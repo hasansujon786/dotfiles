@@ -12,9 +12,9 @@ window:
   dimensions:
     columns: 140
     lines: 38
-  padding:
-    x: 10
-    # y: 10
+  # padding:
+  # ix: 10
+  # y: 10
   # decorations: none
 scrolling:
   history: 10000
