@@ -1,0 +1,82 @@
+# Shell
+#
+# You can set shell.program to the path of your favorite shell, e.g. /bin/fish.
+# Entries in shell.args are passed unmodified as arguments to the shell.
+shell:
+  program: C:\Program Files\Git\bin\bash
+  # args:
+  # - --command=tmux
+
+# Window Customization
+window:
+  dimensions:
+    columns: 140
+    lines: 38
+  padding:
+    x: 10
+    # y: 10
+  # decorations: none
+scrolling:
+  history: 10000
+  multiplier: 3
+background_opacity: .9
+dynamic_title: true
+
+# Font Customization
+# font:
+#   normal:
+#     family: Fira Code
+#     style: Regular
+#   bold:
+#     family: Fira Code
+#     style: Bold
+#   italic:
+#     family: Fira Code
+#     style: Italic
+#   size: 9
+#   offset:
+#     x: 0
+#     y: 0
+#   glyph_offset:
+#     x: 0
+#     y: 0
+#   use_thin_strokes: false
+#   debug:
+#     persistent_logging: false
+# draw_bold_text_with_bright_colors: true
+
+# Color Settings (OneDark)
+colors:
+  primary:
+    background: '0x1e2127'
+    foreground: '0xabb2bf'
+    bright_foreground: '0xe6efff'
+  normal:
+    black: '0x1e2127'
+    red: '0xe06c75'
+    green: '0x98c379'
+    yellow: '0xd19a66'
+    blue: '0x61afef'
+    magenta: '0xc678dd'
+    cyan: '0x56b6c2'
+    white: '0x828791'
+  bright:
+    black: '0x5c6370'
+    red: '0xe06c75'
+    green: '0x98c379'
+    yellow: '0xd19a66'
+    blue: '0x61afef'
+    magenta: '0xc678dd'
+    cyan: '0x56b6c2'
+    white: '0xe6efff'
+  dim:
+    black: '0x1e2127'
+    red: '0xe06c75'
+    green: '0x98c379'
+    yellow: '0xd19a66'
+    blue: '0x61afef'
+    magenta: '0xc678dd'
+    cyan: '0x56b6c2'
+    white: '0x828791'
+# key_bindings:
+#   - { key: N, mods: Control, action: SpawnNewInstance }
