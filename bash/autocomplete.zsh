@@ -68,5 +68,6 @@ sourceIfExists() {
   fi
 }
 
-sourceIfExists ~/mydotfiles/bash/.aliases
+sourceIfExists ~/dot-windows/bash/.aliases
+sourceIfExists ~/dot-windows/bash/.aliases-advanced
 sourceIfExists /usr/local/ibmcloud/autocomplete/zsh_autocomplete
