@@ -278,10 +278,11 @@ let g:webdevicons_enable_nerdtree = 1
 let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
 " enable open and close folder/directory glyph flags (disabled by default with 0)
 let g:DevIconsEnableFoldersOpenClose = 1
+
+" Fix Vue Icon - ﵂
 " change the default dictionary mappings for file extension matches
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vue'] = 'V'
-" let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vue'] = '∇'
+" let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
+" let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vue'] = 'V'
 
 " ======================================
 " => itchyny/lightline.vim
@@ -1114,7 +1115,7 @@ let g:devicons_colors = {
       \'violet': [' ', ' ', ' ', ' '],
       \'blue': [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
       \'cyan': [' ', ' ', ' ', ' '],
-      \'green': [' ', ' ', ' ', ' ', 'V ']
+      \'green': [' ', ' ', ' ', ' ', 'V ', '﵂']
       \}
 call DeviconsColors(g:devicons_colors)
 " }}}
