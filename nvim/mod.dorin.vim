@@ -440,6 +440,10 @@ nmap <leader>gu <Plug>(GitGutterUndoHunk)
 nmap [c <Plug>(GitGutterPrevHunk)
 nmap ]c <Plug>(GitGutterNextHunk)
 
+" ======================================
+" => tpope/vim-fugitive
+" ======================================
+nmap <leader>gg :Gstatus<CR>
 
 source ~/mydotfiles/nvim/plugin/config.vim
 " }}}
