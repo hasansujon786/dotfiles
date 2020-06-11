@@ -248,19 +248,20 @@ let g:NERDTreeMapJumpNextSibling='<Nop>'
 let NERDTreeMapOpenSplit='s'
 let NERDTreeMapOpenVSplit='v'
 
-let NERDTreeDirArrowExpandable="➙"
-let NERDTreeDirArrowCollapsible="➘"
+let NERDTreeDirArrowExpandable=""
+let NERDTreeDirArrowCollapsible=""
 
+" icon source: https://www.nerdfonts.com/cheat-sheet
 let g:NERDTreeIndicatorMapCustom = {
             \ 'Modified'  : 'M',
             \ 'Staged'    : 'S',
             \ 'Untracked' : 'U',
             \ 'Renamed'   : 'R',
             \ 'Deleted'   : 'D',
-            \ 'Unmerged'  : '═',
-            \ 'Dirty'     : '✹',
-            \ 'Clean'     : '✔︎',
-            \ 'Ignored'   : '☒',
+            \ 'Unmerged'  : '',
+            \ 'Dirty'     : '*',
+            \ 'Clean'     : '',
+            \ 'Ignored'   : '',
             \ 'Unknown'   : '?'
             \ }
 
