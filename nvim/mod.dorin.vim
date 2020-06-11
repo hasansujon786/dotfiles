@@ -77,7 +77,7 @@ Plug 'tpope/vim-eunuch'   "for moving and manipulating files / directories.
 " ======================================
 " => Intrigration
 " ======================================
-Plug 'christoomey/vim-tmux-navigator'
+"Plug 'christoomey/vim-tmux-navigator'
 Plug 'mhinz/vim-startify'
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'KabbAmine/vCoolor.vim'
@@ -160,11 +160,11 @@ let g:fzf_preview_use_floating_window = 0
 let g:fzf_preview_command = 'head -100 {-1}'
 
 let g:fzf_preview_custom_default_processors = {
-      \  '':      function('fzf_preview#resource_processor#edit'),
-      \ 'ctrl-s': function('fzf_preview#resource_processor#split'),
-      \ 'ctrl-v': function('fzf_preview#resource_processor#vsplit'),
-      \ 'ctrl-t': function('fzf_preview#resource_processor#tabedit'),
-      \ 'ctrl-q': function('fzf_preview#resource_processor#export_quickfix') }
+    \  '':      function('fzf_preview#resource_processor#edit'),
+    \ 'ctrl-s': function('fzf_preview#resource_processor#split'),
+    \ 'ctrl-v': function('fzf_preview#resource_processor#vsplit'),
+    \ 'ctrl-t': function('fzf_preview#resource_processor#tabedit'),
+    \ 'ctrl-q': function('fzf_preview#resource_processor#export_quickfix') }
 
 " let $FZF_PREVIEW_PREVIEW_BAT_THEME = 'TwoDark'
 
@@ -709,6 +709,14 @@ vnoremap <silent> <A-j> :move '>+1<CR>gv=gv
 " ======================================
 " => Moving-around-tabs-and-buffers
 " ======================================
+
+" Jump between panes
+nnoremap <silent> <leader>j :wincmd j<CR>
+nnoremap <silent> <leader>k :wincmd k<CR>
+nnoremap <silent> <leader>h :wincmd h<CR>
+nnoremap <silent> <leader>l :wincmd l<CR>
+nnoremap <silent> <leader>l :wincmd l<CR>
+nnoremap <silent> <leader>\ :wincmd w<CR>
 
 " Resize splits
 nnoremap <silent> <A-=> :resize +3<CR>
