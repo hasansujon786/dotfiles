@@ -728,7 +728,7 @@ nnoremap <silent> <leader>k :wincmd k<CR>
 nnoremap <silent> <leader>h :wincmd h<CR>
 nnoremap <silent> <leader>l :wincmd l<CR>
 nnoremap <silent> <leader>l :wincmd l<CR>
-nnoremap <silent> <leader>\ :wincmd w<CR>
+nnoremap <silent> <leader>\ :wincmd p<CR>
 
 " Resize splits
 nnoremap <silent> <A-=> :resize +3<CR>
