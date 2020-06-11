@@ -429,6 +429,18 @@ let g:undotree_DiffAutoOpen = 0
 " let g:undotree_DiffpanelHeight = 10
 nnoremap <silent> <C-F5> :UndotreeToggle<cr>
 
+" ======================================
+" => airblade/vim-gitgutter"
+" ======================================
+let g:gitgutter_map_keys = 0
+nmap <leader>gp <Plug>(GitGutterPreviewHunk)
+nmap <leader>gs <Plug>(GitGutterStageHunk)
+nmap <leader>gu <Plug>(GitGutterUndoHunk)
+
+nmap [c <Plug>(GitGutterPrevHunk)
+nmap ]c <Plug>(GitGutterNextHunk)
+
+
 source ~/mydotfiles/nvim/plugin/config.vim
 " }}}
 " => VIM-User-Interface ---------------------------- {{{
