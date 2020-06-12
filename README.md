@@ -24,3 +24,24 @@
 > " Ctrl-^                 0x1E
 > " Ctrl-_                 0x1F
 > " Ctrl-?                 0x7F            DEL
+
+tpope/vim-fugitive
+Another must have by Tim Pope. Fugitive is a plugin that allows you to work with
+git in Vim. You can execute basically any git command in Vim. In my daily usage,
+I use only a few commands though:
+
+:Gread
+It is the same to git checkout [file].
+
+:Gwrite
+It is the same to git add [file].
+
+:Gdiff
+It opens a vim-diff with the buffer changes relative to the HEAD.
+
+:Gblame
+To blame your coworker.
+
+:Ggrep
+In file project-wide search. It’s faster than vimgrep. I use it over fzf’s Ag
+when I want to populate a quickfix list and work on this list.
