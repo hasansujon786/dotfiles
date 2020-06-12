@@ -1,0 +1,81 @@
+[
+  {
+    "key": "ctrl+up",
+    "command": "editor.emmet.action.incrementNumberByOne"
+  },
+  {
+    "key": "ctrl+shift+up",
+    "command": "editor.emmet.action.incrementNumberByTen"
+  },
+  {
+    "key": "ctrl+down",
+    "command": "editor.emmet.action.decrementNumberByOne"
+  },
+  {
+    "key": "ctrl+shift+down",
+    "command": "editor.emmet.action.decrementNumberByTen"
+  },
+  // {
+  //   "key": "ctrl+n",
+  //   "command": "explorer.newFile"
+  // },
+  // {
+  //   "key": "ctrl+shift+n",
+  //   "command": "explorer.newFolder"
+  // },
+  {
+    "key": "ctrl+shift+/",
+    "command": "editor.action.blockComment",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+a",
+    "command": "-editor.action.blockComment",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+alt+e",
+    "command": "workbench.files.action.collapseExplorerFolders"
+  },
+  {
+    "key": "ctrl+alt+f5",
+    "command": "workbench.action.reloadWindow",
+    "when": "neovim.mode == normal"
+  },
+  {
+    "key": "ctrl+shift+t",
+    "command": "workbench.action.toggleActivityBarVisibility"
+  },
+  {
+    "key": "ctrl+shift+j",
+    "command": "workbench.action.toggleMaximizedPanel"
+  },
+  {
+    "key": "ctrl+shift+w",
+    "command": "workbench.action.closeAllEditors"
+  }
+  // {
+  //   "key": "ctrl+k ctrl+w",
+  //   "command": "-workbench.action.closeAllEditors"
+  // },
+  // {
+  //   "key": "ctrl+m",
+  //   "command": "workbench.action.editor.changeLanguageMode"
+  // },
+  // {
+  //   "key": "ctrl+k m",
+  //   "command": "-workbench.action.editor.changeLanguageMode"
+  // },
+  // {
+  //   "key": "ctrl+k u",
+  //   "command": "editor.emmet.action.updateTag"
+  // },
+  // {
+  //   "key": "ctrl+k ctrl+k",
+  //   "command": "workbench.action.keepEditor"
+  // },
+  // {
+  //   "key": "ctrl+k enter",
+  //   "command": "-workbench.action.keepEditor"
+  // },
+]
