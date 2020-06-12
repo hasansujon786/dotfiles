@@ -80,9 +80,8 @@ Plug 'tpope/vim-eunuch'   "for moving and manipulating files / directories.
 "Plug 'christoomey/vim-tmux-navigator'
 Plug 'mhinz/vim-startify'
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-Plug 'KabbAmine/vCoolor.vim'
 
-Plug 'junegunn/fzf', { 'do': './install --bin' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'yuki-ycino/fzf-preview.vim'
 
@@ -154,51 +153,86 @@ call plug#end()
 " ======================================
 " => yuki-ycino/fzf-preview.vim
 " ======================================
-let g:fzf_preview_use_dev_icons = 1
-let g:fzf_preview_layout = '12split new'
-let g:fzf_preview_use_floating_window = 0
-let g:fzf_preview_command = 'head -100 {-1}'
+" let g:fzf_preview_use_dev_icons = 1
+" let g:fzf_preview_layout = '12split new'
+" let g:fzf_preview_use_floating_window = 0
+" let g:fzf_preview_command = 'head -100 {-1}'
 
-let g:fzf_preview_custom_default_processors = {
-    \  '':      function('fzf_preview#resource_processor#edit'),
-    \ 'ctrl-s': function('fzf_preview#resource_processor#split'),
-    \ 'ctrl-v': function('fzf_preview#resource_processor#vsplit'),
-    \ 'ctrl-t': function('fzf_preview#resource_processor#tabedit'),
-    \ 'ctrl-q': function('fzf_preview#resource_processor#export_quickfix') }
+" let g:fzf_preview_custom_default_processors = {
+"     \  '':      function('fzf_preview#resource_processor#edit'),
+"     \ 'ctrl-s': function('fzf_preview#resource_processor#split'),
+"     \ 'ctrl-v': function('fzf_preview#resource_processor#vsplit'),
+"     \ 'ctrl-t': function('fzf_preview#resource_processor#tabedit'),
+"     \ 'ctrl-q': function('fzf_preview#resource_processor#export_quickfix') }
 
 " let $FZF_PREVIEW_PREVIEW_BAT_THEME = 'TwoDark'
 
-let g:fzf_pco = '--multi --ansi --bind=ctrl-d:preview-page-down,ctrl-u:preview-page-up,?:toggle-preview'
-nnoremap <silent> <Leader>fb :<C-u>FzfPreviewBuffers -overwrite-fzf-args=g:fzf_pco<CR>
-nnoremap <silent> <Leader>fh :<C-u>FzfPreviewOldFiles -overwrite-fzf-args=g:fzf_pco<CR>
-nnoremap <silent> <Leader>fd :<C-u>FzfPreviewDirectoryFiles -overwrite-fzf-args=g:fzf_pco<CR>
-nnoremap <silent> <Leader>fw :<C-u>Windows<CR>
-nnoremap <silent> <Leader>fp :<C-u>FzfPreviewProjectFiles -overwrite-fzf-args=g:fzf_pco<CR>
+" let g:fzf_pco = '--multi --ansi --bind=ctrl-d:preview-page-down,ctrl-u:preview-page-up,?:toggle-preview'
+" nnoremap <silent> <Leader>fb :<C-u>FzfPreviewBuffers -overwrite-fzf-args=g:fzf_pco<CR>
+" nnoremap <silent> <Leader>fh :<C-u>FzfPreviewOldFiles -overwrite-fzf-args=g:fzf_pco<CR>
+" nnoremap <silent> <Leader>fd :<C-u>FzfPreviewDirectoryFiles -overwrite-fzf-args=g:fzf_pco<CR>
+" nnoremap <silent> <Leader>fw :<C-u>Windows<CR>
+" nnoremap <silent> <Leader>fp :<C-u>FzfPreviewProjectFiles -overwrite-fzf-args=g:fzf_pco<CR>
 
 " nnoremap <silent> <C-p> :<C-u>FzfPreviewProjectOldFiles -overwrite-fzf-args=g:fzf_pco<CR>
-nnoremap <silent> <C-p> :<C-u>FzfPreviewProjectMruFiles -overwrite-fzf-args=g:fzf_pco<CR>
+" nnoremap <silent> <C-p> :<C-u>FzfPreviewProjectMruFiles -overwrite-fzf-args=g:fzf_pco<CR>
+
 " ======================================
 " => junegunn/fzf
 " ======================================
-" nnoremap <silent> <C-p> :History<CR>
-" nnoremap <silent> <C-_> :Files<CR>
-" nnoremap <silent> - :Files <C-R>=expand('%:h')<CR><CR>
-" nnoremap <silent> <C-_> :Windows <CR>
+" Files fzf#vim#files(dir, [spec dict], [fullscreen bool])
+"
+nnoremap <silent> - :Files <C-R>=expand('%:h')<CR><CR>
+nnoremap <silent> + :Files<CR>
+nnoremap <silent> <C-p> :History<CR>
 
-let g:fzf_layout = { 'window': '12new' }
-let g:fzf_files_options = '--preview "(cat {})"'
+" let g:fzf_layout = { 'window': '20new' }
+" let g:fzf_layout = { 'window': '-tabnew' }
+let g:fzf_layout = { 'window': 'enew' }
+" let g:fzf_files_options = '--reverse --preview "(cat {})"'
+" let g:fzf_files_options = ['--reverse', '--prompt', 'C:\Program Files\']
+
+let g:FZF_DEFAULT_OPTS = '--reverse'
+
+" function! s:fzf_statusline()
+"   " Override statusline as you like
+"   highlight fzf1 ctermfg=161 ctermbg=251
+"   highlight fzf2 ctermfg=23 ctermbg=251
+"   highlight fzf3 ctermfg=237 ctermbg=251
+"   setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+" endfunction
+
+" autocmd! User FzfStatusLine call <SID>fzf_statusline()
+"
+augroup fzf
+  " autocmd!
+  " autocmd! FileType fzf
+  " autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  "       \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+  autocmd  FileType fzf call clearmatches()
+        \| autocmd BufLeave <buffer> call matchadd('ColorColumn', '\%81v', '100')
+augroup END
+
+
+" let $FZF_DEFAULT_OPTS =' --color=dark,
+"       \fg:-1,bg:-1,hl:#61afef,
+"       \fg+:#c678dd,bg+:#2c323c,hl+:#61afef,
+"       \info:#98c379,prompt:#61afef,pointer:#c678dd,
+"       \marker:#e5c07b,spinner:#61afef,header:#61afef,gutter:#282c34
+"       \ --bind ctrl-a:select-all'
 
 let $FZF_DEFAULT_OPTS =' --color=dark,
-      \fg:-1,bg:-1,hl:#61afef,
-      \fg+:#c678dd,bg+:#2c323c,hl+:#61afef,
-      \info:#98c379,prompt:#61afef,pointer:#c678dd,
-      \marker:#e5c07b,spinner:#61afef,header:#61afef,gutter:#282c34
+      \fg:-1,bg:-1,hl:#e5c07b,
+      \fg+:#282C33,bg+:#c678dd,hl+:#ABB2BF,pointer:#000000,
+      \info:#ABB2BF,prompt:#E06C75,
+      \marker:#e5c07b,spinner:#61afef,header:#55B6C2,gutter:#282c34
       \ --bind ctrl-a:select-all'
 
-let g:fzf_action = {
-      \ 'T': 'tab split',
-      \ 'S': 'split',
-      \ 'V': 'vsplit',
+    let g:fzf_action = {
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-s': 'split',
+      \ 'ctrl-v': 'vsplit',
       \ 'q': 'normal <C-c>'}
 
 " imap <c-x><c-k> <plug>(fzf-complete-word)
@@ -445,7 +479,7 @@ nmap ]c <Plug>(GitGutterNextHunk)
 " ======================================
 nmap <leader>gg :Gstatus<CR>
 
-source ~/mydotfiles/nvim/plugin/config.vim
+source ~/dot-windows/nvim/plugin/config.vim
 " }}}
 " => VIM-User-Interface ---------------------------- {{{
 
