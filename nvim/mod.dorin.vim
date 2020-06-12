@@ -137,6 +137,23 @@ Plug 'junegunn/gv.vim'
 " }}}
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" coc extension {{{
+" https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
+
+" => JavaScript
+" coc-tsserver coc-json coc-vetur
+
+" => HTML
+" coc-html coc-css coc-emmet coc-tailwindcss
+
+" => Ediort Support
+" coc-bookmark coc-actions coc-lists coc-snippets coc-spell-checker coc-vimlsp coc-yank
+
+" => CLang
+" coc-clangd
+
+" }}}
+
 " ======================================
 " => Not-listed
 " ======================================
