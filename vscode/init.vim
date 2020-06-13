@@ -9,12 +9,12 @@ call plug#begin('~/.config/nvim/plugged')
 " ======================================
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'tpope/vim-surround'
+Plug 'asvetliakov/vim-easymotion'
 " Plug 'terryma/vim-multiple-cursors'
-" Plug 'airblade/vim-gitgutter'
+" Plug 'unblevable/quick-scope'
 
 
 call plug#end()
-
 
 " => Key-Mappings ---------------------------------- {{{
   
@@ -22,9 +22,6 @@ call plug#end()
 let mapleader="\<Space>"
 let maplocalleader="\<Space>"
 
-nnoremap <silent> <leader>s :<C-u>call VSCodeNotify('workbench.action.files.save')<CR>
-nnoremap <silent> <leader>q :<C-u>call VSCodeNotify('workbench.action.closeActiveEditor')<CR>
-nnoremap <silent> <leader>n :<C-u>call VSCodeNotify('workbench.action.toggleSidebarVisibility')<CR>
 " nnoremap <silent> ? :<C-u>call VSCodeNotify('workbench.action.findInFiles', { 'query': expand('<cword>')})<CR>
 
 " Use q, qq & jk to return to normal mode
@@ -38,7 +35,7 @@ vnoremap <silent> q <ESC>:noh<CR>
 nnoremap Q q
 
 " j/k will move virtual lines (lines that wrap)
-" Seamlessly treat visual lines as actual lines when moving around.
+" Seamlessly treat visual lines as actual lines when moving around. => Todo
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 " Store relative line number jumps in the jumplist if they exceed a threshold.
@@ -51,6 +48,10 @@ noremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
 " Horizontal scroll => Todo
 " nnoremap <A-l> 5zl
 " nnoremap <A-h> 5zh
+
+" Plug 'airblade/vim-gitgutter'
+nnoremap <silent> [c :<C-u>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
+nnoremap <silent> ]c :<C-u>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
 
 " ======================================
 " => Copy-paset
@@ -68,12 +69,24 @@ noremap X "_x
 imap <C-v> <C-R>*
 cmap <C-v> <C-R>+
 
+" Easier system clipboard usage
+vnoremap <Leader>y "+ygv<Esc>
+vnoremap <Leader>d "+d
+nnoremap <Leader>p "+p
+nnoremap <Leader>P "+P
+vnoremap <Leader>p "+p
+vnoremap <Leader>P "+P
+
 " ======================================
 " => Modify-&-Rearrange-texts
 " ======================================
 
 " Make vaa select the entire file...
 vnoremap aa VGo1G
+
+" select a block {} of code
+nmap <silent> vaf /}<CR>V%
+vmap <silent> vaf <Esc>/}<CR>V%
 
 " map . in visual mode => Todo . cmd dose't work
 vnoremap . :norm.<cr>
@@ -82,13 +95,13 @@ vnoremap . :norm.<cr>
 vnoremap > >gv
 vnoremap < <gv
 
-" Commentary
+" Comment or uncomment lines using Commentary
 xmap gc  <Plug>VSCodeCommentary
 nmap gc  <Plug>VSCodeCommentary
 omap gc  <Plug>VSCodeCommentary
 nmap gcc <Plug>VSCodeCommentaryLine
 
-" Move lines up and down in normal & visual mode => Todo
+" Move lines up and down in normal & visual mode => Todo (need to done in vscode)
 " nnoremap <silent> <A-k> :move -2<CR>==
 " nnoremap <silent> <A-j> :move +1<CR>==
 " vnoremap <silent> <A-k> :move '<-2<CR>gv=gv
@@ -105,10 +118,10 @@ nnoremap <silent> <leader>h :<C-u>call VSCodeNotify('workbench.action.focusLeftG
 nnoremap <silent> <leader>l :<C-u>call VSCodeNotify('workbench.action.focusRightGroup')<CR>
 
 " Resize splits => Done in vscode
-" nnoremap <silent> <A-=> :resize +3<CR>
-" nnoremap <silent> <A--> :resize -3<CR>
 " nnoremap <silent> <A-.> :vertical resize +5<CR>
 " nnoremap <silent> <A-,> :vertical resize -5<CR>
+" nnoremap <silent> <A-=> :resize +3<CR> (X) => Todo 
+" nnoremap <silent> <A--> :resize -3<CR> (X)
 
 " zoom a vim pane
 nnoremap <silent> \ :<C-u>call VSCodeNotify('workbench.action.toggleEditorWidths')<CR>
@@ -120,4 +133,134 @@ nnoremap <silent> gh :<C-u>call VSCodeNotify('workbench.action.previousEditorInG
 nnoremap <silent> gL :<C-u>call VSCodeNotify('workbench.action.lastEditorInGroup')<CR>
 nnoremap <silent> gH :<C-u>call VSCodeNotify('workbench.action.firstEditorInGroup')<CR>
 
+" ======================================
+" => Search-functionalities
+" ======================================
+
+" (Built in with vscode)
+" Visual mode pressing * or # searches for the current selection
+" vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+" vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+
+" (Maybe dose't support)
+" " Alias replace all to S
+" nnoremap S :%s//gI<Left><Left><Left>
+" " interactive find replace preview
+" set inccommand=nosplit
+" " replace word under cursor, globally, with confirmation
+" nnoremap <Leader>ff :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+" vnoremap <Leader>ff y :%s/<C-r>"//gc<Left><Left><Left>
+
+" ======================================
+" => Insert-Mode-key-mapping
+" ======================================
+
+" " Move cursor by character => done in Vscode
+" inoremap <A-h> <left>
+" inoremap <A-l> <right>
+" inoremap <A-j> <down>
+" inoremap <A-k> <up>
+" " Move cursor by words
+" inoremap <A-f> <S-right>
+" inoremap <A-b> <S-left>
+" " Jump cursor to start & end of a line
+" inoremap <C-a> <C-O>^
+" inoremap <C-e> <C-O>$
+" " Delete by characters & words
+" inoremap <C-d> <Delete>
+" inoremap <A-d> <C-O>dw
+" inoremap <A-BS> <C-W>
+" " Make a new line under the cursor
+" inoremap <silent> <A-CR> <Esc>o
+" inoremap <silent> <A-o> <Esc>mqA<CR><Esc>`qa
+
+" " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
+" " so that you can undo CTRL-U after inserting a line break.
+" inoremap <C-u> <C-G>u<C-U>
+
+" ======================================
+" => Command-mode-related
+" ======================================
+" " Bash like keys for the command line
+" cnoremap <C-a> <Home>
+" cnoremap <C-e> <End>
+
+" ======================================
+" => Leader-commands
+" ======================================
+" Save & quit file Quickly
+nnoremap <silent> <leader>s :<C-u>call VSCodeNotify('workbench.action.files.save')<CR>
+nnoremap <silent> <leader>q :<C-u>call VSCodeNotify('workbench.action.closeActiveEditor')<CR>
+
+" open Explorer
+nnoremap <silent> <leader>n :<C-u>call VSCodeNotify('workbench.action.toggleSidebarVisibility')<CR>
+
+" " Switch between the last two files
+" nnoremap <leader><tab> <c-^>
+
+" " Open vimrc in a new tab & source
+" nmap <leader>vid :tabedit $MYVIMRC<CR>
+" nmap <leader>vim :tabedit ~/mydotfiles/nvim/init.vim<CR>
+" nmap <leader>vis :source $MYVIMRC<CR>
+
+" " compile & run c Code
+" nnoremap <leader>bb :w<CR>:!gcc % -o .lastbuild && ./.lastbuild<cr>
+" nnoremap <leader>bl :w<CR>:!./.lastbuild<cr>
+
+" " Toggle highlighting of current line and column
+" nnoremap <silent> <leader>c :setlocal cursorcolumn!<CR>
+
+" " Toggle relative line numbers and regular line numbers.
+" nnoremap <silent> <leader>mm :set nu! invrelativenumber<CR>
+" nnoremap <silent> <leader>mu :set invrelativenumber<CR>
+
+" ======================================
+" => Organize-files-&-folders
+" ======================================
+
+" " Open a file relative to the current file
+" " Synonyms: e: edit,
+" " e: window, s: split, v: vertical split, t: tab, d: directory
+" nnoremap <Leader>er :Move <C-R>=expand("%")<CR>
+" nnoremap <leader>ed :Mkdir <C-R>=expand('%:h').'/'<cr>
+" nnoremap <leader>et :tabe <C-R>=expand('%:h').'/'<cr>
+" nnoremap <leader>ev :vsp <C-R>=expand('%:h').'/'<cr>
+" nnoremap <leader>es :sp <C-R>=expand('%:h').'/'<cr>
+" nnoremap <leader>ee :e <C-R>=expand('%:h').'/'<cr>
+
+" " Change dir to current file's dir
+" nnoremap <leader>CD :cd %:p:h<CR>:pwd<CR>
+
+" Toggle folds.
+nnoremap <silent> <leader>z :<C-u>call VSCodeNotify('editor.toggleFold')<CR>
+vnoremap <silent> <leader>z :<C-u>call VSCodeNotify('editor.toggleFold')<CR>
+
+" ======================================
+" => Function-key-mappings
+" ======================================
+" Pasting support
+" set pastetoggle=<F3>  " Press F3 in insert mode to preserve tabs when
+" pasting from clipboard into terminal
+
+" toggle background light / dark
+" nnoremap <silent> <F10> :call ToggleBackground()<CR>
+
 " }}}
+
+" => Disabled-keys --------------------------------- {{{
+
+" disable arrow keys in normal mode
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
+
+" }}}
+
+" " PlaceholderImgTag 300x200
+" function! s:PlaceholderImgTag(size)
+"   let url = 'http://dummyimage.com/' . a:size . '/000000/555555'
+"   let [width,height] = split(a:size, 'x')
+"   execute "normal a<img src=\"".url."\" width=\"".width."\" height=\"".height."\" />"
+" endfunction
+" command! -nargs=1 PlaceholderImgTag call s:PlaceholderImgTag(<f-args>)
