@@ -1,12 +1,80 @@
 // Place your key bindings in this file to overwrite the defaults
 [
   {
+    "key": "ctrl+p",
+    "command": "workbench.action.quickOpenNavigateNextInFilePicker",
+    "when": "inFilesPicker && inQuickOpen"
+  },
+  {
+    "key": "ctrl+up",
+    "command": "editor.emmet.action.incrementNumberByOne",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+up",
+    "command": "editor.emmet.action.incrementNumberByTen",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+down",
+    "command": "editor.emmet.action.decrementNumberByOne",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+down",
+    "command": "editor.emmet.action.decrementNumberByTen",
+    "when": "editorTextFocus"
+  },
+  {
     "key": "ctrl+shift+,",
     "command": "workbench.action.openSettingsJson"
   },
   {
     "key": "ctrl+shift+f5",
     "command": "workbench.action.reloadWindow"
+  },
+  {
+    "key": "ctrl+n",
+    "command": "explorer.newFile"
+  },
+  {
+    "key": "ctrl+shift+n",
+    "command": "explorer.newFolder"
+  },
+  // todo
+  {
+    "key": "ctrl+shift+/",
+    "command": "editor.action.blockComment",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+a",
+    "command": "-editor.action.blockComment",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+alt+e",
+    "command": "workbench.files.action.collapseExplorerFolders"
+  },
+  {
+    "key": "ctrl+shift+t",
+    "command": "workbench.action.toggleActivityBarVisibility"
+  },
+  {
+    "key": "ctrl+shift+j",
+    "command": "workbench.action.toggleMaximizedPanel"
+  },
+  {
+    "key": "ctrl+shift+w",
+    "command": "workbench.action.closeAllEditors"
+  },
+  {
+    "key": "ctrl+k ctrl+k",
+    "command": "workbench.action.keepEditor"
+  },
+  {
+    "key": "ctrl+k enter",
+    "command": "-workbench.action.keepEditor"
   },
 
   // Neovim
