@@ -42,9 +42,6 @@ noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 noremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
 noremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
 
-" Vertical scrolling => Done in vscode
-" nnoremap <A-k> <C-u>
-" nnoremap <A-j> <C-d>
 " Horizontal scroll => Todo
 " nnoremap <A-l> 5zl
 " nnoremap <A-h> 5zh
@@ -136,12 +133,6 @@ nnoremap <silent> gH :<C-u>call VSCodeNotify('workbench.action.firstEditorInGrou
 " ======================================
 " => Search-functionalities
 " ======================================
-
-" (Built in with vscode)
-" Visual mode pressing * or # searches for the current selection
-" vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
-" vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
-
 " (Maybe dose't support)
 " " Alias replace all to S
 " nnoremap S :%s//gI<Left><Left><Left>
@@ -150,40 +141,6 @@ nnoremap <silent> gH :<C-u>call VSCodeNotify('workbench.action.firstEditorInGrou
 " " replace word under cursor, globally, with confirmation
 " nnoremap <Leader>ff :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 " vnoremap <Leader>ff y :%s/<C-r>"//gc<Left><Left><Left>
-
-" ======================================
-" => Insert-Mode-key-mapping
-" ======================================
-
-" " Move cursor by character => done in Vscode
-" inoremap <A-h> <left>
-" inoremap <A-l> <right>
-" inoremap <A-j> <down>
-" inoremap <A-k> <up>
-" " Move cursor by words
-" inoremap <A-f> <S-right>
-" inoremap <A-b> <S-left>
-" " Jump cursor to start & end of a line
-" inoremap <C-a> <C-O>^
-" inoremap <C-e> <C-O>$
-" " Delete by characters & words
-" inoremap <C-d> <Delete>
-" inoremap <A-d> <C-O>dw
-" inoremap <A-BS> <C-W>
-" " Make a new line under the cursor
-" inoremap <silent> <A-CR> <Esc>o
-" inoremap <silent> <A-o> <Esc>mqA<CR><Esc>`qa
-
-" " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
-" " so that you can undo CTRL-U after inserting a line break.
-" inoremap <C-u> <C-G>u<C-U>
-
-" ======================================
-" => Command-mode-related
-" ======================================
-" " Bash like keys for the command line
-" cnoremap <C-a> <Home>
-" cnoremap <C-e> <End>
 
 " ======================================
 " => Leader-commands
