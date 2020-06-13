@@ -741,12 +741,12 @@ imap <C-v> <C-R>*
 cmap <C-v> <C-R>+
 
 " Easier system clipboard usage
-"vnoremap <Leader>y "+y
-"vnoremap <Leader>d "+d
-"nnoremap <Leader>p "+p
-"nnoremap <Leader>P "+P
-"vnoremap <Leader>p "+p
-"vnoremap <Leader>P "+P
+vnoremap <Leader>y "+ygv<Esc>
+vnoremap <Leader>d "+d
+nnoremap <Leader>p "+p
+nnoremap <Leader>P "+P
+vnoremap <Leader>p "+p
+vnoremap <Leader>P "+P
 
 " ======================================
 " => Modify-&-Rearrange-texts
@@ -898,6 +898,7 @@ nnoremap <silent> <leader>mu :set invrelativenumber<CR>
 
 " Allow j and k to work on visual lines (when wrapping)
 noremap <silent> <leader>wp :call ToggleWrap()<CR>
+noremap <silent> <A-z> :call ToggleWrap()<CR>
 
 " Silently open a shell in the directory of the current file
 if has("win32") || has("win64")
