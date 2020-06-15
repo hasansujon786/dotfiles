@@ -231,22 +231,14 @@ augroup fzf
         \| autocmd BufLeave <buffer> call matchadd('ColorColumn', '\%81v', '100')
 augroup END
 
-
-" let $FZF_DEFAULT_OPTS =' --color=dark,
-"       \fg:-1,bg:-1,hl:#61afef,
-"       \fg+:#c678dd,bg+:#2c323c,hl+:#61afef,
-"       \info:#98c379,prompt:#61afef,pointer:#c678dd,
-"       \marker:#e5c07b,spinner:#61afef,header:#61afef,gutter:#282c34
-"       \ --bind ctrl-a:select-all'
-
 let $FZF_DEFAULT_OPTS =' --color=dark,
-      \fg:-1,bg:-1,hl:#e5c07b,
-      \fg+:#282C33,bg+:#c678dd,hl+:#ABB2BF,pointer:#000000,
+      \fg:-1,bg:-1,hl:#55B6C2,
+      \fg+:#E5C07B,bg+:-1,hl+:#55B6C2,pointer:#E5C07B,
       \info:#ABB2BF,prompt:#E06C75,
-      \marker:#e5c07b,spinner:#61afef,header:#55B6C2,gutter:#282c34
+      \marker:#E06C75,spinner:#61afef,header:#c678dd,gutter:-1
       \ --bind ctrl-a:select-all'
 
-    let g:fzf_action = {
+let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit',
