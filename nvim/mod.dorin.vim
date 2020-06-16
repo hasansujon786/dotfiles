@@ -753,6 +753,10 @@ vnoremap <Leader>P "+P
 " Make vaa select the entire file...
 vnoremap aa VGo1G
 
+" select a block {} of code
+nmap <silent> vaf /}<CR>V%
+vmap <silent> vaf <Esc>/}<CR>V%
+
 " map . in visual mode
 vnoremap . :norm.<cr>
 
