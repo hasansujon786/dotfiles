@@ -138,9 +138,12 @@ Plug 'junegunn/gv.vim'
 " }}}
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim
 " coc extension {{{
 " https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-
+" let g:coc_global_extensions = [
+"   \ 'coc-tsserver'
+"   \ ]
 " => JavaScript
 " coc-tsserver coc-json coc-vetur
 
@@ -199,18 +202,17 @@ call plug#end()
 " => junegunn/fzf
 " ======================================
 " Files fzf#vim#files(dir, [spec dict], [fullscreen bool])
-"
 nnoremap <silent> - :Files <C-R>=expand('%:h')<CR><CR>
-nnoremap <silent> + :Files<CR>
 nnoremap <silent> <C-p> :History<CR>
+nnoremap <silent> <C-k>p :Windows<CR>
+nnoremap <silent> <C-k>m :Filetypes<CR>
+nnoremap <silent> <C-k><C-p> :GFile<CR>
 
 " let g:fzf_layout = { 'window': '20new' }
 " let g:fzf_layout = { 'window': '-tabnew' }
 let g:fzf_layout = { 'window': 'enew' }
 " let g:fzf_files_options = '--reverse --preview "(cat {})"'
 " let g:fzf_files_options = ['--reverse', '--prompt', 'C:\Program Files\']
-
-let g:FZF_DEFAULT_OPTS = '--reverse'
 
 " function! s:fzf_statusline()
 "   " Override statusline as you like
@@ -845,7 +847,8 @@ inoremap <C-d> <Delete>
 inoremap <A-d> <C-O>dw
 inoremap <A-BS> <C-W>
 " Make a new line under the cursor
-inoremap <silent> <A-CR> <C-o>mq<CR><C-o>`q<CR>
+inoremap <silent> <A-CR> <C-o>o
+inoremap <silent> <A-o> <C-o>mq<CR><C-o>`q<CR>
 inoremap <silent> <A-O> <Esc>mqA<CR><Esc>`qa
 " " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " " so that you can undo CTRL-U after inserting a line break.
