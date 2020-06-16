@@ -845,9 +845,8 @@ inoremap <C-d> <Delete>
 inoremap <A-d> <C-O>dw
 inoremap <A-BS> <C-W>
 " Make a new line under the cursor
-" inoremap <silent> <C-CR> <Esc>o
+inoremap <silent> <A-CR> <C-o>mq<CR><C-o>`q<CR>
 inoremap <silent> <A-O> <Esc>mqA<CR><Esc>`qa
-inoremap <silent> <A-o> <C-o>mq<CR><C-o>`q<CR>
 " " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-u> <C-G>u<C-U>
