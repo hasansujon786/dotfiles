@@ -17,7 +17,7 @@ Plug 'asvetliakov/vim-easymotion'
 call plug#end()
 
 " => Key-Mappings ---------------------------------- {{{
-  
+
 " Map leader (the dedicated user-mapping prefix key) to space
 let mapleader="\<Space>"
 let maplocalleader="\<Space>"
@@ -49,6 +49,12 @@ noremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
 " Plug 'airblade/vim-gitgutter'
 nnoremap <silent> [c :<C-u>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
 nnoremap <silent> ]c :<C-u>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
+
+nnoremap <leader>gp :<C-u>call VSCodeNotify('editor.action.dirtydiff.next')<CR>
+nnoremap <leader>gs :<C-u>call VSCodeNotifyRange('git.stageSelectedRanges')<CR>
+vnoremap <leader>gs :<C-u>call VSCodeNotifyRange('git.stageSelectedRanges')<CR>
+nnoremap <leader>gu :<C-u>call VSCodeNotify('git.unstageSelectedRanges')<CR>
+vnoremap <leader>gu :<C-u>call VSCodeNotify('git.unstageSelectedRanges')<CR>
 
 " ======================================
 " => Copy-paset
@@ -117,7 +123,7 @@ nnoremap <silent> <leader>l :<C-u>call VSCodeNotify('workbench.action.focusRight
 " Resize splits => Done in vscode
 " nnoremap <silent> <A-.> :vertical resize +5<CR>
 " nnoremap <silent> <A-,> :vertical resize -5<CR>
-" nnoremap <silent> <A-=> :resize +3<CR> (X) => Todo 
+" nnoremap <silent> <A-=> :resize +3<CR> (X) => Todo
 " nnoremap <silent> <A--> :resize -3<CR> (X)
 
 " zoom a vim pane
