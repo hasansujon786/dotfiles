@@ -68,6 +68,7 @@ Plug 'rakr/vim-one'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'unblevable/quick-scope'
+Plug 'easymotion/vim-easymotion'
 Plug 'vim-scripts/YankRing.vim', { 'on':  'YRShow' }
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
