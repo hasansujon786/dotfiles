@@ -393,8 +393,11 @@ let g:startify_files_number = 5
 " ======================================
 " => junegunn/goyo.vim
 " ======================================
-let g:background_before_goyo = &background
+" Toggle Goyo
+nnoremap <silent> gz :Goyo<CR>
+nnoremap <silent> <C-k>z :Goyo<CR>
 
+let g:background_before_goyo = &background
 function! s:goyo_enter()
   let g:background_before_goyo = &background
   if has('gui_running')
@@ -816,16 +819,8 @@ vnoremap <Leader>ff y :%s/<C-r>"//gc<Left><Left><Left>
 " ======================================
 " => Special-key-'g'-commands
 " ======================================
-
-" select a block {} of code
-nmap gs{ vf{%
-vmap gs{ f{%
-
 " sort selected lines
 vmap gs :sort<CR>
-
-" Toggle Goyo
-nnoremap <silent> gz :Goyo<CR>
 
 " ======================================
 " => Insert-Mode-key-mapping
