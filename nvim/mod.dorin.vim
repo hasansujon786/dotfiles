@@ -894,12 +894,6 @@ nnoremap <silent> <leader>mu :set invrelativenumber<CR>
 noremap <silent> <leader>wp :call ToggleWrap()<CR>
 noremap <silent> <A-z> :call ToggleWrap()<CR>
 
-" Silently open a shell in the directory of the current file
-if has("win32") || has("win64")
- " map <leader>t :silent !start cmd /k cd %:p:h <CR>
-  map <silent> <leader>t :tc %:h<CR>:silent !start bash<CR>:tc -<CR>
-endif
-
 " ======================================
 " => Organize-files-&-folders
 " ======================================
@@ -1005,22 +999,18 @@ autocmd TermOpen * set bufhidden=hide
 
 " Terminal mappings -------------------------------
 
+tmap jk <C-\><C-n>
 tmap <Esc> <C-\><C-n>
-tmap <C-w> <Esc><C-w>
-" tmap <silent> <C-d> <Esc>:q<CR>
+tmap <silent> <C-d> <Esc>:q<CR>
 
 " Open terminal
 nmap <silent> <C-t>s <C-w>s<C-w>j:terminal<CR>a
 nmap <silent> <C-t>v <C-w>v<C-w>l:terminal<CR>a
-
-" easily jump from terminal
-tmap <C-o> <C-\><C-n><C-o>
-
-" navigate neovim + neovim terminal emulator with alt+direction
-tnoremap <silent><c-h> <c-\><c-n><c-w>h
-tnoremap <silent><c-j> <c-\><c-n><c-w>j
-tnoremap <silent><c-k> <c-\><c-n><c-w>k
-tnoremap <silent><c-l> <c-\><c-n><c-w>l
+" Silently open a shell in the directory of the current file
+if has("win32") || has("win64")
+ " map <C-t><C-t> :silent !start cmd /k cd %:p:h <CR>
+  nmap <silent> <C-t><C-t> :tc %:h<CR>:silent !start bash<CR>:tc -<CR>
+endif
 
 " }}}
 " => Abbreviations --------------------------------- {{{
