@@ -788,12 +788,12 @@ nnoremap <silent> <leader>l :wincmd l<CR>
 nnoremap <silent> <leader>\ :wincmd p<CR>
 
 " Resize splits
-nnoremap <silent> <A-=> :resize +3<CR>
-nnoremap <silent> <A--> :resize -3<CR>
+nnoremap <silent> <A->> :resize +3<CR>
+nnoremap <silent> <A-<> :resize -3<CR>
 nnoremap <silent> <A-.> :vertical resize +5<CR>
 nnoremap <silent> <A-,> :vertical resize -5<CR>
 " zoom a vim pane
-nnoremap <silent> \ :wincmd _<cr>:wincmd \|<cr>
+nnoremap <silent> \ :wincmd _<cr>:resize -2<CR>:wincmd \|<cr>:vertical resize -10<CR>
 nnoremap <silent> <Bar> :wincmd =<cr>
 
 " Jump between tabs
@@ -896,7 +896,8 @@ noremap <silent> <A-z> :call ToggleWrap()<CR>
 
 " Silently open a shell in the directory of the current file
 if has("win32") || has("win64")
-  map <leader>t :silent !start cmd /k cd %:p:h <CR>
+ " map <leader>t :silent !start cmd /k cd %:p:h <CR>
+  map <silent> <leader>t :tc %:h<CR>:silent !start bash<CR>:tc -<CR>
 endif
 
 " ======================================
