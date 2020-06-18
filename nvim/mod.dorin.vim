@@ -1,3 +1,14 @@
+"
+"  ███▄    █ ▓█████  ▒█████   ██▒   █▓ ██▓ ███▄ ▄███▓
+"  ██ ▀█   █ ▓█   ▀ ▒██▒  ██▒▓██░   █▒▓██▒▓██▒▀█▀ ██▒
+" ▓██  ▀█ ██▒▒███   ▒██░  ██▒ ▓██  █▒░▒██▒▓██    ▓██░
+" ▓██▒  ▐▌██▒▒▓█  ▄ ▒██   ██░  ▒██ █░░░██░▒██    ▒██
+" ▒██░   ▓██░░▒████▒░ ████▓▒░   ▒▀█░  ░██░▒██▒   ░██▒
+" ░ ▒░   ▒ ▒ ░░ ▒░ ░░ ▒░▒░▒░    ░ ▐░  ░▓  ░ ▒░   ░  ░
+" ░ ░░   ░ ▒░ ░ ░  ░  ░ ▒ ▒░    ░ ░░   ▒ ░░  ░      ░
+"    ░   ░ ░    ░   ░ ░ ░ ▒       ░░   ▒ ░░      ░
+"          ░    ░  ░    ░ ░        ░   ░         ░
+"                                 ░
 " => Environment ----------------------------------- {{{
 
 " Local config
@@ -642,13 +653,17 @@ set spelllang=en_gb   " Speak proper English
 set complete+=kspell  " Autocomplete with dictionary words when spell check is on
 
 " Set spellfile to location that is guaranteed to exist
-set spellfile=~/.config/nvim/spell/en.utf-8.add
+set spellfile=~/dot-windows/nvim/spell/en.utf-8.add
 
 " Toggle spelling and show it's status
 nmap <F7> :setlocal spell! spell?<CR>
 
 "Open spell file
-map <leader>dic :tabnew ~/.config/nvim/spell/en.utf-8.add<Cr>
+map <leader>dic :tabnew ~/dot-windows/nvim/spell/en.utf-8.add<Cr>
+
+nnoremap <leader>fw :normal! 1z=<CR>
+nnoremap <leader>fp :normal! mz[s1z=`z<CR>
+nnoremap <leader>fn :normal! mz]s1z=`z<CR>
 
 " Spell commands
 " Next wrong spell      ]s
@@ -848,10 +863,6 @@ nnoremap <leader>bl :w<CR>:!./.lastbuild<cr>
 " Toggle highlighting of current line and column
 nnoremap <silent> <leader>c :setlocal cursorcolumn!<CR>
 
-" Toggle relative line numbers and regular line numbers.
-nnoremap <silent> <leader>mm :set nu! invrelativenumber<CR>
-nnoremap <silent> <leader>mu :set invrelativenumber<CR>
-
 " Allow j and k to work on visual lines (when wrapping)
 noremap <silent> <leader>wp :call ToggleWrap()<CR>
 noremap <silent> <A-z> :call ToggleWrap()<CR>
@@ -885,6 +896,9 @@ set pastetoggle=<F3>  " Press F3 in insert mode to preserve tabs when
 
 " toggle background light / dark
 nnoremap <silent> <F10> :call ToggleBackground()<CR>
+
+" Toggle relative line numbers and regular line numbers.
+nmap <F6> :set invrelativenumber<CR>
 
 " }}}
 " => Disabled-keys --------------------------------- {{{
