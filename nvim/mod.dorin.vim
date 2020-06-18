@@ -84,7 +84,6 @@ Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'yuki-ycino/fzf-preview.vim'
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'preservim/nerdtree'
@@ -170,33 +169,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'vis.vim'
 
 call plug#end()
-
-" ======================================
-" => yuki-ycino/fzf-preview.vim
-" ======================================
-" let g:fzf_preview_use_dev_icons = 1
-" let g:fzf_preview_layout = '12split new'
-" let g:fzf_preview_use_floating_window = 0
-" let g:fzf_preview_command = 'head -100 {-1}'
-
-" let g:fzf_preview_custom_default_processors = {
-"     \  '':      function('fzf_preview#resource_processor#edit'),
-"     \ 'ctrl-s': function('fzf_preview#resource_processor#split'),
-"     \ 'ctrl-v': function('fzf_preview#resource_processor#vsplit'),
-"     \ 'ctrl-t': function('fzf_preview#resource_processor#tabedit'),
-"     \ 'ctrl-q': function('fzf_preview#resource_processor#export_quickfix') }
-
-" let $FZF_PREVIEW_PREVIEW_BAT_THEME = 'TwoDark'
-
-" let g:fzf_pco = '--multi --ansi --bind=ctrl-d:preview-page-down,ctrl-u:preview-page-up,?:toggle-preview'
-" nnoremap <silent> <Leader>fb :<C-u>FzfPreviewBuffers -overwrite-fzf-args=g:fzf_pco<CR>
-" nnoremap <silent> <Leader>fh :<C-u>FzfPreviewOldFiles -overwrite-fzf-args=g:fzf_pco<CR>
-" nnoremap <silent> <Leader>fd :<C-u>FzfPreviewDirectoryFiles -overwrite-fzf-args=g:fzf_pco<CR>
-" nnoremap <silent> <Leader>fw :<C-u>Windows<CR>
-" nnoremap <silent> <Leader>fp :<C-u>FzfPreviewProjectFiles -overwrite-fzf-args=g:fzf_pco<CR>
-
-" nnoremap <silent> <C-p> :<C-u>FzfPreviewProjectOldFiles -overwrite-fzf-args=g:fzf_pco<CR>
-" nnoremap <silent> <C-p> :<C-u>FzfPreviewProjectMruFiles -overwrite-fzf-args=g:fzf_pco<CR>
 
 " ======================================
 " => junegunn/fzf
