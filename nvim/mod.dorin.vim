@@ -201,38 +201,18 @@ call plug#end()
 " ======================================
 " => junegunn/fzf
 " ======================================
-" Files fzf#vim#files(dir, [spec dict], [fullscreen bool])
 nnoremap <silent> - :Files <C-R>=expand('%:h')<CR><CR>
 nnoremap <silent> <C-p> :History<CR>
-nnoremap <silent> <C-k>p :Windows<CR>
-nnoremap <silent> <C-k>m :Filetypes<CR>
+nnoremap <silent> <C-k>p :Files<CR>
 nnoremap <silent> <C-k><C-p> :GFile<CR>
+nnoremap <silent> <C-k>w :Windows<CR>
+nnoremap <silent> <C-k>m :Filetypes<CR>
+nnoremap <silent> <C-k>? :GFile?<CR>
+nnoremap <silent> <C-k>/ :History/<CR>
+nnoremap <silent> <C-k>: :History:<CR>
 
-" let g:fzf_layout = { 'window': '20new' }
-" let g:fzf_layout = { 'window': '-tabnew' }
-let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'window': '30new' }
 " let g:fzf_files_options = '--reverse --preview "(cat {})"'
-" let g:fzf_files_options = ['--reverse', '--prompt', 'C:\Program Files\']
-
-" function! s:fzf_statusline()
-"   " Override statusline as you like
-"   highlight fzf1 ctermfg=161 ctermbg=251
-"   highlight fzf2 ctermfg=23 ctermbg=251
-"   highlight fzf3 ctermfg=237 ctermbg=251
-"   setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
-" endfunction
-
-" autocmd! User FzfStatusLine call <SID>fzf_statusline()
-"
-augroup fzf
-  " autocmd!
-  " autocmd! FileType fzf
-  " autocmd  FileType fzf set laststatus=0 noshowmode noruler
-  "       \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-
-  autocmd  FileType fzf call clearmatches()
-        \| autocmd BufLeave <buffer> call matchadd('ColorColumn', '\%81v', '100')
-augroup END
 
 let $FZF_DEFAULT_OPTS =' --color=dark,
       \fg:-1,bg:-1,hl:#55B6C2,
@@ -246,11 +226,6 @@ let g:fzf_action = {
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit',
       \ 'q': 'normal <C-c>'}
-
-" imap <c-x><c-k> <plug>(fzf-complete-word)
-" imap <c-x><c-f> <plug>(fzf-complete-path)
-" imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-" imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " ======================================
 " => Yggdroot/indentLine
@@ -672,6 +647,11 @@ set cpoptions+=n
 " Highlight the characters on column 81
 highlight ColorColumn guibg=magenta
 call matchadd('ColorColumn', '\%81v', '100')
+augroup fzf
+  autocmd  FileType fzf call clearmatches()
+        \| autocmd BufLeave <buffer> call matchadd('ColorColumn', '\%81v', '100')
+augroup END
+
 
 " }}}
 " => Spell-checking -------------------------------- {{{
