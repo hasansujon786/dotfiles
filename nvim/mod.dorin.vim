@@ -788,8 +788,12 @@ vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " vnoremap * "xy/<C-R>x<CR>
 
+" Type a replacement term and press . to repeat the replacement again. Useful
+" for replacing a few instances of the term (comparable to multiple cursors).
+nnoremap <silent> S :let @/='\<'.expand('<cword>').'\>'<CR>cgn
+xnoremap <silent> s "sy:let @/=@s<CR>cgn
 " Alias replace all to S
-nnoremap S :%s//gI<Left><Left><Left>
+" nnoremap S :%s//gI<Left><Left><Left>
 
 " interactive find replace preview
 set inccommand=nosplit
