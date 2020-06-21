@@ -765,8 +765,8 @@ nnoremap <silent> <leader>l :wincmd l<CR>
 nnoremap <silent> <leader>\ :wincmd p<CR>
 
 " Resize splits
-nnoremap <silent> <A->> :resize +3<CR>
-nnoremap <silent> <A-<> :resize -3<CR>
+nnoremap <silent> <A-=> :resize +3<CR>
+nnoremap <silent> <A--> :resize -3<CR>
 nnoremap <silent> <A-.> :vertical resize +5<CR>
 nnoremap <silent> <A-,> :vertical resize -5<CR>
 " zoom a vim pane
@@ -1322,3 +1322,63 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 "  Repo  : https://github.com/hasansujon786/dot-windows/  "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   """"""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" " Zoom in and out of a specific split pane (similar to tmux).
+" Plug 'dhruvasagar/vim-zoom'
+
+" Plug 'godlygeek/tabular' | Plug 'tpope/vim-markdown'
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+
+" " Automatically show Vim's complete menu while typing.
+" Plug 'vim-scripts/AutoComplPop'
+
+" " A bunch of useful language related snippets (ultisnips is the engine).
+" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
+" " Handle multi-file find and replace.
+" Plug 'mhinz/vim-grepper'
+
+" " Run a diff on 2 directories.
+" Plug 'will133/vim-dirdiff'
+
+" " Format paragraph (selected or not) to 80 character lines.
+" nnoremap <Leader>g gqap
+" xnoremap <Leader>g gqa
+
+" " Navigate the complete menu items like CTRL+n / CTRL+p would.
+" inoremap <expr> <Down> pumvisible() ? "<C-n>" :"<Down>"
+" inoremap <expr> <Up> pumvisible() ? "<C-p>" : "<Up>"
+
+" " Select the complete menu item like CTRL+y would.
+" inoremap <expr> <Right> pumvisible() ? "<C-y>" : "<Right>"
+" inoremap <expr> <CR> pumvisible() ? "<C-y>" :"<CR>"
+
+" " Cancel the complete menu item like CTRL+e would.
+" inoremap <expr> <Left> pumvisible() ? "<C-e>" : "<Left>"
+
+" " Only show the cursor line in the active buffer.
+" augroup CursorLine
+"     au!
+"     au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+"     au WinLeave * setlocal nocursorline
+" augroup END
+
+" " .............................................................................
+" " iamcco/markdown-preview.nvim
+" " .............................................................................
+
+" let g:mkdp_auto_close=0
+" let g:mkdp_refresh_slow=1
+" let g:mkdp_markdown_css='/home/nick/.local/lib/github-markdown-css/github-markdown.css'
+
+" " .............................................................................
+" " SirVer/ultisnips
+" " .............................................................................
+
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" Update a buffer's contents on focus if it changed outside of Vim.
+ au FocusGained,BufEnter * :checktime
+" nmap <C-@> <up>
+
