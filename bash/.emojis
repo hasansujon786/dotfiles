@@ -1,0 +1,14 @@
+EMOJIS=(😺 😸 😹 😻 😼 😽 🙀 😿 😾)
+
+# selects a random element from the EMOJIS set
+  SELECTED_EMOJI=${EMOJIS[$RANDOM % ${#EMOJIS[@]}]};
+${SELECTED_EMOJI}
+
+function success_indicator() {
+  if [ $? -eq 0 ] ; then
+    echo "$"
+  else
+    echo "💩"
+      fi
+}
+# export PS1='$(success_indicator) $ '
