@@ -742,9 +742,9 @@ vnoremap > >gv
 vnoremap < <gv
 
 " Comment or uncomment lines
-nmap <C-_> mzgcc`z
-imap <C-_> <ESC>gccgi
-vmap <C-_> mzgc`zgv
+nmap <C-_> mz_gcc`z
+imap <C-_> <ESC>_gccgi
+vmap <C-_> _gcgv
 
 " Move lines up and down in normal & visual mode
 " nnoremap <silent> <A-k> :move -2<CR>==
