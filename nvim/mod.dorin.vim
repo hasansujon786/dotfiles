@@ -41,6 +41,7 @@ set nomodeline
 set modelines=0
 set shortmess+=c      " don't give |ins-completion-menu| messages
 set lazyredraw        " Don't redraw while executing macros (good performance config)
+set regexpengine=1    " (good performance config)
 set updatetime=100
 " Quickly time out on keycodes, but never time out on mappings
 set timeout ttimeout ttimeoutlen=200
@@ -317,6 +318,9 @@ let g:lightline = {
       \   'mode': 'MyMode',
 	    \   'cocstatus': 'coc#status'
       \ },
+      \ 'tab_component_function': {
+      \   'tabnum': 'LightlineWebDevIcons',
+      \ },
       \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
       \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
       \ }
@@ -352,6 +356,16 @@ function! MyFilename()
         \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
         \ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
+
+function! LightlineWebDevIcons(n)
+  let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
+  return WebDevIconsGetFileTypeSymbol(bufname(l:bufnr))
+endfunction
+
+let s:palette = g:lightline#colorscheme#one#palette
+let s:palette.tabline.tabsel = [ [ '#282C33', '#ABB2BF', 252, 66, 'bold' ] ]
+let s:palette.tabline.left = [ [ '#717785', '#3E4452', 252, 66 ] ]
+unlet s:palette
 
 " ======================================
 " => mhinz/vim-startify
@@ -1381,4 +1395,7 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 " Update a buffer's contents on focus if it changed outside of Vim.
  au FocusGained,BufEnter * :checktime
 " nmap <C-@> <up>
+" https://github.com/nickjj/dotfiles
+" https://nickjanetakis.com/blog/the-tools-i-use
+" https://github.com/Konfekt/FastFold
 
