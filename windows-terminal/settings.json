@@ -7,21 +7,14 @@
 // For documentation on these settings, see: https://aka.ms/terminal-documentation
 {
   "$schema": "https://aka.ms/terminal-profiles-schema",
-
   "defaultProfile": "{0caa0dad-35be-5f56-a8ff-afceeeaa6102}",
   "theme": "system",
   "launchMode": "maximized",
   "rowsToScroll": 20,
   "snapToGridOnResize": false,
-  // "experimental.rendering.forceFullRepaint": true,
-  // "experimental.rendering.software": true,
-
-  // You can add more global application settings here.
-  // To learn more about global settings, visit https://aka.ms/terminal-global-settings
 
   // If enabled, selections are automatically copied to your clipboard.
   "copyOnSelect": false,
-
   // If enabled, formatted data is also copied to your clipboard
   "copyFormatting": false,
 
@@ -33,13 +26,12 @@
     "defaults": {
       // Put settings here that you want to apply to all profiles.
       "fontFace": "CaskaydiaCove Nerd Font",
-      "fontSize": 13,
-      "padding": "0, 0, -2, 0",
+      "fontSize": 14,
+      "padding": "0, 0, 0, 0",
       "cursorShape": "filledBox",
       "startingDirectory": "%USERPROFILE%",
       "scrollbarState": "hidden",
       "colorScheme": "One Half Dark"
-      // "useAcrylic": true
     },
     "list": [
       {
@@ -57,17 +49,14 @@
         "hidden": false
       },
       {
-        // Make changes here to the cmd.exe profile.
+        // Make changes here to the bash.exe profile.
         "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6102}",
         "name": "Bash",
+        "tabTitle": "Bash",
+        "suppressApplicationTitle": true,
         "commandline": "C:\\Program Files\\Git\\bin\\bash.exe",
         "hidden": false,
-
         "icon": "%USERPROFILE%/dot-windows/windows-terminal/ubuntu.png"
-        // "backgroundImage": "%USERPROFILE%/bash.png",
-        // "backgroundImageOpacity": 1,
-        // "backgroundImageStretchMode": "none",
-        // "backgroundImageAlignment": "bottomRight"
       },
       {
         "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
@@ -83,16 +72,16 @@
   // To learn more about keybindings, visit https://aka.ms/terminal-keybindings
   "keybindings": [
     // To learn more about selection, visit https://aka.ms/terminal-selection
-    { "command": { "action": "copy", "singleLine": false }, "keys": "ctrl+shift+c" },
-    { "command": "paste", "keys": "ctrl+shift+v" },
-    { "command": "find", "keys": "ctrl+shift+f" },
+    { "keys": "ctrl+shift+c", "command": { "action": "copy", "singleLine": false } },
+    { "keys": "ctrl+shift+v", "command": "paste" },
+    { "keys": "ctrl+shift+f", "command": "find" },
     {
-      "command": { "action": "splitPane", "split": "auto", "splitMode": "duplicate" },
-      "keys": "alt+shift+d"
+      "keys": "alt+shift+d",
+      "command": { "action": "splitPane", "split": "auto", "splitMode": "duplicate" }
     },
 
     // Unbounds
-    { "command": "unbound", "keys": "alt+enter" }
+    { "keys": "alt+enter", "command": "unbound" }
   ]
 }
 
