@@ -70,7 +70,8 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'itchyny/lightline.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'junegunn/goyo.vim'
-Plug 'rakr/vim-one'
+" Plug 'rakr/vim-one'
+Plug 'joshdick/onedark.vim'
 " Plug 'rafi/awesome-vim-colorschemes'
 " Plug 'whatyouhide/vim-gotham'
 
@@ -510,7 +511,7 @@ set hidden            " enable hidden unsaved buffers
 set diffopt+=vertical " Always use vertical diffs
 set ruler             " Always show current position
 set cmdheight=1       " Height of the command bar
-set foldcolumn=1      " display gutter markings for folds
+set foldcolumn=0      " display gutter markings for folds
 set cursorline        " Show a line on current line
 
 " Fix splitting
@@ -575,7 +576,8 @@ if (has("termguicolors"))
 endif
 
 try
-  colorscheme one
+  " colorscheme one
+  colorscheme onedark
 catch
 endtry
 
