@@ -710,8 +710,12 @@ noremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
 noremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
 
 " Vertical scrolling
-nnoremap <A-k> <C-u>
-nnoremap <A-j> <C-d>
+" nnoremap <A-k> <C-u>
+" nnoremap <A-j> <C-d>
+nnoremap <A-u> <C-u>
+nnoremap <A-d> <C-d>
+nnoremap <A-y> <C-y>
+nnoremap <A-e> <C-e>
 " Horizontal scroll
 nnoremap <A-l> 5zl
 nnoremap <A-h> 5zh
@@ -764,8 +768,8 @@ imap <C-_> <ESC>_gccgi
 vmap <C-_> _gcgv
 
 " Move lines up and down in normal & visual mode
-" nnoremap <silent> <A-k> :move -2<CR>==
-" nnoremap <silent> <A-j> :move +1<CR>==
+nnoremap <silent> <A-k> :move -2<CR>==
+nnoremap <silent> <A-j> :move +1<CR>==
 vnoremap <silent> <A-k> :move '<-2<CR>gv=gv
 vnoremap <silent> <A-j> :move '>+1<CR>gv=gv
 
