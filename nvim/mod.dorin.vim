@@ -494,7 +494,7 @@ source $VIMRUNTIME/menu.vim
 " Autocompletion
 " set wildmode=longest,list,full
 set wildmenu          " Turn on the Wild menu
-set pumblend=15       " set pum background visibility to 20 percent
+set pumblend=3       " set pum background visibility to 20 percent
 set wildoptions=pum   " set file completion in command to use pum
 
 " Ignore the following globs in file completions
@@ -511,7 +511,7 @@ set hidden            " enable hidden unsaved buffers
 set diffopt+=vertical " Always use vertical diffs
 set ruler             " Always show current position
 set cmdheight=1       " Height of the command bar
-set foldcolumn=0      " display gutter markings for folds
+set foldcolumn=1      " display gutter markings for folds
 set cursorline        " Show a line on current line
 
 " Fix splitting
@@ -655,7 +655,8 @@ let &showbreak="↳ "                 " Make wrapped lines more obvious
 set cpoptions+=n
 
 " Highlight the characters on column 81
-highlight ColorColumn guibg=magenta
+highlight CocHighlightText ctermbg=gray guibg=#3B4048
+highlight ColorColumn guibg=#3B4048
 call matchadd('ColorColumn', '\%81v', '100')
 augroup fzf
   autocmd  FileType fzf call clearmatches()
