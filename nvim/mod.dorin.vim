@@ -87,6 +87,7 @@ Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-eunuch'   "for moving and manipulating files / directories.
+Plug 'honza/vim-snippets' " A bunch of useful language related snippets (ultisnips is the engine).
 
 " ======================================
 " => Intrigration
@@ -153,17 +154,25 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim
 " coc extension {{{
 " https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-" let g:coc_global_extensions = [
-"   \ 'coc-tsserver'
-"   \ ]
+let g:coc_global_extensions = [
+  \ 'coc-tsserver',
+  \ 'coc-snippets',
+  \ 'coc-json',
+  \ 'coc-html',
+  \ 'coc-css',
+  \ 'coc-emmet',
+  \ ]
 " => JavaScript
-" coc-tsserver coc-json coc-vetur
+" coc-tsserver coc-json
+" coc-vetur coc-styled-components
 
 " => HTML
-" coc-html coc-css coc-emmet coc-tailwindcss
+" coc-html coc-css coc-emmet
+" coc-tailwindcss
 
 " => Ediort Support
-" coc-bookmark coc-actions coc-lists coc-snippets coc-spell-checker coc-vimlsp coc-yank
+" coc-snippets
+" coc-bookmark coc-actions coc-lists coc-spell-checker coc-vimlsp coc-yank
 
 " => CLang
 " coc-clangd
@@ -1353,9 +1362,6 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 " " Automatically show Vim's complete menu while typing.
 " Plug 'vim-scripts/AutoComplPop'
-
-" " A bunch of useful language related snippets (ultisnips is the engine).
-" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " " Handle multi-file find and replace.
 " Plug 'mhinz/vim-grepper'
