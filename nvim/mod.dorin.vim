@@ -108,6 +108,7 @@ Plug 'ryanoasis/vim-devicons'
 " ======================================
 Plug 'sheerun/vim-polyglot'     " Full lang support
 Plug 'ap/vim-css-color'
+Plug 'jparise/vim-graphql'
 
 " ======================================
 " => Git
@@ -375,7 +376,7 @@ endfunction
 let s:palette = g:lightline#colorscheme#one#palette
 let s:palette.tabline.tabsel = [ [ '#282C33', '#ABB2BF', 252, 66, 'bold' ] ]
 let s:palette.tabline.left = [ [ '#717785', '#3E4452', 252, 66 ] ]
-let s:palette.tabline.middle = [ [ '#717785', '#21252B', 252, 66 ] ]
+" let s:palette.tabline.middle = [ [ '#717785', '#21252B', 252, 66 ] ]
 unlet s:palette
 
 " ======================================
@@ -1053,6 +1054,7 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile *.yrl set filetype=erlang
   autocmd BufRead,BufNewFile *.md set filetype=markdown
   autocmd BufRead,BufNewFile .eslintrc,.prettierrc set filetype=json
+  autocmd BufRead,BufNewFile *.prisma set filetype=graphql
 
   " Enable spellchecking for Markdown
   autocmd FileType markdown setlocal spell
@@ -1412,4 +1414,4 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 " https://github.com/nickjj/dotfiles
 " https://nickjanetakis.com/blog/the-tools-i-use
 " https://github.com/Konfekt/FastFold
-
+" https://github.com/ChristianChiarulli/nvim
