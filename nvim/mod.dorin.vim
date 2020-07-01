@@ -23,13 +23,6 @@ endif
 filetype plugin on
 filetype indent on
 
-" Set to auto read when a file is changed from the outside
-set autoread
-au FocusGained,BufEnter * checktime
-
-" Automatically :write before running commands
-set autowrite
-
 " Some general settings
 set magic             " For regular expressions turn magic on
 set showcmd           " show any commands
@@ -46,6 +39,11 @@ set updatetime=100
 " Quickly time out on keycodes, but never time out on mappings
 set timeout ttimeout ttimeoutlen=200
 set mousemodel=popup
+set autowrite         " Automatically :write before running commands
+set autoread          " Set to auto read when a file is changed from the outside
+" Update a buffer's contents on focus if it changed outside of Vim.
+au FocusGained,BufEnter,CursorHold * checktime
+
 " snippets
 " set clipboard=unnamed
 " set clipboard+=unnamedplus
@@ -86,8 +84,11 @@ Plug 'vim-scripts/YankRing.vim', { 'on':  'YRShow' }
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-eunuch'   "for moving and manipulating files / directories.
-Plug 'honza/vim-snippets' " A bunch of useful language related snippets (ultisnips is the engine).
+Plug 'tpope/vim-eunuch'       "for moving and manipulating files / directories.
+Plug 'honza/vim-snippets'     " A bunch of useful language related snippets (ultisnips is the engine).
+Plug 'Konfekt/FastFold'
+" Plug 'mhinz/vim-grepper'    " Handle multi-file find and replace.
+" Plug 'will133/vim-dirdiff'  " Run a diff on 2 directories.
 
 " ======================================
 " => Intrigration
@@ -163,6 +164,7 @@ let g:coc_global_extensions = [
   \ 'coc-css',
   \ 'coc-emmet',
   \ ]
+"coc-pairs", ""coc-syntax", "coc-word", "coc-emoji", "coc-tag", "coc-dictionary",
 " => JavaScript
 " coc-tsserver coc-json
 " coc-vetur coc-styled-components
@@ -488,6 +490,12 @@ nmap ]c <Plug>(GitGutterNextHunk)
 " ======================================
 nmap <leader>gg :Gstatus<CR>
 
+" ======================================
+" => Konfekt/FastFold
+" ======================================
+let g:fastfold_savehook=0
+let g:fastfold_fold_command_suffixes=[]
+"
 source ~/dot-windows/nvim/plugin/config.vim
 " }}}
 " => VIM-User-Interface ---------------------------- {{{
@@ -544,7 +552,8 @@ endif
 
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
+" automatically wrap left and right
+set whichwrap+=<,>,h,l,[,]
 
 " Show matching brackets when text indicator is over them
 set showmatch
@@ -655,8 +664,9 @@ set hlsearch            " ... as you type
 set iskeyword+=-                    " treat dash separated words as a word text object
 set textwidth=80                    " Hard-wrap text at nth column
 set nowrap                          " nowrap by default
-set listchars=tab:»·,trail:·,nbsp:· " Display extra whitespace
-set list                            " show invisible characters
+set list
+set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,precedes:«,extends:»   " show hidden characters
+" set listchars=tab:»·,trail:·,nbsp:· " Display extra whitespace
 set matchpairs+=<:>,«:»,｢:｣         " Match angle brackets...
 set ai "Auto indent
 set si "Smart indent
@@ -784,6 +794,10 @@ nnoremap <silent> <A-j> :move +1<CR>==
 vnoremap <silent> <A-k> :move '<-2<CR>gv=gv
 vnoremap <silent> <A-j> :move '>+1<CR>gv=gv
 
+" Format paragraph (selected or not) to 80 character lines.
+nnoremap <Leader>g gqap
+xnoremap <Leader>g gqa
+
 " ======================================
 " => Moving-around-tabs-and-buffers
 " ======================================
@@ -814,6 +828,10 @@ nnoremap <silent> gH :tabfirst<CR>
 " ======================================
 " => Search-functionalities
 " ======================================
+
+" auto center on matched string
+noremap n nzz
+noremap N Nzz
 
 " Visual mode pressing * or # searches for the current selection
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
@@ -1083,6 +1101,9 @@ augroup CursorLine
   au WinLeave * setlocal nocursorline
 augroup END
 
+" disable signcolumn for tagbar, nerdtree, as thats useless
+autocmd FileType tagbar,nerdtree setlocal signcolumn=no
+
 " Pretty font icons like Seti-UI {{{
 " Create a dictionary of the colors for later use
 let g:sol = {
@@ -1167,16 +1188,16 @@ function! DeviconsColors(config)
 endfunction
 
 let g:devicons_colors = {
-      \'normal': [' ', ' ', ' ', ' ', ' '],
+      \'normal':    [' ', ' ', ' ', ' ', ' '],
       \'emphasize': [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-      \'yellow': [' ', ' ', ' '],
-      \'orange': [' ', ' ', ' ', 'λ ', ' ', ' '],
-      \'red': [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-      \'magenta': [' '],
-      \'violet': [' ', ' ', ' ', ' '],
-      \'blue': [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-      \'cyan': [' ', ' ', ' ', ' '],
-      \'green': [' ', ' ', ' ', ' ', 'V ', '﵂']
+      \'yellow':    [' ', ' ', ' '],
+      \'orange':    [' ', ' ', ' ', 'λ ', ' ', ' '],
+      \'red':       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+      \'magenta':   [' '],
+      \'violet':    [' ', ' ', ' ', ' '],
+      \'blue':      [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+      \'cyan':      [' ', ' ', ' ', ' '],
+      \'green':     [' ', ' ', ' ', ' ', ' ', '﵂ ']
       \}
 call DeviconsColors(g:devicons_colors)
 " }}}
@@ -1269,6 +1290,20 @@ function! VisualSelection(direction, extra_filter) range
   let @" = l:saved_reg
 endfunction
 
+" Toggle quickfix window.
+function! QuickFix_toggle()
+    for i in range(1, winnr('$'))
+        let bnum = winbufnr(i)
+        if getbufvar(bnum, '&buftype') == 'quickfix'
+            cclose
+            return
+        endif
+    endfor
+
+    copen
+endfunction
+nnoremap <silent> <Leader>c :call QuickFix_toggle()<CR>
+
 " }}}
 " => Temporary ------------------------------------- {{{
 
@@ -1356,62 +1391,3 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" " Zoom in and out of a specific split pane (similar to tmux).
-" Plug 'dhruvasagar/vim-zoom'
-
-" Plug 'godlygeek/tabular' | Plug 'tpope/vim-markdown'
-" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-
-" " Automatically show Vim's complete menu while typing.
-" Plug 'vim-scripts/AutoComplPop'
-
-" " Handle multi-file find and replace.
-" Plug 'mhinz/vim-grepper'
-
-" " Run a diff on 2 directories.
-" Plug 'will133/vim-dirdiff'
-
-" " Format paragraph (selected or not) to 80 character lines.
-" nnoremap <Leader>g gqap
-" xnoremap <Leader>g gqa
-
-" " Navigate the complete menu items like CTRL+n / CTRL+p would.
-" inoremap <expr> <Down> pumvisible() ? "<C-n>" :"<Down>"
-" inoremap <expr> <Up> pumvisible() ? "<C-p>" : "<Up>"
-
-" " Select the complete menu item like CTRL+y would.
-" inoremap <expr> <Right> pumvisible() ? "<C-y>" : "<Right>"
-" inoremap <expr> <CR> pumvisible() ? "<C-y>" :"<CR>"
-
-" " Cancel the complete menu item like CTRL+e would.
-" inoremap <expr> <Left> pumvisible() ? "<C-e>" : "<Left>"
-
-" " Only show the cursor line in the active buffer.
-" augroup CursorLine
-"     au!
-"     au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-"     au WinLeave * setlocal nocursorline
-" augroup END
-
-" " .............................................................................
-" " iamcco/markdown-preview.nvim
-" " .............................................................................
-
-" let g:mkdp_auto_close=0
-" let g:mkdp_refresh_slow=1
-" let g:mkdp_markdown_css='/home/nick/.local/lib/github-markdown-css/github-markdown.css'
-
-" " .............................................................................
-" " SirVer/ultisnips
-" " .............................................................................
-
-" let g:UltiSnipsJumpForwardTrigger="<tab>"
-" let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
-" Update a buffer's contents on focus if it changed outside of Vim.
- au FocusGained,BufEnter * :checktime
-" nmap <C-@> <up>
-" https://github.com/nickjj/dotfiles
-" https://nickjanetakis.com/blog/the-tools-i-use
-" https://github.com/Konfekt/FastFold
-" https://github.com/ChristianChiarulli/nvim
