@@ -238,7 +238,7 @@ command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 " ======================================
 " => Yggdroot/indentLine
 " ======================================
-let g:indentLine_color_gui = '#444444'
+let g:indentLine_color_gui = '#3B4048'
 let g:indentLine_char = '▏'
 
 " ======================================
