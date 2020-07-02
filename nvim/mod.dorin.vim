@@ -87,6 +87,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-eunuch'       "for moving and manipulating files / directories.
 Plug 'honza/vim-snippets'     " A bunch of useful language related snippets (ultisnips is the engine).
 Plug 'Konfekt/FastFold'
+Plug 'justinmk/vim-sneak'
 " Plug 'mhinz/vim-grepper'    " Handle multi-file find and replace.
 " Plug 'will133/vim-dirdiff'  " Run a diff on 2 directories.
 
@@ -433,11 +434,6 @@ augroup END
 " ======================================
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " let qs_max_chars=80
-augroup qs_colors
-  autocmd!
-  autocmd ColorScheme * highlight QuickScopePrimary guifg='tomato' gui=underline ctermfg=155 cterm=underline
-  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#d78787' gui=underline ctermfg=81 cterm=underline
-augroup END
 
 " ======================================
 " => vim-scripts/YankRing.vim
@@ -458,7 +454,7 @@ endfunction
 " ======================================
 " Default mappings
 let g:multi_cursor_start_word_key      = 'gb'
-let g:multi_cursor_select_all_word_key = '<C-F2>'
+let g:multi_cursor_select_all_word_key = 'gB'
 let g:multi_cursor_next_key            = 'gb'
 let g:multi_cursor_prev_key            = 'gp'
 let g:multi_cursor_quit_key            = 'q'
@@ -495,7 +491,21 @@ nmap <leader>gg :Gstatus<CR>
 " ======================================
 let g:fastfold_savehook=0
 let g:fastfold_fold_command_suffixes=[]
-"
+
+" ======================================
+" => justinmk/vim-sneak
+" ======================================
+let g:sneak#label = 1
+" case insensitive sneak
+let g:sneak#use_ic_scs = 1
+" immediately move to the next instance of search, if you move the cursor sneak is back to default behavior
+let g:sneak#s_next = 1
+" remap so I can use , and ; with f and t
+map gS <Plug>Sneak_,
+map gs <Plug>Sneak_;
+" Cool prompts
+let g:sneak#prompt = '🔎 '
+
 source ~/dot-windows/nvim/plugin/config.vim
 " }}}
 " => VIM-User-Interface ---------------------------- {{{
@@ -618,6 +628,24 @@ set ffs=unix,dos,mac
 " let g:one_allow_italics = 1       " support italic fonts
 let g:sh_fold_enabled=1           " enable folding in bash files
 
+" Change Sneak highlight
+highlight Sneak guifg=#282C33 guibg=#62AEEF ctermfg=black ctermbg=cyan
+highlight SneakScope guifg=#282C33 guibg=white ctermfg=black ctermbg=white
+" Highlight the characters on column 81
+highlight CocHighlightText ctermbg=gray guibg=#3B4048
+highlight ColorColumn guibg=#3B4048 ctermbg=gray
+call matchadd('ColorColumn', '\%81v', '100')
+augroup fzf
+  autocmd  FileType fzf call clearmatches()
+        \| autocmd BufLeave <buffer> call matchadd('ColorColumn', '\%81v', '100')
+augroup END
+" Change quick-scope Highlight
+augroup qs_colors
+  autocmd!
+  autocmd ColorScheme * highlight QuickScopePrimary guifg='tomato' gui=underline ctermfg=155 cterm=underline
+  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#d78787' gui=underline ctermfg=81 cterm=underline
+augroup END
+
 " }}}
 " => Files-backup-undo ----------------------------- {{{
 "
@@ -673,16 +701,6 @@ set si "Smart indent
 set linebreak                       " Don't break words when wrapping lines
 let &showbreak="↳ "                 " Make wrapped lines more obvious
 set cpoptions+=n
-
-" Highlight the characters on column 81
-highlight CocHighlightText ctermbg=gray guibg=#3B4048
-highlight ColorColumn guibg=#3B4048
-call matchadd('ColorColumn', '\%81v', '100')
-augroup fzf
-  autocmd  FileType fzf call clearmatches()
-        \| autocmd BufLeave <buffer> call matchadd('ColorColumn', '\%81v', '100')
-augroup END
-
 
 " }}}
 " => Spell-checking -------------------------------- {{{
@@ -840,8 +858,8 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 " Type a replacement term and press . to repeat the replacement again. Useful
 " for replacing a few instances of the term (comparable to multiple cursors).
-nnoremap <silent> S :let @/='\<'.expand('<cword>').'\>'<CR>cgn
-xnoremap <silent> s "sy:let @/=@s<CR>cgn
+nnoremap <silent> C :let @/='\<'.expand('<cword>').'\>'<CR>cgn
+xnoremap <silent> C "sy:let @/=@s<CR>cgn
 " Alias replace all to S
 " nnoremap S :%s//gI<Left><Left><Left>
 
