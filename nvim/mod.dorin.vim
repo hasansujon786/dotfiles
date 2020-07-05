@@ -85,18 +85,18 @@ call plug#begin('~/.config/nvim/plugged')
 " => Visual-&-Theme ========================================
 Plug 'itchyny/lightline.vim'
 Plug 'Yggdroot/indentLine'
-Plug 'junegunn/goyo.vim'
 Plug 'joshdick/onedark.vim'
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 
 " => Functionality-&-Helpers ===============================
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'unblevable/quick-scope'
-Plug 'vim-scripts/YankRing.vim', { 'on':  'YRShow' }
+Plug 'vim-scripts/YankRing.vim', { 'on': 'YRShow' }
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-eunuch'       "for moving and manipulating files / directories.
+Plug 'tpope/vim-eunuch', { 'on': ['Delete', 'Move', 'Rename'] }  "for moving and manipulating files / directories.
 Plug 'hasansujon786/vim-snippets'
 Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-startify'
@@ -107,6 +107,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'Konfekt/FastFold'
+" Plug 'vimwiki/vimwiki'      " my own personal wiki
 " Plug 'mhinz/vim-grepper'    " Handle multi-file find and replace.
 " Plug 'will133/vim-dirdiff'  " Run a diff on 2 directories.
 " Plug 'christoomey/vim-tmux-navigator'
@@ -115,6 +116,7 @@ Plug 'Konfekt/FastFold'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
+Plug 'tpope/vim-rhubarb'      " git(hub) wrapper - open on GitHub
 
 " => Languae-support =======================================
 Plug 'sheerun/vim-polyglot'     " Full lang support
@@ -1175,10 +1177,3 @@ nnoremap <silent> <Leader>c :call QuickFix_toggle()<CR>
 "   \ 'marker':  ['fg', 'Keyword'],
 "   \ 'spinner': ['fg', 'Label'],
 "   \ 'header':  ['fg', 'Comment'] }
-
-" Plug 'godlygeek/tabular' " align stuff... like these vim comments
-" Plug 'janko/vim-test'    " run tests inside vim
-" Plug 'tpope/vim-rhubarb'    " git(hub) wrapper - open on GitHub
-" Plug 'mattn/webapi-vim'
-" Plug 'vimwiki/vimwiki'      " my own personal wiki
-
