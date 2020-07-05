@@ -72,6 +72,7 @@
   // To learn more about keybindings, visit https://aka.ms/terminal-keybindings
   "keybindings": [
     // To learn more about selection, visit https://aka.ms/terminal-selection
+    // { "keys": "ctrl+shift+,", "command": { "action": "openSettings", "target": "defaultsFile" } },
     { "keys": "ctrl+shift+c", "command": { "action": "copy", "singleLine": false } },
     { "keys": "ctrl+shift+v", "command": "paste" },
     { "keys": "ctrl+shift+f", "command": "find" },
@@ -80,6 +81,22 @@
       "command": { "action": "splitPane", "split": "auto", "splitMode": "duplicate" }
     },
 
+    // Tab Management
+    { "command": "nextTab", "keys": "alt+`" },
+    { "command": "prevTab", "keys": "alt+shift+`" },
+    // Create Pane
+    { "command": { "action": "splitPane", "split": "horizontal" }, "keys": "ctrl+alt+s" },
+    { "command": { "action": "splitPane", "split": "vertical" }, "keys": "ctrl+alt+v" },
+    // Resize Pane
+    { "command": { "action": "resizePane", "direction": "down" }, "keys": "ctrl+shift+-" },
+    { "command": { "action": "resizePane", "direction": "up" }, "keys": "ctrl+shift+plus" },
+    { "command": { "action": "resizePane", "direction": "left" }, "keys": "ctrl+shift+," },
+    { "command": { "action": "resizePane", "direction": "right" }, "keys": "ctrl+shift+." },
+    // Jump to Pane
+    { "command": { "action": "moveFocus", "direction": "left" }, "keys": "ctrl+shift+h" },
+    { "command": { "action": "moveFocus", "direction": "down" }, "keys": "ctrl+shift+j" },
+    { "command": { "action": "moveFocus", "direction": "up" }, "keys": "ctrl+shift+k" },
+    { "command": { "action": "moveFocus", "direction": "right" }, "keys": "ctrl+shift+l" },
     // Unbounds
     { "keys": "alt+enter", "command": "unbound" }
   ]
