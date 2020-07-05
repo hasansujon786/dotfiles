@@ -9,16 +9,8 @@
 "    ░   ░ ░    ░   ░ ░ ░ ▒       ░░   ▒ ░░      ░
 "          ░    ░  ░    ░ ░        ░   ░         ░
 "                                 ░
-" => Environment ----------------------------------- {{{
-
-" Local config
-if filereadable($HOME . '/.vimrc.local')
-  source ~/.vimrc.local
-endif
-
-" }}}
+"
 " => General --------------------------------------- {{{
-
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
@@ -44,11 +36,6 @@ set autoread          " Set to auto read when a file is changed from the outside
 " Update a buffer's contents on focus if it changed outside of Vim.
 au FocusGained,BufEnter,CursorHold * checktime
 
-" snippets
-" set clipboard=unnamed
-" set clipboard+=unnamedplus
-
-" Mouse Settings
 if has('mouse')
   set mouse=a           " enable mouse (selection, resizing windows)
 endif
@@ -58,101 +45,111 @@ let mapleader="\<Space>"
 let maplocalleader="\<Space>"
 
 " }}}
+" => Files-backup-undo-spelling -------------------- {{{
+" if filereadable($HOME . '/.vimrc.local')
+"   source ~/.vimrc.local
+" endif
+
+" Turn backup off, since most stuff is in SVN, git etc. anyway...
+set nobackup nowb noswapfile
+" set backupdir=~/.config/nvim/tmp/backup,.
+" set directory=~/.config/nvim/tmp/swap,.
+
+" persistent undo between file reloads
+" set undolevels=5000   " Save a lot of back-history...
+set undodir=~/.config/nvim/tmp/undo,.
+set undofile
+
+set spelllang=en_gb   " Speak proper English
+set complete+=kspell  " Autocomplete with dictionary words when spell check is on
+" Set spellfile to location that is guaranteed to exist
+set spellfile=~/dot-windows/nvim/spell/en.utf-8.add
+map <leader>dic :tabnew ~/dot-windows/nvim/spell/en.utf-8.add<Cr>
+" Toggle spelling and show it's status
+nmap <F7> :setlocal spell! spell?<CR>
+"Open spell file
+nnoremap <leader>fw :normal! 1z=<CR>
+nnoremap <leader>fp :normal! mz[s1z=`z<CR>
+nnoremap <leader>fn :normal! mz]s1z=`z<CR>
+" Spell commands
+" Next wrong spell      ]s
+" Previous wrong spell  [s
+" Add to spell file     zg
+" Prompt spell fixes    z=
+
+" }}}
 " => Plugin-Settings ------------------------------- {{{
 
 call plug#begin('~/.config/nvim/plugged')
 
-" ======================================
-" => Visual-&-Theme
-" ======================================
+" => Visual-&-Theme ========================================
 Plug 'itchyny/lightline.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'junegunn/goyo.vim'
-" Plug 'rakr/vim-one'
 Plug 'joshdick/onedark.vim'
-" Plug 'rafi/awesome-vim-colorschemes'
-" Plug 'whatyouhide/vim-gotham'
 
-" ======================================
-" => Functionality-&-Helpers
-" ======================================
+" => Functionality-&-Helpers ===============================
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'unblevable/quick-scope'
-Plug 'easymotion/vim-easymotion'
 Plug 'vim-scripts/YankRing.vim', { 'on':  'YRShow' }
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-eunuch'       "for moving and manipulating files / directories.
-Plug 'honza/vim-snippets'     " A bunch of useful language related snippets (ultisnips is the engine).
-Plug 'Konfekt/FastFold'
+Plug 'hasansujon786/vim-snippets'
 Plug 'justinmk/vim-sneak'
-" Plug 'mhinz/vim-grepper'    " Handle multi-file find and replace.
-" Plug 'will133/vim-dirdiff'  " Run a diff on 2 directories.
-
-" ======================================
-" => Intrigration
-" ======================================
-"Plug 'christoomey/vim-tmux-navigator'
 Plug 'mhinz/vim-startify'
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
+Plug 'Konfekt/FastFold'
+" Plug 'mhinz/vim-grepper'    " Handle multi-file find and replace.
+" Plug 'will133/vim-dirdiff'  " Run a diff on 2 directories.
+" Plug 'christoomey/vim-tmux-navigator'
 
-" ======================================
-" => Syntax
-" ======================================
-Plug 'sheerun/vim-polyglot'     " Full lang support
-Plug 'ap/vim-css-color'
-Plug 'jparise/vim-graphql'
-
-" ======================================
-" => Git
-" ======================================
+" => Git ===================================================
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 
-" ======================================
-" => Languae-support
-" ======================================
-" javascript {{{
-"   Plug 'nvim-typescript'
-"   Plug 'othree/yajs.vim'
-"   Plug 'mxw/vim-jsx'
-"   Plug 'heavenshell/vim-jsdoc'
-"   Plug 'elzr/vim-json'
-"   Plug 'HerringtonDarkholme/yats.vim'
-"   Plug 'Quramy/vison'
-"   Plug 'jxnblk/vim-mdx-js'
-"   Plug 'meain/vim-package-info', {'build': 'npm install'}
-"   Plug 'yardnsm/vim-import-cost', {'build': 'npm install'}
-" }}}
+" => Languae-support =======================================
+Plug 'sheerun/vim-polyglot'     " Full lang support
+Plug 'ap/vim-css-color'
+Plug 'jparise/vim-graphql'
 
-" html {{{
-"   Plug 'othree/html5.vim'
-  Plug 'mattn/emmet-vim'
-"   Plug 'valloric/MatchTagAlways', {'on_ft': 'html'}
-"   Plug 'posva/vim-vue'
-"   Plug 'skwp/vim-html-escape'
-"   Plug 'kana/vim-textobj-user'
-"   Plug 'whatyouhide/vim-textobj-xmlattr'
-"   Plug 'pedrohdz/vim-yaml-folds'
-" }}}
+" css
+" Plug 'hail2u/vim-css3-syntax'
+" Plug 'ap/vim-css-color'
+" Plug 'norcalli/nvim-colorizer.lua'
+" Plug 'ncm2/ncm2-cssomni'
 
-" css {{{
-"   Plug 'hail2u/vim-css3-syntax'
-"   Plug 'ap/vim-css-color'
-"   Plug 'norcalli/nvim-colorizer.lua'
-"   Plug 'ncm2/ncm2-cssomni'
-" }}}
+" javascript
+" Plug 'nvim-typescript'
+" Plug 'othree/yajs.vim'
+" Plug 'mxw/vim-jsx'
+" Plug 'heavenshell/vim-jsdoc'
+" Plug 'elzr/vim-json'
+" Plug 'HerringtonDarkholme/yats.vim'
+" Plug 'Quramy/vison'
+" Plug 'jxnblk/vim-mdx-js'
+" Plug 'meain/vim-package-info', {'build': 'npm install'}
+" Plug 'yardnsm/vim-import-cost', {'build': 'npm install'}
 
+" html
+Plug 'mattn/emmet-vim'
+" Plug 'valloric/MatchTagAlways', {'on_ft': 'html'}
+" Plug 'othree/html5.vim'
+" Plug 'posva/vim-vue'
+" Plug 'skwp/vim-html-escape'
+" Plug 'kana/vim-textobj-user'
+" Plug 'whatyouhide/vim-textobj-xmlattr'
+" Plug 'pedrohdz/vim-yaml-folds'
+
+" => coc ===================================================
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim
 " coc extension {{{
@@ -180,12 +177,9 @@ let g:coc_global_extensions = [
 
 " => CLang
 " coc-clangd
-
 " }}}
 
-" ======================================
-" => Not-listed
-" ======================================
+" => Not-listed ============================================
 " Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 " Plug 'terryma/vim-expand-region'
 " Plug 'voldikss/vim-floaterm'
@@ -196,9 +190,7 @@ let g:coc_global_extensions = [
 
 call plug#end()
 
-" ======================================
-" => junegunn/fzf
-" ======================================
+" => junegunn/fzf ==========================================
 nnoremap <silent> - :Files <C-R>=expand('%:h')<CR><CR>
 nnoremap <silent> <C-p> :History<CR>
 nnoremap <silent> <C-k>p :Files<CR>
@@ -235,22 +227,16 @@ function! RipgrepFzf(query, fullscreen)
 endfunction
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
-" ======================================
-" => Yggdroot/indentLine
-" ======================================
+" => Yggdroot/indentLine ===================================
 let g:indentLine_color_gui = '#3B4048'
 let g:indentLine_char = '▏'
 
-" ======================================
-" => jiangmiao/auto-pairs
-" ======================================
+" => jiangmiao/auto-pairs ==================================
 let g:AutoPairsShortcutJump = '<M-n>'
 let g:AutoPairsShortcutToggle = '<M-q>'
 let g:AutoPairsShortcutBackInsert = '<Nul>'
 
-" ======================================
-" => scrooloose/nerdtree
-" ======================================
+" => scrooloose/nerdtree ===================================
 let g:NERDTreeIgnore = ['^node_modules$','^.git$']
 let g:NERDTreeAutoDeleteBuffer=1
 let g:NERDTreeShowHidden=1
@@ -287,9 +273,7 @@ let g:NERDTreeIndicatorMapCustom = {
 nnoremap <silent> <expr> <Leader>n g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
 nnoremap <silent> <Leader>0 :NERDTreeToggle<CR>
 
-" ======================================
-" => ryanoasis/vim-devicons
-" ======================================
+" => ryanoasis/vim-devicons ================================
 let g:webdevicons_enable_nerdtree = 1
 let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
 " enable open and close folder/directory glyph flags (disabled by default with 0)
@@ -300,9 +284,7 @@ let g:DevIconsEnableFoldersOpenClose = 1
 " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
 " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vue'] = 'V'
 
-" ======================================
-" => itchyny/lightline.vim
-" ======================================
+" => itchyny/lightline.vim =================================
 " let s:p.tabline.left   = [ [ s:gray1, s:bg ] ]
 " let s:p.tabline.tabsel = [ [ s:fg, s:gray3, 'bold' ] ]
 " nmap <leader>le :e ~/.config/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/one.vim
@@ -382,14 +364,10 @@ let s:palette.tabline.left = [ [ '#717785', '#3E4452', 252, 66 ] ]
 " let s:palette.tabline.middle = [ [ '#717785', '#21252B', 252, 66 ] ]
 unlet s:palette
 
-" ======================================
-" => mhinz/vim-startify
-" ======================================
+" => mhinz/vim-startify ====================================
 let g:startify_files_number = 5
 
-" ======================================
-" => junegunn/goyo.vim
-" ======================================
+" => junegunn/goyo.vim =====================================
 " Toggle Goyo
 nnoremap <silent> gz :Goyo<CR>
 nnoremap <silent> <C-k>z :Goyo<CR>
@@ -418,20 +396,7 @@ augroup GOYO
   autocmd! User GoyoLeave nested call <SID>goyo_leave()
 augroup END
 
-" ======================================
-" => christoomey/vim-tmux-navigator
-" ======================================
-" let g:tmux_navigator_no_mappings = 1
-" nnoremap <silent> <A-h> :TmuxNavigateLeft<cr>
-" nnoremap <silent> <A-j> :TmuxNavigateDown<cr>
-" nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
-" nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
-" nnoremap <silent> <A-\> :TmuxNavigatePrevious<cr>
-" nnoremap <silent> <S-tab> :TmuxNavigatePrevious<cr>
-
-" ======================================
-" => unblevable/quick-scope
-" ======================================
+" => unblevable/quick-scope ================================
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " let qs_max_chars=80
 augroup qs_colors
@@ -439,9 +404,8 @@ augroup qs_colors
   autocmd ColorScheme * highlight QuickScopePrimary guifg='tomato' gui=underline ctermfg=155 cterm=underline
   autocmd ColorScheme * highlight QuickScopeSecondary guifg='#d78787' gui=underline ctermfg=81 cterm=underline
 augroup END
-" ======================================
-" => vim-scripts/YankRing.vim
-" ======================================
+
+" => vim-scripts/YankRing.vim ==============================
 nnoremap <silent> <leader>y :YRShow<CR>
 vnoremap <silent> <leader>y y:YRShow<CR>:close<CR>
 let g:yankring_replace_n_pkey = '<M-S-y>'
@@ -453,10 +417,7 @@ function! YRRunAfterMaps()
   vnoremap y ygv<Esc>
 endfunction
 
-" ======================================
-" => terryma/vim-multiple-cursors
-" ======================================
-" Default mappings
+" => terryma/vim-multiple-cursors ==========================
 let g:multi_cursor_start_word_key      = 'gb'
 let g:multi_cursor_select_all_word_key = 'gB'
 let g:multi_cursor_next_key            = 'gb'
@@ -466,39 +427,24 @@ let g:multi_cursor_quit_key            = 'q'
 " let g:multi_cursor_select_all_key      = 'g<A-n>'
 " let g:multi_cursor_skip_key            = '<C-x>'
 
-" ======================================
-" => mbbill/undotree
-" ======================================
+" => mbbill/undotree =======================================
 let g:undotree_WindowLayout = 2
 let g:undotree_DiffAutoOpen = 0
 " let g:undotree_DiffpanelHeight = 10
 nnoremap <silent> <C-F5> :UndotreeToggle<cr>
 
-" ======================================
-" => airblade/vim-gitgutter"
-" ======================================
+" => airblade/vim-gitgutter" ===============================
 let g:gitgutter_map_keys = 0
 nmap <leader>gp <Plug>(GitGutterPreviewHunk)
 nmap <leader>gs <Plug>(GitGutterStageHunk)
 nmap <leader>gu <Plug>(GitGutterUndoHunk)
+nmap [c <Plug>(GitGutterPrevHunk)zz
+nmap ]c <Plug>(GitGutterNextHunk)zz
 
-nmap [c <Plug>(GitGutterPrevHunk)
-nmap ]c <Plug>(GitGutterNextHunk)
-
-" ======================================
-" => tpope/vim-fugitive
-" ======================================
+" => tpope/vim-fugitive ====================================
 nmap <leader>gg :Gstatus<CR>
 
-" ======================================
-" => Konfekt/FastFold
-" ======================================
-let g:fastfold_savehook=0
-let g:fastfold_fold_command_suffixes=[]
-
-" ======================================
-" => justinmk/vim-sneak
-" ======================================
+" => justinmk/vim-sneak ====================================
 let g:sneak#label = 1
 " case insensitive sneak
 let g:sneak#use_ic_scs = 1
@@ -510,7 +456,7 @@ map gs <Plug>Sneak_;
 " Cool prompts
 let g:sneak#prompt = '🔎 '
 
-source ~/dot-windows/nvim/plugin/config.vim
+source ~/dot-windows/nvim/plugin/import.vim
 " }}}
 " => VIM-User-Interface ---------------------------- {{{
 
@@ -526,7 +472,7 @@ source $VIMRUNTIME/menu.vim
 " Autocompletion
 " set wildmode=longest,list,full
 set wildmenu          " Turn on the Wild menu
-set pumblend=3       " set pum background visibility to 20 percent
+set pumblend=3        " set pum background visibility to 20 percent
 set wildoptions=pum   " set file completion in command to use pum
 
 " Ignore the following globs in file completions
@@ -539,15 +485,17 @@ else
   set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 endif
 
-set hidden            " enable hidden unsaved buffers
-set diffopt+=vertical " Always use vertical diffs
-set ruler             " Always show current position
-set cmdheight=1       " Height of the command bar
-set foldcolumn=1      " display gutter markings for folds
-set cursorline        " Show a line on current line
-
-" Fix splitting
-set splitbelow splitright
+set hidden                        " enable hidden unsaved buffers
+set diffopt+=vertical             " Always use vertical diffs
+set ruler                         " Always show current position
+set cmdheight=1                   " Height of the command bar
+set foldcolumn=1                  " display gutter markings for folds
+set cursorline                    " Show a line on current line
+set showmatch                     " Show matching brackets when text indicator is over them
+set mat=2                         " How many tenths of a second to blink when matching brackets
+set backspace=eol,start,indent    " Configure backspace so it acts as it should act
+set whichwrap+=<,>,h,l,[,]        " automatically wrap left and right
+set splitbelow splitright         " Fix splitting
 
 " Guicursor Setting
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
@@ -559,44 +507,28 @@ set noerrorbells
 set novisualbell
 set t_vb=
 set tm=500
-" Properly disable sound on errors on MacVim
-if has("gui_macvim")
-  autocmd GUIEnter * set vb t_vb=
-endif
-
-" Configure backspace so it acts as it should act
-set backspace=eol,start,indent
-" automatically wrap left and right
-set whichwrap+=<,>,h,l,[,]
-
-" Show matching brackets when text indicator is over them
-set showmatch
-" How many tenths of a second to blink when matching brackets
-set mat=2
 
 " Numbers
-set number
+set number relativenumber
 set numberwidth=1
-set relativenumber
 
 " Specify the behavior when switching between buffers
-try
-  set switchbuf=useopen,usetab,newtab
-  set showtabline=2
-catch
-endtry
+set switchbuf=useopen,usetab,newtab
+set showtabline=2
 
 " }}}
 " => Colors-and-Fonts ------------------------------ {{{
 
-" Enable syntax highlighting
-syntax on
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=UTF-8    " Default encoding
+scriptencoding utf-16 " allow emojis in vimrc
+syntax on             " Enable syntax highlighting
+set ffs=unix,dos,mac  " Use Unix as the standard file type
 
 " Enable 256 colors palette in Gnome Terminal
 if $COLORTERM == 'gnome-terminal'
   set t_Co=256
 endif
-
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "copy next line to .tmux.conf for support true color within tmux
 "set-option -ga terminal-overrides ",xterm-256color:Tc"
@@ -607,13 +539,6 @@ endif
 if (has("termguicolors"))
   set termguicolors
 endif
-
-try
-  " colorscheme one
-  colorscheme onedark
-catch
-endtry
-
 if has("gui_running")
   set guioptions-=T
   set guioptions-=e
@@ -621,17 +546,13 @@ if has("gui_running")
   set guitablabel=%M\ %t
 endif
 
-" Set utf8 as standard encoding and en_US as the standard language
-set encoding=UTF-8    " Default encoding
-scriptencoding utf-16 " allow emojis in vimrc
-
-" Use Unix as the standard file type
-set ffs=unix,dos,mac
-
-" Some default settings
 " let g:one_allow_italics = 1       " support italic fonts
 let g:sh_fold_enabled=1           " enable folding in bash files
 
+augroup colorextend
+  autocmd!
+  autocmd ColorScheme * call onedark#extend_highlight("FoldColumn", { "fg": { "gui": "#4b5263" } })
+augroup END
 " Change Sneak highlight
 highlight Sneak guifg=#282C33 guibg=#62AEEF ctermfg=black ctermbg=cyan
 highlight SneakScope guifg=#282C33 guibg=white ctermfg=black ctermbg=white
@@ -643,32 +564,11 @@ augroup fzf
   autocmd  FileType fzf call clearmatches()
         \| autocmd BufLeave <buffer> call matchadd('ColorColumn', '\%81v', '100')
 augroup END
-" }}}
-" => Files-backup-undo ----------------------------- {{{
-"
-" Turn backup off, since most stuff is in SVN, git etc. anyway...
-set nobackup
-set nowb
-set noswapfile
 
-" set where swap file and undo/backup files are saved
-" set backupdir=~/.config/nvim/tmp/backup,.
-" set directory=~/.config/nvim/tmp/swap,.
-
-" persistent undo between file reloads
-if has('persistent_undo')
-  " set undolevels=5000   " Save a lot of back-history...
-  set undodir=~/.config/nvim/tmp/undo,.
-  set undofile
-endif
-
-" File Browsing ----------------------------------
-let g:netrw_banner=0        " disable annoying banner
-let g:netrw_browse_split=4  " open in prior window
-let g:netrw_altv=&spr       " open splits to the right
-let g:netrw_liststyle=3     " tree view
-let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+try
+  colorscheme onedark
+catch
+endtry
 
 " }}}
 " => Text-Tab-and-Indent --------------------------- {{{
@@ -698,31 +598,6 @@ set si "Smart indent
 set linebreak                       " Don't break words when wrapping lines
 let &showbreak="↳ "                 " Make wrapped lines more obvious
 set cpoptions+=n
-
-" }}}
-" => Spell-checking -------------------------------- {{{
-
-set spelllang=en_gb   " Speak proper English
-set complete+=kspell  " Autocomplete with dictionary words when spell check is on
-
-" Set spellfile to location that is guaranteed to exist
-set spellfile=~/dot-windows/nvim/spell/en.utf-8.add
-
-" Toggle spelling and show it's status
-nmap <F7> :setlocal spell! spell?<CR>
-
-"Open spell file
-map <leader>dic :tabnew ~/dot-windows/nvim/spell/en.utf-8.add<Cr>
-
-nnoremap <leader>fw :normal! 1z=<CR>
-nnoremap <leader>fp :normal! mz[s1z=`z<CR>
-nnoremap <leader>fn :normal! mz]s1z=`z<CR>
-
-" Spell commands
-" Next wrong spell      ]s
-" Previous wrong spell  [s
-" Add to spell file     zg
-" Prompt spell fixes    z=
 
 " }}}
 " => Key-Mappings ---------------------------------- {{{
@@ -756,9 +631,7 @@ nnoremap <A-e> <C-e>
 nnoremap <A-l> 5zl
 nnoremap <A-h> 5zh
 
-" ======================================
-" => Copy-paset
-" ======================================
+" => Copy-paset ============================================
 " Prevent selecting and pasting from overwriting what you originally copied.
 vnoremap p pgvy
 " Keep cursor at the bottom of the visual selection after you yank it.
@@ -780,9 +653,7 @@ nnoremap <Leader>P "+P
 vnoremap <Leader>p "+p
 vnoremap <Leader>P "+P
 
-" ======================================
-" => Modify-&-Rearrange-texts
-" ======================================
+" => Modify-&-Rearrange-texts ==============================
 
 " Make vaa select the entire file...
 vnoremap aa VGo1G
@@ -797,6 +668,7 @@ vnoremap . :norm.<cr>
 " Keep selection when indenting/outdenting.
 vnoremap > >gv
 vnoremap < <gv
+" vmap gs :sort<CR>
 
 " Comment or uncomment lines
 nmap <C-_> mz_gcc`z
@@ -813,10 +685,7 @@ vnoremap <silent> <A-j> :move '>+1<CR>gv=gv
 nnoremap <Leader>g gqap
 xnoremap <Leader>g gqa
 
-" ======================================
-" => Moving-around-tabs-and-buffers
-" ======================================
-
+" => Moving-around-tabs-and-buffers ========================
 " Jump between panes
 nnoremap <silent> <leader>j :wincmd j<CR>
 nnoremap <silent> <leader>k :wincmd k<CR>
@@ -840,10 +709,7 @@ nnoremap <silent> gh :tabprevious<CR>
 nnoremap <silent> gL :tablast<CR>
 nnoremap <silent> gH :tabfirst<CR>
 
-" ======================================
-" => Search-functionalities
-" ======================================
-
+" => Search-functionalities ================================
 " auto center on matched string
 noremap n nzz
 noremap N Nzz
@@ -866,16 +732,7 @@ set inccommand=nosplit
 nnoremap <Leader>ff :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 vnoremap <Leader>ff y :%s/<C-r>"//gc<Left><Left><Left>
 
-" ======================================
-" => Special-key-'g'-commands
-" ======================================
-" sort selected lines
-vmap gs :sort<CR>
-
-" ======================================
-" => Insert-Mode-key-mapping
-" ======================================
-
+" => Insert-Mode-key-mapping ===============================
 " Move cursor by character
 inoremap <A-h> <left>
 inoremap <A-l> <right>
@@ -899,18 +756,12 @@ inoremap <silent> <A-O> <Esc>mqA<CR><Esc>`qa
 " " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-u> <C-G>u<C-U>
 
-" ======================================
-" => Command-mode-related
-" ======================================
-
+" => Command-mode ==========================================
 " Bash like keys for the command line
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
-" ======================================
-" => Leader-commands
-" ======================================
-
+" => Leader-commands =======================================
 " Save file Quickly
 nnoremap <C-s> :write<CR>
 inoremap <C-s> <Esc>:write<CR><Esc>a
@@ -932,14 +783,7 @@ nnoremap <leader>bl :w<CR>:!./.lastbuild<cr>
 " Toggle highlighting of current line and column
 nnoremap <silent> <leader>c :setlocal cursorcolumn!<CR>
 
-" Allow j and k to work on visual lines (when wrapping)
-noremap <silent> <leader>wp :call ToggleWrap()<CR>
-noremap <silent> <A-z> :call ToggleWrap()<CR>
-
-" ======================================
-" => Organize-files-&-folders
-" ======================================
-
+" => Organize-files-&-folders ==============================
 " Open a file relative to the current file
 " Synonyms: e: edit,
 " e: window, s: split, v: vertical split, t: tab, d: directory
@@ -956,32 +800,21 @@ nnoremap <leader>CD :cd %:p:h<CR>:pwd<CR>
 " Find & open file on current window
 "map <C-p> :tabfind *
 
-" ======================================
-" => Function-key-mappings
-" ======================================
+" => Function-key-mappings =================================
 " Pasting support
-set pastetoggle=<F3>  " Press F3 in insert mode to preserve tabs when
-" pasting from clipboard into terminal
-
-" toggle background light / dark
-nnoremap <silent> <F10> :call ToggleBackground()<CR>
+" set pastetoggle=<F3>  " Press F3 in insert mode to preserve tabs when
+" map <leader>pp :setlocal paste!<cr>
 
 " Toggle relative line numbers and regular line numbers.
 nmap <F6> :set invrelativenumber<CR>
 
 " }}}
 " => Disabled-keys --------------------------------- {{{
-
 " disable arrow keys in normal mode
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
-
-" Disable help key
-inoremap <F1> <ESC>
-nnoremap <F1> <ESC>
-vnoremap <F1> <ESC>
 
 " }}}
 " => Fold-related ---------------------------------- {{{
@@ -1072,7 +905,6 @@ autocmd InsertEnter * norm zz
 
 augroup vimrcEx
   autocmd!
-
   " When editing a file, always jump to the last known cursor position.
   " Don't do it for commit messages, when the position is invalid, or when
   " inside an event handler (happens when dropping a file on gvim).
@@ -1082,12 +914,14 @@ augroup vimrcEx
         \ endif
 
   " Set syntax highlighting for specific file types
-  autocmd BufRead,BufNewFile Appraisals,*.rabl set filetype=ruby
   autocmd BufRead,BufNewFile .babelrc set filetype=json
-  autocmd BufRead,BufNewFile *.yrl set filetype=erlang
   autocmd BufRead,BufNewFile *.md set filetype=markdown
   autocmd BufRead,BufNewFile .eslintrc,.prettierrc set filetype=json
   autocmd BufRead,BufNewFile *.prisma set filetype=graphql
+
+  " add support for comments in json (jsonc format used as configuration for
+  " many utilities)
+  autocmd FileType json syntax match Comment +\/\/.\+$+
 
   " Enable spellchecking for Markdown
   autocmd FileType markdown setlocal spell
@@ -1096,16 +930,16 @@ augroup vimrcEx
   autocmd FileType gitcommit setlocal textwidth=72
   autocmd FileType gitcommit setlocal spell
 
+  " disable signcolumn for tagbar, nerdtree, as thats useless
+  autocmd FileType tagbar,nerdtree setlocal signcolumn=no
+
+
   " Allow stylesheets to autocomplete hyphenated words
   autocmd FileType css,scss,sass setlocal iskeyword+=-
 
   " Vim/tmux layout rebalancing
   " automatically rebalance windows on vim resize
   autocmd VimResized * :wincmd =
-
-  " add support for comments in json (jsonc format used as configuration for
-  " many utilities)
-  autocmd FileType json syntax match Comment +\/\/.\+$+
 
 augroup END
 
@@ -1115,9 +949,6 @@ augroup CursorLine
   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   au WinLeave * setlocal nocursorline
 augroup END
-
-" disable signcolumn for tagbar, nerdtree, as thats useless
-autocmd FileType tagbar,nerdtree setlocal signcolumn=no
 
 " Pretty font icons like Seti-UI {{{
 " Create a dictionary of the colors for later use
@@ -1239,6 +1070,10 @@ function! ToggleWrap()
     inoremap <buffer> <silent> <Down> <C-o>gj
   endif
 endfunction
+" Allow j and k to work on visual lines (when wrapping)
+noremap <silent> <leader>wp :call ToggleWrap()<CR>
+noremap <silent> <A-z> :call ToggleWrap()<CR>
+
 
 fun! ToggleBackground()
   if (&background ==? 'dark')
@@ -1247,6 +1082,7 @@ fun! ToggleBackground()
     set background=dark
   endif
 endfun
+nnoremap <silent> <F10> :call ToggleBackground()<CR>
 
 function! TrimWhitespace()
   let l:save = winsaveview()
@@ -1284,27 +1120,6 @@ function! <SID>BufcloseCloseIt()
   endif
 endfunction
 
-function! CmdLine(str)
-  call feedkeys(":" . a:str)
-endfunction
-
-function! VisualSelection(direction, extra_filter) range
-  let l:saved_reg = @"
-  execute "normal! vgvy"
-
-  let l:pattern = escape(@", "\\/.*'$^~[]")
-  let l:pattern = substitute(l:pattern, "\n$", "", "")
-
-  if a:direction == 'gv'
-    call CmdLine("Ack '" . l:pattern . "' " )
-  elseif a:direction == 'replace'
-    call CmdLine("%s" . '/'. l:pattern . '/')
-  endif
-
-  let @/ = l:pattern
-  let @" = l:saved_reg
-endfunction
-
 " Toggle quickfix window.
 function! QuickFix_toggle()
     for i in range(1, winnr('$'))
@@ -1322,24 +1137,6 @@ nnoremap <silent> <Leader>c :call QuickFix_toggle()<CR>
 " }}}
 " => Temporary ------------------------------------- {{{
 
-" if !exists('g:vscode') endif
-
-" if !empty(glob("~/mydotfiles/nvim/init.vim"))
-"   source ~/mydotfiles/nvim/init.vim
-"   echo 'Welcom to Neovim'
-" endif
-
-" clear search
-" nnoremap <silent> <leader>sdf :let @/ = ''<cr>
-
-" map markdown preview
-" nmap <leader>m :!open -a "Marked 2" "%"<cr><cr>
-
-" map git commands
-" nmap <leader>b :Gblame<cr>
-" nmap <leader>l :split \| terminal git log -p %<cr>
-" nmap <leader>d :split \| terminal git diff %<cr>
-
 " Jump to adjacent files
 " nmap <leader>ip :e %:r.pug<CR>
 " nmap <leader>is :e %:r.sass<CR>
@@ -1349,41 +1146,6 @@ nnoremap <silent> <Leader>c :call QuickFix_toggle()<CR>
 " au FileType javascript imap <C-t> $log();<esc>hi
 " au FileType javascript imap <C-a> alert();<esc>hi
 
-" C++
-" au BufRead,BufNewFile,BufEnter *.c nmap <leader>ih :e %:h/../inc/%:t:r.h<CR>
-" au BufRead,BufNewFile,BufEnter *.c nmap <leader>ic :e %:h/../src/%:t:r.c<CR>
-" au BufRead,BufNewFile,BufEnter *.c nmap <leader>gh :e %:h/../inc/%:t:r.h<CR>
-" au BufRead,BufNewFile,BufEnter *.h nmap <leader>gh :e %:h/../src/%:t:r.c<CR>
-" au BufRead,BufNewFile,BufEnter *.c nmap <leader>ii :e %:h/../inc/%:t:r.h<CR>
-" au BufRead,BufNewFile,BufEnter *.h nmap <leader>ii :e %:h/../src/%:t:r.c<CR>
-
-" au BufRead,BufNewFile,BufEnter *.cpp nmap <leader>ih :e %:h/../inc/%:t:r.hpp<CR>
-" au BufRead,BufNewFile,BufEnter *.cpp nmap <leader>ic :e %:h/../src/%:t:r.cpp<CR>
-" au BufRead,BufNewFile,BufEnter *.cpp nmap <leader>gh :e %:h/../inc/%:t:r.hpp<CR>
-" au BufRead,BufNewFile,BufEnter *.hpp nmap <leader>gh :e %:h/../src/%:t:r.cpp<CR>
-" au BufRead,BufNewFile,BufEnter *.cpp nmap <leader>ii :e %:h/../inc/%:t:r.hpp<CR>
-" au BufRead,BufNewFile,BufEnter *.hpp nmap <leader>ii :e %:h/../src/%:t:r.cpp<CR>
-
-" }}}
-" => Misc ------------------------------------------ {{{
-
-" ======================================
-" => Omni complete functions
-" ======================================
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-
-" Remove the Windows ^M - when the encodings gets messed up
-" noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-
-" Quickly open a buffer for scribble
-" map <leader>q :e ~/buffer<cr>
-
-" Quickly open a markdown buffer for scribble
-" map <leader>x :e ~/buffer.md<cr>
-
-" Toggle paste mode on and off
-" map <leader>pp :setlocal paste!<cr>
-
 " }}}
 " => Section name ---------------------------------- {{{
 " ======================================
@@ -1392,17 +1154,31 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 " }}}
 
 
-" Plug 'godlygeek/tabular' " align stuff... like these vim comments
-" Plug 'janko/vim-test'    " run tests inside vim
-" Plug 'tpope/vim-rhubarb'    " git(hub) wrapper - open on GitHub
-" Plug 'mattn/webapi-vim'
-" Plug 'vimwiki/vimwiki'      " my own personal wiki
-
-
   """""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  Author: Hasan Mahmud                                   "
 "  Repo  : https://github.com/hasansujon786/dot-windows/  "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   """"""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" let g:fzf_colors =
+" \ { 'fg':      ['fg', 'Normal'],
+"   \ 'bg':      ['bg', 'Normal'],
+"   \ 'hl':      ['fg', 'Comment'],
+"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+"   \ 'hl+':     ['fg', 'Statement'],
+"   \ 'info':    ['fg', 'Type'],
+"   \ 'border':  ['fg', 'Ignore'],
+"   \ 'prompt':  ['fg', 'Character'],
+"   \ 'pointer': ['fg', 'Exception'],
+"   \ 'marker':  ['fg', 'Keyword'],
+"   \ 'spinner': ['fg', 'Label'],
+"   \ 'header':  ['fg', 'Comment'] }
+
+" Plug 'godlygeek/tabular' " align stuff... like these vim comments
+" Plug 'janko/vim-test'    " run tests inside vim
+" Plug 'tpope/vim-rhubarb'    " git(hub) wrapper - open on GitHub
+" Plug 'mattn/webapi-vim'
+" Plug 'vimwiki/vimwiki'      " my own personal wiki
 
