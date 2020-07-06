@@ -1,3 +1,28 @@
+" let NERDTreeCreatePrefix='silent keepalt keepjumps'
+function! Before_Try_To_select_last_file() abort
+  let s:NERDTreePreFile=expand('%:t')
+endfunction
+function! Try_To_select_last_file() abort
+  if s:NERDTreePreFile !=# ''
+    call search('\v<' . s:NERDTreePreFile . '>')
+  endif
+endfunction
+let NERDTreeMapUpdir='-'
+nnoremap <silent> - :call Before_Try_To_select_last_file()<CR>
+      \:silent keepalt keepjumps edit <C-R>=empty(expand('%')) ? '.' : expand('%:p:h')<CR><CR>
+      \:call Try_To_select_last_file()<CR>
+
+
+" $ vim a b       current buffer is 'a', no alternate file
+" :bn             current is 'b', alternate is 'a'
+" :b#             current is 'a', alternate is 'b'
+" :b#             current is 'b', alternate is 'a'
+" :keepalt e c    current is 'c', alternate is still 'a'
+" :keepalt bd     current is 'b', alternate is 'a'
+" :b#             current is 'a', alternate is 'b'
+
+
+
 " Create a dictionary of the colors for later use
 let g:sol = {
       \"gui": {

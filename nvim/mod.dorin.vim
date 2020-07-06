@@ -193,7 +193,7 @@ let g:coc_global_extensions = [
 call plug#end()
 
 " => junegunn/fzf ==========================================
-" nnoremap <silent> - :Files <C-R>=expand('%:h')<CR><CR>
+nnoremap <silent> - :Files <C-R>=expand('%:h')<CR><CR>
 nnoremap <silent> <C-p> :History<CR>
 nnoremap <silent> <C-k>p :Files<CR>
 nnoremap <silent> <C-k><C-p> :GFile<CR>
@@ -272,22 +272,6 @@ let g:NERDTreeIndicatorMapCustom = {
 " Open nerd tree at the current file or close nerd tree if pressed again.
 nnoremap <silent> <expr> <Leader>n g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
 nnoremap <silent> <Leader>0 :NERDTreeToggle<CR>
-
-let g:NERDTreeCreatePrefix='silent keepalt keepjumps'
-
-function! Before_Try_To_select_last_file() abort
-  let s:NERDTreePreFile=expand('%:t')
-endfunction
-function! Try_To_select_last_file() abort
-  echo s:NERDTreePreFile
-  if s:NERDTreePreFile !=# ''
-    call search('\v<' . s:NERDTreePreFile . '>')
-  endif
-endfunction
-let NERDTreeMapUpdir='-'
-nnoremap <silent> - :call Before_Try_To_select_last_file()<CR>
-      \:silent edit <C-R>=empty(expand('%')) ? '.' : expand('%:p:h')<CR><CR>
-      \:call Try_To_select_last_file()<CR>
 
 " => ryanoasis/vim-devicons ================================
 let g:webdevicons_enable_nerdtree = 1
@@ -563,9 +547,15 @@ augroup colorextend
   autocmd!
   autocmd ColorScheme * call onedark#extend_highlight("FoldColumn", { "fg": { "gui": "#4b5263" } })
 augroup END
+try
+  colorscheme onedark
+catch
+endtry
+
 " Change Sneak highlight
-highlight Sneak guifg=#282C33 guibg=#62AEEF ctermfg=black ctermbg=cyan
+highlight Sneak guifg=#282C33 guibg=#E06B74 ctermfg=black ctermbg=cyan
 highlight SneakScope guifg=#282C33 guibg=white ctermfg=black ctermbg=white
+
 " Highlight the characters on column 81
 highlight CocHighlightText ctermbg=gray guibg=#3B4048
 highlight ColorColumn guibg=#3B4048 ctermbg=gray
@@ -574,11 +564,6 @@ augroup fzf
   autocmd  FileType fzf call clearmatches()
         \| autocmd BufLeave <buffer> call matchadd('ColorColumn', '\%81v', '100')
 augroup END
-
-try
-  colorscheme onedark
-catch
-endtry
 
 " }}}
 " => Text-Tab-and-Indent --------------------------- {{{
@@ -1185,3 +1170,4 @@ nnoremap <silent> <Leader>c :call QuickFix_toggle()<CR>
 "   \ 'marker':  ['fg', 'Keyword'],
 "   \ 'spinner': ['fg', 'Label'],
 "   \ 'header':  ['fg', 'Comment'] }
+"
