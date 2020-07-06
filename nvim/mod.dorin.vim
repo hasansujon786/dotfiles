@@ -193,7 +193,7 @@ let g:coc_global_extensions = [
 call plug#end()
 
 " => junegunn/fzf ==========================================
-nnoremap <silent> - :Files <C-R>=expand('%:h')<CR><CR>
+" nnoremap <silent> - :Files <C-R>=expand('%:h')<CR><CR>
 nnoremap <silent> <C-p> :History<CR>
 nnoremap <silent> <C-k>p :Files<CR>
 nnoremap <silent> <C-k><C-p> :GFile<CR>
@@ -269,11 +269,25 @@ let g:NERDTreeIndicatorMapCustom = {
             \ 'Unknown'   : '?'
             \ }
 
-" autocmd BufEnter NERD_tree_* nmap  d<CR> <CR> :NERDTreeToggle <CR>
-" autocmd BufLeave NERD_tree_* unmap d<CR>
 " Open nerd tree at the current file or close nerd tree if pressed again.
 nnoremap <silent> <expr> <Leader>n g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
 nnoremap <silent> <Leader>0 :NERDTreeToggle<CR>
+
+let g:NERDTreeCreatePrefix='silent keepalt keepjumps'
+
+function! Before_Try_To_select_last_file() abort
+  let s:NERDTreePreFile=expand('%:t')
+endfunction
+function! Try_To_select_last_file() abort
+  echo s:NERDTreePreFile
+  if s:NERDTreePreFile !=# ''
+    call search('\v<' . s:NERDTreePreFile . '>')
+  endif
+endfunction
+let NERDTreeMapUpdir='-'
+nnoremap <silent> - :call Before_Try_To_select_last_file()<CR>
+      \:silent edit <C-R>=empty(expand('%')) ? '.' : expand('%:p:h')<CR><CR>
+      \:call Try_To_select_last_file()<CR>
 
 " => ryanoasis/vim-devicons ================================
 let g:webdevicons_enable_nerdtree = 1
@@ -287,12 +301,6 @@ let g:DevIconsEnableFoldersOpenClose = 1
 " let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vue'] = 'V'
 
 " => itchyny/lightline.vim =================================
-" let s:p.tabline.left   = [ [ s:gray1, s:bg ] ]
-" let s:p.tabline.tabsel = [ [ s:fg, s:gray3, 'bold' ] ]
-" nmap <leader>le :e ~/.config/nvim/plugged/lightline.vim/autoload/lightline/colorscheme/one.vim
-
-" let g:lightline.separator.right = ''
-" let g:lightline.separator.left =  ''
 
 let g:lightline = {
       \ 'colorscheme': 'one',
