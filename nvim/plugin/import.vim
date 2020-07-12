@@ -1,1 +1,1 @@
-source ~/dot-windows/nvim/plugin/coc.vim
+source $NVIM/plugin/coc.vim

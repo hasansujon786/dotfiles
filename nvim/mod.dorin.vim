@@ -46,6 +46,10 @@ let maplocalleader="\<Space>"
 
 " }}}
 " => Files-backup-undo-spelling -------------------- {{{
+" Variables
+let $NVIM = '~/dotfiles/nvim'
+let $SPELLFILE = $NVIM.'/spell/en.utf-8.add'
+
 " if filereadable($HOME . '/.vimrc.local')
 "   source ~/.vimrc.local
 " endif
@@ -63,8 +67,7 @@ set undofile
 set spelllang=en_gb   " Speak proper English
 set complete+=kspell  " Autocomplete with dictionary words when spell check is on
 " Set spellfile to location that is guaranteed to exist
-set spellfile=~/dot-windows/nvim/spell/en.utf-8.add
-map <leader>dic :tabnew ~/dot-windows/nvim/spell/en.utf-8.add<Cr>
+set spellfile=$SPELLFILE
 " Toggle spelling and show it's status
 nmap <F7> :setlocal spell! spell?<CR>
 "Open spell file
@@ -451,7 +454,7 @@ map gs <Plug>Sneak_;
 " Cool prompts
 let g:sneak#prompt = '🔎 '
 
-source ~/dot-windows/nvim/plugin/import.vim
+source $NVIM/plugin/import.vim
 " }}}
 " => VIM-User-Interface ---------------------------- {{{
 
@@ -1153,7 +1156,7 @@ nnoremap <silent> <Leader>c :call QuickFix_toggle()<CR>
   """""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  Author: Hasan Mahmud                                   "
-"  Repo:   https://github.com/hasansujon786/dot-windows/  "
+"  Repo:   https://github.com/hasansujon786/dotfiles/     "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
