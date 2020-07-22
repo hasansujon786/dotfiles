@@ -82,379 +82,43 @@ nnoremap <leader>fn :normal! mz]s1z=`z<CR>
 
 " }}}
 " => Plugin-Settings ------------------------------- {{{
-
 call plug#begin('~/.config/nvim/plugged')
 
 " => Visual-&-Theme ========================================
-Plug 'itchyny/lightline.vim'
-Plug 'Yggdroot/indentLine'
 Plug 'joshdick/onedark.vim'
-Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+source ~/dotfiles/nvim/plugin/indentLine.vim
+source ~/dotfiles/nvim/plugin/lightline.vim
+source ~/dotfiles/nvim/plugin/goyo.vim
 
 " => Functionality-&-Helpers ===============================
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'unblevable/quick-scope'
-Plug 'vim-scripts/YankRing.vim', { 'on': 'YRShow' }
 Plug 'tpope/vim-commentary'
-Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-eunuch', { 'on': ['Delete', 'Move', 'Rename'] }  "for moving and manipulating files / directories.
 Plug 'hasansujon786/vim-snippets'
-Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-startify'
-Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'Konfekt/FastFold'
+source ~/dotfiles/nvim/plugin/quick-scope.vim
+source ~/dotfiles/nvim/plugin/vim-multiple-cursor.vim
+source ~/dotfiles/nvim/plugin/vim-sneak.vim
+source ~/dotfiles/nvim/plugin/auto-pairs.vim
+source ~/dotfiles/nvim/plugin/coc.vim
+source ~/dotfiles/nvim/plugin/fzf.vim
+source ~/dotfiles/nvim/plugin/nerdtree.vim
+source ~/dotfiles/nvim/plugin/language-support.vim
+" source ~/dotfiles/nvim/plugin/yank-ring.vim
+
 " Plug 'vimwiki/vimwiki'      " my own personal wiki
 " Plug 'mhinz/vim-grepper'    " Handle multi-file find and replace.
 " Plug 'will133/vim-dirdiff'  " Run a diff on 2 directories.
 " Plug 'christoomey/vim-tmux-navigator'
 
 " => Git ===================================================
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/gv.vim'
-Plug 'tpope/vim-rhubarb'      " git(hub) wrapper - open on GitHub
-
-" => Languae-support =======================================
-Plug 'sheerun/vim-polyglot'     " Full lang support
-Plug 'ap/vim-css-color'
-Plug 'jparise/vim-graphql'
-
-" css
-" Plug 'hail2u/vim-css3-syntax'
-" Plug 'ap/vim-css-color'
-" Plug 'norcalli/nvim-colorizer.lua'
-" Plug 'ncm2/ncm2-cssomni'
-
-" javascript
-" Plug 'nvim-typescript'
-" Plug 'othree/yajs.vim'
-" Plug 'mxw/vim-jsx'
-" Plug 'heavenshell/vim-jsdoc'
-" Plug 'elzr/vim-json'
-" Plug 'HerringtonDarkholme/yats.vim'
-" Plug 'Quramy/vison'
-" Plug 'jxnblk/vim-mdx-js'
-" Plug 'meain/vim-package-info', {'build': 'npm install'}
-" Plug 'yardnsm/vim-import-cost', {'build': 'npm install'}
-
-" html
-Plug 'mattn/emmet-vim'
-" Plug 'valloric/MatchTagAlways', {'on_ft': 'html'}
-" Plug 'othree/html5.vim'
-" Plug 'posva/vim-vue'
-" Plug 'skwp/vim-html-escape'
-" Plug 'kana/vim-textobj-user'
-" Plug 'whatyouhide/vim-textobj-xmlattr'
-" Plug 'pedrohdz/vim-yaml-folds'
-
-" => coc ===================================================
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim
-" coc extension {{{
-" https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-let g:coc_global_extensions = [
-  \ 'coc-tsserver',
-  \ 'coc-snippets',
-  \ 'coc-json',
-  \ 'coc-html',
-  \ 'coc-css',
-  \ 'coc-emmet',
-  \ ]
-"coc-pairs", ""coc-syntax", "coc-word", "coc-emoji", "coc-tag", "coc-dictionary",
-" => JavaScript
-" coc-tsserver coc-json
-" coc-vetur coc-styled-components
-
-" => HTML
-" coc-html coc-css coc-emmet
-" coc-tailwindcss
-
-" => Ediort Support
-" coc-snippets
-" coc-bookmark coc-actions coc-lists coc-spell-checker coc-vimlsp coc-yank
-
-" => CLang
-" coc-clangd
-" }}}
-
-" => Not-listed ============================================
-" Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
-" Plug 'terryma/vim-expand-region'
-" Plug 'voldikss/vim-floaterm'
-" Plug 'alvan/vim-closetag'
-" Plug 'dragvisuals.vim'
-" Plug 'vmath.vim'
-" Plug 'vis.vim'
+source ~/dotfiles/nvim/plugin/gitgutter.vim
+source ~/dotfiles/nvim/plugin/vim-fugitive.vim
 
 call plug#end()
-
-" => junegunn/fzf ==========================================
-nnoremap <silent> - :Files <C-R>=expand('%:h')<CR><CR>
-nnoremap <silent> <C-p> :History<CR>
-nnoremap <silent> <C-k>p :Files<CR>
-nnoremap <silent> <C-k><C-p> :GFile<CR>
-nnoremap <silent> <C-k>w :Windows<CR>
-nnoremap <silent> <C-k>m :Filetypes<CR>
-nnoremap <silent> <C-k>? :GFile?<CR>
-nnoremap <silent> <C-k>/ :History/<CR>
-nnoremap <silent> <C-k>: :History:<CR>
-nnoremap <A-/> :RG!<space>
-
-let g:fzf_layout = { 'window': '30new' }
-" let g:fzf_files_options = '--reverse --preview "(cat {})"'
-
-let $FZF_DEFAULT_OPTS =' --color=dark,
-      \fg:-1,bg:-1,hl:#55B6C2,
-      \fg+:#E5C07B,bg+:-1,hl+:#55B6C2,pointer:#E5C07B,
-      \info:#ABB2BF,prompt:#E06C75,
-      \marker:#E06C75,spinner:#61afef,header:#c678dd,gutter:-1
-      \ --bind ctrl-a:select-all'
-
-let g:fzf_action = {
-      \ 'ctrl-t': 'tab split',
-      \ 'ctrl-s': 'split',
-      \ 'ctrl-v': 'vsplit',
-      \ 'q': 'normal <C-c>'}
-
-function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
-  let initial_command = printf(command_fmt, shellescape(a:query))
-  let reload_command = printf(command_fmt, '{q}')
-  let spec = {'options': ['--phony','--reverse', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-endfunction
-command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
-
-" => Yggdroot/indentLine ===================================
-let g:indentLine_color_gui = '#3B4048'
-let g:indentLine_char = '▏'
-
-" => jiangmiao/auto-pairs ==================================
-let g:AutoPairsShortcutJump = '<M-n>'
-let g:AutoPairsShortcutToggle = '<M-q>'
-let g:AutoPairsShortcutBackInsert = '<Nul>'
-
-" => scrooloose/nerdtree ===================================
-let g:NERDTreeIgnore = ['^node_modules$','^.git$']
-let g:NERDTreeAutoDeleteBuffer=1
-let g:NERDTreeShowHidden=1
-let NERDTreeQuitOnOpen = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeCascadeSingleChildDir=0
-" Would be useful mappings, but they interfere with my default window movement
-" unmap (<C-j> and <C-k>).
-let g:NERDTreeMapJumpPrevSibling='<Nop>'
-let g:NERDTreeMapJumpNextSibling='<Nop>'
-let NERDTreeMapOpenSplit='s'
-let NERDTreeMapOpenVSplit='v'
-
-let NERDTreeDirArrowExpandable=""
-let NERDTreeDirArrowCollapsible=""
-
-" icon source: https://www.nerdfonts.com/cheat-sheet
-let g:NERDTreeIndicatorMapCustom = {
-            \ 'Modified'  : 'M',
-            \ 'Staged'    : 'S',
-            \ 'Untracked' : 'U',
-            \ 'Renamed'   : 'R',
-            \ 'Deleted'   : 'D',
-            \ 'Unmerged'  : '',
-            \ 'Dirty'     : '*',
-            \ 'Clean'     : '',
-            \ 'Ignored'   : '',
-            \ 'Unknown'   : '?'
-            \ }
-
-" Open nerd tree at the current file or close nerd tree if pressed again.
-nnoremap <silent> <expr> <Leader>n g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
-nnoremap <silent> <Leader>0 :NERDTreeToggle<CR>
-
-" => ryanoasis/vim-devicons ================================
-let g:webdevicons_enable_nerdtree = 1
-let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
-" enable open and close folder/directory glyph flags (disabled by default with 0)
-let g:DevIconsEnableFoldersOpenClose = 1
-
-" Fix Vue Icon - ﵂
-" change the default dictionary mappings for file extension matches
-" let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
-" let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vue'] = 'V'
-
-" => itchyny/lightline.vim =================================
-
-let g:lightline = {
-      \ 'colorscheme': 'one',
-      \ 'mode_map': { 'c': 'NORMAL' },
-      \ 'active': {
-      \   'left': [[ 'mode', 'paste', 'readonly'],
-      \            [ 'fugitive', 'filename',],
-      \            [ 'cocstatus' ]],
-      \
-      \ 'right':  [[ 'lineinfo' ],
-      \            [ 'percent'  ],
-      \            [ 'filetype' ]],
-      \ },
-      \   'component': {
-      \   'readonly': '%{&readonly?"":""}',
-      \ },
-      \ 'component_function': {
-      \   'fugitive': 'LightlineFugitive',
-      \   'filename': 'MyFilename',
-      \   'filetype': 'MyFiletype',
-      \   'mode': 'MyMode',
-	    \   'cocstatus': 'coc#status'
-      \ },
-      \ 'tab_component_function': {
-      \   'tabnum': 'LightlineWebDevIcons',
-      \ },
-      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
-      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
-      \ }
-
-" Use auocmd to force lightline update.
-autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
-
-function! LightlineFugitive()
-  if exists('*FugitiveHead')
-    let branch = FugitiveHead()
-    return winwidth(0) > 60 ? branch !=# '' ? ' '.branch : '' : ''
-  endif
-  return ''
-endfunction
-
-function! MyFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
-  " return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-endfunction
-
-function! MyMode()
-  return winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
-
-function! MyModified()
-  return &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-
-function! MyFilename()
-  return (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \  &ft == 'unite' ? unite#get_status_string() :
-        \  &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-        \ ('' != MyModified() ? ' ' . MyModified() : '')
-endfunction
-
-function! LightlineWebDevIcons(n)
-  let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
-  return WebDevIconsGetFileTypeSymbol(bufname(l:bufnr))
-endfunction
-
-let s:palette = g:lightline#colorscheme#one#palette
-let s:palette.tabline.tabsel = [ [ '#282C33', '#ABB2BF', 252, 66, 'bold' ] ]
-let s:palette.tabline.left = [ [ '#717785', '#3E4452', 252, 66 ] ]
-" let s:palette.tabline.middle = [ [ '#717785', '#21252B', 252, 66 ] ]
-unlet s:palette
-
-" => mhinz/vim-startify ====================================
-let g:startify_files_number = 5
-
-" => junegunn/goyo.vim =====================================
-" Toggle Goyo
-nnoremap <silent> gz :Goyo<CR>
-nnoremap <silent> <C-k>z :Goyo<CR>
-
-let g:background_before_goyo = &background
-function! s:goyo_enter()
-  let g:background_before_goyo = &background
-  if has('gui_running')
-    set linespace=7
-  elseif exists('$TMUX')
-    silent !tmux set status off
-  endif
-endfunction
-
-function! s:goyo_leave()
-  if has('gui_running')
-    set linespace=0
-  elseif exists('$TMUX')
-    silent !tmux set status on
-  endif
-  execute 'set background=' . g:background_before_goyo
-endfunction
-
-augroup GOYO
-  autocmd! User GoyoEnter nested call <SID>goyo_enter()
-  autocmd! User GoyoLeave nested call <SID>goyo_leave()
-augroup END
-
-" => unblevable/quick-scope ================================
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-" let qs_max_chars=80
-augroup qs_colors
-  autocmd!
-  autocmd ColorScheme * highlight QuickScopePrimary guifg='tomato' gui=underline ctermfg=155 cterm=underline
-  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#d78787' gui=underline ctermfg=81 cterm=underline
-augroup END
-
-" => vim-scripts/YankRing.vim ==============================
-nnoremap <silent> <leader>y :YRShow<CR>
-vnoremap <silent> <leader>y y:YRShow<CR>:close<CR>
-let g:yankring_replace_n_pkey = '<M-S-y>'
-let g:yankring_replace_n_nkey = '<M-y>'
-
-function! YRRunAfterMaps()
-  nnoremap <silent> Y :<C-U>YRYankCount 'y$'<CR>
-  vnoremap p pgvy
-  vnoremap y ygv<Esc>
-endfunction
-
-" => terryma/vim-multiple-cursors ==========================
-let g:multi_cursor_start_word_key      = 'gb'
-let g:multi_cursor_select_all_word_key = 'gB'
-let g:multi_cursor_next_key            = 'gb'
-let g:multi_cursor_prev_key            = 'gp'
-let g:multi_cursor_quit_key            = 'q'
-" let g:multi_cursor_start_key           = 'g<C-n>'
-" let g:multi_cursor_select_all_key      = 'g<A-n>'
-" let g:multi_cursor_skip_key            = '<C-x>'
-
-" => mbbill/undotree =======================================
-let g:undotree_WindowLayout = 2
-let g:undotree_DiffAutoOpen = 0
-" let g:undotree_DiffpanelHeight = 10
-nnoremap <silent> <C-F5> :UndotreeToggle<cr>
-
-" => airblade/vim-gitgutter" ===============================
-let g:gitgutter_map_keys = 0
-nmap <leader>gp <Plug>(GitGutterPreviewHunk)
-nmap <leader>gs <Plug>(GitGutterStageHunk)
-nmap <leader>gu <Plug>(GitGutterUndoHunk)
-nmap [c <Plug>(GitGutterPrevHunk)zz
-nmap ]c <Plug>(GitGutterNextHunk)zz
-
-" => tpope/vim-fugitive ====================================
-nmap <leader>gg :Gstatus<CR>
-
-" => justinmk/vim-sneak ====================================
-let g:sneak#label = 1
-" case insensitive sneak
-let g:sneak#use_ic_scs = 1
-" immediately move to the next instance of search, if you move the cursor sneak is back to default behavior
-let g:sneak#s_next = 1
-let g:sneak#target_labels = ";sdgqklqwertyuiopzxcvbnmfj"
-" remap so I can use , and ; with f and t
-map gS <Plug>Sneak_,
-map gs <Plug>Sneak_;
-" Cool prompts
-let g:sneak#prompt = '🔎 '
-
-source $NVIM/plugin/import.vim
 " }}}
 " => VIM-User-Interface ---------------------------- {{{
 
@@ -546,6 +210,13 @@ endif
 
 " let g:one_allow_italics = 1       " support italic fonts
 let g:sh_fold_enabled=1           " enable folding in bash files
+
+" => itchyny/lightline.vim =================================
+let s:palette = g:lightline#colorscheme#one#palette
+let s:palette.tabline.tabsel = [ [ '#282C33', '#ABB2BF', 252, 66, 'bold' ] ]
+let s:palette.tabline.left = [ [ '#717785', '#3E4452', 252, 66 ] ]
+" let s:palette.tabline.middle = [ [ '#717785', '#21252B', 252, 66 ] ]
+unlet s:palette
 
 augroup colorextend
   autocmd!
@@ -949,102 +620,7 @@ augroup CursorLine
   au WinLeave * setlocal nocursorline
 augroup END
 
-" Pretty font icons like Seti-UI {{{
-" Create a dictionary of the colors for later use
-let g:sol = {
-      \"gui": {
-      \"base03": "#002b36",
-      \"base02": "#073642",
-      \"base01": "#586e75",
-      \"base00": "#657b83",
-      \"base0": "#839496",
-      \"base1": "#93a1a1",
-      \"base2": "#eee8d5",
-      \"base3": "#fdf6e3",
-      \"yellow": "#b58900",
-      \"orange": "#cb4b16",
-      \"red": "#dc322f",
-      \"magenta": "#d33682",
-      \"violet": "#6c71c4",
-      \"blue": "#268bd2",
-      \"cyan": "#2aa198",
-      \"green": "#719e07"
-      \},
-      \"cterm": {
-      \"base03": 8,
-      \"base02": 0,
-      \"base01": 10,
-      \"base00": 11,
-      \"base0": 12,
-      \"base1": 14,
-      \"base2": 7,
-      \"base3": 15,
-      \"yellow": 3,
-      \"orange": 9,
-      \"red": 1,
-      \"magenta": 5,
-      \"violet": 13,
-      \"blue": 4,
-      \"cyan": 6,
-      \"green": 2
-      \}
-      \}
-
-" Needs to be near the end because it changes the way some of the
-" other plugins like ctrl-p, startify, NERDTree, etc. work.
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:DevIconsEnableFoldersOpenClose = 1
-if exists("g:loaded_webdevicons")
-  call webdevicons#refresh()
-endif
-
-augroup devicons
-  autocmd!
-  autocmd FileType nerdtree setlocal nolist
-  autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\]" contained conceal containedin=ALL
-  autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\[" contained conceal containedin=ALL
-  autocmd FileType nerdtree setlocal conceallevel=3
-  autocmd FileType nerdtree setlocal concealcursor=nvic
-augroup END
-
-function! DeviconsColors(config)
-  let colors = keys(a:config)
-  augroup devicons_colors
-    autocmd!
-    for color in colors
-      if color == 'normal'
-        exec 'autocmd FileType nerdtree,startify if &background == ''dark'' | '.
-              \ 'highlight devicons_'.color.' guifg='.g:sol.gui.base01.' ctermfg='.g:sol.cterm.base01.' | '.
-              \ 'else | '.
-              \ 'highlight devicons_'.color.' guifg='.g:sol.gui.base1.' ctermfg='.g:sol.cterm.base1.' | '.
-              \ 'endif'
-      elseif color == 'emphasize'
-        exec 'autocmd FileType nerdtree,startify if &background == ''dark'' | '.
-              \ 'highlight devicons_'.color.' guifg='.g:sol.gui.base1.' ctermfg='.g:sol.cterm.base1.' | '.
-              \ 'else | '.
-              \ 'highlight devicons_'.color.' guifg='.g:sol.gui.base01.' ctermfg='.g:sol.cterm.base01.' | '.
-              \ 'endif'
-      else
-        exec 'autocmd FileType nerdtree,startify highlight devicons_'.color.' guifg='.g:sol.gui[color].' ctermfg='.g:sol.cterm[color]
-      endif
-      exec 'autocmd FileType nerdtree,startify syntax match devicons_'.color.' /\v'.join(a:config[color], '|').'/ containedin=ALL'
-    endfor
-  augroup END
-endfunction
-
-let g:devicons_colors = {
-      \'normal':    [' ', ' ', ' ', ' ', ' '],
-      \'emphasize': [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-      \'yellow':    [' ', ' ', ' '],
-      \'orange':    [' ', ' ', ' ', 'λ ', ' ', ' '],
-      \'red':       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-      \'magenta':   [' '],
-      \'violet':    [' ', ' ', ' ', ' '],
-      \'blue':      [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-      \'cyan':      [' ', ' ', ' ', ' '],
-      \'green':     [' ', ' ', ' ', ' ', ' ', '﵂ ']
-      \}
-call DeviconsColors(g:devicons_colors)
+source ~/dotfiles/nvim/plugin/devicons.vim
 " }}}
 
 " }}}

@@ -1,3 +1,34 @@
+" => coc ===================================================
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim
+let g:coc_global_extensions = [
+      \ 'coc-tsserver',
+      \ 'coc-snippets',
+      \ 'coc-json',
+      \ 'coc-html',
+      \ 'coc-css',
+      \ 'coc-emmet',
+      \ ]
+
+" coc extension {{{
+" https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
+"coc-pairs", ""coc-syntax", "coc-word", "coc-emoji", "coc-tag", "coc-dictionary",
+" => JavaScript
+" coc-tsserver coc-json
+" coc-vetur coc-styled-components
+
+" => HTML
+" coc-html coc-css coc-emmet
+" coc-tailwindcss
+
+" => Ediort Support
+" coc-snippets
+" coc-bookmark coc-actions coc-lists coc-spell-checker coc-vimlsp coc-yank
+
+" => CLang
+" coc-clangd
+" }}}
+
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 set signcolumn=yes
