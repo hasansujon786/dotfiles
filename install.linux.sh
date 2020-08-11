@@ -10,10 +10,6 @@ echo " | (_| | (_) | ||_____|  _| | |  __/\__ \\"
 echo "  \__,_|\___/ \__|    |_| |_|_|\___||___/"
 echo ""
 
-# global variable
-pkgm='apt-get'
-
-
 mkSpace() {
   echo ' '
 }
@@ -55,7 +51,7 @@ install_and_setup_tmux() {
   # Only linux (tmux is not working on win, reason: unknown)
   # L => ~/.tmux.conf
   echo 'Instlling tmux...'
-  $pkgm install tmux
+  apt install -y tmux
   mkSpace
 
   if [ -f ~/.tmux.conf ]; then
@@ -74,7 +70,7 @@ install_and_setup_tmux() {
 install_and_setup_nvim() {
   # L => "~/.config/nvim/init.vim"
   echo 'Installing Neovim...'
-  $pkgm install neovim
+  apt install -y neovim
 
   if [ -d ~/.config ]; then
     echo 'Removing old .config directory.'
@@ -105,8 +101,8 @@ install_and_setup_nvim() {
 
 
 install_various_apps() {
-  $pkgm install nodejs
-  $pkgm install ripgrep
+  apt install -y nodejs
+  apt install -y ripgrep
 }
 
 auto_install_everything() {
