@@ -566,7 +566,8 @@ endif
 iab xdate <C-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
 iab reutrn return
 iab re return
-iab mt-vp <meta name="viewport" content="width=device-width, initial-scale=1" />
+iab td TODO:
+iab meta-vp <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 " }}}
 " => Auto-commands --------------------------------- {{{
