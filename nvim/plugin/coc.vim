@@ -87,10 +87,11 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 nmap <leader>rr :CocSearch <C-R>=expand("<cword>")<CR><CR>
+xmap <leader>rr y :CocSearch -F <C-r>"<C-a><C-right><C-right><C-right>\
 
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" Use leader + = to formate selected code.
+xmap <leader>= <Plug>(coc-format-selected)
+nmap <leader>= <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -122,8 +123,8 @@ omap af <Plug>(coc-funcobj-a)
 " Use <TAB> for selections ranges.
 " NOTE: Requires 'textDocument/selectionRange' support from the language server.
 " coc-tsserver, coc-python are the examples of servers that support it.
-nmap <silent> <M-v> <Plug>(coc-range-select)
-xmap <silent> <M-v> <Plug>(coc-range-select)
+nmap <silent> <M-i> <Plug>(coc-range-select)
+xmap <silent> <M-i> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
