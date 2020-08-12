@@ -365,12 +365,15 @@ nnoremap <silent> <A--> :resize -3<CR>
 nnoremap <silent> <A-.> :vertical resize +5<CR>
 nnoremap <silent> <A-,> :vertical resize -5<CR>
 " zoom a vim pane
-nnoremap <silent> \ :wincmd _<cr>:resize -2<CR>:wincmd \|<cr>:vertical resize -10<CR>
+nnoremap <silent> \ :wincmd _<cr>:wincmd \|<cr>:vertical resize -5<CR>
+nnoremap <silent> <leader><leader> :wincmd _<cr>:wincmd \|<cr>:vertical resize -5<CR>
 nnoremap <silent> <Bar> :wincmd =<cr>
 
 " Jump between tabs
 nnoremap <silent> gl :tabnext<CR>
 nnoremap <silent> gh :tabprevious<CR>
+nnoremap <silent> <TAB> :tabnext<CR>
+nnoremap <silent> <S-TAB> :tabprevious<CR>
 nnoremap <silent> gL :tablast<CR>
 nnoremap <silent> gH :tabfirst<CR>
 
@@ -731,6 +734,8 @@ nnoremap <silent> <Leader>c :call QuickFix_toggle()<CR>
 
 " au FileType javascript imap <C-t> $log();<esc>hi
 " au FileType javascript imap <C-a> alert();<esc>hi
+
+" vmap gs :sort<CR>
 
 " }}}
 " => Section name ---------------------------------- {{{
