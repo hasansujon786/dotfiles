@@ -327,18 +327,13 @@ vnoremap <Leader>P "+P
 
 " Make vaa select the entire file...
 vnoremap aa VGo1G
-
 " select a block {} of code
-nmap <silent> vaf /}<CR>V%
-vmap <silent> vaf <Esc>/}<CR>V%
-
+vnoremap <silent> ao <Esc>/}<CR>V%
 " map . in visual mode
 vnoremap . :norm.<cr>
-
 " Keep selection when indenting/outdenting.
 vnoremap > >gv
 vnoremap < <gv
-" vmap gs :sort<CR>
 
 " Comment or uncomment lines
 nmap <C-_> mz_gcc`z
