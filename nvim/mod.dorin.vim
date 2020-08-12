@@ -371,12 +371,16 @@ nnoremap <silent> <leader><leader> :wincmd _<cr>:wincmd \|<cr>:vertical resize -
 nnoremap <silent> <Bar> :wincmd =<cr>
 
 " Jump between tabs
-nnoremap <silent> gl :tabnext<CR>
-nnoremap <silent> gh :tabprevious<CR>
 nnoremap <silent> <TAB> :tabnext<CR>
 nnoremap <silent> <S-TAB> :tabprevious<CR>
-nnoremap <silent> gL :tablast<CR>
-nnoremap <silent> gH :tabfirst<CR>
+nnoremap <silent> g<TAB> :tabmove+<CR>
+nnoremap <silent> g<S-TAB> :tabmove-<CR>
+" Map <leader> + 1-9 to jump to respective tab
+let i = 1
+while i < 10
+  execute ":nmap <silent>" . i . "<TAB> :tabn " . i . "<CR>"
+  let i += 1
+endwhile
 
 " => Search-functionalities ================================
 " auto center on matched string
