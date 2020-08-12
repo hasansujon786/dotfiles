@@ -99,6 +99,7 @@ Plug 'hasansujon786/vim-snippets'
 Plug 'mhinz/vim-startify'
 Plug 'ryanoasis/vim-devicons'
 Plug 'Konfekt/FastFold'
+Plug 'dhruvasagar/vim-open-url'
 source ~/dotfiles/nvim/plugin/quick-scope.vim
 source ~/dotfiles/nvim/plugin/vim-multiple-cursor.vim
 source ~/dotfiles/nvim/plugin/vim-sneak.vim
@@ -328,7 +329,7 @@ vnoremap <Leader>P "+P
 " Make vaa select the entire file...
 vnoremap aa VGo1G
 " select a block {} of code
-vnoremap <silent> ao <Esc>/}<CR>V%
+vnoremap <silent> ao <Esc>/}<CR>:noh<CR>V%
 " map . in visual mode
 vnoremap . :norm.<cr>
 " Keep selection when indenting/outdenting.
