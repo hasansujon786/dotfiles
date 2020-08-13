@@ -755,20 +755,5 @@ nnoremap <silent> <Leader>c :call QuickFix_toggle()<CR>
 "  Author: Hasan Mahmud                                   "
 "  Repo:   https://github.com/hasansujon786/dotfiles/     "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""
+  """""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" let g:fzf_colors =
-" \ { 'fg':      ['fg', 'Normal'],
-"   \ 'bg':      ['bg', 'Normal'],
-"   \ 'hl':      ['fg', 'Comment'],
-"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-"   \ 'hl+':     ['fg', 'Statement'],
-"   \ 'info':    ['fg', 'Type'],
-"   \ 'border':  ['fg', 'Ignore'],
-"   \ 'prompt':  ['fg', 'Character'],
-"   \ 'pointer': ['fg', 'Exception'],
-"   \ 'marker':  ['fg', 'Keyword'],
-"   \ 'spinner': ['fg', 'Label'],
-"   \ 'header':  ['fg', 'Comment'] }
-"
