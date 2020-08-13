@@ -108,12 +108,16 @@ source ~/dotfiles/nvim/plugin/coc.vim
 source ~/dotfiles/nvim/plugin/fzf.vim
 source ~/dotfiles/nvim/plugin/nerdtree.vim
 source ~/dotfiles/nvim/plugin/language-support.vim
+source ~/dotfiles/nvim/plugin/prettier.vim
 " source ~/dotfiles/nvim/plugin/yank-ring.vim
 
 " Plug 'vimwiki/vimwiki'      " my own personal wiki
 " Plug 'mhinz/vim-grepper'    " Handle multi-file find and replace.
 " Plug 'will133/vim-dirdiff'  " Run a diff on 2 directories.
 " Plug 'christoomey/vim-tmux-navigator'
+" Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' } " markdown preview
+" Plug 'editorconfig/editorconfig-vim'
+" Plug 'moll/vim-node'
 
 " => Git ===================================================
 source ~/dotfiles/nvim/plugin/gitgutter.vim
