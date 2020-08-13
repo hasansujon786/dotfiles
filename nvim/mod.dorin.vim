@@ -108,7 +108,7 @@ source ~/dotfiles/nvim/plugin/coc.vim
 source ~/dotfiles/nvim/plugin/fzf.vim
 source ~/dotfiles/nvim/plugin/nerdtree.vim
 source ~/dotfiles/nvim/plugin/language-support.vim
-source ~/dotfiles/nvim/plugin/prettier.vim
+" source ~/dotfiles/nvim/plugin/prettier.vim
 " source ~/dotfiles/nvim/plugin/yank-ring.vim
 
 " Plug 'vimwiki/vimwiki'      " my own personal wiki
