@@ -108,7 +108,7 @@ source ~/dotfiles/nvim/plugin/coc.vim
 source ~/dotfiles/nvim/plugin/fzf.vim
 source ~/dotfiles/nvim/plugin/nerdtree.vim
 source ~/dotfiles/nvim/plugin/language-support.vim
-" source ~/dotfiles/nvim/plugin/prettier.vim
+source ~/dotfiles/nvim/plugin/prettier.vim
 " source ~/dotfiles/nvim/plugin/yank-ring.vim
 
 " Plug 'vimwiki/vimwiki'      " my own personal wiki
@@ -669,9 +669,7 @@ function! ToggleWrap()
   endif
 endfunction
 " Allow j and k to work on visual lines (when wrapping)
-noremap <silent> <leader>wp :call ToggleWrap()<CR>
 noremap <silent> <A-z> :call ToggleWrap()<CR>
-
 
 fun! ToggleBackground()
   if (&background ==? 'dark')
@@ -687,7 +685,7 @@ function! TrimWhitespace()
   %s/\\\@<!\s\+$//e
   call winrestview(l:save)
 endfunction
-autocmd BufWritePre * :call TrimWhitespace()
+autocmd BufWritePre *.vim :call TrimWhitespace()
 
 " PlaceholderImgTag 300x200
 function! s:PlaceholderImgTag(size)
