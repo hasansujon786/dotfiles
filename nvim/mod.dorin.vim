@@ -11,6 +11,33 @@
 "                                 ░
 "
 " => General --------------------------------------- {{{
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=UTF-8    " Default encoding
+scriptencoding utf-16 " allow emojis in vimrc
+set ffs=unix,dos,mac  " Use Unix as the standard file type
+syntax on             " Enable syntax highlighting
+
+" Enable 256 colors palette in Gnome Terminal
+if $COLORTERM == 'gnome-terminal'
+  set t_Co=256
+endif
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"copy next line to .tmux.conf for support true color within tmux
+"set-option -ga terminal-overrides ",xterm-256color:Tc"
+if (has("nvim"))
+  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+if (has("termguicolors"))
+  set termguicolors
+endif
+if has("gui_running")
+  set guioptions-=T
+  set guioptions-=e
+  set t_Co=256
+  set guitablabel=%M\ %t
+endif
+
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
@@ -86,9 +113,9 @@ call plug#begin('~/.config/nvim/plugged')
 
 " => Visual-&-Theme ========================================
 Plug 'joshdick/onedark.vim'
-source ~/dotfiles/nvim/plugin/indentLine.vim
-source ~/dotfiles/nvim/plugin/lightline.vim
-source ~/dotfiles/nvim/plugin/goyo.vim
+Plug 'Yggdroot/indentLine'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 
 " => Functionality-&-Helpers ===============================
 Plug 'michaeljsmith/vim-indent-object'
@@ -100,19 +127,22 @@ Plug 'mhinz/vim-startify'
 Plug 'ryanoasis/vim-devicons'
 Plug 'Konfekt/FastFold'
 Plug 'dhruvasagar/vim-open-url'
-source ~/dotfiles/nvim/plugin/quick-scope.vim
-source ~/dotfiles/nvim/plugin/vim-multiple-cursor.vim
-source ~/dotfiles/nvim/plugin/vim-sneak.vim
-source ~/dotfiles/nvim/plugin/auto-pairs.vim
-source ~/dotfiles/nvim/plugin/coc.vim
-source ~/dotfiles/nvim/plugin/fzf.vim
-source ~/dotfiles/nvim/plugin/nerdtree.vim
-source ~/dotfiles/nvim/plugin/language-support.vim
-source ~/dotfiles/nvim/plugin/prettier.vim
-source ~/dotfiles/nvim/plugin/fold.vim
-source ~/dotfiles/nvim/plugin/filetypes.vim
-" source ~/dotfiles/nvim/plugin/yank-ring.vim
+Plug 'unblevable/quick-scope'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'justinmk/vim-sneak'
+Plug 'jiangmiao/auto-pairs'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'preservim/nerdtree'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'branch': 'release/1.x',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html']
+  \ }
 
+" Plug 'vim-scripts/YankRing.vim', { 'on': 'YRShow' }
 " Plug 'vimwiki/vimwiki'      " my own personal wiki
 " Plug 'mhinz/vim-grepper'    " Handle multi-file find and replace.
 " Plug 'will133/vim-dirdiff'  " Run a diff on 2 directories.
@@ -122,10 +152,33 @@ source ~/dotfiles/nvim/plugin/filetypes.vim
 " Plug 'moll/vim-node'
 
 " => Git ===================================================
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive', { 'on': ['Gstatus', 'Gbrowse', 'GV'] }
+Plug 'junegunn/gv.vim', { 'on': 'GV' }
+Plug 'tpope/vim-rhubarb', { 'on': 'Gbrowse' }      " git(hub) wrapper - open on GitHub
+
+source ~/dotfiles/nvim/plugin/language-support.vim
+call plug#end()
+
+source ~/dotfiles/nvim/plugin/onedark.vim
+source ~/dotfiles/nvim/plugin/indentLine.vim
+source ~/dotfiles/nvim/plugin/lightline.vim
+source ~/dotfiles/nvim/plugin/goyo.vim
+source ~/dotfiles/nvim/plugin/vim-sneak.vim
+source ~/dotfiles/nvim/plugin/quick-scope.vim
+source ~/dotfiles/nvim/plugin/vim-multiple-cursor.vim
+source ~/dotfiles/nvim/plugin/auto-pairs.vim
+source ~/dotfiles/nvim/plugin/coc.vim
+source ~/dotfiles/nvim/plugin/fzf.vim
+source ~/dotfiles/nvim/plugin/nerdtree.vim
+source ~/dotfiles/nvim/plugin/prettier.vim
 source ~/dotfiles/nvim/plugin/gitgutter.vim
 source ~/dotfiles/nvim/plugin/vim-fugitive.vim
+" source ~/dotfiles/nvim/plugin/yank-ring.vim
 
-call plug#end()
+" Local files
+source ~/dotfiles/nvim/plugin/fold.vim
+source ~/dotfiles/nvim/plugin/filetypes.vim
 " }}}
 " => VIM-User-Interface ---------------------------- {{{
 
@@ -185,58 +238,8 @@ set numberwidth=1
 set switchbuf=useopen,usetab,newtab
 set showtabline=2
 
-" }}}
-" => Colors-and-Fonts ------------------------------ {{{
-
-" Set utf8 as standard encoding and en_US as the standard language
-set encoding=UTF-8    " Default encoding
-scriptencoding utf-16 " allow emojis in vimrc
-syntax on             " Enable syntax highlighting
-set ffs=unix,dos,mac  " Use Unix as the standard file type
-
-" Enable 256 colors palette in Gnome Terminal
-if $COLORTERM == 'gnome-terminal'
-  set t_Co=256
-endif
-"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
-"copy next line to .tmux.conf for support true color within tmux
-"set-option -ga terminal-overrides ",xterm-256color:Tc"
-if (has("nvim"))
-  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
-if (has("termguicolors"))
-  set termguicolors
-endif
-if has("gui_running")
-  set guioptions-=T
-  set guioptions-=e
-  set t_Co=256
-  set guitablabel=%M\ %t
-endif
-
-" let g:one_allow_italics = 1       " support italic fonts
-let g:sh_fold_enabled=1           " enable folding in bash files
-
-augroup colorextend
-  autocmd!
-  autocmd ColorScheme * call onedark#extend_highlight("FoldColumn", { "fg": { "gui": "#4b5263" } })
-augroup END
-try
-  colorscheme onedark
-catch
-endtry
-
-" Change Sneak highlight
-highlight Sneak guifg=#282C33 guibg=#E06B74 ctermfg=black ctermbg=cyan
-highlight SneakScope guifg=#282C33 guibg=white ctermfg=black ctermbg=white
-
-" => itchyny/lightline.vim =================================
-let s:palette = g:lightline#colorscheme#one#palette
-let s:palette.tabline.tabsel = [ [ '#282C33', '#ABB2BF', 252, 66, 'bold' ] ]
-let s:palette.tabline.left = [ [ '#717785', '#3E4452', 252, 66 ] ]
-" let s:palette.tabline.middle = [ [ '#717785', '#21252B', 252, 66 ] ]
-unlet s:palette
+" enable folding in bash files
+let g:sh_fold_enabled=1
 
 " Highlight the characters on column 81
 highlight CocHighlightText ctermbg=gray guibg=#3B4048

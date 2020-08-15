@@ -1,6 +1,3 @@
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'preservim/nerdtree'
-
 " => scrooloose/nerdtree ===================================
 let g:NERDTreeIgnore = ['^node_modules$','^.git$']
 let g:NERDTreeAutoDeleteBuffer=1

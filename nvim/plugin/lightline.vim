@@ -1,6 +1,3 @@
-Plug 'itchyny/lightline.vim'
-
-" => itchyny/lightline.vim =================================
 let g:lightline = {
       \ 'colorscheme': 'one',
       \ 'mode_map': { 'c': 'NORMAL' },
@@ -66,3 +63,11 @@ function! LightlineWebDevIcons(n)
   let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
   return WebDevIconsGetFileTypeSymbol(bufname(l:bufnr))
 endfunction
+
+" => itchyny/lightline.vim =================================
+let s:palette = g:lightline#colorscheme#one#palette
+let s:palette.tabline.tabsel = [ [ '#282C33', '#ABB2BF', 252, 66, 'bold' ] ]
+let s:palette.tabline.left = [ [ '#717785', '#3E4452', 252, 66 ] ]
+" let s:palette.tabline.middle = [ [ '#717785', '#21252B', 252, 66 ] ]
+unlet s:palette
+

@@ -1,5 +1,3 @@
-Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
-
 " Toggle Goyo
 nnoremap <silent> gz :Goyo<CR>
 nnoremap <silent> <C-k>z :Goyo<CR>

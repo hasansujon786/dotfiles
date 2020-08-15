@@ -1,4 +1,3 @@
-Plug 'justinmk/vim-sneak'
 let g:sneak#label = 1
 " case insensitive sneak
 let g:sneak#use_ic_scs = 1
@@ -10,3 +9,8 @@ map gS <Plug>Sneak_,
 map gs <Plug>Sneak_;
 " Cool prompts
 let g:sneak#prompt = '🔎 '
+
+" Change Sneak highlight
+highlight Sneak guifg=#282C33 guibg=#E06B74 ctermfg=black ctermbg=cyan
+highlight SneakScope guifg=#282C33 guibg=white ctermfg=black ctermbg=white
+

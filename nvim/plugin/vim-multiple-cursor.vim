@@ -1,4 +1,3 @@
-Plug 'terryma/vim-multiple-cursors'
 let g:multi_cursor_start_word_key      = 'gb'
 let g:multi_cursor_select_all_word_key = 'ga'
 let g:multi_cursor_next_key            = 'gb'

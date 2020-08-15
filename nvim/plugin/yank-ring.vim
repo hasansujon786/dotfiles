@@ -1,5 +1,3 @@
-Plug 'vim-scripts/YankRing.vim', { 'on': 'YRShow' }
-
 " => vim-scripts/YankRing.vim ==============================
 nnoremap <silent> <leader>y :YRShow<CR>
 vnoremap <silent> <leader>y y:YRShow<CR>:close<CR>
