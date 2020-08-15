@@ -160,12 +160,12 @@ Plug 'tpope/vim-rhubarb', { 'on': 'Gbrowse' }      " git(hub) wrapper - open on 
 source ~/dotfiles/nvim/plugin/language-support.vim
 call plug#end()
 
+source ~/dotfiles/nvim/plugin/quick-scope.vim
 source ~/dotfiles/nvim/plugin/onedark.vim
 source ~/dotfiles/nvim/plugin/indentLine.vim
 source ~/dotfiles/nvim/plugin/lightline.vim
 source ~/dotfiles/nvim/plugin/goyo.vim
 source ~/dotfiles/nvim/plugin/vim-sneak.vim
-source ~/dotfiles/nvim/plugin/quick-scope.vim
 source ~/dotfiles/nvim/plugin/vim-multiple-cursor.vim
 source ~/dotfiles/nvim/plugin/auto-pairs.vim
 source ~/dotfiles/nvim/plugin/coc.vim
@@ -380,14 +380,14 @@ nnoremap <silent> <leader><leader> :wincmd _<cr>:wincmd \|<cr>:vertical resize -
 nnoremap <silent> <Bar> :wincmd =<cr>
 
 " Jump between tabs
-nnoremap <silent> <TAB> :tabnext<CR>
-nnoremap <silent> <S-TAB> :tabprevious<CR>
-nnoremap <silent> g<TAB> :tabmove+<CR>
-nnoremap <silent> g<S-TAB> :tabmove-<CR>
-" Map <leader> + 1-9 to jump to respective tab
+nnoremap <silent> gl :tabnext<CR>
+nnoremap <silent> gh :tabprevious<CR>
+nnoremap <silent> m<TAB> :tabmove+<CR>
+nnoremap <silent> m<S-TAB> :tabmove-<CR>
+" Map 1-9 + <Space> to jump to respective tab
 let i = 1
 while i < 10
-  execute ":nmap <silent>" . i . "<TAB> :tabn " . i . "<CR>"
+  execute ":nmap <silent> <Space>" . i . " :tabn " . i . "<CR>"
   let i += 1
 endwhile
 
