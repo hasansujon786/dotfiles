@@ -109,6 +109,8 @@ source ~/dotfiles/nvim/plugin/fzf.vim
 source ~/dotfiles/nvim/plugin/nerdtree.vim
 source ~/dotfiles/nvim/plugin/language-support.vim
 source ~/dotfiles/nvim/plugin/prettier.vim
+source ~/dotfiles/nvim/plugin/fold.vim
+source ~/dotfiles/nvim/plugin/filetypes.vim
 " source ~/dotfiles/nvim/plugin/yank-ring.vim
 
 " Plug 'vimwiki/vimwiki'      " my own personal wiki
@@ -216,13 +218,6 @@ endif
 " let g:one_allow_italics = 1       " support italic fonts
 let g:sh_fold_enabled=1           " enable folding in bash files
 
-" => itchyny/lightline.vim =================================
-let s:palette = g:lightline#colorscheme#one#palette
-let s:palette.tabline.tabsel = [ [ '#282C33', '#ABB2BF', 252, 66, 'bold' ] ]
-let s:palette.tabline.left = [ [ '#717785', '#3E4452', 252, 66 ] ]
-" let s:palette.tabline.middle = [ [ '#717785', '#21252B', 252, 66 ] ]
-unlet s:palette
-
 augroup colorextend
   autocmd!
   autocmd ColorScheme * call onedark#extend_highlight("FoldColumn", { "fg": { "gui": "#4b5263" } })
@@ -235,6 +230,13 @@ endtry
 " Change Sneak highlight
 highlight Sneak guifg=#282C33 guibg=#E06B74 ctermfg=black ctermbg=cyan
 highlight SneakScope guifg=#282C33 guibg=white ctermfg=black ctermbg=white
+
+" => itchyny/lightline.vim =================================
+let s:palette = g:lightline#colorscheme#one#palette
+let s:palette.tabline.tabsel = [ [ '#282C33', '#ABB2BF', 252, 66, 'bold' ] ]
+let s:palette.tabline.left = [ [ '#717785', '#3E4452', 252, 66 ] ]
+" let s:palette.tabline.middle = [ [ '#717785', '#21252B', 252, 66 ] ]
+unlet s:palette
 
 " Highlight the characters on column 81
 highlight CocHighlightText ctermbg=gray guibg=#3B4048
@@ -351,9 +353,9 @@ nnoremap <silent> <A-j> :move +1<CR>==
 vnoremap <silent> <A-k> :move '<-2<CR>gv=gv
 vnoremap <silent> <A-j> :move '>+1<CR>gv=gv
 
-" Format paragraph (selected or not) to 80 character lines.
-nnoremap <Leader>g gqap
-xnoremap <Leader>g gqa
+" " Format paragraph (selected or not) to 80 character lines.
+" nnoremap <Leader>g gqap
+" xnoremap <Leader>g gqa
 
 " => Moving-around-tabs-and-buffers ========================
 " Jump between panes
@@ -453,10 +455,6 @@ nmap <leader>vid :tabedit $MYVIMRC<CR>
 nmap <leader>vim :tabedit ~/mydotfiles/nvim/init.vim<CR>
 nmap <leader>vis :source $MYVIMRC<CR>
 
-" compile & run c Code
-nnoremap <leader>bb :w<CR>:!gcc % -o .lastbuild && ./.lastbuild<cr>
-nnoremap <leader>bl :w<CR>:!./.lastbuild<cr>
-
 " Toggle highlighting of current line and column
 nnoremap <silent> <leader>c :setlocal cursorcolumn!<CR>
 
@@ -492,57 +490,6 @@ nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
-
-" }}}
-" => Fold-related ---------------------------------- {{{
-
-" Space to toggle folds.
-nnoremap <leader>z za
-vnoremap <leader>z za
-
-autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
-autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
-
-" autocmd FileType vim setlocal fdc=1
-set foldlevel=99
-
-autocmd FileType vim setlocal foldmethod=marker
-autocmd FileType vim setlocal foldlevel=0
-
-autocmd FileType javascript,html,css,scss,typescript setlocal foldlevel=99
-
-autocmd FileType css,scss,json setlocal foldmethod=marker
-autocmd FileType css,scss,json setlocal foldmarker={,}
-
-autocmd FileType coffee setl foldmethod=indent
-let g:xml_syntax_folding = 1
-autocmd FileType xml setl foldmethod=syntax
-
-autocmd FileType html setl foldmethod=expr
-autocmd FileType html setl foldexpr=HTMLFolds()
-
-" autocmd FileType javascript,typescript,json setl foldmethod=syntax
-autocmd FileType javascript,typescript,typescript.tsx,typescriptreact,json setl foldmethod=syntax
-
-function! MyFoldText() " {{{
-  let line = getline(v:foldstart)
-  let nucolwidth = &fdc + &number * &numberwidth
-  let windowwidth = winwidth(0) - nucolwidth - 3
-  let foldedlinecount = v:foldend - v:foldstart
-
-  " expand tabs into spaces
-  let onetab = strpart('          ', 0, &tabstop)
-  let line = substitute(line, '\t', onetab, 'g')
-
-  let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-  " let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - len('lines')
-  " let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - len('lines   ')
-  let fillcharcount = windowwidth - len(line)
-  " return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . ' Lines'
-  return line . ''. repeat(" ",fillcharcount)
-endfunction " }}}
-set foldtext=MyFoldText()
-
 
 " }}}
 " => Nvim-terminal --------------------------------- {{{
@@ -591,34 +538,9 @@ augroup vimrcEx
         \   exe "normal g`\"" |
         \ endif
 
-  " Set syntax highlighting for specific file types
-  autocmd BufRead,BufNewFile .babelrc set filetype=json
-  autocmd BufRead,BufNewFile *.md set filetype=markdown
-  autocmd BufRead,BufNewFile .eslintrc,.prettierrc set filetype=json
-  autocmd BufRead,BufNewFile *.prisma set filetype=graphql
-
-  " add support for comments in json (jsonc format used as configuration for
-  " many utilities)
-  autocmd FileType json syntax match Comment +\/\/.\+$+
-
-  " Enable spellchecking for Markdown
-  autocmd FileType markdown setlocal spell
-
-  " Automatically wrap at 72 characters and spell check git commit messages
-  autocmd FileType gitcommit setlocal textwidth=72
-  autocmd FileType gitcommit setlocal spell
-
-  " disable signcolumn for tagbar, nerdtree, as thats useless
-  autocmd FileType tagbar,nerdtree setlocal signcolumn=no
-
-
-  " Allow stylesheets to autocomplete hyphenated words
-  autocmd FileType css,scss,sass setlocal iskeyword+=-
-
   " Vim/tmux layout rebalancing
   " automatically rebalance windows on vim resize
   autocmd VimResized * :wincmd =
-
 augroup END
 
 " Only show the cursor line in the active buffer.
@@ -732,15 +654,6 @@ nnoremap <silent> <Leader>c :call QuickFix_toggle()<CR>
 
 " }}}
 " => Temporary ------------------------------------- {{{
-
-" Jump to adjacent files
-" nmap <leader>ip :e %:r.pug<CR>
-" nmap <leader>is :e %:r.sass<CR>
-" nmap <leader>it :e %:r.ts<CR>
-" nmap <leader>ih :e %:r.html<CR>
-
-" au FileType javascript imap <C-t> $log();<esc>hi
-" au FileType javascript imap <C-a> alert();<esc>hi
 
 " vmap gs :sort<CR>
 
