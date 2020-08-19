@@ -1,3 +1,6 @@
+# default variables 
+export EDITOR='nvim'
+
 # Yarn  & npm
 alias ys='yarn start'
 alias yd='yarn dev'
@@ -50,6 +53,11 @@ alias gsts='git stash save'
 alias grget='git remote get-url origin'
 alias gpr='hub pull-request'
 alias gci='hub issue create'
+
+alias greh='git reset HEAD' # --hard
+alias gre='git reset ' # --hard
+alias glo='git log --oneling --decorate'
+alias lg='lazygit'
 
 # termux
 alias e='cd ~/storage/external-1'
