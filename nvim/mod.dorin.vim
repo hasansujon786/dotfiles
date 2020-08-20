@@ -141,6 +141,7 @@ Plug 'prettier/vim-prettier', {
   \ 'branch': 'release/1.x',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html']
   \ }
+Plug 'voldikss/vim-floaterm', { 'on': 'FloatermNew' }
 
 " Plug 'vim-scripts/YankRing.vim', { 'on': 'YRShow' }
 " Plug 'vimwiki/vimwiki'      " my own personal wiki
@@ -174,6 +175,7 @@ source ~/dotfiles/nvim/plugin/nerdtree.vim
 source ~/dotfiles/nvim/plugin/prettier.vim
 source ~/dotfiles/nvim/plugin/gitgutter.vim
 source ~/dotfiles/nvim/plugin/vim-fugitive.vim
+source ~/dotfiles/nvim/plugin/floaterm.vim
 " source ~/dotfiles/nvim/plugin/yank-ring.vim
 
 " Local files
@@ -503,10 +505,6 @@ autocmd BufEnter term://* startinsert
 autocmd TermOpen * set bufhidden=hide
 
 " Terminal mappings -------------------------------
-
-tmap jk <C-\><C-n>
-tmap <Esc> <C-\><C-n>
-tmap <silent> <C-d> <Esc>:q<CR>
 
 " Open terminal
 nmap <silent> <C-t>s <C-w>s<C-w>j:terminal<CR>a
