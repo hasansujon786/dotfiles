@@ -103,6 +103,16 @@ install_and_setup_nvim() {
 install_various_apps() {
   apt install -y nodejs
   apt install -y ripgrep
+
+  # NOTE: Currently lazygit installation only worls for termux
+  # TODO: Support for Linux & Windows
+  export LAZYGIT_VER="0.20.9"
+  # wget -O lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_x86_64.tar.gz
+  wget -O lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_arm64.tar.gz
+  tar xvf lazygit.tgz
+  # sudo mv lazygit /usr/local/bin/
+  mv lazygit /data/data/com.termux/files/usr/bin/lazygit
+  rm -RF lazygit.tgz
 }
 
 auto_install_everything() {
