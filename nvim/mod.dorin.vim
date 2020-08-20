@@ -112,36 +112,30 @@ nnoremap <leader>fn :normal! mz]s1z=`z<CR>
 call plug#begin('~/.config/nvim/plugged')
 
 " => Visual-&-Theme ========================================
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'Yggdroot/indentLine'
-Plug 'itchyny/lightline.vim'
-Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 
 " => Functionality-&-Helpers ===============================
-Plug 'michaeljsmith/vim-indent-object'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-eunuch', { 'on': ['Delete', 'Move', 'Rename'] }  "for moving and manipulating files / directories.
-Plug 'hasansujon786/vim-snippets'
-Plug 'mhinz/vim-startify'
-Plug 'ryanoasis/vim-devicons'
-Plug 'Konfekt/FastFold'
+Plug 'voldikss/vim-floaterm', { 'on': 'FloatermNew' }
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'dhruvasagar/vim-open-url'
 Plug 'unblevable/quick-scope'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 Plug 'justinmk/vim-sneak'
-Plug 'jiangmiao/auto-pairs'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'mhinz/vim-startify'
+Plug 'Konfekt/FastFold'
+
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
+Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'preservim/nerdtree'
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'branch': 'release/1.x',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html']
-  \ }
-Plug 'voldikss/vim-floaterm', { 'on': 'FloatermNew' }
+
 
 " Plug 'vim-scripts/YankRing.vim', { 'on': 'YRShow' }
 " Plug 'vimwiki/vimwiki'      " my own personal wiki
@@ -152,11 +146,21 @@ Plug 'voldikss/vim-floaterm', { 'on': 'FloatermNew' }
 " Plug 'editorconfig/editorconfig-vim'
 " Plug 'moll/vim-node'
 
+" => Auto completion ========================================
+Plug 'jiangmiao/auto-pairs'
+Plug 'hasansujon786/vim-snippets'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'branch': 'release/1.x',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html']
+  \ }
+
 " => Git ===================================================
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive', { 'on': ['Gstatus', 'Gbrowse', 'GV'] }
+Plug 'tpope/vim-rhubarb', { 'on': 'Gbrowse' }
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
-Plug 'tpope/vim-rhubarb', { 'on': 'Gbrowse' }      " git(hub) wrapper - open on GitHub
+Plug 'airblade/vim-gitgutter'
 
 source ~/dotfiles/nvim/plugin/language-support.vim
 call plug#end()
@@ -166,19 +170,19 @@ source ~/dotfiles/nvim/plugin/onedark.vim
 source ~/dotfiles/nvim/plugin/indentLine.vim
 source ~/dotfiles/nvim/plugin/lightline.vim
 source ~/dotfiles/nvim/plugin/goyo.vim
-source ~/dotfiles/nvim/plugin/vim-sneak.vim
-source ~/dotfiles/nvim/plugin/vim-multiple-cursor.vim
 source ~/dotfiles/nvim/plugin/auto-pairs.vim
 source ~/dotfiles/nvim/plugin/coc.vim
 source ~/dotfiles/nvim/plugin/fzf.vim
 source ~/dotfiles/nvim/plugin/nerdtree.vim
-source ~/dotfiles/nvim/plugin/prettier.vim
-source ~/dotfiles/nvim/plugin/gitgutter.vim
+source ~/dotfiles/nvim/plugin/vim-sneak.vim
+source ~/dotfiles/nvim/plugin/vim-multiple-cursors.vim
+source ~/dotfiles/nvim/plugin/vim-prettier.vim
+source ~/dotfiles/nvim/plugin/vim-gitgutter.vim
 source ~/dotfiles/nvim/plugin/vim-fugitive.vim
-source ~/dotfiles/nvim/plugin/floaterm.vim
+source ~/dotfiles/nvim/plugin/vim-floaterm.vim
 " source ~/dotfiles/nvim/plugin/yank-ring.vim
 
-" Local files
+" Local Configurations
 source ~/dotfiles/nvim/plugin/fold.vim
 source ~/dotfiles/nvim/plugin/filetypes.vim
 " }}}
@@ -551,7 +555,7 @@ augroup CursorLine
   au WinLeave * setlocal nocursorline
 augroup END
 
-source ~/dotfiles/nvim/plugin/devicons.vim
+source ~/dotfiles/nvim/plugin/vim-devicons.vim
 " }}}
 " => Helper-functions ------------------------------ {{{
 
