@@ -7,8 +7,8 @@ let NERDTreeMinimalUI = 1
 let NERDTreeCascadeSingleChildDir=0
 " Would be useful mappings, but they interfere with my default window movement
 " unmap (<C-j> and <C-k>).
-let g:NERDTreeMapJumpPrevSibling='<Nop>'
-let g:NERDTreeMapJumpNextSibling='<Nop>'
+" let g:NERDTreeMapJumpPrevSibling='<Nop>'
+" let g:NERDTreeMapJumpNextSibling='<Nop>'
 let NERDTreeMapOpenSplit='s'
 let NERDTreeMapOpenVSplit='v'
 
@@ -16,7 +16,7 @@ let NERDTreeDirArrowExpandable=""
 let NERDTreeDirArrowCollapsible=""
 
 " icon source: https://www.nerdfonts.com/cheat-sheet
-let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom = {
             \ 'Modified'  : 'M',
             \ 'Staged'    : 'S',
             \ 'Untracked' : 'U',
