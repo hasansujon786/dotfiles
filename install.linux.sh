@@ -113,6 +113,8 @@ install_various_apps() {
   # sudo mv lazygit /usr/local/bin/
   mv lazygit /data/data/com.termux/files/usr/bin/lazygit
   rm -RF lazygit.tgz
+
+  # TODO: isntall python and pynvim
 }
 
 auto_install_everything() {

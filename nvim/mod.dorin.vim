@@ -148,7 +148,7 @@ Plug 'junegunn/fzf.vim'
 
 " => Auto completion ========================================
 Plug 'jiangmiao/auto-pairs'
-Plug 'hasansujon786/vim-snippets'
+Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
