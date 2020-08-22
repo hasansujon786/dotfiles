@@ -186,8 +186,9 @@ source ~/dotfiles/nvim/plugin/vim-smoothie.vim
 " source ~/dotfiles/nvim/plugin/yank-ring.vim
 
 " Local Configurations
-source ~/dotfiles/nvim/plugin/fold.vim
-source ~/dotfiles/nvim/plugin/filetypes.vim
+source ~/dotfiles/nvim/module/fold.vim
+source ~/dotfiles/nvim/module/filetypes.vim
+" source ~/dotfiles/nvim/module/leader.vim
 " }}}
 " => VIM-User-Interface ---------------------------- {{{
 
