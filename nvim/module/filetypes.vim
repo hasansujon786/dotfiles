@@ -27,9 +27,6 @@ augroup END
 """"""""""""""""""""""""""""""
 " => JavaScript
 """"""""""""""""""""""""""""""
-" Run js Code on node
-autocmd FileType javascript nmap <leader>bb :!node %<CR>
-
 " au FileType javascript imap <C-t> $log();<esc>hi
 " au FileType javascript imap <C-a> alert();<esc>hi
 " Jump to adjacent files
@@ -37,13 +34,4 @@ autocmd FileType javascript nmap <leader>bb :!node %<CR>
 " nmap <leader>is :e %:r.sass<CR>
 " nmap <leader>it :e %:r.ts<CR>
 " nmap <leader>ih :e %:r.html<CR>
-
-
-
-""""""""""""""""""""""""""""""
-" => C Program
-""""""""""""""""""""""""""""""
-" compile & run c Code
-autocmd FileType c nmap <leader>bb :w<CR>:!gcc % -o .lastbuild && ./.lastbuild<cr>
-autocmd FileType c nmap <leader>bl :w<CR>:!./.lastbuild<cr>
 

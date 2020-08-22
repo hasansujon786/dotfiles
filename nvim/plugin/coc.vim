@@ -45,13 +45,6 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gI <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" => search-and-rename ==========================
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-" Search world in whole project
-nmap <leader>rr :CocSearch <C-R>=expand("<cword>")<CR><CR>
-xmap <leader>rr y :CocSearch -F <C-r>"<C-a><C-right><C-right><C-right>\
-
 " => better-visual ==============================
 " Use leader + = to formate selected code.
 xmap <leader>= <Plug>(coc-format-selected)

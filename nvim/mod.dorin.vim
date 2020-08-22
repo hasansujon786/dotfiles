@@ -118,7 +118,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'Yggdroot/indentLine'
 
 " => Functionality-&-Helpers ===============================
-Plug 'tpope/vim-eunuch', { 'on': ['Delete', 'Move', 'Rename'] }  "for moving and manipulating files / directories.
+Plug 'tpope/vim-eunuch', { 'on': ['Delete', 'Move', 'Rename', 'Mkdir'] }  "for moving and manipulating files / directories.
 Plug 'voldikss/vim-floaterm', { 'on': 'FloatermNew' }
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'michaeljsmith/vim-indent-object'
@@ -188,7 +188,7 @@ source ~/dotfiles/nvim/plugin/vim-smoothie.vim
 " Local Configurations
 source ~/dotfiles/nvim/module/fold.vim
 source ~/dotfiles/nvim/module/filetypes.vim
-" source ~/dotfiles/nvim/module/leader.vim
+source ~/dotfiles/nvim/module/leader.vim
 " }}}
 " => VIM-User-Interface ---------------------------- {{{
 
@@ -311,10 +311,6 @@ noremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
 noremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
 
 " Vertical scrolling
-" nnoremap <A-k> <C-u>
-" nnoremap <A-j> <C-d>
-nnoremap <A-u> <C-u>
-nnoremap <A-d> <C-d>
 nnoremap <A-y> <C-y>
 nnoremap <A-e> <C-e>
 " Horizontal scroll
@@ -334,14 +330,6 @@ noremap X "_x
 " Paste from current register/buffer in insert mode
 imap <C-v> <C-R>*
 cmap <C-v> <C-R>+
-
-" Easier system clipboard usage
-vnoremap <Leader>y "+ygv<Esc>
-vnoremap <Leader>d "+d
-nnoremap <Leader>p "+p
-nnoremap <Leader>P "+P
-vnoremap <Leader>p "+p
-vnoremap <Leader>P "+P
 
 " => Modify-&-Rearrange-texts ==============================
 
@@ -372,12 +360,13 @@ vnoremap <silent> <A-j> :move '>+1<CR>gv=gv
 
 " => Moving-around-tabs-and-buffers ========================
 " Jump between panes
-nnoremap <silent> <leader>j :wincmd j<CR>
-nnoremap <silent> <leader>k :wincmd k<CR>
-nnoremap <silent> <leader>h :wincmd h<CR>
-nnoremap <silent> <leader>l :wincmd l<CR>
-nnoremap <silent> <leader>l :wincmd l<CR>
-nnoremap <silent> <leader>\ :wincmd p<CR>
+nnoremap <silent> <C-j> :wincmd j<CR>
+nnoremap <silent> <C-k> :wincmd k<CR>
+nnoremap <silent> <C-h> :wincmd h<CR>
+nnoremap <silent> <C-l> :wincmd l<CR>
+nnoremap <silent> <C-l> :wincmd l<CR>
+nnoremap <silent> <C-\> :wincmd p<CR>
+nnoremap <silent> <S-TAB> :wincmd p<CR>
 
 " Resize splits
 nnoremap <silent> <A-=> :resize +3<CR>
@@ -386,7 +375,6 @@ nnoremap <silent> <A-.> :vertical resize +5<CR>
 nnoremap <silent> <A-,> :vertical resize -5<CR>
 " zoom a vim pane
 nnoremap <silent> \ :wincmd _<cr>:wincmd \|<cr>:vertical resize -5<CR>
-nnoremap <silent> <leader><leader> :wincmd _<cr>:wincmd \|<cr>:vertical resize -5<CR>
 nnoremap <silent> <Bar> :wincmd =<cr>
 
 " Jump between tabs
@@ -394,13 +382,6 @@ nnoremap <silent> gl :tabnext<CR>
 nnoremap <silent> gh :tabprevious<CR>
 nnoremap <silent> m<TAB> :tabmove+<CR>
 nnoremap <silent> m<S-TAB> :tabmove-<CR>
-" Map 1-9 + <Space> to jump to respective tab
-let i = 1
-while i < 10
-  execute ":nmap <silent> <Space>" . i . " :tabn " . i . "<CR>"
-  let i += 1
-endwhile
-
 " => Search-functionalities ================================
 " auto center on matched string
 noremap n nzz
@@ -417,12 +398,6 @@ nnoremap <silent> C :let @/='\<'.expand('<cword>').'\>'<CR>cgn
 xnoremap <silent> C "sy:let @/=@s<CR>cgn
 " Alias replace all to S
 " nnoremap S :%s//gI<Left><Left><Left>
-
-" interactive find replace preview
-set inccommand=nosplit
-" replace word under cursor, globally, with confirmation
-nnoremap <Leader>ff :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
-vnoremap <Leader>ff y :%s/<C-r>"//gc<Left><Left><Left>
 
 " => Insert-Mode-key-mapping ===============================
 " Move cursor by character
@@ -453,48 +428,8 @@ inoremap <C-u> <C-G>u<C-U>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
-" => Leader-commands =======================================
-" Save file Quickly
-nnoremap <C-s> :write<CR>
-inoremap <C-s> <Esc>:write<CR><Esc>a
-nnoremap <leader>s :write<CR>
-nnoremap <silent> <leader>q :close<CR>
-
-" Switch between the last two files
-nnoremap <leader><tab> <c-^>
-
-" Open vimrc in a new tab & source
-nmap <leader>vid :tabedit $MYVIMRC<CR>
-nmap <leader>vim :tabedit ~/mydotfiles/nvim/init.vim<CR>
-nmap <leader>vis :source $MYVIMRC<CR>
-
-" Toggle highlighting of current line and column
-nnoremap <silent> <leader>c :setlocal cursorcolumn!<CR>
-
-" => Organize-files-&-folders ==============================
-" Open a file relative to the current file
-" Synonyms: e: edit,
-" e: window, s: split, v: vertical split, t: tab, d: directory
-nnoremap <Leader>er :Move <C-R>=expand("%")<CR>
-nnoremap <leader>ed :Mkdir <C-R>=expand('%:h').'/'<cr>
-nnoremap <leader>et :tabe <C-R>=expand('%:h').'/'<cr>
-nnoremap <leader>ev :vsp <C-R>=expand('%:h').'/'<cr>
-nnoremap <leader>es :sp <C-R>=expand('%:h').'/'<cr>
-nnoremap <leader>ee :e <C-R>=expand('%:h').'/'<cr>
-
-" Change dir to current file's dir
-nnoremap <leader>CD :cd %:p:h<CR>:pwd<CR>
-
 " Find & open file on current window
 "map <C-p> :tabfind *
-
-" => Function-key-mappings =================================
-" Pasting support
-" set pastetoggle=<F3>  " Press F3 in insert mode to preserve tabs when
-" map <leader>pp :setlocal paste!<cr>
-
-" Toggle relative line numbers and regular line numbers.
-nmap <F6> :set invrelativenumber<CR>
 
 " }}}
 " => Disabled-keys --------------------------------- {{{
@@ -580,28 +515,6 @@ function! VisualSelection(direction, extra_filter) range
     let @" = l:saved_reg
 endfunction
 
-function! ToggleWrap()
-  if &wrap
-    echo 'Wrap OFF'
-    setlocal nowrap
-    set virtualedit=all
-    silent! nunmap <buffer> j
-    silent! nunmap <buffer> k
-  else
-    " TODO: fix jk mapping while wrap toggle
-    echo 'Wrap ON'
-    setlocal wrap linebreak nolist
-    set virtualedit=
-    setlocal display+=lastline
-    noremap  <buffer> <silent> k gk
-    noremap  <buffer> <silent> j gj
-    inoremap <buffer> <silent> <Up> <C-o>gk
-    inoremap <buffer> <silent> <Down> <C-o>gj
-  endif
-endfunction
-" Allow j and k to work on visual lines (when wrapping)
-noremap <silent> <A-z> :call ToggleWrap()<CR>
-
 fun! ToggleBackground()
   if (&background ==? 'dark')
     set background=light
@@ -646,20 +559,6 @@ function! <SID>BufcloseCloseIt()
     execute("bdelete! ".l:currentBufNum)
   endif
 endfunction
-
-" Toggle quickfix window.
-function! QuickFix_toggle()
-    for i in range(1, winnr('$'))
-        let bnum = winbufnr(i)
-        if getbufvar(bnum, '&buftype') == 'quickfix'
-            cclose
-            return
-        endif
-    endfor
-
-    copen
-endfunction
-nnoremap <silent> <Leader>c :call QuickFix_toggle()<CR>
 
 " }}}
 " => Temporary ------------------------------------- {{{
