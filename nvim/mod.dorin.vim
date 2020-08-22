@@ -120,8 +120,8 @@ Plug 'Yggdroot/indentLine'
 " => Functionality-&-Helpers ===============================
 Plug 'tpope/vim-eunuch', { 'on': ['Delete', 'Move', 'Rename'] }  "for moving and manipulating files / directories.
 Plug 'voldikss/vim-floaterm', { 'on': 'FloatermNew' }
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'dhruvasagar/vim-open-url'
 Plug 'unblevable/quick-scope'
 Plug 'tpope/vim-commentary'
@@ -129,6 +129,8 @@ Plug 'tpope/vim-surround'
 Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-startify'
 Plug 'Konfekt/FastFold'
+Plug 'tpope/vim-repeat'
+Plug 'psliwka/vim-smoothie' " Smooth scroll
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
@@ -145,6 +147,7 @@ Plug 'junegunn/fzf.vim'
 " Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' } " markdown preview
 " Plug 'editorconfig/editorconfig-vim'
 " Plug 'moll/vim-node'
+" Plug 'glts/vim-radical' " Convert binary, hex, etc..
 
 " => Auto completion ========================================
 Plug 'jiangmiao/auto-pairs'
@@ -175,11 +178,11 @@ source ~/dotfiles/nvim/plugin/coc.vim
 source ~/dotfiles/nvim/plugin/fzf.vim
 source ~/dotfiles/nvim/plugin/nerdtree.vim
 source ~/dotfiles/nvim/plugin/vim-sneak.vim
-source ~/dotfiles/nvim/plugin/vim-multiple-cursors.vim
 source ~/dotfiles/nvim/plugin/vim-prettier.vim
 source ~/dotfiles/nvim/plugin/vim-gitgutter.vim
 source ~/dotfiles/nvim/plugin/vim-fugitive.vim
 source ~/dotfiles/nvim/plugin/vim-floaterm.vim
+source ~/dotfiles/nvim/plugin/vim-smoothie.vim
 " source ~/dotfiles/nvim/plugin/yank-ring.vim
 
 " Local Configurations

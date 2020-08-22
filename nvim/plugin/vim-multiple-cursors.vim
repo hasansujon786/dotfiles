@@ -1,8 +1,0 @@
-let g:multi_cursor_start_word_key      = 'gb'
-let g:multi_cursor_select_all_word_key = 'ga'
-let g:multi_cursor_next_key            = 'gb'
-let g:multi_cursor_prev_key            = 'gp'
-let g:multi_cursor_quit_key            = 'q'
-" let g:multi_cursor_start_key           = 'g<C-n>'
-" let g:multi_cursor_select_all_key      = 'g<A-n>'
-" let g:multi_cursor_skip_key            = '<C-x>'
