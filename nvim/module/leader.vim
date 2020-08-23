@@ -48,8 +48,11 @@ nmap <leader>rn <Plug>(coc-rename)
 " interactive find replace preview
 set inccommand=nosplit
 " replace word under cursor, globally, with confirmation
+" TODO: need to fix which change part of world
 nmap <Leader>rr :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 xmap <Leader>rr y :%s/<C-r>"//gc<Left><Left><Left>
+" Alias replace all to S
+" nnoremap S :%s//gI<Left><Left><Left>
 
 " => g is for git =========================================
 nmap <silent> <leader>gg :Gstatus<CR>
