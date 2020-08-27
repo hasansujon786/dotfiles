@@ -89,9 +89,19 @@ function! QuickFix_toggle()
 endfunction
 " }}}
 nnoremap <silent> <Leader>tq :call QuickFix_toggle()<CR>
-" Toggle relative line numbers and regular line numbers.
-nnoremap <silent> <leader>tr :set invrelativenumber<CR>
-nnoremap <silent> <leader>tn :set number!<CR>
+" Toggle relative line numbers and regular line numbers {{{
+function! ToggleNumber()
+  if &number
+    echo 'Number OFF'
+    set nonumber norelativenumber
+  else
+    echo 'Number ON'
+    set number relativenumber
+  endif
+endfunction
+" }}}
+nnoremap <silent> <leader>tN :set invrelativenumber<CR>
+nnoremap <silent> <leader>tn :call ToggleNumber()<CR>
 " Toggle wrap {{{
 " Allow j and k to work on visual lines (when wrapping)
 function! ToggleWrap()
