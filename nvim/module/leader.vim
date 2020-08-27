@@ -1,10 +1,19 @@
 " => Single mappings ======================================
 nnoremap <silent> <leader>; :Commands<CR>
 nnoremap <silent> <leader>q :close<CR>
-" Switch between the last two files
-nnoremap <silent> <leader><tab> <c-^>
-nnoremap <silent> <leader>z za
-vnoremap <silent> <leader>z za
+" Switch between the alternate files
+nnoremap <leader><tab> <c-^>
+" Jump between windows
+nnoremap <leader>w <C-w>
+nnoremap <silent> <leader>j :wincmd j<CR>
+nnoremap <silent> <leader>k :wincmd k<CR>
+nnoremap <silent> <leader>h :wincmd h<CR>
+nnoremap <silent> <leader>l :wincmd l<CR>
+nnoremap <silent> <leader>\ :wincmd p<CR>
+" Easy fold
+nnoremap <leader>z za
+vnoremap <leader>z za
+nnoremap <silent> <S-TAB> :wincmd p<CR>
 " Easier system clipboard usage
 vnoremap <Leader>y "+ygv<Esc>
 vnoremap <Leader>d "+d
@@ -55,12 +64,14 @@ xmap <Leader>rr y :%s/<C-r>"//gc<Left><Left><Left>
 " nnoremap S :%s//gI<Left><Left><Left>
 
 " => g is for git =========================================
-nmap <silent> <leader>gg :Gstatus<CR>
+nmap <silent> <leader>gg :Gstatus<CR>:wincmd _<CR>
+nmap <silent> <leader>gdf :Gvdiffsplit!<CR>:vertical resize +15<CR>
+nmap <silent> <leader>gl :FloatermNew --height=0.99 --width=0.98 --name=lazygit lazygit<CR>
+" GitGutter
 nmap <silent> <leader>gp <Plug>(GitGutterPreviewHunk)
+nmap <silent> <leader>gu <Plug>(GitGutterUndoHunk)
 nmap <silent> <leader>gs <Plug>(GitGutterStageHunk)
 vmap <silent> <leader>gs <Plug>(GitGutterStageHunk)
-nmap <silent> <leader>gu <Plug>(GitGutterUndoHunk)
-nmap <silent> <leader>gl :FloatermNew --height=0.99 --width=0.98 --name=lazygit lazygit<CR>
 
 " => t is for toggle ======================================
 " Toggle highlighting of current line and column

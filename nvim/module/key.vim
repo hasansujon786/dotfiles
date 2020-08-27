@@ -68,14 +68,6 @@ vnoremap <silent> <A-k> :move '<-2<CR>gv=gv
 vnoremap <silent> <A-j> :move '>+1<CR>gv=gv
 
 " => Moving-around-tabs-and-buffers =======================
-" Jump between panes
-nnoremap <silent> <leader>j :wincmd j<CR>
-nnoremap <silent> <leader>k :wincmd k<CR>
-nnoremap <silent> <leader>h :wincmd h<CR>
-nnoremap <silent> <leader>l :wincmd l<CR>
-nnoremap <silent> <leader>\ :wincmd p<CR>
-nnoremap <silent> <S-TAB> :wincmd p<CR>
-
 " Resize splits
 nnoremap <silent> <A-=> :resize +3<CR>
 nnoremap <silent> <A--> :resize -3<CR>

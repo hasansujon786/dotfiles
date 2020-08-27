@@ -149,7 +149,7 @@ Plug 'prettier/vim-prettier', {
   \ }
 
 " => Git ===================================================
-Plug 'tpope/vim-fugitive', { 'on': ['Gstatus', 'Gbrowse', 'GV'] }
+Plug 'tpope/vim-fugitive', { 'on': ['Gstatus','Gbrowse','Gvdiffsplit','GV'] }
 Plug 'tpope/vim-rhubarb', { 'on': 'Gbrowse' }
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
 Plug 'airblade/vim-gitgutter'
@@ -171,6 +171,7 @@ source ~/dotfiles/nvim/plugin/vim-prettier.vim
 source ~/dotfiles/nvim/plugin/vim-gitgutter.vim
 source ~/dotfiles/nvim/plugin/vim-fugitive.vim
 source ~/dotfiles/nvim/plugin/vim-floaterm.vim
+source ~/dotfiles/nvim/plugin/vim-visual-multi.vim
 " source ~/dotfiles/nvim/plugin/yank-ring.vim
 
 " Local Configurations
