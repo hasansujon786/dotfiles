@@ -103,6 +103,10 @@ install_and_setup_nvim() {
 install_various_apps() {
   apt install -y nodejs
   apt install -y ripgrep
+  # TODO:
+  #  isntall python and pynvim
+  # npm install --global live-server
+
 
   # NOTE: Currently lazygit installation only worls for termux
   # TODO: Support for Linux & Windows
@@ -114,7 +118,6 @@ install_various_apps() {
   mv lazygit /data/data/com.termux/files/usr/bin/lazygit
   rm -RF lazygit.tgz
 
-  # TODO: isntall python and pynvim
 }
 
 auto_install_everything() {

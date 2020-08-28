@@ -130,6 +130,7 @@ let g:coc_global_extensions = [
       \ 'coc-html',
       \ 'coc-css',
       \ 'coc-emmet',
+      \ 'coc-prettier'
       \ ]
 
 " https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions

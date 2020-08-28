@@ -142,11 +142,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'branch': 'release/1.x',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html']
-  \ }
 
 " => Git ===================================================
 Plug 'tpope/vim-fugitive', { 'on': ['Gstatus','Gbrowse','Gvdiffsplit','GV'] }
@@ -167,7 +162,6 @@ source ~/dotfiles/nvim/plugin/coc.vim
 source ~/dotfiles/nvim/plugin/fzf.vim
 source ~/dotfiles/nvim/plugin/nerdtree.vim
 source ~/dotfiles/nvim/plugin/vim-sneak.vim
-source ~/dotfiles/nvim/plugin/vim-prettier.vim
 source ~/dotfiles/nvim/plugin/vim-gitgutter.vim
 source ~/dotfiles/nvim/plugin/vim-fugitive.vim
 source ~/dotfiles/nvim/plugin/vim-floaterm.vim
