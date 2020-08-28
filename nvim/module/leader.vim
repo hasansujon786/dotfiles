@@ -37,6 +37,35 @@ endwhile
 
 " Group mappings
 
+" => c is for coc ========================================
+" Remap keys for applying codeAction to the current line.
+nmap <silent> <leader>ca <Plug>(coc-codeaction)
+" Applying codeAction to the selected region.
+xmap <silent> <leader>ca <Plug>(coc-codeaction-selected)
+" Apply AutoFix to problem on the current line.
+nmap <silent> <leader>cq <Plug>(coc-fix-current)
+
+" Mappings using CoCList:
+" Show all diagnostics.
+nnoremap <silent> <space>c? :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent> <space>ce :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent> <space>cc :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent> <space>co :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent> <space>c@ :<C-u>CocList -I symbols<cr>
+" Open yank list
+nnoremap <silent> <leader>cy :<C-u>CocList -A --normal yank<cr>
+
+" Do default action for next item.
+nnoremap <silent> <space>cj :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>ck :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent> <space>cp :<C-u>CocListResume<CR>
+
 " => e is for Edit ========================================
 " Open a file relative to the current file
 " Synonyms: e: edit,

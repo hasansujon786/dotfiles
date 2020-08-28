@@ -47,13 +47,8 @@ nmap <silent> gr <Plug>(coc-references)
 
 " => better-visual ==============================
 " Use leader + = to formate selected code.
-xmap <leader>= <Plug>(coc-format-selected)
-nmap <leader>= <Plug>(coc-format-selected)
-
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap <silent> <leader>= <Plug>(coc-format-selected)
+nmap <silent> <leader>= <Plug>(coc-format-selected)
 
 " Introduce function text object
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
@@ -69,6 +64,8 @@ nmap <silent> <A-i> <Plug>(coc-range-select)
 xmap <silent> <A-i> <Plug>(coc-range-select)
 
 " => coc-commands ===============================
+" Save current buffer without saving the file.
+command! -nargs=0 SaveWithoutFormat :noa w
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
 " Add `:Fold` command to fold current buffer.
@@ -76,8 +73,7 @@ command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+" Use K to show documentation in preview window. {{{
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -85,29 +81,8 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
-
-" Remap keys for applying codeAction to the current line.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>fq <Plug>(coc-fix-current)
-
-" Mappings using CoCList:
-" Show all diagnostics.
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent> <space>@  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" }}}
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 augroup mygroup
   autocmd!
@@ -130,28 +105,28 @@ let g:coc_global_extensions = [
       \ 'coc-html',
       \ 'coc-css',
       \ 'coc-emmet',
-      \ 'coc-prettier'
+      \ 'coc-pretier',
+      \ 'coc-yank'
       \ ]
 
 " https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 " coc-pairs coc-syntax coc-word coc-tag coc-dictionary
 " => JavaScript
-" coc-tsserver coc-json
 " coc-vetur coc-styled-components
 
 " => HTML
-" coc-html coc-css coc-emmet
 " coc-tailwindcss
 
 " => Ediort Support
-" coc-snippets
-" coc-bookmark coc-actions coc-lists coc-spell-checker coc-vimlsp coc-yank
+" coc-bookmark coc-actions coc-lists coc-spell-checker coc-vimlsp
 
 " => CLang
 " coc-clangd
 
 " }}}
-" => coc-snippets ---------------------------------- {{{
+" => coc-extensions-configs ------------------------ {{{
+
+"##### coc-snippets  #####
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
 " Use <C-j> for select text for visual placeholder of snippet.

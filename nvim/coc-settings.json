@@ -1,0 +1,50 @@
+{
+  // Prettier
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "prettier.bracketSpacing": false,
+  "prettier.statusItemText": "Pt",
+  "prettier.disableSuccessMessage": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "markdown",
+    "javascript",
+    "graphql",
+    "html",
+    "yaml",
+    "json",
+    "python",
+    "java"
+  ],
+
+  // suggestions
+  // "suggest.echodocSupport": true,
+  // TODO add more labels and give them cool glyphs
+  "suggest.completionItemKindLabels": {
+    "text": "t",
+    "method": "m",
+    "function": ""
+  },
+  // snippets
+  "snippets.userSnippetsDirectory": "~/dotfiles/nvim/snips",
+
+  // diagnostics
+  //"diagnostic.errorSign": "",
+  "diagnostic.errorSign": "",
+  "diagnostic.warningSign": " ",
+  "diagnostic.infoSign": "",
+  "diagnostic.hintSign": " ",
+
+  // list
+  "list.indicator": ">",
+  "list.selectedSignText": " ",
+
+  // emmet
+  "emmet.includeLanguages": {
+    "vue-html": "html",
+    "javascript": "javascriptreact"
+  },
+
+  // yank
+  "yank.highlight.duration": 300
+}

@@ -189,6 +189,7 @@ source $VIMRUNTIME/menu.vim
 " set wildmode=longest,list,full
 set wildmenu          " Turn on the Wild menu
 set pumblend=3        " set pum background visibility to 20 percent
+set pumheight=10                        " Makes popup menu smaller
 set wildoptions=pum   " set file completion in command to use pum
 
 " Ignore the following globs in file completions
