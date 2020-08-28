@@ -35,6 +35,17 @@ else
   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
+" Use K to show documentation in preview window. {{{
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+" }}}
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
 " => jump-between-codes =========================
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -73,17 +84,6 @@ command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 
-" Use K to show documentation in preview window. {{{
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-" }}}
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
 augroup mygroup
   autocmd!
   " Highlight the symbol and its references when holding the cursor.
@@ -105,7 +105,7 @@ let g:coc_global_extensions = [
       \ 'coc-html',
       \ 'coc-css',
       \ 'coc-emmet',
-      \ 'coc-pretier',
+      \ 'coc-prettier',
       \ 'coc-yank'
       \ ]
 
