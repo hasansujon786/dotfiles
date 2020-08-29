@@ -120,6 +120,7 @@ Plug 'mhinz/vim-startify'
 Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-repeat'
 Plug 'psliwka/vim-smoothie' " Smooth scroll
+Plug 'hasansujon786/vim-rel-jump'
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'

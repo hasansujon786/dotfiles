@@ -57,7 +57,8 @@ nnoremap <silent> <space>co :<C-u>CocList outline<cr>
 " Search workspace symbols.
 nnoremap <silent> <space>c@ :<C-u>CocList -I symbols<cr>
 " Open yank list
-nnoremap <silent> <leader>cy :<C-u>CocList -A --normal yank<cr>
+" nnoremap <silent> <leader>cy :<C-u>CocList -A --normal yank<cr>
+nnoremap <silent> <leader>cy :<C-u>CocList --normal yank<cr>
 
 " Do default action for next item.
 nnoremap <silent> <space>cj :<C-u>CocNext<CR>
@@ -138,16 +139,11 @@ function! ToggleWrap()
     echo 'Wrap OFF'
     setlocal nowrap
     set virtualedit=all
-    silent! nunmap <buffer> j
-    silent! nunmap <buffer> k
   else
-    " TODO: fix jk mapping while wrap toggle
     echo 'Wrap ON'
     setlocal wrap linebreak nolist
     set virtualedit=
     setlocal display+=lastline
-    noremap  <buffer> <silent> k gk
-    noremap  <buffer> <silent> j gj
     inoremap <buffer> <silent> <Up> <C-o>gk
     inoremap <buffer> <silent> <Down> <C-o>gj
   endif

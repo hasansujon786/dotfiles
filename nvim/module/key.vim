@@ -10,12 +10,6 @@ cnoremap qq <C-c>
 " Use Q to record macros
 nnoremap Q q
 
-" [ The best remap ]
-" j/k will move virtual lines (lines that wrap) and store
-" relative line number jumps in the jumplist if they exceed a threshold.
-noremap <silent> <expr> j (v:count == 0 ? 'gj' : v:count > 5 ? "m'" . v:count .'j' : 'j')
-noremap <silent> <expr> k (v:count == 0 ? 'gk' : v:count > 5 ? "m'" . v:count .'k' : 'k')
-
 " Vertical scrolling
 nmap <silent> <A-d> <Plug>(SmoothieDownwards)
 nmap <silent> <A-u> <Plug>(SmoothieUpwards)
