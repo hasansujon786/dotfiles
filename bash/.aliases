@@ -56,7 +56,7 @@ alias gci='hub issue create'
 
 alias greh='git reset HEAD' # --hard
 alias gre='git reset ' # --hard
-alias glo='git log --oneling --decorate'
+alias glo='git log --oneline --decorate'
 alias lg='lazygit'
 
 # termux

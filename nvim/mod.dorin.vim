@@ -108,7 +108,7 @@ Plug 'Yggdroot/indentLine'
 
 " => Functionality-&-Helpers ===============================
 Plug 'tpope/vim-eunuch', { 'on': ['Delete', 'Move', 'Rename', 'Mkdir'] }  "for moving and manipulating files / directories.
-Plug 'voldikss/vim-floaterm', { 'on': 'FloatermNew' }
+Plug 'voldikss/vim-floaterm', { 'on': [ 'FloatermNew', 'FloatermToggle' ] }
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'dhruvasagar/vim-open-url'

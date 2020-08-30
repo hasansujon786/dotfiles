@@ -45,3 +45,7 @@ To blame your coworker.
 :Ggrep
 In file project-wide search. It’s faster than vimgrep. I use it over fzf’s Ag
 when I want to populate a quickfix list and work on this list.
+
+
+" https://learnvimscriptthehardway.stevelosh.com/chapters/21.html
+" https://medium.com/breathe-publication/understanding-vims-jump-list-7e1bfc72cdf0

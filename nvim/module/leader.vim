@@ -96,7 +96,8 @@ xmap <Leader>rr y :%s/<C-r>"//gc<Left><Left><Left>
 " => g is for git =========================================
 nmap <silent> <leader>gg :Gstatus<CR>:wincmd _<CR>
 nmap <silent> <leader>gdf :Gvdiffsplit!<CR>:vertical resize +15<CR>
-nmap <silent> <leader>gl :FloatermNew --height=0.99 --width=0.98 --name=lazygit lazygit<CR>
+nmap <silent> <leader>gl :FloatermNew --name=lazygit lazygit<CR>
+nmap <silent> <leader>gt :FloatermNew --name=tig tig<CR>
 " GitGutter
 nmap <silent> <leader>gp <Plug>(GitGutterPreviewHunk)
 nmap <silent> <leader>gu <Plug>(GitGutterUndoHunk)

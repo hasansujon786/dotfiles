@@ -103,6 +103,7 @@ install_and_setup_nvim() {
 install_various_apps() {
   apt install -y nodejs
   apt install -y ripgrep
+  apt install -y tig
   # TODO:
   #  isntall python and pynvim
   # npm install --global live-server
