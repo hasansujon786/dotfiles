@@ -1,6 +1,4 @@
 " => Single mappings ======================================
-nnoremap <silent> <leader>; :Commands<CR>
-nnoremap <silent> <leader>q :close<CR>
 " Switch between the alternate files
 nnoremap <leader><tab> <c-^>
 " Jump between windows
@@ -9,11 +7,10 @@ nnoremap <silent> <leader>j :wincmd j<CR>
 nnoremap <silent> <leader>k :wincmd k<CR>
 nnoremap <silent> <leader>h :wincmd h<CR>
 nnoremap <silent> <leader>l :wincmd l<CR>
-nnoremap <silent> <leader>\ :wincmd p<CR>
+nnoremap <silent> <S-TAB> :wincmd p<CR>
 " Easy fold
 nnoremap <leader>z za
 vnoremap <leader>z za
-nnoremap <silent> <S-TAB> :wincmd p<CR>
 " Easier system clipboard usage
 vnoremap <Leader>y "+ygv<Esc>
 vnoremap <Leader>d "+d
@@ -25,6 +22,8 @@ vnoremap <Leader>P "+P
 nnoremap <leader>s :write<CR>
 nnoremap <C-s> :write<CR>
 inoremap <C-s> <Esc>:write<CR><Esc>a
+" exit file quickly
+nnoremap <silent> <leader>q :close<CR>
 " Open nerd tree at the current file or close nerd tree if pressed again.
 nnoremap <silent> <expr> <Leader>n g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
 nnoremap <silent> <Leader>0 :NERDTreeToggle<CR>

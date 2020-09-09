@@ -1,12 +1,18 @@
-nnoremap <silent> - :Files <C-R>=expand('%:h')<CR><CR>
+nnoremap <silent> - :Commands<CR>
+" nnoremap <silent> - :Files <C-R>=expand('%:h')<CR><CR>
 nnoremap <silent> <C-p> :History<CR>
 nnoremap <silent> <C-k>p :Files<CR>
 nnoremap <silent> <C-k><C-p> :GFile<CR>
+
 nnoremap <silent> <C-k>w :Windows<CR>
 nnoremap <silent> <C-k>m :Filetypes<CR>
+
 nnoremap <silent> <C-k>? :GFile?<CR>
 nnoremap <silent> <C-k>/ :History/<CR>
-nnoremap <silent> <C-k>: :History:<CR>
+nnoremap <silent> <C-k>; :History:<CR>
+
+nnoremap <silent> // :BLines<CR>
+nnoremap <silent> ?? :Lines<CR>
 nnoremap <A-/> :RG!<space>
 
 let g:fzf_layout = { 'window': '30new' }
