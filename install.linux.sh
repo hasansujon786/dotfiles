@@ -104,6 +104,7 @@ install_various_apps() {
   apt install -y nodejs
   apt install -y ripgrep
   apt install -y tig
+  apt install -y wget
   # TODO:
   #  isntall python and pynvim
   # npm install --global live-server
@@ -117,7 +118,7 @@ install_various_apps() {
   tar xvf lazygit.tgz
   # sudo mv lazygit /usr/local/bin/
   mv lazygit /data/data/com.termux/files/usr/bin/lazygit
-  rm -RF lazygit.tgz
+  rm lazygit.tgz
 
 }
 
@@ -132,7 +133,7 @@ auto_install_everything() {
 
 prompt_and_get_answers() {
   setup_git_defaults
-  apt update && apt upgrade
+  apt upgrade && apt update 
   auto_install_everything
 
   # if [ $isAutoInstall -eq 1 ]
