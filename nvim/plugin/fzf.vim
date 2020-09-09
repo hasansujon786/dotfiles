@@ -11,8 +11,7 @@ nnoremap <silent> <C-k>? :GFile?<CR>
 nnoremap <silent> <C-k>/ :History/<CR>
 nnoremap <silent> <C-k>; :History:<CR>
 
-nnoremap <silent> // :BLines<CR>
-nnoremap <silent> ?? :Lines<CR>
+nnoremap <silent> ?? :BLines<CR>
 nnoremap <A-/> :RG!<space>
 
 let g:fzf_layout = { 'window': '30new' }

@@ -145,7 +145,7 @@ Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " => Git ===================================================
-Plug 'tpope/vim-fugitive', { 'on': ['Gstatus','Gbrowse','Gvdiffsplit','GV'] }
+Plug 'tpope/vim-fugitive', { 'on': ['Gstatus','Gvdiffsplit'] }
 Plug 'tpope/vim-rhubarb', { 'on': 'Gbrowse' }
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
 Plug 'airblade/vim-gitgutter'
