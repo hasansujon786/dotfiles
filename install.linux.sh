@@ -16,6 +16,7 @@ mkSpace() {
 
 
 setup_git_defaults() {
+  toilet --font mono12 git
   echo ">> Type your github username."
   read git_user_name
   echo ">> Type your github email."
@@ -31,6 +32,7 @@ setup_git_defaults() {
 
 
 setup_bash() {
+  toilet --font mono12 bash
   # L => ~/.bashrc
   echo 'Configuring base profile...'
 
@@ -50,6 +52,7 @@ setup_bash() {
 install_and_setup_tmux() {
   # Only linux (tmux is not working on win, reason: unknown)
   # L => ~/.tmux.conf
+  toilet --font mono12 tmux
   echo 'Instlling tmux...'
   apt install -y tmux
   mkSpace
@@ -68,6 +71,7 @@ install_and_setup_tmux() {
 
 
 install_and_setup_nvim() {
+  toilet --font mono12 nvim
   # L => "~/.config/nvim/init.vim"
   echo 'Installing Neovim...'
   apt install -y neovim
@@ -101,15 +105,26 @@ install_and_setup_nvim() {
 
 
 install_various_apps() {
+  toilet --font mono12 nodejs
   apt install -y nodejs
+
+  toilet --font mono12 ripgrep
   apt install -y ripgrep
+
+  toilet --font mono12 tig
   apt install -y tig
+
+  toilet --font mono12 wget
   apt install -y wget
+
+  toilet --font mono12 python
+  apt install -y python
+  python3 -m pip install --user --upgrade pynvim
   # TODO:
-  #  isntall python and pynvim
   # npm install --global live-server
 
 
+  toilet --font mono12 lazygit
   # NOTE: Currently lazygit installation only worls for termux
   # TODO: Support for Linux & Windows
   export LAZYGIT_VER="0.20.9"
@@ -134,6 +149,7 @@ auto_install_everything() {
 prompt_and_get_answers() {
   setup_git_defaults
   apt upgrade && apt update 
+  apt install -y toilet
   auto_install_everything
 
   # if [ $isAutoInstall -eq 1 ]
