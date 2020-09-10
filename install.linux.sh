@@ -13,10 +13,12 @@ echo ""
 mkSpace() {
   echo ' '
 }
-
+printWithToilet() {
+  toilet --font mono12 $1
+}
 
 setup_git_defaults() {
-  toilet --font mono12 git
+  printWithToilet git
   echo ">> Type your github username."
   read git_user_name
   echo ">> Type your github email."
@@ -32,7 +34,7 @@ setup_git_defaults() {
 
 
 setup_bash() {
-  toilet --font mono12 bash
+  printWithToilet bash
   # L => ~/.bashrc
   echo 'Configuring base profile...'
 
@@ -52,7 +54,7 @@ setup_bash() {
 install_and_setup_tmux() {
   # Only linux (tmux is not working on win, reason: unknown)
   # L => ~/.tmux.conf
-  toilet --font mono12 tmux
+  printWithToilet tmux
   echo 'Instlling tmux...'
   apt install -y tmux
   mkSpace
@@ -71,7 +73,7 @@ install_and_setup_tmux() {
 
 
 install_and_setup_nvim() {
-  toilet --font mono12 nvim
+  printWithToilet nvim
   # L => "~/.config/nvim/init.vim"
   echo 'Installing Neovim...'
   apt install -y neovim
@@ -105,26 +107,26 @@ install_and_setup_nvim() {
 
 
 install_various_apps() {
-  toilet --font mono12 nodejs
+  printWithToilet nodejs
   apt install -y nodejs
 
-  toilet --font mono12 ripgrep
+  printWithToilet ripgrep
   apt install -y ripgrep
 
-  toilet --font mono12 tig
+  printWithToilet tig
   apt install -y tig
 
-  toilet --font mono12 wget
+  printWithToilet wget
   apt install -y wget
 
-  toilet --font mono12 python
+  printWithToilet python
   apt install -y python
   python3 -m pip install --user --upgrade pynvim
   # TODO:
   # npm install --global live-server
 
 
-  toilet --font mono12 lazygit
+  printWithToilet lazygit
   # NOTE: Currently lazygit installation only worls for termux
   # TODO: Support for Linux & Windows
   export LAZYGIT_VER="0.20.9"
@@ -147,15 +149,13 @@ auto_install_everything() {
 }
 
 prompt_and_get_answers() {
-  setup_git_defaults
   apt upgrade && apt update 
   apt install -y toilet
+
+  setup_git_defaults
   auto_install_everything
 
-  # if [ $isAutoInstall -eq 1 ]
-  # then auto_install_everything
-  # else manual_install
-  # fi
+  printWithToilet done.
 }
 
 prompt_and_get_answers
