@@ -238,7 +238,6 @@ set showtabline=2
 let g:sh_fold_enabled=1
 
 " Highlight the characters on column 81
-highlight CocHighlightText ctermbg=gray guibg=#3B4048
 highlight ColorColumn guibg=#3B4048 ctermbg=gray
 call matchadd('ColorColumn', '\%81v', '100')
 augroup fzf
