@@ -1,26 +1,30 @@
+"                                            ▀▀
+"  ██▄████▄   ▄████▄    ▄████▄   ██▄  ▄██   ████     ████▄██▄
+"  ██▀   ██  ██▄▄▄▄██  ██▀  ▀██   ██  ██      ██     ██ ██ ██
+"  ██    ██  ██▀▀▀▀▀▀  ██    ██   ▀█▄▄█▀      ██     ██ ██ ██
+"  ██    ██  ▀██▄▄▄▄█  ▀██▄▄██▀    ████    ▄▄▄██▄▄▄  ██ ██ ██
+"  ▀▀    ▀▀    ▀▀▀▀▀     ▀▀▀▀       ▀▀     ▀▀▀▀▀▀▀▀  ▀▀ ▀▀ ▀▀
+"                                              ▄▀▀    ▀
+"                        ▄▄▄    ▄▄▄   ▄ ▄▄   ▄▄█▄▄  ▄▄▄     ▄▄▄▄
+"                       █▀  ▀  █▀ ▀█  █▀  █    █      █    █▀ ▀█
+"                       █      █   █  █   █    █      █    █   █
+"                       ▀█▄▄▀  ▀█▄█▀  █   █    █    ▄▄█▄▄  ▀█▄▀█
+"                                                           ▄  █
+"                                                            ▀▀
 "
-"  ███▄    █ ▓█████  ▒█████   ██▒   █▓ ██▓ ███▄ ▄███▓
-"  ██ ▀█   █ ▓█   ▀ ▒██▒  ██▒▓██░   █▒▓██▒▓██▒▀█▀ ██▒
-" ▓██  ▀█ ██▒▒███   ▒██░  ██▒ ▓██  █▒░▒██▒▓██    ▓██░
-" ▓██▒  ▐▌██▒▒▓█  ▄ ▒██   ██░  ▒██ █░░░██░▒██    ▒██
-" ▒██░   ▓██░░▒████▒░ ████▓▒░   ▒▀█░  ░██░▒██▒   ░██▒
-" ░ ▒░   ▒ ▒ ░░ ▒░ ░░ ▒░▒░▒░    ░ ▐░  ░▓  ░ ▒░   ░  ░
-" ░ ░░   ░ ▒░ ░ ░  ░  ░ ▒ ▒░    ░ ░░   ▒ ░░  ░      ░
-"    ░   ░ ░    ░   ░ ░ ░ ▒       ░░   ▒ ░░      ░
-"          ░    ░  ░    ░ ░        ░   ░         ░
-"                                 ░
-"
-" => General --------------------------------------- {{{
+" => General ---------------------------------------------------- {{{
 " Set utf8 as standard encoding and en_US as the standard language
-set encoding=UTF-8    " Default encoding
-scriptencoding utf-16 " allow emojis in vimrc
-set ffs=unix,dos,mac  " Use Unix as the standard file type
-syntax on             " Enable syntax highlighting
+set encoding=UTF-8                   " Default encoding
+scriptencoding utf-16                " allow emojis in vimrc
+set ffs=unix,dos,mac                 " Use Unix as the standard file type
+syntax on                            " Enable syntax highlighting
+filetype plugin on                   " Enable filetype plugins
+filetype indent on
 
-" Enable 256 colors palette in Gnome Terminal
 if $COLORTERM == 'gnome-terminal'
-  set t_Co=256
+  set t_Co=256                       " Enable 256 colors palette in Gnome Terminal
 endif
+
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "copy next line to .tmux.conf for support true color within tmux
 "set-option -ga terminal-overrides ",xterm-256color:Tc"
@@ -38,66 +42,53 @@ if has("gui_running")
   set guitablabel=%M\ %t
 endif
 
-" Enable filetype plugins
-filetype plugin on
-filetype indent on
-
 " Some general settings
-set magic             " For regular expressions turn magic on
-set showcmd           " show any commands
-set noshowmode        " don't show mode as airline already does
-set path+=**          " usefull while using find in nested folders
-set fillchars=""      " Remove characters in window split
+set magic                            " For regular expressions turn magic on
+set showcmd                          " show any commands
+set noshowmode                       " don't show mode as airline already does
+set path+=**                         " usefull while using find in nested folders
+set fillchars=""                     " Remove characters in window split
 set fillchars=stlnc:=
 set nomodeline
 set modelines=0
-set shortmess+=c      " don't give |ins-completion-menu| messages
-set lazyredraw        " Don't redraw while executing macros (good performance config)
-set regexpengine=1    " (good performance config)
+set shortmess+=c                     " don't give |ins-completion-menu| messages
+set lazyredraw                       " Don't redraw while executing macros (good performance config)
+set regexpengine=1                   " (good performance config)
 set updatetime=100
-" Quickly time out on keycodes, but never time out on mappings
-set timeout ttimeout ttimeoutlen=200
+set timeout ttimeout ttimeoutlen=200 " Quickly time out on keycodes, but never time out on mappings
 set mousemodel=popup
-set autowrite         " Automatically :write before running commands
-set autoread          " Set to auto read when a file is changed from the outside
-" Update a buffer's contents on focus if it changed outside of Vim.
-au FocusGained,BufEnter,CursorHold * checktime
+set autowrite                        " Automatically :write before running commands
+set autoread                         " Set to auto read when a file is changed from the outside
+au FocusGained,BufEnter,CursorHold *
+      \checktime                     " Update a buffer's contents on focus if it changed outside of Vim.
 
 if has('mouse')
-  set mouse=a           " enable mouse (selection, resizing windows)
+  set mouse=a                        " enable mouse (selection, resizing windows)
 endif
 
-" Map leader (the dedicated user-mapping prefix key) to space
-let mapleader="\<Space>"
+let mapleader="\<Space>"             " Map leader (the dedicated user-mapping prefix key) to space
 let maplocalleader="\<Space>"
 
 " }}}
-" => Files-backup-undo-spelling -------------------- {{{
-" Variables
-let $NVIM = '~/dotfiles/nvim'
-let $SPELLFILE = $NVIM.'/spell/en.utf-8.add'
-
+" => Files-backup-undo-spelling --------------------------------- {{{
 " if filereadable($HOME . '/.vimrc.local')
 "   source ~/.vimrc.local
 " endif
 
-" Turn backup off, since most stuff is in SVN, git etc. anyway...
-set nobackup nowb noswapfile
+set nobackup nowb noswapfile         " Turn backup off, since most stuff is in SVN, git etc. anyway...
 " set backupdir=~/.config/nvim/tmp/backup,.
 " set directory=~/.config/nvim/tmp/swap,.
 
-" persistent undo between file reloads
-" set undolevels=5000   " Save a lot of back-history...
+set undofile                         " persistent undo between file reloads
+set undolevels=1500                  " Save a lot of back-history.
 set undodir=~/.config/nvim/tmp/undo,.
-set undofile
 
-set spelllang=en_gb   " Speak proper English
-set complete+=kspell  " Autocomplete with dictionary words when spell check is on
-" Set spellfile to location that is guaranteed to exist
-set spellfile=$SPELLFILE
+set spelllang=en_gb                  " Speak proper English
+set complete+=kspell                 " Autocomplete with dictionary words when spell check is on
+set spellfile=~/dotfiles/nvim/spell/en.utf-8.add
 
 " }}}
-" => Plugin-Settings ------------------------------- {{{
+" => Plugin-Settings -------------------------------------------- {{{
 call plug#begin('~/.config/nvim/plugged')
 
 " => Visual-&-Theme ========================================
@@ -119,7 +110,7 @@ Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-startify'
 Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-repeat'
-Plug 'psliwka/vim-smoothie' " Smooth scroll
+Plug 'psliwka/vim-smoothie'          " Smooth scroll
 Plug 'hasansujon786/vim-rel-jump'
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -130,14 +121,14 @@ Plug 'junegunn/fzf.vim'
 
 
 " Plug 'vim-scripts/YankRing.vim', { 'on': 'YRShow' }
-" Plug 'vimwiki/vimwiki'      " my own personal wiki
-" Plug 'mhinz/vim-grepper'    " Handle multi-file find and replace.
-" Plug 'will133/vim-dirdiff'  " Run a diff on 2 directories.
+" Plug 'vimwiki/vimwiki'             " my own personal wiki
+" Plug 'mhinz/vim-grepper'           " Handle multi-file find and replace.
+" Plug 'will133/vim-dirdiff'         " Run a diff on 2 directories.
 " Plug 'christoomey/vim-tmux-navigator'
 " Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' } " markdown preview
 " Plug 'editorconfig/editorconfig-vim'
 " Plug 'moll/vim-node'
-" Plug 'glts/vim-radical' " Convert binary, hex, etc..
+" Plug 'glts/vim-radical'            " Convert binary, hex, etc..
 
 " => Auto completion ========================================
 Plug 'jiangmiao/auto-pairs'
@@ -175,10 +166,7 @@ source ~/dotfiles/nvim/module/filetypes.vim
 source ~/dotfiles/nvim/module/leader.vim
 source ~/dotfiles/nvim/module/key.vim
 " }}}
-" => VIM-User-Interface ---------------------------- {{{
-
-" Set 7 lines to the cursor - when moving vertically using j/k
-set so=1
+" => VIM-User-Interface ----------------------------------------- {{{
 
 " Avoid garbled characters in Chinese language windows OS
 let $LANG='en'
@@ -188,10 +176,10 @@ source $VIMRUNTIME/menu.vim
 
 " Autocompletion
 " set wildmode=longest,list,full
-set wildmenu          " Turn on the Wild menu
-set pumblend=3        " set pum background visibility to 20 percent
-set pumheight=10                        " Makes popup menu smaller
-set wildoptions=pum   " set file completion in command to use pum
+set wildmenu                         " Turn on the Wild menu
+set pumblend=3                       " set pum background visibility to 20 percent
+set pumheight=10                     " Makes popup menu smaller
+set wildoptions=pum                  " set file completion in command to use pum
 
 " Ignore the following globs in file completions
 set wildignore+=*.o,*~,*.pyc,*.obj,*.pyc,*.so,*.swp
@@ -203,17 +191,16 @@ else
   set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 endif
 
-set hidden                        " enable hidden unsaved buffers
-set diffopt+=vertical             " Always use vertical diffs
-set ruler                         " Always show current position
-set cmdheight=1                   " Height of the command bar
-set foldcolumn=1                  " display gutter markings for folds
-set cursorline                    " Show a line on current line
-set showmatch                     " Show matching brackets when text indicator is over them
-set mat=2                         " How many tenths of a second to blink when matching brackets
-set backspace=eol,start,indent    " Configure backspace so it acts as it should act
-set whichwrap+=<,>,h,l,[,]        " automatically wrap left and right
-set splitbelow splitright         " Fix splitting
+set hidden                           " enable hidden unsaved buffers
+set diffopt+=vertical                " Always use vertical diffs
+set ruler                            " Always show current position
+set cmdheight=1                      " Height of the command bar
+set foldcolumn=0                     " display gutter markings for folds
+set cursorline                       " Show a line on current line
+set showmatch                        " Show matching brackets when text indicator is over them
+set mat=2                            " How many tenths of a second to blink when matching brackets
+set backspace=eol,start,indent       " Configure backspace so it acts as it should act
+set splitbelow splitright            " Fix splitting
 
 " Guicursor Setting
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
@@ -234,8 +221,7 @@ set numberwidth=1
 set switchbuf=useopen,usetab,newtab
 set showtabline=2
 
-" enable folding in bash files
-let g:sh_fold_enabled=1
+let g:sh_fold_enabled=1              " enable folding in bash files
 
 " Highlight the characters on column 81
 highlight ColorColumn guibg=#3B4048 ctermbg=gray
@@ -246,36 +232,38 @@ augroup fzf
 augroup END
 
 " }}}
-" => Text-Tab-and-Indent --------------------------- {{{
+" => Text-Tab-and-Indent ---------------------------------------- {{{
 
 " Tabbing
-set tabstop=2           " The number of spaces a tab is
-set shiftwidth=2        " Number of spaces to use in auto(indent)
-set softtabstop=2       " Just to be clear
-set expandtab           " Insert tabs as spaces
+set tabstop=2                        " The number of spaces a tab is
+set shiftwidth=2                     " Number of spaces to use in auto(indent)
+set softtabstop=2                    " Just to be clear
+set expandtab                        " Insert tabs as spaces
 
 " Searching
-set wrapscan            " Wrap searches
-set ignorecase          " Ignore search term case...
-set smartcase           " ... unless term contains an uppercase character
-set hlsearch            " ... as you type
+set wrapscan                         " Wrap searches
+set ignorecase                       " Ignore search term case...
+set smartcase                        " ... unless term contains an uppercase character
+set hlsearch                         " ... as you type
 
 " text appearance
-set iskeyword+=-                    " treat dash separated words as a word text object
-set textwidth=80                    " Hard-wrap text at nth column
-set nowrap                          " nowrap by default
+set so=1                             " Set 7 lines to the cursor - when moving vertically using j/k
+set iskeyword+=-                     " treat dash separated words as a word text object
 set list
-set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,precedes:«,extends:»   " show hidden characters
-" set listchars=tab:»·,trail:·,nbsp:· " Display extra whitespace
-set matchpairs+=<:>,«:»,｢:｣         " Match angle brackets...
-set ai "Auto indent
-set si "Smart indent
-set linebreak                       " Don't break words when wrapping lines
-let &showbreak="↳ "                 " Make wrapped lines more obvious
+set listchars=tab:→\ ,nbsp:␣,trail:•,precedes:«,extends:»   " show hidden characters
+set matchpairs+=<:>,«:»,｢:｣          " Match angle brackets...
+set ai si                            " Auto indent & Smart indent
+
+" Wrappings
+set whichwrap+=<,>,h,l,[,]           " automatically wrap left and right
+set textwidth=80                     " Hard-wrap text at nth column
+set nowrap                           " No wrap by default
+set linebreak                        " Don't break words when wrapping lines
+let &showbreak="↳ "                  " Make wrapped lines more obvious
 set cpoptions+=n
 
 " }}}
-" => Nvim-terminal --------------------------------- {{{
+" => Nvim-terminal ---------------------------------------------- {{{
 
 " Default settings
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
@@ -283,7 +271,7 @@ autocmd BufEnter term://* startinsert
 autocmd TermOpen * set bufhidden=hide
 
 " }}}
-" => Abbreviations --------------------------------- {{{
+" => Abbreviations ---------------------------------------------- {{{
 
 iab xdate <C-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
 iab reutrn return
@@ -292,7 +280,7 @@ iab td TODO:
 iab meta-vp <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 " }}}
-" => Auto-commands --------------------------------- {{{
+" => Auto-commands ---------------------------------------------- {{{
 " Vertically center document when entering insert mode
 autocmd InsertEnter * norm zz
 
@@ -320,7 +308,7 @@ augroup END
 
 source ~/dotfiles/nvim/plugin/vim-devicons.vim
 " }}}
-" => Helper-functions ------------------------------ {{{
+" => Helper-functions ------------------------------------------- {{{
 
 function! TrimWhitespace()
   let l:save = winsaveview()
@@ -359,20 +347,15 @@ function! <SID>BufcloseCloseIt()
 endfunction
 
 " }}}
-" => Temporary ------------------------------------- {{{
+" => Temporary -------------------------------------------------- {{{
 
 " }}}
-" => Section name ---------------------------------- {{{
-" ======================================
-" => Title
-" ======================================
-" }}}
 
 
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  Author: Hasan Mahmud                                   "
-"  Repo:   https://github.com/hasansujon786/dotfiles/     "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  """""""""""""""""""""""""""""""""""""""""""""""""""""""
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  Author: Hasan Mahmud                                              "
+"  Repo:   https://github.com/hasansujon786/dotfiles/                "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
