@@ -12,7 +12,9 @@ let g:fern#renderer#default#expanded_symbol  = '▼ '
 let g:fern#renderer#default#leading          = ' '
 let g:fern#renderer#default#leaf_symbol      = ' '
 let g:fern#renderer#default#root_symbol      = '~ '
+highlight GlyphPalette8 guifg=#6b7089
 
+" Fern mappings {{{
 function! FernInit() abort
   " fern-custom-actions {{{
   nnoremap <Plug>(fern-close-drawer) :<C-u>FernDo close -drawer -stay<CR>
@@ -72,16 +74,12 @@ function! FernInit() abort
   " nmap <buffer> K <Plug>(fern-action-mark-children:leaf)
 
 endfunction
-
-" Disable netrw. {{{
+" }}}
+" Disable netrw {{{
 let g:loaded_netrw  = 1
 let g:loaded_netrwPlugin = 1
 let g:loaded_netrwSettings = 1
 let g:loaded_netrwFileHandlers = 1
-augroup my-fern-hijack
-  autocmd!
-  autocmd BufEnter * ++nested call s:hijack_directory()
-augroup END
 
 function! s:hijack_directory() abort
   let path = expand('%:p')
@@ -92,12 +90,23 @@ function! s:hijack_directory() abort
   execute printf('Fern %s', fnameescape(path))
 endfunction
 " }}}
+" fernCursorColor {{{
+function! s:fernCursorColor() abort
+  if &filetype == 'fern'
+    highlight CursorLine guibg=#3E4452
+  else
+    highlight CursorLine guibg=#2C323C
+  endif
+endfunction
+" }}}
 
 augroup FernEvents
   autocmd!
   autocmd FileType fern call FernInit()
   autocmd FileType fern call glyph_palette#apply()
   autocmd FileType nerdtree,startify call glyph_palette#apply()
+  autocmd BufEnter * ++nested call s:hijack_directory()
+  autocmd WinEnter,BufWinEnter * call s:fernCursorColor()
 augroup END
 
 
