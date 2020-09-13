@@ -24,9 +24,7 @@ nnoremap <C-s> :write<CR>
 inoremap <C-s> <Esc>:write<CR><Esc>a
 " exit file quickly
 nnoremap <silent> <leader>q :close<CR>
-" Open nerd tree at the current file or close nerd tree if pressed again.
-nnoremap <silent> <expr> <Leader>n g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
-nnoremap <silent> <Leader>0 :NERDTreeToggle<CR>
+
 " Map 1-9 + <Space> to jump to respective tab
 let i = 1
 while i < 10

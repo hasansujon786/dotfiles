@@ -1,3 +1,14 @@
+" Plug 'preservim/nerdtree'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
+
+
+" Place this line at the bottom of the file
+" source ~/dotfiles/nvim/plugin/vim-devicons.vim
+
+" Open nerd tree at the current file or close nerd tree if pressed again.
+nnoremap <silent> <expr> <Leader>n g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
+nnoremap <silent> <Leader>0 :NERDTreeToggle<CR>
+
 " => scrooloose/nerdtree ===================================
 let g:NERDTreeIgnore = ['^node_modules$','^.git$']
 let g:NERDTreeAutoDeleteBuffer=1

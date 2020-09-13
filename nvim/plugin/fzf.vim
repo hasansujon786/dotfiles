@@ -1,5 +1,5 @@
-nnoremap <silent> - :Commands<CR>
-" nnoremap <silent> - :Files <C-R>=expand('%:h')<CR><CR>
+" nnoremap <silent> - :Commands<CR>
+nnoremap <silent> - :Files <C-R>=expand('%:h')<CR><CR>
 nnoremap <silent> <C-p> :History<CR>
 nnoremap <silent> <C-k>p :Files<CR>
 nnoremap <silent> <C-k><C-p> :GFile<CR>

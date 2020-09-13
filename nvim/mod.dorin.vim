@@ -113,12 +113,13 @@ Plug 'tpope/vim-repeat'
 Plug 'psliwka/vim-smoothie'          " Smooth scroll
 Plug 'hasansujon786/vim-rel-jump'
 
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
-Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+Plug 'https://github.com/lambdalisue/fern-renderer-devicons.vim' " Icon support
+Plug 'https://github.com/lambdalisue/glyph-palette.vim'          " Add color to icons
+Plug 'https://github.com/lambdalisue/fern.vim'
 
 " Plug 'vim-scripts/YankRing.vim', { 'on': 'YRShow' }
 " Plug 'vimwiki/vimwiki'             " my own personal wiki
@@ -152,7 +153,7 @@ source ~/dotfiles/nvim/plugin/goyo.vim
 source ~/dotfiles/nvim/plugin/auto-pairs.vim
 source ~/dotfiles/nvim/plugin/coc.vim
 source ~/dotfiles/nvim/plugin/fzf.vim
-source ~/dotfiles/nvim/plugin/nerdtree.vim
+source ~/dotfiles/nvim/plugin/fern.vim
 source ~/dotfiles/nvim/plugin/vim-sneak.vim
 source ~/dotfiles/nvim/plugin/vim-gitgutter.vim
 source ~/dotfiles/nvim/plugin/vim-fugitive.vim
@@ -306,7 +307,6 @@ augroup CursorLine
   au WinLeave * setlocal nocursorline
 augroup END
 
-source ~/dotfiles/nvim/plugin/vim-devicons.vim
 " }}}
 " => Helper-functions ------------------------------------------- {{{
 
@@ -348,7 +348,7 @@ endfunction
 
 " }}}
 " => Temporary -------------------------------------------------- {{{
-
+" https://bluz71.github.io/2017/05/21/vim-plugins-i-like.html#fernvim
 " }}}
 
 
