@@ -1,5 +1,13 @@
 noremap <silent> <Leader>n :Fern . -drawer -toggle -reveal=%<CR><C-w>=
-noremap <silent> <Leader>. :Fern %:h -drawer <CR>
+" Open current file directory into the drawer
+noremap <silent> <Leader>. :call Before_Try_To_select_last_file()<CR>
+      \:Fern %:h -drawer <CR>
+      \:call Try_To_select_last_file(300)<CR>
+" Open current file directory into the buffer
+nnoremap <silent> - :call Before_Try_To_select_last_file()<CR>
+      \:Fern <C-r>=<SID>smart_path()<CR><CR>
+      \:call Try_To_select_last_file(200)<CR>
+
 
 let g:fern#disable_default_mappings   = 1
 let g:fern#disable_drawer_auto_quit   = 1
@@ -67,8 +75,9 @@ function! FernInit() abort
   nmap <buffer> I <Plug>(fern-action-hidden:toggle)
   nmap <buffer> W <Plug>(fern-action-cd)
   nmap <buffer> <BAR> <Plug>(fern-action-zoom)<C-w>=
-  nmap <silent> <buffer> q :<C-u>quit<CR>
+  nmap <silent> <buffer> q :<C-u>close<CR>
   nmap <buffer> <nowait> < <Plug>(fern-action-leave)
+  nmap <buffer> <nowait> - <Plug>(fern-action-leave)
   nmap <buffer> <nowait> > <Plug>(fern-action-enter)
 
   " nmap <buffer> K <Plug>(fern-action-mark-children:leaf)
@@ -109,4 +118,23 @@ augroup FernEvents
   autocmd WinEnter,BufWinEnter * call s:fernCursorColor()
 augroup END
 
+function! s:smart_path() abort
+  if !empty(&buftype) || bufname('%') =~# '^[^:]\+://'
+    return fnamemodify('.', ':p')
+  endif
+  return fnamemodify(expand('%'), ':p:h')
+endfunction
+
+function! Try_To_select_last_file(time) abort
+  if s:fern_last_file !=# ''
+			func! MyHandler(timer)
+        call search('\v<' . s:fern_last_file . '>')
+			endfunc
+			let timer = timer_start(a:time, 'MyHandler')
+  endif
+endfunction
+
+function! Before_Try_To_select_last_file() abort
+  let s:fern_last_file=expand('%:t')
+endfunction
 
