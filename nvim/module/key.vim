@@ -42,6 +42,8 @@ cmap <C-v> <C-R>"
 " => Modify-&-Rearrange-texts =============================
 " Make vaa select the entire file...
 vnoremap aa VGo1G
+" a fix to select end of line
+vnoremap $ $h
 " select a block {} of code
 vnoremap <silent> ao <Esc>/}<CR>:noh<CR>V%
 " map . in visual mode
@@ -71,11 +73,16 @@ nnoremap <silent> <A-,> :vertical resize -5<CR>
 nnoremap <silent> \ :wincmd _<cr>:wincmd \|<cr>:vertical resize -5<CR>
 nnoremap <silent> <Bar> :wincmd =<cr>
 
+nnoremap <C-i> <C-j>
+nnoremap <C-j> <C-i>
 " Jump between tabs
-nnoremap <silent> gl :tabnext<CR>
-nnoremap <silent> gh :tabprevious<CR>
-nnoremap <silent> m<TAB> :tabmove+<CR>
-nnoremap <silent> m<S-TAB> :tabmove-<CR>
+nnoremap <silent> <TAB> :tabnext<CR>
+nnoremap <silent> <S-TAB> :tabprevious<CR>
+vnoremap <silent> <TAB> <ESC>:tabnext<CR>
+vnoremap <silent> <S-TAB> <ESC>:tabprevious<CR>
+" Move tabs
+nnoremap <silent> ]<TAB> :tabmove+<CR>
+nnoremap <silent> [<TAB> :tabmove-<CR>
 
 " => Search-functionalities ===============================
 " auto center on matched string
@@ -142,13 +149,16 @@ inoremap <C-u> <C-G>u<C-U>
 
 " => Terminal mappings ====================================
 " Open terminal
-nmap <silent> <C-t>s <C-w>s<C-w>j:terminal<CR>a
-nmap <silent> <C-t>v <C-w>v<C-w>l:terminal<CR>a
+nmap <silent> <leader>ts <C-w>s<C-w>J:terminal<CR>a
+nmap <silent> <leader>tv <C-w>v<C-w>L:terminal<CR>a
+nmap <silent> <leader>tt :tabnew<CR>:terminal<CR>a
 " Silently open a shell in the directory of the current file
 if has("win32") || has("win64")
  " map <C-t><C-t> :silent !start cmd /k cd %:p:h <CR>
   nmap <silent> <C-t><C-t> :tc %:h<CR>:silent !start bash<CR>:tc -<CR>
 endif
+tmap <Esc> <C-\><C-n>
+tmap <C-o> <C-\><C-n><C-w>p
 
 " => Function key mappings ================================
 " Toggle spelling and show it's status

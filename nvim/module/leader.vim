@@ -1,6 +1,6 @@
 " => Single mappings ======================================
 " Switch between the alternate files
-nnoremap <leader><tab> <c-^>
+nnoremap <BS> <c-^>
 " Jump between windows
 nnoremap <leader>w <C-w>
 nnoremap <silent> <leader>j :wincmd j<CR>
