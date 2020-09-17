@@ -117,9 +117,11 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-Plug 'https://github.com/lambdalisue/fern-renderer-devicons.vim' " Icon support
-Plug 'https://github.com/lambdalisue/glyph-palette.vim'          " Add color to icons
-Plug 'https://github.com/lambdalisue/fern.vim'
+Plug 'lambdalisue/fern-renderer-devicons.vim' " Icon support
+Plug 'lambdalisue/fern-git-status.vim'
+Plug 'lambdalisue/glyph-palette.vim'    " Add color to icons
+Plug 'lambdalisue/fern-bookmark.vim'
+Plug 'lambdalisue/fern.vim'
 
 " Plug 'vim-scripts/YankRing.vim', { 'on': 'YRShow' }
 " Plug 'vimwiki/vimwiki'             " my own personal wiki

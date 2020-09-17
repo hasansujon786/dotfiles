@@ -7,11 +7,18 @@ noremap <silent> <Leader>. :call Before_Try_To_select_last_file()<CR>
 nnoremap <silent> - :call Before_Try_To_select_last_file()<CR>
       \:Fern <C-r>=<SID>smart_path()<CR><CR>
       \:call Try_To_select_last_file(200)<CR>
+" Open bookmarks
+nnoremap <silent> <Leader>ii :<C-u>Fern bookmark:///<CR>
 
-
+let g:fern#keepalt_on_edit = 1
+let g:fern#default_hidden = 1
 let g:fern#disable_default_mappings   = 1
 let g:fern#disable_drawer_auto_quit   = 1
+let g:fern#default_exclude = 'node_modules'
 " let g:fern#disable_viewer_hide_cursor = 1
+let g:fern_git_status#disable_ignored = 1
+let g:fern_git_status#disable_untracked = 1
+let g:fern_git_status#disable_submodules = 1
 
 let g:fern#renderer = "devicons"
 let g:fern#mark_symbol                       = '●'
@@ -27,8 +34,8 @@ function! FernInit() abort
   " fern-custom-actions {{{
   nnoremap <Plug>(fern-close-drawer) :<C-u>FernDo close -drawer -stay<CR>
   nmap <buffer><silent> <Plug>(fern-action-open-and-close)
-      \ <Plug>(fern-action-open:select)
-      \ <Plug>(fern-close-drawer)
+        \ <Plug>(fern-action-open:select)
+        \ <Plug>(fern-close-drawer)
   nmap <buffer><expr>
         \ <Plug>(fern-custom-openAndClose-expand-collapse)
         \ fern#smart#leaf(
@@ -101,6 +108,7 @@ endfunction
 " }}}
 " fernCursorColor {{{
 function! s:fernCursorColor() abort
+  " TODO: support list
   if &filetype == 'fern'
     highlight CursorLine guibg=#3E4452
   else
@@ -127,10 +135,10 @@ endfunction
 
 function! Try_To_select_last_file(time) abort
   if s:fern_last_file !=# ''
-			func! MyHandler(timer)
-        call search('\v<' . s:fern_last_file . '>')
-			endfunc
-			let timer = timer_start(a:time, 'MyHandler')
+    func! CallBackHandler(timer)
+      call search('\v<' . s:fern_last_file . '>')
+    endfunc
+    let timer = timer_start(a:time, 'CallBackHandler')
   endif
 endfunction
 
