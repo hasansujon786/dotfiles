@@ -10,7 +10,65 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Highlighting same symbols in the buffer at the current cursor position.
 highlight CocHighlightText ctermbg=gray guibg=#3B4048
 
-" => insert-mappings ============================
+augroup mygroup
+  autocmd!
+  " Highlight the symbol and its references when holding the cursor.
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  " Ope CocSearch window on the left
+  autocmd BufRead,BufNewFile __coc_refactor__* wincmd H
+augroup end
+
+" }}}
+" => coc-mappings ---------------------------------- {{{
+" Use K to show documentation in preview window. {{{
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+" }}}
+nmap <silent> K :call <SID>show_documentation()<CR>
+
+" Use `[d` and `]d` to navigate diagnostics
+nmap <silent> [d <Plug>(coc-diagnostic-prev)
+nmap <silent> ]d <Plug>(coc-diagnostic-next)
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gD <Plug>(coc-declaration)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gI <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gR <Plug>(coc-refactor)
+" Search world in whole project
+nmap gcs :CocSearch <C-R>=expand("<cword>")<CR><CR>
+xmap gcs y:CocSearch -F <C-r>"<Home><C-right><C-right><C-right>\<C-right>
+" Symbol renaming
+nmap <silent> <F2> <Plug>(coc-rename)
+" Quick format
+nmap <silent> gq <Plug>(coc-format)
+nmap <silent> gQ <Plug>(coc-format-selected)
+vmap <silent> gQ <Plug>(coc-format-selected)
+
+" Introduce function text object
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+" Class text object
+xmap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ic <Plug>(coc-classobj-i)
+omap ac <Plug>(coc-classobj-a)
+" Use v/V for selections ranges. Require coc-tsserver, coc-python etc.
+nmap <silent> <A-i> <Plug>(coc-range-select)
+xmap <silent> <A-i> <Plug>(coc-range-select)
+
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -37,45 +95,6 @@ else
   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
-" Use K to show documentation in preview window. {{{
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-" }}}
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-" => jump-between-codes =========================
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gI <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" => better-visual ==============================
-" Use leader + = to formate selected code.
-xmap <silent> <leader>= <Plug>(coc-format-selected)
-nmap <silent> <leader>= <Plug>(coc-format-selected)
-
-" Introduce function text object
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap if <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
-
-" Use <TAB> for selections ranges.
-" NOTE: Requires 'textDocument/selectionRange' support from the language server.
-" coc-tsserver, coc-python are the examples of servers that support it.
-nmap <silent> <A-i> <Plug>(coc-range-select)
-xmap <silent> <A-i> <Plug>(coc-range-select)
-
 " => coc-commands ===============================
 " Save current buffer without saving the file.
 command! -nargs=0 SaveWithoutFormat :noa w
@@ -85,18 +104,6 @@ command! -nargs=0 Format :call CocAction('format')
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
-
-augroup mygroup
-  autocmd!
-  " Highlight the symbol and its references when holding the cursor.
-  autocmd CursorHold * silent call CocActionAsync('highlight')
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-  " Ope CocSearch window on the left
-  autocmd BufRead,BufNewFile __coc_refactor__* wincmd H
-augroup end
 
 " }}}
 " => coc-extensions-list --------------------------- {{{

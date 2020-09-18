@@ -49,4 +49,7 @@
   "yank.highlight.duration": 300,
   "yank.enableCompletion": false,
   "yank.list.maxsize": 50
+
+  // vetur
+  //"vetur.format.defaultFormatter.html": "prettier",
 }

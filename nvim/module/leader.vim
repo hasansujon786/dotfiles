@@ -7,7 +7,6 @@ nnoremap <silent> <leader>j :wincmd j<CR>
 nnoremap <silent> <leader>k :wincmd k<CR>
 nnoremap <silent> <leader>h :wincmd h<CR>
 nnoremap <silent> <leader>l :wincmd l<CR>
-nnoremap <silent> <S-TAB> :wincmd p<CR>
 " Easy fold
 nnoremap <leader>z za
 vnoremap <leader>z za
@@ -76,17 +75,11 @@ nnoremap <leader>es :sp <C-R>=expand('%:h').'/'<cr>
 nnoremap <leader>ee :e <C-R>=expand('%:h').'/'<cr>
 
 " => f & r is for find & replace ==========================
-" Search world in whole project
-nmap <leader>ff :CocSearch <C-R>=expand("<cword>")<CR><CR>
-xmap <leader>ff y :CocSearch -F <C-r>"<C-a><C-right><C-right><C-right>\
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
 " interactive find replace preview
 set inccommand=nosplit
 " replace word under cursor, globally, with confirmation
-" TODO: need to fix which change part of world
-nmap <Leader>rr :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
-xmap <Leader>rr y :%s/<C-r>"//gc<Left><Left><Left>
+nmap <Leader>ff :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+xmap <Leader>ff y :%s/<C-r>"//gc<Left><Left><Left>
 " Alias replace all to S
 " nnoremap S :%s//gI<Left><Left><Left>
 

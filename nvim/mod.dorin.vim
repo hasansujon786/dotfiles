@@ -153,7 +153,6 @@ source ~/dotfiles/nvim/plugin/indentLine.vim
 source ~/dotfiles/nvim/plugin/lightline.vim
 source ~/dotfiles/nvim/plugin/goyo.vim
 source ~/dotfiles/nvim/plugin/auto-pairs.vim
-source ~/dotfiles/nvim/plugin/coc.vim
 source ~/dotfiles/nvim/plugin/fzf.vim
 source ~/dotfiles/nvim/plugin/fern.vim
 source ~/dotfiles/nvim/plugin/vim-sneak.vim
@@ -161,6 +160,7 @@ source ~/dotfiles/nvim/plugin/vim-gitgutter.vim
 source ~/dotfiles/nvim/plugin/vim-fugitive.vim
 source ~/dotfiles/nvim/plugin/vim-floaterm.vim
 source ~/dotfiles/nvim/plugin/vim-visual-multi.vim
+source ~/dotfiles/nvim/plugin/coc.vim
 " source ~/dotfiles/nvim/plugin/yank-ring.vim
 
 " Local Configurations
