@@ -266,14 +266,6 @@ let &showbreak="↳ "                  " Make wrapped lines more obvious
 set cpoptions+=n
 
 " }}}
-" => Nvim-terminal ---------------------------------------------- {{{
-
-" Default settings
-au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-autocmd BufEnter term://* startinsert
-autocmd TermOpen * set bufhidden=hide
-
-" }}}
 " => Abbreviations ---------------------------------------------- {{{
 
 iab xdate <C-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
@@ -308,6 +300,16 @@ augroup CursorLine
   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   au WinLeave * setlocal nocursorline
 augroup END
+
+" Neovim terminal
+if has('nvim')
+  augroup Terminal
+    au!
+    au TermOpen * setfiletype terminal | set bufhidden=hide | :startinsert
+    au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+    au FileType terminal setlocal nonumber norelativenumber signcolumn=no
+  augroup END
+endif
 
 " }}}
 " => Helper-functions ------------------------------------------- {{{

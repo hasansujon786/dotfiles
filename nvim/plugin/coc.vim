@@ -45,9 +45,6 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gI <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gR <Plug>(coc-refactor)
-" Search world in whole project
-nnoremap gcs :CocSearch <C-R>=expand("<cword>")<CR><CR>
-xnoremap gcs y:CocSearch -F <C-r>"<Home><C-right><C-right><C-right>\<C-right>
 " Symbol renaming
 nmap <silent> <F2> <Plug>(coc-rename)
 " Quick format

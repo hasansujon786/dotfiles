@@ -40,6 +40,9 @@ nmap <silent> <leader>ca <Plug>(coc-codeaction)
 xmap <silent> <leader>ca <Plug>(coc-codeaction-selected)
 " Apply AutoFix to problem on the current line.
 nmap <silent> <leader>cq <Plug>(coc-fix-current)
+" Search world in whole project
+nnoremap <leader>cs :CocSearch <C-R>=expand("<cword>")<CR><CR>
+xnoremap <leader>cs y:CocSearch -F <C-r>"<Home><C-right><C-right><C-right>\<C-right>
 
 " Mappings using CoCList:
 " Show all diagnostics.
@@ -85,7 +88,7 @@ xnoremap <Leader>ff y :%s/<C-r>"//gc<Left><Left><Left>
 
 " => g is for git =========================================
 nnoremap <silent> <leader>gg :Gstatus<CR>:wincmd _<CR>
-nnoremap <silent> <leader>gdf :Gvdiffsplit!<CR>:vertical resize +15<CR>
+nnoremap <silent> <leader>gf :Gvdiffsplit!<CR>:vertical resize +15<CR>
 nnoremap <silent> <leader>gl :FloatermNew --name=lazygit lazygit<CR>
 nnoremap <silent> <leader>gt :FloatermNew --name=tig tig<CR>
 " GitGutter
