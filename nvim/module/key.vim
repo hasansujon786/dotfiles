@@ -1,5 +1,11 @@
 " => Key-Mappings ------------------------------------- {{{
 
+" " Swap ; and : in normal/visual mode
+nnoremap ; :
+xnoremap ; :
+nnoremap : ;
+xnoremap : ;
+
 " Use q, qq & jk to return to normal mode
 nnoremap <silent> q <ESC>:noh<CR>
 vnoremap <silent> q <ESC>:noh<CR>
@@ -22,7 +28,7 @@ nmap <A-l> 5zl
 nmap <A-h> 5zh
 
 " Find & open file on current window
-"map <C-p> :tabfind *
+"nnoremap <C-p> :tabfind *
 
 " => Copy-paset ===========================================
 " Prevent selecting and pasting from overwriting what you originally copied.
@@ -45,7 +51,9 @@ vnoremap aa VGo1G
 " a fix to select end of line
 vnoremap $ $h
 " select a block {} of code
-vnoremap <silent> ao <Esc>/}<CR>:noh<CR>V%
+vnoremap ao <ESC>va{%V%
+nnoremap yao va{%V%y
+nnoremap dao va{%V%d
 " map . in visual mode
 vnoremap . :norm.<cr>
 " Keep selection when indenting/outdenting.
@@ -149,21 +157,21 @@ inoremap <C-u> <C-G>u<C-U>
 
 " => Terminal mappings ====================================
 " Open terminal
-nmap <silent> <leader>ts <C-w>s<C-w>J:terminal<CR>a
-nmap <silent> <leader>tv <C-w>v<C-w>L:terminal<CR>a
-nmap <silent> <leader>tt :tabnew<CR>:terminal<CR>a
+nnoremap <silent> <leader>ts <C-w>s<C-w>J:terminal<CR>a
+nnoremap <silent> <leader>tv <C-w>v<C-w>L:terminal<CR>a
+nnoremap <silent> <leader>tt :tabnew<CR>:terminal<CR>a
 " Silently open a shell in the directory of the current file
 if has("win32") || has("win64")
- " map <C-t><C-t> :silent !start cmd /k cd %:p:h <CR>
-  nmap <silent> <C-t><C-t> :tc %:h<CR>:silent !start bash<CR>:tc -<CR>
+ " nnoremap <C-t><C-t> :silent !start cmd /k cd %:p:h <CR>
+  nnoremap <silent> <C-t><C-t> :tc %:h<CR>:silent !start bash<CR>:tc -<CR>
 endif
 tmap <Esc> <C-\><C-n>
 tmap <C-o> <C-\><C-n><C-w>p
 
 " => Function key mappings ================================
 " Toggle spelling and show it's status
-nmap <F7> :setlocal spell! spell?<CR>
-imap <F7> <Esc>:setlocal spell! spell?<CR>a
+nnoremap <F7> :setlocal spell! spell?<CR>
+inoremap <F7> <Esc>:setlocal spell! spell?<CR>a
 " TODO: need new bindings
 nnoremap <leader>fw :normal! 1z=<CR>
 nnoremap <leader>fp :normal! mz[s1z=`z<CR>
@@ -195,5 +203,10 @@ nnoremap <Down> :echoe "Use j"<CR>
 
 " vmap gs :sort<CR>
 
+" CTRL-L to fix syntax highlight
+" nnoremap <silent><expr> <C-l> empty(get(b:, 'current_syntax'))
+"       \ ? "\<C-l>"
+"       \ : "\<C-l>:syntax sync fromstart\<CR>"
+"
 " }}}
 

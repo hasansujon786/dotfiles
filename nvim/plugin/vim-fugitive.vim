@@ -1,1 +1,1 @@
-nmap gH :Gbrowse<CR>
+nnoremap gH :Gbrowse<CR>

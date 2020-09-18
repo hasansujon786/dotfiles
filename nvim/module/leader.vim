@@ -27,7 +27,7 @@ nnoremap <silent> <leader>q :close<CR>
 " Map 1-9 + <Space> to jump to respective tab
 let i = 1
 while i < 10
-  execute ":nmap <silent> <Space>" . i . " :tabn " . i . "<CR>"
+  execute ":nnoremap <silent> <Space>" . i . " :tabn " . i . "<CR>"
   let i += 1
 endwhile
 
@@ -78,16 +78,16 @@ nnoremap <leader>ee :e <C-R>=expand('%:h').'/'<cr>
 " interactive find replace preview
 set inccommand=nosplit
 " replace word under cursor, globally, with confirmation
-nmap <Leader>ff :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
-xmap <Leader>ff y :%s/<C-r>"//gc<Left><Left><Left>
+nnoremap <Leader>ff :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+xnoremap <Leader>ff y :%s/<C-r>"//gc<Left><Left><Left>
 " Alias replace all to S
 " nnoremap S :%s//gI<Left><Left><Left>
 
 " => g is for git =========================================
-nmap <silent> <leader>gg :Gstatus<CR>:wincmd _<CR>
-nmap <silent> <leader>gdf :Gvdiffsplit!<CR>:vertical resize +15<CR>
-nmap <silent> <leader>gl :FloatermNew --name=lazygit lazygit<CR>
-nmap <silent> <leader>gt :FloatermNew --name=tig tig<CR>
+nnoremap <silent> <leader>gg :Gstatus<CR>:wincmd _<CR>
+nnoremap <silent> <leader>gdf :Gvdiffsplit!<CR>:vertical resize +15<CR>
+nnoremap <silent> <leader>gl :FloatermNew --name=lazygit lazygit<CR>
+nnoremap <silent> <leader>gt :FloatermNew --name=tig tig<CR>
 " GitGutter
 nmap <silent> <leader>gp <Plug>(GitGutterPreviewHunk)
 nmap <silent> <leader>gu <Plug>(GitGutterUndoHunk)
@@ -140,7 +140,7 @@ function! ToggleWrap()
   endif
 endfunction
 " }}}
-noremap <silent> <leader>tw :call ToggleWrap()<CR>
+nnoremap <silent> <leader>tw :call ToggleWrap()<CR>
 
 " => v is for vim =========================================
 nnoremap <leader>v. :e $MYVIMRC<CR>
@@ -149,15 +149,15 @@ nnoremap <leader>vs :source $MYVIMRC<CR>
 
 " => Others ===============================================
 " compile & run c Code
-autocmd FileType c nmap <leader>bb :w<CR>:!gcc % -o .lastbuild && ./.lastbuild<cr>
-autocmd FileType c nmap <leader>bl :w<CR>:!./.lastbuild<cr>
+autocmd FileType c nnoremap <leader>bb :w<CR>:!gcc % -o .lastbuild && ./.lastbuild<cr>
+autocmd FileType c nnoremap <leader>bl :w<CR>:!./.lastbuild<cr>
 " Run js Code on node
-autocmd FileType javascript nmap <leader>bb :!node %<CR>
+autocmd FileType javascript nnoremap <leader>bb :!node %<CR>
 
 " Change dir to current file's dir
 nnoremap <leader>CD :cd %:p:h<CR>:pwd<CR>
 
 " Pasting support
 " set pastetoggle=<F3>  " Press F3 in insert mode to preserve tabs when
-" map <leader>pp :setlocal paste!<cr>
+" nnoremap <leader>pp :setlocal paste!<cr>
 

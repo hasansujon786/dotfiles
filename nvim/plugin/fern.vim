@@ -1,6 +1,6 @@
-noremap <silent> <Leader>n :Fern . -drawer -toggle -reveal=%<CR><C-w>=
+nnoremap <silent> <Leader>n :Fern . -drawer -toggle -reveal=%<CR><C-w>=
 " Open current file directory into the drawer
-noremap <silent> <Leader>. :call Before_Try_To_select_last_file()<CR>
+nnoremap <silent> <Leader>. :call Before_Try_To_select_last_file()<CR>
       \:Fern %:h -drawer <CR>
       \:call Try_To_select_last_file(300)<CR>
 " Open current file directory into the buffer
@@ -81,8 +81,8 @@ function! FernInit() abort
   nmap <buffer> x <Plug>(fern-action-collapse)
   nmap <buffer> I <Plug>(fern-action-hidden:toggle)
   nmap <buffer> W <Plug>(fern-action-cd)
+  nmap <buffer> q <C-w>c
   nmap <buffer> <BAR> <Plug>(fern-action-zoom)<C-w>=
-  nmap <silent> <buffer> q :<C-u>close<CR>
   nmap <buffer> <nowait> < <Plug>(fern-action-leave)
   nmap <buffer> <nowait> - <Plug>(fern-action-leave)
   nmap <buffer> <nowait> > <Plug>(fern-action-enter)

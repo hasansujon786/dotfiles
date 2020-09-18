@@ -33,7 +33,7 @@ function! s:show_documentation()
   endif
 endfunction
 " }}}
-nmap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 " Use `[d` and `]d` to navigate diagnostics
 nmap <silent> [d <Plug>(coc-diagnostic-prev)
@@ -46,8 +46,8 @@ nmap <silent> gI <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gR <Plug>(coc-refactor)
 " Search world in whole project
-nmap gcs :CocSearch <C-R>=expand("<cword>")<CR><CR>
-xmap gcs y:CocSearch -F <C-r>"<Home><C-right><C-right><C-right>\<C-right>
+nnoremap gcs :CocSearch <C-R>=expand("<cword>")<CR><CR>
+xnoremap gcs y:CocSearch -F <C-r>"<Home><C-right><C-right><C-right>\<C-right>
 " Symbol renaming
 nmap <silent> <F2> <Plug>(coc-rename)
 " Quick format

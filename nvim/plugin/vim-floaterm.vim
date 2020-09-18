@@ -8,6 +8,6 @@ let g:floaterm_keymap_prev   = '<C-\>p'
 let g:floaterm_keymap_next   = '<C-\>n'
 let g:floaterm_keymap_kill   = '<C-\>x'
 let g:floaterm_keymap_toggle = '<C-\><C-\>'
-nmap <silent> <C-\><C-\> :FloatermToggle<CR>
-nmap <silent> <C-\>c :FloatermNew<CR>
+nnoremap <silent> <C-\><C-\> :FloatermToggle<CR>
+nnoremap <silent> <C-\>c :FloatermNew<CR>
 
