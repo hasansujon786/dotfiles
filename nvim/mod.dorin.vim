@@ -76,12 +76,13 @@ let maplocalleader="\<Space>"
 " endif
 
 set nobackup nowb noswapfile         " Turn backup off, since most stuff is in SVN, git etc. anyway...
-" set backupdir=~/.config/nvim/tmp/backup,.
-" set directory=~/.config/nvim/tmp/swap,.
+set backupdir=~/.config/nvim/tmp/backup
+set directory=~/.config/nvim/tmp/swap
+set viewdir=~/.config/nvim/tmp/view
+set undodir=~/.config/nvim/tmp/undo
 
 set undofile                         " persistent undo between file reloads
 set undolevels=1500                  " Save a lot of back-history.
-set undodir=~/.config/nvim/tmp/undo,.
 
 set spelllang=en_gb                  " Speak proper English
 set complete+=kspell                 " Autocomplete with dictionary words when spell check is on
@@ -122,6 +123,7 @@ Plug 'lambdalisue/fern-git-status.vim'
 Plug 'lambdalisue/glyph-palette.vim'    " Add color to icons
 Plug 'lambdalisue/fern-bookmark.vim'
 Plug 'lambdalisue/fern.vim'
+Plug 'lambdalisue/vim-manpager'
 
 " Plug 'vim-scripts/YankRing.vim', { 'on': 'YRShow' }
 " Plug 'vimwiki/vimwiki'             " my own personal wiki
@@ -164,6 +166,7 @@ source ~/dotfiles/nvim/plugin/coc.vim
 " source ~/dotfiles/nvim/plugin/yank-ring.vim
 
 " Local Configurations
+source ~/dotfiles/nvim/module/utils.vim
 source ~/dotfiles/nvim/module/fold.vim
 source ~/dotfiles/nvim/module/filetypes.vim
 source ~/dotfiles/nvim/module/leader.vim
@@ -310,45 +313,6 @@ if has('nvim')
     au FileType terminal setlocal nonumber norelativenumber signcolumn=no
   augroup END
 endif
-
-" }}}
-" => Helper-functions ------------------------------------------- {{{
-
-function! TrimWhitespace()
-  let l:save = winsaveview()
-  %s/\\\@<!\s\+$//e
-  call winrestview(l:save)
-endfunction
-autocmd BufWritePre *.vim :call TrimWhitespace()
-
-" PlaceholderImgTag 300x200
-function! s:PlaceholderImgTag(size)
-  let url = 'http://dummyimage.com/' . a:size . '/000000/555555'
-  let [width,height] = split(a:size, 'x')
-  execute "normal a<img src=\"".url."\" width=\"".width."\" height=\"".height."\" />"
-endfunction
-command! -nargs=1 PlaceholderImgTag call s:PlaceholderImgTag(<f-args>)
-
-" Don't close window, when deleting a buffer
-command! Bclose call <SID>BufcloseCloseIt()
-function! <SID>BufcloseCloseIt()
-  let l:currentBufNum = bufnr("%")
-  let l:alternateBufNum = bufnr("#")
-
-  if buflisted(l:alternateBufNum)
-    buffer #
-  else
-    bnext
-  endif
-
-  if bufnr("%") == l:currentBufNum
-    new
-  endif
-
-  if buflisted(l:currentBufNum)
-    execute("bdelete! ".l:currentBufNum)
-  endif
-endfunction
 
 " }}}
 " => Temporary -------------------------------------------------- {{{

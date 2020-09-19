@@ -100,49 +100,9 @@ vmap <silent> <leader>gs <Plug>(GitGutterStageHunk)
 " => t is for toggle ======================================
 " Toggle highlighting of current line and column
 nnoremap <silent> <leader>tc :setlocal cursorcolumn!<CR>
-" Toggle quickfix window {{{
-function! QuickFix_toggle()
-  for i in range(1, winnr('$'))
-    let bnum = winbufnr(i)
-    if getbufvar(bnum, '&buftype') == 'quickfix'
-      cclose
-      return
-    endif
-  endfor
-  copen
-endfunction
-" }}}
 nnoremap <silent> <Leader>tq :call QuickFix_toggle()<CR>
-" Toggle relative line numbers and regular line numbers {{{
-function! ToggleNumber()
-  if &number
-    echo 'Number OFF'
-    set nonumber norelativenumber
-  else
-    echo 'Number ON'
-    set number relativenumber
-  endif
-endfunction
-" }}}
 nnoremap <silent> <leader>tN :set invrelativenumber<CR>
 nnoremap <silent> <leader>tn :call ToggleNumber()<CR>
-" Toggle wrap {{{
-" Allow j and k to work on visual lines (when wrapping)
-function! ToggleWrap()
-  if &wrap
-    echo 'Wrap OFF'
-    setlocal nowrap
-    set virtualedit=all
-  else
-    echo 'Wrap ON'
-    setlocal wrap linebreak nolist
-    set virtualedit=
-    setlocal display+=lastline
-    inoremap <buffer> <silent> <Up> <C-o>gk
-    inoremap <buffer> <silent> <Down> <C-o>gj
-  endif
-endfunction
-" }}}
 nnoremap <silent> <leader>tw :call ToggleWrap()<CR>
 
 " => v is for vim =========================================
