@@ -56,6 +56,7 @@ alias gci='hub issue create'
 
 alias greh='git reset HEAD' # --hard
 alias gre='git reset ' # --hard
+alias gck='git checkout ' # switch brnch | -b to create
 alias glo='git log --oneline --decorate'
 alias lg='lazygit'
 

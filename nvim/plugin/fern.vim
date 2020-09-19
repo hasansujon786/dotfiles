@@ -6,7 +6,7 @@ nnoremap <silent> <Leader>. :call Before_Try_To_select_last_file()<CR>
 " Open current file directory into the buffer
 nnoremap <silent> - :call Before_Try_To_select_last_file()<CR>
       \:Fern <C-r>=<SID>smart_path()<CR><CR>
-      \:call Try_To_select_last_file(200)<CR>
+      \:call Try_To_select_last_file(300)<CR>
 " Open bookmarks
 nnoremap <silent> <Leader>ii :<C-u>Fern bookmark:///<CR>
 

@@ -33,8 +33,7 @@ set magic                            " For regular expressions turn magic on
 set showcmd                          " show any commands
 set noshowmode                       " don't show mode as airline already does
 set path+=**                         " usefull while using find in nested folders
-set fillchars=""                     " Remove characters in window split
-set fillchars=stlnc:=
+set fillchars=""                     " Remove characters in window split (statusline)
 set nomodeline
 set modelines=0
 set shortmess+=c                     " don't give |ins-completion-menu| messages

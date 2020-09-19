@@ -10,15 +10,15 @@ let g:lightline = {
       \            [ 'percent'  ],
       \            [ 'filetype' ]],
       \ },
-      \   'component': {
-      \   'readonly': '%{&readonly?"":""}',
+      \ 'component': {
+      \ 'readonly': '%{&readonly?"":""}',
       \ },
       \ 'component_function': {
       \   'fugitive': 'LightlineFugitive',
       \   'filename': 'MyFilename',
       \   'filetype': 'MyFiletype',
       \   'mode': 'MyMode',
-	    \   'cocstatus': 'coc#status'
+      \   'cocstatus': 'coc#status'
       \ },
       \ 'tab_component_function': {
       \   'tabnum': 'LightlineWebDevIcons',
@@ -33,7 +33,7 @@ autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 function! LightlineFugitive()
   if exists('*FugitiveHead')
     let branch = FugitiveHead()
-    return winwidth(0) > 60 ? branch !=# '' ? ' '.branch : '' : ''
+    return branch ==# 'master' ? '' : winwidth(0) > 60 ? branch !=# '' ? ' '.branch : '' : ''
   endif
   return ''
 endfunction
@@ -44,7 +44,16 @@ function! MyFiletype()
 endfunction
 
 function! MyMode()
-  return winwidth(0) > 60 ? lightline#mode() : ''
+  let fname = expand('%:t')
+  return fname == '__Tagbar__' ? 'Tagbar' :
+        \ fname == '__Gundo__' ? 'Gundo' :
+        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+        \ fname =~ 'NERD_tree' ? 'NERD_tree' :
+        \ &ft == 'fern' ? 'fern' :
+        \ &ft == 'unite' ? 'Unite' :
+        \ &ft == 'vimfiler' ? 'VimFiler' :
+        \ &ft == 'vimshell' ? 'VimShell' :
+        \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
 function! MyModified()
@@ -66,6 +75,10 @@ endfunction
 
 " => itchyny/lightline.vim =================================
 let s:palette = g:lightline#colorscheme#one#palette
+let s:palette.normal.middle = [ [ '#717785', '#2C323C', 252, 66] ]
+let s:palette.inactive.left = [ [ '#717785', '#3E4452', 252, 66] ]
+let s:palette.inactive.right = [ [ '#717785', '#3E4452', 252, 66] ]
+
 let s:palette.tabline.tabsel = [ [ '#282C33', '#ABB2BF', 252, 66, 'bold' ] ]
 let s:palette.tabline.left = [ [ '#717785', '#3E4452', 252, 66 ] ]
 " let s:palette.tabline.middle = [ [ '#717785', '#21252B', 252, 66 ] ]
