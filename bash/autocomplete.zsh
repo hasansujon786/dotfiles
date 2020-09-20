@@ -70,4 +70,5 @@ sourceIfExists() {
 
 sourceIfExists ~/dotfiles/bash/.aliases
 sourceIfExists ~/dotfiles/bash/.aliases-advanced
+sourceIfExists ~/dotfiles/bash/utils.zsh
 sourceIfExists /usr/local/ibmcloud/autocomplete/zsh_autocomplete
