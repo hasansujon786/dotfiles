@@ -135,23 +135,27 @@ endfunction
 " inoremap <silent> <F2> <C-r>=<SID>s:Utils_uuid()<CR>
 " }}}
 
-" Zoom widnow temporary with <C-w>z {{{
-" TODO: need to fix <19-09-20, > "
-function! s:Utils_toggle_window_zoom() abort
-    if exists('t:zoom_winrestcmd')
-        execute t:zoom_winrestcmd
-        unlet t:zoom_winrestcmd
-    else
-        let t:zoom_winrestcmd = winrestcmd()
-        resize
-        vertical resize
-    endif
+" Auto Zoom Widnow {{{
+command! AutoZoomWin call s:Utils_azw()
+
+function! Utils_Auto_zoom_window()
+  if exists('g:auto_zoom_window') && g:auto_zoom_window == 1
+    wincmd _
+    wincmd |
+    vertical resize -5
+  endif
 endfunction
-nnoremap <silent> <Plug>(my-zoom-window)
-      \ :<C-u>call <SID>toggle_window_zoom()<CR>
-nmap <C-w>z <Plug>(my-zoom-window)
-nmap <C-w><C-z> <Plug>(my-zoom-window)
-" " }}}
+
+function! s:Utils_azw() abort
+  if !exists('g:auto_zoom_window') || g:auto_zoom_window == 0
+    let g:auto_zoom_window = 1
+    echo 'Auto zoom on'
+  else
+    let g:auto_zoom_window = 0
+    echo 'Auto zoom off'
+  endif
+endfunction
+" }}}
 
 " ToggleBackground {{{
 fun! Utils_ToggleBackground()

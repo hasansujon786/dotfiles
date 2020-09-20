@@ -84,3 +84,4 @@ let s:palette.tabline.left = [ [ '#717785', '#3E4452', 252, 66 ] ]
 " let s:palette.tabline.middle = [ [ '#717785', '#21252B', 252, 66 ] ]
 unlet s:palette
 
+" https://github.com/itchyny/lightline.vim/issues/9

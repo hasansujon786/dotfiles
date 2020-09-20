@@ -14,6 +14,9 @@ augroup vimrcEx
   " Vim/tmux layout rebalancing
   " automatically rebalance windows on vim resize
   autocmd VimResized * :wincmd =
+
+  " automatically zoom window on focus
+  autocmd WinEnter * call Utils_Auto_zoom_window()
 augroup END
 
 " Only show the cursor line in the active buffer.

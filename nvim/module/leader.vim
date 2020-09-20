@@ -1,12 +1,4 @@
 " => Single mappings ======================================
-" Switch between the alternate files
-nnoremap <BS> <c-^>
-" Jump between windows
-nnoremap <leader>w <C-w>
-nnoremap <silent> <leader>j :wincmd j<CR>
-nnoremap <silent> <leader>k :wincmd k<CR>
-nnoremap <silent> <leader>h :wincmd h<CR>
-nnoremap <silent> <leader>l :wincmd l<CR>
 " Easy fold
 nnoremap <leader>z za
 vnoremap <leader>z za
@@ -104,6 +96,17 @@ nnoremap <silent> <Leader>tq :call Utils_QuickFix_toggle()<CR>
 nnoremap <silent> <leader>tN :set invrelativenumber<CR>
 nnoremap <silent> <leader>tn :call Utils_ToggleNumber()<CR>
 nnoremap <silent> <leader>tw :call Utils_ToggleWrap()<CR>
+
+" => w is for window ======================================
+" Switch between the alternate files
+nnoremap <BS> <c-^>
+" Jump between windows
+nnoremap <leader>w <C-w>
+nnoremap <silent> <leader>wz :AutoZoomWin<CR>
+nnoremap <silent> <leader>j :wincmd j<CR>
+nnoremap <silent> <leader>k :wincmd k<CR>
+nnoremap <silent> <leader>h :wincmd h<CR>
+nnoremap <silent> <leader>l :wincmd l<CR>
 
 " => v is for vim =========================================
 nnoremap <leader>v. :e $MYVIMRC<CR>
