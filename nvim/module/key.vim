@@ -97,26 +97,9 @@ nnoremap <silent> [<TAB> :tabmove-<CR>
 noremap n nzz
 noremap N Nzz
 
-" Pressing * or # searches for the current selection {{{
-function! VisualSelection(direction, extra_filter) range
-  let l:saved_reg = @"
-  execute "normal! vgvy"
-
-  let l:pattern = escape(@", "\\/.*'$^~[]")
-  let l:pattern = substitute(l:pattern, "\n$", "", "")
-
-  if a:direction == 'gv'
-    call CmdLine("Ack '" . l:pattern . "' " )
-  elseif a:direction == 'replace'
-    call CmdLine("%s" . '/'. l:pattern . '/')
-  endif
-
-  let @/ = l:pattern
-  let @" = l:saved_reg
-endfunction
-" }}}
-vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
-vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+" Pressing * or # searches for the current selection
+vnoremap <silent> * :<C-u>call Utils_VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call Utils_VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " vnoremap * "xy/<C-R>x<CR>
 
 " Type a replacement term and press . to repeat the replacement again. Useful
@@ -181,16 +164,7 @@ nnoremap <leader>fn :normal! mz]s1z=`z<CR>
 " Add to spell file     zg
 " Prompt spell fixes    z=
 
-" ToggleBackground {{{
-fun! ToggleBackground()
-  if (&background ==? 'dark')
-    set background=light
-  else
-    set background=dark
-  endif
-endfun
-" }}}
-nnoremap <silent> <F10> :call ToggleBackground()<CR>
+nnoremap <silent> <F10> :call Utils_ToggleBackground()<CR>
 
 " }}}
 " => Disabled-keys ------------------------------------ {{{

@@ -1,5 +1,5 @@
 " Toggle quickfix window {{{
-function! QuickFix_toggle()
+function! Utils_QuickFix_toggle()
   for i in range(1, winnr('$'))
     let bnum = winbufnr(i)
     if getbufvar(bnum, '&buftype') == 'quickfix'
@@ -12,7 +12,7 @@ endfunction
 " }}}
 
 " Toggle line numbers {{{
-function! ToggleNumber()
+function! Utils_ToggleNumber()
   if &number
     echo 'Number OFF'
     set nonumber norelativenumber
@@ -25,7 +25,7 @@ endfunction
 
 " Toggle wrap {{{
 " Allow j and k to work on visual lines (when wrapping)
-function! ToggleWrap()
+function! Utils_ToggleWrap()
   if &wrap
     echo 'Wrap OFF'
     setlocal nowrap
@@ -42,27 +42,27 @@ endfunction
 " }}}
 
 " TrimWhitespace  {{{
-function! TrimWhitespace()
+function! Utils_TrimWhitespace()
   let l:save = winsaveview()
   %s/\\\@<!\s\+$//e
   call winrestview(l:save)
 endfunction
-autocmd BufWritePre *.vim :call TrimWhitespace()
+autocmd BufWritePre *.vim :call Utils_TrimWhitespace()
 " }}}
 
 " PlaceholderImgTag 300x200 {{{
-function! s:PlaceholderImgTag(size)
+function! s:Utils_PlaceholderImgTag(size)
   let url = 'http://dummyimage.com/' . a:size . '/000000/555555'
   let [width,height] = split(a:size, 'x')
   execute "normal a<img src=\"".url."\" width=\"".width."\" height=\"".height."\" />"
 endfunction
-command! -nargs=1 PlaceholderImgTag call s:PlaceholderImgTag(<f-args>)
+command! -nargs=1 PlaceholderImgTag call s:Utils_PlaceholderImgTag(<f-args>)
 " }}}
 
 " Bclose {{{
 " Don't close window, when deleting a buffer
-command! Bclose call <SID>BufcloseCloseIt()
-function! <SID>BufcloseCloseIt()
+command! Bclose call <SID>Utils_BufcloseCloseIt()
+function! <SID>Utils_BufcloseCloseIt()
   let l:currentBufNum = bufnr("%")
   let l:alternateBufNum = bufnr("#")
 
@@ -83,17 +83,17 @@ endfunction
 " }}}
 
 " Register {{{
-function! s:clear_register() abort
+function! s:Utils_clear_register() abort
   let rs = split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
   for r in rs
     call setreg(r, [])
   endfor
 endfunction
-command! ClearRegister call s:clear_register()
+command! ClearRegister call s:Utils_clear_register()
 " }}}
 
 " Delete view {{{
-function! s:delete_view(bang) abort
+function! s:Utils_delete_view(bang) abort
   if &modified && a:bang !=# '!'
     echohl WarningMsg
     echo 'Use bang to forcedly remove view file on modified buffer'
@@ -109,11 +109,11 @@ function! s:delete_view(bang) abort
     echo 'View file has removed: ' . path
   endif
 endfunction
-command! -bang Delview call s:delete_view(<q-bang>)
+command! -bang Delview call s:Utils_delete_view(<q-bang>)
 " }}}
 
 " GetChar {{{
-function! s:getchar() abort
+function! s:Utils_getchar() abort
   redraw | echo 'Press any key: '
   let c = getchar()
   while c ==# "\<CursorHold>"
@@ -122,22 +122,22 @@ function! s:getchar() abort
   endwhile
   redraw | echo printf('Raw: "%s" | Char: "%s"', c, nr2char(c))
 endfunction
-command! GetChar call s:getchar()
+command! GetChar call s:Utils_getchar()
 " }}}
 
 " Insert UUID by {{{
 " TODO: fix this
-function! s:uuid() abort
+function! s:Utils_uuid() abort
   let r = system('uuidgen')
   let r = substitute(r, '^[\r\n\s]*\|[\r\n\s]*$', '', 'g')
   return r
 endfunction
-" inoremap <silent> <F2> <C-r>=<SID>uuid()<CR>
+" inoremap <silent> <F2> <C-r>=<SID>s:Utils_uuid()<CR>
 " }}}
 
 " Zoom widnow temporary with <C-w>z {{{
 " TODO: need to fix <19-09-20, > "
-function! s:toggle_window_zoom() abort
+function! s:Utils_toggle_window_zoom() abort
     if exists('t:zoom_winrestcmd')
         execute t:zoom_winrestcmd
         unlet t:zoom_winrestcmd
@@ -152,4 +152,33 @@ nnoremap <silent> <Plug>(my-zoom-window)
 nmap <C-w>z <Plug>(my-zoom-window)
 nmap <C-w><C-z> <Plug>(my-zoom-window)
 " " }}}
+
+" ToggleBackground {{{
+fun! Utils_ToggleBackground()
+  if (&background ==? 'dark')
+    set background=light
+  else
+    set background=dark
+  endif
+endfun
+" }}}
+
+" Pressing * or # searches for the current selection {{{
+function! Utils_VisualSelection(direction, extra_filter) range
+  let l:saved_reg = @"
+  execute "normal! vgvy"
+
+  let l:pattern = escape(@", "\\/.*'$^~[]")
+  let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+  if a:direction == 'gv'
+    call CmdLine("Ack '" . l:pattern . "' " )
+  elseif a:direction == 'replace'
+    call CmdLine("%s" . '/'. l:pattern . '/')
+  endif
+
+  let @/ = l:pattern
+  let @" = l:saved_reg
+endfunction
+" }}}
 

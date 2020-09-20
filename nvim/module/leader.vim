@@ -100,10 +100,10 @@ vmap <silent> <leader>gs <Plug>(GitGutterStageHunk)
 " => t is for toggle ======================================
 " Toggle highlighting of current line and column
 nnoremap <silent> <leader>tc :setlocal cursorcolumn!<CR>
-nnoremap <silent> <Leader>tq :call QuickFix_toggle()<CR>
+nnoremap <silent> <Leader>tq :call Utils_QuickFix_toggle()<CR>
 nnoremap <silent> <leader>tN :set invrelativenumber<CR>
-nnoremap <silent> <leader>tn :call ToggleNumber()<CR>
-nnoremap <silent> <leader>tw :call ToggleWrap()<CR>
+nnoremap <silent> <leader>tn :call Utils_ToggleNumber()<CR>
+nnoremap <silent> <leader>tw :call Utils_ToggleWrap()<CR>
 
 " => v is for vim =========================================
 nnoremap <leader>v. :e $MYVIMRC<CR>

@@ -29,7 +29,7 @@ if has('nvim')
     au!
     au TermOpen * setfiletype terminal | set bufhidden=hide | :startinsert
     au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-    au FileType terminal setlocal nonumber norelativenumber
+    au FileType terminal setlocal nonumber norelativenumber signcolumn=no
   augroup END
 endif
 
