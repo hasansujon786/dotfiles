@@ -16,7 +16,7 @@ augroup vimrcEx
   autocmd VimResized * :wincmd =
 
   " automatically zoom window on focus
-  autocmd WinEnter * call Utils_Auto_zoom_window()
+  autocmd WinEnter * if exists('g:auto_zoom_window') | call Utils_azw() | endif
 augroup END
 
 " Only show the cursor line in the active buffer.

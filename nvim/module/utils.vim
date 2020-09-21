@@ -136,9 +136,9 @@ endfunction
 " }}}
 
 " Auto Zoom Widnow {{{
-command! AutoZoomWin call s:Utils_azw()
+command! AutoZoomWin call s:Utils_Auto_zoom_window()
 
-function! Utils_Auto_zoom_window()
+function! Utils_azw() abort
   if exists('g:auto_zoom_window') && g:auto_zoom_window == 1
     wincmd _
     wincmd |
@@ -146,7 +146,7 @@ function! Utils_Auto_zoom_window()
   endif
 endfunction
 
-function! s:Utils_azw() abort
+function! s:Utils_Auto_zoom_window() abort
   if !exists('g:auto_zoom_window') || g:auto_zoom_window == 0
     let g:auto_zoom_window = 1
     echo 'Auto zoom on'
