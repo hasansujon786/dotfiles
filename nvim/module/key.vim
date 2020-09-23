@@ -140,8 +140,8 @@ inoremap <C-u> <C-G>u<C-U>
 
 " => Terminal mappings ====================================
 " Open terminal
-nnoremap <silent> <leader>ts <C-w>s<C-w>J:terminal<CR>
-nnoremap <silent> <leader>tv <C-w>v<C-w>L:terminal<CR>
+" nnoremap <silent> <leader>ts <C-w>s<C-w>J:terminal<CR>
+" nnoremap <silent> <leader>tv <C-w>v<C-w>L:terminal<CR>
 " Silently open a shell in the directory of the current file
 if has("win32") || has("win64")
  " nnoremap <C-t><C-t> :silent !start cmd /k cd %:p:h <CR>

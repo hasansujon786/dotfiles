@@ -10,6 +10,7 @@ nnoremap <silent> - :call Before_Try_To_select_last_file()<CR>
 " Open bookmarks
 nnoremap <silent> <Leader>ii :<C-u>Fern bookmark:///<CR>
 
+let g:fern#drawer_width = 40
 let g:fern#keepalt_on_edit = 1
 let g:fern#default_hidden = 1
 let g:fern#disable_default_mappings   = 1

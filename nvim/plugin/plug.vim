@@ -22,6 +22,7 @@ Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-repeat'
 Plug 'psliwka/vim-smoothie'          " Smooth scroll
 Plug 'hasansujon786/vim-rel-jump'
+Plug 'mkropat/vim-tt'
 
 Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -73,5 +74,6 @@ source ~/dotfiles/nvim/plugin/vim-fugitive.vim
 source ~/dotfiles/nvim/plugin/vim-floaterm.vim
 source ~/dotfiles/nvim/plugin/vim-visual-multi.vim
 source ~/dotfiles/nvim/plugin/coc.vim
+source ~/dotfiles/nvim/plugin/tt.vim
 " source ~/dotfiles/nvim/plugin/yank-ring.vim
 
