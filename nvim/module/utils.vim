@@ -11,18 +11,6 @@ function! Utils_QuickFix_toggle()
 endfunction
 " }}}
 
-" Toggle line numbers {{{
-function! Utils_ToggleNumber()
-  if &number
-    echo 'Number OFF'
-    set nonumber norelativenumber
-  else
-    echo 'Number ON'
-    set number relativenumber
-  endif
-endfunction
-" }}}
-
 " Toggle wrap {{{
 " Allow j and k to work on visual lines (when wrapping)
 function! Utils_ToggleWrap()
@@ -186,3 +174,46 @@ function! Utils_VisualSelection(direction, extra_filter) range
 endfunction
 " }}}
 
+" Cycle through relativenumber + number, number (only), and no numbering {{{
+function!  Utils_cycle_numbering() abort
+  if exists('+relativenumber')
+    execute {
+          \ '00': 'set relativenumber   | set number',
+          \ '01': 'set norelativenumber | set number',
+          \ '10': 'set norelativenumber | set nonumber',
+          \ '11': 'set norelativenumber | set number' }[&number . &relativenumber]
+  else
+    " No relative numbering, just toggle numbers on and off.
+    set number!
+  endif
+endfunction
+" }}}
+
+" Move VISUAL LINE selection within buffer {{{
+function! s:Visual()
+  return visualmode() == 'V'
+endfunction
+function! s:Move(address, should_move)
+  if s:Visual() && a:should_move
+    execute "'<,'>move " . a:address
+    call feedkeys('gv=', 'n')
+  endif
+  call feedkeys('gv', 'n')
+endfunction
+function!Utils_visual_move_up() abort range
+  let l:count=v:count ? -v:count : -1
+  let l:max=(a:firstline - 1) * -1
+  let l:movement=max([l:count, l:max])
+  let l:address="'<" . (l:movement - 1)
+  let l:should_move=l:movement < 0
+  call s:Move(l:address, l:should_move)
+endfunction
+function! Utils_visual_move_down() abort range
+  let l:count=v:count ? v:count : 1
+  let l:max=line('$') - a:lastline
+  let l:movement=min([l:count, l:max])
+  let l:address="'>+" . l:movement
+  let l:should_move=l:movement > 0
+  call s:Move(l:address, l:should_move)
+endfunction
+" }}}

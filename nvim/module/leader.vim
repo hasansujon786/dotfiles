@@ -3,16 +3,20 @@
 nnoremap <leader>z za
 vnoremap <leader>z za
 " Easier system clipboard usage
-nnoremap <Leader>P "+p
-vnoremap <Leader>P "+p
-vnoremap <Leader>D "+d
-vnoremap <Leader>Y "+ygv<Esc>
+nnoremap <Leader>p "+p
+vnoremap <Leader>p "+p
+nnoremap <Leader>P "+P
+nnoremap <Leader>y "+y
+vnoremap <Leader>y "+ygv<Esc>
+vnoremap <Leader>d "+d
 " Save file Quickly
 nnoremap <leader>s :write<CR>
 nnoremap <C-s> :write<CR>
 inoremap <C-s> <Esc>:write<CR><Esc>a
 " exit file quickly
 nnoremap <silent> <leader>q :close<CR>
+" Cycle through relativenumber + number, number (only), and no numbering
+nnoremap <silent> <Leader>r :call Utils_cycle_numbering()<CR>
 
 " Map 1-9 + <Space> to jump to respective tab
 let i = 1
@@ -78,7 +82,6 @@ xnoremap <Leader>ff y :%s/<C-r>"//gc<Left><Left><Left>
 
 " => g is for git =========================================
 nnoremap <silent> <leader>gg :Gstatus<CR>:wincmd _<CR>
-nnoremap <silent> <leader>gf :Gvdiffsplit!<CR>:vertical resize +15<CR>
 nnoremap <silent> <leader>gl :FloatermNew --name=lazygit lazygit<CR>
 nnoremap <silent> <leader>gt :FloatermNew --name=tig tig<CR>
 " GitGutter
@@ -87,13 +90,20 @@ nmap <silent> <leader>gu <Plug>(GitGutterUndoHunk)
 nmap <silent> <leader>gs <Plug>(GitGutterStageHunk)
 vmap <silent> <leader>gs <Plug>(GitGutterStageHunk)
 
+" => d is for diff =========================================
+" <LocalLeader>d... -- Diff mode bindings:
+" - <LocalLeader>dd: show diff view (mnemonic: [d]iff)
+" - <LocalLeader>dh: choose hunk from left (mnemonic: [h] = left)
+" - <LocalLeader>dl choose hunk from right (mnemonic: [l] = right)
+nnoremap <silent> <leader>dd :Gvdiffsplit!<CR>
+nnoremap <silent> <leader>dh :diffget //2<CR>
+nnoremap <silent> <leader>dl :diffget //3<CR>
+
 " => t is for toggle ======================================
 " Toggle highlighting of current line and column
 nnoremap <silent> <leader>tc :setlocal cursorcolumn!<CR>
 nnoremap <silent> <Leader>tq :call Utils_QuickFix_toggle()<CR>
-nnoremap <silent> <leader>tN :set invrelativenumber<CR>
-nnoremap <silent> <leader>tn :call Utils_ToggleNumber()<CR>
-nnoremap <silent> <leader>tr :call Utils_ToggleWrap()<CR>
+nnoremap <silent> <leader>tw :call Utils_ToggleWrap()<CR>
 
 " => w is for window ======================================
 " Switch between the alternate files

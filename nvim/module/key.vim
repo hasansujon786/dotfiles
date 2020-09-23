@@ -68,8 +68,10 @@ vmap <C-_> _gcgv
 " Move lines up and down in normal & visual mode
 nnoremap <silent> <A-j> :move +1<CR>==
 nnoremap <silent> <A-k> :move -2<CR>==
-vnoremap <silent> <A-k> :move '<-2<CR>gv=gv
-vnoremap <silent> <A-j> :move '>+1<CR>gv=gv
+xnoremap <silent> <A-k> :call Utils_visual_move_up()<CR>
+xnoremap <silent> <A-j> :call Utils_visual_move_down()<CR>
+" vnoremap <silent> <A-k> :move '<-2<CR>gv=gv
+" vnoremap <silent> <A-j> :move '>+1<CR>gv=gv
 
 " => Moving-around-tabs-and-buffers =======================
 " Resize splits
@@ -96,6 +98,7 @@ nnoremap <silent> [<TAB> :tabmove-<CR>
 " auto center on matched string
 noremap n nzz
 noremap N Nzz
+xnoremap / y/<C-R>"<CR>
 
 " Pressing * or # searches for the current selection
 vnoremap <silent> * :<C-u>call Utils_VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
@@ -117,6 +120,8 @@ inoremap <A-k> <up>
 " Move cursor by words
 inoremap <A-f> <S-right>
 inoremap <A-b> <S-left>
+cnoremap <A-b> <S-Left>
+cnoremap <A-f> <S-Right>
 " Jump cursor to start & end of a line
 inoremap <C-a> <C-O>^
 inoremap <C-e> <C-O>$
@@ -126,6 +131,9 @@ cnoremap <C-e> <End>
 inoremap <C-d> <Delete>
 inoremap <A-d> <C-O>dw
 inoremap <A-BS> <C-W>
+cnoremap <C-d> <Delete>
+cnoremap <A-d> <S-Right><C-W><Delete>
+cnoremap <A-BS> <C-W>
 
 " Make & move to a new line under the cursor
 inoremap <silent> <A-CR> <C-o>o

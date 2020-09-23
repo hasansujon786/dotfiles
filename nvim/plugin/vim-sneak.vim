@@ -12,5 +12,5 @@ let g:sneak#prompt = '🔎 '
 
 " Change Sneak highlight
 highlight Sneak guifg=#282C33 guibg=#E06B74 ctermfg=black ctermbg=cyan
-highlight SneakScope guifg=#282C33 guibg=white ctermfg=black ctermbg=white
+highlight SneakScope guifg=#282C33 guibg=#61AFEF ctermfg=black ctermbg=white
 

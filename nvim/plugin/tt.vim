@@ -1,4 +1,4 @@
-nnoremap <Leader>tw :Work<cr>
+nnoremap <Leader>tW :Work<cr>
 nnoremap <Leader>tb :Break<cr>
 nnoremap <Leader>tt :ShowTimer<cr>
 nnoremap <Leader>to :OpenTasks<cr>
