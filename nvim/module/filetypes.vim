@@ -35,3 +35,14 @@ augroup END
 " nmap <leader>it :e %:r.ts<CR>
 " nmap <leader>ih :e %:r.html<CR>
 
+augroup setFiletypeBindings
+  autocmd!
+  " compile & run c Code
+  autocmd FileType c nnoremap <leader>bb :w<CR>:!gcc % -o .lastbuild && ./.lastbuild<cr>
+  autocmd FileType c nnoremap <leader>bl :w<CR>:!./.lastbuild<cr>
+  " Run js Code on node
+  autocmd FileType javascript nnoremap <leader>bb :!node %<CR>
+  " Toggle markdown checkList
+  autocmd FileType markdown nnoremap <leader>m 0f[ci[x<ESC>h
+  autocmd FileType markdown nnoremap <leader>M 0f[ci[<Space><ESC>h
+augroup END

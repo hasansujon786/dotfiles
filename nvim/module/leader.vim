@@ -3,12 +3,10 @@
 nnoremap <leader>z za
 vnoremap <leader>z za
 " Easier system clipboard usage
-vnoremap <Leader>y "+ygv<Esc>
-vnoremap <Leader>d "+d
-nnoremap <Leader>p "+p
-nnoremap <Leader>P "+P
-vnoremap <Leader>p "+p
-vnoremap <Leader>P "+P
+nnoremap <Leader>P "+p
+vnoremap <Leader>P "+p
+vnoremap <Leader>D "+d
+vnoremap <Leader>Y "+ygv<Esc>
 " Save file Quickly
 nnoremap <leader>s :write<CR>
 nnoremap <C-s> :write<CR>
@@ -95,7 +93,7 @@ nnoremap <silent> <leader>tc :setlocal cursorcolumn!<CR>
 nnoremap <silent> <Leader>tq :call Utils_QuickFix_toggle()<CR>
 nnoremap <silent> <leader>tN :set invrelativenumber<CR>
 nnoremap <silent> <leader>tn :call Utils_ToggleNumber()<CR>
-nnoremap <silent> <leader>tw :call Utils_ToggleWrap()<CR>
+nnoremap <silent> <leader>tr :call Utils_ToggleWrap()<CR>
 
 " => w is for window ======================================
 " Switch between the alternate files
@@ -114,11 +112,6 @@ nnoremap <leader>v, :e ~/dotfiles/nvim/mod.dorin.vim<CR>
 nnoremap <leader>vs :source $MYVIMRC<CR>
 
 " => Others ===============================================
-" compile & run c Code
-autocmd FileType c nnoremap <leader>bb :w<CR>:!gcc % -o .lastbuild && ./.lastbuild<cr>
-autocmd FileType c nnoremap <leader>bl :w<CR>:!./.lastbuild<cr>
-" Run js Code on node
-autocmd FileType javascript nnoremap <leader>bb :!node %<CR>
 
 " Change dir to current file's dir
 nnoremap <leader>CD :cd %:p:h<CR>:pwd<CR>

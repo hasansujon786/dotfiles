@@ -1,13 +1,14 @@
-nnoremap <Leader>tb :Break<cr>
-nnoremap <Leader>tm :MarkTask<cr>
-nnoremap <Leader>tp :ToggleTimer<cr>
-nnoremap <Leader>ts :ShowTimer<cr>
-nnoremap <Leader>tt :OpenTasks<cr>
 nnoremap <Leader>tw :Work<cr>
+nnoremap <Leader>tb :Break<cr>
+nnoremap <Leader>tt :ShowTimer<cr>
+nnoremap <Leader>to :OpenTasks<cr>
+nnoremap <Leader>tp :ToggleTimer<cr>
 nnoremap <Leader>th :HideAndShowTimer<cr>
 nnoremap <Leader>tu :UpdateCurrentTimer<space>
+nnoremap <Leader>tU :UpdateCurrentStatus<space>
 
 let g:tt_show_on_load = 1
+let g:tt_taskfile = '~/tasks.md'
 
 command! Work
 \  call tt#set_timer(25)
@@ -70,10 +71,11 @@ command! ClearTimer
 
 command! -range MarkTask <line1>,<line2>call tt#mark_task()
 command! OpenTasks call tt#open_tasks() <Bar> call tt#focus_tasks()
-command! -nargs=1 UpdateCurrentTimer call tt#set_timer(<f-args>)
 command! ShowTimer echomsg tt#get_remaining_full_format() . " " . tt#get_status_formatted() . " " . tt#get_task()
 command! ToggleTimer call tt#toggle_timer() | call s:tt_toggle_visibility(1)
 command! HideAndShowTimer call s:tt_hideAndShowTimer()
+command! -nargs=1 UpdateCurrentTimer call tt#set_timer(<f-args>)
+command! -nargs=1 UpdateCurrentStatus call tt#set_status(<f-args>)
 
 
 function! Should_tt_visible()
@@ -82,6 +84,10 @@ function! Should_tt_visible()
   else
     return g:tt_show_on_load
   endif
+endfunction
+
+function! Is_tt_paused()
+  return tt#get_remaining() != -1 && tt#is_running() ? 0 : tt#get_remaining() == -1 ? 0 : 1
 endfunction
 
 function! s:tt_toggle_visibility(bool)
