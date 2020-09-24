@@ -1,6 +1,7 @@
 {
   // Prettier
   "prettier.semi": false,
+  "prettier.printWidth": 120,
   "prettier.singleQuote": true,
   "prettier.bracketSpacing": false,
   "prettier.statusItemText": "Pt",
@@ -38,6 +39,12 @@
   // list
   "list.indicator": ">",
   "list.selectedSignText": " ",
+  "list.nextKeymap": "<C-n>",
+  "list.previousKeymap": "<C-p>",
+  "list.insertMappings": {
+    "<C-j>": "normal:j",
+    "<C-k>": "normal:k"
+  },
 
   // emmet
   "emmet.includeLanguages": {

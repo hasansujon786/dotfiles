@@ -107,16 +107,6 @@ function! s:hijack_directory() abort
   execute printf('Fern %s', fnameescape(path))
 endfunction
 " }}}
-" fernCursorColor {{{
-function! s:fernCursorColor() abort
-  " TODO: support list
-  if &filetype == 'fern'
-    highlight CursorLine guibg=#3E4452
-  else
-    highlight CursorLine guibg=#2C323C
-  endif
-endfunction
-" }}}
 
 augroup FernEvents
   autocmd!
@@ -124,7 +114,6 @@ augroup FernEvents
   autocmd FileType fern call glyph_palette#apply()
   autocmd FileType nerdtree,startify call glyph_palette#apply()
   autocmd BufEnter * ++nested call s:hijack_directory()
-  autocmd WinEnter,BufWinEnter * call s:fernCursorColor()
 augroup END
 
 function! s:smart_path() abort

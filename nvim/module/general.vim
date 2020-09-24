@@ -63,8 +63,9 @@ let maplocalleader="\<Space>"
 set nobackup nowb noswapfile         " Turn backup off, since most stuff is in SVN, git etc. anyway...
 set backupdir=~/.config/nvim/tmp/backup
 set directory=~/.config/nvim/tmp/swap
-set viewdir=~/.config/nvim/tmp/view
 set undodir=~/.config/nvim/tmp/undo
+set viewdir=~/.config/nvim/tmp/view
+set viewoptions-=curdir              " see: https://vi.stackexchange.com/questions/11903/working-directory-different-than-current-file-directory
 
 set undofile                         " persistent undo between file reloads
 set undolevels=1500                  " Save a lot of back-history.
@@ -164,7 +165,7 @@ set ai si                            " Auto indent & Smart indent
 
 " Wrappings
 set whichwrap+=<,>,h,l,[,]           " automatically wrap left and right
-set textwidth=80                     " Hard-wrap text at nth column
+set textwidth=120                    " Hard-wrap text at nth column
 set nowrap                           " No wrap by default
 set linebreak                        " Don't break words when wrapping lines
 let &showbreak="↳ "                  " Make wrapped lines more obvious

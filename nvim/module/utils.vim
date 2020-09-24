@@ -217,3 +217,15 @@ function! Utils_visual_move_down() abort range
   call s:Move(l:address, l:should_move)
 endfunction
 " }}}
+
+" AutoSetCursorColor {{{
+function! Utils_auto_set_cursor_color() abort
+  if &filetype == 'fern' || &filetype == 'list'
+    highlight CursorLine guibg=#3E4452
+  else
+    highlight CursorLine guibg=#2C323C
+  endif
+endfunction
+" }}}
+
+

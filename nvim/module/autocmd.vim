@@ -24,6 +24,7 @@ augroup CursorLine
   au!
   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   au WinLeave * setlocal nocursorline
+  au WinEnter,BufWinEnter * call Utils_auto_set_cursor_color()
 augroup END
 
 " Neovim terminal
