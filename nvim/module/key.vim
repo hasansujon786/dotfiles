@@ -7,8 +7,8 @@ nnoremap : ;
 xnoremap : ;
 
 " Use q, qq & jk to return to normal mode
-nnoremap <silent> q <ESC>:noh<CR>
-vnoremap <silent> q <ESC>:noh<CR>
+nnoremap <silent> q <ESC>:call HLNextOff() <BAR> :nohlsearch<CR>
+vnoremap <silent> q <ESC>:call HLNextOff() <BAR> :nohlsearch<CR>
 inoremap jk <ESC>
 inoremap qq <ESC>
 cnoremap qq <C-c>
@@ -96,8 +96,6 @@ nnoremap <silent> [<TAB> :tabmove-<CR>
 
 " => Search-functionalities ===============================
 " auto center on matched string
-noremap n nzz
-noremap N Nzz
 xnoremap / y/<C-R>"<CR>
 
 " Pressing * or # searches for the current selection

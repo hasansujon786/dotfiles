@@ -17,12 +17,12 @@ Plug 'unblevable/quick-scope'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'justinmk/vim-sneak'
-Plug 'mhinz/vim-startify'
 Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-repeat'
 Plug 'psliwka/vim-smoothie'          " Smooth scroll
 Plug 'hasansujon786/vim-rel-jump'
 Plug 'mkropat/vim-tt'
+" Plug 'vimwiki/vimwiki'             " my own personal wiki
 
 Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -33,17 +33,7 @@ Plug 'lambdalisue/fern-git-status.vim'
 Plug 'lambdalisue/glyph-palette.vim'    " Add color to icons
 Plug 'lambdalisue/fern-bookmark.vim'
 Plug 'lambdalisue/fern.vim'
-Plug 'lambdalisue/vim-manpager'
-
-" Plug 'vim-scripts/YankRing.vim', { 'on': 'YRShow' }
-" Plug 'vimwiki/vimwiki'             " my own personal wiki
-" Plug 'mhinz/vim-grepper'           " Handle multi-file find and replace.
-" Plug 'will133/vim-dirdiff'         " Run a diff on 2 directories.
-" Plug 'christoomey/vim-tmux-navigator'
-" Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' } " markdown preview
-" Plug 'editorconfig/editorconfig-vim'
-" Plug 'moll/vim-node'
-" Plug 'glts/vim-radical'            " Convert binary, hex, etc..
+Plug 'lambdalisue/vim-manpager', {'on': 'Man'}
 
 " => Auto completion ========================================
 Plug 'jiangmiao/auto-pairs'
@@ -56,10 +46,27 @@ Plug 'tpope/vim-rhubarb', { 'on': 'Gbrowse' }
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
 Plug 'airblade/vim-gitgutter'
 
-source ~/dotfiles/nvim/plugin/language-support.vim
+" => Languae-support =======================================
+" html & css
+Plug 'mattn/emmet-vim'
+Plug 'ap/vim-css-color'
+" Plug 'norcalli/nvim-colorizer.lua'
+
+" javascript
+Plug 'sheerun/vim-polyglot'     " Full lang support
+" Plug 'jparise/vim-graphql'
+
+
+" => Not-listed ============================================
+" Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' } " markdown preview
+" Plug 'glts/vim-radical'            " Convert binary, hex, etc..
+" Plug 'editorconfig/editorconfig-vim'
+
+" Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }   " css color
+" Plug 'dragvisuals.vim'
+" Plug 'vmath.vim'
 call plug#end()
 
-source ~/dotfiles/nvim/plugin/quick-scope.vim
 source ~/dotfiles/nvim/plugin/quick-scope.vim
 source ~/dotfiles/nvim/plugin/onedark.vim
 source ~/dotfiles/nvim/plugin/indentLine.vim
@@ -75,5 +82,5 @@ source ~/dotfiles/nvim/plugin/vim-floaterm.vim
 source ~/dotfiles/nvim/plugin/vim-visual-multi.vim
 source ~/dotfiles/nvim/plugin/coc.vim
 source ~/dotfiles/nvim/plugin/tt.vim
-" source ~/dotfiles/nvim/plugin/yank-ring.vim
+source ~/dotfiles/nvim/plugin/hlnext.vim
 
