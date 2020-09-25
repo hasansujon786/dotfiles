@@ -1,26 +1,25 @@
 nnoremap <silent> <Leader>n :Fern . -drawer -toggle -reveal=%<CR><C-w>=
 " Open current file directory into the drawer
-nnoremap <silent> <Leader>. :call Before_Try_To_select_last_file()<CR>
+nnoremap <silent> <Leader>. :call <SID>before_Try_To_select_last_file()<CR>
       \:Fern %:h -drawer <CR>
-      \:call Try_To_select_last_file(300)<CR>
+      \:call <SID>try_To_select_last_file(300)<CR>
 " Open current file directory into the buffer
-nnoremap <silent> - :call Before_Try_To_select_last_file()<CR>
+nnoremap <silent> - :call <SID>before_Try_To_select_last_file()<CR>
       \:Fern <C-r>=<SID>smart_path()<CR><CR>
-      \:call Try_To_select_last_file(300)<CR>
+      \:call <SID>try_To_select_last_file(300)<CR>
 " Open bookmarks
 nnoremap <silent> <Leader>ii :<C-u>Fern bookmark:///<CR>
 
 let g:fern#drawer_width = 40
 let g:fern#keepalt_on_edit = 1
 let g:fern#default_hidden = 1
-let g:fern#disable_default_mappings   = 1
-let g:fern#disable_drawer_auto_quit   = 1
-let g:fern#default_exclude = 'node_modules'
-" let g:fern#disable_viewer_hide_cursor = 1
+let g:fern#disable_default_mappings = 1
+let g:fern#disable_drawer_smart_quit = 1
 let g:fern_git_status#disable_ignored = 1
 let g:fern_git_status#disable_untracked = 1
 let g:fern_git_status#disable_submodules = 1
-
+let g:fern#default_exclude = '.git\|node_modules'
+let g:fern#smart_cursor = 'hide'
 let g:fern#renderer = "devicons"
 let g:fern#mark_symbol                       = '●'
 let g:fern#renderer#default#collapsed_symbol = '▷ '
@@ -28,6 +27,7 @@ let g:fern#renderer#default#expanded_symbol  = '▼ '
 let g:fern#renderer#default#leading          = ' '
 let g:fern#renderer#default#leaf_symbol      = ' '
 let g:fern#renderer#default#root_symbol      = '~ '
+" Folder color
 highlight GlyphPalette8 guifg=#6b7089
 
 " Fern mappings {{{
@@ -112,8 +112,8 @@ augroup FernEvents
   autocmd!
   autocmd FileType fern call FernInit()
   autocmd FileType fern call glyph_palette#apply()
-  autocmd FileType nerdtree,startify call glyph_palette#apply()
   autocmd BufEnter * ++nested call s:hijack_directory()
+  " autocmd FileType nerdtree,startify call glyph_palette#apply()
 augroup END
 
 function! s:smart_path() abort
@@ -123,7 +123,7 @@ function! s:smart_path() abort
   return fnamemodify(expand('%'), ':p:h')
 endfunction
 
-function! Try_To_select_last_file(time) abort
+function! s:try_To_select_last_file(time) abort
   if s:fern_last_file !=# ''
     func! CallBackHandler(timer)
       call search('\v<' . s:fern_last_file . '>')
@@ -132,7 +132,7 @@ function! Try_To_select_last_file(time) abort
   endif
 endfunction
 
-function! Before_Try_To_select_last_file() abort
+function! s:before_Try_To_select_last_file() abort
   let s:fern_last_file=expand('%:t')
 endfunction
 
