@@ -46,8 +46,7 @@ endfunction
 " Clear previous highlighting (if any)...
 function! HLNextOff ()
     if (exists('w:HLNext_matchnum') && w:HLNext_matchnum > 0)
-        call matchdelete(w:HLNext_matchnum)
-        unlet! w:HLNext_matchnum
+        try | call matchdelete(w:HLNext_matchnum) | unlet! w:HLNext_matchnum | catch | endtry
     endif
 endfunction
 
