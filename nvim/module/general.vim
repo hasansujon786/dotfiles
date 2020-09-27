@@ -132,14 +132,6 @@ set showtabline=2
 
 let g:sh_fold_enabled=1              " enable folding in bash files
 
-" Highlight the characters on column 81
-highlight ColorColumn guibg=#3B4048 ctermbg=gray
-call matchadd('ColorColumn', '\%81v', '100')
-augroup fzf
-  autocmd  FileType fzf call clearmatches()
-        \| autocmd BufLeave <buffer> call matchadd('ColorColumn', '\%81v', '100')
-augroup END
-
 " }}}
 " => Text-Tab-and-Indent ---------------------------------------- {{{
 
@@ -165,7 +157,7 @@ set ai si                            " Auto indent & Smart indent
 
 " Wrappings
 set whichwrap+=<,>,h,l,[,]           " automatically wrap left and right
-set textwidth=120                    " Hard-wrap text at nth column
+set textwidth=80                    " Hard-wrap text at nth column
 set nowrap                           " No wrap by default
 set linebreak                        " Don't break words when wrapping lines
 let &showbreak="↳ "                  " Make wrapped lines more obvious

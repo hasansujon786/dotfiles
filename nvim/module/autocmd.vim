@@ -19,12 +19,16 @@ augroup vimrcEx
   autocmd WinEnter * if exists('g:auto_zoom_window') | call Utils_azw() | endif
 augroup END
 
-" Only show the cursor line in the active buffer.
 augroup CursorLine
   au!
+  " Only show the cursor line in the active buffer.
   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   au WinLeave * setlocal nocursorline
   au WinEnter,BufWinEnter * call Utils_auto_set_cursor_color()
+
+  " Highlight the textwidth column.
+  au WinEnter,BufWinEnter *.vim,*.js call Utils_highligt_textwith_column(1)
+        \| au WinLeave,BufWinLeave,BufLeave <buffer> call Utils_highligt_textwith_column(0)
 augroup END
 
 " Neovim terminal
