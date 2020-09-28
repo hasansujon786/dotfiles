@@ -61,10 +61,10 @@ let maplocalleader="\<Space>"
 " endif
 
 set nobackup nowb noswapfile         " Turn backup off, since most stuff is in SVN, git etc. anyway...
-set backupdir=~/.config/nvim/tmp/backup
-set directory=~/.config/nvim/tmp/swap
-set undodir=~/.config/nvim/tmp/undo
-set viewdir=~/.config/nvim/tmp/view
+set backupdir=~/.local/share/nvim/backup
+set directory=~/.local/share/nvim/swap
+set undodir=~/.local/share/nvim/undo
+set viewdir=~/.local/share/nvim/view
 set viewoptions-=curdir              " see: https://vi.stackexchange.com/questions/11903/working-directory-different-than-current-file-directory
 
 set undofile                         " persistent undo between file reloads

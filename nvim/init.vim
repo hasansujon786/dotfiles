@@ -1,7 +1,36 @@
-" W - "~/AppData/Local/nvim"
-" L - "~/.config/nvim/init.vim"
+"                                            ▀▀
+"  ██▄████▄   ▄████▄    ▄████▄   ██▄  ▄██   ████     ████▄██▄
+"  ██▀   ██  ██▄▄▄▄██  ██▀  ▀██   ██  ██      ██     ██ ██ ██
+"  ██    ██  ██▀▀▀▀▀▀  ██    ██   ▀█▄▄█▀      ██     ██ ██ ██
+"  ██    ██  ▀██▄▄▄▄█  ▀██▄▄██▀    ████    ▄▄▄██▄▄▄  ██ ██ ██
+"  ▀▀    ▀▀    ▀▀▀▀▀     ▀▀▀▀       ▀▀     ▀▀▀▀▀▀▀▀  ▀▀ ▀▀ ▀▀
+"                                              ▄▀▀    ▀
+"                        ▄▄▄    ▄▄▄   ▄ ▄▄   ▄▄█▄▄  ▄▄▄     ▄▄▄▄
+"                       █▀  ▀  █▀ ▀█  █▀  █    █      █    █▀ ▀█
+"                       █      █   █  █   █    █      █    █   █
+"                       ▀█▄▄▀  ▀█▄█▀  █   █    █    ▄▄█▄▄  ▀█▄▀█
+"                                                           ▄  █
+"                                                            ▀▀
 
-if !empty(glob("~/dot-windows/nvim/init.vim"))
-  source ~/dot-windows/nvim/mod.dorin.vim
-  echo "Welcom to Neovim"
-endif
+" if !empty(glob("~/dotfiles/nvim/mod.dorin.vim"))
+"   source ~/dotfiles/nvim/mod.dorin.vim
+" endif
+
+source ~/dotfiles/nvim/module/general.vim
+source ~/dotfiles/nvim/plugconfig/plug.vim
+source ~/dotfiles/nvim/module/utils.vim
+source ~/dotfiles/nvim/module/fold.vim
+source ~/dotfiles/nvim/module/filetypes.vim
+source ~/dotfiles/nvim/module/leader.vim
+source ~/dotfiles/nvim/module/key.vim
+source ~/dotfiles/nvim/module/autocmd.vim
+source ~/dotfiles/nvim/module/abbreviation.vim
+
+
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  Author: Hasan Mahmud                                              "
+"  Repo:   https://github.com/hasansujon786/dotfiles/                "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+

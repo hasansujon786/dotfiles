@@ -118,7 +118,6 @@ nnoremap <silent> <leader>l :wincmd l<CR>
 
 " => v is for vim =========================================
 nnoremap <leader>v. :e $MYVIMRC<CR>
-nnoremap <leader>v, :e ~/dotfiles/nvim/mod.dorin.vim<CR>
 nnoremap <leader>vs :source $MYVIMRC<CR>
 
 " => Others ===============================================

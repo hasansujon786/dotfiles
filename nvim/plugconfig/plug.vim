@@ -1,4 +1,4 @@
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin('~/.config/plug')
 
 " => Visual-&-Theme ========================================
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
@@ -66,20 +66,20 @@ Plug 'sheerun/vim-polyglot'     " Full lang support
 " Plug 'vmath.vim'
 call plug#end()
 
-source ~/dotfiles/nvim/plugin/quick-scope.vim
-source ~/dotfiles/nvim/plugin/onedark.vim
-source ~/dotfiles/nvim/plugin/indentLine.vim
-source ~/dotfiles/nvim/plugin/lightline.vim
-source ~/dotfiles/nvim/plugin/goyo.vim
-source ~/dotfiles/nvim/plugin/auto-pairs.vim
-source ~/dotfiles/nvim/plugin/fzf.vim
-source ~/dotfiles/nvim/plugin/fern.vim
-source ~/dotfiles/nvim/plugin/vim-sneak.vim
-source ~/dotfiles/nvim/plugin/vim-gitgutter.vim
-source ~/dotfiles/nvim/plugin/vim-fugitive.vim
-source ~/dotfiles/nvim/plugin/vim-floaterm.vim
-source ~/dotfiles/nvim/plugin/vim-visual-multi.vim
-source ~/dotfiles/nvim/plugin/coc.vim
-source ~/dotfiles/nvim/plugin/tt.vim
-source ~/dotfiles/nvim/plugin/hlnext.vim
+source ~/dotfiles/nvim/plugconfig/quick-scope.vim
+source ~/dotfiles/nvim/plugconfig/onedark.vim
+source ~/dotfiles/nvim/plugconfig/indentLine.vim
+source ~/dotfiles/nvim/plugconfig/lightline.vim
+source ~/dotfiles/nvim/plugconfig/goyo.vim
+source ~/dotfiles/nvim/plugconfig/auto-pairs.vim
+source ~/dotfiles/nvim/plugconfig/fzf.vim
+source ~/dotfiles/nvim/plugconfig/fern.vim
+source ~/dotfiles/nvim/plugconfig/vim-sneak.vim
+source ~/dotfiles/nvim/plugconfig/vim-gitgutter.vim
+source ~/dotfiles/nvim/plugconfig/vim-fugitive.vim
+source ~/dotfiles/nvim/plugconfig/vim-floaterm.vim
+source ~/dotfiles/nvim/plugconfig/vim-visual-multi.vim
+source ~/dotfiles/nvim/plugconfig/coc.vim
+source ~/dotfiles/nvim/plugconfig/tt.vim
+source ~/dotfiles/nvim/plugconfig/hlnext.vim
 
