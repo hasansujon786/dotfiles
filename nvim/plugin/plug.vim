@@ -5,7 +5,6 @@ Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'Yggdroot/indentLine'
-Plug 'https://github.com/cocopon/iceberg.vim'
 
 " => Functionality-&-Helpers ===============================
 Plug 'tpope/vim-eunuch', { 'on': ['Delete', 'Move', 'Rename', 'Mkdir'] }  "for moving and manipulating files / directories.

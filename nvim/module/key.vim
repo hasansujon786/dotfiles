@@ -14,7 +14,9 @@ inoremap qq <ESC>
 cnoremap qq <C-c>
 
 " Use Q to record macros
-nnoremap Q q
+noremap Q q
+" Replay last used macro
+noremap <CR> @@
 
 " Vertical scrolling
 nmap <silent> <A-d> <Plug>(SmoothieDownwards)

@@ -3,7 +3,7 @@
   "prettier.semi": false,
   "prettier.printWidth": 120,
   "prettier.singleQuote": true,
-  "prettier.bracketSpacing": false,
+  "prettier.bracketSpacing": true,
   "prettier.statusItemText": "Pt",
   "prettier.disableSuccessMessage": true,
   "coc.preferences.formatOnSaveFiletypes": [
