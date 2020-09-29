@@ -5,14 +5,14 @@ set signcolumn=yes                           " Always show the signcolumn,
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Highlighting same symbols in the buffer at the current cursor position.
 highlight CocHighlightText ctermbg=gray guibg=#3B4048
 
 augroup mygroup
   autocmd!
   " Highlight the symbol and its references when holding the cursor.
-  autocmd CursorHold * silent call CocActionAsync('highlight')
+  autocmd CursorHold * if exists('g:did_coc_loaded') | silent call CocActionAsync('highlight') | endif
   " Setup formatexpr specified filetype(s).
   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder.

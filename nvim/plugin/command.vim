@@ -1,3 +1,6 @@
+" Active all plugins
+command! BootPlug CocStart
+
 command! -nargs=1 PlaceholderImgTag call hasan#utils#placeholderImgTag(<f-args>)
 command! Bclose call hasan#utils#bufcloseCloseIt()
 command! ClearRegister call hasan#utils#clear_register()

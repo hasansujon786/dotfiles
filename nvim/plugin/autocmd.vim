@@ -1,5 +1,8 @@
 augroup vimrcEx
   autocmd!
+  if !exists('g:all_plugged_loaded')
+    execute 'autocmd CursorHold,CursorHoldI * BootPlug' | let g:all_plugged_loaded = 1
+  endif
   " Vertically center document when entering insert mode
   autocmd InsertEnter * norm zz
 

@@ -4,22 +4,22 @@ call plug#begin('~/.config/plug')
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim'
-Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine',{ 'on': 'CocStart' }
 
 " => Functionality-&-Helpers ===============================
 Plug 'tpope/vim-eunuch', { 'on': ['Delete', 'Move', 'Rename', 'Mkdir'] }  "for moving and manipulating files / directories.
 Plug 'voldikss/vim-floaterm', { 'on': [ 'FloatermNew', 'FloatermToggle' ] }
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'michaeljsmith/vim-indent-object'
-Plug 'dhruvasagar/vim-open-url'
-Plug 'unblevable/quick-scope'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'justinmk/vim-sneak'
-Plug 'Konfekt/FastFold'
-Plug 'tpope/vim-repeat'
-Plug 'psliwka/vim-smoothie'          " Smooth scroll
-Plug 'hasansujon786/vim-rel-jump'
+Plug 'mg979/vim-visual-multi', {'branch': 'master', 'on': 'CocStart' }
+Plug 'michaeljsmith/vim-indent-object',{ 'on': 'CocStart' }
+Plug 'dhruvasagar/vim-open-url',{ 'on': 'CocStart' }
+Plug 'unblevable/quick-scope',{ 'on': 'CocStart' }
+Plug 'tpope/vim-commentary',{ 'on': 'CocStart' }
+Plug 'tpope/vim-surround',{ 'on': 'CocStart' }
+Plug 'justinmk/vim-sneak',{ 'on': 'CocStart' }
+Plug 'Konfekt/FastFold',{ 'on': 'CocStart' }
+Plug 'tpope/vim-repeat',{ 'on': 'CocStart' }
+Plug 'psliwka/vim-smoothie',{ 'on': 'CocStart' }          " Smooth scroll
+Plug 'hasansujon786/vim-rel-jump',{ 'on': 'CocStart' }
 Plug 'mkropat/vim-tt'
 " Plug 'vimwiki/vimwiki'             " my own personal wiki
 
@@ -27,28 +27,28 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-Plug 'lambdalisue/fern-renderer-devicons.vim' " Icon support
-Plug 'lambdalisue/fern-git-status.vim'
-Plug 'lambdalisue/glyph-palette.vim'    " Add color to icons
-Plug 'lambdalisue/fern-bookmark.vim'
-Plug 'lambdalisue/fern.vim'
+Plug 'lambdalisue/fern-renderer-devicons.vim',{ 'on': 'Fern' } " Icon support
+Plug 'lambdalisue/fern-git-status.vim',{ 'on': 'Fern' }
+Plug 'lambdalisue/glyph-palette.vim',{ 'on': 'Fern' }     " Add color to icons
+Plug 'lambdalisue/fern-bookmark.vim',{ 'on': 'Fern' }
+Plug 'lambdalisue/fern.vim',{ 'on': 'Fern' }
 Plug 'lambdalisue/vim-manpager', {'on': 'Man'}
 
 " => Auto completion ========================================
-Plug 'jiangmiao/auto-pairs'
-Plug 'honza/vim-snippets'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'jiangmiao/auto-pairs',{ 'on': 'CocStart' }
+Plug 'honza/vim-snippets',{ 'on': 'CocStart' }
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'on': 'CocStart' }
 
 " => Git ===================================================
 Plug 'tpope/vim-fugitive', { 'on': ['Gstatus','Gvdiffsplit'] }
 Plug 'tpope/vim-rhubarb', { 'on': 'Gbrowse' }
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
-Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter',{ 'on': 'CocStart' }
 
 " => Languae-support =======================================
 " html & css
-Plug 'mattn/emmet-vim'
-Plug 'ap/vim-css-color'
+Plug 'mattn/emmet-vim',{ 'on': 'CocStart' }
+Plug 'ap/vim-css-color',{ 'on': 'CocStart' }
 " Plug 'norcalli/nvim-colorizer.lua'
 
 " javascript
