@@ -70,8 +70,8 @@ vmap <C-_> _gcgv
 " Move lines up and down in normal & visual mode
 nnoremap <silent> <A-j> :move +1<CR>==
 nnoremap <silent> <A-k> :move -2<CR>==
-xnoremap <silent> <A-k> :call Utils_visual_move_up()<CR>
-xnoremap <silent> <A-j> :call Utils_visual_move_down()<CR>
+xnoremap <silent> <A-k> :call hasan#utils#visual_move_up()<CR>
+xnoremap <silent> <A-j> :call hasan#utils#visual_move_down()<CR>
 " vnoremap <silent> <A-k> :move '<-2<CR>gv=gv
 " vnoremap <silent> <A-j> :move '>+1<CR>gv=gv
 
@@ -101,8 +101,8 @@ nnoremap <silent> [<TAB> :tabmove-<CR>
 xnoremap / y/<C-R>"<CR>
 
 " Pressing * or # searches for the current selection
-vnoremap <silent> * :<C-u>call Utils_VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
-vnoremap <silent> # :<C-u>call Utils_VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+vnoremap <silent> * :<C-u>call hasan#utils#visualSelection(('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call hasan#utils#visualSelection(('', '')<CR>?<C-R>=@/<CR><CR>
 " vnoremap * "xy/<C-R>x<CR>
 
 " Type a replacement term and press . to repeat the replacement again. Useful

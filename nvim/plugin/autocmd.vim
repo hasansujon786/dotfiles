@@ -16,7 +16,8 @@ augroup vimrcEx
   autocmd VimResized * :wincmd =
 
   " automatically zoom window on focus
-  autocmd WinEnter * if exists('g:auto_zoom_window') | call Utils_azw() | endif
+  autocmd WinEnter * if exists('g:auto_zoom_window') | call hasan#utils#azw() | endif
+  autocmd BufWritePre *.vim :call hasan#autocmd#trimWhitespace()
 augroup END
 
 augroup CursorLine
@@ -24,11 +25,11 @@ augroup CursorLine
   " Only show the cursor line in the active buffer.
   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   au WinLeave * setlocal nocursorline
-  au WinEnter,BufWinEnter * call Utils_auto_set_cursor_color()
+  au WinEnter,BufWinEnter * call hasan#autocmd#auto_set_cursor_color()
 
   " Highlight the textwidth column.
-  au WinEnter,BufWinEnter *.vim,*.js call Utils_highligt_textwith_column(1)
-        \| au WinLeave,BufWinLeave,BufLeave <buffer> call Utils_highligt_textwith_column(0)
+  au WinEnter,BufWinEnter *.vim,*.js call hasan#autocmd#highligt_textwith_column(1)
+        \| au WinLeave,BufWinLeave,BufLeave <buffer> call hasan#autocmd#highligt_textwith_column(0)
 augroup END
 
 " Neovim terminal

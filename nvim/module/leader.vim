@@ -16,7 +16,7 @@ inoremap <C-s> <Esc>:write<CR><Esc>a
 " exit file quickly
 nnoremap <silent> <leader>q :close<CR>
 " Cycle through relativenumber + number, number (only), and no numbering
-nnoremap <silent> <Leader>r :call Utils_cycle_numbering()<CR>
+nnoremap <silent> <Leader>r :call hasan#utils#cycle_numbering()<CR>
 
 " Map 1-9 + <Space> to jump to respective tab
 let i = 1
@@ -102,8 +102,8 @@ nnoremap <silent> <leader>dl :diffget //3<CR>
 " => t is for toggle ======================================
 " Toggle highlighting of current line and column
 nnoremap <silent> <leader>tc :setlocal cursorcolumn!<CR>
-nnoremap <silent> <Leader>tq :call Utils_QuickFix_toggle()<CR>
-nnoremap <silent> <leader>tw :call Utils_ToggleWrap()<CR>
+nnoremap <silent> <Leader>tq :call hasan#utils#quickFix_toggle()<CR>
+nnoremap <silent> <leader>tw :call hasan#utils#toggleWrap()<CR>
 
 " => w is for window ======================================
 " Switch between the alternate files
