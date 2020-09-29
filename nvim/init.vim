@@ -18,7 +18,6 @@
 
 source ~/dotfiles/nvim/module/general.vim
 source ~/dotfiles/nvim/plugconfig/plug.vim
-" source ~/dotfiles/nvim/module/utils.vim
 source ~/dotfiles/nvim/module/fold.vim
 source ~/dotfiles/nvim/module/filetypes.vim
 source ~/dotfiles/nvim/module/leader.vim
