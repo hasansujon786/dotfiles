@@ -83,9 +83,13 @@ function! LightlineWebDevIcons(n)
 endfunction
 
 function! LightlineTaskTimer()
-  let s:full_time_and_task = Is_tt_paused() ? ' |paused| ' : tt#get_remaining_full_format() . " " . tt#get_status_formatted() . " " . tt#get_task()
-  let s:smart_time = Is_tt_paused() ? ' ' : tt#get_remaining_smart_format()
-  return winwidth(0) > 70 && Should_tt_visible() ? s:full_time_and_task : winwidth(0) > 50 ? s:smart_time  : ''
+  try
+    let s:full_time_and_task = Is_tt_paused() ? ' |paused| ' : tt#get_remaining_full_format() . " " . tt#get_status_formatted() . " " . tt#get_task()
+    let s:smart_time = Is_tt_paused() ? ' ' : tt#get_remaining_smart_format()
+    return winwidth(0) > 70 && Should_tt_visible() ? s:full_time_and_task : winwidth(0) > 50 ? s:smart_time  : ''
+  catch
+    return ''
+  endtry
 endfunction
 
 " => itchyny/lightline.vim =================================
