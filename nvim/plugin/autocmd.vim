@@ -45,3 +45,10 @@ if has('nvim')
   augroup END
 endif
 
+augroup FernEvents
+  autocmd!
+  autocmd FileType fern call hasan#fern#FernInit()
+  autocmd FileType fern call glyph_palette#apply()
+  autocmd BufEnter * ++nested call hasan#boot#hijack_directory()
+  " autocmd FileType nerdtree,startify call glyph_palette#apply()
+augroup END
