@@ -43,9 +43,10 @@ nnoremap Y y$
 noremap x "_x
 noremap X "_x
 " Paste from + register (system clipboard)
-imap <C-v> <C-R>+
+inoremap <C-v> <C-R>+
+cnoremap <C-v> <C-R>+
 " Paste the last item from register
-cmap <C-v> <C-R>"
+cnoremap <A-p> <C-R>"
 
 " => Modify-&-Rearrange-texts =============================
 " Make vaa select the entire file...
