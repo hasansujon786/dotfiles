@@ -1,6 +1,6 @@
 " => Key-Mappings ------------------------------------- {{{
 
-" " Swap ; and : in normal/visual mode
+" Swap ; and : in normal/visual mode
 nnoremap ; :
 xnoremap ; :
 nnoremap : ;
@@ -156,8 +156,7 @@ if has("win32") || has("win64")
  " nnoremap <C-t><C-t> :silent !start cmd /k cd %:p:h <CR>
   nnoremap <silent> <C-t><C-t> :tc %:h<CR>:silent !start bash<CR>:tc -<CR>
 endif
-tmap <Esc> <C-\><C-n>
-tmap <C-o> <C-\><C-n><C-w>p
+tmap <C-o> <C-\><C-n>
 
 " => Function key mappings ================================
 " Toggle spelling and show it's status
