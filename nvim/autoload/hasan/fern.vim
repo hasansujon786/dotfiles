@@ -14,12 +14,9 @@ function! hasan#fern#smart_path() abort
   return fnamemodify(expand('%'), ':p:h')
 endfunction
 
-function! hasan#fern#try_To_select_last_file(time) abort
+function! hasan#fern#try_To_select_last_file() abort
   if s:fern_last_file !=# ''
-    func! CallBackHandler(timer)
-      call search('\v<' . s:fern_last_file . '>')
-    endfunc
-    let timer = timer_start(a:time, 'CallBackHandler')
+    call search('\v<' . s:fern_last_file . '>')
   endif
 endfunction
 
@@ -80,6 +77,7 @@ function! hasan#fern#FernInit() abort
   nmap <buffer> x <Plug>(fern-action-collapse)
   nmap <buffer> I <Plug>(fern-action-hidden:toggle)
   nmap <buffer> W <Plug>(fern-action-cd)
+  nmap <buffer> B <Plug>(fern-action-save-as-bookmark)
   nmap <buffer> q <C-w>c
   nmap <buffer> <BAR> <Plug>(fern-action-zoom)<C-w>=
   nmap <buffer> <nowait> < <Plug>(fern-action-leave)

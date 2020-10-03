@@ -1,12 +1,15 @@
 nnoremap <silent> <Leader>n :call hasan#fern#open_drawer()<CR>
 " Open current file directory into the drawer
-nnoremap <silent> <Leader>. :call hasan#fern#before_Try_To_select_last_file()<CR>
-      \:Fern %:h -drawer <CR>
-      \:call hasan#fern#try_To_select_last_file(300)<CR>
+nnoremap <silent> <Leader>. :
+      \call hasan#fern#before_Try_To_select_last_file()<CR>
+      \:Fern %:h -drawer -wait<CR>
+      \:call hasan#fern#try_To_select_last_file()<CR>
 " Open current file directory into the buffer
-nnoremap <silent> - :call hasan#fern#before_Try_To_select_last_file()<CR>
-      \:Fern <C-r>=hasan#fern#smart_path()<CR><CR>
-      \:call hasan#fern#try_To_select_last_file(300)<CR>
+nnoremap <silent> - :
+      \call hasan#fern#before_Try_To_select_last_file()<CR>
+      \:Fern <C-r>=hasan#fern#smart_path()<CR> -wait<CR>
+      \:call hasan#fern#try_To_select_last_file()<CR>
+
 " Open bookmarks
 nnoremap <silent> <Leader>ii :<C-u>Fern bookmark:///<CR>
 
@@ -20,7 +23,7 @@ let g:fern_git_status#disable_untracked = 1
 let g:fern_git_status#disable_submodules = 1
 let g:fern#default_exclude = '.git\|node_modules'
 let g:fern#smart_cursor = 'hide'
-let g:fern#renderer = "devicons"
+let g:fern#renderer = 'nerdfont'
 let g:fern#mark_symbol                       = '●'
 let g:fern#renderer#default#collapsed_symbol = '▷ '
 let g:fern#renderer#default#expanded_symbol  = '▼ '

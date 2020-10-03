@@ -23,15 +23,15 @@ Plug 'hasansujon786/vim-rel-jump',{ 'on': 'CocStart' }
 Plug 'mkropat/vim-tt'
 " Plug 'vimwiki/vimwiki'             " my own personal wiki
 
-Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-Plug 'lambdalisue/fern-renderer-devicons.vim',{ 'on': 'Fern' } " Icon support
-Plug 'lambdalisue/fern-git-status.vim',{ 'on': 'Fern' }
-Plug 'lambdalisue/glyph-palette.vim',{ 'on': 'Fern' }     " Add color to icons
-Plug 'lambdalisue/fern-bookmark.vim',{ 'on': 'Fern' }
-Plug 'lambdalisue/fern.vim',{ 'on': 'Fern' }
+Plug 'lambdalisue/nerdfont.vim'
+Plug 'lambdalisue/fern-bookmark.vim'
+Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+Plug 'lambdalisue/fern-git-status.vim'
+Plug 'lambdalisue/glyph-palette.vim'
+Plug 'lambdalisue/fern.vim'
 Plug 'lambdalisue/vim-manpager', {'on': 'Man'}
 
 " => Auto completion ========================================

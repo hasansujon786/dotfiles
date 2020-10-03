@@ -22,7 +22,7 @@ let g:lightline = {
       \   'tt_tasktimer': 'LightlineTaskTimer',
       \ },
       \ 'tab_component_function': {
-      \   'tabnum': 'LightlineWebDevIcons',
+      \   'tabnum': 'LightlineNerdfontIcons',
       \ },
       \ 'tabline': {
       \   'left': [[ 'tabs' ]],
@@ -77,9 +77,9 @@ function! MyFilename()
         \ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 
-function! LightlineWebDevIcons(n)
+function! LightlineNerdfontIcons(n)
   let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
-  return WebDevIconsGetFileTypeSymbol(bufname(l:bufnr))
+  return nerdfont#find(bufname(l:bufnr))
 endfunction
 
 function! LightlineTaskTimer()
