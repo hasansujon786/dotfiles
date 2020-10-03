@@ -21,15 +21,8 @@ nnoremap <silent> <C-k><C-k> :BLines<CR>
 
 " Shows Git history for the current buffer
 command! FileHistory execute ":BCommits!"
-
-function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
-  let initial_command = printf(command_fmt, shellescape(a:query))
-  let reload_command = printf(command_fmt, '{q}')
-  let spec = {'options': ['--phony','--reverse', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-endfunction
-command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+" Enhanced RipGrep integration with fzf
+command! -nargs=* -bang RG call hasan#utils#RipgrepFzf(<q-args>, <bang>0)
 
 let g:fzf_layout = { 'down': '~50%' }
 " let g:fzf_files_options = '--reverse --preview "(cat {})"'
@@ -41,6 +34,7 @@ let g:fzf_action = {
       \ 'q': 'normal <C-c>',
       \}
 
+" let $FZF_DEFAULT_COMMAND = "rg --files --hidden "
 let $FZF_DEFAULT_OPTS =
       \'--bind ctrl-a:select-all'
 
@@ -60,12 +54,3 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
-function! s:fzf_statusline()
-  " Override statusline as you like
-  highlight fzf1 guifg=#E5C07B guibg=#3B4048
-  highlight fzf2 guifg=#98C379 guibg=#3B4048
-  highlight fzf3 guifg=#ABB2BF guibg=#3B4048
-  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
-endfunction
-
-autocmd! User FzfStatusLine call <SID>fzf_statusline()

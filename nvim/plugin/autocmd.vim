@@ -1,11 +1,17 @@
 augroup vimrcEx
   autocmd!
+  " Load all plugins
   if !exists('g:all_plugged_loaded')
     execute 'autocmd CursorHold,CursorHoldI * BootPlug' | let g:all_plugged_loaded = 1
   endif
+
   " Vertically center document when entering insert mode
   autocmd InsertEnter * norm zz
-
+  " Vim/tmux layout rebalancing
+  " automatically rebalance windows on vim resize
+  autocmd VimResized * :wincmd =
+  " Trim white spaces before saving
+  autocmd BufWritePre *.vim :call hasan#autocmd#trimWhitespace()
   " When editing a file, always jump to the last known cursor position.
   " Don't do it for commit messages, when the position is invalid, or when
   " inside an event handler (happens when dropping a file on gvim).
@@ -14,13 +20,11 @@ augroup vimrcEx
         \   exe "normal g`\"" |
         \ endif
 
-  " Vim/tmux layout rebalancing
-  " automatically rebalance windows on vim resize
-  autocmd VimResized * :wincmd =
-
   " automatically zoom window on focus
   autocmd WinEnter * if exists('g:auto_zoom_window') | call hasan#utils#azw() | endif
-  autocmd BufWritePre *.vim :call hasan#autocmd#trimWhitespace()
+
+  " Custom fzf statusline
+  autocmd User FzfStatusLine call hasan#autocmd#fzf_statusline()
 augroup END
 
 augroup CursorLine
