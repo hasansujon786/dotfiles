@@ -14,6 +14,7 @@ nnoremap <silent> <C-k>; :History:<CR>
 nnoremap <silent> <C-k>' :Marks<CR>
 
 nnoremap <A-/> :RG!<space>
+vnoremap <A-/> y:RG!<space><C-r>"
 nnoremap <silent> <C-k>l :Lines<CR>
 nnoremap <silent> <C-k>k :BLines<CR>
 nnoremap <silent> <C-k><C-k> :BLines<CR>
@@ -48,7 +49,7 @@ let g:fzf_colors =
   \ 'bg':      ['bg', 'Normal'],
   \ 'hl':      ['fg', 'Directory'],
   \ 'fg+':     ['fg', 'Type', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'bg+':     ['bg', 'Visual','CursorLine', 'CursorColumn'],
   \ 'hl+':     ['fg', 'Directory'],
   \ 'info':    ['fg', 'Keyword'],
   \ 'border':  ['fg', 'Ignore'],

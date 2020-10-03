@@ -1,11 +1,5 @@
 " => Key-Mappings ------------------------------------- {{{
 
-" Swap ; and : in normal/visual mode
-nnoremap ; :
-xnoremap ; :
-nnoremap : ;
-xnoremap : ;
-
 " Use q, qq & jk to return to normal mode
 nnoremap <silent> q <ESC>:call HLNextOff() <BAR> :nohlsearch<CR>
 vnoremap <silent> q <ESC>:call HLNextOff() <BAR> :nohlsearch<CR>
@@ -108,9 +102,8 @@ vnoremap <silent> # :<C-u>call hasan#utils#visualSelection(('', '')<CR>?<C-R>=@/
 
 " Type a replacement term and press . to repeat the replacement again. Useful
 " for replacing a few instances of the term (comparable to multiple cursors).
-" TODO: change binding
-nnoremap <silent> C :let @/='\<'.expand('<cword>').'\>'<CR>cgn
-xnoremap <silent> C "sy:let @/=@s<CR>cgn
+nnoremap <silent> c* :let @/='\<'.expand('<cword>').'\>'<CR>cgn
+xnoremap <silent> c* "sy:let @/=@s<CR>cgn
 
 " => Insert-Mode-key-mapping ==============================
 " Move cursor by character
