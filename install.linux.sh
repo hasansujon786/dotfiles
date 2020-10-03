@@ -78,19 +78,12 @@ install_and_setup_nvim() {
   echo 'Installing Neovim...'
   apt install -y neovim
 
-  if [ -d ~/.config ]; then
+  if [ -d ~/.config/nvim ]; then
     echo 'Removing old .config directory.'
-    rm -Rf ~/.config
+    mv "$HOME/.config/nvim" "$HOME/.config/nvim.bak.$(date +%Y.%m.%d-%H:%M:%S)"
   fi
 
-  echo 'Creating .config/nvim/init.vim.'
-  mkdir ~/.config/nvim -p
-  mkdir ~/.config/nvim/tmp -p
-  mkdir ~/.config/nvim/tmp/backup -p
-  mkdir ~/.config/nvim/tmp/swap -p
-  mkdir ~/.config/nvim/tmp/undo -p
-  touch ~/.config/nvim/init.vim
-  printf 'if !empty(glob("~/dotfiles/nvim/mod.dorin.vim"))\n  source ~/dotfiles/nvim/mod.dorin.vim \nendif' >> ~/.config/nvim/init.vim
+  ln -s ~/dotfiles/nvim ~/.config/nvim
 
   echo 'Installing vim-plug.'
   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
