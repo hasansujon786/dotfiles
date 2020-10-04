@@ -1,11 +1,16 @@
 " => Key-Mappings ------------------------------------- {{{
 
 " Use q, qq & jk to return to normal mode
-nnoremap <silent> q <ESC>:call HLNextOff() <BAR> :nohlsearch<CR>
-vnoremap <silent> q <ESC>:call HLNextOff() <BAR> :nohlsearch<CR>
 inoremap jk <ESC>
 inoremap qq <ESC>
 cnoremap qq <C-c>
+if !exists('g:loaded_HLNext')
+  nnoremap <silent> q <ESC>:nohlsearch<CR>
+  vnoremap <silent> q <ESC>:nohlsearch<CR>
+else
+  nnoremap <silent> q <ESC>:call HLNextOff() <BAR> :nohlsearch<CR>
+  vnoremap <silent> q <ESC>:call HLNextOff() <BAR> :nohlsearch<CR>
+endif
 
 " Use Q to record macros
 noremap Q q
@@ -80,7 +85,6 @@ nnoremap <silent> <A-,> :vertical resize -5<CR>
 nnoremap <silent> \ :wincmd _<cr>:wincmd \|<cr>:vertical resize -5<CR>
 nnoremap <silent> <Bar> :wincmd =<cr>
 
-nnoremap <C-i> <C-j>
 nnoremap <C-j> <C-i>
 " Jump between tabs
 nnoremap <silent> <TAB> :tabnext<CR>

@@ -7,7 +7,7 @@
 " if exists("loaded_HLNext")
 "     finish
 " endif
-" let loaded_HLNext = 1
+let g:loaded_HLNext = 1
 
 " Preserve external compatibility options, then enable full vim compatibility...
 let s:save_cpo = &cpo

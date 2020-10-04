@@ -1,4 +1,5 @@
 nnoremap <silent> <Leader>n :call hasan#fern#open_drawer()<CR>
+nnoremap <silent> <Leader>0 :Fern . -drawer -toggle<CR><C-w>=
 " Open current file directory into the drawer
 nnoremap <silent> <Leader>. :
       \call hasan#fern#before_Try_To_select_last_file()<CR>
