@@ -3,11 +3,11 @@
 " Recommended to use a mapping similar to the following:
 " nmap <silent> <BS> :call HLNextOff() <BAR> :nohlsearch<CR>
 
-" If already loaded, we're done...
-if exists("loaded_HLNext")
-    finish
-endif
-let loaded_HLNext = 1
+" " If already loaded, we're done...
+" if exists("loaded_HLNext")
+"     finish
+" endif
+" let loaded_HLNext = 1
 
 " Preserve external compatibility options, then enable full vim compatibility...
 let s:save_cpo = &cpo

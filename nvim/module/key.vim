@@ -96,8 +96,8 @@ nnoremap <silent> [<TAB> :tabmove-<CR>
 xnoremap / y/<C-R>"<CR>
 
 " Pressing * or # searches for the current selection
-vnoremap <silent> * :<C-u>call hasan#utils#visualSelection(('', '')<CR>/<C-R>=@/<CR><CR>
-vnoremap <silent> # :<C-u>call hasan#utils#visualSelection(('', '')<CR>?<C-R>=@/<CR><CR>
+vnoremap <silent> * :<C-u>call hasan#utils#visualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call hasan#utils#visualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " vnoremap * "xy/<C-R>x<CR>
 
 " Type a replacement term and press . to repeat the replacement again. Useful
