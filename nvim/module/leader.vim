@@ -81,14 +81,20 @@ xnoremap <Leader>ff y :%s/<C-r>"//gc<Left><Left><Left>
 " nnoremap S :%s//gI<Left><Left><Left>
 
 " => g is for git =========================================
-nnoremap <silent> <leader>gg :Gstatus<CR>:wincmd _<CR>
-nnoremap <silent> <leader>gl :FloatermNew --name=lazygit lazygit<CR>
-nnoremap <silent> <leader>gt :FloatermNew --name=tig tig<CR>
 " GitGutter
 nmap <silent> <leader>gp <Plug>(GitGutterPreviewHunk)
 nmap <silent> <leader>gu <Plug>(GitGutterUndoHunk)
 nmap <silent> <leader>gs <Plug>(GitGutterStageHunk)
 vmap <silent> <leader>gs <Plug>(GitGutterStageHunk)
+
+nnoremap <silent> <leader>gg :Gstatus<CR>:wincmd _<CR>
+if !exists('$TMUX')
+  nnoremap <silent> <leader>gl :FloatermNew --name=lazygit lazygit<CR>
+  nnoremap <silent> <leader>gt :FloatermNew --name=tig tig<CR>
+else
+  nnoremap <silent> <leader>gl :silent !tmux new-window "lazygit"<CR>
+  nnoremap <silent> <leader>gt :silent !tmux new-window "tig"<CR>
+endif
 
 " => d is for diff =========================================
 " <LocalLeader>d... -- Diff mode bindings:
