@@ -21,7 +21,7 @@ Plug 'tpope/vim-repeat',{ 'on': 'CocStart' }
 Plug 'psliwka/vim-smoothie',{ 'on': 'CocStart' }          " Smooth scroll
 Plug 'hasansujon786/vim-rel-jump',{ 'on': 'CocStart' }
 Plug 'mkropat/vim-tt'
-" Plug 'vimwiki/vimwiki'             " my own personal wiki
+Plug 'vimwiki/vimwiki',{ 'on': ['VimwikiIndex', 'VimwikiTabIndex', 'VimwikiDiaryIndex'] }
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -82,4 +82,5 @@ source ~/dotfiles/nvim/config/vim-visual-multi.vim
 source ~/dotfiles/nvim/config/coc.vim
 source ~/dotfiles/nvim/config/tt.vim
 source ~/dotfiles/nvim/config/hlnext.vim
+source ~/dotfiles/nvim/config/vim-wiki.vim
 
