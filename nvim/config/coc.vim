@@ -1,6 +1,5 @@
 " => coc-settings ---------------------------------- {{{
 " let g:coc_config_home = '~/dotfiles/nvim'    " set path of coc-settings.json
-set signcolumn=yes                           " Always show the signcolumn,
 
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that

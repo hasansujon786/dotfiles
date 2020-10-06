@@ -1,3 +1,5 @@
+filetype plugin indent on    " required
+
 augroup setSyntax
   autocmd!
   " Set syntax highlighting for specific file types
@@ -5,6 +7,7 @@ augroup setSyntax
   autocmd BufRead,BufNewFile *.md set filetype=markdown
   autocmd BufRead,BufNewFile .eslintrc,.prettierrc set filetype=json
   autocmd BufRead,BufNewFile *.prisma set filetype=graphql
+  autocmd BufRead,BufNewFile *.json.* setfiletype json
 
   " add support for comments in json (jsonc format used as configuration for
   " many utilities)
