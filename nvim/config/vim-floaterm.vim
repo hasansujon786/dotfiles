@@ -1,7 +1,7 @@
 """ Configs
 let g:floaterm_width = 0.98
 let g:floaterm_height = 0.9
-let g:floaterm_title = '%s/%s'
+let g:floaterm_title = '$1/$2'
 """ Keymaps
 let g:floaterm_keymap_new    = '<C-\>c'
 let g:floaterm_keymap_prev   = '<C-\>p'

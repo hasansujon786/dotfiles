@@ -24,7 +24,6 @@ source ~/dotfiles/nvim/module/autocmd.vim
 source ~/dotfiles/nvim/module/command.vim
 source ~/dotfiles/nvim/module/leader.vim
 source ~/dotfiles/nvim/module/key.vim
-" source ~/dotfiles/nvim/module/autocmd.vim
 source ~/dotfiles/nvim/module/abbreviation.vim
 
 

@@ -32,7 +32,7 @@ let g:lightline = {
       \ },
       \
       \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
-      \ 'subseparator': { 'left': "", 'right': "" }
+      \ 'subseparator': { 'left': '', 'right': '' }
       \ }
 
 " Use auocmd to force lightline update.
@@ -84,9 +84,12 @@ endfunction
 
 function! LightlineTaskTimer()
   try
-    let s:full_time_and_task = Is_tt_paused() ? ' |paused| ' : tt#get_remaining_full_format() . " " . tt#get_status_formatted() . " " . tt#get_task()
-    let s:smart_time = Is_tt_paused() ? ' ' : tt#get_remaining_smart_format()
-    return winwidth(0) > 70 && Should_tt_visible() ? s:full_time_and_task : winwidth(0) > 50 ? s:smart_time  : ''
+    if Should_tt_visible()
+      let l:full_tt = Is_tt_paused() ? '|  | ' : tt#get_remaining_full_format() . " " . tt#get_status_formatted() . " " . tt#get_task()
+      let l:smart_tt = Is_tt_paused() ? '' : tt#get_remaining_smart_format()
+      return winwidth(0) > 70 ? l:full_tt : winwidth(0) > 50 ? l:smart_tt  : ''
+    endif
+    return ''
   catch
     return ''
   endtry

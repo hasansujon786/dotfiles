@@ -73,17 +73,13 @@ command! -range MarkTask <line1>,<line2>call tt#mark_task()
 command! OpenTasks call tt#open_tasks() <Bar> call tt#focus_tasks()
 command! ShowTimer echomsg tt#get_remaining_full_format() . " " . tt#get_status_formatted() . " " . tt#get_task()
 command! ToggleTimer call tt#toggle_timer() | call s:tt_toggle_visibility(1)
-command! HideAndShowTimer call s:tt_hideAndShowTimer()
+command! HideAndShowTimer call s:tt_toggle_visibility(g:tt_show_on_load == 1 ? 0 : 1)
 command! -nargs=1 UpdateCurrentTimer call tt#set_timer(<f-args>)
 command! -nargs=1 UpdateCurrentStatus call tt#set_status(<f-args>)
 
 
 function! Should_tt_visible()
-  if !exists('g:tt_show_on_load')
-    return 0
-  else
-    return g:tt_show_on_load
-  endif
+  return !exists('g:tt_show_on_load') ? 0 : g:tt_show_on_load
 endfunction
 
 function! Is_tt_paused()
@@ -93,21 +89,6 @@ endfunction
 function! s:tt_toggle_visibility(bool)
   let g:tt_show_on_load = a:bool
 endfunction
-
-function s:tt_hideAndShowTimer()
-  if g:tt_show_on_load
-    call s:tt_toggle_visibility(0)
-  else
-    call s:tt_toggle_visibility(1)
-  endif
-endfunction
-
-" function s:tt_after_toggle_timer()
-"   if g:tt_show_on_load == 0
-"     call s:tt_toggle_visibility(1)
-"   endif
-" endfunction
-
 
 " augroup TtAirline
 "   autocmd!
