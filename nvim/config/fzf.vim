@@ -1,4 +1,3 @@
-" nnoremap <silent> - :Commands<CR>
 " nnoremap <silent> - :Files <C-R>=expand('%:h')<CR><CR>
 nnoremap <silent> <C-p> :History<CR>
 nnoremap <silent> <C-k>p :Files<CR>
@@ -8,19 +7,17 @@ nnoremap <silent> <C-k>b :Buffers<CR>
 nnoremap <silent> <C-k>w :Windows<CR>
 nnoremap <silent> <C-k>m :Filetypes<CR>
 
+nnoremap <silent> <C-k>' :Marks<CR>
 nnoremap <silent> <C-k>? :GFile?<CR>
 nnoremap <silent> <C-k>/ :History/<CR>
-nnoremap <silent> <C-k>; :History:<CR>
-nnoremap <silent> <C-k>' :Marks<CR>
+nnoremap <silent> <C-k>k :History:<CR>
+nnoremap <silent> <C-k><C-k> :History:<CR>
 
 nnoremap <A-/> :RG!<space>
 vnoremap <A-/> y:RG!<space><C-r>"
+nnoremap <silent> // :BLines<CR>
 nnoremap <silent> <C-k>l :Lines<CR>
-nnoremap <silent> <C-k>k :BLines<CR>
-nnoremap <silent> <C-k><C-k> :BLines<CR>
 
-" Shows Git history for the current buffer
-command! FileHistory execute ":BCommits!"
 " Enhanced RipGrep integration with fzf
 command! -nargs=* -bang RG call hasan#utils#RipgrepFzf(<q-args>, <bang>0)
 
@@ -34,7 +31,8 @@ let g:fzf_action = {
       \ 'q': 'normal <C-c>',
       \}
 
-" let $FZF_DEFAULT_COMMAND = "rg --files --hidden "
+" Requires ripgrep
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/*"'
 let $FZF_DEFAULT_OPTS =
       \'--bind ctrl-a:select-all'
 

@@ -48,6 +48,8 @@ cnoremap <C-v> <C-R>+
 cnoremap <A-p> <C-R>"
 
 " => Modify-&-Rearrange-texts =============================
+" Print the number of occurrences of the current word under the cursor
+vmap <C-g> *<C-O>:%s///gn<CR>
 " Make vaa select the entire file...
 vnoremap aa VGo1G
 " a fix to select end of line

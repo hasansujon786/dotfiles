@@ -114,13 +114,15 @@ nnoremap <silent> <leader>tw :call hasan#utils#toggleWrap()<CR>
 " => w is for window ======================================
 " Switch between the alternate files
 nnoremap <BS> <c-^>
-" Jump between windows
-nnoremap <leader>w <C-w>
-nnoremap <silent> <leader>wz :AutoZoomWin<CR>
+  " Jump between windows
 nnoremap <silent> <leader>j :wincmd j<CR>
 nnoremap <silent> <leader>k :wincmd k<CR>
 nnoremap <silent> <leader>h :wincmd h<CR>
 nnoremap <silent> <leader>l :wincmd l<CR>
+nnoremap <silent> <leader>wv <C-w>v
+nnoremap <silent> <leader>ws <C-w>s
+nnoremap <silent> <leader>wo <C-w>o
+nnoremap <silent> <leader>wz :AutoZoomWin<CR>
 
 " => v is for vim =========================================
 nnoremap <leader>v. :e $MYVIMRC<CR>
