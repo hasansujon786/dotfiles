@@ -41,6 +41,8 @@ autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 function! LightlineFugitive()
   if exists('*FugitiveHead')
     let branch = FugitiveHead()
+    " return winwidth(0) > 60 ? branch !=# '' ? ' '.branch : '' : ''
+    " Print only if branch is not master
     return branch ==# 'master' ? '' : winwidth(0) > 60 ? branch !=# '' ? ' '.branch : '' : ''
   endif
   return ''
@@ -54,14 +56,8 @@ endfunction
 
 function! MyMode()
   let fname = expand('%:t')
-  return fname == '__Tagbar__' ? 'Tagbar' :
-        \ fname == '__Gundo__' ? 'Gundo' :
-        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
-        \ fname =~ 'NERD_tree' ? 'NERD_tree' :
+  return fname =~ 'NERD_tree' ? 'NERD_tree' :
         \ &ft == 'fern' ? 'fern' :
-        \ &ft == 'unite' ? 'Unite' :
-        \ &ft == 'vimfiler' ? 'VimFiler' :
-        \ &ft == 'vimshell' ? 'VimShell' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
@@ -70,9 +66,7 @@ function! MyModified()
 endfunction
 
 function! MyFilename()
-  return (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \  &ft == 'unite' ? unite#get_status_string() :
-        \  &ft == 'vimshell' ? vimshell#get_status_string() :
+  return (&ft == 'fugitive' ? 'fugitive' :
         \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
         \ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
