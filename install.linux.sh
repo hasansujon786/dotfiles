@@ -108,6 +108,7 @@ install_various_apps() {
 
   printWithToilet tig
   apt install -y tig
+  ln -s ~/dotfiles/tui/tig/.tigrc ~/.tigrc
 
   printWithToilet wget
   apt install -y wget
@@ -129,6 +130,8 @@ install_various_apps() {
   # sudo mv lazygit /usr/local/bin/
   mv lazygit /data/data/com.termux/files/usr/bin/lazygit
   rm lazygit.tgz
+
+  ln -s ~/dotfiles/tui/lazygit/config.yml ~/.config/jesseduffield/lazygit/config.yml
 
 }
 

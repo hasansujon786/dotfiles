@@ -1,0 +1,23 @@
+reporting: 'on'
+startuppopupversion: 1
+gui:
+  theme:
+    lightTheme: false # For terminals with a light background
+    activeBorderColor:
+      - green
+      - bold
+    inactiveBorderColor:
+      - default
+    optionsTextColor:
+      - default
+    selectedLineBgColor:
+      - black
+    selectedRangeBgColor:
+      - reverse
+keybinding:
+  universal:
+    scrollUpMain-alt1: '{' # main panel scrool up
+    scrollDownMain-alt1: '}' # main panel scrool down
+    createRebaseOptionsMenu: 'x'
+    optionMenu: 'm' # show help menu
+    nextScreenMode: 'O'
