@@ -1,3 +1,28 @@
+" ConfirmQuit {{{
+function! hasan#utils#clearEcho()
+  echon "\r\r"
+  echon ''
+endfunction
+
+function! hasan#utils#confirmQuit(writeFile)
+  call hasan#utils#clearEcho()
+  let isLastTab = winnr('$')==1 && tabpagenr('$')==1
+
+  if (expand('%:t')=="" && isLastTab && &modified)
+    echohl ErrorMsg | echo  "E32: No file name" | echohl None
+    return
+  endif
+  if (a:writeFile && &modified) | :write | endif
+
+  if (isLastTab && &modified)
+    if (confirm("Save changes & quit the app?", "&Yes\n&No", 2) == 1)| :wq |endif
+  elseif (isLastTab)
+    if (confirm("Do you want to quit the app?", "&Yes\n&No", 2)==1)| :quit |endif
+  else
+    :quit
+  endif
+endfunction
+" }}}
 
 " Toggle quickfix window {{{
 function! hasan#utils#quickFix_toggle()

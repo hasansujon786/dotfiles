@@ -11,10 +11,12 @@ vnoremap <Leader>y "+ygv<Esc>
 vnoremap <Leader>d "+d
 " Save file Quickly
 nnoremap <leader>s :write<CR>
-nnoremap <C-s> :write<CR>
-inoremap <C-s> <Esc>:write<CR><Esc>a
+nnoremap <leader>S :write<CR>:so %<CR>
 " exit file quickly
-nnoremap <silent> <leader>q :close<CR>
+nnoremap <silent> ZZ :call hasan#utils#confirmQuit(1)<CR>
+cnoremap <silent> q<CR>  :call hasan#utils#confirmQuit(0)<CR>
+cnoremap <silent> x<CR>  :call hasan#utils#confirmQuit(1)<CR>
+nnoremap <silent> <leader>q  :call hasan#utils#confirmQuit(0)<CR>
 " Cycle through relativenumber + number, number (only), and no numbering
 nnoremap <silent> <Leader>r :call hasan#utils#cycle_numbering()<CR>
 
