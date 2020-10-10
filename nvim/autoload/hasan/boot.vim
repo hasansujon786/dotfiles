@@ -1,13 +1,13 @@
 
 " AutoSetCursorColor {{{
 function! hasan#boot#auto_set_cursor_color() abort
-  if &filetype =~ 'list\|fugitive\|fern'
+  if &filetype =~ 'list\|fugitive\|\<fern\>'
     highlight CursorLine guibg=#3E4452
   else
     highlight CursorLine guibg=#2C323C
   endif
 
-  if &filetype =~ 'fern'
+  if &filetype =~ '\<fern\>'
     highlight Cursor ctermfg=235 ctermbg=39 guifg=#282C34 guibg=#3E4452
   else
     highlight Cursor ctermfg=235 ctermbg=39 guifg=#282C34 guibg=#61AFEF
