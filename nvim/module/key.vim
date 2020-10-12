@@ -16,6 +16,8 @@ endif
 noremap Q q
 " Replay last used macro
 noremap <CR> @@
+" Better marks
+nnoremap ' `
 
 " Vertical scrolling
 nmap <silent> <A-d> <Plug>(SmoothieDownwards)
@@ -38,6 +40,8 @@ vnoremap p pgvy
 vnoremap y ygv<Esc>
 " Ensure Y works similar to D,C.
 nnoremap Y y$
+" Select the last yanked text
+nnoremap gV `[v`]
 " Prevent x from overriding the clipboard.
 noremap x "_x
 noremap X "_x
@@ -158,6 +162,7 @@ endif
 tmap <C-o> <C-\><C-n>
 
 " => Function key mappings ================================
+nnoremap <silent> <F3> :set paste!<CR>
 " Toggle spelling and show it's status
 nnoremap <F7> :setlocal spell! spell?<CR>
 inoremap <F7> <Esc>:setlocal spell! spell?<CR>a
@@ -180,6 +185,12 @@ nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
+
+" Bindings for more efficient path-based file navigation
+" nnoremap ,f :find *
+" nnoremap ,v :vert sfind *
+" nnoremap ,F :find <C-R>=fnameescape(expand('%:p:h')).'/**/*'<CR>
+" nnoremap ,V :vert sfind <C-R>=fnameescape(expand('%:p:h')).'/**/*'<CR>
 
 " vmap gs :sort<CR>
 

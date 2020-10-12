@@ -56,3 +56,14 @@ augroup FernEvents
   autocmd BufEnter * ++nested call hasan#boot#hijack_directory()
   " autocmd FileType nerdtree,startify call glyph_palette#apply()
 augroup END
+
+" Create file-marks for commonly edited file types
+augroup FileMarks
+  autocmd!
+  autocmd BufLeave *.html normal! mH
+  autocmd BufLeave *.js   normal! mJ
+  autocmd BufLeave *.ts   normal! mT
+  autocmd BufLeave *.vim  normal! mV
+	autocmd BufLeave *.css  normal! mC
+augroup END
+
