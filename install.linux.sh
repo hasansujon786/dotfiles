@@ -83,6 +83,7 @@ install_and_setup_nvim() {
     mv "$HOME/.config/nvim" "$HOME/.config/nvim.bak.$(date +%Y.%m.%d-%H:%M:%S)"
   fi
 
+  mkdir -p ~/.config
   ln -s ~/dotfiles/nvim ~/.config/nvim
 
   echo 'Installing vim-plug.'
@@ -131,6 +132,12 @@ install_various_apps() {
   mv lazygit /data/data/com.termux/files/usr/bin/lazygit
   rm lazygit.tgz
 
+  if [ -d ~/.config/jesseduffield ]; then
+    echo 'Removing old lazygit config.'
+    rm -rf ~/.config/jesseduffield
+  fi
+
+  mkdir -p ~/.config/jesseduffield/lazygit
   ln -s ~/dotfiles/tui/lazygit/config.yml ~/.config/jesseduffield/lazygit/config.yml
 
 }
