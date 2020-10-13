@@ -21,6 +21,7 @@ Plug 'tpope/vim-repeat',{ 'on': 'CocStart' }
 Plug 'psliwka/vim-smoothie',{ 'on': 'CocStart' }          " Smooth scroll
 Plug 'hasansujon786/vim-rel-jump',{ 'on': 'CocStart' }
 Plug 'mkropat/vim-tt'
+Plug 'liuchengxu/vim-which-key'
 Plug 'vimwiki/vimwiki',{ 'on': ['VimwikiIndex', 'VimwikiTabIndex', 'VimwikiDiaryIndex'] }
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }

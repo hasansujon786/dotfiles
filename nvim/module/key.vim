@@ -12,6 +12,13 @@ else
   vnoremap <silent> q <ESC>:call HLNextOff() <BAR> :nohlsearch<CR>
 endif
 
+" exit file with confrim
+nnoremap <silent> ZZ :call hasan#utils#confirmQuit(1)<CR>
+cnoremap <silent> q<CR>  :call hasan#utils#confirmQuit(0)<CR>
+cnoremap <silent> x<CR>  :call hasan#utils#confirmQuit(1)<CR>
+
+" Switch between the alternate files
+nnoremap <BS> <c-^>
 " Use Q to record macros
 noremap Q q
 " Replay last used macro
@@ -176,8 +183,6 @@ nnoremap <leader>fn :normal! mz]s1z=`z<CR>
 " Add to spell file     zg
 " Prompt spell fixes    z=
 
-nnoremap <silent> <F10> :call Utils_ToggleBackground()<CR>
-
 " }}}
 " => Disabled-keys ------------------------------------ {{{
 " disable arrow keys in normal mode
@@ -193,6 +198,9 @@ nnoremap <Down> :echoe "Use j"<CR>
 " nnoremap ,V :vert sfind <C-R>=fnameescape(expand('%:p:h')).'/**/*'<CR>
 
 " vmap gs :sort<CR>
+
+" nnoremap S :%s//gI<Left><Left><Left>
+" nnoremap <silent> <F10> :call Utils_ToggleBackground()<CR>
 
 " CTRL-L to fix syntax highlight
 " nnoremap <silent><expr> <C-l> empty(get(b:, 'current_syntax'))

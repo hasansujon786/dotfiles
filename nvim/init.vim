@@ -22,7 +22,7 @@ source ~/dotfiles/nvim/module/filetypes.vim
 source ~/dotfiles/nvim/module/fold.vim
 source ~/dotfiles/nvim/module/autocmd.vim
 source ~/dotfiles/nvim/module/command.vim
-source ~/dotfiles/nvim/module/leader.vim
+source ~/dotfiles/nvim/module/which-key.vim
 source ~/dotfiles/nvim/module/key.vim
 source ~/dotfiles/nvim/module/abbreviation.vim
 

@@ -55,3 +55,14 @@ command! BD call fzf#run(fzf#wrap({
 
 
 highlight NonText ctermfg=white guifg=#5C6370
+
+" a is for actions
+let g:which_key_map['a'] = {
+      \ 'name' : '+actions' ,
+      \ 'l' : [':Bracey'                 , 'start live server'],
+      \ 'L' : [':BraceyStop'             , 'stop live server'],
+      \ 'm' : [':MarkdownPreview'        , 'markdown preview'],
+      \ 'M' : [':MarkdownPreviewStop'    , 'markdown preview stop'],
+      \ 'v' : [':Codi'                   , 'virtual repl on'],
+      \ 'V' : [':Codi!'                  , 'virtual repl off'],
+      \ }

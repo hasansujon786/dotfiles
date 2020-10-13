@@ -34,7 +34,7 @@ set hidden                                             " enable hidden unsaved b
 
 set lazyredraw                                         " Don't redraw while executing macros (good performance config)
 set updatetime=100
-set timeout ttimeout ttimeoutlen=200                   " Quickly time out on keycodes, but never time out on mappings
+set timeout ttimeout ttimeoutlen=200 timeoutlen=500    " Quickly time out on keycodes, but never time out on mappings
 set autowrite                                          " Automatically :write before running commands
 set autoread                                           " Set to auto read when a file is changed from the outside
 

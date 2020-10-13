@@ -1,18 +1,14 @@
-nnoremap <silent> <Leader>n :call hasan#fern#open_drawer()<CR>
-nnoremap <silent> <Leader>0 :Fern . -drawer -toggle<CR><C-w>=
-" Open current file directory into the drawer
-nnoremap <silent> <Leader>. :
-      \call hasan#fern#before_Try_To_select_last_file()<CR>
-      \:Fern %:h -drawer -wait<CR>
-      \:call hasan#fern#try_To_select_last_file()<CR>
 " Open current file directory into the buffer
 nnoremap <silent> - :
       \call hasan#fern#before_Try_To_select_last_file()<CR>
       \:Fern <C-r>=hasan#fern#smart_path()<CR> -wait<CR>
       \:call hasan#fern#try_To_select_last_file()<CR>
 
-" Open bookmarks
-nnoremap <silent> <Leader>ii :<C-u>Fern bookmark:///<CR>
+command! FernCurDirDrawer
+\  call hasan#fern#before_Try_To_select_last_file()
+\| Fern %:h -drawer -wait
+\| call hasan#fern#try_To_select_last_file()
+
 
 let g:fern#drawer_width = 40
 let g:fern#keepalt_on_edit = 1
