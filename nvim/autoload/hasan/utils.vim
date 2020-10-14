@@ -12,7 +12,7 @@ function! hasan#utils#confirmQuit(writeFile)
     echohl ErrorMsg | echo  "E32: No file name" | echohl None
     return
   endif
-  if (a:writeFile && &modified) | :write | endif
+  if (a:writeFile == '!' && &modified) | :silent write | endif
 
   if (isLastTab && &modified)
     if (confirm("Save changes & quit the app?", "&Yes\n&No", 2) == 1)| :wq |endif

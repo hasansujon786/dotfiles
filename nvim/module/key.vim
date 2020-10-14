@@ -13,9 +13,9 @@ else
 endif
 
 " exit file with confrim
-nnoremap <silent> ZZ :call hasan#utils#confirmQuit(1)<CR>
-cnoremap <silent> q<CR>  :call hasan#utils#confirmQuit(0)<CR>
-cnoremap <silent> x<CR>  :call hasan#utils#confirmQuit(1)<CR>
+nnoremap <silent> ZZ :Q!<CR>
+cnoremap <silent> q<CR> :Q<CR>
+cnoremap <silent> x<CR> :Q!<CR>
 
 " Switch between the alternate files
 nnoremap <BS> <c-^>
@@ -174,9 +174,9 @@ nnoremap <silent> <F3> :set paste!<CR>
 nnoremap <F7> :setlocal spell! spell?<CR>
 inoremap <F7> <Esc>:setlocal spell! spell?<CR>a
 " TODO: need new bindings
-nnoremap <leader>fw :normal! 1z=<CR>
-nnoremap <leader>fp :normal! mz[s1z=`z<CR>
-nnoremap <leader>fn :normal! mz]s1z=`z<CR>
+" nnoremap <leader>fw :normal! 1z=<CR>
+" nnoremap <leader>fp :normal! mz[s1z=`z<CR>
+" nnoremap <leader>fn :normal! mz]s1z=`z<CR>
 " Spell commands
 " Next wrong spell      ]s
 " Previous wrong spell  [s
