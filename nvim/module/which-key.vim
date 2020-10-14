@@ -48,38 +48,26 @@ vnoremap <Leader>d "+d
 let g:which_key_map['p'] = 'which_key_ignore'
 let g:which_key_map['P'] = 'which_key_ignore'
 let g:which_key_map['y'] = 'which_key_ignore'
-" let g:which_key_map['d'] = 'which_key_ignore'
-
-" Coc Search & refactor
-" Search world in whole project
-" Change dir to current file's dir
-nnoremap <leader>CD :cd %:p:h<CR>:pwd<CR>
-nnoremap <leader>cs :CocSearch <C-R>=expand("<cword>")<CR><CR>
-xnoremap <leader>cs y:CocSearch -F <C-r>"<Home><C-right><C-right><C-right>\<C-right>
-nnoremap <leader>? :CocSearch <C-R>=expand("<cword>")<CR><CR>
-nnoremap <leader><TAB> <c-^>
-" Open yank list
-" nnoremap <silent> <leader>cy :<C-u>CocList -A --normal yank<cr>
-nnoremap <silent> <leader>cy :<C-u>CocList --normal yank<cr>
 " }}}
 
 " Single mappings ---------------------------------------- {{{
-let g:which_key_map['l'] = [ ':wincmd l'       , 'window right' ]
-let g:which_key_map['h'] = [ ':wincmd h'       , 'window left' ]
-let g:which_key_map['j'] = [ ':wincmd j'       , 'window bellow' ]
-let g:which_key_map['k'] = [ ':wincmd k'       , 'window above' ]
-
-let g:which_key_map['?'] = 'search word'
-let g:which_key_map['n'] = [ ':call hasan#fern#open_drawer()'       , 'open fern' ]
-let g:which_key_map['s'] = [ ':update'                              , 'save file' ]
-let g:which_key_map['q'] = [ ':call hasan#utils#confirmQuit(0)'     , 'close window' ]
-let g:which_key_map['r'] = [ ':call hasan#utils#cycle_numbering()'  , 'cycle number' ]
-let g:which_key_map['='] = [ '<C-W>='                               , 'balance windows' ]
-let g:which_key_map['x'] = [ ':bdelete'                             , 'delete buffer']
-let g:which_key_map['m'] = [ ':call WindowSwap#EasyWindowSwap()'    , 'move window' ]
+let g:which_key_map['l'] = [ ':wincmd l'                            , 'window-right' ]
+let g:which_key_map['h'] = [ ':wincmd h'                            , 'window-left' ]
+let g:which_key_map['j'] = [ ':wincmd j'                            , 'window-bellow' ]
+let g:which_key_map['k'] = [ ':wincmd k'                            , 'window-above' ]
+let g:which_key_map['n'] = [ ':call hasan#fern#open_drawer()'       , 'open-fern' ]
+let g:which_key_map['q'] = [ ':Q'                                   , 'close-window' ]
+let g:which_key_map['s'] = [ ':update'                              , 'save-file' ]
+let g:which_key_map['r'] = [ ':call hasan#utils#cycle_numbering()'  , 'cycle-number' ]
+let g:which_key_map['='] = [ '<C-W>='                               , 'balance-windows' ]
+let g:which_key_map['x'] = [ ':bdelete'                             , 'delete-buffer']
+let g:which_key_map['m'] = [ ':call WindowSwap#EasyWindowSwap()'    , 'move-window' ]
 let g:which_key_map['z'] = [ 'za'                                   , 'fold' ]
-" let g:which_key_map['z'] = [ 'Goyo'                                 , 'zen' ]
-" let g:which_key_map[';'] = [ ':Commands'                            , 'commands' ]
+" let g:which_key_map['q'] = 'close-window'
+nnoremap <silent> <leader><TAB> :AlternateFile<CR>
+" nnoremap <silent> <leader>q :Q<CR>
+
+
 " }}}
 
 " a is for actions ins language server protocol ---------- {{{
@@ -88,67 +76,64 @@ let g:which_key_map['a'] = {
       \ '.' : [':CocConfig'                          , 'config'],
       \ ';' : ['<Plug>(coc-refactor)'                , 'refactor'],
       \ '?' : [':CocList diagnostics'                , 'diagnostics'],
-      \ 'a' : ['<Plug>(coc-codeaction)'              , 'line action'],
+      \ 'a' : ['<Plug>(coc-codeaction)'              , 'line-action'],
       \ 'A' : ['<Plug>(coc-codeaction-selected)'     , 'selected action'],
-      \ 'b' : [':CocNext'                            , 'next action'],
-      \ 'B' : [':CocPrev'                            , 'prev action'],
+      \ 'b' : [':CocNext'                            , 'next-action'],
+      \ 'B' : [':CocPrev'                            , 'prev-action'],
       \ 'c' : [':CocList commands'                   , 'commands'],
       \ 'd' : ['<Plug>(coc-definition)'              , 'definition'],
       \ 'D' : ['<Plug>(coc-declaration)'             , 'declaration'],
       \ 'e' : [':CocList extensions'                 , 'extensions'],
-      \ 'f' : ['<Plug>(coc-format-selected)'         , 'format selected'],
+      \ 'f' : ['<Plug>(coc-format-selected)'         , 'format-selected'],
       \ 'F' : ['<Plug>(coc-format)'                  , 'format'],
       \ 'h' : ['<Plug>(coc-float-hide)'              , 'hide'],
       \ 'i' : ['<Plug>(coc-implementation)'          , 'implementation'],
-      \ 'j' : ['<Plug>(coc-float-jump)'              , 'float jump'],
-      \ 'l' : ['<Plug>(coc-codelens-action)'         , 'code lens'],
-      \ 'n' : ['<Plug>(coc-diagnostic-next)'         , 'next diagnostic'],
-      \ 'N' : ['<Plug>(coc-diagnostic-next-error)'   , 'next error'],
+      \ 'j' : ['<Plug>(coc-float-jump)'              , 'float-jump'],
+      \ 'l' : ['<Plug>(coc-codelens-action)'         , 'code-lens'],
+      \ 'n' : ['<Plug>(coc-diagnostic-next)'         , 'next-diagnostic'],
+      \ 'N' : ['<Plug>(coc-diagnostic-next-error)'   , 'next-error'],
       \ 'o' : [':CocList outline'                    , 'outline'],
       \ 'O' : [':Vista!!'                            , 'outline'],
-      \ 'p' : ['<Plug>(coc-diagnostic-prev)'         , 'prev diagnostic'],
-      \ 'P' : ['<Plug>(coc-diagnostic-prev-error)'   , 'prev error'],
+      \ 'p' : ['<Plug>(coc-diagnostic-prev)'         , 'prev-diagnostic'],
+      \ 'P' : ['<Plug>(coc-diagnostic-prev-error)'   , 'prev-error'],
       \ 'q' : ['<Plug>(coc-fix-current)'             , 'quickfix'],
       \ 'r' : ['<Plug>(coc-references)'              , 'references'],
       \ 'R' : ['<Plug>(coc-rename)'                  , 'rename'],
       \ 's' : [':CocList -I symbols'                 , 'references'],
       \ 'S' : [':CocList snippets'                   , 'snippets'],
-      \ 't' : ['<Plug>(coc-type-definition)'         , 'type definition'],
-      \ 'T' : [':CocList tasks'                      , 'list tasks'],
-      \ 'u' : [':CocListResume'                      , 'resume list'],
-      \ 'U' : [':CocUpdate'                          , 'update CoC'],
-      \ 'z' : [':CocDisable'                         , 'disable CoC'],
-      \ 'Z' : [':CocEnable'                          , 'enable CoC'],
+      \ 't' : ['<Plug>(coc-type-definition)'         , 'type-definition'],
+      \ 'T' : [':CocList tasks'                      , 'list-tasks'],
+      \ 'u' : [':CocListResume'                      , 'resume-list'],
+      \ 'U' : [':CocUpdate'                          , 'update-CoC'],
+      \ 'z' : [':CocDisable'                         , 'disable-CoC'],
+      \ 'Z' : [':CocEnable'                          , 'enable-CoC'],
       \ }
       " \ 'o' : ['<Plug>(coc-openlink)'                , 'open link'],
 " }}}
 
 " b is for buffer ---------------------------------------- {{{
 let g:which_key_map['b'] = {
-      \ 'name' : '+buffer' ,
-      \ '1' : ['b1'        , 'buffer 1'],
-      \ '2' : ['b2'        , 'buffer 2'],
-      \ 'd' : [':Bclose'   , 'delete-buffer'],
-      \ 'f' : ['bfirst'    , 'first-buffer'],
-      \ 'l' : ['blast'     , 'last-buffer'],
-      \ 'n' : ['bnext'     , 'next-buffer'],
-      \ 'p' : ['bprevious' , 'previous-buffer'],
-      \ 'b' : ['Buffers'   , 'fzf-buffer'],
+      \ 'name' : '+buffer',
+      \ '/' : ['Buffers'                            , 'fzf-buffer'],
+      \ 'd' : ['Bclose'                             , 'delete-buffer'],
+      \ 'f' : ['bfirst'                             , 'first-buffer'],
+      \ 'l' : ['blast'                              , 'last-buffer'],
+      \ 'n' : ['bnext'                              , 'next-buffer'],
+      \ 'p' : ['bprevious'                          , 'previous-buffer'],
+      \ 'X' : [':call hasan#utils#clear_buffers()'  , 'kill-other-buffers'],
       \ }
 " }}}
 
 " e is for edit ------------------------------------------ {{{
 let g:which_key_map['e'] = {
       \ 'name' : '+edit',
-      \ '.' : [':e $MYVIMRC'        , 'open $MYVIMRC'],
-      \ 'b' : [':Fern bookmark:///' , 'history'],
-      \ 'e' : 'edit directory'      ,
-      \ 'd' : 'create directory'    ,
-      \ 'r' : 'rename cur file'     ,
-      \ 't' : 'edit in tab'         ,
-      \ 's' : 'edit in split'       ,
-      \ 'v' : 'edit in vsplit'      ,
-      \ '%' : 'source current file' ,
+      \ 'e' : 'edit-in-directory'        ,
+      \ 'd' : 'create-directory'         ,
+      \ 'r' : 'rename-cur-file'          ,
+      \ 's' : 'edit-in-directory-split'  ,
+      \ 't' : 'edit-in-directory-tab'    ,
+      \ 'v' : 'edit-in-directory-vsplit' ,
+      \ '~' : 'edit-project-root'        ,
       \ }
 " Open a file relative to the current file
 nnoremap <Leader>er :Move <C-R>=expand("%")<CR>
@@ -157,70 +142,54 @@ nnoremap <leader>et :tabe <C-R>=expand('%:h').'/'<cr>
 nnoremap <leader>ev :vsp <C-R>=expand('%:h').'/'<cr>
 nnoremap <leader>es :sp <C-R>=expand('%:h').'/'<cr>
 nnoremap <leader>ee :e <C-R>=expand('%:h').'/'<cr>
-nnoremap <leader>e% :write<CR>:so %<CR>
+nnoremap <leader>e~ :cd %:p:h<CR>:pwd<CR>
 " }}}
 
-" f is for find ------------------------------------------ {{{
-" TODO: fix mappings
+" f is for file ------------------------------------------ {{{
+" TODO: add C commands
 let g:which_key_map['f'] = {
       \ 'name' : '+find' ,
-      \ '/' : [':History/'     , 'history'],
-      \ ';' : [':Commands'     , 'commands'],
-      \ 'b' : [':BLines'       , 'current buffer'],
-      \ 'B' : [':Buffers'      , 'open buffers'],
-      \ 'c' : [':Commits'      , 'commits'],
-      \ 'C' : [':BCommits'     , 'buffer commits'],
-      \ 'f' : 'find & replace',
-      \ 'g' : [':GFiles'       , 'git files'],
-      \ 'G' : [':GFiles?'      , 'modified git files'],
-      \ 'h' : [':History'      , 'file history'],
-      \ 'H' : [':History:'     , 'command history'],
-      \ 'l' : [':Lines'        , 'lines'] ,
-      \ 'm' : [':Marks'        , 'marks'] ,
-      \ 'M' : [':Maps'         , 'normal maps'] ,
-      \ 'p' : [':Helptags'     , 'help tags'] ,
-      \ 'P' : [':Tags'         , 'project tags'],
-      \ 'R' : [':RG!'          , 'text RG'],
-      \ 's' : [':Snippets'     , 'snippets'],
-      \ 'S' : [':Colors'       , 'color schemes'],
-      \ 'T' : [':BTags'        , 'buffer tags'],
-      \ 'w' : [':Windows'      , 'search windows'],
-      \ 'y' : [':Filetypes'    , 'file types'],
-      \ 'z' : [':FZF'          , 'FZF'],
+      \ '/' : [':Files'                         , 'find-files'],
+      \ 'o' : [':call hasan#fern#open_drawer()' , 'find-in-file-tree' ],
+      \ 's' : [':update'                        , 'save-file'],
+      \ 'S' : [':wall'                          , 'save-all-file'],
+      \ 'C' : '+files/convert',
+      \ 'v' : {
+      \   'name' : '+vim',
+      \     '.' : [':e $MYVIMRC'        , 'open-$MYVIMRC'],
+      \  },
+      \ 'y' : 'copy-current-filename',
+      \ 'Y' : 'copy-current-filename',
       \ }
-" replace word under cursor, globally, with confirmation
-nnoremap <Leader>ff :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
-xnoremap <Leader>ff y :%s/<C-r>"//gc<Left><Left><Left>
-" interactive find replace preview
-set inccommand=nosplit
+nnoremap <leader>fy :call hasan#utils#CopyFileNameToClipBoard()<CR>
+nnoremap <leader>fY :call hasan#utils#CopyFileNameToClipBoard(1)<CR>
+
 " }}}
 
 " g is for git ------------------------------------------- {{{
+" TODO: replace Gbrowses
 let g:which_key_map['g'] = {
       \ 'name' : '+git',
-      \ 'a' : [':Git add %'                        , 'add current'],
-      \ 'A' : [':Git add .'                        , 'add all'],
+      \ '/' : [':GFiles'                           , 'git-files'],
+      \ '?' : [':GFiles?'                          , 'modified-git-files'],
+      \ 'a' : [':Git add %'                        , 'add-current'],
       \ 'b' : [':Git blame'                        , 'blame'],
       \ 'B' : [':GBrowse'                          , 'browse'],
-      \ 'd' : [':Gvdiffsplit!'                     , 'diff split'],
-      \ 'D' : [':Git diff'                         , 'diff'],
+      \ 'd' : [':Gvdiffsplit!'                     , 'diff'],
       \ 'g' : [':Gstatus'                          , 'status'],
-      \ 'h' : [':GitGutterLineHighlightsToggle'    , 'highlight hunks'],
-      \ 'H' : ['<Plug>(GitGutterPreviewHunk)'      , 'preview hunk'],
-      \ 'i' : [':Gist -b'                          , 'post gist'],
-      \ 'j' : ['<Plug>(GitGutterNextHunk)'         , 'next hunk'],
-      \ 'k' : ['<Plug>(GitGutterPrevHunk)'         , 'prev hunk'],
+      \ 'H' : [':GitGutterLineHighlightsToggle'    , 'highlight-hunks'],
+      \ 'i' : [':Gist -b'                          , 'post-gist'],
+      \ 'j' : ['<Plug>(GitGutterNextHunk)'         , 'next-hunk'],
+      \ 'k' : ['<Plug>(GitGutterPrevHunk)'         , 'prev-hunk'],
       \ 'L' : [':Git log'                          , 'log'],
-      \ 'm' : ['<Plug>(git-messenger)'             , 'message'],
-      \ 'p' : [':Git pull'                         , 'pull'],
-      \ 'P' : [':Git push'                         , 'push'],
+      \ 'p' : ['<Plug>(GitGutterPreviewHunk)'      , 'preview-hunk'],
       \ 'r' : [':GRemove'                          , 'remove'],
-      \ 's' : ['<Plug>(GitGutterStageHunk)'        , 'stage hunk'],
+      \ 's' : ['<Plug>(GitGutterStageHunk)'        , 'stage-hunk'],
       \ 'S' : [':!git status'                      , 'status'],
-      \ 'T' : [':GitGutterSignsToggle'             , 'toggle signs'],
-      \ 'u' : ['<Plug>(GitGutterUndoHunk)'         , 'undo hunk'],
-      \ 'v' : [':GV'                               , 'view commits'],
-      \ 'V' : [':GV!'                              , 'view buffer commits'],
+      \ 'T' : [':GitGutterSignsToggle'             , 'toggle-signs'],
+      \ 'u' : ['<Plug>(GitGutterUndoHunk)'         , 'undo-hunk'],
+      \ 'v' : [':GV'                               , 'view-commits'],
+      \ 'V' : [':GV!'                              , 'view-buffer-commits'],
       \ }
 if !exists('$TMUX')
   let g:which_key_map.g.l = [ ':FloatermNew --name=lazygit lazygit'   , 'lazygit' ]
@@ -231,23 +200,33 @@ else
 endif
 " }}}
 
+" o is for open ------------------------------------------ {{{
+let g:which_key_map['o'] = {
+      \ 'name' : '+open',
+      \ ';' : [':FloatermNew --wintype=normal --height=6'  , 'terminal'],
+      \ 'b' : [':Fern bookmark:///'                        , 'bookmark'],
+      \ 'q' : [':call hasan#utils#quickFix_toggle()'       , 'quickfix'],
+      \ 'y' : [':CocList --normal yank'                    , 'yankc-history'],
+      \ }
+
+" }}}
+
 " S is for session --------------------------------------- {{{
+" TODO: Add session support.
 let g:which_key_map['S'] = {
       \ 'name' : '+Session',
-      \ 'c' : [':SClose'          , 'Close Session'],
-      \ 'd' : [':SDelete'         , 'Delete Session'],
-      \ 'l' : [':SLoad'           , 'Load Session'],
-      \ 's' : [':Startify'        , 'Start Page'],
-      \ 'S' : [':SSave'           , 'Save Session'],
+      \ 'c' : [':SClose'          , 'close-session'],
+      \ 'd' : [':SDelete'         , 'delete-session'],
+      \ 'l' : [':SLoad'           , 'load-session'],
+      \ 's' : [':Startify'        , 'start-page'],
+      \ 'S' : [':SSave'           , 'save-session'],
       \ }
 " }}}
 
 " t is for toggle ---------------------------------------- {{{
 let g:which_key_map['t'] = {
       \ 'name' : '+toggle',
-      \ ';' : [':FloatermNew --wintype=normal --height=6'  , 'terminal'],
-      \ 'c' : [':setlocal cursorcolumn!'                    , 'cursorcolumn'],
-      \ 'q' : [':call hasan#utils#quickFix_toggle()'       , 'quickfix'],
+      \ 'c' : [':setlocal cursorcolumn!'                   , 'cursorcolumn'],
       \ 'w' : [':call hasan#utils#toggleWrap()'            , 'wrap'],
       \ }
 " }}}
@@ -279,35 +258,41 @@ let g:which_key_map['w'] = {
 " }}}
 
 " / is for search ---------------------------------------- {{{
-" TODO: fix mappings
+" TODO: decide group mappings
 let g:which_key_map['/'] = {
       \ 'name' : '+search',
-      \ '/' : [':History/'              , 'history'],
-      \ ';' : [':Commands'              , 'commands'],
-      \ 'b' : [':BLines'                , 'current buffer'],
-      \ 'B' : [':Buffers'               , 'open buffers'],
-      \ 'c' : [':Commits'               , 'commits'],
-      \ 'C' : [':BCommits'              , 'buffer commits'],
-      \ 'f' : [':Files'                 , 'files'],
-      \ 'g' : [':GFiles'                , 'git files'],
-      \ 'G' : [':GFiles?'               , 'modified git files'],
-      \ 'h' : [':History'               , 'file history'],
-      \ 'H' : [':History:'              , 'command history'],
-      \ 'l' : [':Lines'                 , 'lines'] ,
-      \ 'm' : [':Marks'                 , 'marks'] ,
-      \ 'M' : [':Maps'                  , 'normal maps'] ,
-      \ 'p' : [':Helptags'              , 'help tags'] ,
-      \ 'P' : [':Tags'                  , 'project tags'],
+      \ ':' : [':Commands'              , 'commands'],
+      \ ';' : [':History:'              , 'commands-history'],
+      \ 'b' : [':Buffers'               , 'fzf-buffer'],
+      \ 'C' : [':BCommits'              , 'fzf-buffer-commits'],
+      \ 'c' : [':Commits'               , 'fzf-commits'],
+      \ 'f' : [':Files'                 , 'fzf-files'],
+      \ 'g' : [':GFiles'                , 'fzf-git-files'],
+      \ 'G' : [':GFiles?'               , 'fzf-modi-git-files'],
+      \ 'h' : [':History'               , 'fzf-file-history'],
+      \ 'H' : [':History/'              , 'fzf-searhc-history'],
+      \ 'l' : [':Lines'                 , 'fzf-lines'] ,
+      \ 'L' : [':BLines'                , 'fzf-buffer-lines'],
+      \ 'm' : [':Marks'                 , 'fzf-marks'] ,
+      \ 'k' : [':Maps'                  , 'fzf-keymaps'] ,
+      \ 'p' : 'search-word-in-project',
       \ 's' : [':CocList snippets'      , 'snippets'],
-      \ 'S' : [':Colors'                , 'color schemes'],
-      \ 'r' : [':RG!'                    , 'text Rg'],
-      \ 'T' : [':BTags'                 , 'buffer tags'],
-      \ 'w' : [':Windows'               , 'search windows'],
-      \ 'y' : [':Filetypes'             , 'file types'],
-      \ 'z' : [':FZF'                   , 'FZF'],
+      \ 'r' : 'replace-word-in-file'          ,
+      \ 't' : [':Filetypes'             , 'fzf-filetypes'],
+      \ 'R' : [':RG!'                   , 'text-Rg'],
+      \ 'w' : [':Windows'               , 'fzf-windows'],
       \ }
-      " \ 's' : [':Snippets'     , 'snippets'],
+" Search world in whole project
+nnoremap <leader>/p :CocSearch <C-R>=expand("<cword>")<CR><CR>
+xnoremap <leader>/p y:CocSearch -F <C-r>"<Home><C-right><C-right><C-right>\<C-right>
+" replace word under cursor, globally, with confirmation
+nnoremap <Leader>/r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+xnoremap <Leader>/r y :%s/<C-r>"//gc<Left><Left><Left>
+" interactive find replace preview
+set inccommand=nosplit
+
 " }}}
 
 " Register which key map
 call which_key#register('<Space>', "g:which_key_map")
+
