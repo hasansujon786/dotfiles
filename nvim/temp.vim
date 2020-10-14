@@ -66,3 +66,9 @@ let g:which_key_map['a'] = {
       \ 'v' : [':Codi'                   , 'virtual repl on'],
       \ 'V' : [':Codi!'                  , 'virtual repl off'],
       \ }
+
+" exe "normal! \<c-w>\<c-w>"
+
+
+" enable blinking mode-sensitive cursor
+set guicursor=n-v-c:block-blinkon10,i-ci-ve:ver25-blinkon10,r-cr:hor20,o:hor50

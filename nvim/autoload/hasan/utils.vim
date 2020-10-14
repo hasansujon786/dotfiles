@@ -239,3 +239,20 @@ function! hasan#utils#RipgrepFzf(query, fullscreen)
   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 " }}}
+
+" CopyFileNameToClipBoard {{{ "
+function hasan#utils#CopyFileNameToClipBoard(...) abort
+  if expand('%') == ''
+    echohl WarningMsg | echom 'Can not find clipboard, for more info see :h clipboard' | echohl None
+    return
+  endif
+
+  if a:0
+    let @+ = expand('%:p')
+  else
+    let @+ = expand('%:t')
+  endif
+  echo 'Copied to clipboard: '. @+
+endfunction
+" }}} CopyFileNameToClipBoard "
+

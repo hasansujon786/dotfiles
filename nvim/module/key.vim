@@ -182,6 +182,7 @@ nnoremap <leader>fn :normal! mz]s1z=`z<CR>
 " Previous wrong spell  [s
 " Add to spell file     zg
 " Prompt spell fixes    z=
+nnoremap <F9> :write<CR>:so %<CR>
 
 " }}}
 " => Disabled-keys ------------------------------------ {{{
