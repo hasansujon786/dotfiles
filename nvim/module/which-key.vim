@@ -216,6 +216,7 @@ let g:which_key_map['o'] = {
       \ 'name' : '+open',
       \ ';' : [':FloatermNew --wintype=normal --height=6'  , 'terminal'],
       \ 'b' : [':Fern bookmark:///'                        , 'bookmark'],
+      \ 't' : [':OpenTodo'                                 , 'todo-manager'],
       \ 'q' : [':call hasan#utils#quickFix_toggle()'       , 'quickfix'],
       \ 'y' : [':CocList --normal yank'                    , 'yankc-history'],
       \ }

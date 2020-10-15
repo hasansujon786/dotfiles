@@ -58,17 +58,19 @@ function! MyMode()
   let fname = expand('%:t')
   return fname =~ 'NERD_tree' ? 'NERD_tree' :
         \ &ft == 'fern' ? 'fern' :
+        \ &ft == 'spacevimtodomanager' ? 'TODO' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
 function! MyModified()
-  return &modified ? '+' : &modifiable ? '' : '-'
+  return &modified ? '*' : &modifiable ? '-' : '~'
 endfunction
 
 function! MyFilename()
-  return (&ft == 'fugitive' ? 'fugitive' :
-        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-        \ ('' != MyModified() ? ' ' . MyModified() : '')
+  return ('' != MyModified() ? MyModified() : '').' '.
+        \(&ft == 'fugitive' ? 'fugitive' :
+        \ &ft == 'spacevimtodomanager' ? 'TODO manager' :
+        \  '' != expand('%:t') ? expand('%:t') : '[No Name]')
 endfunction
 
 function! LightlineNerdfontIcons(n)

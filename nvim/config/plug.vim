@@ -23,6 +23,7 @@ Plug 'hasansujon786/vim-rel-jump',{ 'on': 'CocStart' }
 Plug 'mkropat/vim-tt'
 Plug 'liuchengxu/vim-which-key'
 Plug 'vimwiki/vimwiki',{ 'on': ['VimwikiIndex', 'VimwikiTabIndex', 'VimwikiDiaryIndex'] }
+Plug 'wsdjeg/vim-todo',{ 'on': 'OpenTodo' }
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
