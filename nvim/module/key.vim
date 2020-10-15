@@ -22,7 +22,7 @@ nnoremap <BS> <c-^>
 " Use Q to record macros
 noremap Q q
 " Replay last used macro
-noremap <CR> @@
+" noremap <CR> @@
 " Better marks
 nnoremap ' `
 

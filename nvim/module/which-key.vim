@@ -71,6 +71,7 @@ nnoremap <silent> <leader><TAB> :AlternateFile<CR>
 " }}}
 
 " a is for actions ins language server protocol ---------- {{{
+" TODO: fix bindgigs
 let g:which_key_map['a'] = {
       \ 'name' : '+lsp-actions' ,
       \ '.' : [':CocConfig'                          , 'config'],
@@ -116,11 +117,11 @@ let g:which_key_map['b'] = {
       \ 'name' : '+buffer',
       \ '/' : ['Buffers'                            , 'fzf-buffer'],
       \ 'd' : ['Bclose'                             , 'delete-buffer'],
+      \ 'D' : [':call hasan#utils#clear_buffers()'  , 'kill-other-buffers'],
       \ 'f' : ['bfirst'                             , 'first-buffer'],
       \ 'l' : ['blast'                              , 'last-buffer'],
       \ 'n' : ['bnext'                              , 'next-buffer'],
       \ 'p' : ['bprevious'                          , 'previous-buffer'],
-      \ 'X' : [':call hasan#utils#clear_buffers()'  , 'kill-other-buffers'],
       \ }
 " }}}
 
@@ -129,14 +130,12 @@ let g:which_key_map['e'] = {
       \ 'name' : '+edit',
       \ 'e' : 'edit-in-directory'        ,
       \ 'd' : 'create-directory'         ,
-      \ 'r' : 'rename-cur-file'          ,
       \ 's' : 'edit-in-directory-split'  ,
       \ 't' : 'edit-in-directory-tab'    ,
       \ 'v' : 'edit-in-directory-vsplit' ,
       \ '~' : 'edit-project-root'        ,
       \ }
 " Open a file relative to the current file
-nnoremap <Leader>er :Move <C-R>=expand("%")<CR>
 nnoremap <leader>ed :Mkdir <C-R>=expand('%:h').'/'<cr>
 nnoremap <leader>et :tabe <C-R>=expand('%:h').'/'<cr>
 nnoremap <leader>ev :vsp <C-R>=expand('%:h').'/'<cr>
@@ -149,20 +148,31 @@ nnoremap <leader>e~ :cd %:p:h<CR>:pwd<CR>
 " TODO: add C commands
 let g:which_key_map['f'] = {
       \ 'name' : '+find' ,
-      \ '/' : [':Files'                         , 'find-files'],
+      \ '/' : [':Files'                         , 'fzf-files'],
       \ 'o' : [':call hasan#fern#open_drawer()' , 'find-in-file-tree' ],
-      \ 's' : [':update'                        , 'save-file'],
+      \ 's' : [':update'                        , 'save-current-file'],
       \ 'S' : [':wall'                          , 'save-all-file'],
-      \ 'C' : '+files/convert',
-      \ 'v' : {
-      \   'name' : '+vim',
-      \     '.' : [':e $MYVIMRC'        , 'open-$MYVIMRC'],
+      \ 'c' : {
+      \ 'name' : '+files/convert',
+      \    'x' : [':Chmod +x'                   , 'make-executale'],
+      \    'X' : [':Chmod -x'                   , 'remove-executale'],
+      \    'w' : [':Chmod +w'                   , 'add-write-permission'],
+      \    'W' : [':Chmod -w'                   , 'remove-write-permission'],
       \  },
+      \ 't' : [':Filetypes'                     , 'fzf-filetypes'],
+      \ 'v' : {
+      \ 'name' : '+vim',
+      \    '.' : [':e $MYVIMRC'                 , 'open-$MYVIMRC'],
+      \  },
+      \ 'R' : 'rename-current-file',
+      \ 'M' : 'move-current-file',
       \ 'y' : 'copy-current-filename',
       \ 'Y' : 'copy-current-filename',
       \ }
-nnoremap <leader>fy :call hasan#utils#CopyFileNameToClipBoard()<CR>
-nnoremap <leader>fY :call hasan#utils#CopyFileNameToClipBoard(1)<CR>
+nnoremap <Leader>fM :Move <C-R>=expand("%")<CR>
+nnoremap <Leader>fR :Rename <C-R>=expand("%:t")<CR>
+nnoremap <leader>fy :call hasan#utils#CopyFileNameToClipBoard(1)<CR>
+nnoremap <leader>fY :call hasan#utils#CopyFileNameToClipBoard()<CR>
 
 " }}}
 
@@ -170,8 +180,8 @@ nnoremap <leader>fY :call hasan#utils#CopyFileNameToClipBoard(1)<CR>
 " TODO: replace Gbrowses
 let g:which_key_map['g'] = {
       \ 'name' : '+git',
-      \ '/' : [':GFiles'                           , 'git-files'],
-      \ '?' : [':GFiles?'                          , 'modified-git-files'],
+      \ '/' : [':GFiles'                           , 'fzf-git-files'],
+      \ '?' : [':GFiles!?'                         , 'fzf-git-files*'],
       \ 'a' : [':Git add %'                        , 'add-current'],
       \ 'b' : [':Git blame'                        , 'blame'],
       \ 'B' : [':GBrowse'                          , 'browse'],
@@ -184,6 +194,7 @@ let g:which_key_map['g'] = {
       \ 'L' : [':Git log'                          , 'log'],
       \ 'p' : ['<Plug>(GitGutterPreviewHunk)'      , 'preview-hunk'],
       \ 'r' : [':GRemove'                          , 'remove'],
+      \ 'R' : [':GitGutter'                        , 'refres-gitgutter'],
       \ 's' : ['<Plug>(GitGutterStageHunk)'        , 'stage-hunk'],
       \ 'S' : [':!git status'                      , 'status'],
       \ 'T' : [':GitGutterSignsToggle'             , 'toggle-signs'],
@@ -234,15 +245,17 @@ let g:which_key_map['t'] = {
 " w is for wiki-or-window -------------------------------- {{{
 let g:which_key_map['w'] = {
       \ 'name' : '+wiki-or-window',
-      \ 'v' : ['<C-w>v'                                   , 'split right'],
-      \ 's' : ['<C-w>s'                                   , 'split bellow'],
-      \ 'o' : ['<C-w>o'                                   , 'only window'],
-      \ 'z' : [':AutoZoomWin'                             , 'AutoZoomWin'],
+      \ '/' : [':Windows'                                 , 'fzf-windows'],
+      \ 'v' : ['<C-w>v'                                   , 'split-right'],
+      \ 's' : ['<C-w>s'                                   , 'split-bellow'],
+      \ 'o' : ['<C-w>o'                                   , 'only-window'],
+      \ 'c' : ['<C-w>c'                                   , 'only-window'],
+      \ 'z' : [':AutoZoomWin'                             , 'auto-zoom-win'],
       \ 'w' : ['<Plug>VimwikiIndex'                       , 'ncdu'],
       \ 'n' : ['<plug>(wiki-open)'                        , 'ncdu'],
       \ 'j' : ['<plug>(wiki-journal)'                     , 'ncdu'],
       \ 'R' : ['<plug>(wiki-reload)'                      , 'ncdu'],
-      \ 'c' : ['<plug>(wiki-code-run)'                    , 'ncdu'],
+      \ 'C' : ['<plug>(wiki-code-run)'                    , 'ncdu'],
       \ 'b' : ['<plug>(wiki-graph-find-backlinks)'        , 'ncdu'],
       \ 'g' : ['<plug>(wiki-graph-in)'                    , 'ncdu'],
       \ 'G' : ['<plug>(wiki-graph-out)'                   , 'ncdu'],
@@ -261,20 +274,20 @@ let g:which_key_map['w'] = {
 " TODO: decide group mappings
 let g:which_key_map['/'] = {
       \ 'name' : '+search',
-      \ ':' : [':Commands'              , 'commands'],
-      \ ';' : [':History:'              , 'commands-history'],
+      \ '/' : [':History:'              , 'commands-history'],
+      \ ';' : [':Commands'              , 'commands'],
       \ 'b' : [':Buffers'               , 'fzf-buffer'],
       \ 'C' : [':BCommits'              , 'fzf-buffer-commits'],
       \ 'c' : [':Commits'               , 'fzf-commits'],
       \ 'f' : [':Files'                 , 'fzf-files'],
       \ 'g' : [':GFiles'                , 'fzf-git-files'],
-      \ 'G' : [':GFiles?'               , 'fzf-modi-git-files'],
+      \ 'G' : [':GFiles!?'              , 'fzf-git-files*'],
       \ 'h' : [':History'               , 'fzf-file-history'],
-      \ 'H' : [':History/'              , 'fzf-searhc-history'],
+      \ 'H' : [':History/'              , 'fzf-search-history'],
       \ 'l' : [':Lines'                 , 'fzf-lines'] ,
       \ 'L' : [':BLines'                , 'fzf-buffer-lines'],
       \ 'm' : [':Marks'                 , 'fzf-marks'] ,
-      \ 'k' : [':Maps'                  , 'fzf-keymaps'] ,
+      \ 'k' : [':Maps!'                 , 'fzf-keymaps'] ,
       \ 'p' : 'search-word-in-project',
       \ 's' : [':CocList snippets'      , 'snippets'],
       \ 'r' : 'replace-word-in-file'          ,

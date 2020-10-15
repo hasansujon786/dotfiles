@@ -22,10 +22,10 @@ if maparg('?','n') == ""
     nnoremap  <unique>         ?   :call HLNextSetTrigger()<CR>?
 endif
 if maparg('n','n') == ""
-    nnoremap  <unique><silent> n  n:call HLNext()<CR>zz
+    nnoremap  <unique><silent> n  n:call HLNext()<CR>zzzv
 endif
 if maparg('N','n') == ""
-    nnoremap  <unique><silent> N  N:call HLNext()<CR>zz
+    nnoremap  <unique><silent> N  N:call HLNext()<CR>zzzv
 endif
 
 " Default highlighting for next match...

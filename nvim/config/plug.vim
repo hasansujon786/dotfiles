@@ -7,7 +7,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'Yggdroot/indentLine',{ 'on': 'CocStart' }
 
 " => Functionality-&-Helpers ===============================
-Plug 'tpope/vim-eunuch', { 'on': ['Delete', 'Move', 'Rename', 'Mkdir'] }  "for moving and manipulating files / directories.
+Plug 'tpope/vim-eunuch', { 'on': ['Delete','Move','Rename','Mkdir','Chmod'] } "for moving and manipulating files / directories.
 Plug 'voldikss/vim-floaterm', { 'on': [ 'FloatermNew', 'FloatermToggle' ] }
 Plug 'mg979/vim-visual-multi', {'branch': 'master', 'on': 'CocStart' }
 Plug 'michaeljsmith/vim-indent-object',{ 'on': 'CocStart' }
