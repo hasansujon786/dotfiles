@@ -1,12 +1,3 @@
-nnoremap <Leader>tW :Work<cr>
-nnoremap <Leader>tb :Break<cr>
-nnoremap <Leader>tt :ShowTimer<cr>
-nnoremap <Leader>to :OpenTasks<cr>
-nnoremap <Leader>tp :ToggleTimer<cr>
-nnoremap <Leader>th :HideAndShowTimer<cr>
-nnoremap <Leader>tu :UpdateCurrentTimer<space>
-nnoremap <Leader>tU :UpdateCurrentStatus<space>
-
 let g:tt_show_on_load = 1
 let g:tt_taskfile = '~/tasks.md'
 

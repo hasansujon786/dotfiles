@@ -235,8 +235,25 @@ let g:which_key_map['S'] = {
       \ }
 " }}}
 
-" t is for toggle ---------------------------------------- {{{
+" t is for tast-timer ---------------------------------------- {{{
 let g:which_key_map['t'] = {
+      \ 'name' : '+tast-timer',
+      \ 'b' : [':Break'              , 'tt-break'],
+      \ 'h' : [':HideAndShowTimer'   , 'tt-hide-timer'],
+      \ 'o' : [':OpenTasks'          , 'tt-open-tasks'],
+      \ 'p' : [':ToggleTimer'        , 'tt-pause'],
+      \ 'w' : [':Work'               , 'tt-work'],
+      \ 's' : 'tt-status',
+      \ 'u' : 'tt-update-timer',
+      \ 'U' : 'tt-update-status',
+      \ }
+nnoremap <Leader>ts :ShowTimer<CR>
+nnoremap <Leader>tu :UpdateCurrentTimer<space>
+nnoremap <Leader>tU :UpdateCurrentStatus<space>
+" }}}
+
+" T is for toggle ---------------------------------------- {{{
+let g:which_key_map['T'] = {
       \ 'name' : '+toggle',
       \ 'c' : [':setlocal cursorcolumn!'                   , 'cursorcolumn'],
       \ 'w' : [':call hasan#utils#toggleWrap()'            , 'wrap'],
