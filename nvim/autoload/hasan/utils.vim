@@ -126,7 +126,7 @@ endfunction
 " }}}
 
 " Insert UUID by {{{
-" TODO: fix this
+" @todo: fix this
 function! s:Utils_uuid() abort
   let r = system('uuidgen')
   let r = substitute(r, '^[\r\n\s]*\|[\r\n\s]*$', '', 'g')

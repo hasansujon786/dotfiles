@@ -117,13 +117,13 @@ install_various_apps() {
   printWithToilet python
   apt install -y python
   python3 -m pip install --user --upgrade pynvim
-  # TODO:
+  # @todo:
   # npm install --global live-server
 
 
   printWithToilet lazygit
   # NOTE: Currently lazygit installation only worls for termux
-  # TODO: Support for Linux & Windows
+  # @todo: Support for Linux & Windows
   export LAZYGIT_VER="0.20.9"
   # wget -O lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_x86_64.tar.gz
   wget -O lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_arm64.tar.gz

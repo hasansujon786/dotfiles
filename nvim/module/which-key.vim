@@ -71,7 +71,7 @@ nnoremap <silent> <leader><TAB> :AlternateFile<CR>
 " }}}
 
 " a is for actions ins language server protocol ---------- {{{
-" TODO: fix bindgigs
+" @todo: fix bindgigs
 let g:which_key_map['a'] = {
       \ 'name' : '+lsp-actions' ,
       \ '.' : [':CocConfig'                          , 'config'],
@@ -145,7 +145,7 @@ nnoremap <leader>e~ :cd %:p:h<CR>:pwd<CR>
 " }}}
 
 " f is for file ------------------------------------------ {{{
-" TODO: add C commands
+" @todo: add C commands
 let g:which_key_map['f'] = {
       \ 'name' : '+find' ,
       \ '/' : [':Files'                         , 'fzf-files'],
@@ -177,7 +177,7 @@ nnoremap <leader>fY :call hasan#utils#CopyFileNameToClipBoard()<CR>
 " }}}
 
 " g is for git ------------------------------------------- {{{
-" TODO: replace Gbrowses
+" @todo: replace Gbrowses
 let g:which_key_map['g'] = {
       \ 'name' : '+git',
       \ '/' : [':GFiles'                           , 'fzf-git-files'],
@@ -224,7 +224,7 @@ let g:which_key_map['o'] = {
 " }}}
 
 " S is for session --------------------------------------- {{{
-" TODO: Add session support.
+" @todo: Add session support.
 let g:which_key_map['S'] = {
       \ 'name' : '+Session',
       \ 'c' : [':SClose'          , 'close-session'],
@@ -272,7 +272,7 @@ let g:which_key_map['w'] = {
 " }}}
 
 " / is for search ---------------------------------------- {{{
-" TODO: decide group mappings
+" @todo: decide group mappings
 let g:which_key_map['/'] = {
       \ 'name' : '+search',
       \ '/' : [':History:'              , 'commands-history'],

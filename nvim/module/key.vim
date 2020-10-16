@@ -173,7 +173,7 @@ nnoremap <silent> <F3> :set paste!<CR>
 " Toggle spelling and show it's status
 nnoremap <F7> :setlocal spell! spell?<CR>
 inoremap <F7> <Esc>:setlocal spell! spell?<CR>a
-" TODO: need new bindings
+" @todo: need new bindings
 " nnoremap <leader>fw :normal! 1z=<CR>
 " nnoremap <leader>fp :normal! mz[s1z=`z<CR>
 " nnoremap <leader>fn :normal! mz]s1z=`z<CR>
