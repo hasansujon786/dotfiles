@@ -24,6 +24,7 @@ Plug 'mkropat/vim-tt'
 Plug 'liuchengxu/vim-which-key'
 Plug 'vimwiki/vimwiki',{ 'on': ['VimwikiIndex', 'VimwikiTabIndex', 'VimwikiDiaryIndex'] }
 Plug 'wsdjeg/vim-todo',{ 'on': 'OpenTodo' }
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -85,4 +86,5 @@ source ~/dotfiles/nvim/config/coc.vim
 source ~/dotfiles/nvim/config/tt.vim
 source ~/dotfiles/nvim/config/hlnext.vim
 source ~/dotfiles/nvim/config/vim-wiki.vim
+source ~/dotfiles/nvim/config/vimuxline.vim
 
