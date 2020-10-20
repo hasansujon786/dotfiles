@@ -142,16 +142,18 @@ function! hasan#utils#azw() abort
   if exists('g:auto_zoom_window') && g:auto_zoom_window == 1
     wincmd _
     wincmd |
-    vertical resize -5
   endif
 endfunction
 
 function! hasan#utils#auto_zoom_window() abort
   if !exists('g:auto_zoom_window') || g:auto_zoom_window == 0
     let g:auto_zoom_window = 1
+    wincmd _
+    wincmd |
     echo 'Auto zoom on'
   else
     let g:auto_zoom_window = 0
+    wincmd =
     echo 'Auto zoom off'
   endif
 endfunction

@@ -268,7 +268,7 @@ let g:which_key_map['w'] = {
       \ 's' : ['<C-w>s'                                   , 'split-bellow'],
       \ 'o' : ['<C-w>o'                                   , 'only-window'],
       \ 'c' : ['<C-w>c'                                   , 'only-window'],
-      \ 'z' : [':AutoZoomWin'                             , 'auto-zoom-win'],
+      \ 'z' : 'auto-zoom-win'                             ,
       \ 'w' : ['<Plug>VimwikiIndex'                       , 'ncdu'],
       \ 'n' : ['<plug>(wiki-open)'                        , 'ncdu'],
       \ 'j' : ['<plug>(wiki-journal)'                     , 'ncdu'],
@@ -286,6 +286,7 @@ let g:which_key_map['w'] = {
       \ 'u' : ['<plug>(wiki-list-uniq)'                   , 'ncdu'],
       \ 'U' : ['<plug>(wiki-list-uniq-local)'             , 'ncdu'],
       \ }
+nnoremap <leader>wz :AutoZoomWin<CR>
 " }}}
 
 " / is for search ---------------------------------------- {{{
