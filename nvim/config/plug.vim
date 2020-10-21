@@ -43,8 +43,8 @@ Plug 'honza/vim-snippets',{ 'on': 'CocStart' }
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'on': 'CocStart' }
 
 " => Git ===================================================
-Plug 'tpope/vim-fugitive', { 'on': ['Gstatus','Gvdiffsplit'] }
-Plug 'tpope/vim-rhubarb', { 'on': 'Gbrowse' }
+Plug 'tpope/vim-fugitive', { 'on': ['Gstatus','Gvdiffsplit', 'GBrowse', 'GV'] }
+Plug 'tpope/vim-rhubarb', { 'on': ['GBrowse', 'GV'] }
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
 Plug 'airblade/vim-gitgutter',{ 'on': 'CocStart' }
 

@@ -145,7 +145,6 @@ nnoremap <leader>e~ :cd %:p:h<CR>:pwd<CR>
 " }}}
 
 " f is for file ------------------------------------------ {{{
-" @todo: add C commands
 let g:which_key_map['f'] = {
       \ 'name' : '+find' ,
       \ '/' : [':Files'                         , 'fzf-files'],
@@ -178,30 +177,29 @@ nnoremap <leader>fY :call hasan#utils#CopyFileNameToClipBoard()<CR>
 " }}}
 
 " g is for git ------------------------------------------- {{{
-" @todo: replace Gbrowses
 let g:which_key_map['g'] = {
       \ 'name' : '+git',
       \ '/' : [':GFiles'                           , 'fzf-git-files'],
       \ '?' : [':GFiles!?'                         , 'fzf-git-files*'],
+      \
       \ 'a' : [':Git add %'                        , 'add-current'],
       \ 'b' : [':Git blame'                        , 'blame'],
+      \ 'i' : [':Gist -b'                          , 'post-gist'],
+      \ 'L' : [':Git log'                          , 'log'],
+      \
       \ 'B' : [':GBrowse'                          , 'browse'],
       \ 'd' : [':Gvdiffsplit!'                     , 'diff'],
       \ 'g' : [':Gstatus'                          , 'status'],
-      \ 'H' : [':GitGutterLineHighlightsToggle'    , 'highlight-hunks'],
-      \ 'i' : [':Gist -b'                          , 'post-gist'],
-      \ 'j' : ['<Plug>(GitGutterNextHunk)'         , 'next-hunk'],
-      \ 'k' : ['<Plug>(GitGutterPrevHunk)'         , 'prev-hunk'],
-      \ 'L' : [':Git log'                          , 'log'],
-      \ 'p' : ['<Plug>(GitGutterPreviewHunk)'      , 'preview-hunk'],
       \ 'r' : [':GRemove'                          , 'remove'],
-      \ 'R' : [':GitGutter'                        , 'refres-gitgutter'],
-      \ 's' : ['<Plug>(GitGutterStageHunk)'        , 'stage-hunk'],
-      \ 'S' : [':!git status'                      , 'status'],
-      \ 'T' : [':GitGutterSignsToggle'             , 'toggle-signs'],
-      \ 'u' : ['<Plug>(GitGutterUndoHunk)'         , 'undo-hunk'],
       \ 'v' : [':GV'                               , 'view-commits'],
       \ 'V' : [':GV!'                              , 'view-buffer-commits'],
+      \
+      \ 'R' : [':GitGutter'                        , 'refres-gitgutter'],
+      \ 'u' : ['<Plug>(GitGutterUndoHunk)'         , 'undo-hunk'],
+      \ 's' : ['<Plug>(GitGutterStageHunk)'        , 'stage-hunk'],
+      \ 'p' : ['<Plug>(GitGutterPreviewHunk)'      , 'preview-hunk'],
+      \ 'H' : [':GitGutterLineHighlightsToggle'    , 'highlight-hunks'],
+      \ 'T' : [':GitGutterSignsToggle'             , 'toggle-signs'],
       \ }
 if !exists('$TMUX')
   let g:which_key_map.g.l = [ ':FloatermNew --name=lazygit lazygit'   , 'lazygit' ]
@@ -291,7 +289,6 @@ nnoremap <leader>wz :AutoZoomWin<CR>
 " }}}
 
 " / is for search ---------------------------------------- {{{
-" @todo: decide group mappings
 let g:which_key_map['/'] = {
       \ 'name' : '+search',
       \ '/' : [':History:'              , 'commands-history'],
