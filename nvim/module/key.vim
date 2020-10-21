@@ -12,7 +12,7 @@ else
   vnoremap <silent> q <ESC>:call HLNextOff() <BAR> :nohlsearch<CR>
 endif
 
-" exit file with confrim
+" Exit file with confirm
 nnoremap <silent> ZZ :Q!<CR>
 cnoremap <silent> q<CR> :Q<CR>
 cnoremap <silent> x<CR> :Q!<CR>
@@ -40,7 +40,7 @@ nmap <A-h> 5zh
 " Find & open file on current window
 "nnoremap <C-p> :tabfind *
 
-" => Copy-paset ===========================================
+" => Copy-paste ===========================================
 " Prevent selecting and pasting from overwriting what you originally copied.
 vnoremap p pgvy
 " Keep cursor at the bottom of the visual selection after you yank it.
@@ -150,7 +150,7 @@ cnoremap <A-BS> <C-W>
 inoremap <silent> <A-CR> <C-o>o
 " Make a new line under the cursor
 inoremap <silent> <A-O> <Esc>mqA<CR><Esc>`qa
-" Open html tags & place cursor to the middle
+" Open HTML tags & place cursor to the middle
 inoremap <silent> <A-o> <C-o>mq<CR><C-o>`q<CR>
 
 " " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
@@ -170,18 +170,18 @@ tmap <C-o> <C-\><C-n>
 
 " => Function key mappings ================================
 nnoremap <silent> <F3> :set paste!<CR>
+
 " Toggle spelling and show it's status
 nnoremap <F7> :setlocal spell! spell?<CR>
 inoremap <F7> <Esc>:setlocal spell! spell?<CR>a
-" @todo: need new bindings
-" nnoremap <leader>fw :normal! 1z=<CR>
-" nnoremap <leader>fp :normal! mz[s1z=`z<CR>
-" nnoremap <leader>fn :normal! mz]s1z=`z<CR>
+nmap <silent><Plug>FixCurrentWord 1z=:call repeat#set("\<Plug>FixCurrentWord")<CR>
 " Spell commands
 " Next wrong spell      ]s
 " Previous wrong spell  [s
 " Add to spell file     zg
 " Prompt spell fixes    z=
+
+" Save current file and source
 nnoremap <F9> :write<CR>:so %<CR>
 
 " }}}

@@ -160,6 +160,7 @@ let g:which_key_map['f'] = {
       \    'W' : [':Chmod -w'                   , 'remove-write-permission'],
       \  },
       \ 't' : [':Filetypes'                     , 'fzf-filetypes'],
+      \ 'w' : ['<Plug>FixCurrentWord'           , 'fix-current-word'],
       \ 'v' : {
       \ 'name' : '+vim',
       \    '.' : [':e $MYVIMRC'                 , 'open-$MYVIMRC'],

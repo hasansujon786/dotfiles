@@ -2,7 +2,7 @@ let g:lightline = {
       \ 'colorscheme': 'one',
       \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
-      \   'left': [[ 'mode', 'paste', 'readonly'],
+      \   'left': [[ 'mode', 'paste', 'readonly', 'spell'],
       \            [ 'fugitive', 'filename',],
       \            [ 'cocstatus' ]],
       \
@@ -18,6 +18,7 @@ let g:lightline = {
       \   'filename': 'MyFilename',
       \   'filetype': 'MyFiletype',
       \   'mode': 'MyMode',
+      \   'spell': 'MySpell',
       \   'cocstatus': 'coc#status',
       \   'tt_tasktimer': 'LightlineTaskTimer',
       \ },
@@ -60,6 +61,10 @@ function! MyMode()
         \ &ft == 'fern' ? 'fern' :
         \ &ft == 'spacevimtodomanager' ? 'TODO' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+function! MySpell()
+  return winwidth(0) > 60 && &spell ? ' ' : ''
 endfunction
 
 function! MyModified()
