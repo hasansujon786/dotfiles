@@ -1,14 +1,7 @@
 " Open current file directory into the buffer
-nnoremap <silent> - :
-      \call hasan#fern#before_Try_To_select_last_file()<CR>
-      \:Fern <C-r>=hasan#fern#smart_path()<CR> -wait<CR>
-      \:call hasan#fern#try_To_select_last_file()<CR>
-
-command! FernCurDirDrawer
-\  call hasan#fern#before_Try_To_select_last_file()
-\| Fern %:h -drawer -wait
-\| call hasan#fern#try_To_select_last_file()
-
+nnoremap <silent> - :FernCurDir<CR>
+command! FernCurDir call hasan#fern#smart_path(0)
+command! FernCurDirDrawer call hasan#fern#smart_path(1)
 
 let g:fern#drawer_width = 40
 let g:fern#keepalt_on_edit = 1
@@ -27,6 +20,4 @@ let g:fern#renderer#default#expanded_symbol  = '▼ '
 let g:fern#renderer#default#leading          = ' '
 let g:fern#renderer#default#leaf_symbol      = ' '
 let g:fern#renderer#default#root_symbol      = '~ '
-" Folder color
-highlight GlyphPalette8 guifg=#6b7089
 

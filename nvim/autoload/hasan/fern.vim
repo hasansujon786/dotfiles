@@ -6,24 +6,15 @@ function! hasan#fern#open_drawer() abort
   endif
 endfunction
 
-" Fern select last file {{{
-function! hasan#fern#smart_path() abort
+function! hasan#fern#smart_path(drawer)
   if !empty(&buftype) || bufname('%') =~# '^[^:]\+://'
-    return fnamemodify('.', ':p')
-  endif
-  return fnamemodify(expand('%'), ':p:h')
-endfunction
-
-function! hasan#fern#try_To_select_last_file() abort
-  if s:fern_last_file !=# ''
-    call search('\v<' . s:fern_last_file . '>')
+    Fern .
+  else
+    let fern_last_file=expand('%:t')
+    if a:drawer | Fern %:h -drawer -wait | else | Fern %:h -wait | endif
+    if fern_last_file !=# '' | call search('\v<' . fern_last_file . '>') | endif
   endif
 endfunction
-
-function! hasan#fern#before_Try_To_select_last_file() abort
-  let s:fern_last_file=expand('%:t')
-endfunction
-" }}}
 
 " Fern mappings {{{
 function! hasan#fern#FernInit() abort
