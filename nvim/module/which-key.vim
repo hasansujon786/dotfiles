@@ -194,10 +194,11 @@ let g:which_key_map['g'] = {
       \ 'v' : [':GV'                               , 'view-commits'],
       \ 'V' : [':GV!'                              , 'view-buffer-commits'],
       \
-      \ 'R' : [':GitGutter'                        , 'refres-gitgutter'],
+      \ 'U' : [':GitGutter'                        , 'update-gitgutter'],
       \ 'u' : ['<Plug>(GitGutterUndoHunk)'         , 'undo-hunk'],
       \ 's' : ['<Plug>(GitGutterStageHunk)'        , 'stage-hunk'],
       \ 'p' : ['<Plug>(GitGutterPreviewHunk)'      , 'preview-hunk'],
+      \ 'M' : [':GitGutterFold'                    , 'fold-around-hunk'],
       \ 'H' : [':GitGutterLineHighlightsToggle'    , 'highlight-hunks'],
       \ 'T' : [':GitGutterSignsToggle'             , 'toggle-signs'],
       \ }
@@ -234,29 +235,50 @@ let g:which_key_map['S'] = {
       \ }
 " }}}
 
-" t is for tast-timer ---------------------------------------- {{{
+" t is for terminal -------------------------------------- {{{
 let g:which_key_map['t'] = {
-      \ 'name' : '+tast-timer',
+      \ 'name' : '+toggle',
+      \ 'u' : 'open-term-buffer-u',
+      \ 'e' : 'open-term-buffer-e',
+      \ 'o' : 'open-term-buffer-o',
+      \ 'a' : 'open-term-buffer-a',
+      \ 's' : {
+      \ 'name' : '+set-term-with-prefix',
+      \    'u' : 'set-term-buffer-u',
+      \    'e' : 'set-term-buffer-e',
+      \    'o' : 'set-term-buffer-o',
+      \    'a' : 'set-term-buffer-a',
+      \  },
+      \ }
+nmap <silent><leader>tu :call hasan#term#GotoBuffer(0)<CR>
+nmap <silent><leader>te :call hasan#term#GotoBuffer(1)<CR>
+nmap <silent><leader>to :call hasan#term#GotoBuffer(2)<CR>
+nmap <silent><leader>ta :call hasan#term#GotoBuffer(3)<CR>
+
+nmap <silent><leader>tsu :call hasan#term#SetBuffer(0, 'U')<CR>
+nmap <silent><leader>tse :call hasan#term#SetBuffer(1, 'E')<CR>
+nmap <silent><leader>tso :call hasan#term#SetBuffer(2, 'O')<CR>
+nmap <silent><leader>tsa :call hasan#term#SetBuffer(3, 'A')<CR>
+" }}}
+
+" T is for tast-timer-&-toggle --------------------------- {{{
+let g:which_key_map['T'] = {
+      \ 'name' : '+tast-timer-&-toggle',
       \ 'b' : [':Break'              , 'tt-break'],
       \ 'h' : [':HideAndShowTimer'   , 'tt-hide-timer'],
       \ 'o' : [':OpenTasks'          , 'tt-open-tasks'],
       \ 'p' : [':ToggleTimer'        , 'tt-pause'],
-      \ 'w' : [':Work'               , 'tt-work'],
+      \ 'W' : [':Work'               , 'tt-work'],
       \ 's' : 'tt-status',
       \ 'u' : 'tt-update-timer',
       \ 'U' : 'tt-update-status',
-      \ }
-nnoremap <Leader>ts :ShowTimer<CR>
-nnoremap <Leader>tu :UpdateCurrentTimer<space>
-nnoremap <Leader>tU :UpdateCurrentStatus<space>
-" }}}
-
-" T is for toggle ---------------------------------------- {{{
-let g:which_key_map['T'] = {
-      \ 'name' : '+toggle',
+      \
       \ 'c' : [':setlocal cursorcolumn!'                   , 'cursorcolumn'],
       \ 'w' : [':call hasan#utils#toggleWrap()'            , 'wrap'],
       \ }
+nnoremap <Leader>Ts :ShowTimer<CR>
+nnoremap <Leader>Tu :UpdateCurrentTimer<space>
+nnoremap <Leader>TU :UpdateCurrentStatus<space>
 " }}}
 
 " w is for wiki-or-window -------------------------------- {{{

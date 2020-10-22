@@ -25,6 +25,9 @@ augroup vimrcEx
 
   " Custom fzf statusline
   autocmd User FzfStatusLine call hasan#autocmd#fzf_statusline()
+
+  " Neovim terminal
+  autocmd TermOpen * setfiletype terminal | set bufhidden=hide
 augroup END
 
 augroup CursorLine
@@ -38,16 +41,6 @@ augroup CursorLine
   au WinEnter,BufWinEnter *.vim,*.js call hasan#boot#highligt_textwith_column(1)
         \| au WinLeave,BufWinLeave,BufLeave <buffer> call hasan#boot#highligt_textwith_column(0)
 augroup END
-
-" Neovim terminal
-if has('nvim')
-  augroup Terminal
-    au!
-    au TermOpen * setfiletype terminal | set bufhidden=hide | :startinsert
-    au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-    au FileType terminal setlocal nonumber norelativenumber signcolumn=no
-  augroup END
-endif
 
 augroup FernEvents
   autocmd!

@@ -64,7 +64,7 @@ function! MyMode()
 endfunction
 
 function! MySpell()
-  return winwidth(0) > 60 && &spell ? ' ' : ''
+  return winwidth(0) > 60 && &spell ? '📖' : ''
 endfunction
 
 function! MyModified()
