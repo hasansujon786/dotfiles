@@ -51,19 +51,24 @@ let g:which_key_map['y'] = 'which_key_ignore'
 " }}}
 
 " Single mappings ---------------------------------------- {{{
-let g:which_key_map['l'] = [ ':wincmd l'                            , 'window-right' ]
-let g:which_key_map['h'] = [ ':wincmd h'                            , 'window-left' ]
-let g:which_key_map['j'] = [ ':wincmd j'                            , 'window-bellow' ]
-let g:which_key_map['k'] = [ ':wincmd k'                            , 'window-above' ]
 let g:which_key_map['n'] = [ ':call hasan#fern#open_drawer()'       , 'open-fern' ]
 let g:which_key_map['q'] = [ ':Q'                                   , 'close-window' ]
 let g:which_key_map['s'] = [ ':update'                              , 'save-file' ]
-let g:which_key_map['r'] = [ ':call hasan#utils#cycle_numbering()'  , 'cycle-number' ]
 let g:which_key_map['='] = [ '<C-W>='                               , 'balance-windows' ]
 let g:which_key_map['x'] = [ ':bdelete'                             , 'delete-buffer']
 let g:which_key_map['m'] = [ ':call WindowSwap#EasyWindowSwap()'    , 'move-window' ]
 let g:which_key_map['z'] = [ 'za'                                   , 'fold' ]
+let g:which_key_map['r'] = 'cycle-number'
+let g:which_key_map['l'] = 'window-right'
+let g:which_key_map['h'] = 'window-left'
+let g:which_key_map['j'] = 'window-bellow'
+let g:which_key_map['k'] = 'window-above'
 " let g:which_key_map['q'] = 'close-window'
+nnoremap <silent> <leader>k :wincmd k<CR>
+nnoremap <silent> <leader>j :wincmd j<CR>
+nnoremap <silent> <leader>l :wincmd l<CR>
+nnoremap <silent> <leader>h :wincmd h<CR>
+nnoremap <silent> <leader>r :call hasan#utils#cycle_numbering()<CR>
 nnoremap <silent> <leader><TAB> :AlternateFile<CR>
 " nnoremap <silent> <leader>q :Q<CR>
 
@@ -237,28 +242,10 @@ let g:which_key_map['S'] = {
 
 " t is for terminal -------------------------------------- {{{
 let g:which_key_map['t'] = {
-      \ 'name' : '+toggle',
-      \ 'u' : 'open-term-buffer-u',
-      \ 'e' : 'open-term-buffer-e',
-      \ 'o' : 'open-term-buffer-o',
-      \ 'a' : 'open-term-buffer-a',
-      \ 's' : {
-      \ 'name' : '+set-term-with-prefix',
-      \    'u' : 'set-term-buffer-u',
-      \    'e' : 'set-term-buffer-e',
-      \    'o' : 'set-term-buffer-o',
-      \    'a' : 'set-term-buffer-a',
-      \  },
+      \ 'name' : '+terminal',
+      \ 's' : 'SetTerminal',
       \ }
-nmap <silent><leader>tu :call hasan#term#GotoBuffer(0)<CR>
-nmap <silent><leader>te :call hasan#term#GotoBuffer(1)<CR>
-nmap <silent><leader>to :call hasan#term#GotoBuffer(2)<CR>
-nmap <silent><leader>ta :call hasan#term#GotoBuffer(3)<CR>
-
-nmap <silent><leader>tsu :call hasan#term#SetBuffer(0, 'U')<CR>
-nmap <silent><leader>tse :call hasan#term#SetBuffer(1, 'E')<CR>
-nmap <silent><leader>tso :call hasan#term#SetBuffer(2, 'O')<CR>
-nmap <silent><leader>tsa :call hasan#term#SetBuffer(3, 'A')<CR>
+nmap <leader>ts :SetTerminal<space>
 " }}}
 
 " T is for tast-timer-&-toggle --------------------------- {{{

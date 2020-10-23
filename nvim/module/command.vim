@@ -10,4 +10,7 @@ command! AutoZoomWin call hasan#utils#auto_zoom_window()
 command! AlternateFile exe "normal! \<c-^>"
 command! -bang Q call hasan#utils#confirmQuit(<q-bang>)
 
+command! -nargs=1 SetTerminal call hasan#term#SetBuffer(<f-args>)
+command! -nargs=1 GoToTerminal call hasan#term#GotoBuffer(<f-args>)
+command! -nargs=+ SendTerminalCommand call hasan#term#SendTerminalCommand(<f-args>)
 
