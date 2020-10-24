@@ -10,7 +10,7 @@ fun! hasan#term#SetBuffer(ctrlId)
   end
 
   let g:win_ctrl_buf_list[a:ctrlId] = [b:terminal_job_id, nvim_win_get_buf(0)]
-  execute "nmap <silent><leader>t".a:ctrlId." :GoToTerminal ".a:ctrlId."<CR>"
+  execute("nmap <silent><leader>t".a:ctrlId." :GoToTerminal ".a:ctrlId."<CR>")
 
   echo "Terminal CtrlID: " .a:ctrlId
 endfun
@@ -21,19 +21,18 @@ fun! hasan#term#GotoBuffer(ctrlId)
     return
   end
   if has_key(g:win_ctrl_buf_list, a:ctrlId) == 0
-    echo "Nothing There"
+    echo "There is no terminal with CtrlID: ".a:ctrlId
+    execute("unmap <silent><leader>t".a:ctrlId)
     return
   end
-  let contents = g:win_ctrl_buf_list[a:ctrlId]
+  let termBufNum = g:win_ctrl_buf_list[a:ctrlId][1]
+  if !buflisted(l:termBufNum)
+    echo "Buffer ".l:termBufNum." dose not exist anymore"
+    return
+  endif
 
-  try
-    let bufnr = l:contents[1]
-    " call nvim_win_set_buf(0, l:bufh)
-    execute "buffer " .l:bufnr
-    normal! G
-  catch
-    echo "Buffer ".l:bufnr." dose not exist"
-  endtry
+  execute("buffer " .l:termBufNum)
+  normal! G
 endfun
 
 fun! hasan#term#SendTerminalCommand(...)
@@ -42,17 +41,17 @@ fun! hasan#term#SendTerminalCommand(...)
     echo "CtrlID must be a single character"
     return
   end
-  if len(a:000) < 2
-    echo "There is no command to run in the terminal"
-    return
-  end
   if has_key(g:win_ctrl_buf_list, l:ctrlId) == 0
-    echo "Nothing There"
+    echo "There is no terminal with CtrlID: ".l:ctrlId
     return
   end
-  let command = join(a:000[1:], ' ')
-  let contents = g:win_ctrl_buf_list[l:ctrlId]
+  if len(a:000) < 2
+    echo "There is no command to run"
+    return
+  end
 
-  let job_id = l:contents[0]
+  let command = join(a:000[1:], ' ')
+  let job_id = g:win_ctrl_buf_list[l:ctrlId][0]
+
   call chansend(l:job_id, l:command."\n")
 endfun

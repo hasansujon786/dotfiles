@@ -13,4 +13,5 @@ command! -bang Q call hasan#utils#confirmQuit(<q-bang>)
 command! -nargs=1 SetTerminal call hasan#term#SetBuffer(<f-args>)
 command! -nargs=1 GoToTerminal call hasan#term#GotoBuffer(<f-args>)
 command! -nargs=+ SendTerminalCommand call hasan#term#SendTerminalCommand(<f-args>)
+command! AllTerminalIds echo keys(g:win_ctrl_buf_list)
 

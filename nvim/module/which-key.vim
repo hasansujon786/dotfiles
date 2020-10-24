@@ -194,7 +194,7 @@ let g:which_key_map['g'] = {
       \
       \ 'B' : [':GBrowse'                          , 'browse'],
       \ 'd' : [':Gvdiffsplit!'                     , 'diff'],
-      \ 'g' : [':Gstatus'                          , 'status'],
+      \ 'g' : [':Gstatus!'                          , 'status'],
       \ 'r' : [':GRemove'                          , 'remove'],
       \ 'v' : [':GV'                               , 'view-commits'],
       \ 'V' : [':GV!'                              , 'view-buffer-commits'],
