@@ -1,8 +1,4 @@
 " => General ---------------------------------------------------- {{{
-" Use Vim settings, rather then Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-filetype off
-
 " filetype plugin indent on                              " Enable filetype plugins
 " Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 " copy next line to .tmux.conf for support true color within tmux
