@@ -20,9 +20,7 @@ endfunction
 function! hasan#fern#FernInit() abort
   " fern-custom-actions {{{
   nnoremap <Plug>(fern-close-drawer) :<C-u>FernDo close -drawer -stay<CR>
-  nmap <buffer><silent> <Plug>(fern-action-open-and-close)
-        \ <Plug>(fern-action-open:select)
-        \ <Plug>(fern-close-drawer)
+  nmap <buffer><silent> <Plug>(fern-action-open-and-close) <Plug>(fern-action-open:select)<Plug>(fern-close-drawer)
   nmap <buffer><expr>
         \ <Plug>(fern-custom-openAndClose-expand-collapse)
         \ fern#smart#leaf(
@@ -77,6 +75,18 @@ function! hasan#fern#FernInit() abort
 
   " nmap <buffer> K <Plug>(fern-action-mark-children:leaf)
 
+  " Open bookmark:///
+  nnoremap <buffer><silent>
+        \ <Plug>(fern-my-enter-bookmark)
+        \ :<C-u>Fern bookmark:///<CR>
+  nmap <buffer><expr><silent>
+        \ <C-^>
+        \ fern#smart#scheme(
+        \   "\<Plug>(fern-my-enter-bookmark)",
+        \   {
+        \     'bookmark': "\<C-^>",
+        \   },
+        \ )
 endfunction
 " }}}
 

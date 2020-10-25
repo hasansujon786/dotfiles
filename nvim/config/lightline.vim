@@ -75,6 +75,7 @@ function! MyFilename()
   return ('' != MyModified() ? MyModified() : '').' '.
         \(&ft == 'fugitive' ? 'fugitive' :
         \ &ft == 'spacevimtodomanager' ? 'TODO manager' :
+        \ &ft == 'fern' ? ' ' :
         \  '' != expand('%:t') ? expand('%:t') : '[No Name]')
 endfunction
 
