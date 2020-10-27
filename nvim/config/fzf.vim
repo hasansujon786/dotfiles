@@ -1,7 +1,8 @@
 " nnoremap <silent> - :Files <C-R>=expand('%:h')<CR><CR>
-nnoremap <silent> <C-p> :History<CR>
-nnoremap <silent> <C-k>p :Files<CR>
-nnoremap <silent> <C-k><C-p> :GFile<CR>
+nnoremap <silent> <C-p>           :ProjectRecentFiles<CR>
+nnoremap <silent> <C-k>p          :Files<CR>
+nnoremap <silent> <C-k><C-p>      :GFile<CR>
+nnoremap <silent> <C-k><C-k><C-p> :History<CR>
 
 nnoremap <silent> <C-k>b :Buffers<CR>
 nnoremap <silent> <C-k>w :Windows<CR>
@@ -19,7 +20,13 @@ nnoremap <silent> // :BLines<CR>
 nnoremap <silent> <C-k>l :Lines<CR>
 
 " Enhanced RipGrep integration with fzf
-command! -nargs=* -bang RG call hasan#utils#RipgrepFzf(<q-args>, <bang>0)
+command! -nargs=* -bang RG call hasan#fzf#_ripgrep(<q-args>, <bang>0)
+
+command! -bang -nargs=* ProjectRecentFiles
+    \ call fzf#run(fzf#wrap({
+    \   'source': hasan#fzf#_project_recent_files(),
+    \   'options': ['-m', '--header-lines', !empty(expand('%')), '--prompt', 'ProRecent> ']},
+    \ <bang>0))
 
 let g:fzf_layout = { 'down': '~50%' }
 " let g:fzf_files_options = '--reverse --preview "(cat {})"'
