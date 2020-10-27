@@ -1,8 +1,7 @@
 " nnoremap <silent> - :Files <C-R>=expand('%:h')<CR><CR>
-nnoremap <silent> <C-p>           :ProjectRecentFiles<CR>
-nnoremap <silent> <C-k>p          :Files<CR>
-nnoremap <silent> <C-k><C-p>      :GFile<CR>
-nnoremap <silent> <C-k><C-k><C-p> :History<CR>
+nnoremap <silent> <C-p>      :ProjectRecentFiles<CR>
+nnoremap <silent> <C-k>p     :Files<CR>
+nnoremap <silent> <C-k><C-p> :History<CR>
 
 nnoremap <silent> <C-k>b :Buffers<CR>
 nnoremap <silent> <C-k>w :Windows<CR>
@@ -28,7 +27,7 @@ command! -bang -nargs=* ProjectRecentFiles
     \   'options': ['-m', '--header-lines', !empty(expand('%')), '--prompt', 'ProRecent> ']},
     \ <bang>0))
 
-let g:fzf_layout = { 'down': '~50%' }
+let g:fzf_layout = { 'down': '~70%' }
 " let g:fzf_files_options = '--reverse --preview "(cat {})"'
 " let g:fzf_preview_window = 'right:60%'
 let g:fzf_action = {
