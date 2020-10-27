@@ -181,9 +181,6 @@ nmap <silent><Plug>FixCurrentWord 1z=:call repeat#set("\<Plug>FixCurrentWord")<C
 " Add to spell file     zg
 " Prompt spell fixes    z=
 
-" Save current file and source
-nnoremap <F9> :write<CR>:so %<CR>
-
 " }}}
 " => Disabled-keys ------------------------------------ {{{
 " disable arrow keys in normal mode

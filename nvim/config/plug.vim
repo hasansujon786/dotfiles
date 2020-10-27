@@ -55,7 +55,7 @@ Plug 'ap/vim-css-color',{ 'on': 'CocStart' }
 " Plug 'norcalli/nvim-colorizer.lua'
 
 " javascript
-Plug 'sheerun/vim-polyglot'     " Full lang support
+Plug 'sheerun/vim-polyglot',{ 'on': 'CocStart' }    " Full lang support
 " Plug 'jparise/vim-graphql'
 
 
