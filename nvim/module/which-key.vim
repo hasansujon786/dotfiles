@@ -121,11 +121,11 @@ let g:which_key_map['a'] = {
 let g:which_key_map['b'] = {
       \ 'name' : '+buffer',
       \ '/' : ['Buffers'                            , 'fzf-buffer'],
-      \ 'd' : ['Bclose'                             , 'delete-buffer'],
-      \ 'D' : [':call hasan#utils#clear_buffers()'  , 'kill-other-buffers'],
       \ 'f' : ['bfirst'                             , 'first-buffer'],
       \ 'l' : ['blast'                              , 'last-buffer'],
       \ 'n' : ['bnext'                              , 'next-buffer'],
+      \ 'x' : ['Bclose'                             , 'delete-buffer'],
+      \ 'X' : [':call hasan#utils#clear_buffers()'  , 'kill-other-buffers'],
       \ 'p' : ['bprevious'                          , 'previous-buffer'],
       \ }
 " }}}
