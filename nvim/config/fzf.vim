@@ -20,14 +20,11 @@ nnoremap <silent> <C-k>l :Lines<CR>
 
 " Enhanced RipGrep integration with fzf
 command! -nargs=* -bang RG call hasan#fzf#_ripgrep(<q-args>, <bang>0)
+" Project recent & git filet togather
+command! -bang ProjectRecentFiles call hasan#fzf#_project_recent_files(s:p(<bang>0), <bang>0)
 
-command! -bang -nargs=* ProjectRecentFiles
-    \ call fzf#run(fzf#wrap({
-    \   'source': hasan#fzf#_project_recent_files(),
-    \   'options': ['-m', '--header-lines', !empty(expand('%')), '--prompt', 'ProRecent> ']},
-    \ <bang>0))
-
-let g:fzf_layout = { 'down': '~70%' }
+" let g:fzf_layout = { 'down': '~70%' }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.7 } }
 " let g:fzf_files_options = '--reverse --preview "(cat {})"'
 " let g:fzf_preview_window = 'right:60%'
 let g:fzf_action = {
@@ -57,4 +54,12 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
+
+function! s:p(bang, ...)
+  let preview_window = get(g:, 'fzf_preview_window', a:bang && &columns >= 80 || &columns >= 120 ? 'right': '')
+  if len(preview_window)
+    return call('fzf#vim#with_preview', add(copy(a:000), preview_window))
+  endif
+  return {}
+endfunction
 

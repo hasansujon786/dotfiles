@@ -11,7 +11,7 @@ let g:lightline = {
       \            [ 'tt_tasktimer']],
       \ },
       \ 'component': {
-      \   'readonly': '%{&readonly?"":""}',
+      \   'readonly': '%{&readonly?"":""}',
       \ },
       \ 'component_function': {
       \   'fugitive': 'LightlineFugitive',

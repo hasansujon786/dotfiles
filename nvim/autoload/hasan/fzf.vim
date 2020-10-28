@@ -1,5 +1,18 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ProjectRecentFiles                                                      "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! hasan#fzf#_project_recent_files(preview, bang)
+  let options = ['-m', '--header-lines', !empty(expand('%')), '--prompt', 'ProRecent> ']
+  if has_key(a:preview, 'options')
+    let options = l:options +  a:preview.options
+  end
+  call fzf#run(fzf#wrap({
+        \ 'source': s:get_project_recent_files(),
+        \ 'options': options},
+        \ a:bang))
+endfunction
 
-function! hasan#fzf#_project_recent_files()
+function! s:get_project_recent_files()
   let files = filter(map(fzf#vim#_buflisted_sorted(), 'bufname(v:val)'), 'len(v:val)')
           \ + filter(filter(copy(v:oldfiles), 'v:val =~ getcwd()'), "filereadable(fnamemodify(v:val, ':p'))")
           \ + split(system('git ls-files'), '')
@@ -9,6 +22,9 @@ function! hasan#fzf#_project_recent_files()
     \ 'fnamemodify(v:val, ":~:.")'))
 endfunction
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RG                                                                      "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! hasan#fzf#_ripgrep(query, fullscreen)
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))
