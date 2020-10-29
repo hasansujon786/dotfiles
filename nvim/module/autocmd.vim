@@ -58,5 +58,6 @@ augroup FileMarks
   autocmd BufLeave *.ts   normal! mT
   autocmd BufLeave *.vim  normal! mV
 	autocmd BufLeave *.css  normal! mC
+  autocmd BufLeave *.txt  normal! mK
 augroup END
 

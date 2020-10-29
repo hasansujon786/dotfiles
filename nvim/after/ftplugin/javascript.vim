@@ -1,7 +1,9 @@
 " Run js Code on node
-nnoremap <leader>bb :!node %<CR>
+nnoremap <buffer><leader>bb :!node %<CR>
 " Save current file and Format
-nnoremap <F9> :Format<CR>:write<CR>
+nnoremap <buffer><F9> :Format<CR>:write<CR>
+
+nnoremap <buffer> <F4> :e %<.css<CR>
 """"""""""""""""""""""""""""""
 " => JavaScript
 """"""""""""""""""""""""""""""

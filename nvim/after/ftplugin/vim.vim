@@ -1,2 +1,2 @@
 " Save current file and source
-nnoremap <F9> :write<CR>:so %<CR>
+nnoremap <buffer><F9> :write<CR>:so %<CR>
