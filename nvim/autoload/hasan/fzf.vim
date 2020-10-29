@@ -17,12 +17,12 @@ function! s:custom_wrap(spec, fullscreen)
   let actions = copy(get(g:, 'fzf_action', {}))
   let colors = '--color=bg+:#3E4452,bg:#282C34,spinner:#C678DD,hl:#61AFEF,fg:#ABB2BF,prompt:#61AFEF,header:#5C6370,info:#E06C75,pointer:#E5C07B,marker:#E06C75,fg+:#E5C07B,gutter:#282C34,hl+:#61AFEF'
   let sp = "'"
-  let op = join(map(a:spec.options, 'sp . v:val . sp'))
+  let opts = join(map(a:spec.options, 'sp . v:val . sp'))
   let w = a:fullscreen ? { 'window': '-tabnew' } : copy(get(g:, 'fzf_layout', {}))
 
   let custom =  {
         \'_action': actions,
-        \'options': colors." ".op." --expect=".join(keys(actions), ','),
+        \'options': colors." ".opts." --expect=".join(keys(actions), ','),
         \'sink*': a:spec['sink*'],
         \'source': a:spec.source,
         \keys(w)[0]: values(w)[0]}
@@ -53,19 +53,25 @@ function! s:get_project_recent_files()
 endfunction
 
 function! s:project_recent_files_sink(args)
-  let actionKey = a:args[0]
-  let line = a:args[1]
-  if actionKey != ''
-    let action = g:fzf_action[actionKey]
-    return execute(action." ".line)
+  let action = a:args[0]
+  " An action can be on singel or multiple line
+  let lines = a:args[1:]
+  if action != ''
+    let cmd = g:fzf_action[action]
+    for i in lines
+      execute(cmd." ".i)
+    endfor
+    return
   end
+
+  let line = a:args[1]
   let selectedBufNr = bufnr(l:line)
-  let tabwin = []
-  for t in range(1, tabpagenr('$'))
+  let tabwin = [] " tabwin is the [n*tab,n*win] moves to the selected buf.
+  for t in range(1, tabpagenr('$')) " range is 1 because tabpagenr count start from 1
     let buffers = tabpagebuflist(t)
     for w in range(1, len(buffers))
       if selectedBufNr == buffers[w-1]
-        let l:tabwin = [t,w]
+        let l:tabwin = [t,w] " if selectedBufNr is more than 1 it will give the last one
       endif
     endfor
   endfor
