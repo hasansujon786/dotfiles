@@ -23,8 +23,12 @@ nnoremap <BS> <c-^>
 noremap Q q
 " Replay last used macro
 " noremap <CR> @@
-" Better marks
-nnoremap ' `
+
+" Character-wise jumps always
+nnoremap '   `
+vnoremap '   `
+nnoremap ''  `'
+vnoremap ''  `'
 
 " Vertical scrolling
 nmap <silent> <A-d> <Plug>(SmoothieDownwards)

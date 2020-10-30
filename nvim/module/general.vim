@@ -23,10 +23,7 @@ endif
 
 " Some general settings
 set path+=**                                           " usefull while using find in nested folders
-set diffopt+=vertical                                  " Always use vertical diffs
 set backspace=eol,start,indent                         " Configure backspace so it acts as it should act
-set splitbelow splitright                              " Fix splitting
-set hidden                                             " enable hidden unsaved buffers
 
 set lazyredraw                                         " Don't redraw while executing macros (good performance config)
 set updatetime=100
@@ -43,11 +40,18 @@ let maplocalleader="\<Space>"
 "   source ~/.vimrc.local
 " endif
 
+if !has('win32')
+  if !exists('$XDG_CACHE_HOME')
+    let $XDG_CACHE_HOME = $HOME . '/.cache'
+  end
+  set undodir=$XDG_CACHE_HOME/vim_undo
+  set viewdir=$XDG_CACHE_HOME/vim_views
+else
+  set undodir=$HOME/AppData/Local/nvim-data/undo
+  set viewdir=$HOME/AppData/Local/nvim-data/views
+end
+
 set nobackup nowb noswapfile                           " Turn backup off, since most stuff is in SVN, git etc. anyway...
-set backupdir=~/.local/share/nvim/backup
-set directory=~/.local/share/nvim/swap
-set undodir=~/.local/share/nvim/undo
-set viewdir=~/.local/share/nvim/view
 set viewoptions-=curdir                                " see: https://vi.stackexchange.com/questions/11903/working-directory-different-than-current-file-directory
 set undofile undolevels=1500                           " persistent undo between file reloads
 
@@ -64,7 +68,7 @@ set spellfile=~/dotfiles/nvim/spell/en.utf-8.add
 " source $VIMRUNTIME/menu.vim
 
 " Autocompletion
-set wildmenu                                           " Turn on the Wild menu
+set wildmenu wildignorecase                            " Turn on the Wild menu
 set pumblend=3                                         " set pum background visibility to 20 percent
 set pumheight=10                                       " Makes popup menu smaller
 set wildoptions=pum                                    " set file completion in command to use pum
@@ -84,10 +88,6 @@ endif
 set ruler                                              " Always show current position
 set showmatch                                          " Show matching brackets when text indicator is over them
 set cursorline                                         " Show a line on current line
-set foldcolumn=0                                       " display gutter markings for folds
-set signcolumn=yes                                     " Always show the signcolumn,
-
-set cmdheight=1                                        " Height of the command bar
 set showcmd                                            " show any commands
 set noshowmode                                         " don't show mode as lightline already does
 set nomodeline
@@ -105,10 +105,17 @@ set t_vb=
 " Numbers
 set number relativenumber
 set numberwidth=1
+set foldcolumn=0                                       " display gutter markings for folds
+set signcolumn=yes                                     " Always show the signcolumn,
 
-" Specify the behavior when switching between buffers
-set switchbuf=useopen,usetab,newtab
+" Tabline
 set showtabline=2
+
+" Windwo & buffer
+set cmdheight=1                                        " Height of the command bar
+set splitbelow splitright                              " Fix splitting
+set hidden switchbuf=useopen                           " Specify the behavior when switching between buffers (enable hidden unsaved buffers)
+set diffopt+=vertical                                  " Always use vertical diffs
 
 let g:sh_fold_enabled=1                                " enable folding in bash files
 
@@ -125,10 +132,17 @@ set magic                                              " For regular expressions
 set regexpengine=1                                     " (good performance config)
 set wrapscan                                           " Wrap searches.
 set ignorecase smartcase                               " Ignore search term case, unless term contains an uppercase character.
+set infercase
 set hlsearch incsearch                                 " Show where the pattern, as it was typed.
+set gdefault                                           " The ':substitute' flag 'g' is default on.
+set inccommand=nosplit                                 " interactive find replace preview
+
+" Scroll-aside
+set sidescroll=1
+set scrolloff=1                                        " Set 1 lines to the cursor - when moving vertically using j/k
+set sidescrolloff=5
 
 " Text appearance
-set scrolloff=1                                        " Set 1 lines to the cursor - when moving vertically using j/k
 set iskeyword+=-                                       " treat dash separated words as a word text object
 set list
 set listchars+=tab:→\ ,nbsp:␣,trail:•                  " show hidden characters
