@@ -216,6 +216,25 @@ else
 endif
 " }}}
 
+" i is for insertion ------------------------------------- {{{
+let g:which_key_map['i'] = {
+      \ 'name' : '+insertion',
+      \ 'd' : {
+      \ 'name' : 'date-and-time',
+      \    'd' :['_#_Insertion(strftime("%e %B %Y"))'           , 'date'],
+      \    't' :['_#_Insertion( strftime("%H:%M"))'             , 'time'],
+      \  },
+      \ 't' : {
+      \ 'name' : 'text-transfrom',
+      \    'c' :['<Plug>(camel_case_operator)'       , 'transfrom-to-camel-case' ],
+      \    'C' :['<Plug>(upper_camel_case_operator)' , 'transfrom-to-upper-camel-case' ],
+      \    's' :['<Plug>(snake_case_operator)'       ,'transfrom-to-snake-case' ],
+      \    'k' :['<Plug>(kebab_case_operator)'       , 'transfrom-to-kebab-case' ],
+      \    'S' :['<Plug>(start_case_operator)'       , 'transfrom-to-start-case' ],
+      \  },
+      \ }
+" }}}
+
 " o is for open ------------------------------------------ {{{
 let g:which_key_map['o'] = {
       \ 'name' : '+open',
@@ -327,9 +346,6 @@ xnoremap <leader>/p y:CocSearch -F <C-r>"<Home><C-right><C-right><C-right>\<C-ri
 " replace word under cursor, globally, with confirmation
 nnoremap <Leader>/r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 xnoremap <Leader>/r y :%s/<C-r>"//gc<Left><Left><Left>
-" interactive find replace preview
-set inccommand=nosplit
-
 " }}}
 
 " Register which key map

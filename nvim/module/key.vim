@@ -92,6 +92,10 @@ xnoremap <silent> <A-j> :call hasan#utils#visual_move_down()<CR>
 " vnoremap <silent> <A-k> :move '<-2<CR>gv=gv
 " vnoremap <silent> <A-j> :move '>+1<CR>gv=gv
 
+ " exchange_operator.vim
+vmap gx <Plug>(exchange-operator)
+nmap gx <Plug>(exchange-operator)
+
 " => Moving-around-tabs-and-buffers =======================
 " Resize splits
 nnoremap <silent> <A-=> :resize +3<CR>
@@ -113,6 +117,9 @@ nnoremap <silent> ]<TAB> :tabmove+<CR>
 nnoremap <silent> [<TAB> :tabmove-<CR>
 
 " => Search-functionalities ===============================
+" highlight current word in file
+nnoremap z/ :call autoplug#autohl#_AutoHighlightToggle()<CR>
+
 " auto center on matched string
 xnoremap / y/<C-R>"<CR>
 
