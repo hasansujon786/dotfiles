@@ -19,12 +19,12 @@ let s:mode = v:null
 hi! link ExchangeRegion IncSearch
 
 
-" nnoremap <silent><Plug>(exchange-operator)  :set opfunc=autoplug#exchange_operator#_opfunc<CR>g@
-" vnoremap <silent><Plug>(exchange-operator)  :<C-U>call autoplug#exchange_operator#_opfunc(visualmode())<CR>
+" nnoremap <silent><Plug>(exchange-operator)  :set opfunc=exchange_operator#_opfunc<CR>g@
+" vnoremap <silent><Plug>(exchange-operator)  :<C-U>call exchange_operator#_opfunc(visualmode())<CR>
 " vmap gx <Plug>(exchange-operator)
 " nmap gx <Plug>(exchange-operator)
 
-function! autoplug#exchange_operator#_opfunc (type, ...)
+function! exchange_operator#_opfunc (type, ...)
     let sel_save = &selection
     let &selection = "inclusive"
     let reg_save = @@

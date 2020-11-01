@@ -1,8 +1,8 @@
 " !::exe [Redraw | So | Error 'ha']
 
-" nnoremap z/ :call autoplug#autohl#_AutoHighlightToggle()<CR>
+" nnoremap z/ :call autohl#_AutoHighlightToggle()<CR>
 
-function! autoplug#autohl#_AutoHighlightToggle()
+function! autohl#_AutoHighlightToggle()
   let @/ = ''
   if exists('#auto_highlight')
     au! auto_highlight

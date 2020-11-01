@@ -11,7 +11,7 @@
 " nmap <leader>gm     :Goto nmap<space>
 " nmap <leader>ga     :Goto abbrev<space>
 
-function! autoplug#goto#_goto (str)
+function! goto#_goto (str)
     let str = substitute(a:str, '\v[()]', '', 'g')
 
     let g:out = ''

@@ -1,7 +1,11 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# nvim
 tt.state
 /nvim/plugged
+/nvim/events.log
+log.log
+
 # dependencies
 /node_modules
 /.git
@@ -20,7 +24,6 @@ tt.state
 .env.development.local
 .env.test.local
 .env.production.local
-log.log
 
 npm-debug.log*
 yarn-debug.log*

@@ -187,7 +187,7 @@ let g:which_key_map['g'] = {
       \ '/' : [':GFiles'                           , 'fzf-git-files'],
       \ '?' : [':GFiles!?'                         , 'fzf-git-files*'],
       \
-      \ 'a' : [':Git add %'                        , 'add-current'],
+      \ '.' : [':Git add %'                        , 'stage-current-file'],
       \ 'b' : [':Git blame'                        , 'blame'],
       \ 'i' : [':Gist -b'                          , 'post-gist'],
       \ 'L' : [':Git log'                          , 'log'],
@@ -228,7 +228,7 @@ let g:which_key_map['i'] = {
       \ 'name' : 'text-transfrom',
       \    'c' :['<Plug>(camel_case_operator)'       , 'transfrom-to-camel-case' ],
       \    'C' :['<Plug>(upper_camel_case_operator)' , 'transfrom-to-upper-camel-case' ],
-      \    's' :['<Plug>(snake_case_operator)'       ,'transfrom-to-snake-case' ],
+      \    's' :['<Plug>(snake_case_operator)'       , 'transfrom-to-snake-case' ],
       \    'k' :['<Plug>(kebab_case_operator)'       , 'transfrom-to-kebab-case' ],
       \    'S' :['<Plug>(start_case_operator)'       , 'transfrom-to-start-case' ],
       \  },
@@ -285,6 +285,14 @@ let g:which_key_map['T'] = {
 nnoremap <Leader>Ts :ShowTimer<CR>
 nnoremap <Leader>Tu :UpdateCurrentTimer<space>
 nnoremap <Leader>TU :UpdateCurrentStatus<space>
+" }}}
+
+" v is for vim ------------------------------------------- {{{
+let g:which_key_map['v'] = {
+      \ 'name' : '+vim',
+      \ 'l' : 'logevents-toggle',
+      \ }
+nnoremap <leader>vl :call logevents#LogEvents_Toggle()<CR>
 " }}}
 
 " w is for wiki-or-window -------------------------------- {{{

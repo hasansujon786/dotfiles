@@ -118,7 +118,7 @@ nnoremap <silent> [<TAB> :tabmove-<CR>
 
 " => Search-functionalities ===============================
 " highlight current word in file
-nnoremap z/ :call autoplug#autohl#_AutoHighlightToggle()<CR>
+nnoremap z/ :call autohl#_AutoHighlightToggle()<CR>
 
 " auto center on matched string
 xnoremap / y/<C-R>"<CR>

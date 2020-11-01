@@ -5,8 +5,8 @@
 " !::exe [So]
 
 " function! s:mapfunc (method)
-"     exec 'nmap <silent><Plug>(' . a:method . '_operator)  :set opfunc=autoplug#string_transform#_opfunc<CR>"="' . a:method . '"<CR>g@'
-"     exec 'vmap <silent><Plug>(' . a:method . '_operator)  :<C-U>call autoplug#string_transform#_opfunc(visualmode(), "' . a:method . '")<CR>'
+"     exec 'nmap <silent><Plug>(' . a:method . '_operator)  :set opfunc=string_transform#_opfunc<CR>"="' . a:method . '"<CR>g@'
+"     exec 'vmap <silent><Plug>(' . a:method . '_operator)  :<C-U>call string_transform#_opfunc(visualmode(), "' . a:method . '")<CR>'
 " endfunc
 
 " call <SID>mapfunc('snake-case')
@@ -15,14 +15,14 @@
 " call <SID>mapfunc('camel_case')
 " call <SID>mapfunc('upper_camel_case')
 
-function! autoplug#string_transform#_opfunc (type, ...)
+function! string_transform#_opfunc (type, ...)
     let sel_save = &selection
     let &selection = "inclusive"
     let reg_save = @@
 
     " If invoked from Visual mode, use '< and '> marks.
 
-        if (!empty(a:000))     | silent exe "normal! `<" . a:type . "`>y"
+    if (!empty(a:000))     | silent exe "normal! `<" . a:type . "`>y"
     elseif (a:type == 'line')  | silent exe "normal! '[V']y"
     elseif (a:type == 'block') | silent exe "normal! `[\<C-V>`]y"
     else                       | silent exe "normal! `[v`]y"
