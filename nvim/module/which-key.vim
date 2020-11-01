@@ -221,8 +221,8 @@ let g:which_key_map['i'] = {
       \ 'name' : '+insertion',
       \ 'd' : {
       \ 'name' : 'date-and-time',
-      \    'd' :['_#_Insertion(strftime("%e %B %Y"))'           , 'date'],
-      \    't' :['_#_Insertion( strftime("%H:%M"))'             , 'time'],
+      \    'd' :['_#Insertion(strftime("%e %B %Y"))'           , 'date'],
+      \    't' :['_#Insertion( strftime("%H:%M"))'             , 'time'],
       \  },
       \ 't' : {
       \ 'name' : 'text-transfrom',

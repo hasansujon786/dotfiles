@@ -2,27 +2,27 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " type                                                                    "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! _#_isNumber(val)
+function! _#isNumber(val)
   return type(a:val) == v:t_number
 endfunction
 
-function! _#_isFloat(val)
+function! _#isFloat(val)
   return type(a:val) == v:t_float
 endfunction
 
-function! _#_isString(val)
+function! _#isString(val)
   return type(a:val) == v:t_string
 endfunction
 
-function! _#_isFunc(val)
+function! _#isFunc(val)
   return type(a:val) == v:t_func
 endfunction
 
-function! _#_isList(val)
+function! _#isList(val)
   return type(a:val) == v:t_list
 endfunction
 
-function! _#_isDict(val)
+function! _#isDict(val)
   return type(a:val) == v:t_dict
 endfunction
 
@@ -59,12 +59,12 @@ endfu " }}}
 fu! Log(hl, ...)
   silent! echom string(a:000)
   let args = a:000
-  if (a:0 == 1 && _#_isList(a:1))
+  if (a:0 == 1 && _#isList(a:1))
     let args = a:1
   end
 
   for idx in range(len(args))
-    if _#_isString(args[idx])
+    if _#isString(args[idx])
       call EchonHL(a:hl, args[idx])
     else
       " @todo: fix this
@@ -74,19 +74,19 @@ fu! Log(hl, ...)
   endfor
   echohl None
 endfu
-fu! _#_Debug (...)
+fu! _#echoDebug (...)
   call Log('Debug', a:000)
 endfu
-fu! _#_Warn (...)
+fu! _#echoWarn (...)
   call Log('WarningMsg', a:000)
 endfu
-fu! _#_Error (...)
+fu! _#echoError (...)
   call Log('ErrorMsg', a:000)
 endfu
-fu! _#_Info (...)
+fu! _#echoInfo (...)
   call Log('TextInfo', a:000)
 endfu
-fu! _#_Success (...)
+fu! _#echoSuccess (...)
   call call('Log', ['TextSuccess'] + a:000)
 endfu
 
@@ -94,7 +94,7 @@ endfu
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " mics                                                                    "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! _#_Insertion(cmd)
+function! _#Insertion(cmd)
   let g:last_insertion = a:cmd
   put =g:last_insertion
 endfunc
