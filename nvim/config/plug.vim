@@ -1,32 +1,35 @@
 call plug#begin('~/dotfiles/nvim/plugged')
 
 " => Visual-&-Theme ========================================
-Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+Plug 'Yggdroot/indentLine',{ 'on': 'CocStart' }
+Plug 'junegunn/goyo.vim',{ 'on': 'Goyo' }
 Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'Yggdroot/indentLine',{ 'on': 'CocStart' }
 
 " => Functionality-&-Helpers ===============================
-Plug 'tpope/vim-eunuch', { 'on': ['Delete','Move','Rename','Mkdir','Chmod'] } "for moving and manipulating files / directories.
-Plug 'voldikss/vim-floaterm', { 'on': [ 'FloatermNew', 'FloatermToggle' ] }
-Plug 'mg979/vim-visual-multi', {'branch': 'master', 'on': 'CocStart' }
+Plug 'vimwiki/vimwiki',{ 'on': ['VimwikiIndex', 'VimwikiTabIndex', 'VimwikiDiaryIndex'] }
+Plug 'tpope/vim-eunuch',{ 'on': ['Delete','Move','Rename','Mkdir','Chmod'] } "for moving and manipulating files / directories.
+Plug 'voldikss/vim-floaterm',{ 'on': [ 'FloatermNew', 'FloatermToggle' ] }
+Plug 'mg979/vim-visual-multi',{'branch': 'master', 'on': 'CocStart' }
 Plug 'michaeljsmith/vim-indent-object',{ 'on': 'CocStart' }
+Plug 'hasansujon786/vim-rel-jump',{ 'on': 'CocStart' }
 Plug 'dhruvasagar/vim-open-url',{ 'on': 'CocStart' }
 Plug 'unblevable/quick-scope',{ 'on': 'CocStart' }
+Plug 'psliwka/vim-smoothie',{ 'on': 'CocStart' }          " Smooth scroll
 Plug 'tpope/vim-commentary',{ 'on': 'CocStart' }
 Plug 'tpope/vim-surround',{ 'on': 'CocStart' }
 Plug 'justinmk/vim-sneak',{ 'on': 'CocStart' }
 Plug 'Konfekt/FastFold',{ 'on': 'CocStart' }
 Plug 'tpope/vim-repeat',{ 'on': 'CocStart' }
-Plug 'psliwka/vim-smoothie',{ 'on': 'CocStart' }          " Smooth scroll
-Plug 'hasansujon786/vim-rel-jump',{ 'on': 'CocStart' }
-Plug 'mkropat/vim-tt'
-Plug 'liuchengxu/vim-which-key'
-Plug 'vimwiki/vimwiki',{ 'on': ['VimwikiIndex', 'VimwikiTabIndex', 'VimwikiDiaryIndex'] }
 Plug 'wsdjeg/vim-todo',{ 'on': 'OpenTodo' }
-Plug 'tmux-plugins/vim-tmux-focus-events'
 
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'liuchengxu/vim-which-key'
+Plug 'Konfekt/vim-CtrlXA'
+Plug 'mkropat/vim-tt'
+
+Plug 'junegunn/fzf',{ 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 Plug 'lambdalisue/nerdfont.vim'
@@ -35,18 +38,18 @@ Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 Plug 'lambdalisue/fern-git-status.vim'
 Plug 'lambdalisue/glyph-palette.vim'
 Plug 'lambdalisue/fern.vim'
-Plug 'lambdalisue/vim-manpager', {'on': 'Man'}
+Plug 'lambdalisue/vim-manpager',{'on': 'Man'}
 
 " => Auto completion ========================================
+Plug 'neoclide/coc.nvim',{'branch': 'release', 'on': 'CocStart' }
 Plug 'jiangmiao/auto-pairs',{ 'on': 'CocStart' }
 Plug 'honza/vim-snippets',{ 'on': 'CocStart' }
-Plug 'neoclide/coc.nvim', {'branch': 'release', 'on': 'CocStart' }
 
 " => Git ===================================================
-Plug 'tpope/vim-fugitive', { 'on': 'CocStart' }
-Plug 'tpope/vim-rhubarb', { 'on': 'CocStart' }
-Plug 'junegunn/gv.vim', { 'on': 'CocStart' }
 Plug 'airblade/vim-gitgutter',{ 'on': 'CocStart' }
+Plug 'tpope/vim-fugitive',{ 'on': 'CocStart' }
+Plug 'tpope/vim-rhubarb',{ 'on': 'CocStart' }
+Plug 'junegunn/gv.vim',{ 'on': 'CocStart' }
 
 " => Languae-support =======================================
 " html & css
