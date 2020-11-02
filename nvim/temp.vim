@@ -72,3 +72,18 @@ let g:which_key_map['a'] = {
 
 " enable blinking mode-sensitive cursor
 set guicursor=n-v-c:block-blinkon10,i-ci-ve:ver25-blinkon10,r-cr:hor20,o:hor50
+
+" AutoSetCursorColor {{{
+if &filetype =~ '\<fern\>'
+  call s:defaultCursor('CursorLineFocus')
+else
+  call s:defaultCursor('default')
+endif
+function! s:defaultCursor(hl)
+  if (a:hl == 'CursorLineFocus')
+    highlight Cursor ctermfg=235 ctermbg=39 guifg=#282C34 guibg=#3E4452
+  else
+    highlight Cursor ctermfg=235 ctermbg=39 guifg=#282C34 guibg=#61AFEF
+  endif
+endfunction
+" }}}

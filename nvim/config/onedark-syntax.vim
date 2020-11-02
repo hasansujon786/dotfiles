@@ -1,3 +1,8 @@
+" augroup colorextend
+"   autocmd!
+"   autocmd ColorScheme * call onedark#extend_highlight("FoldColumn", { "fg": { "gui": "#4b5263" } })
+" augroup END
+
 call s:h("jsThis", { "fg": s:dark_yellow })
 call s:h("jsVariableDef", { "fg": s:dark_yellow })
 " call s:h("jsModuleKeyword", { "fg": s:red })

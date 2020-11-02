@@ -33,61 +33,33 @@ endfunction
 
 " !::exe [So]
 
-" command! -bar -bang -nargs=* Log      redraw | call _#_Info(<args>)
-" command! -bar -bang -nargs=* Debug    redraw | call _#_Debug(<args>)
-" command! -bar -bang -nargs=* Warn     redraw | call _#_Warn(<args>)
-" command! -bar -bang -nargs=* Error    redraw | call _#_Error(<args>)
-" command! -bar -bang -nargs=* Success  redraw | call _#_Success(<args>)
-" command! -bar -bang -nargs=* Info     redraw | call _#_Info(<args>)
-
-fu! Echon(...) " {{{
-  echon join(a:000)
-endfu " }}}
-fu! EchoHL(hlgroup, ...) " {{{
-  exe ':echohl ' . a:hlgroup
-  echo join(a:000)
-  exe ':echohl None'
-endfu " }}}
-fu! EchonHL(hlgroup, ...) " {{{
-  exe ':echohl ' . a:hlgroup
-  echon join(a:000)
-endfu " }}}
-fu! Echom(...) " {{{
-  echom join(a:000)
-endfu " }}}
-
-fu! Log(hl, ...)
-  silent! echom string(a:000)
+function! _#Echo(...)
+  echo ''
   let args = a:000
-  if (a:0 == 1 && _#isList(a:1))
-    let args = a:1
-  end
-
   for idx in range(len(args))
     if _#isString(args[idx])
-      call EchonHL(a:hl, args[idx])
+      echon args[idx]
     else
-      " @todo: fix this
-      call pp#dump( args[idx] )
+      execute("echohl ".args[idx][0]." | echon '".args[idx][1]."' | echohl None")
     end
     echon ' '
   endfor
   echohl None
-endfu
+endfunction
 fu! _#echoDebug (...)
-  call Log('Debug', a:000)
+  call _#Echo(['Debug', join(a:000, ' ')])
 endfu
 fu! _#echoWarn (...)
-  call Log('WarningMsg', a:000)
+  call _#Echo(['WarningMsg', join(a:000, ' ')])
 endfu
 fu! _#echoError (...)
-  call Log('ErrorMsg', a:000)
+  call _#Echo(['ErrorMsg', join(a:000, ' ')])
 endfu
 fu! _#echoInfo (...)
-  call Log('TextInfo', a:000)
+  call _#Echo(['TextInfo', join(a:000, ' ')])
 endfu
 fu! _#echoSuccess (...)
-  call call('Log', ['TextSuccess'] + a:000)
+  call _#Echo(['TextSuccess', join(a:000, ' ')])
 endfu
 
 
