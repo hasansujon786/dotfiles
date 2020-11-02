@@ -76,45 +76,50 @@ nnoremap <silent> <leader><TAB> :AlternateFile<CR>
 " }}}
 
 " a is for actions ins language server protocol ---------- {{{
-" @todo: fix bindgigs
 let g:which_key_map['a'] = {
       \ 'name' : '+lsp-actions' ,
+      \ '$' : 'coc-restart',
       \ '.' : [':CocConfig'                          , 'config'],
-      \ ';' : ['<Plug>(coc-refactor)'                , 'refactor'],
       \ '?' : [':CocList diagnostics'                , 'diagnostics'],
-      \ 'a' : ['<Plug>(coc-codeaction)'              , 'line-action'],
-      \ 'A' : ['<Plug>(coc-codeaction-selected)'     , 'selected action'],
-      \ 'b' : [':CocNext'                            , 'next-action'],
-      \ 'B' : [':CocPrev'                            , 'prev-action'],
+      \ 'a' : 'coc-action',
       \ 'c' : [':CocList commands'                   , 'commands'],
-      \ 'd' : ['<Plug>(coc-definition)'              , 'definition'],
-      \ 'D' : ['<Plug>(coc-declaration)'             , 'declaration'],
       \ 'e' : [':CocList extensions'                 , 'extensions'],
-      \ 'f' : ['<Plug>(coc-format-selected)'         , 'format-selected'],
-      \ 'F' : ['<Plug>(coc-format)'                  , 'format'],
+      \ 'f' : 'format',
       \ 'h' : ['<Plug>(coc-float-hide)'              , 'hide'],
-      \ 'i' : ['<Plug>(coc-implementation)'          , 'implementation'],
       \ 'j' : ['<Plug>(coc-float-jump)'              , 'float-jump'],
-      \ 'l' : ['<Plug>(coc-codelens-action)'         , 'code-lens'],
-      \ 'n' : ['<Plug>(coc-diagnostic-next)'         , 'next-diagnostic'],
-      \ 'N' : ['<Plug>(coc-diagnostic-next-error)'   , 'next-error'],
-      \ 'o' : [':CocList outline'                    , 'outline'],
-      \ 'O' : [':Vista!!'                            , 'outline'],
-      \ 'p' : ['<Plug>(coc-diagnostic-prev)'         , 'prev-diagnostic'],
-      \ 'P' : ['<Plug>(coc-diagnostic-prev-error)'   , 'prev-error'],
-      \ 'q' : ['<Plug>(coc-fix-current)'             , 'quickfix'],
-      \ 'r' : ['<Plug>(coc-references)'              , 'references'],
-      \ 'R' : ['<Plug>(coc-rename)'                  , 'rename'],
-      \ 's' : [':CocList -I symbols'                 , 'references'],
       \ 'S' : [':CocList snippets'                   , 'snippets'],
-      \ 't' : ['<Plug>(coc-type-definition)'         , 'type-definition'],
       \ 'T' : [':CocList tasks'                      , 'list-tasks'],
       \ 'u' : [':CocListResume'                      , 'resume-list'],
       \ 'U' : [':CocUpdate'                          , 'update-CoC'],
       \ 'z' : [':CocDisable'                         , 'disable-CoC'],
       \ 'Z' : [':CocEnable'                          , 'enable-CoC'],
+      \
+      \ ',' : ['<Plug>(coc-rename)'                  , 'rename'],
+      \ 'd' : ['<Plug>(coc-definition)'              , 'definition'],
+      \ 'D' : ['<Plug>(coc-declaration)'             , 'declaration'],
+      \ 'i' : ['<Plug>(coc-implementation)'          , 'implementation'],
+      \ 'l' : ['<Plug>(coc-codelens-action)'         , 'code-lens'],
+      \ 'o' : [':CocList outline'                    , 'outline'],
+      \ 'O' : [':Vista!!'                            , 'outline'],
+      \ 'q' : ['<Plug>(coc-fix-current)'             , 'quickfix'],
+      \ 'r' : ['<Plug>(coc-references)'              , 'references'],
+      \ 'R' : ['<Plug>(coc-refactor)'                , 'refactor'],
+      \ 's' : [':CocList -I symbols'                 , 'symbol-references'],
+      \ 'y' : ['<Plug>(coc-type-definition)'         , 'type-definition'],
+      \
+      \
+      \ 'b' : [':CocNext'                            , 'next-action'],
+      \ 'B' : [':CocPrev'                            , 'prev-action'],
+      \ 'p' : ['<Plug>(coc-diagnostic-prev)'         , 'prev-diagnostic'],
+      \ 'n' : ['<Plug>(coc-diagnostic-next)'         , 'next-diagnostic'],
+      \ 'N' : ['<Plug>(coc-diagnostic-next-error)'   , 'next-error'],
+      \ 'P' : ['<Plug>(coc-diagnostic-prev-error)'   , 'prev-error'],
       \ }
-      " \ 'o' : ['<Plug>(coc-openlink)'                , 'open link'],
+nnoremap <silent><leader>a$ :CocRestart<CR>
+nmap <leader>aa <Plug>(coc-codeaction)
+vmap <leader>aa <Plug>(coc-codeaction-selected)
+nmap <leader>af <Plug>(coc-format)
+vmap <leader>af <Plug>(coc-format-selected)
 " }}}
 
 " b is for buffer ---------------------------------------- {{{
@@ -165,10 +170,6 @@ let g:which_key_map['f'] = {
       \  },
       \ 't' : [':Filetypes'                     , 'fzf-filetypes'],
       \ 'w' : ['<Plug>FixCurrentWord'           , 'fix-current-word'],
-      \ 'v' : {
-      \ 'name' : '+vim',
-      \    '.' : [':e $MYVIMRC'                 , 'open-$MYVIMRC'],
-      \  },
       \ 'R' : 'rename-current-file',
       \ 'M' : 'move-current-file',
       \ 'y' : 'copy-current-filename',
@@ -290,8 +291,11 @@ nnoremap <Leader>TU :UpdateCurrentStatus<space>
 " v is for vim ------------------------------------------- {{{
 let g:which_key_map['v'] = {
       \ 'name' : '+vim',
+      \ '.' : [':e $MYVIMRC'                  , 'open-$MYVIMRC'],
+      \ '$' : 'source-$MYVIMRC',
       \ 'l' : 'logevents-toggle',
       \ }
+nnoremap <leader>v$ :so $MYVIMRC<CR>
 nnoremap <leader>vl :call logevents#LogEvents_Toggle()<CR>
 " }}}
 

@@ -47,8 +47,7 @@ nmap <silent> gR <Plug>(coc-refactor)
 nmap <silent> <F2> <Plug>(coc-rename)
 " Quick format
 nmap <silent> gq <Plug>(coc-format)
-nmap <silent> gQ <Plug>(coc-format-selected)
-vmap <silent> gQ <Plug>(coc-format-selected)
+vmap <silent> gq <Plug>(coc-format-selected)
 
 " Introduce function text object
 xmap if <Plug>(coc-funcobj-i)
@@ -80,6 +79,7 @@ endfunction
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <A-.> coc#refresh()
 inoremap <silent><expr> <A-,> coc#refresh()
+nnoremap <silent><A-,> :CocAction<CR>
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
