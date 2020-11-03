@@ -24,14 +24,6 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 " }}}
 
 " Ignore WhichKeys --------------------------------------- {{{
-" Map 1-9 + <Space> to jump to respective tab
-let i = 1
-while i < 10
-  execute ":nnoremap <silent> <Space>" . i . " :tabn " . i . "<CR>"
-  let g:which_key_map[i] = 'which_key_ignore'
-  let i += 1
-endwhile
-
 " Open current file directory into the drawer
 nnoremap <silent> <Leader>. :FernCurDirDrawer<CR>
 nnoremap <silent> <Leader>0 :Fern . -drawer -toggle<CR><C-w>=

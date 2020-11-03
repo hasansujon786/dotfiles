@@ -64,9 +64,6 @@ cnoremap <A-p> <C-R>"
 
 " => Modify-&-Rearrange-texts =============================
 
-" Easy CtrlXA
-nmap + <C-a>
-nmap _ <C-x>
 " Print the number of occurrences of the current word under the cursor
 vmap <C-g> *<C-O>:%s///gn<CR>
 " Make vaa select the entire file...
@@ -119,6 +116,10 @@ vnoremap <silent> <S-TAB> <ESC>:tabprevious<CR>
 " Move tabs
 nnoremap <silent> ]<TAB> :tabmove+<CR>
 nnoremap <silent> [<TAB> :tabmove-<CR>
+" Map 1-9 + <Space> to jump to respective tab
+for tnum in range(1, 9)
+  execute ":nnoremap <silent> " . tnum . "<Space> :tabn " . tnum . "<CR>"
+endfor
 
 " => Search-functionalities ===============================
 " highlight current word in file
