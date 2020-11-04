@@ -97,6 +97,13 @@ xnoremap <silent> <A-j> :call hasan#utils#visual_move_down()<CR>
 vmap gx <Plug>(exchange-operator)
 nmap gx <Plug>(exchange-operator)
 
+" ConvertColorTo
+let s:convertColorTo = [['x', 'hex'],['X', 'hexa'],['r', 'rgb'],['R', 'rgba'],['h', 'hsl'],['H', 'hsla']]
+for i in s:convertColorTo
+  exe 'nmap <silent><Plug>(ConvertColorCode'.i[0].') :ConvertColorTo '.i[1].'<CR>:call repeat#set("\<Plug>(ConvertColorCode'.i[0].')")<CR>'
+  exe 'nmap c'.i[0].' <Plug>(ConvertColorCode'.i[0].')'
+endfor
+
 " => Moving-around-tabs-and-buffers =======================
 " Resize splits
 nnoremap <silent> <A-=> :resize +3<CR>
@@ -136,7 +143,7 @@ vnoremap <silent> # :<C-u>call hasan#utils#visualSelection('', '')<CR>?<C-R>=@/<
 " Type a replacement term and press . to repeat the replacement again. Useful
 " for replacing a few instances of the term (comparable to multiple cursors).
 nnoremap <silent> c* :let @/='\<'.expand('<cword>').'\>'<CR>cgn
-xnoremap <silent> c* "sy:let @/=@s<CR>cgn
+xnoremap <silent> c "sy:let @/=@s<CR>cgn
 
 " => Insert-Mode-key-mapping ==============================
 " Move cursor by character

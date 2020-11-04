@@ -1,17 +1,17 @@
 call plug#begin('~/dotfiles/nvim/plugged')
 
 " => Visual-&-Theme ========================================
-Plug 'Yggdroot/indentLine',{ 'on': 'CocStart' }
 Plug 'junegunn/goyo.vim',{ 'on': 'Goyo' }
 Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim'
-Plug 'Yggdroot/indentLine',{ 'on': 'CocStart' }
+Plug 'Yggdroot/indentLine'
 
 " => Functionality-&-Helpers ===============================
 Plug 'vimwiki/vimwiki',{ 'on': ['VimwikiIndex', 'VimwikiTabIndex', 'VimwikiDiaryIndex'] }
 Plug 'tpope/vim-eunuch',{ 'on': ['Delete','Move','Rename','Mkdir','Chmod'] } "for moving and manipulating files / directories.
 Plug 'voldikss/vim-floaterm',{ 'on': [ 'FloatermNew', 'FloatermToggle' ] }
 Plug 'mg979/vim-visual-multi',{'branch': 'master', 'on': 'CocStart' }
+Plug 'amadeus/vim-convert-color-to',{ 'on': 'ConvertColorTo' }
 Plug 'michaeljsmith/vim-indent-object',{ 'on': 'CocStart' }
 Plug 'hasansujon786/vim-rel-jump',{ 'on': 'CocStart' }
 Plug 'dhruvasagar/vim-open-url',{ 'on': 'CocStart' }
