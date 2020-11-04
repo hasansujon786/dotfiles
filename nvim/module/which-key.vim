@@ -44,7 +44,6 @@ let g:which_key_map['y'] = 'which_key_ignore'
 
 " Single mappings ---------------------------------------- {{{
 let g:which_key_map['n'] = [ ':call hasan#fern#open_drawer()'       , 'open-fern' ]
-let g:which_key_map['q'] = [ ':Q'                                   , 'close-window' ]
 let g:which_key_map['s'] = [ ':update'                              , 'save-file' ]
 let g:which_key_map['='] = [ '<C-W>='                               , 'balance-windows' ]
 let g:which_key_map['x'] = [ ':bdelete'                             , 'delete-buffer']
@@ -56,6 +55,7 @@ let g:which_key_map['h'] = 'window-left'
 let g:which_key_map['j'] = 'window-bellow'
 let g:which_key_map['k'] = 'window-above'
 " let g:which_key_map['q'] = 'close-window'
+nnoremap <silent> <leader>q :Q<CR>
 nnoremap <silent> <leader>k :wincmd k<CR>
 nnoremap <silent> <leader>j :wincmd j<CR>
 nnoremap <silent> <leader>l :wincmd l<CR>

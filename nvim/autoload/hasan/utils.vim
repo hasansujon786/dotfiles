@@ -1,11 +1,5 @@
 " ConfirmQuit {{{
-function! hasan#utils#clearEcho()
-  echon "\r\r"
-  echon ''
-endfunction
-
 function! hasan#utils#confirmQuit(writeFile)
-  call hasan#utils#clearEcho()
   let isLastTab = winnr('$')==1 && tabpagenr('$')==1
 
   if (expand('%:t')=="" && isLastTab && &modified)
@@ -15,9 +9,11 @@ function! hasan#utils#confirmQuit(writeFile)
   if (a:writeFile == '!' && &modified) | :silent write | endif
 
   if (isLastTab && &modified)
-    if (confirm("Save changes & quit the app?", "&Yes\n&No", 2) == 1)| :wq |endif
+    call _#echoWarn('>>> Save this buffer & quit the app? <<<')
+    if (confirm("", "&Yes\n&No", 2) == 1)| :wq |endif
   elseif (isLastTab)
-    if (confirm("Do you want to quit the app?", "&Yes\n&No", 2)==1)| :quit |endif
+    call _#echoSuccess('>>> Do you want to quit the app? <<<')
+    if (confirm("", "&Yes\n&No", 2)==1)| :quit |endif
   else
     :quit
   endif
