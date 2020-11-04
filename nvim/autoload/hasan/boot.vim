@@ -1,7 +1,7 @@
 
 " AutoSetCursorColor {{{
 function! hasan#boot#auto_set_cursor_color() abort
-  if &filetype =~ 'list\|fugitive\|\<fern\>'
+  if &filetype =~ 'list\|\<fern\>'
     hi! link CursorLine CursorLineFocus
   else
     hi! link CursorLine CursorLineDefault
@@ -24,10 +24,10 @@ endfunction
 " }}}
 
 " Disable netrw {{{
-" let g:loaded_netrw  = 1
-" let g:loaded_netrwPlugin = 1
-" let g:loaded_netrwSettings = 1
-" let g:loaded_netrwFileHandlers = 1
+let g:loaded_netrw  = 1
+let g:loaded_netrwPlugin = 1
+let g:loaded_netrwSettings = 1
+let g:loaded_netrwFileHandlers = 1
 
 function! hasan#boot#hijack_directory() abort
   let path = expand('%:p')

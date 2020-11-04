@@ -73,6 +73,7 @@ let g:which_key_map['a'] = {
       \ '$' : 'coc-restart',
       \ '.' : [':CocConfig'                          , 'config'],
       \ '?' : [':CocList diagnostics'                , 'diagnostics'],
+      \ ';' : [':CocList'                            , 'coc-lists'],
       \ 'a' : 'coc-action',
       \ 'c' : [':CocList commands'                   , 'commands'],
       \ 'e' : [':CocList extensions'                 , 'extensions'],

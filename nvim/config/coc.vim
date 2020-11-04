@@ -111,7 +111,8 @@ let g:coc_global_extensions = [
       \ 'coc-css',
       \ 'coc-emmet',
       \ 'coc-prettier',
-      \ 'coc-yank'
+      \ 'coc-yank',
+      \ 'coc-marketplace'
       \ ]
 
 " https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
