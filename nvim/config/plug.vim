@@ -36,7 +36,8 @@ Plug 'lambdalisue/nerdfont.vim'
 Plug 'lambdalisue/fern-bookmark.vim'
 Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 Plug 'lambdalisue/fern-git-status.vim'
-Plug 'lambdalisue/glyph-palette.vim'
+" Plug 'lambdalisue/glyph-palette.vim'
+Plug 'hasansujon786/glyph-palette.vim'
 Plug 'lambdalisue/fern.vim'
 Plug 'lambdalisue/vim-manpager',{'on': 'Man'}
 
