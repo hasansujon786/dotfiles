@@ -87,3 +87,14 @@ function! s:defaultCursor(hl)
   endif
 endfunction
 " }}}
+
+" function! MyLineInfo()
+"   https://vi.stackexchange.com/questions/3894/get-percentage-through-file-of-displayed-window
+"   let col = virtcol(".")
+"   let line = line(".")
+"   let leftpad = len(line) == 1 ? '  ' : len(line) == 2 ? ' ' : ''
+"   let rightpad = len(col) == 1 ? ' ' : ''
+"   return leftpad.line.':'.col.rightpad
+"   " return winwidth(0) > 60 ? leftpad.line.':'.col.rightpad : ''
+" endfunction
+
