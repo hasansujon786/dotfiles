@@ -259,3 +259,36 @@ function! hasan#utils#clear_buffers() abort
   endif
 endfunction
 " }}} clear_buffers "
+
+" MaximizesWinToggle {{{
+function! hasan#utils#MaximizesWinToggle()
+  if(winnr('$') > 1)
+    if exists('t:maximize_win_sizes')
+      call s:restore()
+    elseif ((&columns - 5) > winwidth(0) || (&lines - 5) > winheight(0))
+      let t:maximize_win_sizes = { 'before': winrestcmd() }
+      vert resize | resize
+      let t:maximize_win_sizes.after = winrestcmd()
+      normal! ze
+    endif
+  endif
+endfunction
+
+function! hasan#utils#JumpToWin(direction)
+  exe 'wincmd '.a:direction
+  if exists('t:maximize_win_sizes')
+    call s:restore()
+  endif
+endfunction
+
+function! s:restore()
+  if exists('t:maximize_win_sizes')
+    silent! exe t:maximize_win_sizes.before
+    if t:maximize_win_sizes.before != winrestcmd()
+      wincmd =
+    endif
+    unlet t:maximize_win_sizes
+    normal! ze
+  end
+endfunction
+" }}}

@@ -56,10 +56,10 @@ let g:which_key_map['j'] = 'window-bellow'
 let g:which_key_map['k'] = 'window-above'
 " let g:which_key_map['q'] = 'close-window'
 nnoremap <silent> <leader>q :Q<CR>
-nnoremap <silent> <leader>k :wincmd k<CR>
-nnoremap <silent> <leader>j :wincmd j<CR>
-nnoremap <silent> <leader>l :wincmd l<CR>
-nnoremap <silent> <leader>h :wincmd h<CR>
+nnoremap <silent> <leader>k :call hasan#utils#JumpToWin('k')<CR>
+nnoremap <silent> <leader>j :call hasan#utils#JumpToWin('j')<CR>
+nnoremap <silent> <leader>l :call hasan#utils#JumpToWin('l')<CR>
+nnoremap <silent> <leader>h :call hasan#utils#JumpToWin('h')<CR>
 nnoremap <silent> <leader>r :call hasan#utils#cycle_numbering()<CR>
 nnoremap <silent> <leader><TAB> :AlternateFile<CR>
 " nnoremap <silent> <leader>q :Q<CR>

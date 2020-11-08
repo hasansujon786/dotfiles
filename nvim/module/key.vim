@@ -111,7 +111,7 @@ nnoremap <silent> <A--> :resize -3<CR>
 nnoremap <silent> <A-.> :vertical resize +5<CR>
 nnoremap <silent> <A-,> :vertical resize -5<CR>
 " zoom a vim pane
-nnoremap <silent> \ :wincmd _<cr>:wincmd \|<cr>:vertical resize -5<CR>
+nnoremap <silent> \ :call hasan#utils#MaximizesWinToggle()<CR>
 nnoremap <silent> <Bar> :wincmd =<cr>
 
 nnoremap <C-j> <C-i>
