@@ -1,5 +1,23 @@
 " g:vimwiki_list
-nnoremap <silent> <Leader>ww :VimwikiIndex<CR>
-nnoremap <silent> <Leader>wt :VimwikiTabIndex<CR>
-nnoremap <silent> <Leader>wi :VimwikiDiaryIndex<CR>
 " http://thedarnedestthing.com/vimwiki%20cheatsheet
+
+let g:vimwiki_key_mappings =
+  \ {
+  \   'global': 0,
+  \ }
+
+" \ 'w' : ['<Plug>VimwikiIndex'                       , 'ncdu'],
+" \ 'j' : ['<plug>(wiki-journal)'                     , 'ncdu'],
+" \ 'R' : ['<plug>(wiki-reload)'                      , 'ncdu'],
+" \ 'C' : ['<plug>(wiki-code-run)'                    , 'ncdu'],
+" \ 'b' : ['<plug>(wiki-graph-find-backlinks)'        , 'ncdu'],
+" \ 'g' : ['<plug>(wiki-graph-in)'                    , 'ncdu'],
+" \ 'G' : ['<plug>(wiki-graph-out)'                   , 'ncdu'],
+" \ 'l' : ['<plug>(wiki-link-toggle)'                 , 'ncdu'],
+" \ 'd' : ['<plug>(wiki-page-delete)'                 , 'ncdu'],
+" \ 'r' : ['<plug>(wiki-page-rename)'                 , 'ncdu'],
+" \ 'T' : ['<plug>(wiki-page-toc)'                    , 'ncdu'],
+" \ 'Z' : ['<plug>(wiki-page-toc-local)'              , 'ncdu'],
+" \ 'e' : ['<plug>(wiki-export)'                      , 'ncdu'],
+" \ 'u' : ['<plug>(wiki-list-uniq)'                   , 'ncdu'],
+" \ 'U' : ['<plug>(wiki-list-uniq-local)'             , 'ncdu'],

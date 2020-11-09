@@ -23,25 +23,6 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 " }}}
 
-" Ignore WhichKeys --------------------------------------- {{{
-" Open current file directory into the drawer
-nnoremap <silent> <Leader>. :FernCurDirDrawer<CR>
-nnoremap <silent> <Leader>0 :Fern . -drawer -toggle<CR><C-w>=
-let g:which_key_map['.'] = 'which_key_ignore'
-let g:which_key_map['0'] = 'which_key_ignore'
-
-" Easier system clipboard usage
-nnoremap <Leader>p "+p
-vnoremap <Leader>p "+p
-nnoremap <Leader>P "+P
-nnoremap <Leader>y "+y
-vnoremap <Leader>y "+ygv<Esc>
-vnoremap <Leader>d "+d
-let g:which_key_map['p'] = 'which_key_ignore'
-let g:which_key_map['P'] = 'which_key_ignore'
-let g:which_key_map['y'] = 'which_key_ignore'
-" }}}
-
 " Single mappings ---------------------------------------- {{{
 let g:which_key_map['n'] = [ ':call hasan#fern#open_drawer()'       , 'open-fern' ]
 let g:which_key_map['s'] = [ ':update'                              , 'save-file' ]
@@ -296,29 +277,30 @@ nnoremap <leader>vl :call logevents#LogEvents_Toggle()<CR>
 let g:which_key_map['w'] = {
       \ 'name' : '+wiki-or-window',
       \ '/' : [':Windows'                                 , 'fzf-windows'],
-      \ 'v' : ['<C-w>v'                                   , 'split-right'],
-      \ 's' : ['<C-w>s'                                   , 'split-bellow'],
+      \ 'v' : ['<C-w>v'                                   , 'vsplit'],
+      \ 's' : ['<C-w>s'                                   , 'split'],
+      \ 't' : [':tab split'                               , 'tab-split'],
       \ 'o' : ['<C-w>o'                                   , 'only-window'],
-      \ 'c' : ['<C-w>c'                                   , 'only-window'],
+      \ 'c' : ['<C-w>c'                                   , 'close-window'],
       \ 'z' : 'auto-zoom-win'                             ,
-      \ 'w' : ['<Plug>VimwikiIndex'                       , 'ncdu'],
-      \ 'n' : ['<plug>(wiki-open)'                        , 'ncdu'],
-      \ 'j' : ['<plug>(wiki-journal)'                     , 'ncdu'],
-      \ 'R' : ['<plug>(wiki-reload)'                      , 'ncdu'],
-      \ 'C' : ['<plug>(wiki-code-run)'                    , 'ncdu'],
-      \ 'b' : ['<plug>(wiki-graph-find-backlinks)'        , 'ncdu'],
-      \ 'g' : ['<plug>(wiki-graph-in)'                    , 'ncdu'],
-      \ 'G' : ['<plug>(wiki-graph-out)'                   , 'ncdu'],
-      \ 'l' : ['<plug>(wiki-link-toggle)'                 , 'ncdu'],
-      \ 'd' : ['<plug>(wiki-page-delete)'                 , 'ncdu'],
-      \ 'r' : ['<plug>(wiki-page-rename)'                 , 'ncdu'],
-      \ 't' : ['<plug>(wiki-page-toc)'                    , 'ncdu'],
-      \ 'T' : ['<plug>(wiki-page-toc-local)'              , 'ncdu'],
-      \ 'e' : ['<plug>(wiki-export)'                      , 'ncdu'],
-      \ 'u' : ['<plug>(wiki-list-uniq)'                   , 'ncdu'],
-      \ 'U' : ['<plug>(wiki-list-uniq-local)'             , 'ncdu'],
+      \
+      \ 'w' : 'wiki-index',
+      \ 'T' : 'wiki-index-tab',
+      \ 'i' : 'diary-index',
+      \ 'n' : 'diary-today',
+      \ 'N' : 'diary-today-tab',
+      \ 'g' : 'diary-today-tab',
+      \ 'u' : 'wiki-ui-select',
       \ }
 nnoremap <leader>wz :AutoZoomWin<CR>
+" vimwike mappings
+nnoremap <leader>ww :VimwikiIndex<CR>
+nnoremap <leader>wT :VimwikiTabIndex<CR>
+nnoremap <leader>wi :VimwikiDiaryIndex<CR>
+nnoremap <leader>wn :VimwikiMakeDiaryNote<CR>
+nnoremap <leader>wN :VimwikiTabMakeDiaryNote<CR>
+nnoremap <leader>wg :VimwikiDiaryGenerateLinks<CR>
+nnoremap <leader>wu :VimwikiUISelect<CR>
 " }}}
 
 " / is for search ---------------------------------------- {{{
@@ -351,6 +333,34 @@ xnoremap <leader>/p y:CocSearch -F <C-r>"<Home><C-right><C-right><C-right>\<C-ri
 " replace word under cursor, globally, with confirmation
 nnoremap <Leader>/r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 xnoremap <Leader>/r y :%s/<C-r>"//gc<Left><Left><Left>
+" }}}
+
+" Ignore WhichKeys --------------------------------------- {{{
+" Open current file directory into the drawer
+nnoremap <silent> <Leader>. :FernCurDirDrawer<CR>
+nnoremap <silent> <Leader>0 :Fern . -drawer -toggle<CR><C-w>=
+let g:which_key_map['.'] = 'which_key_ignore'
+let g:which_key_map['0'] = 'which_key_ignore'
+
+" Easier system clipboard usage
+nnoremap <Leader>p "+p
+vnoremap <Leader>p "+p
+nnoremap <Leader>P "+P
+nnoremap <Leader>y "+y
+vnoremap <Leader>y "+ygv<Esc>
+vnoremap <Leader>d "+d
+let g:which_key_map['p'] = 'which_key_ignore'
+let g:which_key_map['P'] = 'which_key_ignore'
+let g:which_key_map['y'] = 'which_key_ignore'
+
+" Map <Space>  + 1-9 to jump to respective tab
+" Map <Space>w + 1-9 to jump to respective window
+for tnum in range(1, 9)
+  execute ':nnoremap <silent> <Space>'.tnum.' :tabn '.tnum.'<CR>'
+  let g:which_key_map[tnum] = 'which_key_ignore'
+  execute ':nnoremap <silent> <Space>w'.tnum.' :'.tnum.'wincmd w<CR>'
+  let g:which_key_map['w'][tnum] = 'which_key_ignore'
+endfor
 " }}}
 
 " Register which key map
