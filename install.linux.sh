@@ -111,6 +111,10 @@ install_various_apps() {
   apt install -y tig
   ln -s ~/dotfiles/tui/tig/.tigrc ~/.tigrc
 
+  printWithToilet lf
+  apt install -y lf
+  ln -s ~/dotfiles/tui/lf ~/.config/lf
+
   printWithToilet wget
   apt install -y wget
 
