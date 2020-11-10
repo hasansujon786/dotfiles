@@ -92,3 +92,14 @@ source ~/dotfiles/nvim/config/hlnext.vim
 source ~/dotfiles/nvim/config/vim-wiki.vim
 source ~/dotfiles/nvim/config/vimuxline.vim
 
+" Plug 'xolox/vim-session'
+" https://github.com/fannheyward/coc-react-refactor
+" https://github.com/romgrk/todoist.nvim
+" https://github.com/luochen1990/indent-detector.vim
+" Plug 'romgrk/github-light.vim'
+" Plug 'romgrk/doom-one.vim'
+" Plug 'https://github.com/vim-scripts/PickAColor.vim'
+" Plug 'https://github.com/tpope/vim-scriptease'
+" Plug 'https://github.com/arp242/undofile_warn.vim'
+" Plug 'https://github.com/guns/xterm-color-table.vim'
+" https://vimawesome.com/plugin/vim-colors-solarized-ours
