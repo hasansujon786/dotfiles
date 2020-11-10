@@ -128,7 +128,7 @@ install_various_apps() {
   printWithToilet lazygit
   # NOTE: Currently lazygit installation only worls for termux
   # @todo: Support for Linux & Windows
-  export LAZYGIT_VER="0.20.9"
+  export LAZYGIT_VER="0.23.7"
   # wget -O lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_x86_64.tar.gz
   wget -O lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_arm64.tar.gz
   tar xvf lazygit.tgz
