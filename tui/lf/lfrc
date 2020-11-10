@@ -22,16 +22,17 @@ cmd open ${{
     esac
 }}
 
-cmd mkdir ${{
-  printf "Directory Name: "
+cmd mkdir %{{
+  printf " Directory Name: "
   read ans
   mkdir $ans
 }}
 
-cmd mkfile ${{
-  printf "File Name: "
+cmd mkfile %{{
+  printf " File Name: "
   read ans
-  $EDITOR $ans
+  touch $ans
+  #$EDITOR $ans
 }}
 
 cmd chmod ${{
@@ -82,8 +83,10 @@ cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
 #map '"'
 #map n
 
-map o
+map y
 map d
+map p
+map o
 map c
 map e
 
@@ -99,18 +102,21 @@ map ab targz
 map au unarchive
 
 ######## Basic Functions ########
+map A mkfile
+map K mkdir
+
 map DD delete
 map R rename
 map P paste
 map X cut
-map Y copy
+map C copy
+map <f-2> $vimv $fx
 
-map C clear
-map U unselect
+map <c-c> clear
+map <a-d> half-down
+map <a-u> half-up
 
-map cf mkfile
 map cr sudomkfile
-map cd mkdir
 map cs $mkscript
 map ch chmod
 
@@ -122,7 +128,6 @@ map H top
 map L bottom
 map r reload
 map bg setwallpaper
-map br $vimv $fx
 
 # ---------------------------------------------------------------------------
 # - Movement                                                                -

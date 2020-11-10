@@ -29,11 +29,18 @@ function! hasan#fern#FernInit() abort
         \   "\<Plug>(fern-action-collapse)",
         \ )
 
+  nmap <buffer><expr>
+        \ <Plug>(fern-custom-openAndClose-enter)
+        \ fern#smart#leaf(
+        \   "\<Plug>(fern-action-open-and-close)",
+        \   "\<Plug>(fern-action-enter)",
+        \ )
+
   " }}}
 
   " Open file
+  nmap <buffer><nowait> <CR> <Plug>(fern-custom-openAndClose-enter)
   nmap <buffer> <2-LeftMouse> <Plug>(fern-custom-openAndClose-expand-collapse)
-  nmap <buffer> <CR> <Plug>(fern-custom-openAndClose-expand-collapse)
   nmap <buffer> o <Plug>(fern-custom-openAndClose-expand-collapse)
   nmap <buffer> O <Plug>(fern-action-open:tabedit)
   nmap <buffer> t <Plug>(fern-action-open:tabedit)
@@ -50,16 +57,17 @@ function! hasan#fern#FernInit() abort
   " Mark file & folders
   nmap <buffer> m <Plug>(fern-action-mark:toggle)
   vmap <buffer> m <Plug>(fern-action-mark:toggle)
-  nmap <buffer> Q <Plug>(fern-action-mark:clear)
+  nmap <buffer> u <Plug>(fern-action-mark:clear)
 
   " Create, Delete, Copy, Move, Rename
   nmap <buffer> A <Plug>(fern-action-new-path)
-  nmap <buffer> N <Plug>(fern-action-new-file)
+  " nmap <buffer> N <Plug>(fern-action-new-file)
   nmap <buffer> K <Plug>(fern-action-new-dir)
   nmap <buffer> M <Plug>(fern-action-move)
+  nmap <buffer> R <Plug>(fern-action-move)
   nmap <buffer> C <Plug>(fern-action-copy)
-  nmap <buffer> R <Plug>(fern-action-rename)
-  nmap <buffer> D <Plug>(fern-action-remove)
+  nmap <buffer> <f2> <Plug>(fern-action-rename)
+  nmap <buffer> DD <Plug>(fern-action-remove)
 
   " Various instant mappings
   nmap <buffer> r <Plug>(fern-action-reload)
@@ -69,10 +77,11 @@ function! hasan#fern#FernInit() abort
   nmap <buffer> B <Plug>(fern-action-save-as-bookmark)
   nmap <buffer> q <C-w>c
   nmap <buffer> <BAR> <Plug>(fern-action-zoom)<C-w>=
-  nmap <buffer> <nowait> < <Plug>(fern-action-leave)
   nmap <buffer> <nowait> - <Plug>(fern-action-leave)
-  nmap <buffer> <nowait> > <Plug>(fern-action-enter)
-
+  nmap <buffer><nowait> l <Plug>(fern-action-expand)
+  nmap <buffer><nowait> h <Plug>(fern-action-collapse)
+  nmap <buffer><nowait> <C-h> <Plug>(fern-action-leave)
+  nmap <buffer><nowait> <Backspace> <C-h>
   " nmap <buffer> K <Plug>(fern-action-mark-children:leaf)
 
   " Open bookmark:///

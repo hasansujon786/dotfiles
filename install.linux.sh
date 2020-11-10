@@ -114,6 +114,8 @@ install_various_apps() {
   printWithToilet lf
   apt install -y lf
   ln -s ~/dotfiles/tui/lf ~/.config/lf
+  curl https://raw.githubusercontent.com/thameera/vimv/master/vimv > /data/data/com.termux/files/usr/bin/vimv && chmod +755 /data/data/com.termux/files/usr/bin/vimv
+  # curl https://raw.githubusercontent.com/thameera/vimv/master/vimv > ~/bin/vimv && chmod +755 ~/bin/vimv
 
   printWithToilet wget
   apt install -y wget
