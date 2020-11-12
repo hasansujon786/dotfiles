@@ -20,11 +20,7 @@ function! goto#_goto (str)
     let lastset = matchstr(g:out, 'Last set from \zs\f\+')
 
     if empty(lastset)
-        " @todo: Bettter echo
-        echo 'Couldn’t find definition for “'.str.'”'
-        " echo printf('“%s”', str)
-        " call pp#echo( ['WarningMsg', 'Couldn’t find definition for '],
-        "             \ ['String', printf('“%s”', str)])
+        call _#Echo(['WarningMsg', 'Couldn’t find definition for'], '“'.str.'”')
         return
     end
 
