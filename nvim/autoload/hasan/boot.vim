@@ -13,13 +13,14 @@ endfunction
 highlight ColorColumn guibg=magenta guifg=#282C34 ctermbg=gray  ctermfg=white
 function! hasan#boot#highligt_textwith_column(bool)
   if a:bool
-    func! ColorTWColumn(timer)
-      if &textwidth != 0
-        let w:TW = &textwidth + 1
-        let w:EndOfTW = matchadd('ColorColumn', '\%'.w:TW.'v', '100')
+    let w:TW = &textwidth + 1
+    let w:EndOfTW = matchadd('ColorColumn', '\%'.w:TW.'v', '100')
+    func! RemoveColumnFrmSelectedBuffer(timer)
+      if &textwidth == 0
+        call clearmatches()
       endif
     endfunc
-    let timer = timer_start(30, 'ColorTWColumn')
+    let timer = timer_start(50, 'RemoveColumnFrmSelectedBuffer')
   else
     if (exists('w:EndOfTW') && w:EndOfTW > 0)
       try | call matchdelete(w:EndOfTW) | unlet! w:EndOfTW | catch | endtry
