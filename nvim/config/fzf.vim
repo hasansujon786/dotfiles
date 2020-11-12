@@ -44,27 +44,15 @@ let g:fzf_action = {
 
 " Requires ripgrep
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/*"'
-let $FZF_DEFAULT_OPTS =
-      \'--bind ctrl-a:select-all'
-
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Directory'],
-  \ 'fg+':     ['fg', 'Type', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'Visual','CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Directory'],
-  \ 'info':    ['fg', 'Keyword'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Directory'],
-  \ 'gutter':  ['fg', 'Search'],
-  \ 'pointer': ['fg', 'Type'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+let $FZF_DEFAULT_OPTS =' --color=dark,
+      \fg:-1,bg:-1,hl:#55B6C2,
+      \fg+:#E5C07B,bg+:#3E4452,hl+:#55B6C2,pointer:#E5C07B,
+      \info:#E06C75,prompt:#61AFEF,border:#5C6370,
+      \marker:#E06C75,spinner:#61afef,header:#5C6370,gutter:-1
+      \ --bind ctrl-a:select-all'
 
 function! s:p(bang, ...)
-  let preview_window = get(g:, 'fzf_preview_window', a:bang && &columns >= 80 || &columns >= 120 ? 'right': '')
+  let preview_window = get(g:, 'fzf_preview_window', a:bang && &columns >= 80 || &columns >= 110 ? 'right': '')
   if len(preview_window)
     return call('fzf#vim#with_preview', add(copy(a:000), preview_window))
   endif
