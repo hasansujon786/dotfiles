@@ -23,6 +23,7 @@ Plug 'justinmk/vim-sneak',{ 'on': 'CocStart' }
 Plug 'Konfekt/FastFold',{ 'on': 'CocStart' }
 Plug 'tpope/vim-repeat',{ 'on': 'CocStart' }
 Plug 'wsdjeg/vim-todo',{ 'on': 'OpenTodo' }
+Plug 'tpope/vim-scriptease',{ 'on': ['Messages', 'PP'] }
 
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'liuchengxu/vim-which-key'
@@ -93,13 +94,12 @@ source ~/dotfiles/nvim/config/vim-wiki.vim
 source ~/dotfiles/nvim/config/vimuxline.vim
 
 " Plug 'xolox/vim-session'
-" https://github.com/fannheyward/coc-react-refactor
-" https://github.com/romgrk/todoist.nvim
-" https://github.com/luochen1990/indent-detector.vim
 " Plug 'romgrk/github-light.vim'
 " Plug 'romgrk/doom-one.vim'
-" Plug 'https://github.com/vim-scripts/PickAColor.vim'
-" Plug 'https://github.com/tpope/vim-scriptease'
 " Plug 'https://github.com/arp242/undofile_warn.vim'
 " Plug 'https://github.com/guns/xterm-color-table.vim'
-" https://vimawesome.com/plugin/vim-colors-solarized-ours
+" Plug 'https://github.com/luochen1990/indent-detector.vim'
+
+" 0.5
+" Plug 'https://github.com/ChristianChiarulli/nvcode-color-schemes.vim'
+" Plug 'nvim-treesitter/nvim-treesitter'
