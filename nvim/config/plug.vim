@@ -24,6 +24,7 @@ Plug 'Konfekt/FastFold',{ 'on': 'CocStart' }
 Plug 'tpope/vim-repeat',{ 'on': 'CocStart' }
 Plug 'wsdjeg/vim-todo',{ 'on': 'OpenTodo' }
 Plug 'tpope/vim-scriptease',{ 'on': ['Messages', 'PP'] }
+Plug 'tweekmonster/startuptime.vim',{ 'on': 'StartupTime' }
 
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'liuchengxu/vim-which-key'
