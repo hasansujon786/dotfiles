@@ -11,7 +11,7 @@ gui:
     optionsTextColor:
       - default
     selectedLineBgColor:
-      - black
+      - reverse
     selectedRangeBgColor:
       - reverse
 keybinding:
