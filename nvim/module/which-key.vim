@@ -24,26 +24,23 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 " }}}
 
 " Single mappings ---------------------------------------- {{{
-let g:which_key_map['n'] = [ ':call hasan#fern#open_drawer()'       , 'open-fern' ]
-let g:which_key_map['s'] = [ ':update'                              , 'save-file' ]
-let g:which_key_map['='] = [ '<C-W>='                               , 'balance-windows' ]
-let g:which_key_map['x'] = [ ':bdelete'                             , 'delete-buffer']
-let g:which_key_map['m'] = [ ':call WindowSwap#EasyWindowSwap()'    , 'move-window' ]
-let g:which_key_map['z'] = [ 'za'                                   , 'fold' ]
-let g:which_key_map['r'] = 'cycle-number'
-let g:which_key_map['l'] = 'window-right'
-let g:which_key_map['h'] = 'window-left'
-let g:which_key_map['j'] = 'window-bellow'
-let g:which_key_map['k'] = 'window-above'
-" let g:which_key_map['q'] = 'close-window'
-nnoremap <silent> <leader>q :Q<CR>
-nnoremap <silent> <leader>k :call hasan#utils#JumpToWin('k')<CR>
-nnoremap <silent> <leader>j :call hasan#utils#JumpToWin('j')<CR>
-nnoremap <silent> <leader>l :call hasan#utils#JumpToWin('l')<CR>
-nnoremap <silent> <leader>h :call hasan#utils#JumpToWin('h')<CR>
-nnoremap <silent> <leader>r :call hasan#utils#cycle_numbering()<CR>
+let g:which_key_map['m'] = [':call WindowSwap#EasyWindowSwap()'     , 'move-window' ]
+let g:which_key_map['n'] = [':call hasan#fern#open_drawer()'        , 'open-fern' ]
+let g:which_key_map['l'] = [':call hasan#utils#JumpToWin("l")'      , 'window-right']
+let g:which_key_map['h'] = [':call hasan#utils#JumpToWin("h")'      , 'window-left']
+let g:which_key_map['j'] = [':call hasan#utils#JumpToWin("j")'      , 'window-bellow']
+let g:which_key_map['k'] = [':call hasan#utils#JumpToWin("k")'      , 'window-above']
+let g:which_key_map['r'] = [':call hasan#utils#cycle_numbering()'   , 'cycle-number' ]
+let g:which_key_map['='] = ['<C-W>='                                , 'balance-windows' ]
+let g:which_key_map['x'] = [':bdelete'                              , 'delete-buffer']
+let g:which_key_map['z'] = ['za'                                    , 'fold' ]
+let g:which_key_map['s'] = 'save-current-file'
+let g:which_key_map['q'] = 'close-current-window'
+nnoremap <leader>s :w<CR>
+vnoremap <leader>s :<C-u>w<CR>gv
+nnoremap <silent> <leader>q :Quit<CR>
 nnoremap <silent> <leader><TAB> :AlternateFile<CR>
-" nnoremap <silent> <leader>q :Q<CR>
+vnoremap <silent> <leader><TAB> :<C-u>AlternateFile<CR>
 
 
 " }}}

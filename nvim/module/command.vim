@@ -9,7 +9,7 @@ command! -bang Delview call hasan#utils#delete_view(<q-bang>)
 command! GetChar call hasan#utils#getchar()
 command! AutoZoomWin call hasan#utils#auto_zoom_window()
 command! AlternateFile exe "normal! \<c-^>"
-command! -bang Q call hasan#utils#confirmQuit(<q-bang>)
+command! -bang Quit call hasan#utils#confirmQuit(<q-bang>)
 " }}}
 
 " quick_term.vim {{{

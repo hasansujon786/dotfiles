@@ -13,9 +13,7 @@ else
 endif
 
 " Exit file with confirm
-nnoremap <silent> ZZ :Q!<CR>
-cnoremap <silent> q<CR> :Q<CR>
-cnoremap <silent> x<CR> :Q!<CR>
+nnoremap <silent> ZZ :Quit!<CR>
 
 " Switch between the alternate files
 nnoremap <BS> <c-^>
@@ -139,7 +137,7 @@ vnoremap <silent> # :<C-u>call hasan#utils#visualSelection('', '')<CR>?<C-R>=@/<
 " Type a replacement term and press . to repeat the replacement again. Useful
 " for replacing a few instances of the term (comparable to multiple cursors).
 nnoremap <silent> c* :let @/='\<'.expand('<cword>').'\>'<CR>cgn
-xnoremap <silent> c "sy:let @/=@s<CR>cgn
+xnoremap <silent> C "sy:let @/=@s<CR>cgn
 
 " => Insert-Mode-key-mapping ==============================
 " Move cursor by character
