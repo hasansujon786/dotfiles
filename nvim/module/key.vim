@@ -8,8 +8,8 @@ if !exists('g:loaded_HLNext')
   nnoremap <silent> q <ESC>:nohlsearch<CR>
   vnoremap <silent> q <ESC>:nohlsearch<CR>
 else
-  nnoremap <silent> q <ESC>:call HLNextOff() <BAR> :nohlsearch<CR>
-  vnoremap <silent> q <ESC>:call HLNextOff() <BAR> :nohlsearch<CR>
+  nnoremap <silent> q <ESC>:call HLNextOff() <BAR> :nohlsearch <BAR> mode <CR>
+  vnoremap <silent> q <ESC>:call HLNextOff() <BAR> :nohlsearch <BAR> mode <CR>
 endif
 
 " Exit file with confirm
