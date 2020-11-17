@@ -39,7 +39,6 @@ function! hasan#fern#FernInit() abort
   " }}}
 
   " Open file
-  nmap <buffer><nowait> <CR> <Plug>(fern-custom-openAndClose-enter)
   nmap <buffer> <2-LeftMouse> <Plug>(fern-custom-openAndClose-expand-collapse)
   nmap <buffer> o <Plug>(fern-custom-openAndClose-expand-collapse)
   nmap <buffer> O <Plug>(fern-action-open:tabedit)
@@ -77,11 +76,10 @@ function! hasan#fern#FernInit() abort
   nmap <buffer> B <Plug>(fern-action-save-as-bookmark)
   nmap <buffer> q <C-w>c
   nmap <buffer> <BAR> <Plug>(fern-action-zoom)<C-w>=
-  nmap <buffer> <nowait> - <Plug>(fern-action-leave)
-  nmap <buffer><nowait> l <Plug>(fern-action-expand)
-  nmap <buffer><nowait> h <Plug>(fern-action-collapse)
-  nmap <buffer><nowait> <C-h> <Plug>(fern-action-leave)
-  nmap <buffer><nowait> <Backspace> <C-h>
+  nmap <buffer><nowait> <CR> <Plug>(fern-custom-openAndClose-enter)
+  nmap <buffer><nowait> l <Plug>(fern-custom-openAndClose-enter)
+  nmap <buffer><nowait> h <Plug>(fern-action-leave)
+  nmap <buffer><nowait> - <Plug>(fern-action-leave)
   " nmap <buffer> K <Plug>(fern-action-mark-children:leaf)
 
   " Open bookmark:///
@@ -89,7 +87,7 @@ function! hasan#fern#FernInit() abort
         \ <Plug>(fern-my-enter-bookmark)
         \ :<C-u>Fern bookmark:///<CR>
   nmap <buffer><expr><silent>
-        \ <C-^>
+        \ <Tab>
         \ fern#smart#scheme(
         \   "\<Plug>(fern-my-enter-bookmark)",
         \   {
