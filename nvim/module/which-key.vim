@@ -279,7 +279,7 @@ let g:which_key_map['w'] = {
       \ '/' : [':Windows'                                 , 'fzf-windows'],
       \ 'v' : ['<C-w>v'                                   , 'vsplit'],
       \ 's' : ['<C-w>s'                                   , 'split'],
-      \ 't' : [':tab split'                               , 'tab-split'],
+      \ 't' : [':-tab split'                               , 'tab-split'],
       \ 'o' : ['<C-w>o'                                   , 'only-window'],
       \ 'c' : ['<C-w>c'                                   , 'close-window'],
       \ 'z' : 'auto-zoom-win'                             ,
