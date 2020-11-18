@@ -2,7 +2,7 @@ call plug#begin('~/dotfiles/nvim/plugged')
 
 " => Visual-&-Theme ========================================
 Plug 'junegunn/goyo.vim',{ 'on': 'Goyo' }
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'Yggdroot/indentLine'
 
@@ -78,7 +78,6 @@ call plug#end()
 source ~/dotfiles/nvim/config/quick-scope.vim
 source ~/dotfiles/nvim/config/onedark.vim
 source ~/dotfiles/nvim/config/indentLine.vim
-source ~/dotfiles/nvim/config/lightline.vim
 source ~/dotfiles/nvim/config/goyo.vim
 source ~/dotfiles/nvim/config/auto-pairs.vim
 source ~/dotfiles/nvim/config/fzf.vim
@@ -92,7 +91,10 @@ source ~/dotfiles/nvim/config/coc.vim
 source ~/dotfiles/nvim/config/tt.vim
 source ~/dotfiles/nvim/config/hlnext.vim
 source ~/dotfiles/nvim/config/vim-wiki.vim
-source ~/dotfiles/nvim/config/vimuxline.vim
+" source ~/dotfiles/nvim/config/vimuxline.vim
+" source ~/dotfiles/nvim/config/lightline.vim
+source ~/dotfiles/nvim/config/customstatusline.vim
+source ~/dotfiles/nvim/config/detect_current_mode.vim
 
 " Plug 'xolox/vim-session'
 " Plug 'romgrk/github-light.vim'
