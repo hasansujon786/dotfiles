@@ -95,6 +95,7 @@ source ~/dotfiles/nvim/config/vim-wiki.vim
 " source ~/dotfiles/nvim/config/lightline.vim
 source ~/dotfiles/nvim/config/customstatusline.vim
 source ~/dotfiles/nvim/config/detect_current_mode.vim
+source ~/dotfiles/nvim/config/tabline.vim
 
 " Plug 'xolox/vim-session'
 " Plug 'romgrk/github-light.vim'
