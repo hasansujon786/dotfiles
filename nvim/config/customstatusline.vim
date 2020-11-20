@@ -128,8 +128,8 @@ hi StatusLineNC guibg=#2C323C guifg=#717785
 
 augroup status
   autocmd!
-  autocmd WinEnter,BufEnter,FocusGained * setlocal statusline=%!ActiveStatus()
-  autocmd WinLeave,BufLeave,FocusLost * setlocal statusline=%!InactiveStatus()
+  autocmd WinEnter,BufEnter,BufWinEnter,FocusGained * setlocal statusline=%!ActiveStatus()
+  autocmd WinLeave,BufLeave,BufWinLeave,FocusLost * setlocal statusline=%!InactiveStatus()
 augroup END
 
 function! LightLineBufSettings()
