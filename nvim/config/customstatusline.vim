@@ -41,7 +41,6 @@ let g:currentmode={
 " let statusline.="%(\ \ %{&modifiable?(&expandtab?'et\ ':'noet\ ').&shiftwidth:''}%)\ "
 
 function! ActiveStatus()
-  let fModifiedColor = &modified ? '%9*' : '%3*'
   let statusline=""
   let statusline.="%1*"
   let statusline.="\ %{toupper(g:currentmode[mode()])}\ "
@@ -49,9 +48,9 @@ function! ActiveStatus()
   let statusline.="%{&spell?'\ \ 📖 ':''}"
   let statusline.="%2*"
   let statusline.=s:ic.separator.left
-  let statusline.=fModifiedColor
   let statusline.=s:ic.space
-  let statusline.="%{&modified?'●':'-'}"
+  let statusline.="%3*"
+  let statusline.="%{&modified?'●':nerdfont#find()}"
   let statusline.=s:ic.space
   let statusline.="%3*"
   let statusline.="%<"
@@ -89,7 +88,7 @@ function! InactiveStatus()
   let statusline.="%6*"
   let statusline.=s:ic.space
   let statusline.="%<"
-  let statusline.="%{&modified?'●':'-'}"
+  let statusline.="%{&modified?'●':nerdfont#find()}"
   let statusline.=s:ic.space
   let statusline.="%t"
   let statusline.=s:ic.space
@@ -113,23 +112,19 @@ endfunction
 let g:bg = 'blue'
 set laststatus=2
 set statusline=%!ActiveStatus()
+" Mode color
 hi User1 guibg=#98C379 guifg=#2C323C gui=bold
 hi User2 guibg=#3E4452 guifg=#98C379
+" Secondary section color
 hi User3 guibg=#3E4452 guifg=#ABB2BF
 hi User4 guibg=#2C323C guifg=#3E4452
-" statusline middle
+" Statusline middle
 hi User5 guibg=#2C323C guifg=#717785
+" Secondary section color (inactive)
 hi User6 guibg=#3E4452 guifg=#717785
-" fModifiedColor
-hi User9 guibg=#3E4452 guifg=#E06C75
-hi User8 guibg=#3E4452 guifg=#717785
-
-
-" au InsertEnter * hi statusline guifg=black guibg=#d7afff ctermfg=black ctermbg=magenta
-" au InsertLeave * hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
-
-hi statusline guifg=black guibg=#2C323C ctermfg=black ctermbg=cyan
-hi StatusLineNC guifg=#717785 guibg=#2C323C ctermfg=black ctermbg=cyan
+" Default color
+hi statusline   guibg=#2C323C guifg=#ABB2BF
+hi StatusLineNC guibg=#2C323C guifg=#717785
 
 augroup status
   autocmd!

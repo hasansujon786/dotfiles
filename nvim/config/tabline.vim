@@ -10,7 +10,8 @@ function! MyTabLine()
 
     " the label is made by MyTabLabel()
     let s .= '%{MyTabLabel('.(tab_nr).')}'
-    let s .= IsTabWinModified(tab_nr) ? '●' : tab_nr == tabpagenr() ? '%999X' :  ''
+    let s .= IsTabWinModified(tab_nr) ? '●' : tab_nr == tabpagenr() ?
+          \ (tabpagenr('$') == 1 ? '%#TabLineSp#%999X' : '%999X') :  ''
     let s .= '  '
   endfo
 
