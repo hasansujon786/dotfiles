@@ -2,6 +2,7 @@
 nnoremap <silent> - :FernCurDir<CR>
 command! FernCurDir call hasan#fern#smart_path(0)
 command! FernCurDirDrawer call hasan#fern#smart_path(1)
+command! FernCurFileDrawer call hasan#fern#open_drawer()
 
 let g:fern#drawer_width = 40
 let g:fern#keepalt_on_edit = 1

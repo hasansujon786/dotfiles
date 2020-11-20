@@ -229,18 +229,18 @@ endfunction
 " }}}
 
 " CopyFileNameToClipBoard {{{ "
-function hasan#utils#CopyFileNameToClipBoard(...) abort
+function! hasan#utils#CopyFileNameToClipBoard(bang) abort
   if expand('%') == ''
-    echohl WarningMsg | echom 'Can not find clipboard, for more info see :h clipboard' | echohl None
+    call _#echoWarn('Couldn’t copy the filename')
     return
   endif
 
-  if a:0
-    let @+ = expand('%:p')
-  else
+  if a:bang ==# '!'
     let @+ = expand('%:t')
+  else
+    let @+ = expand('%:p')
   endif
-  echo 'Copied to clipboard: '. @+
+  call _#Echo(['TextInfo', 'Copied to clipboard:'], '“'.@+.'”')
 endfunction
 " }}} CopyFileNameToClipBoard "
 

@@ -33,6 +33,7 @@ endfunction
 
 " !::exe [So]
 
+" call _#Echo(['WarningMsg', 'Couldn’t find definition for'], '“'.str.'”')
 function! _#Echo(...)
   echo ''
   let args = a:000

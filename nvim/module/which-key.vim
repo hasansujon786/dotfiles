@@ -25,12 +25,12 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 
 " Single mappings ---------------------------------------- {{{
 let g:which_key_map['m'] = [':call WindowSwap#EasyWindowSwap()'     , 'move-window' ]
-let g:which_key_map['n'] = [':call hasan#fern#open_drawer()'        , 'open-fern' ]
-let g:which_key_map['l'] = [':call hasan#utils#JumpToWin("l")'      , 'window-right']
-let g:which_key_map['h'] = [':call hasan#utils#JumpToWin("h")'      , 'window-left']
-let g:which_key_map['j'] = [':call hasan#utils#JumpToWin("j")'      , 'window-bellow']
-let g:which_key_map['k'] = [':call hasan#utils#JumpToWin("k")'      , 'window-above']
-let g:which_key_map['r'] = [':call hasan#utils#cycle_numbering()'   , 'cycle-number' ]
+let g:which_key_map['n'] = [':FernCurFileDrawer'                    , 'open-fern' ]
+let g:which_key_map['l'] = [':JumpToWin l'                          , 'window-right']
+let g:which_key_map['h'] = [':JumpToWin h'                          , 'window-left']
+let g:which_key_map['j'] = [':JumpToWin j'                          , 'window-bellow']
+let g:which_key_map['k'] = [':JumpToWin k'                          , 'window-above']
+let g:which_key_map['r'] = [':CycleNumber'                          , 'cycle-number' ]
 let g:which_key_map['='] = ['<C-W>='                                , 'balance-windows' ]
 let g:which_key_map['x'] = [':bdelete'                              , 'delete-buffer']
 let g:which_key_map['z'] = ['za'                                    , 'fold' ]
@@ -101,7 +101,7 @@ let g:which_key_map['b'] = {
       \ 'l' : ['blast'                              , 'last-buffer'],
       \ 'n' : ['bnext'                              , 'next-buffer'],
       \ 'x' : ['Bclose'                             , 'delete-buffer'],
-      \ 'X' : [':call hasan#utils#clear_buffers()'  , 'kill-other-buffers'],
+      \ 'X' : ['KillOtherBuffers'                   , 'kill-other-buffers'],
       \ 'p' : ['bprevious'                          , 'previous-buffer'],
       \ }
 " }}}
@@ -129,7 +129,7 @@ nnoremap <leader>e~ :cd %:p:h<CR>:pwd<CR>
 let g:which_key_map['f'] = {
       \ 'name' : '+find' ,
       \ '/' : [':Files'                         , 'fzf-files'],
-      \ 'o' : [':call hasan#fern#open_drawer()' , 'find-in-file-tree' ],
+      \ 'o' : [':FernCurFileDrawer'             , 'find-in-file-tree' ],
       \ 's' : [':update'                        , 'save-current-file'],
       \ 'S' : [':wall'                          , 'save-all-file'],
       \ 'c' : {
@@ -148,8 +148,8 @@ let g:which_key_map['f'] = {
       \ }
 nnoremap <Leader>fM :Move <C-R>=expand("%")<CR>
 nnoremap <Leader>fR :Rename <C-R>=expand("%:t")<CR>
-nnoremap <leader>fy :call hasan#utils#CopyFileNameToClipBoard(1)<CR>
-nnoremap <leader>fY :call hasan#utils#CopyFileNameToClipBoard()<CR>
+nnoremap <leader>fy :CopyFileNameToClipBoard<CR>
+nnoremap <leader>fY :CopyFileNameToClipBoard!<CR>
 
 " }}}
 
@@ -213,7 +213,7 @@ let g:which_key_map['o'] = {
       \ ';' : [':FloatermNew --wintype=normal --height=6'  , 'terminal'],
       \ 'b' : [':Fern bookmark:///'                        , 'bookmark'],
       \ 't' : [':OpenTodo'                                 , 'todo-manager'],
-      \ 'q' : [':call hasan#utils#quickFix_toggle()'       , 'quickfix'],
+      \ 'q' : [':QfixToggle'                               , 'quickfix'],
       \ 'y' : [':CocList --normal yank'                    , 'yankc-history'],
       \ }
 
@@ -239,9 +239,9 @@ let g:which_key_map['t'] = {
 nmap <leader>ts :SetTerminal<space>
 " }}}
 
-" T is for tast-timer-&-toggle --------------------------- {{{
+" T is for tast-timer-toggle --------------------------- {{{
 let g:which_key_map['T'] = {
-      \ 'name' : '+tast-timer-&-toggle',
+      \ 'name' : '+tast-timer-toggle',
       \ 'b' : [':Break'              , 'tt-break'],
       \ 'h' : [':HideAndShowTimer'   , 'tt-hide-timer'],
       \ 'o' : [':OpenTasks'          , 'tt-open-tasks'],
@@ -252,7 +252,7 @@ let g:which_key_map['T'] = {
       \ 'U' : 'tt-update-status',
       \
       \ 'c' : [':setlocal cursorcolumn!'                   , 'cursorcolumn'],
-      \ 'w' : [':call hasan#utils#toggleWrap()'            , 'wrap'],
+      \ 'w' : [':call hasan#utils#toggleWrap()'            , 'toggle-wrap'],
       \ }
 nnoremap <Leader>Ts :ShowTimer<CR>
 nnoremap <Leader>Tu :UpdateCurrentTimer<space>
