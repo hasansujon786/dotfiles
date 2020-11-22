@@ -127,10 +127,16 @@ hi statusline   guibg=#2C323C guifg=#ABB2BF
 hi StatusLineNC guibg=#2C323C guifg=#717785
 
 augroup status
-  autocmd!
-  autocmd WinEnter,BufEnter,BufWinEnter,FocusGained * setlocal statusline=%!ActiveStatus()
-  autocmd WinLeave,BufLeave,BufWinLeave,FocusLost * setlocal statusline=%!InactiveStatus()
+  autocmd WinEnter,BufEnter,BufDelete,BufWinLeave,SessionLoadPost,FileChangedShellPost * call s:statusline_update()
 augroup END
+
+function! s:statusline_update()
+  let w = winnr()
+  let s = winnr('$') == 1 && w > 0 ? [ActiveStatus()] : [ActiveStatus(), InactiveStatus()]
+  for n in range(1, winnr('$'))
+    call setwinvar(n, '&statusline', s[n!=w])
+  endfor
+endfunction
 
 function! LightLineBufSettings()
     let et = &et ==# 1 ? "•" : "➜"
