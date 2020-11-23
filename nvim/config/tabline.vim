@@ -1,26 +1,50 @@
-set tabline=%!MyTabLine()
+set tabline=%!TabLine()
 
-function! MyTabLine()
+function! TabLine()
   let s = ''
-  for tab_nr in range(1,tabpagenr('$'))
-    " set the tab page number (for mouse clicks)
-    let s .= '%' . (tab_nr) . 'T'
-    " select the separator highlighting
-    let s .= tab_nr == tabpagenr() ?  '%#TabLineSelSp#▎%#TabLineSel#' :  '%#TabLineSp#▎%#TabLine#'
-
-    " the label is made by MyTabLabel()
-    let s .= '%{MyTabLabel('.(tab_nr).')}'
-    let s .= IsTabWinModified(tab_nr) ? '●' : tab_nr == tabpagenr() ?
-          \ (tabpagenr('$') == 1 ? '%#TabLineSp#%999X' : '%999X') :  ''
-    let s .= '  '
-  endfo
-
-  let s .= '%#TabLineSp#▎'
+  let s .= s:tabs()
   " after the last tab fill with TabLineFill and reset tab page nr
   let s .= '%#TabLineFill#%T'
-  " let s .= '%=%#TabLineSp#%999X▎%#TabEnd#  %{fnamemodify(getcwd(), ":t")} '
+  let s .= '%=%#TabLineSp#%999X▎%#TabEnd#  %{fnamemodify(getcwd(), ":t")}  '
   return s
 endfunction
+
+function! s:tabs()
+  let tabs = ''
+  for tab_nr in range(1,tabpagenr('$'))
+    " set the tab page number (for mouse clicks)
+    let tabs .= '%' . (tab_nr) . 'T'
+    " select the separator highlighting
+    let tabs .= tab_nr == tabpagenr() ?  '%#TabLineSelSp#▎%#TabLineSel#' :  '%#TabLineSp#▎%#TabLine#'
+    " the label
+    let tabs .= s:isTurncate(tab_nr) ? '%{TabShortLabel('.tab_nr.')}' : '%{TabLongLabel('.tab_nr.')}'
+    let tabs .= s:isTurncate(tab_nr) ? '' : IsTabWinModified(tab_nr) ? '●' : tab_nr == tabpagenr() ?
+          \ (tabpagenr('$') == 1 ? '%#TabLineSp#%999X' : '%999X') :  ''
+    let tabs .= '  '
+  endfor
+  let tabs .= '%#TabLineSp#▎'
+  return tabs
+endfunction
+
+function! s:isTurncate(tab_nr)
+  let _ = []
+  for n in range(1,tabpagenr('$'))
+    call add(_, TabLongLabel(n).'  ')
+  endfor
+  let t_length = len(join(_, ''))
+  let cols = &columns - 20
+  let tt = tabpagenr('$') - tabpagenr()
+  let cc = t_length > cols && a:tab_nr != tabpagenr()
+
+  if (tt >= 2)
+    return cc && a:tab_nr != tabpagenr() + 1 && a:tab_nr != tabpagenr() + 2
+  elseif (tt == 1)
+    return cc && a:tab_nr != tabpagenr() + 1 && a:tab_nr != tabpagenr() - 1
+  elseif (tt == 0)
+    return cc && a:tab_nr != tabpagenr() - 1 && a:tab_nr != tabpagenr() - 2
+  endif
+endfunction
+
 " barbar.vim #1c1f24
 
 hi TabLine        guibg=#2C323C guifg=#5C6370
@@ -32,8 +56,18 @@ hi TabLineSelSp   guibg=#282C34 guifg=#61AFEF
 
 " hi TabLineFill cleared
 
-" Now the MyTabLabel() function is called for each tab page to get its label. >
-function! MyTabLabel(tab_nr)
+" Now the TabLongLabel() function is called for each tab page to get its label. >
+function! TabShortLabel(tab_nr)
+  let buflist = tabpagebuflist(a:tab_nr)
+  let winnr = tabpagewinnr(a:tab_nr)
+  let fname = fnamemodify(bufname(buflist[winnr - 1]), ":t")
+  " if (fname == '') | let fname = '[No Name]' | endif
+  " 2 spaces is needed for better transition
+  let label = ' '.nerdfont#find(fname).' '.a:tab_nr
+  return label
+endfunction
+
+function! TabLongLabel(tab_nr)
   let buflist = tabpagebuflist(a:tab_nr)
   let winnr = tabpagewinnr(a:tab_nr)
   let fname = fnamemodify(bufname(buflist[winnr - 1]), ":t")
