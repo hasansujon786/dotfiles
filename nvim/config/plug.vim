@@ -103,6 +103,8 @@ source ~/dotfiles/nvim/config/tabline.vim
 " Plug 'https://github.com/arp242/undofile_warn.vim'
 " Plug 'https://github.com/guns/xterm-color-table.vim'
 " Plug 'https://github.com/luochen1990/indent-detector.vim'
+" Plug 'https://github.com/xuxinx/vim-tabline'
+" Plug 'https://github.com/pacha/vem-tabline'
 
 " 0.5
 " Plug 'https://github.com/ChristianChiarulli/nvcode-color-schemes.vim'

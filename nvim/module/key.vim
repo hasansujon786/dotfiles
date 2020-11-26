@@ -114,10 +114,10 @@ nnoremap <silent> <Bar> :wincmd =<cr>
 
 nnoremap <C-j> <C-i>
 " Jump between tabs
-nmap ]t gt
-nmap [t gT
-vmap ]t gt
-vmap [t gT
+nmap <tab> gt
+nmap <s-tab> gT
+vmap <tab> gt
+vmap <s-tab> gT
 " Move tabs
 nnoremap <silent> ]<TAB> :tabmove+<CR>
 nnoremap <silent> [<TAB> :tabmove-<CR>
