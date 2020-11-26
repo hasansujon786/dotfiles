@@ -5,8 +5,12 @@ function! TabLine()
   let s .= s:tabs()
   " after the last tab fill with TabLineFill and reset tab page nr
   let s .= '%#TabLineFill#%T'
-  let s .= '%=%#TabLineSp#%999X▎%#TabEnd#  %{fnamemodify(getcwd(), ":t")}  '
+  let s .= '%=%#TabLineSp#%999X▎%#TabEnd#%@OpenFern@ %-6.10{fnamemodify(getcwd(), ":t")[0:9]} %X'
   return s
+endfunction
+
+function! OpenFern(...)
+  Fern . -reveal=%
 endfunction
 
 function! s:tabs()
@@ -18,9 +22,9 @@ function! s:tabs()
     let tabs .= tab_nr == tabpagenr() ?  '%#TabLineSelSp#▎%#TabLineSel#' :  '%#TabLineSp#▎%#TabLine#'
     " the label
     let tabs .= s:isTurncate(tab_nr) ? '%{TabShortLabel('.tab_nr.')}' : '%{TabLongLabel('.tab_nr.')}'
-    let tabs .= s:isTurncate(tab_nr) ? '' : IsTabWinModified(tab_nr) ? '●' : tab_nr == tabpagenr() ?
-          \ (tabpagenr('$') == 1 ? '%#TabLineSp#%999X' : '%999X') :  ''
-    let tabs .= '  '
+    let close_tab = '%'.tab_nr.'X %X '
+    let tabs .= s:isTurncate(tab_nr) ? '' : IsTabWinModified(tab_nr) ? '●  ' :
+          \ (tabpagenr('$') == 1 ? '%#TabLineSelDel#'.close_tab : close_tab)
   endfor
   let tabs .= '%#TabLineSp#▎'
   return tabs
@@ -53,6 +57,7 @@ hi TabLineFill    guibg=#2C323C guifg=#5C6370
 hi TabLineSel     guibg=#282C34 guifg=#dddddd
 hi TabLineSelMod  guibg=#282C34 guifg=#D19A66
 hi TabLineSelSp   guibg=#282C34 guifg=#61AFEF
+hi TabLineSelDel  guibg=#282C34 guifg=#5C6370
 
 " hi TabLineFill cleared
 
@@ -63,7 +68,7 @@ function! TabShortLabel(tab_nr)
   let fname = fnamemodify(bufname(buflist[winnr - 1]), ":t")
   " if (fname == '') | let fname = '[No Name]' | endif
   " 2 spaces is needed for better transition
-  let label = ' '.nerdfont#find(fname).' '.a:tab_nr
+  let label = ' '.nerdfont#find(fname).' '.a:tab_nr.'  '
   return label
 endfunction
 
