@@ -96,13 +96,18 @@ vmap <leader>af <Plug>(coc-format-selected)
 " b is for buffer ---------------------------------------- {{{
 let g:which_key_map['b'] = {
       \ 'name' : '+buffer',
-      \ '/' : ['Buffers'                            , 'fzf-buffer'],
+      \ '/' : ['Buffers'                            , 'Search-buffers'],
       \ 'f' : ['bfirst'                             , 'first-buffer'],
       \ 'l' : ['blast'                              , 'last-buffer'],
       \ 'n' : ['bnext'                              , 'next-buffer'],
-      \ 'x' : ['Bclose'                             , 'delete-buffer'],
-      \ 'X' : ['KillOtherBuffers'                   , 'kill-other-buffers'],
       \ 'p' : ['bprevious'                          , 'previous-buffer'],
+      \
+      \ 'k' : ['Bclose'                             , 'delete-buffer'],
+      \ 'K' : ['Todo'                               , 'kill-all-buffers'],
+      \ 'O' : ['KillOtherBuffers'                   , 'kill-other-buffers'],
+      \
+      \ 's' : [':w'                                 , 'Save-buffer'],
+      \ 'S' : [':wa'                                , 'Save-all-buffer'],
       \ }
 " }}}
 
@@ -141,7 +146,9 @@ let g:which_key_map['f'] = {
       \  },
       \ 't' : [':Filetypes'                     , 'fzf-filetypes'],
       \ 'w' : ['<Plug>FixCurrentWord'           , 'fix-current-word'],
+      \
       \ 'R' : 'rename-current-file',
+      \ 'C' : 'Todo',
       \ 'M' : 'move-current-file',
       \ 'y' : 'copy-current-filename',
       \ 'Y' : 'copy-current-filename',
@@ -188,24 +195,35 @@ else
 endif
 " }}}
 
-" i is for insertion ------------------------------------- {{{
+" i is for insert ---------------------------------------- {{{
 let g:which_key_map['i'] = {
-      \ 'name' : '+insertion',
-      \ 'd' : {
-      \ 'name' : 'date-and-time',
-      \    'd' :['_#Insertion(strftime("%e %B %Y"))'           , 'date'],
-      \    't' :['_#Insertion( strftime("%H:%M"))'             , 'time'],
-      \  },
+      \ 'name' : '+insert',
+      \ 'd' :['_#Insertion(strftime("%e %B %Y"))'           , 'date'],
+      \ 'D' :['_#Insertion( strftime("%H:%M"))'             , 'time'],
       \ 't' : {
-      \ 'name' : 'text-transfrom',
+      \ 'name' : 'transfrom',
       \    'c' :['<Plug>(camel_case_operator)'       , 'transfrom-to-camel-case' ],
       \    'C' :['<Plug>(upper_camel_case_operator)' , 'transfrom-to-upper-camel-case' ],
       \    's' :['<Plug>(snake_case_operator)'       , 'transfrom-to-snake-case' ],
       \    'k' :['<Plug>(kebab_case_operator)'       , 'transfrom-to-kebab-case' ],
       \    'S' :['<Plug>(start_case_operator)'       , 'transfrom-to-start-case' ],
+      \ 
+      \    'h' :['<Plug>(ConvertColorCodeh)'       , 'convert-color-to-hsl' ],
+      \    'r' :['<Plug>(ConvertColorCoder)'       , 'convert-color-to-rgb' ],
+      \    'x' :['<Plug>(ConvertColorCodex)'       , 'convert-color-to-hex' ],
+      \    'H' :['<Plug>(ConvertColorCodeH)'       , 'convert-color-to-hsl-alpha' ],
+      \    'R' :['<Plug>(ConvertColorCodeR)'       , 'convert-color-to-rgb-alpha' ],
+      \    'X' :['<Plug>(ConvertColorCodeX)'       , 'convert-color-to-hex-alpha' ],
       \  },
       \ }
 " }}}
+" ConvertColorTo
+let s:convertColorTo = [['x', 'hex'],['X', 'hexa'],['r', 'rgb'],['R', 'rgba'],['h', 'hsl'],['H', 'hsla']]
+for i in s:convertColorTo
+  exe 'nmap <silent><Plug>(ConvertColorCode'.i[0].') :ConvertColorTo '.i[1].'<CR>:call repeat#set("\<Plug>(ConvertColorCode'.i[0].')")<CR>'
+  " echo 'nmap c'.i[0].' <Plug>(ConvertColorCode'.i[0].')'
+endfor
+
 
 " o is for open ------------------------------------------ {{{
 let g:which_key_map['o'] = {
@@ -272,32 +290,47 @@ nnoremap <leader>vl :call logevents#LogEvents_Toggle()<CR>
 
 " w is for wiki-or-window -------------------------------- {{{
 let g:which_key_map['w'] = {
-      \ 'name' : '+wiki-or-window',
+      \ 'name' : '+wiki-n-window',
       \ '/' : [':Windows'                                 , 'fzf-windows'],
+      \ 'w' : ['<C-w>w'                                   , 'next-window'],
+      \ 'W' : ['<C-w>W'                                   , 'previous-window'],
+      \ 'h' : ['<C-w>h'                                   , 'window-left'],
+      \ 'j' : ['<C-w>j'                                   , 'window-down'],
+      \ 'k' : ['<C-w>k'                                   , 'window-up'],
+      \ 'l' : ['<C-w>l'                                   , 'window-right'],
+      \ 'H' : ['<C-w>H'                                   , 'window-move-left'],
+      \ 'J' : ['<C-w>J'                                   , 'window-move-down'],
+      \ 'K' : ['<C-w>K'                                   , 'window-move-up'],
+      \ 'L' : ['<C-w>L'                                   , 'window-move-right'],
+      \ 'r' : ['<C-w>r'                                   , 'window-rotate-downwards'],
+      \ 'R' : ['<C-w>R'                                   , 'window-rotate-upwards'],
+      \
       \ 'v' : ['<C-w>v'                                   , 'vsplit'],
       \ 's' : ['<C-w>s'                                   , 'split'],
-      \ 't' : [':-tab split'                               , 'tab-split'],
+      \ 't' : [':-tab split'                              , 'tab-split'],
       \ 'o' : ['<C-w>o'                                   , 'only-window'],
+      \ 'O' : [':tabonly'                                 , 'only-tab'],
       \ 'c' : ['<C-w>c'                                   , 'close-window'],
+      \ 'q' : ['<C-w>c'                                   , 'quit-window'],
       \ 'z' : 'auto-zoom-win'                             ,
       \
-      \ 'w' : 'wiki-index',
+      \ '.' : 'wiki-index',
       \ 'T' : 'wiki-index-tab',
       \ 'i' : 'diary-index',
       \ 'n' : 'diary-today',
       \ 'N' : 'diary-today-tab',
-      \ 'g' : 'diary-today-tab',
-      \ 'u' : 'wiki-ui-select',
+      \ 'g' : 'diary-generate-links',
+      \ '?' : 'wiki-ui-select',
       \ }
 nnoremap <leader>wz :AutoZoomWin<CR>
 " vimwike mappings
-nnoremap <leader>ww :VimwikiIndex<CR>
+nnoremap <leader>w. :VimwikiIndex<CR>
 nnoremap <leader>wT :VimwikiTabIndex<CR>
 nnoremap <leader>wi :VimwikiDiaryIndex<CR>
 nnoremap <leader>wn :VimwikiMakeDiaryNote<CR>
 nnoremap <leader>wN :VimwikiTabMakeDiaryNote<CR>
 nnoremap <leader>wg :VimwikiDiaryGenerateLinks<CR>
-nnoremap <leader>wu :VimwikiUISelect<CR>
+nnoremap <leader>w? :VimwikiUISelect<CR>
 " }}}
 
 " / is for search ---------------------------------------- {{{
