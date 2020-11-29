@@ -186,13 +186,6 @@ let g:which_key_map['g'] = {
       \ 'H' : [':GitGutterLineHighlightsToggle'    , 'highlight-hunks'],
       \ 'T' : [':GitGutterSignsToggle'             , 'toggle-signs'],
       \ }
-if !exists('$TMUX')
-  let g:which_key_map.g.l = [ ':FloatermNew --name=lazygit lazygit'   , 'lazygit' ]
-  let g:which_key_map.g.t = [ ':FloatermNew --name=tig tig'           , 'tig' ]
-else
-  let g:which_key_map.g.l = [ ':silent !tmux new-window "lazygit"'    , 'lazygit' ]
-  let g:which_key_map.g.t = [ ':silent !tmux new-window "tig"'        , 'tig' ]
-endif
 " }}}
 
 " i is for insert ---------------------------------------- {{{
@@ -216,14 +209,14 @@ let g:which_key_map['i'] = {
       \    'X' :['<Plug>(ConvertColorCodeX)'       , 'convert-color-to-hex-alpha' ],
       \  },
       \ }
-" }}}
+
 " ConvertColorTo
 let s:convertColorTo = [['x', 'hex'],['X', 'hexa'],['r', 'rgb'],['R', 'rgba'],['h', 'hsl'],['H', 'hsla']]
 for i in s:convertColorTo
   exe 'nmap <silent><Plug>(ConvertColorCode'.i[0].') :ConvertColorTo '.i[1].'<CR>:call repeat#set("\<Plug>(ConvertColorCode'.i[0].')")<CR>'
   " echo 'nmap c'.i[0].' <Plug>(ConvertColorCode'.i[0].')'
 endfor
-
+" }}}
 
 " o is for open ------------------------------------------ {{{
 let g:which_key_map['o'] = {
@@ -232,7 +225,7 @@ let g:which_key_map['o'] = {
       \ 'b' : [':Fern bookmark:///'                        , 'bookmark'],
       \ 't' : [':OpenTodo'                                 , 'todo-manager'],
       \ 'q' : [':QfixToggle'                               , 'quickfix'],
-      \ 'y' : [':CocList --normal yank'                    , 'yankc-history'],
+      \ 'y' : [':CocList --normal yank'                    , 'yank-history'],
       \ }
 
 " }}}
@@ -257,7 +250,7 @@ let g:which_key_map['t'] = {
 nmap <leader>ts :SetTerminal<space>
 " }}}
 
-" T is for tast-timer-toggle --------------------------- {{{
+" T is for tast-timer-toggle ----------------------------- {{{
 let g:which_key_map['T'] = {
       \ 'name' : '+tast-timer-toggle',
       \ 'b' : [':Break'              , 'tt-break'],
@@ -363,6 +356,22 @@ xnoremap <leader>/p y:CocSearch -F <C-r>"<Home><C-right><C-right><C-right>\<C-ri
 " replace word under cursor, globally, with confirmation
 nnoremap <Leader>/r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 xnoremap <Leader>/r y :%s/<C-r>"//gc<Left><Left><Left>
+" }}}
+
+" tmux --------------------------------------------------- {{{
+if !exists('$TMUX')
+  let g:which_key_map.g.l = [ ':FloatermNew --name=lazygit lazygit'   , 'lazygit' ]
+  let g:which_key_map.g.t = [ ':FloatermNew --name=tig tig'           , 'tig' ]
+
+  let g:which_key_map.f.l = [ ':FloatermNew --name=lf lf %:p'         , 'file-in-lf' ]
+  let g:which_key_map.o.l = [ ':FloatermNew --name=lf lf'             , 'open-lf' ]
+else
+  let g:which_key_map.g.l = [ ':silent !tmux new-window "lazygit"'    , 'lazygit' ]
+  let g:which_key_map.g.t = [ ':silent !tmux new-window "tig"'        , 'tig' ]
+
+  let g:which_key_map.f.l = [ ':silent !tmux new-window "lf" %:p'     , 'file-in-lf' ]
+  let g:which_key_map.o.l = [ ':silent !tmux new-window "lf"'         , 'open-lf' ]
+endif
 " }}}
 
 " Ignore WhichKeys --------------------------------------- {{{
