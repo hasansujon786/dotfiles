@@ -266,10 +266,12 @@ function! hasan#utils#MaximizesWinToggle()
     if exists('t:maximize_win_sizes')
       call s:restore()
     elseif ((&columns - 5) > winwidth(0) || (&lines - 5) > winheight(0))
-      let t:maximize_win_sizes = { 'before': winrestcmd() }
+      let t:maximize_win_sizes = { 'before': winrestcmd() , 'winnr': winnr('$')}
       vert resize | resize
       let t:maximize_win_sizes.after = winrestcmd()
       normal! ze
+    else
+      wincmd =
     endif
   endif
 endfunction
@@ -283,12 +285,13 @@ endfunction
 
 function! s:restore()
   if exists('t:maximize_win_sizes')
-    silent! exe t:maximize_win_sizes.before
-    if t:maximize_win_sizes.before != winrestcmd()
+    if (t:maximize_win_sizes.winnr == winnr('$'))
+      silent! exe t:maximize_win_sizes.before
+    else
       wincmd =
     endif
     unlet t:maximize_win_sizes
     normal! ze
-  end
+  endif
 endfunction
 " }}}
