@@ -59,14 +59,14 @@ function! hasan#fern#FernInit() abort
   nmap <buffer> u <Plug>(fern-action-mark:clear)
 
   " Create, Delete, Copy, Move, Rename
-  nmap <buffer> A <Plug>(fern-action-new-path)
-  " nmap <buffer> N <Plug>(fern-action-new-file)
+  nmap <buffer> <c-n> <Plug>(fern-action-new-path)
   nmap <buffer> K <Plug>(fern-action-new-dir)
-  nmap <buffer> M <Plug>(fern-action-move)
-  nmap <buffer> R <Plug>(fern-action-move)
-  nmap <buffer> C <Plug>(fern-action-copy)
-  nmap <buffer> <f2> <Plug>(fern-action-rename)
-  nmap <buffer> DD <Plug>(fern-action-remove)
+  " nmap <buffer> N <Plug>(fern-action-new-file)
+  nmap <buffer> <delete> <Plug>(fern-action-remove)
+  nmap <buffer> <F2> <Plug>(fern-action-move)
+  nmap <buffer> <C-x> <Plug>(fern-action-move)
+  nmap <buffer> <C-c> <Plug>(fern-action-copy)
+  nmap <buffer> <C-r> <Plug>(fern-action-rename)
 
   " Various instant mappings
   nmap <buffer> r <Plug>(fern-action-reload)

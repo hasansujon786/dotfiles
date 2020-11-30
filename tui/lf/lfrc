@@ -102,7 +102,7 @@ map ab targz
 map au unarchive
 
 ######## Basic Functions ########
-map A mkfile
+map <c-n> mkfile
 map K mkdir
 
 map <delete> delete
@@ -120,7 +120,7 @@ map cr sudomkfile
 map cs $mkscript
 map ch chmod
 
-map . set hidden!
+map I set hidden!
 map o open_config
 map <enter> open
 
