@@ -105,14 +105,14 @@ map au unarchive
 map A mkfile
 map K mkdir
 
-map DD delete
-map R rename
-map P paste
-map X cut
-map C copy
-map <f-2> $vimv $fx
+map <delete> delete
+map <f-2> rename
+map <c-p> paste
+map <c-x> cut
+map <c-c> copy
+map <c-r> $vimv $fx
+map <esc> clear
 
-map <c-c> clear
 map <a-d> half-down
 map <a-u> half-up
 
