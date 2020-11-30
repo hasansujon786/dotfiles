@@ -238,7 +238,7 @@ function! hasan#utils#CopyFileNameToClipBoard(bang) abort
   if a:bang ==# '!'
     let @+ = expand('%:t')
   else
-    let @+ = expand('%:p')
+    let @+ = expand('%:~')
   endif
   call _#Echo(['TextInfo', 'Copied to clipboard:'], '“'.@+.'”')
 endfunction

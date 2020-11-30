@@ -151,12 +151,12 @@ let g:which_key_map['f'] = {
       \ 'C' : 'Todo',
       \ 'M' : 'move-current-file',
       \ 'y' : 'copy-current-filename',
-      \ 'Y' : 'copy-current-filename',
+      \ 'Y' : 'copy-current-filpath',
       \ }
 nnoremap <Leader>fM :Move <C-R>=expand("%")<CR>
 nnoremap <Leader>fR :Rename <C-R>=expand("%:t")<CR>
-nnoremap <leader>fy :CopyFileNameToClipBoard<CR>
-nnoremap <leader>fY :CopyFileNameToClipBoard!<CR>
+nnoremap <leader>fy :CopyFileNameToClipBoard!<CR>
+nnoremap <leader>fY :CopyFileNameToClipBoard<CR>
 
 " }}}
 
@@ -192,29 +192,32 @@ let g:which_key_map['g'] = {
 let g:which_key_map['i'] = {
       \ 'name' : '+insert',
       \ 'd' :['_#Insertion(strftime("%e %B %Y"))'           , 'date'],
-      \ 'D' :['_#Insertion( strftime("%H:%M"))'             , 'time'],
+      \ 'D' :['_#Insertion(strftime("%H:%M"))'              , 'time'],
+      \ 'f' :['_#Insertion(expand("%:t"))'                  , 'current-file-name'],
+      \ 'F' :['_#Insertion(expand("%:~"))'                  , 'current-file-path'],
+      \
       \ 't' : {
-      \ 'name' : 'transfrom',
+      \ 'name' : '+transfrom',
       \    'c' :['<Plug>(camel_case_operator)'       , 'transfrom-to-camel-case' ],
       \    'C' :['<Plug>(upper_camel_case_operator)' , 'transfrom-to-upper-camel-case' ],
       \    's' :['<Plug>(snake_case_operator)'       , 'transfrom-to-snake-case' ],
       \    'k' :['<Plug>(kebab_case_operator)'       , 'transfrom-to-kebab-case' ],
       \    'S' :['<Plug>(start_case_operator)'       , 'transfrom-to-start-case' ],
       \ 
-      \    'h' :['<Plug>(ConvertColorCodeh)'       , 'convert-color-to-hsl' ],
-      \    'r' :['<Plug>(ConvertColorCoder)'       , 'convert-color-to-rgb' ],
-      \    'x' :['<Plug>(ConvertColorCodex)'       , 'convert-color-to-hex' ],
-      \    'H' :['<Plug>(ConvertColorCodeH)'       , 'convert-color-to-hsl-alpha' ],
-      \    'R' :['<Plug>(ConvertColorCodeR)'       , 'convert-color-to-rgb-alpha' ],
-      \    'X' :['<Plug>(ConvertColorCodeX)'       , 'convert-color-to-hex-alpha' ],
+      \    'h' :['<Plug>(ConvertColorCode-h)'        , 'convert-color-to-hsl' ],
+      \    'r' :['<Plug>(ConvertColorCode-r)'        , 'convert-color-to-rgb' ],
+      \    'x' :['<Plug>(ConvertColorCode-x)'        , 'convert-color-to-hex' ],
+      \    'H' :['<Plug>(ConvertColorCode-H)'        , 'convert-color-to-hsl-alpha' ],
+      \    'R' :['<Plug>(ConvertColorCode-R)'        , 'convert-color-to-rgb-alpha' ],
+      \    'X' :['<Plug>(ConvertColorCode-X)'        , 'convert-color-to-hex-alpha' ],
       \  },
       \ }
 
 " ConvertColorTo
 let s:convertColorTo = [['x', 'hex'],['X', 'hexa'],['r', 'rgb'],['R', 'rgba'],['h', 'hsl'],['H', 'hsla']]
 for i in s:convertColorTo
-  exe 'nmap <silent><Plug>(ConvertColorCode'.i[0].') :ConvertColorTo '.i[1].'<CR>:call repeat#set("\<Plug>(ConvertColorCode'.i[0].')")<CR>'
-  " echo 'nmap c'.i[0].' <Plug>(ConvertColorCode'.i[0].')'
+  exe 'nmap <silent><Plug>(ConvertColorCode-'.i[0].') :ConvertColorTo '.i[1].'<CR>:call repeat#set("\<Plug>(ConvertColorCode-'.i[0].')")<CR>'
+  " exe 'nmap c'.i[0].' <Plug>(ConvertColorCode-'.i[0].')'
 endfor
 " }}}
 
