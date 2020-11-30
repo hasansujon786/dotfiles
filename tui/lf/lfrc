@@ -102,8 +102,9 @@ map ab targz
 map au unarchive
 
 ######## Basic Functions ########
-map <c-n> mkfile
+map A mkfile
 map K mkdir
+map <c-n> mkfile
 
 map <delete> delete
 map <f-2> rename
