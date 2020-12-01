@@ -295,3 +295,14 @@ function! s:restore()
   endif
 endfunction
 " }}}
+
+" file_info {{{
+function! hasan#utils#file_info()
+  let fname = ['', expand('%') == '' ? '“[No Name]“' : '“'.expand('%:.').'“']
+  let lines = ['WarningMsg', line('$').' lines']
+  let scroll = ['TextSuccess', '--'.(line('.') * 100) / line('$').'%--']
+  let readAndMod = ['ErrorMsg', &readonly ? '[Readonly]' : &modified ? '[Modified]' : '']
+
+  call _#Echo(['TextInfo','File Info:'], fname, lines, scroll, readAndMod)
+endfunction
+" }}}

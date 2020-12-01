@@ -134,6 +134,7 @@ nnoremap <leader>e~ :cd %:p:h<CR>:pwd<CR>
 let g:which_key_map['f'] = {
       \ 'name' : '+find' ,
       \ '/' : [':Files'                         , 'fzf-files'],
+      \ 'i' : 'file-info'                       ,
       \ 'o' : [':FernCurFileDrawer'             , 'find-in-file-tree' ],
       \ 's' : [':update'                        , 'save-current-file'],
       \ 'S' : [':wall'                          , 'save-all-file'],
@@ -153,6 +154,7 @@ let g:which_key_map['f'] = {
       \ 'y' : 'copy-current-filename',
       \ 'Y' : 'copy-current-filpath',
       \ }
+nnoremap <leader>fi :call hasan#utils#file_info()<CR>
 nnoremap <Leader>fM :Move <C-R>=expand("%")<CR>
 nnoremap <Leader>fR :Rename <C-R>=expand("%:t")<CR>
 nnoremap <leader>fy :CopyFileNameToClipBoard!<CR>
@@ -294,6 +296,7 @@ let g:which_key_map['w'] = {
       \ 'j' : ['<C-w>j'                                   , 'window-down'],
       \ 'k' : ['<C-w>k'                                   , 'window-up'],
       \ 'l' : ['<C-w>l'                                   , 'window-right'],
+      \ 'p' : ['<C-w>p'                                   , 'window-previous'],
       \ 'H' : ['<C-w>H'                                   , 'window-move-left'],
       \ 'J' : ['<C-w>J'                                   , 'window-move-down'],
       \ 'K' : ['<C-w>K'                                   , 'window-move-up'],
