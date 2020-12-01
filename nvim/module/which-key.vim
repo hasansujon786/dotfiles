@@ -135,6 +135,7 @@ let g:which_key_map['f'] = {
       \ 'name' : '+find' ,
       \ '/' : [':Files'                         , 'fzf-files'],
       \ 'i' : 'file-info'                       ,
+      \ 'f' : 'find-and-replace-in-file'                       ,
       \ 'o' : [':FernCurFileDrawer'             , 'find-in-file-tree' ],
       \ 's' : [':update'                        , 'save-current-file'],
       \ 'S' : [':wall'                          , 'save-all-file'],
@@ -159,6 +160,9 @@ nnoremap <Leader>fM :Move <C-R>=expand("%")<CR>
 nnoremap <Leader>fR :Rename <C-R>=expand("%:t")<CR>
 nnoremap <leader>fy :CopyFileNameToClipBoard!<CR>
 nnoremap <leader>fY :CopyFileNameToClipBoard<CR>
+" replace word under cursor, globally, with confirmation
+nnoremap <Leader>ff  :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+xnoremap <Leader>ff y:%s/<C-r>"//gc<Left><Left><Left>
 
 " }}}
 
@@ -335,8 +339,9 @@ nnoremap <leader>w? :VimwikiUISelect<CR>
 " / is for search ---------------------------------------- {{{
 let g:which_key_map['/'] = {
       \ 'name' : '+search',
-      \ '/' : [':History:'              , 'commands-history'],
-      \ ';' : [':Commands'              , 'commands'],
+      \ '/' : 'fzf-Rg'                  ,
+      \ ';' : [':History:'              , 'fzf-commands-history'],
+      \ ':' : [':Command!'              , 'fzf-commands-history'],
       \ 'b' : [':Buffers'               , 'fzf-buffer'],
       \ 'C' : [':BCommits'              , 'fzf-buffer-commits'],
       \ 'c' : [':Commits'               , 'fzf-commits'],
@@ -351,18 +356,15 @@ let g:which_key_map['/'] = {
       \ 'k' : [':Maps!'                 , 'fzf-keymaps'] ,
       \ 'p' : 'search-word-in-project',
       \ 's' : [':CocList snippets'      , 'snippets'],
-      \ 'r' : 'replace-word-in-file'          ,
       \ 't' : [':Filetypes'             , 'fzf-filetypes'],
-      \ 'R' : [':RG!'                   , 'text-Rg'],
       \ 'w' : [':Windows'               , 'fzf-windows'],
       \ }
 " Search word in whole project
 " Tip: Use 'gn' to select last searched result coc_refactor window
 nnoremap <leader>/p :SearchInProject <C-R>=expand("<cword>")<CR><CR>
 xnoremap <leader>/p "zy:SearchInProject <C-r>z<CR>
-" replace word under cursor, globally, with confirmation
-nnoremap <Leader>/r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
-xnoremap <Leader>/r y :%s/<C-r>"//gc<Left><Left><Left>
+nnoremap <leader>// :RG!<CR>
+xnoremap <leader>// "zy:RG! <C-r>z<CR>
 " }}}
 
 " tmux --------------------------------------------------- {{{

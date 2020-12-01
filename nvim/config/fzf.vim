@@ -14,13 +14,13 @@ nnoremap <silent> <C-k>k :History:<CR>
 nnoremap <silent> <C-k><C-k> :History:<CR>
 
 nnoremap <A-/> :RG!<space>
-vnoremap <A-/> y:RG!<space><C-r>"
+xnoremap <A-/> "zy:RG! <C-r>z<CR>
 nnoremap <silent> // :BLines<CR>
 nnoremap <silent> <C-k>l :Lines<CR>
 
 " Enhanced RipGrep integration with fzf
 command! -nargs=* -bang RG call hasan#fzf#_ripgrep(<q-args>, <bang>0)
-" Project recent & git filet togather
+" Project recent & git filter togather
 command! -bang ProjectRecentFiles call hasan#fzf#_project_recent_files(s:p(<bang>0), <bang>0)
 
 " let g:fzf_layout = { 'down': '~70%' }
@@ -39,7 +39,6 @@ let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit',
-      \ 'q': 'normal <C-c>',
       \}
 
 " Requires ripgrep

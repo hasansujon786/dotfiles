@@ -115,6 +115,12 @@ vmap <s-tab> gT
 nnoremap <silent> ]<TAB> :tabmove+<CR>
 nnoremap <silent> [<TAB> :tabmove-<CR>
 
+" Quickfix list
+nmap ]q :cnext<CR>
+nmap [q :cprev<CR>
+nmap ]Q :clast<CR>
+nmap [Q :cfirst<CR>
+
 " => Search-functionalities ===============================
 " highlight current word in file
 nnoremap z/ :call autohl#_AutoHighlightToggle()<CR>
