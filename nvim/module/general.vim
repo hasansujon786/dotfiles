@@ -104,7 +104,7 @@ set t_vb=
 
 " Numbers
 set number relativenumber
-set numberwidth=1
+set numberwidth=4
 set foldcolumn=0                                       " display gutter markings for folds
 set signcolumn=yes                                     " Always show the signcolumn,
 
