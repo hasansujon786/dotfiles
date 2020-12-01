@@ -306,3 +306,12 @@ function! hasan#utils#file_info()
   call _#Echo(['TextInfo','File Info:'], fname, lines, scroll, readAndMod)
 endfunction
 " }}}
+
+" SearchInProject {{{
+function! hasan#utils#searchInProject(...)
+  let args = join(a:000, '\ ')
+  let @/ = args
+  exe 'CocSearch -F '.args
+endfunction
+" }}}
+

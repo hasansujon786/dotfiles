@@ -356,9 +356,10 @@ let g:which_key_map['/'] = {
       \ 'R' : [':RG!'                   , 'text-Rg'],
       \ 'w' : [':Windows'               , 'fzf-windows'],
       \ }
-" Search world in whole project
-nnoremap <leader>/p :CocSearch <C-R>=expand("<cword>")<CR><CR>
-xnoremap <leader>/p y:CocSearch -F <C-r>"<Home><C-right><C-right><C-right>\<C-right>
+" Search word in whole project
+" Tip: Use 'gn' to select last searched result coc_refactor window
+nnoremap <leader>/p :SearchInProject <C-R>=expand("<cword>")<CR><CR>
+xnoremap <leader>/p "zy:SearchInProject <C-r>z<CR>
 " replace word under cursor, globally, with confirmation
 nnoremap <Leader>/r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 xnoremap <Leader>/r y :%s/<C-r>"//gc<Left><Left><Left>
