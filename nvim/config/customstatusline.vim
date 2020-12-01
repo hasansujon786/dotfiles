@@ -64,6 +64,11 @@ function! ActiveStatus()
   let statusline.="%5*"
 
   let statusline.=s:ic.space
+  let statusline.="%{&expandtab?'Spc:':'Tab:'}"
+  let statusline.="%{&shiftwidth}"
+  let statusline.=s:ic.space
+
+  let statusline.=s:ic.space
   let statusline.="%{''!=#&filetype?&filetype:'none'}"
   let statusline.=s:ic.space
 
