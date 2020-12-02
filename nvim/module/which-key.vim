@@ -285,9 +285,18 @@ let g:which_key_map['v'] = {
       \ '.' : [':e $MYVIMRC'                  , 'open-$MYVIMRC'],
       \ '$' : 'source-$MYVIMRC',
       \ 'l' : 'logevents-toggle',
+      \ 'p' : {
+      \ 'name' : '+plug',
+      \    'i' : [':PlugInstall'                , 'install-plugins'],
+      \    'c' : [':PlugClean'                  , 'clean-plugins'],
+      \    's' : [':PlugStatus'                 , 'plug-status'],
+      \    'u' : [':PlugUpdate'                 , 'update-all-plugins'],
+      \    'U' : 'upgrade-plug-itself',
+      \  },
       \ }
 nnoremap <leader>v$ :so $MYVIMRC<CR>
 nnoremap <leader>vl :call logevents#LogEvents_Toggle()<CR>
+nnoremap <leader>vpU :PlugUpgrade<CR>
 " }}}
 
 " w is for wiki-or-window -------------------------------- {{{
