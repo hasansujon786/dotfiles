@@ -98,3 +98,18 @@ endfunction
 "   " return winwidth(0) > 60 ? leftpad.line.':'.col.rightpad : ''
 " endfunction
 
+
+" From pickRelated
+" nmap <leader>cv :!open % -a Google\ Chrome<CR><CR>
+" " Surround with console.log();
+" nmap <leader>cl :.s/\v[ \t]+\zs([^;]*);*/console.log\(\1\)\;/<CR>:noh<CR>
+" " Diff current two windows
+" nmap <leader>d :windo diffthis<CR>
+" nmap <leader>D :diffoff!<CR>
+" nmap <leader>du :diffupdate<CR>
+" " Location list
+" nmap ]w :lnext<CR>
+" nmap [w :lprev<CR>
+" nmap ]W :llast<CR>
+" nmap [W :lfirst<CR>
+

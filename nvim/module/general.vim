@@ -144,9 +144,11 @@ set sidescrolloff=5
 
 " Text appearance
 set iskeyword+=-                                       " treat dash separated words as a word text object
+set iskeyword-=#                                       " Remove # from part of word
 set list
 set listchars+=tab:→\ ,nbsp:␣,trail:•                  " show hidden characters
-set listchars+=precedes:«,extends:»
+" set listchars+=precedes:«,extends:»
+set listchars+=precedes:,extends:
 set matchpairs+=<:>,«:»,｢:｣                            " Match angle brackets...
 
 " Wrappings
