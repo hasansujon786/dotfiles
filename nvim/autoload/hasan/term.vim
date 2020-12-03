@@ -10,7 +10,7 @@ fun! hasan#term#SetBuffer(ctrlId)
   end
 
   let g:win_ctrl_buf_list[a:ctrlId] = [b:terminal_job_id, nvim_win_get_buf(0)]
-  execute("nmap <silent><leader>t".a:ctrlId." :GoToTerminal ".a:ctrlId."<CR>")
+  execute("nmap <silent><leader>[".a:ctrlId." :GoToTerminal ".a:ctrlId."<CR>")
 
   echo "Terminal CtrlID: " .a:ctrlId
 endfun
@@ -22,7 +22,7 @@ fun! hasan#term#GotoBuffer(ctrlId)
   end
   if has_key(g:win_ctrl_buf_list, a:ctrlId) == 0
     echo "There is no terminal with CtrlID: ".a:ctrlId
-    execute("unmap <silent><leader>t".a:ctrlId)
+    execute("unmap <silent><leader>[".a:ctrlId)
     return
   end
   let termBufNum = g:win_ctrl_buf_list[a:ctrlId][1]

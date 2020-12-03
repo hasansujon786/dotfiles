@@ -251,32 +251,27 @@ let g:which_key_map['S'] = {
       \ }
 " }}}
 
-" t is for terminal -------------------------------------- {{{
+" t is for toggle ----------------------------------------------- {{{
 let g:which_key_map['t'] = {
-      \ 'name' : '+terminal',
-      \ 's' : 'SetTerminal',
-      \ }
-nmap <leader>ts :SetTerminal<space>
-" }}}
-
-" T is for tast-timer-toggle ----------------------------- {{{
-let g:which_key_map['T'] = {
-      \ 'name' : '+tast-timer-toggle',
-      \ 'b' : [':Break'              , 'tt-break'],
-      \ 'h' : [':HideAndShowTimer'   , 'tt-hide-timer'],
-      \ 'o' : [':OpenTasks'          , 'tt-open-tasks'],
-      \ 'p' : [':ToggleTimer'        , 'tt-pause'],
-      \ 'W' : [':Work'               , 'tt-work'],
-      \ 's' : 'tt-status',
-      \ 'u' : 'tt-update-timer',
-      \ 'U' : 'tt-update-status',
-      \
+      \ 'name' : '+toggle',
       \ 'c' : [':setlocal cursorcolumn!'                   , 'cursorcolumn'],
       \ 'w' : [':call hasan#utils#toggleWrap()'            , 'toggle-wrap'],
+      \
+      \ 't' : {
+      \ 'name' : '+task-and-timer',
+      \    'b' : [':Break'              , 'tt-break'],
+      \    'h' : [':HideAndShowTimer'   , 'tt-hide-timer'],
+      \    'o' : [':OpenTasks'          , 'tt-open-tasks'],
+      \    'p' : [':ToggleTimer'        , 'tt-pause'],
+      \    'w' : [':Work'               , 'tt-work'],
+      \    's' : 'tt-status',
+      \    'u' : 'tt-update-timer',
+      \    'U' : 'tt-update-status',
       \ }
-nnoremap <Leader>Ts :ShowTimer<CR>
-nnoremap <Leader>Tu :UpdateCurrentTimer<space>
-nnoremap <Leader>TU :UpdateCurrentStatus<space>
+      \ }
+nnoremap <Leader>tts :ShowTimer<CR>
+nnoremap <Leader>ttu :UpdateCurrentTimer<space>
+nnoremap <Leader>ttU :UpdateCurrentStatus<space>
 " }}}
 
 " v is for vim ------------------------------------------- {{{
@@ -374,6 +369,14 @@ nnoremap <leader>/p :SearchInProject <C-R>=expand("<cword>")<CR><CR>
 xnoremap <leader>/p "zy:SearchInProject <C-r>z<CR>
 nnoremap <leader>// :RG!<CR>
 xnoremap <leader>// "zy:RG! <C-r>z<CR>
+" }}}
+
+" [ is for terminal -------------------------------------- {{{
+let g:which_key_map['['] = {
+      \ 'name' : '+terminal',
+      \ 't' : 'SetTerminal',
+      \ }
+nmap <leader>[t :SetTerminal<space>
 " }}}
 
 " tmux --------------------------------------------------- {{{
