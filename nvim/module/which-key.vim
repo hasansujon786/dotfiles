@@ -374,9 +374,9 @@ xnoremap <leader>// "zy:RG! <C-r>z<CR>
 " [ is for terminal -------------------------------------- {{{
 let g:which_key_map['['] = {
       \ 'name' : '+terminal',
-      \ 't' : 'SetTerminal',
+      \ '[' : 'SetTerminal',
       \ }
-nmap <leader>[t :SetTerminal<space>
+nmap <leader>[[ :SetTerminal<space>
 " }}}
 
 " tmux --------------------------------------------------- {{{

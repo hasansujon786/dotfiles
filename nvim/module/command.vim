@@ -22,6 +22,8 @@ command! -nargs=+ SearchInProject call hasan#utils#searchInProject(<f-args>)
 command! -nargs=1 SetTerminal call hasan#term#SetBuffer(<f-args>)
 command! -nargs=1 GoToTerminal call hasan#term#GotoBuffer(<f-args>)
 command! -nargs=+ SendTerminalCommand call hasan#term#SendTerminalCommand(<f-args>)
-command! AllTerminalIds echo keys(g:win_ctrl_buf_list)
+command! AllTerminalIds echo keys(g:term_ctrlId_buf_list)
+command! GoToPreviousTerminal call hasan#term#GotoPreviousTerm()
+command! GoToNextTerminal call hasan#term#GotoNextTerm()
 " }}}
 

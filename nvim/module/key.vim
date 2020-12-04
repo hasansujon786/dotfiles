@@ -95,7 +95,7 @@ xnoremap <silent> <A-j> :call hasan#utils#visual_move_down()<CR>
 vmap gx <Plug>(exchange-operator)
 nmap gx <Plug>(exchange-operator)
 
-" => Moving-around-tabs-and-buffers =======================
+" => Navigate =============================================
 " Resize splits
 nnoremap <silent> <A-=> :resize +3<CR>
 nnoremap <silent> <A--> :resize -3<CR>
@@ -120,6 +120,10 @@ nmap ]q :cnext<CR>
 nmap [q :cprev<CR>
 nmap ]Q :clast<CR>
 nmap [Q :cfirst<CR>
+
+" Selected Terminal
+nmap <silent> ]t :GoToNextTerminal<CR>
+nmap <silent> [t :GoToPreviousTerminal<CR>
 
 " => Search-functionalities ===============================
 " highlight current word in file
