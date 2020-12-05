@@ -63,6 +63,7 @@ Plug 'ap/vim-css-color',{ 'on': 'CocStart' }
 " javascript
 Plug 'sheerun/vim-polyglot',{ 'on': 'CocStart' }    " Full lang support
 " Plug 'jparise/vim-graphql'
+Plug 'leafOfTree/vim-vue-plugin',{ 'on': 'CocStart' }
 
 
 " => Not-listed ============================================
@@ -96,6 +97,7 @@ source ~/dotfiles/nvim/config/vim-wiki.vim
 source ~/dotfiles/nvim/config/customstatusline.vim
 source ~/dotfiles/nvim/config/detect_current_mode.vim
 source ~/dotfiles/nvim/config/tabline.vim
+source ~/dotfiles/nvim/config/vim-vue-plugin.vim
 
 " Plug 'xolox/vim-session'
 " Plug 'romgrk/github-light.vim'
