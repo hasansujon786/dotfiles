@@ -45,7 +45,7 @@ vnoremap <silent> <leader><TAB> :<C-u>AlternateFile<CR>
 
 " }}}
 
-" a is for actions ins language server protocol ---------- {{{
+" a is for actions in language server protocol ----------- {{{
 let g:which_key_map['a'] = {
       \ 'name' : '+lsp-actions' ,
       \ '$' : 'coc-restart',
@@ -161,8 +161,8 @@ nnoremap <Leader>fR :Rename <C-R>=expand("%:t")<CR>
 nnoremap <leader>fy :CopyFileNameToClipBoard!<CR>
 nnoremap <leader>fY :CopyFileNameToClipBoard<CR>
 " replace word under cursor, globally, with confirmation
-nnoremap <Leader>ff  :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
-xnoremap <Leader>ff y:%s/<C-r>"//gc<Left><Left><Left>
+nnoremap <Leader>ff  "zyiw:%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+xnoremap <Leader>ff "zy:%s/<C-r>"//gc<Left><Left><Left>
 
 " }}}
 
@@ -251,7 +251,7 @@ let g:which_key_map['S'] = {
       \ }
 " }}}
 
-" t is for toggle ----------------------------------------------- {{{
+" t is for toggle ---------------------------------------- {{{
 let g:which_key_map['t'] = {
       \ 'name' : '+toggle',
       \ 'c' : [':setlocal cursorcolumn!'                   , 'cursorcolumn'],
