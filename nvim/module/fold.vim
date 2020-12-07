@@ -42,7 +42,7 @@ set foldtext=MyFoldText()
 
 augroup remember_folds
   autocmd!
-  au BufWinLeave ?*.js,*.ts,*.json,*.jsonc,*.css,*.html mkview 1
-  au BufWinEnter ?*.js,*.ts,*.json,*.jsonc,*.css,*.html silent! loadview 1
+  au BufWritePost ?*.js,*.ts,*.json,*.jsonc,*.css,*.html,*.vue mkview 1
+  au BufReadPost ?*.js,*.ts,*.json,*.jsonc,*.css,*.html,*.vue silent! loadview 1
 augroup END
 " let g:session_dir = '$HOME/.nvim/sessions/'

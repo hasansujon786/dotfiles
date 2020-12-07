@@ -55,8 +55,13 @@
   // yank
   "yank.highlight.duration": 300,
   "yank.enableCompletion": false,
-  "yank.list.maxsize": 50
+  "yank.list.maxsize": 50,
 
   // vetur
   //"vetur.format.defaultFormatter.html": "prettier",
+  "vetur.format.defaultFormatterOptions": {
+    "js-beautify-html": { "wrap_attributes": "force-expand-multiline" },
+    "prettyhtml": { "printWidth": 120, "singleQuote": true, "wrapAttributes": false, "sortAttributes": false },
+    "prettier": { "printWidth": 120, "singleQuote": true, "semi": false, "bracketSpacing": true }
+  }
 }
