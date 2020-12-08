@@ -239,6 +239,14 @@ let g:which_key_map['o'] = {
 
 " }}}
 
+" p is for project --------------------------------------- {{{
+let g:which_key_map['p'] = {
+      \ 'name' : '+project',
+      \ 'p' : [':CocList project'                               , 'swithc-project'],
+      \ }
+
+" }}}
+
 " S is for session --------------------------------------- {{{
 " @todo: Add session support.
 let g:which_key_map['S'] = {
@@ -403,15 +411,15 @@ let g:which_key_map['.'] = 'which_key_ignore'
 let g:which_key_map['0'] = 'which_key_ignore'
 
 " Easier system clipboard usage
-nnoremap <Leader>p "+p
-vnoremap <Leader>p "+p
-nnoremap <Leader>P "+P
+nnoremap <Leader>ip "+p
 nnoremap <Leader>y "+y
+nnoremap <Leader>d "+d
+vnoremap <Leader>ip "+p
 vnoremap <Leader>y "+ygv<Esc>
 vnoremap <Leader>d "+d
-let g:which_key_map['p'] = 'which_key_ignore'
-let g:which_key_map['P'] = 'which_key_ignore'
+let g:which_key_map['i']['p'] = 'from-system-clipboard'
 let g:which_key_map['y'] = 'which_key_ignore'
+let g:which_key_map['d'] = 'which_key_ignore'
 
 " Map <Space>  + 1-9 to jump to respective tab
 " Map <Space>w + 1-9 to jump to respective window
