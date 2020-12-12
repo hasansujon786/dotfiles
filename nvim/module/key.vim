@@ -9,11 +9,14 @@ if !exists('g:loaded_HLNext')
   vnoremap <silent> q <ESC>:nohlsearch<CR>
 else
   nnoremap <silent> q <ESC>:call HLNextOff() <BAR> :nohlsearch <BAR> mode <CR>
-  vnoremap <silent> q <ESC>:call HLNextOff() <BAR> :nohlsearch <BAR> mode <CR>
+  vnoremap <silent> q <ESC>:call HLNextOff() <BAR> :nohlsearch <CR>
 endif
 
 " Exit file with confirm
 nnoremap <silent> ZZ :Quit!<CR>
+
+" Fold
+nmap zm zM
 
 " Switch between the alternate files
 nnoremap <BS> <c-^>
