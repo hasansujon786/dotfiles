@@ -99,6 +99,7 @@ source ~/dotfiles/nvim/config/customstatusline.vim
 source ~/dotfiles/nvim/config/detect_current_mode.vim
 source ~/dotfiles/nvim/config/tabline.vim
 source ~/dotfiles/nvim/config/vim-vue-plugin.vim
+source ~/dotfiles/nvim/config/comfortable-motion.vim
 
 " Plug 'xolox/vim-session'
 " Plug 'romgrk/github-light.vim'
