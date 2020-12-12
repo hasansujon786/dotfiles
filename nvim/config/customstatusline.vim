@@ -59,7 +59,11 @@ function! ActiveStatus()
   let statusline.="%4*"
   let statusline.=s:ic.separator.left
 
+  let statusline.=s:ic.space
   let statusline.="%5*"
+  let statusline.="%{CocStatus()}"
+  let statusline.=s:ic.space
+
   let statusline.="%="
   let statusline.="%5*"
 
@@ -148,5 +152,8 @@ function! LightLineBufSettings()
     return ('│ts│'. &tabstop . '│sw│'. &shiftwidth . '│et│' . et . '│')
 endfunction
 
-
+function! CocStatus()
+  " . get(b:,'coc_current_function','')
+  return exists('*coc#status') ? coc#status() : ''
+endfunction
 
