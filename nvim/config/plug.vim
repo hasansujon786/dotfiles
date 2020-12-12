@@ -16,7 +16,8 @@ Plug 'michaeljsmith/vim-indent-object',{ 'on': 'CocStart' }
 Plug 'hasansujon786/vim-rel-jump',{ 'on': 'CocStart' }
 Plug 'dhruvasagar/vim-open-url',{ 'on': 'CocStart' }
 Plug 'unblevable/quick-scope',{ 'on': 'CocStart' }
-Plug 'psliwka/vim-smoothie',{ 'on': 'CocStart' }          " Smooth scroll
+" Plug 'psliwka/vim-smoothie',{ 'on': 'CocStart' }          " Smooth scroll
+Plug 'yuttie/comfortable-motion.vim',{ 'on': 'CocStart' }          " Smooth scroll
 Plug 'tpope/vim-commentary',{ 'on': 'CocStart' }
 Plug 'tpope/vim-surround',{ 'on': 'CocStart' }
 Plug 'justinmk/vim-sneak',{ 'on': 'CocStart' }
