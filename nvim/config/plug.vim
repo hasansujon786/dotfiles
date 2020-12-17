@@ -16,8 +16,6 @@ Plug 'michaeljsmith/vim-indent-object',{ 'on': 'CocStart' }
 Plug 'hasansujon786/vim-rel-jump',{ 'on': 'CocStart' }
 Plug 'dhruvasagar/vim-open-url',{ 'on': 'CocStart' }
 Plug 'unblevable/quick-scope',{ 'on': 'CocStart' }
-" Plug 'psliwka/vim-smoothie',{ 'on': 'CocStart' }          " Smooth scroll
-Plug 'yuttie/comfortable-motion.vim',{ 'on': 'CocStart' }          " Smooth scroll
 Plug 'tpope/vim-commentary',{ 'on': 'CocStart' }
 Plug 'tpope/vim-surround',{ 'on': 'CocStart' }
 Plug 'justinmk/vim-sneak',{ 'on': 'CocStart' }
@@ -99,7 +97,6 @@ source ~/dotfiles/nvim/config/customstatusline.vim
 source ~/dotfiles/nvim/config/detect_current_mode.vim
 source ~/dotfiles/nvim/config/tabline.vim
 source ~/dotfiles/nvim/config/vim-vue-plugin.vim
-source ~/dotfiles/nvim/config/comfortable-motion.vim
 
 " Plug 'xolox/vim-session'
 " Plug 'romgrk/github-light.vim'
