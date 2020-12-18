@@ -25,23 +25,6 @@ noremap Q q
 " Replay last used macro
 " noremap <CR> @@
 
-" Character-wise jumps always
-nnoremap '   `
-vnoremap '   `
-nnoremap ''  `'
-vnoremap ''  `'
-
-" Vertical scrolling
-nmap <silent> <A-d> <C-d>
-nmap <silent> <A-u> <C-u>
-nmap <silent> <A-f> <C-f>
-nmap <silent> <A-b> <C-b>
-nmap <A-y> <C-y>
-nmap <A-e> <C-e>
-" Horizontal scroll
-nmap <A-l> 5zl
-nmap <A-h> 5zh
-
 " Find & open file on current window
 "nnoremap <C-p> :tabfind *
 
@@ -64,7 +47,9 @@ cnoremap <C-v> <C-R>+
 cnoremap <A-p> <C-R>"
 
 " => Modify-&-Rearrange-texts =============================
-
+" increase selected numbers
+xnoremap + g<C-a>
+xnoremap - g<C-x>
 " Print the number of occurrences of the current word under the cursor
 vmap <C-g> *<C-O>:%s///gn<CR>
 " Make vaa select the entire file...
@@ -99,6 +84,26 @@ vmap gx <Plug>(exchange-operator)
 nmap gx <Plug>(exchange-operator)
 
 " => Navigate =============================================
+" jump in file
+nnoremap <silent> H H:exec 'norm! '. &scrolloff . 'k'<cr>
+nnoremap <silent> L L:exec 'norm! '. &scrolloff . 'j'<cr>
+" Character-wise jumps always
+nnoremap '   `
+vnoremap '   `
+nnoremap ''  `'
+vnoremap ''  `'
+
+" Vertical scrolling
+nmap <silent> <A-d> <C-d>
+nmap <silent> <A-u> <C-u>
+nmap <silent> <A-f> <C-f>
+nmap <silent> <A-b> <C-b>
+nmap <A-y> <C-y>
+nmap <A-e> <C-e>
+" Horizontal scroll
+nmap <A-l> 5zl
+nmap <A-h> 5zh
+
 " Resize splits
 nnoremap <silent> <A-=> :resize +3<CR>
 nnoremap <silent> <A--> :resize -3<CR>
