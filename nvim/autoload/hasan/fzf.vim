@@ -1,3 +1,22 @@
+function! s:custom_wrap(spec, fullscreen)
+  " let colors = '--color=bg+:#3E4452,bg:#282C34,spinner:#C678DD,hl:#61AFEF,fg:#ABB2BF,prompt:#61AFEF,header:#5C6370,info:#E06C75,pointer:#E5C07B,marker:#E06C75,fg+:#E5C07B,gutter:#282C34,hl+:#61AFEF'
+  let sp = "'"
+  let win = a:fullscreen ? { 'window': '-tabnew' } : copy(get(g:, 'fzf_layout', {}))
+  let opts = join(map(a:spec.options, 'sp . v:val . sp'))
+
+  let global_action = copy(get(g:, 'fzf_action', {}))
+  let action = copy(get(a:spec, 'action', global_action))
+  if (len(keys(action)) > 0) | let opts = opts." --expect=".join(keys(action), ',') | endif
+
+  return {
+        \'_action': action,
+        \'options': opts,
+        \'sink*': a:spec['sink*'],
+        \'source': a:spec.source,
+        \keys(win)[0]: values(win)[0]}
+endfunction
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RG                                                                      "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -8,6 +27,7 @@ function! hasan#fzf#_ripgrep(query, fullscreen)
   let spec = {'options': ['--phony','--reverse', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ProjectRecentFiles                                                      "
@@ -24,22 +44,6 @@ function! hasan#fzf#_project_recent_files(preview, bang)
         \'source': s:get_project_recent_files(),
         \'sink*': function('s:project_recent_files_sink')},
         \ a:bang))
-endfunction
-
-function! s:custom_wrap(spec, fullscreen)
-  let actions = copy(get(g:, 'fzf_action', {}))
-  " let colors = '--color=bg+:#3E4452,bg:#282C34,spinner:#C678DD,hl:#61AFEF,fg:#ABB2BF,prompt:#61AFEF,header:#5C6370,info:#E06C75,pointer:#E5C07B,marker:#E06C75,fg+:#E5C07B,gutter:#282C34,hl+:#61AFEF'
-  let colors = ''
-  let sp = "'"
-  let opts = join(map(a:spec.options, 'sp . v:val . sp'))
-  let win = a:fullscreen ? { 'window': '-tabnew' } : copy(get(g:, 'fzf_layout', {}))
-
-  return {
-        \'_action': actions,
-        \'options': colors." ".opts." --expect=".join(keys(actions), ','),
-        \'sink*': a:spec['sink*'],
-        \'source': a:spec.source,
-        \keys(win)[0]: values(win)[0]}
 endfunction
 
 function! s:get_project_recent_files()
@@ -101,4 +105,52 @@ endfunction
 function! s:jump(t, w)
   execute a:t.'tabnext'
   execute a:w.'wincmd w'
+endfunction
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Projects                                                                 "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let s:projects_config_file = '~/.vim-projects'
+let s:projects_action = {
+      \ 'ctrl-e': function('s:edit_projects_config_file'),
+      \}
+
+function! hasan#fzf#_projects(bang) abort
+  let options = ['--header-lines', !empty(fnamemodify(getcwd(), ':~')), '--prompt', 'Projects> ']
+
+  call fzf#run(s:custom_wrap({
+        \'options': options,
+        \'action': s:projects_action,
+        \'source': s:get_project_list(),
+        \'sink*': function('s:projects_list_sink')},
+        \ a:bang))
+endfunction
+
+function! s:projects_list_sink(args) abort
+  " if no line has selected
+  if len(a:args) < 2 | return |endif
+  " action: can be '', 'ctrl-t','ctrl-v' etc.
+  let action = a:args[0]
+  let line = a:args[1]
+
+  if (action != '' && _#isFunc(s:projects_action[action]))
+    let Funcref = s:projects_action[action]
+    return Funcref(line)
+  endif
+
+  execute('cd'.line)
+  execute('edit '.line)
+endfunction
+
+function! s:get_project_list() abort
+  let config_fname = expand(s:projects_config_file)
+  let projects = readfile(config_fname)
+
+  return [fnamemodify(getcwd(), ':~')] + projects
+  " return fzf#vim#_uniq([fnamemodify(getcwd(), ':~')] + projects)
+endfunction
+
+function! s:edit_projects_config_file(...) abort
+  execute('split '.s:projects_config_file)
 endfunction

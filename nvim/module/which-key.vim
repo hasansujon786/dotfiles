@@ -242,7 +242,7 @@ let g:which_key_map['o'] = {
 " p is for project --------------------------------------- {{{
 let g:which_key_map['p'] = {
       \ 'name' : '+project',
-      \ 'p' : [':CocList project'                               , 'swithc-project'],
+      \ 'p' : ['Projects'                               , 'swithc-project'],
       \ }
 
 " }}}
