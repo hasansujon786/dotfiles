@@ -113,7 +113,7 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let s:projects_config_file = '~/.vim-projects'
 let s:projects_action = {
-      \ 'ctrl-e': function('s:edit_projects_config_file'),
+      \ 'ctrl-e': function('hasan#fzf#edit_projects_config_file'),
       \}
 
 function! hasan#fzf#_projects(bang) abort
@@ -151,6 +151,6 @@ function! s:get_project_list() abort
   " return fzf#vim#_uniq([fnamemodify(getcwd(), ':~')] + projects)
 endfunction
 
-function! s:edit_projects_config_file(...) abort
+function! hasan#fzf#edit_projects_config_file(...) abort
   execute('split '.s:projects_config_file)
 endfunction
