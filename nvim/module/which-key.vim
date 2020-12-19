@@ -242,7 +242,8 @@ let g:which_key_map['o'] = {
 " p is for project --------------------------------------- {{{
 let g:which_key_map['p'] = {
       \ 'name' : '+project',
-      \ 'p' : ['Projects'                               , 'swithc-project'],
+      \ 'p' : [':Projects'               , 'swithc-project'],
+      \ 'r' : [':ProjectRecentFiles'    , 'project-recent-files'],
       \ }
 
 " }}}
@@ -366,15 +367,16 @@ let g:which_key_map['/'] = {
       \ 'L' : [':BLines'                , 'fzf-buffer-lines'],
       \ 'm' : [':Marks'                 , 'fzf-marks'] ,
       \ 'k' : [':Maps!'                 , 'fzf-keymaps'] ,
-      \ 'p' : 'search-word-in-project',
+      \ 'r' : 'refactor-word-in-project',
+      \ 'p' : [':ProjectRecentFiles'    , 'fzf-project-recent-files'],
       \ 's' : [':CocList snippets'      , 'snippets'],
       \ 't' : [':Filetypes'             , 'fzf-filetypes'],
       \ 'w' : [':Windows'               , 'fzf-windows'],
       \ }
 " Search word in whole project
 " Tip: Use 'gn' to select last searched result coc_refactor window
-nnoremap <leader>/p :SearchInProject <C-R>=expand("<cword>")<CR><CR>
-xnoremap <leader>/p "zy:SearchInProject <C-r>z<CR>
+nnoremap <leader>/r :RefactorWordInProject <C-R>=expand("<cword>")<CR><CR>
+xnoremap <leader>/r "zy:RefactorWordInProject <C-r>z<CR>
 nnoremap <leader>// :RG!<CR>
 xnoremap <leader>// "zy:RG! <C-r>z<CR>
 " }}}

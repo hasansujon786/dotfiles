@@ -307,8 +307,8 @@ function! hasan#utils#file_info()
 endfunction
 " }}}
 
-" SearchInProject {{{
-function! hasan#utils#searchInProject(...)
+" RefactorWordInProject {{{
+function! hasan#utils#refactorWordInProject(...)
   let args = join(a:000, '\ ')
   let @/ = args
   exe 'CocSearch -F '.args
