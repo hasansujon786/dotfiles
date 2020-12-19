@@ -114,6 +114,7 @@ endfunction
 let s:projects_config_file = '~/.vim-projects'
 let s:projects_action = {
       \ 'ctrl-e': function('hasan#fzf#edit_projects_config_file'),
+      \ 'ctrl-a': function('hasan#fzf#add_to_projects'),
       \}
 
 function! hasan#fzf#_projects(bang) abort
@@ -128,29 +129,42 @@ function! hasan#fzf#_projects(bang) abort
 endfunction
 
 function! s:projects_list_sink(args) abort
-  " if no line has selected
-  if len(a:args) < 2 | return |endif
-  " action: can be '', 'ctrl-t','ctrl-v' etc.
   let action = a:args[0]
-  let line = a:args[1]
 
   if (action != '' && _#isFunc(s:projects_action[action]))
     let Funcref = s:projects_action[action]
-    return Funcref(line)
+    return Funcref(a:args)
   endif
 
-  execute('cd'.line)
-  execute('edit '.line)
+  " if no line has selected
+  if len(a:args) < 2 | return |endif
+  " action: can be '', 'ctrl-t','ctrl-v' etc.
+  let line = split(a:args[1], '> ')
+  let path = line[1]
+
+  execute('cd'.path)
+  execute('edit '.path)
 endfunction
 
 function! s:get_project_list() abort
   let config_fname = expand(s:projects_config_file)
-  let projects = readfile(config_fname)
-
-  return [fnamemodify(getcwd(), ':~')] + projects
-  " return fzf#vim#_uniq([fnamemodify(getcwd(), ':~')] + projects)
+  let projects = readfile(config_fname, '', 15)
+  return [fnamemodify(getcwd(), ':~')] + fzf#vim#_uniq(projects)
 endfunction
 
 function! hasan#fzf#edit_projects_config_file(...) abort
   execute('split '.s:projects_config_file)
+endfunction
+
+function hasan#fzf#add_to_projects(...) abort
+  let path = getcwd()
+  let name = fnamemodify(getcwd(), ':t')
+  let sp_nr  = 0
+  let p_sp_nr = 20
+  if(len(name) < p_sp_nr)
+    let sp_nr = p_sp_nr - len(name)
+  endif
+
+  let line = printf('%s %'.sp_nr.'s %s', name, '> ', path)
+  call system('print "'.line.'" >> ~/.vim-projects')
 endfunction
