@@ -30,7 +30,7 @@ Plug 'liuchengxu/vim-which-key'
 Plug 'Konfekt/vim-CtrlXA'
 Plug 'mkropat/vim-tt'
 
-Plug 'junegunn/fzf',{ 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 
 Plug 'lambdalisue/nerdfont.vim'

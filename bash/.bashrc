@@ -12,4 +12,5 @@
 PS1='\[\033]0;$TITLEPREFIX:$PWD\007\]\[\033[32m\]Hasan@4x \[\033[35m\][\T] \[\033[33m\]\w\[\033[36m\]\[\033[0m\]\n$ '
 
 
-source ~/dotfiles/bash/.aliases
+[ -f ~/dotfiles/bash/.aliases ] && source ~/dotfiles/bash/.aliases
+[ -f ~/dotfiles/bash/.fzf.bash ] && source ~/dotfiles/bash/.fzf.bash

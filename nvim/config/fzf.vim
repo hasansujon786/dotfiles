@@ -43,13 +43,13 @@ let g:fzf_action = {
       \}
 
 " Requires ripgrep
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/*"'
-let $FZF_DEFAULT_OPTS =' --color=dark,
-      \fg:-1,bg:-1,hl:#55B6C2,
-      \fg+:#E5C07B,bg+:#3E4452,hl+:#55B6C2,pointer:#E5C07B,
-      \info:#E06C75,prompt:#61AFEF,border:#5C6370,
-      \marker:#E06C75,spinner:#61afef,header:#5C6370,gutter:-1
-      \ --bind ctrl-a:select-all'
+" let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/*"'
+" let $FZF_DEFAULT_OPTS =' --color=dark,
+"       \fg:-1,bg:-1,hl:#55B6C2,
+"       \fg+:#E5C07B,bg+:#3E4452,hl+:#55B6C2,pointer:#E5C07B,
+"       \info:#E06C75,prompt:#61AFEF,border:#5C6370,
+"       \marker:#E06C75,spinner:#61afef,header:#5C6370,gutter:-1
+"       \ --bind ctrl-a:select-all'
 
 function! s:p(bang, ...)
   let preview_window = get(g:, 'fzf_preview_window', a:bang && &columns >= 80 || &columns >= 110 ? 'right': '')
