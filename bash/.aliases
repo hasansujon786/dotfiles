@@ -1,13 +1,7 @@
-# default variables 
-export EDITOR='nvim'
-# fzf
-export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git/*"'
-export FZF_DEFAULT_OPTS='--color=dark,fg:-1,bg:-1,hl:#55B6C2,fg+:#E5C07B,bg+:#3E4452,hl+:#55B6C2,pointer:#E5C07B,info:#E06C75,prompt:#61AFEF,border:#5C6370,marker:#E06C75,spinner:#61afef,header:#5C6370,gutter:-1 --bind alt-a:select-all,alt-d:deselect-all'
-
 # Yarn  & npm
 alias ys='yarn start'
 alias yd='yarn dev'
-alias yul='yarn upgrade-interactive --latest'
+alias yup='yarn upgrade-interactive --latest'
 alias ns='npm start'
 alias nd='npm run dev'
 
@@ -24,8 +18,9 @@ alias ta="tmux attach"
 
 # handy short cuts #
 alias bashrc="vim ~/mydotfiles/bash/.bashrc"
+alias c='cd'
 alias x='exit'
-alias c='clear'
+# alias c='clear'
 alias ..='cd ..'
 alias h='history'
 alias o='explorer'
@@ -100,7 +95,6 @@ alias fgrep='fgrep --color=auto'
 # fi
 
 # unix
-alias c='cat'
 alias le='less -j4'
 alias chex='chmod +x'
 alias cpr='cp -r'
