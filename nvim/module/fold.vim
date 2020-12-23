@@ -13,7 +13,7 @@ autocmd FileType javascript,html,css,scss,typescript setlocal foldlevel=99
 autocmd FileType css,scss,json setlocal foldmethod=marker
 autocmd FileType css,scss,json setlocal foldmarker={,}
 
-autocmd FileType coffee setl foldmethod=indent
+autocmd FileType coffee,vue setl foldmethod=indent
 let g:xml_syntax_folding = 1
 autocmd FileType xml setl foldmethod=syntax
 
@@ -40,9 +40,9 @@ function! MyFoldText() " {{{
 endfunction " }}}
 set foldtext=MyFoldText()
 
-augroup remember_folds
-  autocmd!
-  au BufWritePost ?*.js,*.ts,*.json,*.jsonc,*.css,*.html,*.vue mkview 1
-  au BufReadPost ?*.js,*.ts,*.json,*.jsonc,*.css,*.html,*.vue silent! loadview 1
-augroup END
+" augroup remember_folds
+"   autocmd!
+"   au BufWritePost ?*.js,*.ts,*.json,*.jsonc,*.css,*.html,*.vue mkview 1
+"   au BufReadPost ?*.js,*.ts,*.json,*.jsonc,*.css,*.html,*.vue silent! loadview 1
+" augroup END
 " let g:session_dir = '$HOME/.nvim/sessions/'
