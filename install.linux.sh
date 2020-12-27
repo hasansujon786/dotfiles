@@ -146,6 +146,10 @@ install_various_apps() {
   mkdir -p ~/.config/jesseduffield/lazygit
   ln -s ~/dotfiles/tui/lazygit/config.yml ~/.config/jesseduffield/lazygit/config.yml
 
+  printWithToilet taskwarrior
+  apt install taskwarrior
+  pip3 install tasklib
+  pip3 install six
 }
 
 auto_install_everything() {

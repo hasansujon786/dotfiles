@@ -7,12 +7,15 @@ Plug 'joshdick/onedark.vim'
 Plug 'Yggdroot/indentLine'
 
 " => Functionality-&-Helpers ===============================
-Plug 'vimwiki/vimwiki',{ 'on': ['VimwikiIndex', 'VimwikiTabIndex', 'VimwikiUISelect', 'VimwikiDiaryIndex', 'VimwikiMakeDiaryNote','VimwikiTabMakeDiaryNote'] }
+Plug 'tools-life/taskwiki'
+Plug 'vimwiki/vimwiki',{ 'branch': 'dev', 'on': ['VimwikiIndex', 'VimwikiTabIndex', 'VimwikiUISelect', 'VimwikiDiaryIndex', 'VimwikiMakeDiaryNote','VimwikiTabMakeDiaryNote'] }
 Plug 'tpope/vim-eunuch',{ 'on': ['Delete','Move','Rename','Mkdir','Chmod'] } "for moving and manipulating files / directories.
 Plug 'voldikss/vim-floaterm',{ 'on': [ 'FloatermNew', 'FloatermToggle' ] }
 Plug 'mg979/vim-visual-multi',{'branch': 'master', 'on': 'CocStart' }
 Plug 'amadeus/vim-convert-color-to',{ 'on': 'ConvertColorTo' }
 Plug 'michaeljsmith/vim-indent-object',{ 'on': 'CocStart' }
+Plug 'tweekmonster/startuptime.vim',{ 'on': 'StartupTime' }
+Plug 'tpope/vim-scriptease',{ 'on': ['Messages', 'PP'] }
 Plug 'hasansujon786/vim-rel-jump',{ 'on': 'CocStart' }
 Plug 'dhruvasagar/vim-open-url',{ 'on': 'CocStart' }
 Plug 'unblevable/quick-scope',{ 'on': 'CocStart' }
@@ -22,8 +25,6 @@ Plug 'justinmk/vim-sneak',{ 'on': 'CocStart' }
 Plug 'Konfekt/FastFold',{ 'on': 'CocStart' }
 Plug 'tpope/vim-repeat',{ 'on': 'CocStart' }
 Plug 'wsdjeg/vim-todo',{ 'on': 'OpenTodo' }
-Plug 'tpope/vim-scriptease',{ 'on': ['Messages', 'PP'] }
-Plug 'tweekmonster/startuptime.vim',{ 'on': 'StartupTime' }
 
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'liuchengxu/vim-which-key'

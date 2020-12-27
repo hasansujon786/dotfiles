@@ -3,6 +3,7 @@
 
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_markdown_link_ext = 1
+let g:taskwiki_markup_syntax = 'markdown'
 let g:vimwiki_key_mappings =
   \ {
   \   'global': 0,
