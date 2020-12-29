@@ -11,14 +11,16 @@ alias vim=nvim
 alias v=nvim
 
 # Tmux
-alias tm="tmux new -s pasta"
-alias tn="tmux new -s "
+alias t="tmux new -s pasta"
+alias tt="tmux new -s "
 alias ta="tmux attach"
 # alias tmux="env TERM=xterm-256color tmux"
 
 # handy short cuts #
 alias bashrc="vim ~/mydotfiles/bash/.bashrc"
 alias c='cd'
+alias to='touch'
+alias mk='mkdir -p'
 alias x='exit'
 # alias c='clear'
 alias ..='cd ..'
