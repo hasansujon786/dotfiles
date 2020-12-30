@@ -272,7 +272,7 @@ let g:which_key_map['t'] = {
       \    'b' : [':Break'              , 'tt-break'],
       \    'h' : [':HideAndShowTimer'   , 'tt-hide-timer'],
       \    'o' : [':OpenTasks'          , 'tt-open-tasks'],
-      \    'p' : [':ToggleTimer'        , 'tt-pause'],
+      \    'p' : [':PauseOrPlayTimer'   , 'tt-pause-or-play'],
       \    'w' : [':Work'               , 'tt-work'],
       \    's' : 'tt-status',
       \    'u' : 'tt-update-timer',

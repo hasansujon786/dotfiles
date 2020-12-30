@@ -7,6 +7,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'Yggdroot/indentLine'
 
 " => Functionality-&-Helpers ===============================
+Plug 'wsdjeg/notifications.vim'
 Plug 'tools-life/taskwiki'
 Plug 'vimwiki/vimwiki',{ 'branch': 'dev', 'on': ['VimwikiIndex', 'VimwikiTabIndex', 'VimwikiUISelect', 'VimwikiDiaryIndex', 'VimwikiMakeDiaryNote','VimwikiTabMakeDiaryNote'] }
 Plug 'tpope/vim-eunuch',{ 'on': ['Delete','Move','Rename','Mkdir','Chmod'] } "for moving and manipulating files / directories.
