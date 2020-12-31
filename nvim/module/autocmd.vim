@@ -1,9 +1,9 @@
 augroup vimrcEx
   autocmd!
   " Load all plugins
-  if !exists('g:all_plugged_loaded')
-    execute 'autocmd CursorHold,CursorHoldI * BootPlug' | let g:all_plugged_loaded = 1
-  endif
+  " if !exists('g:all_plugged_loaded')
+  "   execute 'autocmd CursorHold,CursorHoldI * BootPlug' | let g:all_plugged_loaded = 1
+  " endif
 
   " Vertically center document when entering insert mode
   autocmd InsertEnter * norm zz
@@ -61,3 +61,12 @@ augroup FileMarks
   autocmd BufLeave *.txt  normal! mK
 augroup END
 
+" Load all plugins
+function! BootAllPlugins(...) abort
+  BootPlug
+  let g:all_plug_loaded = 1
+endfunction
+
+if !exists('g:all_plug_loaded')
+  let s:timer_id = timer_start(2000, function('BootAllPlugins'), {'repeat' : 1})
+endif
