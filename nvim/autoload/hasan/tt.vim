@@ -1,6 +1,8 @@
-let g:tt_show_on_load = 1
 let g:tt_taskfile = '~/tasks.md'
-" @todo: statusline support
+
+function! hasan#tt#is_tt_paused()
+  return tt#get_remaining() != -1 && tt#is_running() ? 0 : tt#get_remaining() == -1 ? 0 : 1
+endfunction
 
 command! Work
 \  call tt#set_timer(25)
@@ -8,7 +10,6 @@ command! Work
 \| call tt#set_status('working')
 \| call tt#when_done('AfterWork')
 \| call notification#open(['TaskTimer:', 'Timer Started '. tt#get_status_formatted()])
-\| call s:tt_toggle_visibility(1)
 
 command! AfterWork
       \ Break
@@ -34,13 +35,11 @@ command! AfterBreak
   \  call tt#set_status('get ready')
   \| call tt#clear_timer()
   \| call notification#open(['TaskTimer:', 'Break Ended '. tt#get_status_formatted()])
-  \| call s:tt_toggle_visibility(1)
 
 command! ClearTimer
   \  call tt#clear_status()
   \| call tt#clear_task()
   \| call tt#clear_timer()
-  \| call s:tt_toggle_visibility(0)
 
 command! ShowTimer
       \ call notification#open(['TaskTimer:',
@@ -54,7 +53,6 @@ command! PauseOrPlayTimer
       \| endif
       \| call tt#toggle_timer()
 
-command! HideAndShowTimer call s:tt_toggle_visibility(g:tt_show_on_load == 1 ? 0 : 1)
 command! -nargs=1 UpdateCurrentTimer call tt#set_timer(<f-args>)
 command! -nargs=1 UpdateCurrentStatus call tt#set_status(<f-args>)
 command! -range MarkTask <line1>,<line2>call tt#mark_task()
@@ -73,20 +71,8 @@ command! AfterWorkOnTask
   \  call tt#play_sound()
   \| call tt#open_tasks()
   \| call tt#mark_last_task()
-  \| call s:tt_toggle_visibility(1)
   \| Break
 
-function! Should_tt_visible()
-  return !exists('g:tt_show_on_load') ? 0 : g:tt_show_on_load
-endfunction
-
-function! Is_tt_paused()
-  return tt#get_remaining() != -1 && tt#is_running() ? 0 : tt#get_remaining() == -1 ? 0 : 1
-endfunction
-
-function! s:tt_toggle_visibility(bool)
-  let g:tt_show_on_load = a:bool
-endfunction
 
 " augroup TtAirline
 "   autocmd!

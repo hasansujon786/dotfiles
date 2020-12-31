@@ -90,7 +90,6 @@ source ~/dotfiles/nvim/config/vim-fugitive.vim
 source ~/dotfiles/nvim/config/vim-floaterm.vim
 source ~/dotfiles/nvim/config/vim-visual-multi.vim
 source ~/dotfiles/nvim/config/coc.vim
-source ~/dotfiles/nvim/config/tt.vim
 source ~/dotfiles/nvim/config/hlnext.vim
 source ~/dotfiles/nvim/config/vim-wiki.vim
 " source ~/dotfiles/nvim/config/vimuxline.vim

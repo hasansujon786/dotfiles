@@ -274,12 +274,11 @@ let g:which_key_map['t'] = {
       \    'o' : [':OpenTasks'          , 'tt-open-tasks'],
       \    'p' : [':PauseOrPlayTimer'   , 'tt-pause-or-play'],
       \    'w' : [':Work'               , 'tt-work'],
-      \    's' : 'tt-status',
+      \    's' : ['ShowTimer'           , 'tt-status'],
       \    'u' : 'tt-update-timer',
       \    'U' : 'tt-update-status',
       \ }
       \ }
-nnoremap <Leader>tts :ShowTimer<CR>
 nnoremap <Leader>ttu :UpdateCurrentTimer<space>
 nnoremap <Leader>ttU :UpdateCurrentStatus<space>
 " }}}

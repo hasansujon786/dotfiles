@@ -9,6 +9,8 @@ let s:ic = {
 \ 'hint':     '',
 \ 'line':     '',
 \ 'dic':      '📖',
+\ 'cup':      '',
+\ 'pomodoro': '',
 \ 'separator': {'left': '', 'right': ''},
 \ 'subseparator': {'left': '', 'right': ''},
 \ 'space': ' '
@@ -64,8 +66,12 @@ function! ActiveStatus()
   let statusline.="%{CocStatus()}"
   let statusline.=s:ic.space
 
-  let statusline.="%="
+  let statusline.="%=" " Middle
   let statusline.="%5*"
+
+  let statusline.=s:ic.space
+  let statusline.="%{TaskTimerStatus()}"
+  let statusline.=s:ic.space
 
   let statusline.=s:ic.space
   let statusline.="%{&expandtab?'Spc:':'Tab:'}"
@@ -118,7 +124,6 @@ function! InactiveStatus()
   return statusline
 endfunction
 
-let g:bg = 'blue'
 set laststatus=2
 set statusline=%!ActiveStatus()
 " Mode color
@@ -155,5 +160,18 @@ endfunction
 function! CocStatus()
   " . get(b:,'coc_current_function','')
   return exists('*coc#status') ? coc#status() : ''
+endfunction
+
+function! TaskTimerStatus()
+  if !exists('g:all_plug_loaded')
+    return s:ic.checking
+  else | try
+    let icon = tt#get_status() =~ 'break' ? s:ic.cup : s:ic.pomodoro
+    let status = (!tt#is_running() && !hasan#tt#is_tt_paused() ? 'off' :
+          \ hasan#tt#is_tt_paused() ? 'paused' :
+          \ tt#get_remaining_smart_format())
+    return icon.' '.status
+    catch | return '' | endtry
+  endif
 endfunction
 
