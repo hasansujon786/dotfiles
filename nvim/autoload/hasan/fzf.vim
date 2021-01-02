@@ -111,7 +111,7 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Projects                                                                 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let s:projects_config_file = '~/.vim-projects'
+let s:projects_config_file = '~/.config/.vim-projects'
 let s:projects_action = {
       \ 'ctrl-e': function('hasan#fzf#edit_projects_config_file'),
       \ 'ctrl-a': function('hasan#fzf#add_to_projects'),
@@ -166,5 +166,5 @@ function hasan#fzf#add_to_projects(...) abort
   endif
 
   let line = printf('%s %'.sp_nr.'s %s', name, '> ', path)
-  call system('print "'.line.'" >> ~/.vim-projects')
+  call system('print "'.line.'" >> '.s:projects_config_file)
 endfunction
