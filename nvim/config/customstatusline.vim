@@ -8,8 +8,10 @@ let s:ic = {
 \ 'info':     '',
 \ 'hint':     '',
 \ 'line':     '',
-\ 'dic':      '📖',
+\ 'dic':      ' ',
+\ 'wrap':     '蝹',
 \ 'cup':      '',
+\ 'search':   '',
 \ 'pomodoro': '',
 \ 'separator': {'left': '', 'right': ''},
 \ 'subseparator': {'left': '', 'right': ''},
@@ -46,8 +48,9 @@ function! ActiveStatus()
   let statusline=""
   let statusline.="%1*"
   let statusline.="\ %{toupper(g:currentmode[mode()])}\ "
-  let statusline.="%{&readonly?'\ \  ':''}"
-  let statusline.="%{&spell?'\ \ 📖 ':''}"
+  let statusline.="%{&readonly?'\ ".s:ic.lock." ':''}"
+  let statusline.="%{&spell?'\ ".s:ic.dic." ':''}"
+  let statusline.="%{&wrap?'\ ".s:ic.wrap." ':''}"
   let statusline.="%2*"
   let statusline.=s:ic.separator.left
   let statusline.=s:ic.space
