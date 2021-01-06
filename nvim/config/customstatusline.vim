@@ -1,3 +1,10 @@
+let s:status_color={
+    \ 'n'  : '#98C379',
+    \ 'v': '#C678DD',
+    \ 'i'   : '#61AFEF',
+    \ 't'   : '#61AFEF',
+    \ 'r'    : '#E06C75',
+    \}
 
 let s:ic = {
 \ 'lock':     '',
@@ -42,6 +49,19 @@ let g:currentmode={
     \}
 
 
+function _update_vim_mode_color(mode) abort
+  let bg = get(s:status_color, g:vim_current_mode, 'n')
+
+  exe 'hi User1 guibg='.bg.' guifg=#2C323C gui=bold'
+  exe 'hi User2 guifg='.bg.' guibg=#3E4452 gui=bold'
+  " if exists('$TMUX')
+  "   call s:updateVimuxLine(bg)
+  " endif
+endfunction
+
+function s:updateVimuxLine(bg)
+  call system('tmux set -g window-status-current-format "#[fg=#282C34,bg='.a:bg.',noitalics]#[fg=black,bg='.a:bg.'] #I #[fg=black, bg='.a:bg.'] #W #[fg='.a:bg.', bg=#282C34]"')
+endfunction
 " let statusline.="%(\ \ %{&modifiable?(&expandtab?'et\ ':'noet\ ').&shiftwidth:''}%)\ "
 
 function! _active_status()
