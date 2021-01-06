@@ -10,11 +10,11 @@ endfunction
 " }}}
 
 " Utils_highligt_textwith_column {{{
-highlight ColorColumn guibg=magenta guifg=#282C34 ctermbg=gray  ctermfg=white
+highlight EndOfTextWidth guibg=magenta guifg=#282C34
 function! hasan#boot#highligt_textwith_column(bool)
   if a:bool
     let w:TW = &textwidth + 1
-    let w:EndOfTW = matchadd('ColorColumn', '\%'.w:TW.'v', '100')
+    let w:EndOfTW = matchadd('EndOfTextWidth', '\%'.w:TW.'v', '100')
     func! RemoveColumnFrmSelectedBuffer(timer)
       if &textwidth == 0
         call clearmatches()

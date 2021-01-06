@@ -44,7 +44,7 @@ let g:currentmode={
 
 " let statusline.="%(\ \ %{&modifiable?(&expandtab?'et\ ':'noet\ ').&shiftwidth:''}%)\ "
 
-function! ActiveStatus()
+function! _active_status()
   let statusline=""
   let statusline.="%1*"
   let statusline.="\ %{toupper(g:currentmode[mode()])}\ "
@@ -101,7 +101,7 @@ function! ActiveStatus()
   return statusline
 endfunction
 
-function! InactiveStatus()
+function! _inactive_status()
   let statusline=""
   let statusline.="%6*"
   let statusline.=s:ic.space
@@ -128,7 +128,7 @@ function! InactiveStatus()
 endfunction
 
 set laststatus=2
-set statusline=%!ActiveStatus()
+set statusline=%!_active_status()
 " Mode color
 hi User1 guibg=#98C379 guifg=#2C323C gui=bold
 hi User2 guibg=#3E4452 guifg=#98C379
@@ -144,16 +144,28 @@ hi statusline   guibg=#2C323C guifg=#ABB2BF
 hi StatusLineNC guibg=#2C323C guifg=#717785
 
 augroup status
-  autocmd WinEnter,BufEnter,BufDelete,BufWinLeave,SessionLoadPost,FileChangedShellPost * call s:statusline_update()
+  autocmd FocusGained,WinEnter,BufEnter,BufDelete,BufWinLeave,SessionLoadPost,FileChangedShellPost * call s:statusline_update()
+  autocmd FocusLost * call Blur_statusline()
 augroup END
 
 function! s:statusline_update()
   let w = winnr()
-  let s = winnr('$') == 1 && w > 0 ? [ActiveStatus()] : [ActiveStatus(), InactiveStatus()]
+  let s = winnr('$') == 1 && w > 0 ? [_active_status()] : [_active_status(), _inactive_status()]
   for n in range(1, winnr('$'))
     call setwinvar(n, '&statusline', s[n!=w])
   endfor
 endfunction
+
+function! Blur_statusline()
+   call setwinvar(0, '&statusline', _inactive_status())
+endfunction
+function! Focus_statusline()
+   call setwinvar(0, '&statusline', _active_status())
+endfunction
+function! Update_all_statusline()
+  call s:statusline_update()
+endfunction
+
 
 function! LightLineBufSettings()
     let et = &et ==# 1 ? "•" : "➜"

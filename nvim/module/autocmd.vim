@@ -30,7 +30,7 @@ augroup vimrcEx
   autocmd TermOpen * setfiletype terminal | set bufhidden=hide
 augroup END
 
-augroup CursorLine
+augroup Focus
   au!
   " Only show the cursor line in the active buffer.
   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
@@ -40,6 +40,10 @@ augroup CursorLine
   " Highlight the textwidth column.
   au WinEnter,BufWinEnter *.vim,*.js call hasan#boot#highligt_textwith_column(1)
         \| au WinLeave,BufWinLeave,BufLeave <buffer> call hasan#boot#highligt_textwith_column(0)
+
+  " Change active/inactive window background
+  au FocusGained,WinEnter,BufWinEnter * call hasan#focus#focus_window()
+  au WinLeave,FocusLost * call hasan#focus#blur_window()
 augroup END
 
 augroup FernEvents
