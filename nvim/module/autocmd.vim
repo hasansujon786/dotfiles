@@ -33,8 +33,8 @@ augroup END
 augroup Focus
   au!
   " Only show the cursor line in the active buffer.
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  au WinLeave * setlocal nocursorline
+  au WinEnter,BufWinEnter,FocusGained * setlocal cursorline
+  au WinLeave,FocusLost * setlocal nocursorline
   au WinEnter,BufWinEnter * call hasan#boot#auto_set_cursor_color()
 
   " Highlight the textwidth column.
