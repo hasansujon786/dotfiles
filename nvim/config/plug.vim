@@ -80,7 +80,6 @@ call plug#end()
 source ~/dotfiles/nvim/config/quick-scope.vim
 source ~/dotfiles/nvim/config/onedark.vim
 source ~/dotfiles/nvim/config/indentLine.vim
-source ~/dotfiles/nvim/config/goyo.vim
 source ~/dotfiles/nvim/config/auto-pairs.vim
 source ~/dotfiles/nvim/config/fzf.vim
 source ~/dotfiles/nvim/config/fern.vim

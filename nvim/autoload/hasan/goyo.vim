@@ -1,7 +1,3 @@
-" Toggle Goyo
-nnoremap <silent> gz :Goyo<CR>
-nnoremap <silent> <C-k>z :Goyo<CR>
-
 function! s:hide_statsline_color()
   if( &background == 'dark' )
     hi User1 guibg=#282C34 guifg=#282C34 gui=bold
@@ -20,10 +16,12 @@ function! s:hide_statsline_color()
 endfunction
 
 let g:background_before_goyo = &background
-function! s:goyo_enter()
+function! hasan#goyo#goyo_enter()
+  let g:goyo_is_running = v:true
   let g:background_before_goyo = &background
   call s:hide_statsline_color()
 
+  call hasan#focus#disable()
   if has('gui_running')
     set linespace=7
   elseif exists('$TMUX')
@@ -31,20 +29,17 @@ function! s:goyo_enter()
   endif
 endfunction
 
-function! s:goyo_leave()
+function! hasan#goyo#goyo_leave()
+  let g:goyo_is_running = v:false
   execute 'set background=' . g:background_before_goyo
   source ~/dotfiles/nvim/config/customstatusline.vim
   source ~/dotfiles/nvim/config/tabline.vim
 
+  call hasan#focus#eneble()
   if has('gui_running')
     set linespace=0
   elseif exists('$TMUX')
     silent !tmux set status on
   endif
 endfunction
-
-augroup GOYO
-  autocmd! User GoyoEnter nested call <SID>goyo_enter()
-  autocmd! User GoyoLeave nested call <SID>goyo_leave()
-augroup END
 

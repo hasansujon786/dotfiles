@@ -18,6 +18,12 @@ nnoremap <silent> ZZ :Quit!<CR>
 " Fold
 nmap zm zM
 
+" Goyo
+nmap <silent> z<CR> :Goyo<CR>
+vmap <silent> z<CR> :Goyo<CR>
+nmap <silent> gz :Goyo<CR>
+vmap <silent> gz :Goyo<CR>
+
 " Switch between the alternate files
 nnoremap <BS> <c-^>
 " Use Q to record macros
