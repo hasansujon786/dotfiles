@@ -1,4 +1,5 @@
-hi WindowBlur guibg=#2C323C
+" hi WindowBlur guibg=#2C323C
+hi WindowBlur guibg=#363d49
 hi EndOfBufferWB guifg=#2C323C
 hi CursorLineNrWB guifg=#4B5263
 
