@@ -43,7 +43,7 @@ augroup Focus
 
   " Change active/inactive window background
   au FocusGained,WinEnter,BufWinEnter * call hasan#focus#focus_window()
-  au WinLeave,FocusLost * call hasan#focus#blur_window()
+  au FocusLost * call hasan#focus#blur_this_window()
 
   " Goyo Events
   au User GoyoEnter nested call hasan#goyo#goyo_enter()
