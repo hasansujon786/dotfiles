@@ -1,9 +1,9 @@
 let s:status_color={
-    \ 'n'  : '#98C379',
-    \ 'v': '#C678DD',
-    \ 'i'   : '#61AFEF',
-    \ 't'   : '#61AFEF',
-    \ 'r'    : '#E06C75',
+    \ 'n' :'#98C379',
+    \ 'v' :'#C678DD',
+    \ 'i' :'#61AFEF',
+    \ 't' :'#61AFEF',
+    \ 'r' :'#E06C75',
     \}
 
 let s:ic = {
@@ -50,6 +50,8 @@ let g:currentmode={
 
 
 function _update_vim_mode_color(mode) abort
+  if (hasan#goyo#is_running()) | return | endif
+
   let bg = get(s:status_color, g:vim_current_mode, 'n')
 
   exe 'hi User1 guibg='.bg.' guifg=#2C323C gui=bold'

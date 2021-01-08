@@ -43,3 +43,6 @@ function! hasan#goyo#goyo_leave()
   endif
 endfunction
 
+function! hasan#goyo#is_running() abort
+  return exists('g:goyo_is_running') && g:goyo_is_running == v:true
+endfunction
