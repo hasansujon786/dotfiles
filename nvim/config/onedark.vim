@@ -10,5 +10,6 @@ hi Debug              ctermfg=180 guifg=#E5C07B
 hi CursorLineDefault  ctermbg=236 guibg=#2C323C
 hi CursorLineFocus    ctermbg=237 guibg=#3E4452
 hi Notification       guibg=#3E4452 guifg=#E5C07B
+hi VertSplit          guifg=#5c6370 guibg=#363d49
 " hi NonText            ctermfg=180 guifg=#E5C07B
 " hi SpecialKey         ctermfg=180 guifg=#E5C07B
