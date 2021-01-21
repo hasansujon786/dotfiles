@@ -391,17 +391,19 @@ nmap <leader>[[ :SetTerminal<space>
 
 " tmux --------------------------------------------------- {{{
 if !exists('$TMUX')
-  let g:which_key_map.g.l = [ ':FloatermNew --name=lazygit lazygit'   , 'lazygit' ]
-  let g:which_key_map.g.t = [ ':FloatermNew --name=tig tig'           , 'tig' ]
+  let g:which_key_map.g.l = [ ':FloatermNew --name=lazygit lazygit'                 , 'lazygit' ]
+  let g:which_key_map.g.t = [ ':FloatermNew --name=tig tig'                         , 'tig' ]
 
-  let g:which_key_map.f.l = [ ':FloatermNew --name=lf lf %:p'         , 'file-in-lf' ]
-  let g:which_key_map.o.l = [ ':FloatermNew --name=lf lf'             , 'open-lf' ]
+  let g:which_key_map.f.l = [ ':FloatermNew --name=lf lf %:p'                       , 'file-in-lf' ]
+  let g:which_key_map.o.l = [ ':FloatermNew --name=lf lf'                           , 'open-lf' ]
+  let g:which_key_map.o.v = [ ':FloatermNew --name=vit vit'                         , 'open-vit' ]
 else
-  let g:which_key_map.g.l = [ ':silent !tmux new-window "lazygit"'    , 'lazygit' ]
-  let g:which_key_map.g.t = [ ':silent !tmux new-window "tig"'        , 'tig' ]
+  let g:which_key_map.g.l = [ ':silent !tmux new-window "lazygit"'                  , 'lazygit' ]
+  let g:which_key_map.g.t = [ ':silent !tmux new-window "tig"'                      , 'tig' ]
 
-  let g:which_key_map.f.l = [ ':silent !tmux new-window "lf" %:p'     , 'file-in-lf' ]
-  let g:which_key_map.o.l = [ ':silent !tmux new-window "lf"'         , 'open-lf' ]
+  let g:which_key_map.f.l = [ ':silent !tmux new-window "lf" %:p'                   , 'file-in-lf' ]
+  let g:which_key_map.o.l = [ ':silent !tmux new-window "lf"'                       , 'open-lf' ]
+  let g:which_key_map.o.v = [ ':silent !tmux new-window -n "vit" "vit"'             , 'open-vit' ]
 endif
 " }}}
 

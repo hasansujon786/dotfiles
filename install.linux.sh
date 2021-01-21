@@ -150,6 +150,9 @@ install_various_apps() {
   apt install taskwarrior
   pip3 install tasklib
   pip3 install six
+
+  printWithToilet vit
+  pip3 install vit
 }
 
 auto_install_everything() {
