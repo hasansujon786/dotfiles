@@ -315,3 +315,12 @@ function! hasan#utils#refactorWordInProject(...)
 endfunction
 " }}}
 
+" tastwiki_edit {{{
+function! hasan#utils#tastwiki_edit(uuid) abort
+  if !exists('$TMUX')
+    execute('FloatermNew --name=task task edit '.a:uuid)
+  else
+    execute('silent !tmux split -hb "task edit "'.a:uuid)
+  endif
+endfunction
+" }}}

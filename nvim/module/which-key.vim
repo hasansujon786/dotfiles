@@ -261,13 +261,20 @@ let g:which_key_map['S'] = {
       \ }
 " }}}
 
-" t is for toggle ---------------------------------------- {{{
+" t is for task ------------------------------------------ {{{
 let g:which_key_map['t'] = {
+      \ 'name' : '+task',
+      \ 'e' : 'TaskWikiAdvancedEdit',
+      \}
+" }}}
+
+" ` is for toggle ---------------------------------------- {{{
+let g:which_key_map['`'] = {
       \ 'name' : '+toggle',
       \ 'c' : [':setlocal cursorcolumn!'                   , 'cursorcolumn'],
       \ 'w' : [':call hasan#utils#toggleWrap()'            , 'toggle-wrap'],
       \
-      \ 't' : {
+      \ '`' : {
       \ 'name' : '+task-and-timer',
       \    'b' : [':Break'              , 'tt-break'],
       \    'h' : [':HideAndShowTimer'   , 'tt-hide-timer'],
@@ -279,8 +286,8 @@ let g:which_key_map['t'] = {
       \    'U' : 'tt-update-status',
       \ }
       \ }
-nnoremap <Leader>ttu :UpdateCurrentTimer<space>
-nnoremap <Leader>ttU :UpdateCurrentStatus<space>
+nnoremap <Leader>``u :UpdateCurrentTimer<space>
+nnoremap <Leader>``U :UpdateCurrentStatus<space>
 " }}}
 
 " v is for vim ------------------------------------------- {{{
