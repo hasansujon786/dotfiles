@@ -75,7 +75,9 @@ function! TabLabel(tab_nr)
   let winnr = tabpagewinnr(a:tab_nr)
   let fname = fnamemodify(bufname(buflist[winnr - 1]), ":t")
   if (fname == '') | let fname = '[No Name]' | endif
-  let label = nerdfont#find(fname).' '.fname.' '
+
+  let icon = exists("*nerdfont#find")?nerdfont#find(fname):'-'
+  let label = icon.' '.fname.' '
   if (len(label) > s:label_ln) | let label = label[0:s:label_ln-3].'..' | endif
 
   return label

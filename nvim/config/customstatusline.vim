@@ -77,7 +77,7 @@ function! _active_status()
   let statusline.=s:ic.separator.left
   let statusline.=s:ic.space
   let statusline.="%3*"
-  let statusline.="%{&modified?'●':nerdfont#find()}"
+  let statusline.="%{&modified?'●':exists('*nerdfont#find')?nerdfont#find():'-'}"
   let statusline.=s:ic.space
   let statusline.="%3*"
   let statusline.="%<"
@@ -128,7 +128,7 @@ function! _inactive_status()
   let statusline.="%6*"
   let statusline.=s:ic.space
   let statusline.="%<"
-  let statusline.="%{&modified?'●':nerdfont#find()}"
+  let statusline.="%{&modified?'●':exists('*nerdfont#find')?nerdfont#find():'-'}"
   let statusline.=s:ic.space
   let statusline.="%t"
   let statusline.=s:ic.space
