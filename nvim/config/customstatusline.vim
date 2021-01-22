@@ -1,3 +1,9 @@
+try
+  let g:nerdfont_loaded = g:nerdfont#default == '' ? 1 : 0
+catch
+  let g:nerdfont_loaded = 0
+endtry
+
 let s:status_color={
     \ 'n' :'#98C379',
     \ 'v' :'#C678DD',
@@ -77,7 +83,7 @@ function! _active_status()
   let statusline.=s:ic.separator.left
   let statusline.=s:ic.space
   let statusline.="%3*"
-  let statusline.="%{&modified?'●':exists('*nerdfont#find')?nerdfont#find():'-'}"
+  let statusline.="%{&modified?'●':g:nerdfont_loaded?nerdfont#find():'-'}"
   let statusline.=s:ic.space
   let statusline.="%3*"
   let statusline.="%<"
@@ -128,7 +134,7 @@ function! _inactive_status()
   let statusline.="%6*"
   let statusline.=s:ic.space
   let statusline.="%<"
-  let statusline.="%{&modified?'●':exists('*nerdfont#find')?nerdfont#find():'-'}"
+  let statusline.="%{&modified?'●':g:nerdfont_loaded?nerdfont#find():'-'}"
   let statusline.=s:ic.space
   let statusline.="%t"
   let statusline.=s:ic.space
