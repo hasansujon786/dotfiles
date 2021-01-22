@@ -85,6 +85,7 @@ install_and_setup_nvim() {
 
   mkdir -p ~/.config
   ln -s ~/dotfiles/nvim ~/.config/nvim
+  ln -s ~/storage/shared/documents/vimwiki ~/vimwiki
 
   echo 'Installing vim-plug.'
   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
