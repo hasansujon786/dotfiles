@@ -9,6 +9,7 @@ Plug 'Yggdroot/indentLine'
 " => Functionality-&-Helpers ===============================
 Plug 'tools-life/taskwiki'
 Plug 'hasansujon786/notifications.vim'
+Plug 'dhruvasagar/vim-dotoo',{ 'on': 'CocStart' }
 Plug 'vimwiki/vimwiki',{ 'branch': 'dev', 'on': ['VimwikiIndex', 'VimwikiTabIndex', 'VimwikiUISelect', 'VimwikiDiaryIndex', 'VimwikiMakeDiaryNote','VimwikiTabMakeDiaryNote'] }
 Plug 'tpope/vim-eunuch',{ 'on': ['Delete','Move','Rename','Mkdir','Chmod'] } "for moving and manipulating files / directories.
 Plug 'voldikss/vim-floaterm',{ 'on': [ 'FloatermNew', 'FloatermToggle' ] }
@@ -96,6 +97,7 @@ source ~/dotfiles/nvim/config/customstatusline.vim
 source ~/dotfiles/nvim/config/detect_current_mode.vim
 source ~/dotfiles/nvim/config/tabline.vim
 source ~/dotfiles/nvim/config/vim-vue-plugin.vim
+source ~/dotfiles/nvim/config/dotoo.vim
 
 " Plug 'xolox/vim-session'
 " Plug 'romgrk/github-light.vim'
