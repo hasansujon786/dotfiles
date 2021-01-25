@@ -1,4 +1,4 @@
-au BufNewFile,BufRead *.org setf dotoo
+au BufNewFile,BufRead,BufEnter *.org setf dotoo
 hi dotoo_shade_stars ctermfg=NONE guifg='#282C34'
 hi link dotoo_timestamp Comment
 hi dotoo_deadline_scheduled guifg='#065F64'
