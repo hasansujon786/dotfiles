@@ -232,6 +232,8 @@ endfor
 let g:which_key_map['o'] = {
       \ 'name' : '+open',
       \ ';' : [':FloatermNew --wintype=normal --height=6'  , 'terminal'],
+      \ 'a' : ['<Plug>(dotoo-agenda)'                      , 'org-agenda'],
+      \ 'c' : ['<Plug>(dotoo-capture-custom)'              , 'org-capture'],
       \ 'b' : [':Fern bookmark:///'                        , 'bookmark'],
       \ 't' : [':OpenTodo'                                 , 'todo-manager'],
       \ 'q' : [':QfixToggle'                               , 'quickfix'],
