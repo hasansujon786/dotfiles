@@ -133,3 +133,18 @@ endfunction
 
 " Invoke command. 'g' is for call graph, kinda.
 nnoremap <silent> <Leader>g :call Cscope('3', expand('<cword>'))<CR>
+
+if exists('g:started_by_firenvim')
+  set laststatus=0
+else
+  set laststatus=2 "show statusbar
+endif
+
+" Some Readline Keybindings When In Insertmode
+inoremap <expr> <C-B> getline('.')=~'^\s*$'&&col('.')> strlen(getline('.'))?"0\<Lt>C-D>\<Lt>Esc>kJs":"\<Lt>Left>"
+
+" lorem ipsum
+iabbrev <expr> lorem system('curl -s http://metaphorpsum.com/paragraphs/1')
+" quickly print the date
+iab <expr> dts strftime("%c")
+

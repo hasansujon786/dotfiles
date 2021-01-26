@@ -155,6 +155,10 @@ vnoremap <silent> # :<C-u>call hasan#utils#visualSelection('', '')<CR>?<C-R>=@/<
 " for replacing a few instances of the term (comparable to multiple cursors).
 nnoremap <silent> c* :let @/='\<'.expand('<cword>').'\>'<CR>cgn
 xnoremap <silent> C "sy:let @/=@s<CR>cgn
+" delete matches
+nmap dm :%s/<c-r>///g<CR>
+" change matches
+nmap cm :%s/<c-r>///g<Left><Left>
 
 " => Insert-Mode-key-mapping ==============================
 " Move cursor by character
@@ -168,8 +172,8 @@ inoremap <A-b> <S-left>
 cnoremap <A-b> <S-Left>
 cnoremap <A-f> <S-Right>
 " Jump cursor to start & end of a line
-inoremap <C-a> <C-O>^
-inoremap <C-e> <C-O>$
+inoremap <C-a> <C-o>^<C-g>u
+inoremap <expr> <C-e> col('.')>strlen(getline('.'))<bar><bar>pumvisible()?"\<Lt>C-E>":"\<Lt>End>"
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 " Delete by characters & words
