@@ -1,3 +1,4 @@
+" @todo add custom hilight for selected filetype (ex: terminal)
 " hi WindowBlur guibg=#2C323C
 hi WindowBlur guibg=#363d49
 hi EndOfBufferWB guifg=#2C323C
@@ -39,7 +40,7 @@ function! hasan#focus#toggle() abort
 endfunction
 
 function! hasan#focus#eneble()
-  hi WindowBlur guibg=#2C323C
+  hi WindowBlur guibg=#363d49
   hi EndOfBufferWB guifg=#2C323C
   hi CursorLineNrWB guifg=#4B5263
 
