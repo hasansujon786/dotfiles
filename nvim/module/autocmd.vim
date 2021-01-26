@@ -68,6 +68,10 @@ augroup END
 function! BootAllPlugins(...) abort
   BootPlug
   let g:all_plug_loaded = 1
+
+  " Lazy load nerdfont
+  try | let g:nerdfont_loaded = g:nerdfont#default == '' ? 1 : 0
+  catch | let g:nerdfont_loaded = 0 | endtry
 endfunction
 
 augroup LazyLoadPlug
