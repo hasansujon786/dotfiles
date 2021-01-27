@@ -208,6 +208,8 @@ tmap <C-o> <C-\><C-n>
 
 " => Function key mappings ================================
 nnoremap <silent> <F3> :set paste!<CR>
+noremap <F12> <Esc>:syntax sync fromstart<CR>
+inoremap <F12> <C-o>:syntax sync fromstart<CR>
 
 " Toggle spelling and show it's status
 nnoremap <F7> :setlocal spell! spell?<CR>

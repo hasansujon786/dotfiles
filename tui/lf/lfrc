@@ -152,6 +152,7 @@ map gd cd ~/downloads
 map gD cd ~/desktop
 
 map g. cd ~/dotfiles
+map gp. cd ~/dotfiles/nvim/plugged
 map gr. cd ~/repos
 
 map gc cd ~/.config
