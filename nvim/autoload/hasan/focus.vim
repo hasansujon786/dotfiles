@@ -1,4 +1,3 @@
-" @todo add custom hilight for selected filetype (ex: terminal)
 " hi WindowBlur guibg=#2C323C
 hi WindowBlur guibg=#363d49
 hi EndOfBufferWB guifg=#2C323C
@@ -17,10 +16,17 @@ let s:focus_window_execute_filetypes = {
       \ 'fzf': 1,
       \ }
 
+let s:focus_highlight_colors_for_filetype = {
+      \ 'floaterm': [
+      \ 'Normal:Floaterm',
+      \ 'NormalNC:FloatermNC'
+      \ ]
+      \ }
+
 function! hasan#focus#focus_window() abort
   if s:is_focus_disabled() | return | endif
 
-  call s:add_focus_and_other_win_blur(0)
+  call s:focus_current_win_and_blur_other_wins(0)
 endfunction
 
 function! hasan#focus#blur_this_window() abort
@@ -45,7 +51,7 @@ function! hasan#focus#eneble()
   hi CursorLineNrWB guifg=#4B5263
 
   let g:focus_is_disabled = v:false
-  call s:add_focus_and_other_win_blur(0)
+  call s:focus_current_win_and_blur_other_wins(0)
 endfunction
 
 function! hasan#focus#disable()
@@ -58,11 +64,18 @@ function! hasan#focus#disable()
   endfor
 endfunction
 
-function! s:add_focus_and_other_win_blur(blur) abort
+function! s:focus_current_win_and_blur_other_wins(blur) abort
   for cur_nr in range(1, tabpagewinnr(tabpagenr(), '$'))
+    " if current window
     if (cur_nr == winnr() && s:should_blur(cur_nr))
-      call setwinvar(0, '&winhighlight', '')
+      let focus_highlight_color = get(s:focus_highlight_colors_for_filetype, &ft, '')
+      if _#isString(focus_highlight_color)
+        call setwinvar(0, '&winhighlight', '')
+      else
+        call setwinvar(cur_nr, '&winhighlight', join(focus_highlight_color,','))
+      endif
 
+    " other windows
     elseif (s:should_blur(cur_nr))
       call setwinvar(cur_nr, '&winhighlight', join(s:winhighlight_blurred,','))
     endif
