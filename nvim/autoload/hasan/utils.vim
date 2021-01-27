@@ -265,13 +265,11 @@ function! hasan#utils#MaximizesWinToggle()
   if(winnr('$') > 1)
     if exists('t:maximize_win_sizes')
       call s:restore()
-    elseif ((&columns - 5) > winwidth(0) || (&lines - 5) > winheight(0))
+    else
       let t:maximize_win_sizes = { 'before': winrestcmd() , 'winnr': winnr('$')}
       vert resize | resize
       let t:maximize_win_sizes.after = winrestcmd()
       normal! ze
-    else
-      wincmd =
     endif
   endif
 endfunction
@@ -284,15 +282,14 @@ function! hasan#utils#JumpToWin(direction)
 endfunction
 
 function! s:restore()
-  if exists('t:maximize_win_sizes')
-    if (t:maximize_win_sizes.winnr == winnr('$'))
-      silent! exe t:maximize_win_sizes.before
-    else
-      wincmd =
-    endif
-    unlet t:maximize_win_sizes
-    normal! ze
+  " if windows weren't rearranged after maximized then it can restore
+  if (t:maximize_win_sizes.winnr == winnr('$') && t:maximize_win_sizes.after == winrestcmd())
+    silent! exe t:maximize_win_sizes.before
+  else
+    wincmd =
   endif
+  unlet t:maximize_win_sizes
+  normal! ze
 endfunction
 " }}}
 
