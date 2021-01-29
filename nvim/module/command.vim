@@ -17,6 +17,7 @@ command! -nargs=0 QfixToggle call hasan#utils#quickFix_toggle()
 command! -bang CopyFileNameToClipBoard call hasan#utils#CopyFileNameToClipBoard(<q-bang>)
 command! -nargs=+ RefactorWordInProject call hasan#utils#refactorWordInProject(<f-args>)
 command! -nargs=1 TaskWikiAdvancedEdit call hasan#utils#tastwiki_edit(<f-args>)
+command! -nargs=1 -complete=file Fedit call hasan#float#_fedit(<f-args>)
 " }}}
 
 " quick_term.vim {{{

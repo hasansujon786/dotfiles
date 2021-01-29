@@ -14,6 +14,7 @@ let s:winhighlight_blurred = [
 
 let s:focus_window_execute_filetypes = {
       \ 'fzf': 1,
+      \ 'floating': 1,
       \ }
 
 let s:focus_highlight_colors_for_filetype = {
