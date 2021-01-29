@@ -297,6 +297,7 @@ let g:which_key_map['v'] = {
       \ 'name' : '+vim',
       \ '.' : [':e $MYVIMRC'                  , 'open-$MYVIMRC'],
       \ '$' : 'source-$MYVIMRC',
+      \ 'e' : 'print-to-float',
       \ 'l' : 'logevents-toggle',
       \ 'p' : {
       \ 'name' : '+plug',
@@ -310,6 +311,7 @@ let g:which_key_map['v'] = {
 nnoremap <leader>v$ :so $MYVIMRC<CR>
 nnoremap <leader>vl :call logevents#LogEvents_Toggle()<CR>
 nnoremap <leader>vpU :PlugUpgrade<CR>
+nnoremap <leader>ve :call _#print_to_float(g:)<left>
 " }}}
 
 " w is for wiki-or-window -------------------------------- {{{
