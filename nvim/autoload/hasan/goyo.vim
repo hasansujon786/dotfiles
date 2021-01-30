@@ -18,7 +18,7 @@ endfunction
 let g:background_before_goyo = &background
 function! hasan#goyo#goyo_enter()
   let g:goyo_is_running = v:true
-  let g:background_before_goyo = &background
+  " let g:background_before_goyo = &background
   call s:hide_statsline_color()
 
   call hasan#focus#disable()
@@ -31,7 +31,7 @@ endfunction
 
 function! hasan#goyo#goyo_leave()
   let g:goyo_is_running = v:false
-  execute 'set background=' . g:background_before_goyo
+  " execute 'set background=' . g:background_before_goyo
   source ~/dotfiles/nvim/config/customstatusline.vim
   source ~/dotfiles/nvim/config/tabline.vim
   call hasan#color#load_custom_highlight()
