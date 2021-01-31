@@ -174,3 +174,27 @@ function! ZoomToggle()
   endif
 endfunction
 " 1}}} "ZoomToggle
+
+let g:coc_global_extensions = [
+      \'coc-diagnostic',
+      \'coc-marketplace',
+      \'coc-dictionary',
+      \'coc-tag',
+      \'coc-word',
+      \'coc-go',
+      \'coc-ccls',
+      \'coc-java',
+      \'coc-python',
+      \'coc-tsserver',
+      \'coc-html',
+      \'coc-vimtex',
+      \'coc-texlab',
+      \'coc-json',
+      \'coc-lists',
+      \'coc-utils'
+      \]
+
+function! SourceAgendaFiles()
+  let files = systemlist('rg --files -t org ~/Documents/org')
+  echo files
+endfunction
