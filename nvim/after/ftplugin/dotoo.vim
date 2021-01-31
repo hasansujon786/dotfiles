@@ -8,7 +8,10 @@ iabbrev <buffer> todo: TODO
 iabbrev <buffer> next: NEXT
 iabbrev <buffer> waiting: WAITING
 iabbrev <buffer> hold: HOLD
+iabbrev <buffer> someday: SOMEDAY
 iabbrev <buffer> meeting: MEETING
 iabbrev <buffer> phone: PHONE
 iabbrev <buffer> cancelled: CANCELLED
 iabbrev <buffer> done: DONE
+
+nmap <buffer> gf gF
