@@ -28,8 +28,8 @@ function! hasan#float#_createCenteredFloatingWindow(edit_bufnr)
     let s:winnr = nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
     call setwinvar(s:winnr, '&filetype', 'floating')
   endif
+  let w:Fedit_bufnr = bufnr()
   call setwinvar(s:winnr, '&winhighlight', 'Normal:Floating')
-  let b:Fedit_bufnr = bufnr()
 
   au WinLeave * ++once call nvim_win_close(s:bd_winnr,1) | call nvim_win_close(s:winnr,1)
 endfunction
@@ -39,9 +39,10 @@ function! hasan#float#_fedit(fname)
     call _#echoError('File not found')
     return
   endif
-  if(exists('b:Fedit_bufnr'))
+  if(exists('w:Fedit_bufnr'))
     exe 'edit '.a:fname
-    let b:Fedit_bufnr = bufnr()
+    let w:Fedit_bufnr = bufnr()
+    call setwinvar(0, '&winhighlight', 'Normal:Floating')
     return
   endif
 
