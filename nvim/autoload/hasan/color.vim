@@ -9,4 +9,6 @@ function hasan#color#load_custom_highlight() abort
   hi Floating guibg=#282C34
   " hi NonText            ctermfg=180 guifg=#E5C07B
   " hi SpecialKey         ctermfg=180 guifg=#E5C07B
+  " Highlighting same symbols in the buffer at the current cursor position.
+  hi CocHighlightText ctermbg=gray guibg=#3B4048
 endfunction

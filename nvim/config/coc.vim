@@ -5,8 +5,6 @@
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
 " set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-" Highlighting same symbols in the buffer at the current cursor position.
-highlight CocHighlightText ctermbg=gray guibg=#3B4048
 
 augroup mygroup
   autocmd!
