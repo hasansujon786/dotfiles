@@ -44,6 +44,8 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gI <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gR <Plug>(coc-refactor)
+" Tip: Use 'gn' to select last searched result
+xnoremap <silent> gR "zy:RefactorWordInProject <C-r>z<CR>
 " Symbol renaming
 nmap <silent> <F2> <Plug>(coc-rename)
 " Quick format

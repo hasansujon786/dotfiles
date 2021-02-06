@@ -169,9 +169,7 @@ xnoremap <Leader>ff "zy:%s/<C-r>"//gc<Left><Left><Left>
 " g is for git ------------------------------------------- {{{
 let g:which_key_map['g'] = {
       \ 'name' : '+git',
-      \ '/' : [':GFiles'                           , 'fzf-git-files'],
-      \ '?' : [':GFiles!?'                         , 'fzf-git-files*'],
-      \
+      \ '/' : [':GFiles?'                         , 'fzf-git-files*'],
       \ '.' : [':Git add %'                        , 'stage-current-file'],
       \ 'g' : [':Gstatus!'                         , 'status'],
       \ 'b' : [':Git blame'                        , 'blame'],
@@ -246,7 +244,7 @@ let g:which_key_map['o'] = {
 let g:which_key_map['p'] = {
       \ 'name' : '+project',
       \ 'p' : [':Projects'               , 'swithc-project'],
-      \ 'r' : [':ProjectRecentFiles'    , 'project-recent-files'],
+      \ 'r' : [':ProjectRecentFiles'     , 'project-recent-files'],
       \ }
 
 " }}}
@@ -363,33 +361,27 @@ nnoremap <leader>w? :VimwikiUISelect<CR>
 " / is for search ---------------------------------------- {{{
 let g:which_key_map['/'] = {
       \ 'name' : '+search',
-      \ '/' : 'fzf-Rg'                  ,
+      \ '/' : [':BLines'                , 'fzf-buffer-lines'],
       \ ';' : [':History:'              , 'fzf-commands-history'],
       \ ':' : [':Command!'              , 'fzf-commands-history'],
       \ 'b' : [':Buffers'               , 'fzf-buffer'],
       \ 'C' : [':BCommits'              , 'fzf-buffer-commits'],
       \ 'c' : [':Commits'               , 'fzf-commits'],
       \ 'f' : [':Files'                 , 'fzf-files'],
-      \ 'g' : [':GFiles'                , 'fzf-git-files'],
-      \ 'G' : [':GFiles!?'              , 'fzf-git-files*'],
-      \ 'h' : [':History'               , 'fzf-file-history'],
-      \ 'H' : [':History/'              , 'fzf-search-history'],
+      \ 'g' : [':GFiles?'               , 'fzf-git-files*'],
+      \ 'h' : [':History/'              , 'fzf-search-history'],
+      \ 'H' : [':History'               , 'fzf-file-history'],
       \ 'l' : [':Lines'                 , 'fzf-lines'] ,
-      \ 'L' : [':BLines'                , 'fzf-buffer-lines'],
       \ 'm' : [':Marks'                 , 'fzf-marks'] ,
       \ 'k' : [':Maps!'                 , 'fzf-keymaps'] ,
-      \ 'r' : 'refactor-word-in-project',
-      \ 'p' : [':ProjectRecentFiles'    , 'fzf-project-recent-files'],
-      \ 's' : [':CocList snippets'      , 'snippets'],
+      \ 'r' : [':ProjectRecentFiles'    , 'fzf-project-recent-files'],
+      \ 'p' :                             'fzf-project-search',
       \ 't' : [':Filetypes'             , 'fzf-filetypes'],
       \ 'w' : [':Windows'               , 'fzf-windows'],
       \ }
 " Search word in whole project
-" Tip: Use 'gn' to select last searched result coc_refactor window
-nnoremap <leader>/r :RefactorWordInProject <C-R>=expand("<cword>")<CR><CR>
-xnoremap <leader>/r "zy:RefactorWordInProject <C-r>z<CR>
-nnoremap <leader>// :RG!<CR>
-xnoremap <leader>// "zy:RG! <C-r>z<CR>
+nnoremap <leader>/p :RG!<CR>
+xnoremap <leader>/p "zy:RG! <C-r>z<CR>
 " }}}
 
 " [ is for terminal -------------------------------------- {{{
