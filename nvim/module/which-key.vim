@@ -11,6 +11,13 @@ let g:which_key_sep = '→'
 " Not a fan of floating windows for this
 let g:which_key_use_floating_win = 0
 " set timeoutlen=100
+" let g:which_key_display_names = {
+"       \' ': 'SPC',
+"       \'<C-H>': 'BS',
+"       \'<C-I>': 'TAB',
+"       \'<TAB>': 'TAB',
+"       \'.': '●'
+"       \}
 
 " Change the colors if you want
 highlight default link WhichKey          Operator
@@ -24,6 +31,8 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 " }}}
 
 " Single mappings ---------------------------------------- {{{
+let g:which_key_map['.'] = [':Files'                                , 'Find file']
+let g:which_key_map[' '] = [':ProjectRecentFiles'                   , 'Find file in project']
 let g:which_key_map['m'] = [':call WindowSwap#EasyWindowSwap()'     , 'move-window' ]
 let g:which_key_map['n'] = [':FernCurFileDrawer'                    , 'open-fern' ]
 let g:which_key_map['l'] = [':JumpToWin l'                          , 'window-right']
@@ -118,7 +127,8 @@ let g:which_key_map['f'] = {
       \ '/' : [':Files'                         , 'fzf-files'],
       \ 'i' : 'file-info'                       ,
       \ 'f' : 'find-and-replace-in-file'                       ,
-      \ 'o' : [':FernCurFileDrawer'             , 'find-in-file-tree' ],
+      \ 'o' : [':FernCurFileDrawer'             , 'open-file-in-tree' ],
+      \ 'O' : [':FernCurDirDrawer'              , 'open-dir-in-tree' ],
       \ 's' : [':update'                        , 'save-current-file'],
       \ 'S' : [':wall'                          , 'save-all-file'],
       \ 'c' : {
@@ -128,6 +138,7 @@ let g:which_key_map['f'] = {
       \    'w' : [':Chmod +w'                   , 'add-write-permission'],
       \    'W' : [':Chmod -w'                   , 'remove-write-permission'],
       \  },
+      \ 'r' : [':History'                       , 'recent-files'],
       \ 't' : [':Filetypes'                     , 'fzf-filetypes'],
       \ 'w' : ['<Plug>FixCurrentWord'           , 'fix-current-word'],
       \
@@ -225,8 +236,8 @@ let g:which_key_map['o'] = {
 " p is for project --------------------------------------- {{{
 let g:which_key_map['p'] = {
       \ 'name' : '+project',
-      \ 'p' : [':Projects'               , 'swithc-project'],
-      \ 'r' : [':ProjectRecentFiles'     , 'project-recent-files'],
+      \ 'p' : [':Projects'               , 'Switch project'],
+      \ 'r' : [':ProjectRecentFiles'     , 'Find recent project files'],
       \ }
 
 " }}}
@@ -343,23 +354,25 @@ nnoremap <leader>w? :VimwikiUISelect<CR>
 " / is for search ---------------------------------------- {{{
 let g:which_key_map['/'] = {
       \ 'name' : '+search',
-      \ '/' : [':BLines'                , 'fzf-buffer-lines'],
-      \ ';' : [':History:'              , 'fzf-commands-history'],
-      \ ':' : [':Command!'              , 'fzf-commands-history'],
-      \ 'b' : [':Buffers'               , 'fzf-buffer'],
-      \ 'C' : [':BCommits'              , 'fzf-buffer-commits'],
-      \ 'c' : [':Commits'               , 'fzf-commits'],
-      \ 'f' : [':Files'                 , 'fzf-files'],
-      \ 'g' : [':GFiles?'               , 'fzf-git-files*'],
-      \ 'h' : [':History/'              , 'fzf-search-history'],
-      \ 'H' : [':History'               , 'fzf-file-history'],
-      \ 'l' : [':Lines'                 , 'fzf-lines'] ,
-      \ 'm' : [':Marks'                 , 'fzf-marks'] ,
-      \ 'k' : [':Maps!'                 , 'fzf-keymaps'] ,
-      \ 'r' : [':ProjectRecentFiles'    , 'fzf-project-recent-files'],
-      \ 'p' :                             'fzf-project-search',
-      \ 't' : [':Filetypes'             , 'fzf-filetypes'],
-      \ 'w' : [':Windows'               , 'fzf-windows'],
+      \ '/' : [':BLines'                , 'Search buffer line'],
+      \ 'd' : ['RGInDir'                , 'Search current directory'],
+      \ 'p' :                             'Search project',
+      \
+      \ 'f' : [':Files'                 , 'Find file'],
+      \ 'F' : [':FilesInDir'            , 'Find directory file'],
+      \ 'b' : [':Buffers'               , 'Find buffers'],
+      \ 'g' : [':GFiles?'               , 'Find git files*'],
+      \ 'r' : [':History'               , 'Recent files'],
+      \ 'w' : [':Windows'               , 'Find windows'],
+      \
+      \ ';' : [':History:'              , 'Search recent command'],
+      \ ':' : [':Command'               , 'Search command'],
+      \ 'c' : [':BCommits'              , 'Look up buffer commits'],
+      \ 'C' : [':Commits'               , 'Look up commits'],
+      \ 'h' : [':History/'              , 'Look up search history'],
+      \ 'k' : [':Maps!'                 , 'Look up keymaps'] ,
+      \ 'm' : [':Marks'                 , 'Jump to marks'] ,
+      \ 't' : [':Filetypes'             , 'Change filetypes'],
       \ }
 " Search word in whole project
 nnoremap <leader>/p :RG!<CR>
@@ -393,12 +406,6 @@ endif
 " }}}
 
 " Ignore WhichKeys --------------------------------------- {{{
-" Open current file directory into the drawer
-nnoremap <silent> <Leader>. :FernCurDirDrawer<CR>
-nnoremap <silent> <Leader>0 :Fern . -drawer -toggle<CR><C-w>=
-let g:which_key_map['.'] = 'which_key_ignore'
-let g:which_key_map['0'] = 'which_key_ignore'
-
 " Easier system clipboard usage
 nnoremap <Leader>ip "+p
 nnoremap <Leader>y "+y
