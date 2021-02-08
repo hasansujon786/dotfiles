@@ -1,3 +1,4 @@
+" utils {{{
 function! s:custom_wrap(spec, fullscreen)
   " let colors = '--color=bg+:#3E4452,bg:#282C34,spinner:#C678DD,hl:#61AFEF,fg:#ABB2BF,prompt:#61AFEF,header:#5C6370,info:#E06C75,pointer:#E5C07B,marker:#E06C75,fg+:#E5C07B,gutter:#282C34,hl+:#61AFEF'
   let sp = "'"
@@ -16,10 +17,10 @@ function! s:custom_wrap(spec, fullscreen)
         \keys(win)[0]: values(win)[0]}
 endfunction
 
-
+" }}}
+"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RG                                                                      "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RG {{{
 function! hasan#fzf#_ripgrep(query, fullscreen, dir)
   let prompt = ['--prompt', 'RG> ']
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
@@ -32,12 +33,11 @@ function! hasan#fzf#_ripgrep(query, fullscreen, dir)
   let spec = {'options': prompt + ['--phony','--reverse', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ProjectRecentFiles                                                      "
+" }}}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ProjectRecentFiles {{{
 function! hasan#fzf#_project_recent_files(preview, bang)
   let options = ['-m', '--header-lines', !empty(expand('%')), '--prompt', 'ProRecent> ']
   if has_key(a:preview, 'options')
@@ -111,25 +111,19 @@ function! s:jump(t, w)
   execute a:t.'tabnext'
   execute a:w.'wincmd w'
 endfunction
-
+" }}}
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Projects                                                                 "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let s:projects_config_file = '~/.config/.vim-projects'
-let s:projects_action = {
-      \ 'ctrl-e': function('hasan#fzf#edit_projects_config_file'),
-      \ 'ctrl-a': function('hasan#fzf#add_to_projects'),
-      \}
-
+" Projects {{{
 function! hasan#fzf#_projects(bang) abort
   let options = ['--header-lines', !empty(fnamemodify(getcwd(), ':~')), '--prompt', 'Projects> ']
 
   call fzf#run(s:custom_wrap({
         \'options': options,
         \'action': s:projects_action,
-        \'source': s:get_project_list(),
-        \'sink*': function('s:projects_list_sink')},
+        \'sink*': function('s:projects_list_sink'),
+        \'source': [fnamemodify(getcwd(), ':~')] + hasan#utils#read_list(expand(s:projects_config_file), 15)},
         \ a:bang))
 endfunction
 
@@ -151,25 +145,18 @@ function! s:projects_list_sink(args) abort
   execute('edit '.path)
 endfunction
 
-function! s:get_project_list() abort
-  let config_fname = expand(s:projects_config_file)
-  let projects = readfile(config_fname, '', 15)
-  return [fnamemodify(getcwd(), ':~')] + fzf#vim#_uniq(projects)
-endfunction
-
-function! hasan#fzf#edit_projects_config_file(...) abort
+function! s:edit_projects_config_file(...) abort
   execute('split '.s:projects_config_file)
 endfunction
 
-function hasan#fzf#add_to_projects(...) abort
-  let path = getcwd()
-  let name = fnamemodify(getcwd(), ':t')
-  let sp_nr  = 0
-  let p_sp_nr = 20
-  if(len(name) < p_sp_nr)
-    let sp_nr = p_sp_nr - len(name)
-  endif
-
-  let line = printf('%s %'.sp_nr.'s %s', name, '> ', path)
-  call system('print "'.line.'" >> '.s:projects_config_file)
+function s:add_path_to_projects(...) abort
+  call hasan#utils#write_list(s:projects_config_file, fnamemodify(getcwd(), ':~'), fnamemodify(getcwd(), ':t'), 50)
 endfunction
+
+let s:projects_config_file = '~/.config/vim-projects'
+let s:projects_action = {
+      \ 'ctrl-e': function('s:edit_projects_config_file'),
+      \ 'ctrl-a': function('s:add_path_to_projects'),
+      \}
+" }}}
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
