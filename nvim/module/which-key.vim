@@ -355,7 +355,8 @@ nnoremap <leader>w? :VimwikiUISelect<CR>
 let g:which_key_map['/'] = {
       \ 'name' : '+search',
       \ '/' : [':BLines'                , 'Search buffer line'],
-      \ 'd' : ['RGInDir'                , 'Search current directory'],
+      \ 'd' : [':RGCurDir'              , 'Search current directory'],
+      \ 'D' :                             'Search other directory',
       \ 'p' :                             'Search project',
       \
       \ 'f' : [':Files'                 , 'Find file'],
@@ -377,6 +378,7 @@ let g:which_key_map['/'] = {
 " Search word in whole project
 nnoremap <leader>/p :RG!<CR>
 xnoremap <leader>/p "zy:RG! <C-r>z<CR>
+nnoremap <leader>/D :RGDir<space>
 " }}}
 
 " [ is for terminal -------------------------------------- {{{
