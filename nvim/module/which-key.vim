@@ -1,8 +1,8 @@
 
 " WhichKey configs --------------------------------------- {{{
 " Map leader to which_key
-nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
-vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+vnoremap <silent> <leader> :<c-u> :WhichKeyVisual '<Space>'<CR>
 
 " Create map to add keys to
 let g:which_key_map =  {}
@@ -43,11 +43,8 @@ let g:which_key_map['r'] = [':CycleNumber'                          , 'cycle-num
 let g:which_key_map['='] = ['<C-W>='                                , 'balance-windows' ]
 let g:which_key_map['x'] = [':bdelete'                              , 'delete-buffer']
 let g:which_key_map['z'] = ['za'                                    , 'fold' ]
-let g:which_key_map['s'] = 'save-current-file'
-let g:which_key_map['q'] = 'close-current-window'
-nnoremap <leader>s :w<CR>
-vnoremap <leader>s :<C-u>w<CR>gv
-nnoremap <silent> <leader>q :Quit<CR>
+let g:which_key_map['s'] = [':write'                                , 'Save file' ]
+let g:which_key_map['q'] = [':Quit'                                 , 'Close window']
 nnoremap <silent> <leader><TAB> :AlternateFile<CR>
 vnoremap <silent> <leader><TAB> :<C-u>AlternateFile<CR>
 
@@ -126,13 +123,13 @@ nnoremap <leader>e~ :cd %:p:h<CR>:pwd<CR>
 
 " f is for file ------------------------------------------ {{{
 let g:which_key_map['f'] = {
-      \ 'name' : '+find' ,
+      \ 'name' : '+file' ,
       \ '/' : [':Files'                         , 'fzf-files'],
       \ 'i' : 'file-info'                       ,
       \ 'f' : 'find-and-replace-in-file'                       ,
       \ 'o' : [':FernCurFileDrawer'             , 'open-file-in-tree' ],
       \ 'O' : [':FernCurDirDrawer'              , 'open-dir-in-tree' ],
-      \ 's' : [':update'                        , 'save-current-file'],
+      \ 's' : [':write'                         , 'save-current-file'],
       \ 'S' : [':wall'                          , 'save-all-file'],
       \ 'c' : {
       \ 'name' : '+files/convert',

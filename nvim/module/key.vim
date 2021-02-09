@@ -5,11 +5,11 @@ inoremap jk <ESC>
 inoremap qq <ESC>
 cnoremap qq <C-c>
 if !exists('g:loaded_HLNext')
-  nnoremap <silent> q <ESC>:nohlsearch<CR>
+  nnoremap <silent> q <ESC>:nohlsearch<BAR>echo ''<CR>
   vnoremap <silent> q <ESC>:nohlsearch<CR>
 else
-  nnoremap <silent> q <ESC>:call HLNextOff() <BAR> :nohlsearch <BAR> mode <CR>
-  vnoremap <silent> q <ESC>:call HLNextOff() <BAR> :nohlsearch <CR>
+  nnoremap <silent> q <ESC>:call HLNextOff()<BAR>:nohlsearch<BAR>echo ''<CR>
+  vnoremap <silent> q <ESC>:call HLNextOff()<BAR>:nohlsearch<CR>
 endif
 
 " Exit file with confirm
