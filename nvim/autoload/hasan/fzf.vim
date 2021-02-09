@@ -17,8 +17,18 @@ function! s:custom_wrap(spec, fullscreen)
         \keys(win)[0]: values(win)[0]}
 endfunction
 
+function s:write_list(fpath, line, title, padding) abort
+  let sp_nr = len(a:title) < a:padding ? a:padding - len(a:title) : 0
+  let line = printf('%s %'.sp_nr.'s %s', a:title, '> ', a:line)
+  call system('print "'.line.'" >> '.a:fpath)
+endfunction
+
+function! s:read_list(fpath, max) abort
+  let projects = readfile(a:fpath, '', a:max)
+  return fzf#vim#_uniq(projects)
+endfunction
 " }}}
-"
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RG {{{
 function! hasan#fzf#_ripgrep(query, fullscreen, dir)
@@ -63,6 +73,7 @@ function! s:get_project_recent_files()
 endfunction
 
 function! s:project_recent_files_sink(args)
+  let g:foo = a:args
   " if no line has selected
   if len(a:args) < 2 | return |endif
   " action: can be '', 'ctrl-t','ctrl-v' etc.
@@ -123,7 +134,7 @@ function! hasan#fzf#_projects(bang) abort
         \'options': options,
         \'action': s:projects_action,
         \'sink*': function('s:projects_list_sink'),
-        \'source': [fnamemodify(getcwd(), ':~')] + hasan#utils#read_list(expand(s:projects_config_file), 15)},
+        \'source': [fnamemodify(getcwd(), ':~')] + s:read_list(expand(s:projects_config_file), 15)},
         \ a:bang))
 endfunction
 
@@ -138,7 +149,7 @@ function! s:projects_list_sink(args) abort
   " if no line has selected
   if len(a:args) < 2 | return |endif
   " action: can be '', 'ctrl-t','ctrl-v' etc.
-  let line = split(a:args[1], '> ')
+  let line = split(a:args[1], '>  ')
   let path = line[1]
 
   execute('cd'.path)
@@ -150,7 +161,7 @@ function! s:edit_projects_config_file(...) abort
 endfunction
 
 function s:add_path_to_projects(...) abort
-  call hasan#utils#write_list(s:projects_config_file, fnamemodify(getcwd(), ':~'), fnamemodify(getcwd(), ':t'), 50)
+  call s:write_list(s:projects_config_file, fnamemodify(getcwd(), ':~'), fnamemodify(getcwd(), ':t'), 50)
 endfunction
 
 let s:projects_config_file = '~/.config/vim-projects'
@@ -160,3 +171,41 @@ let s:projects_action = {
       \}
 " }}}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Bookmarks {{{
+function! hasan#fzf#_bookmar(bang)
+  let options = ['-m', '--prompt', 'Bookmarks> ']
+
+  call fzf#run(s:custom_wrap({
+        \'options': options,
+        \'sink*': function('s:bookmark_sink'),
+        \'source': s:read_list(expand(s:bookmark_config_file), 15)},
+        \ a:bang))
+endfunction
+
+function s:bookmark_sink(args) abort
+  let lines = [a:args[0]] + map(a:args[1:], 'split(v:val, ">  ")[1]')
+  call s:project_recent_files_sink(lines)
+endfunction
+
+function hasan#fzf#set_bookmark() abort
+  let fname = expand('%:~')
+  if(fname == '') | return _#echoError('No file name') | endif
+
+  let default_name = fnamemodify(fname, ':t')
+  let input = input('Set bookmark (default '.default_name.'): ') | redraw
+  let bm_name = input == '' ? default_name : input
+
+  call _#echoSuccess('New bookmark has written')
+  call s:write_list(s:bookmark_config_file, fname, bm_name, 50)
+endfunction
+
+function hasan#fzf#edit_bookmark() abort
+  execute('split '.s:bookmark_config_file)
+endfunction
+
+let s:bookmark_config_file = '~/.config/vim-bookmarks'
+" }}}
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+

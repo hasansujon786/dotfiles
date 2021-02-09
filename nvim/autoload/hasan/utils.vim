@@ -322,15 +322,3 @@ function! hasan#utils#tastwiki_edit(uuid) abort
 endfunction
 " }}}
 
-" print_list {{{
-function hasan#utils#write_list(fpath, line, title, padding) abort
-  let sp_nr = len(a:title) < a:padding ? a:padding - len(a:title) : 0
-  let line = printf('%s %'.sp_nr.'s %s', a:title, '> ', a:line)
-  call system('print "'.line.'" >> '.a:fpath)
-endfunction
-
-function! hasan#utils#read_list(fpath, max) abort
-  let projects = readfile(a:fpath, '', a:max)
-  return fzf#vim#_uniq(projects)
-endfunction
-" }}}

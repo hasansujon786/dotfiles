@@ -99,6 +99,9 @@ let g:which_key_map['b'] = {
       \
       \ 's' : [':w'                                 , 'Save-buffer'],
       \ 'S' : [':wa'                                , 'Save-all-buffer'],
+      \
+      \ 'm' : [':call hasan#fzf#set_bookmark()'     , 'Set bookmark'],
+      \ 'M' : [':call hasan#fzf#edit_bookmark()'    , 'Delete bookmark'],
       \ }
 " }}}
 
@@ -372,7 +375,8 @@ let g:which_key_map['/'] = {
       \ 'C' : [':Commits'               , 'Look up commits'],
       \ 'h' : [':History/'              , 'Look up search history'],
       \ 'k' : [':Maps!'                 , 'Look up keymaps'] ,
-      \ 'm' : [':Marks'                 , 'Jump to marks'] ,
+      \ 'm' : [':Bookmarks'             , 'Jump to bookmark'] ,
+      \ 'M' : [':Marks'                 , 'Jump to marks'] ,
       \ 't' : [':Filetypes'             , 'Change filetypes'],
       \ }
 " Search word in whole project

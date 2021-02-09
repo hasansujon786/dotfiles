@@ -25,6 +25,7 @@ command! RGCurDir exe 'RGDir '.expand('%:h')
 command! -bang ProjectRecentFiles call hasan#fzf#_project_recent_files(s:p(<bang>0), <bang>0)
 command! -bang Projects call hasan#fzf#_projects(<bang>0)
 command! FilesCurDir exe 'Files '.expand('%:h')
+command! -bang Bookmarks call hasan#fzf#_bookmar(<bang>0)
 
 " let g:fzf_layout = { 'down': '~70%' }
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.7 } }
