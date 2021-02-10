@@ -31,20 +31,20 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 " }}}
 
 " Single mappings ---------------------------------------- {{{
-let g:which_key_map['.'] = [':Files'                                , 'Find file']
 let g:which_key_map[' '] = [':ProjectRecentFiles'                   , 'Find file in project']
-let g:which_key_map['m'] = [':call WindowSwap#EasyWindowSwap()'     , 'move-window' ]
-let g:which_key_map['n'] = [':FernCurFileDrawer'                    , 'open-fern' ]
-let g:which_key_map['l'] = [':JumpToWin l'                          , 'window-right']
+let g:which_key_map['.'] = [':FilesCurDir'                          , 'Find file in directory']
+let g:which_key_map['='] = ['<C-W>='                                , 'balance-windows' ]
 let g:which_key_map['h'] = [':JumpToWin h'                          , 'window-left']
 let g:which_key_map['j'] = [':JumpToWin j'                          , 'window-bellow']
 let g:which_key_map['k'] = [':JumpToWin k'                          , 'window-above']
+let g:which_key_map['l'] = [':JumpToWin l'                          , 'window-right']
+let g:which_key_map['m'] = [':call WindowSwap#EasyWindowSwap()'     , 'move-window' ]
+let g:which_key_map['n'] = [':FernCurFileDrawer'                    , 'open-fern' ]
+let g:which_key_map['q'] = [':Quit'                                 , 'Close window']
 let g:which_key_map['r'] = [':CycleNumber'                          , 'cycle-number' ]
-let g:which_key_map['='] = ['<C-W>='                                , 'balance-windows' ]
+let g:which_key_map['s'] = [':write'                                , 'Save file' ]
 let g:which_key_map['x'] = [':bdelete'                              , 'delete-buffer']
 let g:which_key_map['z'] = ['za'                                    , 'fold' ]
-let g:which_key_map['s'] = [':write'                                , 'Save file' ]
-let g:which_key_map['q'] = [':Quit'                                 , 'Close window']
 nnoremap <silent> <leader><TAB> :AlternateFile<CR>
 vnoremap <silent> <leader><TAB> :<C-u>AlternateFile<CR>
 
@@ -360,7 +360,7 @@ let g:which_key_map['/'] = {
       \ 'p' :                             'Search project',
       \
       \ 'f' : [':Files'                 , 'Find file'],
-      \ 'F' : [':FilesInDir'            , 'Find directory file'],
+      \ 'F' : [':FilesCurDir'           , 'Find file in directory'],
       \ 'b' : [':Buffers'               , 'Find buffers'],
       \ 'g' : [':GFiles?'               , 'Find git files*'],
       \ 'r' : [':History'               , 'Recent files'],
