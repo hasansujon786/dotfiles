@@ -3,7 +3,8 @@
 " Map leader to which_key
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 vnoremap <silent> <leader> :<c-u> :WhichKeyVisual '<Space>'<CR>
-
+let g:which_key_hspace = 4
+let g:which_key_centered = 0
 " Create map to add keys to
 let g:which_key_map =  {}
 " Define a separator
@@ -31,23 +32,17 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 " }}}
 
 " Single mappings ---------------------------------------- {{{
-let g:which_key_map[' '] = [':ProjectRecentFiles'                   , 'Find file in project']
-let g:which_key_map['.'] = [':FilesCurDir'                          , 'Find file in directory']
-let g:which_key_map['='] = ['<C-W>='                                , 'balance-windows' ]
-let g:which_key_map['h'] = [':JumpToWin h'                          , 'window-left']
-let g:which_key_map['j'] = [':JumpToWin j'                          , 'window-bellow']
-let g:which_key_map['k'] = [':JumpToWin k'                          , 'window-above']
-let g:which_key_map['l'] = [':JumpToWin l'                          , 'window-right']
-let g:which_key_map['m'] = [':call WindowSwap#EasyWindowSwap()'     , 'move-window' ]
-let g:which_key_map['n'] = [':FernCurFileDrawer'                    , 'open-fern' ]
+let g:which_key_map[' '] = [':ProjectRecentFiles'                   , 'Find project file']
+let g:which_key_map['.'] = [':FilesCurDir'                          , 'Find directory file']
+let g:which_key_map[':'] = [':Commands'                             , 'Search commands']
+let g:which_key_map[';'] = [':History:'                             , 'Search recent cmd']
+let g:which_key_map['n'] = [':FernCurFileDrawer'                    , 'Open file tree' ]
 let g:which_key_map['q'] = [':Quit'                                 , 'Close window']
-let g:which_key_map['r'] = [':CycleNumber'                          , 'cycle-number' ]
+let g:which_key_map['r'] = [':CycleNumber'                          , 'Cycle number' ]
 let g:which_key_map['s'] = [':write'                                , 'Save file' ]
-let g:which_key_map['x'] = [':bdelete'                              , 'delete-buffer']
-let g:which_key_map['z'] = ['za'                                    , 'fold' ]
-nnoremap <silent> <leader><TAB> :AlternateFile<CR>
-vnoremap <silent> <leader><TAB> :<C-u>AlternateFile<CR>
-
+let g:which_key_map['x'] = [':bdelete'                              , 'Delete buffer']
+let g:which_key_map['z'] = ['za'                                    , 'Fold/Unfold' ]
+let g:which_key_map['`'] = ['<c-^>'                                 , 'Switch last buffer' ]
 
 " }}}
 
@@ -262,25 +257,25 @@ let g:which_key_map['t'] = {
 " }}}
 
 " ` is for toggle ---------------------------------------- {{{
-let g:which_key_map['`'] = {
-      \ 'name' : '+toggle',
-      \ 'c' : [':setlocal cursorcolumn!'                   , 'cursorcolumn'],
-      \ 'w' : [':call hasan#utils#toggleWrap()'            , 'toggle-wrap'],
-      \
-      \ '`' : {
-      \ 'name' : '+task-and-timer',
-      \    'b' : [':Break'              , 'tt-break'],
-      \    'h' : [':HideAndShowTimer'   , 'tt-hide-timer'],
-      \    'o' : [':OpenTasks'          , 'tt-open-tasks'],
-      \    'p' : [':PauseOrPlayTimer'   , 'tt-pause-or-play'],
-      \    'w' : [':Work'               , 'tt-work'],
-      \    's' : ['ShowTimer'           , 'tt-status'],
-      \    'u' : 'tt-update-timer',
-      \    'U' : 'tt-update-status',
-      \ }
-      \ }
-nnoremap <Leader>``u :UpdateCurrentTimer<space>
-nnoremap <Leader>``U :UpdateCurrentStatus<space>
+" let g:which_key_map['`'] = {
+"       \ 'name' : '+toggle',
+"       \ 'c' : [':setlocal cursorcolumn!'                   , 'cursorcolumn'],
+"       \ 'w' : [':call hasan#utils#toggleWrap()'            , 'toggle-wrap'],
+"       \
+"       \ '`' : {
+"       \ 'name' : '+task-and-timer',
+"       \    'b' : [':Break'              , 'tt-break'],
+"       \    'h' : [':HideAndShowTimer'   , 'tt-hide-timer'],
+"       \    'o' : [':OpenTasks'          , 'tt-open-tasks'],
+"       \    'p' : [':PauseOrPlayTimer'   , 'tt-pause-or-play'],
+"       \    'w' : [':Work'               , 'tt-work'],
+"       \    's' : ['ShowTimer'           , 'tt-status'],
+"       \    'u' : 'tt-update-timer',
+"       \    'U' : 'tt-update-status',
+"       \ }
+"       \ }
+" nnoremap <Leader>``u :UpdateCurrentTimer<space>
+" nnoremap <Leader>``U :UpdateCurrentStatus<space>
 " }}}
 
 " v is for vim ------------------------------------------- {{{
@@ -366,8 +361,6 @@ let g:which_key_map['/'] = {
       \ 'r' : [':History'               , 'Recent files'],
       \ 'w' : [':Windows'               , 'Find windows'],
       \
-      \ ';' : [':History:'              , 'Search recent command'],
-      \ ':' : [':Command'               , 'Search command'],
       \ 'c' : [':BCommits'              , 'Look up buffer commits'],
       \ 'C' : [':Commits'               , 'Look up commits'],
       \ 'h' : [':History/'              , 'Look up search history'],
@@ -419,6 +412,10 @@ vnoremap <Leader>d "+d
 let g:which_key_map['i']['p'] = 'from-system-clipboard'
 let g:which_key_map['y'] = 'which_key_ignore'
 let g:which_key_map['d'] = 'which_key_ignore'
+let g:which_key_map['h'] = [':JumpToWin h'     , 'which_key_ignore']
+let g:which_key_map['j'] = [':JumpToWin j'     , 'which_key_ignore']
+let g:which_key_map['k'] = [':JumpToWin k'     , 'which_key_ignore']
+let g:which_key_map['l'] = [':JumpToWin l'     , 'which_key_ignore']
 
 " Map <Space>  + 1-9 to jump to respective tab
 " Map <Space>w + 1-9 to jump to respective window
