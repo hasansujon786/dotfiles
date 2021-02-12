@@ -33,7 +33,7 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 
 " Single mappings ---------------------------------------- {{{
 let g:which_key_map[' '] = [':ProjectRecentFiles'                   , 'Find project file']
-let g:which_key_map['.'] = [':FilesCurDir'                          , 'Find directory file']
+let g:which_key_map['.'] = [':Files'                                , 'Find file']
 let g:which_key_map[':'] = [':Commands'                             , 'Search commands']
 let g:which_key_map[';'] = [':History:'                             , 'Search recent cmd']
 let g:which_key_map['n'] = [':FernCurFileDrawer'                    , 'Open file tree' ]
@@ -119,38 +119,38 @@ nnoremap <leader>e~ :cd %:p:h<CR>:pwd<CR>
 " f is for file ------------------------------------------ {{{
 let g:which_key_map['f'] = {
       \ 'name' : '+file' ,
-      \ '/' : [':Files'                         , 'fzf-files'],
-      \ 'i' : 'file-info'                       ,
-      \ 'f' : 'find-and-replace-in-file'                       ,
-      \ 'o' : [':FernCurFileDrawer'             , 'open-file-in-tree' ],
-      \ 'O' : [':FernCurDirDrawer'              , 'open-dir-in-tree' ],
-      \ 's' : [':write'                         , 'save-current-file'],
-      \ 'S' : [':wall'                          , 'save-all-file'],
-      \ 'c' : {
-      \ 'name' : '+files/convert',
-      \    'x' : [':Chmod +x'                   , 'make-executale'],
-      \    'X' : [':Chmod -x'                   , 'remove-executale'],
-      \    'w' : [':Chmod +w'                   , 'add-write-permission'],
-      \    'W' : [':Chmod -w'                   , 'remove-write-permission'],
-      \  },
-      \ 'r' : [':History'                       , 'recent-files'],
+      \ 'e' : [':Files ~/dotfiles/nvim/'        , 'Find file in nvim'],
+      \ 'f' : [':Files'                         , 'Find file'],
+      \ 'F' : [':FilesCurDir'                   , 'Find file from here'],
+      \ 'd' : [':FilesCurDir'                   , 'Find directory'],
+      \ 'r' : [':History'                       , 'Recent files'],
       \ 't' : [':Filetypes'                     , 'fzf-filetypes'],
-      \ 'w' : ['<Plug>FixCurrentWord'           , 'fix-current-word'],
       \
-      \ 'R' : 'rename-current-file',
-      \ 'C' : 'Todo',
-      \ 'M' : 'move-current-file',
-      \ 'y' : 'copy-current-filename',
-      \ 'Y' : 'copy-current-filpath',
+      \ 'i' : [':call hasan#utils#file_info()'  , 'file-info'],
+      \ 's' : [':write'                         , 'Save file'],
+      \ 'S' : 'Save file as...',
+      \ 'R' : 'Rename file',
+      \ 'C' : 'Copy this file',
+      \ 'M' : 'Move/rename file',
+      \ 'y' : ['CopyFileNameToClipBoard'       , 'Yank filename' ],
+      \
+      \ 'u' : {
+      \ 'name' : '+update-permission',
+      \    'x' : [':Chmod +x'                   , 'Make this file executable'],
+      \    'X' : [':Chmod -x'                   , 'Remove executable'],
+      \    'w' : [':Chmod +w'                   , 'Add write permission'],
+      \    'W' : [':Chmod -w'                   , 'Remove write permission'],
+      \  },
+      \ 'w' : ['<Plug>FixCurrentWord'           , 'Fix current world'],
+      \ '.' : 'Replace world in buf'
       \ }
-nnoremap <leader>fi :call hasan#utils#file_info()<CR>
+nnoremap <Leader>fS :w <C-R>=expand("%")<CR>
+nnoremap <Leader>fC :w <C-R>=expand("%")<CR>
 nnoremap <Leader>fM :Move <C-R>=expand("%")<CR>
 nnoremap <Leader>fR :Rename <C-R>=expand("%:t")<CR>
-nnoremap <leader>fy :CopyFileNameToClipBoard!<CR>
-nnoremap <leader>fY :CopyFileNameToClipBoard<CR>
 " replace word under cursor, globally, with confirmation
-nnoremap <Leader>ff  "zyiw:%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
-xnoremap <Leader>ff "zy:%s/<C-r>"//gc<Left><Left><Left>
+nnoremap <Leader>f.  "zyiw:%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+xnoremap <Leader>f. "zy:%s/<C-r>"//gc<Left><Left><Left>
 
 " }}}
 
@@ -355,7 +355,7 @@ let g:which_key_map['/'] = {
       \ 'p' :                             'Search project',
       \
       \ 'f' : [':Files'                 , 'Find file'],
-      \ 'F' : [':FilesCurDir'           , 'Find file in directory'],
+      \ 'F' : [':FilesCurDir'           , 'Find file from here'],
       \ 'b' : [':Buffers'               , 'Find buffers'],
       \ 'g' : [':GFiles?'               , 'Find git files*'],
       \ 'r' : [':History'               , 'Recent files'],
