@@ -36,7 +36,6 @@ let g:which_key_map[' '] = [':ProjectRecentFiles'                   , 'Find proj
 let g:which_key_map['.'] = [':Files'                                , 'Find file']
 let g:which_key_map[':'] = [':Commands'                             , 'Search commands']
 let g:which_key_map[';'] = [':History:'                             , 'Search recent cmd']
-let g:which_key_map['n'] = [':FernCurFileDrawer'                    , 'Open file tree' ]
 let g:which_key_map['q'] = [':Quit'                                 , 'Close window']
 let g:which_key_map['r'] = [':CycleNumber'                          , 'Cycle number' ]
 let g:which_key_map['s'] = [':write'                                , 'Save file' ]
@@ -224,8 +223,9 @@ let g:which_key_map['o'] = {
       \ 't' : [':OpenTodo'                                 , 'todo-manager'],
       \ 'q' : [':QfixToggle'                               , 'quickfix'],
       \ 'y' : [':CocList --normal yank'                    , 'yank-history'],
+      \ 'p' : [':FernDrawerToggle!'                        , 'Project sidebar' ],
+      \ 'P' : [':call hasan#fern#reveal()'                 , 'Find file in PSB' ],
       \ }
-
 " }}}
 
 " p is for project --------------------------------------- {{{
