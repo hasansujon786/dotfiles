@@ -37,12 +37,12 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 
 Plug 'lambdalisue/nerdfont.vim'
-Plug 'lambdalisue/fern-bookmark.vim'
 Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 Plug 'lambdalisue/fern-git-status.vim'
-" Plug 'lambdalisue/glyph-palette.vim'
 Plug 'hasansujon786/glyph-palette.vim'
 Plug 'lambdalisue/fern.vim'
+" Plug 'lambdalisue/glyph-palette.vim'
+" Plug 'lambdalisue/fern-bookmark.vim'
 Plug 'lambdalisue/vim-manpager',{'on': 'Man'}
 
 " => Auto completion ========================================
