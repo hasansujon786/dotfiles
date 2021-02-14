@@ -5,7 +5,7 @@ Plug 'junegunn/goyo.vim',{ 'on': 'Goyo' }
 " Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'Yggdroot/indentLine'
-
+Plug 'cossonleo/neo-smooth-scroll.nvim',{ 'on': 'CocStart' }
 " => Functionality-&-Helpers ===============================
 Plug 'tools-life/taskwiki'
 Plug 'hasansujon786/notifications.vim'
@@ -98,6 +98,7 @@ source ~/dotfiles/nvim/config/detect_current_mode.vim
 source ~/dotfiles/nvim/config/tabline.vim
 source ~/dotfiles/nvim/config/vim-vue-plugin.vim
 source ~/dotfiles/nvim/config/dotoo.vim
+source ~/dotfiles/nvim/config/emmet.vim
 
 " Plug 'xolox/vim-session'
 " Plug 'romgrk/github-light.vim'
