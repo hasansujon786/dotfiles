@@ -216,7 +216,8 @@ endfor
 " o is for open ------------------------------------------ {{{
 let g:which_key_map['o'] = {
       \ 'name' : '+open',
-      \ ';' : [':FloatermNew --wintype=normal --height=6'  , 'terminal'],
+      \ 'e' : [':FloatermNew'                              , 'Open terminal'],
+      \ 'E' : [':FloatermNew --wintype=normal --height=10' , 'Open terminal split'],
       \ 'a' : ['<Plug>(dotoo-agenda)'                      , 'org-agenda'],
       \ 'c' : ['<Plug>(dotoo-capture-custom)'              , 'org-capture'],
       \ 'b' : [':Fern bookmark:///'                        , 'bookmark'],
