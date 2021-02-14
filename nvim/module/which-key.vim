@@ -375,14 +375,6 @@ xnoremap <leader>/p "zy:RG! <C-r>z<CR>
 nnoremap <leader>/D :RGDir<space>
 " }}}
 
-" [ is for terminal -------------------------------------- {{{
-let g:which_key_map['['] = {
-      \ 'name' : '+terminal',
-      \ '[' : 'SetTerminal',
-      \ }
-nmap <leader>[[ :SetTerminal<space>
-" }}}
-
 " tmux --------------------------------------------------- {{{
 if !exists('$TMUX')
   let g:which_key_map.g.l = [ ':FloatermNew --name=lazygit lazygit'                 , 'lazygit' ]

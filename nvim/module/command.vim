@@ -19,13 +19,3 @@ command! -nargs=+ RefactorWordInProject call hasan#utils#refactorWordInProject(<
 command! -nargs=1 TaskWikiAdvancedEdit call hasan#utils#tastwiki_edit(<f-args>)
 command! -nargs=1 -complete=file Fedit call hasan#float#_fedit(<f-args>)
 " }}}
-
-" quick_term.vim {{{
-command! -nargs=1 SetTerminal call hasan#term#SetBuffer(<f-args>)
-command! -nargs=1 GoToTerminal call hasan#term#GotoBuffer(<f-args>)
-command! -nargs=+ SendTerminalCommand call hasan#term#SendTerminalCommand(<f-args>)
-command! AllTerminalIds echo keys(g:term_ctrlId_buf_list)
-command! GoToPreviousTerminal call hasan#term#GotoPreviousTerm()
-command! GoToNextTerminal call hasan#term#GotoNextTerm()
-" }}}
-

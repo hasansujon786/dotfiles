@@ -1,3 +1,14 @@
+" quick_term.vim {{{
+nmap <silent> ]t :GoToNextTerminal<CR>
+nmap <silent> [t :GoToPreviousTerminal<CR>
+command! -nargs=1 SetTerminal call hasan#term#SetBuffer(<f-args>)
+command! -nargs=1 GoToTerminal call hasan#term#GotoBuffer(<f-args>)
+command! -nargs=+ SendTerminalCommand call hasan#term#SendTerminalCommand(<f-args>)
+command! AllTerminalIds echo keys(g:term_ctrlId_buf_list)
+command! GoToPreviousTerminal call hasan#term#GotoPreviousTerm()
+command! GoToNextTerminal call hasan#term#GotoNextTerm()
+" }}}
+
 if !exists('g:term_ctrlId_buf_list')
   let g:term_ctrlId_buf_list = {} "{ctrlId : [job_id, bufnr]}
   let g:term_last_term_ctrlId = ''

@@ -135,10 +135,6 @@ nmap [q :cprev<CR>
 nmap ]Q :clast<CR>
 nmap [Q :cfirst<CR>
 
-" Selected Terminal
-nmap <silent> ]t :GoToNextTerminal<CR>
-nmap <silent> [t :GoToPreviousTerminal<CR>
-
 " => Search-functionalities ===============================
 " highlight current word in file
 nnoremap z/ :call autohl#_AutoHighlightToggle()<CR>
