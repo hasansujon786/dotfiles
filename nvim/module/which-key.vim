@@ -123,9 +123,9 @@ let g:which_key_map['f'] = {
       \ 'F' : [':FilesCurDir'                   , 'Find file from here'],
       \ 'd' : [':FilesCurDir'                   , 'Find directory'],
       \ 'r' : [':History'                       , 'Recent files'],
-      \ 't' : [':Filetypes'                     , 'fzf-filetypes'],
+      \ 't' : [':Filetypes'                     , 'Change filetypes'],
       \
-      \ 'i' : [':call hasan#utils#file_info()'  , 'file-info'],
+      \ 'i' : [':call hasan#utils#file_info()'  , 'Show file info'],
       \ 's' : [':write'                         , 'Save file'],
       \ 'S' : 'Save file as...',
       \ 'R' : 'Rename file',
@@ -216,14 +216,13 @@ endfor
 " o is for open ------------------------------------------ {{{
 let g:which_key_map['o'] = {
       \ 'name' : '+open',
-      \ 'e' : [':FloatermNew'                              , 'Open terminal'],
-      \ 'E' : [':FloatermNew --wintype=normal --height=10' , 'Open terminal split'],
-      \ 'a' : ['<Plug>(dotoo-agenda)'                      , 'org-agenda'],
-      \ 'c' : ['<Plug>(dotoo-capture-custom)'              , 'org-capture'],
-      \ 'b' : [':Fern bookmark:///'                        , 'bookmark'],
-      \ 't' : [':OpenTodo'                                 , 'todo-manager'],
-      \ 'q' : [':QfixToggle'                               , 'quickfix'],
-      \ 'y' : [':CocList --normal yank'                    , 'yank-history'],
+      \ '-' : [':FernCurDir'                               , 'Fern'],
+      \ 'a' : ['<Plug>(dotoo-agenda)'                      , '+org-agenda'],
+      \ 'c' : ['<Plug>(dotoo-capture-custom)'              , '+org-capture'],
+      \ 't' : [':FloatermNew'                              , 'Terminal'],
+      \ 'T' : [':FloatermNew --wintype=normal --height=10' , 'Terminal split'],
+      \ 'q' : [':QfixToggle'                               , 'Quickfix'],
+      \ 'y' : [':CocList --normal yank'                    , 'Yank list'],
       \ 'p' : [':FernDrawerToggle!'                        , 'Project sidebar' ],
       \ 'P' : [':call hasan#fern#reveal()'                 , 'Find file in PSB' ],
       \ }
@@ -234,6 +233,7 @@ let g:which_key_map['p'] = {
       \ 'name' : '+project',
       \ 'p' : [':Projects'               , 'Switch project'],
       \ 'r' : [':ProjectRecentFiles'     , 'Find recent project files'],
+      \ 't' : [':OpenTodo'               , 'Show project todos'],
       \ }
 
 " }}}
@@ -378,19 +378,19 @@ nnoremap <leader>/D :RGDir<space>
 
 " tmux --------------------------------------------------- {{{
 if !exists('$TMUX')
-  let g:which_key_map.g.l = [ ':FloatermNew --name=lazygit lazygit'                 , 'lazygit' ]
-  let g:which_key_map.g.t = [ ':FloatermNew --name=tig tig'                         , 'tig' ]
+  let g:which_key_map.g.l = [ ':FloatermNew --name=lazygit lazygit'                 , 'Lazygit' ]
+  let g:which_key_map.g.t = [ ':FloatermNew --name=lazygittig tig'                  , 'Tig' ]
 
-  let g:which_key_map.f.l = [ ':FloatermNew --name=lf lf %:p'                       , 'file-in-lf' ]
-  let g:which_key_map.o.l = [ ':FloatermNew --name=lf lf'                           , 'open-lf' ]
-  let g:which_key_map.o.v = [ ':FloatermNew --name=vit vit'                         , 'open-vit' ]
+  let g:which_key_map.o.l = [ ':FloatermNew --name=lf lf'                           , 'Lf' ]
+  let g:which_key_map.o.L = [ ':FloatermNew --name=lf lf %:p'                       , 'File in Lf' ]
+  let g:which_key_map.o.v = [ ':FloatermNew --name=vit vit'                         , 'Vit' ]
 else
-  let g:which_key_map.g.l = [ ':silent !tmux new-window "lazygit"'                  , 'lazygit' ]
-  let g:which_key_map.g.t = [ ':silent !tmux new-window "tig"'                      , 'tig' ]
+  let g:which_key_map.g.l = [ ':silent !tmux new-window "lazygit"'                  , 'Lazygit' ]
+  let g:which_key_map.g.t = [ ':silent !tmux new-window "tig"'                      , 'Tig' ]
 
-  let g:which_key_map.f.l = [ ':silent !tmux new-window "lf" %:p'                   , 'file-in-lf' ]
-  let g:which_key_map.o.l = [ ':silent !tmux new-window "lf"'                       , 'open-lf' ]
-  let g:which_key_map.o.v = [ ':silent !tmux new-window -n "vit" "vit"'             , 'open-vit' ]
+  let g:which_key_map.o.l = [ ':silent !tmux new-window "lf"'                       , 'Lf' ]
+  let g:which_key_map.o.L = [ ':silent !tmux new-window "lf" %:p'                   , 'File in Lf' ]
+  let g:which_key_map.o.v = [ ':silent !tmux new-window -n "vit" "vit"'             , 'Vit' ]
 endif
 " }}}
 
