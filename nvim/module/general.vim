@@ -152,7 +152,7 @@ set listchars+=precedes:,extends:
 set matchpairs+=<:>,«:»,｢:｣                            " Match angle brackets...
 
 " Wrappings
-set textwidth=80                                       " Hard-wrap text at nth column
+set textwidth=120                                      " Hard-wrap text at nth column
 set whichwrap+=<,>,h,l,[,]                             " Allow left/right & h/l key to move to the previous/next line
 set nowrap                                             " No wrap by default
 set linebreak                                          " Don't break words when wrapping lines
