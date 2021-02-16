@@ -1,13 +1,17 @@
 " g:vimwiki_list
 " http://thedarnedestthing.com/vimwiki%20cheatsheet
 
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+" let g:vimwiki_auto_chdir = 1
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md', 'auto_toc': 1}]
+let g:vimwiki_folding = 'expr'
 let g:vimwiki_markdown_link_ext = 1
 let g:taskwiki_markup_syntax = 'markdown'
 let g:vimwiki_key_mappings =
   \ {
   \   'global': 0,
   \ }
+xnoremap <silent> <Plug>VimwikiCreateLinkTag :call hasan#vimwiki#_create_link_tag()<CR>
+" gZ
 
 " \ 'w' : ['<Plug>VimwikiIndex'                       , 'ncdu'],
 " \ 'j' : ['<plug>(wiki-journal)'                     , 'ncdu'],
