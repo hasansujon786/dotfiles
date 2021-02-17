@@ -1,54 +1,51 @@
 let g:nerdfont_loaded = 0
 
 let s:status_color={
-    \ 'n' :'#98C379',
-    \ 'v' :'#C678DD',
-    \ 'i' :'#61AFEF',
-    \ 't' :'#61AFEF',
-    \ 'r' :'#E06C75',
-    \}
+  \ 'n' :'#98C379',
+  \ 'v' :'#C678DD',
+  \ 'i' :'#61AFEF',
+  \ 't' :'#61AFEF',
+  \ 'r' :'#E06C75',
+  \}
 
 let s:ic = {
-\ 'lock':     '',
-\ 'checking': '',
-\ 'warning':  '',
-\ 'error':    '',
-\ 'ok':       '',
-\ 'info':     '',
-\ 'hint':     '',
-\ 'line':     '',
-\ 'dic':      ' ',
-\ 'wrap':     '蝹',
-\ 'cup':      '',
-\ 'search':   '',
-\ 'pomodoro': '',
-\ 'separator': {'left': '', 'right': ''},
-\ 'subseparator': {'left': '', 'right': ''},
-\ 'space': ' '
-\}
+  \ 'lock':     '',
+  \ 'checking': '',
+  \ 'warning':  '',
+  \ 'error':    '',
+  \ 'ok':       '',
+  \ 'info':     '',
+  \ 'hint':     '',
+  \ 'line':     '',
+  \ 'dic':      ' ',
+  \ 'wrap':     '蝹',
+  \ 'cup':      '',
+  \ 'search':   '',
+  \ 'pomodoro': '',
+  \}
 
 " Status Line Custom
 let g:currentmode={
-    \ 'n'  : 'Normal',
-    \ 'no' : 'Normal·Operator Pending',
-    \ 'v'  : 'Visual',
-    \ 'V'  : 'V-Line',
-    \ "\<C-V>" : 'V-Block',
-    \ 's'  : 'Select',
-    \ 'S'  : 'S-Line',
-    \ "\<C-S>" : 'S-Block',
-    \ 'i'  : 'Insert',
-    \ 'R'  : 'Replace',
-    \ 'Rv' : 'V-Replace',
-    \ 'c'  : 'Normal',
-    \ 'cv' : 'Vim Ex',
-    \ 'ce' : 'Ex',
-    \ 'r'  : 'Prompt',
-    \ 'rm' : 'More',
-    \ 'r?' : 'Confirm',
-    \ '!'  : 'Shell',
-    \ 't'  : 'Terminal'
-    \}
+  \ 'n'  : 'Normal',
+  \ 'no' : 'Normal·Operator Pending',
+  \ 'v'  : 'Visual',
+  \ 'V'  : 'V-Line',
+  \ "\<C-V>" : 'V-Block',
+  \ 's'  : 'Select',
+  \ 'S'  : 'S-Line',
+  \ "\<C-S>" : 'S-Block',
+  \ 'i'  : 'Insert',
+  \ 'R'  : 'Replace',
+  \ 'Rv' : 'V-Replace',
+  \ 'c'  : 'Normal',
+  \ 'cv' : 'Vim Ex',
+  \ 'ce' : 'Ex',
+  \ 'r'  : 'Prompt',
+  \ 'rm' : 'More',
+  \ 'r?' : 'Confirm',
+  \ '!'  : 'Shell',
+  \ 't'  : 'Terminal'
+  \}
 
 
 function _update_vim_mode_color(mode) abort
@@ -68,85 +65,103 @@ function s:updateVimuxLine(bg)
 endfunction
 " let statusline.="%(\ \ %{&modifiable?(&expandtab?'et\ ':'noet\ ').&shiftwidth:''}%)\ "
 
+" file:/data/data/com.termux/files/usr/share/nvim/runtime/doc/options.txt:5797
+let g:statusline = {
+  \ 'component': {
+  \   'mode': "\ %{toupper(g:currentmode[mode()])}\ ",
+  \   'readonly': "%{&readonly?'\ ".s:ic.lock." ':''}",
+  \   'spell': "%{&spell?'\ ".s:ic.dic." ':''}",
+  \   'wrap': "%{&wrap?'\ ".s:ic.wrap." ':''}",
+  \   'modified': "%{&modified?'●':!g:nerdfont_loaded?'':nerdfont#find()}",
+  \   'space_width': "%{&expandtab?'Spc:'.&shiftwidth:'Tab:'.&shiftwidth}",
+  \   'filetype': "%{''!=#&filetype?&filetype:'none'}",
+  \   'filename': "%t",
+  \   'percent': "%3p%%",
+  \   'lineinfo': "%3l:%-2v",
+  \   'coc_status': "%{CocStatus()}",
+  \   'tasktimer_status': "%{TaskTimerStatus()}",
+  \   },
+  \ 'separator': {'left': '', 'right': '', 'space': ' '},
+  \ 'subseparator': {'left': '', 'right': ''},
+  \ }
+
 function! _active_status()
   let statusline=""
   let statusline.="%1*"
-  let statusline.="\ %{toupper(g:currentmode[mode()])}\ "
-  let statusline.="%{&readonly?'\ ".s:ic.lock." ':''}"
-  let statusline.="%{&spell?'\ ".s:ic.dic." ':''}"
-  let statusline.="%{&wrap?'\ ".s:ic.wrap." ':''}"
+  let statusline.=g:statusline.component.mode
+  let statusline.=g:statusline.component.readonly
+  let statusline.=g:statusline.component.spell
+  let statusline.=g:statusline.component.wrap
   let statusline.="%2*"
-  let statusline.=s:ic.separator.left
-  let statusline.=s:ic.space
+  let statusline.=g:statusline.separator.left
+  let statusline.=g:statusline.separator.space
   let statusline.="%3*"
-  let statusline.="%{&modified?'●':!g:nerdfont_loaded?'':nerdfont#find()}"
-  let statusline.=s:ic.space
-  let statusline.="%3*"
-  let statusline.="%<"
-  let statusline.="%t"
-  let statusline.=s:ic.space
+  let statusline.=g:statusline.component.modified
+  let statusline.=g:statusline.separator.space
+  let statusline.="%<" " turncate left
+  let statusline.=g:statusline.component.filename
+  let statusline.=g:statusline.separator.space
   let statusline.="%4*"
-  let statusline.=s:ic.separator.left
+  let statusline.=g:statusline.separator.left
 
-  let statusline.=s:ic.space
+  let statusline.=g:statusline.separator.space
   let statusline.="%5*"
-  let statusline.="%{CocStatus()}"
-  let statusline.=s:ic.space
+  let statusline.=g:statusline.component.coc_status
+  let statusline.=g:statusline.separator.space
 
-  let statusline.="%=" " Middle
+  let statusline.="%=" " (Middle) align from right
+
   let statusline.="%5*"
+  let statusline.=g:statusline.separator.space
+  let statusline.=g:statusline.component.tasktimer_status
+  let statusline.=g:statusline.separator.space
 
-  let statusline.=s:ic.space
-  let statusline.="%{TaskTimerStatus()}"
-  let statusline.=s:ic.space
+  let statusline.=g:statusline.separator.space
+  let statusline.=g:statusline.component.space_width
+  let statusline.=g:statusline.separator.space
 
-  let statusline.=s:ic.space
-  let statusline.="%{&expandtab?'Spc:':'Tab:'}"
-  let statusline.="%{&shiftwidth}"
-  let statusline.=s:ic.space
-
-  let statusline.=s:ic.space
-  let statusline.="%{''!=#&filetype?&filetype:'none'}"
-  let statusline.=s:ic.space
+  let statusline.=g:statusline.separator.space
+  let statusline.=g:statusline.component.filetype
+  let statusline.=g:statusline.separator.space
 
   let statusline.="%4*"
-  let statusline.=s:ic.separator.right
+  let statusline.=g:statusline.separator.right
   let statusline.="%3*"
-  let statusline.=s:ic.space
-  let statusline.="%3p%%"
-  let statusline.=s:ic.space
+  let statusline.=g:statusline.separator.space
+  let statusline.=g:statusline.component.percent
+  let statusline.=g:statusline.separator.space
 
   let statusline.="%2*"
-  let statusline.=s:ic.separator.right
+  let statusline.=g:statusline.separator.right
   let statusline.="%1*"
-  let statusline.=s:ic.space
-  let statusline.="%3l:%-2v"
-  let statusline.=s:ic.space
+  let statusline.=g:statusline.separator.space
+  let statusline.=g:statusline.component.lineinfo
+  let statusline.=g:statusline.separator.space
   return statusline
 endfunction
 
 function! _inactive_status()
   let statusline=""
   let statusline.="%6*"
-  let statusline.=s:ic.space
-  let statusline.="%<"
-  let statusline.="%{&modified?'●':!g:nerdfont_loaded?'':nerdfont#find()}"
-  let statusline.=s:ic.space
-  let statusline.="%t"
-  let statusline.=s:ic.space
+  let statusline.=g:statusline.separator.space
+  let statusline.=g:statusline.component.modified
+  let statusline.=g:statusline.separator.space
+  let statusline.="%<" " turncate left
+  let statusline.=g:statusline.component.filename
+  let statusline.=g:statusline.separator.space
   let statusline.="%4*"
-  let statusline.=s:ic.separator.left
-
-  let statusline.="%5*"
-  let statusline.="%="
+  let statusline.=g:statusline.separator.left
   let statusline.="%5*"
 
+  let statusline.="%=" " (Middle) align from right
+
+  let statusline.="%5*"
   let statusline.="%4*"
-  let statusline.=s:ic.separator.right
+  let statusline.=g:statusline.separator.right
   let statusline.="%6*"
-  let statusline.=s:ic.space
-  let statusline.="%3p%%"
-  let statusline.=s:ic.space
+  let statusline.=g:statusline.separator.space
+  let statusline.=g:statusline.component.lineinfo
+  let statusline.=g:statusline.separator.space
 
   return statusline
 endfunction
