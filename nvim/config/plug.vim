@@ -5,7 +5,6 @@ Plug 'junegunn/goyo.vim',{ 'on': 'Goyo' }
 " Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'Yggdroot/indentLine'
-Plug 'cossonleo/neo-smooth-scroll.nvim',{ 'on': 'CocStart' }
 " => Functionality-&-Helpers ===============================
 Plug 'tools-life/taskwiki'
 Plug 'hasansujon786/notifications.vim'
