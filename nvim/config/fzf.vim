@@ -15,7 +15,7 @@ nnoremap <silent> <C-k><C-k> :History:<CR>
 
 nnoremap <A-/> :RG!<space>
 xnoremap <A-/> "zy:RG! <C-r>z<CR>
-nnoremap <silent> <C-k>l :Lines<CR>
+nnoremap <silent> // :BLines<CR>
 
 " Enhanced RipGrep integration with fzf
 command! -nargs=* -bang RG call hasan#fzf#_ripgrep(<q-args>, <bang>0, '')

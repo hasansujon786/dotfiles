@@ -5,7 +5,7 @@ VimWiki
 config
 github
 repo
-Admin
+admin
 rebase
 diff
 init
@@ -19,4 +19,5 @@ CocList
 refactor
 Backlink
 Backlinks
----
+cheatsheet
+plugin

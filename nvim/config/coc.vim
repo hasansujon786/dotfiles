@@ -103,10 +103,6 @@ inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float
 vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
-" Find symbol of current document.
-let g:coc_lsp_filetypes = ['vim', 'javascript', 'typescript', 'vue', 'json', 'html', 'css', 'scss']
-nnoremap <silent><nowait><expr> // index(g:coc_lsp_filetypes, &ft) >= 0 ? ":<C-u>CocList outline<cr>" : ":<C-u>BLines<cr>"
-
 " => coc-commands ===============================
 " Save current buffer without saving the file.
 command! -nargs=0 SaveWithoutFormat :noa w
@@ -116,6 +112,9 @@ command! -nargs=0 Format :call CocAction('format')
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
+" Find symbol of current document.
+let g:coc_lsp_filetypes = ['vim', 'javascript', 'typescript', 'vue', 'json', 'html', 'css', 'scss']
+command! BetterSearch :call hasan#coc#_better_search()
 
 " }}}
 " => coc-extensions-list --------------------------- {{{

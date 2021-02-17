@@ -350,7 +350,7 @@ nnoremap <leader>w? :VimwikiUISelect<CR>
 " / is for search ---------------------------------------- {{{
 let g:which_key_map['/'] = {
       \ 'name' : '+search',
-      \ '/' : [':BLines'                , 'Search buffer line'],
+      \ '/' : [':BetterSearch'          , 'Better search'],
       \ 'd' : [':RGCurDir'              , 'Search current directory'],
       \ 'D' :                             'Search other directory',
       \ 'p' :                             'Search project',

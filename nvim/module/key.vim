@@ -130,6 +130,8 @@ nnoremap <silent> ]<TAB> :tabmove+<CR>
 nnoremap <silent> [<TAB> :tabmove-<CR>
 
 " Quickfix list
+nmap ]a :lnext<CR>
+nmap [a :lprev<CR>
 nmap ]q :cnext<CR>
 nmap [q :cprev<CR>
 nmap ]Q :clast<CR>

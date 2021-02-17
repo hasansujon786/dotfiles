@@ -10,6 +10,8 @@ let g:vimwiki_key_mappings =
   \ {
   \   'global': 0,
   \ }
+" nnoremap <leader>gt :VimwikiRebuildTags!<cr>:VimwikiGenerateTagLinks<cr><c-l>
+" nnoremap <silent><buffer> <leader><bs> :VimwikiBacklinks<cr>
 xnoremap <silent> <Plug>VimwikiCreateLinkTag :call hasan#vimwiki#_create_link_tag()<CR>
 " gZ
 
