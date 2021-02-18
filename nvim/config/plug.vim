@@ -92,7 +92,6 @@ source ~/dotfiles/nvim/config/coc.vim
 source ~/dotfiles/nvim/config/hlnext.vim
 source ~/dotfiles/nvim/config/vim-wiki.vim
 " source ~/dotfiles/nvim/config/lightline.vim
-source ~/dotfiles/nvim/config/customstatusline.vim
 source ~/dotfiles/nvim/config/detect_current_mode.vim
 source ~/dotfiles/nvim/config/tabline.vim
 source ~/dotfiles/nvim/config/vim-vue-plugin.vim

@@ -32,7 +32,6 @@ endfunction
 function! hasan#goyo#goyo_leave()
   let g:goyo_is_running = v:false
   " execute 'set background=' . g:background_before_goyo
-  source ~/dotfiles/nvim/config/customstatusline.vim
   source ~/dotfiles/nvim/config/tabline.vim
   call hasan#color#load_custom_highlight()
 

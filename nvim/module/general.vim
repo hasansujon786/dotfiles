@@ -108,8 +108,9 @@ set numberwidth=4
 set foldcolumn=0                                       " display gutter markings for folds
 set signcolumn=yes                                     " Always show the signcolumn,
 
-" Tabline
+" Tabline & Statusline
 set showtabline=2
+set laststatus=2
 
 " Windwo & buffer
 set cmdheight=1                                        " Height of the command bar
