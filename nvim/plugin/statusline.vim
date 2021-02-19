@@ -113,7 +113,8 @@ augroup StausLine
   au FocusGained,WinEnter,BufEnter,BufDelete,BufWinLeave,SessionLoadPost,FileChangedShellPost
         \ * call statusline#_update_all()
   au FocusLost * call statusline#_blur()
-  au VimEnter * call statusline#_set_colorscheme()
+  au VimEnter,ColorScheme * call statusline#_set_colorscheme()
   au User GoyoLeave nested call statusline#_set_colorscheme()
+  au User GoyoEnter nested call statusline#_hide_statusline_colors()
 augroup END
 

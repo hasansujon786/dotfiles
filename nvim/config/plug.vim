@@ -71,6 +71,7 @@ Plug 'leafOfTree/vim-vue-plugin',{ 'on': 'CocStart' }
 " Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' } " markdown preview
 " Plug 'glts/vim-radical'            " Convert binary, hex, etc..
 " Plug 'editorconfig/editorconfig-vim'
+" https://github.com/TimUntersberger/neogit
 
 " Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }   " css color
 " Plug 'dragvisuals.vim'

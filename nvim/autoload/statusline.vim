@@ -109,6 +109,10 @@ function! statusline#_set_colorscheme()
   let colorscheme = get(g:statusline, 'colorscheme', 'one')
   call function('statusline#colorscheme#'.colorscheme.'#_set_colorscheme')()
 endfunction
+function! statusline#_hide_statusline_colors()
+  let colorscheme = get(g:statusline, 'colorscheme', 'one')
+  call function('statusline#colorscheme#'.colorscheme.'#_hide_statusline_colors')()
+endfunction
 
 function! statusline#_update_all()
   let w = winnr()

@@ -10,11 +10,27 @@ function statusline#colorscheme#one#_set_colorscheme() abort
   " Secondary section color (inactive)
   hi User6 guibg=#3E4452 guifg=#717785
   " Banner section color
-  hi User7 guibg=tomato guifg=white gui=bold
-  " hi User8 guibg=tomato guifg=#ABB2BF
+  hi User7 guibg=tomato guifg=black gui=bold
   " Default color
   hi statusline   guibg=#2C323C guifg=#ABB2BF
   hi StatusLineNC guibg=#2C323C guifg=#717785
+endfunction
+
+function! statusline#colorscheme#one#_hide_statusline_colors() abort
+  if( &background == 'dark' )
+    hi User1 guibg=#282C34 guifg=#282C34
+    hi User2 guibg=#282C34 guifg=#282C34
+    " Secondary section color
+    hi User3 guibg=#282C34 guifg=#282C34
+    hi User4 guibg=#282C34 guifg=#282C34
+    " Statusline middle
+    hi User5 guibg=#282C34 guifg=#282C34
+    " Secondary section color (inactive)
+    hi User6 guibg=#282C34 guifg=#282C34
+    " Default color
+    hi statusline   guibg=#282C34 guifg=#282C34
+    hi StatusLineNC guibg=#282C34 guifg=#282C34
+  endif
 endfunction
 
 let s:status_color={
