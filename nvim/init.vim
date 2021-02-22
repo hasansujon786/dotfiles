@@ -17,7 +17,7 @@
 " endif
 
 source ~/dotfiles/nvim/module/general.vim
-source ~/dotfiles/nvim/config/plug.vim
+source ~/dotfiles/nvim/module/config.vim
 source ~/dotfiles/nvim/module/fold.vim
 source ~/dotfiles/nvim/module/autocmd.vim
 source ~/dotfiles/nvim/module/command.vim

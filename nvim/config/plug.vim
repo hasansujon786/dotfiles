@@ -1,15 +1,20 @@
 call plug#begin('~/dotfiles/nvim/plugged')
 
-" => Visual-&-Theme ========================================
+" => Visual-&-Theme ======================================== {{{
 Plug 'junegunn/goyo.vim',{ 'on': 'Goyo' }
-" Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'Yggdroot/indentLine'
-" => Functionality-&-Helpers ===============================
-Plug 'tools-life/taskwiki'
-Plug 'hasansujon786/notifications.vim'
-Plug 'dhruvasagar/vim-dotoo',{ 'on': 'CocStart' }
+" }}}
+
+" => Productivity ========================================== {{{
 Plug 'vimwiki/vimwiki',{ 'branch': 'dev', 'on': ['VimwikiIndex', 'VimwikiTabIndex', 'VimwikiUISelect', 'VimwikiDiaryIndex', 'VimwikiMakeDiaryNote','VimwikiTabMakeDiaryNote'] }
+Plug 'dhruvasagar/vim-dotoo',{ 'on': 'CocStart' }
+Plug 'wsdjeg/vim-todo',{ 'on': 'OpenTodo' }
+Plug 'tools-life/taskwiki'
+Plug 'mkropat/vim-tt'
+" }}}
+
+" => Functionality-&-Helpers =============================== {{{
 Plug 'tpope/vim-eunuch',{ 'on': ['Delete','Move','Rename','Mkdir','Chmod'] } "for moving and manipulating files / directories.
 Plug 'voldikss/vim-floaterm',{ 'on': [ 'FloatermNew', 'FloatermToggle' ] }
 Plug 'mg979/vim-visual-multi',{'branch': 'master', 'on': 'CocStart' }
@@ -25,12 +30,11 @@ Plug 'tpope/vim-surround',{ 'on': 'CocStart' }
 Plug 'justinmk/vim-sneak',{ 'on': 'CocStart' }
 Plug 'Konfekt/FastFold',{ 'on': 'CocStart' }
 Plug 'tpope/vim-repeat',{ 'on': 'CocStart' }
-Plug 'wsdjeg/vim-todo',{ 'on': 'OpenTodo' }
 
 Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'hasansujon786/notifications.vim'
 Plug 'liuchengxu/vim-which-key'
 Plug 'Konfekt/vim-CtrlXA'
-Plug 'mkropat/vim-tt'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
@@ -43,19 +47,21 @@ Plug 'lambdalisue/fern.vim'
 " Plug 'lambdalisue/glyph-palette.vim'
 " Plug 'lambdalisue/fern-bookmark.vim'
 Plug 'lambdalisue/vim-manpager',{'on': 'Man'}
+" }}}
 
-" => Auto completion ========================================
-Plug 'neoclide/coc.nvim',{'branch': 'release', 'on': 'CocStart' }
-Plug 'jiangmiao/auto-pairs',{ 'on': 'CocStart' }
-Plug 'honza/vim-snippets',{ 'on': 'CocStart' }
-
-" => Git ===================================================
+" => Git =================================================== {{{
 Plug 'airblade/vim-gitgutter',{ 'on': 'CocStart' }
 Plug 'tpope/vim-fugitive',{ 'on': 'CocStart' }
 Plug 'tpope/vim-rhubarb',{ 'on': 'CocStart' }
 Plug 'junegunn/gv.vim',{ 'on': 'CocStart' }
+" }}}
 
-" => Languae-support =======================================
+" => Languae-support ======================================= {{{
+" Auto Completion
+Plug 'neoclide/coc.nvim',{'branch': 'release', 'on': 'CocStart' }
+Plug 'jiangmiao/auto-pairs',{ 'on': 'CocStart' }
+Plug 'honza/vim-snippets',{ 'on': 'CocStart' }
+
 " html & css
 Plug 'mattn/emmet-vim',{ 'on': 'CocStart' }
 Plug 'ap/vim-css-color',{ 'on': 'CocStart' }
@@ -65,9 +71,9 @@ Plug 'ap/vim-css-color',{ 'on': 'CocStart' }
 Plug 'sheerun/vim-polyglot',{ 'on': 'CocStart' }    " Full lang support
 " Plug 'jparise/vim-graphql'
 Plug 'leafOfTree/vim-vue-plugin',{ 'on': 'CocStart' }
+" }}}
 
-
-" => Not-listed ============================================
+" => Not-listed ============================================ {{{
 " Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' } " markdown preview
 " Plug 'glts/vim-radical'            " Convert binary, hex, etc..
 " Plug 'editorconfig/editorconfig-vim'
@@ -76,28 +82,8 @@ Plug 'leafOfTree/vim-vue-plugin',{ 'on': 'CocStart' }
 " Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }   " css color
 " Plug 'dragvisuals.vim'
 " Plug 'vmath.vim'
+" }}}
 call plug#end()
-
-source ~/dotfiles/nvim/config/quick-scope.vim
-source ~/dotfiles/nvim/config/onedark.vim
-source ~/dotfiles/nvim/config/indentLine.vim
-source ~/dotfiles/nvim/config/auto-pairs.vim
-source ~/dotfiles/nvim/config/fzf.vim
-source ~/dotfiles/nvim/config/fern.vim
-source ~/dotfiles/nvim/config/sneak.vim
-source ~/dotfiles/nvim/config/vim-gitgutter.vim
-source ~/dotfiles/nvim/config/vim-fugitive.vim
-source ~/dotfiles/nvim/config/vim-floaterm.vim
-source ~/dotfiles/nvim/config/vim-visual-multi.vim
-source ~/dotfiles/nvim/config/coc.vim
-source ~/dotfiles/nvim/config/hlnext.vim
-source ~/dotfiles/nvim/config/vim-wiki.vim
-" source ~/dotfiles/nvim/config/lightline.vim
-source ~/dotfiles/nvim/config/detect_current_mode.vim
-source ~/dotfiles/nvim/config/tabline.vim
-source ~/dotfiles/nvim/config/vim-vue-plugin.vim
-source ~/dotfiles/nvim/config/dotoo.vim
-source ~/dotfiles/nvim/config/emmet.vim
 
 " Plug 'xolox/vim-session'
 " Plug 'romgrk/github-light.vim'
