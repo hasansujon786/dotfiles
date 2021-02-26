@@ -9,6 +9,7 @@
 augroup mygroup
   autocmd!
   " Highlight the symbol and its references when holding the cursor.
+  " @todo: disable hilight in css
   autocmd CursorHold * if exists('g:did_coc_loaded') | silent call CocActionAsync('highlight') | endif
   " Setup formatexpr specified filetype(s).
   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')

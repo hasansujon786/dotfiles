@@ -45,6 +45,7 @@ augroup Focus
   au User GoyoLeave nested call hasan#goyo#goyo_leave()
 
   if has_key(environ(), 'TMUX')
+    " @todo: fix this & add project name
     autocmd VimEnter,VimResume,FocusGained * call system('tmux set status off')
     autocmd VimLeave,VimSuspend,FocusLost * call system('tmux set status on')
   endif
