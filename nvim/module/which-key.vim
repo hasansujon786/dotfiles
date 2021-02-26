@@ -96,6 +96,20 @@ let g:which_key_map['b'] = {
       \ }
 " }}}
 
+" c is for color ----------------------------------------- {{{
+
+let g:which_key_map['c'] = {
+      \ 'name' : '+colorv',
+      \ 'e': [':ColorVEdit'                    , 'ColorVEdit'],
+      \ 'E' : [':ColorVEditAll'                 , 'ColorVEditAll'],
+      \ 'v' : [':ColorV'                        , 'ColorV'],
+      \ 'i' : {
+      \ 'name' : '+colorv-insert',
+      \    'i' : [':ColorVInsert'               , 'ColorVInsert'],
+      \  },
+      \ }
+" }}}
+
 " e is for edit ------------------------------------------ {{{
 let g:which_key_map['e'] = {
       \ 'name' : '+edit',

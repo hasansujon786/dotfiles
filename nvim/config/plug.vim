@@ -47,6 +47,8 @@ Plug 'lambdalisue/fern.vim'
 " Plug 'lambdalisue/glyph-palette.vim'
 " Plug 'lambdalisue/fern-bookmark.vim'
 Plug 'lambdalisue/vim-manpager',{'on': 'Man'}
+
+Plug 'gu-fan/colorv.vim',{ 'on': ['ColorV','ColorVInsert','ColorVEdit','ColorVEditAll'] }
 " }}}
 
 " => Git =================================================== {{{
