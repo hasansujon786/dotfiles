@@ -43,12 +43,6 @@ augroup Focus
   " Goyo Events
   au User GoyoEnter nested call hasan#goyo#goyo_enter()
   au User GoyoLeave nested call hasan#goyo#goyo_leave()
-
-  if has_key(environ(), 'TMUX')
-    " @todo: fix this & add project name
-    autocmd VimEnter,VimResume,FocusGained * call system('tmux set status off')
-    autocmd VimLeave,VimSuspend,FocusLost * call system('tmux set status on')
-  endif
 augroup END
 
 augroup FernEvents
