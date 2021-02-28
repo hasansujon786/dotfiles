@@ -45,6 +45,10 @@ let g:fzf_action = {
       \ 'ctrl-v': 'vsplit',
       \}
 
+let g:fzf_project_files_filter_oldfiles = {
+      \ 'dotfiles' : 'v:val !~# "/dotfiles/nvim/plugged/"'
+      \}
+
 " Requires ripgrep
 " let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/*"'
 " let $FZF_DEFAULT_OPTS =' --color=dark,

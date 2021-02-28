@@ -61,14 +61,24 @@ function! hasan#fzf#_project_recent_files(preview, bang)
         \ a:bang))
 endfunction
 
+function s:oldfiles_filter() abort
+  let default_filter = 'filereadable(fnamemodify(v:val, ":p")) && v:val =~ getcwd() && v:val !~# ".git/"'
+  if !exists('g:fzf_project_files_filter_oldfiles')
+    return default_filter
+  endif
+
+  let user_defined_filter = get(g:fzf_project_files_filter_oldfiles, fnamemodify(getcwd(), ':t'), '')
+  return user_defined_filter == '' ? default_filter : default_filter.' && '.user_defined_filter
+endfunction
+
 function! s:get_project_recent_files()
   " recent_files =
-  " 1. Sorted buffers list | filter: 'not term'
-  " 2. oldfiles | filter: 'is readable', 'is inside cwd' & 'not in .git dir'
+  " 1. Sorted buffers list --> filter: 'not term'
+  " 2. oldfiles --> filter: 'is readable', 'is inside cwd' & 'not in .git dir'
   " 3. git ls-files
-  let recent_files = filter(map(fzf#vim#_buflisted_sorted(), 'bufname(v:val)'), 'len(v:val) && v:val !~ "term://" && v:val !~# ".git/"')
-        \ + filter(copy(v:oldfiles), 'filereadable(fnamemodify(v:val, ":p")) && v:val =~ getcwd() && v:val !~# ".git/"')
-        \ + split(system('git ls-files'), '')
+  let recent_files = filter(map(fzf#vim#_buflisted_sorted(), 'bufname(v:val)'), 'len(v:val) && v:val !~ "term://"')
+        \ + filter(copy(v:oldfiles), s:oldfiles_filter())
+        \ + systemlist('git ls-files')
   return fzf#vim#_uniq(map(filter([expand('%')], 'len(v:val)') + recent_files, 'fnamemodify(v:val, ":~:.")'))
 endfunction
 
