@@ -137,14 +137,17 @@ endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Projects {{{
+let g:fzf_projects_file = '~/.config/vim-projects'
+
 function! hasan#fzf#_projects(bang) abort
+  call hasan#utils#_filereadable_and_create(g:fzf_projects_file, v:true)
   let options = ['--header-lines', !empty(fnamemodify(getcwd(), ':~')), '--prompt', 'Projects> ']
 
   call fzf#run(s:custom_wrap({
         \'options': options,
         \'action': s:projects_action,
         \'sink*': function('s:projects_list_sink'),
-        \'source': [fnamemodify(getcwd(), ':~')] + s:read_list(expand(s:projects_config_file), 15)},
+        \'source': [fnamemodify(getcwd(), ':~')] + s:read_list(expand(g:fzf_projects_file), 15)},
         \ a:bang))
 endfunction
 
@@ -167,14 +170,13 @@ function! s:projects_list_sink(args) abort
 endfunction
 
 function! s:edit_projects_config_file(...) abort
-  execute('split '.s:projects_config_file)
+  execute('split '.g:fzf_projects_file)
 endfunction
 
 function s:add_path_to_projects(...) abort
-  call s:write_list(s:projects_config_file, fnamemodify(getcwd(), ':~'), fnamemodify(getcwd(), ':t'), 50)
+  call s:write_list(g:fzf_projects_file, fnamemodify(getcwd(), ':~'), fnamemodify(getcwd(), ':t'), 50)
 endfunction
 
-let s:projects_config_file = '~/.config/vim-projects'
 let s:projects_action = {
       \ 'ctrl-e': function('s:edit_projects_config_file'),
       \ 'ctrl-a': function('s:add_path_to_projects'),
@@ -184,13 +186,16 @@ let s:projects_action = {
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Bookmarks {{{
+let g:fzf_bookmarks_file = '~/.config/vim-bookmarks'
+
 function! hasan#fzf#_bookmar(bang)
+  call hasan#utils#_filereadable_and_create(g:fzf_bookmarks_file, v:true)
   let options = ['-m', '--prompt', 'Bookmarks> ']
 
   call fzf#run(s:custom_wrap({
         \'options': options,
         \'sink*': function('s:bookmark_sink'),
-        \'source': s:read_list(expand(s:bookmark_config_file), 15)},
+        \'source': s:read_list(expand(g:fzf_bookmarks_file), 15)},
         \ a:bang))
 endfunction
 
@@ -208,14 +213,12 @@ function hasan#fzf#set_bookmark() abort
   let bm_name = input == '' ? default_name : input
 
   call _#echoSuccess('New bookmark has written')
-  call s:write_list(s:bookmark_config_file, fname, bm_name, 50)
+  call s:write_list(g:fzf_bookmarks_file, fname, bm_name, 50)
 endfunction
 
 function hasan#fzf#edit_bookmark() abort
-  execute('split '.s:bookmark_config_file)
+  execute('split '.g:fzf_bookmarks_file)
 endfunction
-
-let s:bookmark_config_file = '~/.config/vim-bookmarks'
 " }}}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

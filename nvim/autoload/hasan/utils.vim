@@ -336,3 +336,15 @@ function! hasan#utils#_get_visual_selection()
   return join(lines, "\n")
 endfunction
 " }}}
+
+" filereadable_and_create {{{
+function hasan#utils#_filereadable_and_create(file,create) abort
+  let file_path = fnamemodify(a:file, ':p')
+  let exists = filereadable(file_path)
+  if !exists && a:create
+    call system('mkdir -p '.fnamemodify(file_path, ':h'))
+    call system('touch '.file_path)
+  endif
+  return exists
+endfunction
+" }}}
