@@ -5,7 +5,7 @@ function! s:custom_wrap(spec, fullscreen)
   let win = a:fullscreen ? { 'window': '-tabnew' } : copy(get(g:, 'fzf_layout', {}))
   let opts = join(map(a:spec.options, 'sp . v:val . sp'))
 
-  let global_action = copy(get(g:, 'fzf_action', {}))
+  let global_action = get(g:, 'fzf_action', {})
   let action = copy(get(a:spec, 'action', global_action))
   if (len(keys(action)) > 0) | let opts = opts." --expect=".join(keys(action), ',') | endif
 
@@ -83,7 +83,6 @@ function! s:get_project_recent_files()
 endfunction
 
 function! s:project_recent_files_sink(args)
-  let g:foo = a:args
   " if no line has selected
   if len(a:args) < 2 | return |endif
   " action: can be '', 'ctrl-t','ctrl-v' etc.
@@ -137,49 +136,66 @@ endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Projects {{{
-let g:fzf_projects_file = '~/.config/vim-projects'
+let g:fzf_projects_file = '~/.coc-project'
 
 function! hasan#fzf#_projects(bang) abort
-  call hasan#utils#_filereadable_and_create(g:fzf_projects_file, v:true)
   let options = ['--header-lines', !empty(fnamemodify(getcwd(), ':~')), '--prompt', 'Projects> ']
 
   call fzf#run(s:custom_wrap({
         \'options': options,
         \'action': s:projects_action,
         \'sink*': function('s:projects_list_sink'),
-        \'source': [fnamemodify(getcwd(), ':~')] + s:read_list(expand(g:fzf_projects_file), 15)},
+        \'source': [fnamemodify(getcwd(), ':~')] + s:get_project_list(expand(g:fzf_projects_file), -1)},
         \ a:bang))
 endfunction
 
-function! s:projects_list_sink(args) abort
-  let action = a:args[0]
+function! s:get_project_list(fpath, max) abort
+  let data = readfile(a:fpath, '', a:max)
+  let list = keys(json_decode(data))
+  return map(list, function('s:prettyfy_line'))
+endfunction
 
+function s:prettyfy_line(idx, val) abort
+  let padding = 50
+  let title = fnamemodify(a:val, ':t')
+  let sp_nr = len(title) < padding ? padding - len(title) : 0
+  let line = printf('%s %'.sp_nr.'s %s', title, '> ', fnamemodify(a:val, ':~'))
+  return line
+endfunction
+
+function! s:projects_list_sink(args) abort
+  " if no line has selected
+  if len(a:args) < 2 | return |endif
+
+  " action: can be '', 'ctrl-t','ctrl-v' etc.
+  let action = a:args[0]
   if (action != '' && _#isFunc(s:projects_action[action]))
     let Funcref = s:projects_action[action]
     return Funcref(a:args)
   endif
 
-  " if no line has selected
-  if len(a:args) < 2 | return |endif
-  " action: can be '', 'ctrl-t','ctrl-v' etc.
   let line = split(a:args[1], '>  ')
   let path = line[1]
-
   execute('cd'.path)
   execute('edit '.path)
 endfunction
 
-function! s:edit_projects_config_file(...) abort
-  execute('split '.g:fzf_projects_file)
+function! s:open_coc_project(...) abort
+  exe 'CocList project'
 endfunction
 
-function s:add_path_to_projects(...) abort
-  call s:write_list(g:fzf_projects_file, fnamemodify(getcwd(), ':~'), fnamemodify(getcwd(), ':t'), 50)
+function s:open_project_in_tmux_tab(line) abort
+  if has_key(environ(), 'TMUX')
+    let path = split(a:line[1], '>  ')[1]
+    exe printf('silent !tmux new-window "cd %s && nvim %s"' ,path,path)
+  else
+    echoerr 'No tmux'
+  endif
 endfunction
 
 let s:projects_action = {
-      \ 'ctrl-e': function('s:edit_projects_config_file'),
-      \ 'ctrl-a': function('s:add_path_to_projects'),
+      \ 'ctrl-x': function('s:open_coc_project'),
+      \ 'ctrl-t': function('s:open_project_in_tmux_tab'),
       \}
 " }}}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
