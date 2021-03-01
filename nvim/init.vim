@@ -34,12 +34,3 @@ source ~/dotfiles/nvim/module/playground.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-nnoremap <A-n> m
-nnoremap <A-N> M
-vnoremap <A-n> m
-vnoremap <A-N> M
-inoremap <A-n> m
-inoremap <A-N> M
-cnoremap <A-n> m
-cnoremap <A-N> M
-

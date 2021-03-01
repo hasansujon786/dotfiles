@@ -142,6 +142,10 @@ function! hasan#utils#azw() abort
 endfunction
 
 function! hasan#utils#auto_zoom_window() abort
+  " @todo: auto add & remove event
+  " automatically zoom window on focus
+  autocmd! WinEnter * if exists('g:auto_zoom_window') | call hasan#utils#azw() | endif
+
   if !exists('g:auto_zoom_window') || g:auto_zoom_window == 0
     let g:auto_zoom_window = 1
     wincmd _

@@ -11,15 +11,9 @@ augroup vimrcEx
   " Don't do it for commit messages, when the position is invalid, or when
   " inside an event handler (happens when dropping a file on gvim).
   autocmd BufReadPost *
-        \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") && expand('%:t') != 'COMMIT_EDITMSG' |
+        \ if exists('g:all_plug_loaded') && &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") && expand('%:t') != 'COMMIT_EDITMSG' |
         \   exe "normal g`\"" |
         \ endif
-
-  " automatically zoom window on focus
-  autocmd WinEnter * if exists('g:auto_zoom_window') | call hasan#utils#azw() | endif
-
-  " Custom fzf statusline
-  autocmd User FzfStatusLine call hasan#autocmd#fzf_statusline()
 
   " Neovim terminal
   autocmd TermOpen * setfiletype terminal | set bufhidden=hide
@@ -76,5 +70,5 @@ endfunction
 
 augroup LazyLoadPlug
   autocmd!
-  autocmd CursorHold,CursorHoldI * call BootAllPlugins() | autocmd! LazyLoadPlug
+  autocmd VimEnter * ++once call timer_start(300, 'BootAllPlugins')
 augroup end

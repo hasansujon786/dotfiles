@@ -33,6 +33,7 @@ endfunction
 " RG {{{
 function! hasan#fzf#_ripgrep(query, fullscreen, dir)
   let prompt = ['--prompt', 'RG> ']
+  " @todo: add --hidden to RG
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
   if(a:dir != '')
     let prompt = ['--prompt', 'RG ('.fnamemodify(a:dir, ':~:t').')> ']
