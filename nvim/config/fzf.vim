@@ -34,18 +34,18 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.7 } }
 " let g:fzf_layout = { 'down': '~70%' }
 " let g:fzf_files_options = '--reverse --preview "(cat {})"'
 " let g:fzf_preview_window = 'right:60%'
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
 let g:fzf_action = {
       \ 'ctrl-q': function('s:build_quickfix_list'),
       \ 'ctrl-t': 'tab split',
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit',
       \}
-
-function! s:build_quickfix_list(lines)
-  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-  copen
-  cc
-endfunction
 
 let g:fzf_project_files_filter_oldfiles = {
       \ 'dotfiles' : 'v:val !~# "/dotfiles/nvim/plugged/"'
