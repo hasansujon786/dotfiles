@@ -62,6 +62,7 @@ let g:statusline = {
   \   'coc_status': "%{CocStatus()}",
   \   'tasktimer_status': "%{TaskTimerStatus()}",
   \   'banner': "%{BannerMsg()}",
+  \   'mini_scrollbar': "%{Mini_scrollbar()}",
   \   },
   \ 'separator': {'left': '', 'right': '', 'space': ' '},
   \ 'subseparator': {'left': '', 'right': ''},
@@ -103,6 +104,16 @@ function BannerMsg() abort
   return exists('g:statusline_banner_is_hidden') && !g:statusline_banner_is_hidden ? line : ''
 endfunction
 
+function! Mini_scrollbar()
+  " https://www.reddit.com/r/vim/comments/lvktng/tiny_statusline_scrollbar/
+  " Plug 'https://github.com/drzel/vim-line-no-indicator'
+  let width = 9
+  let perc = (line('.') - 1.0) / (max([line('$'), 2]) - 1.0)
+  let before = float2nr(round(perc * (width - 3)))
+  let after = width - 3 - before
+  " return '[' . repeat(' ',  before) . '=' . repeat(' ', after) . ']'
+  return repeat('░',  before) . '▒' . repeat('░', after)
+endfunction
 " }}}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
