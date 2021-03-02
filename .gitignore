@@ -2,7 +2,6 @@
 
 # nvim
 tt.state
-/playground.vim
 /nvim/plugged
 /nvim/events.log
 log.log
