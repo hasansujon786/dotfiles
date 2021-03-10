@@ -58,16 +58,17 @@ function! s:tabs()
   let tabs = ''
   for tab_nr in range(1,tabpagenr('$'))
     " set the tab page number (for mouse clicks)
-    let tabs .= '%' . (tab_nr) . 'T'
-    " select the separator highlighting
-    let tabs .= s:is_turncate(tab_nr) ? '': tab_nr == tabpagenr() ?  '%#TabLineSelSp#▎%#TabLineSel#' :  '%#TabLineSp#▎%#TabLine#'
-    " the label
-    let tabs .= s:is_turncate(tab_nr) ? '' : ' %-'.s:tab_ln.'{TabLabel('.tab_nr.')}'
-    let close_tab = '%'.tab_nr.'X %X '
-    let tabs .= s:is_turncate(tab_nr) ? '' : s:is_tabwin_modified(tab_nr) ? '●  ' :
-          \ (tabpagenr('$') == 1 ? '%#TabLineSelX#'.close_tab : close_tab)
+    let head = '%'. (tab_nr).'T'
+    let separator = tab_nr == tabpagenr() ? '%#TabLineSelSp#▎%#TabLineSel#' : '%#TabLineSp#▎%#TabLine#'
+    let label = '%-'.s:tab_ln.'{TabLabel('.tab_nr.')}'
+    let close_btn = (tabpagenr('$') == 1 ? '%#TabLineSelX#' : '').
+          \'%'.tab_nr.'X'.g:tabline.tab_close_icon.'%X'
+    let tail = s:is_tabwin_modified(tab_nr) ? g:tabline.modified_icon : close_btn
+
+    let tab = head.separator.' '.label.tail.'  '
+    let tabs .= s:is_turncate(tab_nr) ? '' : tab
   endfor
-  let tabs .= '%#TabLineSp#▎'
+  let tabs .= '%#TabLineSp#▎'    " last separetor
   let tabs .= '%#TabLineFill#%T' " reset colors from here
   return tabs
 endfunction
