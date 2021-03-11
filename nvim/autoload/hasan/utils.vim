@@ -249,8 +249,9 @@ endfunction
 " }}} CopyFileNameToClipBoard "
 
 " clear_buffers {{{ "
-function! hasan#utils#clear_buffers() abort
-  if confirm('Kill all other buffers?', "&Yes\n&No\n&Cancel", 3) == 1
+function! hasan#utils#clear_other_buffers() abort
+  call _#echoWarn('>>> Kill all other buffers? <<<')
+  if confirm('', "&Yes\n&No\n&Cancel", 3) == 1
     let blisted = filter(range(1, bufnr('$')), 'buflisted(v:val)')
     for i in blisted
       if i != bufnr('%')
@@ -259,6 +260,19 @@ function! hasan#utils#clear_buffers() abort
         catch
         endtry
       endif
+    endfor
+  endif
+endfunction
+
+function! hasan#utils#clear_all_buffers() abort
+  call _#echoWarn('>>> Kill all buffers? <<<')
+  if confirm('', "&Yes\n&No\n&Cancel", 3) == 1
+    let blisted = filter(range(1, bufnr('$')), 'buflisted(v:val)')
+    for i in blisted
+      try
+        exe 'bw ' . i
+      catch
+      endtry
     endfor
   endif
 endfunction

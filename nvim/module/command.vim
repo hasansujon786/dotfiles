@@ -12,7 +12,6 @@ command! AlternateFile exe "normal! \<c-^>"
 command! -bang Quit call hasan#utils#confirmQuit(<q-bang>)
 command! -nargs=1 JumpToWin call hasan#utils#JumpToWin(<f-args>)
 command! -nargs=0 CycleNumber call hasan#utils#cycle_numbering()
-command! -nargs=0 KillOtherBuffers call hasan#utils#clear_buffers()
 command! -nargs=0 QfixToggle call hasan#utils#quickFix_toggle()
 command! -bang CopyFileNameToClipBoard call hasan#utils#CopyFileNameToClipBoard(<q-bang>)
 command! -nargs=+ RefactorWordInProject call hasan#utils#refactorWordInProject(<f-args>)

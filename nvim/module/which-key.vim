@@ -78,21 +78,21 @@ vmap <leader>af <Plug>(coc-format-selected)
 " b is for buffer ---------------------------------------- {{{
 let g:which_key_map['b'] = {
       \ 'name' : '+buffer',
-      \ '/' : ['Buffers'                            , 'Search-buffers'],
-      \ 'f' : ['bfirst'                             , 'first-buffer'],
-      \ 'l' : ['blast'                              , 'last-buffer'],
-      \ 'n' : ['bnext'                              , 'next-buffer'],
-      \ 'p' : ['bprevious'                          , 'previous-buffer'],
+      \ '/' : [':Buffers'                                     , 'Search buffers'],
+      \ 'f' : [':bfirst'                                      , 'First buffer'],
+      \ 'l' : [':blast'                                       , 'Last buffer'],
+      \ 'n' : [':bnext'                                       , 'Next buffer'],
+      \ 'p' : [':bprevious'                                   , 'Previous buffer'],
       \
-      \ 'k' : ['Bclose'                             , 'delete-buffer'],
-      \ 'K' : ['Todo'                               , 'kill-all-buffers'],
-      \ 'O' : ['KillOtherBuffers'                   , 'kill-other-buffers'],
+      \ 'k' : [':Bclose'                                      , 'Kill this buffer'],
+      \ 'K' : [':call hasan#utils#clear_all_buffers()'       , 'Kill all buffers'],
+      \ 'o' : [':call hasan#utils#clear_other_buffers()'     , 'Kill other buffers'],
       \
-      \ 's' : [':w'                                 , 'Save-buffer'],
-      \ 'S' : [':wa'                                , 'Save-all-buffer'],
+      \ 's' : [':w'                                          , 'Save buffer'],
+      \ 'S' : [':wa'                                         , 'Save all buffer'],
       \
-      \ 'm' : [':call hasan#fzf#set_bookmark()'     , 'Set bookmark'],
-      \ 'M' : [':call hasan#fzf#edit_bookmark()'    , 'Delete bookmark'],
+      \ 'm' : [':call hasan#fzf#set_bookmark()'              , 'Set bookmark'],
+      \ 'M' : [':call hasan#fzf#edit_bookmark()'             , 'Delete bookmark'],
       \ }
 " }}}
 
