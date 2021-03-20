@@ -9,6 +9,10 @@ function! hasan#float#_createCenteredFloatingWindow(edit_file_bufnr, user_option
   let top = "╭" . repeat("─", width - 2) . "╮"
   let mid = "│" . repeat(" ", width - 2) . "│"
   let bot = "╰" . repeat("─", width - 2) . "╯"
+  if get(a:user_options, 'bufname', '') != ''
+    let label = '[ '. a:user_options.bufname .' ]'
+    let bot = "╰" . repeat("─", width - (2 + 1 + len(label))) .label. "─╯"
+  endif
   let lines = [top] + repeat([mid], height - 2) + [bot]
   let bd_bufnr = nvim_create_buf(v:false, v:true)
   call nvim_buf_set_lines(bd_bufnr, 0, -1, v:true, lines)
@@ -58,14 +62,16 @@ function! hasan#float#_fedit(fname, bang)
   wincmd P
   let edit_file_bufnr = bufnr()
   quit
+
   let options = {
-        \'style': {
-        \  '&nu': '1',
-        \  '&rnu': '1',
-        \  '&cursorline': '1',
-        \  '&signcolumn': 'yes',
-        \}
-        \}
+    \'bufname': fnamemodify(bufname(edit_file_bufnr), ':.'),
+    \'style': {
+    \  '&nu': '1',
+    \  '&rnu': '1',
+    \  '&cursorline': '1',
+    \  '&signcolumn': 'yes',
+    \  }
+    \}
   call hasan#float#_createCenteredFloatingWindow(edit_file_bufnr, a:bang == '!' ? {} : options)
 endfunction
 
