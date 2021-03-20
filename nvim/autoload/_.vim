@@ -74,7 +74,7 @@ endfunc
 
 function! _#print_to_float(var_name)
   if(!exists('b:Fedit_bufnr'))
-    call hasan#float#_createCenteredFloatingWindow(0)
+    call hasan#float#_createCenteredFloatingWindow(0, {})
   endif
 
   if (_#isDict(a:var_name))

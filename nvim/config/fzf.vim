@@ -45,6 +45,7 @@ let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit',
+      \ 'ctrl-f': 'Fedit',
       \}
 
 let g:fzf_project_files_filter_oldfiles = {

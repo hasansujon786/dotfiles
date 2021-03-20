@@ -6,7 +6,8 @@ function hasan#color#load_custom_highlight() abort
   hi CursorLineFocus    ctermbg=237 guibg=#3E4452
   hi Notification       guibg=#3E4452 guifg=#E5C07B
   hi VertSplit          guifg=#5c6370 guibg=#363d49
-  hi Floating guibg=#282C34
+  hi Fedit              guibg=#282C34
+  hi FeditBorder        guibg=#282C34 guifg=#5C6370
   " hi NonText            ctermfg=180 guifg=#E5C07B
   " hi SpecialKey         ctermfg=180 guifg=#E5C07B
   " Highlighting same symbols in the buffer at the current cursor position.
