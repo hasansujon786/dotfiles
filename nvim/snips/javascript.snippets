@@ -24,7 +24,7 @@
 #
 # Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
 
-snippet useRF "Custom useReducer template" b
+snippet useReducer "useReducer template" b
 const defaultReducerValue = {}
 function reducder(state, action) {
 	switch (action.type) {
@@ -41,7 +41,7 @@ function reducder(state, action) {
 const [state, dispatch] = useReducer(reducder, defaultReducerValue)
 endsnippet
 
-snippet creCF "Custom createContext template" b
+snippet createContext "createContext template" b
 import React, {createContext} from 'react'
 
 export const Context = createContext()
@@ -55,4 +55,8 @@ function ContextProvider(props) {
 }
 
 export default ContextProvider
+endsnippet
+
+snippet cn "JSX attribute className"
+className='$1'
 endsnippet

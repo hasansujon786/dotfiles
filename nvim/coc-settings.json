@@ -7,6 +7,7 @@
   "prettier.bracketSpacing": true,
   "prettier.statusItemText": "Pt",
   "prettier.disableSuccessMessage": true,
+  "prettier.jsxSingleQuote": true,
   //"coc.preferences.formatOnSaveFiletypes": [
   //"css",
   //"markdown",
