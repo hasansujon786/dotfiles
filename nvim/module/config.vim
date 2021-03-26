@@ -1,5 +1,6 @@
 
 source ~/dotfiles/nvim/config/plug.vim
+source ~/dotfiles/nvim/config/dashboard.vim
 source ~/dotfiles/nvim/config/quick-scope.vim
 source ~/dotfiles/nvim/config/onedark.vim
 source ~/dotfiles/nvim/config/indentLine.vim

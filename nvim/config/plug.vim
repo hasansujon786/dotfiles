@@ -3,7 +3,8 @@ call plug#begin('~/dotfiles/nvim/plugged')
 " => Visual-&-Theme ======================================== {{{
 Plug 'junegunn/goyo.vim',{ 'on': 'Goyo' }
 Plug 'joshdick/onedark.vim'
-Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine',{ 'on': 'CocStart' }
+Plug 'https://github.com/glepnir/dashboard-nvim'
 " }}}
 
 " => Productivity ========================================== {{{
