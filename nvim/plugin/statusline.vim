@@ -4,30 +4,6 @@ let g:nerdfont_loaded = 0
 let g:statusline_banner_msg = ''
 let g:statusline_banner_is_hidden = 1
 
-" Status Line Custom
-let g:currentmode={
-  \ 'n'  : 'Normal',
-  \ 'no' : 'Normal·Operator Pending',
-  \ 'v'  : 'Visual',
-  \ 'V'  : 'V-Line',
-  \ "\<C-V>" : 'V-Block',
-  \ 's'  : 'Select',
-  \ 'S'  : 'S-Line',
-  \ "\<C-S>" : 'S-Block',
-  \ 'i'  : 'Insert',
-  \ 'R'  : 'Replace',
-  \ 'Rv' : 'V-Replace',
-  \ 'c'  : 'Normal',
-  \ 'cv' : 'Vim Ex',
-  \ 'ce' : 'Ex',
-  \ 'r'  : 'Prompt',
-  \ 'rm' : 'More',
-  \ 'r?' : 'Confirm',
-  \ '!'  : 'Shell',
-  \ 't'  : 'Terminal'
-  \}
-
-
 let g:icon = {
   \ 'lock':     '',
   \ 'checking': '',
@@ -49,7 +25,7 @@ let g:icon = {
 let g:statusline = {
   \ 'colorscheme': 'one',
   \ 'component': {
-  \   'mode': "\ %{toupper(g:currentmode[mode()])}\ ",
+  \   'mode': "\ %{CurrentMode()}\ ",
   \   'readonly': "%{&readonly?'\ ".g:icon.lock." ':''}",
   \   'spell': "%{&spell?'\ ".g:icon.dic." ':''}",
   \   'wrap': "%{&wrap?'\ ".g:icon.wrap." ':''}",
@@ -72,6 +48,34 @@ let g:statusline = {
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Component functions {{{
+
+let s:mode_states={
+  \ 'n'  : 'Normal',
+  \ 'no' : 'Normal·Operator Pending',
+  \ 'v'  : 'Visual',
+  \ 'V'  : 'V-Line',
+  \ "\<C-V>" : 'V-Block',
+  \ 's'  : 'Select',
+  \ 'S'  : 'S-Line',
+  \ "\<C-S>" : 'S-Block',
+  \ 'i'  : 'Insert',
+  \ 'R'  : 'Replace',
+  \ 'Rv' : 'V-Replace',
+  \ 'c'  : 'Normal',
+  \ 'cv' : 'Vim Ex',
+  \ 'ce' : 'Ex',
+  \ 'r'  : 'Prompt',
+  \ 'rm' : 'More',
+  \ 'r?' : 'Confirm',
+  \ '!'  : 'Shell',
+  \ 't'  : 'Terminal'
+  \}
+
+function! CurrentMode()
+  return exists('g:loaded_sneak_plugin') && sneak#is_sneaking() ? 'SNEAK ' :
+        \ &ft == 'fern' ? 'fern' :
+        \ toupper(s:mode_states[mode()])
+endfunction
 
 function! LightLineBufSettings()
   let et = &et ==# 1 ? "•" : "➜"
