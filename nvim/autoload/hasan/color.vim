@@ -12,4 +12,10 @@ function hasan#color#load_custom_highlight() abort
   " hi SpecialKey         ctermfg=180 guifg=#E5C07B
   " Highlighting same symbols in the buffer at the current cursor position.
   hi CocHighlightText ctermbg=gray guibg=#3B4048
+
+  " gitgutter & signnify
+  hi SignifySignAdd       ctermfg=114 guifg=#496A2F
+  hi SignifySignChange    ctermfg=180 guifg=#805C19
+  hi SignifySignDelete    ctermfg=204 guifg=#931F29
+
 endfunction

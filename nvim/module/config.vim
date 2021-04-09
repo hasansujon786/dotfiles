@@ -8,7 +8,7 @@ source ~/dotfiles/nvim/config/auto-pairs.vim
 source ~/dotfiles/nvim/config/fzf.vim
 source ~/dotfiles/nvim/config/fern.vim
 source ~/dotfiles/nvim/config/sneak.vim
-source ~/dotfiles/nvim/config/vim-gitgutter.vim
+source ~/dotfiles/nvim/config/gitgutter.vim
 source ~/dotfiles/nvim/config/vim-fugitive.vim
 source ~/dotfiles/nvim/config/vim-floaterm.vim
 source ~/dotfiles/nvim/config/vim-visual-multi.vim
