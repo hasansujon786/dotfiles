@@ -48,7 +48,6 @@ Plug 'lambdalisue/fern.vim'
 " Plug 'lambdalisue/fern-bookmark.vim'
 Plug 'lambdalisue/vim-manpager',{'on': 'Man'}
 
-Plug 'gu-fan/colorv.vim',{ 'on': ['ColorV','ColorVInsert','ColorVEdit','ColorVEditAll', 'ColorVEditTo'] }
 " }}}
 
 " => Git =================================================== {{{
@@ -65,8 +64,9 @@ Plug 'jiangmiao/auto-pairs',{ 'on': 'CocStart' }
 Plug 'honza/vim-snippets',{ 'on': 'CocStart' }
 
 " html & css
+Plug 'gu-fan/colorv.vim',{ 'on': 'CocStart' }
 Plug 'mattn/emmet-vim',{ 'on': 'CocStart' }
-Plug 'ap/vim-css-color',{ 'on': 'CocStart' }
+" Plug 'ap/vim-css-color',{ 'on': 'CocStart' }
 " Plug 'norcalli/nvim-colorizer.lua'
 
 " javascript
