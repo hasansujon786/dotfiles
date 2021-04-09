@@ -19,7 +19,6 @@ Plug 'mkropat/vim-tt'
 Plug 'tpope/vim-eunuch',{ 'on': ['Delete','Move','Rename','Mkdir','Chmod'] } "for moving and manipulating files / directories.
 Plug 'voldikss/vim-floaterm',{ 'on': [ 'FloatermNew', 'FloatermToggle' ] }
 Plug 'mg979/vim-visual-multi',{'branch': 'master', 'on': 'CocStart' }
-Plug 'amadeus/vim-convert-color-to',{ 'on': 'ConvertColorTo' }
 Plug 'michaeljsmith/vim-indent-object',{ 'on': 'CocStart' }
 Plug 'tweekmonster/startuptime.vim',{ 'on': 'StartupTime' }
 Plug 'tpope/vim-scriptease',{ 'on': ['Messages', 'PP'] }
@@ -49,7 +48,7 @@ Plug 'lambdalisue/fern.vim'
 " Plug 'lambdalisue/fern-bookmark.vim'
 Plug 'lambdalisue/vim-manpager',{'on': 'Man'}
 
-Plug 'gu-fan/colorv.vim',{ 'on': ['ColorV','ColorVInsert','ColorVEdit','ColorVEditAll'] }
+Plug 'gu-fan/colorv.vim',{ 'on': ['ColorV','ColorVInsert','ColorVEdit','ColorVEditAll', 'ColorVEditTo'] }
 " }}}
 
 " => Git =================================================== {{{

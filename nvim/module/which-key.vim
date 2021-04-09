@@ -107,6 +107,15 @@ let g:which_key_map['c'] = {
       \ 'name' : '+colorv-insert',
       \    'i' : [':ColorVInsert'               , 'ColorVInsert'],
       \  },
+      \ 'c' : {
+      \ 'name' : '+colorV-convert-to',
+      \    'h' : [':call _colorVConvertTo("HSL")'                , 'Convert to HSL'],
+      \    'H' : [':call _colorVConvertTo("HSLA")'               , 'Convert to HSLA'],
+      \    'r' : [':call _colorVConvertTo("RGB")'                , 'Convert to RGB'],
+      \    'R' : [':call _colorVConvertTo("RGBA")'               , 'Convert to RGBA'],
+      \    'x' : [':call _colorVConvertTo("HEX#")'               , 'Convert to HEX#'],
+      \    'X' : [':call _colorVConvertTo("HEXA")'               , 'Convert to HEXA'],
+      \  },
       \ }
 " }}}
 
@@ -209,22 +218,8 @@ let g:which_key_map['i'] = {
       \    's' :['<Plug>(snake_case_operator)'       , 'transfrom-to-snake-case' ],
       \    'k' :['<Plug>(kebab_case_operator)'       , 'transfrom-to-kebab-case' ],
       \    'S' :['<Plug>(start_case_operator)'       , 'transfrom-to-start-case' ],
-      \ 
-      \    'h' :['<Plug>(ConvertColorCode-h)'        , 'convert-color-to-hsl' ],
-      \    'r' :['<Plug>(ConvertColorCode-r)'        , 'convert-color-to-rgb' ],
-      \    'x' :['<Plug>(ConvertColorCode-x)'        , 'convert-color-to-hex' ],
-      \    'H' :['<Plug>(ConvertColorCode-H)'        , 'convert-color-to-hsl-alpha' ],
-      \    'R' :['<Plug>(ConvertColorCode-R)'        , 'convert-color-to-rgb-alpha' ],
-      \    'X' :['<Plug>(ConvertColorCode-X)'        , 'convert-color-to-hex-alpha' ],
       \  },
       \ }
-
-" ConvertColorTo
-let s:convertColorTo = [['x', 'hex'],['X', 'hexa'],['r', 'rgb'],['R', 'rgba'],['h', 'hsl'],['H', 'hsla']]
-for i in s:convertColorTo
-  exe 'nmap <silent><Plug>(ConvertColorCode-'.i[0].') :ConvertColorTo '.i[1].'<CR>:call repeat#set("\<Plug>(ConvertColorCode-'.i[0].')")<CR>'
-  " exe 'nmap c'.i[0].' <Plug>(ConvertColorCode-'.i[0].')'
-endfor
 " }}}
 
 " o is for open ------------------------------------------ {{{
