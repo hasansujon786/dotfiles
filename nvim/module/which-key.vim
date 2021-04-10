@@ -242,9 +242,7 @@ let g:which_key_map['p'] = {
       \ 'name' : '+project',
       \ 'p' : [':Projects'               , 'Switch project'],
       \ 'r' : [':ProjectRecentFiles'     , 'Find recent project files'],
-      \ 't' : [':OpenTodo'               , 'Show project todos'],
       \ }
-
 " }}}
 
 " S is for session --------------------------------------- {{{

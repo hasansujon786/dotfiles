@@ -10,7 +10,6 @@ Plug 'https://github.com/glepnir/dashboard-nvim'
 " => Productivity ========================================== {{{
 Plug 'vimwiki/vimwiki',{ 'branch': 'dev', 'on': ['VimwikiIndex', 'VimwikiTabIndex', 'VimwikiUISelect', 'VimwikiDiaryIndex', 'VimwikiMakeDiaryNote','VimwikiTabMakeDiaryNote'] }
 Plug 'dhruvasagar/vim-dotoo',{ 'on': 'CocStart' }
-Plug 'wsdjeg/vim-todo',{ 'on': 'OpenTodo' }
 Plug 'tools-life/taskwiki'
 Plug 'mkropat/vim-tt'
 " }}}
