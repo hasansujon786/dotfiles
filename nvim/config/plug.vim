@@ -62,7 +62,7 @@ Plug 'neoclide/coc.nvim',{'branch': 'release', 'on': 'CocStart' }
 Plug 'honza/vim-snippets',{ 'on': 'CocStart' }
 
 " html & css
-Plug 'gu-fan/colorv.vim',{ 'on': 'CocStart' }
+Plug 'gu-fan/colorv.vim',{ 'on': ['ColorV','ColorVEditTo','ColorVEdit','ColorVPreviewLine','ColorVPreview'] }
 Plug 'mattn/emmet-vim',{ 'on': 'CocStart' }
 " Plug 'ap/vim-css-color',{ 'on': 'CocStart' }
 " Plug 'norcalli/nvim-colorizer.lua'

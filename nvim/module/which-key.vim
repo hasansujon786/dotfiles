@@ -100,7 +100,7 @@ let g:which_key_map['b'] = {
 
 let g:which_key_map['c'] = {
       \ 'name' : '+colorv',
-      \ 'e': [':ColorVEdit'                    , 'ColorVEdit'],
+      \ 'e' : [':ColorVEdit'                    , 'ColorVEdit'],
       \ 'E' : [':ColorVEditAll'                 , 'ColorVEditAll'],
       \ 'v' : [':ColorV'                        , 'ColorV'],
       \ 'i' : {
@@ -115,6 +115,11 @@ let g:which_key_map['c'] = {
       \    'R' : [':call _colorVConvertTo("RGBA")'               , 'Convert to RGBA'],
       \    'x' : [':call _colorVConvertTo("HEX#")'               , 'Convert to HEX#'],
       \    'X' : [':call _colorVConvertTo("HEXA")'               , 'Convert to HEXA'],
+      \  },
+      \ 'p' : {
+      \ 'name' : '+preview',
+      \    'l' : [':ColorVPreviewLine'          , 'ColorVPreviewLine'],
+      \    'p' : [':ColorVPreview'              , 'ColorVPreview'],
       \  },
       \ }
 " }}}
