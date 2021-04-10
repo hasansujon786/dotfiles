@@ -132,6 +132,7 @@ let g:coc_global_extensions = [
       \ 'coc-vetur',
       \ 'coc-vimlsp',
       \ 'coc-project',
+      \ 'coc-pairs',
       \ ]
 
 " https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions

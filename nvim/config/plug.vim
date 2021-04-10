@@ -59,7 +59,6 @@ Plug 'junegunn/gv.vim',{ 'on': 'CocStart' }
 " => Languae-support ======================================= {{{
 " Auto Completion
 Plug 'neoclide/coc.nvim',{'branch': 'release', 'on': 'CocStart' }
-Plug 'jiangmiao/auto-pairs',{ 'on': 'CocStart' }
 Plug 'honza/vim-snippets',{ 'on': 'CocStart' }
 
 " html & css
