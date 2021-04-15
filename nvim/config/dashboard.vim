@@ -9,7 +9,6 @@ let g:dashboard_custom_header = [
   \'▓██▒  ▐▌██▒▒▓█  ▄ ▒██   ██░  ▒██ █░░░██░▒██    ▒██ ',
   \'▒██░   ▓██░░▒████▒░ ████▓▒░   ▒▀█░  ░██░▒██▒   ░██▒',
   \'░ ▒░   ▒ ▒ ░░ ▒░ ░░ ▒░▒░▒░    ░ ▐░  ░▓  ░ ▒░   ░  ░',
-  \'░ ░░   ░ ▒░ ░ ░  ░  ░ ▒ ▒░    ░ ░░   ▒ ░░  ░      ░',
   \'   ░   ░ ░    ░   ░ ░ ░ ▒       ░░   ▒ ░░      ░   ',
   \'         ░    ░  ░    ░         ░   ░         ░    ',
   \]
@@ -22,7 +21,7 @@ let s:icon['bm'] = '  '
 let s:icon['cl'] = '  '
 let s:icon['ff'] = '  '
 let s:icon['nf'] = '  '
-let s:icon['fw'] = '  '
+let s:icon['fw'] = '  '
 
 let g:dashboard_custom_section = {
       \ 'a_find_history':{
