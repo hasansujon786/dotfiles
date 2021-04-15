@@ -18,4 +18,9 @@ function hasan#color#load_custom_highlight() abort
   hi SignifySignChange    ctermfg=180 guifg=#805C19
   hi SignifySignDelete    ctermfg=204 guifg=#931F29
 
+  " hi DashboardHeader ctermfg=114 guifg=#61AFEF
+  hi DashboardHeader   ctermfg=59  guifg=#5c6370
+  hi DashboardFooter   ctermfg=59  guifg=#5c6370
+  hi DashboardShortcut ctermfg=145 guifg=#ABB2BF
+  hi DashboardCenter   ctermfg=145 guifg=#ABB2BF
 endfunction

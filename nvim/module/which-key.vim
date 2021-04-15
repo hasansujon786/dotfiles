@@ -254,11 +254,9 @@ let g:which_key_map['p'] = {
 " @todo: Add session support.
 let g:which_key_map['S'] = {
       \ 'name' : '+Session',
-      \ 'c' : [':SClose'          , 'close-session'],
-      \ 'd' : [':SDelete'         , 'delete-session'],
-      \ 'l' : [':SLoad'           , 'load-session'],
-      \ 's' : [':Startify'        , 'start-page'],
-      \ 'S' : [':SSave'           , 'save-session'],
+      \ 'd' : [':Dashboard'        , 'Open dashboard'],
+      \ 'l' : [':SessionLoad'      , 'Load session'],
+      \ 'S' : [':SessionSave'      , 'Save session'],
       \ }
 " }}}
 
@@ -365,7 +363,7 @@ let g:which_key_map['/'] = {
       \ '/' : [':BetterSearch'          , 'Better search'],
       \ 'd' : [':RGCurDir'              , 'Search current directory'],
       \ 'D' :                             'Search other directory',
-      \ 'p' :                             'Search project',
+      \ 'p' :                             'Search in project',
       \
       \ 'f' : [':Files'                 , 'Find file'],
       \ 'F' : [':FilesCurDir'           , 'Find file from here'],
