@@ -258,3 +258,17 @@ endfunction
 "  \ '▀▀    ▀▀   ▝▀▀▀▀▀     ▀▀▀▀       ▀▀     ▀▀  ▀▀  ▀▀  ▀▀',
 "  \]
 " }}}
+
+
+" hi StatusLine_active_normal             guibg=#98C379 guifg=#2C323C gui=bold
+" hi StatusLine_active_insert             guibg=#61AFEF guifg=#2C323C gui=bold
+" hi StatusLine_active_terminal           guibg=#61AFEF guifg=#2C323C gui=bold
+" hi StatusLine_active_visual             guibg=#C678DD guifg=#2C323C gui=bold
+" hi StatusLine_active_replace            guibg=#E06C75 guifg=#2C323C gui=bold
+
+" hi StatusLine_active_normal_alt         guibg=#3E4452 guifg=#98C379
+" hi StatusLine_active_insert_alt         guibg=#3E4452 guifg=#61AFEF
+" hi StatusLine_active_terminal_alt       guibg=#3E4452 guifg=#61AFEF
+" hi StatusLine_active_visual_alt         guibg=#3E4452 guifg=#C678DD
+" hi StatusLine_active_replace_alt        guibg=#3E4452 guifg=#E06C75
+

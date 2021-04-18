@@ -184,9 +184,9 @@ xnoremap <Leader>f. "zy:%s/<C-r>"//gc<Left><Left><Left>
 " g is for git ------------------------------------------- {{{
 let g:which_key_map['g'] = {
       \ 'name' : '+git',
-      \ '/' : [':GFiles?'                         , 'fzf-git-files*'],
+      \ '/' : [':GFiles?'                          , 'fzf-git-files*'],
       \ '.' : [':Git add %'                        , 'stage-current-file'],
-      \ 'g' : [':Gstatus!'                         , 'status'],
+      \ 'g' : [':Git'                              , 'status'],
       \ 'b' : [':Git blame'                        , 'blame'],
       \ 'L' : [':Git log'                          , 'log'],
       \ 'f' : [':diffget //2'                      , 'diffget ours'],
