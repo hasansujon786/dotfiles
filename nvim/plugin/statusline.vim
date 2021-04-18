@@ -102,7 +102,7 @@ endfunction
 
 function BannerMsg() abort
   let msg = exists('g:statusline_banner_msg') ? g:statusline_banner_msg : ''
-  let banner_w = (winwidth(0) - 18) / 2
+  let banner_w = (winwidth(0)) / 2
   let space = banner_w + (len(msg) / 2)
   let line = printf('%'.space.'S', msg)
   return exists('g:statusline_banner_is_hidden') && !g:statusline_banner_is_hidden ? line : ''

@@ -3,20 +3,20 @@
 function! statusline#_layout_active()
   let statusline=""
   let statusline.="%{statusline#_update_color()}"
-  " first level
-  let statusline.="%#StatusLine_active_0#"
-  let statusline.=g:statusline.component.mode
-  let statusline.=g:statusline.component.readonly
-  let statusline.=g:statusline.component.spell
-  let statusline.=g:statusline.component.wrap
-  let statusline.="%#StatusLine_active_0_alt#"
-  let statusline.=g:statusline.separator.left
 
   if (exists('g:statusline_banner_is_hidden') && !g:statusline_banner_is_hidden)
     let statusline.="%#StatusLine_banner#"
     let statusline.=g:statusline.component.banner
     let statusline.="%=" " (Middle) align from right
   else
+    " first level
+    let statusline.="%#StatusLine_active_0#"
+    let statusline.=g:statusline.component.mode
+    let statusline.=g:statusline.component.readonly
+    let statusline.=g:statusline.component.spell
+    let statusline.=g:statusline.component.wrap
+    let statusline.="%#StatusLine_active_0_alt#"
+    let statusline.=g:statusline.separator.left
 
     " second level
     let statusline.="%#StatusLine_active_1#"
@@ -59,16 +59,15 @@ function! statusline#_layout_active()
     let statusline.=g:statusline.component.percent
     let statusline.=g:statusline.separator.space
 
+    " first level
+    let statusline.="%#StatusLine_active_0_alt#"
+    let statusline.=g:statusline.separator.right
+    let statusline.="%#StatusLine_active_0#"
+    let statusline.=g:statusline.separator.space
+    let statusline.=g:statusline.component.lineinfo
+    let statusline.=g:statusline.separator.space
+
   endif
-
-  " first level
-  let statusline.="%#StatusLine_active_0_alt#"
-  let statusline.=g:statusline.separator.right
-  let statusline.="%#StatusLine_active_0#"
-  let statusline.=g:statusline.separator.space
-  let statusline.=g:statusline.component.lineinfo
-  let statusline.=g:statusline.separator.space
-
   return statusline
 endfunction
 " }}}
@@ -174,15 +173,12 @@ function statusline#_show_banner(msg, opts) abort
   let g:statusline_banner_is_hidden = 0
   let timer = get(a:opts, 'timer', 5000)
   let s:banner_msg_timer_id = timer_start(timer, 'statusline#_hide_banner')
-  call _update_vim_mode_color('v')
   call statusline#_update_all()
 endfunction
 " call statusline#_show_banner('testing', {'timer': 3000})
 " call statusline#_show_banner('testing',{})
 function statusline#_hide_banner(timer_id) abort
-  let g:statusline_banner_msg = ''
   let g:statusline_banner_is_hidden = 1
-  call _update_vim_mode_color('v')
   call statusline#_update_all()
 endfunction
 " }}}
