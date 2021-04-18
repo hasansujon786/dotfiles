@@ -1,9 +1,9 @@
 let s:hopper_file = getcwd().'/pf.hopper'
 
 function pfhopper#open() abort
-  " TODO: remove Fedit file from buflisted
-  exec 'Fedit '.s:hopper_file
+  exec 'Fedit! '.s:hopper_file
 
+  set signcolumn=no
   nnoremap <silent> <buffer> <CR> :call <SID>hop('edit')<CR>
   nnoremap <silent> <buffer> q    :close<CR>
   nnoremap <silent> <buffer> l    :call <SID>hop('edit')<CR>

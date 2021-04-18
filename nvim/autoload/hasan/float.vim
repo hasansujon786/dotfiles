@@ -1,4 +1,6 @@
-function! hasan#float#_createCenteredFloatingWindow(edit_file_bufnr, user_options)
+let s:close_bufnr = 0
+
+function! hasan#float#_createCenteredFloatingWindow(edit_file_bufnr, listed, user_options)
   let width = min([&columns - 4, max([80, &columns - 20])])
   let height = min([&lines - 4, max([20, &lines - 10])])
   let top = ((&lines - height) / 2) - 1
@@ -33,7 +35,6 @@ function! hasan#float#_createCenteredFloatingWindow(edit_file_bufnr, user_option
     let s:winnr = nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
     call setwinvar(s:winnr, '&filetype', 'fedit')
   endif
-  let w:Fedit_bufnr = bufnr()
   call setwinvar(s:winnr, '&winhighlight', 'Normal:Fedit')
   " set user configs
   let style = get(a:user_options, 'style', 0)
@@ -43,22 +44,35 @@ function! hasan#float#_createCenteredFloatingWindow(edit_file_bufnr, user_option
     endfor
   endif
 
+  " autocmd: close window & buffer
   au WinLeave * ++once call nvim_win_close(s:bd_winnr,1) | call nvim_win_close(s:winnr,1)
+  if a:listed == 0
+    " if user runs Fedit! in sequence
+    if s:close_bufnr != 0
+      call timer_stop(s:close_buf_timer)
+      if s:close_bufnr != a:edit_file_bufnr | call s:unload_float_buffer() | endif
+    endif
+
+    let s:close_bufnr = a:edit_file_bufnr
+    au WinLeave * ++once let s:close_buf_timer = timer_start(500, function('s:unload_float_buffer'))
+  endif
 endfunction
 
-" bang @!: remove all styles
+function s:unload_float_buffer(...) abort
+  if s:close_bufnr != 0
+    exec 'bd '.s:close_bufnr
+    let s:close_bufnr = 0
+  endif
+endfunction
+
+" bang !: remove buffer for buflist
 function! hasan#float#_fedit(fname, bang)
   if !filereadable(a:fname)
     call _#echoError('File not found')
     return
   endif
-  if(exists('w:Fedit_bufnr'))
-    exe 'edit '.a:fname
-    let w:Fedit_bufnr = bufnr()
-    call setwinvar(0, '&winhighlight', 'Normal:Fedit')
-    return
-  endif
 
+  " get bufnr
   exe 'pedit '. a:fname
   wincmd P
   let edit_file_bufnr = bufnr()
@@ -73,7 +87,8 @@ function! hasan#float#_fedit(fname, bang)
     \  '&signcolumn': 'yes',
     \  }
     \}
-  call hasan#float#_createCenteredFloatingWindow(edit_file_bufnr, a:bang == '!' ? {} : options)
+  let listed = a:bang == '!' ? 0 : 1
+  call hasan#float#_createCenteredFloatingWindow(edit_file_bufnr, listed, options)
 endfunction
 
 
