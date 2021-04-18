@@ -46,6 +46,7 @@ function! hasan#float#_createCenteredFloatingWindow(edit_file_bufnr, user_option
   au WinLeave * ++once call nvim_win_close(s:bd_winnr,1) | call nvim_win_close(s:winnr,1)
 endfunction
 
+" bang @!: remove all styles
 function! hasan#float#_fedit(fname, bang)
   if !filereadable(a:fname)
     call _#echoError('File not found')
