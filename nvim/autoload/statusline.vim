@@ -2,42 +2,43 @@
 " statusline#_layout_active {{{
 function! statusline#_layout_active()
   let statusline=""
+  let statusline.="%{statusline#_update_color()}"
   " first level
-  let statusline.="%1*"
+  let statusline.="%#StatusLine_active_0#"
   let statusline.=g:statusline.component.mode
   let statusline.=g:statusline.component.readonly
   let statusline.=g:statusline.component.spell
   let statusline.=g:statusline.component.wrap
-  let statusline.="%2*"
+  let statusline.="%#StatusLine_active_0_alt#"
   let statusline.=g:statusline.separator.left
 
   if (exists('g:statusline_banner_is_hidden') && !g:statusline_banner_is_hidden)
-    let statusline.="%7*"
+    let statusline.="%#StatusLine_banner#"
     let statusline.=g:statusline.component.banner
     let statusline.="%=" " (Middle) align from right
   else
 
     " second level
-    let statusline.="%3*"
+    let statusline.="%#StatusLine_active_1#"
     let statusline.=g:statusline.separator.space
     let statusline.=g:statusline.component.modified
     let statusline.=g:statusline.separator.space
     let statusline.="%<" " truncate left
     let statusline.=g:statusline.component.filename
     let statusline.=g:statusline.separator.space
-    let statusline.="%4*"
+    let statusline.="%#StatusLine_active_1_alt#"
     let statusline.=g:statusline.separator.left
-    let statusline.=g:statusline.separator.space
 
     " third level
-    let statusline.="%5*"
+    let statusline.="%#StatusLine_active_middle#"
+    let statusline.=g:statusline.separator.space
     let statusline.=g:statusline.component.coc_status
     let statusline.=g:statusline.separator.space
 
     let statusline.="%=" " (Middle) align from right
 
     " third level
-    let statusline.="%5*"
+    let statusline.="%#StatusLine_active_middle#"
     let statusline.=g:statusline.separator.space
     let statusline.=g:statusline.component.tasktimer_status
     let statusline.=g:statusline.separator.space
@@ -51,9 +52,9 @@ function! statusline#_layout_active()
     let statusline.=g:statusline.separator.space
 
     " second level
-    let statusline.="%4*"
+    let statusline.="%#StatusLine_active_1_alt#"
     let statusline.=g:statusline.separator.right
-    let statusline.="%3*"
+    let statusline.="%#StatusLine_active_1#"
     let statusline.=g:statusline.separator.space
     let statusline.=g:statusline.component.percent
     let statusline.=g:statusline.separator.space
@@ -61,9 +62,9 @@ function! statusline#_layout_active()
   endif
 
   " first level
-  let statusline.="%2*"
+  let statusline.="%#StatusLine_active_0_alt#"
   let statusline.=g:statusline.separator.right
-  let statusline.="%1*"
+  let statusline.="%#StatusLine_active_0#"
   let statusline.=g:statusline.separator.space
   let statusline.=g:statusline.component.lineinfo
   let statusline.=g:statusline.separator.space
@@ -77,23 +78,23 @@ endfunction
 " statusline#_layout_inactive {{{
 function! statusline#_layout_inactive()
   let statusline=""
-  let statusline.="%6*"
+  let statusline.="%#StatusLine_inactive_1#"
   let statusline.=g:statusline.separator.space
   let statusline.=g:statusline.component.modified
   let statusline.=g:statusline.separator.space
   let statusline.="%<" " turncate left
   let statusline.=g:statusline.component.filename
   let statusline.=g:statusline.separator.space
-  let statusline.="%4*"
+  let statusline.="%#StatusLine_inactive_1_alt#"
   let statusline.=g:statusline.separator.left
-  let statusline.="%5*"
+  let statusline.="%#StatusLineNC#"
 
   let statusline.="%=" " (Middle) align from right
 
-  let statusline.="%5*"
-  let statusline.="%4*"
+  let statusline.="%#StatusLineNC#"
+  let statusline.="%#StatusLine_inactive_1_alt#"
   let statusline.=g:statusline.separator.right
-  let statusline.="%6*"
+  let statusline.="%#StatusLine_inactive_1#"
   let statusline.=g:statusline.separator.space
   let statusline.=g:statusline.component.lineinfo
   let statusline.=g:statusline.separator.space
@@ -105,6 +106,41 @@ endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Controls {{{
+let s:mode_color_names={
+  \ 'n'  : 'normal',
+  \ 't'  : 'terminal',
+  \ 'v'  : 'visual',
+  \ 'V'  : 'visual',
+  \ "\<C-V>" : 'visual',
+  \ 'i'  : 'insert',
+  \ 'R'  : 'replace',
+  \ 'c'  : 'normal',
+  \
+  \ 's'  : 'select',
+  \ 'S'  : 'sline',
+  \ "\<C-S>" : 'sblock',
+  \ 'Rv' : 'vreplace',
+  \ 'cv' : 'vimex',
+  \ 'ce' : 'ex',
+  \ 'r'  : 'prompt',
+  \ 'rm' : 'more',
+  \ 'r?' : 'confirm',
+  \ '!'  : 'shell',
+  \ 'no' : 'normal·operator pending',
+  \}
+
+let s:mode = ''
+function statusline#_update_color() abort
+  let mode = get(s:mode_color_names, mode(), 'normal')
+  if s:mode == mode
+    return ''
+  endif
+  let s:mode = mode
+  exec printf('hi! link StatusLine_active_0     StatusLine_active_0_%s', mode)
+  exec printf('hi! link StatusLine_active_0_alt StatusLine_active_0_%s_alt', mode)
+  return ''
+endfunction
+
 function! statusline#_set_colorscheme()
   let colorscheme = get(g:statusline, 'colorscheme', 'one')
   call function('statusline#colorscheme#'.colorscheme.'#_set_colorscheme')()

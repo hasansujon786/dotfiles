@@ -1,19 +1,32 @@
 function statusline#colorscheme#one#_set_colorscheme() abort
-  " Mode color
-  hi User1 guibg=#98C379 guifg=#2C323C gui=bold
-  hi User2 guibg=#3E4452 guifg=#98C379
-  " Secondary section color
-  hi User3 guibg=#3E4452 guifg=#ABB2BF
-  hi User4 guibg=#2C323C guifg=#3E4452
-  " Statusline middle
-  hi User5 guibg=#2C323C guifg=#717785
+  " hi StatusLine_active_0
+  " hi StatusLine_active_0_alt
+  hi StatusLine_active_1      guibg=#3E4452 guifg=#ABB2BF
+  hi StatusLine_active_1_alt  guibg=#2C323C guifg=#3E4452
+  hi StatusLine_active_middle guibg=#2C323C guifg=#717785
+
   " Secondary section color (inactive)
-  hi User6 guibg=#3E4452 guifg=#717785
+  hi StatusLine_inactive_1      guibg=#3E4452 guifg=#717785
+  hi StatusLine_inactive_1_alt  guibg=#2C323C guifg=#3E4452
+
   " Banner section color
-  hi User7 guibg=tomato guifg=black gui=bold
+  hi StatusLine_banner guibg=tomato guifg=black gui=bold
   " Default color
   hi statusline   guibg=#2C323C guifg=#ABB2BF
   hi StatusLineNC guibg=#2C323C guifg=#717785
+
+  let s:highlight_colors={
+        \ 'normal'  :'#98C379',
+        \ 'insert'  :'#61AFEF',
+        \ 'terminal':'#61AFEF',
+        \ 'visual'  :'#C678DD',
+        \ 'replace' :'#E06C75',
+        \}
+  for key in keys(s:highlight_colors)
+    exec printf('hi StatusLine_active_0_%s     guifg=#2C323C guibg=%s gui=bold', key, get(s:highlight_colors,key))
+    exec printf('hi StatusLine_active_0_%s_alt guibg=#3E4452 guifg=%s', key, get(s:highlight_colors,key))
+  endfor
+
 endfunction
 
 function! statusline#colorscheme#one#_hide_statusline_colors() abort
@@ -33,6 +46,8 @@ function! statusline#colorscheme#one#_hide_statusline_colors() abort
   endif
 endfunction
 
+
+" delete this
 let s:status_color={
   \ 'n' :'#98C379',
   \ 'v' :'#C678DD',
