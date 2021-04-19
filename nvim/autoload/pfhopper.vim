@@ -34,3 +34,11 @@ function! pfhopper#add_to_hopper_file() abort
   call _#Echo(['TextInfo', 'Hopper new file:'], '“'.fname.'”')
 endfunction
 
+function! pfhopper#fzf_add_to_hopper_file(lines) abort
+  call hasan#utils#_filereadable_and_create(s:get_hopper_file(), v:true)
+  call system('print "" >> '.s:get_hopper_file())
+  for line in a:lines
+    call system('print "'.line.'" >> '.s:get_hopper_file())
+  endfor
+endfunction
+
