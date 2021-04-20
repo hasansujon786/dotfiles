@@ -46,6 +46,7 @@ let g:fzf_action = {
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit',
       \ 'ctrl-f': 'Fedit',
+      \ 'ctrl-x': function('pfhopper#fzf_add_to_hopper_file'),
       \}
 
 let g:fzf_project_files_filter_oldfiles = {
