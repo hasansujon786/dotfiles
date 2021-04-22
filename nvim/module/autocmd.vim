@@ -31,8 +31,8 @@ augroup Focus
         \| au WinLeave,BufWinLeave,BufLeave <buffer> call hasan#boot#highligt_textwith_column(0)
 
   " Change active/inactive window background
-  au FocusGained,WinEnter,BufWinEnter * call hasan#focus#focus_window()
-  au FocusLost * call hasan#focus#blur_this_window()
+  au FocusGained,WinEnter,BufWinEnter * call nebulous#focus_window()
+  au FocusLost * call nebulous#blur_this_window()
 
   " Goyo Events
   au User GoyoEnter nested call hasan#goyo#goyo_enter()

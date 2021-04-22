@@ -38,6 +38,7 @@ let g:which_key_map[':'] = [':Commands'                             , 'Search co
 let g:which_key_map[';'] = [':History:'                             , 'Search recent cmd']
 let g:which_key_map['q'] = [':Quit'                                 , 'Close window']
 let g:which_key_map['r'] = [':CycleNumber'                          , 'Cycle number' ]
+let g:which_key_map['R'] = [':call nebulous#toggle()'               , 'Toggle Nebulous']
 let g:which_key_map['s'] = [':write'                                , 'Save file' ]
 let g:which_key_map['x'] = [':bdelete'                              , 'Delete buffer']
 let g:which_key_map['z'] = ['za'                                    , 'Fold/Unfold' ]

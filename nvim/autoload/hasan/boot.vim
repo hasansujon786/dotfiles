@@ -3,10 +3,8 @@
 function! hasan#boot#auto_set_cursor_color() abort
   if &filetype =~ 'list\|\<fern\>'
     hi! link CursorLine CursorLineFocus
-    hi Cursor ctermbg=237 guibg=#3E4452
   else
     hi! link CursorLine CursorLineDefault
-    hi Cursor ctermbg=39  guibg=#61AFEF
   endif
 endfunction
 " }}}
