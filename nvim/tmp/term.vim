@@ -113,3 +113,16 @@ fun! hasan#term#SendTerminalCommand(...)
 
   call chansend(l:job_id, l:command."\n")
 endfun
+
+function! Flatten(list)
+  let val = []
+  for elem in a:list
+    if type(elem) == type([])
+      call extend(val, Flatten(elem))
+    else
+      call add(val, elem)
+    endif
+    unlet elem
+  endfor
+  return val
+endfunction

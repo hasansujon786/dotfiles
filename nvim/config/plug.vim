@@ -1,10 +1,12 @@
 call plug#begin('~/dotfiles/nvim/plugged')
 
 " => Visual-&-Theme ======================================== {{{
-Plug 'junegunn/goyo.vim',{ 'on': 'Goyo' }
 Plug 'joshdick/onedark.vim'
+Plug 'glepnir/dashboard-nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'junegunn/goyo.vim',{ 'on': 'Goyo' }
 Plug 'Yggdroot/indentLine',{ 'on': 'CocStart' }
-Plug 'https://github.com/glepnir/dashboard-nvim'
+Plug 'hasansujon786/kissline.nvim', { 'dir': '~/kissline.nvim' }
 " }}}
 
 " => Productivity ========================================== {{{
