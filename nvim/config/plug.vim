@@ -75,27 +75,5 @@ Plug 'sheerun/vim-polyglot',{ 'on': 'CocStart' }    " Full lang support
 Plug 'leafOfTree/vim-vue-plugin',{ 'on': 'CocStart' }
 " }}}
 
-" => Not-listed ============================================ {{{
-" Plug 'shime/vim-livedown', { 'do': 'npm install -g livedown' } " markdown preview
-" Plug 'glts/vim-radical'            " Convert binary, hex, etc..
-" Plug 'editorconfig/editorconfig-vim'
-" https://github.com/TimUntersberger/neogit
-
-" Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }   " css color
-" Plug 'dragvisuals.vim'
-" Plug 'vmath.vim'
-" }}}
 call plug#end()
 
-" Plug 'xolox/vim-session'
-" Plug 'romgrk/github-light.vim'
-" Plug 'romgrk/doom-one.vim'
-" Plug 'https://github.com/arp242/undofile_warn.vim'
-" Plug 'https://github.com/guns/xterm-color-table.vim'
-" Plug 'https://github.com/luochen1990/indent-detector.vim'
-" Plug 'https://github.com/xuxinx/vim-tabline'
-" Plug 'https://github.com/pacha/vem-tabline'
-
-" 0.5
-" Plug 'https://github.com/ChristianChiarulli/nvcode-color-schemes.vim'
-" Plug 'nvim-treesitter/nvim-treesitter'
