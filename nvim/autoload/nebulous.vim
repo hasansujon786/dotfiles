@@ -1,11 +1,8 @@
 let s:is_disabled = 0
 let s:winhighlight_blurred = [
-      \ 'CursorLineNr:CursorLineNrWB',
-      \ 'EndOfBuffer:EndOfBufferWB',
-      \ 'IncSearch:WindowBlur',
-      \ 'Normal:WindowBlur',
-      \ 'NormalNC:WindowBlur',
-      \ 'SignColumn:WindowBlur'
+      \ 'CursorLineNr:NebulousCursorLineNr',
+      \ 'Normal:Nebulous',
+      \ 'NormalNC:Nebulous',
       \ ]
 let s:nebulous_ignored_filetypes = {
       \ 'fzf': 1,
@@ -21,9 +18,8 @@ let s:nebulous_highlight_colors_for_filetype = {
 
 
 function! nebulous#init() abort
-  hi WindowBlur guibg=#363d49
-  hi EndOfBufferWB guifg=#2C323C
-  hi CursorLineNrWB guifg=#4B5263
+  hi Nebulous guibg=#363d49
+  hi NebulousCursorLineNr guifg=#4B5263
 endfunction
 call nebulous#init()
 
@@ -39,6 +35,7 @@ function! nebulous#eneble()
   call nebulous#init()
   let s:is_disabled = v:false
   call s:focus_current_win_and_blur_other_wins()
+  call _#Echo(['TextInfo', '[Nebulous]'], 'on')
 endfunction
 
 function! nebulous#disable()
@@ -49,6 +46,7 @@ function! nebulous#disable()
       call setwinvar(cur_nr, '&winhighlight', '')
     endif
   endfor
+  call _#Echo(['TextInfo', '[Nebulous]'], 'off')
 endfunction
 
 function! nebulous#focus_window() abort
