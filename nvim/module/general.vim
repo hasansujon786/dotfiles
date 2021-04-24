@@ -74,6 +74,8 @@ set pumheight=10                                       " Makes popup menu smalle
 set wildoptions=pum                                    " set file completion in command to use pum
 set shortmess+=c                                       " don't give |ins-completion-menu| messages
 set mousemodel=popup
+set fillchars+=eob:\                                   " suppress ~ at EndOfBuffer
+" set fillchars-=vert:┃                                " BOX DRAWINGS HEAVY VERTICAL (U+2503, UTF-8: E2 94 83)
 
 " Ignore the following globs in file completions
 set wildignore+=*.o,*~,*.pyc,*.obj,*.pyc,*.so,*.swp

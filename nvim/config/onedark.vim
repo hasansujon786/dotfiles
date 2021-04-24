@@ -4,4 +4,4 @@ try
 catch
 endtry
 
-call hasan#color#load_custom_highlight()
+call hasan#highlight#load_custom_highlight()
