@@ -36,9 +36,11 @@ function! hasan#fzf#_ripgrep(query, fullscreen, dir)
   " @todo: add --hidden to RG
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
   if(a:dir != '')
-    let prompt = ['--prompt', 'RG ('.fnamemodify(a:dir, ':~:t').')> ']
-    let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s '.a:dir.' || true'
+    let l:path = a:dir == '.' ? expand('%:h') : a:dir
+    let prompt = ['--prompt', 'RGDir> ', '--header', fnamemodify(l:path, ':~')]
+    let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s '.l:path.' || true'
   endif
+
   let initial_command = printf(command_fmt, shellescape(a:query))
   let reload_command = printf(command_fmt, '{q}')
   let spec = {'options': prompt + ['--phony','--reverse', '--query', a:query, '--bind', 'change:reload:'.reload_command]}

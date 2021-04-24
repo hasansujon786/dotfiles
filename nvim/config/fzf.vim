@@ -20,7 +20,6 @@ nnoremap <silent> // :BLines<CR>
 " Enhanced RipGrep integration with fzf
 command! -nargs=* -bang RG call hasan#fzf#_ripgrep(<q-args>, <bang>0, '')
 command! -nargs=1 -complete=dir RGDir call hasan#fzf#_ripgrep('', 1, <q-args>)
-command! RGCurDir exe 'RGDir '.expand('%:h')
 " Project recent & git filter togather
 command! -bang ProjectRecentFiles call hasan#fzf#_project_recent_files(s:p(<bang>0), <bang>0)
 command! -bang Projects call hasan#fzf#_projects(<bang>0)
