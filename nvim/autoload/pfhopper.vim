@@ -1,16 +1,15 @@
 function! s:get_hopper_file() abort
-  return '~/.config/pf.hopper/'. fnamemodify(getcwd(), ':t') .'/pf.hopper'
+  return $HOME.'/.config/pf.hopper/'. fnamemodify(getcwd(), ':t') .'/pf.hopper'
 endfunction
 
 function! pfhopper#open() abort
-  call hasan#utils#_filereadable_and_create(s:get_hopper_file(), v:true)
-  exec 'Fedit! '.s:get_hopper_file()
+  let hopper_file = s:get_hopper_file()
+  call hasan#utils#_filereadable_and_create(hopper_file, v:true)
+  call hasan#float#_fedit(hopper_file, 0, {
+        \ 'window': {'width': 0.7, 'height': 0.5},
+        \ 'bufname': fnamemodify(getcwd(), ':~'),
+        \})
 
-  if fnamemodify(s:get_hopper_file(), ':t') != 'pf.hopper'
-    return _#echoError('Something went wrong')
-  endif
-
-  set signcolumn=no
   nnoremap <silent> <buffer> <CR> :call <SID>hop('edit')<CR>
   nnoremap <silent> <buffer> l :call <SID>hop('edit')<CR>
   nnoremap <silent> <buffer> t :call <SID>hop('tabnew')<CR>

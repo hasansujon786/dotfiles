@@ -1,9 +1,10 @@
 let s:close_bufnr = 0
 
 function! hasan#float#_createCenteredFloatingWindow(edit_file_bufnr, listed, user_options)
-  let width = min([&columns - 4, max([80, &columns - 20])])
-  let height = min([&lines - 4, max([20, &lines - 10])])
-  let top = ((&lines - height) / 2) - 1
+  let window = get(a:user_options, 'window', {'width': 0.8, 'height': 0.7})
+  let width = float2nr(&columns * window.width)
+  let height = float2nr(&lines * window.height)
+  let top = (&lines - height) / 2
   let left = (&columns - width) / 2
   let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal', 'focusable': 0 }
 
@@ -66,7 +67,7 @@ function s:unload_float_buffer(...) abort
 endfunction
 
 " bang !: remove buffer for buflist
-function! hasan#float#_fedit(fname, bang)
+function! hasan#float#_fedit(fname, listed, options)
   if !filereadable(a:fname)
     call _#echoError('File not found')
     return
@@ -79,16 +80,16 @@ function! hasan#float#_fedit(fname, bang)
   quit
 
   let options = {
-    \'bufname': fnamemodify(bufname(edit_file_bufnr), ':.'),
-    \'style': {
-    \  '&nu': '1',
-    \  '&rnu': '1',
-    \  '&cursorline': '1',
-    \  '&signcolumn': 'yes',
-    \  }
+    \ 'window': get(a:options, 'window', {'width': 0.9, 'height': 0.8}),
+    \ 'bufname': get(a:options, 'bufname', fnamemodify(bufname(edit_file_bufnr), ':.')),
+    \ 'style': get(a:options, 'style',{
+    \   '&nu': '1',
+    \   '&rnu': '1',
+    \   '&cursorline': '1',
+    \   '&signcolumn': 'auto',
+    \  }),
     \}
-  let listed = a:bang == '!' ? 0 : 1
-  call hasan#float#_createCenteredFloatingWindow(edit_file_bufnr, listed, options)
+  call hasan#float#_createCenteredFloatingWindow(edit_file_bufnr, a:listed, options)
 endfunction
 
 
