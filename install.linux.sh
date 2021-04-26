@@ -131,13 +131,14 @@ install_various_apps() {
   printWithToilet lazygit
   # NOTE: Currently lazygit installation only worls for termux
   # @todo: Support for Linux & Windows
-  export LAZYGIT_VER="0.23.7"
+  mkdir -p ./lazy
+  export LAZYGIT_VER="0.28.1"
   # wget -O lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_x86_64.tar.gz
-  wget -O lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_arm64.tar.gz
-  tar xvf lazygit.tgz
+  wget -O ./lazy/lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_arm64.tar.gz
+  tar xvf ./lazy/lazygit.tgz -C ./lazy/
   # sudo mv lazygit /usr/local/bin/
-  mv lazygit /data/data/com.termux/files/usr/bin/lazygit
-  rm lazygit.tgz
+  mv ./lazy/lazygit /data/data/com.termux/files/usr/bin/lazygit
+  rm -rf ./lazy
 
   if [ -d ~/.config/jesseduffield ]; then
     echo 'Removing old lazygit config.'
