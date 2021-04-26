@@ -1,7 +1,6 @@
 let g:dashboard_fzf_window = 0
 let g:dashboard_default_executive ='fzf'
-" let g:dashboard_custom_footer = []
-
+let g:dashboard_enable_session = 0
 let g:dashboard_custom_header = [
   \' ███▄    █ ▓█████  ▒█████   ██▒   █▓ ██▓ ███▄ ▄███▓',
   \' ██ ▀█   █ ▓█   ▀ ▒██▒  ██▒▓██░   █▒▓██▒▓██▒▀█▀ ██▒',
@@ -43,3 +42,14 @@ let g:dashboard_custom_section = {
       \   'description': [s:icon['fw'].'Search in project                     SPC / p'],
       \   'command': 'RG!'},
       \}
+
+command! -nargs=? -complete=customlist,sessions#session#session_list SessionSave
+      \ call sessions#session#session_save(<q-args>)
+command! -nargs=? -complete=customlist,sessions#session#session_list SessionLoad
+      \ call sessions#session#session_load(<q-args>)
+command! -nargs=0 SessionSaveAndQuit call <Sid>sessionSaveAndQuit()
+function s:sessionSaveAndQuit() abort
+  wall
+  SessionSave
+  quitall
+endfunction

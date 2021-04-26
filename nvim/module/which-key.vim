@@ -127,13 +127,18 @@ let g:which_key_map['c'] = {
 
 " e is for edit ------------------------------------------ {{{
 let g:which_key_map['e'] = {
-      \ 'name' : '+edit',
+      \ 'name' : '+edit-n-session',
       \ 'e' : 'edit-in-directory'        ,
       \ 'd' : 'create-directory'         ,
       \ 's' : 'edit-in-directory-split'  ,
       \ 't' : 'edit-in-directory-tab'    ,
       \ 'v' : 'edit-in-directory-vsplit' ,
       \ '~' : 'edit-project-root'        ,
+      \
+      \ 'D' : [':Dashboard'              , 'Open dashboard'],
+      \ 'L' : [':SessionLoad'            , 'Load session'],
+      \ 'S' : [':SessionSave'            , 'Save session'],
+      \ 'Q' : [':SessionSaveAndQuit'     , 'Save session and quit'],
       \ }
 " Open a file relative to the current file
 nnoremap <leader>ed :Mkdir <C-R>=expand('%:h').'/'<cr>
@@ -248,16 +253,6 @@ let g:which_key_map['p'] = {
       \ 'name' : '+project',
       \ 'p' : [':Projects'               , 'Switch project'],
       \ 'r' : [':ProjectRecentFiles'     , 'Find recent project files'],
-      \ }
-" }}}
-
-" S is for session --------------------------------------- {{{
-" @todo: Add session support.
-let g:which_key_map['S'] = {
-      \ 'name' : '+Session',
-      \ 'd' : [':Dashboard'        , 'Open dashboard'],
-      \ 'l' : [':SessionLoad'      , 'Load session'],
-      \ 'S' : [':SessionSave'      , 'Save session'],
       \ }
 " }}}
 
