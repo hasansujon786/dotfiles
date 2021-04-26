@@ -272,3 +272,10 @@ endfunction
 " hi StatusLine_active_visual_alt         guibg=#3E4452 guifg=#C678DD
 " hi StatusLine_active_replace_alt        guibg=#3E4452 guifg=#E06C75
 
+function UniquieId() abort
+  let s:count = !exists('s:count') ? 1 : s:count + 1
+  return s:count
+endfunction
+let g:close_winids = {}
+" let g:close_winids[UniquieId()] = ['xx']
+" echo UniquieId()

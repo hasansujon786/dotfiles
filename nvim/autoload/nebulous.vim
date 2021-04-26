@@ -73,7 +73,6 @@ endfunction
 
 function! s:remove_blur(win_nr) abort
   let nebulous_highlight_color = get(s:nebulous_on_focus_highlights_by_filetype, &ft, '')
-  echo nebulous_highlight_color
   if _#isString(nebulous_highlight_color)
     call setwinvar(a:win_nr, '&winhighlight', '')
   else
