@@ -264,25 +264,24 @@ let g:which_key_map['t'] = {
 " }}}
 
 " ` is for toggle ---------------------------------------- {{{
-" let g:which_key_map['`'] = {
-"       \ 'name' : '+toggle',
-"       \ 'c' : [':setlocal cursorcolumn!'                   , 'cursorcolumn'],
-"       \ 'w' : [':call hasan#utils#toggleWrap()'            , 'toggle-wrap'],
-"       \
-"       \ '`' : {
-"       \ 'name' : '+task-and-timer',
-"       \    'b' : [':Break'              , 'tt-break'],
-"       \    'h' : [':HideAndShowTimer'   , 'tt-hide-timer'],
-"       \    'o' : [':OpenTasks'          , 'tt-open-tasks'],
-"       \    'p' : [':PauseOrPlayTimer'   , 'tt-pause-or-play'],
-"       \    'w' : [':Work'               , 'tt-work'],
-"       \    's' : ['ShowTimer'           , 'tt-status'],
-"       \    'u' : 'tt-update-timer',
-"       \    'U' : 'tt-update-status',
-"       \ }
-"       \ }
-" nnoremap <Leader>``u :UpdateCurrentTimer<space>
-" nnoremap <Leader>``U :UpdateCurrentStatus<space>
+let g:which_key_map['t'] = {
+      \ 'name' : '+toggle',
+      \ 'c' : [':setlocal cursorcolumn!'                   , 'cursorcolumn'],
+      \ 'w' : [':call hasan#utils#toggleWrap()'            , 'toggle-wrap'],
+      \
+      \ 't' : {
+      \ 'name' : '+task-and-timer',
+      \    'w' : [':Work'               , 'Start work timer'],
+      \    's' : [':TimerShow'          , 'Show timer status'],
+      \    'p' : [':TimerToggle'        , 'Pause or Paly'],
+      \    'b' : [':Break'              , 'Take a break'],
+      \    'o' : [':OpenTasks'          , 'Open tasks'],
+      \    'u' : 'Update current timer',
+      \    'U' : 'Update current status',
+      \ }
+      \ }
+nnoremap <Leader>ttu :UpdateCurrentTimer<space>
+nnoremap <Leader>ttU :UpdateCurrentStatus<space>
 " }}}
 
 " v is for vim ------------------------------------------- {{{

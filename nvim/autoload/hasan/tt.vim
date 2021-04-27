@@ -4,16 +4,25 @@ function! hasan#tt#is_tt_paused()
   return tt#get_remaining() != -1 && tt#is_running() ? 0 : tt#get_remaining() == -1 ? 0 : 1
 endfunction
 
-command! Work
-\  call tt#set_timer(25)
-\| call tt#start_timer()
-\| call tt#set_status('working')
-\| call tt#when_done('AfterWork')
-\| call notification#open(['TaskTimer:', 'Timer Started '. tt#get_status_formatted()], {'sound_silent': 1})
+command! -bang Work call s:work(<bang>0)
+function s:work(keep_task) abort
+  let start_from_begin = 1
+  if (tt#is_running() || hasan#tt#is_tt_paused())
+    call _#echoWarn('>>> Cancel the current timer & start a new timer? <<<')
+    let start_from_begin = confirm("", "&Yes\n&No", 2)
+  endif
 
-command! AfterWork
-      \ call notification#open(['TaskTimer:', 'Break Started '. tt#get_status_formatted()], {})
-      \| Break
+  if start_from_begin == 1
+    if(!a:keep_task) | call tt#clear_task() | endif
+    call tt#set_timer(25)
+    call tt#start_timer()
+    call tt#set_status('working')
+    call tt#when_done('AfterWork')
+    execute 'TimerShow'
+  endif
+endfunction
+
+command! AfterWork Break
 
 command! Break call Break()
 function! Break()
@@ -29,6 +38,7 @@ function! Break()
   endif
   call tt#start_timer()
   call tt#when_done('AfterBreak')
+  execute 'TimerShow'
 endfunction
 
 command! AfterBreak
@@ -36,16 +46,22 @@ command! AfterBreak
   \| call tt#clear_timer()
   \| call notification#open(['TaskTimer:', 'Break Ended '. tt#get_status_formatted()], {})
 
-command! ClearTimer
+command! TimerStop
   \  call tt#clear_status()
   \| call tt#clear_task()
   \| call tt#clear_timer()
 
-command! ShowTimer
-      \ call notification#open(['TaskTimer:',
-      \ tt#get_remaining_full_format()." ".tt#get_status_formatted().tt#get_task()], {'sound_silent': 1})
+command! TimerShow call s:shwo_timer()
+function s:shwo_timer() abort
+  let msg = ['TaskTimer:', tt#get_remaining_full_format().' '.tt#get_status_formatted()]
+  if tt#get_task() != '' | call add(msg, tt#get_task()) | endif
+  call notification#open([msg], {'sound_silent': 1})
+endfunction
 
-command! PauseOrPlayTimer
+command! TimerToggle
+      \ call tt#toggle_timer()
+
+command! TimerToggle
       \ call tt#toggle_timer()
 
 command! -nargs=1 UpdateCurrentTimer call tt#set_timer(<f-args>)
@@ -56,15 +72,12 @@ command! OpenTasks call tt#open_tasks() <Bar> call tt#focus_tasks()
 command! WorkOnTask
   \  if tt#can_be_task(getline('.'))
   \|   call tt#set_task(getline('.'), line('.'))
-  \|   execute 'Work'
-  \|   echomsg "Current task: " . tt#get_task()
+  \|   execute 'Work!'
   \|   call tt#when_done('AfterWorkOnTask')
   \| endif
 
-" @todo: work on this
 command! AfterWorkOnTask
-  \  call tt#play_sound()
-  \| call tt#open_tasks()
+  \  call tt#open_tasks()
   \| call tt#mark_last_task()
   \| Break
 
