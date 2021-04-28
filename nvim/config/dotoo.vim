@@ -25,18 +25,18 @@ let g:dotoo_todo_keyword_faces = [
   \ ['DONE', [':foreground 22,#10B981', ':weight bold']],
   \ ]
 
-let g:dotoo#capture#refile = expand('~/Documents/org/refile.org')
+let g:dotoo#capture#refile = expand('~/vimwiki/org/refile.org')
 let g:dotoo#agenda#files = [
-  \ '~/Documents/org/*.org',
-  \ '~/Documents/org/refile.org',
-  \ '~/Documents/org/read.org',
-  \ '~/Documents/org/task.org'
+  \ '~/vimwiki/org/*.org',
+  \ '~/vimwiki/org/refile.org',
+  \ '~/vimwiki/org/read.org',
+  \ '~/vimwiki/org/task.org'
   \ ]
 let g:dotoo#capture#templates = {
   \ 't': {
   \   'description': 'Todo',
   \   'lines': [
-  \     '** TODO %?',
+  \     '* TODO %?',
   \     'DEADLINE: [%(strftime(g:dotoo#time#datetime_format))]'
   \   ],
   \  'target': g:dotoo#capture#refile
