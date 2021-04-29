@@ -5,7 +5,7 @@ endfunction
 function! pfhopper#open() abort
   let hopper_file = s:get_hopper_file()
   call hasan#utils#_filereadable_and_create(hopper_file, v:true)
-  call hasan#float#_fedit(hopper_file, 0, {
+  call hasan#float#_fedit(hopper_file, 1, {
         \ 'window': {'width': 0.7, 'height': 0.5},
         \ 'bufname': fnamemodify(getcwd(), ':~'),
         \})

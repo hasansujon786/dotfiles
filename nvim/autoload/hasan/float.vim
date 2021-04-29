@@ -1,6 +1,6 @@
 function! hasan#float#_createCenteredFloatingWindow(edit_file_bufnr, user_options)
   let window = get(a:user_options, 'window', {'width': 0.8, 'height': 0.7})
-  let listed = get(a:user_options, 'listed', 1)
+  let keep_alive = get(a:user_options, 'keep_alive', 1)
 
   let winids = []
   let bufids = []
@@ -36,7 +36,9 @@ function! hasan#float#_createCenteredFloatingWindow(edit_file_bufnr, user_option
   if _#isNumber(a:edit_file_bufnr) && a:edit_file_bufnr != 0
     " winids[1]
     call add(winids, nvim_open_win(a:edit_file_bufnr, v:true, opts))
-    if listed == 0 | setlocal nobuflisted | endif
+    exec 'filetype detect'
+    " bufids[1]
+    if !keep_alive | call add(bufids, a:edit_file_bufnr) | endif
   else " create a scratch buffer
     " bufids[1]
     call add(bufids, nvim_create_buf(v:false, v:true))
@@ -72,21 +74,17 @@ endfunction
 
 
 " bang !: remove buffer for buflist
-function! hasan#float#_fedit(fname, listed, options)
+function! hasan#float#_fedit(fname, keep_alive, options)
   if !filereadable(a:fname)
     call _#echoError('File not found')
     return
   endif
-  " get bufnr
-  exe 'pedit '. a:fname
-  wincmd P
-  let edit_file_bufnr = bufnr()
-  quit
 
+  let edit_file_bufnr = bufadd(a:fname)
   let options = {
     \ 'window': get(a:options, 'window', {'width': 0.9, 'height': 0.8}),
     \ 'bufname': get(a:options, 'bufname', fnamemodify(bufname(edit_file_bufnr), ':.')),
-    \ 'listed': a:listed,
+    \ 'keep_alive': a:keep_alive,
     \ 'style': get(a:options, 'style',{
     \   '&nu': '1',
     \   '&rnu': '1',
