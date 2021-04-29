@@ -1,7 +1,6 @@
 " Active all plugins
 command! BootPlug CocStart
 
-" untitled {{{
 command! -nargs=1 PlaceholderImgTag call hasan#utils#placeholderImgTag(<f-args>)
 command! Bclose call hasan#utils#bufcloseCloseIt()
 command! ClearRegister call hasan#utils#clear_register()
@@ -20,4 +19,6 @@ command! -nargs=1 TaskWikiAdvancedEdit call hasan#utils#tastwiki_edit(<f-args>)
 command! -bang -nargs=1 -complete=file Fedit call hasan#float#_fedit(<f-args>, <bang>1, {})
 command! OpenPFH call pfhopper#open()
 command! AddToPFH call pfhopper#add_to_hopper_file()
-" }}}
+
+" command! OpenInVSCode    exe "silent !code --goto '" . expand("%") . ":" . line(".") . ":" . col(".") . "'"                    | redraw!
+" command! OpenCwdInVSCode exe "silent !code '" . getcwd() . "' --goto '" . expand("%") . ":" . line(".") . ":" . col(".") . "'" | redraw!

@@ -12,10 +12,6 @@
 "                                                           ▄  █
 "                                                            ▀▀
 
-" if !empty(glob("~/dotfiles/nvim/mod.dorin.vim"))
-"   source ~/dotfiles/nvim/mod.dorin.vim
-" endif
-
 source ~/dotfiles/nvim/module/general.vim
 source ~/dotfiles/nvim/module/config.vim
 source ~/dotfiles/nvim/module/fold.vim
@@ -24,7 +20,7 @@ source ~/dotfiles/nvim/module/command.vim
 source ~/dotfiles/nvim/module/which-key.vim
 source ~/dotfiles/nvim/module/key.vim
 source ~/dotfiles/nvim/module/abbreviation.vim
-source ~/dotfiles/nvim/module/playground.vim
+" source ~/dotfiles/nvim/module/playground.vim
 
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

@@ -279,3 +279,12 @@ endfunction
 let g:close_winids = {}
 " let g:close_winids[UniquieId()] = ['xx']
 " echo UniquieId()
+" if !empty(glob("~/dotfiles/nvim/mod.dorin.vim"))
+"   source ~/dotfiles/nvim/mod.dorin.vim
+" endif
+
+autocmd VimEnter *
+  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \|   PlugInstall --sync | q | echom "Installed new plugins"
+  \| endif
+

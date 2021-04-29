@@ -1,4 +1,7 @@
 " => General ---------------------------------------------------- {{{
+if !exists('g:os')
+  let g:os = has('win64') || has('win32') || has('win16') ? 'Windows' : has('mac') ? 'MacOS' : 'Linux'
+endif
 " filetype plugin indent on                              " Enable filetype plugins
 " Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 " copy next line to .tmux.conf for support true color within tmux
@@ -90,7 +93,7 @@ endif
 set ruler                                              " Always show current position
 set showmatch                                          " Show matching brackets when text indicator is over them
 set cursorline                                         " Show a line on current line
-set showcmd                                            " show any commands
+set showcmd                                            " shows size of visual selection bellow statusline
 set noshowmode                                         " don't show mode as lightline already does
 set nomodeline
 set modelines=0

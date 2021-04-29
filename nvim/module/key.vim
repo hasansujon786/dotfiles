@@ -190,6 +190,8 @@ inoremap <silent> <A-o> <C-o>mq<CR><C-o>`q<CR>
 " " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-u> <C-G>u<C-U>
+" fix previous misspelled world
+inoremap <c-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 " => Terminal mappings ====================================
 " Open terminal
@@ -204,8 +206,8 @@ tmap <C-o> <C-\><C-n>
 
 " => Function key mappings ================================
 nnoremap <silent> <F3> :set paste!<CR>
-noremap <F12> <Esc>:syntax sync fromstart<CR>
-inoremap <F12> <C-o>:syntax sync fromstart<CR>
+nnoremap <F5> <Esc>:syntax sync fromstart<CR><C-l>
+inoremap <F5> <C-o>:syntax sync fromstart<CR><C-o><C-l>
 
 " Toggle spelling and show it's status
 nnoremap <F7> :setlocal spell! spell?<CR>
