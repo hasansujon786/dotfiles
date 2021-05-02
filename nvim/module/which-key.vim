@@ -244,7 +244,7 @@ let g:which_key_map['o'] = {
       \ 'q' : [':QfixToggle'                               , 'Quickfix'],
       \ 'y' : [':CocList --normal yank'                    , 'Yank list'],
       \ 'p' : [':FernDrawerToggle!'                        , 'Project sidebar' ],
-      \ 'P' : [':call hasan#fern#reveal()'                 , 'Find file in PSB' ],
+      \ 'P' : [':FernCurDirDrawer'                         , 'Dir in preject sidebar' ],
       \ }
 " }}}
 

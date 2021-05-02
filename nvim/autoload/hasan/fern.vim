@@ -7,26 +7,12 @@ function! hasan#fern#drawer_toggle(reveal) abort
   wincmd =
 endfunction
 
-function! hasan#fern#reveal() abort
-  if &ft == 'fern'
-    wincmd p
-  endif
-  Fern . -drawer -reveal=%
-  if &ft != 'fern'
-    wincmd =
-  endif
-endfunction
-
 function! hasan#fern#smart_path(drawer)
-  if !empty(&buftype) || bufname('%') =~# '^[^:]\+://'
+  if !empty(&buftype) || bufname('%') =~# '^[^:]\+://' || empty(bufname('%'))
     Fern .
   else
     let fern_last_file=expand('%:t')
-    if a:drawer
-      Fern %:h -drawer -wait
-    else
-      Fern %:h -wait
-    endif
+    exec a:drawer ? 'Fern %:h -drawer -wait' : 'Fern %:h -wait'
     if fern_last_file !=# '' | call search('\v<' . fern_last_file . '>') | endif
   endif
 endfunction
@@ -96,7 +82,6 @@ function! hasan#fern#FernInit() abort
   nmap <buffer><nowait> h <Plug>(fern-action-leave)
   nmap <buffer><nowait> - <Plug>(fern-action-leave)
   " nmap <buffer> K <Plug>(fern-action-mark-children:leaf)
-  nmap <buffer><silent> p :call hasan#fern#reveal()<CR>
 
   " Open bookmark:///
   nnoremap <buffer><silent>
