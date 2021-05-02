@@ -66,6 +66,7 @@ function! BootAllPlugins(...) abort
   " Lazy load nerdfont
   try | let g:nerdfont_loaded = g:nerdfont#default == '' ? 1 : 0
   catch | let g:nerdfont_loaded = 0 | endtry
+  source $HOME/dotfiles/nvim/config/lazy/index.vim
   runtime! autoload/netrw.vim
 endfunction
 
