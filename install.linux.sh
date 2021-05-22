@@ -92,22 +92,26 @@ install_and_setup_tmux() {
 
 install_and_setup_nvim() {
   printWithFiglet nvim
-  # L => "~/.config/nvim/init.vim"
   echo 'Installing Neovim...'
-  apt install -y neovim
-
-  if [ -d ~/.config/nvim ]; then
-    echo 'Removing old .config directory.'
-    mv "$HOME/.config/nvim" "$HOME/.config/nvim.bak.$(date +%Y.%m.%d-%H:%M:%S)"
+  if [[ "$machine" == "windows" ]]; then
+    vimpath=~/AppData/Local/nvim
+  else
+    vimpath=~/.config/nvim
+    mkdir -p ~/.config
   fi
 
-  mkdir -p ~/.config
-  ln -s ~/dotfiles/nvim ~/.config/nvim
-  ln -s ~/storage/shared/documents/vimwiki ~/vimwiki
+  $getter install -y neovim
 
-  echo 'Installing vim-plug.'
-  curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  if [ -d $vimpath ]; then
+    echo 'Removing old .config directory.'
+    mv $vimpath "$vimpath.bak.$(date +%Y.%m.%d-%H:%M:%S)"
+  fi
+  ln -s ~/dotfiles/nvim $vimpath
+  # ln -s ~/storage/shared/documents/vimwiki ~/vimwiki
+
+  # echo 'Installing vim-plug.'
+  # curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+  #   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
   echo 'Done..'
   mkSpace
@@ -202,3 +206,7 @@ prompt_and_get_answers() {
 
 # setup_git_defaults
 # setup_bash
+# install_and_setup_nvim
+
+
+

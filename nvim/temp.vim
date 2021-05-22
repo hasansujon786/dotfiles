@@ -288,3 +288,4 @@ autocmd VimEnter *
   \|   PlugInstall --sync | q | echom "Installed new plugins"
   \| endif
 
+" https://linuxize.com/post/how-to-compare-strings-in-bash/
