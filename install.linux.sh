@@ -10,15 +10,33 @@ echo " | (_| | (_) | ||_____|  _| | |  __/\__ \\"
 echo "  \__,_|\___/ \__|    |_| |_|_|\___||___/"
 echo ""
 
+# configs
+unameOut="$(uname -s)"
+case "${unameOut}" in
+  Linux*)     machine=linux;;
+  Darwin*)    machine=mac;;
+  CYGWIN*)    machine=windows;;
+  MINGW*)     machine=windows;;
+    *)        machine="UNKNOWN:${unameOut}"
+esac
+echo \ ${machine}
+
+case "${machine}" in
+  linux*)     getter=apt;;
+  windows*)   getter=choco;;
+    *)        getter=hello
+esac
+
+# utils
 mkSpace() {
   echo ' '
 }
-printWithToilet() {
-  toilet --font mono12 $1
+printWithFiglet() {
+  figlet \ $1
 }
 
 setup_git_defaults() {
-  printWithToilet git
+  printWithFiglet git
   echo ">> Type your github username."
   read git_user_name
   echo ">> Type your github email."
@@ -34,7 +52,7 @@ setup_git_defaults() {
 
 
 setup_bash() {
-  printWithToilet bash
+  printWithFiglet bash
   # L => ~/.bashrc
   echo 'Configuring base profile...'
 
@@ -54,7 +72,7 @@ setup_bash() {
 install_and_setup_tmux() {
   # Only linux (tmux is not working on win, reason: unknown)
   # L => ~/.tmux.conf
-  printWithToilet tmux
+  printWithFiglet tmux
   echo 'Instlling tmux...'
   apt install -y tmux
   mkSpace
@@ -73,7 +91,7 @@ install_and_setup_tmux() {
 
 
 install_and_setup_nvim() {
-  printWithToilet nvim
+  printWithFiglet nvim
   # L => "~/.config/nvim/init.vim"
   echo 'Installing Neovim...'
   apt install -y neovim
@@ -102,33 +120,33 @@ install_and_setup_nvim() {
 
 
 install_various_apps() {
-  printWithToilet nodejs
+  printWithFiglet nodejs
   apt install -y nodejs
 
-  printWithToilet ripgrep
+  printWithFiglet ripgrep
   apt install -y ripgrep
 
-  printWithToilet tig
+  printWithFiglet tig
   apt install -y tig
   ln -s ~/dotfiles/tui/tig/.tigrc ~/.tigrc
 
-  printWithToilet lf
+  printWithFiglet lf
   apt install -y lf
   ln -s ~/dotfiles/tui/lf ~/.config/lf
   curl https://raw.githubusercontent.com/thameera/vimv/master/vimv > /data/data/com.termux/files/usr/bin/vimv && chmod +755 /data/data/com.termux/files/usr/bin/vimv
   # curl https://raw.githubusercontent.com/thameera/vimv/master/vimv > ~/bin/vimv && chmod +755 ~/bin/vimv
 
-  printWithToilet wget
+  printWithFiglet wget
   apt install -y wget
 
-  printWithToilet python
+  printWithFiglet python
   apt install -y python
   python3 -m pip install --user --upgrade pynvim
   # @todo:
   # npm install --global live-server
 
 
-  printWithToilet lazygit
+  printWithFiglet lazygit
   # NOTE: Currently lazygit installation only worls for termux
   # @todo: Support for Linux & Windows
   mkdir -p ./lazy
@@ -148,12 +166,12 @@ install_various_apps() {
   mkdir -p ~/.config/jesseduffield/lazygit
   ln -s ~/dotfiles/tui/lazygit/config.yml ~/.config/jesseduffield/lazygit/config.yml
 
-  printWithToilet taskwarrior
+  printWithFiglet taskwarrior
   apt install taskwarrior
   pip3 install tasklib
   pip3 install six
 
-  printWithToilet vit
+  printWithFiglet vit
   pip3 install vit
 }
 
@@ -167,14 +185,20 @@ auto_install_everything() {
 }
 
 prompt_and_get_answers() {
-  apt upgrade && apt update 
-  apt install -y toilet
+  if [[ $getter=="choco" ]]; then
+    $getter install -y figlet-go
+  else
+    apt upgrade && apt update 
+    $getter install -y toilet
+  fi
 
   setup_git_defaults
   auto_install_everything
 
-  printWithToilet done.
+  printWithFiglet done.
 }
 
-prompt_and_get_answers
+# prompt_and_get_answers
 
+# setup_git_defaults
+# setup_bash
