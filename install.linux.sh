@@ -13,10 +13,10 @@ echo ""
 # configs
 unameOut="$(uname -s)"
 case "${unameOut}" in
-  Linux*)     machine=linux;;
-  Darwin*)    machine=mac;;
-  CYGWIN*)    machine=windows;;
-  MINGW*)     machine=windows;;
+  Linux*)     machine="linux";;
+  Darwin*)    machine="mac";;
+  CYGWIN*)    machine="windows";;
+  MINGW*)     machine="windows";;
     *)        machine="UNKNOWN:${unameOut}"
 esac
 echo \ ${machine}
@@ -24,7 +24,7 @@ echo \ ${machine}
 case "${machine}" in
   linux*)     getter=apt;;
   windows*)   getter=choco;;
-    *)        getter=hello
+    *)        getter=apt
 esac
 
 # utils
@@ -185,7 +185,7 @@ auto_install_everything() {
 }
 
 prompt_and_get_answers() {
-  if [[ $getter=="choco" ]]; then
+  if [[ "$machine" == "windows" ]]; then
     $getter install -y figlet-go
   else
     apt upgrade && apt update 
