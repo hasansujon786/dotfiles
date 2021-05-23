@@ -122,61 +122,78 @@ install_and_setup_nvim() {
   echo "Done with setup."
 }
 
+install_lazygit () {
+  printWithFiglet lazygit
+
+  if [[ "$machine" == "windows" ]]; then
+    lazygitpath=~/AppData/Roaming/lazygit
+
+    $getter install -y lazygit
+  else
+    lazygitpath=~/.config/lazygit/config.yml
+    mkdir -p ~/.config/lazygit
+
+    # NOTE: Currently lazygit installation only worls for termux
+    mkdir -p ./lazy
+    export LAZYGIT_VER="0.28.1"
+    # wget -O lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_x86_64.tar.gz
+    wget -O ./lazy/lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_arm64.tar.gz
+    tar xvf ./lazy/lazygit.tgz -C ./lazy/
+    # sudo mv lazygit /usr/local/bin/
+    mv ./lazy/lazygit /data/data/com.termux/files/usr/bin/lazygit
+    rm -rf ./lazy
+  fi
+
+  if [ -d $lazygitpath ]; then
+    echo 'Removing old lazygit config.'
+    rm "$lazygitpath/config.yml"
+  fi
+  ln -s ~/dotfiles/tui/lazygit/config.yml $lazygitpath
+}
 
 install_various_apps() {
   printWithFiglet nodejs
-  apt install -y nodejs
+  $getter install -y nodejs
 
   printWithFiglet ripgrep
-  apt install -y ripgrep
+  $getter install -y ripgrep
 
-  printWithFiglet tig
-  apt install -y tig
-  ln -s ~/dotfiles/tui/tig/.tigrc ~/.tigrc
+  # TODO
+  # printWithFiglet tig
+  # $getter install -y tig
+  # ln -s ~/dotfiles/tui/tig/.tigrc ~/.tigrc
 
   printWithFiglet lf
-  apt install -y lf
-  ln -s ~/dotfiles/tui/lf ~/.config/lf
-  curl https://raw.githubusercontent.com/thameera/vimv/master/vimv > /data/data/com.termux/files/usr/bin/vimv && chmod +755 /data/data/com.termux/files/usr/bin/vimv
+  $getter install -y lf
+  if [[ "$machine" == "windows" ]]; then
+    lfpath=~/AppData/Local/lf
+  else
+    lfpath=~/.config/lf
+  fi
+  mkdir -p $lfpath
+  ln -s ~/dotfiles/tui/lf/lfrc "$lfpath/lfrc"
+
+  # TODO: add vimb support to lf
+  # curl https://raw.githubusercontent.com/thameera/vimv/master/vimv > /data/data/com.termux/files/usr/bin/vimv && chmod +755 /data/data/com.termux/files/usr/bin/vimv
   # curl https://raw.githubusercontent.com/thameera/vimv/master/vimv > ~/bin/vimv && chmod +755 ~/bin/vimv
 
   printWithFiglet wget
-  apt install -y wget
+  $getter install -y wget
 
   printWithFiglet python
-  apt install -y python
-  python3 -m pip install --user --upgrade pynvim
+  $getter install -y python
+  pip install --user --upgrade pynvim
   # @todo:
   # npm install --global live-server
 
+  # TODO
+  # printWithFiglet taskwarrior
+  # apt install taskwarrior
+  # pip3 install tasklib
+  # pip3 install six
 
-  printWithFiglet lazygit
-  # NOTE: Currently lazygit installation only worls for termux
-  # @todo: Support for Linux & Windows
-  mkdir -p ./lazy
-  export LAZYGIT_VER="0.28.1"
-  # wget -O lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_x86_64.tar.gz
-  wget -O ./lazy/lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_arm64.tar.gz
-  tar xvf ./lazy/lazygit.tgz -C ./lazy/
-  # sudo mv lazygit /usr/local/bin/
-  mv ./lazy/lazygit /data/data/com.termux/files/usr/bin/lazygit
-  rm -rf ./lazy
-
-  if [ -d ~/.config/jesseduffield ]; then
-    echo 'Removing old lazygit config.'
-    rm -rf ~/.config/jesseduffield
-  fi
-
-  mkdir -p ~/.config/jesseduffield/lazygit
-  ln -s ~/dotfiles/tui/lazygit/config.yml ~/.config/jesseduffield/lazygit/config.yml
-
-  printWithFiglet taskwarrior
-  apt install taskwarrior
-  pip3 install tasklib
-  pip3 install six
-
-  printWithFiglet vit
-  pip3 install vit
+  # printWithFiglet vit
+  # pip3 install vit
 }
 
 auto_install_everything() {
@@ -207,6 +224,9 @@ prompt_and_get_answers() {
 # setup_git_defaults
 # setup_bash
 # install_and_setup_nvim
+# install_lazygit
+# install_various_apps
 
 
+# install_and_setup_tmux() {
 
