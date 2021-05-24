@@ -3,11 +3,13 @@ function! s:custom_wrap(spec, fullscreen)
   " let colors = '--color=bg+:#3E4452,bg:#282C34,spinner:#C678DD,hl:#61AFEF,fg:#ABB2BF,prompt:#61AFEF,header:#5C6370,info:#E06C75,pointer:#E5C07B,marker:#E06C75,fg+:#E5C07B,gutter:#282C34,hl+:#61AFEF'
   let sp = "'"
   let win = a:fullscreen ? { 'window': '-tabnew' } : copy(get(g:, 'fzf_layout', {}))
-  let opts = join(map(a:spec.options, 'sp . v:val . sp'))
+  let opts = a:spec.options
 
   let global_action = get(g:, 'fzf_action', {})
   let action = copy(get(a:spec, 'action', global_action))
-  if (len(keys(action)) > 0) | let opts = opts." --expect=".join(keys(action), ',') | endif
+  if (len(keys(action)) > 0)
+    let opts = opts + ['--expect', join(keys(action), ',')]
+  endif
 
   return {
         \'_action': action,
@@ -52,7 +54,7 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ProjectRecentFiles {{{
 function! hasan#fzf#_project_recent_files(preview, bang)
-  let options = ['-m', '--header-lines', !empty(expand('%')), '--prompt', 'ProRecent> ']
+  let options = ['--header-lines', !empty(expand('%')), '--prompt', 'ProRecent> ']
   if has_key(a:preview, 'options')
     let options = l:options + a:preview.options
   end
@@ -218,12 +220,12 @@ function! hasan#fzf#_bookmar(bang)
         \ a:bang))
 endfunction
 
-function s:bookmark_sink(args) abort
+function! s:bookmark_sink(args) abort
   let lines = [a:args[0]] + map(a:args[1:], 'split(v:val, ">  ")[1]')
   call s:project_recent_files_sink(lines)
 endfunction
 
-function hasan#fzf#set_bookmark() abort
+function! hasan#fzf#set_bookmark() abort
   let fname = expand('%:~')
   if(fname == '') | return _#echoError('No file name') | endif
 
@@ -235,7 +237,7 @@ function hasan#fzf#set_bookmark() abort
   call s:write_list(g:fzf_bookmarks_file, fname, bm_name, 50)
 endfunction
 
-function hasan#fzf#edit_bookmark() abort
+function! hasan#fzf#edit_bookmark() abort
   execute('split '.g:fzf_bookmarks_file)
 endfunction
 " }}}
