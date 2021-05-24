@@ -117,7 +117,7 @@ install_and_setup_nvim() {
   mkSpace
 
   echo "Installing vim plugins..."
-  nvim +PlugInstall +qall
+  # nvim +PlugInstall +qall
 
   echo "Done with setup."
 }
@@ -130,8 +130,7 @@ install_lazygit () {
 
     $getter install -y lazygit
   else
-    lazygitpath=~/.config/lazygit/config.yml
-    mkdir -p ~/.config/lazygit
+    lazygitpath=~/.config/lazygit
 
     # NOTE: Currently lazygit installation only worls for termux
     mkdir -p ./lazy
@@ -147,6 +146,8 @@ install_lazygit () {
   if [ -d $lazygitpath ]; then
     echo 'Removing old lazygit config.'
     rm "$lazygitpath/config.yml"
+  else
+    mkdir -p $lazygitpath
   fi
   ln -s ~/dotfiles/tui/lazygit/config.yml $lazygitpath
 }
@@ -182,7 +183,8 @@ install_various_apps() {
 
   printWithFiglet python
   $getter install -y python
-  pip install --user --upgrade pynvim
+# c:\python39\python.exe -m pip install --upgrade pip
+  # pip install --user --upgrade pynvim
   # @todo:
   # npm install --global live-server
 
@@ -199,9 +201,11 @@ install_various_apps() {
 auto_install_everything() {
   echo ' ** Auto Install ** '
 
+  setup_git_defaults
   setup_bash
-  install_and_setup_tmux
+  # install_and_setup_tmux
   install_and_setup_nvim
+  install_lazygit
   install_various_apps
 }
 
@@ -213,13 +217,12 @@ prompt_and_get_answers() {
     $getter install -y toilet
   fi
 
-  setup_git_defaults
   auto_install_everything
 
   printWithFiglet done.
 }
 
-# prompt_and_get_answers
+prompt_and_get_answers
 
 # setup_git_defaults
 # setup_bash
