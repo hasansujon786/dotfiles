@@ -91,10 +91,14 @@ endfunction
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <A-,> coc#refresh()
 inoremap <silent><expr> <C-space> coc#refresh()
-nmap <silent><C-space> <Plug>(coc-codeaction-line)
-xmap <silent><C-space> <Plug>(coc-codeaction-selected)
+inoremap <silent><expr> <A-,> coc#refresh()
+inoremap <silent><expr> <C-q> coc#refresh()
+
+nnoremap <silent><C-space> <Plug>(coc-codeaction-line)
+xnoremap <silent><C-space> <Plug>(coc-codeaction-selected)
+nnoremap <silent><C-q> <Plug>(coc-codeaction-line)
+xnoremap <silent><C-q> <Plug>(coc-codeaction-selected)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
