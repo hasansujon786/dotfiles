@@ -1,5 +1,6 @@
 # W - "~/AppData/Roaming/alacritty"
 # L - "-"
+# https://github.com/alacritty/alacritty/blob/master/alacritty.yml
 
 # Shell
 #
@@ -9,32 +10,33 @@ shell:
   program: C:\Program Files\Git\bin\bash
   # args:
   # - --command=tmux
+working_directory: \\?\C:\Users\hasan
 
 # Window Customization
 window:
   dimensions:
-    columns: 140
-    lines: 38
+    columns: 100
+    lines: 25
   # padding:
-  # x: 10
-  # y: 10
+  #   x: 0
+  #   y: 0
   # decorations: none
 scrolling:
   history: 10000
   multiplier: 3
-background_opacity: .9
+background_opacity: .92
 dynamic_title: true
 
 # Font Customization
 font:
   normal:
-    family: CaskaydiaCove Nerd Font
+    family: CaskaydiaCove NF
     # style: Regular
   bold:
-    family: CaskaydiaCove Nerd Font
+    family: CaskaydiaCove NF
     # style: Bold
   italic:
-    family: CaskaydiaCove Nerd Font
+    family: CaskaydiaCove NF
     # style: Italic
   size: 13
   offset:
@@ -81,5 +83,7 @@ colors:
     magenta:  '0xc678dd'
     cyan:     '0x56b6c2'
     white:    '0x828791'
-# key_bindings:
-#   - { key: N, mods: Control, action: SpawnNewInstance }
+
+key_bindings: 
+  - { key: N, mods: Control|Shift, action: SpawnNewInstance }
+  - { key: Space, mods: Control, chars: "\x11" }
