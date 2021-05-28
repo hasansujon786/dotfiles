@@ -4,7 +4,7 @@ command! FernCurDir call hasan#fern#smart_path(0)
 command! FernCurDirDrawer call hasan#fern#smart_path(1)
 command! -bang FernDrawerToggle call hasan#fern#drawer_toggle(<bang>0)
 
-let g:fern#drawer_width = 40
+let g:fern#drawer_width = 35
 let g:fern#keepalt_on_edit = 1
 let g:fern#default_hidden = 1
 let g:fern#disable_default_mappings = 1
