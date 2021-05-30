@@ -33,6 +33,7 @@ augroup Focus
   " Change active/inactive window background
   au FocusGained,WinEnter,BufWinEnter * call nebulous#focus_window()
   au FocusLost * call nebulous#blur_current_window()
+  au User TelescopeFindPre call nebulous#onTelescopeStart()
 
   " Goyo Events
   au User GoyoEnter nested call hasan#goyo#goyo_enter()

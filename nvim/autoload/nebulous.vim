@@ -8,6 +8,7 @@ let s:nebulous_ignored_filetypes = {
       \ 'fzf': 1,
       \ 'floating': 1,
       \ 'qf': 1,
+      \ 'TelescopePrompt': 1,
       \ }
 let s:nebulous_on_focus_highlights_by_filetype = {
       \ 'floaterm': [
@@ -83,3 +84,26 @@ endfunction
 function! s:add_blur(win_nr) abort
   call setwinvar(a:win_nr, '&winhighlight', join(s:nebulous_on_blur_highlights,','))
 endfunction
+
+function! nebulous#block(...) abort
+ let s:nebulous_disabled = v:true
+endfunction
+
+function! nebulous#unblock(...) abort
+ let s:nebulous_disabled = v:false
+endfunction
+
+function! nebulous#onTelescopeStart() abort
+  call nebulous#blur_current_window()
+  call nebulous#block()
+  augroup NebulousTelescope
+    autocmd!
+    autocmd WinClosed * call nebulous#onTelescopeClosed()
+  augroup end
+endfunction
+
+function! nebulous#onTelescopeClosed() abort
+  call nebulous#unblock()
+  autocmd! NebulousTelescope
+endfunction
+
