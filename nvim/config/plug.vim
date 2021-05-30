@@ -16,6 +16,12 @@ Plug 'tools-life/taskwiki'
 Plug 'mkropat/vim-tt'
 " }}}
 
+" => Navigation ============================================ {{{
+Plug 'ThePrimeagen/harpoon'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+" }}}
+
 " => Functionality-&-Helpers =============================== {{{
 Plug 'tpope/vim-eunuch',{ 'on': ['Delete','Move','Rename','Mkdir','Chmod'] } "for moving and manipulating files / directories.
 Plug 'voldikss/vim-floaterm',{ 'on': [ 'FloatermNew', 'FloatermToggle' ] }
