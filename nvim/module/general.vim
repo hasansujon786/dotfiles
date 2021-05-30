@@ -78,7 +78,10 @@ set wildoptions=pum                                    " set file completion in 
 set shortmess+=c                                       " don't give |ins-completion-menu| messages
 set mousemodel=popup
 set fillchars+=eob:\                                   " suppress ~ at EndOfBuffer
+set fillchars+=vert:░
 " set fillchars-=vert:┃                                " BOX DRAWINGS HEAVY VERTICAL (U+2503, UTF-8: E2 94 83)
+" set fillchars+=stl:░
+" set fillchars+=stlnc:░
 
 " Ignore the following globs in file completions
 set wildignore+=*.o,*~,*.pyc,*.obj,*.pyc,*.so,*.swp
