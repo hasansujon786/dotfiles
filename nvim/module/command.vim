@@ -17,8 +17,6 @@ command! -nargs=+ RefactorWordInProject call hasan#utils#refactorWordInProject(<
 command! -nargs=1 TaskWikiAdvancedEdit call hasan#utils#tastwiki_edit(<f-args>)
 
 command! -bang -nargs=1 -complete=file Fedit call hasan#float#_fedit(<f-args>, <bang>1, {})
-command! OpenPFH call pfhopper#open()
-command! AddToPFH call pfhopper#add_to_hopper_file()
 
 " command! OpenInVSCode    exe "silent !code --goto '" . expand("%") . ":" . line(".") . ":" . col(".") . "'"                    | redraw!
 " command! OpenCwdInVSCode exe "silent !code '" . getcwd() . "' --goto '" . expand("%") . ":" . line(".") . ":" . col(".") . "'" | redraw!

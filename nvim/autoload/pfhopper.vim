@@ -1,10 +1,12 @@
 function! s:get_hopper_file() abort
-  return $HOME.'/.config/pf.hopper/'. fnamemodify(getcwd(), ':t') .'/pf.hopper'
+  return fnamemodify('~/.config/pf.hopper/'. fnamemodify(getcwd(), ':t') .'/pf.hopper', ":p")
 endfunction
 
 function! pfhopper#open() abort
   let hopper_file = s:get_hopper_file()
-  call hasan#utils#_filereadable_and_create(hopper_file, v:true)
+  let exists = hasan#utils#_filereadable_and_create(hopper_file, v:true)
+  if !exists | return 0 | endif
+
   call hasan#float#_fedit(hopper_file, 1, {
         \ 'window': {'width': 0.7, 'height': 0.5},
         \ 'bufname': fnamemodify(getcwd(), ':~'),
@@ -29,8 +31,11 @@ function! pfhopper#add_to_hopper_file() abort
   if(fname == '') | return _#echoError('No file name') | endif
 
   call hasan#utils#_filereadable_and_create(s:get_hopper_file(), v:true)
-  call system('print "'.fname.'" >> '.s:get_hopper_file())
-  call _#Echo(['TextInfo', 'Hopper new file:'], '“'.fname.'”')
+  execute 'redir! >> '.s:get_hopper_file()
+  echo fname
+  redir END
+  " call system('print "'.fname.'" >> '.s:get_hopper_file())
+  " call _#Echo(['TextInfo', 'Hopper new file:'], '“'.fname.'”')
 endfunction
 
 function! pfhopper#fzf_add_to_hopper_file(lines) abort
