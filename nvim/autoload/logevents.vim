@@ -20,10 +20,10 @@ let s:first_report = 1
 
 function! s:ReportEvent (eventtype, filename)
     if s:first_report && expand('%:t') != 'events.log'
-        redir! > ~/.config/nvim/events.log
+        redir! > ~/dotfiles/events.log
         let s:first_report = 0
     endif
-    redir! >> ~/.config/nvim/events.log
+    redir! >> ~/dotfiles/events.log
     echomsg '[' . substitute(reltimestr(reltime(s:start_time)),'^\s*','','') . ']'   a:eventtype   a:filename
     redir END
 endfunction

@@ -3,7 +3,7 @@
 # nvim
 tt.state
 /nvim/plugged
-/nvim/events.log
+/events.log
 log.log
 
 # dependencies
