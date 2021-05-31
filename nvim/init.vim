@@ -20,6 +20,7 @@ source ~/dotfiles/nvim/module/command.vim
 source ~/dotfiles/nvim/module/which-key.vim
 source ~/dotfiles/nvim/module/key.vim
 source ~/dotfiles/nvim/module/abbreviation.vim
+luafile ~/dotfiles/nvim/start.lua
 " source ~/dotfiles/nvim/module/playground.vim
 
 
