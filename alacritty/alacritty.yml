@@ -11,7 +11,8 @@ shell:
   # args:
   # - --command=tmux
 # working_directory: \\?\C:\Users\hasan
-working_directory: \\?\d:\repoes
+# working_directory: \\?\d:\repoes
+working_directory: D:\repoes
 
 # Window Customization
 window:

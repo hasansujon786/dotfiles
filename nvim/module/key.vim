@@ -200,7 +200,11 @@ inoremap <c-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 " Silently open a shell in the directory of the current file
 if has("win32") || has("win64")
  " nnoremap <C-t><C-t> :silent !start cmd /k cd %:p:h <CR>
-  nnoremap <silent> <C-t><C-t> :tc %:h<CR>:silent !start bash<CR>:tc -<CR>
+  nnoremap <silent> <C-t><C-t> :silent !start alacritty --working-directory .<CR>
+  nnoremap <silent> <C-t><C-f> :silent !start alacritty --working-directory %:h<CR>
+
+  nnoremap <silent> <C-t><C-q> :silent !start bash<CR>
+  " nnoremap <silent> <C-t>q :tc %:h<CR>:silent !start bash<CR>:tc -<CR>
 endif
 tmap <C-o> <C-\><C-n>
 
