@@ -10,7 +10,8 @@ shell:
   program: C:\Program Files\Git\bin\bash
   # args:
   # - --command=tmux
-working_directory: \\?\C:\Users\hasan
+# working_directory: \\?\C:\Users\hasan
+working_directory: \\?\d:\repoes
 
 # Window Customization
 window:
@@ -21,11 +22,8 @@ window:
   #   x: 0
   #   y: 0
   # decorations: none
-scrolling:
-  history: 10000
-  multiplier: 3
-background_opacity: .92
-dynamic_title: true
+  dynamic_title: true
+background_opacity: 0.92
 
 # Font Customization
 font:
@@ -86,4 +84,11 @@ colors:
 
 key_bindings: 
   - { key: N, mods: Control|Shift, action: SpawnNewInstance }
-  - { key: Space, mods: Control, chars: "\x11" }
+  - { key: Space, mods: Control, chars: "\x11" } # ctrl-q
+  - { key: Slash, mods: Control, chars: "\x1F" } # ctrl-_
+  - { key: Back,  mods: Control, chars: "\x17" } # ctrl-w
+  # - { key: R,      mods: Control|Shift,  command:
+  #   { program: "explorer", args: ["."] }  }
+
+# http://www.physics.udel.edu/~watson/scen103/ascii.html
+# https://github.com/Happy-Dude/dotfiles/blob/master/alacritty/.config/alacritty/alacritty.yml
