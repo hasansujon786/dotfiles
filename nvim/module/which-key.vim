@@ -32,8 +32,8 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 " }}}
 
 " Single mappings ---------------------------------------- {{{
-let g:which_key_map[' '] = [':ProjectRecentFiles'                   , 'Find project file']
-let g:which_key_map['.'] = [':Files'                                , 'Find file']
+let g:which_key_map[' '] = [':ProjectFiles'                         , 'Find project file']
+let g:which_key_map['.'] = [':Telescope find_files'                 , 'Find file']
 let g:which_key_map[':'] = [':Commands'                             , 'Search commands']
 let g:which_key_map[';'] = [':History:'                             , 'Search recent cmd']
 let g:which_key_map['q'] = [':Quit'                                 , 'Close window']

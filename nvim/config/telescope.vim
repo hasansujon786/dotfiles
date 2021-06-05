@@ -16,4 +16,4 @@ nnoremap <silent> <C-p>      :Telescope oldfiles<CR>
 
 " nnoremap <A-/> :RG!<space>
 " xnoremap <A-/> "zy:RG! <C-r>z<CR>
-nnoremap <silent> // :Telescope current_buffer_fuzzy_find<CR>
+nnoremap <silent> // :lua require("hasan.telescope.custom").curbuf()<CR>
