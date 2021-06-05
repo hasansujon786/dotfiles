@@ -3,29 +3,49 @@
 
 set -e
 
-echo "      _       _         __ _ _"
-echo "   __| | ___ | |_      / _(_) | ___  ___"
-echo "  / _\` |/ _ \| __|____| |_| | |/ _ \/ __|"
-echo " | (_| | (_) | ||_____|  _| | |  __/\__ \\"
-echo "  \__,_|\___/ \__|    |_| |_|_|\___||___/"
-echo ""
-
-# configs
-unameOut="$(uname -s)"
-case "${unameOut}" in
-  Linux*)     machine="linux";;
-  Darwin*)    machine="mac";;
-  CYGWIN*)    machine="windows";;
-  MINGW*)     machine="windows";;
-    *)        machine="UNKNOWN:${unameOut}"
+input=$1
+case "${input}" in
+  lin)     inputValid=1;;
+  win)     inputValid=1;;
+  ter)    inputValid=1;;
+    *)     inputValid=0
 esac
-echo \ ${machine}
 
-case "${machine}" in
-  linux*)     getter=apt;;
-  windows*)   getter=choco;;
-    *)        getter=apt
-esac
+if [[ $inputValid -eq 0 ]]; then
+  echo "error: The following required arguments were not provided:"
+  echo "USAGE:
+
+  ./install [OS Name] (win/lin/ter)
+
+    win: windows
+    lin: linux
+    ter: termux"
+  exit 1
+else
+  echo "      _       _         __ _ _"
+  echo "   __| | ___ | |_      / _(_) | ___  ___"
+  echo "  / _\` |/ _ \| __|____| |_| | |/ _ \/ __|"
+  echo " | (_| | (_) | ||_____|  _| | |  __/\__ \\"
+  echo "  \__,_|\___/ \__|    |_| |_|_|\___||___/"
+  echo ""
+
+  case "${input}" in
+    win)  machine=windows;;
+    lin)  machine=linux;;
+    ter)  machine=termux;;
+    *)    machine=linux
+  esac
+
+  case "${input}" in
+    win)  getter=choco;;
+    lin)  getter=apt;;
+    ter)  getter=apt;;
+    *)    getter=apt
+  esac
+
+  echo \ System: ${machine}
+  echo \ Package manager: ${getter}
+fi
 
 # utils
 mkSpace() {
@@ -100,7 +120,7 @@ install_and_setup_nvim() {
     mkdir -p ~/.config
   fi
 
-  $getter install -y neovim
+  $getter install -y neovim --pre
 
   if [ -d $vimpath ]; then
     echo 'Removing old .config directory.'
@@ -222,7 +242,7 @@ prompt_and_get_answers() {
   printWithFiglet done.
 }
 
-prompt_and_get_answers
+# prompt_and_get_answers
 
 # setup_git_defaults
 # setup_bash
@@ -233,3 +253,13 @@ prompt_and_get_answers
 
 # install_and_setup_tmux() {
 
+# C:\Users\hasan\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
+# choco install keypirinha -y
+
+
+# install path C:\ProgramData\chocolatey\lib\keypirinha\tools\Keypirinha
+# config path C:\Users\hasan\AppData\Roaming\Keypirinha\User
+
+# powershell New-Item -ItemType SymbolicLink -Path "~/kissline.nvim/test" -Target "~/testFolder"
+# powershell New-Item -ItemType SymbolicLink -Path "~/AppData/Local/nvim" -Target "~/dotfiles/nvim"
+# powershell New-Item -ItemType SymbolicLink -Path "~/AppData/Roaming/alacritty" -Target "~/dotfiles/alacritty"
