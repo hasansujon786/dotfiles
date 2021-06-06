@@ -4,6 +4,6 @@ function hasan#coc#_better_search() abort
  elseif (&ft == 'vimwiki')
    exe 'VimwikiBacklinks'
  else
-   exe "BLines"
+   exe "lua require('hasan.telescope.custom').curbuf()"
  endif
 endfunction

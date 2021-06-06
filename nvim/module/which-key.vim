@@ -190,7 +190,7 @@ xnoremap <Leader>f. "zy:%s/<C-r>"//gc<Left><Left><Left>
 " g is for git ------------------------------------------- {{{
 let g:which_key_map['g'] = {
       \ 'name' : '+git',
-      \ '/' : [':GFiles?'                          , 'fzf-git-files*'],
+      \ '/' : [':Telescope git_status'             , 'Find git files*'],
       \ '.' : [':Git add %'                        , 'stage-current-file'],
       \ 'g' : [':Git'                              , 'status'],
       \ 'b' : [':Git blame'                        , 'blame'],
@@ -253,6 +253,7 @@ let g:which_key_map['p'] = {
       \ 'name' : '+project',
       \ 'p' : [':Projects'               , 'Switch project'],
       \ 'r' : [':ProjectRecentFiles'     , 'Find recent project files'],
+      \ '.' : [':Telescope file_browser' , 'Browse project'],
       \ }
 " }}}
 
@@ -356,24 +357,25 @@ nnoremap <leader>w? :VimwikiUISelect<CR>
 let g:which_key_map['/'] = {
       \ 'name' : '+search',
       \ '/' : [':BetterSearch'          , 'Better search'],
-      \ 'd' : [':RGCurDir'              , 'Search current directory'],
+      \
+      \ 'f' : [':Telescope find_files'  , 'Find file'],
+      \ 'b' : [':Telescope buffers'     , 'Find buffers'],
+      \ 'r' : [':Telescope oldfiles'    , 'Recent files'],
+      \
+      \ 'g' : [':Telescope git_status'  , 'Find git files*'],
+      \ 'c' : [':Telescope git_commits' , 'Look up commits'],
+      \ 'B' : [':Telescope git_bcommits', 'Look up buffer commits'],
+      \ 'k' : [':Telescope keymaps'     , 'Look up keymaps'] ,
+      \ 'M' : [':Telescope marks'       , 'Jump to marks'] ,
+      \ 't' : [':Telescope filetypes'   , 'Change filetypes'],
+      \
       \ 'D' :                             'Search other directory',
       \ 'p' :                             'Search in project',
-      \
-      \ 'f' : [':Files'                 , 'Find file'],
+      \ 'd' : [':RGCurDir'              , 'Search current directory'],
       \ 'F' : [':FilesCurDir'           , 'Find file from here'],
-      \ 'b' : [':Buffers'               , 'Find buffers'],
-      \ 'g' : [':GFiles?'               , 'Find git files*'],
-      \ 'r' : [':History'               , 'Recent files'],
       \ 'w' : [':Windows'               , 'Find windows'],
-      \
-      \ 'c' : [':BCommits'              , 'Look up buffer commits'],
-      \ 'C' : [':Commits'               , 'Look up commits'],
       \ 'h' : [':History/'              , 'Look up search history'],
-      \ 'k' : [':Maps!'                 , 'Look up keymaps'] ,
       \ 'm' : [':Bookmarks'             , 'Jump to bookmark'] ,
-      \ 'M' : [':Marks'                 , 'Jump to marks'] ,
-      \ 't' : [':Filetypes'             , 'Change filetypes'],
       \ }
 " Search word in whole project
 nnoremap <leader>/p :RG!<CR>
