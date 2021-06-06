@@ -203,7 +203,7 @@ if has("win32") || has("win64")
   nnoremap <silent> <C-t><C-t> :silent !start alacritty --working-directory .<CR>
   nnoremap <silent> <C-t><C-f> :silent !start alacritty --working-directory %:h<CR>
 
-  nnoremap <silent> <C-t><C-q> :silent !start bash<CR>
+  nnoremap <silent> <C-t>q :silent !start bash<CR>
   " nnoremap <silent> <C-t>q :tc %:h<CR>:silent !start bash<CR>:tc -<CR>
 endif
 tmap <C-o> <C-\><C-n>

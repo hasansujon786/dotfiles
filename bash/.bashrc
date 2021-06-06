@@ -15,10 +15,15 @@ PS1='\[\033]0;$TITLEPREFIX:$PWD\007\]\n\[\033[32m\]\u@\h \[\033[35m\][\T] \[\033
 [ -f ~/dotfiles/bash/.aliases ] && source ~/dotfiles/bash/.aliases
 [ -f ~/dotfiles/bash/.env ] && source ~/dotfiles/bash/.env
 
-newterm_curr_cd() {
+open_alacritty() {
   start alacritty --working-directory $(pwd)
   # nohup alacritty --working-directory $(pwd) </dev/null &>/dev/null &
 }
 
-# bindkey -s '^t' 'newterm_curr_cd\o'  # CTRL-T in terminal calls for newterm_curr_cd function
-bind -x '"\C-t\C-t":"newterm_curr_cd"'
+open_bash() {
+  start bash
+}
+
+# bindkey -s '^t' 'open_alacritty\o'  # CTRL-T in terminal calls for open_alacritty function
+bind -x '"\C-t\C-t":"open_alacritty"'
+bind -x '"\C-tq":"open_bash"'
