@@ -21,7 +21,7 @@ let g:fern#renderer#default#expanded_symbol  = '▼ '
 let g:fern#renderer#default#leading          = ' '
 let g:fern#renderer#default#leaf_symbol      = ' '
 let g:fern#renderer#default#root_symbol      = '~ '
-let g:nerdfont#path#extension#customs = {
-      \ 'vue': 'V',
-      \}
+" let g:nerdfont#path#extension#customs = {
+"       \ 'vue': 'V',
+"       \}
 
