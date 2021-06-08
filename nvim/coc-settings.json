@@ -2,7 +2,7 @@
   "suggest.enablePreview": true,
   // Prettier
   "prettier.semi": false,
-  "prettier.printWidth": 120,
+  "prettier.printWidth": 100,
   "prettier.singleQuote": true,
   "prettier.bracketSpacing": true,
   "prettier.statusItemText": "Pt",
