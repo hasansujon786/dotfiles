@@ -3,6 +3,7 @@
 " Powerline characters:
 " "                
 " 
+"      ❯     
 let s:by_name = {
 \ 'lock':     '',
 \ 'checking': '',
