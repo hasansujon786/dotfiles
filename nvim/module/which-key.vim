@@ -298,6 +298,7 @@ let g:which_key_map['v'] = {
       \    'c' : [':PlugClean'                  , 'clean-plugins'],
       \    's' : [':PlugStatus'                 , 'plug-status'],
       \    'u' : [':PlugUpdate'                 , 'update-all-plugins'],
+      \    'p' : 'Search plugin files',
       \    'U' : 'upgrade-plug-itself',
       \  },
       \ }
@@ -310,7 +311,6 @@ nnoremap <leader>ve :call _#print_to_float(g:)<left>
 " w is for wiki-or-window -------------------------------- {{{
 let g:which_key_map['w'] = {
       \ 'name' : '+wiki-n-window',
-      \ '/' : [':Windows'                                 , 'fzf-windows'],
       \ 'w' : ['<C-w>w'                                   , 'next-window'],
       \ 'W' : ['<C-w>W'                                   , 'previous-window'],
       \ 'h' : ['<C-w>h'                                   , 'window-left'],
@@ -341,6 +341,7 @@ let g:which_key_map['w'] = {
       \ 'N' : 'diary-today-tab',
       \ 'g' : 'diary-generate-links',
       \ '?' : 'wiki-ui-select',
+      \ '/' : 'Search wiki files',
       \ }
 nnoremap <leader>wz :AutoZoomWin<CR>
 " vimwike mappings
@@ -368,15 +369,16 @@ let g:which_key_map['/'] = {
       \ 'k' : [':Telescope keymaps'     , 'Look up keymaps'] ,
       \ 'M' : [':Telescope marks'       , 'Jump to marks'] ,
       \ 't' : [':Telescope filetypes'   , 'Change filetypes'],
+      \ 'w' : 'Search wiki files',
       \
       \ 'D' :                             'Search other directory',
       \ 'p' :                             'Search in project',
       \ 'd' : [':RGCurDir'              , 'Search current directory'],
       \ 'F' : [':FilesCurDir'           , 'Find file from here'],
-      \ 'w' : [':Windows'               , 'Find windows'],
       \ 'h' : [':History/'              , 'Look up search history'],
       \ 'm' : [':Bookmarks'             , 'Jump to bookmark'] ,
       \ }
+      " \ 'w' : [':Windows'               , 'Find windows'],
 " Search word in whole project
 nnoremap <leader>/p :RG!<CR>
 xnoremap <leader>/p "zy:RG! <C-r>z<CR>

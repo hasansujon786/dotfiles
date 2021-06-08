@@ -28,6 +28,7 @@ function M.git_files()
     winblend = 5,
     previewer = false,
     shorten_path = false,
+    prompt_prefix = '  ',
 
     layout_config = {
       width = 0.25,
@@ -51,7 +52,7 @@ end
 function M.search_wiki_files()
   builtin.find_files({
       prompt_title = "Wiki Files",
-      cwd = "D:/repoes/vimwiki",
+      cwd = "~/vimwiki",
     })
 end
 
