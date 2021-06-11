@@ -87,5 +87,8 @@
     "js-beautify-html": { "wrap_attributes": "force-expand-multiline" },
     "prettyhtml": { "printWidth": 120, "singleQuote": true, "wrapAttributes": false, "sortAttributes": false },
     "prettier": { "printWidth": 120, "singleQuote": true, "semi": false, "bracketSpacing": true }
-  }
+  },
+
+  // lua
+  "Lua.diagnostics.globals": ["vim"]
 }
