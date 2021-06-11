@@ -7,6 +7,7 @@ require('telescope').setup{
     selection_caret = ' ',
     -- prompt_position = "top",
     -- sorting_strategy = "ascending",
+    winblend = 5,
     mappings = {
       -- n = {
       --   ["<Del>"] = actions.close
@@ -19,7 +20,8 @@ require('telescope').setup{
         ["<esc>"] = actions.close,
       },
     },
-    -- file_ignore_patterns = { "parser.c" },
+    file_ignore_patterns = { "%.gitignore" },
+    -- `file_ignore_patterns = { "scratch/.*", "%.env" }`
     extensions = {
       fzy_native = {
         override_generic_sorter = false,

@@ -1,16 +1,20 @@
--- local actions = require('telescope/actions')
-local builtin = require('telescope.builtin')
+local local_action = require('hasan.telescope.local_action')
+local builtin = require('telescope/builtin')
 local utils = require('telescope.utils')
 local themes = require('telescope.themes')
--- local pickers = require('telescope.pickers')
--- local finders = require('telescope.finders')
+local pickers = require('telescope.pickers')
+local finders = require('telescope.finders')
 -- local make_entry = require('telescope.make_entry')
+-- local actions = require('telescope/actions')
+-- local action_state = require('telescope/actions/state')
+-- local sorters = require('telescope/sorters')
+local conf = require('telescope.config').values
 
--- local conf = require('telescope.config').values
+local filter = vim.tbl_filter
 
 local M = {}
 
-M.project_files = function()
+M.project_recent_files = function()
   local _, ret, _ = utils.get_os_command_output({ 'git', 'rev-parse', '--is-inside-work-tree' })
   local gopts = {
     prompt_title = 'Git Files',
@@ -62,34 +66,59 @@ function M.search_plugins()
       cwd = "~/dotfiles/nvim/plugged/",
     })
 end
--- lua require("hasan.telescope.custom").search_plugins()
 
+M.project_files = function(opts)
+  local bufnrs = filter(function(b)
+    if 1 ~= vim.fn.buflisted(b) then
+        return false
+    end
+    if not opts.show_all_buffers and not vim.api.nvim_buf_is_loaded(b) then
+      return false
+    end
+    if not opts.show_current_buffer and b == vim.api.nvim_get_current_buf() then
+      return false
+    end
+    if opts.only_cwd and not string.find(vim.api.nvim_buf_get_name(b), vim.loop.cwd(), 1, true) then
+      return false
+    end
+    return true
+  end, vim.fn['fzf#vim#_buflisted_sorted']())
 
+  local bufer_files = {}
+  for _, bufnr in ipairs(bufnrs) do
+    local bufname = vim.api.nvim_buf_get_name(bufnr)
+    local file = vim.fn.fnamemodify(bufname, ':.'):gsub("\\","/")
+    table.insert(bufer_files, file)
+  end
 
--- M.custom = function (opts)
---   require('telescope.builtin').find_files({
---       finder = finders.new_table {
---         results = {
---           "~/dotfiles/nvim/init.vim",
---           "path/to/another_file"
---         },
+  local git_files = utils.get_os_command_output({ 'git', 'ls-files', '--exclude-standard', '--cached', '--others' })
 
---         entry_maker = opts.entry_maker,
---       },
---     })
---   pickers.new(opts, {
---       prompt_title = 'ConfigPicker',
---       finder = finders.new_table {
---         results = {
---           "path/to/file",
---           "path/to/another_file"
---         },
+  local fusedArray = {}
+  local n=0
+  for _,v in ipairs(bufer_files) do n=n+1 ; fusedArray[n] = v end
+  for _,v in ipairs(git_files) do n=n+1 ; fusedArray[n] = v end
 
---         entry_maker = opts.entry_maker,
---       },
---     }):find()
--- end
+  pickers.new(opts, {
+    prompt_title = 'Project files',
+    -- finder = finders.new_table(fusedArray),
+    finder = finders.new_table(vim.fn['fzf#vim#_uniq'](fusedArray)),
+    sorter = conf.file_sorter(opts),
+    previewer = conf.file_previewer(opts),
+    -- default_selection_index = 2,
+    selection_strategy = 'reset', -- follow, reset, row
+    color_devicons = true,
+    attach_mappings = function(_, map)
+      map('i', '<cr>', local_action.edit)
+      map('i', '<C-v>', local_action.vsplit)
+      map('i', '<C-s>', local_action.split)
+      map('i', '<C-t>', local_action.tabedit)
 
+      -- A return value _must_ be returned. It is an error to not return anything.
+      -- Return false if you don't want any other mappings applied.
+      return true
+    end,
+  }):find()
+end
 
 
 return M
