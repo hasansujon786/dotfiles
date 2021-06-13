@@ -1,4 +1,5 @@
 local actions = require('telescope/actions')
+local local_action = require('hasan.telescope.local_action')
 
 require('telescope').setup{
   defaults = {
@@ -21,6 +22,7 @@ require('telescope').setup{
         ["<esc>"] = actions.close,
         ["<M-u>"] = actions.preview_scrolling_up,
         ["<M-d>"] = actions.preview_scrolling_down,
+        ["<C-f>"] = local_action.fedit,
       },
     },
     file_ignore_patterns = { "%.gitignore" },

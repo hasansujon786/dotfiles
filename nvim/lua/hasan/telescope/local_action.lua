@@ -22,6 +22,9 @@ local local_action = transform_mod({
   tabedit = function(prompt_bufnr)
     edit_buffer(prompt_bufnr, 'tabedit')
   end,
+  fedit = function(prompt_bufnr)
+    edit_buffer(prompt_bufnr, 'Fedit')
+  end,
 })
 
 return local_action
