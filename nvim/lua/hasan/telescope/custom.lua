@@ -4,7 +4,7 @@ local utils = require('telescope.utils')
 local themes = require('telescope.themes')
 local pickers = require('telescope.pickers')
 local finders = require('telescope.finders')
--- local make_entry = require('telescope.make_entry')
+local make_entry = require('telescope.make_entry')
 -- local actions = require('telescope/actions')
 -- local action_state = require('telescope/actions/state')
 -- local sorters = require('telescope/sorters')
@@ -100,8 +100,10 @@ M.project_files = function(opts)
 
   pickers.new(opts, {
     prompt_title = 'Project files',
-    -- finder = finders.new_table(fusedArray),
-    finder = finders.new_table(vim.fn['fzf#vim#_uniq'](fusedArray)),
+    finder = finders.new_table{
+      results = vim.fn['fzf#vim#_uniq'](fusedArray),
+      entry_maker = opts.entry_maker or make_entry.gen_from_file(opts),
+    },
     sorter = conf.file_sorter(opts),
     previewer = conf.file_previewer(opts),
     -- default_selection_index = 2,

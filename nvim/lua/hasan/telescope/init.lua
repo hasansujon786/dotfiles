@@ -13,11 +13,14 @@ require('telescope').setup{
       --   ["<Del>"] = actions.close
       -- },
       i = {
-        -- ["<C-q>"] = actions.send_to_qflist,
         ["<C-x>"] = false,
+        ["<C-u>"] = false,
+        ["<C-d>"] = false,
         ["<C-s>"] = actions.file_split,
         ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
         ["<esc>"] = actions.close,
+        ["<M-u>"] = actions.preview_scrolling_up,
+        ["<M-d>"] = actions.preview_scrolling_down,
       },
     },
     file_ignore_patterns = { "%.gitignore" },
