@@ -12,6 +12,10 @@ else
   vnoremap <silent> q <ESC>:call HLNextOff()<BAR>:nohlsearch<CR>
 endif
 
+" run last : command easily
+nnoremap <CR> :<up>
+autocmd CmdwinEnter * nnoremap <buffer><CR> <CR>
+
 " Exit file with confirm
 nnoremap <silent> ZZ :Quit!<CR>
 
@@ -20,16 +24,12 @@ nmap zm zM
 
 " Goyo
 nmap <silent> z<CR> :Goyo<CR>
-vmap <silent> z<CR> :Goyo<CR>
 nmap <silent> gz :Goyo<CR>
-vmap <silent> gz :Goyo<CR>
 
 " Switch between the alternate files
 nnoremap <BS> <c-^>
 " Use Q to record macros
 noremap Q q
-" Replay last used macro
-" noremap <CR> @@
 
 " Find & open file on current window
 "nnoremap <C-p> :tabfind *
