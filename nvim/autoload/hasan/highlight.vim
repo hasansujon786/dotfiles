@@ -8,6 +8,7 @@ function hasan#highlight#load_custom_highlight() abort
   hi VertSplit          guifg=#4D5666 guibg=#363d49
   hi Fedit              guibg=#282C34
   hi FeditBorder        guibg=#282C34 guifg=#5C6370
+  hi! link TelescopeBorder FeditBorder
   " hi NonText            ctermfg=180 guifg=#E5C07B
   " hi SpecialKey         ctermfg=180 guifg=#E5C07B
   " Highlighting same symbols in the buffer at the current cursor position.

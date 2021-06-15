@@ -242,3 +242,16 @@ function! icon#name(name)
   \ '[INVALID_NAME]'
   \)
 endfunction
+
+" M.bufinfo = {
+"   ['%a']			= {'', 'MoreMsg'},
+"   ['#a']			= {'', 'MoreMsg'},
+"   ['a']			= {'', 'MoreMsg'},
+"   ['#h']			= {'', 'WarningMsg'},
+"   ['h']			= {'﬘', 'ModeMsg'},
+"   ['-']			= '',
+"   ['=']			= '',
+"   ['+']			= '',
+"   ['R']			= '',
+"   ['F']			= '',
+"   }

@@ -15,7 +15,7 @@ let g:tabline = {
 hi TabLine        guibg=#2C323C guifg=#5C6370
 hi TabLineSp      guibg=#2C323C guifg=#4B5263
 hi TabLineFill    guibg=#2C323C guifg=#5C6370
-hi TabLineSel     guibg=#282C34 guifg=#dddddd gui=bold
+hi TabLineSel     guibg=#282C34 guifg=#dddddd
 
 hi TabCount       guibg=#98C379 guifg=#2C323C gui=bold
 hi TabCountSp     guibg=#2C323C guifg=#98C379
