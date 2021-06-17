@@ -1,4 +1,4 @@
-command! ProjectFiles lua require("hasan.telescope.custom").project_files({})
+command! ProjectFiles lua require("hasan.telescope.custom").project_files()
 
 nnoremap <silent> <C-p> :Telescope oldfiles<CR>
 
