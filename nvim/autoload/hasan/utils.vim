@@ -1,7 +1,7 @@
 " ConfirmQuit {{{
 function! hasan#utils#confirmQuit(writeFile)
-  let isLastTab = winnr('$')==1 && tabpagenr('$')==1
-
+  let list_open_wins = filter(nvim_list_wins(), {k,v->nvim_win_get_config(v).relative == ""})
+  let isLastTab = len(list_open_wins)==1 && list_open_wins[0] == win_getid() && tabpagenr('$')==1
   if (expand('%:t')=="" && isLastTab && &modified)
     echohl ErrorMsg | echo  "E32: No file name" | echohl None
     return
