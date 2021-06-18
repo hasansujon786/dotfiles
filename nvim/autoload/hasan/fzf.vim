@@ -181,7 +181,7 @@ function! s:projects_list_sink(args) abort
 
   let line = split(a:args[1], '>  ')
   let path = line[1]
-  execute('cd'.path)
+  execute('cd '.path)
   execute('edit '.path)
 endfunction
 
