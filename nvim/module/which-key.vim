@@ -45,7 +45,7 @@ let g:which_key_map['z'] = ['za'                                    , 'Fold/Unfo
 let g:which_key_map['`'] = ['<c-^>'                                 , 'Switch last buffer' ]
 
 let g:which_key_map['e'] = 'Open harpoon'
-let g:which_key_map['m'] = 'Mark current file to harpoon'
+let g:which_key_map['m'] = 'Mark to harpoon'
 " }}}
 
 " a is for actions in language server protocol ----------- {{{
