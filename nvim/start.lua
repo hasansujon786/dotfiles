@@ -6,6 +6,7 @@ end
 
 -- plugins
 require('plugin.telescope')
+require('plugin.treesitter')
 
 
 

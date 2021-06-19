@@ -1,7 +1,10 @@
 call plug#begin('~/dotfiles/nvim/plugged')
 
 " => Visual-&-Theme ======================================== {{{
-Plug 'joshdick/onedark.vim'
+" Plug 'joshdick/onedark.vim'
+Plug 'christianchiarulli/nvcode-color-schemes.vim'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/playground'
 Plug 'glepnir/dashboard-nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'junegunn/goyo.vim',{ 'on': 'Goyo' }
@@ -79,7 +82,7 @@ Plug 'mattn/emmet-vim',{ 'on': 'CocStart' }
 " Plug 'norcalli/nvim-colorizer.lua'
 
 " javascript
-Plug 'sheerun/vim-polyglot',{ 'on': 'CocStart' }    " Full lang support
+" Plug 'sheerun/vim-polyglot',{ 'on': 'CocStart' }    " Full lang support
 " Plug 'jparise/vim-graphql'
 Plug 'leafOfTree/vim-vue-plugin',{ 'on': 'CocStart' }
 " }}}
