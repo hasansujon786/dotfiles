@@ -7,6 +7,8 @@ end
 -- plugins
 require('plugin.telescope')
 require('plugin.treesitter')
+-- require('plugin.mark-radar')
+-- require('plugin.whichkey')
 
 
 

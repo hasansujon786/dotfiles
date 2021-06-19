@@ -87,5 +87,8 @@ Plug 'mattn/emmet-vim',{ 'on': 'CocStart' }
 Plug 'leafOfTree/vim-vue-plugin',{ 'on': 'CocStart' }
 " }}}
 
+" Plug 'https://github.com/winston0410/mark-radar.nvim'
+" Plug 'folke/which-key.nvim'
+" Plug 'https://github.com/McAuleyPenney/mark-radar.nvim'
 call plug#end()
 

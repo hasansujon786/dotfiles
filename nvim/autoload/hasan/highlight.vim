@@ -14,6 +14,7 @@ function hasan#highlight#load_custom_highlight() abort
   " Highlighting same symbols in the buffer at the current cursor position.
   hi CocHighlightText guibg=#3B4048
   hi Pmenu            guibg=#3E4452
+  hi WhichKeyFloat    guibg=#2C323C
 
   " gitgutter & signnify
   hi SignColumn           guibg=NONE
@@ -31,5 +32,6 @@ function hasan#highlight#load_custom_highlight() abort
   hi DashboardCenter   ctermfg=145 guifg=#ABB2BF
 endfunction
 
+" call hasan#highlight#load_custom_highlight()
 " hi VertSplit          guifg=#4D5666 guibg=#363d49
 " hi VertSplit          guifg=#181a1f guibg=NONE
