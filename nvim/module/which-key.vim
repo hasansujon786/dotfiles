@@ -44,6 +44,8 @@ let g:which_key_map['x'] = [':bdelete'                              , 'Delete bu
 let g:which_key_map['z'] = ['za'                                    , 'Fold/Unfold' ]
 let g:which_key_map['`'] = ['<c-^>'                                 , 'Switch last buffer' ]
 
+let g:which_key_map['e'] = 'Open harpoon'
+let g:which_key_map['m'] = 'Mark current file to harpoon'
 " }}}
 
 " a is for actions in language server protocol ----------- {{{
@@ -126,27 +128,27 @@ let g:which_key_map['c'] = {
 " }}}
 
 " e is for edit ------------------------------------------ {{{
-let g:which_key_map['e'] = {
-      \ 'name' : '+edit-n-session',
-      \ 'e' : 'edit-in-directory'        ,
-      \ 'd' : 'create-directory'         ,
-      \ 's' : 'edit-in-directory-split'  ,
-      \ 't' : 'edit-in-directory-tab'    ,
-      \ 'v' : 'edit-in-directory-vsplit' ,
-      \ '~' : 'edit-project-root'        ,
-      \
-      \ 'D' : [':Dashboard'              , 'Open dashboard'],
-      \ 'L' : [':SessionLoad'            , 'Load session'],
-      \ 'S' : [':SessionSave'            , 'Save session'],
-      \ 'Q' : [':SessionSaveAndQuit'     , 'Save session and quit'],
-      \ }
-" Open a file relative to the current file
-nnoremap <leader>ed :Mkdir <C-R>=expand('%:h').'/'<cr>
-nnoremap <leader>et :tabe <C-R>=expand('%:h').'/'<cr>
-nnoremap <leader>ev :vsp <C-R>=expand('%:h').'/'<cr>
-nnoremap <leader>es :sp <C-R>=expand('%:h').'/'<cr>
-nnoremap <leader>ee :e <C-R>=expand('%:h').'/'<cr>
-nnoremap <leader>e~ :cd %:p:h<CR>:pwd<CR>
+" let g:which_key_map['e'] = {
+"       \ 'name' : '+edit-n-session',
+"       \ 'e' : 'edit-in-directory'        ,
+"       \ 'd' : 'create-directory'         ,
+"       \ 's' : 'edit-in-directory-split'  ,
+"       \ 't' : 'edit-in-directory-tab'    ,
+"       \ 'v' : 'edit-in-directory-vsplit' ,
+"       \ '~' : 'edit-project-root'        ,
+"       \
+"       \ 'D' : [':Dashboard'              , 'Open dashboard'],
+"       \ 'L' : [':SessionLoad'            , 'Load session'],
+"       \ 'S' : [':SessionSave'            , 'Save session'],
+"       \ 'Q' : [':SessionSaveAndQuit'     , 'Save session and quit'],
+"       \ }
+" " Open a file relative to the current file
+" nnoremap <leader>ed :Mkdir <C-R>=expand('%:h').'/'<cr>
+" nnoremap <leader>et :tabe <C-R>=expand('%:h').'/'<cr>
+" nnoremap <leader>ev :vsp <C-R>=expand('%:h').'/'<cr>
+" nnoremap <leader>es :sp <C-R>=expand('%:h').'/'<cr>
+" nnoremap <leader>ee :e <C-R>=expand('%:h').'/'<cr>
+" nnoremap <leader>e~ :cd %:p:h<CR>:pwd<CR>
 " }}}
 
 " f is for file ------------------------------------------ {{{
