@@ -1,4 +1,4 @@
-local actions = require('telescope/actions')
+local actions = require('telescope.actions')
 local local_action = require('hasan.telescope.local_action')
 
 require('telescope').setup{
