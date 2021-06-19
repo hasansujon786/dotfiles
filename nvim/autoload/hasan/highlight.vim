@@ -12,7 +12,8 @@ function hasan#highlight#load_custom_highlight() abort
   " hi NonText            ctermfg=180 guifg=#E5C07B
   " hi SpecialKey         ctermfg=180 guifg=#E5C07B
   " Highlighting same symbols in the buffer at the current cursor position.
-  hi CocHighlightText ctermbg=gray guibg=#3B4048
+  hi CocHighlightText guibg=#3B4048
+  hi Pmenu            guibg=#3E4452
 
   " gitgutter & signnify
   hi SignColumn           guibg=NONE
