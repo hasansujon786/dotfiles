@@ -15,9 +15,13 @@ function hasan#highlight#load_custom_highlight() abort
   hi CocHighlightText ctermbg=gray guibg=#3B4048
 
   " gitgutter & signnify
-  hi SignifySignAdd       ctermfg=114 guifg=#496A2F
-  hi SignifySignChange    ctermfg=180 guifg=#805C19
-  hi SignifySignDelete    ctermfg=204 guifg=#931F29
+  hi SignColumn           guibg=NONE
+  hi SignifySignAdd       guifg=#618D3F
+  hi SignifySignChange    guifg=#9E772E
+  hi SignifySignDelete    guifg=#842E37
+  hi link GitGutterAdd    SignifySignAdd
+  hi link GitGutterChange SignifySignChange
+  hi link GitGutterDelete SignifySignDelete
 
   " hi DashboardHeader ctermfg=114 guifg=#61AFEF
   hi DashboardHeader   ctermfg=59  guifg=#5c6370
