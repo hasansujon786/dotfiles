@@ -95,6 +95,8 @@ function! nebulous#unblock(...) abort
 endfunction
 
 function! nebulous#onTelescopeStart() abort
+  if nebulous#is_disabled() | return | endif
+
   call nebulous#blur_current_window()
   call nebulous#block()
   augroup NebulousTelescope
