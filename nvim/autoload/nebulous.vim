@@ -3,6 +3,7 @@ let s:nebulous_on_blur_highlights = [
       \ 'CursorLineNr:NebulousCursorLineNr',
       \ 'Normal:Nebulous',
       \ 'NormalNC:Nebulous',
+      \ 'EndOfBuffer:Nebulous',
       \ ]
 let s:nebulous_ignored_filetypes = {
       \ 'fzf': 1,
