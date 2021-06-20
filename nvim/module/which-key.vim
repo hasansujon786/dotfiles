@@ -193,8 +193,10 @@ xnoremap <Leader>f. "zy:%s/<C-r>"//gc<Left><Left><Left>
 let g:which_key_map['g'] = {
       \ 'name' : '+git',
       \ '/' : [':Telescope git_status'             , 'Find git files*'],
+      \ 'g' : [':Neogit kind=split'                , 'Open Neogit'],
+      \ 'G' : [':Neogit'                           , 'Open NeogitTab'],
+      \
       \ '.' : [':Git add %'                        , 'stage-current-file'],
-      \ 'g' : [':Git'                              , 'status'],
       \ 'b' : [':Git blame'                        , 'blame'],
       \ 'L' : [':Git log'                          , 'log'],
       \ 'f' : [':diffget //2'                      , 'diffget ours'],
@@ -204,7 +206,6 @@ let g:which_key_map['g'] = {
       \ 'r' : [':GRemove'                          , 'remove'],
       \ 'v' : [':GV'                               , 'view-commits'],
       \ 'V' : [':GV!'                              , 'view-buffer-commits'],
-      \ 'i' : [':Gist -b'                          , 'post-gist'],
       \
       \ 's' : ['<Plug>(GitGutterStageHunk)'        , 'stage-hunk'],
       \ 'u' : ['<Plug>(GitGutterUndoHunk)'         , 'undo-hunk'],

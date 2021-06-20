@@ -71,7 +71,8 @@ Plug 'junegunn/gv.vim',{ 'on': 'CocStart' }
 
 " => Languae-support ======================================= {{{
 Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'nvim-treesitter/playground', { 'on': 'TSPlaygroundToggle'}
+Plug 'nvim-treesitter/playground', { 'on': ['TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor']}
+
 " Auto Completion
 Plug 'neoclide/coc.nvim',{'branch': 'release', 'on': 'CocStart' }
 Plug 'honza/vim-snippets',{ 'on': 'CocStart' }
@@ -91,5 +92,6 @@ Plug 'leafOfTree/vim-vue-plugin',{ 'on': 'CocStart' }
 " Plug 'https://github.com/winston0410/mark-radar.nvim'
 " Plug 'folke/which-key.nvim'
 " Plug 'https://github.com/McAuleyPenney/mark-radar.nvim'
+Plug 'TimUntersberger/neogit', { 'on': 'Neogit' }
 call plug#end()
 
