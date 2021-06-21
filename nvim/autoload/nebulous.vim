@@ -48,13 +48,15 @@ function! nebulous#focus_window() abort
   if nebulous#is_disabled() | return | endif
 
   for cur_nr in range(1, tabpagewinnr(tabpagenr(), '$'))
-    " if current window
-    if (cur_nr == winnr() && !s:win_has_ignored_filetype(cur_nr))
-      call s:remove_blur(cur_nr)
-    " other windows
-    elseif (!s:win_has_ignored_filetype(cur_nr))
-      call s:add_blur(cur_nr)
-    endif
+    let not_float_win = nvim_win_get_config(win_getid(cur_nr)).relative == ''
+    if not_float_win
+      if (cur_nr == winnr() && !s:win_has_ignored_filetype(cur_nr))
+        call s:remove_blur(cur_nr)
+      " other windows
+      elseif (!s:win_has_ignored_filetype(cur_nr))
+        call s:add_blur(cur_nr)
+      endif
+    end
   endfor
 endfunction
 
@@ -86,27 +88,27 @@ function! s:add_blur(win_nr) abort
   call setwinvar(a:win_nr, '&winhighlight', join(s:nebulous_on_blur_highlights,','))
 endfunction
 
-function! nebulous#block(...) abort
- let s:nebulous_disabled = v:true
-endfunction
+" function! nebulous#block(...) abort
+"  let s:nebulous_disabled = v:true
+" endfunction
 
-function! nebulous#unblock(...) abort
- let s:nebulous_disabled = v:false
-endfunction
+" function! nebulous#unblock(...) abort
+"  let s:nebulous_disabled = v:false
+" endfunction
 
-function! nebulous#onTelescopeStart() abort
-  if nebulous#is_disabled() | return | endif
+" function! nebulous#onTelescopeStart() abort
+"   if nebulous#is_disabled() | return | endif
 
-  call nebulous#blur_current_window()
-  call nebulous#block()
-  augroup NebulousTelescope
-    autocmd!
-    autocmd WinClosed * call nebulous#onTelescopeClosed()
-  augroup end
-endfunction
+"   call nebulous#blur_current_window()
+"   call nebulous#block()
+"   augroup NebulousTelescope
+"     autocmd!
+"     autocmd WinClosed * call nebulous#onTelescopeClosed()
+"   augroup end
+" endfunction
 
-function! nebulous#onTelescopeClosed() abort
-  call nebulous#unblock()
-  autocmd! NebulousTelescope
-endfunction
+" function! nebulous#onTelescopeClosed() abort
+"   call nebulous#unblock()
+"   autocmd! NebulousTelescope
+" endfunction
 
