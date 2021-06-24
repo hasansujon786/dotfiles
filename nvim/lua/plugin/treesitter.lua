@@ -8,7 +8,6 @@ require("nvim-treesitter.configs").setup {
     use_languagetree = false,
     -- disable = {"dart"}
   },
-
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -18,9 +17,10 @@ require("nvim-treesitter.configs").setup {
       scope_incremental = "<M-s>", -- increment to the upper scope (as defined in locals.scm)
     },
   },
-  -- context_commentstring = {
-  --   enable = true
-  -- }
+  context_commentstring = {
+    enable = true
+  },
+
   playground = {
     enable = true,
     disable = {},

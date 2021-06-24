@@ -72,6 +72,7 @@ Plug 'junegunn/gv.vim',{ 'on': 'CocStart' }
 " => Languae-support ======================================= {{{
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/playground', { 'on': ['TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor']}
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 
 " Auto Completion
 Plug 'neoclide/coc.nvim',{'branch': 'release', 'on': 'CocStart' }
