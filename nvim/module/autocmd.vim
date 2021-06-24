@@ -30,11 +30,6 @@ augroup Focus
   au WinEnter,BufWinEnter *.vim,*.js call hasan#boot#highligt_textwith_column(1)
         \| au WinLeave,BufWinLeave,BufLeave <buffer> call hasan#boot#highligt_textwith_column(0)
 
-  " Change active/inactive window background
-  au FocusGained,WinEnter,BufWinEnter * call nebulous#focus_window()
-  au FocusLost * call nebulous#blur_current_window()
-  " au User TelescopeFindPre call nebulous#onTelescopeStart()
-
   " Goyo Events
   au User GoyoEnter nested call hasan#goyo#goyo_enter()
   au User GoyoLeave nested call hasan#goyo#goyo_leave()
