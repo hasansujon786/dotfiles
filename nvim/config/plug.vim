@@ -46,7 +46,8 @@ Plug 'tpope/vim-repeat',{ 'on': 'CocStart' }
 
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'hasansujon786/notifications.vim'
-Plug 'liuchengxu/vim-which-key'
+" Plug 'liuchengxu/vim-which-key'
+Plug 'folke/which-key.nvim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
@@ -67,6 +68,7 @@ Plug 'airblade/vim-gitgutter',{ 'on': 'CocStart' }
 Plug 'tpope/vim-fugitive',{ 'on': 'CocStart' }
 Plug 'tpope/vim-rhubarb',{ 'on': 'CocStart' }
 Plug 'junegunn/gv.vim',{ 'on': 'CocStart' }
+Plug 'TimUntersberger/neogit', { 'on': 'Neogit' }
 " }}}
 
 " => Languae-support ======================================= {{{
@@ -91,8 +93,6 @@ Plug 'leafOfTree/vim-vue-plugin',{ 'on': 'CocStart' }
 " }}}
 
 " Plug 'https://github.com/winston0410/mark-radar.nvim'
-" Plug 'folke/which-key.nvim'
 " Plug 'https://github.com/McAuleyPenney/mark-radar.nvim'
-Plug 'TimUntersberger/neogit', { 'on': 'Neogit' }
 call plug#end()
 
