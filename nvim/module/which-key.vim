@@ -225,6 +225,7 @@ let g:which_key_map['i'] = {
       \ 'f' :['_#Insertion(expand("%:t"))'                  , 'current-file-name'],
       \ 'F' :['_#Insertion(expand("%:~"))'                  , 'current-file-path'],
       \
+      \ 'l' :['_#Insertion("https://source.unsplash.com/random")' , 'Place holder image'],
       \ 't' : {
       \ 'name' : '+transfrom',
       \    'c' :['<Plug>(camel_case_operator)'       , 'transfrom-to-camel-case' ],
