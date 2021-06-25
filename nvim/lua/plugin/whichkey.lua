@@ -1,4 +1,6 @@
-require("which-key").setup {
+local wk = require("which-key")
+
+wk.setup {
   window = {
     border = "none", -- none, single, double, shadow
     position = "bottom", -- bottom, top
@@ -12,19 +14,15 @@ require("which-key").setup {
     align = "left", -- align columns left, center or right
   },
   key_labels = {
-    -- override the label used to display some keys. It doesn't effect WK in any other way.
-    -- For example:
-    ["<space>"] = "SPC",
-    ["<cr>"] = "RET",
-    ["<tab>"] = "TAB",
+    ['<space>'] = 'SPC',
+    ['<cr>'] = 'RET',
+    ['<Tab>'] = 'TAB',
   },
   show_help = false,
 }
 
 
-local wk = require("which-key")
-
-wk.register({
+local leader = {
   a = {
     name = "+lsp", -- optional group name
     c = { '<cmd>CocList commands<CR>',                   'commands' },
@@ -74,7 +72,7 @@ wk.register({
     t = { ':call _#Insertion(strftime("%H:%M"))<CR>',               'Current time' },
     f = { ':call _#Insertion(expand("%:~"))<CR>',                   'Current file path' },
     F = { ':call _#Insertion(expand("%:t"))<CR>',                   'Current file name' },
-    p = 'Paste system CB',
+    p = 'Paste form CB',
   },
 
   g = {
@@ -243,8 +241,6 @@ wk.register({
     -- m = { ':Bookmarks<CR>',                 'Jump to bookmark' } ,
   },
 
-  e = 'Open harpoon',
-  m = 'Mark to harpoon',
   y = 'Yank to CB',
   d = 'Delete to CB',
   q = { '<cmd>Quit<cr><CR>',                              'Close window' },
@@ -253,8 +249,10 @@ wk.register({
   s = { '<cmd>write<CR>',                                 'Save file' },
   x = { '<cmd>bdelete<CR>',                               'Delete buffer' },
   z = { 'za',                                             'Fold/Unfold' },
+  m = { ':lua require("harpoon.mark").add_file()<CR>',    'Mark to Harpoon' },
 
   ['<space>'] = { '<cmd>ProjectFiles<cr>',                'Find File' },
+  ['<tab>'] = { ':Harpoon<CR>',                           'Open Harpoon' },
   ['.'] = { '<cmd>Telescope find_files<CR>',              'Find file' },
   [';'] = { '<cmd>Telescope command_history<CR>',         'Search commands' },
   [':'] = { '<cmd>Telescope commands<CR>',                'Search recent cmd' },
@@ -268,8 +266,9 @@ wk.register({
   ['3'] = { ':lua require("harpoon.ui").nav_file(3)<CR>', 'which_key_ignore'},
   ['4'] = { ':lua require("harpoon.ui").nav_file(4)<CR>', 'which_key_ignore'},
   ['5'] = { ':lua require("harpoon.ui").nav_file(5)<CR>', 'which_key_ignore'},
+}
 
-}, { prefix = "<leader>" })
+wk.register(leader, { prefix = '<leader>' })
 
 -- " nnoremap <Leader>fS :w <C-R>=expand("%")<CR>
 -- " nnoremap <Leader>fC :w <C-R>=expand("%")<CR>
@@ -282,3 +281,7 @@ wk.register({
 -- " vmap <leader>aa <Plug>(coc-codeaction-selected)
 -- " nmap <leader>af <Plug>(coc-format)
 -- " vmap <leader>af <Plug>(coc-format-selected)
+
+-- for i = 0, 10 do
+--   leader[tostring(i)] = "which_key_ignore"
+-- end

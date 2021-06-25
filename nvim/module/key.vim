@@ -224,6 +224,16 @@ nmap <silent><Plug>FixCurrentWord 1z=:call repeat#set("\<Plug>FixCurrentWord")<C
 " Prompt spell fixes    z=
 
 " }}}
+" => Leader-mappings ---------------------------------- {{{
+" Easier system clipboard usage
+nnoremap <leader>ip "+p
+vnoremap <leader>ip "+p
+nnoremap <leader>y "+y
+vnoremap <leader>y "+ygv<Esc>
+nnoremap <leader>d "+d
+vnoremap <leader>d "+d
+
+" }}}
 " => Disabled-keys ------------------------------------ {{{
 " disable arrow keys in normal mode
 nnoremap <Left> :echoe "Use h"<CR>
