@@ -4,6 +4,7 @@ function hasan#highlight#load_custom_highlight() abort
   hi Notification       guibg=#3E4452 guifg=#E5C07B
   hi Fedit              guibg=#282C34
   hi FeditBorder        guibg=#282C34 guifg=#5C6370
+  hi WhichKeyFloat      guibg=#2C323C
 
   hi VertSplit          guifg=#4D5666 guibg=#363d49
   hi CursorColumn       guibg=#3B4048

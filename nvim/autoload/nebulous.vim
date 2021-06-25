@@ -91,6 +91,9 @@ endfunction
 function! nebulous#whichkey_hack(...) abort
   if nebulous#is_disabled() | return | endif
   call s:remove_blur(winnr())
+  if exists('g:loaded_kissline')
+    call kissline#_focus()
+  endif
   redrawstatus
 endfunction
 
