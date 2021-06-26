@@ -122,5 +122,12 @@ function M.search_plugins()
     })
 end
 
+function M.grep_string()
+  local string = vim.fn.input('Grep String: ')
+
+  builtin.grep_string({
+    search = string
+  })
+end
 
 return M

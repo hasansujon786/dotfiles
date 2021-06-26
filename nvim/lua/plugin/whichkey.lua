@@ -103,26 +103,20 @@ local leader = {
 
   f = {
     name = '+file',
-    f = { ':Telescope find_files<CR>',         'Find file' },
-    r = { ':Telescope oldfiles<CR>',           'Recent files' },
-    t = { ':Telescope filetypes<CR>',          'Change filetypes' },
-    -- F = { ':FilesCurDir<CR>',                    'Find file from here' },
-    -- d = { ':FilesCurDir<CR>',                    'Find directory' },
+    -- File command
     i = { ':call hasan#utils#file_info()<CR>', 'Show file info' },
-    s = { ':write<CR>',                        'Save file' },
+    s = { ':write<CR>',                        'Save current file' },
+    S = { ':wa<CR>',                           'Save all file' },
     y = { ':CopyFileNameToClipBoard<CR>',      'Yank filename' },
-    w = { '<Plug>FixCurrentWord',              'Fix current world' },
-
-    -- TODO
     R = 'Rename file',
     C = 'Copy this file',
     M = 'Move/rename file',
 
-    L = { ':SessionLoad<CR>',             'Load session' },
-    S = { ':SessionSave<CR>',             'Save session' },
-    Q = { ':SessionSaveAndQuit<CR>',      'Save session and quit' },
-    ['.'] = { ':Dashboard<CR>',           'Open dashboard' },
-
+    -- Word command
+    w = { '<Plug>FixCurrentWord',              'Fix current world' },
+    ['.'] = 'Rename current word',
+    -- F = { ':FilesCurDir<CR>',                    'Find file from here' },
+    -- d = { ':FilesCurDir<CR>',                    'Find directory' },
     u = {
       name = '+update-permission',
       x = { ':Chmod +x<CR>',                   'Make this file executable' },
@@ -147,9 +141,15 @@ local leader = {
 
   p = {
     name = '+project',
-    p = { ':Projects<CR>',                    'Switch project' },
-    r = { ':ProjectRecentFiles<CR>',          'Find recent project files' },
-    ['.'] = { ':Telescope file_browser<CR>',  'Browse project' },
+    p = { ':Projects<CR>',                          'Switch project' },
+    r = { ':Telescop oldfiles<CR>',                 'Find recent files' },
+    B = { ':Telescope file_browser<CR>',            'Browse files' },
+    b = { ':Telescope file_browser prompt_title=Project\\ Browser cwd=D:\\repoes <CR>',  'Browse other projects' },
+
+    l = { ':SessionLoad<CR>',                       'Load session' },
+    s = { ':SessionSave<CR>',                       'Save session' },
+    q = { ':SessionSaveAndQuit<CR>',                'Save session and quit' },
+    d = { ':Dashboard<CR>',                         'Open dashboard' },
   },
 
   t = {
@@ -236,8 +236,8 @@ local leader = {
     M = { ':Telescope marks<CR>',           'Jump to marks' } ,
     r = { ':Telescope oldfiles<CR>',        'Recent files' },
     t = { ':Telescope filetypes<CR>',       'Change filetypes' },
+    s = { ':lua require("hasan.telescope.custom").grep_string()<CR>',         'Grep string' },
     w = { ':lua require("hasan.telescope.custom").search_wiki_files()<CR>',   'Search wiki files'},
-
     -- m = { ':Bookmarks<CR>',                 'Jump to bookmark' } ,
   },
 
@@ -270,13 +270,6 @@ local leader = {
 
 wk.register(leader, { prefix = '<leader>' })
 
--- " nnoremap <Leader>fS :w <C-R>=expand("%")<CR>
--- " nnoremap <Leader>fC :w <C-R>=expand("%")<CR>
--- " nnoremap <Leader>fM :Move <C-R>=expand("%")<CR>
--- " nnoremap <Leader>fR :Rename <C-R>=expand("%:t")<CR>
--- " " remap c.
--- " nnoremap <Leader>f.  "zyiw:%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
--- " xnoremap <Leader>f. "zy:%s/<C-r>"//gc<Left><Left><Left>
 -- " nmap <leader>aa <Plug>(coc-codeaction)
 -- " vmap <leader>aa <Plug>(coc-codeaction-selected)
 -- " nmap <leader>af <Plug>(coc-format)

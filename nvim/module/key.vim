@@ -225,6 +225,7 @@ nmap <silent><Plug>FixCurrentWord 1z=:call repeat#set("\<Plug>FixCurrentWord")<C
 
 " }}}
 " => Leader-mappings ---------------------------------- {{{
+
 " Easier system clipboard usage
 nnoremap <leader>ip "+p
 vnoremap <leader>ip "+p
@@ -232,6 +233,15 @@ nnoremap <leader>y "+y
 vnoremap <leader>y "+ygv<Esc>
 nnoremap <leader>d "+d
 vnoremap <leader>d "+d
+
+" Word commands
+nnoremap <Leader>f.  "zyiw:%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+xnoremap <Leader>f. "zy:%s/<C-r>"//gc<Left><Left><Left>
+
+" File commands
+nnoremap <leader>fC :w <C-R>=expand("%")<CR>
+nnoremap <leader>fM :Move <C-R>=expand("%")<CR>
+nnoremap <leader>fR :Rename <C-R>=expand("%:t")<CR>
 
 " }}}
 " => Disabled-keys ------------------------------------ {{{
