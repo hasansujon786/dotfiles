@@ -14,7 +14,6 @@ Plug 'hasansujon786/kissline.nvim', { 'dir': '~/kissline.nvim' }
 " => Productivity ========================================== {{{
 Plug 'vimwiki/vimwiki',{ 'branch': 'dev', 'on': ['VimwikiIndex', 'VimwikiTabIndex', 'VimwikiUISelect', 'VimwikiDiaryIndex', 'VimwikiMakeDiaryNote','VimwikiTabMakeDiaryNote'] }
 Plug 'dhruvasagar/vim-dotoo',{ 'on': 'CocStart' }
-Plug 'tools-life/taskwiki'
 Plug 'mkropat/vim-tt'
 " }}}
 
@@ -23,7 +22,6 @@ Plug 'ThePrimeagen/harpoon'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-project.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 " }}}
 
@@ -33,7 +31,7 @@ Plug 'voldikss/vim-floaterm',{ 'on': [ 'FloatermNew', 'FloatermToggle' ] }
 Plug 'mg979/vim-visual-multi',{'branch': 'master', 'on': 'CocStart' }
 Plug 'michaeljsmith/vim-indent-object',{ 'on': 'CocStart' }
 Plug 'tweekmonster/startuptime.vim',{ 'on': 'StartupTime' }
-Plug 'tpope/vim-scriptease',{ 'on': ['Messages', 'PP'] }
+" Plug 'tpope/vim-scriptease',{ 'on': ['Messages', 'PP'] }
 Plug 'hasansujon786/vim-rel-jump',{ 'on': 'CocStart' }
 Plug 'dhruvasagar/vim-open-url',{ 'on': 'CocStart' }
 Plug 'unblevable/quick-scope',{ 'on': 'CocStart' }
@@ -41,12 +39,10 @@ Plug 'tpope/vim-commentary',{ 'on': 'CocStart' }
 Plug 'tpope/vim-surround',{ 'on': 'CocStart' }
 Plug 'justinmk/vim-sneak',{ 'on': 'CocStart' }
 Plug 'Konfekt/vim-CtrlXA',{ 'on': 'CocStart' }
-Plug 'Konfekt/FastFold',{ 'on': 'CocStart' }
+" Plug 'Konfekt/FastFold',{ 'on': 'CocStart' }
 Plug 'tpope/vim-repeat',{ 'on': 'CocStart' }
 
-Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'hasansujon786/notifications.vim'
-" Plug 'liuchengxu/vim-which-key'
 Plug 'folke/which-key.nvim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
