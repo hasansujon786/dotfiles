@@ -89,6 +89,9 @@ local leader = {
     v = { ':GV<CR>',                               'view-commits' },
     V = { ':GV!<CR>',                              'view-buffer-commits' },
 
+    l = { ':FloatermNew lazygit<CR>',              'Open lazygit' },
+    t = { ':FloatermNew tig<CR>',                  'Open tig' },
+
     g = { ':Neogit kind=split<CR>',                'Open Neogit' },
     G = { ':Neogit<CR>',                           'Open NeogitTab' },
 
@@ -104,10 +107,12 @@ local leader = {
   f = {
     name = '+file',
     -- File command
+    b = { ':Telescope file_browser<CR>',       'Open file browser' },
     i = { ':call hasan#utils#file_info()<CR>', 'Show file info' },
     s = { ':write<CR>',                        'Save current file' },
     S = { ':wa<CR>',                           'Save all file' },
-    y = { ':CopyFileNameToClipBoard<CR>',      'Yank filename' },
+    y = { ':CopyFileNameToClipBoard!<CR>',     'Yank file name' },
+    Y = { ':CopyFileNameToClipBoard<CR>',      'Yank path name' },
     R = 'Rename file',
     C = 'Copy this file',
     M = 'Move/rename file',
@@ -131,7 +136,7 @@ local leader = {
     ['-'] = { ':FernCurDir<CR>',                                'Fern' },
     a = { '<Plug>(dotoo-agenda)',                               '+org-agenda' },
     c = { '<Plug>(dotoo-capture-custom)',                       '+org-capture' },
-    t = { ':FloatermToggle<CR>',                                'Toggle terminal popup' },
+    t = { ':FloatermNew bash<CR>',                              'Open terminal popup' },
     T = { ':FloatermNew --wintype=normal --height=10 bash<CR>', 'Open terminal split' },
     q = { ':QfixToggle<CR>',                                    'Quickfix' },
     y = { ':CocList --normal yank<CR>',                         'Yank list' },
