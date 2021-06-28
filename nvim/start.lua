@@ -8,6 +8,7 @@ end
 require('plugin.telescope')
 require('plugin.treesitter')
 require('plugin.whichkey')
+require('plugin.neoscroll')
 -- require('plugin.mark-radar')
 
 

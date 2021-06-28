@@ -44,6 +44,7 @@ Plug 'tpope/vim-repeat',{ 'on': 'CocStart' }
 
 Plug 'hasansujon786/notifications.vim'
 Plug 'folke/which-key.nvim'
+Plug 'folke/neoscroll.nvim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
