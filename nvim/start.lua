@@ -9,6 +9,7 @@ require('plugin.telescope')
 require('plugin.treesitter')
 require('plugin.whichkey')
 require('plugin.neoscroll')
+require('colorizer').setup()
 -- require('plugin.mark-radar')
 
 

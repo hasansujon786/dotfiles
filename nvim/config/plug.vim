@@ -86,7 +86,7 @@ Plug 'norcalli/nvim-colorizer.lua'
 " javascript
 " Plug 'sheerun/vim-polyglot',{ 'on': 'CocStart' }    " Full lang support
 " Plug 'jparise/vim-graphql'
-Plug 'leafOfTree/vim-vue-plugin',{ 'on': 'CocStart' }
+" Plug 'leafOfTree/vim-vue-plugin',{ 'on': 'CocStart' }
 " }}}
 
 " Plug 'https://github.com/winston0410/mark-radar.nvim'
