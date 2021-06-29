@@ -80,8 +80,8 @@ Plug 'honza/vim-snippets',{ 'on': 'CocStart' }
 " html & css
 Plug 'gu-fan/colorv.vim',{ 'on': ['ColorV','ColorVEditTo','ColorVEdit','ColorVPreviewLine','ColorVPreview'] }
 Plug 'mattn/emmet-vim',{ 'on': 'CocStart' }
-Plug 'ap/vim-css-color',{ 'on': 'CocStart' }
-" Plug 'norcalli/nvim-colorizer.lua'
+" Plug 'ap/vim-css-color',{ 'on': 'CocStart' }
+Plug 'norcalli/nvim-colorizer.lua'
 
 " javascript
 " Plug 'sheerun/vim-polyglot',{ 'on': 'CocStart' }    " Full lang support
