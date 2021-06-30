@@ -19,7 +19,7 @@ source ~/dotfiles/nvim/config/vim-wiki.vim
 " source ~/dotfiles/nvim/config/detect_current_mode.vim
 source ~/dotfiles/nvim/config/tabline.vim
 source ~/dotfiles/nvim/config/vim-vue-plugin.vim
-source ~/dotfiles/nvim/config/dotoo.vim
+" source ~/dotfiles/nvim/config/dotoo.vim
 source ~/dotfiles/nvim/config/emmet.vim
 source ~/dotfiles/nvim/config/colorv.vim
 source ~/dotfiles/nvim/config/harpoon.vim

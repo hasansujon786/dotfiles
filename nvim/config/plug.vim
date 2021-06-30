@@ -13,7 +13,8 @@ Plug 'hasansujon786/kissline.nvim', { 'dir': '~/kissline.nvim' }
 
 " => Productivity ========================================== {{{
 Plug 'vimwiki/vimwiki',{ 'branch': 'dev', 'on': ['VimwikiIndex', 'VimwikiTabIndex', 'VimwikiUISelect', 'VimwikiDiaryIndex', 'VimwikiMakeDiaryNote','VimwikiTabMakeDiaryNote'] }
-Plug 'dhruvasagar/vim-dotoo',{ 'on': 'CocStart' }
+Plug 'https://github.com/kristijanhusak/orgmode.nvim'
+" Plug 'dhruvasagar/vim-dotoo',{ 'on': 'CocStart' }
 Plug 'mkropat/vim-tt'
 " }}}
 
