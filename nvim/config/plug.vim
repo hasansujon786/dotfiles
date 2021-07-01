@@ -9,6 +9,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'junegunn/goyo.vim',{ 'on': 'Goyo' }
 Plug 'Yggdroot/indentLine',{ 'on': 'CocStart' }
 Plug 'hasansujon786/kissline.nvim', { 'dir': '~/kissline.nvim' }
+Plug 'hasansujon786/notifier.nvim', { 'dir': '~/notifier.nvim' }
 " }}}
 
 " => Productivity ========================================== {{{
