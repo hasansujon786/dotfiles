@@ -17,6 +17,7 @@ augroup vimrcEx
 
   " Neovim terminal
   autocmd TermOpen * setfiletype terminal | set bufhidden=hide
+  autocmd ColorScheme * call hasan#highlight#load_custom_highlight()
 augroup END
 
 augroup Focus
