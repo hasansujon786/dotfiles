@@ -6,6 +6,10 @@ require('telescope').setup{
     file_sorter = require('telescope.sorters').get_fzy_sorter,
     prompt_prefix = '  ',
     selection_caret = ' ',
+    layout_config = {
+      height = 0.7,
+      width = 0.8,
+    },
     -- prompt_position = "top",
     -- sorting_strategy = "ascending",
     winblend = 5,
