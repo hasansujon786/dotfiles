@@ -3,6 +3,9 @@ let g:tt_taskfile = '~/tasks.md'
 function! hasan#tt#is_tt_paused()
   return tt#get_remaining() != -1 && tt#is_running() ? 0 : tt#get_remaining() == -1 ? 0 : 1
 endfunction
+function! hasan#tt#msg()
+  return tt#get_remaining_full_format().' '.tt#get_status_formatted()
+endfunction
 
 command! -bang Work call s:work(<bang>0)
 function s:work(keep_task) abort
@@ -38,28 +41,20 @@ function! Break()
   endif
   call tt#start_timer()
   call tt#when_done('AfterBreak')
-  execute 'TimerShow'
+  lua require('notifier').alert({vim.fn['hasan#tt#msg']()}, {title = 'TaskTimer'})
 endfunction
 
 command! AfterBreak
   \  call tt#set_status('get ready')
   \| call tt#clear_timer()
-  \| call notification#open(['TaskTimer:', 'Break Ended '. tt#get_status_formatted()], {})
+  \| lua require('notifier').alert({'Break Ended ' .. vim.fn['tt#get_status_formatted']()}, {title = 'TaskTimer'})
 
 command! TimerStop
   \  call tt#clear_status()
   \| call tt#clear_task()
   \| call tt#clear_timer()
 
-command! TimerShow call s:shwo_timer()
-function s:shwo_timer() abort
-  let msg = ['TaskTimer:', tt#get_remaining_full_format().' '.tt#get_status_formatted()]
-  if tt#get_task() != '' | call add(msg, tt#get_task()) | endif
-  call notification#open([msg], {'sound_silent': 1})
-endfunction
-
-command! TimerToggle
-      \ call tt#toggle_timer()
+command! TimerShow lua require('notifier').open({vim.fn['hasan#tt#msg']()}, {title = 'TaskTime'})
 
 command! TimerToggle
       \ call tt#toggle_timer()
