@@ -15,7 +15,7 @@ wk.setup {
   },
   key_labels = {
     ['<space>'] = 'SPC',
-    ['<cr>'] = 'RET',
+    ['<CR>'] = 'RET',
     ['<Tab>'] = 'TAB',
   },
   show_help = false,
@@ -106,7 +106,8 @@ local leader = {
 
   f = {
     name = '+file',
-    -- File command
+    -- File Command
+    f = { ':Telescope find_files<CR>',         'Find file' },
     b = { ':Telescope file_browser<CR>',       'Open file browser' },
     i = { ':call hasan#utils#file_info()<CR>', 'Show file info' },
     s = { ':write<CR>',                        'Save current file' },
@@ -261,9 +262,8 @@ local leader = {
 
   ['<space>'] = { '<cmd>ProjectFiles<cr>',                'Find File' },
   ['<tab>'] = { ':Harpoon<CR>',                           'Open Harpoon' },
-  ['.'] = { '<cmd>Telescope find_files<CR>',              'Find file' },
-  [';'] = { '<cmd>Telescope command_history<CR>',         'Search commands' },
-  [':'] = { '<cmd>Telescope commands<CR>',                'Search recent cmd' },
+  ['.'] = { '<cmd>Telescope commands<CR>',                'Commands panel' },
+  [';'] = { '<cmd>Telescope command_history<CR>',         'Search recent cmd' },
 
   h = { '<cmd>JumpToWin h<CR>',                           'which_key_ignore' },
   j = { '<cmd>JumpToWin j<CR>',                           'which_key_ignore' },
