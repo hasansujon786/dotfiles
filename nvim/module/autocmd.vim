@@ -18,6 +18,7 @@ augroup vimrcEx
   " Neovim terminal
   autocmd TermOpen * setfiletype terminal | set bufhidden=hide
   autocmd ColorScheme * call hasan#highlight#load_custom_highlight()
+  autocmd BufWritePost plugins.lua PackerCompile
 augroup END
 
 augroup Focus
@@ -57,13 +58,13 @@ augroup END
 
 " Load all plugins
 function! BootAllPlugins(...) abort
-  BootPlug
+  " BootPlug
   let g:all_plug_loaded = 1
 
   " Lazy load nerdfont
   try | let g:nerdfont_loaded = g:nerdfont#default == '' ? 1 : 0
   catch | let g:nerdfont_loaded = 0 | endtry
-  source $HOME/dotfiles/nvim/config/lazy/index.vim
+  " source $HOME/dotfiles/nvim/config/lazy/index.vim
   runtime! autoload/netrw.vim
 endfunction
 
