@@ -5,6 +5,7 @@ P = function(...)
 end
 
 -- plugins
+require('plugins')
 require('plugin.telescope')
 require('plugin.treesitter')
 require('plugin.whichkey')
