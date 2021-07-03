@@ -103,3 +103,18 @@ function s:hidden_tabs_navigation(direction, hi) abort
 endfunction
 " }}}
 
+function! tabline#apply_colors()
+  hi TabLine        guibg=#2C323C guifg=#5C6370
+  hi TabLineSp      guibg=#2C323C guifg=#4B5263
+  hi TabLineFill    guibg=#2C323C guifg=#5C6370
+  hi TabLineSel     guibg=#282C34 guifg=#dddddd
+
+  hi TabCount       guibg=#98C379 guifg=#2C323C gui=bold
+  hi TabCountSp     guibg=#2C323C guifg=#98C379
+  hi TabCountAlt    guibg=#3E4452 guifg=#ABB2BF
+  hi TabCountAltSp  guibg=#2C323C guifg=#3E4452
+
+  hi TabLineSelSp   guibg=#282C34 guifg=#61AFEF
+  hi TabLineSelX    guibg=#282C34 guifg=#5C6370
+  hi TabCountButton guifg=#ABB2BF
+endfunction
