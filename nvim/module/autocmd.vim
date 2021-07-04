@@ -11,7 +11,7 @@ augroup vimrcEx
   " Don't do it for commit messages, when the position is invalid, or when
   " inside an event handler (happens when dropping a file on gvim).
   autocmd BufReadPost *
-        \ if exists('g:all_plug_loaded') && &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") && expand('%:t') != 'COMMIT_EDITMSG' |
+        \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") && expand('%:t') != 'COMMIT_EDITMSG' |
         \   exe "normal g`\"" |
         \ endif
 
@@ -44,6 +44,7 @@ augroup FernEvents
   autocmd FileType fern call hasan#fern#FernInit()
   autocmd FileType fern call glyph_palette#apply()
   autocmd BufEnter * ++nested call hasan#boot#hijack_directory()
+  autocmd VimEnter * ++once runtime! autoload/netrw.vim
   " autocmd FileType nerdtree,startify call glyph_palette#apply()
 augroup END
 
@@ -54,22 +55,6 @@ augroup FileMarks
   autocmd BufLeave *.js   normal! mJ
   autocmd BufLeave *.ts   normal! mT
   autocmd BufLeave *.vim  normal! mV
-	autocmd BufLeave *.css  normal! mC
+  autocmd BufLeave *.css  normal! mC
   autocmd BufLeave *.txt  normal! mK
 augroup END
-
-" Load all plugins
-function! BootAllPlugins(...) abort
-  " BootPlug
-  let g:all_plug_loaded = 1
-
-  " Lazy load nerdfont
-  try | let g:nerdfont_loaded = g:nerdfont#default == '' ? 1 : 0
-  catch | let g:nerdfont_loaded = 0 | endtry
-  runtime! autoload/netrw.vim
-endfunction
-
-augroup LazyLoadPlug
-  autocmd!
-  autocmd VimEnter * ++once call timer_start(300, 'BootAllPlugins')
-augroup end

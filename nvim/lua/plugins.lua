@@ -51,8 +51,8 @@ return require("packer").startup({
 
     --> Git ----------------------------------------
     use({ 'airblade/vim-gitgutter', opt = true, event = 'BufRead' })
-    use({ 'tpope/vim-fugitive', opt = true, cmd = 'Git' })
-    use({ 'tpope/vim-rhubarb', opt = true, cmd = 'Git'  })
+    use({ 'tpope/vim-fugitive', opt = true, cmd = {'Git','GBrowse','GV'}})
+    use({ 'tpope/vim-rhubarb', opt = true, cmd = {'Git','GBrowse','GV'}})
     use({ 'junegunn/gv.vim', opt = true, cmd = 'GV' })
     use({ 'TimUntersberger/neogit', opt = true, cmd = 'Neogit' })
 
