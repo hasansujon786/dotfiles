@@ -79,7 +79,7 @@ function! TabLabel(tab_nr)
   let fname = fnamemodify(bufname(buflist[winnr - 1]), ":t")
   if (fname == '') | let fname = '[No Name]' | endif
 
-  let icon = nerdfont#find(fname)
+  let icon = tabline#nvim_web_devicon(fname)
   " let label = icon.' '.fname.' '
   let label = a:tab_nr.' '. icon.' '.fname.' '
   if (len(label) > s:label_ln) | let label = label[0:s:label_ln-3].'..' | endif
@@ -117,4 +117,9 @@ function! tabline#apply_colors()
   hi TabLineSelSp   guibg=#282C34 guifg=#61AFEF
   hi TabLineSelX    guibg=#282C34 guifg=#5C6370
   hi TabCountButton guifg=#ABB2BF
+endfunction
+
+function! tabline#nvim_web_devicon(fname)
+ let fextension = fnamemodify(a:fname,':e')
+ return luaeval(printf('require"nvim-web-devicons".get_icon("%s", "%s", { default = true })', a:fname, fextension))
 endfunction
