@@ -44,8 +44,8 @@ return require("packer").startup({
     use({ 'tpope/vim-commentary', opt = true, event = 'BufRead' })
     use({ 'tpope/vim-surround', opt = true, event = 'BufRead' })
     use({ 'justinmk/vim-sneak', opt = true, event = 'BufRead' })
+    use({ 'Konfekt/vim-CtrlXA', opt = true, event = 'BufRead' })
     use({ 'tpope/vim-repeat', opt = true, event = 'BufRead' })
-    use({ 'monaqa/dial.nvim', opt = true, event = 'BufRead', config = function() require('dial').config() end })
     use({ 'folke/which-key.nvim', config = function() require('config.whichkey') end })
     use({ 'folke/neoscroll.nvim', opt = true, event = 'VimEnter', config = function() require('config.neoscroll') end })
 
