@@ -19,7 +19,7 @@ augroup vimrcEx
   autocmd TermOpen * setfiletype terminal | set bufhidden=hide
   autocmd ColorScheme * call hasan#highlight#load_custom_highlight()
   autocmd BufWritePost plugins.lua PackerCompile
-  autocmd FocusGained * :checktime " Check if we need to reload the file when it changed
+  autocmd FocusGained,BufEnter * checktime " Set to auto read when a file is changed from the outside
 " cmd("au TextYankPost * lua vim.highlight.on_yank {}")
 augroup END
 
