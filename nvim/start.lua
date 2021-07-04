@@ -5,7 +5,7 @@ P = function(...)
 end
 
 -- plugins
+require('options')
 require('plugins')
-
 
 
