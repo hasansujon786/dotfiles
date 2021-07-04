@@ -36,7 +36,7 @@ return require("packer").startup({
     use({ 'voldikss/vim-floaterm', opt = true, cmd = {'FloatermNew','FloatermToggle'} })
     use({ 'mg979/vim-visual-multi', opt = true, event = 'BufRead' })
     use({ 'michaeljsmith/vim-indent-object', opt = true, event = 'BufRead' })
-    use({ 'tweekmonster/startuptime.vim' })
+    use({ 'tweekmonster/startuptime.vim', opt = true, cmd = 'StartupTime' })
     -- " use 'tpope/vim-scriptease'
     use({ 'hasansujon786/vim-rel-jump', opt = true, event = 'BufRead' })
     use({ 'dhruvasagar/vim-open-url', opt = true, event = 'BufRead' })
