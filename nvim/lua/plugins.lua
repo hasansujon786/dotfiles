@@ -4,7 +4,6 @@ return require("packer").startup({
   function(use)
     use({ 'wbthomason/packer.nvim' })
     --> Visual -------------------------------------
-    use({ 'folke/tokyonight.nvim' })
     use({ 'navarasu/onedark.nvim' })
     use({ 'glepnir/dashboard-nvim' })
     use({ 'kyazdani42/nvim-web-devicons' })
@@ -12,19 +11,16 @@ return require("packer").startup({
     use({ 'Yggdroot/indentLine', opt = true, event = 'BufRead' })
     use({ 'hasansujon786/kissline.nvim' })
     use({ 'hasansujon786/notifier.nvim', opt = true, event = 'BufRead' })
+    -- use({ 'folke/tokyonight.nvim' })
 
     --> Productiviry -------------------------------
-    use({ 'vimwiki/vimwiki', opt = true, cmd = {'VimwikiIndex','VimwikiTabIndex','VimwikiUISelect','VimwikiDiaryIndex','VimwikiMakeDiaryNote','VimwikiTabMakeDiaryNote'} })
-    use({ 'kristijanhusak/orgmode.nvim', opt = true, event = 'BufRead',
-      config = function()
-        require('plugin.orgmode')
-      end
-    })
-    use({ 'mkropat/vim-tt' })
+    use({ 'vimwiki/vimwiki', opt = true, cmd = {'VimwikiIndex','VimwikiTabIndex','VimwikiUISelect'} })
+    use({ 'kristijanhusak/orgmode.nvim', opt = true, event = 'BufRead', config = function() require('config.orgmode') end })
+    use({ 'mkropat/vim-tt', opt = true, event = 'BufRead' })
 
     --> Navigation ---------------------------------
     use({ 'ThePrimeagen/harpoon', opt = true, event = 'VimEnter' })
-    use({ 'nvim-telescope/telescope.nvim' })
+    use({ 'nvim-telescope/telescope.nvim', config = function() require('config.telescope') end })
     use({ 'nvim-telescope/telescope-fzy-native.nvim' })
     use({ 'junegunn/fzf.vim' })
 
@@ -51,14 +47,8 @@ return require("packer").startup({
     use({ 'Konfekt/vim-CtrlXA', opt = true, event = 'BufRead' })
     use({ 'tpope/vim-repeat', opt = true, event = 'BufRead' })
 
-    use({ 'folke/which-key.nvim' })
-    use({ 'folke/neoscroll.nvim', opt = true,
-      -- event = 'VimEnter',
-      event = 'CursorHold',
-      config = function()
-        require('plugin.neoscroll')
-      end,
-    })
+    use({ 'folke/which-key.nvim', config = function() require('config.whichkey') end })
+    use({ 'folke/neoscroll.nvim', opt = true, event = 'VimEnter', config = function() require('config.neoscroll') end, })
 
     --> Git ----------------------------------------
     use({ 'airblade/vim-gitgutter', opt = true, event = 'BufRead' })
@@ -68,9 +58,9 @@ return require("packer").startup({
     use({ 'TimUntersberger/neogit', opt = true, cmd = 'Neogit' })
 
     --> Lsp & completions --------------------------
-    use({ 'nvim-treesitter/nvim-treesitter' })
+    use({ 'nvim-treesitter/nvim-treesitter', config = function() require('config.treesitter') end })
     use({ 'nvim-treesitter/playground', opt = true, cmd = {'TSPlaygroundToggle','TSHighlightCapturesUnderCursor'} })
-    use({ 'JoosepAlviste/nvim-ts-context-commentstring' })
+    use({ 'JoosepAlviste/nvim-ts-context-commentstring', opt = true, event = 'BufRead'  })
 
     use({ 'neoclide/coc.nvim', opt = true, event = 'BufRead' })
     use({ 'honza/vim-snippets', opt = true, event = 'InsertEnter'})
@@ -80,6 +70,7 @@ return require("packer").startup({
     use({ 'norcalli/nvim-colorizer.lua', opt = true, event = 'BufRead',
       config = function ()
         require('colorizer').setup()
+        vim.cmd('ColorizerReloadAllBuffers')
       end
     })
   end,
