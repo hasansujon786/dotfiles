@@ -1,9 +1,3 @@
-"!::exe [So]
-"
-" Powerline characters:
-" "                
-" 
-"      ❯     
 let s:by_name = {
 \ 'lock':     '',
 \ 'checking': '',
@@ -255,3 +249,11 @@ endfunction
 "   ['R']			= '',
 "   ['F']			= '',
 "   }
+" Powerline characters:
+" "                
+" 
+"   '
+" Add = "",
+" Modified = "",
+" Remove = ""
+"      ❯     
