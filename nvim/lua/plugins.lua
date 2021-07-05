@@ -22,7 +22,6 @@ return require("packer").startup({
     use({ 'ThePrimeagen/harpoon', opt = true, event = 'VimEnter' })
     use({ 'nvim-telescope/telescope.nvim', config = function() require('config.telescope') end })
     use({ 'nvim-telescope/telescope-fzy-native.nvim' })
-    use({ 'junegunn/fzf.vim' })
 
     use({ 'lambdalisue/fern-renderer-nerdfont.vim' })
     use({ 'hasansujon786/glyph-palette.vim' })

@@ -27,25 +27,26 @@ local git_and_buffer_files = function(opts)
       return false
     end
     return true
-  end, vim.fn['fzf#vim#_buflisted_sorted']())
+  end, vim.fn['hasan#utils#_buflisted_sorted']())
 
+  local current_file = vim.fn.expand('%'):gsub("\\","/")
   local bufer_files = {}
   for _, bufnr in ipairs(bufnrs) do
     local bufname = vim.api.nvim_buf_get_name(bufnr)
     local file = vim.fn.fnamemodify(bufname, ':.'):gsub("\\","/")
     table.insert(bufer_files, file)
   end
-
   local git_files = utils.get_os_command_output({ 'git', 'ls-files', '--exclude-standard', '--cached', '--others' })
 
   local fusedArray = {}
   local n=0
   for _,v in ipairs(bufer_files) do n=n+1 ; fusedArray[n] = v end
-  for _,v in ipairs(git_files) do n=n+1 ; fusedArray[n] = v end
+  -- for _,v in ipairs(git_files) do n=n+1 ; fusedArray[n] = v end
+  for _,v in ipairs(filter(function(v) return v ~= current_file end, git_files)) do n=n+1 ; fusedArray[n] = v end
 
   pickers.new(opts, {
     finder = finders.new_table{
-      results = vim.fn['fzf#vim#_uniq'](fusedArray),
+      results = vim.fn['hasan#utils#_uniq'](fusedArray),
       entry_maker = opts.entry_maker or make_entry.gen_from_file(opts),
     },
     sorter = conf.file_sorter(opts),

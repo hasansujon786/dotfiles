@@ -366,3 +366,30 @@ function hasan#utils#_filereadable_and_create(file,create) abort
   return exists
 endfunction
 " }}}
+
+function! hasan#utils#_buflisted_sorted() abort "{{{
+  return sort(s:list_bufs(), 's:sort_buffers')
+endfunction
+
+function! s:list_bufs()
+  return filter(nvim_list_bufs(), 'buflisted(v:val) && getbufvar(v:val, "&filetype") != "qf"')
+endfunction
+function! s:sort_buffers(...)
+  let [b1, b2] = map(copy(a:000), 'get(g:hasan_telescope_buffers, v:val, v:val)')
+  " Using minus between a float and a number in a sort function causes an error
+  return b1 < b2 ? 1 : -1
+endfunction
+"}}}
+
+function! hasan#utils#_uniq(list) " {{{
+  let visited = {}
+  let ret = []
+  for l in a:list
+    if !empty(l) && !has_key(visited, l)
+      call add(ret, l)
+      let visited[l] = 1
+    endif
+  endfor
+  return ret
+endfunction
+" }}}
