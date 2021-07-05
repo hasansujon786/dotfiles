@@ -118,7 +118,7 @@ end
 function M.search_plugins()
   builtin.find_files({
       prompt_title = "Plugins",
-      cwd = "~/dotfiles/nvim/plugged/",
+      cwd = vim.fn.glob(vim.fn.stdpath("data") .. '/site/pack/packer'),
     })
 end
 
