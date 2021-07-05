@@ -29,14 +29,12 @@ background_opacity: 0.92
 # Font Customization
 font:
   normal:
-    family: CaskaydiaCove NF
-    # style: Regular
+    family: FiraCode NF
+    style: Medium
   bold:
-    family: CaskaydiaCove NF
-    # style: Bold
+    family: FiraCode NF
   italic:
-    family: CaskaydiaCove NF
-    # style: Italic
+    family: FiraCode NF
   size: 13
   offset:
     x: 0
