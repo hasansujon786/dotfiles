@@ -252,8 +252,10 @@ endfunction
 " Powerline characters:
 " "                
 " 
+" ﰖ
 "   '
 " Add = "",
 " Modified = "",
 " Remove = ""
 "      ❯     
+"      

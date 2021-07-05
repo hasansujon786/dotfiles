@@ -17,6 +17,8 @@ else
   set viewdir=$HOME/AppData/Local/nvim-data/views
 end
 ]])
+opt.title = true
+opt.titlestring = "Neovim - %{fnamemodify(getcwd(), ':t')} - %<%t"  -- what the title of the window will be set to
 opt.backup = false
 opt.swapfile = false                              -- Turn backup off, since most stuff is in SVN, git etc. anyway...
 opt.writebackup = false
