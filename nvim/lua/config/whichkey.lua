@@ -260,10 +260,10 @@ local leader = {
   z = { 'za',                                             'Fold/Unfold' },
   m = { ':lua require("harpoon.mark").add_file()<CR>',    'Mark to Harpoon' },
 
-  ['<space>'] = { '<cmd>ProjectFiles<cr>',                'Find File' },
-  ['<tab>'] = { ':Harpoon<CR>',                           'Open Harpoon' },
   ['.'] = { '<cmd>Telescope commands<CR>',                'Commands panel' },
   [';'] = { '<cmd>Telescope command_history<CR>',         'Search recent cmd' },
+  ['<space>'] = { '<cmd>ProjectFiles<cr>',                'Find File' },
+  ['<tab>'] = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', 'Open Harpoon' },
 
   h = { '<cmd>JumpToWin h<CR>',                           'which_key_ignore' },
   j = { '<cmd>JumpToWin j<CR>',                           'which_key_ignore' },

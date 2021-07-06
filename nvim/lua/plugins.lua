@@ -5,12 +5,12 @@ return require("packer").startup({
     use({ 'wbthomason/packer.nvim' })
     --> Visual -------------------------------------
     use({ 'navarasu/onedark.nvim' })
-    use({ 'glepnir/dashboard-nvim' })
+    use({ 'glepnir/dashboard-nvim', config = function() require('config.dashboard') end })
     use({ 'kyazdani42/nvim-web-devicons' })
     use({ 'junegunn/goyo.vim', opt = true, cmd = 'Goyo', })
     use({ 'Yggdroot/indentLine', opt = true, event = 'BufRead' })
     use({ 'hasansujon786/kissline.nvim' })
-    use({ 'hasansujon786/notifier.nvim', opt = true, event = 'BufRead' })
+    use({ 'hasansujon786/notifier.nvim' })
     -- use({ 'folke/tokyonight.nvim' })
 
     --> Productiviry -------------------------------
