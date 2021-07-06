@@ -1,5 +1,5 @@
 local local_action = require('hasan.telescope.local_action')
-local builtin = require('telescope/builtin')
+local builtin = require('telescope.builtin')
 local utils = require('telescope.utils')
 local themes = require('telescope.themes')
 local pickers = require('telescope.pickers')

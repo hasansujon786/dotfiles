@@ -149,10 +149,9 @@ local leader = {
 
   p = {
     name = '+project',
-    p = { ':Projects<CR>',                          'Switch project' },
-    r = { ':Telescop oldfiles<CR>',                 'Find recent files' },
-    B = { ':Telescope file_browser<CR>',            'Browse files' },
-    b = { ':Telescope file_browser prompt_title=Project\\ Browser cwd=D:\\repoes <CR>',  'Browse other projects' },
+    p = { ':SwitchProjects<CR>',         'Switch project' },
+    r = { ':lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>',  'Find recent files' },
+    b = { ':Telescope file_browser prompt_title=Project\\ Browser cwd=D:\\repoes<CR>',  'Browse other projects' },
 
     l = { ':SessionLoad<CR>',                       'Load session' },
     s = { ':SessionSave<CR>',                       'Save session' },
