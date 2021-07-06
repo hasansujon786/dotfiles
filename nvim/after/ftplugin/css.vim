@@ -24,3 +24,5 @@ function! s:insert_semicolon()
 
   return ';'
 endfu
+
+call hasan#formatoptions#setup()

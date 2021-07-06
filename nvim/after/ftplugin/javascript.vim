@@ -1,3 +1,4 @@
+call hasan#formatoptions#setup()
 " Run js Code on node
 nnoremap <buffer><leader>bb :!node %<CR>
 " Save current file and Format
