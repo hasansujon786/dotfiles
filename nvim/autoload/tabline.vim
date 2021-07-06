@@ -120,6 +120,10 @@ function! tabline#apply_colors()
 endfunction
 
 function! tabline#nvim_web_devicon(fname)
- let fextension = fnamemodify(a:fname,':e')
- return luaeval(printf('require"nvim-web-devicons".get_icon("%s", "%s", { default = true })', a:fname, fextension))
+  try
+    let fextension = fnamemodify(a:fname,':e')
+    return luaeval(printf('require"nvim-web-devicons".get_icon("%s", "%s", { default = true })', a:fname, fextension))
+  catch /.*/
+    return '[No Name]'
+  endtry
 endfunction
