@@ -243,6 +243,8 @@ nnoremap <leader>fC :w <C-R>=expand("%")<CR>
 nnoremap <leader>fM :Move <C-R>=expand("%")<CR>
 nnoremap <leader>fR :Rename <C-R>=expand("%:t")<CR>
 
+" packer commands
+nnoremap <leader>vpc :PackerCompile<CR>
 " }}}
 " => Disabled-keys ------------------------------------ {{{
 " disable arrow keys in normal mode

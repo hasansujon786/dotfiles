@@ -184,12 +184,12 @@ local leader = {
     -- nnoremap <leader>ve :call _#print_to_float(g:)<left>
     l = { ':call logevents#LogEvents_Toggle()<CR>',  'Toggle LogEvents' },
     p = {
-      name = '+plug',
-      i = { ':PlugInstall<CR>',           'install-plugins' },
-      c = { ':PlugClean<CR>',             'clean-plugins' },
-      s = { ':PlugStatus<CR>',            'plug-status' },
-      u = { ':PlugUpdate<CR>',            'update-all-plugins' },
-      U = { ':PlugUpgrade<CR>',           'upgrade-plug-itself'},
+      name = '+plugin',
+      c = { 'Compile plugin setup' },
+      C = { ':PackerClean<CR>',             'Clean plugins' },
+      i = { ':PackerInstall<CR>',           'Install plugins' },
+      s = { ':PackerStatus<CR>',            'Plugin status' },
+      u = { ':PackerUpdate<CR>',            'Update plugins' },
       p = { ':lua require("hasan.telescope.custom").search_plugins()<CR>',  'Search plugin files'},
     },
   },
