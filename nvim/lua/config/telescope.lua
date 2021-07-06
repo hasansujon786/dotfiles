@@ -3,7 +3,8 @@ local local_action = require('hasan.telescope.local_action')
 
 require('telescope').setup{
   defaults = {
-    file_sorter = require('telescope.sorters').get_fzy_sorter,
+    file_sorter = require'telescope.sorters'.get_fzy_sorter,
+    generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
     prompt_prefix = '  ',
     selection_caret = ' ',
     layout_config = {
