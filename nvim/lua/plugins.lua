@@ -57,6 +57,8 @@ return require("packer").startup({
     use({ 'tpope/vim-rhubarb', opt = true, cmd = {'Git','GBrowse','GV'}})
     use({ 'junegunn/gv.vim', opt = true, cmd = 'GV' })
     use({ 'TimUntersberger/neogit', opt = true, cmd = 'Neogit' })
+    -- use({'ruifm/gitlinker.nvim'})
+    -- ues({'tanvirtin/vgit.nvim'})
 
     --> Lsp & completions --------------------------
     use({ 'nvim-treesitter/nvim-treesitter', config = function() require('config.treesitter') end })

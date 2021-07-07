@@ -30,7 +30,7 @@ require('telescope').setup{
         ["<C-f>"] = local_action.fedit,
       },
     },
-    file_ignore_patterns = { "%.gitignore" },
+    file_ignore_patterns = { "%.gitignore", "%.git\\.*" },
     -- `file_ignore_patterns = { "scratch/.*", "%.env" }`
     extensions = {
       fzy_native = {
