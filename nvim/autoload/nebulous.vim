@@ -3,7 +3,6 @@ let s:nebulous_on_blur_highlights = [
       \ 'CursorLineNr:NebulousCursorLineNr',
       \ 'Normal:Nebulous',
       \ 'NormalNC:Nebulous',
-      \ 'EndOfBuffer:Nebulous',
       \ ]
 let s:nebulous_ignored_filetypes = {
       \ 'fzf': 1,
@@ -22,26 +21,35 @@ let s:nebulous_on_focus_highlights_by_filetype = {
 function! nebulous#init() abort
   hi Nebulous guibg=#363d49
   hi NebulousCursorLineNr guifg=#4B5263
+
+  " resets
+  hi EndOfBuffer guibg=NONE
 endfunction
 call nebulous#init()
 
 function! nebulous#toggle() abort
   if nebulous#is_disabled()
-    let s:nebulous_disabled = v:false
-
-    call nebulous#init()
-    call nebulous#focus_window()
-    call _#Echo(['TextInfo', '[Nebulous]'], 'on')
+    call nebulous#on()
   else
-    let s:nebulous_disabled = v:true
-
-    for cur_nr in range(1, tabpagewinnr(tabpagenr(), '$'))
-      if (!s:win_has_ignored_filetype(cur_nr))
-        call s:remove_blur(cur_nr)
-      endif
-    endfor
-    call _#Echo(['TextInfo', '[Nebulous]'], 'off')
+    call nebulous#off()
   endif
+endfunction
+
+function! nebulous#on() abort
+  let s:nebulous_disabled = v:false
+  call nebulous#init()
+  call nebulous#focus_window()
+  call _#Echo(['TextInfo', '[Nebulous]'], 'on')
+endfunction
+
+function! nebulous#off() abort
+  let s:nebulous_disabled = v:true
+  for cur_nr in range(1, tabpagewinnr(tabpagenr(), '$'))
+    if (!s:win_has_ignored_filetype(cur_nr))
+      call s:remove_blur(cur_nr)
+    endif
+  endfor
+  call _#Echo(['TextInfo', '[Nebulous]'], 'off')
 endfunction
 
 function! nebulous#focus_window() abort
