@@ -248,10 +248,10 @@ nnoremap <leader>vpc :PackerCompile<CR>
 " }}}
 " => Disabled-keys ------------------------------------ {{{
 " disable arrow keys in normal mode
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
+" nnoremap <Left> :echoe "Use h"<CR>
+" nnoremap <Right> :echoe "Use l"<CR>
+" nnoremap <Up> :echoe "Use k"<CR>
+" nnoremap <Down> :echoe "Use j"<CR>
 
 " Bindings for more efficient path-based file navigation
 " nnoremap ,f :find *

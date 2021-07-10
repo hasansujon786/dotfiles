@@ -40,3 +40,5 @@ end
 
 cmd('set statusline='.."%!luaeval('status_line()')")
 -- vim.o.statusline = "%!luaeval('status_line()')"
+-- local opt_plug = vim.fn.globpath('C:\\Users\\hasan\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt', '*', 0, 1)
+-- local start_plug = vim.fn.globpath('C:\\Users\\hasan\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start', '*', 0, 1)

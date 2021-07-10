@@ -138,6 +138,7 @@ let g:coc_global_extensions = [
       \ 'coc-project',
       \ 'coc-pairs',
       \ ]
+" CocInstall https://github.com/rodrigore/coc-tailwind-intellisense
 
 " https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 " coc-pairs coc-syntax coc-word coc-tag coc-dictionary

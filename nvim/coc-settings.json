@@ -75,6 +75,9 @@
     "vue-html": "html",
     "javascript": "javascriptreact"
   },
+  "tailwindCSS.enable": true,
+  "tailwindCSS.lint.cssConflict": "warning",
+  "tailwindCSS.validate": true,
 
   // yank
   "yank.highlight.duration": 300,
