@@ -4,6 +4,7 @@
 tt.state
 /nvim/plugged
 /events.log
+/tui/lazygit/state.yml
 log.log
 
 # dependencies

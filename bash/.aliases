@@ -11,7 +11,7 @@ alias vim=nvim
 alias v=nvim
 alias lv=vl
 alias vl='vim -c "normal '\''0"'
-alias vst='nvim --startuptime log'
+alias vst='nvim --startuptime startup.log -c exit && tail -100 startup.log'
 
 # Tmux
 alias t="tmux new -s pasta"

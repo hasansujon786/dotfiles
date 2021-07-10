@@ -21,3 +21,9 @@ keybinding:
     createRebaseOptionsMenu: 'x'
     optionMenu: 'm' # show help menu
     nextScreenMode: 'O'
+customCommands:
+  - key: 'e'
+    command: 'nvim {{.SelectedFile.Name}}'
+    description: 'open in editor'
+    context: 'files'
+    subprocess: true
