@@ -22,10 +22,6 @@ nnoremap <silent> ZZ :Quit!<CR>
 " Fold
 nmap zm zM
 
-" Goyo
-nmap <silent> z<CR> :Goyo<CR>
-nmap <silent> gz :Goyo<CR>
-
 " Switch between the alternate files
 nnoremap <BS> <c-^>
 " Use Q to record macros
@@ -114,7 +110,7 @@ nnoremap <silent> <A--> :resize -3<CR>
 nnoremap <silent> <A-.> :vertical resize +5<CR>
 nnoremap <silent> <A-,> :vertical resize -5<CR>
 " zoom a vim pane
-nnoremap <silent> \ :call hasan#utils#MaximizesWinToggle()<CR>
+nnoremap <silent> \ :ZenMode<CR>
 nnoremap <silent> <Bar> :wincmd =<cr>
 
 nnoremap <C-j> <C-i>

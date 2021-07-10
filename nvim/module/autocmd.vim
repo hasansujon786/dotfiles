@@ -32,10 +32,6 @@ augroup Focus
   " Highlight the textwidth column.
   au WinEnter,BufWinEnter *.vim,*.js call hasan#boot#highligt_textwith_column(1)
         \| au WinLeave,BufWinLeave,BufLeave <buffer> call hasan#boot#highligt_textwith_column(0)
-
-  " Goyo Events
-  au User GoyoEnter nested call hasan#goyo#goyo_enter()
-  au User GoyoLeave nested call hasan#goyo#goyo_leave()
 augroup END
 
 augroup FernEvents
