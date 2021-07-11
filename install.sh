@@ -190,6 +190,16 @@ install_various_apps() {
   # pip3 install vit
 }
 
+setup_keypirinha() {
+  # install path C:\ProgramData\chocolatey\lib\keypirinha\tools\Keypirinha
+  keypirinhaPath=(~/AppData/Roaming/Keypirinha)
+  util_print keypirinha
+
+  util_backUpConfig ${keypirinhaPath[$machineCode]}
+  util_makeSymlinkPath ~/dotfiles/gui/Keypirinha ${keypirinhaPath[$machineCode]}
+  $getter install -y keypirinha
+}
+
 install_and_setup_tmux() {
   # TODO: (tmux is not working on win, reason: unknown)
   # L => ~/.tmux.conf
@@ -219,7 +229,9 @@ auto_install_everything() {
   setup_lf
   install_various_apps
 
-  # install_and_setup_tmux
+  if [ $machineCode -eq 0 ]; then
+    setup_keypirinha
+  fi
 }
 
 prompt_and_get_answers() {
@@ -231,8 +243,4 @@ prompt_and_get_answers() {
 
 prompt_and_get_answers
 
-# choco install keypirinha -y
-# install path C:\ProgramData\chocolatey\lib\keypirinha\tools\Keypirinha
-# config path C:\Users\hasan\AppData\Roaming\Keypirinha\User
-# powershell New-Item -ItemType SymbolicLink -Path "~/kissline.nvim/test" -Target "~/testFolder"
 
