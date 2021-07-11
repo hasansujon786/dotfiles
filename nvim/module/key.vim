@@ -1,9 +1,8 @@
 " => Key-Mappings ------------------------------------- {{{
 
-" Use q, qq & jk to return to normal mode
+" Use jk to return to normal mode
 inoremap jk <ESC>
-inoremap qq <ESC>
-cnoremap qq <C-c>
+cnoremap jk <C-c>
 if !exists('g:loaded_HLNext')
   nnoremap <silent> q <ESC>:nohlsearch<BAR>echo ''<CR>
   vnoremap <silent> q <ESC>:nohlsearch<CR>
@@ -103,6 +102,7 @@ nmap <A-e> <C-e>
 " Horizontal scroll
 nmap <A-l> 5zl
 nmap <A-h> 5zh
+nmap <A-o> <C-d>
 
 " Resize splits
 nnoremap <silent> <A-=> :resize +3<CR>
