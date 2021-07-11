@@ -5,13 +5,13 @@ set -e
 
 input=$1
 case "${input}" in
-  lin)     inputValid=1;;
-  win)     inputValid=1;;
-  ter)    inputValid=1;;
-    *)     inputValid=0
+  win)     machineCode=0;;
+  lin)     machineCode=1;;
+  ter)     machineCode=2;;
+    *)     machineCode=3
 esac
 
-if [[ $inputValid -eq 0 ]]; then
+if [[ $machineCode -eq 3 ]]; then
   echo "error: The following required arguments were not provided:"
   echo "USAGE:
 
@@ -45,6 +45,7 @@ else
 
   echo \ System: ${machine}
   echo \ Package manager: ${getter}
+  echo \ code: ${machineCode}
 fi
 
 # utils
@@ -52,7 +53,23 @@ mkSpace() {
   echo ' '
 }
 printWithFiglet() {
+  echo ' ' 
   figlet \ $1
+  echo ' ' 
+}
+util_backUpConfig() {
+  if [ -d $1 ]; then
+    echo 'Removing old directory.'
+    mv $1 "$1.bak.$(date +%Y.%m.%d-%H.%M.%S)"
+  elif [ -f $1 ]; then
+    echo 'Removing old file.'
+    mv $1 "$1.bak.$(date +%Y.%m.%d-%H.%M.%S)"
+  fi
+}
+util_makeSymlinkPath() {
+  # $1 = actual path (from)
+  # $2 = symlink path (to)
+  powershell New-Item -ItemType SymbolicLink -Path "$2" -Target "$1"
 }
 
 setup_git_defaults() {
@@ -72,20 +89,11 @@ setup_git_defaults() {
 
 
 setup_bash() {
+  bashPath=(~/.bashrc ~/.bashrc ~/.bashrc)
   printWithFiglet bash
-  # L => ~/.bashrc
-  echo 'Configuring base profile...'
 
-  if [ -f ~/.bashrc ]; then
-    echo 'Removing old .bashrc.'
-    rm ~/.bashrc
-  fi
-
-  echo 'Creating new .bashrc.'
-  printf 'if [ -f ~/dotfiles/bash/.bashrc ]; then\n . ~/dotfiles/bash/.bashrc\nfi' >> ~/.bashrc
-
-  echo 'Done...'
-  mkSpace
+  util_backUpConfig ${bashPath[$machineCode]}
+  util_makeSymlinkPath ~/dotfiles/bash/.bashrc ${bashPath[$machineCode]}
 }
 
 
