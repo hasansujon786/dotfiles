@@ -48,14 +48,18 @@ else
   echo \ code: ${machineCode}
 fi
 
-# utils
-mkSpace() {
+###### utils ######
+util_print() {
   echo ' '
-}
-printWithFiglet() {
-  echo ' ' 
   figlet \ $1
-  echo ' ' 
+}
+util_setup_figlet() {
+  if [[ "$machine" == "windows" ]]; then
+    $getter install -y figlet-go
+  else
+    apt upgrade && apt update 
+    $getter install -y figlet
+  fi
 }
 util_backUpConfig() {
   if [ -d $1 ]; then
@@ -72,8 +76,11 @@ util_makeSymlinkPath() {
   powershell New-Item -ItemType SymbolicLink -Path "$2" -Target "$1"
 }
 
+
+###### setup functions ######
 setup_git_defaults() {
-  printWithFiglet git
+  util_print git
+
   echo ">> Type your github username."
   read git_user_name
   echo ">> Type your github email."
@@ -87,23 +94,108 @@ setup_git_defaults() {
   # git credential-cache exit
 }
 
-
 setup_bash() {
   bashPath=(~/.bashrc ~/.bashrc ~/.bashrc)
-  printWithFiglet bash
+  util_print bash
 
   util_backUpConfig ${bashPath[$machineCode]}
   util_makeSymlinkPath ~/dotfiles/bash/.bashrc ${bashPath[$machineCode]}
 }
 
+setup_nvim() {
+  nvimPath=(~/AppData/Local/nvim ~/.config/nvim ~/.config/nvim)
+  util_print nvim
+
+  util_backUpConfig ${nvimPath[$machineCode]}
+  util_makeSymlinkPath ~/dotfiles/nvim ${nvimPath[$machineCode]}
+
+  $getter install -y neovim --pre
+
+  # echo "Installing vim plugins..."
+  # nvim +PlugInstall +qall
+}
+
+setup_lazygit () {
+  lazygitPath=(~/AppData/Roaming/lazygit ~/.config/lazygit ~/.config/lazygit)
+  util_print lazygit
+
+  util_backUpConfig ${lazygitPath[$machineCode]}
+  util_makeSymlinkPath ~/dotfiles/tui/lazygit ${lazygitPath[$machineCode]}
+
+  # $getter install -y lazygit
+
+  # install manually
+  # # NOTE: Currently lazygit installation only worls for termux
+  # mkdir -p ./lazy
+  # export LAZYGIT_VER="0.28.1"
+  # # wget -O lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_x86_64.tar.gz
+  # wget -O ./lazy/lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_arm64.tar.gz
+  # tar xvf ./lazy/lazygit.tgz -C ./lazy/
+  # # sudo mv lazygit /usr/local/bin/
+  # mv ./lazy/lazygit /data/data/com.termux/files/usr/bin/lazygit
+  # rm -rf ./lazy
+}
+
+setup_lf() {
+  lfPath=(~/AppData/Local/lf)
+  util_print lf
+
+  util_backUpConfig ${lfPath[$machineCode]}
+  util_makeSymlinkPath ~/dotfiles/tui/lf ${lfPath[$machineCode]}
+  $getter install -y lf
+
+  # TODO: add vimb support to lf
+  # curl https://raw.githubusercontent.com/thameera/vimv/master/vimv > /data/data/com.termux/files/usr/bin/vimv && chmod +755 /data/data/com.termux/files/usr/bin/vimv
+  # curl https://raw.githubusercontent.com/thameera/vimv/master/vimv > ~/bin/vimv && chmod +755 ~/bin/vimv
+}
+
+setup_alacritty() {
+  alacrittyPath=(~/AppData/Roaming/alacritty)
+  util_print alacritty
+
+  util_backUpConfig ${alacrittyPath[$machineCode]}
+  util_makeSymlinkPath ~/dotfiles/alacritty ${alacrittyPath[$machineCode]}
+  $getter install -y alacritty
+}
+
+install_various_apps() {
+  util_print nodejs
+  $getter install -y nodejs
+
+  util_print ripgrep
+  $getter install -y ripgrep
+
+  # TODO
+  # util_print tig
+  # $getter install -y tig
+  # ln -s ~/dotfiles/tui/tig/.tigrc ~/.tigrc
+
+  util_print wget
+  $getter install -y wget
+
+  util_print python
+  $getter install -y python
+# c:\python39\python.exe -m pip install --upgrade pip
+  # pip install --user --upgrade pynvim
+  # @todo:
+  # npm install --global live-server
+
+  # TODO
+  # util_print taskwarrior
+  # apt install taskwarrior
+  # pip3 install tasklib
+  # pip3 install six
+
+  # util_print vit
+  # pip3 install vit
+}
 
 install_and_setup_tmux() {
-  # Only linux (tmux is not working on win, reason: unknown)
+  # TODO: (tmux is not working on win, reason: unknown)
   # L => ~/.tmux.conf
-  printWithFiglet tmux
+  util_print tmux
   echo 'Instlling tmux...'
   apt install -y tmux
-  mkSpace
 
   if [ -f ~/.tmux.conf ]; then
     echo 'Removing old .tmux.conf'
@@ -114,116 +206,6 @@ install_and_setup_tmux() {
   printf 'source-file ~/dotfiles/tmux/.tmux.conf' >> ~/.tmux.conf
 
   echo 'Done'
-  mkSpace
-}
-
-
-install_and_setup_nvim() {
-  printWithFiglet nvim
-  echo 'Installing Neovim...'
-  if [[ "$machine" == "windows" ]]; then
-    vimpath=~/AppData/Local/nvim
-  else
-    vimpath=~/.config/nvim
-    mkdir -p ~/.config
-  fi
-
-  $getter install -y neovim --pre
-
-  if [ -d $vimpath ]; then
-    echo 'Removing old .config directory.'
-    mv $vimpath "$vimpath.bak.$(date +%Y.%m.%d-%H:%M:%S)"
-  fi
-  ln -s ~/dotfiles/nvim $vimpath
-  # ln -s ~/storage/shared/documents/vimwiki ~/vimwiki
-
-  # echo 'Installing vim-plug.'
-  # curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-  #   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-  echo 'Done..'
-  mkSpace
-
-  echo "Installing vim plugins..."
-  # nvim +PlugInstall +qall
-
-  echo "Done with setup."
-}
-
-install_lazygit () {
-  printWithFiglet lazygit
-
-  if [[ "$machine" == "windows" ]]; then
-    lazygitpath=~/AppData/Roaming/lazygit
-
-    $getter install -y lazygit
-  else
-    lazygitpath=~/.config/lazygit
-
-    # NOTE: Currently lazygit installation only worls for termux
-    mkdir -p ./lazy
-    export LAZYGIT_VER="0.28.1"
-    # wget -O lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_x86_64.tar.gz
-    wget -O ./lazy/lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_arm64.tar.gz
-    tar xvf ./lazy/lazygit.tgz -C ./lazy/
-    # sudo mv lazygit /usr/local/bin/
-    mv ./lazy/lazygit /data/data/com.termux/files/usr/bin/lazygit
-    rm -rf ./lazy
-  fi
-
-  if [ -d $lazygitpath ]; then
-    echo 'Removing old lazygit config.'
-    rm "$lazygitpath/config.yml"
-  else
-    mkdir -p $lazygitpath
-  fi
-  ln -s ~/dotfiles/tui/lazygit/config.yml $lazygitpath
-}
-
-install_various_apps() {
-  printWithFiglet nodejs
-  $getter install -y nodejs
-
-  printWithFiglet ripgrep
-  $getter install -y ripgrep
-
-  # TODO
-  # printWithFiglet tig
-  # $getter install -y tig
-  # ln -s ~/dotfiles/tui/tig/.tigrc ~/.tigrc
-
-  printWithFiglet lf
-  $getter install -y lf
-  if [[ "$machine" == "windows" ]]; then
-    lfpath=~/AppData/Local/lf
-  else
-    lfpath=~/.config/lf
-  fi
-  mkdir -p $lfpath
-  ln -s ~/dotfiles/tui/lf/lfrc "$lfpath/lfrc"
-
-  # TODO: add vimb support to lf
-  # curl https://raw.githubusercontent.com/thameera/vimv/master/vimv > /data/data/com.termux/files/usr/bin/vimv && chmod +755 /data/data/com.termux/files/usr/bin/vimv
-  # curl https://raw.githubusercontent.com/thameera/vimv/master/vimv > ~/bin/vimv && chmod +755 ~/bin/vimv
-
-  printWithFiglet wget
-  $getter install -y wget
-
-  printWithFiglet python
-  $getter install -y python
-# c:\python39\python.exe -m pip install --upgrade pip
-  # pip install --user --upgrade pynvim
-  # @todo:
-  # npm install --global live-server
-
-  # TODO
-  # printWithFiglet taskwarrior
-  # apt install taskwarrior
-  # pip3 install tasklib
-  # pip3 install six
-
-  # printWithFiglet vit
-  # pip3 install vit
 }
 
 auto_install_everything() {
@@ -231,43 +213,26 @@ auto_install_everything() {
 
   setup_git_defaults
   setup_bash
-  # install_and_setup_tmux
-  install_and_setup_nvim
-  install_lazygit
+  setup_alacritty
+  setup_nvim
+  seup_lazygit
+  setup_lf
   install_various_apps
+
+  # install_and_setup_tmux
 }
 
 prompt_and_get_answers() {
-  if [[ "$machine" == "windows" ]]; then
-    $getter install -y figlet-go
-  else
-    apt upgrade && apt update 
-    $getter install -y toilet
-  fi
-
+  util_setup_figlet
   auto_install_everything
 
-  printWithFiglet done.
+  util_print done.
 }
 
-# prompt_and_get_answers
+prompt_and_get_answers
 
-# setup_git_defaults
-# setup_bash
-# install_and_setup_nvim
-# install_lazygit
-# install_various_apps
-
-
-# install_and_setup_tmux() {
-
-# C:\Users\hasan\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
 # choco install keypirinha -y
-
-
 # install path C:\ProgramData\chocolatey\lib\keypirinha\tools\Keypirinha
 # config path C:\Users\hasan\AppData\Roaming\Keypirinha\User
-
 # powershell New-Item -ItemType SymbolicLink -Path "~/kissline.nvim/test" -Target "~/testFolder"
-# powershell New-Item -ItemType SymbolicLink -Path "~/AppData/Local/nvim" -Target "~/dotfiles/nvim"
-# powershell New-Item -ItemType SymbolicLink -Path "~/AppData/Roaming/alacritty" -Target "~/dotfiles/alacritty"
+
