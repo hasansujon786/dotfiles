@@ -59,3 +59,11 @@ cmd('set statusline='.."%!luaeval('status_line()')")
 --   };
 -- }
 -- utils.create_augroups(autocmds)
+--
+-- table.insert(autocmds['doom_core'], {
+--   {
+--       'TextYankPost',
+--       '*',
+--       "lua require('vim.highlight').on_yank({higroup = 'Search', timeout = 200})",
+--   },
+-- })

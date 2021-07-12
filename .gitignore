@@ -7,6 +7,7 @@ tt.state
 /tui/lazygit/state.yml
 log.log
 /gui/Keypirinha/User/Keypirinha-Notepad2.ini
+/gui/Keypirinha/User/Keypirinha.history
 
 # dependencies
 /node_modules

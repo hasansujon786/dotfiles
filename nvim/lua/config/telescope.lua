@@ -13,7 +13,7 @@ require('telescope').setup{
     },
     -- prompt_position = "top",
     -- sorting_strategy = "ascending",
-    winblend = 5,
+    winblend = 0,
     mappings = {
       -- n = {
       --   ["<Del>"] = actions.close
