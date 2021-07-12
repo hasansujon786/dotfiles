@@ -42,3 +42,20 @@ cmd('set statusline='.."%!luaeval('status_line()')")
 -- vim.o.statusline = "%!luaeval('status_line()')"
 -- local opt_plug = vim.fn.globpath('C:\\Users\\hasan\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt', '*', 0, 1)
 -- local start_plug = vim.fn.globpath('C:\\Users\\hasan\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start', '*', 0, 1)
+
+-- local autocmds = {
+--   todo = {
+--     {"BufEnter",     "*.todo",              "setl ft=todo"};
+--     {"BufEnter",     "*meus/todo/todo.txt", "setl ft=todo"};
+--     {"BufReadCmd",   "*meus/todo/todo.txt", [[silent call rclone#load("db:todo/todo.txt")]]};
+--     {"BufWriteCmd",  "*meus/todo/todo.txt", [[silent call rclone#save("db:todo/todo.txt")]]};
+--     {"FileReadCmd",  "*meus/todo/todo.txt", [[silent call rclone#load("db:todo/todo.txt")]]};
+--     {"FileWriteCmd", "*meus/todo/todo.txt", [[silent call rclone#save("db:todo/todo.txt")]]};
+--   };
+--   vimrc = {
+--     {"BufWritePost init.vim nested source $MYVIMRC"};
+--     {"FileType man setlocal nonumber norelativenumber"};
+--     {"BufEnter term://* setlocal nonumber norelativenumber"};
+--   };
+-- }
+-- utils.create_augroups(autocmds)
