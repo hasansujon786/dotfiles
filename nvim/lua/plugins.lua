@@ -11,6 +11,7 @@ return require("packer").startup({
     use({ 'folke/zen-mode.nvim', opt = true, cmd = 'ZenMode'})
     use({ 'hasansujon786/kissline.nvim' })
     use({ 'hasansujon786/notifier.nvim' })
+    use({ 'hasansujon786/telescope-yanklist.nvim' })
     -- use({ 'folke/tokyonight.nvim' })
 
     --> Productiviry -------------------------------

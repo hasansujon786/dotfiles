@@ -67,3 +67,7 @@ cmd('set statusline='.."%!luaeval('status_line()')")
 --       "lua require('vim.highlight').on_yank({higroup = 'Search', timeout = 200})",
 --   },
 -- })
+-- augroup LuaHighLight
+-- au!
+-- au TextYankPost * silent! lua vim.highlight.on_yank {on_visual=false}
+-- augroup end
