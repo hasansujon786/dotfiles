@@ -241,6 +241,8 @@ prompt_and_get_answers() {
   util_print done.
 }
 
-prompt_and_get_answers
+# prompt_and_get_answers
 
-
+# util_makeSymlinkPath D:\\repoes\\plugins\\kissline.nvim  C:\\Users\\hasan\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\kissline.nvim
+# util_makeSymlinkPath D:\\repoes\\plugins\\notifier.nvim  C:\\Users\\hasan\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\notifier.nvim
+# util_makeSymlinkPath D:\\repoes\\plugins\\telescope-yanklist.nvim  C:\\Users\\hasan\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\telescope-yanklist.nvim

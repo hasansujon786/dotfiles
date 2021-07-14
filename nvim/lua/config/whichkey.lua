@@ -145,7 +145,7 @@ local leader = {
     -- y = { ':CocList --normal yank<CR>',                         'Yank list' },
     y = { ':lua require("yanklist").yanklist()<CR>',            'Yank list' },
     p = { ':FernDrawerToggle!<CR>',                             'Project sidebar' },
-    P = { ':FernCurDirDrawer<CR>',                              'Dir in preject sidebar' },
+    P = { ':FernCurDirDrawer<CR>',                              'Project sidebar' },
   },
 
   p = {
@@ -277,7 +277,15 @@ local leader = {
   ['5'] = { ':lua require("harpoon.ui").nav_file(5)<CR>', 'which_key_ignore'},
 }
 
+local leader_visual = {
+  o = {
+    name = '+open',
+    y = { ':lua require("yanklist").yanklist({is_visual=true})<CR>',      'Yank list' },
+  },
+}
+
 wk.register(leader, { prefix = '<leader>' })
+wk.register(leader_visual, { prefix = '<leader>', mode = 'v' })
 
 -- " nmap <leader>aa <Plug>(coc-codeaction)
 -- " vmap <leader>aa <Plug>(coc-codeaction-selected)
