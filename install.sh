@@ -111,6 +111,8 @@ setup_nvim() {
 
   $getter install -y neovim --pre
 
+  packerPath=(~/AppData/Local/nvim-data/site/pack/packer/start/packer.nvim, ~/.local/share/nvim/site/pack/packer/start/packer.nvim)
+  git clone https://github.com/wbthomason/packer.nvim ${packerPath[$machineCode]}
   # echo "Installing vim plugins..."
   # nvim +PlugInstall +qall
 }
@@ -137,7 +139,7 @@ setup_lazygit () {
 }
 
 setup_lf() {
-  lfPath=(~/AppData/Local/lf)
+  lfPath=(~/AppData/Local/lf, ~/.config/lf, ~/.config/lf)
   util_print lf
 
   util_backUpConfig ${lfPath[$machineCode]}
@@ -150,7 +152,7 @@ setup_lf() {
 }
 
 setup_alacritty() {
-  alacrittyPath=(~/AppData/Roaming/alacritty)
+  alacrittyPath=(~/AppData/Roaming/alacritty, ~/config/alacritty, ~/config/alacritty)
   util_print alacritty
 
   util_backUpConfig ${alacrittyPath[$machineCode]}
@@ -225,7 +227,7 @@ auto_install_everything() {
   setup_bash
   setup_alacritty
   setup_nvim
-  seup_lazygit
+  # setup_lazygit
   setup_lf
   install_various_apps
 
