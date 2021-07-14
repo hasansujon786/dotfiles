@@ -8,7 +8,6 @@ source ~/dotfiles/nvim/config/gitgutter.vim
 source ~/dotfiles/nvim/config/vim-fugitive.vim
 source ~/dotfiles/nvim/config/vim-floaterm.vim
 source ~/dotfiles/nvim/config/vim-visual-multi.vim
-source ~/dotfiles/nvim/config/coc.vim
 source ~/dotfiles/nvim/config/hlnext.vim
 source ~/dotfiles/nvim/config/vim-wiki.vim
 source ~/dotfiles/nvim/config/tabline.vim
@@ -17,6 +16,7 @@ source ~/dotfiles/nvim/config/emmet.vim
 source ~/dotfiles/nvim/config/colorv.vim
 source ~/dotfiles/nvim/config/kissline.vim
 
+" source ~/dotfiles/nvim/config/coc.vim
 " source ~/dotfiles/nvim/module/which-key.vim
 " source ~/dotfiles/nvim/config/plug.vim
 " source ~/dotfiles/nvim/config/dashboard.vim

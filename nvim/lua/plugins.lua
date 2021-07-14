@@ -9,9 +9,9 @@ return require("packer").startup({
     use({ 'kyazdani42/nvim-web-devicons' })
     use({ 'Yggdroot/indentLine', opt = true, event = 'BufRead' })
     use({ 'folke/zen-mode.nvim', opt = true, cmd = 'ZenMode'})
-    use({ 'hasansujon786/kissline.nvim' })
-    use({ 'hasansujon786/notifier.nvim' })
-    use({ 'hasansujon786/telescope-yanklist.nvim' })
+    use({ 'D:\\repoes\\plugins\\kissline.nvim' })
+    use({ 'D:\\repoes\\plugins\\notifier.nvim' })
+    use({ 'D:\\repoes\\plugins\\telescope-yanklist.nvim' })
     -- use({ 'folke/tokyonight.nvim' })
 
     --> Productiviry -------------------------------
@@ -66,8 +66,16 @@ return require("packer").startup({
     use({ 'nvim-treesitter/playground', opt = true, cmd = {'TSPlaygroundToggle','TSHighlightCapturesUnderCursor'} })
     use({ 'JoosepAlviste/nvim-ts-context-commentstring', opt = true, event = 'BufRead'  })
 
-    use({ 'neoclide/coc.nvim', opt = true, event = 'BufRead' })
     use({ 'honza/vim-snippets', opt = true, event = 'InsertEnter'})
+    use({
+      'neoclide/coc.nvim',
+      config = function ()
+        vim.cmd "source ~/dotfiles/nvim/config/coc.vim"
+      end,
+      disable = vim.g.disable_coc,
+      opt = true,
+      event = 'BufRead'
+    })
 
     use({ 'gu-fan/colorv.vim', opt = true, cmd = 'ColorV' })
     use({ 'mattn/emmet-vim', opt = true, event = 'BufRead' })
@@ -77,5 +85,41 @@ return require("packer").startup({
         vim.cmd('ColorizerReloadAllBuffers')
       end
     })
+
+    -- TODO: refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
+    use {
+      "neovim/nvim-lspconfig",
+      disable = vim.g.disable_lsp
+    }
+    -- use { "kabouzeid/nvim-lspinstall", event = "VimEnter", config = function() require("lspinstall").setup() end, }
+    use {
+      "hrsh7th/nvim-compe",
+      disable = vim.g.disable_lsp,
+      -- event = "InsertEnter",
+      config = function()
+        require('config.compe')
+      end,
+    }
+    use {
+      "windwp/nvim-autopairs",
+      disable = vim.g.disable_lsp,
+      -- event = "InsertEnter",
+      -- after = { "telescope.nvim" },
+      config = function()
+        require('config.autopairs')
+      end,
+    }
+    use {
+      "airblade/vim-rooter",
+      disable = vim.g.disable_lsp,
+      config = function()
+        vim.g.rooter_silent_chdir = 1
+      end,
+    }
+    use {
+      "hrsh7th/vim-vsnip",
+      disable = vim.g.disable_lsp,
+      event = "InsertEnter"
+    }
   end,
 })

@@ -46,6 +46,7 @@ opt.autowrite = true                              -- Automatically :write before
 opt.autoread = true                               -- Set to auto read when a file is changed from the outside
 
 -- Autocompletion
+opt.completeopt = 'menuone,noselect'
 opt.wildmenu = true
 opt.wildignorecase = true
 opt.shortmess:append('c')                         -- don't pass messages to |ins-completion-menu|
