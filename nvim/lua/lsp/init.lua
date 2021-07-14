@@ -126,6 +126,8 @@ function lsp_config.common_on_attach(client, bufnr)
   documentHighlight(client, bufnr)
 end
 
+lsp_config.on_attach = on_attach
+
 function lsp_config.PeekDefinition()
   if vim.tbl_contains(vim.api.nvim_list_wins(), lsp_config.floating_win) then
     vim.api.nvim_set_current_win(lsp_config.floating_win)
