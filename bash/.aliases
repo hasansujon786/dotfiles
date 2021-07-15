@@ -6,11 +6,12 @@ alias ns='npm start'
 alias nd='npm run dev'
 
 # Vim
+alias nvim=~/.local/share/nvim/nvim
 alias v.='nvim .'
 alias vim=nvim
 alias v=nvim
 alias lv=vl
-alias vl='vim -c "normal '\''0"'
+alias vl='nvim -c "normal '\''0"'
 alias vst='nvim --startuptime startup.log -c exit && tail -100 startup.log'
 
 # Tmux
