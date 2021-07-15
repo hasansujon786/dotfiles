@@ -25,5 +25,6 @@ open_bash() {
 }
 
 # bindkey -s '^t' 'open_alacritty\o'  # CTRL-T in terminal calls for open_alacritty function
-bind -x '"\C-t\C-t":"open_alacritty"'
-bind -x '"\C-tq":"open_bash"'
+# windows
+# bind -x '"\C-t\C-t":"open_alacritty"'
+# bind -x '"\C-tq":"open_bash"'
