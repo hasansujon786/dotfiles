@@ -28,3 +28,5 @@ open_bash() {
 # windows
 # bind -x '"\C-t\C-t":"open_alacritty"'
 # bind -x '"\C-tq":"open_bash"'
+
+alias luamake=/home/hasan/.local/share/nvim/lsp-servers/sumneko_lua/lua-language-server/3rd/luamake/luamake

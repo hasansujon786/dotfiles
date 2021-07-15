@@ -8,6 +8,7 @@ require('plugins')
 if (vim.g.disable_lsp == false) then
   require('lsp')
   require('lsp.tailwindcss-ls')
+  require('lsp.sumneko_lua')
 end
 
 

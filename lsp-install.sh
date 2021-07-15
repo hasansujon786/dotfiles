@@ -22,6 +22,7 @@ if [[ $machineCode -eq 3 ]]; then
     ter: termux"
   exit 1
 else
+  case "${input}" in
     win)  machine=windows;;
     lin)  machine=linux;;
     ter)  machine=termux;;
@@ -82,6 +83,23 @@ setup_tailwindcss-ls() {
   chmod +x tailwindcss-language-server
 }
 
-setup_tsserver
-setup_tailwindcss-ls
+# sudo apt install ninja-build
+setup_sumneko_lua() {
+  lua_path=$localServerPath/sumneko_lua
+  mkdir -p $lua_path
+  cd $lua_path
+
+  # clone project
+  git clone https://github.com/sumneko/lua-language-server
+  cd lua-language-server
+  git submodule update --init --recursive
+  cd 3rd/luamake
+  compile/install.sh
+  cd ../..
+  ./3rd/luamake/luamake rebuild
+}
+
+# setup_tsserver
+# setup_tailwindcss-ls
+
 
