@@ -21,6 +21,10 @@ Target OS names:
   return jit.os
 end
 
+M.is_windows = function()
+  return jit.os == 'Windows'
+end
+
 M.read_file = function(path)
   local fd = vim.loop.fs_open(path, 'r', 438)
   local stat = vim.loop.fs_fstat(fd)
