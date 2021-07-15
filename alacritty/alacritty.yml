@@ -1,18 +1,14 @@
-# W - "~/AppData/Roaming/alacritty"
-# L - "-"
 # https://github.com/alacritty/alacritty/blob/master/alacritty.yml
 
 # Shell
 #
 # You can set shell.program to the path of your favorite shell, e.g. /bin/fish.
 # Entries in shell.args are passed unmodified as arguments to the shell.
-shell:
-  program: C:\Program Files\Git\bin\bash
+# shell:
+  # program: C:\Program Files\Git\bin\bash
   # args:
   # - --command=tmux
-# working_directory: \\?\C:\Users\hasan
-# working_directory: \\?\d:\repoes
-working_directory: D:\repoes
+# working_directory: D:\repoes
 
 # Window Customization
 window:
@@ -29,12 +25,12 @@ background_opacity: 0.92
 # Font Customization
 font:
   normal:
-    family: FiraCode NF
-    style: Medium
+    family: FiraCode Nerd Font
+    # style: Medium
   bold:
-    family: FiraCode NF
+    family: FiraCode Nerd Font
   italic:
-    family: FiraCode NF
+    family: FiraCode Nerd Font
   size: 13
   offset:
     x: 0
