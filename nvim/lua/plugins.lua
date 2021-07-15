@@ -9,9 +9,9 @@ return require("packer").startup({
     use({ 'kyazdani42/nvim-web-devicons' })
     use({ 'Yggdroot/indentLine', opt = true, event = 'BufRead' })
     use({ 'folke/zen-mode.nvim', opt = true, cmd = 'ZenMode'})
-    use({ 'D:\\repoes\\plugins\\kissline.nvim' })
-    use({ 'D:\\repoes\\plugins\\notifier.nvim' })
-    use({ 'D:\\repoes\\plugins\\telescope-yanklist.nvim' })
+    use({ 'hasansujon786/kissline.nvim' })
+    use({ 'hasansujon786/notifier.nvim' })
+    use({ 'hasansujon786/telescope-yanklist.nvim' })
     -- use({ 'folke/tokyonight.nvim' })
 
     --> Productiviry -------------------------------
