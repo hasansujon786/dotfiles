@@ -80,9 +80,11 @@ colors:
 
 key_bindings: 
   - { key: N, mods: Control|Shift, action: SpawnNewInstance }
-  - { key: Space, mods: Control, chars: "\x11" } # ctrl-q
-  - { key: Slash, mods: Control, chars: "\x1F" } # ctrl-_
+  - { key: F, mods: Control|Shift, action: ToggleFullscreen }
+  - { key: F11, action: ToggleFullscreen }
   - { key: Back,  mods: Control, chars: "\x17" } # ctrl-w
+  # - { key: Space, mods: Control, chars: "\x11" } # ctrl-q
+  # - { key: Slash, mods: Control, chars: "\x1F" } # ctrl-_
   # - { key: R,      mods: Control|Shift,  command:
   #   { program: "explorer", args: ["."] }  }
 
