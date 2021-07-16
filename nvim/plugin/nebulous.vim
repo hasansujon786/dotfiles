@@ -4,5 +4,5 @@ augroup Nebulous
   au FocusGained,WinEnter,BufWinEnter * call nebulous#focus_window()
   au User NotifierNotificationLoaded,NeogitStatusRefreshed call nebulous#focus_window()
   au FocusLost * call nebulous#blur_current_window()
-  au FileType Whichkey call timer_start(0, function('nebulous#whichkey_hack'))
+  au FileType WhichKey call timer_start(0, function('nebulous#whichkey_hack'))
 augroup END
