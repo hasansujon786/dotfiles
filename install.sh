@@ -167,6 +167,7 @@ setup_alacritty() {
 install_various_apps() {
   util_print nodejs
   $getter install -y nodejs
+  # https://www.codegrepper.com/code-examples/shell/install+nodejs+in+elementary+os
 
   util_print ripgrep
   $getter install -y ripgrep

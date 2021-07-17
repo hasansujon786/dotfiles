@@ -99,7 +99,8 @@ setup_sumneko_lua() {
   ./3rd/luamake/luamake rebuild
 }
 
-# setup_tsserver
-# setup_tailwindcss-ls
+setup_tsserver
+setup_tailwindcss-ls
+setup_sumneko_lua
 
 
