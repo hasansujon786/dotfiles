@@ -70,7 +70,11 @@ mkdir -p $localServerPath
 
 ###### setup functions ######
 setup_tsserver() {
-  npm install -g typescript typescript-language-server
+  if [[ "$machine" == "windows" ]]; then
+    npm install -g typescript typescript-language-server
+  else
+    sudo npm install -g typescript typescript-language-server
+  fi
 }
 
 setup_tailwindcss-ls() {

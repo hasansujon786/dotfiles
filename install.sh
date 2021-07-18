@@ -195,6 +195,9 @@ install_various_apps() {
 
   # util_print vit
   # pip3 install vit
+
+  $getter install build-essential
+  $getter install ninja-build
 }
 
 setup_keypirinha() {
