@@ -1,3 +1,8 @@
+local status_ok, _ = pcall(require, "compe")
+if not status_ok then
+  return
+end
+
 require'compe'.setup {
   enabled = true;
   autocomplete = true;
@@ -48,12 +53,6 @@ require'compe'.setup {
   --   -- for emoji press : (idk if that in compe tho)
   -- },
 }
-
-local status_ok, compe = pcall(require, "compe")
-if not status_ok then
-  return
-end
-
 
 local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
