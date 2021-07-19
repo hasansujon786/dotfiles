@@ -121,5 +121,10 @@ return require("packer").startup({
       disable = vim.g.disable_lsp,
       event = "InsertEnter"
     }
+    use {
+      "rafamadriz/friendly-snippets",
+      disable = vim.g.disable_lsp,
+      event = "InsertEnter"
+    }
   end,
 })
