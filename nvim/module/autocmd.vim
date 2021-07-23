@@ -6,7 +6,7 @@ augroup vimrcEx
   " automatically rebalance windows on vim resize
   autocmd VimResized * :wincmd =
   " Trim white spaces before saving
-  autocmd BufWritePre *.vim :call hasan#autocmd#trimWhitespace()
+  autocmd BufWritePre *.vim,*.lua :call hasan#autocmd#trimWhitespace()
   " When editing a file, always jump to the last known cursor position.
   " Don't do it for commit messages, when the position is invalid, or when
   " inside an event handler (happens when dropping a file on gvim).

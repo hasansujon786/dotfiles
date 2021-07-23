@@ -71,3 +71,13 @@ cmd('set statusline='.."%!luaeval('status_line()')")
 -- au!
 -- au TextYankPost * silent! lua vim.highlight.on_yank {on_visual=false}
 -- augroup end
+
+-- vsnip
+-- return t "<C-n>"
+-- local info = vim.fn.complete_info({'selected'})
+-- if info.selected == -1 then
+--   return t "<C-n><C-y><C-r>=luaeval('require\"compe\"._close()')<CR>"
+-- else
+--   return vim.fn["compe#confirm"]("<tab>")
+-- end
+

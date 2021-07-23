@@ -3,13 +3,20 @@ if not status_ok then
   return
 end
 
+vim.g.vsnip_filetypes = {
+  javascript = {'javascriptreact'},
+  typescript = {'typescriptreact'},
+  javascriptreact = {'javascript'},
+  typescriptreact = {'typescript'},
+}
+
 require'compe'.setup {
   enabled = true;
   autocomplete = true;
   debug = false;
   min_length = 1;
-  preselect = 'enable';
-  -- preselect = 'always';
+  -- preselect = 'enable';
+  preselect = 'always';
   throttle_time = 80;
   source_timeout = 200;
   resolve_timeout = 800;
@@ -71,9 +78,10 @@ end
 -- Use (s-)tab to:
 --- move to prev/next item in completion menuone
 --- jump to prev/next snippet's placeholder
+
 _G.tab_complete = function()
   if vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
+    return vim.fn["compe#confirm"]("<tab>")
   elseif vim.fn.call("vsnip#available", { 1 }) == 1 then
     return t "<Plug>(vsnip-expand-or-jump)"
   elseif vim.fn["hasan#compe#check_front_char"]() then

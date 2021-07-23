@@ -1,6 +1,6 @@
 -- C:\Users\hasan\AppData\Local\nvim-data\site\pack\packer
 
-return require("packer").startup({
+return require('packer').startup({
   function(use)
     use({ 'wbthomason/packer.nvim' })
     --> Visual -------------------------------------
@@ -24,7 +24,7 @@ return require("packer").startup({
     use({ 'nvim-telescope/telescope.nvim', config = function() require('config.telescope') end })
     use({ 'nvim-telescope/telescope-fzy-native.nvim' })
     use({ 'nvim-telescope/telescope-project.nvim', opt = true, cmd = {'SwitchProjects'}, config = function ()
-      vim.cmd[[command! SwitchProjects lua require("telescope").extensions.project.project{}]]
+      vim.cmd[[command! SwitchProjects lua require('telescope').extensions.project.project{}]]
     end })
 
     use({ 'lambdalisue/fern-renderer-nerdfont.vim' })
@@ -40,7 +40,7 @@ return require("packer").startup({
     use({ 'mg979/vim-visual-multi', opt = true, event = 'BufRead' })
     use({ 'michaeljsmith/vim-indent-object', opt = true, event = 'BufRead' })
     use({ 'tweekmonster/startuptime.vim', opt = true, cmd = 'StartupTime' })
-    -- " use 'tpope/vim-scriptease'
+    -- use 'tpope/vim-scriptease'
     use({ 'hasansujon786/vim-rel-jump', opt = true, event = 'BufRead' })
     use({ 'dhruvasagar/vim-open-url', opt = true, event = 'BufRead' })
     use({ 'unblevable/quick-scope', opt = true, event = 'BufRead' })
@@ -66,11 +66,9 @@ return require("packer").startup({
     use({ 'nvim-treesitter/playground', opt = true, cmd = {'TSPlaygroundToggle','TSHighlightCapturesUnderCursor'} })
     use({ 'JoosepAlviste/nvim-ts-context-commentstring', opt = true, event = 'BufRead'  })
 
-    use({ 'honza/vim-snippets', opt = true, event = 'InsertEnter'})
-    use({
-      'neoclide/coc.nvim',
+    use({ 'neoclide/coc.nvim',
       config = function ()
-        vim.cmd "source ~/dotfiles/nvim/config/coc.vim"
+        vim.cmd 'source ~/dotfiles/nvim/config/coc.vim'
       end,
       disable = vim.g.disable_coc,
       opt = true,
@@ -86,45 +84,42 @@ return require("packer").startup({
       end
     })
 
-    -- TODO: refactor all of this (for now it works, but yes I know it could be wrapped in a simpler function)
     use {
-      "neovim/nvim-lspconfig",
-      disable = vim.g.disable_lsp
-    }
-    -- use { "kabouzeid/nvim-lspinstall", event = "VimEnter", config = function() require("lspinstall").setup() end, }
-    use {
-      "hrsh7th/nvim-compe",
-      disable = vim.g.disable_lsp,
-      -- event = "InsertEnter",
-      config = function()
-        require('config.compe')
-      end,
-    }
-    use {
-      "windwp/nvim-autopairs",
-      disable = vim.g.disable_lsp,
-      -- event = "InsertEnter",
-      -- after = { "telescope.nvim" },
-      config = function()
-        require('config.autopairs')
-      end,
-    }
-    use {
-      "airblade/vim-rooter",
+      'airblade/vim-rooter',
       disable = vim.g.disable_lsp,
       config = function()
         vim.g.rooter_silent_chdir = 1
       end,
     }
     use {
-      "hrsh7th/vim-vsnip",
-      disable = vim.g.disable_lsp,
-      event = "InsertEnter"
+      'neovim/nvim-lspconfig',
+      disable = vim.g.disable_lsp
     }
     use {
-      "rafamadriz/friendly-snippets",
+      'hrsh7th/nvim-compe',
       disable = vim.g.disable_lsp,
-      event = "InsertEnter"
+      event = 'InsertEnter',
+      config = function()
+        require('config.compe')
+      end,
+    }
+    use {
+      'windwp/nvim-autopairs',
+      disable = vim.g.disable_lsp,
+      event = 'InsertEnter',
+      config = function()
+        require('config.autopairs')
+      end,
+    }
+    use {
+      'hrsh7th/vim-vsnip',
+      disable = vim.g.disable_lsp,
+      event = 'InsertCharPre'
+    }
+    use {
+      'rafamadriz/friendly-snippets',
+      disable = vim.g.disable_lsp,
+      event = 'InsertCharPre'
     }
   end,
 })
