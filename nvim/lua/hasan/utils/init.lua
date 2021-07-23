@@ -1,7 +1,8 @@
 local M = {}
 
 M.reload_this_module = function ()
-  local module_name = vim.fn.fnamemodify(vim.fn.expand('%'), ':r:gs?\\?.?:gs?/?.?:gs?nvim.??:gs?lua.??')
+  local fname = vim.fn.fnamemodify(vim.fn.expand('%:p:r'), string.format(':gs?%s/??', vim.fn.getcwd()))
+  local module_name = vim.fn.fnamemodify(fname, ':gs?\\?.?:gs?/?.?:gs?nvim.??:gs?lua.??:gs?.init??')
   print(string.format('[%s] - module reloaded', module_name))
   R(module_name)
 end
