@@ -8,10 +8,15 @@ return require('packer').startup({
     use({ 'glepnir/dashboard-nvim', config = function() require('config.dashboard') end })
     use({ 'kyazdani42/nvim-web-devicons' })
     use({ 'Yggdroot/indentLine', opt = true, event = 'BufRead' })
-    use({ 'folke/zen-mode.nvim', opt = true, cmd = 'ZenMode'})
     use({ 'hasansujon786/kissline.nvim' })
     use({ 'hasansujon786/notifier.nvim' })
     use({ 'hasansujon786/telescope-yanklist.nvim' })
+    use({ 'folke/zen-mode.nvim',
+      opt = true, cmd = 'ZenMode',
+      config = function()
+        require('config.zen')
+      end
+    })
     -- use({ 'folke/tokyonight.nvim' })
 
     --> Productiviry -------------------------------
