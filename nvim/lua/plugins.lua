@@ -1,4 +1,6 @@
 -- C:\Users\hasan\AppData\Local\nvim-data\site\pack\packer
+vim.g.disable_lsp = false
+vim.g.disable_coc = true
 
 return require('packer').startup({
   function(use)
@@ -11,8 +13,7 @@ return require('packer').startup({
     use({ 'hasansujon786/kissline.nvim' })
     use({ 'hasansujon786/notifier.nvim' })
     use({ 'hasansujon786/telescope-yanklist.nvim' })
-    use({ 'folke/zen-mode.nvim',
-      opt = true, cmd = 'ZenMode',
+    use({ 'folke/zen-mode.nvim', opt = true, cmd = 'ZenMode',
       config = function()
         require('config.zen')
       end
@@ -55,18 +56,29 @@ return require('packer').startup({
     use({ 'Konfekt/vim-CtrlXA', opt = true, event = 'BufRead' })
     use({ 'tpope/vim-repeat', opt = true, event = 'BufRead' })
     use({ 'folke/which-key.nvim', config = function() require('config.whichkey') end })
-    use({ 'folke/neoscroll.nvim', opt = true, event = 'VimEnter', config = function() require('config.neoscroll') end })
+    use({ 'folke/neoscroll.nvim', opt = true, event = 'WinScrolled',
+      config = function()
+        require('config.neoscroll')
+      end
+    })
 
     --> Git ----------------------------------------
     use({ 'airblade/vim-gitgutter', opt = true, event = 'BufRead' })
     use({ 'tpope/vim-fugitive', opt = true, cmd = {'Git','GBrowse','GV'}})
-    use({ 'tpope/vim-rhubarb', opt = true, cmd = {'Git','GBrowse','GV'}})
-    use({ 'junegunn/gv.vim', opt = true, cmd = 'GV' })
+    use({ 'tpope/vim-rhubarb', opt = true, after = 'vim-fugitive'})
+    use({ 'junegunn/gv.vim', opt = true, after = 'vim-fugitive' })
     use({ 'TimUntersberger/neogit', opt = true, cmd = 'Neogit' })
     -- use({'ruifm/gitlinker.nvim'})
     -- ues({'tanvirtin/vgit.nvim'})
 
     --> Lsp & completions --------------------------
+    use({ 'neoclide/coc.nvim',
+      opt = true, event = 'BufRead',
+      disable = vim.g.disable_coc,
+      config = function ()
+        vim.cmd 'source ~/dotfiles/nvim/config/coc.vim'
+      end
+    })
     use({ 'nvim-treesitter/nvim-treesitter', config = function() require('config.treesitter') end })
     use({ 'nvim-treesitter/playground', opt = true, cmd = {'TSPlaygroundToggle','TSHighlightCapturesUnderCursor'} })
     use({ 'JoosepAlviste/nvim-ts-context-commentstring', opt = true, event = 'BufRead'  })
@@ -82,49 +94,47 @@ return require('packer').startup({
 
     use({ 'gu-fan/colorv.vim', opt = true, cmd = 'ColorV' })
     use({ 'mattn/emmet-vim', opt = true, event = 'BufRead' })
-    use({ 'norcalli/nvim-colorizer.lua', opt = true, event = 'BufRead',
-      config = function ()
-        require('colorizer').setup()
-        vim.cmd('ColorizerReloadAllBuffers')
+    use({ 'norcalli/nvim-colorizer.lua',
+      opt = true, event = 'BufRead',
+      config = function()
+        require('config.colorizer')
       end
     })
 
-    use {
-      'airblade/vim-rooter',
+    use({ 'neovim/nvim-lspconfig',
       disable = vim.g.disable_lsp,
       config = function()
-        vim.g.rooter_silent_chdir = 1
-      end,
-    }
-    use {
-      'neovim/nvim-lspconfig',
-      disable = vim.g.disable_lsp
-    }
-    use {
-      'hrsh7th/nvim-compe',
+        require('lsp')
+        require('lsp.tailwindcss-ls')
+        require('lsp.sumneko_lua')
+      end
+    })
+    use({ 'airblade/vim-rooter',
+      opt = true, event = 'VimEnter',
       disable = vim.g.disable_lsp,
-      event = 'InsertEnter',
+      config = function() vim.g.rooter_silent_chdir = 1 end
+    })
+    use({ 'hrsh7th/nvim-compe',
+      opt = true, event = 'InsertEnter',
+      disable = vim.g.disable_lsp,
       config = function()
         require('config.compe')
-      end,
-    }
-    use {
-      'windwp/nvim-autopairs',
+      end
+    })
+    use({ 'windwp/nvim-autopairs',
+      opt = true, event = 'InsertEnter',
       disable = vim.g.disable_lsp,
-      event = 'InsertEnter',
       config = function()
         require('config.autopairs')
-      end,
-    }
-    use {
-      'hrsh7th/vim-vsnip',
+      end
+    })
+    use({ 'hrsh7th/vim-vsnip',
+      opt = true, event = 'InsertCharPre',
       disable = vim.g.disable_lsp,
-      event = 'InsertCharPre'
-    }
-    use {
-      'rafamadriz/friendly-snippets',
-      disable = vim.g.disable_lsp,
-      event = 'InsertCharPre'
-    }
+    })
+    use({ 'rafamadriz/friendly-snippets',
+      opt = true, event = 'InsertCharPre'
+    })
+
   end,
 })
