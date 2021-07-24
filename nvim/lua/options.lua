@@ -153,7 +153,7 @@ opt.sidescroll=1
 opt.scrolloff=1                                   -- Set 1 lines to the cursor - when moving vertically using j/k
 opt.sidescrolloff=5
 -- Wrappings
-opt.textwidth=120                                 -- Hard-wrap text at nth column
+opt.textwidth=80                                  -- Hard-wrap text at nth column
 opt.wrap = false                                  -- No wrap by default
 opt.linebreak = true                              -- Don't break words when wrapping lines
 opt.breakindent = true                            -- Every wrapped line will continue visually indented

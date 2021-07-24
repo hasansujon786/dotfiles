@@ -15,3 +15,9 @@ function! hasan#autocmd#fzf_statusline()
   setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
 endfunction
 " }}}
+
+function! hasan#autocmd#restore_position()
+  if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") && expand('%:t') != 'COMMIT_EDITMSG'
+    exe "normal g`\""
+  endif
+endfunction
