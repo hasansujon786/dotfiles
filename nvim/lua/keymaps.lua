@@ -33,16 +33,16 @@ maps.nnoremap('x', '"_x')
 maps.nnoremap('X', '"_X')
 -- Paste from + register (system clipboard)
 maps.inoremap('<C-v>',' <C-R>+')
-maps.cnoremap('<C-v>', '<C-R>+')
+maps.cnoremap('<C-v>', '<C-R>+', {silent=false})
 -- Paste the last item from register
-maps.cnoremap('<A-p>', '<C-R>"')
+maps.cnoremap('<A-p>', '<C-R>"', {silent=false})
 
 -- Modify & rearange texts ----------------------
 -- increase selected numbers
 maps.xnoremap('+',' g<C-a>')
 maps.xnoremap('-', 'g<C-x>')
 -- Print the number of occurrences of the current word under the cursor
-maps.vnoremap('<C-g>', '*<C-O>:%s///gn<CR>')
+maps.vmap('<C-g>', '*<C-O>:%s///gn<CR>', {silent=false})
 -- A fix to select end of line
 maps.vnoremap('$', '$h')
 -- Select a block {} of code
@@ -66,8 +66,8 @@ maps.xnoremap('<A-j>', ':call hasan#utils#visual_move_down()<CR>')
 -- vnoremap <silent> <A-k> :move '<-2<CR>gv=gv
 -- vnoremap <silent> <A-j> :move '>+1<CR>gv=gv
 -- Exchange_operator.vim
-maps.vmap('gx', '<Plug>(exchange-operator)')
 maps.nmap('gx', '<Plug>(exchange-operator)')
+maps.vmap('gx', '<Plug>(exchange-operator)')
 
 
 -- Navigation -----------------------------------
@@ -106,10 +106,14 @@ maps.nnoremap('\\', ':ZenMode<CR>')
 maps.nnoremap('<Bar>', ':wincmd =<cr>')
 maps.nnoremap('<C-j>', '<C-i>')
 -- Jump between tabs
-maps.nmap('<tab>', 'gt')
-maps.nmap('<s-tab>', 'gT')
-maps.vmap('<tab>', 'gt')
-maps.vmap('<s-tab>', 'gT')
+maps.nnoremap('gl', 'gt')
+maps.nnoremap('gh', 'gT')
+maps.vnoremap('gl', 'gt')
+maps.vnoremap('gh', 'gT')
+maps.nnoremap('<tab>', 'gt')
+maps.nnoremap('<s-tab>', 'gT')
+maps.vnoremap('<tab>', 'gt')
+maps.vnoremap('<s-tab>', 'gT')
 -- Move tabs
 maps.nnoremap(']<TAB>', ':tabmove+<CR>')
 maps.nnoremap('[<TAB>', ':tabmove-<CR>')
@@ -184,7 +188,7 @@ maps.map('t', '<C-o>', '<C-\\><C-n>')
 
 
 -- Function keys --------------------------------
-maps.nnoremap('<F3>', ':set paste!<CR>')
+maps.nnoremap('<F3>', ':set paste! paste?<CR>')
 maps.nnoremap('<F5>', '<Esc>:syntax sync fromstart<CR><C-l>')
 maps.inoremap('<F5>', '<C-o>:syntax sync fromstart<CR><C-o><C-l>')
 -- Toggle spelling and show it's status
