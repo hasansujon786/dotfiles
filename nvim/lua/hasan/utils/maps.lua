@@ -53,7 +53,7 @@ function M.smap(key, cmd, opts)
   return map("s", key, cmd, opts)
 end
 function M.cmap(key, cmd, opts)
-  return map("c", key, cmd, opts)
+  return map("c", key, cmd, opts, { silent = false })
 end
 
 function M.nnoremap(key, cmd, opts)
@@ -75,7 +75,7 @@ function M.snoremap(key, cmd, opts)
   return map("s", key, cmd, opts, { noremap = true })
 end
 function M.cnoremap(key, cmd, opts)
-  return map("c", key, cmd, opts, { noremap = true })
+  return map("c", key, cmd, opts, { noremap = true, silent = false })
 end
 
 function M.t(str)

@@ -1,8 +1,8 @@
 local maps = require('hasan.utils.maps')
 
 -- Use jk to return to normal mode
-maps.imap('jk', '<ESC>')
-maps.cmap('jk', '<ESC>')
+maps.inoremap('jk', '<ESC>')
+maps.cnoremap('jk', '<ESC>')
 -- Hide search highlighting
 maps.nnoremap('q', '<ESC>:nohlsearch<BAR>echo ""<CR>')
 maps.vnoremap('q', '<ESC>:nohlsearch<CR>')
@@ -33,9 +33,9 @@ maps.nnoremap('x', '"_x')
 maps.nnoremap('X', '"_X')
 -- Paste from + register (system clipboard)
 maps.inoremap('<C-v>',' <C-R>+')
-maps.cnoremap('<C-v>', '<C-R>+', {silent=false})
+maps.cnoremap('<C-v>', '<C-R>+')
 -- Paste the last item from register
-maps.cnoremap('<A-p>', '<C-R>"', {silent=false})
+maps.cnoremap('<A-p>', '<C-R>"')
 
 -- Modify & rearange texts ----------------------
 -- increase selected numbers
@@ -160,7 +160,7 @@ maps.cnoremap('<A-b>', '<S-Left>')
 maps.cnoremap('<A-f>', '<S-Right>')
 -- Jump cursor to start & end of a line
 maps.inoremap('<C-a>', '<C-o>^<C-g>u')
--- maps.inoremap('<expr> <C-e> col('.')>strlen(getline('.'))<bar><bar>pumvisible()?"\<Lt>C-E>":"\<Lt>End>"
+maps.inoremap('<C-e>', '<End>')
 maps.cnoremap('<C-a>', '<Home>')
 maps.cnoremap('<C-e>', '<End>')
 -- Delete by characters & words
@@ -172,15 +172,15 @@ maps.cnoremap('<A-d>',  '<S-Right><C-W><Delete>')
 maps.cnoremap('<A-BS>', '<C-W>')
 -- Make & move to a new line under the cursor
 maps.inoremap('<A-CR>', '<C-o>o')
--- Make a new line under the cursor
-maps.inoremap('<A-O>', '<Esc>mqA<CR><Esc>`qa')
--- Open HTML tags & place cursor to the middle
-maps.inoremap('<A-o>', '<C-o>mq<CR><C-o>`q<CR>')
+-- Open HTML tags
+maps.inoremap('<A-o>', '<CR><C-o>O')
 -- CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 -- so that you can undo CTRL-U after inserting a line break.
 maps.inoremap('<C-u>', '<C-G>u<C-U>')
--- " fix previous misspelled world
-maps.inoremap('<c-k>l', '<c-g>u<Esc>[s1z=`]a<c-g>u')
+-- Fix previous misspelled world
+maps.inoremap('<C-k><C-p>', '<c-g>u<Esc>[s1z=`]a<c-g>u')
+-- Uppercase current word
+maps.inoremap('<C-k><C-u>', '<c-g>u<Esc>BgUiwgi')
 
 
 -- Terminal -------------------------------------
