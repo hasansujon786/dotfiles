@@ -11,55 +11,46 @@ vim.g.vsnip_filetypes = {
 }
 
 require'compe'.setup {
-  enabled = true;
-  autocomplete = true;
-  debug = false;
-  min_length = 1;
-  -- preselect = 'enable';
-  preselect = 'always';
-  throttle_time = 80;
-  source_timeout = 200;
-  resolve_timeout = 800;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
+  enabled = true,
+  autocomplete = true,
+  debug = false,
+  min_length = 1,
+  preselect = 'enable',
+  -- preselect = 'always',
+  throttle_time = 80,
+  source_timeout = 200,
+  resolve_timeout = 800,
+  incomplete_delay = 400,
+  max_abbr_width = 100,
+  max_kind_width = 100,
+  max_menu_width = 100,
   documentation = {
-    border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
+    border = 'double', -- the border option is the same as `|help nvim_open_win|`
     winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
     max_width = 120,
     min_width = 60,
     max_height = math.floor(vim.o.lines * 0.3),
     min_height = 1,
-  };
+  },
 
   source = {
-    path = true;
-    buffer = true;
-    calc = true;
-    nvim_lsp = true;
-    nvim_lua = true;
-    vsnip = true;
-    ultisnips = true;
-    luasnip = true;
-  };
-
-  -- source = {
-  --   path = { kind = "   (Path)" },
-  --   buffer = { kind = "   (Buffer)" },
-  --   calc = { kind = "   (Calc)" },
-  --   vsnip = { kind = "   (Snippet)" },
-  --   nvim_lsp = { kind = "   (LSP)" },
-  --   nvim_lua = false,
-  --   spell = { kind = "   (Spell)" },
-  --   tags = false,
-  --   vim_dadbod_completion = false,
-  --   snippets_nvim = false,
-  --   ultisnips = false,
-  --   treesitter = false,
-  --   emoji = { kind = " ﲃ  (Emoji)", filetypes = { "markdown", "text" } },
-  --   -- for emoji press : (idk if that in compe tho)
-  -- },
+    path = { kind = "  " },
+    buffer = { kind = "  " },
+    -- buffer = { kind = "  " },
+    calc = { kind = "  " },
+    vsnip = { kind = "  " },
+    nvim_lsp = { kind = "  " },
+    nvim_lua = false,
+    spell = { kind = "  " },
+    tags = false,
+    vim_dadbod_completion = false,
+    snippets_nvim = false,
+    ultisnips = false,
+    luasnip = false,
+    treesitter = false,
+    emoji = { kind = " ﲃ ", filetypes = { "markdown", "text" } },
+    -- for emoji press : (idk if that in compe tho)
+  },
 }
 
 local t = function(str)
@@ -81,7 +72,12 @@ end
 
 _G.tab_complete = function()
   if vim.fn.pumvisible() == 1 then
-    return vim.fn["compe#confirm"]("<tab>")
+    local selected = vim.fn.complete_info()['selected']
+    if selected == -1 and vim.fn.call("vsnip#available", { 1 }) == 1 then
+      return t "<Plug>(vsnip-expand-or-jump)"
+    else
+      return t "<C-n>"
+    end
   elseif vim.fn.call("vsnip#available", { 1 }) == 1 then
     return t "<Plug>(vsnip-expand-or-jump)"
   elseif vim.fn["hasan#compe#check_front_char"]() then
@@ -110,7 +106,7 @@ vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true 
 
 vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", { noremap = true, silent = true, expr = true })
 vim.api.nvim_set_keymap("i", "<CR>", "compe#confirm('<CR>')", { noremap = true, silent = true, expr = true })
-vim.api.nvim_set_keymap("i", "<C-e>", "compe#close('<C-e>')", { noremap = true, silent = true, expr = true })
-vim.api.nvim_set_keymap("i", "<C-f>", "compe#scroll({ 'delta': +4 })", { noremap = true, silent = true, expr = true })
-vim.api.nvim_set_keymap("i", "<C-d>", "compe#scroll({ 'delta': -4 })", { noremap = true, silent = true, expr = true })
+vim.api.nvim_set_keymap("i", "<C-e>", "compe#close('<End>')", { noremap = true, silent = true, expr = true })
+-- vim.api.nvim_set_keymap("i", "<C-f>", "compe#scroll({ 'delta': +4 })", { noremap = true, silent = true, expr = true })
+-- vim.api.nvim_set_keymap("i", "<C-d>", "compe#scroll({ 'delta': -4 })", { noremap = true, silent = true, expr = true })
 

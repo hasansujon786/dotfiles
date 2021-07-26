@@ -9,11 +9,11 @@ function hasan#highlight#load_custom_highlight() abort
   hi! link Folded Comment
 
   hi WhichKeyFloat      guibg=#2C323C
-  hi Fedit              guibg=#282C34
-  hi FeditBorder        guibg=#282C34 guifg=#5C6370
-  hi link NormalFloat Fedit
-  hi link FloatBorder FeditBorder
+  hi! link Fedit Normal
+  hi! link FeditBorder Comment
   hi! link TelescopeBorder Comment
+  " hi link NormalFloat Fedit
+  " hi link FloatBorder FeditBorder
 
   " gitgutter & signnify
   hi SignColumn         guibg=NONE
