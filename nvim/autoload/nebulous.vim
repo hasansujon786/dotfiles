@@ -1,4 +1,5 @@
 let s:nebulous_disabled = 0
+let s:is_pause = 0
 let s:nebulous_on_blur_highlights = [
       \ 'CursorLineNr:NebulousCursorLineNr',
       \ 'Normal:Nebulous',
@@ -53,7 +54,7 @@ function! nebulous#off() abort
 endfunction
 
 function! nebulous#focus_window() abort
-  if nebulous#is_disabled() | return | endif
+  if nebulous#is_disabled() || s:is_pause | return | endif
 
   for cur_nr in range(1, tabpagewinnr(tabpagenr(), '$'))
     let not_float_win = nvim_win_get_config(win_getid(cur_nr)).relative == ''
@@ -68,6 +69,12 @@ function! nebulous#focus_window() abort
   endfor
 endfunction
 
+function! nebulous#focus_current_window() abort
+  if nebulous#is_disabled() | return | endif
+  if (!s:win_has_ignored_filetype(0))
+    call s:remove_blur(0)
+  endif
+endfunction
 function! nebulous#blur_current_window() abort
   if nebulous#is_disabled() | return | endif
   if (!s:win_has_ignored_filetype(0))
@@ -105,3 +112,16 @@ function! nebulous#whichkey_hack(...) abort
   redrawstatus
 endfunction
 
+function! nebulous#pause() abort
+  let is_float_win = nvim_win_get_config(win_getid(0)).relative != ''
+  if !is_float_win
+    let s:is_pause = 1
+  endif
+  augroup NebulousPause
+    au!
+    au InsertLeave <buffer> call nebulous#play()
+  augroup END
+endfunction
+function! nebulous#play() abort
+  let s:is_pause = 0
+endfunction
