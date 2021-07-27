@@ -9,9 +9,9 @@ function hasan#highlight#load_custom_highlight() abort
   hi! link Folded Comment
 
   hi WhichKeyFloat      guibg=#2C323C
+  hi FeditBorder        guifg=#5c6370
   hi! link Fedit Normal
-  hi! link FeditBorder Comment
-  hi! link TelescopeBorder Comment
+  hi! link TelescopeBorder FeditBorder
   " hi link NormalFloat Fedit
   " hi link FloatBorder FeditBorder
 
