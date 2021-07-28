@@ -72,16 +72,11 @@ end
 
 _G.tab_complete = function()
   if vim.fn.pumvisible() == 1 then
-    local selected = vim.fn.complete_info()['selected']
-    if selected == -1 and vim.fn.call("vsnip#available", { 1 }) == 1 then
-      return t "<Plug>(vsnip-expand-or-jump)"
-    else
-      return t "<C-n>"
-    end
-  elseif vim.fn.call("vsnip#available", { 1 }) == 1 then
-    return t "<Plug>(vsnip-expand-or-jump)"
+    return vim.fn["compe#confirm"]({ select = true})
   elseif vim.fn["hasan#compe#check_front_char"]() then
     return t "<Right>"
+  elseif vim.fn.call("vsnip#available", { 1 }) == 1 then
+    return t "<Plug>(vsnip-expand-or-jump)"
   elseif check_back_space() then
     return t "<Tab>"
   else
