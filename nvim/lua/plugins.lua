@@ -63,11 +63,17 @@ return require('packer').startup({
     })
 
     --> Git ----------------------------------------
-    use({ 'airblade/vim-gitgutter', opt = true, event = 'BufRead' })
     use({ 'tpope/vim-fugitive', opt = true, cmd = {'Git','GBrowse','GV'}})
     use({ 'tpope/vim-rhubarb', opt = true, after = 'vim-fugitive'})
     use({ 'junegunn/gv.vim', opt = true, after = 'vim-fugitive' })
     use({ 'TimUntersberger/neogit', opt = true, cmd = 'Neogit' })
+    use({ 'lewis6991/gitsigns.nvim',
+      opt = true, event = 'BufRead',
+      config = function()
+        require('config.gitsigns')
+      end
+    })
+   -- sdfsdf sdf sdf
     -- use({'ruifm/gitlinker.nvim'})
     -- ues({'tanvirtin/vgit.nvim'})
 
@@ -82,15 +88,6 @@ return require('packer').startup({
     use({ 'nvim-treesitter/nvim-treesitter', config = function() require('config.treesitter') end })
     use({ 'nvim-treesitter/playground', opt = true, cmd = {'TSPlaygroundToggle','TSHighlightCapturesUnderCursor'} })
     use({ 'JoosepAlviste/nvim-ts-context-commentstring', opt = true, event = 'BufRead'  })
-
-    use({ 'neoclide/coc.nvim',
-      config = function ()
-        vim.cmd 'source ~/dotfiles/nvim/config/coc.vim'
-      end,
-      disable = vim.g.disable_coc,
-      opt = true,
-      event = 'BufRead'
-    })
 
     use({ 'gu-fan/colorv.vim', opt = true, cmd = 'ColorV' })
     use({ 'mattn/emmet-vim', opt = true, event = 'BufRead' })

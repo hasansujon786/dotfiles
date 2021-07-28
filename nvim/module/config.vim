@@ -4,7 +4,6 @@ source ~/dotfiles/nvim/config/indentLine.vim
 source ~/dotfiles/nvim/config/telescope.vim
 source ~/dotfiles/nvim/config/fern.vim
 source ~/dotfiles/nvim/config/sneak.vim
-source ~/dotfiles/nvim/config/gitgutter.vim
 source ~/dotfiles/nvim/config/vim-fugitive.vim
 source ~/dotfiles/nvim/config/vim-floaterm.vim
 source ~/dotfiles/nvim/config/vim-visual-multi.vim
@@ -16,6 +15,7 @@ source ~/dotfiles/nvim/config/emmet.vim
 source ~/dotfiles/nvim/config/colorv.vim
 source ~/dotfiles/nvim/config/kissline.vim
 
+" source ~/dotfiles/nvim/config/gitgutter.vim
 " source ~/dotfiles/nvim/config/coc.vim
 " source ~/dotfiles/nvim/module/which-key.vim
 " source ~/dotfiles/nvim/config/plug.vim

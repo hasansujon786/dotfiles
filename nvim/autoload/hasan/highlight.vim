@@ -17,7 +17,6 @@ function hasan#highlight#load_custom_highlight() abort
 
   " gitgutter & signnify
   hi SignColumn         guibg=NONE
-  hi GitGutterChange    guifg=#D19A66
 
   " hi DashboardHeader ctermfg=114 guifg=#61AFEF
   hi DashboardHeader   ctermfg=59  guifg=#5c6370

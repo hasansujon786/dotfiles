@@ -17,6 +17,9 @@ maps.nnoremap('ZZ', ':Quit!<CR>')
 maps.nnoremap('Q', 'q')
 -- Fold
 maps.nmap('zm', 'zM')
+-- update buffer content
+maps.nnoremap('<C-l>', '<Esc>:syntax sync fromstart<CR>:Gitsigns refresh<CR><C-l>')
+maps.inoremap('<C-l>', '<C-o>:syntax sync fromstart<CR>:Gitsigns refresh<CR><C-l>')
 
 
 -- Copy Paste -----------------------------------
@@ -189,8 +192,6 @@ maps.map('t', '<C-o>', '<C-\\><C-n>')
 
 -- Function keys --------------------------------
 maps.nnoremap('<F3>', ':set paste! paste?<CR>')
-maps.nnoremap('<F5>', '<Esc>:syntax sync fromstart<CR><C-l>')
-maps.inoremap('<F5>', '<C-o>:syntax sync fromstart<CR><C-o><C-l>')
 -- Toggle spelling and show it's status
 maps.nnoremap('<F7>', ':setlocal spell! spell?<CR>')
 maps.inoremap('<F7>', '<Esc>:setlocal spell! spell?<CR>a')
