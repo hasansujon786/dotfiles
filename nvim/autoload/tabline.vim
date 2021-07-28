@@ -59,7 +59,7 @@ function! s:tabs()
   for tab_nr in range(1,tabpagenr('$'))
     " set the tab page number (for mouse clicks)
     let head = '%'. (tab_nr).'T'
-    let separator = tab_nr == tabpagenr() ? '%#TabLineSelSp#▎%#TabLineSel#' : '%#TabLineSp#▎%#TabLine#'
+    let separator = tab_nr == tabpagenr() ? '%#TabLineSelSp#'.g:tabline.double_line.'%#TabLineSel#' : '%#TabLineSp#'.g:tabline.double_line.'%#TabLine#'
     let label = '%-'.s:tab_ln.'{TabLabel('.tab_nr.')}'
     let close_btn = (tabpagenr('$') == 1 ? '%#TabLineSelX#' : '').
           \'%'.tab_nr.'X'.g:tabline.tab_close_icon.'%X'
@@ -68,7 +68,7 @@ function! s:tabs()
     let tab = head.separator.' '.label.tail.'  '
     let tabs .= s:is_turncate(tab_nr) ? '' : tab
   endfor
-  let tabs .= '%#TabLineSp#▎'    " last separetor
+  let tabs .= '%#TabLineSp#'.g:tabline.line_left    " last separetor
   let tabs .= '%#TabLineFill#%T' " reset colors from here
   return tabs
 endfunction
@@ -76,14 +76,11 @@ endfunction
 function! TabLabel(tab_nr)
   let buflist = tabpagebuflist(a:tab_nr)
   let winnr = tabpagewinnr(a:tab_nr)
-  let fname = fnamemodify(bufname(buflist[winnr - 1]), ":t")
-  if (fname == '') | let fname = '[No Name]' | endif
+  let tabName = luaeval(printf("require('hasan.tabline').tabName(%s)", buflist[winnr - 1]))
+  let icon = tabline#nvim_web_devicon(tabName)
+  let label = a:tab_nr.' '. icon.' '.tabName.' '
 
-  let icon = tabline#nvim_web_devicon(fname)
-  " let label = icon.' '.fname.' '
-  let label = a:tab_nr.' '. icon.' '.fname.' '
   if (len(label) > s:label_ln) | let label = label[0:s:label_ln-3].'..' | endif
-
   return label
 endfunction
 

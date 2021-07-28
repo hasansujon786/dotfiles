@@ -7,7 +7,9 @@ let g:tabline = {
       \ 'modified_icon': '●',
       \ 'close_icon': '',
       \ 'tab_close_icon': '',
-      \ 'separator_style': ''
+      \ 'separator_style': '',
+      \ 'double_line': '‖',
+      \ 'line_left': '▎'
       \}
 
 " barbar.vim #1c1f24
