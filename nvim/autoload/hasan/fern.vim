@@ -5,7 +5,11 @@ function! hasan#fern#edit_alternate() abort
   if (is_fern_node && !filereadable(vim_alternate) && s:fern_alternate_file != '')
     execute('e '.s:fern_alternate_file)
   else
-    exe "normal! \<c-^>"
+    try
+      exe "normal! \<c-^>"
+    catch
+      echo 'E23: No alternate file'
+    endtry
   endif
 endfunction
 
