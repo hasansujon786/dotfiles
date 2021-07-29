@@ -6,8 +6,6 @@ maps.cnoremap('jk', '<ESC>')
 -- Hide search highlighting
 maps.nnoremap('q', '<ESC>:nohlsearch<BAR>echo ""<CR>')
 maps.vnoremap('q', '<ESC>:nohlsearch<CR>')
--- Switch between the alternate files
-maps.nnoremap('<BS>', '<c-^>')
 -- run last : command easily
 maps.nnoremap('<CR>', ':<up>', {silent = false})
 vim.cmd[[autocmd CmdwinEnter * nnoremap <buffer><CR> <CR>]]
@@ -19,7 +17,6 @@ maps.nnoremap('Q', 'q')
 maps.nmap('zm', 'zM')
 -- update buffer content
 maps.nnoremap('<C-l>', '<Esc>:syntax sync fromstart<CR>:Gitsigns refresh<CR><C-l>')
-maps.inoremap('<C-l>', '<C-o>:syntax sync fromstart<CR>:Gitsigns refresh<CR><C-l>')
 
 
 -- Copy Paste -----------------------------------

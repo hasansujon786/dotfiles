@@ -1,3 +1,14 @@
+let s:fern_alternate_file = ''
+function! hasan#fern#edit_alternate() abort
+  let vim_alternate = expand('#')
+  let is_fern_node = vim_alternate =~# '^[^:]\+://'
+  if (is_fern_node && !filereadable(vim_alternate) && s:fern_alternate_file != '')
+    execute('e '.s:fern_alternate_file)
+  else
+    exe "normal! \<c-^>"
+  endif
+endfunction
+
 function! hasan#fern#drawer_toggle(reveal) abort
   if expand('%:t') != '' && a:reveal
     Fern . -drawer -toggle -reveal=%
@@ -8,12 +19,14 @@ function! hasan#fern#drawer_toggle(reveal) abort
 endfunction
 
 function! hasan#fern#smart_path(drawer)
+  let s:fern_alternate_file = filereadable(bufname('%')) ? bufname('%') : ''
+
   if !empty(&buftype) || bufname('%') =~# '^[^:]\+://' || empty(bufname('%'))
     Fern .
   else
-    let fern_last_file=expand('%:t')
+    let fern_previous_node=expand('%:t')
     exec a:drawer ? 'Fern %:h -drawer -wait' : 'Fern %:h -wait'
-    if fern_last_file !=# '' | call search('\v<' . fern_last_file . '>') | endif
+    if fern_previous_node !=# '' | call search('\v<' . fern_previous_node . '>') | endif
   endif
 endfunction
 
@@ -76,11 +89,11 @@ function! hasan#fern#FernInit() abort
   nmap <buffer> W <Plug>(fern-action-cd)
   nmap <buffer> B <Plug>(fern-action-save-as-bookmark)
   nmap <buffer> q <C-w>c
-  nmap <buffer> <BAR> <Plug>(fern-action-zoom)<C-w>=
-  nmap <buffer><nowait> <CR> <Plug>(fern-custom-openAndClose-enter)
   nmap <buffer><nowait> l <Plug>(fern-custom-openAndClose-enter)
   nmap <buffer><nowait> h <Plug>(fern-action-leave)
   nmap <buffer><nowait> - <Plug>(fern-action-leave)
+  nmap <buffer><nowait> <CR> <Plug>(fern-custom-openAndClose-enter)
+  nmap <buffer><nowait> \ <Plug>(fern-action-zoom:reset)
   " nmap <buffer> K <Plug>(fern-action-mark-children:leaf)
 
   " Open bookmark:///
