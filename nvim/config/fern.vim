@@ -1,8 +1,9 @@
 " Open current file directory into the buffer
-nnoremap <silent> - :FernCurDir<CR>
-command! FernCurDir call hasan#fern#smart_path(0)
-command! FernCurDirDrawer call hasan#fern#smart_path(1)
-command! -bang FernDrawerToggle call hasan#fern#drawer_toggle(<bang>0)
+nnoremap <silent> <Plug>(my-fern-vinager) :call hasan#fern#smart_path(0)<CR>
+nnoremap <silent> <Plug>(my-fern-cdir) :call hasan#fern#smart_path(1)<CR>
+nnoremap <silent> <Plug>(my-fern-t&r) :call hasan#fern#drawer_toggle(1)<CR>
+nnoremap <silent> <Plug>(my-fern-toggle) :call hasan#fern#drawer_toggle(0)<CR>
+nmap - <Plug>(my-fern-vinager)
 
 let g:fern#drawer_width = 35
 let g:fern#keepalt_on_edit = 1

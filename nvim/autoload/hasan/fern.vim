@@ -4,7 +4,7 @@ function! hasan#fern#drawer_toggle(reveal) abort
   else
     Fern . -drawer -toggle
   endif
-  wincmd =
+  " wincmd =
 endfunction
 
 function! hasan#fern#smart_path(drawer)

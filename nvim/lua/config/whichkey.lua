@@ -134,7 +134,7 @@ local leader = {
 
   o = {
     name = '+open',
-    ['-'] = { ':FernCurDir<CR>',                                'Fern' },
+    ['-'] = { '<Plug>(my-fern-vinager)',                        'Fern vinager' },
     a = 'Org agenda',
     c = 'Org capture',
     -- a = { '<Plug>(dotoo-agenda)',                               '+org-agenda' },
@@ -144,8 +144,8 @@ local leader = {
     q = { ':QfixToggle<CR>',                                    'Quickfix' },
     -- y = { ':CocList --normal yank<CR>',                         'Yank list' },
     y = { ':lua require("yanklist").yanklist()<CR>',            'Yank list' },
-    p = { ':FernDrawerToggle!<CR>',                             'Project sidebar' },
-    P = { ':FernCurDirDrawer<CR>',                              'Project sidebar' },
+    p = { '<Plug>(my-fern-t&r)<Plug>(fern-action-zoom:reset)',  'Toggle prject tree' },
+    P = { '<Plug>(my-fern-cdir)<Plug>(fern-action-zoom:reset)', 'Toggle prject tree' },
   },
 
   p = {
@@ -257,7 +257,7 @@ local leader = {
   r = { '<cmd>CycleNumber<CR>',                           'Cycle number' },
   R = { '<cmd>call nebulous#toggle()<CR>',                'Toggle Nebulous' },
   s = { '<cmd>write<CR>',                                 'Save file' },
-  n = { '<cmd>FernDrawerToggle<CR>',                      'Toggle sidebar' },
+  n = { '<Plug>(my-fern-toggle)<Plug>(fern-action-zoom:reset)', 'Toggle sidebar' },
   x = { '<cmd>bdelete<CR>',                               'Delete buffer' },
   z = { 'za',                                             'Fold/Unfold' },
   m = { ':lua require("harpoon.mark").add_file()<CR>',    'Mark to Harpoon' },
