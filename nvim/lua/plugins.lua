@@ -56,7 +56,7 @@ return require('packer').startup({
     use({ 'Konfekt/vim-CtrlXA', opt = true, event = 'BufRead' })
     use({ 'tpope/vim-repeat', opt = true, event = 'BufRead' })
     use({ 'folke/which-key.nvim', config = function() require('config.whichkey') end })
-    use({ 'folke/neoscroll.nvim', opt = true, event = 'BufRead',
+    use({ 'karb94/neoscroll.nvim', opt = true, event = 'BufRead',
       config = function()
         require('config.neoscroll')
       end
