@@ -15,5 +15,6 @@ let g:tabline = {
 " barbar.vim #1c1f24
 
 " hi TabLineFill cleared
+call tabline#apply_colors()
 autocmd ColorScheme * call tabline#apply_colors()
 
