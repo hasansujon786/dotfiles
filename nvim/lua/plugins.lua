@@ -125,6 +125,10 @@ return require('packer').startup({
         require('config.autopairs')
       end
     })
+    use({ 'windwp/nvim-ts-autotag',
+      opt = true, after = 'nvim-autopairs',
+      disable = vim.g.disable_lsp,
+    })
     use({ 'hrsh7th/vim-vsnip',
       opt = true, event = 'InsertCharPre',
       disable = vim.g.disable_lsp,

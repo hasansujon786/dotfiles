@@ -52,3 +52,26 @@ cmd('set statusline='.."%!luaeval('status_line()')")
 --   return vim.fn["compe#confirm"]("<tab>")
 -- end
 
+-- creates a command
+function command(cmd, nargs, attrs)
+  attrs = attrs or '!'
+  nargs = nargs or 0
+  vim.cmd('command'..attrs..' -nargs='..nargs..' '..cmd)
+end
+
+function get_pos() return call('getcurpos') end
+
+-- set cursor position
+function set_pos(pos) call('setpos', '.', pos) end
+
+-- gets the current date/time according to pattern
+function date(pattern)
+  pattern = pattern or "%Y-%m-%d_%X"
+  return os.date(pattern, os.time())
+end
+
+-- checks if file exists
+function is_file_exists(path)
+  local f = io.open(path, 'r')
+  if f ~= nil then io.close(f) return true else return false end
+end
