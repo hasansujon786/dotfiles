@@ -31,8 +31,10 @@ call nebulous#init()
 function! nebulous#toggle() abort
   if nebulous#is_disabled()
     call nebulous#on()
+    call _#Echo(['TextInfo', '[Nebulous]'], 'on')
   else
     call nebulous#off()
+    call _#Echo(['TextInfo', '[Nebulous]'], 'off')
   endif
 endfunction
 
@@ -40,7 +42,6 @@ function! nebulous#on() abort
   let s:nebulous_disabled = v:false
   call nebulous#init()
   call nebulous#focus_window()
-  call _#Echo(['TextInfo', '[Nebulous]'], 'on')
 endfunction
 
 function! nebulous#off() abort
@@ -50,7 +51,6 @@ function! nebulous#off() abort
       call s:remove_blur(cur_nr)
     endif
   endfor
-  call _#Echo(['TextInfo', '[Nebulous]'], 'off')
 endfunction
 
 function! nebulous#focus_window() abort

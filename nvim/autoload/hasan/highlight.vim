@@ -1,4 +1,8 @@
 let g:bg_tranparent = v:false
+if exists('g:bg_tranparent') && g:bg_tranparent == v:true
+  call nebulous#off()
+endif
+
 function hasan#highlight#load_custom_highlight() abort
   if exists('g:bg_tranparent') && g:bg_tranparent == v:true
     hi Normal guibg=NONE guifg=#ABB2BF
