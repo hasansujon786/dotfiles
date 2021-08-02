@@ -21,7 +21,7 @@ alias ta="tmux attach"
 # alias tmux="env TERM=xterm-256color tmux"
 
 # handy short cuts #
-alias bashrc="vim ~/mydotfiles/bash/.bashrc"
+alias bashrc="vim ~/dotfiles/bash/.bashrc"
 alias c='cd'
 alias to='touch'
 alias mk='mkdir -p'
@@ -104,7 +104,7 @@ alias fgrep='fgrep --color=auto'
 alias le='less -j4'
 alias chex='chmod +x'
 alias cpr='cp -r'
-alias rr='rm -Rf'
+alias rr='rm -rfI'
 alias mn='mv -vn'
 alias txf='tar -xf'
 alias uz='unzip'
@@ -113,6 +113,7 @@ alias fn='find . -name "*'
 alias ff='find . -name "*.'
 alias h='hash -rf'
 alias sz='source ~/.zshrc'
+alias sb='source ~/.bashrc'
 alias hx='hexdump -C'
 alias k9='kill -9'
 alias k15='kill -s 15'
