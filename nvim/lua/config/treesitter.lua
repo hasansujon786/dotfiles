@@ -2,7 +2,6 @@
 require("nvim-treesitter.configs").setup {
   -- ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ensure_installed = { 'html', 'css', 'javascript', 'typescript', 'tsx', 'json', 'lua', 'vue' },
-
   highlight = {
     enable = true, -- false will disable the whole extension
     use_languagetree = false,
@@ -11,21 +10,15 @@ require("nvim-treesitter.configs").setup {
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = "<M-w>", -- maps in normal mode to init the node/scope selection
-      node_incremental = "<M-w>", -- increment to the upper named parent
-      node_decemental = "<M-q>", -- decrement to the previous node
-      scope_incremental = "<M-s>", -- increment to the upper scope (as defined in locals.scm)
+      init_selection = 'gnn', -- maps in normal mode to init the node/scope selection
+      node_incremental = '}', -- increment to the upper named parent
+      node_decremental = '{', -- decrement to the previous node
+      scope_incremental = 'gn', -- increment to the upper scope (as defined in locals.scm)
     },
   },
-  context_commentstring = {
-    enable = true
-  },
-  indent = {
-    enable = true
-  },
-  autotag = {
-    enable = true,
-  },
+  context_commentstring = { enable = true },
+  indent = { enable = true },
+  autotag = { enable = true },
   playground = {
     enable = true,
     disable = {},
@@ -35,7 +28,6 @@ require("nvim-treesitter.configs").setup {
       toggle_query_editor = 'o',
       toggle_hl_groups = 'i',
       toggle_injected_languages = 't',
-
       -- This shows stuff like literal strings, commas, etc.
       toggle_anonymous_nodes = 'a',
       toggle_language_display = 'I',
@@ -45,5 +37,63 @@ require("nvim-treesitter.configs").setup {
       goto_node = '<cr>',
       show_help = '?',
     },
-  }
+  },
+  textobjects = {
+    select = {
+      enable = true,
+      -- Automatically jump forward to textobj, similar to targets.vim
+      lookahead = true,
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+        -- Or you can define your own textobjects like this
+        ["iF"] = {
+          python = "(function_definition) @function",
+          cpp = "(function_definition) @function",
+          c = "(function_definition) @function",
+          java = "(method_declaration) @function",
+        },
+      },
+    },
+    swap = {
+      enable = true,
+      swap_next = {
+        ["<leader>e"] = "@parameter.inner",
+      },
+      swap_previous = {
+        ["<leader>E"] = "@parameter.inner",
+      },
+    },
+    move = {
+      enable = true,
+      set_jumps = false, -- whether to set jumps in the jumplist
+      goto_next_start = {
+        ["]]"] = "@function.outer",
+        ["]m"] = "@class.outer",
+      },
+      goto_previous_start = {
+        ["[["] = "@function.outer",
+        ["[m"] = "@class.outer",
+      },
+      goto_next_end = {
+        ["]["] = "@function.outer",
+        ["]M"] = "@class.outer",
+      },
+      goto_previous_end = {
+        ["[]"] = "@function.outer",
+        ["[M"] = "@class.outer",
+      },
+    },
+    lsp_interop = {
+      enable = true,
+      border = 'double',
+      peek_definition_code = {
+        ["df"] = "@function.outer",
+        ["dF"] = "@class.outer",
+      },
+    }
+  },
 }

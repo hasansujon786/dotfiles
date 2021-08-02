@@ -1,5 +1,6 @@
-
-require('neoscroll').setup()
+require('neoscroll').setup({
+  hide_cursor = false,
+})
 local map = {}
 
 map['<C-u>'] = { 'scroll', { '-vim.wo.scroll', 'true', '80' } }

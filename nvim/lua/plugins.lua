@@ -78,7 +78,6 @@ return require('packer').startup({
         require('config.gitsigns')
       end
     })
-   -- sdfsdf sdf sdf
     -- use({'ruifm/gitlinker.nvim'})
     -- ues({'tanvirtin/vgit.nvim'})
 
@@ -93,6 +92,7 @@ return require('packer').startup({
     use({ 'nvim-treesitter/nvim-treesitter', config = function() require('config.treesitter') end })
     use({ 'nvim-treesitter/playground', opt = true, cmd = {'TSPlaygroundToggle','TSHighlightCapturesUnderCursor'} })
     use({ 'JoosepAlviste/nvim-ts-context-commentstring', opt = true, event = 'BufRead'  })
+    use({ 'nvim-treesitter/nvim-treesitter-textobjects' })
 
     use({ 'gu-fan/colorv.vim', opt = true, cmd = 'ColorV' })
     use({ 'mattn/emmet-vim', opt = true, event = 'BufRead' })
