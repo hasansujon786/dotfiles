@@ -54,7 +54,7 @@ command! TimerStop
   \| call tt#clear_task()
   \| call tt#clear_timer()
 
-command! TimerShow lua require('notifier').open({vim.fn['hasan#tt#msg']()}, {title = 'TaskTime'})
+command! TimerShow lua require('notifier').notify({vim.fn['hasan#tt#msg']()}, {title = 'TaskTime'})
 
 command! TimerToggle
       \ call tt#toggle_timer()

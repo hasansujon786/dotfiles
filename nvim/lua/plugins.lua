@@ -23,7 +23,12 @@ return require('packer').startup({
     --> Productiviry -------------------------------
     use({ 'vimwiki/vimwiki', opt = true, cmd = {'VimwikiIndex','VimwikiTabIndex','VimwikiUISelect'} })
     use({ 'kristijanhusak/orgmode.nvim', opt = true, event = 'BufRead', config = function() require('config.orgmode') end })
-    use({ 'mkropat/vim-tt', opt = true, event = 'VimEnter', config = function () vim.g.tt_loaded = 1 end })
+    use({ 'mkropat/vim-tt', opt = true, event = 'CursorHold',
+      config = function ()
+        vim.g.tt_loaded = 1
+        vim.cmd 'source ~/dotfiles/nvim/autoload/hasan/tt.vim'
+      end
+    })
 
     --> Navigation ---------------------------------
     use({ 'ThePrimeagen/harpoon', opt = true, event = 'VimEnter' })
