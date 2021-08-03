@@ -1,10 +1,10 @@
 local nvim_lsp = require('lspconfig')
-local lsp_config = {}
+local lsp = {}
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  lsp_config.common_on_attach(client, bufnr)
+lsp.on_attach = function(client, bufnr)
+  lsp.common_on_attach(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -44,9 +44,9 @@ end
 -- map buffer local keybindings when the language server attaches
 -- local servers = { "pyright", "rust_analyzer", "tsserver" }
 local servers = { "tsserver" }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
+for _, lspName in ipairs(servers) do
+  nvim_lsp[lspName].setup {
+    on_attach = lsp.on_attach,
     flags = {
       debounce_text_changes = 150,
     }
@@ -117,18 +117,16 @@ local function documentHighlight(client, bufnr)
   end
 end
 
-function lsp_config.common_on_attach(client, bufnr)
+function lsp.common_on_attach(client, bufnr)
   documentHighlight(client, bufnr)
 end
 
-lsp_config.on_attach = on_attach
-
-function lsp_config.PeekDefinition()
-  if vim.tbl_contains(vim.api.nvim_list_wins(), lsp_config.floating_win) then
-    vim.api.nvim_set_current_win(lsp_config.floating_win)
+function lsp.PeekDefinition()
+  if vim.tbl_contains(vim.api.nvim_list_wins(), lsp.floating_win) then
+    vim.api.nvim_set_current_win(lsp.floating_win)
   else
     local params = vim.lsp.util.make_position_params()
-    return vim.lsp.buf_request(0, "textDocument/definition", params, lsp_config.preview_location_callback)
+    return vim.lsp.buf_request(0, "textDocument/definition", params, lsp.preview_location_callback)
   end
 end
 
@@ -239,4 +237,4 @@ autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
 autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100) ]]
 -- Java
 -- autocmd FileType java nnoremap ca <Cmd>lua require('jdtls').code_action()<CR>
-return lsp_config
+return lsp
