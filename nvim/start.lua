@@ -1,4 +1,5 @@
 
+require('state')
 require('global')
 require('options')
 require('plugins')

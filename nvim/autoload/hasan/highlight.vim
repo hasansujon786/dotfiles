@@ -1,5 +1,5 @@
-let g:bg_tranparent = v:false
 if exists('g:bg_tranparent') && g:bg_tranparent == v:true
+  " TODO: add better toggle system
   call nebulous#off()
 endif
 
