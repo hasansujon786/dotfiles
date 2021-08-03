@@ -66,7 +66,9 @@ maps.xnoremap('<A-j>', ':call hasan#utils#visual_move_down()<CR>')
 -- Exchange_operator.vim
 maps.nmap('gx', '<Plug>(exchange-operator)')
 maps.vmap('gx', '<Plug>(exchange-operator)')
-
+maps.nmap('gwl', '<Plug>(swap-parameter-next):call repeat#set("\\<Plug>(swap-parameter-next)")<CR>')
+maps.nmap('gwh', '<Plug>(swap-parameter-prev):call repeat#set("\\<Plug>(swap-parameter-prev)")<CR>')
+maps.nmap('<Plug>(fix-current-world)', '1z=:call repeat#set("\\<Plug>(fix-current-world)")<CR>')
 
 -- Navigation -----------------------------------
 -- jump in file

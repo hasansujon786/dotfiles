@@ -119,7 +119,7 @@ local leader = {
     M = 'Move/rename file',
 
     -- Word command
-    w = { '<Plug>FixCurrentWord',              'Fix current world' },
+    w = { '<Plug>(fix-current-world)',         'Fix current world' },
     ['.'] = 'Rename current word',
     -- F = { ':FilesCurDir<CR>',                    'Find file from here' },
     -- d = { ':FilesCurDir<CR>',                    'Find directory' },
