@@ -9,14 +9,14 @@ return require('packer').startup({
     use({ 'navarasu/onedark.nvim' })
     use({ 'glepnir/dashboard-nvim', config = function() require('config.dashboard') end })
     use({ 'kyazdani42/nvim-web-devicons' })
-    use({ 'Yggdroot/indentLine', opt = true, event = 'BufRead' })
     use({ 'hasansujon786/kissline.nvim' })
     use({ 'hasansujon786/notifier.nvim' })
     use({ 'hasansujon786/telescope-yanklist.nvim' })
     use({ 'folke/zen-mode.nvim', opt = true, cmd = 'ZenMode',
-      config = function()
-        require('config.zen')
-      end
+      config = function() require('config.zen') end
+    })
+    use({ 'Yggdroot/indentLine', opt = true, event = 'BufRead',
+      config = function() require('config.indentLine') end
     })
     -- use({ 'folke/tokyonight.nvim' })
 
@@ -54,7 +54,7 @@ return require('packer').startup({
     -- use 'tpope/vim-scriptease'
     use({ 'hasansujon786/vim-rel-jump', opt = true, event = 'BufRead' })
     use({ 'dhruvasagar/vim-open-url', opt = true, event = 'BufRead' })
-    use({ 'unblevable/quick-scope', opt = true, event = 'BufRead' })
+    use({ 'unblevable/quick-scope', opt = true, event = 'BufReadPost'})
     use({ 'tpope/vim-commentary', opt = true, event = 'BufRead' })
     use({ 'tpope/vim-surround', opt = true, event = 'BufRead' })
     use({ 'justinmk/vim-sneak', opt = true, event = 'BufRead' })

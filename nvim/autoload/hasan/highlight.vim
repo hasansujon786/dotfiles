@@ -49,6 +49,9 @@ function hasan#highlight#load_custom_highlight() abort
   hi LspReferenceText guibg=#3B4048 gui=NONE
   hi LspReferenceWrite guibg=#3B4048 gui=NONE
   hi LspReferenceRead guibg=#3B4048 gui=NONE
+
+  hi QuickScopePrimary   guifg=tomato gui=underline
+  hi QuickScopeSecondary guifg=#d78787 gui=underline
 endfunction
 
 " call hasan#highlight#load_custom_highlight()
