@@ -2,7 +2,7 @@ call hasan#formatoptions#setup()
 " Run js Code on node
 nnoremap <buffer><leader>bb :!node %<CR>
 " Save current file and Format
-nnoremap <buffer><F9> :Format<CR>:write<CR>
+nnoremap <buffer><F9> <cmd>lua vim.lsp.buf.formatting()<CR>
 
 nnoremap <buffer> <F4> :e %<.css<CR>
 """"""""""""""""""""""""""""""
