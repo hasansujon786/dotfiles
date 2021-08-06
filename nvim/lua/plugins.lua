@@ -6,7 +6,7 @@ return require('packer').startup({
   function(use)
     use({ 'wbthomason/packer.nvim' })
     --> Visual -------------------------------------
-    use({ 'navarasu/onedark.nvim' })
+    use({ 'navarasu/onedark.nvim', config = function() require('config.onedark') end })
     use({ 'glepnir/dashboard-nvim', config = function() require('config.dashboard') end })
     use({ 'kyazdani42/nvim-web-devicons' })
     use({ 'hasansujon786/kissline.nvim' })
