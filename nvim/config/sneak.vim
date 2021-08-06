@@ -13,8 +13,3 @@ nmap <expr> , sneak#is_sneaking() ? '<Plug>Sneak_,' : ','
 " Repeat the last Sneak
 nmap gs s<CR>
 nmap gS S<CR>
-
-" Change Sneak highlight
-hi Sneak      gui=bold guibg=#E06B74 guifg=#282C33
-hi SneakScope gui=bold guibg=#61AFEF
-autocmd ColorScheme * hi Sneak gui=bold guibg=#E06B74 guifg=#282C33 | hi SneakScope gui=bold guibg=#61AFEF

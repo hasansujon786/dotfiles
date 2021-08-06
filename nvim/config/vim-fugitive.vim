@@ -1,1 +1,0 @@
-nnoremap gH :Gbrowse<CR>

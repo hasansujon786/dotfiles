@@ -1,7 +1,6 @@
 source ~/dotfiles/nvim/config/onedark.vim
 source ~/dotfiles/nvim/config/telescope.vim
 source ~/dotfiles/nvim/config/sneak.vim
-source ~/dotfiles/nvim/config/vim-fugitive.vim
 source ~/dotfiles/nvim/config/vim-floaterm.vim
 source ~/dotfiles/nvim/config/vim-visual-multi.vim
 source ~/dotfiles/nvim/config/hlnext.vim
