@@ -148,6 +148,8 @@ cmd('set listchars+=precedes:«,extends:»')
 cmd('set listchars+=precedes:,extends:')
 cmd('set listchars+=tab:→\\ ,nbsp:␣,trail:•')     -- show hidden characters
 cmd('set whichwrap+=<,>,[,],h,l')                 -- Allow left/right & h/l key to move to the previous/next line
+opt.foldtext='hasan#utils#foldtext()'
+opt.foldlevel=99
 -- Scroll aside
 opt.sidescroll=1
 opt.scrolloff=1                                   -- Set 1 lines to the cursor - when moving vertically using j/k

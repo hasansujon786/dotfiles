@@ -1,4 +1,5 @@
 local utils = require('hasan.utils')
+local treesitter_foldtext_filetypes = 'javascript,typescript,typescript.tsx,typescriptreact,json,lua,vue'
 
 local autocmds = {
   vimrcEx = {
@@ -28,6 +29,13 @@ local autocmds = {
     {'BufLeave *.vim  normal! mV'},
     {'BufLeave *.css  normal! mC'},
     {'BufLeave *.txt  normal! mK'},
+  },
+  Fold ={
+    {'FileType vim setlocal foldlevel=0'},
+    {'FileType vim,css,scss,json setlocal foldmethod=marker'},
+    {'FileType css,scss,json setlocal foldmarker={,}'},
+    {'FileType', treesitter_foldtext_filetypes, 'setl foldmethod=expr'},
+    {'FileType', treesitter_foldtext_filetypes, 'call timer_start(10, function("hasan#utils#treesitter_fold"))'}
   }
   -- {"BufEnter term://* setlocal nonumber norelativenumber"};
 }
