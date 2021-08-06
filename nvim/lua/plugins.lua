@@ -47,7 +47,10 @@ return require('packer').startup({
     use({ 'nvim-lua/popup.nvim' })
     use({ 'nvim-lua/plenary.nvim' })
     use({ 'tpope/vim-eunuch', opt = true, cmd = {'Delete','Move','Rename','Mkdir','Chmod'} })
-    use({ 'voldikss/vim-floaterm', opt = true, cmd = {'FloatermNew','FloatermToggle'} })
+    use({ 'voldikss/vim-floaterm', opt = true,
+      cmd = {'FloatermNew','FloatermToggle'},
+      config = function() require('config.floaterm') end
+    })
     use({ 'mg979/vim-visual-multi', opt = true, event = 'BufRead' })
     use({ 'michaeljsmith/vim-indent-object', opt = true, event = 'BufRead' })
     use({ 'tweekmonster/startuptime.vim', opt = true, cmd = 'StartupTime' })

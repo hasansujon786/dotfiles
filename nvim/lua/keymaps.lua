@@ -213,3 +213,14 @@ maps.nnoremap('<leader>fM', ':Move <C-R>=expand("%")<CR>', {silent = false})
 maps.nnoremap('<leader>fR', ':Rename <C-R>=expand("%:t")<CR>', {silent = false})
 -- packer commands
 maps.nnoremap('<leader>vpc', ':PackerCompile<CR>', {silent = false})
+
+-- Floaterm
+vim.g.floaterm_keymap_new    = '<C-\\>c'
+vim.g.floaterm_keymap_prev   = '<C-\\>p'
+vim.g.floaterm_keymap_next   = '<C-\\>n'
+vim.g.floaterm_keymap_kill   = '<C-\\>x'
+vim.g.floaterm_keymap_toggle = '<A-CR>'
+maps.nnoremap('<A-CR>', ':FloatermToggle<CR>')
+maps.nnoremap(']t', ':FloatermToggle<CR><C-\\><C-n>')
+maps.nnoremap('[t', ':FloatermToggle<CR><C-\\><C-n>')
+
