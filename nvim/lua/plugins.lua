@@ -41,7 +41,7 @@ return require('packer').startup({
     use({ 'lambdalisue/fern-renderer-nerdfont.vim' })
     use({ 'hasansujon786/glyph-palette.vim' })
     use({ 'lambdalisue/nerdfont.vim' })
-    use({ 'lambdalisue/fern.vim' })
+    use({ 'lambdalisue/fern.vim', config = function() require('config.fern') end })
 
     --> Utils --------------------------------------
     use({ 'nvim-lua/popup.nvim' })
@@ -104,6 +104,7 @@ return require('packer').startup({
     })
 
     use({ 'neovim/nvim-lspconfig',
+      opt = true, event = 'CursorHold',
       disable = vim.g.disable_lsp,
       config = function()
         require('lsp')

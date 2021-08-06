@@ -144,8 +144,8 @@ local leader = {
     q = { ':QfixToggle<CR>',                                    'Quickfix' },
     -- y = { ':CocList --normal yank<CR>',                         'Yank list' },
     y = { ':lua require("yanklist").yanklist()<CR>',            'Yank list' },
-    p = { '<Plug>(my-fern-t&r)<Plug>(fern-action-zoom:reset)',  'Toggle prject tree' },
-    P = { '<Plug>(my-fern-cdir)<Plug>(fern-action-zoom:reset)', 'Toggle prject tree' },
+    p = { '<Plug>(my-fern-toggle-reveal)<Plug>(fern-action-zoom:reset)',  'Toggle prject tree' },
+    P = { '<Plug>(my-fern-cur-dir)<Plug>(fern-action-zoom:reset)', 'Toggle prject tree' },
   },
 
   p = {

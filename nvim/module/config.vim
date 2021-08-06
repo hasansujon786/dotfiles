@@ -1,6 +1,5 @@
 source ~/dotfiles/nvim/config/onedark.vim
 source ~/dotfiles/nvim/config/telescope.vim
-source ~/dotfiles/nvim/config/fern.vim
 source ~/dotfiles/nvim/config/sneak.vim
 source ~/dotfiles/nvim/config/vim-fugitive.vim
 source ~/dotfiles/nvim/config/vim-floaterm.vim
@@ -11,6 +10,7 @@ source ~/dotfiles/nvim/config/tabline.vim
 source ~/dotfiles/nvim/config/emmet.vim
 source ~/dotfiles/nvim/config/colorv.vim
 
+" source ~/dotfiles/nvim/config/fern.vim
 " source ~/dotfiles/nvim/config/quick-scope.vim
 " source ~/dotfiles/nvim/config/vim-vue-plugin.vim
 " source ~/dotfiles/nvim/config/indentLine.vim
