@@ -4,9 +4,9 @@
 " nmap <silent> <BS> :call HLNextOff() <BAR> :nohlsearch<CR>
 
 " " If already loaded, we're done...
-" if exists("loaded_HLNext")
-"     finish
-" endif
+if exists("loaded_HLNext")
+    finish
+endif
 let g:loaded_HLNext = 1
 
 " Preserve external compatibility options, then enable full vim compatibility...
