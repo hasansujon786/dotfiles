@@ -264,7 +264,7 @@ local leader = {
 
   ['.'] = { '<cmd>Telescope commands<CR>',                'Commands panel' },
   [';'] = { '<cmd>Telescope command_history<CR>',         'Search recent cmd' },
-  ['<space>'] = { '<cmd>ProjectFiles<cr>',                'Find File' },
+  ['<space>'] = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find File' },
   ['<tab>'] = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', 'Open Harpoon' },
 
   h = { '<C-w>h',                                         'which_key_ignore' },

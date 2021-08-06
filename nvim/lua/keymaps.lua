@@ -228,4 +228,6 @@ vim.g.floaterm_keymap_toggle = '<A-CR>'
 maps.nnoremap('<A-CR>', ':FloatermToggle<CR>')
 maps.nnoremap(']t', ':FloatermToggle<CR><C-\\><C-n>')
 maps.nnoremap('[t', ':FloatermToggle<CR><C-\\><C-n>')
-
+-- Telescope
+maps.nnoremap('<C-p>', ':lua require("telescope.builtin").oldfiles()<CR>')
+maps.nnoremap('//', ':lua require("hasan.telescope.custom").curbuf()<CR>')
