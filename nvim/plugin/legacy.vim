@@ -1,4 +1,10 @@
-source ~/dotfiles/nvim/module/config.vim
-" source ~/dotfiles/nvim/module/fold.vim
-source ~/dotfiles/nvim/module/command.vim
 source ~/dotfiles/nvim/module/abbreviation.vim
+" configs
+source ~/dotfiles/nvim/config/telescope.vim
+source ~/dotfiles/nvim/config/sneak.vim
+source ~/dotfiles/nvim/config/vim-floaterm.vim
+source ~/dotfiles/nvim/config/vim-visual-multi.vim
+source ~/dotfiles/nvim/config/hlnext.vim
+source ~/dotfiles/nvim/config/vim-wiki.vim
+source ~/dotfiles/nvim/config/emmet.vim
+source ~/dotfiles/nvim/config/colorv.vim

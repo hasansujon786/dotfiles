@@ -239,7 +239,7 @@ function! hasan#utils#CopyFileNameToClipBoard(bang) abort
     return
   endif
 
-  if a:bang ==# '!'
+  if a:bang ==# 0
     let @+ = expand('%:t')
   else
     let @+ = expand('%:~')
@@ -323,6 +323,7 @@ endfunction
 " }}}
 
 " RefactorWordInProject {{{
+" command! -nargs=+ RefactorWordInProject call hasan#utils#refactorWordInProject(<f-args>)
 function! hasan#utils#refactorWordInProject(...)
   let args = join(a:000, '\ ')
   let @/ = args
@@ -331,6 +332,7 @@ endfunction
 " }}}
 
 " tastwiki_edit {{{
+" command! -nargs=1 TaskWikiAdvancedEdit call hasan#utils#tastwiki_edit(<f-args>)
 function! hasan#utils#tastwiki_edit(uuid) abort
   if !exists('$TMUX')
     execute('FloatermNew --name=task task edit '.a:uuid)
