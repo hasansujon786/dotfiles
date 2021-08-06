@@ -54,6 +54,7 @@ function hasan#highlight#load_custom_highlight() abort
   hi QuickScopePrimary   guifg=tomato gui=underline
   hi QuickScopeSecondary guifg=#d78787 gui=underline
   hi Sneak      gui=bold guibg=#E06B74 guifg=#282C33
+  hi! link HLNext IncSearch
 endfunction
 
 " call hasan#highlight#load_custom_highlight()

@@ -4,8 +4,13 @@ local maps = require('hasan.utils.maps')
 maps.inoremap('jk', '<ESC>')
 maps.cnoremap('jk', '<ESC>')
 -- Hide search highlighting
-maps.nnoremap('q', '<ESC>:nohlsearch<BAR>echo ""<CR>')
-maps.vnoremap('q', '<ESC>:nohlsearch<CR>')
+if vim.fn.exists('g:loaded_HLNext') then
+  maps.nnoremap('q', '<ESC>:call HLNextOff()<BAR>:nohlsearch<BAR>echo ""<CR>')
+  maps.vnoremap('q', '<ESC>:call HLNextOff()<BAR>:nohlsearch<CR>')
+else
+  maps.nnoremap('q', '<ESC>:nohlsearch<BAR>echo ""<CR>')
+  maps.vnoremap('q', '<ESC>:nohlsearch<CR>')
+end
 -- run last : command easily
 maps.nnoremap('<CR>', ':<up>', {silent = false})
 vim.cmd[[autocmd CmdwinEnter * nnoremap <buffer><CR> <CR>]]
