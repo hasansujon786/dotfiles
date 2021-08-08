@@ -66,7 +66,7 @@ return require('packer').startup({
     use({ 'tpope/vim-repeat', opt = true, event = 'BufRead' })
     use({ 'folke/which-key.nvim', config = function() require('config.whichkey') end })
     use({ 'karb94/neoscroll.nvim', opt = true, event = 'BufRead',
-      disable=true,
+      disable = true,
       config = function()
         require('config.neoscroll')
       end
