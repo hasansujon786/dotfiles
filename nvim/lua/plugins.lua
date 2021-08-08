@@ -19,6 +19,7 @@ return require('packer').startup({
       config = function() require('config.indentLine') end
     })
     -- use({ 'folke/tokyonight.nvim' })
+    -- use({'projekt0n/github-nvim-theme'})
 
     --> Productiviry -------------------------------
     use({ 'vimwiki/vimwiki', opt = true, cmd = {'VimwikiIndex','VimwikiTabIndex','VimwikiUISelect'} })
@@ -65,6 +66,7 @@ return require('packer').startup({
     use({ 'tpope/vim-repeat', opt = true, event = 'BufRead' })
     use({ 'folke/which-key.nvim', config = function() require('config.whichkey') end })
     use({ 'karb94/neoscroll.nvim', opt = true, event = 'BufRead',
+      disable=true,
       config = function()
         require('config.neoscroll')
       end
