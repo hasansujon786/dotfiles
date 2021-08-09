@@ -30,3 +30,9 @@ vim.g.VM_leader = '<leader>vv'
 vim.g.VM_theme_set_by_colorscheme = 0
 -- emmet
 vim.g.user_emmet_leader_key = '<C-c>'
+-- vim-wiki
+vim.g.vimwiki_list = {{path='~/vimwiki/', syntax='markdown', ext='.md', auto_toc=1}}
+vim.g.vimwiki_folding = 'expr'
+vim.g.vimwiki_markdown_link_ext = 1
+vim.g.taskwiki_markup_syntax = 'markdown'
+vim.g.vimwiki_key_mappings = {global = 0}
