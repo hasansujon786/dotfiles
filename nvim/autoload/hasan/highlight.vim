@@ -50,11 +50,15 @@ function hasan#highlight#load_custom_highlight() abort
   hi LspReferenceWrite guibg=#3B4048 gui=NONE
   hi LspReferenceRead guibg=#3B4048 gui=NONE
 
-  " plugins
+  " Plugins
+  hi! link HLNext IncSearch
   hi QuickScopePrimary   guifg=tomato gui=underline
   hi QuickScopeSecondary guifg=#d78787 gui=underline
   hi Sneak      gui=bold guibg=#E06B74 guifg=#282C33
-  hi! link HLNext IncSearch
+  hi VM_Extend guibg=#3E4452
+  hi VM_Cursor guibg=#00af87    guifg=#ffffff
+  hi VM_Insert guibg=#3E4452
+  hi VM_Mono   guibg=#E06C75    guifg=#ffffff
 endfunction
 
 " call hasan#highlight#load_custom_highlight()
