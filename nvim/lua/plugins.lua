@@ -60,8 +60,13 @@ return require('packer').startup({
     use({ 'dhruvasagar/vim-open-url', opt = true, event = 'BufRead' })
     use({ 'unblevable/quick-scope', opt = true, event = 'BufReadPost'})
     use({ 'tpope/vim-commentary', opt = true, event = 'BufRead' })
-    use({ 'tpope/vim-surround', opt = true, event = 'BufRead' })
-    use({ 'justinmk/vim-sneak', opt = true, event = 'BufRead' })
+    use({ 'tpope/vim-surround', opt = true, event = 'BufRead',  })
+    use({ 'justinmk/vim-sneak', opt = true, event = 'BufRead',
+      after = 'vim-surround',
+      config = function()
+        require('config.sneak')
+      end
+    })
     use({ 'Konfekt/vim-CtrlXA', opt = true, event = 'BufRead' })
     use({ 'tpope/vim-repeat', opt = true, event = 'BufRead' })
     use({ 'folke/which-key.nvim', config = function() require('config.whichkey') end })

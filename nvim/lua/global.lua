@@ -19,3 +19,9 @@ if pcall(require, 'plenary') then
   end
 end
 
+
+-- Sneak
+vim.g['sneak#target_labels'] = ";wertyuopzbnmfLGKHWERTYUIQOPZBNMFJ0123456789"
+vim.g['sneak#label'] = 1 -- use <tab> to jump through lebles
+vim.g['sneak#use_ic_scs'] = 1 -- case insensitive sneak
+vim.g['sneak#prompt'] = '  '
