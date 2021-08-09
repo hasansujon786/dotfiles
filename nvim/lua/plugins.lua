@@ -105,7 +105,11 @@ return require('packer').startup({
     use({ 'nvim-treesitter/nvim-treesitter-textobjects' })
 
     use({ 'gu-fan/colorv.vim', opt = true, cmd = 'ColorV' })
-    use({ 'mattn/emmet-vim', opt = true, event = 'BufRead' })
+    use({ 'mattn/emmet-vim', opt = true, event = 'BufRead',
+      config = function()
+        require('config.emmet')
+      end
+    })
     use({ 'norcalli/nvim-colorizer.lua',
       opt = true, event = 'BufRead',
       config = function()
