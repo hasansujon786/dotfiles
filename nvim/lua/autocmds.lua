@@ -17,6 +17,7 @@ local autocmds = {
     {'WinEnter,BufWinEnter,FocusGained * setlocal cursorline'},
     {'WinLeave,FocusLost * setlocal nocursorline'},
     {'WinEnter,BufWinEnter * call hasan#boot#auto_set_cursor_color()'},
+    {'CursorHold * ++once lua require("nebulous").active()'},
     -- {'WinEnter,BufWinEnter *.vim,*.js,*.lua call hasan#boot#highligt_ruler(1)'},
   },
   FernEvents = {

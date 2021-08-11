@@ -94,7 +94,7 @@ M.disable = function ()
   nb_is_disabled = true
 end
 
-M.toggle = function (state)
+M.toggle = function ()
   if nb_is_disabled then
     M.active()
   else
