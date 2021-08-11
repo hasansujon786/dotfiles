@@ -1,6 +1,5 @@
 local M = {}
 local nb_is_disabled = false
-local nb_is_pause = false
 local nb_blur_hls = {
   'CursorLineNr:NebulousCursorLineNr',
   'Normal:Nebulous',
@@ -42,7 +41,7 @@ local utils = {
 }
 
 local focusWindow = function (winid)
-  if utils.win_has_blacklist_filetype() or utils.is_floting_window(winid)then
+  if utils.win_has_blacklist_filetype(winid) or utils.is_floting_window(winid)then
     return
   end
 
@@ -50,7 +49,7 @@ local focusWindow = function (winid)
 end
 
 local blurWindow = function(winid)
-  if utils.win_has_blacklist_filetype() or utils.is_floting_window(winid) then
+  if utils.win_has_blacklist_filetype(winid) or utils.is_floting_window(winid) then
     return
   end
 
@@ -58,7 +57,7 @@ local blurWindow = function(winid)
 end
 
 M.updateAllWindows = function()
-  if nb_is_disabled or nb_is_pause then
+  if nb_is_disabled then
     return
   end
 
@@ -70,7 +69,7 @@ M.updateAllWindows = function()
     end
   end
 
-  if utils.is_floting_window() then
+  if utils.is_floting_window(0) then
     vim.defer_fn(function ()
       M.updateAllWindows()
     end, 10)
