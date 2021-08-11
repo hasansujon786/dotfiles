@@ -1,5 +1,5 @@
 local M = {}
-local nb_is_disabled = false
+local nb_is_disabled = true
 local nb_blur_hls = {
   'CursorLineNr:NebulousCursorLineNr',
   'Normal:Nebulous',
@@ -13,19 +13,6 @@ local nb_blacklist_filetypes = {
 -- local nb_pre_exist_hls = {
 --   floaterm = {'Normal:Floaterm', 'NormalNC:FloatermNC' }
 -- }
-
-local function init()
-  vim.cmd[[
-    hi Nebulous guibg=#363d49
-    hi NebulousCursorLineNr guifg=#4B5263
-  ]]
-
-  -- resets
-  vim.cmd[[
-    hi EndOfBuffer guibg=NONE
-    call nebulous#autocmds()
-  ]]
-end
 
 local utils = {
   win_has_blacklist_filetype = function(winid)
@@ -56,7 +43,15 @@ local blurWindow = function(winid)
   vim.fn.setwinvar(winid, '&winhighlight', table.concat(nb_blur_hls, ','))
 end
 
-M.updateAllWindows = function()
+M.setup_colors = function()
+  vim.cmd[[
+    hi Nebulous guibg=#363d49
+    hi NebulousCursorLineNr guifg=#4B5263
+    hi EndOfBuffer guibg=NONE
+  ]]
+end
+
+M.update_all_windows = function()
   if nb_is_disabled then
     return
   end
@@ -71,7 +66,7 @@ M.updateAllWindows = function()
 
   if utils.is_floting_window(0) then
     vim.defer_fn(function ()
-      M.updateAllWindows()
+      M.update_all_windows()
     end, 10)
   end
 end
@@ -83,9 +78,28 @@ end
 M.on_focus_gained = function ()
   focusWindow(0)
 end
-M.setup = function ()
-  init()
-  M.updateAllWindows()
+
+M.active = function ()
+  nb_is_disabled = false
+  M.setup_colors()
+  vim.fn['nebulous#autocmds']()
+  M.update_all_windows()
+end
+
+M.disable = function ()
+  vim.fn['nebulous#autocmds_remove']()
+  for _,  curid in ipairs(vim.api.nvim_list_wins()) do
+    focusWindow(curid)
+  end
+  nb_is_disabled = true
+end
+
+M.toggle = function (state)
+  if nb_is_disabled then
+    M.active()
+  else
+    M.disable()
+  end
 end
 
 return M
