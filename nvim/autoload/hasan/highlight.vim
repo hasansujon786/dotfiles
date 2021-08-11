@@ -1,8 +1,3 @@
-if exists('g:bg_tranparent') && g:bg_tranparent == v:true
-  " TODO: add better toggle system
-  call nebulous#off()
-endif
-
 function hasan#highlight#load_custom_highlight() abort
   if exists('g:bg_tranparent') && g:bg_tranparent == v:true
     hi Normal guibg=NONE guifg=#ABB2BF
@@ -21,10 +16,8 @@ function hasan#highlight#load_custom_highlight() abort
   hi! link Fedit Normal
   hi! link TelescopeBorder FeditBorder
   " hi link NormalFloat Fedit
-  " hi link FloatBorder FeditBorder
-
-  " gitgutter & signnify
-  hi SignColumn         guibg=NONE
+  hi FloatBorder guibg=#31353f guifg=#5c6370
+  hi SignColumn  guibg=NONE
 
   " hi DashboardHeader ctermfg=114 guifg=#61AFEF
   hi DashboardHeader   ctermfg=59  guifg=#5c6370
