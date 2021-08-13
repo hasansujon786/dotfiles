@@ -99,34 +99,34 @@ setup_git_defaults() {
 }
 
 setup_bash() {
-  bashPath=(~/.bashrc ~/.bashrc ~/.bashrc)
+  bashPath=($HOME/.bashrc $HOME/.bashrc $HOME/.bashrc)
   util_print bash
 
   util_backUpConfig ${bashPath[$machineCode]}
-  util_makeSymlinkPath ~/dotfiles/bash/.bashrc ${bashPath[$machineCode]}
+  util_makeSymlinkPath $HOME/dotfiles/bash/.bashrc ${bashPath[$machineCode]}
 }
 
 setup_nvim() {
-  nvimPath=(~/AppData/Local/nvim ~/.config/nvim ~/.config/nvim)
+  nvimPath=($HOME/AppData/Local/nvim $HOME/.config/nvim $HOME/.config/nvim)
   util_print nvim
 
   util_backUpConfig ${nvimPath[$machineCode]}
-  util_makeSymlinkPath ~/dotfiles/nvim ${nvimPath[$machineCode]}
+  util_makeSymlinkPath $HOME/dotfiles/nvim ${nvimPath[$machineCode]}
 
   $getter install -y neovim
 
-  packerPath=(~/AppData/Local/nvim-data/site/pack/packer/start/packer.nvim, ~/.local/share/nvim/site/pack/packer/start/packer.nvim)
+  packerPath=($HOME/AppData/Local/nvim-data/site/pack/packer/start/packer.nvim, $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim)
   git clone https://github.com/wbthomason/packer.nvim ${packerPath[$machineCode]}
   # echo "Installing vim plugins..."
   # nvim +PlugInstall +qall
 }
 
 setup_lazygit () {
-  lazygitPath=(~/AppData/Roaming/lazygit ~/.config/lazygit ~/.config/lazygit)
+  lazygitPath=($HOME/AppData/Roaming/lazygit $HOME/.config/lazygit $HOME/.config/lazygit)
   util_print lazygit
 
   util_backUpConfig ${lazygitPath[$machineCode]}
-  util_makeSymlinkPath ~/dotfiles/tui/lazygit ${lazygitPath[$machineCode]}
+  util_makeSymlinkPath $HOME/dotfiles/tui/lazygit ${lazygitPath[$machineCode]}
 
   # $getter install -y lazygit
 
@@ -143,11 +143,11 @@ setup_lazygit () {
 }
 
 setup_lf() {
-  lfPath=(~/AppData/Local/lf ~/.config/lf ~/.config/lf)
+  lfPath=($HOME/AppData/Local/lf $HOME/.config/lf $HOME/.config/lf)
   util_print lf
 
   util_backUpConfig ${lfPath[$machineCode]}
-  util_makeSymlinkPath ~/dotfiles/tui/lf ${lfPath[$machineCode]}
+  util_makeSymlinkPath $HOME/dotfiles/tui/lf ${lfPath[$machineCode]}
   $getter install -y lf
 
   # TODO: add vimb support to lf
@@ -156,11 +156,11 @@ setup_lf() {
 }
 
 setup_alacritty() {
-  alacrittyPath=(~/AppData/Roaming/alacritty ~/.config/alacritty ~/.config/alacritty)
+  alacrittyPath=($HOME/AppData/Roaming/alacritty $HOME/.config/alacritty $HOME/.config/alacritty)
   util_print alacritty
 
   util_backUpConfig ${alacrittyPath[$machineCode]}
-  util_makeSymlinkPath ~/dotfiles/alacritty ${alacrittyPath[$machineCode]}
+  util_makeSymlinkPath $HOME/dotfiles/alacritty ${alacrittyPath[$machineCode]}
   $getter install -y alacritty
 }
 
@@ -202,11 +202,11 @@ install_various_apps() {
 
 setup_keypirinha() {
   # install path C:\ProgramData\chocolatey\lib\keypirinha\tools\Keypirinha
-  keypirinhaPath=(~/AppData/Roaming/Keypirinha)
+  keypirinhaPath=($HOME/AppData/Roaming/Keypirinha)
   util_print keypirinha
 
   util_backUpConfig ${keypirinhaPath[$machineCode]}
-  util_makeSymlinkPath ~/dotfiles/gui/Keypirinha ${keypirinhaPath[$machineCode]}
+  util_makeSymlinkPath $HOME/dotfiles/gui/Keypirinha ${keypirinhaPath[$machineCode]}
   $getter install -y keypirinha
 }
 
@@ -251,8 +251,17 @@ prompt_and_get_answers() {
   util_print done.
 }
 
-# prompt_and_get_answers
+prompt_and_get_answers
 
-# util_makeSymlinkPath D:\\repoes\\plugins\\kissline.nvim  C:\\Users\\hasan\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\kissline.nvim
-# util_makeSymlinkPath D:\\repoes\\plugins\\notifier.nvim  C:\\Users\\hasan\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\notifier.nvim
-# util_makeSymlinkPath D:\\repoes\\plugins\\telescope-yanklist.nvim  C:\\Users\\hasan\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\telescope-yanklist.nvim
+# sudo apt-get install gcc g++ make
+# sudo apt-get install curl
+# curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+# sudo apt-get install nodejs
+# # Check node version
+# node -v 
+# # v13.9.0
+# # Also, check the npm version
+# npm -v 
+# # 6.13.7
+# sudo apt-get update && sudo apt-get install yarn
+
