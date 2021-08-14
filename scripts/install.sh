@@ -143,16 +143,24 @@ setup_lazygit () {
 }
 
 setup_lf() {
+  # https://linoxide.com/lf-terminal-manager-linux/
   lfPath=($HOME/AppData/Local/lf $HOME/.config/lf $HOME/.config/lf)
   util_print lf
 
   util_backUpConfig ${lfPath[$machineCode]}
   util_makeSymlinkPath $HOME/dotfiles/tui/lf ${lfPath[$machineCode]}
-  $getter install -y lf
-
-  # TODO: add vimb support to lf
-  # curl https://raw.githubusercontent.com/thameera/vimv/master/vimv > /data/data/com.termux/files/usr/bin/vimv && chmod +755 /data/data/com.termux/files/usr/bin/vimv
-  # curl https://raw.githubusercontent.com/thameera/vimv/master/vimv > ~/bin/vimv && chmod +755 ~/bin/vimv
+  if [[ "$machine" == "windows" ]]; then
+    $getter install -y lf
+  else
+    wget https://github.com/gokcehan/lf/releases/download/r24/lf-linux-amd64.tar.gz -O lf-linux-amd64.tar.gz
+    tar xvf lf-linux-amd64.tar.gz
+    chmod +x lf
+    sudo mv lf /usr/local/bin
+    rm -rf lf-linux-amd64.tar.gz
+    curl https://raw.githubusercontent.com/thameera/vimv/master/vimv > ~/usr/local/bin/vimv && chmod +755 ~/usr/local/bin/vimv
+    # install vimv
+    sudo cp ~/dotfiles/tui/lf/vimv /usr/local/bin/
+  fi
 }
 
 setup_alacritty() {
@@ -242,7 +250,7 @@ auto_install_everything() {
   setup_alacritty
   setup_nvim
   # setup_lazygit
-  # setup_lf
+  setup_lf
   install_various_apps
   setup_node
 
