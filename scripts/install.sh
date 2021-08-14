@@ -113,10 +113,22 @@ setup_nvim() {
   util_backUpConfig ${nvimPath[$machineCode]}
   util_makeSymlinkPath $HOME/dotfiles/nvim ${nvimPath[$machineCode]}
 
-  $getter install -y neovim
+  if [[ "$machine" == "windows" ]]; then
+    $getter install -y neovim
+  else
+    wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
+    chmod u+x nvim.appimage
+    sudo mv nvim.appimage /usr/local/bin/nvim
+  fi
 
   packerPath=($HOME/AppData/Local/nvim-data/site/pack/packer/start/packer.nvim, $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim)
-  git clone https://github.com/wbthomason/packer.nvim ${packerPath[$machineCode]}
+  if [ -d ${packerPath[$machineCode]} ]; then
+    echo 'packer.nvim already exists'
+  else
+    echo 'cloning packer.nvim'
+    mkdir -p ${packerPath[$machineCode]}
+    git clone https://github.com/wbthomason/packer.nvim ${packerPath[$machineCode]}
+  fi
   # echo "Installing vim plugins..."
   # nvim +PlugInstall +qall
 }

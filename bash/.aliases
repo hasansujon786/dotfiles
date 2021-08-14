@@ -6,7 +6,6 @@ alias ns='npm start'
 alias nd='npm run dev'
 
 # Vim
-alias nvim=~/.local/share/nvim/nvim
 alias v.='nvim .'
 alias vim=nvim
 alias v=nvim
