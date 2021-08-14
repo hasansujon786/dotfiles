@@ -164,11 +164,17 @@ setup_alacritty() {
   $getter install -y alacritty
 }
 
-install_various_apps() {
+setup_node () {
   util_print nodejs
-  $getter install -y nodejs
-  # https://www.codegrepper.com/code-examples/shell/install+nodejs+in+elementary+os
+  curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+  sudo $getter install nodejs
 
+  util_print npm-essentials
+  sudo npm install -g yarn
+  sudo npm install -g expo-cli
+}
+
+install_various_apps() {
   util_print ripgrep
   $getter install -y ripgrep
 
@@ -182,7 +188,7 @@ install_various_apps() {
 
   util_print python
   $getter install -y python
-# c:\python39\python.exe -m pip install --upgrade pip
+  # c:\python39\python.exe -m pip install --upgrade pip
   # pip install --user --upgrade pynvim
   # @todo:
   # npm install --global live-server
@@ -238,6 +244,7 @@ auto_install_everything() {
   # setup_lazygit
   # setup_lf
   install_various_apps
+  setup_node
 
   if [ $machineCode -eq 0 ]; then
     setup_keypirinha
@@ -252,16 +259,4 @@ prompt_and_get_answers() {
 }
 
 prompt_and_get_answers
-
-# sudo apt-get install gcc g++ make
-# sudo apt-get install curl
-# curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
-# sudo apt-get install nodejs
-# # Check node version
-# node -v 
-# # v13.9.0
-# # Also, check the npm version
-# npm -v 
-# # 6.13.7
-# sudo apt-get update && sudo apt-get install yarn
 

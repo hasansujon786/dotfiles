@@ -103,6 +103,9 @@ setup_sumneko_lua() {
   ./3rd/luamake/luamake rebuild
 }
 
+$getter install build-essential
+$getter install ninja-build
+
 setup_tsserver
 setup_tailwindcss-ls
 setup_sumneko_lua
