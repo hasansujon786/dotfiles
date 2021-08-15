@@ -57,7 +57,7 @@ util_setup_figlet() {
   if [[ "$machine" == "windows" ]]; then
     $getter install -y figlet-go
   else
-    apt upgrade && apt update 
+    sudo apt upgrade && sudo apt update
     $getter install -y figlet
   fi
 }
@@ -181,7 +181,7 @@ setup_alacritty() {
 
   util_backUpConfig ${alacrittyPath[$machineCode]}
   util_makeSymlinkPath $HOME/dotfiles/alacritty ${alacrittyPath[$machineCode]}
-  $getter install -y alacritty
+  # $getter install -y alacritty
 }
 
 setup_node () {
