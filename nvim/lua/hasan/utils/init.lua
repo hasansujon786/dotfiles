@@ -26,6 +26,11 @@ M.is_windows = function()
   return jit.os == 'Windows'
 end
 
+M.is_file_exist = function (path)
+  local f = io.open(path, 'r')
+  if f ~= nil then io.close(f) return true else return false end
+end
+
 M.read_file = function(path)
   local fd = vim.loop.fs_open(path, 'r', 438)
   local stat = vim.loop.fs_fstat(fd)
