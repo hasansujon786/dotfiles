@@ -32,12 +32,14 @@ return require('packer').startup({
     })
 
     --> Navigation ---------------------------------
+    use({ 'ahmedkhalf/project.nvim', opt = true, event = 'VimEnter',
+      config = function()
+        require('config.project')
+      end
+    })
     use({ 'ThePrimeagen/harpoon', opt = true, event = 'VimEnter' })
     use({ 'nvim-telescope/telescope.nvim', config = function() require('config.telescope') end })
     use({ 'nvim-telescope/telescope-fzy-native.nvim' })
-    use({ 'nvim-telescope/telescope-project.nvim', opt = true, cmd = {'SwitchProjects'}, config = function ()
-      vim.cmd[[command! SwitchProjects lua require('telescope').extensions.project.project{}]]
-    end })
 
     use({ 'lambdalisue/fern-renderer-nerdfont.vim' })
     use({ 'hasansujon786/glyph-palette.vim' })
@@ -125,11 +127,6 @@ return require('packer').startup({
         require('lsp.tailwindcss-ls')
         require('lsp.sumneko_lua')
       end
-    })
-    use({ 'airblade/vim-rooter',
-      opt = true, event = 'VimEnter',
-      disable = vim.g.disable_lsp,
-      config = function() vim.g.rooter_silent_chdir = 1 end
     })
     use({ 'hrsh7th/nvim-compe',
       opt = true, event = 'InsertEnter',
