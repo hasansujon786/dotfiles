@@ -30,6 +30,8 @@ vim.g.VM_leader = '<leader>vv'
 vim.g.VM_theme_set_by_colorscheme = 0
 -- emmet
 vim.g.user_emmet_leader_key = '<C-c>'
+-- quick-scoope
+vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
 -- vim-wiki
 vim.g.vimwiki_list = {{path='~/vimwiki/', syntax='markdown', ext='.md', auto_toc=1}}
 vim.g.vimwiki_folding = 'expr'
