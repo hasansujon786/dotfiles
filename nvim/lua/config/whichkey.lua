@@ -73,6 +73,11 @@ local leader = {
     f = { ':call _#Insertion(expand("%:~"))<CR>',                   'Current file path' },
     F = { ':call _#Insertion(expand("%:t"))<CR>',                   'Current file name' },
     p = 'Paste form CB',
+
+    i = { '<Plug>ColorConvertCycle',                 'Cycle color' },
+    x = { '<Plug>ColorConvertHEX',                   'Convert color to HEX' },
+    h = { '<Plug>ColorConvertHSL',                   'Convert color to HSL' },
+    r = { '<Plug>ColorConvertRGB',                   'Convert color to RGB' },
   },
 
   g = {
@@ -150,9 +155,9 @@ local leader = {
 
   p = {
     name = '+project',
-    p = { ':SwitchProjects<CR>',         'Switch project' },
+    p = { ':Telescope projects<CR>',         'Switch project' },
     r = { ':lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>',  'Find recent files' },
-    b = { ':Telescope file_browser prompt_title=Project\\ Browser cwd=D:\\repoes<CR>',  'Browse other projects' },
+    b = { ':Telescope file_browser prompt_title=Project\\ Browser cwd=~/repoes<CR>',  'Browse other projects' },
 
     l = { ':SessionLoad<CR>',                       'Load session' },
     s = { ':SessionSave<CR>',                       'Save session' },
