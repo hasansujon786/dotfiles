@@ -17,7 +17,6 @@ local autocmds = {
     {'WinEnter,BufWinEnter,FocusGained * setlocal cursorline'},
     {'WinLeave,FocusLost * setlocal nocursorline'},
     {'WinEnter,BufWinEnter * call hasan#boot#auto_set_cursor_color()'},
-    {'CursorHold * ++once lua require("nebulous").active()'},
     -- {'WinEnter,BufWinEnter *.vim,*.js,*.lua call hasan#boot#highligt_ruler(1)'},
   },
   FernEvents = {
@@ -44,9 +43,14 @@ local autocmds = {
   Telescope = {
     {'BufWinEnter,WinEnter * let g:hasan_telescope_buffers[bufnr()] = reltimefloat(reltime())'},
     {'BufDelete * silent! call remove(g:hasan_telescope_buffers, expand("<abuf>"))'}
-  }
-
+  },
+  Nebulous = {}
   -- {"BufEnter term://* setlocal nonumber norelativenumber"};
 }
+
+if not vim.g.bg_tranparent then
+  table.insert(autocmds.Nebulous, {{'CursorHold * ++once lua require("nebulous").active()'}})
+end
+
 utils.create_augroups(autocmds)
 
