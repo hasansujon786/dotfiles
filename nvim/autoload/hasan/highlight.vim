@@ -1,7 +1,4 @@
 function hasan#highlight#load_custom_highlight() abort
-  if exists('g:bg_tranparent') && g:bg_tranparent == v:true
-    hi Normal guibg=NONE guifg=#ABB2BF
-  endif
   hi TextInfo           guifg=#56B6C2
   hi TextSuccess        guifg=#61AFEF
   hi Cursor             guibg=#61AFEF gui=NONE

@@ -50,3 +50,5 @@ when I want to populate a quickfix list and work on this list.
 " https://learnvimscriptthehardway.stevelosh.com/chapters/21.html
 " https://medium.com/breathe-publication/understanding-vims-jump-list-7e1bfc72cdf0
 > https://vimways.org/2019/
+
+sudo vim /etc/hostname

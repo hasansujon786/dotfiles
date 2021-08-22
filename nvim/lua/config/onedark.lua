@@ -1,4 +1,5 @@
-vim.g.onedark_italic_comment = false -- By default it is true
+vim.g.onedark_italic_comment = false -- default true
+vim.g.onedark_transparent_background = vim.g.bg_tranparent -- default false
 require('onedark').setup()
 
 vim.fn['hasan#highlight#load_custom_highlight']()
