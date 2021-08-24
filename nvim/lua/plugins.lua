@@ -69,6 +69,7 @@ return require('packer').startup({
         require('config.sneak')
       end
     })
+    use({ 'arthurxavierx/vim-caser', opt = true, event = 'BufReadPost' })
     use({ 'Konfekt/vim-CtrlXA', opt = true, event = 'BufRead' })
     use({ 'tpope/vim-repeat', opt = true, event = 'BufRead' })
     use({ 'folke/which-key.nvim', config = function() require('config.whichkey') end })

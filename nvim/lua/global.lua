@@ -38,3 +38,5 @@ vim.g.vimwiki_folding = 'expr'
 vim.g.vimwiki_markdown_link_ext = 1
 vim.g.taskwiki_markup_syntax = 'markdown'
 vim.g.vimwiki_key_mappings = {global = 0}
+-- vim-caser
+vim.g.caser_prefix = '<leader>ts'
