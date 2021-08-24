@@ -32,6 +32,7 @@ return require('packer').startup({
     })
 
     --> Navigation ---------------------------------
+    use({'kevinhwang91/nvim-bqf'})
     use({ 'ahmedkhalf/project.nvim', opt = true, event = 'VimEnter',
       config = function()
         require('config.project')
