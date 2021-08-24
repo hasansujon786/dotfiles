@@ -66,6 +66,13 @@ local leader = {
     M = { '<cmd>call hasan#fzf#edit_bookmark()<CR>',           'Delete bookmark' },
   },
 
+  c = {
+    c = { '<Plug>ColorConvertCycle',                 'Cycle color' },
+    x = { '<Plug>ColorConvertHEX',                   'Convert color to HEX' },
+    h = { '<Plug>ColorConvertHSL',                   'Convert color to HSL' },
+    r = { '<Plug>ColorConvertRGB',                   'Convert color to RGB' },
+  },
+
   i = {
     name = '+insert',
     d = { ':call _#Insertion(strftime("%e %B %Y"))<CR>',            'Current date' },
@@ -73,11 +80,6 @@ local leader = {
     f = { ':call _#Insertion(expand("%:~"))<CR>',                   'Current file path' },
     F = { ':call _#Insertion(expand("%:t"))<CR>',                   'Current file name' },
     p = 'Paste form CB',
-
-    i = { '<Plug>ColorConvertCycle',                 'Cycle color' },
-    x = { '<Plug>ColorConvertHEX',                   'Convert color to HEX' },
-    h = { '<Plug>ColorConvertHSL',                   'Convert color to HSL' },
-    r = { '<Plug>ColorConvertRGB',                   'Convert color to RGB' },
   },
 
   g = {

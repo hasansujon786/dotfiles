@@ -108,7 +108,6 @@ return require('packer').startup({
     use({ 'nvim-treesitter/nvim-treesitter-textobjects' })
 
     use({ 'NTBBloodbath/color-converter.nvim', opt = true, event = 'BufRead' })
-    use({ 'gu-fan/colorv.vim', opt = true, cmd = 'ColorV' })
     use({ 'mattn/emmet-vim', opt = true, event = 'BufRead',
       config = function()
         require('config.emmet')
