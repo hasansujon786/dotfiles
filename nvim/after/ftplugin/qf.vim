@@ -1,6 +1,8 @@
 setlocal nobuflisted
 
-nnoremap <silent><buffer> <CR> <CR>:cclose<CR>
-nnoremap <silent><nowait><buffer> q :wincmd c<CR>
-nnoremap <silent><nowait><buffer> <esc> :wincmd c<CR>
+nmap     <silent><buffer> <C-s> <C-x>
+nnoremap <silent><buffer> <CR> <CR>:cclose<Bar>setlocal signcolumn=yes nu rnu<CR>
+nnoremap <silent><buffer> o <CR>:cclose<Bar>setlocal signcolumn=yes nu rnu<CR>
+nnoremap <silent><nowait><buffer> q :cclose<CR>
+nnoremap <silent><nowait><buffer> <esc> :cclose<CR>
 
