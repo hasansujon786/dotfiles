@@ -130,13 +130,23 @@ return require('packer').startup({
         require('lsp.sumneko_lua')
       end
     })
-    use({ 'hrsh7th/nvim-compe',
+    use {
+      'hrsh7th/nvim-cmp',
       opt = true, event = 'InsertEnter',
-      disable = vim.g.disable_lsp,
+      requires = {
+        'hrsh7th/vim-vsnip',
+        'rafamadriz/friendly-snippets',
+        -- completion sources
+        'f3fora/cmp-spell',
+        'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-buffer',
+        'hrsh7th/cmp-path',
+        'hrsh7th/cmp-vsnip'
+      },
       config = function()
-        require('config.compe')
+        require('config.cmp')
       end
-    })
+    }
     use({ 'windwp/nvim-autopairs',
       opt = true, event = 'InsertEnter',
       disable = vim.g.disable_lsp,
@@ -148,13 +158,5 @@ return require('packer').startup({
       opt = true, after = 'nvim-autopairs',
       disable = vim.g.disable_lsp,
     })
-    use({ 'hrsh7th/vim-vsnip',
-      opt = true, event = 'InsertCharPre',
-      disable = vim.g.disable_lsp,
-    })
-    use({ 'rafamadriz/friendly-snippets',
-      opt = true, event = 'InsertCharPre'
-    })
-
   end,
 })
