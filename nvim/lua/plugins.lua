@@ -115,7 +115,7 @@ return require('packer').startup({
       end
     })
     use({ 'norcalli/nvim-colorizer.lua',
-      opt = true, event = 'BufRead',
+      opt = true, event = 'CursorHold',
       config = function()
         require('config.colorizer')
       end
@@ -148,15 +148,13 @@ return require('packer').startup({
       end
     }
     use({ 'windwp/nvim-autopairs',
-      opt = true, event = 'InsertEnter',
-      disable = vim.g.disable_lsp,
+      opt = true, after = 'nvim-cmp',
       config = function()
         require('config.autopairs')
       end
     })
     use({ 'windwp/nvim-ts-autotag',
-      opt = true, after = 'nvim-autopairs',
-      disable = vim.g.disable_lsp,
+      opt = true, after = 'nvim-cmp',
     })
   end,
 })
