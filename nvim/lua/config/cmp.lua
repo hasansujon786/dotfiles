@@ -100,3 +100,11 @@ cmp.setup({
     end,
   },
 })
+
+vim.g.vsnip_filetypes = {
+  javascript = {'javascriptreact'},
+  typescript = {'typescriptreact'},
+  javascriptreact = {'javascript'},
+  typescriptreact = {'typescript'},
+}
+
