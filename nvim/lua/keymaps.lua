@@ -230,4 +230,7 @@ maps.nnoremap(']t', ':FloatermToggle<CR><C-\\><C-n>')
 maps.nnoremap('[t', ':FloatermToggle<CR><C-\\><C-n>')
 -- Telescope
 maps.nnoremap('<C-p>', ':lua require("telescope.builtin").oldfiles()<CR>')
-maps.nnoremap('//', ':lua require("hasan.telescope.custom").curbuf()<CR>')
+maps.nnoremap('//', ':Telescope current_buffer_fuzzy_find previewer=false theme=get_dropdown<CR>')
+maps.vnoremap('/', '"zy:Telescope current_buffer_fuzzy_find previewer=false theme=get_dropdown default_text=<C-r>"<CR>')
+maps.nnoremap('<A-/>', ':Telescope live_grep<CR>')
+maps.vnoremap('<A-/>', '"zy:Telescope grep_string default_text=<C-r>"<CR>')

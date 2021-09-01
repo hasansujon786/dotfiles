@@ -150,7 +150,7 @@ local leader = {
     T = { ':FloatermNew --wintype=normal --height=10 bash<CR>', 'Open terminal split' },
     q = { '<cmd>call hasan#utils#quickFix_toggle()<CR>',        'Quickfix' },
     -- y = { ':CocList --normal yank<CR>',                         'Yank list' },
-    y = { ':lua require("yanklist").yanklist()<CR>',            'Yank list' },
+    y = { ':lua require("yanklist").yanklist({initial_mode="normal"})<CR>', 'Yank list' },
     p = { '<Plug>(my-fern-toggle-reveal)<Plug>(fern-action-zoom:reset)',  'Toggle prject tree' },
     P = { '<Plug>(my-fern-cur-dir)<Plug>(fern-action-zoom:reset)', 'Toggle prject tree' },
   },
@@ -288,7 +288,7 @@ local leader = {
 local leader_visual = {
   o = {
     name = '+open',
-    y = { ':lua require("yanklist").yanklist({is_visual=true})<CR>',      'Yank list' },
+    y = { ':lua require("yanklist").yanklist({is_visual=true,initial_mode="normal"})<CR>', 'Yank list' },
   },
 }
 
