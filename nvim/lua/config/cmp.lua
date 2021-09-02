@@ -69,8 +69,8 @@ cmp.setup({
     end, { 'i', 's' }),
   },
   sources = {
-    { name = 'vsnip' },
     { name = 'nvim_lsp' },
+    { name = 'vsnip' },
     { name = 'buffer' },
     { name = 'path' },
     { name = 'spell' },
