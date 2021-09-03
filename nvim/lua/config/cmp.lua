@@ -17,7 +17,7 @@ cmp.setup({
   },
   snippet = {
     expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
+      vim.fn['vsnip#anonymous'](args.body)
     end,
   },
   mapping = {
@@ -78,16 +78,35 @@ cmp.setup({
   },
   formatting = {
     format = function(entry, vim_item)
+      -- vim_item.menu = vim_item.kind
       vim_item.kind = ({
-        vsnip    = '',
-        nvim_lsp = '',
-        buffer   = '',
-        path     = '',
-        spell    = '',
-        orgmode  = '✿',
-      })[entry.source.name]
+        Text          = '',
+        Method        = '',
+        Function      = '',
+        Constructor   = '',
+        Field         = 'ﴲ',
+        Variable      = '',
+        Constant      = 'ﲀ',
+        Class         = '',
+        Interface     = '',
+        Module        = '',
+        Property      = 'ﰠ',
+        Unit          = '',
+        Value         = '',
+        Enum          = '',
+        EnumMember    = '',
+        Snippet       = '',
+        Keyword       = '',
+        Color         = '',
+        File          = '',
+        Reference     = '',
+        Folder        = '',
+        Struct        = 'ﳤ',
+        Event         = '',
+        Operator      = '',
+        TypeParameter = '',
+      })[vim_item.kind]
 
-      -- set a name for each source
       vim_item.menu = ({
         vsnip    = '[Snippet]',
         nvim_lsp = '[LSP]',
