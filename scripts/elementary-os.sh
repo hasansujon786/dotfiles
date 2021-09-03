@@ -8,6 +8,7 @@ sudo add-apt-repository -y multiverse
 sudo apt install -y ubuntu-restricted-extras
 
 sudo apt-get install -y gnome-disk-utility
+sudo apt-get install -y gnome-system-monitor
 
 # sudo apt install gnome-tweaks -y
 
