@@ -50,7 +50,6 @@ return require('packer').startup({
     --> Utils --------------------------------------
     use({ 'nvim-lua/popup.nvim' })
     use({ 'nvim-lua/plenary.nvim' })
-    use({ 'tpope/vim-eunuch', opt = true, cmd = {'Delete','Move','Rename','Mkdir','Chmod'} })
     use({ 'voldikss/vim-floaterm', opt = true,
       cmd = {'FloatermNew','FloatermToggle'},
       config = function() require('config.floaterm') end
@@ -58,12 +57,9 @@ return require('packer').startup({
     use({ 'mg979/vim-visual-multi', opt = true, event = 'BufRead' })
     use({ 'michaeljsmith/vim-indent-object', opt = true, event = 'BufRead' })
     use({ 'tweekmonster/startuptime.vim', opt = true, cmd = 'StartupTime' })
-    -- use 'tpope/vim-scriptease'
     use({ 'hasansujon786/vim-rel-jump', opt = true, event = 'BufRead' })
     use({ 'dhruvasagar/vim-open-url', opt = true, event = 'BufRead' })
     use({ 'unblevable/quick-scope', opt = true, event = 'BufReadPost'})
-    use({ 'tpope/vim-commentary', opt = true, event = 'BufRead' })
-    use({ 'tpope/vim-surround', opt = true, event = 'BufRead',  })
     use({ 'justinmk/vim-sneak', opt = true, event = 'BufRead',
       after = 'vim-surround',
       config = function()
@@ -72,7 +68,6 @@ return require('packer').startup({
     })
     use({ 'arthurxavierx/vim-caser', opt = true, event = 'BufReadPost' })
     use({ 'Konfekt/vim-CtrlXA', opt = true, event = 'BufRead' })
-    use({ 'tpope/vim-repeat', opt = true, event = 'BufRead' })
     use({ 'folke/which-key.nvim', config = function() require('config.whichkey') end })
     use({ 'karb94/neoscroll.nvim', opt = true, event = 'BufRead',
       disable = true,
@@ -80,6 +75,11 @@ return require('packer').startup({
         require('config.neoscroll')
       end
     })
+    use({ 'tpope/vim-scriptease', opt = true, cmd = {'PP','Messages'} })
+    use({ 'tpope/vim-eunuch', opt = true, cmd = {'Delete','Move','Rename','Mkdir','Chmod'} })
+    use({ 'tpope/vim-commentary', opt = true, event = 'BufRead' })
+    use({ 'tpope/vim-surround', opt = true, event = 'BufRead',  })
+    use({ 'tpope/vim-repeat', opt = true, event = 'BufRead' })
 
     --> Git ----------------------------------------
     use({ 'tpope/vim-fugitive', opt = true, cmd = {'Git','GBrowse','GV'}})
