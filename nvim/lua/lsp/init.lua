@@ -36,6 +36,7 @@ end
 local function lsp_buffer_keymaps(bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+  local filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
   --Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -57,7 +58,11 @@ local function lsp_buffer_keymaps(bufnr)
   -- buf_set_keymap('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<F2>', '<cmd>lua require("lsp.util").rename_with_quickfix()<CR>', opts)
   buf_set_keymap('n', '<C-space>', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  -- buf_set_keymap("n", "<F9>", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  if filetype == 'lua' then
+    buf_set_keymap('n', '<F9>', '<cmd>write<CR>:lua require("hasan.utils").reload_this_module()<CR>', opts)
+  else
+    buf_set_keymap('n', '<F9>', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  end
 
   buf_set_keymap('n', '<leader>aa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<leader>ar', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
