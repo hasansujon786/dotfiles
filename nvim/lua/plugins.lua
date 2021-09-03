@@ -126,8 +126,9 @@ return require('packer').startup({
       disable = vim.g.disable_lsp,
       config = function()
         require('lsp')
-        require('lsp.tailwindcss-ls')
-        require('lsp.sumneko_lua')
+        require('lsp.setup.tsserver')
+        require('lsp.setup.tailwindcss-ls')
+        require('lsp.setup.sumneko_lua')
       end
     })
     use {

@@ -1,5 +1,5 @@
 -- TODO: what is a tailwindcss filetype
-local lspconfig = require "lspconfig"
+local lspconfig = require('lspconfig')
 local lsp = require('lsp')
 
 -- "C:\\Users\\hasan\\tailwindcss-intellisense\\extension\\dist\\server\\tailwindServer.js",

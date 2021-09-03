@@ -1,4 +1,3 @@
-local nvim_lsp = require('lspconfig')
 local M = {}
 
 vim.fn.sign_define(
@@ -74,19 +73,6 @@ M.on_attach = function(client, bufnr)
   lsp_buffer_keymaps(bufnr)
   -- lunarvim
   -- vim.cmd 'command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()'
-end
-
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
--- local servers = { "pyright", "rust_analyzer", "tsserver" }
-local servers = { "tsserver" }
-for _, lspName in ipairs(servers) do
-  nvim_lsp[lspName].setup {
-    on_attach = M.on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    }
-  }
 end
 
 return M
