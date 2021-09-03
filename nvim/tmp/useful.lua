@@ -154,3 +154,5 @@ autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100) ]]
 -- Java
 -- autocmd FileType java nnoremap ca <Cmd>lua require('jdtls').code_action()<CR>
 
+-- call matchadd("Conceal", '->' , 10, -1, {'conceal': '→'}
+-- call matchadd("Conceal", '<=' , 10, -1, {'conceal': '≤'}
