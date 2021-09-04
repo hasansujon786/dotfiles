@@ -1,9 +1,18 @@
-let s:fern_alternate_file = ''
+let s:last_file = ''
+let s:alternate_file = ''
+
+function! s:save_last_file()
+  if &ft != 'fern'
+    let s:last_file = filereadable(bufname('%')) ? bufname('%') : ''
+    let s:alternate_file = filereadable(bufname('#')) ? bufname('#') : s:alternate_file
+  endif
+endfunction
+
 function! hasan#fern#edit_alternate() abort
-  let vim_alternate = expand('#')
-  let is_fern_node = vim_alternate =~# '^[^:]\+://'
-  if (is_fern_node && !filereadable(vim_alternate) && s:fern_alternate_file != '')
-    execute('e '.s:fern_alternate_file)
+  let alternate_is_fern_node = expand('#') =~# '^[^:]\+://'
+  if (alternate_is_fern_node && s:last_file != '')
+    let openfile = s:last_file == expand('%') ? s:alternate_file : s:last_file
+    exec 'e '.openfile
   else
     try
       exe "normal! \<c-^>"
@@ -14,6 +23,8 @@ function! hasan#fern#edit_alternate() abort
 endfunction
 
 function! hasan#fern#drawer_toggle(reveal) abort
+  call s:save_last_file()
+
   if expand('%:t') != '' && a:reveal
     Fern . -drawer -toggle -reveal=%
   else
@@ -22,19 +33,37 @@ function! hasan#fern#drawer_toggle(reveal) abort
   " wincmd =
 endfunction
 
-function! hasan#fern#smart_path(drawer)
-  let s:fern_alternate_file = filereadable(bufname('%')) ? bufname('%') : ''
+" function! hasan#fern#smart_path(drawer)
+function! hasan#fern#open_dir()
+  if &ft == 'fern' | return | endif
+  call s:save_last_file()
 
-  if !empty(&buftype) || bufname('%') =~# '^[^:]\+://' || empty(bufname('%'))
-    Fern .
-  else
-    let fern_previous_node=expand('%:t')
-    exec a:drawer ? 'Fern %:h -drawer -wait' : 'Fern %:h -wait'
-    if fern_previous_node !=# '' | call search('\v<' . fern_previous_node . '>') | endif
-  endif
+  let fname=fnamemodify(s:last_file, ':t')
+  exec 'Fern %:h -drawer -wait | FernReveal '.fname.' -wait'
+endfunction
+
+function! hasan#fern#vinager()
+  call s:save_last_file()
+  exec 'Fern %:h -wait | FernReveal #:t -wait'
 endfunction
 
 " Fern mappings {{{
+function! hasan#fern#focus_last_file()
+  if &ft != 'fern' | return | endif
+
+  if fnamemodify(getcwd(), ':t').';$' == fnamemodify(expand('%'), ':t')
+    exec 'FernReveal '.s:last_file.' -wait'
+  else
+    exec 'FernReveal '.fnamemodify(s:last_file, ':t').' -wait'
+  endif
+endfunction
+
+function! hasan#fern#edit_fern_alternate() abort
+  if (&ft == 'fern' && s:last_file != '')
+    execute('e '.s:last_file)
+  endif
+endfunction
+
 function! hasan#fern#FernInit() abort
   " fern-custom-actions {{{
   nnoremap <Plug>(fern-close-drawer) :<C-u>FernDo close -drawer -stay<CR>
@@ -98,6 +127,8 @@ function! hasan#fern#FernInit() abort
   nmap <buffer><nowait> - <Plug>(fern-action-leave)
   nmap <buffer><nowait> <CR> <Plug>(fern-custom-openAndClose-enter)
   nmap <buffer><nowait> \ <Plug>(fern-action-zoom:reset)
+  nnoremap <silent><buffer> f :call hasan#fern#focus_last_file()<CR>
+  nnoremap <silent><buffer> <BS> :call hasan#fern#edit_fern_alternate()<CR>
   " nmap <buffer> K <Plug>(fern-action-mark-children:leaf)
 
   " Open bookmark:///

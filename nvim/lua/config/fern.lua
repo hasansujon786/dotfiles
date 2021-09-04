@@ -1,10 +1,6 @@
 local maps = require('hasan.utils.maps')
-maps.nmap('-', '<Plug>(my-fern-vinager)')
+maps.nnoremap('-', '<cmd>call hasan#fern#vinager()<CR>') -- change in whichkey
 maps.nnoremap('<BS>', '<cmd> call hasan#fern#edit_alternate()<CR>')
-maps.nnoremap('<Plug>(my-fern-vinager)', '<cmd>call hasan#fern#smart_path(0)<CR>')
-maps.nnoremap('<Plug>(my-fern-cur-dir)', '<cmd>call hasan#fern#smart_path(1)<CR>')
-maps.nnoremap('<Plug>(my-fern-toggle)', '<cmd>call hasan#fern#drawer_toggle(0)<CR>')
-maps.nnoremap('<Plug>(my-fern-toggle-reveal)', '<cmd>call hasan#fern#drawer_toggle(1)<CR>') -- toggle & reveal
 
 vim.g['fern#drawer_width'] = 35
 vim.g['fern#keepalt_on_edit'] = 1

@@ -156,3 +156,4 @@ autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100) ]]
 
 -- call matchadd("Conceal", '->' , 10, -1, {'conceal': '→'}
 -- call matchadd("Conceal", '<=' , 10, -1, {'conceal': '≤'}
+-- call search('\v<' . fern_previous_node . '>')

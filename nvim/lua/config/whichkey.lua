@@ -97,8 +97,8 @@ local leader = {
     l = { ':FloatermNew lazygit<CR>',              'Open lazygit' },
     t = { ':FloatermNew tig<CR>',                  'Open tig' },
 
-    g = { ':Neogit kind=split<CR>',                'Open Neogit' },
-    G = { ':Neogit<CR>',                           'Open NeogitTab' },
+    g = { ':Neogit<CR>',                           'Open Neogit' },
+    G = { ':Neogit kind=split<CR>',                'Open Neogit Split' },
 
     b = 'Preview git blame',
     p = 'Preview hunk',
@@ -141,7 +141,6 @@ local leader = {
 
   o = {
     name = '+open',
-    ['-'] = { '<Plug>(my-fern-vinager)',                        'Fern vinager' },
     a = 'Org agenda',
     c = 'Org capture',
     -- a = { '<Plug>(dotoo-agenda)',                               '+org-agenda' },
@@ -151,8 +150,10 @@ local leader = {
     q = { '<cmd>call hasan#utils#quickFix_toggle()<CR>',        'Quickfix' },
     -- y = { ':CocList --normal yank<CR>',                         'Yank list' },
     y = { ':lua require("yanklist").yanklist({initial_mode="normal"})<CR>', 'Yank list' },
-    p = { '<Plug>(my-fern-toggle-reveal)<Plug>(fern-action-zoom:reset)',  'Toggle prject tree' },
-    P = { '<Plug>(my-fern-cur-dir)<Plug>(fern-action-zoom:reset)', 'Toggle prject tree' },
+
+    p = { '<cmd>call hasan#fern#drawer_toggle(1)<CR>',  'Toggle prject tree' },
+    P = { '<cmd>call hasan#fern#open_dir()<CR>',        'Toggle prject tree' },
+    ['-'] = { '<cmd>call hasan#fern#vinager()<CR>',     'Fern vinager' },
   },
 
   p = {
