@@ -3,8 +3,10 @@ let s:alternate_file = ''
 
 function! s:save_last_file()
   if &ft != 'fern'
-    let s:last_file = filereadable(bufname('%')) ? bufname('%') : ''
-    let s:alternate_file = filereadable(bufname('#')) ? bufname('#') : s:alternate_file
+    let current_file = expand('%:p')
+    let alternate_file = expand('#:p')
+    let s:last_file = filereadable(current_file) ? current_file : ''
+    let s:alternate_file = filereadable(alternate_file) ? alternate_file : s:alternate_file
   endif
 endfunction
 
