@@ -19,24 +19,26 @@ if pcall(require, 'plenary') then
   end
 end
 
-
--- Sneak
+-- Vsnip ==============================
+-- vim.g.vsnip_namespace = ':'
+vim.g.vsnip_snippet_dir = '~/dotfiles/nvim/.vsnip'
+-- Sneak ==============================
 vim.g['sneak#target_labels'] = ";wertyuopzbnmfLGKHWERTYUIQOPZBNMFJ0123456789"
 vim.g['sneak#label'] = 1 -- use <tab> to jump through lebles
 vim.g['sneak#use_ic_scs'] = 1 -- case insensitive sneak
 vim.g['sneak#prompt'] = '  '
--- vim-visual-multi
+-- vim-visual-multi ===================
 vim.g.VM_leader = '<leader>vv'
 vim.g.VM_theme_set_by_colorscheme = 0
--- emmet
+-- emmet ==============================
 vim.g.user_emmet_leader_key = '<C-c>'
--- quick-scoope
+-- quick-scoope =======================
 vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
--- vim-wiki
+-- vim-wiki ===========================
 vim.g.vimwiki_list = {{path='~/vimwiki/', syntax='markdown', ext='.md', auto_toc=1}}
 vim.g.vimwiki_folding = 'expr'
 vim.g.vimwiki_markdown_link_ext = 1
 vim.g.taskwiki_markup_syntax = 'markdown'
 vim.g.vimwiki_key_mappings = {global = 0}
--- vim-caser
+-- vim-caser ==========================
 vim.g.caser_prefix = '<leader>cs'

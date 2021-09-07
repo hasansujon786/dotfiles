@@ -1,0 +1,55 @@
+{
+  "useState": {
+    "prefix": "us",
+    "body": "const [${1:val}, set${2:setterName}] = useState(${0:defVal})",
+    "description": "use state hook"
+  },
+  "reactFunctionComponent": {
+    "prefix": "rfc",
+    "body": "import React from 'react'\n\nconst ${1:${TM_FILENAME_BASE}} = () => {\n\treturn (\n\t\t<div>\n\t\t\t$0\n\t\t</div>\n\t)\n}\n\nexport default ${1:${TM_FILENAME_BASE}}",
+    "description": "Creates a React function component without PropTypes"
+  },
+  "reactFunctionComponentBasic": {
+    "prefix": "rff",
+    "body": "const ${1:ComponentName} = () => {\n\treturn (\n\t\t<div>\n\t\t\t$0\n\t\t</div>\n\t)\n}",
+    "description": "Creates only a React function component without PropTypes and import"
+  },
+  "createContext": {
+    "prefix": "ucon",
+    "body": [
+      "import React, {createContext} from 'react'",
+      "",
+      "export const Context = createContext()",
+      "function ContextProvider(props) {",
+      "\treturn (",
+      "\t\t<Context.Provider value={defaultContextState}>",
+      "\t\t\t{props.children}",
+      "\t\t</Context.Provider>",
+      "\t)",
+      "}",
+      "",
+      "export default ContextProvider"
+    ],
+    "description": "use context hook template"
+  },
+  "useReducer": {
+    "prefix": "ured",
+    "body": [
+      "const defaultReducerValue = {}",
+      "function reducder(state, action) {",
+      "\tswitch (action.type) {",
+      "\t\tcase 'give-a-case-name': {",
+      "\t\t\treturn {",
+      "\t\t\t\t...state,",
+      "\t\t\t}",
+      "\t\t}",
+      "",
+      "\t\tdefault:",
+      "\t\t\treturn state",
+      "\t}",
+      "}",
+      "const [state, dispatch] = useReducer(reducder, defaultReducerValue)"
+    ],
+    "description": "use reducer hook template"
+  }
+}
