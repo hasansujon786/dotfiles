@@ -29,6 +29,9 @@ return require('packer').startup({
     use({ 'kristijanhusak/orgmode.nvim', opt = true, ft = {'org'},
       config = function() require('config.orgmode') end
     })
+    use({"akinsho/org-bullets.nvim", opt = true, after = 'orgmode.nvim',
+      config = function() require('config.org-bullets') end
+    })
     use({ 'mkropat/vim-tt', opt = true, event = 'CursorHold',
       config = function ()
         vim.g.tt_loaded = 1
