@@ -18,12 +18,17 @@ return require('packer').startup({
     use({ 'Yggdroot/indentLine', opt = true, event = 'BufRead',
       config = function() require('config.indentLine') end
     })
+    use({ 'norcalli/nvim-colorizer.lua', opt = true, event = 'CursorHold',
+      config = function() require('config.colorizer') end
+    })
     -- use({ 'folke/tokyonight.nvim' })
     -- use({'projekt0n/github-nvim-theme'})
 
     --> Productiviry -------------------------------
     use({ 'vimwiki/vimwiki', opt = true, cmd = {'VimwikiIndex','VimwikiTabIndex','VimwikiUISelect'} })
-    use({ 'kristijanhusak/orgmode.nvim', opt = true, event = 'BufRead', config = function() require('config.orgmode') end })
+    use({ 'kristijanhusak/orgmode.nvim', opt = true, ft = {'org'},
+      config = function() require('config.orgmode') end
+    })
     use({ 'mkropat/vim-tt', opt = true, event = 'CursorHold',
       config = function ()
         vim.g.tt_loaded = 1
@@ -32,7 +37,7 @@ return require('packer').startup({
     })
 
     --> Navigation ---------------------------------
-    use({'kevinhwang91/nvim-bqf'})
+    use({'kevinhwang91/nvim-bqf', opt = true, ft = {'qf'}})
     use({ 'ahmedkhalf/project.nvim', opt = true, event = 'VimEnter',
       config = function()
         require('config.project')
@@ -42,32 +47,39 @@ return require('packer').startup({
     use({ 'nvim-telescope/telescope.nvim', config = function() require('config.telescope') end })
     use({ 'nvim-telescope/telescope-fzy-native.nvim' })
 
-    use({ 'lambdalisue/fern-renderer-nerdfont.vim' })
-    use({ 'hasansujon786/glyph-palette.vim' })
-    use({ 'lambdalisue/nerdfont.vim' })
-    use({ 'lambdalisue/fern.vim', config = function() require('config.fern') end })
+    use({ 'lambdalisue/fern.vim',
+      config = function() require('config.fern') end,
+      requires = {
+        'lambdalisue/fern-renderer-nerdfont.vim',
+        'hasansujon786/glyph-palette.vim',
+        'lambdalisue/nerdfont.vim'
+      }
+    })
+
+    use({ 'unblevable/quick-scope', opt = true, event = 'CursorHold'})
+    use({ 'justinmk/vim-sneak', opt = true, event = 'CursorHold',
+      after = 'vim-surround',
+      config = function()
+        require('config.sneak')
+      end
+    })
 
     --> Utils --------------------------------------
+    use({ 'mg979/vim-visual-multi', opt = true, event = 'CursorHold' })
+    use({ 'arthurxavierx/vim-caser', opt = true, event = 'CursorHold' })
+    use({ 'NTBBloodbath/color-converter.nvim', opt = true, event = 'CursorHold' })
+    use({ 'Konfekt/vim-CtrlXA', opt = true, event = 'CursorHold' })
+    use({ 'tpope/vim-commentary', opt = true, event = 'BufRead' })
+    use({ 'tpope/vim-surround', opt = true, event = 'BufRead',  })
+
     use({ 'nvim-lua/popup.nvim' })
     use({ 'nvim-lua/plenary.nvim' })
     use({ 'voldikss/vim-floaterm', opt = true,
       cmd = {'FloatermNew','FloatermToggle'},
       config = function() require('config.floaterm') end
     })
-    use({ 'mg979/vim-visual-multi', opt = true, event = 'BufRead' })
-    use({ 'michaeljsmith/vim-indent-object', opt = true, event = 'BufRead' })
-    use({ 'tweekmonster/startuptime.vim', opt = true, cmd = 'StartupTime' })
     use({ 'hasansujon786/vim-rel-jump', opt = true, event = 'BufRead' })
     use({ 'dhruvasagar/vim-open-url', opt = true, event = 'BufRead' })
-    use({ 'unblevable/quick-scope', opt = true, event = 'BufReadPost'})
-    use({ 'justinmk/vim-sneak', opt = true, event = 'BufRead',
-      after = 'vim-surround',
-      config = function()
-        require('config.sneak')
-      end
-    })
-    use({ 'arthurxavierx/vim-caser', opt = true, event = 'BufReadPost' })
-    use({ 'Konfekt/vim-CtrlXA', opt = true, event = 'BufRead' })
     use({ 'folke/which-key.nvim', config = function() require('config.whichkey') end })
     use({ 'karb94/neoscroll.nvim', opt = true, event = 'BufRead',
       disable = true,
@@ -75,16 +87,18 @@ return require('packer').startup({
         require('config.neoscroll')
       end
     })
+    use({ 'tweekmonster/startuptime.vim', opt = true, cmd = 'StartupTime' })
     use({ 'tpope/vim-scriptease', opt = true, cmd = {'PP','Messages'} })
     use({ 'tpope/vim-eunuch', opt = true, cmd = {'Delete','Move','Rename','Mkdir','Chmod'} })
-    use({ 'tpope/vim-commentary', opt = true, event = 'BufRead' })
-    use({ 'tpope/vim-surround', opt = true, event = 'BufRead',  })
     use({ 'tpope/vim-repeat', opt = true, event = 'BufRead' })
 
     --> Git ----------------------------------------
-    use({ 'tpope/vim-fugitive', opt = true, cmd = {'Git','GBrowse','GV'}})
-    use({ 'tpope/vim-rhubarb', opt = true, after = 'vim-fugitive'})
-    use({ 'junegunn/gv.vim', opt = true, after = 'vim-fugitive' })
+    use({ 'tpope/vim-fugitive', opt = true, cmd = {'Git','GBrowse','GV'},
+      requires = {
+        'tpope/vim-rhubarb',
+        'junegunn/gv.vim'
+      }
+    })
     use({ 'TimUntersberger/neogit', opt = true, cmd = 'Neogit' })
     use({ 'lewis6991/gitsigns.nvim',
       opt = true, event = 'BufRead',
@@ -103,22 +117,18 @@ return require('packer').startup({
         vim.cmd 'source ~/dotfiles/nvim/config/coc.vim'
       end
     })
-    use({ 'nvim-treesitter/nvim-treesitter', config = function() require('config.treesitter') end })
-    use({ 'nvim-treesitter/playground', opt = true, cmd = {'TSPlaygroundToggle','TSHighlightCapturesUnderCursor'} })
-    use({ 'JoosepAlviste/nvim-ts-context-commentstring', opt = true, event = 'BufRead'  })
-    use({ 'nvim-treesitter/nvim-treesitter-textobjects' })
-
-    use({ 'NTBBloodbath/color-converter.nvim', opt = true, event = 'BufRead' })
-    use({ 'mattn/emmet-vim', opt = true, event = 'BufRead',
-      config = function()
-        require('config.emmet')
-      end
+    use({ 'nvim-treesitter/nvim-treesitter',
+      opt = true, event = 'BufRead',
+      config = function() require('config.treesitter') end,
+      requires = {
+        'JoosepAlviste/nvim-ts-context-commentstring',
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        'michaeljsmith/vim-indent-object',
+        'windwp/nvim-ts-autotag',
+      }
     })
-    use({ 'norcalli/nvim-colorizer.lua',
-      opt = true, event = 'CursorHold',
-      config = function()
-        require('config.colorizer')
-      end
+    use({ 'nvim-treesitter/playground', opt = true,
+      cmd = {'TSPlaygroundToggle','TSHighlightCapturesUnderCursor'}
     })
 
     use({ 'neovim/nvim-lspconfig',
@@ -134,6 +144,7 @@ return require('packer').startup({
     use {
       'hrsh7th/nvim-cmp',
       opt = true, event = 'InsertEnter',
+      config = function() require('config.cmp') end,
       requires = {
         'hrsh7th/vim-vsnip',
         'rafamadriz/friendly-snippets',
@@ -144,18 +155,13 @@ return require('packer').startup({
         'hrsh7th/cmp-path',
         'hrsh7th/cmp-vsnip'
       },
-      config = function()
-        require('config.cmp')
-      end
     }
+    use({ 'mattn/emmet-vim', opt = true, event = 'BufRead',
+      config = function() require('config.emmet') end
+    })
     use({ 'windwp/nvim-autopairs',
       opt = true, after = 'nvim-cmp',
-      config = function()
-        require('config.autopairs')
-      end
-    })
-    use({ 'windwp/nvim-ts-autotag',
-      opt = true, after = 'nvim-cmp',
+      config = function() require('config.autopairs') end
     })
   end,
 })
