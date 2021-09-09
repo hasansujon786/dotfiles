@@ -14,4 +14,9 @@ M.toggle_bg_tranparent = function ()
   end
 end
 
+M.toggle_onedark = function ()
+  require('onedark').toggle()
+  print(vim.g.onedark_style)
+end
+
 return M

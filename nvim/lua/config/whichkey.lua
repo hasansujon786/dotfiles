@@ -171,6 +171,8 @@ local leader = {
   t = {
     name = '+toggle',
     b = { ':lua require("hasan.utils.color").toggle_bg_tranparent()<CR>',  'Toggle transparency' },
+    B = { ':lua require("hasan.utils.color").toggle_onedark()<CR>',        'Toggle Onedark' },
+
     c = { ':setlocal cursorcolumn!<CR>',            'cursorcolumn' },
     w = { ':call hasan#utils#toggleWrap()<CR>',     'toggle-wrap' },
 
