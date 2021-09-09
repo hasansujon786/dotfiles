@@ -4,7 +4,6 @@ function hasan#highlight#load_custom_highlight() abort
   hi Cursor             guibg=#61AFEF gui=NONE
   hi VertSplit          guifg=#4D5666 guibg=#363d49
   hi CursorColumn       guibg=#3B4048
-  hi CursorLineDefault  guibg=#2C323C
   hi CursorLineFocus    guibg=#3E4452
   hi SignColumn         guibg=NONE
   hi WhichKeyFloat      guibg=#2C323C

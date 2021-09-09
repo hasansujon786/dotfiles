@@ -1,10 +1,8 @@
 
 " AutoSetCursorColor {{{
-function! hasan#boot#auto_set_cursor_color() abort
+function! hasan#boot#auto_set_cursor_color(...) abort
   if &filetype =~ 'list\|\<fern\>'
-    hi! link CursorLine CursorLineFocus
-  else
-    hi! link CursorLine CursorLineDefault
+    set winhighlight=CursorLine:CursorLineFocus
   endif
 endfunction
 " }}}
