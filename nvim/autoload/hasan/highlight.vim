@@ -6,7 +6,6 @@ function hasan#highlight#load_custom_highlight() abort
   hi CursorColumn       guibg=#3B4048
   hi CursorLineFocus    guibg=#3E4452
   hi SignColumn         guibg=NONE
-  hi WhichKeyFloat      guibg=#2C323C
   hi FeditBorder        guifg=#5c6370
   hi FloatBorder        guibg=#31353f guifg=#5c6370
   hi! link Fedit Normal
