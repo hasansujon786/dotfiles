@@ -5,35 +5,20 @@ vim.g.mapleader=' '
 vim.g.maplocalleader=' '
 
 -- Files-backup-undo
-cmd([[
-if !has('win32')
-  if !exists('$XDG_CACHE_HOME')
-    let $XDG_CACHE_HOME = $HOME . '/.cache'
-  end
-  set undodir=$XDG_CACHE_HOME/vim_undo
-  set viewdir=$XDG_CACHE_HOME/vim_views
-else
-  set undodir=$HOME/AppData/Local/nvim-data/undo
-  set viewdir=$HOME/AppData/Local/nvim-data/views
-end
-]])
 opt.backup = false
 opt.swapfile = false                              -- Turn backup off, since most stuff is in SVN, git etc. anyway...
 opt.writebackup = false
 opt.undofile = true
-opt.undolevels=1500                               -- persistent undo between file reloads
-cmd('set viewoptions-=curdir')                    -- see: https://vi.stackexchange.com/questions/11903/working-directory-different-than-current-file-directory
-cmd('set sessionoptions-=folds')
-
+opt.undolevels = 1500                             -- persistent undo between file reloads
+opt.viewoptions:remove({'folds', 'curdir'})       -- see: https://vi.stackexchange.com/questions/11903/working-directory-different-than-current-file-directory
 -- Spell
 opt.spelllang='en_us'                             -- Speak proper English | en_gb
-cmd('set complete+=kspell')                       -- Autocomplete with dictionary words when spell check is on
-opt.spellfile='~/dotfiles/nvim/spell/en.utf-8.add'
-
+opt.complete:append({'kspell'})
+opt.spellfile=os.getenv('HOME')..'/dotfiles/nvim/spell/en.utf-8.add'
 -- Controls
 opt.mouse='a'
 opt.backspace={'eol','start','indent'}            -- Configure backspace so it acts as it should act
-cmd('set path+=**')                               -- usefull while using find in nested folders
+opt.path:append({'**'})
 -- opt.clipboard = "unnamedplus"
 
 opt.lazyredraw = true                             -- Don't redraw while executing macros (good performance config)
@@ -54,6 +39,8 @@ opt.wildoptions='pum'                             -- set file completion in comm
 opt.mousemodel='popup'
 opt.pumblend=4                                    -- Set pum background transparent
 opt.pumheight=10                                  -- Makes popup menu smaller
+-- Ignore the following globs in file completions
+opt.wildignore = '*.o,*~,*.pyc,*.obj,*.pyc,*.so,*.swp,*.zip,*.jpg,*.gif,*.png,*.pdf,.git,.hg,.svn,DS_STORE,bower_components,node_modules'
 -- TODO: w, {v, b, l}
 opt.formatoptions = opt.formatoptions
   - 'a' -- Auto formatting is BAD.
@@ -65,21 +52,6 @@ opt.formatoptions = opt.formatoptions
   + 'n' -- Indent past the formatlistpat, not underneath it.
   + 'j' -- Auto-remove comments if possible.
   - '2' -- I'm not in gradeschool anymore
-
--- Ignore the following globs in file completions
-cmd([[
-set wildignore+=*.o,*~,*.pyc,*.obj,*.pyc,*.so,*.swp
-set wildignore+=*.zip,*.jpg,*.gif,*.png,*.pdf
-set wildignore+=.git,.hg,.svn,DS_STORE,bower_components,node_modules
-if has("win16") || has("win32")
-  set wildignore+=.git\*,.hg\*,.svn\*
-else
-  set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
-endif
-]])
--- Ignore compiled files
--- opt.wildignore = "__pycache__"
--- opt.wildignore = opt.wildignore + { "*.o", "*~", "*.pyc", "*pycache*" }
 
 -- ui
 opt.ruler = true                                  -- Always show current position
@@ -140,16 +112,25 @@ opt.inccommand='nosplit'                          -- interactive find replace pr
 
 -- Text appearance
 opt.list = true
+opt.listchars = {
+  tab = '→ ',
+  nbsp= '␣',
+  trail = '•',
+  extends = '',
+  precedes = ''
+  -- eol = "¬",
+}
 opt.joinspaces = false                            -- Two spaces and grade school, we're done
-cmd('set iskeyword+=-')                           -- treat dash separated words as a word text object
-cmd('set iskeyword-=#')                           -- Remove # from part of word
-cmd('set matchpairs+=<:>,«:»,｢:｣')                -- Match angle brackets...
-cmd('set listchars+=precedes:«,extends:»')
-cmd('set listchars+=precedes:,extends:')
-cmd('set listchars+=tab:→\\ ,nbsp:␣,trail:•')     -- show hidden characters
-cmd('set whichwrap+=<,>,[,],h,l')                 -- Allow left/right & h/l key to move to the previous/next line
+cmd [[set iskeyword+=-]]                          -- treat dash separated words as a word text object
+cmd [[set iskeyword-=#]]                          -- Remove # from part of word
+opt.matchpairs:append({'<:>','«:»','｢:｣'})        -- Match angle brackets...)
+opt.whichwrap:append('<,>,[,],h,l')               -- Allow left/right & h/l key to move to the previous/next line
+-- code folding settings
 opt.foldtext='hasan#utils#foldtext()'
-opt.foldlevel=99
+opt.foldlevelstart = 99
+opt.foldenable = true                             -- don't fold by default
+opt.foldnestmax = 10                              -- deepest fold is 10 levels
+opt.foldlevel = 1
 -- Scroll aside
 opt.sidescroll=1
 opt.scrolloff=1                                   -- Set 1 lines to the cursor - when moving vertically using j/k
@@ -160,6 +141,6 @@ opt.wrap = false                                  -- No wrap by default
 opt.linebreak = true                              -- Don't break words when wrapping lines
 opt.breakindent = true                            -- Every wrapped line will continue visually indented
 opt.showbreak = string.rep(" ", 3)                -- Make it so that long lines wrap smartly
--- cmd('let &showbreak="↳ "')                         -- Make wrapped lines more obvious
-cmd('set cpoptions+=n')
+-- cmd('let &showbreak="↳ "')                        -- Make wrapped lines more obvious
+opt.cpoptions:append('n')
 
