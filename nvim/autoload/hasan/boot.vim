@@ -4,6 +4,10 @@ function! hasan#boot#auto_set_cursor_color(...) abort
   if &filetype =~ 'list\|\<fern\>'
     set winhighlight=CursorLine:CursorLineFocus
   endif
+
+  if &filetype !~ 'TelescopePrompt'
+    setlocal cursorline
+  endif
 endfunction
 " }}}
 

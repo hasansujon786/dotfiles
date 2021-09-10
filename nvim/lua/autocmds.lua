@@ -14,9 +14,8 @@ local autocmds = {
     {'TermOpen * setfiletype terminal | set bufhidden=hide'},
     {'ColorScheme * call hasan#highlight#load_custom_highlight()'},
 
-    {'WinEnter,BufWinEnter,FocusGained * setlocal cursorline'},
-    {'WinLeave,FocusLost * setlocal nocursorline'},
-    {'WinEnter,BufWinEnter * call timer_start(50, function("hasan#boot#auto_set_cursor_color"))'},
+    {'WinEnter,BufWinEnter,FocusGained * call timer_start(50, function("hasan#boot#auto_set_cursor_color"))'},
+    {'WinLeave,BufWinLeave,FocusLost * setlocal nocursorline'},
     -- {'WinEnter,BufWinEnter *.vim,*.js,*.lua call hasan#boot#highligt_ruler(1)'},
   },
   FernEvents = {
