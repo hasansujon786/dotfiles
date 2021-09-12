@@ -10,3 +10,4 @@ nnoremap <silent> <buffer> t :call <SID>hop('tabnew')<CR>
 nnoremap <silent> <buffer> s :call <SID>hop('split')<CR>
 nnoremap <silent> <buffer> v :call <SID>hop('vsplit')<CR>
 nnoremap <silent> <buffer> f :call <SID>hop('Fedit')<CR>
+nnoremap <silent> <buffer> q :wq<CR>
