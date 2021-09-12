@@ -1,4 +1,6 @@
-M = {}
+M = {
+  ensure_installed = {'html', 'sumneko_lua', 'tailwindcss', 'tsserver', 'vimls', 'vuels', 'cssls'}
+}
 
 -- https://www.youtube.com/watch?v=tAVxxdFFYMU
 M.rename_with_quickfix = function()
@@ -42,6 +44,23 @@ M.rename_with_quickfix = function()
   end)
 end
 
+M.install_essential_servers = function ()
+  local installing_servers = false
+  for _,  server_name in ipairs(M.ensure_installed) do
+    local ok, server = require'nvim-lsp-installer.servers'.get_server(server_name)
+    if ok then
+      if not server:is_installed() then
+        server:install()
+        if not installing_servers then
+          installing_servers = true
+        end
+      end
+    end
+  end
 
+  if installing_servers then
+    vim.cmd('LspInstallInfo')
+  end
+end
 
 return M

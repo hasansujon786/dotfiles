@@ -22,7 +22,7 @@ opt.path:append({'**'})
 -- opt.clipboard = "unnamedplus"
 
 opt.lazyredraw = true                             -- Don't redraw while executing macros (good performance config)
-opt.updatetime=100
+opt.updatetime=300
 opt.timeout = true
 opt.ttimeout = true
 opt.ttimeoutlen=200
