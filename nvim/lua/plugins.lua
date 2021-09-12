@@ -137,12 +137,12 @@ return require('packer').startup({
     use({ 'neovim/nvim-lspconfig',
       opt = true, event = 'CursorHold',
       disable = vim.g.disable_lsp,
-      config = function()
-        require('lsp')
-        require('lsp.setup.tsserver')
-        require('lsp.setup.tailwindcss-ls')
-        require('lsp.setup.sumneko_lua')
-      end
+      config = function() require('lsp') end,
+    })
+    use({ 'williamboman/nvim-lsp-installer',
+      opt = true, after = 'nvim-lspconfig',
+      disable = vim.g.disable_lsp,
+      config = function() require('lsp.installer') end,
     })
     use {
       'hrsh7th/nvim-cmp',
