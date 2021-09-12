@@ -63,10 +63,10 @@ util_setup_figlet() {
 }
 util_backUpConfig() {
   if [ -d $1 ]; then
-    echo 'Removing old directory.'
+    echo 'Backeduped old directory.'
     mv $1 "$1.bak.$(date +%Y.%m.%d-%H.%M.%S)"
   elif [ -f $1 ]; then
-    echo 'Removing old file.'
+    echo 'Backeduped old file.'
     mv $1 "$1.bak.$(date +%Y.%m.%d-%H.%M.%S)"
   fi
 }
@@ -140,18 +140,26 @@ setup_lazygit () {
   util_backUpConfig ${lazygitPath[$machineCode]}
   util_makeSymlinkPath $HOME/dotfiles/tui/lazygit ${lazygitPath[$machineCode]}
 
-  # $getter install -y lazygit
+  if [[ "$machine" == "windows" ]]; then
+    $getter install -y lazygit
+  elif [[ "$machine" == "ter" ]]; then
+    # install manually for termux
+    mkdir -p ./lazy
+    export LAZYGIT_VER="0.29"
+    wget -O ./lazy/lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_arm64.tar.gz
+    tar xvf ./lazy/lazygit.tgz -C ./lazy/
+    mv ./lazy/lazygit /data/data/com.termux/files/usr/bin/lazygit
+    rm -rf ./lazy
+  else
+    # install manually for linux
+    mkdir -p ./lazy
+    export LAZYGIT_VER="0.29"
+    wget -O ./lazy/lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_x86_64.tar.gz
+    tar xvf ./lazy/lazygit.tgz -C ./lazy/
+    sudo mv ./lazy/lazygit /usr/local/bin/
+    rm -rf ./lazy
+  fi
 
-  # install manually
-  # # NOTE: Currently lazygit installation only worls for termux
-  # mkdir -p ./lazy
-  # export LAZYGIT_VER="0.28.1"
-  # # wget -O lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_x86_64.tar.gz
-  # wget -O ./lazy/lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_arm64.tar.gz
-  # tar xvf ./lazy/lazygit.tgz -C ./lazy/
-  # # sudo mv lazygit /usr/local/bin/
-  # mv ./lazy/lazygit /data/data/com.termux/files/usr/bin/lazygit
-  # rm -rf ./lazy
 }
 
 setup_lf() {
