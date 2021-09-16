@@ -58,7 +58,7 @@ local function lsp_buffer_keymaps(bufnr)
   -- buf_set_keymap('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<F2>', '<cmd>lua require("lsp.util").rename_with_quickfix()<CR>', opts)
   buf_set_keymap('n', '<C-space>', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  if filetype ~= 'lua' then
+  if filetype ~= 'lua' and filetype ~= 'vim' then
     buf_set_keymap('n', '<F9>', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   end
 
