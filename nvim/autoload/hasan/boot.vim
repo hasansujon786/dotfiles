@@ -1,6 +1,8 @@
 
 " AutoSetCursorColor {{{
 function! hasan#boot#auto_set_cursor_color(...) abort
+  if &filetype == 'floaterm' | return | endif
+
   if &filetype =~ 'list\|\<fern\>'
     set winhighlight=CursorLine:CursorLineFocus
   endif

@@ -224,8 +224,8 @@ vim.g.floaterm_keymap_new    = '<C-\\>c'
 vim.g.floaterm_keymap_prev   = '<C-\\>p'
 vim.g.floaterm_keymap_next   = '<C-\\>n'
 vim.g.floaterm_keymap_kill   = '<C-\\>x'
-vim.g.floaterm_keymap_toggle = '<A-CR>'
-maps.nnoremap('<A-CR>', ':FloatermToggle<CR>')
+vim.g.floaterm_keymap_toggle = '<C-t>'
+maps.nnoremap('<C-t>', ':FloatermToggle<CR>')
 maps.nnoremap(']t', ':FloatermToggle<CR><C-\\><C-n>')
 maps.nnoremap('[t', ':FloatermToggle<CR><C-\\><C-n>')
 -- Telescope
