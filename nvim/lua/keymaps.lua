@@ -5,10 +5,10 @@ maps.inoremap('jk', '<ESC>')
 maps.cnoremap('jk', '<ESC>')
 -- Hide search highlighting
 if vim.fn.exists('g:loaded_HLNext') then
-  maps.nnoremap('q', '<ESC>:call HLNextOff()<BAR>:nohlsearch<BAR>echo ""<CR>')
+  maps.nnoremap('q', '<ESC>:call HLNextOff()<BAR>:nohlsearch<BAR>echo ""<BAR>ColorizerReloadAllBuffers<CR>')
   maps.vnoremap('q', '<ESC>:call HLNextOff()<BAR>:nohlsearch<CR>')
 else
-  maps.nnoremap('q', '<ESC>:nohlsearch<BAR>echo ""<CR>')
+  maps.nnoremap('q', '<ESC>:nohlsearch<BAR>echo ""<BAR>ColorizerReloadAllBuffers<CR><CR>')
   maps.vnoremap('q', '<ESC>:nohlsearch<CR>')
 end
 -- run last : command easily
