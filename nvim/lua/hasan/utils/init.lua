@@ -1,3 +1,4 @@
+local Job = require('plenary.job')
 local M = {}
 
 M.reload_this_module = function ()
@@ -96,6 +97,46 @@ M.create_augroups = function(definitions)
       vim.api.nvim_command(command)
     end
     vim.api.nvim_command('augroup END')
+  end
+end
+
+M.open_git_remote = function(openRoot)
+  local fpath = nil
+  local isReadonly = vim.api.nvim_buf_get_option(0, 'readonly')
+  local isModifiable = vim.api.nvim_buf_get_option(0, 'modifiable')
+  if not isReadonly and isModifiable then
+    fpath = vim.fn.expand('%')
+  end
+
+  local j = Job:new({
+    command = 'git',
+    args = {'config', '--get',  'remote.origin.url'},
+    cwd = vim.fn.expand('%:p:h')
+  })
+  local k = Job:new({
+    command = "git",
+    -- args = {'rev-parse', '--abbrev-ref', 'HEAD'},
+    args = {'branch', '--show-current'},
+    cwd = vim.fn.expand('%:p:h')
+  })
+
+  local ok_remote, remote_root = pcall(function()
+    return vim.trim(j:sync()[1])
+  end)
+  local ok_branch, branch = pcall(function()
+    return vim.trim(k:sync()[1])
+  end)
+
+  if ok_remote and ok_branch then
+    local full_remote_path = remote_root
+    if fpath and not openRoot then
+      full_remote_path = string.format('%s/blob/%s/%s', remote_root, branch, fpath)
+    end
+
+    vim.cmd('OpenURL '.. full_remote_path)
+    print(full_remote_path)
+  else
+    return ''
   end
 end
 

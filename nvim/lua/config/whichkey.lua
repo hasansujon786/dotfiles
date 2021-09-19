@@ -85,14 +85,9 @@ local leader = {
   g = {
     name = '+git',
     ['/'] = { ':Telescope git_status<CR>',         'Find git files*' },
-    ['.'] = { ':Git add %<CR>',                    'Stage current file' },
     f = { ':diffget //2<CR>',                      'diffget ours' },
     j = { ':diffget //3<CR>',                      'diffget theirs' },
-    B = { ':GBrowse<CR>',                          'Browse git repo' },
-    M = { ':Git blame<CR>',                        'Blame current buffer' },
-    L = { ':Git log<CR>',                          'Show logs' },
-    v = { ':GV<CR>',                               'View commits' },
-    V = { ':GV!<CR>',                              'View buffer commits' },
+    B = { ':lua require("hasan.utils.init").open_git_remote(false)<CR>',   'Browse git repo' },
 
     l = { ':FloatermNew lazygit<CR>',              'Open lazygit' },
     t = { ':FloatermNew tig<CR>',                  'Open tig' },
