@@ -96,12 +96,12 @@ return require('packer').startup({
     use({ 'tpope/vim-repeat', opt = true, event = 'BufRead' })
 
     --> Git ----------------------------------------
-    use({ 'tpope/vim-fugitive', opt = true, cmd = {'Git','GBrowse','GV'},
-      requires = {
-        'tpope/vim-rhubarb',
-        'junegunn/gv.vim'
-      }
-    })
+    -- use({ 'tpope/vim-fugitive', opt = true, cmd = {'Git','GBrowse','GV'},
+    --   requires = {
+    --     'tpope/vim-rhubarb',
+    --     'junegunn/gv.vim'
+    --   }
+    -- })
     use({ 'TimUntersberger/neogit', opt = true, cmd = 'Neogit' })
     use({ 'lewis6991/gitsigns.nvim',
       opt = true, event = 'BufRead',
