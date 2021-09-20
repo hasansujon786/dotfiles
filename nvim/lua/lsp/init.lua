@@ -1,24 +1,19 @@
 local M = {}
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'double' })
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'double' })
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'double' })
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'double' })
+vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+})
 
-vim.fn.sign_define(
-  "LspDiagnosticsSignError",
-  { texthl = "LspDiagnosticsSignError", text = "", numhl = "LspDiagnosticsSignError" }
-)
-vim.fn.sign_define(
-  "LspDiagnosticsSignWarning",
-  { texthl = "LspDiagnosticsSignWarning", text = "", numhl = "LspDiagnosticsSignWarning" }
-)
-vim.fn.sign_define(
-  "LspDiagnosticsSignHint",
-  { texthl = "LspDiagnosticsSignHint", text = "", numhl = "LspDiagnosticsSignHint" }
-)
-vim.fn.sign_define(
-  "LspDiagnosticsSignInformation",
-  { texthl = "LspDiagnosticsSignInformation", text = "", numhl = "LspDiagnosticsSignInformation" }
-)
+local signs = { Error = '', Warning = '', Hint = '', Information = '' }
+for type, icon in pairs(signs) do
+  local hl = 'LspDiagnosticsSign' .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+end
 
 local function lsp_document_highlight(client)
   -- Set autocommands conditional on server_capabilities
