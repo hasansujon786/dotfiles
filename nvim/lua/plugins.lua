@@ -26,7 +26,7 @@ return require('packer').startup({
 
     --> Productiviry -------------------------------
     use({ 'vimwiki/vimwiki', opt = true, cmd = {'VimwikiIndex','VimwikiTabIndex','VimwikiUISelect'} })
-    use({ 'kristijanhusak/orgmode.nvim', opt = true, ft = {'org'},
+    use({ 'kristijanhusak/orgmode.nvim', opt = true, event = 'CursorHold',
       config = function() require('config.orgmode') end
     })
     use({"akinsho/org-bullets.nvim", opt = true, after = 'orgmode.nvim',
