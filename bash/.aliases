@@ -14,7 +14,7 @@ alias vl='nvim -c "normal '\''0"'
 alias vst='nvim --startuptime startup.log -c exit && tail -100 startup.log'
 
 # Tmux
-alias t="tmux new -s pasta"
+alias t="tmux new -As pasta"
 alias tt="tmux new -s "
 alias ta="tmux attach"
 # alias tmux="env TERM=xterm-256color tmux"
