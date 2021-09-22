@@ -20,6 +20,7 @@ window:
   #   y: 0
   # decorations: none
   dynamic_title: true
+  startup_mode: Maximized # Windowed Fullscreen
 background_opacity: 0.92
 
 # Font Customization
