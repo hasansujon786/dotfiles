@@ -76,44 +76,44 @@ cmp.setup({
     { name = 'orgmode' },
   },
   formatting = {
-    format = function(entry, vim_item)
-      -- vim_item.menu = vim_item.kind
+    format = function(_, vim_item)
+      vim_item.menu = vim_item.kind
+      -- vim_item.menu = ({
+      --   vsnip    = '[Snippet]',
+      --   nvim_lsp = '[LSP]',
+      --   buffer   = '[Buffer]',
+      --   path     = '[Path]',
+      --   spell    = '[Spell]',
+      --   orgmode  = '[orgmode]',
+      -- })[entry.source.name]
+
       vim_item.kind = ({
-        Text          = '',
-        Method        = '',
         Function      = '',
-        Constructor   = '',
-        Field         = 'ﴲ',
+        Constructor   = '',
+        Method        = '',
         Variable      = '',
-        Constant      = '',
+        Field         = 'ﴲ',
+        TypeParameter = '',
+        Constant      = '',
         Class         = '',
-        Interface     = '',
-        Module        = '',
-        Property      = 'ﰠ',
-        Unit          = '',
-        Value         = '',
-        Enum          = '練',
-        EnumMember    = '',
-        Snippet       = '',
-        Keyword       = '',
-        Color         = '',
-        File          = '',
-        Reference     = '',
-        Folder        = '',
-        Struct        = 'ﳤ',
+        Interface     = 'ﰮ',
+        Struct        = '',
         Event         = '',
         Operator      = '',
-        TypeParameter = '',
+        Module        = '',
+        Property      = '',
+        Enum          = '',
+        EnumMember    = '',
+        Value         = '',
+        Reference     = '',
+        Keyword       = '',
+        File          = '',
+        Folder        = 'ﱮ',
+        Color         = '',
+        Unit          = '',
+        Snippet       = '',
+        Text          = '',
       })[vim_item.kind]
-
-      vim_item.menu = ({
-        vsnip    = '[Snippet]',
-        nvim_lsp = '[LSP]',
-        buffer   = '[Buffer]',
-        path     = '[Path]',
-        spell    = '[Spell]',
-        orgmode  = '[orgmode]',
-      })[entry.source.name]
       return vim_item
     end,
   },

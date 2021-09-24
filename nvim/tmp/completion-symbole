@@ -1,3 +1,7 @@
+https://www.chrisatmachine.com/Neovim/26-lsp-symbols/
+https://code.visualstudio.com/docs/editor/intellisense
+
+it from coc.vim by chrisAtMachine 
 "suggest.completionItemKindLabels": {
   "method": "  ",
   "function": "  ",
@@ -82,3 +86,27 @@ vim.lsp.protocol.CompletionItemKind = {
   "   (Operator)",
   "   (TypeParameter)",
 }
+
+" M.icons = {
+"   Class = " ",
+"   Color = " ",
+"   Constant = " ",
+"   Constructor = " ",
+"   Enum = "了 ",
+"   EnumMember = " ",
+"   Field = " ",
+"   File = " ",
+"   Folder = " ",
+"   Function = " ",
+"   Interface = "ﰮ ",
+"   Keyword = " ",
+"   Method = "ƒ",
+"   Module = " ",
+"   Property = " ",
+"   Snippet = "﬌ ",
+"   Struct = " ",
+"   Text = " ",
+"   Unit = " ",
+"   Value = " ",
+"   Variable = " ",
+" }
