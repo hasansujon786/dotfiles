@@ -74,6 +74,7 @@ return require('packer').startup({
     use({ 'Konfekt/vim-CtrlXA', opt = true, event = 'CursorHold' })
     use({ 'tpope/vim-commentary', opt = true, event = 'BufRead' })
     use({ 'tpope/vim-surround', opt = true, event = 'BufRead',  })
+    use({ 'nathom/filetype.nvim' })
 
     use({ 'nvim-lua/popup.nvim' })
     use({ 'nvim-lua/plenary.nvim' })
