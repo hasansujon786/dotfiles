@@ -122,7 +122,6 @@ function! hasan#fern#FernInit() abort
   nmap <buffer> x <Plug>(fern-action-collapse)
   nmap <buffer> I <Plug>(fern-action-hidden:toggle)
   nmap <buffer> W <Plug>(fern-action-cd)
-  nmap <buffer> B <Plug>(fern-action-save-as-bookmark)
   nmap <buffer> q <C-w>c
   nmap <buffer><nowait> l <Plug>(fern-custom-openAndClose-enter)
   nmap <buffer><nowait> h <Plug>(fern-action-leave)
@@ -132,19 +131,19 @@ function! hasan#fern#FernInit() abort
   nnoremap <silent><buffer> f :call hasan#fern#focus_last_file()<CR>
   nnoremap <silent><buffer> <BS> :call hasan#fern#edit_fern_alternate()<CR>
   " nmap <buffer> K <Plug>(fern-action-mark-children:leaf)
-
-  " Open bookmark:///
-  nnoremap <buffer><silent>
-        \ <Plug>(fern-my-enter-bookmark)
-        \ :<C-u>Fern bookmark:///<CR>
-  nmap <buffer><expr><silent>
-        \ <Tab>
-        \ fern#smart#scheme(
-        \   "\<Plug>(fern-my-enter-bookmark)",
-        \   {
-        \     'bookmark': "\<C-^>",
-        \   },
-        \ )
 endfunction
+  " nmap <buffer> B <Plug>(fern-action-save-as-bookmark)
+  " Open bookmark:///
+  " nnoremap <buffer><silent>
+  "       \ <Plug>(fern-my-enter-bookmark)
+  "       \ :<C-u>Fern bookmark:///<CR>
+  " nmap <buffer><expr><silent>
+  "       \ <Tab>
+  "       \ fern#smart#scheme(
+  "       \   "\<Plug>(fern-my-enter-bookmark)",
+  "       \   {
+  "       \     'bookmark': "\<C-^>",
+  "       \   },
+  "       \ )
 " }}}
 
