@@ -8,6 +8,7 @@ tt.state
 log.log
 /gui/Keypirinha/User/Keypirinha-Notepad2.ini
 /gui/Keypirinha/User/Keypirinha.history
+/nvim/plugin/packer_compiled.lua
 
 # dependencies
 /node_modules
