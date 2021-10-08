@@ -3,6 +3,8 @@ local local_action = require('hasan.telescope.local_action')
 
 require('telescope').setup{
   defaults = {
+    scroll_strategy = 'cycle',
+    selection_strategy = 'reset',
     file_sorter = require'telescope.sorters'.get_fzy_sorter,
     generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
     prompt_prefix = '  ',
@@ -19,15 +21,15 @@ require('telescope').setup{
       --   ["<Del>"] = actions.close
       -- },
       i = {
-        ["<C-x>"] = false,
-        ["<C-u>"] = false,
-        ["<C-d>"] = false,
-        ["<C-s>"] = actions.file_split,
-        ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-        ["<esc>"] = actions.close,
-        ["<M-u>"] = actions.preview_scrolling_up,
-        ["<M-d>"] = actions.preview_scrolling_down,
-        ["<C-f>"] = local_action.fedit,
+        ['<C-x>'] = false,
+        ['<C-u>'] = false,
+        ['<C-d>'] = false,
+        ['<C-s>'] = actions.file_split,
+        ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+        ['<esc>'] = actions.close,
+        ['<M-u>'] = actions.preview_scrolling_up,
+        ['<M-d>'] = actions.preview_scrolling_down,
+        ['<C-f>'] = local_action.fedit,
       },
     },
     file_ignore_patterns = { "%.gitignore", "%.git\\.*" },
