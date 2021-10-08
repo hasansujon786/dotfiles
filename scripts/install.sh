@@ -230,8 +230,12 @@ install_various_apps() {
   # util_print vit
   # pip3 install vit
 
-  $getter install build-essential
-  $getter install ninja-build
+  if [[ "$machine" == "windows" ]]; then
+    $getter install mingw
+  elif [[ "$machine" == "linux" ]]; then
+    $getter install build-essential
+    $getter install ninja-build
+  fi
 }
 
 setup_keypirinha() {
@@ -249,7 +253,7 @@ install_and_setup_tmux() {
   # L => ~/.tmux.conf
   util_print tmux
   echo 'Instlling tmux...'
-  apt install -y tmux
+  $getter install -y tmux
 
   if [ -f ~/.tmux.conf ]; then
     echo 'Removing old .tmux.conf'
@@ -269,13 +273,15 @@ auto_install_everything() {
   setup_bash
   setup_alacritty
   setup_nvim
-  # setup_lazygit
+  setup_lazygit
   setup_lf
   install_various_apps
-  setup_node
+  # setup_node
 
-  if [ $machineCode -eq 0 ]; then
+  if [[ "$machine" == "windows" ]]; then
     setup_keypirinha
+  elif [[ "$machine" == "linux" ]]; then
+    install_and_setup_tmux
   fi
 }
 
