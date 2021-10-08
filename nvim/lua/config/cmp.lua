@@ -15,7 +15,10 @@ cmp.setup({
     maxheight = math.floor(vim.o.lines * 0.3),
     minheight = 1,
   },
-  -- experimental = { ghost_text = true, },
+  experimental = {
+    native_menu = false,
+    ghost_text = false,
+  },
   snippet = {
     expand = function(args)
       vim.fn['vsnip#anonymous'](args.body)
@@ -24,16 +27,16 @@ cmp.setup({
   mapping = {
     ['<A-u>'] = cmp.mapping.scroll_docs(-4),
     ['<A-d>'] = cmp.mapping.scroll_docs(4),
-    ['<A-n>'] = cmp.mapping(function()
-      if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(t('<C-n>'), 'n')
+    ['<A-n>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
       else
-        vim.fn.feedkeys(t('<ESC>n'), '')
+        fallback()
       end
     end, { 'i', 's' }),
     ['<A-p>'] = cmp.mapping(function()
-      if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(t('<C-p>'), 'n')
+      if cmp.visible() then
+        cmp.select_prev_item()
       else
         vim.fn.feedkeys(t('<ESC>p'), '')
       end
@@ -46,8 +49,7 @@ cmp.setup({
     --   select = true,
     -- }),
     ['<Tab>'] = cmp.mapping(function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        -- vim.fn.feedkeys(t('<C-n>'), 'n')
+      if cmp.visible() then
         cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
       elseif vim.fn['hasan#compe#check_front_char']() then
         vim.fn.feedkeys(t('<Right>'), 'n')
@@ -58,7 +60,7 @@ cmp.setup({
       end
     end, { 'i', 's' }),
     ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if vim.fn.pumvisible() == 1 then
+      if cmp.visible() then
         vim.fn.feedkeys(t('<C-p>'), 'n')
       elseif vim.fn['vsnip#jumpable'](-1) == 1 then
         vim.fn.feedkeys(t('<Plug>(vsnip-jump-prev)'), '')
