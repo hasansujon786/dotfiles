@@ -76,7 +76,7 @@ return require('packer').startup({
     use({ 'tpope/vim-surround', opt = true, event = 'BufRead',  })
     use({ 'nathom/filetype.nvim' })
 
-    -- use({ 'nvim-lua/popup.nvim' })
+    use({ 'nvim-lua/popup.nvim' })
     use({ 'nvim-lua/plenary.nvim' })
     use({ 'voldikss/vim-floaterm', opt = true,
       cmd = {'FloatermNew','FloatermToggle'},
