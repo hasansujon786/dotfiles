@@ -76,7 +76,7 @@ return require('packer').startup({
     use({ 'tpope/vim-surround', opt = true, event = 'BufRead',  })
     use({ 'nathom/filetype.nvim' })
 
-    use({ 'nvim-lua/popup.nvim' })
+    -- use({ 'nvim-lua/popup.nvim' })
     use({ 'nvim-lua/plenary.nvim' })
     use({ 'voldikss/vim-floaterm', opt = true,
       cmd = {'FloatermNew','FloatermToggle'},
@@ -145,9 +145,9 @@ return require('packer').startup({
       disable = vim.g.disable_lsp,
       config = function() require('lsp.installer') end,
     })
-    use {
+    use({
       'hrsh7th/nvim-cmp',
-      opt = true, event = 'InsertEnter',
+      opt = true, after = 'nvim-lspconfig',
       config = function() require('config.cmp') end,
       requires = {
         'hrsh7th/vim-vsnip',
@@ -159,13 +159,13 @@ return require('packer').startup({
         'hrsh7th/cmp-path',
         'hrsh7th/cmp-vsnip'
       },
-    }
-    use({ 'mattn/emmet-vim', opt = true, event = 'BufRead',
-      config = function() require('config.emmet') end
     })
     use({ 'windwp/nvim-autopairs',
       opt = true, after = 'nvim-cmp',
       config = function() require('config.autopairs') end
+    })
+    use({ 'mattn/emmet-vim', opt = true, event = 'BufRead',
+      config = function() require('config.emmet') end
     })
   end,
 })
