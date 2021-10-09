@@ -119,6 +119,7 @@ setup_nvim() {
     wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
     chmod u+x nvim.appimage
     sudo mv nvim.appimage /usr/local/bin/nvim
+    $getter install -y xclip
   fi
 
   packerPath=($HOME/AppData/Local/nvim-data/site/pack/packer/start/packer.nvim, $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim)
@@ -200,6 +201,8 @@ setup_node () {
   util_print npm-essentials
   sudo npm install -g yarn
   sudo npm install -g expo-cli
+  sudo npm install -g neovim
+  sudo npm install -g live-server
 }
 
 install_various_apps() {
@@ -218,8 +221,6 @@ install_various_apps() {
   $getter install -y python
   # c:\python39\python.exe -m pip install --upgrade pip
   # pip install --user --upgrade pynvim
-  # @todo:
-  # npm install --global live-server
 
   # TODO
   # util_print taskwarrior
