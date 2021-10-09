@@ -1,10 +1,10 @@
 local cmp = require'cmp'
 local has_words_before = function()
-  local cursor = vim.api.nvim_win_get_cursor(0)
-  return not vim.api.nvim_get_current_line():sub(1, cursor[2]):match('^%s$')
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
-local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
+local feedkey = function(key, mode)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
 cmp.setup({
@@ -38,7 +38,7 @@ cmp.setup({
       if cmp.visible() then
         cmp.select_prev_item()
       else
-        vim.fn.feedkeys(t('<ESC>p'), '')
+        feedkey('<ESC>p', '')
       end
     end, { 'i', 's' }),
     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
@@ -52,18 +52,18 @@ cmp.setup({
       if cmp.visible() then
         cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
       elseif vim.fn['hasan#compe#check_front_char']() then
-        vim.fn.feedkeys(t('<Right>'), 'n')
+        feedkey('<Right>', 'n')
       elseif has_words_before() and vim.fn['vsnip#available']() == 1 then
-        vim.fn.feedkeys(t('<Plug>(vsnip-expand-or-jump)'), '')
+        feedkey('<Plug>(vsnip-expand-or-jump)', '')
       else
         fallback()
       end
     end, { 'i', 's' }),
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        vim.fn.feedkeys(t('<C-p>'), 'n')
+        cmp.select_prev_item()
       elseif vim.fn['vsnip#jumpable'](-1) == 1 then
-        vim.fn.feedkeys(t('<Plug>(vsnip-jump-prev)'), '')
+        feedkey('<Plug>(vsnip-jump-prev)', '')
       else
         fallback()
       end
@@ -127,4 +127,6 @@ vim.g.vsnip_filetypes = {
   javascriptreact = {'javascript'},
   typescriptreact = {'typescript'},
 }
+
+vim.cmd[[autocmd FileType TelescopePrompt lua require('cmp').setup.buffer { enabled = false }]]
 
