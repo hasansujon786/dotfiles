@@ -25,26 +25,12 @@ wk.setup {
 local leader = {
   a = {
     name = '+lsp',
-    c = { '<cmd>CocList commands<CR>',                   'commands' },
-    e = { '<cmd>CocList extensions<CR>',                 'extensions' },
-    o = { '<cmd>CocList outline<CR>',                    'outline' },
-    S = { '<cmd>CocList snippets<CR>',                   'snippets' },
-    T = { '<cmd>CocList tasks<CR>',                      'list-tasks' },
-    s = { '<cmd>CocList -I symbols<CR>',                 'symbol-references' },
+    d = 'Show diagnostics',
+    h = 'Show signature help',
 
-    h = { '<Plug>(coc-float-hide)',               'float-hide' },
-    j = { '<Plug>(coc-float-jump)',               'float-jump' },
-    l = { '<Plug>(coc-codelens-action)',          'code-lens' },
-
-    -- a = 'coc-action',
-    -- f = 'format',
-
-    ['?'] = { '<cmd>CocList diagnostics<CR>',            'diagnostics' },
-    ['.'] = { '<cmd>CocListResume<CR>',                  'resume-list' },
-    [';'] = { '<cmd>CocList<CR>',                        'coc-lists' },
-    [','] = { '<cmd>CocConfig<CR>',                      'config' },
-    ['$'] = { '<cmd>CocRestart<CR>',                     'coc-restart' },
-    U = { '<cmd>CocUpdate<CR>',                          'update-CoC' },
+    ['+'] = 'Add workspace folder',
+    ['-'] = 'Remove workspace folder',
+    ['?'] = 'List workspace folder',
   },
 
   b = {
@@ -142,8 +128,8 @@ local leader = {
     -- c = { '<Plug>(dotoo-capture-custom)',                       '+org-capture' },
     t = { ':FloatermNew bash<CR>',                              'Open terminal popup' },
     T = { ':FloatermNew --wintype=normal --height=10 bash<CR>', 'Open terminal split' },
-    q = { '<cmd>call hasan#utils#quickFix_toggle()<CR>',        'Quickfix' },
-    -- y = { ':CocList --normal yank<CR>',                         'Yank list' },
+    q = { '<cmd>call hasan#window#toggle_quickfix(1)<CR>',      'Open Quickfix list' },
+    l = { '<cmd>call hasan#window#toggle_quickfix(0)<CR>',      'Open Local list' },
     y = { ':lua require("yanklist").yanklist({initial_mode="normal"})<CR>', 'Yank list' },
 
     p = { '<cmd>call hasan#fern#drawer_toggle(1)<CR>',  'Toggle prject tree' },

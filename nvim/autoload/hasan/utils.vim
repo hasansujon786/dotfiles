@@ -20,19 +20,6 @@ function! hasan#utils#confirmQuit(writeFile)
 endfunction
 " }}}
 
-" Toggle quickfix window {{{
-function! hasan#utils#quickFix_toggle()
-  for i in range(1, winnr('$'))
-    let bnum = winbufnr(i)
-    if getbufvar(bnum, '&buftype') == 'quickfix'
-      cclose
-      return
-    endif
-  endfor
-  copen
-endfunction
-" }}}
-
 " Toggle wrap {{{
 " Allow j and k to work on visual lines (when wrapping)
 function! hasan#utils#toggleWrap()
