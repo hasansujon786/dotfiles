@@ -147,6 +147,8 @@ local leader = {
     s = { ':SessionSave<CR>',                       'Save session' },
     q = { ':SessionSaveAndQuit<CR>',                'Save session and quit' },
     d = { ':Dashboard<CR>',                         'Open dashboard' },
+
+    [':'] = 'Run shell command',
   },
 
   t = {
