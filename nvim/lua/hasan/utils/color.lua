@@ -1,15 +1,17 @@
 local M = {}
 
 M.toggle_bg_tranparent = function ()
+  local theme = vim.g.onedark_theme_colors[vim.g.onedark_style]
+
   if not vim.g.bg_tranparent then
     vim.g.bg_tranparent = true
-    vim.cmd('hi Normal guibg=NONE guifg=#ABB2BF')
     require('nebulous').disable()
+    vim.cmd(string.format('hi Normal guibg=%s guifg=%s', 'None', theme.fg))
     vim.cmd[[silent !sed -i '01s/false/true/' ~/dotfiles/nvim/lua/state.lua]]
   else
     vim.g.bg_tranparent = false
-    vim.cmd('hi Normal guibg=#282C34 guifg=#ABB2BF')
     require('nebulous').active()
+    vim.cmd(string.format('hi Normal guibg=%s guifg=%s', theme.bg, theme.fg))
     vim.cmd[[silent !sed -i '01s/true/false/' ~/dotfiles/nvim/lua/state.lua]]
   end
 end
