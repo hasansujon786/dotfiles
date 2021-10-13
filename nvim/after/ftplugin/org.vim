@@ -1,3 +1,4 @@
+nmap <buffer> <CR>  <Leader>oo
 nnoremap <silent><c-q> :lua require("orgmode").action('org_mappings.toggle_checkbox')<CR>
 
 function! Org_foldtext()
@@ -17,3 +18,4 @@ function! Org_foldtext()
 endfunction
 
 setl foldtext=Org_foldtext()
+setl spell

@@ -1,5 +1,5 @@
 function hasan#highlight#load_custom_highlight() abort
-  hi TextInfo           guifg=#56B6C2
+  hi TextInfo           guifg=#56B6C2 guibg=NONE
   hi TextSuccess        guifg=#61AFEF
   hi Cursor             guibg=#61AFEF gui=NONE
   hi VertSplit          guifg=#4D5666 guibg=#363d49
