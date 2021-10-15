@@ -219,7 +219,8 @@ maps.nnoremap('<leader>fR', ':Rename <C-R>=expand("%:t")<CR>', {silent = false})
 -- packer commands
 maps.nnoremap('<leader>vpc', ':PackerCompile<CR>', {silent = false})
 -- run project cmd
-maps.nnoremap('<leader>p:', ':!tmux-windowizer $(pwd) ', {silent = false})
+maps.nnoremap('<leader>p:', ':silent ! tmux-windowizer $(pwd) ', {silent = false})
+maps.nnoremap('<leader>p;', ':silent ! tmux-send-keys $(pwd) ', {silent = false})
 
 -- Floaterm
 vim.g.floaterm_keymap_new    = '<C-\\>c'
