@@ -133,6 +133,8 @@ fi
 
 [ -f ~/dotfiles/bash/.aliases ] && source ~/dotfiles/bash/.aliases
 [ -f ~/dotfiles/bash/.env ] && source ~/dotfiles/bash/.env
+[ -f ~/dotfiles/bash/nvm.sh ] && source ~/dotfiles/bash/nvm.sh
+[ -f ~/dotfiles/bash/nvm_bash_completion ] && source ~/dotfiles/bash/nvm_bash_completion
 
 open_alacritty() {
   start alacritty --working-directory $(pwd)
@@ -148,4 +150,3 @@ open_bash() {
 # bind -x '"\C-t\C-t":"open_alacritty"'
 # bind -x '"\C-tq":"open_bash"'
 
-alias luamake=/home/hasan/.local/share/nvim/lsp-servers/sumneko_lua/lua-language-server/3rd/luamake/luamake
