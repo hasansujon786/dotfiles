@@ -116,9 +116,9 @@ setup_nvim() {
   if [[ "$machine" == "windows" ]]; then
     $getter install -y neovim
   else
-    wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
-    chmod u+x nvim.appimage
-    sudo mv nvim.appimage /usr/local/bin/nvim
+    # wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
+    # chmod u+x nvim.appimage
+    # sudo mv nvim.appimage ~/dotfiles/bin/nvim
     $getter install -y xclip
   fi
 
