@@ -195,14 +195,24 @@ setup_alacritty() {
 
 setup_node () {
   util_print nodejs
-  curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-  sudo $getter install nodejs
+  # curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+
+  if [[ "$machine" == "windows" ]]; then
+    $getter install nodejs
+  elif [[ "$machine" == "linux" ]]; then
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+    export NVM_DIR="$HOME/.config/nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+    nvm install 14
+  fi
 
   util_print npm-essentials
-  sudo npm install -g yarn
-  sudo npm install -g expo-cli
-  sudo npm install -g neovim
-  sudo npm install -g live-server
+
+  npm install -g yarn
+  npm install -g expo-cli
+  npm install -g neovim
+  npm install -g live-server
 }
 
 install_various_apps() {
@@ -276,8 +286,8 @@ auto_install_everything() {
   setup_nvim
   setup_lazygit
   setup_lf
+  setup_node
   install_various_apps
-  # setup_node
 
   if [[ "$machine" == "windows" ]]; then
     setup_keypirinha

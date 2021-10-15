@@ -133,8 +133,9 @@ fi
 
 [ -f ~/dotfiles/bash/.aliases ] && source ~/dotfiles/bash/.aliases
 [ -f ~/dotfiles/bash/.env ] && source ~/dotfiles/bash/.env
-[ -f ~/dotfiles/bash/nvm.sh ] && source ~/dotfiles/bash/nvm.sh
-[ -f ~/dotfiles/bash/nvm_bash_completion ] && source ~/dotfiles/bash/nvm_bash_completion
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 open_alacritty() {
   start alacritty --working-directory $(pwd)
