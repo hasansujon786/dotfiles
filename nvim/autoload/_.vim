@@ -72,20 +72,3 @@ function! _#Insertion(cmd)
   put =g:last_insertion
 endfunc
 
-function! _#print_to_float(var_name)
-  if(!exists('b:Fedit_bufnr'))
-    call hasan#float#_createCenteredFloatingWindow(0, {})
-  endif
-
-  if (_#isDict(a:var_name))
-    let keys = keys(a:var_name)
-    let values = values(a:var_name)
-    for idx in range(len(a:var_name))
-      put =keys[idx].' : '.values[idx]
-    endfor
-  else
-    put =a:var_name
-  endif
-endfunc
-
-
