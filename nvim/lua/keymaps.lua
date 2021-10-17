@@ -210,8 +210,8 @@ maps.vnoremap('<leader>y', '"+ygv<Esc>')
 maps.nnoremap('<leader>d', '"+d')
 maps.vnoremap('<leader>d', '"+d')
 -- Word commands
-maps.nnoremap('<Leader>f.', '"zyiw:%s/\\<<C-r><C-w>\\>//gc<Left><Left><Left>', {silent = false})
-maps.xnoremap('Leader>f.', '"zy:%s/<C-r>"//gc<Left><Left><Left>', {silent = false})
+maps.nnoremap('<Leader>f.', '<cmd>call hasan#utils#better_substitute()<CR>', {silent = false})
+maps.xnoremap('<Leader>f.', '<cmd>call hasan#utils#better_substitute()<CR>', {silent = false})
 -- File commands
 maps.nnoremap('<leader>fC', ':w <C-R>=expand("%")<CR>', {silent = false})
 maps.nnoremap('<leader>fM', ':Move <C-R>=expand("%")<CR>', {silent = false})
