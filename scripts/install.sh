@@ -163,6 +163,14 @@ setup_lazygit () {
 
 }
 
+setup_tig() {
+  util_print tig
+  if [[ "$machine" == "windows" ]]; then
+    $getter install -y tig
+  fi
+  ln -s ~/dotfiles/tui/tig/.tigrc ~/.tigrc
+}
+
 setup_lf() {
   # https://linoxide.com/lf-terminal-manager-linux/
   lfPath=($HOME/AppData/Local/lf $HOME/.config/lf $HOME/.config/lf)
@@ -218,11 +226,6 @@ setup_node () {
 install_various_apps() {
   util_print ripgrep
   $getter install -y ripgrep
-
-  # TODO
-  # util_print tig
-  # $getter install -y tig
-  # ln -s ~/dotfiles/tui/tig/.tigrc ~/.tigrc
 
   util_print wget
   $getter install -y wget
@@ -285,6 +288,7 @@ auto_install_everything() {
   setup_alacritty
   setup_nvim
   setup_lazygit
+  setup_tig
   setup_lf
   setup_node
   install_various_apps

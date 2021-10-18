@@ -97,8 +97,10 @@ end
 M.toggle = function ()
   if nb_is_disabled then
     M.active()
+    print('[Nebulous] on')
   else
     M.disable()
+    print('[Nebulous] off')
   end
 end
 
