@@ -26,7 +26,8 @@ return require('packer').startup({
 
     --> Productiviry -------------------------------
     use({ 'vimwiki/vimwiki', opt = true, cmd = {'VimwikiIndex','VimwikiTabIndex','VimwikiUISelect'} })
-    use({ 'kristijanhusak/orgmode.nvim', opt = true, event = 'CursorHold',
+    use({ 'kristijanhusak/orgmode.nvim',
+      opt = true, after = 'nvim-treesitter', branch = 'tree-sitter',
       config = function() require('config.orgmode') end
     })
     use({"akinsho/org-bullets.nvim", opt = true, after = 'orgmode.nvim',
@@ -115,7 +116,7 @@ return require('packer').startup({
 
     --> Lsp & completions --------------------------
     use({ 'neoclide/coc.nvim',
-      opt = true, event = 'BufRead',
+      opt = true, event = 'CursorHold',
       disable = vim.g.disable_coc,
       config = function ()
         vim.cmd 'source ~/dotfiles/nvim/config/coc.vim'
