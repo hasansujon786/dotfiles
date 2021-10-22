@@ -28,6 +28,8 @@ local function lsp_document_highlight(client)
   end
 end
 
+-- buf_set_keymap('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+-- buf_set_keymap('n', '<C-space>', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 local function lsp_buffer_keymaps(bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -49,11 +51,9 @@ local function lsp_buffer_keymaps(bufnr)
   buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = "double"}})<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = "double"}})<CR>', opts)
-  buf_set_keymap('n', 'g?', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({show_header=false,border="double"})<CR>', opts)
-  -- buf_set_keymap('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<F2>', '<cmd>lua require("lsp.util").rename_with_quickfix()<CR>', opts)
-  -- buf_set_keymap('n', '<C-space>', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', '<C-space>', '<cmd>lua require("telescope.builtin").lsp_code_actions(require("telescope.themes").get_cursor({initial_mode="normal"}))<CR>', opts)
+  buf_set_keymap('n', '<C-LeftMouse>', '<LeftMouse><cmd>lua vim.lsp.buf.definition()<CR>', opts)
   if filetype ~= 'lua' and filetype ~= 'vim' then
     buf_set_keymap('n', '<F9>', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   end
@@ -63,6 +63,7 @@ local function lsp_buffer_keymaps(bufnr)
   buf_set_keymap('n', '<leader>a?', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
   buf_set_keymap('n', '<leader>ah', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<leader>ad', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', '<leader>al', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({show_header=false,border="double"})<CR>', opts)
 end
 
 -- Use an on_attach function to only map the following keys
