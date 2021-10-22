@@ -95,8 +95,11 @@ local leader = {
   f = {
     name = '+file',
     -- File Command
-    f = { ':Telescope find_files<CR>',         'Find file' },
-    b = { ':Telescope file_browser<CR>',       'Open file browser' },
+    d = { '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', 'Find directory' },
+    b = { '<cmd>lua require("hasan.telescope.custom").file_browser()<cr>',          'File browser' },
+    f = { '<cmd>lua require("hasan.telescope.custom").file_files()<cr>',            'Find file' },
+    F = { '<cmd>lua require("hasan.telescope.custom").file_files("cur_dir")<cr>',   'Find file from here' },
+
     i = { ':call hasan#utils#file_info()<CR>', 'Show file info' },
     s = { ':write<CR>',                        'Save current file' },
     S = { ':wa<CR>',                           'Save all file' },
@@ -261,9 +264,8 @@ local leader = {
   z = { 'za',                                             'Fold/Unfold' },
   m = { ':lua require("harpoon.mark").add_file()<CR>',    'Mark to Harpoon' },
 
-  ['.'] = { '<cmd>Telescope commands<CR>',                'Commands panel' },
-  [';'] = { '<cmd>Telescope command_history<CR>',         'Search recent cmd' },
-  ['<space>'] = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find File' },
+  ['.'] = { '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', 'Find directory' },
+  ['<space>'] = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find File in project' },
   ['<tab>'] = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', 'Open Harpoon' },
 
   h = { '<C-w>h',                                         'which_key_ignore' },

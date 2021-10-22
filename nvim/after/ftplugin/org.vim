@@ -17,4 +17,4 @@ function! Org_foldtext()
 endfunction
 
 setl foldtext=Org_foldtext()
-" setl spell
+setl shiftwidth=1 tabstop=1 softtabstop=1

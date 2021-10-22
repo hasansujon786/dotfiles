@@ -130,4 +130,22 @@ function M.grep_string()
   })
 end
 
+function M.file_browser(dir)
+  local opts = {}
+  if dir == 'cur_dir' then
+    opts = {cwd=vim.fn.expand('%:h')}
+  end
+
+  builtin.file_browser(themes.get_ivy(opts))
+end
+
+function M.file_files(dir)
+  local opts = {}
+  if dir == 'cur_dir' then
+    opts = {cwd=vim.fn.expand('%:h')}
+  end
+
+  builtin.find_files(themes.get_ivy(opts))
+end
+
 return M

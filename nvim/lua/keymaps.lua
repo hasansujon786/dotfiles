@@ -237,3 +237,4 @@ maps.nnoremap('//', ':Telescope current_buffer_fuzzy_find previewer=false theme=
 maps.vnoremap('/', '"zy:Telescope current_buffer_fuzzy_find previewer=false theme=get_dropdown default_text=<C-r>"<CR>')
 maps.nnoremap('<A-/>', ':Telescope live_grep<CR>')
 maps.vnoremap('<A-/>', '"zy:Telescope grep_string default_text=<C-r>"<CR>')
+maps.nnoremap('<A-x>', '<cmd>Telescope commands theme=get_ivy<CR>')
