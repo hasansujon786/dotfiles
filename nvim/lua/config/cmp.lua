@@ -7,6 +7,34 @@ local feedkey = function(key, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
+local kind_icons = {
+  Function      = '',
+  Constructor   = '',
+  Method        = '',
+  Variable      = '',
+  Field         = 'ﴲ',
+  TypeParameter = '',
+  Constant      = '',
+  Class         = '',
+  Interface     = 'ﰮ',
+  Struct        = '',
+  Event         = '',
+  Operator      = '',
+  Module        = '',
+  Property      = '',
+  Enum          = '',
+  EnumMember    = '',
+  Value         = '',
+  Reference     = '',
+  Keyword       = '',
+  File          = '',
+  Folder        = 'ﱮ',
+  Color         = '',
+  Unit          = '',
+  Snippet       = '',
+  Text          = '',
+}
+
 cmp.setup({
   documentation = {
     border = 'double',
@@ -72,50 +100,29 @@ cmp.setup({
   sources = {
     { name = 'nvim_lsp' },
     { name = 'vsnip' },
-    { name = 'buffer' },
+    { name = 'buffer',
+      opts = {
+        get_bufnrs = function()
+          return vim.api.nvim_list_bufs()
+        end,
+      },
+    },
     { name = 'path' },
-    { name = 'spell' },
-    { name = 'orgmode' },
   },
   formatting = {
-    format = function(_, vim_item)
-      vim_item.menu = vim_item.kind
-      -- vim_item.menu = ({
-      --   vsnip    = '[Snippet]',
-      --   nvim_lsp = '[LSP]',
-      --   buffer   = '[Buffer]',
-      --   path     = '[Path]',
-      --   spell    = '[Spell]',
-      --   orgmode  = '[orgmode]',
-      -- })[entry.source.name]
-
-      vim_item.kind = ({
-        Function      = '',
-        Constructor   = '',
-        Method        = '',
-        Variable      = '',
-        Field         = 'ﴲ',
-        TypeParameter = '',
-        Constant      = '',
-        Class         = '',
-        Interface     = 'ﰮ',
-        Struct        = '',
-        Event         = '',
-        Operator      = '',
-        Module        = '',
-        Property      = '',
-        Enum          = '',
-        EnumMember    = '',
-        Value         = '',
-        Reference     = '',
-        Keyword       = '',
-        File          = '',
-        Folder        = 'ﱮ',
-        Color         = '',
-        Unit          = '',
-        Snippet       = '',
-        Text          = '',
-      })[vim_item.kind]
+    format = function(entry, vim_item)
+      vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
+      vim_item.menu = ({
+        nvim_lsp =   'ﲳ',
+        nvim_lua =   '',
+        treesitter = '',
+        path =       'ﱮ',
+        buffer =     '﬘',
+        zsh =        '',
+        vsnip =      '',
+        spell =      '暈',
+        orgmode =    '✿',
+      })[entry.source.name]
       return vim_item
     end,
   },
@@ -128,5 +135,6 @@ vim.g.vsnip_filetypes = {
   typescriptreact = {'typescript'},
 }
 
-vim.cmd[[autocmd FileType TelescopePrompt lua require('cmp').setup.buffer { enabled = false }]]
+vim.cmd[[autocmd FileType org lua CmpOrgmodeSetup()]]
+vim.cmd[[autocmd FileType NeogitCommitMessage lua CmpNeogitCommitMessageSetup()]]
 

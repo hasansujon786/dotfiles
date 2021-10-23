@@ -18,3 +18,25 @@ endfunction
 
 setl foldtext=Org_foldtext()
 setl shiftwidth=1 tabstop=1 softtabstop=1
+
+lua << EOF
+function CmpOrgmodeSetup()
+  require('cmp').setup.buffer {
+    enabled = true,
+    sources = {
+      { name = 'vsnip' },
+      { name = 'spell' },
+      { name = 'buffer',
+        opts = {
+          get_bufnrs = function()
+            return vim.api.nvim_list_bufs()
+          end,
+        },
+      },
+      { name = 'path' },
+      { name = 'orgmode' },
+    },
+  }
+end
+EOF
+

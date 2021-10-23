@@ -89,13 +89,13 @@ require("nvim-treesitter.configs").setup {
         ["[M"] = "@class.outer",
       },
     },
-    lsp_interop = {
-      enable = true,
-      border = 'double',
-      peek_definition_code = {
-        ["df"] = "@function.outer",
-        ["dF"] = "@class.outer",
-      },
-    }
+    -- lsp_interop = {
+    --   enable = true,
+    --   border = 'double',
+    --   peek_definition_code = {
+    --     ["df"] = "@function.outer",
+    --     ["dF"] = "@class.outer",
+    --   },
+    -- }
   },
 }

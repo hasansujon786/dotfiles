@@ -47,6 +47,9 @@ function hasan#highlight#load_custom_highlight() abort
   hi! link TelescopePreviewBorder FloatBorder
   hi! link TelescopeResultsBorder FloatBorder
   hi! link TelescopePromptBorder  FloatBorder
+  hi! link CmpItemKind CmpItemMenu
+  hi CmpItemAbbrMatchFuzzy   guifg=#E5C07B gui=underline
+  hi CmpItemAbbrMatch        guifg=#E5C07B
 endfunction
 
 " call hasan#highlight#load_custom_highlight()
