@@ -141,6 +141,13 @@ return require('packer').startup({
       disable = vim.g.disable_lsp,
       config = function() require('lsp') end,
     })
+    use({ 'jose-elias-alvarez/nvim-lsp-ts-utils',
+      opt = true, after = 'nvim-lspconfig',
+    })
+    use({ 'jose-elias-alvarez/null-ls.nvim',
+      opt = true, after = 'nvim-lspconfig',
+      config = function() require('lsp.null-ls') end,
+    })
     use({ 'williamboman/nvim-lsp-installer',
       opt = true, after = 'nvim-lspconfig',
       disable = vim.g.disable_lsp,
