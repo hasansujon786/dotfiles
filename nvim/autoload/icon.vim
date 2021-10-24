@@ -227,7 +227,7 @@ endfunction
 
 " Powerline characters:
 "                
-"  ﰖ  
+"  ﰖ   
 "   
 "    
 "      
