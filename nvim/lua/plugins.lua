@@ -153,8 +153,7 @@ return require('packer').startup({
       disable = vim.g.disable_lsp,
       config = function() require('lsp.installer') end,
     })
-    use({
-      'hrsh7th/nvim-cmp',
+    use({ 'hrsh7th/nvim-cmp',
       opt = true, after = 'nvim-lspconfig',
       config = function() require('config.cmp') end,
       requires = {

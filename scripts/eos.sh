@@ -23,3 +23,5 @@ sudo apt-get install -y gnome-system-monitor
 wget https://github.com/subhra74/xdm/releases/download/7.2.11/xdm-setup-7.2.11.tar.xz
 tar -xvf xdm-setup-7.2.11.tar.xz
 sudo sh install.sh
+
+# deluge

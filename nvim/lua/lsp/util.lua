@@ -1,5 +1,5 @@
 M = {
-  ensure_installed = {'html', 'sumneko_lua', 'tailwindcss', 'tsserver', 'vimls', 'vuels', 'cssls'}
+  ensure_installed = {'html', 'sumneko_lua', 'tailwindcss', 'tsserver', 'vimls', 'vuels', 'cssls', 'jsonls', 'emmet_ls'}
 }
 
 -- https://www.youtube.com/watch?v=tAVxxdFFYMU
