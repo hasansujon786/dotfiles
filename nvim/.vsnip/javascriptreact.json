@@ -51,5 +51,16 @@
       "const [state, dispatch] = useReducer(reducder, defaultReducerValue)"
     ],
     "description": "use reducer hook template"
+  },
+  "jsxRenderProp": {
+    "prefix": "jrp",
+    "body": [
+      "<${1:Component}>",
+      "  {({ isHovered, isFocused, isPressed }) => (",
+      "    <${2:Children}/>",
+      "  )}",
+      "</${1:Component}>"
+    ],
+    "description": "Provide props from parent componet"
   }
 }
