@@ -14,7 +14,8 @@ opt.viewoptions:remove({'folds', 'curdir'})       -- see: https://vi.stackexchan
 -- Spell
 opt.spelllang='en_us'                             -- Speak proper English | en_gb
 opt.complete:append({'kspell'})
-opt.spellfile=os.getenv('HOME')..'/dotfiles/nvim/spell/en.utf-8.add'
+-- opt.spellfile=os.getenv('HOME')..'/dotfiles/nvim/spell/en.utf-8.add'
+opt.spellfile='~/dotfiles/nvim/spell/en.utf-8.add'
 -- Controls
 opt.mouse='a'
 opt.backspace={'eol','start','indent'}            -- Configure backspace so it acts as it should act
