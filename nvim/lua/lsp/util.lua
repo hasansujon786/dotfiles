@@ -14,12 +14,14 @@ M.rename_with_quickfix = function()
 
   position_params.newName = new_name
 
-  vim.lsp.buf_request(0, "textDocument/rename", position_params, function(err, method, result, ...)
+  -- vim.lsp.buf_request(0, "textDocument/rename", position_params, function(err, method, result, ...)
+  vim.lsp.buf_request(0, "textDocument/rename", position_params, function(err, result, ctx, config)
     -- You can uncomment this to see what the result looks like.
     if false then
       print(vim.inspect(result))
     end
-    vim.lsp.handlers["textDocument/rename"](err, method, result, ...)
+    -- vim.lsp.handlers["textDocument/rename"](err, method, result, ...)
+    vim.lsp.handlers["textDocument/rename"](err, result, ctx, config)
 
     local entries = {}
     if result.changes then
