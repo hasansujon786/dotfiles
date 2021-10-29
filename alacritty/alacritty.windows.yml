@@ -1,0 +1,96 @@
+# https://github.com/alacritty/alacritty/blob/master/alacritty.yml
+
+# Shell
+#
+# You can set shell.program to the path of your favorite shell, e.g. /bin/fish.
+# Entries in shell.args are passed unmodified as arguments to the shell.
+shell:
+  program: C:\Program Files\Git\bin\bash
+  # args:
+  # - --command=tmux
+working_directory: e:\projects
+
+# Window Customization
+window:
+  dimensions:
+    columns: 100
+    lines: 25
+  # padding:
+  #   x: 0
+  #   y: 0
+  # decorations: none
+  dynamic_title: true
+  startup_mode: Maximized # Windowed Fullscreen
+background_opacity: 0.92
+
+# Font Customization
+font:
+  normal:
+    # family: FiraCode Nerd Font Mono
+    family: FiraCode NF
+    style: Medium
+  bold:
+    family: FiraCode Nerd Font Mono
+  italic:
+    family: FiraCode Nerd Font Mono
+  size: 13
+  offset:
+    x: 0
+    y: 0
+  glyph_offset:
+    x: 0
+    y: 0
+  use_thin_strokes: false
+  debug:
+    persistent_logging: false
+draw_bold_text_with_bright_colors: true
+
+# Color Settings (OneDark)
+colors:
+  primary:
+    # background:  '0x1e2127'
+    background:  '0x282C34'
+    foreground:  '0xabb2bf'
+    bright_foreground:  '0xe6efff'
+  normal:
+    black:    '0x1e2127'
+    red:      '0xe06c75'
+    green:    '0x98c379'
+    yellow:   '0xd19a66'
+    blue:     '0x61afef'
+    magenta:  '0xc678dd'
+    cyan:     '0x56b6c2'
+    white:    '0x828791'
+  bright:
+    black:    '0x5c6370'
+    red:      '0xe06c75'
+    green:    '0x98c379'
+    yellow:   '0xd19a66'
+    blue:     '0x61afef'
+    magenta:  '0xc678dd'
+    cyan:     '0x56b6c2'
+    white:    '0xe6efff'
+  dim:
+    black:    '0x1e2127'
+    red:      '0xe06c75'
+    green:    '0x98c379'
+    yellow:   '0xd19a66'
+    blue:     '0x61afef'
+    magenta:  '0xc678dd'
+    cyan:     '0x56b6c2'
+    white:    '0x828791'
+
+key_bindings: 
+  - { key: N, mods: Control|Shift, action: SpawnNewInstance }
+  - { key: F, mods: Control|Shift, action: ToggleFullscreen }
+  - { key: F11, action: ToggleFullscreen }
+  - { key: Back,  mods: Control, chars: "\x17" } # ctrl-w
+  # - { key: Space, mods: Control, chars: "\x11" } # ctrl-q
+  # - { key: Slash, mods: Control, chars: "\x1F" } # ctrl-_
+  # - { key: R,      mods: Control|Shift,  command:
+  #   { program: "explorer", args: ["."] }  }
+
+# http://www.physics.udel.edu/~watson/scen103/ascii.html
+# https://github.com/Happy-Dude/dotfiles/blob/master/alacritty/.config/alacritty/alacritty.yml
+
+

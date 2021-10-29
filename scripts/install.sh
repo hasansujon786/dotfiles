@@ -197,8 +197,13 @@ setup_alacritty() {
   util_print alacritty
 
   util_backUpConfig ${alacrittyPath[$machineCode]}
-  util_makeSymlinkPath $HOME/dotfiles/alacritty ${alacrittyPath[$machineCode]}
-  # $getter install -y alacritty
+  mkdir -p ${alacrittyPath[$machineCode]}
+  # util_makeSymlinkPath $HOME/dotfiles/alacritty ${alacrittyPath[$machineCode]}
+  util_makeSymlinkPath $HOME/dotfiles/alacritty/alacritty.$machine.yml ${alacrittyPath[$machineCode]}/alacritty.yml
+
+  if [[ "$machine" == "windows" ]]; then
+    $getter install -y alacritty
+  fi
 }
 
 setup_node () {
