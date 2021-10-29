@@ -9,10 +9,18 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
   update_in_insert = false,
 })
 
-local signs = { Error = '', Warn = '', Hint = '', Info = '' }
-for type, icon in pairs(signs) do
-  local hl = 'DiagnosticSign' .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
+if vim.fn.has "nvim-0.5.1" == 1  then
+  local signs = { Error = '', Warning = '', Hint = '', Information = '' }
+  for type, icon in pairs(signs) do
+    local hl = 'LspDiagnosticsSign' .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
+  end
+else
+  local signs = { Error = '', Warn = '', Hint = '', Info = '' }
+  for type, icon in pairs(signs) do
+    local hl = 'DiagnosticSign' .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
+  end
 end
 
 local function lsp_document_highlight(client)
