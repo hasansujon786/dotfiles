@@ -146,7 +146,7 @@ setup_lazygit () {
   elif [[ "$machine" == "ter" ]]; then
     # install manually for termux
     mkdir -p ./lazy
-    export LAZYGIT_VER="0.29"
+    export LAZYGIT_VER="0.30.1"
     wget -O ./lazy/lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_arm64.tar.gz
     tar xvf ./lazy/lazygit.tgz -C ./lazy/
     mv ./lazy/lazygit /data/data/com.termux/files/usr/bin/lazygit
@@ -154,7 +154,7 @@ setup_lazygit () {
   else
     # install manually for linux
     mkdir -p ./lazy
-    export LAZYGIT_VER="0.29"
+    export LAZYGIT_VER="0.30.1"
     wget -O ./lazy/lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_x86_64.tar.gz
     tar xvf ./lazy/lazygit.tgz -C ./lazy/
     sudo mv ./lazy/lazygit /usr/local/bin/
@@ -226,6 +226,7 @@ setup_node () {
   npm install -g expo-cli
   npm install -g neovim
   npm install -g live-server
+  npm install -g prettier eslint
 }
 
 install_various_apps() {
