@@ -4,16 +4,16 @@ vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { 
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'double' })
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   virtual_text = true,
-  signs = false,
+  signs = true,
   underline = true,
-  update_in_insert = false,
+  update_in_insert = true,
 })
 
 if vim.fn.has "nvim-0.6.0" == 1  then
   local signs = { Error = '', Warn = '', Hint = '', Info = '' }
-  for type, icon in pairs(signs) do
+  for type, _ in pairs(signs) do
     local hl = 'DiagnosticSign' .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
+    vim.fn.sign_define(hl, { text = '', texthl = hl, numhl = hl })
   end
 else
   local signs = { Error = '', Warning = '', Hint = '', Information = '' }
