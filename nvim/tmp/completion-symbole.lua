@@ -1,7 +1,7 @@
 https://www.chrisatmachine.com/Neovim/26-lsp-symbols/
 https://code.visualstudio.com/docs/editor/intellisense
 
-it from coc.vim by chrisAtMachine 
+it from coc.vim by chrisAtMachine
 "suggest.completionItemKindLabels": {
   "method": "  ",
   "function": "  ",
