@@ -35,7 +35,7 @@ require('telescope').setup{
     -- `file_ignore_patterns = { "scratch/.*", "%.env" }`
     file_ignore_patterns = {
       "%.gitignore", "%.git\\.*",
-      "bash/*", "bin/*", "tui/*", "vscode/*", "system/*", "spell/*",
+      "bash/*", "bin/*", "tui/*", "vscode/*", "system/*", "spell/*", "4_archive/*"
     },
     extensions = {
       fzy_native = {
