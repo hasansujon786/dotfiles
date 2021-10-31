@@ -17,9 +17,9 @@ if vim.fn.has "nvim-0.6.0" == 1  then
   end
 else
   local signs = { Error = '', Warning = '', Hint = '', Information = '' }
-  for type, icon in pairs(signs) do
+  for type, _ in pairs(signs) do
     local hl = 'LspDiagnosticsSign' .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
+    vim.fn.sign_define(hl, { text = '', texthl = hl, numhl = hl })
   end
 end
 
