@@ -107,44 +107,41 @@ function M.curbuf()
   builtin.current_buffer_fuzzy_find(opts)
 end
 
-
 function M.search_wiki_files()
   builtin.find_files({
-      prompt_title = "Wiki Files",
-      cwd = "~/vimwiki",
+      prompt_title = 'Org files',
+      cwd = '~/vimwiki',
+      previewer = false
     })
 end
 
 function M.search_plugins()
-  builtin.find_files({
-      prompt_title = "Plugins",
-      cwd = vim.fn.glob(vim.fn.stdpath("data") .. '/site/pack/packer'),
-    })
+  builtin.file_browser(themes.get_ivy({
+    prompt_title = 'Plugins',
+    cwd = vim.fn.glob(vim.fn.stdpath('data') .. '/site/pack/packer'),
+  }))
 end
 
 function M.grep_string()
   local string = vim.fn.input('Grep String: ')
-
-  builtin.grep_string({
-    search = string
-  })
+  builtin.grep_string({ search = string })
 end
 
 function M.file_browser(dir)
   local opts = {}
-  if dir == 'cur_dir' then
-    opts = {cwd=vim.fn.expand('%:h')}
+  local cwd = vim.fn.expand('%:h')
+  if dir == 'cur_dir' and cwd ~= '' then
+    opts = {cwd=cwd}
   end
-
   builtin.file_browser(themes.get_ivy(opts))
 end
 
 function M.file_files(dir)
   local opts = {}
-  if dir == 'cur_dir' then
-    opts = {cwd=vim.fn.expand('%:h')}
+  local cwd = vim.fn.expand('%:h')
+  if dir == 'cur_dir' and cwd ~= '' then
+    opts = {cwd=cwd}
   end
-
   builtin.find_files(themes.get_ivy(opts))
 end
 
