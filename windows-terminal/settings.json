@@ -2,7 +2,7 @@
   "$schema": "https://aka.ms/terminal-profiles-schema",
   "defaultProfile": "{0caa0dad-35be-5f56-a8ff-afceeeaa6102}",
   "theme": "system",
-  "launchMode": "maximized",
+  "launchMode": "maximizedFocus",
   "rowsToScroll": 20,
   "snapToGridOnResize": true,
   "copyOnSelect": true,
@@ -16,7 +16,8 @@
       "fontSize": 14,
       "padding": "0, 0, 0, 0",
       "cursorShape": "filledBox",
-      "startingDirectory": "%USERPROFILE%",
+      //"startingDirectory": "%USERPROFILE%",
+      "startingDirectory": "E:\\repoes",
       "scrollbarState": "hidden",
       "colorScheme": "One Half Dark",
       "tabColor": "#1F1F1F",
@@ -66,7 +67,9 @@
     { "keys": "ctrl+shift+v",   "command": "paste" },
     { "keys": "ctrl+shift+f",   "command": "find" },
     { "keys": "ctrl+backspace", "command": { "action": "sendInput", "input": "\u0017" } },
-    { "keys": "ctrl+shift+u",        "command": { "action": "altsendInput", "input": "cd ..\r" } },
+    { "keys": "ctrl+shift+u",   "command": { "action": "sendInput", "input": "cd ..\r" } },
+    { "keys": "f11",            "command": "toggleFocusMode" },
+    { "keys": "alt+enter",      "command": "toggleFocusMode" },
     // Tab Management
     { "keys": "alt+`",          "command": "nextTab" },
     { "keys": "alt+shift+`",    "command": "prevTab" },
@@ -88,7 +91,5 @@
     { "keys": "alt+shift+j",    "command": { "action": "moveFocus", "direction": "down" } },
     { "keys": "alt+shift+k",    "command": { "action": "moveFocus", "direction": "up" } },
     { "keys": "alt+shift+l",    "command": { "action": "moveFocus", "direction": "right" } },
-    // Unbounds
-    { "keys": "alt+enter",      "command": "unbound" },
   ]
 }
