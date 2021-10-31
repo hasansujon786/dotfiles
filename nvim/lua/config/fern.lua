@@ -2,7 +2,7 @@ local maps = require('hasan.utils.maps')
 maps.nnoremap('-', '<cmd>call hasan#fern#vinager()<CR>') -- change in whichkey
 maps.nnoremap('<BS>', '<cmd> call hasan#fern#edit_alternate()<CR>')
 
-vim.g['fern#drawer_width'] = 35
+vim.g['fern#drawer_width'] = 26
 vim.g['fern#keepalt_on_edit'] = 1
 vim.g['fern#default_hidden'] = 1
 vim.g['fern#disable_default_mappings'] = 1

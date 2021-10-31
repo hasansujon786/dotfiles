@@ -120,6 +120,7 @@ function! hasan#fern#FernInit() abort
   " Various instant mappings
   nmap <buffer> r <Plug>(fern-action-reload)
   nmap <buffer> x <Plug>(fern-action-collapse)
+  nmap <buffer> u <Plug>(fern-action-focus:parent)
   nmap <buffer> I <Plug>(fern-action-hidden:toggle)
   nmap <buffer> W <Plug>(fern-action-cd)
   nmap <buffer> q <C-w>c
