@@ -9,6 +9,7 @@ choco install microsoft-windows-terminal -y       # --pre
 choco install 7zip.install -y
 choco install gimp -y
 choco install vlc -y
+choco install emacs -y
 New-Item -ItemType SymbolicLink -Path 'C:\Users\hasan\AppData\Local\Microsoft\Windows Terminal\settings.json' -Target C:\Users\hasan\dotfiles\windows-terminal\settings.jsony
 
 # choco install javaruntime -y
