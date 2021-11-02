@@ -11,7 +11,7 @@ function! hasan#boot#auto_set_cursor_color(...) abort
     setl winhighlight=Folded:TextInfo
   endif
 
-  if &filetype !~ 'TelescopePrompt'
+  if &filetype !~ 'TelescopePrompt\|Prompt'
     setlocal cursorline
   endif
 endfunction
