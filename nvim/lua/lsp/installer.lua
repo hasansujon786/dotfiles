@@ -15,6 +15,16 @@ lsp_installer.on_server_ready(function(server)
   --     opts.root_dir = function() ... end
   -- end
 
+  if server.name == "sumneko_lua" then
+    opts.settings = {
+      Lua = {
+        diagnostics = {
+          globals = { 'vim' }
+        }
+      }
+    }
+  end
+
   -- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
   server:setup(opts)
   vim.cmd [[ do User LspAttachBuffers ]]
