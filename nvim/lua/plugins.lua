@@ -27,7 +27,7 @@ return require('packer').startup({
     --> Productiviry -------------------------------
     use({ 'vimwiki/vimwiki', opt = true, cmd = {'VimwikiIndex','VimwikiTabIndex','VimwikiUISelect'} })
     use({ 'kristijanhusak/orgmode.nvim',
-      opt = true, after = 'nvim-treesitter', branch = 'tree-sitter',
+      opt = true, ft = 'org',
       config = function() require('config.orgmode') end
     })
     use({"akinsho/org-bullets.nvim", opt = true, after = 'orgmode.nvim',
