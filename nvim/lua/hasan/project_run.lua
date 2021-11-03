@@ -24,7 +24,17 @@ local local_actions = {
   run = function (prompt_bufnr)
     local entry = action_state.get_selected_entry()
     require('telescope.actions').close(prompt_bufnr)
-    vim.cmd('silent !tmux-windowizer $(pwd) ' .. entry.value[2])
+    if vim.fn.has('win32') == 1 then
+      vim.fn.setreg('*', {'yarn '..entry.value[1]})
+      local cmd = 'terminal /c/Program\\ Files/WindowsApps/Microsoft.WindowsTerminal_1.10.2714.0_x64__8wekyb3d8bbwe/wt.exe '
+      cmd = cmd .. '-w 0 nt -d .'
+      vim.cmd(cmd)
+      vim.defer_fn(function ()
+        vim.cmd('bdelete!')
+      end, 2000)
+    else
+      vim.cmd('silent !tmux-windowizer $(pwd) ' .. entry.value[2])
+    end
   end,
 }
 local make_entry_form_scripts = function(entry)
