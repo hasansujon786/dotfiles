@@ -7,6 +7,8 @@
   "snapToGridOnResize": true,
   "copyOnSelect": true,
   "copyFormatting": false,
+  "largePasteWarning": false,
+  "multiLinePasteWarning": false,
 
   "profiles": {
     "defaults": {

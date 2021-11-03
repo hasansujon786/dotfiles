@@ -19,6 +19,10 @@ alias tt="tmux new -s "
 alias ta="tmux attach"
 # alias tmux="env TERM=xterm-256color tmux"
 
+# Windows Terminal
+alias wt='/c/Program\ Files/WindowsApps/Microsoft.WindowsTerminal_1.10.2714.0_x64__8wekyb3d8bbwe/wt.exe'
+alias wtt='wt -w 0 nt -d .'
+
 # handy short cuts #
 alias bashrc="vim ~/dotfiles/bash/.bashrc"
 alias c='cd'
