@@ -26,12 +26,9 @@ local local_actions = {
     require('telescope.actions').close(prompt_bufnr)
     if vim.fn.has('win32') == 1 then
       vim.fn.setreg('*', {'yarn '..entry.value[1]})
-      local cmd = 'terminal /c/Program\\ Files/WindowsApps/Microsoft.WindowsTerminal_1.10.2714.0_x64__8wekyb3d8bbwe/wt.exe '
-      cmd = cmd .. '-w 0 nt -d .'
+      local cmd = 'silent !"c:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.10.2714.0_x64__8wekyb3d8bbwe\\wt.exe" '
+      cmd  = cmd .. '-w 0 nt -d .'
       vim.cmd(cmd)
-      vim.defer_fn(function ()
-        vim.cmd('bdelete!')
-      end, 2000)
     else
       vim.cmd('silent !tmux-windowizer $(pwd) ' .. entry.value[2])
     end
