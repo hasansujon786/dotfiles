@@ -76,12 +76,12 @@ return require('packer').startup({
     use({ 'tpope/vim-commentary', opt = true, event = 'BufRead' })
     use({ 'tpope/vim-surround', opt = true, event = 'BufRead',  })
     use({ 'nathom/filetype.nvim' })
-
-    use({ 'nvim-lua/popup.nvim' })
     use({ 'nvim-lua/plenary.nvim' })
     use({ 'voldikss/vim-floaterm', opt = true,
       cmd = {'FloatermNew','FloatermToggle'},
-      config = function() require('config.floaterm') end
+      config = function()
+        require('config.floaterm')
+      end
     })
     use({ 'hasansujon786/vim-rel-jump', opt = true, event = 'BufRead' })
     use({ 'dhruvasagar/vim-open-url', opt = true, event = 'BufRead' })
