@@ -41,9 +41,9 @@ local leader = {
     n = { '<cmd>bnext<CR>',                                    'Next buffer' },
     p = { '<cmd>bprevious<CR>',                                'Previous buffer' },
 
-    k = { '<cmd>call hasan#utils#bufcloseCloseIt()<CR>',       'Kill this buffer' },
-    K = { '<cmd>call hasan#utils#clear_all_buffers()<CR>',     'Kill all buffers' },
-    o = { '<cmd>call hasan#utils#clear_other_buffers()<CR>',   'Kill other buffers' },
+    k = { '<cmd>call hasan#utils#buffer#_clear()<CR>',         'Kill this buffer' },
+    K = { '<cmd>call hasan#utils#buffer#_clear_all()<CR>',     'Kill all buffers' },
+    o = { '<cmd>call hasan#utils#buffer#_clear_other()<CR>',   'Kill other buffers' },
 
     s = { '<cmd>w<CR>',                                        'Save buffer' },
     S = { '<cmd>wa<CR>',                                       'Save all buffer' },
@@ -66,6 +66,10 @@ local leader = {
     f = { ':call _#Insertion(expand("%:~"))<CR>',                   'Current file path' },
     F = { ':call _#Insertion(expand("%:t"))<CR>',                   'Current file name' },
     p = 'Paste form CB',
+
+    l = {
+      i = { ':call _#Insertion(hasan#utils#placeholderImgTag("300x200"))<CR>', 'Current file name' }
+    },
   },
 
   g = {
