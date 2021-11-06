@@ -68,6 +68,7 @@
     { "keys": "ctrl+shift+c",   "command": { "action": "copy", "singleLine": false } },
     { "keys": "ctrl+shift+v",   "command": "paste" },
     { "keys": "ctrl+shift+f",   "command": "find" },
+    { "keys": "ctrl+space",     "command": { "action": "sendInput", "input": "\u0011" } },
     { "keys": "ctrl+backspace", "command": { "action": "sendInput", "input": "\u0017" } },
     { "keys": "ctrl+shift+u",   "command": { "action": "sendInput", "input": "cd ..\r" } },
     { "keys": "alt+enter",      "command": "toggleFocusMode" },

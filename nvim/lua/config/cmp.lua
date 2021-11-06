@@ -72,10 +72,11 @@ cmp.setup({
     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
     ['<C-e>'] = cmp.mapping.close(),
     ['<C-Space>'] = cmp.mapping.complete(),
-    -- ['<CR>'] = cmp.mapping.confirm({
-    --   behavior = cmp.ConfirmBehavior.Replace,
-    --   select = true,
-    -- }),
+    ['<C-q>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })

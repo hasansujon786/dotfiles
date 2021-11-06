@@ -60,12 +60,14 @@ local function lsp_buffer_keymaps(bufnr)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = "double"}})<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = "double"}})<CR>', opts)
   buf_set_keymap('n', '<F2>', '<cmd>lua require("lsp.util").rename_with_quickfix()<CR>', opts)
+  buf_set_keymap('n', '<C-q>', '<cmd>lua require("telescope.builtin").lsp_code_actions(require("telescope.themes").get_cursor({initial_mode="normal"}))<CR>', opts)
   buf_set_keymap('n', '<C-space>', '<cmd>lua require("telescope.builtin").lsp_code_actions(require("telescope.themes").get_cursor({initial_mode="normal"}))<CR>', opts)
   buf_set_keymap('n', '<C-LeftMouse>', '<LeftMouse><cmd>lua vim.lsp.buf.definition()<CR>', opts)
   if filetype ~= 'lua' and filetype ~= 'vim' then
-    buf_set_keymap('n', '<F9>', '<cmd>w<bar>lua vim.lsp.buf.formatting()<CR>', opts)
+    buf_set_keymap('n', '<F9>', '<cmd>lua vim.lsp.buf.formatting_sync()<CR><cmd>update<CR>', opts)
   end
 
+  buf_set_keymap('n', '<leader>fs', '<cmd>lua vim.lsp.buf.formatting_sync()<CR><cmd>update<CR>', opts)
   buf_set_keymap('n', '<leader>a+', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<leader>a-', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<leader>a?', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
