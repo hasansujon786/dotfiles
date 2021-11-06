@@ -1,7 +1,10 @@
-# Yarn  & npm
+# Yarn
+alias yup='yarn upgrade-interactive --latest'
+alias ycc='yarn cache clean'
+alias ya='yarn android'
 alias ys='yarn start'
 alias yd='yarn dev'
-alias yup='yarn upgrade-interactive --latest'
+# npm
 alias ns='npm start'
 alias nd='npm run dev'
 
@@ -22,6 +25,13 @@ alias ta="tmux attach"
 # Windows Terminal
 alias wt='/c/Program\ Files/WindowsApps/Microsoft.WindowsTerminal_1.10.2714.0_x64__8wekyb3d8bbwe/wt.exe'
 alias wtt='wt -w 0 nt -d .'
+
+# React native
+alias grc="./gradlew clean"
+alias grrc="cd android && ./gradlew clean && cd .."
+alias bub='cd android && ./gradlew bundleRelease'
+alias bua='cd android && ./gradlew assembleRelease'
+alias bui='react-native run-android --variant=release'
 
 # handy short cuts #
 alias bashrc="vim ~/dotfiles/bash/.bashrc"
