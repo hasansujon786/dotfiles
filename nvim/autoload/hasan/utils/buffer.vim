@@ -60,3 +60,21 @@ function! hasan#utils#buffer#_clear_all() abort "{{{
   endif
 endfunction "}}}
 
+function! hasan#utils#buffer#_open_scratch_buffer() abort "{{{
+  for winNr in range(1, winnr('$'))
+    let bufNr = winbufnr(winNr)
+    if getbufvar(bufNr, '&filetype') == 'scratch'
+      exe winNr.'wincmd w'
+      return
+    endif
+  endfor
+
+  exe('sp '.stdpath('data').'/scratch')
+  wincmd J
+  set signcolumn=no
+  set filetype=scratch
+  resize 8
+  au! WinLeave,BufLeave <buffer> :silent w
+endfunction "}}}
+
+

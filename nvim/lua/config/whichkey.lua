@@ -263,8 +263,7 @@ local leader = {
   r = { '<cmd>call hasan#utils#cycle_numbering()<CR>',    'Cycle number' },
   R = { '<cmd>lua require("nebulous").toggle()<CR>',      'Toggle Nebulous' },
   s = { '<cmd>write<CR>',                                 'Save file' },
-  n = { '<Plug>(my-fern-toggle)<Plug>(fern-action-zoom:reset)', 'Toggle sidebar' },
-  x = { '<cmd>bdelete<CR>',                               'Delete buffer' },
+  x = { '<cmd>call hasan#utils#buffer#_open_scratch_buffer()<CR>',   'Open up scratch buffer' },
   z = { 'za',                                             'Fold/Unfold' },
   m = { ':lua require("harpoon.mark").add_file()<CR>',    'Mark to Harpoon' },
 
