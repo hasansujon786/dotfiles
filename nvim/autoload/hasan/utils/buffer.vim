@@ -69,10 +69,11 @@ function! hasan#utils#buffer#_open_scratch_buffer() abort "{{{
     endif
   endfor
 
-  exe('sp '.stdpath('data').'/scratch')
+  exe('sp '.stdpath('data').'/scratchpad')
   wincmd J
   set signcolumn=no
-  set filetype=scratch
+  set filetype=scratchpad
+  set nobuflisted
   resize 8
   au! WinLeave,BufLeave <buffer> :silent w
 endfunction "}}}

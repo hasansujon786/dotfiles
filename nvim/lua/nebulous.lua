@@ -9,7 +9,7 @@ local nb_blacklist_filetypes = {
   fzf = true,
   floating = true,
   qf = true,
-  scratch = true,
+  scratchpad = true,
 }
 -- local nb_pre_exist_hls = {
 --   floaterm = {'Normal:Floaterm', 'NormalNC:FloatermNC' }
