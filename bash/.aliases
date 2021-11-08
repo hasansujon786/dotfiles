@@ -29,9 +29,10 @@ alias wtt='wt -w 0 nt -d .'
 # React native
 alias grc="./gradlew clean"
 alias grrc="cd android && ./gradlew clean && cd .."
-alias bub='cd android && ./gradlew bundleRelease'
-alias bua='cd android && ./gradlew assembleRelease'
-alias bui='react-native run-android --variant=release'
+alias bre='cd android && ./gradlew bundleRelease'
+alias bap='cd android && ./gradlew assembleRelease'
+alias bdb='cd android && ./gradlew assembleDebug'
+alias brei='react-native run-android --variant=release'
 
 # handy short cuts #
 alias bashrc="vim ~/dotfiles/bash/.bashrc"

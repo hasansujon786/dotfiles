@@ -27,7 +27,9 @@ return require('packer').startup({
     --> Productiviry -------------------------------
     use({ 'vimwiki/vimwiki', opt = true, cmd = {'VimwikiIndex','VimwikiTabIndex','VimwikiUISelect'} })
     use({ 'kristijanhusak/orgmode.nvim',
-      opt = true, ft = 'org',
+      -- commit ='50d1a97b25d77f33d312b4775fbd68217d22c946',
+      commit ='e287630dad1eceb03292b6283aa73505e539191b',
+      opt = true, after = 'nvim-treesitter',
       config = function() require('config.orgmode') end
     })
     use({"akinsho/org-bullets.nvim", opt = true, after = 'orgmode.nvim',

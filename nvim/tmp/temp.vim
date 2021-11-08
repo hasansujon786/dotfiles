@@ -1,6 +1,11 @@
 " Don't fold automatically https://stackoverflow.com/a/8316817
 autocmd BufRead * normal zR
 
+inoremap <silent> <F2> <C-r>=<SID>s:Utils_uuid()<CR>
+:FloatermNew --name=task task edit
+cmap <C-R> <C-u><Plug>(TelescopeFuzzyCommandSearch)
+nmap <C-R> <Plug>(TelescopeFuzzyCommandSearch)
+
 if has("macunix") || has('win32')
   set clipboard=unnamed
 elseif has("unix")
