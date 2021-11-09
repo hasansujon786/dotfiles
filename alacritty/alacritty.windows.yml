@@ -20,7 +20,7 @@ window:
   #   y: 0
   # decorations: none
   dynamic_title: true
-  startup_mode: Maximized # Windowed Fullscreen
+  startup_mode: Windowed # Maximized Fullscreen
 background_opacity: 0.92
 
 # Font Customization
@@ -83,10 +83,11 @@ colors:
 key_bindings: 
   - { key: N, mods: Control|Shift, action: SpawnNewInstance }
   - { key: F, mods: Control|Shift, action: ToggleFullscreen }
+  - { key: W, mods: Control|Shift, action: Quit }
   - { key: F11, action: ToggleFullscreen }
   - { key: Back,  mods: Control, chars: "\x17" } # ctrl-w
-  # - { key: Space, mods: Control, chars: "\x11" } # ctrl-q
-  # - { key: Slash, mods: Control, chars: "\x1F" } # ctrl-_
+  - { key: Space, mods: Control, chars: "\x11" } # ctrl-q
+  - { key: Slash, mods: Control, chars: "\x1F" } # ctrl-_
   # - { key: R,      mods: Control|Shift,  command:
   #   { program: "explorer", args: ["."] }  }
 
