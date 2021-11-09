@@ -145,4 +145,20 @@ function M.file_files(dir)
   builtin.find_files(themes.get_ivy(opts))
 end
 
+M.projects = function ()
+  local edit_projects_file = function(prompt_bufnr)
+    require('telescope.actions').close(prompt_bufnr)
+    vim.cmd('split '.. vim.fn.stdpath('data')..'/project_nvim/project_history')
+  end
+  local projects_options = {
+    attach_mappings = function(_, map)
+      map('i', '<C-e>', edit_projects_file)
+      map('n', '<C-e>', edit_projects_file)
+      return true
+    end,
+  }
+  require("telescope._extensions").manager.projects.projects(themes.get_dropdown(projects_options))
+end
+
+
 return M

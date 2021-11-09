@@ -148,7 +148,7 @@ local leader = {
 
   p = {
     name = '+project',
-    p = { ':Telescope projects<CR>',         'Switch project' },
+    p = { '<cmd>lua require("hasan.telescope.custom").projects()<CR>',          'Switch project' },
     r = { ':lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>',  'Find recent files' },
     b = { ':Telescope file_browser prompt_title=Project\\ Browser cwd=~/repoes<CR>',  'Browse other projects' },
 
