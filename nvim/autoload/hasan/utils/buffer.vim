@@ -7,22 +7,29 @@ function! hasan#utils#buffer#_clear() abort "{{{
 
   if (&modified)
     call _#echoWarn('>>> Save this buffer before close? <<<')
-    let choice = confirm('', '&Yes\n&No', 1)
-    if (choice == 2)
+    let choice = confirm('', "&Yes\n&No\n&Cancel", 3)
+    if (choice == 1)
+      exec('silent w')
+    elseif (choice == 2)
       let bdcmd = 'bdelete! '
-    else
-      :silent w
+    elseif(choice == 3)
+      return 0
     endif
   endif
 
   if buflisted(alternateBufNum)
     buffer #
   else
-    bnext
+    try
+      bnext
+    catch
+      call _#echoWarn('There is no buffer anymore')
+      return
+    endtry
   endif
 
   if bufnr('%') == currentBufNum
-    new
+    execute('Dashboard')
   endif
 
   if buflisted(currentBufNum)
@@ -57,13 +64,14 @@ function! hasan#utils#buffer#_clear_all() abort "{{{
       catch
       endtry
     endfor
+    exec('Dashboard')
   endif
 endfunction "}}}
 
 function! hasan#utils#buffer#_open_scratch_buffer() abort "{{{
   for winNr in range(1, winnr('$'))
     let bufNr = winbufnr(winNr)
-    if getbufvar(bufNr, '&filetype') == 'scratch'
+    if getbufvar(bufNr, '&filetype') == 'scratchpad'
       exe winNr.'wincmd w'
       return
     endif
