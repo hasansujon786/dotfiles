@@ -176,5 +176,8 @@ return require('packer').startup({
     use({ 'mattn/emmet-vim', opt = true, event = 'BufRead',
       config = function() require('config.emmet') end
     })
+    use({ 'akinsho/flutter-tools.nvim', opt = true, ft = {'dart'},
+      config = function() require('config.flutter-tools') end
+    })
   end,
 })
