@@ -18,7 +18,7 @@ function hasan#highlight#load_custom_highlight() abort
   hi TSVariable        guifg=#e86671
   hi TSNamespace       guifg=#e86671
   hi TSField           guifg=#e86671
-  hi TSParameter       guifg=#e86671 gui=italic
+  " hi TSParameter       guifg=#e86671 gui=italic
   hi TSTagAttribute    guifg=#D19A66 gui=italic
   hi TSConstructor     guifg=#E5C07B gui=NONE
   hi TSConstant        guifg=#E5C07B gui=NONE

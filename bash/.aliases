@@ -34,6 +34,9 @@ alias asre='cd android && ./gradlew assembleRelease'
 alias asde='cd android && ./gradlew assembleDebug'
 alias inre='react-native run-android --variant=release'
 
+#adb
+alias acc='adb connect 192.168.31.252'
+
 # handy short cuts #
 alias bashrc="vim ~/dotfiles/bash/.bashrc"
 alias c='cd'
