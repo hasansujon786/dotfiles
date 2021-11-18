@@ -111,7 +111,7 @@ local leader = {
     S = { ':wa<CR>',                           'Save all file' },
     y = { ':call hasan#utils#CopyFileNameToClipBoard(1)<CR>',  'Yank path name' },
     Y = { ':call hasan#utils#CopyFileNameToClipBoard(0)<CR>',  'Yank file name' },
-    R = 'Rename file',
+    R = { ':lua require("hasan.utils.ui").rename_current_file()<CR>', 'Rename file' },
     C = 'Copy this file',
     M = 'Move/rename file',
 

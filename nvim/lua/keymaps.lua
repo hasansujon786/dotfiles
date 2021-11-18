@@ -215,7 +215,6 @@ maps.xnoremap('<Leader>f.', '<cmd>call hasan#utils#better_substitute()<CR>', {si
 -- File commands
 maps.nnoremap('<leader>fC', ':w <C-R>=expand("%")<CR>', {silent = false})
 maps.nnoremap('<leader>fM', ':Move <C-R>=expand("%")<CR>', {silent = false})
-maps.nnoremap('<leader>fR', ':Rename <C-R>=expand("%:t")<CR>', {silent = false})
 -- packer commands
 maps.nnoremap('<leader>vpc', ':PackerCompile<CR>', {silent = false})
 -- run project cmd
