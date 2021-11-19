@@ -10,7 +10,7 @@ choco install 7zip.install -y
 choco install gimp -y
 choco install vlc -y
 choco install emacs -y
-New-Item -ItemType SymbolicLink -Path 'C:\Users\hasan\AppData\Local\Microsoft\Windows Terminal\settings.json' -Target C:\Users\hasan\dotfiles\windows-terminal\settings.jsony
+New-Item -ItemType SymbolicLink -Path 'C:\Users\hasan\AppData\Local\Microsoft\Windows Terminal\settings.json' -Target C:\Users\hasan\dotfiles\windows-terminal\settings.json
 
 # choco install javaruntime -y
 # choco install adobereader -y

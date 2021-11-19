@@ -94,6 +94,6 @@
     { "keys": "alt+shift+h",    "command": { "action": "moveFocus", "direction": "left" } },
     { "keys": "alt+shift+j",    "command": { "action": "moveFocus", "direction": "down" } },
     { "keys": "alt+shift+k",    "command": { "action": "moveFocus", "direction": "up" } },
-    { "keys": "alt+shift+l",    "command": { "action": "moveFocus", "direction": "right" } },
+    { "keys": "alt+shift+l",    "command": { "action": "moveFocus", "direction": "right" } }
   ]
 }
