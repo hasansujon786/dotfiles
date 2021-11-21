@@ -8,8 +8,8 @@ return require('packer').startup({
     --> Visual -------------------------------------
     use({ 'navarasu/onedark.nvim', config = function() require('config.onedark') end })
     use({ 'glepnir/dashboard-nvim', config = function() require('config.dashboard') end })
+    use({ 'hasansujon786/kissline.nvim', config = function() require('config.kissline') end  })
     use({ 'kyazdani42/nvim-web-devicons' })
-    use({ 'hasansujon786/kissline.nvim' })
     use({ 'hasansujon786/notifier.nvim' })
     use({ 'hasansujon786/telescope-yanklist.nvim' })
     use({ 'folke/zen-mode.nvim', opt = true, cmd = 'ZenMode',

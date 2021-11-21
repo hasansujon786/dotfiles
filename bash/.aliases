@@ -49,6 +49,7 @@ alias h='history'
 alias o='explorer'
 alias open='explorer'
 alias du='du -h --max-depth=0 '
+alias re='cd /e/repoes'
 # Copy the PWD to the Clipboard
 alias cpd="pwd | tr -d '\n' | clip && echo 'pwd copied to clipboard'"
 # alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard'"
