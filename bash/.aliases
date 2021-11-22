@@ -23,7 +23,6 @@ alias ta="tmux attach"
 # alias tmux="env TERM=xterm-256color tmux"
 
 # Windows Terminal
-alias wt='/c/Program\ Files/WindowsApps/Microsoft.WindowsTerminal_1.10.2714.0_x64__8wekyb3d8bbwe/wt.exe'
 alias wtt='wt -w 0 nt -d .'
 
 # React native
@@ -34,8 +33,15 @@ alias asre='cd android && ./gradlew assembleRelease'
 alias asde='cd android && ./gradlew assembleDebug'
 alias inre='react-native run-android --variant=release'
 
+# Flutter
+alias flr='flutter run'
+alias flc='flutter clean'
+
 #adb
 alias acc='adb connect 192.168.31.252'
+alias add='adb devices'
+alias adres='adb kill-server && adb devices'
+alias scc='scrcpy -s f8a8aa489804'
 
 # handy short cuts #
 alias bashrc="vim ~/dotfiles/bash/.bashrc"
