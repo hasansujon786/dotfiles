@@ -8,7 +8,7 @@ function CmpNeogitCommitMessageSetup()
       { name = 'vsnip' },
       { name = 'spell' },
       { name = 'buffer',
-        opts = {
+        option = {
           get_bufnrs = function()
             return vim.api.nvim_list_bufs()
           end,
