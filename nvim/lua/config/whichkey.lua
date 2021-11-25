@@ -135,8 +135,7 @@ local leader = {
     c = 'Org capture',
     h = {'<cmd>lua require("hasan.org").open_org_home("-tabedit")<CR>', 'Open org home'},
     ['.'] = {'<cmd>lua require("hasan.org").open_org_home("edit")<CR>', 'Open org home'},
-    -- a = { '<Plug>(dotoo-agenda)',                               '+org-agenda' },
-    -- c = { '<Plug>(dotoo-capture-custom)',                       '+org-capture' },
+
     t = { ':FloatermNew bash<CR>',                              'Open terminal popup' },
     T = { ':FloatermNew --wintype=normal --height=10 bash<CR>', 'Open terminal split' },
     q = { '<cmd>call hasan#window#toggle_quickfix(1)<CR>',      'Open Quickfix list' },
@@ -228,16 +227,7 @@ local leader = {
     O = { '<cmd>tabonly<CR>',            'Keep only tab' },
     z = { '<cmd>AutoZoomWin<CR>',        'Toggle window zoom' },
 
-    -- wiki
-    -- i = 'diary-index',
-    -- n = 'diary-today',
-    -- N = 'diary-today-tab',
-    -- g = 'diary-generate-links',
-    T = { ':VimwikiTabIndex<CR>',        'wiki-index-tab'},
-    ['.'] = { ':VimwikiIndex<CR>',       'Open wiki index' },
-    ['?'] = { ':VimwikiUISelect<CR>',    'Wiki ui select' },
-    ['/'] = { ':lua require("hasan.telescope.custom").search_wiki_files()<CR>',   'Search wiki files'},
-
+    ['/'] = { ':lua require("hasan.telescope.custom").search_wiki_files()<CR>',   'Search org files'},
   },
 
   ['/'] = {
@@ -255,7 +245,7 @@ local leader = {
     t = { ':Telescope filetypes<CR>',       'Change filetypes' },
     v = { ':Telescope help_tags<CR>',       'Search Vim help' },
     s = { ':lua require("hasan.telescope.custom").grep_string()<CR>',         'Grep string' },
-    w = { ':lua require("hasan.telescope.custom").search_wiki_files()<CR>',   'Search wiki files'},
+    w = { ':lua require("hasan.telescope.custom").search_wiki_files()<CR>',   'Search org files'},
     -- m = { ':Bookmarks<CR>',                 'Jump to bookmark' } ,
   },
 
