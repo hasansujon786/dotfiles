@@ -5,9 +5,14 @@ lsp_installer.on_server_ready(function(server)
   }
 
   -- if using cmp.nvm
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+
   local status_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
   if status_ok then
-    opts.capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    opts.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+  else
+    opts.capabilities = capabilities
   end
 
   -- (optional) Customize the options passed to the server
