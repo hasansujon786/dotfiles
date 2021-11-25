@@ -8,7 +8,9 @@ return require('packer').startup({
     --> Visual -------------------------------------
     use({ 'navarasu/onedark.nvim', config = function() require('config.onedark') end })
     use({ 'glepnir/dashboard-nvim', config = function() require('config.dashboard') end })
-    use({ 'hasansujon786/kissline.nvim', config = function() require('config.kissline') end  })
+    use({ 'hasansujon786/kissline.nvim', opt = true, event = 'VimEnter',
+      config = function() require('config.kissline') end
+    })
     use({ 'kyazdani42/nvim-web-devicons' })
     use({ 'hasansujon786/notifier.nvim' })
     use({ 'hasansujon786/telescope-yanklist.nvim' })
@@ -77,7 +79,7 @@ return require('packer').startup({
     use({ 'Konfekt/vim-CtrlXA', opt = true, event = 'CursorHold' })
     use({ 'tpope/vim-commentary', opt = true, event = 'BufRead' })
     use({ 'tpope/vim-surround', opt = true, event = 'BufRead',  })
-    use({ 'nathom/filetype.nvim' })
+    use({ 'nathom/filetype.nvim', disable = true })
     use({ 'nvim-lua/plenary.nvim' })
     use({ 'voldikss/vim-floaterm', opt = true,
       cmd = {'FloatermNew','FloatermToggle'},

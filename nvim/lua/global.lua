@@ -19,7 +19,6 @@ if pcall(require, 'plenary') then
   end
 end
 
-vim.g.did_load_filetypes = 1
 -- Vsnip ==============================
 -- vim.g.vsnip_namespace = ':'
 vim.g.vsnip_snippet_dir = '~/dotfiles/nvim/.vsnip'
