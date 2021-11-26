@@ -11,9 +11,9 @@ require("nvim-treesitter.configs").setup {
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = 'gnn', -- maps in normal mode to init the node/scope selection
-      node_incremental = '}', -- increment to the upper named parent
-      node_decremental = '{', -- decrement to the previous node
+      init_selection = 'g<tab>', -- maps in normal mode to init the node/scope selection
+      node_incremental = '<tab>', -- increment to the upper named parent
+      node_decremental = '<s-tab>', -- decrement to the previous node
       scope_incremental = 'gn', -- increment to the upper scope (as defined in locals.scm)
     },
   },
@@ -51,6 +51,10 @@ require("nvim-treesitter.configs").setup {
         ["if"] = "@function.inner",
         ["ac"] = "@class.outer",
         ["ic"] = "@class.inner",
+        ["iP"] = "@parameter.inner",
+        ["aP"] = "@parameter.outer",
+        ["ik"] = "@call.inner",
+        ["ak"] = "@call.outer",
         -- Or you can define your own textobjects like this
         ["iF"] = {
           python = "(function_definition) @function",
