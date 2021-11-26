@@ -24,10 +24,10 @@ function CmpOrgmodeSetup()
   require('cmp').setup.buffer {
     enabled = true,
     sources = {
-      { name = 'vsnip' },
       { name = 'spell' },
+      { name = 'vsnip' },
       { name = 'buffer',
-        opts = {
+        option = {
           get_bufnrs = function()
             return vim.api.nvim_list_bufs()
           end,
