@@ -12,6 +12,12 @@ require('flutter-tools').setup {
 
       buf_set_keymap('n', '<Leader>fr', '<Cmd>FlutterRun<CR>', opts)
       buf_set_keymap('n', '<Leader>fc', '<Cmd>lua require("telescope").extensions.flutter.commands()<CR>', opts)
+      vim.cmd[[
+        xnoremap at abob
+        onoremap at :normal vat<CR>
+        xnoremap it iwl%o
+        onoremap it :normal vit<CR>
+      ]]
     end,
     capabilities = capabilities,
     settings = {

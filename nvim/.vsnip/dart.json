@@ -492,7 +492,7 @@
     "description": "Create a testWidgets function"
   },
   "for loop": {
-    "prefix": "flp",
+    "prefix": "forloop",
     "body": [
       "for (int i = 1; i <= list.lenght; i++) {",
       "  print(i);",
@@ -501,7 +501,7 @@
     "description": "for loop"
   },
   "for loop object": {
-    "prefix": "flpo",
+    "prefix": "forobject",
     "body": [
       "for (final object in flybyObjects) {",
       "  print(object);",
