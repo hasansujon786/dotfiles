@@ -26,7 +26,7 @@ local local_actions = {
     require('telescope.actions').close(prompt_bufnr)
     if vim.fn.has('win32') == 1 then
       vim.fn.setreg('*', {'yarn '..entry.value[1]})
-      local cmd = 'silent !"c:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.10.2714.0_x64__8wekyb3d8bbwe\\wt.exe" '
+      local cmd = 'silent !"c:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.11.2921.0_x64__8wekyb3d8bbwe\\wt.exe" '
       cmd  = cmd .. '-w 0 nt -d .'
       vim.cmd(cmd)
     else
