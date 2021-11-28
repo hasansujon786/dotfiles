@@ -55,5 +55,17 @@ M.rename_current_file = function ()
   })
 end
 
+M.substitute_word = function (isVisual)
+  local curWord = isVisual and vim.fn['hasan#utils#get_visual_selection']() or vim.fn.expand('<cword>')
+  local stringlenght = string.len(curWord) + 5
+
+  M.input(curWord, function(newWord)
+    local cmd = isVisual and '%s/'..curWord..'/'..newWord..'/gc' or '%s/\\<'..curWord..'\\>/'..newWord..'/gc'
+
+    vim.fn['hasan#utils#feedkeys'](':<C-u>'..cmd..'<CR>', 'n')
+    vim.fn.setreg('z', cmd)
+  end, { title = 'Substitute Word', width = stringlenght > 20 and stringlenght or 20 })
+end
+
 return M
 -- require('hasan.utils.ui').rename_current_file()

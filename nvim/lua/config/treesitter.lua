@@ -1,7 +1,7 @@
 
 require("nvim-treesitter.configs").setup {
   -- ensure_installed = { 'html', 'css', 'javascript', 'typescript', 'tsx', 'json', 'lua', 'vue', 'org' },
-  ensure_installed = { 'html', 'css', 'javascript', 'typescript', 'tsx', 'json', 'lua', 'vue' },
+  ensure_installed = { 'html', 'css', 'javascript', 'typescript', 'tsx', 'json', 'lua', 'vue', 'dart' },
   highlight = {
     enable = true, -- false will disable the whole extension
     use_languagetree = false,
