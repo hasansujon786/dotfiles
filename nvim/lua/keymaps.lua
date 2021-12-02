@@ -27,6 +27,8 @@ maps.nmap('zm', 'zM')
 maps.vnoremap('p', 'pgvy')
 -- Keep cursor at the bottom of the visual selection after you yank it.
 maps.vnoremap('y', 'ygv<Esc>')
+--- Ensure Y works similar to D,C.
+maps.nnoremap('Y', 'y$')
 -- Select the last yanked text
 maps.nnoremap('gV', '`[v`]')
 -- Prevent x from overriding the clipboard.
