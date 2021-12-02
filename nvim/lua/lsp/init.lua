@@ -2,18 +2,29 @@ local M = {}
 
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'double' })
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'double' })
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+vim.diagnostic.config({
   virtual_text = true,
   signs = true,
-  underline = true,
   update_in_insert = true,
+  severity_sort = true,
+  float = {
+    focusable = false,
+    close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
+    border = 'rounded',
+    source = 'always',  -- show source in diagnostic popup window
+    -- prefix = ' '
+  }
 })
 
 if vim.fn.has "nvim-0.6.0" == 1  then
   local signs = { Error = '', Warn = '', Hint = '', Info = '' }
   for type, _ in pairs(signs) do
     local hl = 'DiagnosticSign' .. type
-    vim.fn.sign_define(hl, { text = '', texthl = hl, numhl = hl })
+    vim.fn.sign_define(hl, {
+      text = '', -- disable diagnostic icon for gitsign
+      texthl = hl,
+      numhl = hl,
+    })
   end
 else
   local signs = { Error = '', Warning = '', Hint = '', Information = '' }
@@ -21,24 +32,30 @@ else
     local hl = 'LspDiagnosticsSign' .. type
     vim.fn.sign_define(hl, { text = '', texthl = hl, numhl = hl })
   end
+  vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = false,
+    signs = false,
+    underline = true,
+    update_in_insert = true,
+  })
 end
 
 local function lsp_document_highlight(client)
   -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then
     vim.api.nvim_exec([[
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
+    augroup lsp_document_highlight
+    autocmd! * <buffer>
+    autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+    autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+    augroup END
       ]], false)
   end
 end
 
 -- buf_set_keymap('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
 -- buf_set_keymap('n', '<C-space>', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-local function lsp_buffer_keymaps(bufnr)
+local function lsp_buffer_keymaps(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
   local filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
@@ -57,8 +74,8 @@ local function lsp_buffer_keymaps(bufnr)
   buf_set_keymap('n', 'gp', '<cmd>lua require"lsp.peek".Peek("definition")<CR>', opts)
 
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = "double"}})<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = "double"}})<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<F2>', '<cmd>lua require("lsp.util").rename_with_quickfix()<CR>', opts)
   buf_set_keymap('n', '<C-q>', '<cmd>lua require("telescope.builtin").lsp_code_actions(require("telescope.themes").get_cursor())<CR>', opts)
   buf_set_keymap('n', '<C-space>', '<cmd>lua require("telescope.builtin").lsp_code_actions(require("telescope.themes").get_cursor())<CR>', opts)
@@ -76,7 +93,7 @@ local function lsp_buffer_keymaps(bufnr)
   buf_set_keymap('n', '<leader>a?', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
   buf_set_keymap('n', '<leader>ah', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<leader>ad', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap('n', '<leader>al', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({show_header=false,border="double"})<CR>', opts)
+  buf_set_keymap('n', '<leader>al', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 end
 
 local function lsp_tsserver_config(client, bufnr)
@@ -137,7 +154,7 @@ end
 -- after the language server attaches to the current buffer
 M.on_attach = function(client, bufnr)
   lsp_document_highlight(client)
-  lsp_buffer_keymaps(bufnr)
+  lsp_buffer_keymaps(client, bufnr)
 
   if client.name == 'tsserver' then
     lsp_tsserver_config(client, bufnr)
