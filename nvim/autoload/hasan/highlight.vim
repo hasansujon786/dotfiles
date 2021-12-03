@@ -6,10 +6,10 @@ function hasan#highlight#load_custom_highlight() abort
   hi VertSplit          guifg=#4D5666 guibg=#363d49
   hi CursorColumn       guibg=#3B4048
   hi CursorLineFocus    guibg=#3E4452
-  hi Float              guibg=#242b38 guifg=#a5b0c5
-  hi FloatBorder        guibg=#242b38 guifg=#5c6370
   hi IncSearch          guibg=#e86671 gui=underline
   hi SignColumn         guibg=NONE
+  hi FloatBorder        guibg=NONE guifg=#61AFEF
+  hi! link NormalFloat Normal
   hi! link Folded Comment
 
   " Syntax highlights
@@ -44,9 +44,10 @@ function hasan#highlight#load_custom_highlight() abort
   hi DashboardShortcut ctermfg=145 guifg=#ABB2BF
   hi DashboardCenter   ctermfg=145 guifg=#ABB2BF
   hi! link HLNext IncSearch
-  hi! link TelescopePreviewBorder FloatBorder
-  hi! link TelescopeResultsBorder FloatBorder
-  hi! link TelescopePromptBorder  FloatBorder
+  hi! link TelescopeBorder Comment
+  hi! link TelescopePreviewBorder TelescopeBorder
+  hi! link TelescopeResultsBorder TelescopeBorder
+  hi! link TelescopePromptBorder  TelescopeBorder
   hi! link CmpItemKind CmpItemMenu
   hi CmpItemAbbrMatchFuzzy   guifg=#E5C07B gui=underline
   hi CmpItemAbbrMatch        guifg=#E5C07B

@@ -1,7 +1,9 @@
 local M = {}
 
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'double' })
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'double' })
+local borderStyle = 'rounded' -- none, single, double, shadow
+
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = borderStyle })
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderStyle })
 
 if vim.fn.has "nvim-0.6.0" == 1  then
   vim.diagnostic.config({
@@ -12,7 +14,7 @@ if vim.fn.has "nvim-0.6.0" == 1  then
     float = {
       focusable = false,
       close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
-      border = 'rounded',
+      border = borderStyle,
       source = 'always',  -- show source in diagnostic popup window
       -- prefix = ' '
     }
