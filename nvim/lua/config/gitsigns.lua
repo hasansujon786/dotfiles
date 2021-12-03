@@ -28,4 +28,7 @@ require('gitsigns').setup {
     ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
     ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
   },
+  preview_config = {
+    border = 'rounded',
+  },
 }
