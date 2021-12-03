@@ -29,6 +29,28 @@
     ],
     "description": "Create a Stateful widget"
   },
+  "Material App Scaffold": {
+    "prefix": "scaffoldmate",
+    "description": "Scaffold a Material Screen",
+    "body": [
+      "import 'package:flutter/material.dart';",
+      "",
+      "class ${1:name} extends StatelessWidget {",
+      "  const ${1:name}({Key? key}) : super(key: key);\n",
+      "  @override",
+      "  Widget build(BuildContext context) {",
+      "    return Scaffold(",
+      "      appBar: AppBar(",
+      "        title: const Text(${1:'Material App Bar'}),",
+      "      ),",
+      "      body: const Center(",
+      "        child: Text('Hello World'),",
+      "      ),",
+      "    );",
+      "  }",
+      "}"
+    ]
+  },
   "Build Method": {
     "prefix": "build",
     "body": [
