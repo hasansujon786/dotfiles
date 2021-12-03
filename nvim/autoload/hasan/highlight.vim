@@ -11,6 +11,7 @@ function hasan#highlight#load_custom_highlight() abort
   hi FloatBorder        guibg=NONE guifg=#61AFEF
   hi! link NormalFloat Normal
   hi! link Folded Comment
+  hi! link WhichKeyFloat Pmenu
 
   " Syntax highlights
   hi TSTagDelimiter    guifg=#ABB2BF
