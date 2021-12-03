@@ -11,6 +11,9 @@ return require('packer').startup({
     use({ 'hasansujon786/kissline.nvim', opt = true, event = 'VimEnter',
       config = function() require('config.kissline') end
     })
+    use({ 'nvim-lualine/lualine.nvim',
+      config = function() require('config.lualine-config') end
+    })
     use({ 'kyazdani42/nvim-web-devicons' })
     use({ 'hasansujon786/notifier.nvim' })
     use({ 'hasansujon786/telescope-yanklist.nvim' })
