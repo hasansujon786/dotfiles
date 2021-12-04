@@ -31,7 +31,7 @@ M.input = function(defaultText, onConfirm, opts)
   vim.api.nvim_buf_set_keymap(0, 'n', '<Esc>', '<cmd>stopinsert | q!<CR>', map_opts)
   vim.api.nvim_buf_set_keymap(0, 'i', '<CR>', '<cmd>stopinsert | lua _utils_ui_input()<CR>', map_opts)
   vim.api.nvim_buf_set_keymap(0, 'n', '<CR>', '<cmd>stopinsert | lua _utils_ui_input()<CR>', map_opts)
-  vim.api.nvim_buf_set_option(0, 'filetype', 'Prompt')
+  vim.api.nvim_buf_set_option(0, 'buftype', 'prompt')
 
   function _G._utils_ui_input()
     local newText = vim.trim(vim.fn.getline('.'))

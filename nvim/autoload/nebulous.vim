@@ -35,7 +35,7 @@ function! nebulous#focus_cursor(...) abort
     setl winhighlight=Folded:TextInfo
   endif
 
-  if &filetype !~ 'TelescopePrompt\|Prompt'
+  if &buftype !~ 'prompt'
     try | call nvim_win_set_option(a:000[0], 'cursorline', v:true) | catch | endtry
   endif
 endfunction
