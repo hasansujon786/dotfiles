@@ -17,8 +17,5 @@ endfunction
 
 function! nebulous#whichkey_hack(...) abort
   lua require('nebulous').on_focus_gained()
-  if exists('g:loaded_kissline')
-    call kissline#_focus()
-  endif
   redrawstatus
 endfunction
