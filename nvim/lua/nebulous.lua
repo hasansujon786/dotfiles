@@ -54,8 +54,16 @@ M.setup_colors = function()
   ]]
 end
 
-M.update_all_windows = function()
+M.update_all_windows = function(shouldCheckFloat)
   if nb_is_disabled then
+    return
+  end
+
+  -- check update windows again if there is a floating window
+  if utils.is_floting_window(0) and shouldCheckFloat then
+    vim.defer_fn(function ()
+      M.update_all_windows(false)
+    end, 1)
     return
   end
 
@@ -66,13 +74,6 @@ M.update_all_windows = function()
       blurWindow(curid)
     end
   end
-
-  -- is disabled it for multiple run
-  -- if utils.is_floting_window(0) then
-  --   vim.defer_fn(function ()
-  --     M.update_all_windows()
-  --   end, 10)
-  -- end
 end
 
 M.on_focus_lost = function ()
