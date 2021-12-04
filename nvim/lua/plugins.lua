@@ -11,9 +11,7 @@ return require('packer').startup({
     use({ 'hasansujon786/kissline.nvim', opt = true, event = 'VimEnter',
       config = function() require('config.kissline') end
     })
-    use({ 'nvim-lualine/lualine.nvim',
-      config = function() require('config.lualine-config') end
-    })
+    use({ 'nvim-lualine/lualine.nvim', config = function() require('config.lualine-config') end })
     use({ 'kyazdani42/nvim-web-devicons', config = function() require('config.devicons-config') end })
     use({ 'hasansujon786/notifier.nvim' })
     use({ 'hasansujon786/telescope-yanklist.nvim' })
@@ -76,6 +74,7 @@ return require('packer').startup({
     })
 
     --> Utils --------------------------------------
+    use({ 'MunifTanjim/nui.nvim' })
     use({ 'mg979/vim-visual-multi', opt = true, event = 'CursorHold' })
     use({ 'arthurxavierx/vim-caser', opt = true, event = 'CursorHold' })
     use({ 'NTBBloodbath/color-converter.nvim', opt = true, event = 'CursorHold' })
@@ -113,7 +112,9 @@ return require('packer').startup({
     -- })
     use({ 'TimUntersberger/neogit', opt = true, cmd = 'Neogit' })
     use({ 'lewis6991/gitsigns.nvim',
-      opt = true, event = 'BufRead',
+      -- opt = true, event = 'BufRead',
+      branch = 'crlf', opt = true, event = 'BufRead',
+      disable = false,
       config = function()
         require('config.gitsigns')
       end
