@@ -29,18 +29,20 @@ local utils = {
 }
 
 local focusWindow = function (winid)
+  vim.fn['nebulous#onFocusWindow'](winid)
+
   if utils.win_has_blacklist_filetype(winid) or utils.is_floting_window(winid)then
     return
   end
-
   vim.fn.setwinvar(winid, '&winhighlight', '')
 end
 
 local blurWindow = function(winid)
+  vim.api.nvim_win_set_option(winid, 'cursorline', false)
+
   if utils.win_has_blacklist_filetype(winid) or utils.is_floting_window(winid) then
     return
   end
-
   vim.fn.setwinvar(winid, '&winhighlight', table.concat(nb_blur_hls, ','))
 end
 
@@ -65,11 +67,12 @@ M.update_all_windows = function()
     end
   end
 
-  if utils.is_floting_window(0) then
-    vim.defer_fn(function ()
-      M.update_all_windows()
-    end, 10)
-  end
+  -- is disabled it for multiple run
+  -- if utils.is_floting_window(0) then
+  --   vim.defer_fn(function ()
+  --     M.update_all_windows()
+  --   end, 10)
+  -- end
 end
 
 M.on_focus_lost = function ()

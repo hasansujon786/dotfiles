@@ -19,3 +19,24 @@ function! nebulous#whichkey_hack(...) abort
   lua require('nebulous').on_focus_gained()
   redrawstatus
 endfunction
+
+function! nebulous#onFocusWindow(winId) abort
+  call timer_start(50, funcref('nebulous#focus_cursor', [a:winId]))
+endfunction
+
+function! nebulous#focus_cursor(...) abort
+  if &filetype == 'floaterm' | return | endif
+
+  if &filetype =~ 'list\|\<fern\>'
+    set winhighlight=CursorLine:CursorLineFocus
+  endif
+
+  if &filetype =~ 'org'
+    setl winhighlight=Folded:TextInfo
+  endif
+
+  if &filetype !~ 'TelescopePrompt\|Prompt'
+    call nvim_win_set_option(a:000[0], 'cursorline', v:true)
+  endif
+endfunction
+

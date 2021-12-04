@@ -1,22 +1,4 @@
 
-" AutoSetCursorColor {{{
-function! hasan#boot#auto_set_cursor_color(...) abort
-  if &filetype == 'floaterm' | return | endif
-
-  if &filetype =~ 'list\|\<fern\>'
-    set winhighlight=CursorLine:CursorLineFocus
-  endif
-
-  if &filetype =~ 'org'
-    setl winhighlight=Folded:TextInfo
-  endif
-
-  if &filetype !~ 'TelescopePrompt\|Prompt'
-    setlocal cursorline
-  endif
-endfunction
-" }}}
-
 " Utils_highligt_textwith_column {{{
 highlight EndOfTextWidth guibg=magenta guifg=#282C34
 function! hasan#boot#highligt_ruler(bool)
