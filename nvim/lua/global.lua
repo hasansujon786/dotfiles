@@ -12,10 +12,12 @@ if pcall(require, 'plenary') then
   local plenary_reload = require('plenary.reload').reload_module
 
 
-  R = function(name)
-    plenary_reload(name)
-    -- print(string.format('[%s] - module reloaded', name))
-    return require(name)
+  R = function(moduleName, message)
+    plenary_reload(moduleName)
+    if message then
+      print(string.format('[%s] - %s', moduleName, message))
+    end
+    return require(moduleName)
   end
 end
 

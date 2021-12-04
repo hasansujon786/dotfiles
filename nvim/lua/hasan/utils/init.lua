@@ -2,10 +2,13 @@ local Job = require('plenary.job')
 local M = {}
 
 M.reload_this_module = function ()
-  local fname = vim.fn.fnamemodify(vim.fn.expand('%:p:r'), string.format(':gs?%s/??', vim.fn.getcwd()))
-  local module_name = vim.fn.fnamemodify(fname, ':gs?\\?.?:gs?/?.?:gs?nvim.??:gs?lua.??:gs?.init??')
-  print(string.format('[%s] - module reloaded', module_name))
-  R(module_name)
+  -- local fname = vim.fn.fnamemodify(vim.fn.expand('%:p:r'), string.format(':gs?%s/??', vim.fn.getcwd()))
+  -- local module_name = vim.fn.fnamemodify(fname, ':gs?\\?.?:gs?/?.?:gs?nvim.??:gs?lua.??:gs?.init??')
+
+  local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':gs?\\?.?:gs?/?.?')
+  local module_name_from_root = vim.fn.fnamemodify(vim.fn.expand('%:p:r'), ':gs?\\?.?:gs?/?.?:gs?nvim.??:gs?lua.??:gs?.init??:gs?.lua??')
+  local module_name = vim.fn.fnamemodify(module_name_from_root, ':gs?'..cwd..'.??')
+  R(module_name, 'module reloaded')
 end
 
 M.get_default = function(x, default)
