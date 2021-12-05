@@ -1,70 +1,74 @@
 local utils = require('hasan.utils')
+local Input = require("nui.input")
+local event = require("nui.utils.autocmd").event
 
 local M = {}
 
-M.input = function(defaultText, onConfirm, opts)
-  local title = utils.get_default(opts.title, 'New Name')
-  local width = utils.get_default(opts.width, 25)
-  local height = utils.get_default(opts.height, 1)
+M.input = function(title, options)
+  local width = string.len(options.default_value) + 10
 
-  if false then
-    return 0
-  end
-
-  local win = require('plenary.popup').create(defaultText, {
-    title = title,
-    style = 'minimal',
-    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+  local popup_options = {
     relative = 'cursor',
-    borderhighlight = 'FloatBorder',
-    titlehighlight = 'Title',
-    highlight = 'Float',
-    focusable = true,
-    width = width,
-    height = height,
-    -- line = 'cursor+2',
-    -- col = 'cursor-1'
-  })
+    position = {
+      row = 1,
+      col = 0,
+    },
+    size =  utils.get_default(options.size, width > 25 and width or 25) ,
+    border = {
+      style = 'rounded',
+      highlight = 'FloatBorder',
+      text = {
+        top = title,
+        top_align = 'center',
+      },
+    },
+    win_options = {
+      -- winblend = 5,
+      winhighlight = 'Normal:Normal',
+    },
+  }
 
-  local map_opts = { noremap = true, silent = true }
-  vim.api.nvim_buf_set_keymap(0, 'i', '<Esc>', '<cmd>stopinsert | q!<CR>', map_opts)
-  vim.api.nvim_buf_set_keymap(0, 'n', '<Esc>', '<cmd>stopinsert | q!<CR>', map_opts)
-  vim.api.nvim_buf_set_keymap(0, 'i', '<CR>', '<cmd>stopinsert | lua _utils_ui_input()<CR>', map_opts)
-  vim.api.nvim_buf_set_keymap(0, 'n', '<CR>', '<cmd>stopinsert | lua _utils_ui_input()<CR>', map_opts)
-  vim.api.nvim_buf_set_option(0, 'buftype', 'prompt')
+  local input = Input(popup_options, options)
+  -- mount/open the component
+  input:mount()
 
-  function _G._utils_ui_input()
-    local newText = vim.trim(vim.fn.getline('.'))
-    vim.api.nvim_win_close(win, true)
-    onConfirm(newText)
-  end
+  input:map('i', '<Esc>', input.input_props.on_close, { noremap = true })
+  input:map('n', '<Esc>', input.input_props.on_close, { noremap = true })
+  input:map('i', '<C-c>', input.input_props.on_close, { noremap = true })
+  input:map('n', '<C-c>', input.input_props.on_close, { noremap = true })
+
+  -- unmount component when cursor leaves buffer
+  input:on(event.BufLeave, function()
+    input:unmount()
+  end)
 end
-
-
 
 M.rename_current_file = function ()
   local currNameFileName = vim.fn.expand('%:t')
-  local stringlenght = string.len(currNameFileName) + 5
 
-  M.input(currNameFileName, function(newName)
-    print(newName)
-    vim.cmd('Rename '.. newName)
-  end, {
-    title = 'Rename File',
-    width = stringlenght > 20 and stringlenght or 20,
+  M.input('Rename File', {
+    prompt = '> ',
+    default_value = currNameFileName,
+    on_submit = function(newName)
+      if string.len(newName) > 0 then
+        vim.cmd('Rename '.. newName)
+      end
+    end,
   })
 end
 
 M.substitute_word = function (isVisual)
   local curWord = isVisual and vim.fn['hasan#utils#get_visual_selection']() or vim.fn.expand('<cword>')
-  local stringlenght = string.len(curWord) + 5
 
-  M.input(curWord, function(newWord)
-    local cmd = isVisual and '%s/'..curWord..'/'..newWord..'/gc' or '%s/\\<'..curWord..'\\>/'..newWord..'/gc'
+  M.input('Substitute Word', {
+    default_value = curWord,
+    on_submit = function(newWord)
+      local cmd = isVisual and '%s/'..curWord..'/'..newWord..'/gc' or '%s/\\<'..curWord..'\\>/'..newWord..'/gc'
 
-    vim.fn['hasan#utils#feedkeys'](':<C-u>'..cmd..'<CR>', 'n')
-    vim.fn.setreg('z', cmd)
-  end, { title = 'Substitute Word', width = stringlenght > 20 and stringlenght or 20 })
+      vim.fn['hasan#utils#feedkeys'](':<C-u>'..cmd..'<CR>', 'n')
+      vim.fn.setreg('z', cmd)
+    end,
+  })
 end
 
 return M
