@@ -32,6 +32,7 @@ function hasan#highlight#load_custom_highlight() abort
   hi LspReferenceRead  guibg=#3B4048 gui=NONE
 
   " Plugins
+  hi IndentBlanklineChar guifg=#3B4048
   hi QuickScopePrimary   guifg=tomato gui=underline
   hi QuickScopeSecondary guifg=#d78787 gui=underline
   hi Sneak      gui=bold guibg=#E06B74 guifg=#282C33

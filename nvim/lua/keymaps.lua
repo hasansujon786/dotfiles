@@ -34,6 +34,8 @@ maps.nnoremap('gV', '`[v`]')
 -- Prevent x from overriding the clipboard.
 maps.nnoremap('x', '"_x')
 maps.nnoremap('X', '"_X')
+maps.xnoremap('x', '"_x')
+maps.xnoremap('X', '"_X')
 -- Paste from + register (system clipboard)
 maps.inoremap('<C-v>',' <C-R>+')
 maps.cnoremap('<C-v>', '<C-R>+')

@@ -19,7 +19,11 @@ return require('packer').startup({
       config = function() require('config.zen') end
     })
     use({ 'Yggdroot/indentLine', opt = true, event = 'BufRead',
+      disable = true,
       config = function() require('config.indentLine') end
+    })
+    use({ "lukas-reineke/indent-blankline.nvim",opt = true,event = 'BufRead',
+      config = function() require('config.indentLine-config') end
     })
     use({ 'norcalli/nvim-colorizer.lua', opt = true, event = 'CursorHold',
       config = function() require('config.colorizer') end
@@ -114,7 +118,7 @@ return require('packer').startup({
     use({ 'lewis6991/gitsigns.nvim',
       -- opt = true, event = 'BufRead',
       branch = 'crlf', opt = true, event = 'BufRead',
-      disable = false,
+      disable = true,
       config = function()
         require('config.gitsigns')
       end
