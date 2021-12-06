@@ -8,3 +8,7 @@ maps.nmap('<leader>gr', '<Plug>(GitGutterUndoHunk)')
 maps.nmap('<leader>gq', ':GitGutterQuickFix | copen<CR>')
 maps.nmap('<leader>g.', ':silent !git add %<CR>')
 
+maps.omap('ih', '<Plug>(GitGutterTextObjectInnerPending)')
+maps.omap('ah', '<Plug>(GitGutterTextObjectOuterPending)')
+maps.xmap('ih', '<Plug>(GitGutterTextObjectInnerVisual)')
+maps.xmap('ah', '<Plug>(GitGutterTextObjectOuterVisual)')
