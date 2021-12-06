@@ -1,27 +1,19 @@
 local lsp_installer = require("nvim-lsp-installer")
+-- if using cmp.nvim
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+local cmp_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+if cmp_ok then capabilities = cmp_nvim_lsp.update_capabilities(capabilities) end
+
 lsp_installer.on_server_ready(function(server)
   local opts = {
     on_attach = require('lsp').on_attach,
     flags = {
       debounce_text_changes = 500,
     },
+    capabilities = capabilities,
   }
 
-  -- if using cmp.nvm
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-  local status_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-  if status_ok then
-    opts.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
-  else
-    opts.capabilities = capabilities
-  end
-
-  -- (optional) Customize the options passed to the server
-  -- if server.name == "tsserver" then
-  --     opts.root_dir = function() ... end
-  -- end
 
   if server.name == "sumneko_lua" then
     opts.settings = {
