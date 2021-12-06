@@ -89,7 +89,6 @@ local function lsp_buffer_keymaps(client, bufnr)
   buf_set_keymap('v', '<C-q>', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
   buf_set_keymap('v', '<C-space>', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
   buf_set_keymap('n', '<C-LeftMouse>', '<LeftMouse><cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', '//', '<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>', opts)
   if filetype ~= 'lua' and filetype ~= 'vim' then
     buf_set_keymap('n', '<F9>', '<cmd>lua vim.lsp.buf.formatting_sync()<CR><cmd>update<CR>', opts)
   end
@@ -100,6 +99,7 @@ local function lsp_buffer_keymaps(client, bufnr)
   buf_set_keymap('n', '<leader>a?', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
   buf_set_keymap('n', '<leader>ah', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<leader>ad', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', '<leader>.',  '<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>', opts)
 
   if vim.fn.has "nvim-0.6.0" == 1  then
     buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)

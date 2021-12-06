@@ -232,6 +232,7 @@ local leader = {
 
   ['/'] = {
     name = '+search',
+    ['.'] = { ':Telescope resume<CR>',      'Telescope resume' },
     ['/'] = { ':Telescope live_grep<CR>',   'Find file' },
     b = { ':Telescope buffers<CR>',         'Find buffers' },
     B = { ':Telescope git_bcommits<CR>',    'Look up buffer commits' },
@@ -259,7 +260,7 @@ local leader = {
   z = { 'za',                                             'Fold/Unfold' },
   m = { ':lua require("harpoon.mark").add_file()<CR>',    'Mark to Harpoon' },
 
-  ['.'] = { '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', 'Find directory' },
+  ['.'] = 'Search document symbols',
   ['<space>'] = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find File in project' },
   ['<tab>'] = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', 'Open Harpoon' },
 
