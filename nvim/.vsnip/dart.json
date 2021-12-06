@@ -30,7 +30,7 @@
     "description": "Create a Stateful widget"
   },
   "Material App Scaffold": {
-    "prefix": "scaffoldmate",
+    "prefix": "scamate",
     "description": "Scaffold a Material Screen",
     "body": [
       "import 'package:flutter/material.dart';",

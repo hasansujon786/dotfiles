@@ -115,6 +115,7 @@ return require('packer').startup({
     --   }
     -- })
     use({ 'TimUntersberger/neogit', opt = true, cmd = 'Neogit' })
+    use({'airblade/vim-gitgutter',opt=true,event='BufWinEnter',config="require('config.gitgutter-config')"})
     use({ 'lewis6991/gitsigns.nvim',
       -- opt = true, event = 'BufRead',
       branch = 'crlf', opt = true, event = 'BufRead',

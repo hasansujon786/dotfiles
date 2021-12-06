@@ -44,3 +44,11 @@ vim.g.taskwiki_markup_syntax = 'markdown'
 vim.g.vimwiki_key_mappings = {global = 0}
 -- vim-caser ==========================
 vim.g.caser_prefix = '<leader>cs'
+-- git-gutter =========================
+vim.g.gitgutter_map_keys = 0
+vim.g.gitgutter_sign_added = '│'
+vim.g.gitgutter_sign_modified = '│'
+vim.g.gitgutter_sign_removed = '│'
+vim.g.gitgutter_sign_removed_first_line = '│'
+vim.g.gitgutter_sign_removed_above_and_below = '│'
+vim.g.gitgutter_sign_modified_removed = '│'

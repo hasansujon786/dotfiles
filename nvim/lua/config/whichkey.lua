@@ -93,9 +93,8 @@ local leader = {
     s = 'Stage hunk',
     u = 'Undo last hunk',
     R = 'Reset buffer',
-    d = { ':Gitsigns diffthis<CR>',                'Show diff' },
-    H = { ':Gitsigns toggle_linehl<CR>',           'Highlight hunks' },
-    T = { ':Gitsigns toggle_signs<CR>',            'Toggle Signes' },
+    h = { ':GitGutterLineHighlightsToggle<CR>',    'Highlight hunks' },
+    T = { ':GitGutterToggle<CR>',                  'Toggle Signes' },
   },
 
   f = {
