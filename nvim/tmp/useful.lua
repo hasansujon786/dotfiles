@@ -157,3 +157,13 @@ autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100) ]]
 -- call matchadd("Conceal", '->' , 10, -1, {'conceal': '→'}
 -- call matchadd("Conceal", '<=' , 10, -1, {'conceal': '≤'}
 -- call search('\v<' . fern_previous_node . '>')
+
+local reload_this_module = function ()
+  -- local fname = vim.fn.fnamemodify(vim.fn.expand('%:p:r'), string.format(':gs?%s/??', vim.fn.getcwd()))
+  -- local module_name = vim.fn.fnamemodify(fname, ':gs?\\?.?:gs?/?.?:gs?nvim.??:gs?lua.??:gs?.init??')
+
+  local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':gs?\\?.?:gs?/?.?')
+  local module_name_from_root = vim.fn.fnamemodify(vim.fn.expand('%:p:r'), ':gs?\\?.?:gs?/?.?:gs?nvim.??:gs?lua.??:gs?.init??:gs?.lua??')
+  local module_name = vim.fn.fnamemodify(module_name_from_root, ':gs?'..cwd..'.??')
+  R(module_name, 'module reloaded')
+end
