@@ -11,11 +11,12 @@ local make_entry = require('telescope.make_entry')
 local conf = require('telescope.config').values
 
 local filter = vim.tbl_filter
+local flatten = vim.tbl_flatten
 
 local git_and_buffer_files = function(opts)
   local bufnrs = filter(function(b)
     if 1 ~= vim.fn.buflisted(b) then
-        return false
+      return false
     end
     if not opts.show_all_buffers and not vim.api.nvim_buf_is_loaded(b) then
       return false
@@ -29,20 +30,16 @@ local git_and_buffer_files = function(opts)
     return true
   end, vim.fn['hasan#utils#_buflisted_sorted']())
 
-  local current_file = vim.fn.expand('%'):gsub("\\","/")
   local bufer_files = {}
   for _, bufnr in ipairs(bufnrs) do
     local bufname = vim.api.nvim_buf_get_name(bufnr)
     local file = vim.fn.fnamemodify(bufname, ':.'):gsub("\\","/")
     table.insert(bufer_files, file)
   end
+  local current_file = vim.fn.expand('%'):gsub("\\","/")
   local git_files = utils.get_os_command_output({ 'git', 'ls-files', '--exclude-standard', '--cached', '--others' })
-
-  local fusedArray = {}
-  local n=0
-  for _,v in ipairs(bufer_files) do n=n+1 ; fusedArray[n] = v end
-  -- for _,v in ipairs(git_files) do n=n+1 ; fusedArray[n] = v end
-  for _,v in ipairs(filter(function(v) return v ~= current_file end, git_files)) do n=n+1 ; fusedArray[n] = v end
+  git_files = filter(function(v) return v ~= current_file end, git_files)
+  local fusedArray = flatten({bufer_files, git_files})
 
   pickers.new(opts, {
     finder = finders.new_table{
