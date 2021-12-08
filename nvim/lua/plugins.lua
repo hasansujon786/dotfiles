@@ -35,7 +35,7 @@ return require('packer').startup({
     -- use({ 'vimwiki/vimwiki', opt = true, cmd = {'VimwikiIndex','VimwikiTabIndex','VimwikiUISelect'} })
     use({ 'kristijanhusak/orgmode.nvim',
       -- commit ='50d1a97b25d77f33d312b4775fbd68217d22c946',
-      commit ='e287630dad1eceb03292b6283aa73505e539191b',
+      -- commit ='e287630dad1eceb03292b6283aa73505e539191b', -- working
       opt = true, after = 'nvim-treesitter',
       config = function() require('config.orgmode') end
     })
