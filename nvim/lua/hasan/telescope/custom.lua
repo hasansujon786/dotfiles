@@ -1,14 +1,19 @@
-local local_action = require('hasan.telescope.local_action')
-local builtin = require('telescope.builtin')
-local utils = require('telescope.utils')
-local themes = require('telescope.themes')
-local pickers = require('telescope.pickers')
-local finders = require('telescope.finders')
-local make_entry = require('telescope.make_entry')
--- local actions = require('telescope/actions')
--- local action_state = require('telescope/actions/state')
--- local sorters = require('telescope/sorters')
-local conf = require('telescope.config').values
+local Path = require 'plenary.path'
+local scan = require 'plenary.scandir'
+local utils = require 'telescope.utils'
+local themes = require 'telescope.themes'
+local finders = require 'telescope.finders'
+local pickers = require 'telescope.pickers'
+local builtin = require 'telescope.builtin'
+local actions = require 'telescope.actions'
+local make_entry = require 'telescope.make_entry'
+local action_set = require 'telescope.actions.set'
+local action_state = require 'telescope.actions.state'
+-- local sorters = require 'telescope/sorters'
+
+local local_action = require 'hasan.telescope.local_action'
+local conf = require 'telescope.config'.values
+local os_sep = Path.path.sep
 
 local filter = vim.tbl_filter
 local flatten = vim.tbl_flatten
@@ -33,10 +38,10 @@ local git_and_buffer_files = function(opts)
   local bufer_files = {}
   for _, bufnr in ipairs(bufnrs) do
     local bufname = vim.api.nvim_buf_get_name(bufnr)
-    local file = vim.fn.fnamemodify(bufname, ':.'):gsub("\\","/")
+    local file = vim.fn.fnamemodify(bufname, ':.'):gsub('\\','/')
     table.insert(bufer_files, file)
   end
-  local current_file = vim.fn.expand('%'):gsub("\\","/")
+  local current_file = vim.fn.expand('%'):gsub('\\','/')
   local git_files = utils.get_os_command_output({ 'git', 'ls-files', '--exclude-standard', '--cached', '--others' })
   git_files = filter(function(v) return v ~= current_file end, git_files)
   local fusedArray = flatten({bufer_files, git_files})
@@ -154,8 +159,46 @@ M.projects = function ()
       return true
     end,
   }
-  require("telescope._extensions").manager.projects.projects(themes.get_dropdown(projects_options))
+  require('telescope._extensions').manager.projects.projects(themes.get_dropdown(projects_options))
 end
 
+M.live_grep_in_folder = function(opts)
+  opts = opts or {}
+  local data = {}
+  scan.scan_dir(vim.loop.cwd(), {
+    hidden = opts.hidden,
+    only_dirs = true,
+    respect_gitignore = true,
+    on_insert = function(entry)
+      table.insert(data, entry .. os_sep)
+    end,
+  })
+  table.insert(data, 1, '.' .. os_sep)
+
+  pickers.new(opts, {
+    prompt_title = 'Folders for Live Grep',
+    finder = finders.new_table { results = data, entry_maker = make_entry.gen_from_file(opts) },
+    previewer = conf.file_previewer(opts),
+    sorter = conf.file_sorter(opts),
+    attach_mappings = function(prompt_bufnr)
+      action_set.select:replace(function()
+        local current_picker = action_state.get_current_picker(prompt_bufnr)
+        local dirs = {}
+        local selections = current_picker:get_multi_selection()
+        if vim.tbl_isempty(selections) then
+          table.insert(dirs, action_state.get_selected_entry().value)
+        else
+          for _, selection in ipairs(selections) do
+            table.insert(dirs, selection.value)
+          end
+        end
+        actions._close(prompt_bufnr, current_picker.initial_mode == 'insert')
+        -- require('telescope.builtin').live_grep { search_djirs = dirs }
+        require('telescope.builtin').live_grep { cwd = dirs[1] }
+      end)
+      return true
+    end,
+  }):find()
+end
 
 return M
