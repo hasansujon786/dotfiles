@@ -87,26 +87,31 @@ vim.lsp.protocol.CompletionItemKind = {
   "   (TypeParameter)",
 }
 
-" M.icons = {
-"   Class = " ",
-"   Color = " ",
-"   Constant = " ",
-"   Constructor = " ",
-"   Enum = "了 ",
-"   EnumMember = " ",
-"   Field = " ",
-"   File = " ",
-"   Folder = " ",
-"   Function = " ",
-"   Interface = "ﰮ ",
-"   Keyword = " ",
-"   Method = "ƒ",
-"   Module = " ",
-"   Property = " ",
-"   Snippet = "﬌ ",
-"   Struct = " ",
-"   Text = " ",
-"   Unit = " ",
-"   Value = " ",
-"   Variable = " ",
-" }
+icons = {
+  Class = " ",
+  Color = " ",
+  Constant = " ",
+  Constructor = " ",
+  Enum = "了 ",
+  EnumMember = " ",
+  Field = " ",
+  File = " ",
+  Folder = " ",
+  Function = " ",
+  Interface = "ﰮ ",
+  Keyword = " ",
+  Method = "ƒ",
+  Module = " ",
+  Property = " ",
+  Snippet = "﬌ ",
+  Struct = " ",
+  Text = " ",
+  Unit = " ",
+  Value = " ",
+  Variable = " ",
+}
+
+-- '', -- Function
+-- '﬌', -- Snippet
+-- '', -- Reference
+-- '', -- Folder
