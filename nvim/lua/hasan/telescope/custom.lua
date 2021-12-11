@@ -109,6 +109,13 @@ function M.curbuf()
   builtin.current_buffer_fuzzy_find(opts)
 end
 
+function M.lsp_document_symbols()
+  local opts = {
+    previewer = false,
+  }
+  builtin.lsp_document_symbols(themes.get_dropdown(opts))
+end
+
 function M.search_wiki_files()
   builtin.find_files({
       prompt_title = 'Org files',
@@ -201,4 +208,21 @@ M.live_grep_in_folder = function(opts)
   }):find()
 end
 
+M.commands = function()
+  local opts = {
+    layout_strategy = 'vertical',
+    sorting_strategy = "ascending",
+    layout_config = {
+      -- preview_cutoff = 10,
+      anchor = 'N',
+      prompt_position = 'top',
+      -- mirror = ,
+      width = 0.7,
+      height = 0.8,
+    }
+  }
+  builtin.commands(themes.get_dropdown(opts))
+  -- builtin.commands(themes.get_ivy(opts))
+  -- builtin.commands(opts)
+end
 return M
