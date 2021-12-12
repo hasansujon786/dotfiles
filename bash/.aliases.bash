@@ -145,3 +145,18 @@ alias k9='kill -9'
 alias k15='kill -s 15'
 alias w1='watch -n 1'
 
+
+open_alacritty() {
+  start alacritty --working-directory $(pwd)
+  # nohup alacritty --working-directory $(pwd) </dev/null &>/dev/null &
+}
+
+open_bash() {
+  start bash
+}
+
+# bindkey -s '^t' 'open_alacritty\o'  # CTRL-T in terminal calls for open_alacritty function
+# windows
+# bind -x '"\C-t\C-t":"open_alacritty"'
+# bind -x '"\C-tq":"open_bash"'
+
