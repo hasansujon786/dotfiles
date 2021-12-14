@@ -30,7 +30,7 @@
     "description": "Create a Stateful widget"
   },
   "Material App Scaffold": {
-    "prefix": "scamate",
+    "prefix": "scaffold",
     "description": "Scaffold a Material Screen",
     "body": [
       "import 'package:flutter/material.dart';",
@@ -41,7 +41,7 @@
       "  Widget build(BuildContext context) {",
       "    return Scaffold(",
       "      appBar: AppBar(",
-      "        title: const Text(${1:'Material App Bar'}),",
+      "        title: const Text('${1:Screen Title}'),",
       "      ),",
       "      body: const Center(",
       "        child: Text('Hello World'),",

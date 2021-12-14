@@ -10,7 +10,8 @@ local autocmds = {
     {'VimResized * :wincmd ='}, -- Vim/tmux layout rebalancing
     {'FocusGained * checktime'}, -- Set to auto read when a file is changed from the outside
     {'BufWritePre *.vim,*.lua call hasan#autocmd#trimWhitespace()'},
-    {'BufReadPost *  call hasan#autocmd#restore_position()'},
+    {'BufWinEnter,WinEnter __FLUTTER_DEV_LOG__ normal Gzz'},
+    {'BufReadPost * call hasan#autocmd#restore_position()'},
     {'TermOpen * setfiletype terminal | set bufhidden=hide'},
     {'ColorScheme * call hasan#highlight#load_custom_highlight()'},
 

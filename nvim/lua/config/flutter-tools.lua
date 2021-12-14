@@ -22,8 +22,10 @@ require('flutter-tools').setup {
     capabilities = capabilities,
     settings = {
       showTodos = true,
-      completeFunctionCalls = true,
-      analysisExcludedFolders = {''}
+      completeFunctionCalls = false,
+      analysisExcludedFolders = {''},
+      lineLength = 120,
+      -- enableSdkFormatter = false,
     }
   },
   ui = {
