@@ -22,7 +22,7 @@ require('flutter-tools').setup {
     capabilities = capabilities,
     settings = {
       showTodos = true,
-      completeFunctionCalls = false,
+      completeFunctionCalls = true,
       analysisExcludedFolders = {''},
       lineLength = 120,
       -- enableSdkFormatter = false,

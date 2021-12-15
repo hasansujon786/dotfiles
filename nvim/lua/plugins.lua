@@ -188,8 +188,8 @@ return require('packer').startup({
         'f3fora/cmp-spell',
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-buffer',
-        'hrsh7th/cmp-path',
-        'hrsh7th/cmp-vsnip'
+        'hrsh7th/cmp-vsnip',
+        {'hrsh7th/cmp-path', commit ='d83839ae510d18530c6d36b662a9e806d4dceb73'}
       },
     })
     use({ 'windwp/nvim-autopairs',
