@@ -7,9 +7,9 @@ gui:
       - green
       - bold
     inactiveBorderColor:
-      - default
+      - "#546178"
     optionsTextColor:
-      - default
+      - "#546178"
     selectedLineBgColor:
       - reverse
     selectedRangeBgColor:
@@ -25,6 +25,7 @@ keybinding:
     scrollUpMain-alt1: '{' # main panel scrool up
     scrollDownMain-alt1: '}' # main panel scrool down
     nextScreenMode: 'O'
+notARepository: "skip" # one of: 'prompt' | 'create' | 'skip'
 # customCommands:
 #   - key: 'e'
 #     command: 'nvim {{.SelectedFile.Name}}'

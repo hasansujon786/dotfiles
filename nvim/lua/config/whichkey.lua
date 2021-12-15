@@ -80,11 +80,9 @@ local leader = {
     j = { ':diffget //3<CR>',                      'diffget theirs' },
     B = { ':lua require("hasan.utils.init").open_git_remote(false)<CR>',   'Browse git repo' },
 
-    l = { ':FloatermNew lazygit<CR>',              'Open lazygit' },
-    t = { ':FloatermNew tig<CR>',                  'Open tig' },
-
+    l = { ':FloatermNew --height=1.0 --width=1.0 lazygit<CR>',              'Open lazygit' },
+    t = { ':FloatermNew --height=1.0 --width=1.0 tig<CR>',                  'Open tig' },
     g = { ':Neogit<CR>',                           'Open Neogit' },
-    G = { ':Neogit kind=split<CR>',                'Open Neogit Split' },
 
     b = 'Preview git blame',
     p = 'Preview hunk',
