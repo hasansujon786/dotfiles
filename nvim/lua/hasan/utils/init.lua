@@ -39,7 +39,7 @@ Target OS names:
 end
 
 M.is_windows = function()
-  return jit.os == 'Windows'
+  return vim.fn.has('win32') == 1
 end
 
 M.is_file_exist = function (path)
