@@ -27,7 +27,6 @@ local leader = {
     name = '+lsp',
     d = 'Show diagnostics',
     h = 'Show signature help',
-    a = { '<cmd>lua require("telescope.builtin").lsp_code_actions(require("telescope.themes").get_cursor())<CR>',   'Code actions' },
     p = { '<cmd>lua require("telescope.builtin").lsp_definitions({ jump_type = "never" })<CR>',   'Preview defination' },
     r = { '<cmd>lua require("telescope.builtin").lsp_references()<CR>',                           'Preview references' },
     ['+'] = 'Add workspace folder',

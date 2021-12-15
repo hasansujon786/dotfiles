@@ -63,52 +63,53 @@ local function lsp_document_highlight(client)
 end
 
 local function lsp_buffer_keymaps(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_map(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
   local filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
   --Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
-  local opts = { noremap=true, silent=false }
+  local opts = { noremap=true, silent=true }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', 'gY', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', 'gI', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', 'gp', '<cmd>lua require"lsp.peek".Peek("definition")<CR>', opts)
+  buf_map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_map('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_map('n', 'gY', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_map('n', 'gI', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_map('n', 'gp', '<cmd>lua require"lsp.peek".Peek("definition")<CR>', opts)
 
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', '<F2>', '<cmd>lua require("lsp.util").rename_with_quickfix()<CR>', opts)
-  buf_set_keymap('n', '<C-q>', '<cmd>lua require("telescope.builtin").lsp_code_actions(require("telescope.themes").get_cursor())<CR>', opts)
-  buf_set_keymap('n', '<C-space>', '<cmd>lua require("telescope.builtin").lsp_code_actions(require("telescope.themes").get_cursor())<CR>', opts)
-  buf_set_keymap('v', '<C-q>', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
-  buf_set_keymap('v', '<C-space>', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
-  buf_set_keymap('n', '<C-LeftMouse>', '<LeftMouse><cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_map('n', '<F2>', '<cmd>lua require("lsp.util").rename_with_quickfix()<CR>', opts)
+  buf_map('n', '<C-LeftMouse>', '<LeftMouse><cmd>lua vim.lsp.buf.definition()<CR>', opts)
   if filetype ~= 'lua' and filetype ~= 'vim' then
-    buf_set_keymap('n', '<F9>', '<cmd>lua vim.lsp.buf.formatting_sync()<CR><cmd>update<CR>', opts)
+    buf_map('n', '<F9>', '<cmd>lua vim.lsp.buf.formatting_sync()<CR><cmd>update<CR>', opts)
+  end
+  local cmp_keys = {'<C-q>', '<C-space>'}
+  for _, cmp_key in ipairs(cmp_keys) do
+    buf_map('n', cmp_key, ':Telescope lsp_code_actions theme=get_cursor<CR>', opts)
+    buf_map('v', cmp_key, ':Telescope lsp_range_code_actions theme=get_cursor<CR>', opts)
   end
 
-  buf_set_keymap('n', '<leader>fs', '<cmd>lua vim.lsp.buf.formatting_sync()<CR><cmd>update<CR>', opts)
-  buf_set_keymap('x', '<leader>fs', '<ESC><cmd>lua vim.lsp.buf.range_formatting()<CR><cmd>update<CR>', opts)
-  buf_set_keymap('n', '<leader>a+', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<leader>a-', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<leader>a?', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<leader>ah', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<leader>ad', '<cmd>lua vim.diagnostic.setqflist()<CR>', opts)
-  buf_set_keymap('n', '<leader>aD', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap('n', '<leader>.',  '<cmd>lua require("hasan.telescope.custom").lsp_document_symbols()<cr>', opts)
+  buf_map('n', '<leader>fs', '<cmd>lua vim.lsp.buf.formatting_sync()<CR><cmd>update<CR>', opts)
+  buf_map('x', '<leader>fs', '<ESC><cmd>lua vim.lsp.buf.range_formatting()<CR><cmd>update<CR>', opts)
+  buf_map('n', '<leader>a+', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_map('n', '<leader>a-', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_map('n', '<leader>a?', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_map('n', '<leader>ah', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_map('n', '<leader>ad', '<cmd>lua vim.diagnostic.setqflist()<CR>', opts)
+  buf_map('n', '<leader>aD', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_map('n', '<leader>.',  '<cmd>lua require("hasan.telescope.custom").lsp_document_symbols()<cr>', opts)
 
   if vim.fn.has "nvim-0.6.0" == 1  then
-    buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-    buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-    buf_set_keymap('n', '<leader>al', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+    buf_map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+    buf_map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+    buf_map('n', '<leader>al', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   else
-    buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = "double"}})<CR>', opts)
-    buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = "double"}})<CR>', opts)
-    buf_set_keymap('n', '<leader>al', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({show_header=false,border="double"})<CR>', opts)
+    buf_map('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = "double"}})<CR>', opts)
+    buf_map('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = "double"}})<CR>', opts)
+    buf_map('n', '<leader>al', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({show_header=false,border="double"})<CR>', opts)
   end
 end
 
