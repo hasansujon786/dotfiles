@@ -154,7 +154,7 @@ local leader = {
     q = { ':SessionSaveAndQuit<CR>',                'Save session and quit' },
     d = { ':Dashboard<CR>',                         'Open dashboard' },
 
-    R = { ':lua require("hasan.project_run").run("package.json")<CR>', 'Run project script' },
+    R = { ':lua require("hasan.project_run").open("package.json")<CR>', 'Run project script' },
     [':'] = 'Run shell command',
     [';'] = 'Send keys',
   },

@@ -44,6 +44,7 @@ alias adres='adb kill-server && adb devices'
 alias scc='scrcpy -s 192.168.31.252 --always-on-top'
 alias scc2='scrcpy -s f8a8aa489804 --always-on-top'
 
+alias wt="c:\\\Program\ Files\\\WindowsApps\\\Microsoft.WindowsTerminal_1.11.3471.0_x64__8wekyb3d8bbwe\\\wt.exe"
 # handy short cuts #
 alias bashrc="vim ~/dotfiles/bash/.bashrc"
 alias c='cd'

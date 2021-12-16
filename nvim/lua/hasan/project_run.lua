@@ -7,6 +7,7 @@ local finders = require('telescope.finders')
 local action_state = require('telescope.actions.state')
 -- local sorters = require('telescope/sorters')
 local conf = require('telescope.config').values
+local M = {}
 
 local get_project_scripts = function(fpath)
   local data = vim.fn.readfile(fpath)
@@ -24,16 +25,10 @@ local local_actions = {
   run = function (prompt_bufnr)
     local entry = action_state.get_selected_entry()
     require('telescope.actions').close(prompt_bufnr)
-    if vim.fn.has('win32') == 1 then
-      vim.fn.setreg('*', {'yarn '..entry.value[1]})
-      local cmd = 'silent !"c:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.11.2921.0_x64__8wekyb3d8bbwe\\wt.exe" '
-      cmd  = cmd .. '-w 0 nt -d .'
-      vim.cmd(cmd)
-    else
-      vim.cmd('silent !tmux-windowizer $(pwd) ' .. entry.value[2])
-    end
+    M.open_tab(vim.fn.getcwd(), entry.value[2])
   end,
 }
+
 local make_entry_form_scripts = function(entry)
   local displayer = entry_display.create {
     separator = ' ',
@@ -52,9 +47,19 @@ local make_entry_form_scripts = function(entry)
   return { display = make_display, ordinal = entry[1], value = entry}
 end
 
-local M = {}
+M.open_tab = function (dir, command_arg)
+  if not command_arg then return end
+  if vim.fn.has('win32') == 1 then
+    local winterm = 'silent !"c:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.11.3471.0_x64__8wekyb3d8bbwe\\wt.exe"'
+    local cmd = {winterm, '-w 0 nt -d', dir, '-p "Bash"', 'bash -c "', command_arg, '"'}
+    vim.cmd(table.concat(cmd, ' '))
+  else
+    -- vim.cmd('silent !tmux-windowizer $(pwd) ' .. entry.value[2])
+    print('Project_run:WIP')
+  end
+end
 
-M.run = function(scriptFile, opts)
+M.open = function(scriptFile, opts)
   opts = utils.get_default(opts, {})
   local themeOpts = themes.get_dropdown(opts)
 
