@@ -75,7 +75,7 @@ M.open = function(scriptFile, opts)
       results = get_project_scripts(fpath),
       entry_maker = opts.entry_maker or make_entry_form_scripts
     },
-    prompt_title = opts.prompt_title or 'YankList',
+    prompt_title = opts.prompt_title or 'Project Run',
     sorter = opts.sorter or conf.generic_sorter(opts),
     -- initial_mode = 'normal',
     -- previewer = conf.file_previewer(opts),

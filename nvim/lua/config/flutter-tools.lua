@@ -10,7 +10,7 @@ require('flutter-tools').setup {
       local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
       require('lsp').on_attach(client, bufnr)
 
-      buf_set_keymap('n', '<Leader>fr', '<Cmd>FlutterRun<CR>', opts)
+      buf_set_keymap('n', '<Leader>fr', '<Cmd>lua require("hasan.project_run").open_tab(vim.fn.getcwd(), "flutter run")<CR>', opts)
       buf_set_keymap('n', '<Leader>fc', '<Cmd>lua require("telescope").extensions.flutter.commands()<CR>', opts)
       vim.cmd[[
         xnoremap at abob
