@@ -7,6 +7,7 @@ alias yd='yarn dev'
 # npm
 alias ns='npm start'
 alias nd='npm run dev'
+alias ncc='npm cache clean --force'
 
 # Vim
 alias v.='nvim .'
@@ -23,6 +24,7 @@ alias ta="tmux attach"
 # alias tmux="env TERM=xterm-256color tmux"
 
 # Windows Terminal
+alias wt="c:\\\Program\ Files\\\WindowsApps\\\Microsoft.WindowsTerminal_1.11.3471.0_x64__8wekyb3d8bbwe\\\wt.exe"
 alias wtt='wt -w 0 nt -d .'
 
 # React native
@@ -44,7 +46,6 @@ alias adres='adb kill-server && adb devices'
 alias scc='scrcpy -s 192.168.31.252 --always-on-top'
 alias scc2='scrcpy -s f8a8aa489804 --always-on-top'
 
-alias wt="c:\\\Program\ Files\\\WindowsApps\\\Microsoft.WindowsTerminal_1.11.3471.0_x64__8wekyb3d8bbwe\\\wt.exe"
 # handy short cuts #
 alias bashrc="vim ~/dotfiles/bash/.bashrc"
 alias c='cd'
