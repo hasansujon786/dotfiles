@@ -268,6 +268,12 @@ setup_keypirinha() {
   $getter install -y keypirinha
 }
 
+setup_sublime() {
+  util_print sublime
+  mv ~/AppData/Roaming/Sublime\ Text/Packages/User/ ~/AppData/Roaming/Sublime\ Text/Packages/User-old
+  util_makeSymlinkPath $HOME/dotfiles/gui/sublime_text "'C:\Users\hasan\AppData\Roaming\Sublime Text\Packages\User'"
+}
+
 install_and_setup_tmux() {
   # TODO: (tmux is not working on win, reason: unknown)
   # L => ~/.tmux.conf

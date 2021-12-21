@@ -1,0 +1,68 @@
+" Type :h vintageousrc for help.
+let mapleader=<space>
+
+nnoremap q <esc>
+vnoremap q <esc>
+nnoremap <M-u> <C-u>
+nnoremap <M-d> <C-d>
+noremap <leader>y "+y
+noremap <leader>Y "+Y
+noremap <leader>ip "+p
+noremap <leader>iP "+P
+
+" File managing
+nnoremap <leader>s :w<CR>
+vnoremap <leader>s :w<CR>
+nnoremap <leader><leader> :ShowOverlay overlay=goto show_files=true<CR>
+nnoremap <leader>op :Neovintageous action=toggle_side_bar<CR>
+
+" window managing
+" Origami: https://packagecontrol.io/packages/Origami.
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>l <C-w>l
+nnoremap <leader>q <C-w>c
+nnoremap <leader>wo <C-w>o
+nnoremap <leader>ww <C-w>w
+nnoremap <leader>wc :CloseFile<CR>
+nnoremap <leader>wh <C-w>h
+nnoremap <leader>wj <C-w>j
+nnoremap <leader>wk <C-w>k
+nnoremap <leader>wl <C-w>l
+nnoremap <leader>ws <C-w>s
+nnoremap <leader>wv <C-w>v
+nnoremap <leader>. :ToggleZoomPane<CR>
+nnoremap <leader>, :ZoomPane<CR>
+
+" bookmarks
+" nnoremap <leader>m <C-f2>
+nnoremap <leader>m :ToggleBookmark<CR>
+" nnoremap <leader>k <f2>
+" nnoremap <leader>j <S-f2>
+
+" Special Commands
+nnoremap <leader>v. :Neovintageous action=open_rc_file<CR>
+nnoremap <leader>vR :Neovintageous action=reload_rc_file<CR>
+" noremap <leader>hp :PasteFromHistory<CR>
+nnoremap gb :FindUnderExpand<CR>
+vnoremap gb :FindUnderExpand<CR>
+nnoremap gi :GotoLastEditEnhanced<CR>
+nnoremap gd <f12>
+
+
+" AceJump
+" nnoremap s :AceJumpWord<CR>
+" nnoremap S :AceJumpWord<CR>
+nnoremap <leader>J :AceJumpLine<CR> 
+nnoremap <leader>K :AceJumpLine<CR> 
+
+" nnoremap <leader>ws :CarryFileToPane direction=down<CR>
+" nnoremap <leader>wv :CarryFileToPane direction=right<CR>
+" nnoremap <leader>wd :DestroyPane direction=self<CR>
+" nnoremap <leader>. :ToggleZoomPane fraction=0.98<CR>
+" nnoremap <leader>. :ZoomPane fraction=0.8<CR>
+" Editor
+" nnoremap <leader>o :ShowOverlay overlay=goto text=@<CR>
+" nnoremap <leader>i :GotoSymbolInProject<CR>
+

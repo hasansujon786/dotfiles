@@ -1,0 +1,114 @@
+[
+  {
+   "keys": ["j", "k"],
+   "command": "nv_enter_normal_mode",
+   "args": {"mode": "mode_insert"},
+   "context": [{"key": "vi_insert_mode_aware"}]
+  },  
+
+  { "keys": ["ctrl+up"], "command": "scroll_lines", "args": {"amount": 3.0 } },
+  { "keys": ["ctrl+down"], "command": "scroll_lines", "args": {"amount": -3.0 } },
+
+  { "keys": ["alt+k"], "command": "swap_line_up" },
+  { "keys": ["alt+j"], "command": "swap_line_down" },
+  // Editor
+  { "keys": ["ctrl+b"], "command": "toggle_side_bar" },
+  { "keys": ["ctrl+shift+w"], "command": "close_all" },
+  { "keys": ["ctrl+shift+["], "command": "fold" },
+  { "keys": ["ctrl+shift+]"], "command": "unfold" },
+  { "keys": ["ctrl+f"], "command": "show_panel", "args": {"panel": "find", "reverse": false} },
+  // { "keys": ["ctrl+shift+h"], "command": "show_panel", "args": {"panel": "find_in_files"} },
+
+
+  // js_pretier
+  { "keys": ["alt+shift+f"], "command": "js_prettier" },
+  {
+    // open setting
+    "keys": ["ctrl+,"],
+    "command": "edit_settings",
+    "args": {
+      "base_file": "${packages}/Default/Preferences.sublime-settings",
+      "default": "// Settings in here override those in \"Default/Preferences.sublime-settings\",\n// and are overridden in turn by syntax-specific settings.\n{\n\t$0\n}\n"
+    }
+  },
+  // AdvanceNewFile
+  { "keys": ["ctrl+n"], "command": "advanced_new_file_new"},
+  {
+    // leaper for sublime
+    "keys": ["tab"],
+    "command": "move",
+    "args": { "by": "characters", "forward": true },
+    "context": [
+      {
+        "key": "setting.auto_match_enabled",
+        "operator": "equal",
+        "operand": true
+      },
+      {
+        "key": "selection_empty",
+        "operator": "equal",
+        "operand": true,
+        "match_all": true
+      },
+      {
+        "key": "auto_complete_visible",
+        "operator": "not_equal",
+        "operand": true
+      },
+      {
+        "key": "following_text",
+        "operator": "regex_contains",
+        "operand": "^(\\]|\\)|\\}|>|\\\"|'|\\;)",
+        "match_all": true
+      }
+    ]
+  }
+
+  // {
+  //   "keys": ["tab"],
+  //   "command": "expand_abbreviation_by_tab",
+
+  //   // put comma-separated syntax selectors for which
+  //   // you want to expandEmmet abbreviations into "operand" key
+  //   // instead of SCOPE_SELECTOR.
+  //   // Examples: source.js, text.html - source
+  //   "context": [
+  //     {
+  //       "operand": "meta.group.braces.round.js, text.html",
+  //       "operator": "equal",
+  //       "match_all": true,
+  //       "key": "selector"
+  //     },
+
+  //     // run only if there's no selected text
+  //     {
+  //       "match_all": true,
+  //       "key": "selection_empty"
+  //     },
+
+  //     // don't work if there are active tabstops
+  //     {
+  //       "operator": "equal",
+  //       "operand": false,
+  //       "match_all": true,
+  //       "key": "has_next_field"
+  //     },
+
+  //     // don't work if completion popup is visible and you
+  //     // want to insert completion with Tab. If you want to
+  //     // expand Emmet with Tab even if popup is visible --
+  //     // remove this section
+  //     {
+  //       "operand": false,
+  //       "operator": "equal",
+  //       "match_all": true,
+  //       "key": "auto_complete_visible"
+  //     },
+  //     {
+  //       "match_all": true,
+  //       "key": "is_abbreviation"
+  //     }
+  //   ]
+  // },
+]
+

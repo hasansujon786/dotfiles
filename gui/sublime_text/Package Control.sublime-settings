@@ -1,0 +1,25 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"AceJump",
+		"AdvancedNewFile",
+		"All Autocomplete",
+		"AutoFileName",
+		"Babel",
+		"ColorPicker",
+		"Emmet",
+		"GotoLastEditEnhanced",
+		"NeoVintageous",
+		"Origami",
+		"Package Control",
+		"PackageResourceViewer",
+		"SideBarEnhancements",
+		"Theme - One Dark",
+		"TypeScript",
+		"Vue Syntax Highlight",
+	],
+}
