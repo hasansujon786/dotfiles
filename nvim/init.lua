@@ -11,6 +11,7 @@ require('options')
 require('plugins')
 require('keymaps')
 require('autocmds')
+require('playground')
 -- nodejs.install
 -- https://cj.rs/blog/tips/nvim-plugin-development/
 

@@ -155,6 +155,9 @@ local leader = {
     d = { ':Dashboard<CR>',                         'Open dashboard' },
 
     R = { ':lua require("hasan.project_run").open("package.json")<CR>', 'Run project script' },
+    c = { ':lua require("hasan.project_run").commands()<CR>',           'Run project commands' },
+    e = { ':lua require("hasan.project_run").commands()<CR>',           'Run project commands' },
+    u = { ':lua require("hasan.project_run").commands()<CR>',           'Run project commands' },
     [':'] = 'Run shell command',
     [';'] = 'Send keys',
   },
