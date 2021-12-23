@@ -25,9 +25,9 @@
       "tabColor": "#1F1F1F",
       //"tabColor": "#262626",
       //"opacity": 0,
-      //"useAcrylic": true,
-      //"acrylicOpacity": 0,
-      //"background": "#012456",
+      "useAcrylic": true,
+      "acrylicOpacity": 0.85,
+      "background": "#242b38"
     },
     "list": [
       {

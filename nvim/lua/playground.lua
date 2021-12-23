@@ -4,7 +4,7 @@ require('hasan.project_run').setup({
       util.open_tab(vim.fn.getcwd(), 'lazygit')
     end},
     {'lf', 'lf', function (util)
-      util.open_tab(vim.fn.getcwd(), 'lazygit')
+      util.open_tab(vim.fn.getcwd(), 'lf')
     end},
   },
 
