@@ -106,6 +106,14 @@ setup_bash() {
   util_makeSymlinkPath $HOME/dotfiles/bash/.bashrc ${bashPath[$machineCode]}
 }
 
+setup_wezterm() {
+  weztermPath=($HOME/.wezterm.lua $HOME/.config/wezterm/wezterm.lua $HOME/.config/wezterm/wezterm.lua)
+  util_print wezterm
+
+  util_backUpConfig ${weztermPath[$machineCode]}
+  util_makeSymlinkPath $HOME/dotfiles/gui/wezterm/.wezterm.lua ${weztermPath[$machineCode]}
+}
+
 setup_nvim() {
   nvimPath=($HOME/AppData/Local/nvim $HOME/.config/nvim $HOME/.config/nvim)
   util_print nvim
@@ -302,6 +310,7 @@ auto_install_everything() {
   setup_lazygit
   setup_tig
   setup_lf
+  setup_wezterm
   setup_node
   install_various_apps
 
