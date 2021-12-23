@@ -46,14 +46,23 @@ end
 M.commands = function(opts)
   opts = t_utils.get_default(opts, {})
   local theme_opts = themes.get_dropdown(opts)
-  local commandList = utils.conf.on_startup(utils.user_util)
+  local on_startup = utils.conf.on_startup
+  local command_list = {}
+
+  if on_startup ~= nil then
+    command_list = on_startup(utils.user_util)
+  end
+  local default_commands = utils.conf.default_commands
+  if #default_commands > 0 then
+    for _,v in ipairs(default_commands) do table.insert(command_list, v) end
+  end
 
   pickers.new(theme_opts, {
     finder = finders.new_table{
-      results = commandList,
+      results = command_list,
       entry_maker = opts.entry_maker or utils.make_entry_form_list
     },
-    prompt_title = opts.prompt_title or 'Project Run',
+    prompt_title = opts.prompt_title or 'Project commands',
     sorter = opts.sorter or t_conf.generic_sorter(opts),
     -- initial_mode = 'normal',
     -- default_selection_index = 2,
@@ -76,6 +85,7 @@ M.setup = function(opts)
   opts = opts and opts or {}
 
   utils.conf.on_startup = t_utils.get_default(opts.on_startup, nil)
+  utils.conf.default_commands = t_utils.get_default(opts.default_commands, {})
 end
 
 return M

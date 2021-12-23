@@ -1,24 +1,26 @@
 require('hasan.project_run').setup({
+  default_commands = {
+    {'lazygit', 'lazygit', function (util)
+      util.open_tab(vim.fn.getcwd(), 'lazygit')
+    end},
+    {'lf', 'lf', function (util)
+      util.open_tab(vim.fn.getcwd(), 'lazygit')
+    end},
+  },
+
   on_startup = function (st_utils)
     if st_utils.root_has('pubspec.yaml') then
       return {
-        {'flutter run', 'bar'},
-        {'fooo', 'bar'},
-        {'fooo', 'bar'},
-        {'fooo', 'bar'},
+        {'flutter run', 'flutter run', function(util)
+          util.open_tab(vim.fn.getcwd(), 'adb connect 192.168.31.252 && flutter run')
+        end},
       }
     end
 
-    if st_utils.root_has('nvim\\init.lua') then
-      return {
-        {'kkk', 'bar', function (util)
-          util.open_tab(vim.fn.getcwd(), 'lazygit')
-        end},
-        {'kkk', 'bar'},
-        {'kkk', 'bar'},
-        {'kkk', 'bar'},
-      }
-    end
+    -- if st_utils.root_has('nvim\\init.lua') then
+    --   return {
+    --   }
+    -- end
 
     return {}
   end
