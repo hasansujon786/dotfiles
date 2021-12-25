@@ -1,11 +1,10 @@
-
 require("nvim-treesitter.configs").setup {
   ensure_installed = { 'html', 'css', 'javascript', 'typescript', 'tsx', 'json', 'lua', 'vue', 'dart' },
   highlight = {
     enable = true, -- false will disable the whole extension
     use_languagetree = false,
     -- disable = {'org'}, -- Remove this to use TS highlighter for some of the highlights (Experimental)
-    additional_vim_regex_highlighting = {'org'}, -- Required since TS highlighter doesn't support all syntax features (conceal)
+    additional_vim_regex_highlighting = {'org','html'}, -- Required since TS highlighter doesn't support all syntax features (conceal)
   },
   incremental_selection = {
     enable = true,

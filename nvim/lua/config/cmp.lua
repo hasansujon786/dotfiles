@@ -9,26 +9,26 @@ end
 
 local kind_icons = {
   Function      = '',
-  Constructor   = '',
   Method        = '',
+  Constructor   = '',
   Variable      = '',
-  Field         = 'ﴲ',
+  Field         = '',
   TypeParameter = '',
   Constant      = '',
-  Class         = '',
-  Interface     = 'ﰮ',
-  Struct        = '',
+  Class         = 'פּ ',
+  Interface     = '蘒',
+  Struct        = '',
   Event         = '',
   Operator      = '',
   Module        = '',
   Property      = '',
+  Value         = '',
   Enum          = '',
   EnumMember    = '',
-  Value         = '',
   Reference     = '',
   Keyword       = '',
-  File          = '',
-  Folder        = 'ﱮ',
+  File          = '',
+  Folder        = '',
   Color         = '',
   Unit          = '',
   Snippet       = '',
@@ -73,6 +73,7 @@ cmp.setup({
     ['<C-e>'] = cmp.mapping.close(),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-q>'] = cmp.mapping.complete(),
+    ['<C-l>'] = cmp.mapping.complete({config={sources={{name='vsnip'}}}}),
     ['<CR>'] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
@@ -100,7 +101,6 @@ cmp.setup({
   },
   sources = {
     { name = 'nvim_lsp' },
-    { name = 'vsnip' },
     { name = 'buffer',
       option = {
         get_bufnrs = function()
@@ -108,11 +108,13 @@ cmp.setup({
         end,
       },
     },
+    { name = 'vsnip' },
     { name = 'path' },
   },
   formatting = {
+    fields = { 'kind', 'abbr', 'menu' },
     format = function(entry, vim_item)
-      vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
+      -- NOTE: order matters
       vim_item.menu = ({
         nvim_lsp =   'ﲳ',
         nvim_lua =   '',
@@ -120,10 +122,15 @@ cmp.setup({
         path =       'ﱮ',
         buffer =     '﬘',
         zsh =        '',
-        vsnip =      '',
+        vsnip =      '',
         spell =      '暈',
         orgmode =    '✿',
       })[entry.source.name]
+      vim_item.menu = string.format('%s %s', string.sub(vim_item.kind, 1,4), vim_item.menu)
+
+      -- Kind icons
+      -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
+      vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
       return vim_item
     end,
   },
@@ -138,4 +145,7 @@ vim.g.vsnip_filetypes = {
 
 vim.cmd[[autocmd FileType org lua CmpOrgmodeSetup()]]
 vim.cmd[[autocmd FileType NeogitCommitMessage lua CmpNeogitCommitMessageSetup()]]
+
+--  inoremap <C-S> <Cmd>lua require('cmp').complete({ config = { sources = { { name = 'vsnip' } } } })<CR>
+
 

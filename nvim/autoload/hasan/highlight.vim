@@ -1,5 +1,5 @@
 function hasan#highlight#load_custom_highlight() abort
-  " Nvim Interface
+  "/// Neovim Builin ///"
   hi TextInfo           guifg=#56B6C2 guibg=NONE
   hi TextSuccess        guifg=#61AFEF
   hi Cursor             guibg=#61AFEF gui=NONE
@@ -13,7 +13,7 @@ function hasan#highlight#load_custom_highlight() abort
   hi! link Folded Comment
   hi! link WhichKeyFloat Pmenu
 
-  " Syntax highlights
+  "/// Treesitter highlights ///"
   hi TSTagDelimiter    guifg=#ABB2BF
   hi TSProperty        guifg=#e86671
   hi TSVariable        guifg=#e86671
@@ -26,12 +26,12 @@ function hasan#highlight#load_custom_highlight() abort
   hi TSVariableBuiltin guifg=#E5C07B
   hi! link TSInclude TSKeyword
 
-  " LSP variable reference
+  "/// LSP variable reference ///"
   hi LspReferenceText  guibg=#3B4048 gui=NONE
   hi LspReferenceWrite guibg=#3B4048 gui=NONE
   hi LspReferenceRead  guibg=#3B4048 gui=NONE
 
-  " Plugins
+  "/// Plugins ///"
   hi IndentBlanklineChar guifg=#3B4048
   hi QuickScopePrimary   guifg=tomato gui=underline
   hi QuickScopeSecondary guifg=#d78787 gui=underline
@@ -50,9 +50,12 @@ function hasan#highlight#load_custom_highlight() abort
   hi! link TelescopePreviewBorder TelescopeBorder
   hi! link TelescopeResultsBorder TelescopeBorder
   hi! link TelescopePromptBorder  TelescopeBorder
-  hi! link CmpItemKind CmpItemMenu
+
+  "/// nvim-cmp ///"
   hi CmpItemAbbrMatchFuzzy   guifg=#E5C07B gui=underline
   hi CmpItemAbbrMatch        guifg=#E5C07B
+  hi! link CmpItemKindDefault Comment
+  hi! link CmpItemMenu Comment
 endfunction
 
 " call hasan#highlight#load_custom_highlight()

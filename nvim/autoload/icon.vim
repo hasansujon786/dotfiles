@@ -241,3 +241,5 @@ endfunction
 " '─│─│╭╮╯╰'
 "    
 " numbers_sup = {'¹','²','³','⁴','⁵','⁶','⁷','⁸','⁹','⁰'}
+
+"   פּ     蘒練  some other good icons
