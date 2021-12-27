@@ -55,11 +55,11 @@ cmp.setup({
   mapping = {
     ['<A-u>'] = cmp.mapping.scroll_docs(-4),
     ['<A-d>'] = cmp.mapping.scroll_docs(4),
-    ['<A-n>'] = cmp.mapping(function(fallback)
+    ['<A-n>'] = cmp.mapping(function(_)
       if cmp.visible() then
         cmp.select_next_item()
       else
-        fallback()
+        cmp.complete()
       end
     end, { 'i', 's' }),
     ['<A-p>'] = cmp.mapping(function()
@@ -73,18 +73,24 @@ cmp.setup({
     ['<C-e>'] = cmp.mapping.close(),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-q>'] = cmp.mapping.complete(),
-    ['<C-l>'] = cmp.mapping.complete({config={sources={{name='vsnip'}}}}),
+    ['<C-l>'] = cmp.mapping(function(_)
+      if has_words_before() and vim.fn['vsnip#jumpable'](1) == 1 then
+        feedkey('<Plug>(vsnip-jump-next)', '')
+      else
+        cmp.complete({config={sources={{name='vsnip'}}}})
+      end
+    end, { 'i', 's' }),
     ['<CR>'] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-      elseif vim.fn['hasan#compe#check_front_char']() then
-        feedkey('<Right>', 'n')
+        cmp.confirm({ behavior = cmp.ConfirmBehavior.Select, select = true })
       elseif has_words_before() and vim.fn['vsnip#available']() == 1 then
         feedkey('<Plug>(vsnip-expand-or-jump)', '')
+      elseif vim.fn['hasan#compe#check_front_char']() then
+        feedkey('<Right>', 'n')
       else
         fallback()
       end
