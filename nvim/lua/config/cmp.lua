@@ -85,7 +85,9 @@ cmp.setup({
       select = true,
     }),
     ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
+      if cmp.visible() and vim.fn['vsnip#available']() == 1 then
+        cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+      elseif cmp.visible() then
         cmp.confirm({ behavior = cmp.ConfirmBehavior.Select, select = true })
       elseif has_words_before() and vim.fn['vsnip#available']() == 1 then
         feedkey('<Plug>(vsnip-expand-or-jump)', '')
@@ -153,5 +155,6 @@ vim.cmd[[autocmd FileType org lua CmpOrgmodeSetup()]]
 vim.cmd[[autocmd FileType NeogitCommitMessage lua CmpNeogitCommitMessageSetup()]]
 
 --  inoremap <C-S> <Cmd>lua require('cmp').complete({ config = { sources = { { name = 'vsnip' } } } })<CR>
+-- vim.cmd[[xmap <C-l>   <Plug>(vsnip-cut-text)]]
 
 

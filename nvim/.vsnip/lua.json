@@ -1,0 +1,6 @@
+{
+  "log": {
+    "prefix": ["pp"],
+    "body": "P(${1:$TM_SELECTED_TEXT})"
+  }
+}
