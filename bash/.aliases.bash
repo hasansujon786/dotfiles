@@ -26,6 +26,7 @@ alias ta="tmux attach"
 # Windows Terminal
 alias wt="c:\\\Program\ Files\\\WindowsApps\\\Microsoft.WindowsTerminal_1.11.3471.0_x64__8wekyb3d8bbwe\\\wt.exe"
 alias wtt='wt -w 0 nt -d .'
+alias rgb='wt -w 0 nt -p PowerShell powershell -c rgb-tui'
 
 # React native
 alias grc="./gradlew clean"
