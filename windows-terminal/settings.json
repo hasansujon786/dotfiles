@@ -13,9 +13,11 @@
   "profiles": {
     "defaults": {
       // Put settings here that you want to apply to all profiles.
-      "fontFace": "FiraCode NF",
-      "fontWeight": "medium",
-      "fontSize": 14,
+      "font": {
+        "face": "FiraCode NF",
+        "weight": "medium",
+        "size": 14
+      },
       "padding": "0, 0, 0, 0",
       "cursorShape": "filledBox",
       //"startingDirectory": "%USERPROFILE%",
