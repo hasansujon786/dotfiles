@@ -62,15 +62,17 @@ local leader = {
 
   i = {
     name = '+insert',
-    d = { ':call _#Insertion(strftime("%e %B %Y"))<CR>',            'Current date' },
-    t = { ':call _#Insertion(strftime("%H:%M"))<CR>',               'Current time' },
-    f = { ':call _#Insertion(expand("%:~"))<CR>',                   'Current file path' },
-    F = { ':call _#Insertion(expand("%:t"))<CR>',                   'Current file name' },
-    p = 'Paste form CB',
+    d = { ':call _#Insertion(strftime("%e %B %Y"))<CR>',             'Current date' },
+    t = { ':call _#Insertion(strftime("%H:%M"))<CR>',                'Current time' },
+    f = { ':call _#Insertion(expand("%:~"))<CR>',                    'Current file path' },
+    F = { ':call _#Insertion(expand("%:t"))<CR>',                    'Current file name' },
 
     l = {
-      i = { ':call _#Insertion(hasan#utils#placeholderImgTag("300x200"))<CR>', 'Current file name' }
+      t = { ':call _#Insertion(hasan#utils#placeholderImgTag("300x200"))<CR>', 'Placeholder image tag' },
+      k = { ':call _#Insertion("https://placekitten.com/g/50/50")<CR>',        'Sample image link' },
     },
+
+    p = 'Paste form Clip',
   },
 
   g = {
@@ -147,7 +149,7 @@ local leader = {
     name = '+project',
     p = { '<cmd>lua require("hasan.telescope.custom").projects()<CR>',          'Switch project' },
     r = { ':lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>',  'Find recent files' },
-    b = { ':Telescope file_browser prompt_title=Project\\ Browser cwd=~/repoes<CR>',  'Browse other projects' },
+    -- b = { ':Telescope file_browser prompt_title=Project\\ Browser cwd=~/repoes<CR>',  'Browse other projects' },
 
     l = { ':SessionLoad<CR>',                       'Load session' },
     s = { ':SessionSave<CR>',                       'Save session' },
@@ -236,7 +238,6 @@ local leader = {
     b = { ':Telescope buffers<CR>',         'Find buffers' },
     B = { ':Telescope git_bcommits<CR>',    'Look up buffer commits' },
     c = { ':Telescope git_commits<CR>',     'Look up commits' },
-    d = { ':Telescope file_browser<CR>',    'Change filetypes' },
     f = { ':Telescope find_files<CR>',      'Find file' },
     g = { ':Telescope git_status<CR>',      'Find git files*' },
     k = { ':Telescope keymaps<CR>',         'Look up keymaps' } ,

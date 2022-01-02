@@ -9,6 +9,7 @@ local actions = require 'telescope.actions'
 local make_entry = require 'telescope.make_entry'
 local action_set = require 'telescope.actions.set'
 local action_state = require 'telescope.actions.state'
+local extensions = require 'telescope'.extensions
 -- local sorters = require 'telescope/sorters'
 
 local local_action = require 'hasan.telescope.local_action'
@@ -125,10 +126,11 @@ function M.search_wiki_files()
 end
 
 function M.search_plugins()
-  builtin.file_browser(themes.get_ivy({
+  local opts = {
     prompt_title = 'Plugins',
     cwd = vim.fn.glob(vim.fn.stdpath('data') .. '/site/pack/packer'),
-  }))
+  }
+  extensions.file_browser.file_browser(themes.get_ivy(opts))
 end
 
 function M.grep_string()
@@ -138,11 +140,11 @@ end
 
 function M.file_browser(dir)
   local opts = {}
-  local cwd = vim.fn.expand('%:h')
+  local cwd = vim.fn.expand('%:p:h')
   if dir == 'cur_dir' and cwd ~= '' then
     opts = {cwd=cwd}
   end
-  builtin.file_browser(themes.get_ivy(opts))
+  extensions.file_browser.file_browser(themes.get_ivy(opts))
 end
 
 function M.file_files(dir)
