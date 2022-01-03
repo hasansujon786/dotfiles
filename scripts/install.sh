@@ -270,8 +270,16 @@ setup_keypirinha() {
 
 setup_sublime() {
   util_print sublime
-  mv ~/AppData/Roaming/Sublime\ Text/Packages/User/ ~/AppData/Roaming/Sublime\ Text/Packages/User-old
+  rm -rf $HOME/AppData/Roaming/Sublime\ Text/Packages/User/
   util_makeSymlinkPath $HOME/dotfiles/gui/sublime_text "'C:\Users\hasan\AppData\Roaming\Sublime Text\Packages\User'"
+}
+
+setup_windowsTerminal() {
+  util_print WinTerminal
+  rm -rf $HOME/AppData/Local/Microsoft/Windows\ Terminal/settings.json
+  util_makeSymlinkPath $HOME/dotfiles/windows-terminal/settings.json "'C:\Users\hasan\AppData\Local\Microsoft\Windows Terminal\settings.json'"
+
+  $getter install -y microsoft-windows-terminal  # --pre
 }
 
 install_and_setup_tmux() {
@@ -307,6 +315,8 @@ auto_install_everything() {
   install_various_apps
 
   if [[ "$machine" == "windows" ]]; then
+    setup_windowsTerminal
+    setup_sublime
     setup_keypirinha
   elif [[ "$machine" == "linux" ]]; then
     install_and_setup_tmux
