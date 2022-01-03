@@ -171,13 +171,13 @@ setup_lazygit () {
 
 }
 
-setup_tig() {
-  util_print tig
-  if [[ "$machine" == "windows" ]]; then
-    $getter install -y tig
-  fi
-  ln -s ~/dotfiles/tui/tig/.tigrc ~/.tigrc
-}
+# setup_tig() {
+#   util_print tig
+#   if [[ "$machine" == "windows" ]]; then
+#     $getter install -y tig
+#   fi
+#   ln -s ~/dotfiles/tui/tig/.tigrc ~/.tigrc
+# }
 
 setup_lf() {
   # https://linoxide.com/lf-terminal-manager-linux/
@@ -227,14 +227,6 @@ setup_node () {
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
     nvm install 14
   fi
-
-  util_print npm-essentials
-
-  npm install -g yarn
-  npm install -g expo-cli
-  npm install -g neovim
-  npm install -g live-server
-  npm install -g prettier eslint
 }
 
 install_various_apps() {
