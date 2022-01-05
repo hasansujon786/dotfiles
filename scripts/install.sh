@@ -219,7 +219,7 @@ setup_node () {
   # curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 
   if [[ "$machine" == "windows" ]]; then
-    $getter install nodejs
+    $getter install -y nodejs
   elif [[ "$machine" == "linux" ]]; then
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
     export NVM_DIR="$HOME/.config/nvm"
@@ -235,6 +235,9 @@ install_various_apps() {
 
   util_print wget
   $getter install -y wget
+
+  util_print curl
+  $getter install -y curl
 
   util_print python
   $getter install -y python
