@@ -73,9 +73,6 @@ function cpy {
 }
 
 # git
-alias gs='git show'
-alias gt='git tag'
-alias gupd='git update'
 alias ggpusht='git push origin $(git_current_branch) --tags'
 alias ggpushf='git push origin $(git_current_branch) --force'
 alias ggpushtf='git push origin $(git_current_branch) --tags --force'
@@ -88,8 +85,13 @@ alias grget='git remote get-url origin'
 alias gpr='hub pull-request'
 alias gci='hub issue create'
 
-alias greh='git reset HEAD' # --hard
-alias gre='git reset ' # --hard
+alias g='git'
+alias gs='git show'
+alias gt='git tag'
+alias gupd='git update'
+alias gcl='git clone --recurse-submodules'
+alias grh='git reset HEAD' # --hard
+alias gr='git reset ' # --hard
 alias gck='git checkout ' # switch brnch | -b to create
 alias glo='git log --oneline --decorate'
 alias lg='lazygit'
