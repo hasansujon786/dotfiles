@@ -102,3 +102,67 @@ cmd video_preview ${{
 }}
 map + :video_preview
 
+
+# ---------------------------------------------------------------------------
+# - Custom Functions                                                        -
+# ---------------------------------------------------------------------------
+cmd open ${{
+    case $(file --mime-type "$f" -bL) in
+        text/*|application/json) $EDITOR "$f";;
+        video/*|image/*/application/pdf) xdg-open "$f";;
+        *) xdg-open "$f" ;;
+    esac
+}}
+
+cmd chmod ${{
+  printf "Mode Bits: "
+  read ans
+
+  for file in "$fx"
+  do
+    chmod $ans $file
+  done
+
+  lf -remote 'send reload'
+}}
+
+cmd sudomkfile ${{
+  printf "File Name: "
+  read ans
+  sudo $EDITOR $ans
+}}
+
+cmd setwallpaper %cp "$f" ~/.config/wall.png && xwallpaper --zoom "$f"
+
+cmd open_config  ${{
+  $EDITOR $(bookmenu -b ~/.config/bookmenu/configs -f fzf -o)
+}}
+
+# Archive bindings
+cmd unarchive ${{
+  case "$f" in
+      *.zip) unzip "$f" ;;
+      *.tar.gz) tar -xzvf "$f" ;;
+      *.tar.bz2) tar -xjvf "$f" ;;
+      *.tar) tar -xvf "$f" ;;
+      *) echo "Unsupported format" ;;
+  esac
+}}
+cmd zip %zip -r "$f" "$f"
+cmd tar %tar cvf "$f.tar" "$f"
+cmd targz %tar cvzf "$f.tar.gz" "$f"
+cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
+
+######### Archive Mappings ########
+map az zip
+map at tar
+map ag targz
+map ab targz
+map au unarchive
+
+map cr sudomkfile
+map cs $mkscript
+map ch chmod
+
+map bg setwallpaper
+

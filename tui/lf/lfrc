@@ -1,158 +1,57 @@
 # Basic Settings
-# set previewer ~/.config/lf/pv.sh
-set preview true
-#set hidden true
-#set color256 true
+set shell cmd        # interpreter for shell commands
+set preview true     # set previewer ~/.config/lf/pv.sh
 set drawbox true
 set icons true
 set ignorecase true
 set incsearch true
+set tabstop 2
+set scrolloff 5
+#set hidden true
+#set color256 true
 #set number true
 #set relativenumber true
-set tabstop 2
-
-# ---------------------------------------------------------------------------
-# - Custom Functions                                                        -
-# ---------------------------------------------------------------------------
-cmd open ${{
-    case $(file --mime-type "$f" -bL) in
-        text/*|application/json) $EDITOR "$f";;
-        video/*|image/*/application/pdf) xdg-open "$f";;
-        *) xdg-open "$f" ;;
-    esac
-}}
-
-cmd mkdir %{{
-  printf " Directory Name: "
-  read ans
-  mkdir $ans
-}}
-
-cmd mkfile %{{
-  printf " File Name: "
-  read ans
-  touch $ans
-  #$EDITOR $ans
-}}
-
-cmd chmod ${{
-  printf "Mode Bits: "
-  read ans
-
-  for file in "$fx"
-  do
-    chmod $ans $file
-  done
-
-  lf -remote 'send reload'
-}}
-
-cmd sudomkfile ${{
-  printf "File Name: "
-  read ans
-  sudo $EDITOR $ans
-}}
-
-cmd setwallpaper %cp "$f" ~/.config/wall.png && xwallpaper --zoom "$f"
-
-cmd open_config  ${{
-  $EDITOR $(bookmenu -b ~/.config/bookmenu/configs -f fzf -o)
-}}
-
-# Archive bindings
-cmd unarchive ${{
-  case "$f" in
-      *.zip) unzip "$f" ;;
-      *.tar.gz) tar -xzvf "$f" ;;
-      *.tar.bz2) tar -xjvf "$f" ;;
-      *.tar) tar -xvf "$f" ;;
-      *) echo "Unsupported format" ;;
-  esac
-}}
-cmd zip %zip -r "$f" "$f"
-cmd tar %tar cvf "$f.tar" "$f"
-cmd targz %tar cvzf "$f.tar.gz" "$f"
-cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
 
 # ---------------------------------------------------------------------------
 # - Bindings                                                                -
 # ---------------------------------------------------------------------------
 ######## Remove some defaults ########
-#map m
-#map "'"
-#map '"'
-#map n
-
-map y
-map d
-map p
-map o
-map c
-map e
-
-######## File Openers ########
-map ee $$EDITOR "$f"
-# map i $~/.config/lf/pv.sh $f | less -R
-
-######### Archive Mappings ########
-map az zip
-map at tar
-map ag targz
-map ab targz
-map au unarchive
+map y reload
+map d reload
+map p reload
+map c reload
+map r reload
 
 ######## Basic Functions ########
+map I set hidden!
+map H top
+map L bottom
+map e $nvim %f%
+map w $bash
+map i $less %f%
+map o $explorer %f%
+
 map A mkfile
 map K mkdir
 map <c-n> mkfile
 
+map <enter> shell
 map <delete> delete
 map <f-2> rename
-map <c-p> paste
+map <c-v> paste
 map <c-x> cut
 map <c-c> copy
 map <c-r> $vimv $fx
 map <esc> clear
 
+
 map <a-d> half-down
 map <a-u> half-up
-
-map cr sudomkfile
-map cs $mkscript
-map ch chmod
-
-map I set hidden!
-map o open_config
-map <enter> open
-
-map H top
-map L bottom
-map r reload
-map bg setwallpaper
 
 # ---------------------------------------------------------------------------
 # - Movement                                                                -
 # ---------------------------------------------------------------------------
 
-map gtr cd ~/.local/share/Trash/files
-
-map gv. cd ~/videos
-
-map gp. cd ~/pictures
-map gps cd ~/pictures/screenshots
-
-map gw. cd ~/pictures/Wallpapers
-map gww cd ~/pictures/Wallpapers/Wallpapers
-map gwm cd ~/pictures/Wallpapers/MobileWallpapers
-
-map gt. cd ~/documents/Textbooks
-map gC cd ~/documents
-
-map gd cd ~/downloads
-map gD cd ~/desktop
-
-map g. cd ~/dotfiles
-map gp. cd ~/dotfiles/nvim/plugged
-map gr. cd ~/repos
-
-map gc cd ~/.config
+map .c cd C:\\
+map .d cd D:\\
+map .e cd E:\\

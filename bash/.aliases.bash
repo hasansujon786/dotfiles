@@ -88,6 +88,7 @@ alias gci='hub issue create'
 alias g='git'
 alias gs='git show'
 alias gt='git tag'
+alias gst='git status'
 alias gupd='git update'
 alias gcl='git clone --recurse-submodules'
 alias grh='git reset HEAD' # --hard

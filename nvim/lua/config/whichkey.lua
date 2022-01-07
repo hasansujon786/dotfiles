@@ -134,6 +134,7 @@ local leader = {
     h = {'<cmd>lua require("hasan.org").open_org_home("-tabedit")<CR>', 'Open org home'},
     ['.'] = {'<cmd>lua require("hasan.org").open_org_home("edit")<CR>', 'Open org home'},
 
+    f = { ':FloatermNew --height=1.0 --width=1.0 --opener=edit lf<CR>',     'Open lf' },
     t = { ':FloatermNew bash<CR>',                              'Open terminal popup' },
     T = { ':FloatermNew --wintype=normal --height=10 bash<CR>', 'Open terminal split' },
     q = { '<cmd>call hasan#window#toggle_quickfix(1)<CR>',      'Open Quickfix list' },
