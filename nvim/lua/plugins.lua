@@ -152,7 +152,7 @@ return require('packer').startup({
       end
     })
     use({ 'nvim-treesitter/nvim-treesitter',
-      opt = true, event = 'BufRead',
+      opt = true, event = 'CursorHold',
       config = function() require('config.treesitter') end,
       requires = {
         'JoosepAlviste/nvim-ts-context-commentstring',
