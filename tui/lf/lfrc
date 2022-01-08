@@ -7,6 +7,7 @@ set ignorecase true
 set incsearch true
 set tabstop 2
 set scrolloff 5
+set info size
 #set hidden true
 #set color256 true
 #set number true
@@ -31,9 +32,8 @@ map w $bash
 map i $less %f%
 map o $explorer %f%
 
-map A mkfile
-map K mkdir
-map <c-n> mkfile
+map A push :mkdir<space>
+map a push :touch<space>
 
 map <enter> shell
 map <delete> delete
@@ -44,14 +44,25 @@ map <c-c> copy
 map <c-r> $vimv $fx
 map <esc> clear
 
-
 map <a-d> half-down
 map <a-u> half-up
 
 # ---------------------------------------------------------------------------
-# - Movement                                                                -
+# - Navigation Shortcut                                                     -
 # ---------------------------------------------------------------------------
 
 map .c cd C:\\
 map .d cd D:\\
 map .e cd E:\\
+map .. cd ~/Desktop
+
+map g. cd ~/Desktop
+map gd cd ~/Downloads
+map gp cd ~/Pictures
+map gv cd ~/Videos
+map gm cd ~/Music
+map gD cd ~/Documents
+map gr cd E:\\repoes
+
+cmd mkdir %mkdir "$@"
+cmd touch %touch %f%
