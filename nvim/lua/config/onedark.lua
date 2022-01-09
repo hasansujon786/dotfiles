@@ -1,11 +1,30 @@
-vim.g.onedark_style = 'cool'
-vim.g.onedark_italic_comment = false -- default true
-vim.g.onedark_transparent_background = vim.g.bg_tranparent -- default false
-require('onedark').setup()
+require('onedark').setup  {
+  style = 'cool',
+  transparent = vim.g.bg_tranparent,
+  term_colors = false,
+  toggle_style_key = '<leader>ts',
+  toggle_style_list = {'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light'},
+  -- colors = {},
+  -- highlights = {},
+  -- Options are italic, bold, underline, none
+  code_style = {
+    comments = 'none',
+    keywords = 'none',
+    functions = 'none',
+    strings = 'none',
+    variables = 'none'
+  },
+  -- Plugins Config --
+  diagnostics = {
+    darker = true,
+    undercurl = true,
+    background = true,
+  },
+}
 
-vim.fn['hasan#highlight#load_custom_highlight']()
+require('onedark').load()
 
 vim.g.onedark_theme_colors ={
-  dark = { bg='#282c34', fg='#abb2bf'},
-  cool = { bg='#242b38', fg='#a5b0c5' },
+  dark = {normal = {bg='#282c34', fg='#abb2bf' }},
+  cool = {normal = {bg='#242b38', fg='#a5b0c5' }},
 }
