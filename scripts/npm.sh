@@ -8,3 +8,4 @@ npm install -g expo-cli eas-cli
 npm install -g neovim
 npm install -g live-server
 npm install -g prettier eslint
+npm install -g vite

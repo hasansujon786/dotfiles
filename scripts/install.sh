@@ -171,13 +171,13 @@ setup_lazygit () {
 
 }
 
-# setup_tig() {
-#   util_print tig
-#   if [[ "$machine" == "windows" ]]; then
-#     $getter install -y tig
-#   fi
-#   ln -s ~/dotfiles/tui/tig/.tigrc ~/.tigrc
-# }
+setup_tig() {
+  util_print tig
+  if [[ "$machine" == "windows" ]]; then
+    $getter install -y tig
+  fi
+  ln -s ~/dotfiles/tui/tig/.tigrc ~/.tigrc
+}
 
 setup_lf() {
   # https://linoxide.com/lf-terminal-manager-linux/
@@ -254,10 +254,10 @@ install_various_apps() {
   # pip3 install vit
 
   if [[ "$machine" == "windows" ]]; then
-    $getter install mingw
+    $getter install -y mingw
   elif [[ "$machine" == "linux" ]]; then
-    $getter install build-essential
-    $getter install ninja-build
+    $getter install -y build-essential
+    $getter install -y ninja-build
   fi
 }
 
@@ -279,10 +279,10 @@ setup_sublime() {
 
 setup_windowsTerminal() {
   util_print WinTerminal
+  $getter install -y microsoft-windows-terminal  # --pre
+
   rm -rf $HOME/AppData/Local/Microsoft/Windows\ Terminal/settings.json
   util_makeSymlinkPath $HOME/dotfiles/windows-terminal/settings.json "'C:\Users\hasan\AppData\Local\Microsoft\Windows Terminal\settings.json'"
-
-  $getter install -y microsoft-windows-terminal  # --pre
 }
 
 install_and_setup_tmux() {
@@ -311,7 +311,7 @@ auto_install_everything() {
   setup_alacritty
   setup_nvim
   setup_lazygit
-  setup_tig
+  # setup_tig
   setup_lf
   setup_wezterm
   setup_node
@@ -319,8 +319,8 @@ auto_install_everything() {
 
   if [[ "$machine" == "windows" ]]; then
     setup_windowsTerminal
-    setup_sublime
     setup_keypirinha
+    # setup_sublime
   elif [[ "$machine" == "linux" ]]; then
     install_and_setup_tmux
   fi
