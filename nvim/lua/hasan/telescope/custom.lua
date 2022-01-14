@@ -119,10 +119,23 @@ end
 
 function M.search_wiki_files()
   builtin.find_files({
-      prompt_title = 'Org files',
-      cwd = '~/vimwiki',
-      previewer = false
-    })
+    results_title = 'Wiki files',
+    prompt_title = 'Search Wiki',
+    cwd = '~/vimwiki',
+    search_dirs = {
+      '3_resources/wiki/',
+    },
+    -- previewer = false
+  })
+end
+
+function M.grep_org_text()
+  builtin.live_grep {
+    results_title = 'Org Texts',
+    prompt_title = 'Search Org Texts',
+    path_display = { 'smart' },
+    cwd = '~/vimwiki',
+  }
 end
 
 function M.search_plugins()
@@ -227,4 +240,15 @@ M.commands = function()
   -- builtin.commands(themes.get_ivy(opts))
   -- builtin.commands(opts)
 end
+
+function M.search_project_todos()
+  builtin.grep_string {
+    results_title = " Project Todos",
+    prompt_title = "Search Todos",
+    prompt_prefix = " ",
+    path_display = { "smart" },
+    search = "todo",
+  }
+end
+
 return M

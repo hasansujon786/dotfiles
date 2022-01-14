@@ -75,7 +75,6 @@ maps.nmap('gx', '<Plug>(exchange-operator)')
 maps.vmap('gx', '<Plug>(exchange-operator)')
 maps.nmap('<P', '<Plug>(swap-parameter-prev):call repeat#set("\\<Plug>(swap-parameter-prev)")<CR>')
 maps.nmap('>P', '<Plug>(swap-parameter-next):call repeat#set("\\<Plug>(swap-parameter-next)")<CR>')
-maps.nmap('<Plug>(fix-current-world)', '1z=:call repeat#set("\\<Plug>(fix-current-world)")<CR>')
 
 -- Navigation -----------------------------------
 -- jump in file
@@ -211,9 +210,6 @@ maps.nnoremap('<leader>y', '"+y')
 maps.vnoremap('<leader>y', '"+ygv<Esc>')
 maps.nnoremap('<leader>d', '"+d')
 maps.vnoremap('<leader>d', '"+d')
--- Word commands
-maps.nnoremap('<Leader>f.', ':lua require("hasan.utils.ui").substitute_word(false)<CR>')
-maps.xnoremap('<Leader>f.', ':lua require("hasan.utils.ui").substitute_word(true)<CR>')
 -- File commands
 maps.nnoremap('<leader>fC', ':w <C-R>=expand("%")<CR>', {silent = false})
 maps.nnoremap('<leader>fM', ':Move <C-R>=expand("%")<CR>', {silent = false})

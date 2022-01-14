@@ -1,5 +1,4 @@
 local wk = require('which-key')
-
 wk.setup {
   window = {
     border = 'none', -- none, single, double, shadow
@@ -21,6 +20,10 @@ wk.setup {
   show_help = false,
 }
 
+local common = {
+  search_wiki_files = { ':lua require("hasan.telescope.custom").search_wiki_files()<CR>', 'Search org files'},
+  grep_org_text = { ':lua require("hasan.telescope.custom").grep_org_text()<CR>', 'Grep org text'},
+}
 
 local leader = {
   a = {
@@ -78,22 +81,24 @@ local leader = {
   g = {
     name = '+git',
     ['/'] = { ':Telescope git_status<CR>',         'Find git files*' },
-    f = { ':diffget //2<CR>',                      'diffget ours' },
-    j = { ':diffget //3<CR>',                      'diffget theirs' },
-    B = { ':lua require("hasan.utils.init").open_git_remote(false)<CR>',   'Browse git repo' },
+    c = { ':Telescope git_commits<CR>',            'Look up commits' },
+    C = { ':Telescope git_bcommits<CR>',           'Look up buffer commits' },
+    b = { ':lua require("hasan.utils.init").open_git_remote(false)<CR>',   'Browse git repo' },
 
     l = { ':FloatermNew --height=1.0 --width=1.0 lazygit<CR>',              'Open lazygit' },
     t = { ':FloatermNew --height=1.0 --width=1.0 tig<CR>',                  'Open tig' },
-    g = { ':Neogit<CR>',                           'Open Neogit' },
+    g = { ':Neogit<CR>',                                                    'Open Neogit' },
 
-    b = 'Preview git blame',
     p = 'Preview hunk',
     r = 'Reset hunk',
     s = 'Stage hunk',
     u = 'Undo last hunk',
     R = 'Reset buffer',
-    h = { ':GitGutterLineHighlightsToggle<CR>',    'Highlight hunks' },
+    H = { ':GitGutterLineHighlightsToggle<CR>',    'Highlight hunks' },
     T = { ':GitGutterToggle<CR>',                  'Toggle Signes' },
+    ['.'] = { ':silent !git add %<CR>',            'Stage current file' },
+    -- f = { ':diffget //2<cr>',                      'diffget ours' },
+    -- j = { ':diffget //3<CR>',                      'diffget theirs' },
   },
 
   f = {
@@ -104,20 +109,19 @@ local leader = {
     f = { '<cmd>lua require("hasan.telescope.custom").file_files()<cr>',            'Find file' },
     F = { '<cmd>lua require("hasan.telescope.custom").file_files("cur_dir")<cr>',   'Find file from here' },
 
-    i = { ':call hasan#utils#file_info()<CR>', 'Show file info' },
-    s = { ':write<CR>',                        'Save current file' },
-    S = { ':wa<CR>',                           'Save all file' },
-    y = { ':call hasan#utils#CopyFileNameToClipBoard(1)<CR>',  'Yank path name' },
-    Y = { ':call hasan#utils#CopyFileNameToClipBoard(0)<CR>',  'Yank file name' },
-    R = { ':lua require("hasan.utils.ui").rename_current_file()<CR>', 'Rename file' },
+    i = { ':call hasan#utils#file_info()<CR>',                       'Show file info' },
+    s = { ':write<CR>',                                              'Save current file' },
+    S = { ':wa<CR>',                                                 'Save all file' },
+    y = { ':call hasan#utils#CopyFileNameToClipBoard(1)<CR>',        'Yank path name' },
+    Y = { ':call hasan#utils#CopyFileNameToClipBoard(0)<CR>',        'Yank file name' },
+    R = { ':lua require("hasan.utils.ui").rename_current_file()<CR>','Rename file' },
     C = 'Copy this file',
     M = 'Move/rename file',
 
     -- Word command
     w = { '<Plug>(fix-current-world)',         'Fix current world' },
-    ['.'] = 'Rename current word',
-    -- F = { ':FilesCurDir<CR>',                    'Find file from here' },
-    -- d = { ':FilesCurDir<CR>',                    'Find directory' },
+    ['.'] = {':lua require("hasan.utils.ui").substitute_word(false)<CR>','Substitute word'},
+
     u = {
       name = '+update-permission',
       x = { ':Chmod +x<CR>',                   'Make this file executable' },
@@ -133,6 +137,7 @@ local leader = {
     c = 'Org capture',
     h = {'<cmd>lua require("hasan.org").open_org_home("-tabedit")<CR>', 'Open org home'},
     ['.'] = {'<cmd>lua require("hasan.org").open_org_home("edit")<CR>', 'Open org home'},
+    ['/'] = common.grep_org_text,
 
     f = { ':FloatermNew --height=1.0 --width=1.0 --opener=edit lf<CR>',     'Open lf' },
     t = { ':FloatermNew bash<CR>',                              'Open terminal popup' },
@@ -148,8 +153,9 @@ local leader = {
 
   p = {
     name = '+project',
-    p = { '<cmd>lua require("hasan.telescope.custom").projects()<CR>',          'Switch project' },
-    r = { ':lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>',  'Find recent files' },
+    p = { ':lua require("hasan.telescope.custom").projects()<CR>',            'Switch project' },
+    r = { ':lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>','Find recent files' },
+    t = { ':lua require("hasan.telescope.custom").search_project_todos()<CR>','Search project todos' },
     -- b = { ':Telescope file_browser prompt_title=Project\\ Browser cwd=~/repoes<CR>',  'Browse other projects' },
 
     l = { ':SessionLoad<CR>',                       'Load session' },
@@ -158,9 +164,7 @@ local leader = {
     d = { ':Dashboard<CR>',                         'Open dashboard' },
 
     R = { ':lua require("hasan.project_run").open("package.json")<CR>', 'Run project script' },
-    c = { ':lua require("hasan.project_run").commands()<CR>',           'Run project commands' },
     e = { ':lua require("hasan.project_run").commands()<CR>',           'Run project commands' },
-    u = { ':lua require("hasan.project_run").commands()<CR>',           'Run project commands' },
     [':'] = 'Run shell command',
     [';'] = 'Send keys',
   },
@@ -229,25 +233,23 @@ local leader = {
     O = { '<cmd>tabonly<CR>',            'Keep only tab' },
     z = { '<cmd>AutoZoomWin<CR>',        'Toggle window zoom' },
 
-    ['/'] = { ':lua require("hasan.telescope.custom").search_wiki_files()<CR>',   'Search org files'},
+    ['/'] = common.search_wiki_files,
   },
 
   ['/'] = {
     name = '+search',
-    ['.'] = { ':Telescope resume<CR>',      'Telescope resume' },
-    ['/'] = { ':Telescope live_grep<CR>',   'Find file' },
     b = { ':Telescope buffers<CR>',         'Find buffers' },
-    B = { ':Telescope git_bcommits<CR>',    'Look up buffer commits' },
-    c = { ':Telescope git_commits<CR>',     'Look up commits' },
     f = { ':Telescope find_files<CR>',      'Find file' },
-    g = { ':Telescope git_status<CR>',      'Find git files*' },
     k = { ':Telescope keymaps<CR>',         'Look up keymaps' } ,
     M = { ':Telescope marks<CR>',           'Jump to marks' } ,
     r = { ':Telescope oldfiles<CR>',        'Recent files' },
     t = { ':Telescope filetypes<CR>',       'Change filetypes' },
-    v = { ':Telescope help_tags<CR>',       'Search Vim help' },
     s = { ':lua require("hasan.telescope.custom").grep_string()<CR>',         'Grep string' },
-    w = { ':lua require("hasan.telescope.custom").search_wiki_files()<CR>',   'Search org files'},
+    ['/'] = { ':Telescope live_grep<CR>',   'Find file' },
+    ['.'] = { ':Telescope resume<CR>',      'Telescope resume' },
+
+    o = common.grep_org_text,
+    w = common.search_wiki_files,
     -- m = { ':Bookmarks<CR>',                 'Jump to bookmark' } ,
   },
 
@@ -281,15 +283,14 @@ local leader_visual = {
     name = '+open',
     y = { ':lua require("yanklist").yanklist({is_visual=true,initial_mode="normal"})<CR>', 'Yank list' },
   },
+  f = {
+    name = '+file',
+    ['.'] = {':lua require("hasan.utils.ui").substitute_word(true)<CR>','Substitute word'},
+  }
 }
 
 wk.register(leader, { prefix = '<leader>' })
 wk.register(leader_visual, { prefix = '<leader>', mode = 'v' })
-
--- " nmap <leader>aa <Plug>(coc-codeaction)
--- " vmap <leader>aa <Plug>(coc-codeaction-selected)
--- " nmap <leader>af <Plug>(coc-format)
--- " vmap <leader>af <Plug>(coc-format-selected)
 
 -- for i = 0, 10 do
 --   leader[tostring(i)] = "which_key_ignore"
