@@ -140,7 +140,6 @@ local function set_pos(pos) fn('setpos', '.', pos) end
 --   -- required to fix code action ranges
 --   ts_utils.setup_client(client)
 
---   -- TODO: keymap these?
 --   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", ":TSLspOrganize<CR>", {silent = true})
 --   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "qq", ":TSLspFixCurrent<CR>", {silent = true})
 --   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", {silent = true})

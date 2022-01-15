@@ -1,4 +1,3 @@
--- TODO: what is a tailwindcss filetype
 local lspconfig = require('lspconfig')
 local lsp = require('lsp')
 

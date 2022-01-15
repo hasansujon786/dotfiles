@@ -244,7 +244,6 @@ install_various_apps() {
   # c:\python39\python.exe -m pip install --upgrade pip
   # pip install --user --upgrade pynvim
 
-  # TODO
   # util_print taskwarrior
   # apt install taskwarrior
   # pip3 install tasklib
@@ -286,7 +285,6 @@ setup_windowsTerminal() {
 }
 
 install_and_setup_tmux() {
-  # TODO: (tmux is not working on win, reason: unknown)
   # L => ~/.tmux.conf
   util_print tmux
   echo 'Instlling tmux...'

@@ -176,6 +176,7 @@ local leader = {
 
     c = { ':setlocal cursorcolumn!<CR>',            'cursorcolumn' },
     w = { ':call hasan#utils#toggleWrap()<CR>',     'toggle-wrap' },
+    ['*'] = { ':call autohl#_AutoHighlightToggle()<CR>','Highlight same words' },
 
     t = {
       name  = '+task-and-timer',
@@ -193,9 +194,6 @@ local leader = {
   v = {
     name = '+vim',
     ['/'] = { ':Telescope help_tags<CR>',       'Search Vim help' },
-    -- TODO
-    -- e = 'print-to-float',
-    -- nnoremap <leader>ve :call _#print_to_float(g:)<left>
     l = { ':call logevents#LogEvents_Toggle()<CR>',  'Toggle LogEvents' },
     p = {
       name = '+plugin',

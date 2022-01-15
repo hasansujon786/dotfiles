@@ -247,7 +247,10 @@ function M.search_project_todos()
     prompt_title = "Search Todos",
     prompt_prefix = " ",
     path_display = { "smart" },
-    search = "todo",
+    search = "todo:",
+    additional_args = function ()
+      return {"--glob", "!nvim/legacy/*"}
+    end
   }
 end
 

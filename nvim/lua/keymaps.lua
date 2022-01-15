@@ -133,12 +133,6 @@ maps.nmap('[Q', ':cfirst<CR>')
 
 
 -- Search ---------------------------------------
--- Highlight current word in file
--- nnoremap z/ :call autohl#_AutoHighlightToggle()<CR> -- TODO
-
--- Search visual selection
--- xnoremap / y/<C-R>"<CR>  -- TODO
-
 -- Pressing * or # searches for the current selection
 maps.vnoremap('*', ':<C-u>call hasan#utils#visualSelection("", "")<CR>/<C-R>=@/<CR><CR>')
 maps.vnoremap('#', ':<C-u>call hasan#utils#visualSelection("", "")<CR>?<C-R>=@/<CR><CR>')

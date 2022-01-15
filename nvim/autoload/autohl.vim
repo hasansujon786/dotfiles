@@ -1,6 +1,6 @@
 " !::exe [Redraw | So | Error 'ha']
 
-" nnoremap z/ :call autohl#_AutoHighlightToggle()<CR>
+" :call autohl#_AutoHighlightToggle()<CR>
 
 function! autohl#_AutoHighlightToggle()
   let @/ = ''
@@ -31,7 +31,7 @@ function! s:autoHighlight()
     return
   end
   call s:deleteAutoHighlight()
-  let w:auto_highlight_id = matchadd('ColorColumn', '\V\<'.escape(expand('<cword>'), '\').'\>')
+  let w:auto_highlight_id = matchadd('IncSearch', '\V\<'.escape(expand('<cword>'), '\').'\>')
 endfunction
 
 function! s:deleteAutoHighlight()
