@@ -241,15 +241,55 @@ M.commands = function()
   -- builtin.commands(opts)
 end
 
+M.grep_string_list = function(opts)
+  opts = opts and opts or {}
+
+  local vimgrep_arguments = opts.vimgrep_arguments or conf.vimgrep_arguments
+  local search_dirs = opts.search_dirs
+  opts.entry_maker = opts.entry_maker or make_entry.gen_from_vimgrep(opts)
+
+  local search_list = {}
+  if opts.search_list and #opts.search_list > 0 then
+    for _, value in ipairs(opts.search_list) do
+      table.insert(search_list, "-e")
+      table.insert(search_list, value)
+    end
+  end
+
+  local additional_args = {}
+  if opts.additional_args ~= nil and type(opts.additional_args) == "function" then
+    additional_args = opts.additional_args(opts)
+  end
+
+  local args = flatten {
+    vimgrep_arguments,
+    additional_args,
+    search_list,
+  }
+
+  if search_dirs then
+    for _, path in ipairs(search_dirs) do
+      table.insert(args, vim.fn.expand(path))
+    end
+  end
+
+  pickers.new(opts, {
+    prompt_title = "find todos",
+    finder = finders.new_oneshot_job(args, opts),
+    previewer = conf.grep_previewer(opts),
+    sorter = conf.generic_sorter(opts),
+  }):find()
+end
+
 function M.search_project_todos()
-  builtin.grep_string {
+  M.grep_string_list {
     results_title = " Project Todos",
     prompt_title = "Search Todos",
     prompt_prefix = " ",
     path_display = { "smart" },
-    search = "todo:",
+    search_list = {"todo:", "done:", "info:"},
     additional_args = function ()
-      return {"--glob", "!nvim/legacy/*"}
+      return {"--glob", "!nvim/lua/hasan/telescope/custom.lua", "--glob", "!nvim/legacy/*"}
     end
   }
 end
