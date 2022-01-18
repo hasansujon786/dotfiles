@@ -9,6 +9,8 @@ log.log
 /gui/Keypirinha/User/Keypirinha-Notepad2.ini
 /gui/Keypirinha/User/Keypirinha.history
 /nvim/plugin/packer_compiled.lua
+/tui/lf/history
+/tui/lf/files
 
 # dependencies
 /node_modules

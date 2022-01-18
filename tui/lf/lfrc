@@ -8,10 +8,19 @@ set incsearch true
 set tabstop 2
 set scrolloff 5
 set info size
-#set hidden true
+set hidden true
+set icons true
+set ignorecase true
 #set color256 true
 #set number true
 #set relativenumber true
+
+# ---------------------------------------------------------------------------
+# - Custom commands                                                         -
+# ---------------------------------------------------------------------------
+cmd mkdir %mkdir
+cmd touch %touch %f%
+cmd doc $lf -doc | less
 
 # ---------------------------------------------------------------------------
 # - Bindings                                                                -
@@ -22,6 +31,8 @@ map d reload
 map p reload
 map c reload
 map r reload
+map x $%f%
+map X !%f%
 
 ######## Basic Functions ########
 map I set hidden!
@@ -65,6 +76,3 @@ map gD cd ~/Documents
 map gr cd E:\\repoes
 map ga. cd ~/AppData
 map gan cd ~/AppData/Local/nvim-data
-
-cmd mkdir %mkdir "$@"
-cmd touch %touch %f%
