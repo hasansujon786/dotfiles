@@ -24,6 +24,7 @@ require('lualine').setup {
     lualine_x = {
       { sl.harpoon.fn, cond = sl.harpoon.toggle },
       sl.lsp_status.fn,
+      { sl.task_timer.fn, cond = sl.task_timer.toggle },
       {'branch', icon = '' },
       sl.space_info,
       { 'filetype', icons_enabled = false }

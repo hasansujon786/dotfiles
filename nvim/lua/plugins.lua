@@ -60,7 +60,6 @@ return require('packer').startup({
     use({ 'mkropat/vim-tt', opt = true, event = 'CursorHold',
       config = function ()
         vim.g.tt_loaded = 1
-        vim.cmd 'source ~/dotfiles/nvim/autoload/hasan/tt.vim'
       end
     })
 

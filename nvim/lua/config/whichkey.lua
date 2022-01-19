@@ -181,13 +181,13 @@ local leader = {
     t = {
       name  = '+task-and-timer',
       w = { ':Work<CR>',                            'Start work timer' },
+      W = { ':Work!<CR>',                           'Start custom timer' },
       s = { ':TimerShow<CR>',                       'Show timer status' },
       p = { ':TimerToggle<CR>',                     'Pause or Paly' },
       b = { ':Break<CR>',                           'Take a break' },
       o = { ':OpenTasks<CR>',                       'Open tasks' },
-      -- TODO: use input metheo to get user valeu
-      -- u = { ':UpdateCurrentTimer',                   'Update current timer' },
-      -- U = { ':UpdateCurrentStatus',                  'Update current status' },
+      u = { ':UpdateCurrentTimer<CR>',              'Update current timer' },
+      U = { ':UpdateCurrentStatus<CR>',             'Update current status' },
     }
   },
 

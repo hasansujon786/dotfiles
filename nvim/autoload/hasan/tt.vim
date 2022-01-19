@@ -1,5 +1,3 @@
-let g:tt_taskfile = '~/tasks.md'
-
 function! hasan#tt#is_tt_paused()
   return tt#get_remaining() != -1 && tt#is_running() ? 0 : tt#get_remaining() == -1 ? 0 : 1
 endfunction
@@ -7,28 +5,46 @@ function! hasan#tt#msg()
   return tt#get_remaining_full_format().' '.tt#get_status_formatted()
 endfunction
 
-command! -bang Work call s:work(<bang>0)
-function s:work(keep_task) abort
-  let start_from_begin = 1
-  if (tt#is_running() || hasan#tt#is_tt_paused())
-    call _#echoWarn('>>> Cancel the current timer & start a new timer? <<<')
-    let start_from_begin = confirm("", "&Yes\n&No", 2)
-  endif
-
-  if start_from_begin == 1
-    if(!a:keep_task) | call tt#clear_task() | endif
-    call tt#set_timer(25)
-    call tt#start_timer()
-    call tt#set_status('working')
-    call tt#when_done('AfterWork')
-    execute 'TimerShow'
-  endif
+function! hasan#tt#update_current_timer()
+  let status = tt#get_status()
+  let remaining_time = tt#get_remaining() > 60 ? (tt#get_remaining() / 60) + 1 : 1
+  let new_time = input({'prompt':'Update '..status..' Timer> ','default': remaining_time})
+  if new_time < 1 | return | endif
+  call tt#set_timer(new_time)
 endfunction
 
-command! AfterWork Break
+function! hasan#tt#update_current_status()
+  let status = tt#get_status()
+  let new_status = input({'prompt':'Update Status> ','default': status})
+  if len(new_status) <= 2 | return | endif
+  call tt#set_status(new_status)
+endfunction
 
-command! Break call Break()
-function! Break()
+
+function hasan#tt#work(custom_time) abort
+  let start_from_begin = 1
+  let work_time = get(g:, 'tt_default_time', 25)
+
+  if a:custom_time
+    let work_time = input({'prompt':'Set a time> ','default': work_time})
+    if work_time < 1 | return | endif
+  elseif (tt#is_running() || hasan#tt#is_tt_paused() && a:custom_time == 0)
+    call _#echoWarn('>>> Cancel the current timer & start a new timer? <<<')
+    let start_from_begin = confirm("", "&Yes\n&No", 1)
+    if start_from_begin == 2 || start_from_begin == 0 | return | endif
+  endif
+
+  call tt#clear_task()
+  call tt#clear_timer()
+
+  call tt#set_status('working')
+  call tt#set_timer(work_time)
+  call tt#start_timer()
+  call tt#when_done('AfterWork')
+  execute 'TimerShow'
+endfunction
+
+function! hasan#tt#break()
   let l:count = tt#get_state('break-count', 0)
   if l:count >= 3
     call tt#set_timer(15)
@@ -44,40 +60,24 @@ function! Break()
   lua require('notifier').alert({vim.fn['hasan#tt#msg']()}, {title = 'TaskTimer'})
 endfunction
 
-command! AfterBreak
-  \  call tt#set_status('get ready')
-  \| call tt#clear_timer()
-  \| lua require('notifier').alert({'Break Ended ' .. vim.fn['tt#get_status_formatted']()}, {title = 'TaskTimer'})
-
-command! TimerStop
-  \  call tt#clear_status()
-  \| call tt#clear_task()
-  \| call tt#clear_timer()
-
-command! TimerShow lua require('notifier').notify({vim.fn['hasan#tt#msg']()}, {title = 'TaskTime'})
-
-command! TimerToggle
-      \ call tt#toggle_timer()
-
-command! -nargs=1 UpdateCurrentTimer call tt#set_timer(<f-args>)
-command! -nargs=1 UpdateCurrentStatus call tt#set_status(<f-args>)
-command! -range MarkTask <line1>,<line2>call tt#mark_task()
-command! OpenTasks call tt#open_tasks() <Bar> call tt#focus_tasks()
-
-command! WorkOnTask
-  \  if tt#can_be_task(getline('.'))
-  \|   call tt#set_task(getline('.'), line('.'))
-  \|   execute 'Work!'
-  \|   call tt#when_done('AfterWorkOnTask')
-  \| endif
-
-command! AfterWorkOnTask
-  \  call tt#open_tasks()
-  \| call tt#mark_last_task()
-  \| Break
-
-
 " augroup TtAirline
 "   autocmd!
 "   autocmd User TtTick call s:should_tt_update_tabline()
 " augroup END
+
+function! hasan#tt#statusline_status()
+  if !exists('g:tt_loaded')
+    return ''
+  else
+    try
+      let icon = tt#get_status() =~ 'break' ? '' : ''
+      let status = (!tt#is_running() && !hasan#tt#is_tt_paused() ? 'off' :
+            \ hasan#tt#is_tt_paused() ? 'paused' :
+            \ tt#get_remaining_smart_format())
+      return icon.' '.status
+    catch
+      return ''
+    endtry
+  endif
+endfunction
+

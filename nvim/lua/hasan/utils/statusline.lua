@@ -57,7 +57,6 @@ M.harpoon = {
   end
 }
 
-
 M.spell = {
   use_mode_hl = true,
   toggle = function ()
@@ -80,5 +79,17 @@ M.wrap = {
   end,
   fn = [[%"wrap]]
 }
+
+M.task_timer = {
+  toggle = function ()
+    if vim.g.tt_loaded == 1  then
+      return vim.fn['tt#is_running']() == 1 or vim.fn['hasan#tt#is_tt_paused']() == 1
+    end
+  end,
+  fn = function ()
+    return vim.fn['hasan#tt#statusline_status']()
+  end
+}
+
 
 return M
