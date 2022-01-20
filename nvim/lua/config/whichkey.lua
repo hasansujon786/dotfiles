@@ -83,7 +83,7 @@ local leader = {
     ['/'] = { ':Telescope git_status<CR>',         'Find git files*' },
     c = { ':Telescope git_commits<CR>',            'Look up commits' },
     C = { ':Telescope git_bcommits<CR>',           'Look up buffer commits' },
-    b = { ':lua require("hasan.utils.init").open_git_remote(false)<CR>',   'Browse git repo' },
+    B = { ':lua require("hasan.utils.init").open_git_remote(false)<CR>',   'Browse git repo' },
 
     l = { ':FloatermNew --height=1.0 --width=1.0 lazygit<CR>',              'Open lazygit' },
     t = { ':FloatermNew --height=1.0 --width=1.0 tig<CR>',                  'Open tig' },

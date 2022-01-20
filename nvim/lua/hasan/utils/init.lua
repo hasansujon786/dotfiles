@@ -1,4 +1,3 @@
-local Job = require('plenary.job')
 local M = {}
 
 M.reload_this_module = function ()
@@ -122,6 +121,7 @@ M.create_augroups = function(definitions)
 end
 
 M.open_git_remote = function(openRoot)
+  local Job = require('plenary.job')
   local fpath = nil
   local isReadonly = vim.api.nvim_buf_get_option(0, 'readonly')
   local isModifiable = vim.api.nvim_buf_get_option(0, 'modifiable')

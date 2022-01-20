@@ -1,21 +1,6 @@
 -- C:\Users\hasan\AppData\Local\nvim-data\site\pack\packer
 vim.g.disable_lsp = false
 vim.g.disable_coc = true
-local fn = vim.fn
-local cmd = vim.cmd
-
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-local is_installed = fn.empty(fn.glob(install_path)) == 0
-
-if not is_installed then
-  if fn.input("Install packer.nvim?") == "y" then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    cmd 'packadd packer.nvim'
-    print(" Installed packer.nvim.")
-    is_installed = 1
-  end
-end
-if not is_installed then return end
 
 return require('packer').startup({
   function(use)
