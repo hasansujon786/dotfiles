@@ -139,12 +139,12 @@ maps.vnoremap('#', ':<C-u>call hasan#utils#visualSelection("", "")<CR>?<C-R>=@/<
 -- vnoremap * "xy/<C-R>x<CR>
 
 -- Type a replacement term and press . to repeat the replacement again. Useful
--- for replacing a few instances of the term (comparable to multiple cursors).
+-- for replacing a few instances of the term (alternative to multiple cursors).
 maps.nnoremap('c*', ":let @/='\\<'.expand('<cword>').'\\>'<CR>cgn")
-maps.xnoremap('C', '"sy:let @/=@s<CR>cgn') -- TODO: use search register
--- Delete & change matches
-maps.nmap('dm', ':%s/<c-r>///g<CR>')
-maps.nmap('cm', ':%s/<c-r>///g<Left><Left>')
+maps.xnoremap('c', '"cy:let @/=@c<CR>cgn')
+-- Delete & change all matches
+maps.nnoremap('dm', ':%s/<c-r>///g<CR>')
+maps.nnoremap('cm', ':%s/<c-r>///g<Left><Left>')
 
 
 -- Insert mode ----------------------------------
@@ -224,9 +224,8 @@ maps.nnoremap(']t', ':FloatermToggle<CR><C-\\><C-n>')
 maps.nnoremap('[t', ':FloatermToggle<CR><C-\\><C-n>')
 -- Telescope
 maps.nnoremap('<C-p>', ':lua require("telescope.builtin").oldfiles()<CR>')
-maps.nnoremap('//', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>')
-maps.vnoremap('/', '"zy:Telescope current_buffer_fuzzy_find previewer=false theme=get_dropdown default_text=<C-r>"<CR>')
-maps.nnoremap('<A-/>', ':Telescope live_grep<CR>')
-maps.vnoremap('<A-/>', '"zy:Telescope grep_string default_text=<C-r>"<CR>')
+maps.nnoremap('<A-/>', ':lua require("hasan.telescope.custom").grep_string(false)<CR>')
+maps.vnoremap('<A-/>', ':lua require("hasan.telescope.custom").grep_string(true)<CR>')
 maps.nnoremap('<A-x>', '<cmd>lua require("hasan.telescope.custom").commands()<cr>')
-maps.nnoremap('<C-k><C-k>', '<cmd>lua require("hasan.telescope.custom").commands()<cr>')
+maps.nnoremap('//', ':lua require("hasan.telescope.custom").curbuf(false)<cr>')
+maps.vnoremap('/',  ':lua require("hasan.telescope.custom").curbuf(true)<cr>')

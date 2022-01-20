@@ -101,12 +101,18 @@ function M.git_files()
   builtin.git_files(opts)
 end
 
-function M.curbuf()
+function M.curbuf(isVisual)
   local opts = themes.get_dropdown {
     border = true,
     previewer = false,
     shorten_path = false,
   }
+  if isVisual then
+    local word = vim.fn['hasan#utils#get_visual_selection']()
+    opts.default_text = word
+    vim.fn.setreg('/', word)
+  end
+
   builtin.current_buffer_fuzzy_find(opts)
 end
 
@@ -146,9 +152,19 @@ function M.search_plugins()
   extensions.file_browser.file_browser(themes.get_ivy(opts))
 end
 
-function M.grep_string()
-  local string = vim.fn.input('Grep String: ')
-  builtin.grep_string({ search = string })
+function M.grep_string(is_visual)
+  local word = nil
+  if is_visual then
+    word = vim.fn['hasan#utils#get_visual_selection']()
+  else
+    word = vim.fn.input('Grep String: ')
+  end
+
+  word = string.gsub(word, "%s+", "")
+  if word == "" then return end
+
+  vim.fn.setreg('/', word)
+  builtin.grep_string({ search = word })
 end
 
 function M.file_browser(dir)

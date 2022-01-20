@@ -17,26 +17,29 @@ require('telescope').setup{
     -- sorting_strategy = "ascending",
     winblend = 0,
     mappings = {
-      -- n = {
-      --   ["<Del>"] = actions.close
-      -- },
+      n = {
+        ['<M-p>'] = actions.move_selection_previous,
+        ['<M-n>'] = actions.move_selection_next,
+      },
       i = {
-        ['<C-x>'] = false,
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
+        ['<M-p>'] = actions.move_selection_previous,
+        ['<M-n>'] = actions.move_selection_next,
         ['<C-s>'] = actions.file_split,
         ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
         ['<esc>'] = actions.close,
         ['<M-u>'] = actions.preview_scrolling_up,
         ['<M-d>'] = actions.preview_scrolling_down,
+        ['<C-x>'] = false,
+        ['<C-u>'] = false,
+        ['<C-d>'] = false,
         ['<C-f>'] = local_action.fedit,
       },
     },
     -- `file_ignore_patterns = { "scratch/.*", "%.env" }`
     file_ignore_patterns = {
-      "%.gitignore", "%.git\\.*",
-      "bash/*", "bin/*", "tui/*", "vscode/*", "system/*", "spell/*", "4_archive/*",
-      "android/*", "ios/*"
+      "%.gitignore", "%.git/.*",
+      "%.bin/.*", "%.bin%-win/.*", "%.system/.*",
+      "android/.*", "ios/.*"
     },
     extensions = {
       fzy_native = {

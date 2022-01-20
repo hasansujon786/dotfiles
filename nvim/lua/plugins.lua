@@ -48,14 +48,14 @@ return require('packer').startup({
 
     --> Productiviry -------------------------------
     -- use({ 'vimwiki/vimwiki', opt = true, cmd = {'VimwikiIndex','VimwikiTabIndex','VimwikiUISelect'} })
-    use({ 'kristijanhusak/orgmode.nvim',
+    use({ 'nvim-orgmode/orgmode',
       -- commit ='50d1a97b25d77f33d312b4775fbd68217d22c946',
       -- commit ='e287630dad1eceb03292b6283aa73505e539191b', -- working
       opt = true, after = 'nvim-treesitter',
-      config = function() require('config.orgmode') end
-    })
-    use({"akinsho/org-bullets.nvim", opt = true, after = 'orgmode.nvim',
-      config = function() require('config.org-bullets') end
+      config = function() require('config.orgmode') end,
+      requires = {
+        {"akinsho/org-bullets.nvim", config = function() require('config.org-bullets') end }
+      }
     })
     use({ 'mkropat/vim-tt', opt = true, event = 'CursorHold',
       config = function ()
