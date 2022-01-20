@@ -53,13 +53,6 @@ require("nvim-treesitter.configs").setup {
         ["aP"] = "@parameter.outer",
         ["ik"] = "@call.inner",
         ["ak"] = "@call.outer",
-        -- Or you can define your own textobjects like this
-        ["iF"] = {
-          python = "(function_definition) @function",
-          cpp = "(function_definition) @function",
-          c = "(function_definition) @function",
-          java = "(method_declaration) @function",
-        },
       },
     },
     swap = {
