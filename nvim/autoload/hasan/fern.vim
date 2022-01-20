@@ -49,6 +49,15 @@ function! hasan#fern#vinager()
   exec 'Fern %:h -wait | FernReveal #:t -wait'
 endfunction
 
+function! hasan#fern#hijack_directory() abort
+  let path = expand('%:p')
+  if !isdirectory(path)
+    return
+  endif
+  bwipeout %
+  execute printf('Fern %s', fnameescape(path))
+endfunction
+
 " Fern mappings {{{
 function! hasan#fern#focus_last_file()
   if &ft != 'fern' | return | endif

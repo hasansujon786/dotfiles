@@ -1,3 +1,4 @@
+local utils = require('hasan.utils')
 local maps = require('hasan.utils.maps')
 maps.nnoremap('-', '<cmd>call hasan#fern#vinager()<CR>') -- change in whichkey
 maps.nnoremap('<BS>', '<cmd> call hasan#fern#edit_alternate()<CR>')
@@ -19,3 +20,11 @@ vim.g['fern#renderer#default#expanded_symbol']  = '▼ '
 vim.g['fern#renderer#default#leading']          = ' '
 vim.g['fern#renderer#default#leaf_symbol']      = ' '
 vim.g['fern#renderer#default#root_symbol']      = '~ '
+
+utils.create_augroups({
+  FernEvents = {
+    {'FileType fern call hasan#fern#FernInit()'},
+    {'FileType fern call glyph_palette#apply()'},
+    {'BufEnter * ++nested call hasan#fern#hijack_directory()'},
+  },
+})

@@ -15,13 +15,9 @@ local autocmds = {
     {'TermOpen * setfiletype terminal | set bufhidden=hide'},
     {'ColorScheme * call hasan#highlight#load_custom_highlight()'},
 
-    -- {'WinEnter,BufWinEnter *.vim,*.js,*.lua call hasan#boot#highligt_ruler(1)'},
-  },
-  FernEvents = {
-    {'FileType fern call hasan#fern#FernInit()'},
-    {'FileType fern call glyph_palette#apply()'},
-    {'BufEnter * ++nested call hasan#boot#hijack_directory()'},
     {'VimEnter * ++once runtime! autoload/netrw.vim'},
+
+    -- {'WinEnter,BufWinEnter *.vim,*.js,*.lua call hasan#boot#highligt_ruler(1)'},
   },
   FileMarks = {
     {'BufLeave *.html normal! mH'},

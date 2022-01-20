@@ -14,7 +14,6 @@ return require('packer').startup({
     use({ 'nvim-lualine/lualine.nvim', config = function() require('config.lualine-config') end })
     use({ 'kyazdani42/nvim-web-devicons', config = function() require('config.devicons-config') end })
     use({ 'hasansujon786/notifier.nvim' })
-    use({ 'hasansujon786/telescope-yanklist.nvim' })
     use({ 'folke/zen-mode.nvim', opt = true, cmd = 'ZenMode',
       config = function() require('config.zen') end
     })
@@ -59,9 +58,11 @@ return require('packer').startup({
     use({ 'nvim-telescope/telescope.nvim', config = function() require('config.telescope') end })
     use({ 'nvim-telescope/telescope-fzy-native.nvim' })
     use({ 'nvim-telescope/telescope-file-browser.nvim', opt = true, event = 'CursorHold', })
+    use({ 'hasansujon786/telescope-yanklist.nvim', opt = true, event = 'CursorHold', })
 
     use({ 'lambdalisue/fern.vim',
       config = function() require('config.fern') end,
+      opt = true, event = 'CursorHold',
       requires = {
         'lambdalisue/fern-renderer-nerdfont.vim',
         'hasansujon786/glyph-palette.vim',
@@ -115,7 +116,7 @@ return require('packer').startup({
     --   }
     -- })
     use({ 'TimUntersberger/neogit', opt = true, cmd = 'Neogit' })
-    use({'airblade/vim-gitgutter',opt=true,event='BufWinEnter',config="require('config.gitgutter-config')"})
+    use({'airblade/vim-gitgutter',opt=true,event='CursorHold',config="require('config.gitgutter-config')"})
     use({ 'lewis6991/gitsigns.nvim',
       -- opt = true, event = 'BufRead',
       branch = 'crlf', opt = true, event = 'BufRead',
