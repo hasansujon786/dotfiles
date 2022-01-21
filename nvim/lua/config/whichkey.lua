@@ -146,6 +146,7 @@ local leader = {
     l = { '<cmd>call hasan#window#toggle_quickfix(0)<CR>',      'Open Local list' },
     y = { ':lua require("yanklist").yanklist({initial_mode="normal"})<CR>', 'Yank list' },
 
+    b = { '<cmd>call hasan#fern#drawer_toggle(0)<CR>',  'Toggle prject tree' },
     p = { '<cmd>call hasan#fern#drawer_toggle(1)<CR>',  'Toggle prject tree' },
     P = { '<cmd>call hasan#fern#open_dir()<CR>',        'Toggle prject tree' },
     ['-'] = { '<cmd>call hasan#fern#vinager()<CR>',     'Fern vinager' },
