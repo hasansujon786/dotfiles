@@ -59,6 +59,7 @@ local function lsp_document_highlight(client)
       autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
     augroup END
       ]], false)
+    -- autocmd BufWritePre *.js,*.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
   end
 end
 
