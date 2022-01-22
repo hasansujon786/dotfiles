@@ -8,23 +8,22 @@ local finders = require('telescope.finders')
 local M = {}
 local utils = require('hasan.utils.pr_utils')
 
-M.open = function(scriptFile, opts)
+M.scriptsCommandsFromJSON = function(script_file, opts)
   opts = t_utils.get_default(opts, {})
   local theme_opts = themes.get_dropdown(opts)
 
-  local fpath = vim.fn.getcwd() ..'/'.. scriptFile
-  local exists = vim.fn.filereadable(fpath) == 1
+  local exists, path = utils.user_util.root_has(script_file)
   if not exists then
-    print('Not found '.. scriptFile)
+    print('Not found '.. script_file)
     return 0
   end
 
   pickers.new(theme_opts, {
     finder = finders.new_table{
-      results = utils.user_util.get_project_scripts(fpath),
+      results = utils.user_util.get_project_scripts(path.filename),
       entry_maker = opts.entry_maker or utils.make_entry_form_list
     },
-    prompt_title = opts.prompt_title or 'Project Run',
+    prompt_title = opts.prompt_title or 'Project Script Commands',
     sorter = opts.sorter or t_conf.generic_sorter(opts),
     -- initial_mode = 'normal',
     -- default_selection_index = 2,
@@ -41,6 +40,7 @@ M.open = function(scriptFile, opts)
       return true
     end,
   }):find()
+  vim.cmd[[normal! a]]
 end
 
 M.commands = function(opts)
