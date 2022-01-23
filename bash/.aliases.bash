@@ -17,6 +17,7 @@ alias lv=vl
 alias vl='nvim -c "normal '\''0"'
 alias vst='nvim --startuptime startup.log -c exit && tail -100 startup.log'
 alias cd.='cd ~/dotfiles && nvim'
+alias cdk='cd ~/AppData/Local/nvim-data/site/pack/packer/opt/kissline.nvim && nvim'
 
 # Tmux
 alias t="tmux new -As pasta"

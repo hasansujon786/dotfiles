@@ -30,7 +30,7 @@ M.user_util.open_tab = function (dir, command_arg)
   -- IMPORTNAT: add bash to Path
   if vim.fn.has('win32') == 1 then
     local winterm = 'silent !"c:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.11.3471.0_x64__8wekyb3d8bbwe\\wt.exe"'
-    local cmd = {winterm, '-w 0 nt -d', dir, '-p "Bash"', 'bash -c "source ~/dotfiles/bash/.env && ', command_arg, '"'}
+    local cmd = {winterm, '-w 0 nt -d', dir, '-p "Bash"',  'bash --login -i', '-c "', command_arg, '"'}
     vim.cmd(table.concat(cmd, ' '))
   else
     -- vim.cmd('silent !tmux-windowizer $(pwd) ' .. entry.value[2])
