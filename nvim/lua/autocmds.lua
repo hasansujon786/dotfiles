@@ -8,7 +8,7 @@ local autocmds = {
   vimrcEx = {
     {'InsertEnter * norm zz'}, -- center document
     {'VimResized * :wincmd ='}, -- Vim/tmux layout rebalancing
-    {'FocusGained,BufEnter,CursorHold * :silent checktime'}, -- auto read when a file is changed from the outside
+    {'FocusGained,BufEnter,CursorHold * :silent! checktime'}, -- auto read when a file is changed from the outside
     -- {'FocusLost,WinLeave,BufLeave * :silent! noautocmd w'}, -- auto save
     {'BufWritePre *.vim,*.lua call hasan#autocmd#trimWhitespace()'},
     {'BufWinEnter,WinEnter __FLUTTER_DEV_LOG__ normal Gzz'},
