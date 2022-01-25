@@ -80,6 +80,7 @@ local function lsp_buffer_keymaps(client, bufnr)
   buf_map('n', 'gY', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   buf_map('n', 'gI', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   buf_map('n', 'gp', '<cmd>lua require"lsp.peek".Peek("definition")<CR>', opts)
+  buf_map('n', 'g.', '<cmd>lua require("hasan.telescope.custom").lsp_document_symbols()<cr>', opts)
 
   buf_map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_map('n', '<F2>', '<cmd>lua require("lsp.util").rename_with_quickfix()<CR>', opts)
@@ -101,7 +102,6 @@ local function lsp_buffer_keymaps(client, bufnr)
   buf_map('n', '<leader>ah', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_map('n', '<leader>ad', '<cmd>lua vim.diagnostic.setqflist()<CR>', opts)
   buf_map('n', '<leader>aD', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_map('n', '<leader>.',  '<cmd>lua require("hasan.telescope.custom").lsp_document_symbols()<cr>', opts)
 
   if vim.fn.has "nvim-0.6.0" == 1  then
     buf_map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)

@@ -1,6 +1,6 @@
 call hasan#formatoptions#setup()
 " Run js Code on node
-nnoremap <buffer><leader>bb :!node %<CR>
+" nnoremap <buffer><leader>bb :!node %<CR>
 
 nnoremap <buffer> <F4> :e %<.css<CR>
 """"""""""""""""""""""""""""""

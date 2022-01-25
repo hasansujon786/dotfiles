@@ -22,7 +22,9 @@ wk.setup {
 
 local common = {
   search_wiki_files = { ':lua require("hasan.telescope.custom").search_wiki_files()<CR>', 'Search org files'},
-  grep_org_text = { ':lua require("hasan.telescope.custom").grep_org_text()<CR>', 'Grep org text'},
+  grep_org_text = { ':lua require("hasan.telescope.custom").grep_org_text()<CR>',         'Grep org text'},
+  buffers_cwd = { '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>',         'Switch Project buffers' },
+  buffers_all = { '<cmd>lua require("hasan.telescope.custom").buffers(false)<CR>',        'Switch all buffers' },
 }
 
 local leader = {
@@ -39,7 +41,8 @@ local leader = {
 
   b = {
     name = '+buffer',
-    ['/'] = { ':Telescope buffers<CR>',                        'Search buffers' },
+    b = common.buffers_cwd,
+    B = common.buffers_all,
     f = { '<cmd>bfirst<CR>',                                   'First buffer' },
     l = { '<cmd>blast<CR>',                                    'Last buffer' },
     n = { '<cmd>bnext<CR>',                                    'Next buffer' },
@@ -263,7 +266,8 @@ local leader = {
   z = { 'za',                                             'Fold/Unfold' },
   m = { ':lua require("harpoon.mark").add_file()<CR>',    'Mark to Harpoon' },
 
-  ['.'] = 'Search document symbols',
+  ['.'] = common.buffers_cwd,
+  ['>'] = common.buffers_all,
   ['<space>'] = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find File in project' },
   ['<tab>'] = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', 'Open Harpoon' },
 
