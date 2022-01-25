@@ -3,18 +3,26 @@ let mapleader=<space>
 
 nnoremap q <esc>
 vnoremap q <esc>
-nnoremap <M-u> <C-u>
-nnoremap <M-d> <C-d>
+noremap gl gt
+noremap gh gT
+
 noremap <leader>y "+y
 noremap <leader>Y "+Y
 noremap <leader>ip "+p
 noremap <leader>iP "+P
+
+" In file navigation
+nnoremap <M-u> <C-u>
+nnoremap <M-d> <C-d>
+nnoremap <M-o> <C-d>
 
 " File managing
 nnoremap <leader>s :w<CR>
 vnoremap <leader>s :w<CR>
 nnoremap <leader><leader> :ShowOverlay overlay=goto show_files=true<CR>
 nnoremap <leader>op :Neovintageous action=toggle_side_bar<CR>
+
+" for resize windwos https://packagecontrol.io/packages/PanePane
 
 " window managing
 " Origami: https://packagecontrol.io/packages/Origami.
@@ -32,8 +40,7 @@ nnoremap <leader>wk <C-w>k
 nnoremap <leader>wl <C-w>l
 nnoremap <leader>ws <C-w>s
 nnoremap <leader>wv <C-w>v
-nnoremap <leader>. :ToggleZoomPane<CR>
-nnoremap <leader>, :ZoomPane<CR>
+nnoremap <Bar> :ToggleZoomPane<CR>
 
 " bookmarks
 " nnoremap <leader>m <C-f2>

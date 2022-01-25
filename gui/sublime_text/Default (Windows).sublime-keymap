@@ -1,41 +1,50 @@
 [
+  //////////// Neovintageous /////////////
   {
    "keys": ["j", "k"],
    "command": "nv_enter_normal_mode",
    "args": {"mode": "mode_insert"},
    "context": [{"key": "vi_insert_mode_aware"}]
-  },  
+  },
+  // Horizontal Scroll
+  { "keys": ["alt+l"], "command": "scroll_width", "args": {"amount": 30, "by_character": true} },
+  { "keys": ["alt+h"], "command": "scroll_width", "args": {"amount":-30, "by_character": true}},
+  // Overlay scroll
+  { "keys": ["ctrl+n"], "command": "move", "args": {"by": "lines", "forward": true}, "context": [{"key": "overlay_visible"}, {"key": "control", "operand": "overlay_control command_palette"}, {"key": "setting.vintageous_use_ctrl_keys"}]},
+  { "keys": ["ctrl+p"], "command": "move", "args": {"by": "lines", "forward": false}, "context": [{"key": "overlay_visible"}, {"key": "control", "operand": "overlay_control command_palette"}, {"key": "setting.vintageous_use_ctrl_keys"}]},
+  { "keys": ["ctrl+n"], "command": "move", "args": {"by": "lines", "forward": true}, "context": [{"key": "overlay_visible"}, {"key": "control", "operand": "overlay_control goto_file"}, {"key": "setting.vintageous_use_ctrl_keys"}]},
+  { "keys": ["ctrl+p"], "command": "move", "args": {"by": "lines", "forward": false}, "context": [{"key": "overlay_visible"}, {"key": "control", "operand": "overlay_control goto_file"}, {"key": "setting.vintageous_use_ctrl_keys"}]},
+  { "keys": ["ctrl+n"], "command": "move", "args": {"by": "lines", "forward": true}, "context": [{"key": "overlay_visible"}, {"key": "control", "operand": "overlay_control"}, {"key": "setting.vintageous_use_ctrl_keys"}]},
+  { "keys": ["ctrl+p"], "command": "move", "args": {"by": "lines", "forward": false}, "context": [{"key": "overlay_visible"}, {"key": "control", "operand": "overlay_control"}, {"key": "setting.vintageous_use_ctrl_keys"}]},
 
-  { "keys": ["ctrl+up"], "command": "scroll_lines", "args": {"amount": 3.0 } },
-  { "keys": ["ctrl+down"], "command": "scroll_lines", "args": {"amount": -3.0 } },
 
-  { "keys": ["alt+k"], "command": "swap_line_up" },
-  { "keys": ["alt+j"], "command": "swap_line_down" },
-  // Editor
+  //////////// Editor /////////////
+  { "keys": ["ctrl+shift+t"], "command": "switch_tabs" },
   { "keys": ["ctrl+b"], "command": "toggle_side_bar" },
   { "keys": ["ctrl+shift+w"], "command": "close_all" },
   { "keys": ["ctrl+shift+["], "command": "fold" },
   { "keys": ["ctrl+shift+]"], "command": "unfold" },
   { "keys": ["ctrl+f"], "command": "show_panel", "args": {"panel": "find", "reverse": false} },
+  { "keys": ["alt+k"], "command": "swap_line_up" },
+  { "keys": ["alt+j"], "command": "swap_line_down" },
+  // open setting
+  { "keys": ["ctrl+,"], "command": "edit_settings", "args": { "base_file": "${packages}/Default/Preferences.sublime-settings", "default": "// Settings in here override those in \"Default/Preferences.sublime-settings\",\n// and are overridden in turn by syntax-specific settings.\n{\n\t$0\n}\n" } },
   // { "keys": ["ctrl+shift+h"], "command": "show_panel", "args": {"panel": "find_in_files"} },
 
 
-  // js_pretier
-  { "keys": ["alt+shift+f"], "command": "js_prettier" },
-  {
-    // open setting
-    "keys": ["ctrl+,"],
-    "command": "edit_settings",
-    "args": {
-      "base_file": "${packages}/Default/Preferences.sublime-settings",
-      "default": "// Settings in here override those in \"Default/Preferences.sublime-settings\",\n// and are overridden in turn by syntax-specific settings.\n{\n\t$0\n}\n"
-    }
-  },
+
+  //////////// Plugins /////////////
   // AdvanceNewFile
-  { "keys": ["ctrl+n"], "command": "advanced_new_file_new"},
+  { "keys": ["ctrl+shift+n"], "command": "advanced_new_file_new"},
+
+
+
+
+
+  //////////// Advance Mappings /////////////
   {
     // leaper for sublime
-    "keys": ["tab"],
+    "keysl": ["tab"],
     "command": "move",
     "args": { "by": "characters", "forward": true },
     "context": [

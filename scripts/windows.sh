@@ -6,6 +6,7 @@
 choco install potplayer -y
 choco install 7zip.install -y
 choco install googlechrome -y
+choco install onefetch -y
 
 # choco install gimp -y
 # choco install vlc -y

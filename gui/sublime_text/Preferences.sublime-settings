@@ -14,7 +14,7 @@
 	"highlightedyank": true,
 	"highlightedyank_duration": 300,
 	"highlightedyank_style": "fill",
-	"hot_exit": false,
+	"hot_exit": true,
 	"line_padding_bottom": 1,
 	"line_padding_top": 2,
 	"margin": 0,
