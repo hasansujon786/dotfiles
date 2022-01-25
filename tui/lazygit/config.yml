@@ -26,9 +26,9 @@ keybinding:
     scrollDownMain-alt1: '}' # main panel scrool down
     nextScreenMode: 'O'
 notARepository: "skip" # one of: 'prompt' | 'create' | 'skip'
-# customCommands:
-#   - key: 'e'
-#     command: 'nvim {{.SelectedFile.Name}}'
-#     description: 'open in editor'
-#     context: 'files'
-#     subprocess: true
+customCommands:
+  - key: 'e'
+    command: 'nvim {{.SelectedFile.Name}}'
+    description: 'open in neovim'
+    context: 'files'
+    subprocess: true

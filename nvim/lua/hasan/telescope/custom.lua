@@ -311,7 +311,7 @@ function M.search_project_todos()
 end
 
 M.buffers = function (cwd_only)
-  builtin.buffers({cwd_only = cwd_only, sort_mru = true, ignore_current_buffer = true})
+  builtin.buffers({cwd_only = cwd_only, sort_mru = true, ignore_current_buffer = cwd_only})
 end
 
 return M
