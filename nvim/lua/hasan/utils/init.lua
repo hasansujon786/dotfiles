@@ -161,4 +161,60 @@ M.open_git_remote = function(openRoot)
   end
 end
 
+-- opts = utils.merge({
+--   timeout = 2000,
+-- }, opts or {})
+M.merge = function(...)
+  return vim.tbl_deep_extend('force', ...)
+end
+
+M.index_of = function(tbl, item)
+  for i, val in ipairs(tbl) do
+    if val == item then
+      return i
+    end
+  end
+end
+
+M.Logger = {}
+M.Logger.__index = M.Logger
+
+local function log(type, msg, opts)
+  local title = 'msg title'
+  local ok, notify = pcall(require, 'notify')
+  if ok then
+    notify(
+      msg,
+      type,
+      M.merge({
+        title = title,
+      }, opts)
+    )
+  else
+    if vim.tbl_islist(msg) then
+      -- regular vim.notify can't take tables of strings
+      local tmp_list = msg
+      msg = ''
+      for _, v in pairs(tmp_list) do
+        msg = msg .. v
+      end
+    end
+
+    vim.notify(msg, type)
+  end
+end
+
+function M.Logger:log(msg, opts)
+  log(vim.log.levels.INFO, msg, opts or {})
+end
+
+function M.Logger:warn(msg, opts)
+  log(vim.log.levels.WARN, msg, opts or {})
+end
+
+function M.Logger:error(msg, opts)
+  log(vim.log.levels.ERROR, msg, opts or {})
+end
+
+
 return M
