@@ -1,11 +1,14 @@
 local utils = require('hasan.utils')
 local Input = require("nui.input")
 local event = require("nui.utils.autocmd").event
+local Text = require('nui.text')
+local state = require('state')
 
 local M = {}
 
-M.input = function(title, options)
-  local width = string.len(options.default_value) + 10
+M.input = function(title, opts)
+  local widht = 25
+  local t_widht = opts.default_value and string.len(opts.default_value) or 25
 
   local popup_options = {
     relative = 'cursor',
@@ -13,22 +16,22 @@ M.input = function(title, options)
       row = 1,
       col = 0,
     },
-    size =  utils.get_default(options.size, width > 25 and width or 25) ,
+    size = utils.get_default(opts.size, t_widht > widht and t_widht or widht) ,
     border = {
-      style = 'rounded',
-      highlight = 'FloatBorder',
+      style = state.border.style,
+      highlight = state.border.highlight,
       text = {
-        top = title,
-        top_align = 'center',
+        top = Text(title, state.border.text.highlight),
+        top_align = state.border.text.align,
       },
     },
     win_options = {
-      -- winblend = 5,
-      winhighlight = 'Normal:Normal',
+      winblend = 5,
+      sidescrolloff = 0,
     },
   }
 
-  local input = Input(popup_options, options)
+  local input = Input(popup_options, opts)
   -- mount/open the component
   input:mount()
 
@@ -47,7 +50,6 @@ M.rename_current_file = function ()
   local currNameFileName = vim.fn.expand('%:t')
 
   M.input('Rename File', {
-    prompt = '> ',
     default_value = currNameFileName,
     on_submit = function(newName)
       if string.len(newName) > 0 then
