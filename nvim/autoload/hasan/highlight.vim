@@ -56,6 +56,10 @@ function hasan#highlight#load_custom_highlight() abort
   hi CmpItemAbbrMatch        guifg=#E5C07B
   hi! link CmpItemKindDefault Comment
   hi! link CmpItemMenu Comment
+
+  "/// marks.nvim ///"
+  hi! link MarkSignNumHL None
+  hi! link MarkSignHL Comment
 endfunction
 
 " call hasan#highlight#load_custom_highlight()

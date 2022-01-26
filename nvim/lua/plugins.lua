@@ -94,6 +94,7 @@ return require('packer').startup({
         require('config.floaterm')
       end
     })
+    use({ 'chentau/marks.nvim',opt=true,event='CursorHold',config=[[require('config.marks-config')]] })
     use({ 'hasansujon786/vim-rel-jump', opt = true, event = 'BufRead' })
     use({ 'dhruvasagar/vim-open-url', opt = true, event = 'BufRead' })
     use({ 'folke/which-key.nvim', config = function() require('config.whichkey') end })
