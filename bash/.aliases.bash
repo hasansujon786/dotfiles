@@ -127,6 +127,7 @@ alias fgrep='fgrep --color=auto'
 if test -n "$ZSH_VERSION"; then
   bindkey '^o' clear-screen
 else
+  bind '" ":"\e\C-e\C-v '
   bind  '"\el":shell-expand-line'
   # bind '\C-o:clear-screen'
   # bind  '"\eh":"foobar"'
