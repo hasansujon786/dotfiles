@@ -22,10 +22,7 @@ vnoremap <leader>s :w<CR>
 nnoremap <leader><leader> :ShowOverlay overlay=goto show_files=true<CR>
 nnoremap <leader>op :Neovintageous action=toggle_side_bar<CR>
 
-" for resize windwos https://packagecontrol.io/packages/PanePane
-
 " window managing
-" Origami: https://packagecontrol.io/packages/Origami.
 nnoremap <leader>h <C-w>h
 nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
@@ -40,7 +37,15 @@ nnoremap <leader>wk <C-w>k
 nnoremap <leader>wl <C-w>l
 nnoremap <leader>ws <C-w>s
 nnoremap <leader>wv <C-w>v
-nnoremap <Bar> :ToggleZoomPane<CR>
+nnoremap <Bslash> :ToggleZoomPane fraction=1<CR>
+nnoremap <Bar> <C-w>=
+
+nnoremap <A-.> :PanePaneResize dimension=width resize=increase<CR>
+nnoremap <A-,> :PanePaneResize dimension=width resize=decrease<CR>
+nnoremap <A-=> :PanePaneResize dimension=height resize=increase<CR>
+nnoremap <A--> :PanePaneResize dimension=height resize=decrease<CR>
+" :PanePaneResize dimension=width resize=equal<CR>
+" :PanePaneResize dimension=height resize=equal<CR>
 
 " bookmarks
 " nnoremap <leader>m <C-f2>
