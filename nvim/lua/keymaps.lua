@@ -108,10 +108,10 @@ maps.nnoremap('<A-->', ':resize -3<CR>')
 maps.nnoremap('<A-.>', ':vertical resize +5<CR>')
 maps.nnoremap('<A-,>', ':vertical resize -5<CR>')
 -- Zoom a vim pane
-maps.nnoremap('\\', ':ZenMode<CR>')
+maps.nnoremap('\\', ':ZoomToggle<CR>')
 maps.nnoremap('<Bar>', ':wincmd =<cr>')
-maps.nnoremap('<C-j>', '<C-i>')
 -- Jump between tabs
+maps.nnoremap('<C-j>', '<C-i>')
 maps.nnoremap('gl', 'gt')
 maps.nnoremap('gh', 'gT')
 maps.vnoremap('gl', 'gt')

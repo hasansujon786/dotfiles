@@ -21,7 +21,7 @@ return require('packer').startup({
       disable = true,
       config = function() require('config.indentLine') end
     })
-    use({ "lukas-reineke/indent-blankline.nvim",opt = true,event = 'BufRead',
+    use({ "lukas-reineke/indent-blankline.nvim",opt = true,event = 'VimEnter',
       config = function() require('config.indentLine-config') end
     })
     use({ 'norcalli/nvim-colorizer.lua', opt = true, event = 'CursorHold',
@@ -78,7 +78,10 @@ return require('packer').startup({
       end
     })
 
+    -- use({'tpope/vim-obsession'})
+    -- https://github.com/sindrets/winshift.nvim
     --> Utils --------------------------------------
+    use({ 'hasansujon786/vim-zoom', opt = true, cmd={'ZoomToggle'}, config='require("config.zoom-config")' })
     use({ 'MunifTanjim/nui.nvim' })
     use({ 'mg979/vim-visual-multi', opt = true, event = 'CursorHold' })
     use({ 'arthurxavierx/vim-caser', opt = true, event = 'CursorHold' })

@@ -41,6 +41,9 @@ local autocmds = {
   },
   Nebulous = {
     {'CursorHold * ++once lua require("nebulous").init(vim.g.bg_tranparent)'}
+  },
+  VimZoom = {
+    {'User ZoomPost lua ZoomPost()'}
   }
   -- {"BufEnter term://* setlocal nonumber norelativenumber"};
 }
