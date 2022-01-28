@@ -39,13 +39,11 @@ local autocmds = {
     {'BufWinEnter,WinEnter * let g:hasan_telescope_buffers[bufnr()] = reltimefloat(reltime())'},
     {'BufDelete * silent! call remove(g:hasan_telescope_buffers, expand("<abuf>"))'}
   },
-  Nebulous = {}
+  Nebulous = {
+    {'CursorHold * ++once lua require("nebulous").init(vim.g.bg_tranparent)'}
+  }
   -- {"BufEnter term://* setlocal nonumber norelativenumber"};
 }
-
-if not vim.g.bg_tranparent then
-  table.insert(autocmds.Nebulous, {{'CursorHold * ++once lua require("nebulous").active()'}})
-end
 
 utils.create_augroups(autocmds)
 

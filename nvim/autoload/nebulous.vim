@@ -20,23 +20,25 @@ function! nebulous#whichkey_hack(...) abort
   redrawstatus
 endfunction
 
-function! nebulous#onFocusWindow(winId) abort
+function! nebulous#onWinEnter(winId) abort
   call timer_start(50, funcref('nebulous#focus_cursor', [a:winId]))
 endfunction
 
-function! nebulous#focus_cursor(...) abort
-  if &filetype == 'floaterm' | return | endif
+let s:cursorline_focus_ft = 'list\|\<fern\>'
+let s:cursorline_disable_ft = 'dashboard\|floaterm'
+let s:cursorline_disable_bt = 'prompt'
 
-  if &filetype =~ 'list\|\<fern\>'
-    set winhighlight=CursorLine:CursorLineFocus
+function! nebulous#focus_cursor(...) abort
+  if &ft =~ s:cursorline_disable_ft || &buftype =~ s:cursorline_disable_bt
+    return 0
   endif
 
   if &filetype =~ 'org'
     setl winhighlight=Folded:TextInfo
   endif
-
-  if &buftype !~ 'prompt'
-    try | call nvim_win_set_option(a:000[0], 'cursorline', v:true) | catch | endtry
+  if &filetype =~ s:cursorline_focus_ft
+    set winhighlight=CursorLine:CursorLineFocus
   endif
+  try | call nvim_win_set_option(a:000[0], 'cursorline', v:true) | catch | endtry
 endfunction
 

@@ -5,12 +5,12 @@ M.toggle_bg_tranparent = function ()
 
   if not vim.g.bg_tranparent then
     vim.g.bg_tranparent = true
-    require('nebulous').disable()
+    require('nebulous').disable_win_blur()
     vim.cmd(string.format('hi Normal guibg=%s guifg=%s', 'None', normal.fg))
     vim.cmd[[silent !sed -i '01s/false/true/' ~/dotfiles/nvim/lua/state.lua]]
   else
     vim.g.bg_tranparent = false
-    require('nebulous').active()
+    require('nebulous').init()
     vim.cmd(string.format('hi Normal guibg=%s guifg=%s', normal.bg, normal.fg))
     vim.cmd[[silent !sed -i '01s/true/false/' ~/dotfiles/nvim/lua/state.lua]]
   end
