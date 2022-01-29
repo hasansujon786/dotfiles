@@ -15,6 +15,7 @@ local autocmds = {
     {'BufReadPost * call hasan#autocmd#restore_position()'},
     {'TermOpen * setfiletype terminal | set bufhidden=hide'},
     {'ColorScheme * call hasan#highlight#load_custom_highlight()'},
+    {'ColorScheme * lua require("hasan.utils.ui.highlights").apply_custom_hightlights()'},
 
     {'VimEnter * ++once runtime! autoload/netrw.vim'},
 
