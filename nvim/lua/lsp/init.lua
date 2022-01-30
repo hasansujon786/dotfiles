@@ -88,10 +88,10 @@ local function lsp_buffer_keymaps(client, bufnr)
   if filetype ~= 'lua' and filetype ~= 'vim' then
     buf_map('n', '<F9>', '<cmd>lua vim.lsp.buf.formatting_sync()<CR><cmd>update<CR>', opts)
   end
-  local cmp_keys = {'<C-q>', '<C-space>'}
-  for _, cmp_key in ipairs(cmp_keys) do
-    buf_map('n', cmp_key, ':Telescope lsp_code_actions theme=get_cursor<CR>', opts)
-    buf_map('v', cmp_key, ':Telescope lsp_range_code_actions theme=get_cursor<CR>', opts)
+  local code_action_keys = {'<C-q>', '<C-space>', '<leader>.'}
+  for _, action_key in ipairs(code_action_keys) do
+    buf_map('n', action_key, ':Telescope lsp_code_actions theme=get_cursor<CR>', opts)
+    buf_map('v', action_key, ':Telescope lsp_range_code_actions theme=get_cursor<CR>', opts)
   end
 
   buf_map('n', '<leader>fs', '<cmd>lua vim.lsp.buf.formatting_sync()<CR><cmd>update<CR>', opts)

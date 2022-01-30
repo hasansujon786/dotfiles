@@ -266,7 +266,7 @@ local leader = {
   z = { 'za',                                             'Fold/Unfold' },
   m = { ':lua require("harpoon.mark").add_file()<CR>',    'Mark to Harpoon' },
 
-  ['.'] = common.buffers_cwd,
+  -- ['.'] = common.buffers_cwd,
   ['>'] = common.buffers_all,
   ['<space>'] = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find File in project' },
   ['<tab>'] = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', 'Open Harpoon' },

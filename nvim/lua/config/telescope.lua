@@ -1,7 +1,21 @@
 local actions = require('telescope.actions')
 local local_action = require('hasan.telescope.local_action')
 
+local lsp_code_actions = {
+  attach_mappings = function(_, map)
+    map('i', '<tab>', actions.move_selection_next)
+    map('n', '<tab>', actions.move_selection_next)
+    map('i', '<S-tab>', actions.move_selection_previous)
+    map('n', '<S-tab>', actions.move_selection_previous)
+    return true
+  end,
+}
+
 require('telescope').setup{
+  pickers = {
+    lsp_code_actions = lsp_code_actions,
+    lsp_range_code_actions = lsp_code_actions,
+  },
   defaults = {
     scroll_strategy = 'cycle',
     selection_strategy = 'reset',
