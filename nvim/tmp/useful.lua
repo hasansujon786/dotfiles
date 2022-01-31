@@ -1,0 +1,36 @@
+-- This is your alacritty.yml
+-- 01 | # Window Customization
+-- 02 | window:
+-- 03 |   dimensions:
+-- 04 |     columns: 100
+-- 05 |     lines: 25
+-- 06 |   padding:
+-- 07 |     x: 20
+-- 08 |     y: 20
+-- 09 |   # decorations: none
+-- 10 |   dynamic_title: true
+-- 12 |   startup_mode: Windowed # Maximized Fullscreen
+-- 13 | background_opacity: 0.92
+
+-- function Sad(line_nr, from, to, fname)
+--   vim.cmd(string.format("silent !sed -i '%ss/%s/%s/' %s", line_nr, from, to, fname))
+-- end
+
+-- function IncreasePadding()
+--   foo('19', 0, 20, '~/dotfiles/alacritty/alacritty.windows.yml')
+--   foo('20', 0, 20, '~/dotfiles/alacritty/alacritty.windows.yml')
+-- end
+
+-- function DecreasePadding()
+--   Sad('19', 20, 0, '~/dotfiles/alacritty/alacritty.windows.yml')
+--   Sad('20', 20, 0, '~/dotfiles/alacritty/alacritty.windows.yml')
+-- end
+
+-- vim.cmd[[
+--   augroup ChangeAlacrittyPadding
+--    au!
+--    au VimEnter * lua DecreasePadding()
+--    au VimLeavePre * lua IncreasePadding()
+--   augroup END
+-- ]]
+

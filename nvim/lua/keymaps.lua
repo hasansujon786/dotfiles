@@ -141,7 +141,7 @@ maps.vnoremap('#', ':<C-u>call hasan#utils#visualSelection("", "")<CR>?<C-R>=@/<
 -- Type a replacement term and press . to repeat the replacement again. Useful
 -- for replacing a few instances of the term (alternative to multiple cursors).
 maps.nnoremap('c*', ":let @/='\\<'.expand('<cword>').'\\>'<CR>cgn")
-maps.xnoremap('c', '"cy:let @/=@c<CR>cgn')
+maps.xnoremap('C', '"cy:let @/=@c<CR>cgn')
 -- Delete & change all matches
 maps.nnoremap('dm', ':%s/<c-r>///g<CR>')
 maps.nnoremap('cm', ':%s/<c-r>///g<Left><Left>')
