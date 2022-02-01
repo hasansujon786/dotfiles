@@ -53,6 +53,7 @@ require('telescope').setup{
     -- `file_ignore_patterns = { "scratch/.*", "%.env" }`
     file_ignore_patterns = {
       "%.gitignore", "%.git/.*",
+      "4_archive/.*",
       "%.bin/.*", "%.bin%-win/.*", "%.system/.*",
       "android/.*", "ios/.*"
     },

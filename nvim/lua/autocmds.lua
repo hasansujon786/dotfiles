@@ -22,11 +22,11 @@ local autocmds = {
     -- {'WinEnter,BufWinEnter *.vim,*.js,*.lua call hasan#boot#highligt_ruler(1)'},
   },
   FileMarks = {
-    {'BufLeave *.html normal! mH'},
-    {'BufLeave *.js   normal! mJ'},
-    {'BufLeave *.ts   normal! mT'},
-    {'BufLeave *.vim  normal! mV'},
-    {'BufLeave *.css  normal! mC'},
+    -- {'BufLeave *.html normal! mH'},
+    -- {'BufLeave *.js   normal! mJ'},
+    -- {'BufLeave *.ts   normal! mT'},
+    -- {'BufLeave *.vim  normal! mV'},
+    -- {'BufLeave *.css  normal! mC'},
     {'BufLeave *.txt  normal! mK'},
   },
   Fold = {

@@ -1,3 +1,4 @@
+local utils = require('hasan.utils')
 local Popup = require('nui.popup')
 local Text = require('nui.text')
 local event = require('nui.utils.autocmd').event
@@ -13,6 +14,9 @@ local last_pop = nil
 local function get_title_text()
   local text = vim.fn.fnamemodify(api.nvim_buf_get_name(last_bufnr), ':t')
   return Text(text, 'FloatBorder')
+end
+local function is_org_float_win()
+  return utils.is_floting_window(0) and vim.bo.filetype == 'org'
 end
 local function remove_autocmds()
   print('removed autocmd')
@@ -93,17 +97,19 @@ M.open_org_float = function()
 end
 
 function OrgOnFileChange()
-  last_bufnr = api.nvim_buf_get_number(0)
-  last_pop.border:set_text('top', get_title_text(), 'center')
+  if is_org_float_win() then
+    last_bufnr = api.nvim_buf_get_number(0)
+    last_pop.border:set_text('top', get_title_text(), 'center')
 
-  opt.number = true
-  opt.relativenumber = true
-  opt.signcolumn='yes'
-  opt.numberwidth=2
+    opt.number = true
+    opt.relativenumber = true
+    opt.signcolumn='yes'
+    opt.numberwidth=2
+  end
 end
 
 M.toggle_org_float = function()
-  if vim.bo.filetype == 'org' then
+  if is_org_float_win() then
     -- pop:set_size({ width = 20, height = 20 })
     last_pop:unmount()
     remove_autocmds()

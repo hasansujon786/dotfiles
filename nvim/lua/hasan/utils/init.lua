@@ -22,6 +22,10 @@ M.if_nil = function(x, was_nil, was_not_nil)
   end
 end
 
+M.is_floting_window = function(winid)
+  return vim.api.nvim_win_get_config(winid).relative ~= ''
+end
+
 M.get_os = function()
 --[[
 Target OS names:
