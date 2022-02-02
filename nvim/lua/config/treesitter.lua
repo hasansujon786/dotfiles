@@ -1,3 +1,5 @@
+local utils = require('hasan.utils')
+
 require("nvim-treesitter.configs").setup {
   ensure_installed = { 'html', 'vim', 'css', 'javascript', 'typescript', 'tsx', 'json', 'lua', 'vue', 'dart', 'bash' },
   highlight = {
@@ -94,3 +96,27 @@ require("nvim-treesitter.configs").setup {
     -- }
   },
 }
+
+function Treesitter_foldexpr()
+  vim.defer_fn(function ()
+    vim.wo.foldlevel = 20
+    vim.wo.foldmethod = "expr"
+
+    if vim.bo.filetype == 'org' then
+      vim.wo.foldexpr = "OrgmodeFoldExpr()"
+      vim.cmd[[normal! zM]]
+    else
+      vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+    end
+  end, 50)
+end
+
+
+local treesitter_foldtext_filetypes = 'javascript,typescript,typescript.tsx,typescriptreact,json,lua,vue,org'
+local autocmds = {
+  TS_fold = {
+    {'FileType', treesitter_foldtext_filetypes, 'lua Treesitter_foldexpr()'},
+  }
+}
+
+utils.create_augroups(autocmds)

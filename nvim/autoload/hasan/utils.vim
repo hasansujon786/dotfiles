@@ -200,10 +200,6 @@ function! hasan#utils#foldtext() " {{{
 
   return line .' ['.foldedlinecount.'ℓ]'. repeat(" ",fillcharcount)
 endfunction
-
-function! hasan#utils#treesitter_fold(...)
-  setl foldexpr=nvim_treesitter#foldexpr()
-endfunction
 " }}}
 
 function! hasan#utils#get_visual_selection() "{{{

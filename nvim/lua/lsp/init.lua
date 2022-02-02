@@ -9,6 +9,7 @@ if vim.fn.has "nvim-0.6.0" == 1  then
   vim.diagnostic.config({
     virtual_text = true,
     signs = true,
+    underline = true,
     update_in_insert = true,
     severity_sort = true,
     float = {
@@ -41,12 +42,6 @@ else
     local hl = 'LspDiagnosticsSign' .. type
     vim.fn.sign_define(hl, { text = '', texthl = hl, numhl = hl })
   end
-  vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = false,
-    signs = false,
-    underline = true,
-    update_in_insert = true,
-  })
 end
 
 local function lsp_document_highlight(client)

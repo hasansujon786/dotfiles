@@ -1,5 +1,4 @@
 local utils = require('hasan.utils')
-local treesitter_foldtext_filetypes = 'javascript,typescript,typescript.tsx,typescriptreact,json,lua,vue'
 if vim.fn.exists('g:hasan_telescope_buffers') == 0 then
   vim.g.hasan_telescope_buffers = {['0']=0} -- hasan#utils#_buflisted_sorted()
 end
@@ -33,8 +32,6 @@ local autocmds = {
     {'FileType vim setlocal foldlevel=0'},
     {'FileType vim,css,scss,json setlocal foldmethod=marker'},
     {'FileType css,scss,json setlocal foldmarker={,}'},
-    {'FileType', treesitter_foldtext_filetypes, 'setl foldmethod=expr'},
-    {'FileType', treesitter_foldtext_filetypes, 'call timer_start(10, function("hasan#utils#treesitter_fold"))'}
   },
   Telescope = {
     {'BufWinEnter,WinEnter * let g:hasan_telescope_buffers[bufnr()] = reltimefloat(reltime())'},
