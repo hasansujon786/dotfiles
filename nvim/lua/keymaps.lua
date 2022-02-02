@@ -18,9 +18,6 @@ vim.cmd[[autocmd CmdwinEnter * nnoremap <buffer><CR> <CR>]]
 maps.nnoremap('ZZ', ':Quit!<CR>')
 -- Use Q to record macros
 maps.nnoremap('Q', 'q')
--- Fold
-maps.nmap('zm', 'zM')
-
 
 -- Copy Paste -----------------------------------
 -- Prevent selecting and pasting from overwriting what you originally copied.
@@ -75,6 +72,12 @@ maps.nmap('gx', '<Plug>(exchange-operator)')
 maps.vmap('gx', '<Plug>(exchange-operator)')
 maps.nmap('<P', '<Plug>(swap-parameter-prev):call repeat#set("\\<Plug>(swap-parameter-prev)")<CR>')
 maps.nmap('>P', '<Plug>(swap-parameter-next):call repeat#set("\\<Plug>(swap-parameter-next)")<CR>')
+-- Fold
+maps.nnoremap('zm', 'zM')
+maps.nnoremap('zo', 'zm')
+maps.nnoremap('zM', ':%foldclose<CR>')
+maps.nnoremap('<tab>', 'za')
+maps.nnoremap('<s-tab>', 'zA')
 
 -- Navigation -----------------------------------
 -- jump in file
@@ -116,13 +119,9 @@ maps.nnoremap('gl', 'gt')
 maps.nnoremap('gh', 'gT')
 maps.vnoremap('gl', 'gt')
 maps.vnoremap('gh', 'gT')
-maps.nnoremap('<tab>', 'gt')
-maps.nnoremap('<s-tab>', 'gT')
-maps.vnoremap('<tab>', 'gt')
-maps.vnoremap('<s-tab>', 'gT')
 -- Move tabs
-maps.nnoremap(']<TAB>', ':tabmove+<CR>')
-maps.nnoremap('[<TAB>', ':tabmove-<CR>')
+maps.nnoremap('gL', ':tabmove+<CR>')
+maps.nnoremap('gH', ':tabmove-<CR>')
 -- Quickfix list
 maps.nmap(']a', ':lnext<CR>')
 maps.nmap('[a', ':lprev<CR>')

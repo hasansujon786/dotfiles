@@ -130,10 +130,9 @@ opt.matchpairs:append({'<:>','«:»','｢:｣'})        -- Match angle brackets.
 opt.whichwrap:append('<,>,[,],h,l')               -- Allow left/right & h/l key to move to the previous/next line
 -- code folding settings
 opt.foldtext='hasan#utils#foldtext()'
-opt.foldlevelstart = 99
+opt.foldnestmax = 2                               -- maximum nesting of folds
+opt.foldlevelstart = 99                           -- Sets 'foldlevel' when starting to edit a buffer
 opt.foldenable = true                             -- don't fold by default
-opt.foldnestmax = 10                              -- deepest fold is 10 levels
-opt.foldlevel = 1
 -- Scroll aside
 opt.sidescroll=1
 opt.scrolloff=1                                   -- Set 1 lines to the cursor - when moving vertically using j/k

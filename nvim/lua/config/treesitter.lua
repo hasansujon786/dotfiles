@@ -99,12 +99,10 @@ require("nvim-treesitter.configs").setup {
 
 function Treesitter_foldexpr()
   vim.defer_fn(function ()
-    vim.wo.foldlevel = 20
     vim.wo.foldmethod = "expr"
 
     if vim.bo.filetype == 'org' then
       vim.wo.foldexpr = "OrgmodeFoldExpr()"
-      vim.cmd[[normal! zM]]
     else
       vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
     end
