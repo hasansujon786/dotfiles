@@ -51,17 +51,18 @@ alias scc2='scrcpy -s f8a8aa489804 --always-on-top'
 
 # handy short cuts #
 alias bashrc="vim ~/dotfiles/bash/.bashrc"
+alias ..='cd ..'
 alias c='cd'
+alias cs='cd'
+alias re='cd /e/repoes'
 alias to='touch'
 alias mk='mkdir -p'
 alias x='exit'
 # alias c='clear'
-alias ..='cd ..'
 alias h='history'
 alias o='explorer'
 alias open='explorer'
 alias du='du -h --max-depth=0 '
-alias re='cd /e/repoes'
 # Copy the PWD to the Clipboard
 alias cpd="pwd | tr -d '\n' | clip && echo 'pwd copied to clipboard'"
 # alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard'"

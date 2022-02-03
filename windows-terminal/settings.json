@@ -76,7 +76,6 @@
     { "keys": "ctrl+space",     "command": { "action": "sendInput", "input": "\u0011" } },
     { "keys": "ctrl+backspace", "command": { "action": "sendInput", "input": "\u0017" } },
     { "keys": "alt+enter",      "command": "toggleFullscreen" },
-    { "keys": "f11",            "command": "toggleFocusMode" },
     // Tab Management
     { "keys": "alt+`",          "command": "nextTab" },
     { "keys": "alt+shift+`",    "command": "prevTab" },

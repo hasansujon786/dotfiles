@@ -48,9 +48,9 @@ maps.vmap('<C-g>', '*<C-O>:%s///gn<CR>', {silent=false})
 -- A fix to select end of line
 maps.vnoremap('$', '$h')
 -- Select a block {} of code
-maps.vnoremap('ao', '<ESC>va{%V%')
-maps.nnoremap('yao', 'va{%V%y')
-maps.nnoremap('dao', 'va{%V%d')
+-- maps.vnoremap('ao', '<ESC>va{%V%')
+-- maps.nnoremap('yao', 'va{%V%y')
+-- maps.nnoremap('dao', 'va{%V%d')
 -- map . in visual mode
 maps.vnoremap('.', ':norm.<cr>')
 -- Keep selection when indenting/outdenting.

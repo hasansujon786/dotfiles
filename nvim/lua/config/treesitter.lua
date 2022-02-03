@@ -11,10 +11,10 @@ require("nvim-treesitter.configs").setup {
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = 'g<tab>', -- maps in normal mode to init the node/scope selection
+      init_selection = 'v<tab>', -- maps in normal mode to init the node/scope selection
       node_incremental = '<tab>', -- increment to the upper named parent
       node_decremental = '<s-tab>', -- decrement to the previous node
-      scope_incremental = 'gn', -- increment to the upper scope (as defined in locals.scm)
+      scope_incremental = 'g<tab>', -- increment to the upper scope (as defined in locals.scm)
     },
   },
   context_commentstring = { enable = true },
@@ -49,12 +49,18 @@ require("nvim-treesitter.configs").setup {
         -- You can use the capture groups defined in textobjects.scm
         ["af"] = "@function.outer",
         ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner",
+        ["iF"] = "@call.inner",
+        ["aF"] = "@call.outer",
         ["iP"] = "@parameter.inner",
         ["aP"] = "@parameter.outer",
-        ["ik"] = "@call.inner",
-        ["ak"] = "@call.outer",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+        ["ao"] = "@block.outer",
+        ["io"] = "@block.inner",
+        -- @conditional.inner
+        -- @conditional.outer
+        -- @loop.inner
+        -- @loop.outer
       },
     },
     swap = {
