@@ -2,7 +2,7 @@ local utils = require('hasan.utils')
 local Input = require("nui.input")
 local event = require("nui.utils.autocmd").event
 local Text = require('nui.text')
-local state = require('state')
+local ui = require('state').ui
 
 local M = {}
 
@@ -18,11 +18,11 @@ M.input = function(title, opts)
     },
     size = utils.get_default(opts.size, t_widht > widht and t_widht or widht) ,
     border = {
-      style = state.border.style,
-      highlight = state.border.highlight,
+      style = ui.border.style,
+      highlight = ui.border.highlight,
       text = {
-        top = Text(title, state.border.text.highlight),
-        top_align = state.border.text.align,
+        top = Text(title, ui.border.text.highlight),
+        top_align = ui.border.text.align,
       },
     },
     win_options = {

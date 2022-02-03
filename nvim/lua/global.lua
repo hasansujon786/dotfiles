@@ -1,3 +1,4 @@
+local ui = require('state').ui
 -- Global functions
 -- P = function(...)
 --   local objects = vim.tbl_map(vim.inspect, {...})
@@ -77,3 +78,13 @@ vim.g.gitgutter_sign_removed = '│'
 vim.g.gitgutter_sign_removed_first_line = '│'
 vim.g.gitgutter_sign_removed_above_and_below = '│'
 vim.g.gitgutter_sign_modified_removed = '│'
+vim.g.gitgutter_floating_window_options = {
+  relative = 'cursor',
+  row = 1,
+  col = 0,
+  width = 10,
+  height = vim.api.nvim_eval("&previewheight"),
+  style = 'minimal',
+  border = ui.border.style
+}
+

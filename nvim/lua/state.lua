@@ -1,13 +1,15 @@
 vim.g.bg_tranparent = false
 local M = {}
 
-M.border = {
-  style = 'rounded',
-  highlight = 'FloatBorder',
-  text = {
+M.ui = {
+  border = {
+    style = 'rounded',
     highlight = 'FloatBorder',
-    align = 'center',
-  },
+    text = {
+      highlight = 'FloatBorder',
+      align = 'center',
+    },
+  }
 }
 
 return M
