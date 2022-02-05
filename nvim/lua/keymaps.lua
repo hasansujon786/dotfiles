@@ -103,8 +103,8 @@ maps.vmap('<A-b>', '<C-b>')
 maps.vmap('<A-y>', '<C-y>')
 maps.vmap('<A-e>', '<C-e>')
 -- Horizontal scroll
-maps.nmap('<A-l>', '10zl')
-maps.nmap('<A-h>', '10zh')
+maps.nmap('<A-l>', '<ScrollWheelRight>')
+maps.nmap('<A-h>', '<ScrollWheelLeft>')
 -- Resize splits
 maps.nnoremap('<A-=>', ':resize +3<CR>')
 maps.nnoremap('<A-->', ':resize -3<CR>')
