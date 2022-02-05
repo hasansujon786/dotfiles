@@ -28,17 +28,11 @@ function CmpOrgmodeSetup()
   require('cmp').setup.buffer {
     enabled = true,
     sources = {
-      { name = 'spell' },
-      { name = 'vsnip' },
-      { name = 'buffer',
-        option = {
-          get_bufnrs = function()
-            return vim.api.nvim_list_bufs()
-          end,
-        },
-      },
-      { name = 'path' },
       { name = 'orgmode' },
+      { name = 'vsnip' },
+      { name = 'spell' },
+      { name = 'buffer'},
+      { name = 'path' },
     },
   }
 end

@@ -15,11 +15,10 @@ local function get_title_text()
   local text = vim.fn.fnamemodify(api.nvim_buf_get_name(last_bufnr), ':t')
   return Text(text, 'FloatBorder')
 end
-local function is_org_float_win()
+local function is_cur_win_org_float()
   return utils.is_floting_window(0) and vim.bo.filetype == 'org'
 end
 local function remove_autocmds()
-  print('removed autocmd')
   last_pop = nil
   vim.cmd[[
       augroup OpenOrg
@@ -97,7 +96,7 @@ M.open_org_float = function()
 end
 
 function OrgOnFileChange()
-  if is_org_float_win() then
+  if is_cur_win_org_float() then
     last_bufnr = api.nvim_buf_get_number(0)
     last_pop.border:set_text('top', get_title_text(), 'center')
 
@@ -109,7 +108,7 @@ function OrgOnFileChange()
 end
 
 M.toggle_org_float = function()
-  if is_org_float_win() then
+  if is_cur_win_org_float() or last_pop ~= nil  then
     -- pop:set_size({ width = 20, height = 20 })
     last_pop:unmount()
     remove_autocmds()
