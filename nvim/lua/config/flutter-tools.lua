@@ -1,3 +1,4 @@
+local ui = require('state').ui
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true;
 
@@ -29,7 +30,7 @@ require('flutter-tools').setup {
     }
   },
   ui = {
-    border = 'rounded',
+    border = ui.border.style,
   },
   debugger = {
     enabled = false,
