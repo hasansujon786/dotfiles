@@ -42,6 +42,7 @@ cmp.setup({
     minwidth = 60,
     maxheight = math.floor(vim.o.lines * 0.3),
     minheight = 1,
+    winhighlight = 'Normal:Normal,FloatBorder:FloatBorder',
   },
   experimental = {
     native_menu = false,
@@ -53,26 +54,29 @@ cmp.setup({
     end,
   },
   mapping = {
-    ['<A-u>'] = cmp.mapping.scroll_docs(-4),
-    ['<A-d>'] = cmp.mapping.scroll_docs(4),
+    ['<A-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+    ['<A-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
     ['<A-n>'] = cmp.mapping(function(_)
       if cmp.visible() then
         cmp.select_next_item()
       else
         cmp.complete()
       end
-    end, { 'i', 's' }),
-    ['<A-p>'] = cmp.mapping(function()
+    end, { 'i', 'c' }),
+    ['<A-p>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       else
-        feedkey('<ESC>p', '')
+        fallback()
       end
-    end, { 'i', 's' }),
+    end, { 'i', 'c' }),
     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-q>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping({
+      i = cmp.mapping.abort(),
+      c = cmp.mapping.close(),
+    }),
+    ["<c-space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    ["<C-q>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
     ['<C-l>'] = cmp.mapping(function(_)
       if has_words_before() and vim.fn['vsnip#jumpable'](1) == 1 then
         feedkey('<Plug>(vsnip-jump-next)', '')
@@ -109,14 +113,8 @@ cmp.setup({
   },
   sources = {
     { name = 'nvim_lsp' },
-    { name = 'buffer',
-      option = {
-        get_bufnrs = function()
-          return vim.api.nvim_list_bufs()
-        end,
-      },
-    },
     { name = 'vsnip' },
+    { name = 'buffer', keyword_length = 4 },
     { name = 'path' },
   },
   formatting = {
@@ -156,5 +154,14 @@ vim.cmd[[autocmd FileType NeogitCommitMessage lua CmpNeogitCommitMessageSetup()]
 
 --  inoremap <C-S> <Cmd>lua require('cmp').complete({ config = { sources = { { name = 'vsnip' } } } })<CR>
 -- vim.cmd[[xmap <C-l>   <Plug>(vsnip-cut-text)]]
+
+cmp.setup.cmdline('/', {
+  sources = {
+  { name = "buffer", keyword_length = 2 },
+  },
+  view = {
+    entries = { name = "wildmenu", separator = " | " }, -- the user can also specify the `wildmenu` literal string.
+  },
+})
 
 
