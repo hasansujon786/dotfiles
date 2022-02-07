@@ -34,3 +34,21 @@
 --   augroup END
 -- ]]
 
+
+Exemark = function()
+  local bufnr = vim.fn.bufnr()
+  local ns = vim.api.nvim_create_namespace("virttext_definition")
+  local line = "Text"
+  -- local line = "local line = lines[1]"
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local line_nr = cursor[1] - 2
+  vim.api.nvim_win_set_cursor(0, cursor)
+  vim.api.nvim_buf_set_extmark(
+    bufnr,
+    ns,
+    line_nr,
+    1,
+  { virt_lines = { { { line, "NormalFloat" } } } }
+    )
+end
+

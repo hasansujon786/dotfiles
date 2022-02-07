@@ -55,7 +55,7 @@ M.setup = function ()
       focusable = false,
       border = ui.border.style,
       source = false,
-      header = { ' Diagnostics:', 'DiagnosticHeader' },
+      header = { ' Diagnostics:', 'DiagnosticHeader' },
       prefix = function(diagnostic, i, total)
         local icon, highlight = M.diagnostic_icon_by_severity(diagnostic.severity)
         return i .. '/' .. total .. ' ' .. icon .. ' ', highlight
