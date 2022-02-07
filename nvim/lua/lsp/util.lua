@@ -13,8 +13,8 @@ M.install_essential_servers = function()
     'sumneko_lua',
   }
   local installing_servers = false
-  for _,  server_name in ipairs(essential_servers) do
-    local ok, server = require'nvim-lsp-installer.servers'.get_server(server_name)
+  for _, server_name in ipairs(essential_servers) do
+    local ok, server = require('nvim-lsp-installer.servers').get_server(server_name)
     if ok then
       if not server:is_installed() then
         server:install()
@@ -60,7 +60,9 @@ local function rename_handler(err, result, ctx, config)
     vim.fn.setqflist(entries, 'r')
   end
 
-  if err then vim.notify(('Error running lsp query "%s": %s'):format('textDocument/rename', err), vim.log.levels.ERROR) end
+  if err then
+    vim.notify(('Error running lsp query "%s": %s'):format('textDocument/rename', err), vim.log.levels.ERROR)
+  end
   if result and result.changes then
     -- notify_changes(result.changes)
     add_changes_to_quickfix(result.changes)
@@ -87,6 +89,24 @@ M.rename_with_quickfix = function()
       end
     end,
   })
+end
+
+function M.references_with_quickfix()
+  vim.fn['hasan#utils#feedkeys']('viwo<ESC>', 'n')
+
+  vim.defer_fn(function()
+    local cursor = vim.api.nvim_win_get_cursor(0)
+    local line_nr = cursor[1]
+    local col_nr = cursor[2] + 1
+    local bname = vim.fn.bufname()
+    bname = bname:gsub('\\', '\\\\')
+    vim.lsp.buf.references()
+    vim.defer_fn(function()
+      local search_cmd = string.format("call search('\\v%s')", bname .. '\\|' .. line_nr .. ' col ' .. col_nr)
+      vim.cmd(search_cmd)
+      vim.fn.setreg('z', search_cmd)
+    end, 200)
+  end, 20)
 end
 
 return M
