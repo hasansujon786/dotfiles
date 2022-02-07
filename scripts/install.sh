@@ -244,6 +244,9 @@ install_various_apps() {
   # c:\python39\python.exe -m pip install --upgrade pip
   # pip install --user --upgrade pynvim
 
+  util_print rust
+  $getter install -y rust
+
   # util_print taskwarrior
   # apt install taskwarrior
   # pip3 install tasklib

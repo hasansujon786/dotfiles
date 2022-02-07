@@ -86,14 +86,14 @@ M.on_attach = function(client, bufnr)
   lsp_buffer_keymaps(client, bufnr)
 
   if client.name == 'tsserver' then
-    -- lsp_tsserver_config(client, bufnr)
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
   end
-  -- lunarvim
-  -- vim.cmd 'command! -nargs=0 LspVirtualTextToggle lua require('lsp/virtual_text').toggle()'
   vim.cmd('command! -buffer Formate lua vim.lsp.buf.formatting()')
   vim.cmd('command! -buffer FormateSync lua vim.lsp.buf.formatting_sync()')
+  -- if client.resolved_capabilities.document_formatting then
+  --   vim.cmd[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
+  -- end
 end
 
 return M
