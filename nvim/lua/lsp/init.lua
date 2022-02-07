@@ -2,8 +2,14 @@ local M = {}
 local ui = require('state').ui
 
 require('lsp.diagnosgic').setup()
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = ui.border.style })
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = ui.border.style })
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+  vim.lsp.handlers.hover,
+  { border = ui.border.style }
+)
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+  vim.lsp.handlers.signature_help,
+  { border = ui.border.style }
+)
 
 local function lsp_document_highlight(client)
   -- Set autocommands conditional on server_capabilities
@@ -33,9 +39,11 @@ local function lsp_buffer_keymaps(client, bufnr)
   buf_map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_map('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_map('n', 'gY', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_map('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   buf_map('n', 'gI', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_map('n', 'gp', '<cmd>lua require"lsp.peek".Peek("definition")<CR>', opts)
+  buf_map('n', 'gpd', '<cmd>lua require"lsp.peek".PeekDefinition()<CR>', opts)
+  buf_map('n', 'gpy', '<cmd>lua require"lsp.peek".PeekTypeDefinition()<CR>', opts)
+  buf_map('n', 'gpI', '<cmd>lua require"lsp.peek".PeekImplementation()<CR>', opts)
   buf_map('n', 'g.', '<cmd>lua require("hasan.telescope.custom").lsp_document_symbols()<cr>', opts)
 
   buf_map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
