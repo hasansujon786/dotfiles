@@ -9,6 +9,9 @@ M.ui = {
       highlight = 'FloatBorder',
       align = 'center',
     },
+  },
+  icons = {
+    diagnotic = { Error = '', Warn = '', Hint = '', Info = '' }
   }
 }
 

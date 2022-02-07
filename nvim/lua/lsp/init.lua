@@ -1,48 +1,9 @@
 local M = {}
+local ui = require('state').ui
 
-local borderStyle = 'rounded' -- none, single, double, shadow
-
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = borderStyle })
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderStyle })
-
-if vim.fn.has "nvim-0.6.0" == 1  then
-  vim.diagnostic.config({
-    virtual_text = true,
-    signs = true,
-    underline = true,
-    update_in_insert = true,
-    severity_sort = true,
-    float = {
-      focusable = false,
-      close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
-      border = borderStyle,
-      source = 'always',  -- show source in diagnostic popup window
-      -- prefix = ' '
-    }
-  })
-
-  local signs = { Error = '', Warn = '', Hint = '', Info = '' }
-  for type, _ in pairs(signs) do
-    local hl = 'DiagnosticSign' .. type
-    vim.fn.sign_define(hl, {
-      text = '', -- disable diagnostic icon for gitsign
-      texthl = hl,
-      numhl = hl,
-    })
-  end
-else
-  vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = true,
-    signs = true,
-    underline = true,
-    update_in_insert = true,
-  })
-  local signs = { Error = '', Warning = '', Hint = '', Information = '' }
-  for type, _ in pairs(signs) do
-    local hl = 'LspDiagnosticsSign' .. type
-    vim.fn.sign_define(hl, { text = '', texthl = hl, numhl = hl })
-  end
-end
+require('lsp.diagnosgic').setup()
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = ui.border.style })
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = ui.border.style })
 
 local function lsp_document_highlight(client)
   -- Set autocommands conditional on server_capabilities
@@ -99,8 +60,8 @@ local function lsp_buffer_keymaps(client, bufnr)
   buf_map('n', '<leader>aD', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 
   if vim.fn.has "nvim-0.6.0" == 1  then
-    buf_map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-    buf_map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+    buf_map('n', '[d', '<cmd>lua require("lsp.diagnosgic").jump_to_diagnostic("prev")<CR>', opts)
+    buf_map('n', ']d', '<cmd>lua require("lsp.diagnosgic").jump_to_diagnostic("next")<CR>', opts)
     buf_map('n', '<leader>al', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   else
     buf_map('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = "double"}})<CR>', opts)
