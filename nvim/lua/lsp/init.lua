@@ -66,6 +66,7 @@ local function lsp_buffer_keymaps(client, bufnr)
   buf_map('n', '<leader>ah', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_map('n', '<leader>ad', '<cmd>lua vim.diagnostic.setqflist()<CR>', opts)
   buf_map('n', '<leader>aD', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_map('n', '<leader>ai', '<cmd>lua require("lsp.workspace").ts_organize_imports_sync()<CR>', opts)
 
   if vim.fn.has "nvim-0.6.0" == 1  then
     buf_map('n', '[d', '<cmd>lua require("lsp.diagnosgic").jump_to_diagnostic("prev")<CR>', opts)
