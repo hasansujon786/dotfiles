@@ -30,6 +30,7 @@ function hasan#highlight#load_custom_highlight() abort
   hi LspReferenceText  guibg=#3B4048 gui=NONE
   hi LspReferenceWrite guibg=#3B4048 gui=NONE
   hi LspReferenceRead  guibg=#3B4048 gui=NONE
+  hi DiagnosticHeader  guifg=#56b6c2 gui=bold
 
   "/// Plugins ///"
   hi IndentBlanklineChar guifg=#3B4048
@@ -52,10 +53,28 @@ function hasan#highlight#load_custom_highlight() abort
   hi! link TelescopePromptBorder  TelescopeBorder
 
   "/// nvim-cmp ///"
-  hi CmpItemAbbrMatchFuzzy   guifg=#E5C07B gui=underline
-  hi CmpItemAbbrMatch        guifg=#E5C07B
-  hi! link CmpItemKindDefault Comment
+  hi CmpItemAbbrMatchFuzzy   guifg=#d99a5e gui=underline,bold
+  hi CmpItemAbbrMatch        guifg=#d99a5e
+  "
   hi! link CmpItemMenu Comment
+  hi! CmpItemAbbrDeprecated guifg=#808080 gui=strikethrough
+  "
+  hi! CmpItemKindFunction   guifg=#ca72e4
+  hi! CmpItemKindMethod     guifg=#ca72e4
+  "
+  hi! CmpItemKindVariable   guifg=#5ab0f6
+  hi! link CmpItemKindField     CmpItemKindVariable
+  hi! link CmpItemKindInterface CmpItemKindVariable
+  "
+  hi! CmpItemKindClass      guifg=#ebc275
+  hi! link CmpItemKindEvent CmpItemKindClass
+  hi! link CmpItemKindEnum  CmpItemKindClass
+  hi! link CmpItemKindValue CmpItemKindClass
+  "
+  hi! CmpItemKindKeyword    guifg=#D4D4D4
+  hi! CmpItemKindProperty   guifg=#D4D4D4
+  hi! CmpItemKindUnit       guifg=#D4D4D4
+  hi! CmpItemKindText       guifg=#9CDCFE
 
   "/// marks.nvim ///"
   hi! link MarkSignNumHL None

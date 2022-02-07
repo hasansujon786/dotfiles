@@ -52,3 +52,11 @@ Exemark = function()
     )
 end
 
+-- local pos = nvim.win_get_cursor(0)
+-- local line = nvim.buf_get_lines(0, pos[1] - 1, pos[1], false)[1]
+-- local _, start = line:find("^%s+")
+-- nvim.win_set_cursor(0, {pos[1], start})
+
+
+-- Telescope lsp_workspace_symbols query=profiles
+-- Telescope lsp_dynamic_workspace_symbols
