@@ -34,7 +34,7 @@ maps.nnoremap('X', '"_X')
 maps.xnoremap('x', '"_x')
 maps.xnoremap('X', '"_X')
 -- Paste from + register (system clipboard)
-maps.inoremap('<C-v>',' <C-R>+')
+maps.inoremap('<C-v>', '<C-R>+')
 maps.cnoremap('<C-v>', '<C-R>+')
 -- Paste the last item from register
 maps.cnoremap('<A-p>', '<C-R>"')
