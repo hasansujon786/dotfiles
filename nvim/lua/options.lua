@@ -63,7 +63,7 @@ opt.showcmd = true                                -- shows size of visual select
 opt.showmode = false                              -- don't show mode as lightline already does
 opt.modeline = false
 opt.modelines=0
-opt.fillchars={eob=' ',vert= '░'}                 -- Suppress ~ at EndOfBuffer
+opt.fillchars={eob=' ',vert= '▒'}                 -- Suppress ~ at EndOfBuffer
 opt.belloff = "all" -- Just turn the dang bell off
 opt.guifont=u.is_windows() and 'FiraCode NF:h14' or 'FiraCode Nerd Font Mono:h13'
 opt.guicursor='n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175'
