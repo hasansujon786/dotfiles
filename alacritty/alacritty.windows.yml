@@ -30,9 +30,9 @@ font:
     family: FiraCode NF
     style: Medium
   bold:
-    family: FiraCode Nerd Font Mono
+    family: FiraCode NF
   italic:
-    family: FiraCode Nerd Font Mono
+    family: FiraCode NF
   size: 13
   offset:
     x: 0
