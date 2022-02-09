@@ -16,10 +16,9 @@ require('orgmode').setup({
   org_hide_emphasis_markers = true,
   org_todo_keywords = {'TODO','NEXT','WORKING','WAITING', '|', 'DONE','CANCELED'},
   org_agenda_templates = {
-    f = {
-      description = 'FileMark',
-      template = '* %?\n  %a',
-      target = '~/vimwiki/5_inbox/file-mark.org'
+    m = {
+      description = 'Mark file',
+      template = '* TODO %?\n  %a',
     },
   }
 })
