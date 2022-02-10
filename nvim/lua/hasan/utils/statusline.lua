@@ -60,7 +60,7 @@ M.harpoon = {
 M.spell = {
   use_mode_hl = true,
   toggle = function ()
-    return vim.fn.getbufvar(vim.api.nvim_get_current_buf(), '&spell') == 1
+    return vim.api.nvim_win_get_option(0, 'spell')
   end,
   fn = [[%"]]
 }
@@ -75,9 +75,9 @@ M.readonly = {
 M.wrap = {
   use_mode_hl = true,
   toggle = function ()
-    return vim.fn.getbufvar(vim.api.nvim_get_current_buf(), '&wrap') == 1
+    return vim.api.nvim_win_get_option(0, 'wrap')
   end,
-  fn = [[%"wrap]]
+  fn = [[%"w]]
 }
 
 M.task_timer = {

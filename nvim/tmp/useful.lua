@@ -60,3 +60,37 @@ end
 
 -- Telescope lsp_workspace_symbols query=profiles
 -- Telescope lsp_dynamic_workspace_symbols
+
+Edit_macro = function()
+  local register = 'i'
+
+  local opts = {default = vim.g.edit_macro_last or ''}
+
+  if opts.default == '' then
+    opts.prompt = 'Create Macro'
+  else
+    opts.prompt = 'Edit Macro'
+  end
+
+  vim.ui.input(opts, function(value)
+    if value == nil then return end
+
+    local macro = vim.fn.escape(value, '"')
+    vim.cmd(string.format('let @%s="%s"', register, macro))
+
+    vim.g.edit_macro_last = value
+  end)
+end
+
+require("harpoon").setup({
+  mark_branch = true,
+  projects = {
+    ["$HOME/Developer/your-project"] = {
+      term = {
+        cmds = {
+          "docker exec -it web bash",
+        }
+      }
+    }
+  }
+})

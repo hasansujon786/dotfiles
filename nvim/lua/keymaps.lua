@@ -46,7 +46,7 @@ maps.xnoremap('-', 'g<C-x>')
 -- Print the number of occurrences of the current word under the cursor
 maps.vmap('<C-g>', '*<C-O>:%s///gn<CR>', {silent=false})
 -- A fix to select end of line
-maps.vnoremap('$', '$h')
+maps.xnoremap('$', 'g_')
 -- Select a block {} of code
 -- maps.vnoremap('ao', '<ESC>va{%V%')
 -- maps.nnoremap('yao', 'va{%V%y')
