@@ -41,6 +41,7 @@ unset color_prompt force_color_prompt
 
 [ -f ~/dotfiles/bash/.aliases.bash ] && source ~/dotfiles/bash/.aliases.bash
 [ -f ~/dotfiles/bash/.env ] && source ~/dotfiles/bash/.env
+[ -f ~/dotfiles/bash/z.sh ] && source ~/dotfiles/bash/z.sh
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

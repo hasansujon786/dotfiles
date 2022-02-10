@@ -58,6 +58,7 @@ alias re='cd /e/repoes'
 alias to='touch'
 alias mk='mkdir -p'
 alias x='exit'
+alias e='z'
 # alias c='clear'
 alias h='history'
 alias o='explorer'
@@ -101,7 +102,6 @@ alias glo='git log --oneline --decorate'
 alias lg='lazygit'
 
 # termux
-alias e='cd ~/storage/external-1'
 alias ex='cd ~/storage/external-1'
 
 # kill port
@@ -129,11 +129,12 @@ if test -n "$ZSH_VERSION"; then
   bindkey '^o' clear-screen
 else
   bind '" ":"\e\C-e\C-v '
-  bind  '"\el":shell-expand-line'
+  bind '"\el":clear-screen'
+  # bind '"\el":shell-expand-line'
   # bind '\C-o:clear-screen'
-  # bind  '"\eh":"foobar"'
-  # bind  '"\e[24~":"foobar"'
-  # bind  '"\ed":kill-word'
+  # bind '"\eh":"foobar"'
+  # bind '"\e[24~":"foobar"'
+  # bind '"\ed":kill-word'
 fi
 
 # unix
