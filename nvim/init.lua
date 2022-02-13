@@ -5,14 +5,14 @@
  ----------------------------------------------------------------------
   -------------------------------------------------------------------
 
-local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 local is_installed = vim.fn.isdirectory(install_path) == 1
 
 if not is_installed then
-  if vim.fn.input("Install packer.nvim?") == "y" then
-    vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd 'packadd packer.nvim'
-    print(" Installed packer.nvim.")
+  if vim.fn.input('Install packer.nvim?') == 'y' then
+    vim.fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
+    vim.cmd('packadd packer.nvim')
+    print(' Installed packer.nvim.')
     require('plugins')
     require('packer').sync()
     is_installed = 1
@@ -30,4 +30,3 @@ if is_installed then
 end
 -- nodejs.install
 -- https://cj.rs/blog/tips/nvim-plugin-development/
-

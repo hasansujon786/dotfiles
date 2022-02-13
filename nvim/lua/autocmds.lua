@@ -32,6 +32,7 @@ local autocmds = {
     {'FileType vim setlocal foldlevel=0'},
     {'FileType vim,css,scss,json setlocal foldmethod=marker'},
     {'FileType css,scss,json setlocal foldmarker={,}'},
+    {'FileType dart setlocal commentstring=//\\ %s'}
   },
   Telescope = {
     {'BufWinEnter,WinEnter * let g:hasan_telescope_buffers[bufnr()] = reltimefloat(reltime())'},
