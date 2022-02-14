@@ -1,0 +1,32 @@
+# Move the directory to the second line
+format = "$time$all$directory$character"
+add_newline = false
+[line_break]
+disabled = false
+[character]
+success_symbol = "[](bold white)"
+error_symbol = "[](bold red)"
+vicmd_symbol = "[](bold green)"
+
+[memory_usage]
+symbol = " "
+format = "[$symbol$ram_pct]($style) "
+threshold = 50
+style = "bold dimmed white"
+disabled = false
+
+[time]
+time_format = "%I:%M:%S"
+format = '[\[$time\]]($style) '
+use_12hr = true
+disabled = false
+style = "bold purple"
+
+[git_branch]
+symbol = " "
+format = "[$symbol$branch]($style) "
+style = "bold yellow"
+
+[directory]
+use_os_path_sep = false
+truncation_symbol = "…/"

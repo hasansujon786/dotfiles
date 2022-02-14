@@ -51,14 +51,15 @@ alias scc2='scrcpy -s f8a8aa489804 --always-on-top'
 
 # handy short cuts #
 alias bashrc="vim ~/dotfiles/bash/.bashrc"
+alias -- -='cd -'
 alias ..='cd ..'
-alias c='cd'
 alias cs='cd'
 alias re='cd /e/repoes'
 alias to='touch'
 alias mk='mkdir -p'
 alias x='exit'
 alias e='z'
+alias c='clear && pwd && ls'
 # alias c='clear'
 alias h='history'
 alias o='explorer'

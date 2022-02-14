@@ -102,6 +102,7 @@ setup_bash() {
   bashPath=($HOME/.bashrc $HOME/.bashrc $HOME/.bashrc)
   util_print bash
 
+  $getter install -y starship
   util_backUpConfig ${bashPath[$machineCode]}
   util_makeSymlinkPath $HOME/dotfiles/bash/.bashrc ${bashPath[$machineCode]}
 }
