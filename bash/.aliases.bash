@@ -90,6 +90,7 @@ alias grget='git remote get-url origin'
 alias gpr='hub pull-request'
 alias gci='hub issue create'
 
+alias -- --=jump-to-git-root
 alias g='git'
 alias gs='git show'
 alias gt='git tag'
@@ -166,6 +167,30 @@ open_alacritty() {
 open_bash() {
   start bash
 }
+
+jump-to-git-root() {
+  local _root_dir="$(git rev-parse --show-toplevel 2>/dev/null)"
+  if [[ $_root_dir == "" ]]; then
+    >&2 echo 'Not a Git repo!'
+    return 0
+  fi
+  local _pwd=$(pwd -W)
+  if [[ $_pwd = $_root_dir ]]; then
+    # Handle submodules:
+    # If parent dir is also managed under Git then we are in a submodule.
+    # If so, cd to nearest Git parent project.
+    _root_dir="$(git -C $(dirname $_pwd) rev-parse --show-toplevel 2>/dev/null)"
+    if [[ $? -gt 0 ]]; then
+      echo "Already at Git repo root."
+      return 0
+    fi
+  fi
+  # Make `cd -` work.
+  OLDPWD=$_pwd
+  echo "Git repo root: $_root_dir"
+  cd $_root_dir
+}
+
 
 # bindkey -s '^t' 'open_alacritty\o'  # CTRL-T in terminal calls for open_alacritty function
 # windows
