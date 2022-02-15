@@ -19,22 +19,23 @@ HISTFILESIZE=2000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-  xterm-color|*-256color) color_prompt=yes;;
-esac
+# # set a fancy prompt (non-color, unless we know we "want" color)
+# case "$TERM" in
+#   xterm-color|*-256color) color_prompt=yes;;
+# esac
 
-if [ "$color_prompt" = yes ]; then
-  PS1='\[\033]0;$TITLEPREFIX:$PWD\007\]\n\[\033[32m\]\u@\h \[\033[35m\][\T] \[\033[33m\]\w\[\033[36m\]`__git_ps1`\[\033[0m\]\n$ '
-fi
-unset color_prompt
+# if [ "$color_prompt" = yes ]; then
+#   PS1='\[\033]0;$TITLEPREFIX:$PWD\007\]\n\[\033[32m\]\u@\h \[\033[35m\][\T] \[\033[33m\]\w\[\033[36m\]`__git_ps1`\[\033[0m\]\n$ '
+# fi
+# unset color_prompt
 
-[ -f ~/dotfiles/bash/.aliases.bash ] && source ~/dotfiles/bash/.aliases.bash
-[ -f ~/dotfiles/bash/.env ] && source ~/dotfiles/bash/.env
-[ -f ~/dotfiles/bash/z.sh ] && source ~/dotfiles/bash/z.sh
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -f ~/dotfiles/bash/z.sh ] && source ~/dotfiles/bash/z.sh
+[ -f ~/dotfiles/bash/.fzf.sh ] && source ~/dotfiles/bash/.fzf.sh
+[ -f ~/dotfiles/bash/.aliases.bash ] && source ~/dotfiles/bash/.aliases.bash
+[ -f ~/dotfiles/bash/.env ] && source ~/dotfiles/bash/.env
 
 function set_win_title(){
   echo -ne "\033]0; $(basename "$PWD") \007"

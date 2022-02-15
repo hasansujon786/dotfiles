@@ -16,7 +16,7 @@ style = "bold dimmed white"
 disabled = false
 
 [time]
-time_format = "%I:%M:%S"
+time_format = "%I:%M:%S∣%d,%b"
 format = '[\[$time\]]($style) '
 use_12hr = true
 disabled = false

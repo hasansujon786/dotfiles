@@ -103,6 +103,7 @@ setup_bash() {
   util_print bash
 
   $getter install -y starship
+  $getter install -y fzf
   util_backUpConfig ${bashPath[$machineCode]}
   util_makeSymlinkPath $HOME/dotfiles/bash/.bashrc ${bashPath[$machineCode]}
 }
