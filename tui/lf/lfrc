@@ -21,6 +21,10 @@ set ignorecase true
 cmd mkdir %{{ mkdir }}
 cmd touch %{{ touch }}
 cmd doc $lf -doc | less
+cmd fzf_jump ${{
+  $res="$(fd --hidden --type directory --exclude '.git' | fzf --header='Jump to location')"
+  lf -remote "send $id cd $res"
+}}
 
 # ---------------------------------------------------------------------------
 # - Bindings                                                                -
@@ -54,10 +58,11 @@ map <c-v> paste
 map <c-x> cut
 map <c-c> copy
 map <c-r> $vimv $fx
-map <esc> clear
+map C clear
 
 map <a-d> half-down
 map <a-u> half-up
+map <a-m> fzf_jump
 
 # Archive bindings
 map Zu %{{ unzip $Env:f }}
