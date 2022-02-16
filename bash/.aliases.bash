@@ -132,6 +132,7 @@ if test -n "$ZSH_VERSION"; then
 else
   bind '" ":"\e\C-e\C-v '
   bind '"\el":clear-screen'
+  bind '"\eo":"lfcd\C-m"'
   # bind '"\el":shell-expand-line'
   # bind '\C-o:clear-screen'
   # bind '"\eh":"foobar"'
@@ -191,9 +192,16 @@ jump-to-git-root() {
   cd $_root_dir
 }
 
-
-# bindkey -s '^t' 'open_alacritty\o'  # CTRL-T in terminal calls for open_alacritty function
-# windows
-# bind -x '"\C-t\C-t":"open_alacritty"'
-# bind -x '"\C-tq":"open_bash"'
-
+lfcd () {
+  tmp="$(mktemp)"
+  lf -last-dir-path="$tmp" "$@"
+  if [ -f "$tmp" ]; then
+    dir="$(cat "$tmp")"
+    rm -f "$tmp"
+    if [ -d "$dir" ]; then
+      if [ "$dir" != "$(pwd)" ]; then
+        cd "$dir"
+      fi
+    fi
+  fi
+}
