@@ -25,3 +25,4 @@ map ZZ !{{ bash -c 'cd $(fzf)' }}
 
 $current_directory = (pwd).path
 $current_directory = pwd
+lf -remote 'send reload'

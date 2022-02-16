@@ -35,18 +35,18 @@ map d reload
 map p reload
 map c reload
 map r reload
-map x $$Env:f
-map X !$Env:f
 
 ######## Basic Functions ########
 map I set hidden!
+map F filter
 map H top
 map L bottom
 map e $nvim $Env:f
 map w $bash
 map W $powershell
 map i $less $Env:f
-map O $explorer $Env:f
+map o $explorer $Env:f
+map O %{{ explorer $(dirname $Env:f) }}
 
 map A push :mkdir<space>
 map a push :touch<space>
@@ -79,7 +79,7 @@ map .d cd D:\\
 map .e cd E:\\
 map .. cd ~/Desktop
 
-map g. cd ~/Desktop
+map g. cd ~/dotfiles
 map gd cd ~/Downloads
 map gp cd ~/Pictures
 map gv cd ~/Videos
