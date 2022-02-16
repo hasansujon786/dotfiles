@@ -1,5 +1,7 @@
 https://github.com/BrodieRobertson/dotfiles/blob/master/config/lf/lfrc
 
+https://git.alex.balgavy.eu/dotfiles/file/lf/lfrc.html
+
 $ => execute shell commands
   ex: map i $less %f%
 
@@ -20,3 +22,6 @@ cmd edit_config :{{
 
 # map ZZ !{{ bash --login -i -c 'ls' }}
 map ZZ !{{ bash -c 'cd $(fzf)' }}
+
+$current_directory = (pwd).path
+$current_directory = pwd

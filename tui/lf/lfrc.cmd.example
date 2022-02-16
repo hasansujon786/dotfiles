@@ -1,5 +1,5 @@
 # Basic Settings
-set shell powershell
+set shell cmd        # interpreter for shell commands
 set preview true     # set previewer ~/.config/lf/pv.sh
 set drawbox true
 set icons true
@@ -18,8 +18,8 @@ set ignorecase true
 # ---------------------------------------------------------------------------
 # - Custom commands                                                         -
 # ---------------------------------------------------------------------------
-cmd mkdir %{{ mkdir }}
-cmd touch %{{ touch }}
+cmd mkdir %mkdir
+cmd touch %touch %f%
 cmd doc $lf -doc | less
 
 # ---------------------------------------------------------------------------
@@ -31,18 +31,17 @@ map d reload
 map p reload
 map c reload
 map r reload
-map x $$Env:f
-map X !$Env:f
+map x $%f%
+map X !%f%
 
 ######## Basic Functions ########
 map I set hidden!
 map H top
 map L bottom
-map e $nvim $Env:f
+map e $nvim %f%
 map w $bash
-map W $powershell
-map i $less $Env:f
-map O $explorer $Env:f
+map i $less %f%
+map o $explorer %f%
 
 map A push :mkdir<space>
 map a push :touch<space>
@@ -60,7 +59,7 @@ map <a-d> half-down
 map <a-u> half-up
 
 # Archive bindings
-map Zu %{{ unzip $Env:f }}
+map Zu ${{ unzip %f% }}
 # *.tar.gz) tar -xzvf "$f" ;;
 # *.tar.bz2) tar -xjvf "$f" ;;
 # *.tar) tar -xvf "$f" ;;
