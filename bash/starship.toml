@@ -13,7 +13,7 @@ symbol = " "
 format = "[$symbol$ram_pct]($style) "
 threshold = 50
 style = "bold dimmed white"
-disabled = false
+disabled = true
 
 [time]
 time_format = "%I:%M:%S∣%d,%b"

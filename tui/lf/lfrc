@@ -58,6 +58,12 @@ map <esc> clear
 map <a-d> half-down
 map <a-u> half-up
 
+# Archive bindings
+map Zu ${{ unzip %f% }}
+# *.tar.gz) tar -xzvf "$f" ;;
+# *.tar.bz2) tar -xjvf "$f" ;;
+# *.tar) tar -xvf "$f" ;;
+
 # ---------------------------------------------------------------------------
 # - Navigation Shortcut                                                     -
 # ---------------------------------------------------------------------------
