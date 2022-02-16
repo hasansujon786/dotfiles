@@ -65,6 +65,7 @@ alias h='history'
 alias o='explorer'
 alias open='explorer'
 alias du='du -h --max-depth=0 '
+alias lf='lfcd'
 # Copy the PWD to the Clipboard
 alias cpd="pwd | tr -d '\n' | clip && echo 'pwd copied to clipboard'"
 # alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard'"
@@ -194,7 +195,7 @@ jump-to-git-root() {
 
 lfcd () {
   tmp="$(mktemp)"
-  lf -last-dir-path="$tmp" "$@"
+  \lf -last-dir-path="$tmp" "$@"
   if [ -f "$tmp" ]; then
     dir="$(cat "$tmp")"
     rm -f "$tmp"

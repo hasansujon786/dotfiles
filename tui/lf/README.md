@@ -7,9 +7,9 @@ $ => execute shell commands
 
 # Command definitions
 the prefix shows what kind of command it is
+!: runs as interactive shell command (puts lf in the bg)
 $: runs as shell command
 %: runs as piped shell command (stdout => statusline)
-!: runs as interactive shell command (puts lf in the bg)
 :: runs as lf command
 
 map ZZ !{{ echo %SHELL% }}

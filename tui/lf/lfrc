@@ -23,7 +23,22 @@ cmd touch %{{ touch }}
 cmd doc $lf -doc | less
 cmd fzf_jump ${{
   $res="$(fd --hidden --type directory --exclude '.git' | fzf --header='Jump to location')"
-  lf -remote "send $id cd $res"
+  if($res -ne "") {
+    lf -remote "send $id cd $res"
+  }
+}}
+cmd jump-to-git-root %{{
+  $_root_dir="$(git rev-parse --show-toplevel)"
+  if($_root_dir -eq "") {
+    return lf -remote "send echo 'Not a Git repo!'"
+  }
+  $_pwd=$(pwd)
+  $pattern = '[\\/]'
+  $_pwd = $_pwd -replace $pattern, '/'
+  if($_root_dir -eq $_pwd) {
+    return lf -remote "send echo 'Already at Git repo root.'"
+  }
+  lf -remote "send $id cd $_root_dir"
 }}
 
 # ---------------------------------------------------------------------------
@@ -47,6 +62,7 @@ map W $powershell
 map i $less $Env:f
 map o $explorer $Env:f
 map O %{{ explorer $(dirname $Env:f) }}
+map -- jump-to-git-root
 
 map A push :mkdir<space>
 map a push :touch<space>
