@@ -323,6 +323,7 @@ auto_install_everything() {
   if [[ "$machine" == "windows" ]]; then
     setup_windowsTerminal
     setup_keypirinha
+    $getter install -y quicklook
     # setup_sublime
   elif [[ "$machine" == "linux" ]]; then
     install_and_setup_tmux

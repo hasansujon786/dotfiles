@@ -22,7 +22,7 @@ cmd mkdir %{{ mkdir }}
 cmd touch %{{ touch }}
 cmd doc $lf -doc | less
 cmd fzf_jump ${{
-  $res="$(fd --hidden --type directory --exclude '.git' | fzf --header='Jump to location')"
+  $res="$(fd --hidden --type directory --exclude '.git' | fzf --header='Jump to location' --preview 'ls {}')"
   if($res -ne "") {
     lf -remote "send $id cd $res"
   }
@@ -63,6 +63,10 @@ map i $less $Env:f
 map o open
 map O $explorer $Env:f
 map E %{{ explorer $(dirname $Env:f) }}
+map v :{{
+  toggle
+  down
+}}
 
 map a push :touch<space>
 map A push :mkdir<space>
@@ -74,6 +78,7 @@ map <c-x> cut
 map <c-c> copy
 map <c-r> $vimv $fx
 map C clear
+map <space> $C:\\Users\\hasan\\AppData\\Local\\Programs\\QuickLook\\QuickLook.exe $Env:f
 
 map <a-d> half-down
 map <a-u> half-up
