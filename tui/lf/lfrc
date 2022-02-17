@@ -60,13 +60,12 @@ map e $nvim $Env:f
 map w $bash
 map W $powershell
 map i $less $Env:f
-map o $explorer $Env:f
-map O %{{ explorer $(dirname $Env:f) }}
-map -- jump-to-git-root
+map o open
+map O $explorer $Env:f
+map E %{{ explorer $(dirname $Env:f) }}
 
-map A push :mkdir<space>
 map a push :touch<space>
-
+map A push :mkdir<space>
 map <enter> shell
 map <delete> delete
 map <f-2> rename
@@ -79,6 +78,7 @@ map C clear
 map <a-d> half-down
 map <a-u> half-up
 map <a-m> fzf_jump
+map -- jump-to-git-root
 
 # Archive bindings
 map Zu %{{ unzip $Env:f }}
