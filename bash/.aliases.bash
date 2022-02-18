@@ -131,14 +131,6 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
-if test -n "$ZSH_VERSION"; then
-  bindkey '^o' clear-screen
-else
-  bind '"\eo":"lfcd\C-m"'
-  bind '"\eq":shell-expand-line'
-  bind '" ":"\eq\C-v "'
-fi
-
 # unix
 alias le='less -j4'
 alias chex='chmod +x'
@@ -157,16 +149,6 @@ alias hx='hexdump -C'
 alias k9='kill -9'
 alias k15='kill -s 15'
 alias w1='watch -n 1'
-
-
-open_alacritty() {
-  start alacritty --working-directory $(pwd)
-  # nohup alacritty --working-directory $(pwd) </dev/null &>/dev/null &
-}
-
-open_bash() {
-  start bash
-}
 
 jump-to-git-root() {
   local _root_dir="$(git rev-parse --show-toplevel 2>/dev/null)"
@@ -204,3 +186,9 @@ lfcd () {
     fi
   fi
 }
+
+bind '"\C-x\C-x":edit-and-execute-command'
+bind '"\eo":"lfcd\C-m"'
+bind '"\el":clear-screen'
+bind '"\eq":alias-expand-line'
+bind '" ":"\eq\C-v "'

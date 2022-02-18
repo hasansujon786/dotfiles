@@ -31,3 +31,14 @@ bind -x '"\el":globalias'
 
 # # normal space during searches
 # bindkey -M isearch " " magic-space
+
+open_alacritty() {
+  start alacritty --working-directory $(pwd)
+  # nohup alacritty --working-directory $(pwd) </dev/null &>/dev/null &
+}
+
+open_bash() {
+  start bash
+}
+
+-- "$SECONDS"
