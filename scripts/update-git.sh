@@ -1,5 +1,4 @@
-#!/bin/bash
-##!/bin/sh
+#!/bin/sh
 
 sudo add-apt-repository -y ppa:git-core/ppa
 sudo apt-get update

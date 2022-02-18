@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # https://www.reddit.com/r/elementaryos/comments/p40rm5/using_kde_connect_on_elementary_os_6_odin/
 
 # wingpanel dependencies

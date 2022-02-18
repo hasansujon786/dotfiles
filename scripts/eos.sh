@@ -1,5 +1,5 @@
-#!/bin/bash
-##!/bin/sh
+#!/bin/sh
+
 sudo apt update
 sudo apt install -y software-properties-common
 sudo add-apt-repository -y ppa:philip.scott/pantheon-tweaks

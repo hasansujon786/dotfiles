@@ -1,5 +1,4 @@
-#!/bin/bash
-##!/bin/sh
+#!/bin/sh
 
 set -e
 
@@ -248,6 +247,8 @@ install_various_apps() {
 
   util_print rust
   $getter install -y rust
+  # cargo install --list
+  # cargo install stylua vimv
 
   # util_print taskwarrior
   # apt install taskwarrior

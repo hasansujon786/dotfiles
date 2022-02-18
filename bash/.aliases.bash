@@ -40,7 +40,9 @@ alias inre='react-native run-android --variant=release'
 
 # Flutter
 alias flr='flutter run'
-alias flc='flutter clean'
+alias fll='flutter clean'
+alias flc='flutter create'
+alias fls='flutter create -t skeleton'
 
 #adb
 alias acc='adb connect 192.168.31.252'
@@ -90,6 +92,7 @@ alias gsts='git stash save'
 alias grget='git remote get-url origin'
 alias gpr='hub pull-request'
 alias gci='hub issue create'
+alias gm2m='git branch -m master main'
 
 alias -- --=jump-to-git-root
 alias g='git'
@@ -131,14 +134,9 @@ alias fgrep='fgrep --color=auto'
 if test -n "$ZSH_VERSION"; then
   bindkey '^o' clear-screen
 else
-  bind '" ":"\e\C-e\C-v '
-  bind '"\el":clear-screen'
   bind '"\eo":"lfcd\C-m"'
-  # bind '"\el":shell-expand-line'
-  # bind '\C-o:clear-screen'
-  # bind '"\eh":"foobar"'
-  # bind '"\e[24~":"foobar"'
-  # bind '"\ed":kill-word'
+  bind '"\eq":shell-expand-line'
+  bind '" ":"\eq\C-v "'
 fi
 
 # unix
