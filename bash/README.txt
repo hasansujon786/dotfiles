@@ -1,3 +1,5 @@
+https://phoenixnap.com/kb/change-bash-prompt-linux
+
 # bind '\C-o:clear-screen'
 # bind '"\eh":"foobar"'
 # bind '"\e[24~":"foobar"'
