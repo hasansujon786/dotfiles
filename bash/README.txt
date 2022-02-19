@@ -5,9 +5,15 @@ https://phoenixnap.com/kb/change-bash-prompt-linux
 # bind '"\e[24~":"foobar"'
 # bind '"\ed":kill-word'
 
+git-branch-name() {
+  git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3-
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
 project_dir () {
   git_parent=`dirname $(git rev-parse --show-toplevel 2>/dev/null)`
   printf `pwd -W | sed -E -e "s|$git_parent|…|"`
+  sub_terr=$(git rev-parse --show-prefix)
   # if [ $branch ]; then printf "\[\033[0;36m\]%s " $(project_dir); else printf "\[\033[0;36m\]\w "; fi
 }
 

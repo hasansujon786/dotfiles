@@ -19,30 +19,6 @@ HISTFILESIZE=2000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-  xterm-color|*-256color) color_prompt=yes;;
-esac
-
-git-branch-name() {
-  git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3-
-}
-
-dir-and-git-branch() {
-  local branch=`git-branch-name`
-  printf "\[\033[0;36m\]\w "
-  if [ $branch ]; then printf "\[\033[1;33m\] %s " $branch; fi
-}
-
-re-prompt() {
-  PS1="\n\[\033[35m\][\T∣\d] $(dir-and-git-branch)\n \`if [ \$? = 0 ]; then echo \[\e[0m\]; else echo \[\e[31m\]; fi\`\[\033[0m\] "
-}
-
-if [ "$color_prompt" = yes ]; then
-  PROMPT_COMMAND=re-prompt
-fi
-unset color_prompt
-
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -51,3 +27,10 @@ export NVM_DIR="$HOME/.config/nvm"
 [ -f ~/dotfiles/bash/.aliases.bash ] && source ~/dotfiles/bash/.aliases.bash
 [ -f ~/dotfiles/bash/.env ] && source ~/dotfiles/bash/.env
 
+
+function set_win_title(){
+  echo -ne "\033]0; $(basename "$PWD") \007"
+}
+starship_precmd_user_func="set_win_title"
+export STARSHIP_CONFIG=~/dotfiles/bash/starship.toml
+eval "$(starship init bash)"
