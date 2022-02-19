@@ -30,12 +30,12 @@ git-branch-name() {
 
 dir-and-git-branch() {
   local branch=`git-branch-name`
-  if [ $branch ]; then printf "\[\033[0;36m\]…/\W "; else printf "\[\033[0;36m\]\w "; fi
+  printf "\[\033[0;36m\]\w "
   if [ $branch ]; then printf "\[\033[1;33m\] %s " $branch; fi
 }
 
 re-prompt() {
-  PS1="\[\033[35m\][\T∣\d] $(dir-and-git-branch)\n \`if [ \$? = 0 ]; then echo \[\e[0m\]; else echo \[\e[31m\]; fi\`\[\033[0m\] "
+  PS1="\n\[\033[35m\][\T∣\d] $(dir-and-git-branch)\n \`if [ \$? = 0 ]; then echo \[\e[0m\]; else echo \[\e[31m\]; fi\`\[\033[0m\] "
 }
 
 if [ "$color_prompt" = yes ]; then
