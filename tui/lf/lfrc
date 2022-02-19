@@ -62,7 +62,6 @@ map r reload
 
 ######## Basic Functions ########
 map I set hidden!
-map F filter
 map H top
 map L bottom
 map e $nvim $Env:f
@@ -72,6 +71,7 @@ map i $less $Env:f
 map o open
 map O %explorer $Env:f
 map E %{{ explorer $(dirname $Env:f) }}
+map <space> %C:\\Users\\hasan\\AppData\\Local\\Programs\\QuickLook\\QuickLook.exe $Env:f
 map v :{{
   toggle
   down
@@ -88,13 +88,14 @@ map <c-x> cut
 map <c-c> copy
 map <c-r> bulk-rename
 map C clear
-map <space> %C:\\Users\\hasan\\AppData\\Local\\Programs\\QuickLook\\QuickLook.exe $Env:f
 
 map <a-d> half-down
 map <a-u> half-up
 map <a-m> fzf_jump
 map -- jump-to-git-root
 
+map <esc> setfilter
+map zf filter
 map z. $du -h -d1 | less
 # Archive bindings
 map Zu %{{ unzip $Env:f }}
