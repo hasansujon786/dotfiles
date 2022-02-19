@@ -45,7 +45,6 @@ local function lsp_buffer_keymaps(client, bufnr)
   buf_map('n', 'gpd', '<cmd>lua require"lsp.peek".PeekDefinition()<CR>', opts)
   buf_map('n', 'gpy', '<cmd>lua require"lsp.peek".PeekTypeDefinition()<CR>', opts)
   buf_map('n', 'gpI', '<cmd>lua require"lsp.peek".PeekImplementation()<CR>', opts)
-  buf_map('n', 'g.', '<cmd>lua require("hasan.telescope.custom").lsp_document_symbols()<cr>', opts)
 
   buf_map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_map('n', '<F2>', '<cmd>lua require("lsp.util").rename_with_quickfix()<CR>', opts)
@@ -53,12 +52,13 @@ local function lsp_buffer_keymaps(client, bufnr)
   if filetype ~= 'lua' and filetype ~= 'vim' then
     buf_map('n', '<F9>', '<cmd>lua vim.lsp.buf.formatting_sync()<CR><cmd>update<CR>', opts)
   end
-  local code_action_keys = {'<C-q>', '<C-space>', '<leader>.'}
+  local code_action_keys = {'<C-q>', '<C-space>', '<A-space>'}
   for _, action_key in ipairs(code_action_keys) do
     buf_map('n', action_key, ':Telescope lsp_code_actions theme=get_cursor<CR>', opts)
     buf_map('v', action_key, ':Telescope lsp_range_code_actions theme=get_cursor<CR>', opts)
   end
 
+  buf_map('n', '<leader>.',  '<cmd>lua require("hasan.telescope.custom").lsp_document_symbols()<cr>', opts)
   buf_map('n', '<leader>fs', '<cmd>lua vim.lsp.buf.formatting_sync()<CR><cmd>update<CR>', opts)
   buf_map('x', '<leader>fs', '<ESC><cmd>lua vim.lsp.buf.range_formatting()<CR><cmd>update<CR>', opts)
   buf_map('n', '<leader>a+', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)

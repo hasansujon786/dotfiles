@@ -76,6 +76,7 @@ cmp.setup({
       c = cmp.mapping.close(),
     }),
     ["<c-space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    ['<M-space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     ["<C-q>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
     ['<C-l>'] = cmp.mapping(function(_)
       if has_words_before() and vim.fn['vsnip#jumpable'](1) == 1 then
@@ -92,7 +93,7 @@ cmp.setup({
       if cmp.visible() and vim.fn['vsnip#available']() == 1 then
         cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
       elseif cmp.visible() then
-        cmp.confirm({ behavior = cmp.ConfirmBehavior.Select, select = true })
+        cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
       elseif has_words_before() and vim.fn['vsnip#available']() == 1 then
         feedkey('<Plug>(vsnip-expand-or-jump)', '')
       elseif vim.fn['hasan#compe#check_front_char']() then

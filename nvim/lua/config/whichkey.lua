@@ -108,8 +108,8 @@ local leader = {
   f = {
     name = '+file',
     -- File Command
-    d = { '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', 'Find directory' },
-    b = { '<cmd>lua require("hasan.telescope.custom").file_browser()<cr>',          'File browser' },
+    b = { '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', 'Browse file directory' },
+    d = { '<cmd>lua require("hasan.telescope.custom").file_browser()<cr>',          'Browser project files' },
     f = { '<cmd>lua require("hasan.telescope.custom").file_files()<cr>',            'Find file' },
     F = { '<cmd>lua require("hasan.telescope.custom").file_files("cur_dir")<cr>',   'Find file from here' },
 
@@ -292,7 +292,11 @@ local leader_visual = {
   f = {
     name = '+file',
     ['.'] = {':lua require("hasan.utils.ui").substitute_word(true)<CR>','Substitute word'},
-  }
+  },
+  ['/'] = {
+    name = '+search',
+    s = { ':lua require("hasan.telescope.custom").grep_string(true)<CR>',         'Grep string' },
+  },
 }
 
 wk.register(leader, { prefix = '<leader>' })

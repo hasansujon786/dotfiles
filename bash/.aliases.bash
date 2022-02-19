@@ -187,8 +187,8 @@ lfcd () {
   fi
 }
 
-bind '"\C-x\C-x":edit-and-execute-command'
 bind '"\eo":"lfcd\C-m"'
 bind '"\el":clear-screen'
+bind '"\e\ ":magic-space'
 bind '"\eq":alias-expand-line'
 bind '" ":"\eq\C-v "'
