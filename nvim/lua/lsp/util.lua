@@ -1,4 +1,5 @@
 local M = {}
+local api = vim.api
 
 M.install_essential_servers = function()
   local essential_servers = {
@@ -47,7 +48,7 @@ local function rename_handler(err, result, ctx, config)
         local bufnr = vim.uri_to_bufnr(uri)
         for _, edit in ipairs(edits) do
           local start_line = edit.range.start.line + 1
-          local line = vim.api.nvim_buf_get_lines(bufnr, start_line - 1, start_line, false)[1]
+          local line = api.nvim_buf_get_lines(bufnr, start_line - 1, start_line, false)[1]
           table.insert(entries, {
             bufnr = bufnr,
             lnum = start_line,
@@ -92,19 +93,21 @@ M.rename_with_quickfix = function()
 end
 
 function M.references_with_quickfix()
+  local valid_fmt = '%s │%5d:%-3d│'
+  local search_fmt = "call search('%s')"
   vim.fn['hasan#utils#feedkeys']('viwo<ESC>', 'n')
 
   vim.defer_fn(function()
-    local cursor = vim.api.nvim_win_get_cursor(0)
+    local cursor = api.nvim_win_get_cursor(0)
     local line_nr = cursor[1]
     local col_nr = cursor[2] + 1
-    local bname = vim.fn.bufname()
-    bname = bname:gsub('\\', '\\\\')
+    local fname = require('hasan.utils.ui.qf').valid_qf_fname(api.nvim_get_current_buf())
+    fname = fname:gsub('\\', '\\\\')
+
     vim.lsp.buf.references()
     vim.defer_fn(function()
-      local search_cmd = string.format("call search('\\v%s')", bname .. '\\|' .. line_nr .. ' col ' .. col_nr)
+      local search_cmd = search_fmt:format(valid_fmt:format(fname, line_nr, col_nr))
       vim.cmd(search_cmd)
-      vim.fn.setreg('z', search_cmd)
     end, 200)
   end, 20)
 end
