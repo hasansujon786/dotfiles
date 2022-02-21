@@ -111,8 +111,10 @@ alias lg='lazygit'
 alias ex='cd ~/storage/external-1'
 
 # kill port
-alias fipid='netstat -ano | findstr'
-alias kipid='taskkill /PID'
+alias fip='tasklist | findstr'
+alias kip='taskkill //PID'
+alias kin='taskkill //F //IM'
+alias kijv='taskkill //F //IM "java.exe"'
 
 ## Colorize the ls output ##
 alias ls='ls --color=auto'
