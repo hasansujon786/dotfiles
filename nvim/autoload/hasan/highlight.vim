@@ -3,7 +3,9 @@ function hasan#highlight#load_custom_highlight() abort
   hi TextInfo           guifg=#56B6C2 guibg=NONE
   hi TextSuccess        guifg=#61AFEF
   hi Cursor             guibg=#61AFEF gui=NONE
-  hi VertSplit          guifg=#4D5666 guibg=#363d49
+  hi VertSplit          guibg=#384051 guifg=#384051
+  hi! link StatusLine   VertSplit
+  hi! link StatusLineNC VertSplit
   hi CursorColumn       guibg=#3B4048
   hi CursorLineFocus    guibg=#3E4452
   hi IncSearch          guibg=#e86671 gui=underline
@@ -84,3 +86,4 @@ endfunction
 " call hasan#highlight#load_custom_highlight()
 " hi VertSplit          guifg=#4D5666 guibg=#363d49
 " hi VertSplit          guifg=#181a1f guibg=NONE
+" hi Nebulous guibg=#363d49 -- ori

@@ -46,7 +46,7 @@ end
 
 M.setup_colors = function()
   vim.cmd[[
-    hi Nebulous guibg=#363d49
+    hi Nebulous guibg=#323c4e
     hi NebulousCursorLineNr guifg=#4B5263
     hi EndOfBuffer guibg=NONE
   ]]
