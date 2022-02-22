@@ -4,8 +4,8 @@ function hasan#highlight#load_custom_highlight() abort
   hi TextSuccess        guifg=#61AFEF
   hi Cursor             guibg=#61AFEF gui=NONE
   hi VertSplit          guibg=#384051 guifg=#384051
-  hi! link StatusLine   VertSplit
-  hi! link StatusLineNC VertSplit
+  hi StatusLine         guibg=#384051 guifg=#ABB2BF
+  hi StatusLineNC       guibg=#384051 guifg=#ABB2BF
   hi CursorColumn       guibg=#3B4048
   hi CursorLineFocus    guibg=#3E4452
   hi IncSearch          guibg=#e86671 gui=underline
