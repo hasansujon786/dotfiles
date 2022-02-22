@@ -545,5 +545,26 @@
       "Navigator.restorablePushNamed(context, ${1:RouteView.routeName});"
     ],
     "description": "Navigator.restorablePushNamed"
+  },
+  "Theme.of": {
+    "prefix": "to",
+    "body": [
+      "Theme.of(context)"
+    ],
+    "description": "Theme.of(context)"
+  },
+  "texttheme": {
+    "prefix": "tot",
+    "body": [
+      "Theme.of(context).textTheme"
+    ],
+    "description": "textTheme"
+  },
+  "route_args": {
+    "prefix": "rarg",
+    "body": [
+      "final args = ModalRoute.of(context)!.settings.arguments as Map<String, String?>;"
+    ],
+    "description": "Access route arguments"
   }
 }

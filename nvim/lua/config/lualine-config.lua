@@ -1,9 +1,29 @@
 local sl = require('hasan.utils.statusline')
 
 local onedark = require('lualine.themes.onedark')
--- onedark.normal.b.bg = '#68707E'
 onedark.normal.c.fg = '#68707E'
+onedark.inactive.c.bg = '#384051'
 local only_pad_right = { left = 1, right = 0 }
+
+local filename = function(file_status)
+  return {
+    'filename',
+    file_status = file_status,
+    path = 0,
+    shorting_target = 40,
+    symbols = {
+      modified = '*',
+      readonly = '-',
+      unnamed = '[No Name]',
+    },
+  }
+end
+local filetype = {
+  'filetype',
+  colored = true,
+  icon_only = true,
+  padding = { left = 1, right = 0 },
+}
 
 require('lualine').setup({
   options = {
@@ -13,20 +33,7 @@ require('lualine').setup({
   },
   sections = {
     lualine_a = { { 'mode', separator = { left = '' }, right_padding = 2 } },
-    lualine_b = {
-      { 'filetype', colored = true, icon_only = true, padding = { left = 1, right = 0 } },
-      {
-        'filename',
-        file_status = false,
-        path = 0,
-        shorting_target = 40,
-        symbols = {
-          modified = '[+]',
-          readonly = '[-]',
-          unnamed = '[No Name]',
-        },
-      },
-    },
+    lualine_b = { filetype, filename(false) },
     lualine_c = {},
     lualine_x = {
       sl.lsp_status.fn,
@@ -47,7 +54,7 @@ require('lualine').setup({
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = { 'filename' },
+    lualine_c = { filename(true) },
     lualine_x = { 'progress' },
     lualine_y = {},
     lualine_z = {},
