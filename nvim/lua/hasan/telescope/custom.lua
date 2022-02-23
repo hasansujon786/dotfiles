@@ -116,13 +116,6 @@ function M.curbuf(isVisual)
   builtin.current_buffer_fuzzy_find(opts)
 end
 
-function M.lsp_document_symbols()
-  local opts = {
-    previewer = false,
-  }
-  builtin.lsp_document_symbols(themes.get_dropdown(opts))
-end
-
 function M.search_wiki_files()
   builtin.find_files({
     results_title = 'Wiki files',

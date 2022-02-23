@@ -58,7 +58,7 @@ local function lsp_buffer_keymaps(client, bufnr)
     buf_map('v', action_key, ':Telescope lsp_range_code_actions theme=get_cursor<CR>', opts)
   end
 
-  buf_map('n', '<leader>.',  '<cmd>lua require("hasan.telescope.custom").lsp_document_symbols()<cr>', opts)
+  buf_map('n', '<leader>.',  '<cmd>Telescope lsp_document_symbols<cr>', opts)
   buf_map('n', '<leader>fs', '<cmd>lua vim.lsp.buf.formatting_sync()<CR><cmd>update<CR>', opts)
   buf_map('x', '<leader>fs', '<ESC><cmd>lua vim.lsp.buf.range_formatting()<CR><cmd>update<CR>', opts)
   buf_map('n', '<leader>a+', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)

@@ -11,16 +11,20 @@ local lsp_code_actions = {
   end,
 }
 
-require('telescope').setup{
+require('telescope').setup({
   pickers = {
     lsp_code_actions = lsp_code_actions,
     lsp_range_code_actions = lsp_code_actions,
+    lsp_document_symbols = {
+      theme = 'dropdown',
+      previewer = false,
+    },
   },
   defaults = {
     scroll_strategy = 'cycle',
     selection_strategy = 'reset',
-    file_sorter = require'telescope.sorters'.get_fzy_sorter,
-    generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
+    file_sorter = require('telescope.sorters').get_fzy_sorter,
+    generic_sorter = require('telescope.sorters').get_generic_fuzzy_sorter,
     -- prompt_prefix = '  ',
     prompt_prefix = '  ',
     selection_caret = ' ',
@@ -61,9 +65,8 @@ require('telescope').setup{
       fzy_native = {
         override_generic_sorter = false,
         override_file_sorter = true,
-      }
-    }
-  }
-}
+      },
+    },
+  },
+})
 require('telescope').load_extension('fzy_native')
-

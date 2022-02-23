@@ -74,7 +74,6 @@ maps.nmap('<P', '<Plug>(swap-parameter-prev):call repeat#set("\\<Plug>(swap-para
 maps.nmap('>P', '<Plug>(swap-parameter-next):call repeat#set("\\<Plug>(swap-parameter-next)")<CR>')
 -- Fold
 maps.nnoremap('zm', 'zM')
-maps.nnoremap('zo', 'zm')
 maps.nnoremap('zM', ':%foldclose<CR>')
 maps.nnoremap('<tab>', 'za')
 maps.nnoremap('<s-tab>', 'zA')
