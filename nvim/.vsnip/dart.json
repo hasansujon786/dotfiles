@@ -566,5 +566,19 @@
       "final args = ModalRoute.of(context)!.settings.arguments as Map<String, String?>;"
     ],
     "description": "Access route arguments"
+  },
+  "Screen height": {
+    "prefix": "sh",
+    "body": [
+      "double height = MediaQuery.of(context).size.height;"
+    ],
+    "description": "Screen height"
+  },
+  "Quick Container": {
+    "prefix": "dd",
+    "body": [
+      "Container(child: const Text('foobar'), color: Colors.blue.shade300),"
+    ],
+    "description": "Quick Container"
   }
 }

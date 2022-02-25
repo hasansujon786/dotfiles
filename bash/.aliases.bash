@@ -45,7 +45,7 @@ alias flc='flutter create'
 alias fls='flutter create -t skeleton'
 
 #adb
-alias acc='adb connect 192.168.31.252'
+alias acc='adb connect 192.168.31.252 && adb devices'
 alias add='adb devices'
 alias adres='adb kill-server && adb devices'
 alias scc='scrcpy -s 192.168.31.252 --always-on-top'
