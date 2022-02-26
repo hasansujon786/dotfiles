@@ -9,7 +9,7 @@ local autocmds = {
     {'VimResized * :wincmd ='}, -- Vim/tmux layout rebalancing
     {'FocusGained,BufEnter,CursorHold * :silent! checktime'}, -- auto read when a file is changed from the outside
     -- {'FocusLost,WinLeave,BufLeave * :silent! noautocmd w'}, -- auto save
-    {'BufWritePre *.vim,*.lua call hasan#autocmd#trimWhitespace()'},
+    {'BufWritePre *.vim,*.lua,*.org call hasan#autocmd#trimWhitespace()'},
     {'BufWinEnter,WinEnter __FLUTTER_DEV_LOG__ normal Gzz'},
     {'BufReadPost * call hasan#autocmd#restore_position()'},
     {'TermOpen * setfiletype terminal | set bufhidden=hide'},
@@ -39,7 +39,7 @@ local autocmds = {
     {'BufDelete * silent! call remove(g:hasan_telescope_buffers, expand("<abuf>"))'}
   },
   Nebulous = {
-    {'CursorHold * ++once lua require("nebulous").init(vim.g.bg_tranparent)'}
+    {'CursorHold * ++once lua require("hasan.utils.color").my_nebulous_setup()'}
   },
   VimZoom = {
     {'User ZoomPost lua ZoomPost()'}

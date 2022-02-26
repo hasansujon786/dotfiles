@@ -1,9 +1,9 @@
-local M = {}
+local M = { _configs = {} }
 local _utils = require('hasan.utils')
 local nb_is_disabled = true
-local is_disable_win_blur = true
+local is_win_blur_disabled = true
 local nb_blur_hls = {
-  'CursorLineNr:NebulousCursorLineNr',
+  'CursorLineNr:LineNr',
   'Normal:Nebulous',
   'NormalNC:Nebulous',
 }
@@ -46,8 +46,8 @@ end
 
 M.setup_colors = function()
   vim.cmd[[
+    " hi! link Nebulous PmenuThumb
     hi Nebulous guibg=#323c4e
-    hi NebulousCursorLineNr guifg=#4B5263
     hi EndOfBuffer guibg=NONE
   ]]
 end
@@ -67,13 +67,18 @@ M.update_all_windows = function(shouldCheckFloat)
 
   for _,  curid in ipairs(vim.api.nvim_list_wins()) do
     if utils.is_current_window(curid) then
-      vim.fn['nebulous#onWinEnter'](curid)
-      if not is_disable_win_blur then
+      if M._configs.on_focus then
+        M._configs.on_focus(curid)
+      end
+
+      if not is_win_blur_disabled then
         focusWindow(curid)
       end
     else
-      vim.api.nvim_win_set_option(curid, 'cursorline', false)
-      if not is_disable_win_blur then
+      if M._configs.on_blur then
+        M._configs.on_blur(curid)
+      end
+      if not is_win_blur_disabled then
         blurWindow(curid)
       end
     end
@@ -88,9 +93,9 @@ M.on_focus_gained = function ()
   focusWindow(0)
 end
 
-M.init = function (init_with_out_blur)
+M.init = function (init_state)
   nb_is_disabled = false
-  is_disable_win_blur = _utils.get_default(init_with_out_blur, false)
+  is_win_blur_disabled = _utils.get_default(init_state, false)
   M.setup_colors()
   vim.fn['nebulous#autocmds']()
   M.update_all_windows()
@@ -103,11 +108,11 @@ M.disable = function ()
     vim.api.nvim_win_set_option(curid, 'cursorline', true)
   end
   nb_is_disabled = true
-  is_disable_win_blur = true
+  is_win_blur_disabled = true
 end
 
 M.toggle = function ()
-  if nb_is_disabled or is_disable_win_blur then
+  if nb_is_disabled or is_win_blur_disabled then
     M.init()
     print('[Nebulous] on')
   else
@@ -120,11 +125,11 @@ M.disable_win_blur = function ()
   for _,  curid in ipairs(vim.api.nvim_list_wins()) do
     focusWindow(curid)
   end
-  is_disable_win_blur = true
+  is_win_blur_disabled = true
 end
 
 M.toggle_win_blur = function ()
-  if is_disable_win_blur or nb_is_disabled then
+  if is_win_blur_disabled or nb_is_disabled then
     M.init()
     print('[Nebulous] win blur on')
   else
@@ -135,4 +140,16 @@ end
 
 -- lua require("nebulous").disable_win_blur()
 -- lua require("nebulous").toggle_win_blur()
+
+M.setup = function(opts)
+  opts = _utils.merge({
+    init_wb_with_disabled = false,
+    on_focus = nil,
+    on_blur = nil,
+  }, opts or {})
+  M._configs = opts
+
+  M.init(opts.init_wb_with_disabled)
+end
+
 return M

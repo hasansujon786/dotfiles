@@ -250,6 +250,8 @@ install_various_apps() {
   # cargo install --list
   # cargo install stylua vimv
 
+  $getter install -y onefetch
+
   # util_print taskwarrior
   # apt install taskwarrior
   # pip3 install tasklib
