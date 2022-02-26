@@ -110,7 +110,6 @@ opt.smartcase = true                              -- Ignore search term case, un
 opt.infercase = true
 opt.hlsearch = true
 opt.incsearch = true                              -- Show where the pattern, as it was typed.
-opt.gdefault = true                               -- The ':substitute' flag 'g' is default on.
 opt.inccommand='nosplit'                          -- interactive find replace preview
 
 -- Text appearance

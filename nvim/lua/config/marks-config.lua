@@ -1,9 +1,9 @@
 require'marks'.setup {
   mappings = {
     set = 'm',
-    delete = 'dm',
-    delete_line = 'dm-',
-    delete_buf = 'dm<space>',
+    delete = 'm-',
+    delete_line = 'm--',
+    delete_buf = 'dx<space>',
     set_next = 'm,',
     toggle = 'm=',
     preview = 'm;',
