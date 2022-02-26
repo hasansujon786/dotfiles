@@ -109,10 +109,10 @@ function Treesitter_foldexpr()
 
     if vim.bo.filetype == 'org' then
       vim.wo.foldexpr = 'OrgmodeFoldExpr()'
+    elseif vim.b.treesitter_import_syntax ~= nil then
+      vim.wo.foldexpr = string.format("v:lnum==1?'>1':getline(v:lnum)=~'%s'?1:nvim_treesitter#foldexpr()", vim.b.treesitter_import_syntax)
     else
-      -- vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
-      local syntax = vim.b.treesitter_import_syntax and vim.b.treesitter_import_syntax or 'import'
-      vim.wo.foldexpr = string.format("v:lnum==1?'>1':getline(v:lnum)=~'%s'?1:nvim_treesitter#foldexpr()", syntax)
+      vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
     end
   end, 50)
 end
@@ -121,6 +121,7 @@ local treesitter_foldtext_filetypes = 'html,css,javascript,typescript,tsx,typesc
 local autocmds = {
   TS_fold = {
     { 'FileType', treesitter_foldtext_filetypes, 'lua Treesitter_foldexpr()' },
+    { 'FileType', 'javascript,typescript,tsx,typescriptreact,vue,dart', 'let b:treesitter_import_syntax = "import"'}
   },
 }
 
