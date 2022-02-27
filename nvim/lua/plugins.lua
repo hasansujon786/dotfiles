@@ -193,4 +193,12 @@ return require('packer').startup({
       config = function() require('config.flutter-tools') end
     })
   end,
+  config = {
+    max_jobs = 3,
+    display = {
+      open_fn = function()
+        return require('packer.util').float({ border = 'single' })
+      end,
+    },
+  },
 })
