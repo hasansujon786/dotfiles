@@ -1,4 +1,14 @@
 -- C:\Users\hasan\AppData\Local\nvim-data\site\pack\packer
+local fn = vim.fn
+local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+local is_installed = fn.isdirectory(install_path) == 1
+if not is_installed then
+  print('Installing packer...')
+  fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+  vim.cmd('packadd packer.nvim')
+  print('Installed packer.nvim.')
+end
+
 vim.g.disable_lsp = false
 vim.g.disable_coc = true
 
@@ -192,13 +202,12 @@ return require('packer').startup({
     use({ 'akinsho/flutter-tools.nvim', opt = true, ft = {'dart'},
       config = function() require('config.flutter-tools') end
     })
+
+    if not is_installed then
+      require('packer').sync()
+    end
   end,
   config = {
     max_jobs = 3,
-    display = {
-      open_fn = function()
-        return require('packer.util').float({ border = 'single' })
-      end,
-    },
   },
 })
