@@ -8,7 +8,7 @@ shell:
   program: C:\Program Files\Git\bin\bash
   # args:
   # - --command=tmux
-working_directory: e:\repoes
+working_directory: f:\repoes
 
 # Window Customization
 window:
@@ -21,7 +21,7 @@ window:
   # decorations: none
   dynamic_title: true
   startup_mode: Windowed # Maximized Fullscreen
-background_opacity: 0.92
+  opacity: 0.92
 
 # Font Customization
 font:

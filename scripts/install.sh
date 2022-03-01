@@ -286,7 +286,8 @@ setup_sublime() {
 
 setup_windowsTerminal() {
   util_print WinTerminal
-  $getter install -y microsoft-windows-terminal  # --pre
+  # $getter install -y microsoft-windows-terminal  # --pre
+  choco install -y microsoft-windows-terminal --version=1.11.3471.0 -y
 
   rm -rf $HOME/AppData/Local/Microsoft/Windows\ Terminal/settings.json
   util_makeSymlinkPath $HOME/dotfiles/windows-terminal/settings.json "'C:\Users\hasan\AppData\Local\Microsoft\Windows Terminal\settings.json'"
@@ -327,7 +328,7 @@ auto_install_everything() {
     setup_windowsTerminal
     setup_keypirinha
     $getter install -y quicklook
-    # setup_sublime
+    setup_sublime
   elif [[ "$machine" == "linux" ]]; then
     install_and_setup_tmux
   fi
