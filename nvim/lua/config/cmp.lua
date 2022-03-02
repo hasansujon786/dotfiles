@@ -144,10 +144,12 @@ cmp.setup({
 })
 
 vim.g.vsnip_filetypes = {
-  javascript = {'javascriptreact'},
-  typescript = {'typescriptreact'},
-  javascriptreact = {'javascript'},
-  typescriptreact = {'typescript'},
+  vimspec = { 'vim' },
+  javascriptreact = { 'javascript' },
+  typescriptreact = { 'typescript' },
+  javascript = { 'javascriptreact' },
+  typescript = { 'typescriptreact' },
+  dart = { 'flutter' },
 }
 
 vim.cmd[[autocmd FileType org lua CmpOrgmodeSetup()]]

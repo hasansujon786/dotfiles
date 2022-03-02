@@ -3,6 +3,7 @@ local api = vim.api
 
 M.install_essential_servers = function()
   local essential_servers = {
+    'bashls',
     'html',
     'vimls',
     'vuels',
