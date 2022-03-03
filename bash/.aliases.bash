@@ -40,14 +40,15 @@ alias inre='react-native run-android --variant=release'
 
 # Flutter
 alias flr='flutter run'
+alias flrp='flutter run -d "192.168.31.252"'
 alias fll='flutter clean'
 alias flc='flutter create'
-alias fls='flutter create -t skeleton'
+alias flcs='flutter create -t skeleton'
 
 #adb
 alias acc='adb connect 192.168.31.252 && adb devices'
 alias add='adb devices'
-alias adres='adb kill-server && adb devices'
+alias arr='~/dotfiles/scripts/abd_wifi.sh'
 alias scc='scrcpy -s 192.168.31.252 --always-on-top'
 alias scc2='scrcpy -s f8a8aa489804 --always-on-top'
 
@@ -59,6 +60,7 @@ alias cs='cd'
 alias re='cd /e/repoes'
 alias to='touch'
 alias mk='mkdir -p'
+mkd() { mkdir -p "$@" && cd "$@"; }
 alias x='exit'
 alias e='z'
 alias c='clear && pwd && ls'

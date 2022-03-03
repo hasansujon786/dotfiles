@@ -233,6 +233,7 @@ setup_node () {
 install_various_apps() {
   util_print ripgrep
   $getter install -y ripgrep
+  $getter install -y fd
 
   util_print wget
   $getter install -y wget
@@ -251,6 +252,7 @@ install_various_apps() {
   # cargo install stylua vimv
 
   $getter install -y onefetch
+  $getter install -y scrcpy
 
   # util_print taskwarrior
   # apt install taskwarrior

@@ -248,7 +248,7 @@ local leader = {
     r = { ':Telescope oldfiles<CR>',        'Recent files' },
     t = { ':Telescope filetypes<CR>',       'Change filetypes' },
     s = { ':lua require("hasan.telescope.custom").grep_string()<CR>',         'Grep string' },
-    ['/'] = { ':Telescope live_grep<CR>',   'Find file' },
+    ['/'] = { ':Telescope live_grep<CR>',   'Live grep' },
     ['.'] = { ':Telescope resume<CR>',      'Telescope resume' },
 
     o = common.grep_org_text,
