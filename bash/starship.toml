@@ -21,7 +21,7 @@ disabled = true
 
 [time]
 time_format = "%I:%M:%S∣%b,%d"
-format = "[\[$time\]]($style) "
+format = '[\[$time\]]($style) '
 use_12hr = true
 disabled = false
 style = "bold purple"
