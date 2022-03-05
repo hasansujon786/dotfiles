@@ -1,12 +1,16 @@
 # Move the directory to the second line
-format = "$time$all$directory$character"
+format = """$time$git_branch$git_status$package$cmd_duration
+$directory$character"""
 add_newline = true
 [line_break]
 disabled = false
 [character]
 success_symbol = "[](bold white)"
 error_symbol = "[](bold red)"
-vicmd_symbol = "[V](bold green) "
+vicmd_symbol = "[V](bold green)"
+
+[package]
+display_private = true
 
 [memory_usage]
 symbol = " "
@@ -16,8 +20,8 @@ style = "bold dimmed white"
 disabled = true
 
 [time]
-time_format = "%I:%M:%S∣%d,%b"
-format = '[\[$time\]]($style) '
+time_format = "%I:%M:%S∣%b,%d"
+format = "[\[$time\]]($style) "
 use_12hr = true
 disabled = false
 style = "bold purple"
