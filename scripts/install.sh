@@ -327,6 +327,7 @@ auto_install_everything() {
   install_various_apps
 
   if [[ "$machine" == "windows" ]]; then
+    start ms-settings:developers
     setup_windowsTerminal
     setup_keypirinha
     $getter install -y quicklook

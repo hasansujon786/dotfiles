@@ -8,6 +8,10 @@ choco install 7zip.install -y
 choco install googlechrome -y
 choco install onefetch -y
 
+# https://developer.android.com/studio#downloads
+# https://dl.google.com/android/repository/commandlinetools-win-8092744_latest.zip
+# sdkmanager.bat "platforms;android-29" "platform-tools" "build-tools;28.0.3"
+
 # choco install gimp -y
 # choco install vlc -y
 # choco install emacs -y
