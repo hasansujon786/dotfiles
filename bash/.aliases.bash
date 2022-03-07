@@ -114,9 +114,9 @@ alias ex='cd ~/storage/external-1'
 
 # kill port
 alias fip='tasklist | findstr'
-alias kip='taskkill //PID'
-alias kin='taskkill //F //IM'
-alias kijv='taskkill //F //IM "java.exe"'
+alias tk='taskkill //F //IM'
+alias tkp='taskkill //PID'
+alias tkv='taskkill //F //IM "java.exe"'
 
 ## Colorize the ls output ##
 alias ls='ls --color=auto'
@@ -193,6 +193,6 @@ lfcd () {
 
 bind '"\eo":"lfcd\C-m"'
 bind '"\el":clear-screen'
-bind '"\e\ ":magic-space'
+# bind '"\e\ ":magic-space'
 bind '"\eq":alias-expand-line'
 bind '" ":"\eq\C-v "'

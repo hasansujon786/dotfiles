@@ -13,6 +13,16 @@
 
 # Key bindings
 # ------------
+__fzf_z__() {
+  [ $# -gt 0 ] && z "$*" && return
+  local cmd dir
+  cmd="z -l 2>&1"
+  dir=$(eval "$cmd" | fzf --height 50% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//') && printf 'cd -- %q' "$dir"
+}
+
+# ALT-j - cd into the selected directory
+bind -m emacs-standard '"\ej": " \C-l\C-b\C-k \C-u`__fzf_z__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d"'
+
 __fzf_select__() {
   local cmd="${FZF_CTRL_T_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
     -o -type f -print \

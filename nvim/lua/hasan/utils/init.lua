@@ -221,4 +221,35 @@ function M.Logger:error(msg, opts)
 end
 
 
+M.augroup = function(group)
+  -- local id = vim.api.nvim_create_augroup(group, { clear = true })
+  vim.api.nvim_create_augroup(group, { clear = true })
+
+  return function(autocmds)
+    autocmds(function(event, opts, command)
+      -- opts.group = id
+      opts.group = group
+      local is_function = type(command) == 'function'
+      opts.callback = is_function and command or nil
+      opts.command = not is_function and command or nil
+
+      vim.api.nvim_create_autocmd(event, opts)
+    end)
+  end
+end
+-- local NULL_LS_AUGROUP = augroup('NULL_LS_AUGROUP')
+-- NULL_LS_AUGROUP(function(autocmd)
+--   -- autocmd({ 'BufWritePre' }, { buffer = bufnr }, function()
+--   --   vim.lsp.buf.formatting_sync()
+--   -- end)
+
+--   -- Also you can add a many autocmds as you'd like here
+--   -- For example:
+--   local count = 1
+--   autocmd({ 'CursorMoved' }, { buffer = vim.api.nvim_win_get_buf(0) }, function()
+--     print(string.format('cursor moved %d times', count))
+--     count = count + 1
+--   end)
+-- end)
+
 return M

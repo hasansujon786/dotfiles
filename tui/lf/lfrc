@@ -20,8 +20,8 @@ set icons true
 cmd mkdir %{{ mkdir }}
 cmd touch %{{ touch }}
 cmd doc $lf -doc | less
-cmd fzf_jump ${{
-  $res="$(fd --hidden --type directory --exclude '.git' | fzf --header='Jump to location' --preview 'ls {}')"
+cmd fzf_cd ${{
+  $res="$(fd --hidden --type directory --exclude '.git' | fzf --reverse --inline-info --preview 'ls {}')"
   if($res -ne "") {
     lf -remote "send $id cd $res"
   }
@@ -91,7 +91,7 @@ map C clear
 
 map <a-d> half-down
 map <a-u> half-up
-map <a-m> fzf_jump
+map <a-m> fzf_cd
 map -- jump-to-git-root
 
 map <esc> setfilter
