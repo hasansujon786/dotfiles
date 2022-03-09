@@ -64,6 +64,17 @@ local leader = {
     x = { '<Plug>ColorConvertHEX',                   'Convert color to HEX' },
     h = { '<Plug>ColorConvertHSL',                   'Convert color to HSL' },
     r = { '<Plug>ColorConvertRGB',                   'Convert color to RGB' },
+
+    m = {
+      name = '+hightlight-hints',
+      x = { '<cmd>call hiiw#ClearInterestingWord()<cr>',          'Clear hints' },
+      y = { '<cmd>call hiiw#HiInterestingWord(1)<cr>',            'Mark hint 1' },
+      g = { '<cmd>call hiiw#HiInterestingWord(2)<cr>',            'Mark hint 2' },
+      b = { '<cmd>call hiiw#HiInterestingWord(3)<cr>',            'Mark hint 3' },
+      w = { '<cmd>call hiiw#HiInterestingWord(4)<cr>',            'Mark hint 4' },
+      p = { '<cmd>call hiiw#HiInterestingWord(5)<cr>',            'Mark hint 5' },
+      r = { '<cmd>call hiiw#HiInterestingWord(6)<cr>',            'Mark hint 6' },
+    }
   },
 
   i = {
