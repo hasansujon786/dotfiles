@@ -121,12 +121,11 @@ fo() {
   file=$(head -2 <<< "$out" | tail -1)
   if [ -n "$file" ]; then
     if [[ "$key" = ctrl-e ]]; then
-      nvim "$file"
-    if [[ "$key" = ctrl-o ]]; then
-      explorer "$file"
-    else
       # ${EDITOR:-nvim} "$file"
+      nvim "$file"
+    else
       explorer "$file"
+      printf 'explorer %q' "$file"
     fi
   fi
 }
