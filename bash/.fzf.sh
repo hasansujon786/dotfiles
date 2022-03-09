@@ -99,8 +99,59 @@ else
 fi
 
 # ALT-C - cd into the selected directory
-bind -m emacs-standard '"\em": " \C-l\C-b\C-k \C-u`__fzf_cd__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d"'
-bind -m vi-command '"\em": "\C-l\C-z\ec\C-z"'
-bind -m vi-insert '"\em": "\C-l\C-z\ec\C-z"'
+bind -m emacs-standard '"\ec": " \C-l\C-b\C-k \C-u`__fzf_cd__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d"'
+bind -m vi-command '"\ec": "\C-l\C-z\ec\C-z"'
+bind -m vi-insert '"\ec": "\C-l\C-z\ec\C-z"'
 
 fi
+
+fk() {
+  local pid
+  pid=$(tasklist | sed 1d | fzf -m | awk '{print $1}')
+
+  if [ "x$pid" != "x" ]
+  then
+    echo $pid | xargs taskkill //F //IM
+  fi
+}
+
+fo() {
+  IFS=$'\n' out=("$(fzf --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)")
+  key=$(head -1 <<< "$out")
+  file=$(head -2 <<< "$out" | tail -1)
+  if [ -n "$file" ]; then
+    if [[ "$key" = ctrl-e ]]; then
+      nvim "$file"
+    if [[ "$key" = ctrl-o ]]; then
+      explorer "$file"
+    else
+      # ${EDITOR:-nvim} "$file"
+      explorer "$file"
+    fi
+  fi
+}
+
+fif() {
+  if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
+  nvim $(rg --files-with-matches --no-messages --smart-case "$1" | fzf --preview "cat {}")
+}
+
+b() {
+  # bookmarks_path="c/AppData\Local\BraveSoftware\Brave-Browser\User Data\Default\Bookmarks"
+  bookmarks_path="/c/Users/hasan/AppData/Local/BraveSoftware/Brave-Browser/User Data/Default/Bookmarks"
+
+  jq_script='
+  def ancestors: while(. | length >= 2; del(.[-1,-2]));
+  . as $in | paths(.url?) as $key | $in | getpath($key) | {name,url, path: [$key[0:-2] | ancestors as $a | $in | getpath($a) | .name?] | reverse | join("/") } | .path + "/" + .name + "\t" + .url'
+
+  jq -r "$jq_script" < "$bookmarks_path" \
+    | sed -E $'s/(.*)\t(.*)/\\1\t\x1b[36m\\2\x1b[m/g' \
+    | fzf --ansi \
+    | cut -d$'\t' -f2 \
+    | xargs start
+}
+
+emo () {
+  fzf < /c/Users/hasan/dotfiles/bash/emojis.txt | sed 's/ .*//'
+}
+
