@@ -44,10 +44,10 @@ function hasan#highlight#load_custom_highlight() abort
   hi VM_Mono    guibg=#00af87 guifg=#ffffff
   " hi VM_Cursor
   " hi DashboardHeader ctermfg=114 guifg=#61AFEF
-  hi DashboardHeader   ctermfg=59  guifg=#5c6370
-  hi DashboardFooter   ctermfg=59  guifg=#5c6370
-  hi DashboardShortcut ctermfg=145 guifg=#ABB2BF
-  hi DashboardCenter   ctermfg=145 guifg=#ABB2BF
+  hi DashboardHeader   guifg=#5c6370
+  hi DashboardFooter   guifg=#5c6370
+  hi DashboardShortcut guifg=#5c6370
+  hi DashboardCenter   guifg=#5c6370
   hi! link HLNext IncSearch
   hi! link TelescopeBorder Comment
   hi! link TelescopePreviewBorder TelescopeBorder
