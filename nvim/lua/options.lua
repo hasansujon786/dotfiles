@@ -142,7 +142,6 @@ opt.textwidth=80                                  -- Hard-wrap text at nth colum
 opt.wrap = false                                  -- No wrap by default
 opt.linebreak = true                              -- Don't break words when wrapping lines
 opt.breakindent = true                            -- Every wrapped line will continue visually indented
-opt.showbreak = string.rep(" ", 3)                -- Make it so that long lines wrap smartly
--- cmd('let &showbreak="↳ "')                        -- Make wrapped lines more obvious
+opt.showbreak = '↪  '                -- Make it so that long lines wrap smartly
 opt.cpoptions:append('n')
 
