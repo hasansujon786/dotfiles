@@ -17,7 +17,7 @@ return require('packer').startup({
     use({ 'wbthomason/packer.nvim' })
     --> Visual -------------------------------------
     use({ 'navarasu/onedark.nvim', config = function() require('config.onedark') end })
-    use({ 'glepnir/dashboard-nvim', config = function() require('config.dashboard') end })
+    use({ 'hasansujon786/dashboard-nvim', config = function() require('config.dashboard') end })
     use({ 'hasansujon786/kissline.nvim', opt = true, event = 'VimEnter',
       config = function() require('config.kissline') end
     })
