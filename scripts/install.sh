@@ -287,14 +287,17 @@ setup_sublime() {
 }
 
 setup_windowsTerminal() {
-  # "'C:\Users\hasan\AppData\Local\Microsoft\Windows Terminal\settings.json'"
-  wtPath=($HOME/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json)
   util_print WinTerminal
-  # works with win10lite --version=1.11.3471.0
-  $getter install -y microsoft-windows-terminal -y  # --pre
 
+  wtPath=($HOME/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json)
+  $getter install -y microsoft-windows-terminal # --pre
   rm -rf ${wtPath[$machineCode]}
   util_makeSymlinkPath $HOME/dotfiles/windows-terminal/settings.json  ${wtPath[$machineCode]}
+
+  # # $getter install -y microsoft-windows-terminal  # --pre
+  # choco install -y microsoft-windows-terminal --version=1.11.3471.0 -y
+  # rm -rf $HOME/AppData/Local/Microsoft/Windows\ Terminal/settings.json
+  # util_makeSymlinkPath $HOME/dotfiles/windows-terminal/settings.json "'C:\Users\hasan\AppData\Local\Microsoft\Windows Terminal\settings.json'"
 }
 
 install_and_setup_tmux() {
