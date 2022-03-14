@@ -1,11 +1,18 @@
-https://github.com/BrodieRobertson/dotfiles/blob/master/config/lf/lfrc
+# doc
+https://pkg.go.dev/github.com/gokcehan/lf
 
+https://github.com/BrodieRobertson/dotfiles/blob/master/config/lf/lfrc
 https://git.alex.balgavy.eu/dotfiles/file/lf/lfrc.html
 
 $ => execute shell commands
   ex: map i $less %f%
 
 # Command definitions
+read           (modal)   (default ':')
+shell          (modal)   (default '$')
+shell-pipe     (modal)   (default '%')
+shell-wait     (modal)   (default '!')
+shell-async    (modal)   (default '&')
 the prefix shows what kind of command it is
 !: runs as interactive shell command (puts lf in the bg)
 $: runs as shell command

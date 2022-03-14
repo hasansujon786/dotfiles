@@ -10,9 +10,14 @@ set scrolloff 5
 set info size
 set hidden true
 set icons true
+set mouse true
 #set color256 true
 #set number true
 #set relativenumber true
+# set promptfmt "
+# \033[38;5;8m\033[48;5;236m %u@%h \033[38;5;236m\033[48;5;234m
+# \033[38;5;8m\033[48;5;234m %w\%f \033[0m\033[38;5;234m\033[0m
+# "
 
 # ---------------------------------------------------------------------------
 # - Custom commands                                                         -
@@ -20,6 +25,8 @@ set icons true
 cmd mkdir %{{ mkdir }}
 cmd touch %{{ touch }}
 cmd doc $lf -doc | less
+cmd quickLook &C:\\Users\\hasan\\AppData\\Local\\Programs\\QuickLook\\QuickLook.exe $Env:f
+cmd systemOpen &explorer $Env:f
 cmd fzf_cd ${{
   $res="$(fd --hidden --type directory --exclude '.git' | fzf --reverse --inline-info --preview 'ls {}')"
   if($res -ne "") {
@@ -69,34 +76,45 @@ map w $bash
 map W $powershell
 map i $less $Env:f
 map o open
-map O %explorer $Env:f
-map E %{{ explorer $(dirname $Env:f) }}
-map <space> %C:\\Users\\hasan\\AppData\\Local\\Programs\\QuickLook\\QuickLook.exe $Env:f
+map O systemOpen
+map <enter> systemOpen
+map R &{{ explorer $(dirname $Env:f) }}
+map <space> quickLook
+map V invert
 map v :{{
   toggle
   down
 }}
-map V invert
+map <esc> :{{
+  clear
+  setfilter
+  # unselect
+}}
+
 
 map a push :touch<space>
 map A push :mkdir<space>
-map <enter> shell
 map <delete> delete
 map <f-2> rename
 map <c-v> paste
 map <c-x> cut
 map <c-c> copy
 map <c-r> bulk-rename
-map C clear
 
 map <a-d> half-down
 map <a-u> half-up
-map <a-m> fzf_cd
+map <a-c> fzf_cd
 map -- jump-to-git-root
+map <backspace> updir
 
-map <esc> setfilter
-map zf filter
+map <m-1> open  # primary
+map <m-2> updir  # secondary
+map <m-3> systemOpen  # middle
+map <m-up> up
+map <m-down> down
+
 map z. $du -h -d1 | less
+map zf filter
 # Archive bindings
 map Zu %{{ unzip $Env:f }}
 # *.tar.gz) tar -xzvf "$f" ;;
@@ -107,10 +125,10 @@ map Zu %{{ unzip $Env:f }}
 # - Navigation Shortcut                                                     -
 # ---------------------------------------------------------------------------
 
-map .c cd C:\\
-map .d cd D:\\
-map .e cd E:\\
 map .. cd ~/Desktop
+map .c cd C:\\
+map .f cd F:\\
+map .e cd E:\\
 
 map g. cd ~/dotfiles
 map gd cd ~/Downloads
@@ -118,6 +136,6 @@ map gp cd ~/Pictures
 map gv cd ~/Videos
 map gm cd ~/Music
 map gD cd ~/Documents
-map gr cd E:\\repoes
+map gr cd F:\\repoes
 map ga. cd ~/AppData
 map gan cd ~/AppData/Local/nvim-data

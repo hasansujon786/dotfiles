@@ -18,6 +18,7 @@ vim.cmd[[autocmd CmdwinEnter * nnoremap <buffer><CR> <CR>]]
 maps.nnoremap('ZZ', ':Quit!<CR>')
 -- Use Q to record macros
 maps.nnoremap('Q', 'q')
+maps.vnoremap('@', ':norm @', {silent = false})
 
 -- Copy Paste -----------------------------------
 -- Prevent selecting and pasting from overwriting what you originally copied.
@@ -217,7 +218,7 @@ maps.nnoremap('<leader>p;', ':silent ! tmux-send-keys $(pwd) ', {silent = false}
 vim.g.floaterm_keymap_new    = '<C-\\>c'
 vim.g.floaterm_keymap_prev   = '<C-\\>p'
 vim.g.floaterm_keymap_next   = '<C-\\>n'
-vim.g.floaterm_keymap_kill   = '<C-\\>x'
+vim.g.floaterm_keymap_kill   = '<A-q>'
 vim.g.floaterm_keymap_toggle = '<A-m>'
 maps.nnoremap('<A-m>', ':FloatermToggle<CR>')
 maps.nnoremap(']t', ':FloatermToggle<CR><C-\\><C-n>')
