@@ -90,7 +90,7 @@ setup_git_defaults() {
   read git_user_email
 
   git config --global user.email $git_user_email
-  git config --global user.name $git_user_name
+  git config --global user.name "$git_user_name"
   git config --global credential.helper store
 
   # git config --global credential.helper 'cache --timeout=86400'
@@ -287,12 +287,14 @@ setup_sublime() {
 }
 
 setup_windowsTerminal() {
+  # "'C:\Users\hasan\AppData\Local\Microsoft\Windows Terminal\settings.json'"
+  wtPath=($HOME/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json)
   util_print WinTerminal
-  # $getter install -y microsoft-windows-terminal  # --pre
-  choco install -y microsoft-windows-terminal --version=1.11.3471.0 -y
+  # works with win10lite --version=1.11.3471.0
+  $getter install -y microsoft-windows-terminal -y  # --pre
 
-  rm -rf $HOME/AppData/Local/Microsoft/Windows\ Terminal/settings.json
-  util_makeSymlinkPath $HOME/dotfiles/windows-terminal/settings.json "'C:\Users\hasan\AppData\Local\Microsoft\Windows Terminal\settings.json'"
+  rm -rf ${wtPath[$machineCode]}
+  util_makeSymlinkPath $HOME/dotfiles/windows-terminal/settings.json  ${wtPath[$machineCode]}
 }
 
 install_and_setup_tmux() {
