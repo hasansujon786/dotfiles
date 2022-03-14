@@ -139,3 +139,34 @@ map gD cd ~/Documents
 map gr cd F:\\repoes
 map ga. cd ~/AppData
 map gan cd ~/AppData/Local/nvim-data
+
+# quickly cd into frecent directories using zoxide, zlua or rupa/z
+cmd z ${{
+  set +u
+    dest=''
+    prefix=''
+    [[ "$OSTYPE" == "darwin"* ]] && prefix='/usr/local'
+    if hash zoxide 2>/dev/null; then
+      dest="$(zoxide query "$@")"
+# See: https://github.com/skywind3000/z.lua
+        elif [ -f "$prefix/etc/profile.d/z.lua" ]; then
+        export _ZL_NO_PROMPT_COMMAND=1
+        dest="$(lua "$prefix/etc/profile.d/z.lua" -e "$@")"
+# See https://github.com/rupa/z
+        elif [ -f "$prefix/etc/profile.d/z.sh" ] || [ -f "$prefix/share/z/z.sh"]; then
+        export _Z_NO_PROMPT_COMMAND=1
+        source "$prefix/etc/profile.d/z.sh" || source "$prefix/share/z/z.sh"
+        dest="$(_z "$@" && pwd)"
+        fi
+
+        if test -n "${dest}"; then
+          lf -remote "send $id cd '${dest}'"
+        else
+          lf -remote "send $id echo 'Invalid directory ${dest}'"
+        fi
+}}
+
+cmd fzf_z ${{
+  sel="$(zoxide query -l | fzf +s)"
+    [ -d "$sel" ] && lf -remote "send $id cd \"$sel\""
+}}
