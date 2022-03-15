@@ -80,16 +80,10 @@ map O systemOpen
 map <enter> systemOpen
 map R &{{ explorer $(dirname $Env:f) }}
 map <space> quickLook
-map V invert
-map v :{{
-  toggle
-  down
-}}
-map <esc> :{{
-  clear
-  setfilter
-  # unselect
-}}
+map U invert
+map v :toggle; down
+map V :toggle; up
+map <esc> :clear; setfilter
 
 
 map a push :touch<space>

@@ -25,8 +25,9 @@ M.open_tab = function(dir, cmd_arg)
   end
   local cmd = {}
   if vim.fn.has('win32') == 1 then
-    local winTermPath =
-      'silent !"c:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.11.3471.0_x64__8wekyb3d8bbwe\\wt.exe"'
+    -- local winTermPath =
+    --   'silent !"c:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.11.3471.0_x64__8wekyb3d8bbwe\\wt.exe"'
+    local winTermPath = 'silent !"wt"'
     local profile = '-p "Bash" C:\\Program Files\\Git\\bin\\bash'
     local command_str = '-c "source ~/dotfiles/bash/.env && %s"'
 
