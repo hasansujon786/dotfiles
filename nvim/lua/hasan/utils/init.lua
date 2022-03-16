@@ -1,12 +1,16 @@
 local M = {}
 
-M.reload_this_module = function ()
-  local file = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':.'):gsub('\\','.')
-  file = file:gsub('/','.')
-  file = file:gsub('nvim.','')
-  file = file:gsub('lua.','')
-  file = file:gsub('.lua','')
-  local module_name = file:gsub('.init','')
+M.select = function(prompt, choices, callback)
+  vim.ui.select(choices, { prompt = prompt }, callback)
+end
+
+M.reload_this_module = function()
+  local file = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':.'):gsub('\\', '.')
+  file = file:gsub('/', '.')
+  file = file:gsub('nvim.', '')
+  file = file:gsub('lua.', '')
+  file = file:gsub('.lua', '')
+  local module_name = file:gsub('.init', '')
   R(module_name, 'module reloaded')
 end
 
@@ -27,7 +31,7 @@ M.is_floting_window = function(winid)
 end
 
 M.get_os = function()
---[[
+  --[[
 Target OS names:
   - Windows
   - Linux
@@ -45,16 +49,20 @@ M.is_windows = function()
   return vim.fn.has('win32') == 1
 end
 
-M.is_file_exist = function (path)
+M.is_file_exist = function(path)
   local f = io.open(path, 'r')
-  if f ~= nil then io.close(f) return true else return false end
+  if f ~= nil then
+    io.close(f)
+    return true
+  else
+    return false
+  end
 end
 
 M.get_relative_fname = function()
   local fname = vim.fn.expand('%:p')
   return fname:gsub(vim.fn.getcwd() .. '/', '')
 end
-
 
 M.read_file = function(path)
   local fd = vim.loop.fs_open(path, 'r', 438)
@@ -114,10 +122,7 @@ M.create_augroups = function(definitions)
     vim.api.nvim_command('augroup ' .. group_name)
     vim.api.nvim_command('autocmd!')
     for _, def in ipairs(definition) do
-      local command = table.concat(
-        vim.tbl_flatten({ 'autocmd', def }),
-        ' '
-      )
+      local command = table.concat(vim.tbl_flatten({ 'autocmd', def }), ' ')
       vim.api.nvim_command(command)
     end
     vim.api.nvim_command('augroup END')
@@ -135,14 +140,14 @@ M.open_git_remote = function(openRoot)
 
   local j = Job:new({
     command = 'git',
-    args = {'config', '--get',  'remote.origin.url'},
-    cwd = vim.fn.expand('%:p:h')
+    args = { 'config', '--get', 'remote.origin.url' },
+    cwd = vim.fn.expand('%:p:h'),
   })
   local k = Job:new({
-    command = "git",
+    command = 'git',
     -- args = {'rev-parse', '--abbrev-ref', 'HEAD'},
-    args = {'branch', '--show-current'},
-    cwd = vim.fn.expand('%:p:h')
+    args = { 'branch', '--show-current' },
+    cwd = vim.fn.expand('%:p:h'),
   })
 
   local ok_remote, remote_root = pcall(function()
@@ -158,7 +163,7 @@ M.open_git_remote = function(openRoot)
       full_remote_path = string.format('%s/blob/%s/%s', remote_root, branch, fpath)
     end
 
-    vim.cmd('OpenURL '.. full_remote_path)
+    vim.cmd('OpenURL ' .. full_remote_path)
     print(full_remote_path)
   else
     return ''
@@ -219,7 +224,6 @@ end
 function M.Logger:error(msg, opts)
   log(vim.log.levels.ERROR, msg, opts or {})
 end
-
 
 M.augroup = function(group)
   -- local id = vim.api.nvim_create_augroup(group, { clear = true })

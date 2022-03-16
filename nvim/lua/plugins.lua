@@ -117,6 +117,13 @@ return require('packer').startup({
         require('config.neoscroll')
       end
     })
+    use({ 'olimorris/persisted.nvim',
+      module = 'persisted', opt = true,
+      cmd = {'SessionLoad', 'SessionLoadLast', 'SessionSave'},
+      config = function()
+        require('config.persisted').setup()
+      end,
+    })
     use({ 'tweekmonster/startuptime.vim', opt = true, cmd = 'StartupTime' })
     use({ 'tpope/vim-scriptease', opt = true, cmd = {'PP','Messages'} })
     use({ 'tpope/vim-eunuch', opt = true, cmd = {'Delete','Move','Rename','Mkdir','Chmod'} })
@@ -208,6 +215,6 @@ return require('packer').startup({
     end
   end,
   config = {
-    max_jobs = 3,
+    max_jobs = 5,
   },
 })
