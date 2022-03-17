@@ -10,12 +10,14 @@ M.setup = function()
     options = { 'buffers', 'curdir', 'tabpages', 'winsize' }, -- session options used for saving
     allowed_dirs = nil,
     ignored_dirs = nil,
-    before_save = function()
-      print('sessions is saving')
-    end,
-    after_save = function()
-      print('sessions saved')
-    end,
+    -- before_save = function()
+    --   -- Clear out Minimap before saving the session
+    --   -- With Minimap open it stops the session restoring to the last cursor position
+    --   pcall(vim.cmd, 'bw minimap')
+    -- end,
+    -- after_save = function()
+    --   print('sessions saved')
+    -- end,
   })
 end
 
@@ -34,12 +36,18 @@ M.loadSession = function()
     sessions_short[#sessions_short + 1] = session:gsub(path_to_trim, '')
   end
 
-  require('hasan.utils').select('Session to load', sessions_short, function(choice)
-    if choice == nil then
-      return
-    end
-    vim.cmd('source ' .. vim.fn.fnameescape(psessions_path .. choice))
-  end)
+  require('hasan.utils.ui').menu(sessions_short, {
+    title = 'Session to load',
+    on_submit = function(item)
+      vim.cmd('source ' .. vim.fn.fnameescape(sessions[item._index]))
+    end,
+  })
+end
+
+M.sessionSaveAndQuit = function()
+  vim.cmd([[wall]])
+  require('persisted').save()
+  vim.cmd([[qall]])
 end
 
 return M

@@ -28,15 +28,15 @@ vim.g.dashboard_custom_section = {
     description = {'  Recent files                          SPC p r'},
     command = 'Telescope oldfiles'
   },
-  d = {
-    description = {'  Load last session                     SPC p l'},
+  b = {
+    description = {'  Load session                          SPC p l'},
     command = 'SessionLoad'
   },
-  c = {
+  d = {
     description = {'  Find project file                     SPC f f'},
     command = 'Telescope find_files'
   },
-  b = {
+  c = {
     description = {'  Open terminal                         SPC o t'},
     command = 'FloatermNew --wintype=normal --height=10 bash'
   },

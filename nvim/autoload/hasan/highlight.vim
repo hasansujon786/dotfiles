@@ -81,6 +81,10 @@ function hasan#highlight#load_custom_highlight() abort
   "/// marks.nvim ///"
   hi! link MarkSignNumHL None
   hi! link MarkSignHL Comment
+
+  "/// nui.nvim ///"
+  hi NuiMenuItem   guifg=#d99a5e guibg=#2d3343
+  hi NuiMenuNr     guifg=#d99a5e
 endfunction
 
 " call hasan#highlight#load_custom_highlight()

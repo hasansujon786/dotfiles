@@ -60,10 +60,13 @@ local leader = {
   },
 
   c = {
-    c = { '<Plug>ColorConvertCycle',                 'Cycle color' },
-    x = { '<Plug>ColorConvertHEX',                   'Convert color to HEX' },
-    h = { '<Plug>ColorConvertHSL',                   'Convert color to HSL' },
-    r = { '<Plug>ColorConvertRGB',                   'Convert color to RGB' },
+    name = '+change',
+    c = { '<Plug>ColorConvertCycle',                'Cycle color' },
+    x = { '<Plug>ColorConvertHEX',                  'Convert color to HEX' },
+    h = { '<Plug>ColorConvertHSL',                  'Convert color to HSL' },
+    r = { '<Plug>ColorConvertRGB',                  'Convert color to RGB' },
+
+    w = {':lua require("hasan.utils.ui").substitute_word(false)<CR>','Substitute word'},
 
     m = {
       name = '+hightlight-hints',
@@ -119,8 +122,9 @@ local leader = {
   f = {
     name = '+file',
     -- File Command
-    b = { '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', 'Browse file directory' },
+    ['.'] = { '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', 'Browse file directory' },
     d = { '<cmd>lua require("hasan.telescope.custom").file_browser()<cr>',          'Browser project files' },
+    b = { '<cmd>lua require("hasan.telescope.custom").file_browser()<cr>',          'Browser project files' },
     f = { '<cmd>lua require("hasan.telescope.custom").file_files()<cr>',            'Find file' },
     F = { '<cmd>lua require("hasan.telescope.custom").file_files("cur_dir")<cr>',   'Find file from here' },
 
@@ -133,9 +137,7 @@ local leader = {
     C = 'Copy this file',
     M = 'Move/rename file',
 
-    -- Word command
-    w = { '<Plug>(fix-current-world)',         'Fix current world' },
-    ['.'] = {':lua require("hasan.utils.ui").substitute_word(false)<CR>','Substitute word'},
+    w  = { '<Plug>(fix-current-world)',        'Fix current world' },
 
     u = {
       name = '+update-permission',
@@ -169,20 +171,18 @@ local leader = {
 
   p = {
     name = '+project',
+    e = { ':lua require("project_run").commands()<CR>',   'Run project commands' },
+
     p = { ':lua require("hasan.telescope.custom").projects()<CR>',            'Switch project' },
     r = { ':lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>','Find recent files' },
     t = { ':lua require("hasan.telescope.custom").search_project_todos()<CR>','Search project todos' },
     -- b = { ':Telescope file_browser prompt_title=Project\\ Browser cwd=~/repoes<CR>',  'Browse other projects' },
 
+    d = { ':Dashboard<CR>',                         'Open dashboard' },
     l = { ':SessionLoad<CR>',                       'Load session' },
     s = { ':SessionSave<CR>',                       'Save session' },
-    q = { ':SessionSaveAndQuit<CR>',                'Save session and quit' },
-    d = { ':Dashboard<CR>',                         'Open dashboard' },
-
-    R = { ':lua require("hasan.project_run").scriptsCommandsFromJSON("package.json")<CR>', 'Run project script' },
-    e = { ':lua require("project_run").commands()<CR>',                              'Run project commands' },
-    [':'] = 'Run shell command',
-    [';'] = 'Send keys',
+    q = { '<cmd>lua require("config.persisted").loadSession()<CR>',       'Select session' },
+    z = { '<cmd>lua require("config.persisted").sessionSaveAndQuit()<CR>','Save session and quit' },
   },
 
   t = {

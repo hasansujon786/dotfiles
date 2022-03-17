@@ -1,7 +1,8 @@
 local utils = require('hasan.utils')
-local Input = require("nui.input")
-local event = require("nui.utils.autocmd").event
+local Input = require('nui.input')
+local Menu = require('nui.menu')
 local Text = require('nui.text')
+local event = require('nui.utils.autocmd').event
 local ui = require('state').ui
 
 local M = {}
@@ -16,7 +17,7 @@ M.input = function(title, opts)
       row = 1,
       col = 0,
     },
-    size = utils.get_default(opts.size, t_widht > widht and t_widht or widht) ,
+    size = utils.get_default(opts.size, t_widht > widht and t_widht or widht),
     border = {
       style = ui.border.style,
       highlight = ui.border.highlight,
@@ -46,28 +47,95 @@ M.input = function(title, opts)
   end)
 end
 
-M.rename_current_file = function ()
+M.menu = function(list, opts)
+  opts = utils.merge({
+    title = nil,
+    size = #list > 8 and { height = 8 } or nil,
+    title_align = 'center',
+    number = true,
+    position = '20%',
+    on_close = nil,
+    on_submit = function(item)
+      print('SUBMITTED', vim.inspect(item._index))
+    end,
+  }, opts or {})
+
+  local menu_items = {}
+  for _, item in pairs(list) do
+    table.insert(menu_items, Menu.item(item))
+  end
+
+  local menu = Menu({
+    relative = 'editor',
+    size = opts.size,
+    position = opts.position,
+    border = {
+      padding = {
+        top = 1,
+        bottom = 1,
+        left = opts.number and 0 or 2,
+        right = opts.number and 3 or 2,
+      },
+      style = ui.border.style,
+      highlight = 'TelescopeBorder',
+      text = {
+        top = opts.title and Text(opts.title) or nil,
+        top_align = opts.title_align,
+      },
+    },
+    win_options = {
+      numberwidth = 4,
+      -- winblend = 10,
+      number = opts.number,
+      winhighlight = 'Normal:TelescopeNormal,CursorLine:NuiMenuItem,CursorLineNr:NuiMenuNr',
+    },
+  }, {
+    lines = menu_items,
+    max_width = 70,
+    keymap = {
+      focus_next = { 'j', '<Down>', '<Tab>' },
+      focus_prev = { 'k', '<Up>', '<S-Tab>' },
+      close = { '<Esc>', '<C-c>' },
+      submit = { '<CR>', '<Space>' },
+    },
+    on_close = opts.on_close,
+    on_submit = opts.on_submit,
+  })
+
+  -- mount the component
+  menu:mount()
+  vim.cmd([[hi Cursor blend=100]])
+
+  -- close menu when cursor leaves buffer
+  menu:on(event.BufLeave, function()
+    vim.cmd([[hi Cursor blend=0]])
+    menu.menu_props.on_close()
+  end, { once = true })
+end
+
+M.rename_current_file = function()
   local currNameFileName = vim.fn.expand('%:t')
 
   M.input('Rename File', {
     default_value = currNameFileName,
     on_submit = function(newName)
       if string.len(newName) > 0 then
-        vim.cmd('Rename '.. newName)
+        vim.cmd('Rename ' .. newName)
       end
     end,
   })
 end
 
-M.substitute_word = function (isVisual)
+M.substitute_word = function(isVisual)
   local curWord = isVisual and vim.fn['hasan#utils#get_visual_selection']() or vim.fn.expand('<cword>')
 
   M.input('Substitute Word', {
     default_value = curWord,
     on_submit = function(newWord)
-      local cmd = isVisual and '%s/'..curWord..'/'..newWord..'/gc' or '%s/\\<'..curWord..'\\>/'..newWord..'/gc'
+      local cmd = isVisual and '%s/' .. curWord .. '/' .. newWord .. '/gc'
+        or '%s/\\<' .. curWord .. '\\>/' .. newWord .. '/gc'
 
-      vim.fn['hasan#utils#feedkeys'](':<C-u>'..cmd..'<CR>', 'n')
+      vim.fn['hasan#utils#feedkeys'](':<C-u>' .. cmd .. '<CR>', 'n')
       vim.fn.setreg('z', cmd)
     end,
   })
