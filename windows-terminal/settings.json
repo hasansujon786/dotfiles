@@ -28,10 +28,8 @@
       "scrollbarState": "hidden",
       "colorScheme": "One Half Dark",
       "tabColor": "#1F1F1F",
-      //"tabColor": "#262626",
-      //"opacity": 0,
       "useAcrylic": true,
-      "acrylicOpacity": 0.75,
+      "opacity": 75,
       "background": "#242b38"
     },
     "list": [

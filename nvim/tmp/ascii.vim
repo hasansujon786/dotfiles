@@ -123,3 +123,41 @@
 " --  [[ `--- ---'                               ]],
 " -- }
 
+" -- dashboard.section.header.val = {
+" --   [[ _______             ____   ____.__         ]],
+" --   [[ \      \   ____  ___\   \ /   /|__| _____  ]],
+" --   [[ /   |   \_/ __ \/  _ \   Y   / |  |/     \ ]],
+" --   [[/    |    \  ___(  <_> )     /  |  |  Y Y  \]],
+" --   [[\____|__  /\___  >____/ \___/   |__|__|_|  /]],
+" --   [[        \/     \/                        \/ ]],
+" -- }
+
+" -- M.tabout = function()
+" --   local ok, tabout = om.safe_require("tabout")
+" --   if not ok then
+" --     return
+" --   end
+
+" --   tabout.setup({
+" --     tabkey = "<Tab>", -- key to trigger tabout, set to an empty string to disable
+" --     backwards_tabkey = "<S-Tab>", -- key to trigger backwards tabout, set to an empty string to disable
+" --     completion = true, -- We use tab for completion so set this to true
+" --   })
+" -- end
+" -- M.aerial = function()
+" --   local ok, aerial = om.safe_require("aerial")
+" --   if not ok then
+" --     return
+" --   end
+
+" --   aerial.setup({
+" --     backends = {
+" --       -- default to preferring LSP backend
+" --       ["_"] = { "lsp", "treesitter", "markdown" },
+" --       ruby = { "treesitter" },
+" --     },
+" --     close_on_select = true,
+" --     default_direction = "prefer_right",
+" --     min_width = 30,
+" --   })
+" -- end
