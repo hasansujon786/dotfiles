@@ -8,6 +8,8 @@ local nb_blur_hls = {
   'NormalNC:Nebulous',
 }
 local nb_blacklist_filetypes = {
+  fern = true,
+  NvimTree = true,
   fzf = true,
   floating = true,
   qf = true,

@@ -290,6 +290,7 @@ setup_windowsTerminal() {
   util_print WinTerminal
 
   wtPath=($HOME/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json)
+  # wtPathBeta=($HOME/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState/settings.json)
   $getter install -y microsoft-windows-terminal # --pre
   rm -rf ${wtPath[$machineCode]}
   util_makeSymlinkPath $HOME/dotfiles/windows-terminal/settings.json  ${wtPath[$machineCode]}
