@@ -1,3 +1,4 @@
+" http://shapecatcher.com/
 " Powerline characters:
 "                
 "  ﰖ   
@@ -134,6 +135,16 @@
 "  Value = " ",
 "  Variable = " ",
 "}
+
+" vim.opt.fillchars = {
+"   horiz = '━',
+"   horizup = '┻',
+"   horizdown = '┳',
+"   vert = '┃',
+"   vertleft  = '┫',
+"   vertright = '┣',
+"   verthoriz = '╋',
+" }
 
 " -- local border = {
 " --   { "┏", "FloatBorder" },
