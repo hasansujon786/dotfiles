@@ -103,3 +103,17 @@ function! HorizontalScrollMode( call_char )
     " autocmd WinScrolled * IndentBlanklineRefreshScroll
 endfunction
 " }}}
+
+" nebulous#onWinEnter {{{
+let s:timer = 0
+function! nebulous#onWinEnter(winId) abort
+  call timer_stop(s:timer)
+  let s:timer = timer_start(50, funcref('nebulous#focus_cursor', [a:winId]))
+endfunction
+
+let s:cursorline_disable_ftype = 'dashboard\|floaterm'
+let s:cursorline_focus_ftype = 'list\|\<fern\>'
+if ftype =~ s:cursorline_focus_ftype
+  set winhighlight=CursorLine:CursorLineFocus
+endif
+"}}}

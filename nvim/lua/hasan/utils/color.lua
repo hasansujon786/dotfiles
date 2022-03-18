@@ -1,14 +1,15 @@
 local cmd = vim.cmd
+local api = vim.api
 local M = {}
 
 M.my_nebulous_setup = function()
   require('nebulous').setup({
     init_wb_with_disabled = vim.g.bg_tranparent,
     on_focus = function(winid)
-      vim.fn['nebulous#onWinEnter'](winid)
+      require('hasan.utils.ui.cursorline').cursorline_show(winid)
     end,
     on_blur = function(winid)
-      vim.api.nvim_win_set_option(winid, 'cursorline', false)
+      require('hasan.utils.ui.cursorline').cursorline_hide(winid)
     end,
   })
 end
@@ -19,13 +20,13 @@ M.toggle_bg_tranparent = function()
   if not vim.g.bg_tranparent then
     vim.g.bg_tranparent = true
     require('nebulous').disable_win_blur()
-    vim.cmd(string.format('hi Normal guibg=%s guifg=%s', 'None', normal.fg))
-    vim.cmd([[silent !sed -i '01s/false/true/' ~/dotfiles/nvim/lua/state.lua]])
+    cmd(string.format('hi Normal guibg=%s guifg=%s', 'None', normal.fg))
+    cmd([[silent !sed -i '01s/false/true/' ~/dotfiles/nvim/lua/state.lua]])
   else
     vim.g.bg_tranparent = false
     require('nebulous').init()
-    vim.cmd(string.format('hi Normal guibg=%s guifg=%s', normal.bg, normal.fg))
-    vim.cmd([[silent !sed -i '01s/true/false/' ~/dotfiles/nvim/lua/state.lua]])
+    cmd(string.format('hi Normal guibg=%s guifg=%s', normal.bg, normal.fg))
+    cmd([[silent !sed -i '01s/true/false/' ~/dotfiles/nvim/lua/state.lua]])
   end
 end
 
