@@ -85,6 +85,9 @@ function hasan#highlight#load_custom_highlight() abort
   "/// nui.nvim ///"
   hi NuiMenuItem   guifg=#d99a5e guibg=#2d3343
   hi NuiMenuNr     guifg=#d99a5e
+
+  "/// symboal-outline.nvim ///"
+  hi FocusedSymbol guibg=#4D5666 guifg=NONE
 endfunction
 
 " call hasan#highlight#load_custom_highlight()

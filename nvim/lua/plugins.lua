@@ -4,7 +4,7 @@ local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 local is_installed = fn.isdirectory(install_path) == 1
 if not is_installed then
   print('Installing packer...')
-  fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+  fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
   vim.cmd('packadd packer.nvim')
   print('Installed packer.nvim.')
 end
@@ -128,6 +128,13 @@ return require('packer').startup({
     use({ 'tpope/vim-scriptease', opt = true, cmd = {'PP','Messages'} })
     use({ 'tpope/vim-eunuch', opt = true, cmd = {'Delete','Move','Rename','Mkdir','Chmod'} })
     use({ 'tpope/vim-repeat', opt = true, event = 'BufRead' })
+    use({ 'simrat39/symbols-outline.nvim',
+      opt = true, cmd = { 'SymbolsOutline', 'SymbolsOutlineClose' },
+      setup = function()
+        require('config.symbol_outline').setup()
+      end,
+    })
+    -- use({ 'sunjon/Shade.nvim', config = function() require('config.shade') end })
 
     --> Git ----------------------------------------
     -- use({ 'tpope/vim-fugitive', opt = true, cmd = {'Git','GBrowse','GV'},
