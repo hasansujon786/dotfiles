@@ -136,6 +136,7 @@ local leader = {
     R = { ':lua require("hasan.utils.ui").rename_current_file()<CR>','Rename file' },
     C = 'Copy this file',
     M = 'Move/rename file',
+    X = { '<cmd>call hasan#autocmd#trimWhitespace()<CR>',            'Remove white space'},
 
     w  = { '<Plug>(fix-current-world)',        'Fix current world' },
 
