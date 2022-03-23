@@ -46,9 +46,8 @@
       "colorScheme": "One Half Dark",
       "cursorShape": "filledBox",
       "font": {
-        "face": "Delugia",
-        "size": 14,
-        "weight": "normal"
+        "face": "Delugia Nerd Font",
+        "size": 14
       },
       "opacity": 75,
       "padding": "0, 0, 0, 0",
