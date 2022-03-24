@@ -1,6 +1,6 @@
 local M = {}
 local ui = require('state').ui
-local diagnotic_icons = ui.icons.diagnotic
+local diagnotic_icons  = require('hasan.utils.ui.icons').diagnostics
 
 M.diagnostic_icon_by_severity = function (severity)
   local icon, highlight
@@ -14,7 +14,7 @@ M.diagnostic_icon_by_severity = function (severity)
     icon = diagnotic_icons.Info
     highlight = 'DiagnosticInfo'
   elseif severity == 4 then
-    icon = diagnotic_icons.Error
+    icon = diagnotic_icons.Hint
     highlight = 'DiagnosticHint'
   end
   return icon, highlight

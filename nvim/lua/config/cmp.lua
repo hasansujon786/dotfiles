@@ -1,39 +1,13 @@
-local cmp = require'cmp'
+local cmp = require('cmp')
+local kind_icons = require('hasan.utils.ui.icons').kind
+
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
 end
 local feedkey = function(key, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
-
-local kind_icons = {
-  Function      = '',
-  Method        = '',
-  Constructor   = '',
-  Variable      = '',
-  Field         = '',
-  TypeParameter = '',
-  Constant      = '',
-  Class         = 'פּ',
-  Interface     = '蘒',
-  Struct        = '',
-  Event         = '',
-  Operator      = '',
-  Module        = '',
-  Property      = '',
-  Value         = '',
-  Enum          = '',
-  EnumMember    = '',
-  Reference     = '',
-  Keyword       = '',
-  File          = '',
-  Folder        = '',
-  Color         = '',
-  Unit          = '',
-  Snippet       = '',
-  Text          = '',
-}
 
 cmp.setup({
   documentation = {
@@ -75,14 +49,14 @@ cmp.setup({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     }),
-    ["<c-space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    ['<c-space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     ['<M-space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-    ["<C-q>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    ['<C-q>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     ['<C-l>'] = cmp.mapping(function(_)
       if has_words_before() and vim.fn['vsnip#jumpable'](1) == 1 then
         feedkey('<Plug>(vsnip-jump-next)', '')
       else
-        cmp.complete({config={sources={{name='vsnip'}}}})
+        cmp.complete({ config = { sources = { { name = 'vsnip' } } } })
       end
     end, { 'i', 's' }),
     ['<CR>'] = cmp.mapping.confirm({
@@ -133,7 +107,7 @@ cmp.setup({
         spell =      '暈',
         orgmode =    '✿',
       })[entry.source.name]
-      vim_item.menu = string.format('%s %s', string.sub(vim_item.kind, 1,4), vim_item.menu)
+      vim_item.menu = string.format('%s %s', string.sub(vim_item.kind, 1, 3), vim_item.menu)
 
       -- Kind icons
       -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
@@ -152,19 +126,17 @@ vim.g.vsnip_filetypes = {
   dart = { 'flutter' },
 }
 
-vim.cmd[[autocmd FileType org lua CmpOrgmodeSetup()]]
-vim.cmd[[autocmd FileType NeogitCommitMessage lua CmpNeogitCommitMessageSetup()]]
+vim.cmd([[autocmd FileType org lua CmpOrgmodeSetup()]])
+vim.cmd([[autocmd FileType NeogitCommitMessage lua CmpNeogitCommitMessageSetup()]])
 
 --  inoremap <C-S> <Cmd>lua require('cmp').complete({ config = { sources = { { name = 'vsnip' } } } })<CR>
 -- vim.cmd[[xmap <C-l>   <Plug>(vsnip-cut-text)]]
 
 cmp.setup.cmdline('/', {
   sources = {
-  { name = "buffer", keyword_length = 2 },
+    { name = 'buffer', keyword_length = 2 },
   },
   view = {
-    entries = { name = "wildmenu", separator = " | " }, -- the user can also specify the `wildmenu` literal string.
+    entries = { name = 'wildmenu', separator = ' | ' }, -- the user can also specify the `wildmenu` literal string.
   },
 })
-
-

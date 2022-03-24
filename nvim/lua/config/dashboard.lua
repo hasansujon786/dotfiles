@@ -33,7 +33,7 @@ vim.g.dashboard_custom_section = {
     command = 'SessionLoad'
   },
   d = {
-    description = {'  Find project file                     SPC f f'},
+    description = {'  Find project file                     SPC f f'},
     command = 'Telescope find_files'
   },
   c = {
