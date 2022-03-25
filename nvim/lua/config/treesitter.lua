@@ -11,10 +11,10 @@ require('nvim-treesitter.configs').setup({
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = 'v<tab>', -- maps in normal mode to init the node/scope selection
+      init_selection = 'g<tab>', -- maps in normal mode to init the node/scope selection
+      scope_incremental = 'V', -- increment to the upper scope (as defined in locals.scm)
       node_incremental = '<tab>', -- increment to the upper named parent
       node_decremental = '<s-tab>', -- decrement to the previous node
-      scope_incremental = 'g<tab>', -- increment to the upper scope (as defined in locals.scm)
     },
   },
   context_commentstring = { enable = true },
@@ -49,14 +49,15 @@ require('nvim-treesitter.configs').setup({
         -- You can use the capture groups defined in textobjects.scm
         ['af'] = '@function.outer',
         ['if'] = '@function.inner',
-        ['iF'] = '@call.inner',
-        ['aF'] = '@call.outer',
+        ['ic'] = '@call.inner',
+        ['ac'] = '@call.outer',
         ['iP'] = '@parameter.inner',
         ['aP'] = '@parameter.outer',
-        ['ac'] = '@class.outer',
-        ['ic'] = '@class.inner',
+        ['am'] = '@class.outer',
+        ['im'] = '@class.inner',
         ['ao'] = '@block.outer',
         ['io'] = '@block.inner',
+        ['aM'] = '@comment.outer',
         -- @conditional.inner
         -- @conditional.outer
         -- @loop.inner
@@ -110,9 +111,12 @@ function Treesitter_foldexpr()
     if vim.bo.filetype == 'org' then
       vim.wo.foldexpr = 'OrgmodeFoldExpr()'
     elseif vim.b.treesitter_import_syntax ~= nil then
-      vim.wo.foldexpr = string.format("v:lnum==1?'>1':getline(v:lnum)=~'%s'?1:nvim_treesitter#foldexpr()", vim.b.treesitter_import_syntax)
+      vim.wo.foldexpr = string.format(
+        "v:lnum==1?'>1':getline(v:lnum)=~'%s'?1:nvim_treesitter#foldexpr()",
+        vim.b.treesitter_import_syntax
+      )
     else
-      vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+      vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
     end
   end, 50)
 end
@@ -121,7 +125,7 @@ local treesitter_foldtext_filetypes = 'html,css,javascript,typescript,tsx,typesc
 local autocmds = {
   TS_fold = {
     { 'FileType', treesitter_foldtext_filetypes, 'lua Treesitter_foldexpr()' },
-    { 'FileType', 'javascript,typescript,tsx,typescriptreact,vue,dart', 'let b:treesitter_import_syntax = "import"'}
+    { 'FileType', 'javascript,typescript,tsx,typescriptreact,vue,dart', 'let b:treesitter_import_syntax = "import"' },
   },
 }
 
