@@ -47,7 +47,7 @@ local function lsp_buffer_keymaps(client, bufnr)
   buf_map('n', 'gpI', '<cmd>lua require"lsp.peek".PeekImplementation()<CR>', opts)
 
   buf_map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_map('n', '<F2>', '<cmd>lua require("lsp.util").rename_with_quickfix()<CR>', opts)
+  buf_map('n', '<F2>', '<cmd>lua require("lsp.util").lspRename()<CR>', opts)
   buf_map('n', '<C-LeftMouse>', '<LeftMouse><cmd>lua vim.lsp.buf.definition()<CR>', opts)
   if filetype ~= 'lua' and filetype ~= 'vim' then
     buf_map('n', '<F9>', '<cmd>lua vim.lsp.buf.formatting_sync()<CR><cmd>update<CR>', opts)
@@ -68,6 +68,7 @@ local function lsp_buffer_keymaps(client, bufnr)
   buf_map('n', '<leader>ad', '<cmd>lua vim.diagnostic.setqflist()<CR>', opts)
   buf_map('n', '<leader>aD', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_map('n', '<leader>ai', '<cmd>lua require("lsp.workspace").ts_organize_imports_sync()<CR>', opts)
+  buf_map('n', '<leader>aq', '<cmd>lua require("lsp.util").showLspRenameChanges()<CR>', opts)
 
   if vim.fn.has "nvim-0.6.0" == 1  then
     buf_map('n', '[d', '<cmd>lua require("lsp.diagnosgic").jump_to_diagnostic("prev")<CR>', opts)

@@ -41,39 +41,33 @@ end
 --     vim.notify(msg, vim.log.levels.INFO, { title = ('Rename: %s -> %s'):format(currName, new) })
 --   end
 
-local function rename_handler(err, result, ctx, config)
-  local add_changes_to_quickfix = function(changes)
-    local entries = {}
-    if changes then
-      for uri, edits in pairs(changes) do
-        local bufnr = vim.uri_to_bufnr(uri)
-        for _, edit in ipairs(edits) do
-          local start_line = edit.range.start.line + 1
-          local line = api.nvim_buf_get_lines(bufnr, start_line - 1, start_line, false)[1]
-          table.insert(entries, {
-            bufnr = bufnr,
-            lnum = start_line,
-            col = edit.range.start.character + 1,
-            text = line,
-          })
-        end
-      end
-    end
-    vim.fn.setqflist(entries, 'r')
+M._lspRenameChanges = nil
+M.showLspRenameChanges = function()
+  local entries = {}
+  if not M._lspRenameChanges then
+    return
   end
 
-  if err then
-    vim.notify(('Error running lsp query "%s": %s'):format('textDocument/rename', err), vim.log.levels.ERROR)
+  for uri, edits in pairs(M._lspRenameChanges) do
+    local bufnr = vim.uri_to_bufnr(uri)
+    for _, edit in ipairs(edits) do
+      local start_line = edit.range.start.line + 1
+      local line = api.nvim_buf_get_lines(bufnr, start_line - 1, start_line, false)[1]
+      table.insert(entries, {
+        bufnr = bufnr,
+        lnum = start_line,
+        col = edit.range.start.character + 1,
+        text = line,
+      })
+    end
   end
-  if result and result.changes then
-    -- notify_changes(result.changes)
-    add_changes_to_quickfix(result.changes)
-  end
-  vim.lsp.handlers['textDocument/rename'](err, result, ctx, config)
+  vim.fn.setqflist(entries, 'r')
+
+  vim.cmd([[copen]])
 end
 
--- https://www.youtube.com/watch?v=tAVxxdFFYMU
-M.rename_with_quickfix = function()
+M.lspRename = function()
+  -- https://www.youtube.com/watch?v=tAVxxdFFYMU
   -- local tshl = require('nvim-treesitter-playground.hl-info').get_treesitter_hl()
   -- if tshl and #tshl > 0 then
   --   local ind = tshl[#tshl]:match('^.*()%*%*.*%*%*')
@@ -85,12 +79,62 @@ M.rename_with_quickfix = function()
     default_value = currName,
     on_submit = function(newName)
       if #newName > 0 and newName ~= currName then
-        local position_params = vim.lsp.util.make_position_params()
-        position_params.newName = newName
-        vim.lsp.buf_request(0, 'textDocument/rename', position_params, rename_handler)
+        M._lspRename(newName)
       end
     end,
   })
+end
+
+M._lspRename = function(value)
+  local lsp_params = vim.lsp.util.make_position_params()
+  if not value or #value == 0 then
+    return
+  end
+
+  -- request lsp rename
+  lsp_params.newName = value
+  vim.lsp.buf_request(0, 'textDocument/rename', lsp_params, function(err, res, ctx, _)
+    if err then
+      vim.notify(('Error running lsp query "%s": %s'):format('textDocument/rename', err), vim.log.levels.ERROR)
+      return
+    end
+    if not res then
+      return
+    end
+
+    -- apply renames
+    local client = vim.lsp.get_client_by_id(ctx.client_id)
+    vim.lsp.util.apply_workspace_edit(res, client.offset_encoding)
+
+    -- print renames
+    local changed_files_count = 0
+    local changed_instances_count = 0
+
+    if res.documentChanges then
+      for _, changed_file in pairs(res.documentChanges) do
+        changed_files_count = changed_files_count + 1
+        changed_instances_count = changed_instances_count + #changed_file.edits
+      end
+    elseif res.changes then
+      for _, changed_file in pairs(res.changes) do
+        changed_instances_count = changed_instances_count + #changed_file
+        changed_files_count = changed_files_count + 1
+      end
+      M._lspRenameChanges = res.changes
+    end
+
+    -- compose the right print message
+    print(
+      string.format(
+        'renamed %s instance%s in %s file%s. %s',
+        changed_instances_count,
+        changed_instances_count == 1 and '' or 's',
+        changed_files_count,
+        changed_files_count == 1 and '' or 's',
+        changed_files_count > 1 and "To save them run ':wa'" or ''
+      )
+    )
+  end)
 end
 
 function M.references_with_quickfix()
