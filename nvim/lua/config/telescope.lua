@@ -27,7 +27,7 @@ require('telescope').setup({
     generic_sorter = require('telescope.sorters').get_generic_fuzzy_sorter,
     -- prompt_prefix = '  ',
     prompt_prefix = '  ',
-    selection_caret = ' ',
+    selection_caret = '❯ ',
     layout_config = {
       height = 0.7,
       width = 0.8,
