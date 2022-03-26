@@ -2,7 +2,7 @@ local api = vim.api
 local M = {}
 
 local cursorline_focus_ft = { list = true, fern = true, qf = true }
-local cursorline_persist_ft = { qf = true, fern = true }
+local cursorline_persist_ft = { qf = true, fern = true, NvimTree = true }
 local cursorline_disable_ft = { dashboard = true, floaterm = true, TelescopePrompt = true }
 local cursorline_disable_bt = { prompt = true }
 

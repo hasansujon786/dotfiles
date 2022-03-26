@@ -61,5 +61,5 @@ require('lualine').setup({
     lualine_z = {},
   },
   tabline = {},
-  extensions = { 'fern', 'quickfix' },
+  extensions = { 'fern', 'quickfix', 'nvim-tree', 'symbols-outline', 'toggleterm' },
 })

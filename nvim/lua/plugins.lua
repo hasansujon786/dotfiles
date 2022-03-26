@@ -69,8 +69,9 @@ return require('packer').startup({
     use({ 'nvim-telescope/telescope-fzy-native.nvim' })
     use({ 'nvim-telescope/telescope-file-browser.nvim', opt = true, event = 'CursorHold', })
     use({ 'hasansujon786/telescope-yanklist.nvim', opt = true, event = 'CursorHold', })
-
+    use({ 'kyazdani42/nvim-tree.lua', config = [[require('config.nvim_tree')]] })
     use({ 'lambdalisue/fern.vim',
+      disable = true,
       config = function() require('config.fern') end,
       opt = true, event = 'CursorHold',
       requires = {

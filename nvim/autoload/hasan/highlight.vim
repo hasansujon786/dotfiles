@@ -88,6 +88,10 @@ function hasan#highlight#load_custom_highlight() abort
 
   "/// symboal-outline.nvim ///"
   hi FocusedSymbol guibg=#4D5666 guifg=NONE
+
+  hi! link NvimTreeCursorLine CursorLineFocus
+  hi! link NvimTreeIndentMarker IndentBlanklineChar
+  hi NvimTreeWindowPicker guibg=#2d3343 guifg=#d99a5e
 endfunction
 
 " call hasan#highlight#load_custom_highlight()
