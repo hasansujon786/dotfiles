@@ -301,9 +301,9 @@ local leader_visual = {
     name = '+open',
     y = { ':lua require("yanklist").yanklist({is_visual=true,initial_mode="normal"})<CR>', 'Yank list' },
   },
-  f = {
-    name = '+file',
-    ['.'] = {':lua require("hasan.utils.ui").substitute_word(true)<CR>','Substitute word'},
+  c = {
+    name = '+change',
+    w = {':lua require("hasan.utils.ui").substitute_word(true)<CR>','Substitute word'},
   },
   ['/'] = {
     name = '+search',
