@@ -10,7 +10,7 @@ function hasan#highlight#load_custom_highlight() abort
   hi CursorLineFocus    guibg=#3E4452
   hi IncSearch          guibg=#e86671 gui=underline
   hi SignColumn         guibg=NONE
-  hi FloatBorder        guibg=NONE guifg=#61AFEF
+  hi FloatBorder        guibg=NONE guifg=#4dbdcb
   hi! link NormalFloat Normal
   hi! link Folded Comment
   hi! link WhichKeyFloat Pmenu
@@ -49,7 +49,8 @@ function hasan#highlight#load_custom_highlight() abort
   hi DashboardShortcut guifg=#5c6370
   hi DashboardCenter   guifg=#5c6370
   hi! link HLNext IncSearch
-  hi! link TelescopeBorder Comment
+  hi TelescopeBorder guifg=#465673
+  hi TelescopePromptTitle guifg=#d99a5e
   hi! link TelescopePreviewBorder TelescopeBorder
   hi! link TelescopeResultsBorder TelescopeBorder
   hi! link TelescopePromptBorder  TelescopeBorder
