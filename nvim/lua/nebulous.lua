@@ -1,11 +1,15 @@
+local fn = vim.fn
+local api = vim.api
 local M = { _configs = {} }
 local _utils = require('hasan.utils')
 local nb_is_disabled = true
 local is_win_blur_disabled = true
 local nb_blur_hls = {
-  'CursorLineNr:LineNr',
-  'Normal:Nebulous',
-  'NormalNC:Nebulous',
+  'LineNr:Nebulous',
+  'LineNrAbove:Nebulous',
+  'LineNrBelow:Nebulous',
+  -- 'Normal:Nebulous',
+  -- 'NormalNC:Nebulous',
 }
 local nb_blacklist_filetypes = {
   fern = true,
@@ -37,6 +41,7 @@ local focusWindow = function (winid)
     return
   end
   vim.fn.setwinvar(winid, '&winhighlight', '')
+  pcall(vim.fn.matchdelete, winid, winid)
 end
 
 local blurWindow = function(winid)
@@ -44,12 +49,13 @@ local blurWindow = function(winid)
     return
   end
   vim.fn.setwinvar(winid, '&winhighlight', table.concat(nb_blur_hls, ','))
+  pcall(fn.matchadd, 'Nebulous', '.', 200, winid, { window = winid })
 end
 
 M.setup_colors = function()
   vim.cmd[[
     " hi! link Nebulous PmenuThumb
-    hi Nebulous guibg=#323c4e
+    hi Nebulous guifg=#323c4e
     hi EndOfBuffer guibg=NONE
   ]]
 end

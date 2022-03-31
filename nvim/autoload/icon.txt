@@ -142,15 +142,15 @@
 "  Variable = " ",
 "}
 
-" vim.opt.fillchars = {
-"   horiz = '━',
-"   horizup = '┻',
-"   horizdown = '┳',
-"   vert = '┃',
-"   vertleft  = '┫',
-"   vertright = '┣',
-"   verthoriz = '╋',
-" }
+vim.opt.fillchars = {
+  horiz = '━',
+  horizup = '┻',
+  horizdown = '┳',
+  vert = '┃',
+  vertleft  = '┫',
+  vertright = '┣',
+  verthoriz = '╋',
+}
 
 " -- local border = {
 " --   { "┏", "FloatBorder" },
