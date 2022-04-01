@@ -220,7 +220,9 @@ setup_node () {
   # curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 
   if [[ "$machine" == "windows" ]]; then
-    $getter install -y nodejs
+    # $getter install -y nodejs
+    # choco install nvm
+    $getter install -y nodejs-lts
   elif [[ "$machine" == "linux" ]]; then
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
     export NVM_DIR="$HOME/.config/nvm"
