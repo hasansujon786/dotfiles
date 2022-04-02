@@ -35,7 +35,8 @@ function hasan#highlight#load_custom_highlight() abort
   hi DiagnosticHeader  guifg=#56b6c2 gui=bold
 
   "/// Plugins ///"
-  hi IndentBlanklineChar guifg=#3B4048
+  hi! link HLNext IncSearch
+  hi IndentBlanklineChar guifg=#323a48
   hi QuickScopePrimary   guifg=tomato gui=underline
   hi QuickScopeSecondary guifg=#d78787 gui=underline
   hi Sneak      gui=bold guibg=#ccff88 guifg=black
@@ -49,7 +50,6 @@ function hasan#highlight#load_custom_highlight() abort
   hi DashboardFooter   guifg=#5c6370
   hi DashboardShortcut guifg=#5c6370
   hi DashboardCenter   guifg=#5c6370
-  hi! link HLNext IncSearch
   hi TelescopeBorder guifg=#465673
   hi TelescopePromptTitle guifg=#d99a5e
   hi! link TelescopePreviewBorder TelescopeBorder
@@ -91,6 +91,7 @@ function hasan#highlight#load_custom_highlight() abort
   "/// symboal-outline.nvim ///"
   hi FocusedSymbol guibg=#4D5666 guifg=NONE
 
+  "/// nvim-tree.nvim ///"
   hi! link NvimTreeCursorLine CursorLineFocus
   hi! link NvimTreeIndentMarker IndentBlanklineChar
   hi NvimTreeWindowPicker guibg=#2d3343 guifg=#d99a5e
