@@ -14,26 +14,31 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 local function lsp_document_highlight(client)
   -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec([[
-    augroup lsp_document_highlight
-      autocmd! * <buffer>
-      autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-      autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-    augroup END
-      ]], false)
+    vim.api.nvim_exec(
+      [[
+      augroup lsp_document_highlight
+        autocmd! * <buffer>
+        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved,WinLeave,BufWinLeave,BufLeave <buffer> lua vim.lsp.buf.clear_references()
+      augroup END
+      ]],
+      false
+    )
     -- autocmd BufWritePre *.js,*.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
   end
 end
 
 local function lsp_buffer_keymaps(client, bufnr)
-  local function buf_map(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+  local opts = { noremap = true, silent = true }
+  local function buf_map(...)
+    vim.api.nvim_buf_set_keymap(bufnr, ...)
+  end
+  local function buf_set_option(...)
+    vim.api.nvim_buf_set_option(bufnr, ...)
+  end
   local filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
   --Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Mappings.
-  local opts = { noremap=true, silent=true }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
@@ -52,13 +57,13 @@ local function lsp_buffer_keymaps(client, bufnr)
   if filetype ~= 'lua' and filetype ~= 'vim' then
     buf_map('n', '<F9>', '<cmd>lua vim.lsp.buf.formatting_sync()<CR><cmd>update<CR>', opts)
   end
-  local code_action_keys = {'<C-q>', '<C-space>', '<A-space>'}
+  local code_action_keys = { '<C-q>', '<C-space>', '<A-space>' }
   for _, action_key in ipairs(code_action_keys) do
     buf_map('n', action_key, ':Telescope lsp_code_actions theme=get_cursor<CR>', opts)
     buf_map('v', action_key, ':Telescope lsp_range_code_actions theme=get_cursor<CR>', opts)
   end
 
-  buf_map('n', '<leader>.',  '<cmd>Telescope lsp_document_symbols<cr>', opts)
+  buf_map('n', '<leader>.', '<cmd>Telescope lsp_document_symbols<cr>', opts)
   buf_map('n', '<leader>fs', '<cmd>lua vim.lsp.buf.formatting_sync()<CR><cmd>update<CR>', opts)
   buf_map('x', '<leader>fs', '<ESC><cmd>lua vim.lsp.buf.range_formatting()<CR><cmd>update<CR>', opts)
   buf_map('n', '<leader>a+', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
@@ -70,11 +75,12 @@ local function lsp_buffer_keymaps(client, bufnr)
   buf_map('n', '<leader>ai', '<cmd>lua require("lsp.workspace").ts_organize_imports_sync()<CR>', opts)
   buf_map('n', '<leader>aq', '<cmd>lua require("lsp.util").showLspRenameChanges()<CR>', opts)
 
-  if vim.fn.has "nvim-0.6.0" == 1  then
+  if vim.fn.has('nvim-0.6.0') == 1 then
     buf_map('n', '[d', '<cmd>lua require("lsp.diagnosgic").jump_to_diagnostic("prev")<CR>', opts)
     buf_map('n', ']d', '<cmd>lua require("lsp.diagnosgic").jump_to_diagnostic("next")<CR>', opts)
     buf_map('n', '<leader>al', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   else
+    -- old api
     buf_map('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = "double"}})<CR>', opts)
     buf_map('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = "double"}})<CR>', opts)
     buf_map('n', '<leader>al', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({show_header=false,border="double"})<CR>', opts)
