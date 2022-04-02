@@ -1,22 +1,14 @@
 local _utils = require('hasan.utils')
 local utils = require('nebulous.utils')
 local view = require('nebulous.view')
-local configs = require('nebulous.configs').configs
+local config = require('nebulous.configs')
 
 local fn = vim.fn
 local api = vim.api
 local M = {}
 
-M.setup_colors = function()
-  vim.cmd([[
-    " hi! link Nebulous PmenuThumb
-    hi Nebulous guifg=#323c4e
-    hi EndOfBuffer guibg=NONE
-  ]])
-end
-
 M.update_all_windows = function(shouldCheckFloat)
-  if configs.nb_is_disabled then
+  if config.options.nb_is_disabled then
     return
   end
 
@@ -30,18 +22,18 @@ M.update_all_windows = function(shouldCheckFloat)
 
   for _, curid in ipairs(api.nvim_list_wins()) do
     if utils.is_current_window(curid) then
-      if configs.on_focus then
-        configs.on_focus(curid)
+      if config.options.on_focus then
+        config.options.on_focus(curid)
       end
 
-      if not configs.is_win_blur_disabled then
+      if not config.options.is_win_blur_disabled then
         view.focusWindow(curid)
       end
     else
-      if configs.on_blur then
-        configs.on_blur(curid)
+      if config.options.on_blur then
+        config.options.on_blur(curid)
       end
-      if not configs.is_win_blur_disabled then
+      if not config.options.is_win_blur_disabled then
         view.blurWindow(curid)
       end
     end
@@ -57,9 +49,14 @@ M.on_focus_gained = function()
 end
 
 M.init = function(init_state)
-  configs.nb_is_disabled = false
-  configs.is_win_blur_disabled = _utils.get_default(init_state, false)
-  M.setup_colors()
+  config.options.nb_is_disabled = false
+  config.options.is_win_blur_disabled = _utils.get_default(init_state, false)
+  -- setup colors
+  vim.cmd([[
+    " hi! link Nebulous PmenuThumb
+    hi Nebulous guifg=#323c4e
+    hi EndOfBuffer guibg=NONE
+  ]])
   fn['nebulous#autocmds']()
   M.update_all_windows()
 end
@@ -70,12 +67,12 @@ M.disable = function()
     view.focusWindow(curid)
     api.nvim_win_set_option(curid, 'cursorline', true)
   end
-  configs.nb_is_disabled = true
-  configs.is_win_blur_disabled = true
+  config.options.nb_is_disabled = true
+  config.options.is_win_blur_disabled = true
 end
 
 M.toggle = function()
-  if configs.nb_is_disabled or configs.is_win_blur_disabled then
+  if config.options.nb_is_disabled or config.options.is_win_blur_disabled then
     M.init()
     print('[Nebulous] on')
   else
@@ -88,11 +85,11 @@ M.disable_win_blur = function()
   for _, curid in ipairs(api.nvim_list_wins()) do
     view.focusWindow(curid)
   end
-  configs.is_win_blur_disabled = true
+  config.options.is_win_blur_disabled = true
 end
 
 M.toggle_win_blur = function()
-  if configs.is_win_blur_disabled or configs.nb_is_disabled then
+  if config.options.is_win_blur_disabled or config.options.nb_is_disabled then
     M.init()
     print('[Nebulous] win blur on')
   else
@@ -105,10 +102,8 @@ end
 -- lua require("nebulous").toggle_win_blur()
 
 M.setup = function(opts)
-  local _con = require('nebulous.configs')
-  opts = _utils.merge(_con.default, opts or {})
-  configs = opts
-  _con.updateConfigs(opts)
+  opts = _utils.merge(config.default, opts or {})
+  config.updateConfigs(opts)
 
   M.init(opts.init_wb_with_disabled)
 end

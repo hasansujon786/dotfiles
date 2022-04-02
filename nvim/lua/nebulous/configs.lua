@@ -23,11 +23,10 @@ M.default = {
   },
 }
 
-M.configs = M.default
+M.options = M.default
 
 M.updateConfigs = function(opts)
-  print('updating')
-  M.configs = opts
+  M.options = opts
 end
 
 return M
