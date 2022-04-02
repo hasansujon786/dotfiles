@@ -11,6 +11,13 @@ local utils = {
   is_current_window = function(winid)
     return vim.api.nvim_get_current_win() == winid
   end,
+  setup_colors = function()
+    vim.cmd([[
+      " hi! link Nebulous PmenuThumb
+      hi Nebulous guifg=#323c4e
+      hi EndOfBuffer guibg=NONE
+    ]])
+  end,
 }
 
 return utils
