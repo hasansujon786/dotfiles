@@ -1,13 +1,15 @@
 # Basic Settings
 set shell powershell
 set preview true     # set previewer ~/.config/lf/pv.sh
+set previewer "C:\\Users\\hasan\\dotfiles\\tui\\lf\\preview.bat"
 set drawbox true
 set icons true
 set ignorecase true
 set incsearch true
 set tabstop 2
 set scrolloff 5
-set info size
+# set info size
+# set filesep " "
 set hidden true
 set icons true
 set mouse true
@@ -84,6 +86,11 @@ map U invert
 map v :toggle; down
 map V :toggle; up
 map <esc> :clear; setfilter
+map <f-5> push :source<space>C:/Users/hasan/dotfiles/tui/lf/lfrc<enter>
+map Y :{{
+  &echo $Env:fx | clip
+  echo 'file name copied..'
+}}
 
 
 map a push :touch<space>

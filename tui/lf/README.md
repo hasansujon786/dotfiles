@@ -3,6 +3,7 @@ https://pkg.go.dev/github.com/gokcehan/lf
 
 https://github.com/BrodieRobertson/dotfiles/blob/master/config/lf/lfrc
 https://git.alex.balgavy.eu/dotfiles/file/lf/lfrc.html
+https://medium.com/@a.hr.mostafavi/using-lf-file-manager-on-windows-fc4f1e4e1442
 
 $ => execute shell commands
   ex: map i $less %f%

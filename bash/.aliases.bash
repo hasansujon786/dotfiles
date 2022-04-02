@@ -110,9 +110,6 @@ alias gck='git checkout ' # switch brnch | -b to create
 alias glo='git log --oneline --decorate'
 alias lg='lazygit'
 
-# termux
-alias ex='cd ~/storage/external-1'
-
 # kill port
 alias fip='tasklist | findstr'
 alias tk='taskkill //F //IM'
