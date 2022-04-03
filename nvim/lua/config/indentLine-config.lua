@@ -18,6 +18,7 @@ local indent_wrap_mapping = function(mapping)
   end
 end
 
+maps.nnoremap('0', indent_wrap_mapping('0'))
 maps.nnoremap('zA', indent_wrap_mapping('zA'))
 maps.nnoremap('zC', indent_wrap_mapping('zC'))
 maps.nnoremap('zM', indent_wrap_mapping('zM'))

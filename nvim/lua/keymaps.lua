@@ -12,13 +12,13 @@ else
   maps.vnoremap('q', '<ESC>:nohlsearch<CR>')
 end
 -- run last : command easily
-maps.nnoremap('<CR>', ':<up>', {silent = false})
-vim.cmd[[autocmd CmdwinEnter * nnoremap <buffer><CR> <CR>]]
+maps.nnoremap('<CR>', ':<up>', { silent = false })
+vim.cmd([[autocmd CmdwinEnter * nnoremap <buffer><CR> <CR>]])
 -- Prompt before quitting
 maps.nnoremap('ZZ', ':Quit!<CR>')
 -- Use Q to record macros
 maps.nnoremap('Q', 'q')
-maps.vnoremap('@', ':norm @', {silent = false})
+maps.vnoremap('@', ':norm @', { silent = false })
 
 -- Copy Paste -----------------------------------
 -- Prevent selecting and pasting from overwriting what you originally copied.
@@ -42,10 +42,10 @@ maps.cnoremap('<A-p>', '<C-R>"')
 
 -- Modify & rearange texts ----------------------
 -- increase selected numbers
-maps.xnoremap('+',' g<C-a>')
+maps.xnoremap('+', ' g<C-a>')
 maps.xnoremap('-', 'g<C-x>')
 -- Print the number of occurrences of the current word under the cursor
-maps.vmap('<C-g>', '*<C-O>:%s///gn<CR>', {silent=false})
+maps.vmap('<C-g>', '*<C-O>:%s///gn<CR>', { silent = false })
 -- A fix to select end of line
 maps.xnoremap('$', 'g_')
 -- Select a block {} of code
@@ -83,8 +83,8 @@ maps.nnoremap('<s-tab>', 'zA')
 maps.nnoremap('H', 'H:exec "norm! ". &scrolloff . "k"<cr>')
 maps.nnoremap('L', 'L:exec "norm! ". &scrolloff . "j"<cr>')
 -- Character wise jumps always
-maps.nnoremap("'", "`")
-maps.vnoremap("'", "`")
+maps.nnoremap("'", '`')
+maps.vnoremap("'", '`')
 maps.nnoremap("''", "`'")
 maps.vnoremap("''", "`'")
 -- Vertical scrolling
@@ -132,7 +132,6 @@ maps.nmap('[q', ':cprev<CR>')
 maps.nmap(']Q', ':clast<CR>')
 maps.nmap('[Q', ':cfirst<CR>')
 
-
 -- Search ---------------------------------------
 -- Pressing * or # searches for the current selection
 maps.vnoremap('*', ':<C-u>call hasan#utils#visualSelection("", "")<CR>/<C-R>=@/<CR><CR>')
@@ -144,8 +143,8 @@ maps.vnoremap('#', ':<C-u>call hasan#utils#visualSelection("", "")<CR>?<C-R>=@/<
 maps.nnoremap('c*', ":let @/='\\<'.expand('<cword>').'\\>'<CR>cgn")
 maps.xnoremap('C', '"cy:let @/=@c<CR>cgn')
 -- Delete & change all matches
-maps.nnoremap('dm', ':%s/<c-r>///g<CR>', {silent = false})
-maps.nnoremap('cm', ':%s/<c-r>///g<Left><Left>', {silent = false})
+maps.nnoremap('dm', ':%s/<c-r>///g<CR>', { silent = false })
+maps.nnoremap('cm', ':%s/<c-r>///g<Left><Left>', { silent = false })
 
 -- Insert mode ----------------------------------
 -- Move cursor by character
@@ -164,11 +163,11 @@ maps.inoremap('<C-e>', '<End>')
 maps.cnoremap('<C-a>', '<Home>')
 maps.cnoremap('<C-e>', '<End>')
 -- Delete by characters & words
-maps.inoremap('<C-d>',  '<Delete>')
-maps.inoremap('<A-d>',  '<C-O>dw')
+maps.inoremap('<C-d>', '<Delete>')
+maps.inoremap('<A-d>', '<C-O>dw')
 maps.inoremap('<A-BS>', '<C-W>')
-maps.cnoremap('<C-d>',  '<Delete>')
-maps.cnoremap('<A-d>',  '<S-Right><C-W><Delete>')
+maps.cnoremap('<C-d>', '<Delete>')
+maps.cnoremap('<A-d>', '<S-Right><C-W><Delete>')
 maps.cnoremap('<A-BS>', '<C-W>')
 -- Make & move to a new line under the cursor
 maps.inoremap('<A-CR>', '<C-o>o')
@@ -182,10 +181,8 @@ maps.inoremap('<C-k><C-p>', '<c-g>u<Esc>[s1z=`]a<c-g>u')
 -- Uppercase current word
 maps.inoremap('<C-k><C-u>', '<c-g>u<Esc>BgUiwgi')
 
-
 -- Terminal -------------------------------------
 maps.map('t', '<C-o>', '<C-\\><C-n>')
-
 
 -- Function keys --------------------------------
 maps.nnoremap('<F3>', ':set paste! paste?<CR>')
@@ -194,7 +191,6 @@ maps.nnoremap('<F7>', ':setlocal spell! spell?<CR>')
 maps.inoremap('<F7>', '<C-o>:setlocal spell! spell?<CR>')
 maps.nnoremap('<F5>', '<Esc>:syntax sync fromstart<CR>')
 maps.inoremap('<F5>', '<C-o>:syntax sync fromstart<CR>')
-
 
 -- Leader keys ----------------------------------
 -- Easier system clipboard usage
@@ -205,20 +201,20 @@ maps.vnoremap('<leader>y', '"+ygv<Esc>')
 maps.nnoremap('<leader>d', '"+d')
 maps.vnoremap('<leader>d', '"+d')
 -- File commands
-maps.nnoremap('<leader>fC', ':w <C-R>=expand("%")<CR>', {silent = false})
-maps.nnoremap('<leader>fM', ':Move <C-R>=expand("%")<CR>', {silent = false})
-maps.nnoremap('<leader>fe', ":edit <C-R>=expand('%:p:h') . '\\'<CR>", {silent = false})
+maps.nnoremap('<leader>fC', ':w <C-R>=expand("%")<CR>', { silent = false })
+maps.nnoremap('<leader>fM', ':Move <C-R>=expand("%")<CR>', { silent = false })
+maps.nnoremap('<leader>fe', ":edit <C-R>=expand('%:p:h') . '\\'<CR>", { silent = false })
 -- packer commands
-maps.nnoremap('<leader>vpc', ':PackerCompile<CR>', {silent = false})
+maps.nnoremap('<leader>vpc', ':PackerCompile<CR>', { silent = false })
 -- run project cmd
 -- maps.nnoremap('<leader>p:', ':silent ! tmux-windowizer $(pwd) ', {silent = false})
 -- maps.nnoremap('<leader>p;', ':silent ! tmux-send-keys $(pwd) ', {silent = false})
 
 -- Floaterm
-vim.g.floaterm_keymap_new    = '<C-\\>c'
-vim.g.floaterm_keymap_prev   = '<C-\\>p'
-vim.g.floaterm_keymap_next   = '<C-\\>n'
-vim.g.floaterm_keymap_kill   = '<A-q>'
+vim.g.floaterm_keymap_new = '<C-\\>c'
+vim.g.floaterm_keymap_prev = '<C-\\>p'
+vim.g.floaterm_keymap_next = '<C-\\>n'
+vim.g.floaterm_keymap_kill = '<A-q>'
 vim.g.floaterm_keymap_toggle = '<A-m>'
 maps.nnoremap('<A-m>', ':FloatermToggle<CR>')
 maps.nnoremap(']t', ':FloatermToggle<CR><C-\\><C-n>')
@@ -226,7 +222,7 @@ maps.nnoremap('[t', ':FloatermToggle<CR><C-\\><C-n>')
 -- Telescope
 maps.nnoremap('<C-p>', ':lua require("telescope.builtin").oldfiles()<CR>')
 maps.nnoremap('<A-x>', '<cmd>lua require("hasan.telescope.custom").commands()<cr>')
-maps.vnoremap('/',  ':lua require("hasan.telescope.custom").grep_string(true)<CR>')
+maps.nnoremap('<A-/>', '<cmd>lua require("hasan.telescope.custom").grep_string(false)<CR>')
+maps.vnoremap('<A-/>', '<cmd>lua require("hasan.telescope.custom").grep_string(true)<CR>')
 maps.nnoremap('//', ':lua require("hasan.telescope.custom").curbuf(false)<cr>')
-maps.nnoremap('<A-/>', 'viw:lua require("hasan.telescope.custom").curbuf(true)<cr>')
-maps.vnoremap('<A-/>', ':lua require("hasan.telescope.custom").curbuf(true)<cr>')
+maps.vnoremap('/', ':lua require("hasan.telescope.custom").curbuf(true)<cr>')

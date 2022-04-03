@@ -2,5 +2,13 @@
   "log": {
     "prefix": ["pp"],
     "body": "P(${1:$TM_SELECTED_TEXT})"
+  },
+  "defer": {
+    "prefix": ["defer"],
+    "body": [
+      "vim.defer_fn(function()",
+      "  ${0:-- your code}",
+      "end, ${1:1000})"
+    ]
   }
 }
