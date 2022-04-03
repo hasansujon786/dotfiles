@@ -225,6 +225,21 @@ function M.Logger:error(msg, opts)
   log(vim.log.levels.ERROR, msg, opts or {})
 end
 
+function M.toggle(option, silent)
+  local info = vim.api.nvim_get_option_info(option)
+  local scopes = { buf = 'bo', win = 'wo', global = 'o' }
+  local scope = scopes[info.scope]
+  local options = vim[scope]
+  options[option] = not options[option]
+  if silent ~= true then
+    if options[option] then
+      M.Logger:log('enabled vim.' .. scope .. '.' .. option)
+    else
+      M.Logger:warn('disabled vim.' .. scope .. '.' .. option)
+    end
+  end
+end
+
 M.augroup = function(group)
   -- local id = vim.api.nvim_create_augroup(group, { clear = true })
   vim.api.nvim_create_augroup(group, { clear = true })

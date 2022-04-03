@@ -30,11 +30,6 @@ M.toggle_bg_tranparent = function()
   end
 end
 
-M.toggle_onedark = function()
-  require('onedark').toggle()
-  print(vim.g.onedark_style)
-end
-
 -- Define bg color
 -- @param group Group
 -- @param color Color

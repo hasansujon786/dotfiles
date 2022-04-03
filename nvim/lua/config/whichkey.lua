@@ -134,6 +134,7 @@ local leader = {
     y = { ':call hasan#utils#CopyFileNameToClipBoard(1)<CR>',        'Yank path name' },
     Y = { ':call hasan#utils#CopyFileNameToClipBoard(0)<CR>',        'Yank file name' },
     R = { ':lua require("hasan.utils.ui").rename_current_file()<CR>','Rename file' },
+    e = 'Edit in current dir',
     C = 'Copy this file',
     M = 'Move/rename file',
     X = { '<cmd>call hasan#autocmd#trimWhitespace()<CR>',            'Remove white space'},
@@ -189,11 +190,11 @@ local leader = {
   t = {
     name = '+toggle',
     b = { ':lua require("hasan.utils.color").toggle_bg_tranparent()<CR>',  'Toggle transparency' },
-    B = { ':lua require("hasan.utils.color").toggle_onedark()<CR>',        'Toggle Onedark' },
+    B = 'Toggle Onedark',
 
-    c = { ':setlocal cursorcolumn!<CR>',            'cursorcolumn' },
-    w = { ':call hasan#utils#toggleWrap()<CR>',     'toggle-wrap' },
-    ['*'] = { ':call autohl#_AutoHighlightToggle()<CR>','Highlight same words' },
+    c = { '<cmd>lua require("hasan.utils").toggle("cursorcolumn")<CR>',    'Toggle cursorcolumn' },
+    w = { '<cmd>lua require("hasan.utils").toggle("wrap")<CR>',            'Toggle wrap' },
+    H = { ':call autohl#_AutoHighlightToggle()<CR>',                       'Highlight same words' },
 
     t = {
       name  = '+task-and-timer',
@@ -270,16 +271,15 @@ local leader = {
 
   y = 'Yank to CB',
   d = 'Delete to CB',
-  q = { '<cmd>Quit<CR>',                                  'Close window' },
-  r = { '<cmd>call hasan#utils#cycle_numbering()<CR>',    'Cycle number' },
-  R = { '<cmd>lua require("nebulous").toggle_win_blur()<CR>',      'Toggle Nebulous' },
-  s = { '<cmd>write<CR>',                                 'Save file' },
-  x = { '<cmd>call hasan#utils#buffer#_open_scratch_buffer()<CR>',   'Open up scratch buffer' },
-  z = { 'za',                                             'Fold/Unfold' },
-  m = { ':lua require("harpoon.mark").add_file()<CR>',    'Mark to Harpoon' },
+  q = { '<cmd>Quit<CR>',                                               'Close window' },
+  r = { '<cmd>lua require("hasan.utils.ui").cycle_numbering()<CR>',    'Cycle number' },
+  R = { '<cmd>lua require("nebulous").toggle_win_blur()<CR>',          'Toggle Nebulous' },
+  s = { '<cmd>write<CR>',                                              'Save file' },
+  x = { '<cmd>call hasan#utils#buffer#_open_scratch_buffer()<CR>',     'Open up scratch buffer' },
+  M = { ':lua require("harpoon.mark").add_file()<CR>',                 'Mark to Harpoon' },
 
   -- ['.'] = common.buffers_cwd,
-  e = {'<cmd>lua require("hasan.org").toggle_org_float()<CR>',  'Toggle org float'},
+  e = {'<cmd>lua require("hasan.org").toggle_org_float()<CR>',         'Toggle org float'},
   ['>'] = common.buffers_all,
   ['<space>'] = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find File in project' },
   ['<tab>'] = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', 'Open Harpoon' },

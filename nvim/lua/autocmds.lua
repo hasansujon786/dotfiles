@@ -4,6 +4,9 @@ if vim.fn.exists('g:hasan_telescope_buffers') == 0 then
 end
 
 local autocmds = {
+  packer_user_config = {
+    {'BufWritePost plugins.lua source <afile> | PackerCompile'}
+  },
   vimrcEx = {
     {'InsertEnter * norm zz'}, -- center document
     {'VimResized * :wincmd ='}, -- Vim/tmux layout rebalancing

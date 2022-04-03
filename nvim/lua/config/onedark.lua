@@ -2,7 +2,7 @@ require('onedark').setup({
   style = 'cool',
   transparent = vim.g.bg_tranparent,
   term_colors = false,
-  toggle_style_key = '<leader>ts',
+  toggle_style_key = '<leader>tB',
   toggle_style_list = { 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light' },
   -- colors = {},
   -- highlights = {},

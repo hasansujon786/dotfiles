@@ -83,20 +83,6 @@ function! hasan#utils#visualSelection(direction, extra_filter) range "{{{
   call HLNextSetTrigger()
 endfunction "}}}
 
-" Cycle through relativenumber + number, number (only), and no numbering
-function!  hasan#utils#cycle_numbering() abort "{{{
-  if exists('+relativenumber')
-    execute {
-          \ '00': 'set relativenumber   | set number',
-          \ '01': 'set norelativenumber | set number',
-          \ '10': 'set norelativenumber | set nonumber',
-          \ '11': 'set norelativenumber | set number' }[&number . &relativenumber]
-  else
-    " No relative numbering, just toggle numbers on and off.
-    set number!
-  endif
-endfunction "}}}
-
 " Move VISUAL LINE selection within buffer
 function! hasan#utils#visual_move_up() abort range "{{{
   let l:count=v:count ? -v:count : -1

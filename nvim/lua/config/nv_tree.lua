@@ -96,7 +96,7 @@ tree.setup {
   },
   filters = {
     dotfiles = false,
-    custom = {}
+    custom = { '*.git', 'node_modules' },
   },
   git = {
     enable = false,
