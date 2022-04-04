@@ -7,6 +7,7 @@ choco install potplayer -y
 choco install 7zip.install -y
 choco install googlechrome -y
 choco install onefetch -y
+choco install qbittorrent -y
 
 # https://developer.android.com/studio#downloads
 # https://dl.google.com/android/repository/commandlinetools-win-8092744_latest.zip
@@ -16,6 +17,7 @@ choco install onefetch -y
 # choco install vlc -y
 # choco install emacs -y
 
+# choco install etcher -y
 # choco install javaruntime -y
 # choco install adobereader -y
 # choco install pdfcreator -y

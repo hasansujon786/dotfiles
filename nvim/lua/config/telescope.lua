@@ -39,6 +39,8 @@ require('telescope').setup({
       n = {
         ['<M-p>'] = actions.move_selection_previous,
         ['<M-n>'] = actions.move_selection_next,
+        ['<C-p>'] = actions.move_selection_previous,
+        ['<C-n>'] = actions.move_selection_next,
       },
       i = {
         ['<M-p>'] = actions.move_selection_previous,
