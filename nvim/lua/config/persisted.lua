@@ -15,9 +15,9 @@ M.setup = function()
     --   -- With Minimap open it stops the session restoring to the last cursor position
     --   pcall(vim.cmd, 'bw minimap')
     -- end,
-    -- after_save = function()
-    --   print('sessions saved')
-    -- end,
+    after_save = function()
+      print('persisted: session saved')
+    end,
   })
 end
 
