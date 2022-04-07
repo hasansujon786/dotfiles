@@ -1,5 +1,6 @@
 local M = {}
 local psessions_path = vim.fn.expand(vim.fn.stdpath('data') .. '/sessions/')
+-- vim.o.sessionoptions
 
 M.setup = function()
   require('persisted').setup({
@@ -7,7 +8,6 @@ M.setup = function()
     use_git_branch = false,
     autosave = false,
     autoload = false,
-    options = { 'buffers', 'curdir', 'tabpages', 'winsize' }, -- session options used for saving
     allowed_dirs = nil,
     ignored_dirs = nil,
     -- before_save = function()
@@ -24,7 +24,7 @@ end
 M.loadSession = function()
   local ok, persisted = pcall(require, 'persisted')
   if not ok then
-    print('foo')
+    print('persisted not installed')
     return
   end
 
@@ -45,9 +45,9 @@ M.loadSession = function()
 end
 
 M.sessionSaveAndQuit = function()
-  vim.cmd([[wall]])
+  vim.cmd('wall')
   require('persisted').save()
-  vim.cmd([[qall]])
+  vim.cmd('qall')
 end
 
 return M

@@ -183,7 +183,7 @@ local leader = {
     d = { ':Dashboard<CR>',                         'Open dashboard' },
     l = { ':SessionLoad<CR>',                       'Load session' },
     s = { ':SessionSave<CR>',                       'Save session' },
-    q = { '<cmd>lua require("config.persisted").loadSession()<CR>',       'Select session' },
+    m = { '<cmd>lua require("config.persisted").loadSession()<CR>',       'Show session menu' },
     z = { '<cmd>lua require("config.persisted").sessionSaveAndQuit()<CR>','Save session and quit' },
   },
 
