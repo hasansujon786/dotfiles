@@ -2,19 +2,19 @@
 " https://github.com/asvetliakov/vscode-neovim/tree/master/vim
 " if exists('g:vscode') else " ordinary neovim endif
 
-call plug#begin('~/.config/nvim/plugged')
+" call plug#begin('~/.config/nvim/plugged')
 
-" ======================================
-" => Functionality-&-Helpers
-" ======================================
-Plug 'michaeljsmith/vim-indent-object'
-Plug 'tpope/vim-surround'
-Plug 'asvetliakov/vim-easymotion'
-" Plug 'terryma/vim-multiple-cursors'
-" Plug 'unblevable/quick-scope'
+" " ======================================
+" " => Functionality-&-Helpers
+" " ======================================
+" Plug 'michaeljsmith/vim-indent-object'
+    " Plug 'tpope/vim-surround'
+" Plug 'asvetliakov/vim-easymotion'
+" " Plug 'terryma/vim-multiple-cursors'
+" " Plug 'unblevable/quick-scope'
 
 
-call plug#end()
+" call plug#end()
 
 " => Key-Mappings ---------------------------------- {{{
 

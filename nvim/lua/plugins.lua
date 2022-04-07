@@ -27,10 +27,6 @@ return require('packer').startup({
     use({ 'folke/zen-mode.nvim', opt = true, cmd = 'ZenMode',
       config = function() require('config.zen') end
     })
-    use({ 'Yggdroot/indentLine', opt = true, event = 'BufRead',
-      disable = true,
-      config = function() require('config.indentLine') end
-    })
     use({ "lukas-reineke/indent-blankline.nvim",opt = true,event = 'VimEnter',
       config = function() require('config.indentLine-config') end
     })
@@ -70,16 +66,6 @@ return require('packer').startup({
     use({ 'nvim-telescope/telescope-file-browser.nvim', opt = true, event = 'CursorHold', })
     use({ 'hasansujon786/telescope-yanklist.nvim', opt = true, event = 'CursorHold', })
     use({ 'kyazdani42/nvim-tree.lua', config = [[require('config.nv_tree')]] })
-    use({ 'lambdalisue/fern.vim',
-      disable = true,
-      config = function() require('config.fern') end,
-      opt = true, event = 'CursorHold',
-      requires = {
-        'lambdalisue/fern-renderer-nerdfont.vim',
-        'hasansujon786/glyph-palette.vim',
-        'lambdalisue/nerdfont.vim'
-      }
-    })
 
     use({ 'unblevable/quick-scope', opt = true, event = 'CursorHold'})
     use({ 'justinmk/vim-sneak', opt = true, event = 'CursorHold',
@@ -100,7 +86,6 @@ return require('packer').startup({
     use({ 'Konfekt/vim-CtrlXA', opt = true, event = 'CursorHold' })
     use({ 'tpope/vim-commentary', opt = true, event = 'BufRead' })
     use({ 'tpope/vim-surround', opt = true, event = 'BufRead',  })
-    use({ 'nathom/filetype.nvim', disable = true })
     use({ 'nvim-lua/plenary.nvim' })
     use({ 'voldikss/vim-floaterm', opt = true,
       cmd = {'FloatermNew','FloatermToggle'},
@@ -112,12 +97,6 @@ return require('packer').startup({
     use({ 'hasansujon786/vim-rel-jump', opt = true, event = 'BufRead' })
     use({ 'dhruvasagar/vim-open-url', opt = true, event = 'BufRead' })
     use({ 'folke/which-key.nvim', config = function() require('config.whichkey') end })
-    use({ 'karb94/neoscroll.nvim', opt = true, event = 'BufRead',
-      disable = true,
-      config = function()
-        require('config.neoscroll')
-      end
-    })
     use({ 'olimorris/persisted.nvim',
       module = 'persisted', opt = true,
       cmd = {'SessionLoad', 'SessionLoadLast', 'SessionSave'},
@@ -217,6 +196,27 @@ return require('packer').startup({
     use({ 'akinsho/flutter-tools.nvim', opt = true, ft = {'dart'},
       config = function() require('config.flutter-tools') end
     })
+
+    use {
+      'mfussenegger/nvim-dap',
+      disable = true,
+      -- opt = true,
+      -- event = "BufReadPre",
+      -- module = { "dap" },
+      wants = { 'nvim-dap-virtual-text', 'DAPInstall.nvim', 'nvim-dap-ui', 'which-key.nvim' },
+      requires = {
+        'Pocco81/DAPInstall.nvim',
+        'theHamsta/nvim-dap-virtual-text',
+        'rcarriga/nvim-dap-ui',
+        'mfussenegger/nvim-dap-python',
+        'nvim-telescope/telescope-dap.nvim',
+        -- { "leoluz/nvim-dap-go", module = "dap-go" },
+      { 'jbyuki/one-small-step-for-vimkind', module = 'osv' },
+      },
+      config = function()
+        require('config.dap').setup()
+      end,
+    }
 
     if not is_installed then
       require('packer').sync()

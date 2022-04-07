@@ -1,3 +1,9 @@
+-- use({ 'karb94/neoscroll.nvim', opt = true, event = 'BufRead',
+--   disable = true,
+--   config = function()
+--     require('config.neoscroll')
+--   end
+-- })
 require('neoscroll').setup({
   hide_cursor = false,
 })

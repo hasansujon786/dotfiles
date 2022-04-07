@@ -19,6 +19,8 @@
 --   end,
 -- }
 
+-- lua require('osv').run_this()
+
 local M = {}
 
 local function configure()

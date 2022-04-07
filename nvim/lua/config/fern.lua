@@ -1,3 +1,13 @@
+-- use({ 'lambdalisue/fern.vim',
+--   disable = true,
+--   config = function() require('config.fern') end,
+--   opt = true, event = 'CursorHold',
+--   requires = {
+--     'lambdalisue/fern-renderer-nerdfont.vim',
+--     'hasansujon786/glyph-palette.vim',
+--     'lambdalisue/nerdfont.vim'
+--   }
+-- })
 local utils = require('hasan.utils')
 local maps = require('hasan.utils.maps')
 maps.nnoremap('-', '<cmd>call hasan#fern#vinager()<CR>') -- change in whichkey
