@@ -1,27 +1,27 @@
 local luv = vim.loop
 local api = vim.api
-local lib = require "nvim-tree.lib"
-local log = require "nvim-tree.log"
-local colors = require "nvim-tree.colors"
-local renderer = require "nvim-tree.renderer"
-local utils = require "nvim-tree.utils"
-local change_dir = require "nvim-tree.actions.change-dir"
-local legacy = require "nvim-tree.legacy"
-local core = require "nvim-tree.core"
-local tree = require "nvim-tree"
-local view = require "nvim-tree.view"
+local lib = require('nvim-tree.lib')
+local log = require('nvim-tree.log')
+local colors = require('nvim-tree.colors')
+local renderer = require('nvim-tree.renderer')
+local utils = require('nvim-tree.utils')
+local change_dir = require('nvim-tree.actions.change-dir')
+local legacy = require('nvim-tree.legacy')
+local core = require('nvim-tree.core')
+local tree = require('nvim-tree')
+local view = require('nvim-tree.view')
 
 local maps = require('hasan.utils.maps')
-maps.nnoremap('<BS>',       ':lua Alternate_file()<CR>')
-maps.nnoremap('-',          ':lua Vinegar()<CR>')
+maps.nnoremap('<BS>', ':lua Alternate_file()<CR>')
+maps.nnoremap('-', ':lua Vinegar()<CR>')
 maps.nnoremap('<leader>op', ':NvimTreeFindFileToggle<CR>')
 maps.nnoremap('<leader>ob', ':NvimTreeToggle<CR>')
-maps.nnoremap('<leader>0',  ':NvimTreeFocus<CR>')
+maps.nnoremap('<leader>0', ':NvimTreeFocus<CR>')
 maps.nnoremap('<leader>or', ':NvimTreeRefresh<CR>')
 
 local function cd_root()
-  require "nvim-tree.lib".open(vim.loop.cwd())
-  vim.cmd[[normal! gg]]
+  require('nvim-tree.lib').open(vim.loop.cwd())
+  vim.cmd([[normal! gg]])
 end
 
 -- init.lua
@@ -33,7 +33,7 @@ local list = {
   { key = 'v',                           action = 'vsplit' },
   { key = 't',                           action = 'tabnew' },
   { key = 'O',                           action = 'system_open' },
-  { key = 's',                           action = 'search_node' },
+  { key = 'f',                           action = 'search_node' },
 
   { key = {'<2-RightMouse>', 'l'},       action = 'cd' },
   { key = {'-', 'h'},                    action = 'dir_up' },
@@ -73,26 +73,25 @@ local list = {
   -- { key = 'D',                            action = 'trash' },
 }
 
-vim.g.nvim_tree_indent_markers = 1
-tree.setup {
-  disable_netrw        = true,
-  hijack_netrw         = true,
-  open_on_setup        = false,
+tree.setup({
+  disable_netrw = true,
+  hijack_netrw = true,
+  open_on_setup = false,
   ignore_buffer_on_setup = false,
-  ignore_ft_on_setup   = {},
+  ignore_ft_on_setup = {},
   auto_reload_on_write = true,
-  open_on_tab          = false,
-  hijack_cursor        = false,
-  update_cwd           = false,
+  open_on_tab = false,
+  hijack_cursor = false,
+  update_cwd = false,
   hijack_unnamed_buffer_when_opening = false,
-  hijack_directories   = {
+  hijack_directories = {
     enable = true,
     auto_open = true,
   },
   update_focused_file = {
-    enable      = true,
-    update_cwd  = true,
-    ignore_list = {}
+    enable = true,
+    update_cwd = true,
+    ignore_list = {},
   },
   filters = {
     dotfiles = false,
@@ -102,6 +101,11 @@ tree.setup {
     enable = false,
     ignore = true,
     timeout = 500,
+  },
+  renderer = {
+    indent_markers = {
+      enable = true,
+    },
   },
   view = {
     width = 26,
@@ -115,7 +119,7 @@ tree.setup {
     },
     number = false,
     relativenumber = false,
-    signcolumn = 'yes'
+    signcolumn = 'yes',
   },
   actions = {
     change_dir = {
@@ -129,13 +133,13 @@ tree.setup {
         enable = true,
         chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
         exclude = {
-          filetype = { 'notify', 'packer', 'qf', 'diff', 'fugitive', 'fugitiveblame', },
-          buftype  = { 'nofile', 'terminal', 'help', },
-        }
-      }
-    }
+          filetype = { 'notify', 'packer', 'qf', 'diff', 'fugitive', 'fugitiveblame' },
+          buftype = { 'nofile', 'terminal', 'help' },
+        },
+      },
+    },
   },
-}
+})
 
 local alt_file = nil
 local pre_alt_file = nil
@@ -154,7 +158,7 @@ function Alternate_file()
   if vim.o.filetype == 'NvimTree' then
     if alt_file and vim.w.vinegar then
       view.close()
-      vim.cmd('e '..alt_file)
+      vim.cmd('e ' .. alt_file)
       alt_file = pre_alt_file and pre_alt_file ~= '' and pre_alt_file or nil
       return
     end
@@ -172,10 +176,9 @@ function Alternate_file()
 
   local found_file = alt_file and alt_file ~= vim.fn.expand('%') and alt_file or nil
   if found_file then
-    vim.cmd('e '..found_file)
+    vim.cmd('e ' .. found_file)
     return
   end
 
   vim.cmd([[echo 'E23: No alternate file']])
 end
-
