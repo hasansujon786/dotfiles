@@ -1,23 +1,12 @@
-local luv = vim.loop
-local api = vim.api
-local lib = require('nvim-tree.lib')
-local log = require('nvim-tree.log')
-local colors = require('nvim-tree.colors')
-local renderer = require('nvim-tree.renderer')
-local utils = require('nvim-tree.utils')
-local change_dir = require('nvim-tree.actions.change-dir')
-local legacy = require('nvim-tree.legacy')
-local core = require('nvim-tree.core')
 local tree = require('nvim-tree')
-local view = require('nvim-tree.view')
 
 local maps = require('hasan.utils.maps')
-maps.nnoremap('<BS>', ':lua Alternate_file()<CR>')
-maps.nnoremap('-', ':lua Vinegar()<CR>')
 maps.nnoremap('<leader>op', ':NvimTreeFindFileToggle<CR>')
 maps.nnoremap('<leader>ob', ':NvimTreeToggle<CR>')
 maps.nnoremap('<leader>0', ':NvimTreeFocus<CR>')
 maps.nnoremap('<leader>or', ':NvimTreeRefresh<CR>')
+maps.nnoremap('-', ':lua require("hasan.utils.vinegar").vinegar()<CR>')
+maps.nnoremap('<BS>', ':lua require("hasan.utils.vinegar").alternate_file()<CR>')
 
 local function cd_root()
   require('nvim-tree.lib').open(vim.loop.cwd())
@@ -141,44 +130,3 @@ tree.setup({
   },
 })
 
-local alt_file = nil
-local pre_alt_file = nil
-
-function Vinegar()
-  pre_alt_file = vim.fn.expand('#')
-  if view.is_visible() then
-    view.close()
-  end
-  require('nvim-tree').open_replacing_current_buffer()
-  alt_file = vim.fn.expand('#')
-  vim.w.vinegar = true
-end
-
-function Alternate_file()
-  if vim.o.filetype == 'NvimTree' then
-    if alt_file and vim.w.vinegar then
-      view.close()
-      vim.cmd('e ' .. alt_file)
-      alt_file = pre_alt_file and pre_alt_file ~= '' and pre_alt_file or nil
-      return
-    end
-
-    if view.is_visible() and vim.w.vinegar == nil then
-      view.close()
-      return
-    end
-  end
-
-  if vim.fn.expand('#') ~= '' then
-    vim.fn['hasan#utils#feedkeys']('<c-^>', 'n')
-    return
-  end
-
-  local found_file = alt_file and alt_file ~= vim.fn.expand('%') and alt_file or nil
-  if found_file then
-    vim.cmd('e ' .. found_file)
-    return
-  end
-
-  vim.cmd([[echo 'E23: No alternate file']])
-end

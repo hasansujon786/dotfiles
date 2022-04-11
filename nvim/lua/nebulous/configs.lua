@@ -13,6 +13,8 @@ M.default = {
     floating = true,
     qf = true,
     scratchpad = true,
+    NeogitStatus = true,
+    NeogitPopup = true,
   },
   nb_blur_hls = {
     'LineNr:Nebulous',
