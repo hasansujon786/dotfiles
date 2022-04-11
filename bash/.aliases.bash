@@ -111,10 +111,10 @@ alias glo='git log --oneline --decorate'
 alias lg='lazygit'
 
 # kill port
-alias fip='tasklist | findstr'
-alias tk='taskkill //F //IM'
-alias tkp='taskkill //PID'
-alias tkv='taskkill //F //IM "java.exe"'
+alias fp='tasklist | findstr' # search string
+alias k='taskkill //F //IM'
+alias kp='taskkill //PID'
+alias kv='taskkill //F //IM "java.exe"'
 
 ## Colorize the ls output ##
 alias ls='ls --color=auto'
