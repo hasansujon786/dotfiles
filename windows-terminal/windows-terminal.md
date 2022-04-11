@@ -6,3 +6,5 @@ wt -w 0 -F ft -t 3
 vim.cmd[[!sed -i '18s/14/18/' 'c:\\Users\\hasan\\AppData\\Local\Microsoft\\Windows Terminal\\settings.json']]
 vim.cmd[[!sed -i '18s/18/14/' 'c:\\Users\\hasan\\AppData\\Local\Microsoft\\Windows Terminal\\settings.json']]
 
+
+      "intenseTextStyle": "bold"
