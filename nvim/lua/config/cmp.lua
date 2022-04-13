@@ -10,13 +10,9 @@ local feedkey = function(key, mode)
 end
 
 cmp.setup({
-  documentation = {
-    border = 'double',
-    maxwidth = 120,
-    minwidth = 60,
-    maxheight = math.floor(vim.o.lines * 0.3),
-    minheight = 1,
-    winhighlight = 'Normal:Normal,FloatBorder:FloatBorder',
+  window = {
+    -- completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
   experimental = {
     native_menu = false,
@@ -97,15 +93,15 @@ cmp.setup({
     format = function(entry, vim_item)
       -- NOTE: order matters
       vim_item.menu = ({
-        nvim_lsp =   'ﲳ',
-        nvim_lua =   '',
+        nvim_lsp = 'ﲳ',
+        nvim_lua = '',
         treesitter = '',
-        path =       'ﱮ',
-        buffer =     '﬘',
-        zsh =        '',
-        vsnip =      '',
-        spell =      '暈',
-        orgmode =    '✿',
+        path = 'ﱮ',
+        buffer = '﬘',
+        zsh = '',
+        vsnip = '',
+        spell = '暈',
+        orgmode = '✿',
       })[entry.source.name]
       vim_item.menu = string.format('%s %s', string.sub(vim_item.kind, 1, 3), vim_item.menu)
 
@@ -133,6 +129,17 @@ vim.cmd([[autocmd FileType NeogitCommitMessage lua CmpNeogitCommitMessageSetup()
 -- vim.cmd[[xmap <C-l>   <Plug>(vsnip-cut-text)]]
 
 cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline({
+    ['<CR>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+        feedkey('<CR>', '')
+      else
+        fallback()
+      end
+      -- c = cmp.mapping.confirm({ select = true }),
+    end, { 'c' }),
+  }),
   sources = {
     { name = 'buffer', keyword_length = 2 },
   },
