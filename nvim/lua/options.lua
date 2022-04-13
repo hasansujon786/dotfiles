@@ -130,7 +130,7 @@ opt.listchars = {
   nbsp= '␣',
   trail = '•',
   extends = '',
-  precedes = '',
+  precedes = '',
   -- space = "•",
   -- eol = "¬",
 }
