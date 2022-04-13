@@ -123,7 +123,12 @@ return require('packer').startup({
     --     'junegunn/gv.vim'
     --   }
     -- })
-    use({ 'TimUntersberger/neogit', opt = true, cmd = 'Neogit' })
+    use({ 'TimUntersberger/neogit', opt = true, cmd = 'Neogit',
+      config = function()
+        require('config.neogit')
+      end,
+      requires = { 'sindrets/diffview.nvim', after = 'neogit' }
+    })
     use({'airblade/vim-gitgutter',opt=true,event='CursorHold',config="require('config.gitgutter-config')"})
     use({ 'lewis6991/gitsigns.nvim',
       -- opt = true, event = 'BufRead',
