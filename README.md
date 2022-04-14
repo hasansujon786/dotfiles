@@ -52,3 +52,6 @@ when I want to populate a quickfix list and work on this list.
 > https://vimways.org/2019/
 
 sudo vim /etc/hostname
+
+# cmp
+https://github.com/hrsh7th/nvim-cmp/issues/231

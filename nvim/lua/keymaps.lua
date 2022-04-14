@@ -147,6 +147,7 @@ maps.nnoremap('dm', ':%s/<c-r>///g<CR>', { silent = false })
 maps.nnoremap('cm', ':%s/<c-r>///g<Left><Left>', { silent = false })
 
 -- Insert mode ----------------------------------
+maps.inoremap('<A-p>', '<Esc>p')
 -- Move cursor by character
 maps.inoremap('<A-h>', '<left>')
 maps.inoremap('<A-l>', '<right>')

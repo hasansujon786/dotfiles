@@ -15,13 +15,15 @@ cmp.setup({
     documentation = cmp.config.window.bordered(),
   },
   experimental = {
-    native_menu = false,
     ghost_text = false,
   },
   snippet = {
     expand = function(args)
       vim.fn['vsnip#anonymous'](args.body)
     end,
+  },
+  view = {
+    entries = { name = 'custom', selection_order = 'top_down' },
   },
   mapping = cmp.mapping.preset.insert({
     ['<A-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
@@ -37,7 +39,7 @@ cmp.setup({
       if cmp.visible() then
         cmp.select_prev_item()
       else
-        feedkey('<Esc>p', '')
+        fallback()
       end
     end, { 'i', 'c' }),
     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
