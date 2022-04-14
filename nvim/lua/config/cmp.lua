@@ -23,7 +23,7 @@ cmp.setup({
       vim.fn['vsnip#anonymous'](args.body)
     end,
   },
-  mapping = {
+  mapping = cmp.mapping.preset.insert({
     ['<A-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<A-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
     ['<A-n>'] = cmp.mapping(function(_)
@@ -37,7 +37,7 @@ cmp.setup({
       if cmp.visible() then
         cmp.select_prev_item()
       else
-        fallback()
+        feedkey('<Esc>p', '')
       end
     end, { 'i', 'c' }),
     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
@@ -81,7 +81,7 @@ cmp.setup({
         fallback()
       end
     end, { 'i', 's' }),
-  },
+  }),
   sources = {
     { name = 'nvim_lsp' },
     { name = 'vsnip' },
@@ -138,6 +138,12 @@ cmp.setup.cmdline('/', {
         fallback()
       end
       -- c = cmp.mapping.confirm({ select = true }),
+    end, { 'c' }),
+    ['<C-y>'] = cmp.mapping(function(fallback)
+      cmp.close()
+      vim.defer_fn(function()
+        feedkey('<CR>', '')
+      end, 10)
     end, { 'c' }),
   }),
   sources = {
