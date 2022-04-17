@@ -25,6 +25,7 @@ local common = {
   grep_org_text = { ':lua require("hasan.telescope.custom").grep_org_text()<CR>',         'Grep org text'},
   buffers_cwd = { '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>',         'Switch Project buffers' },
   buffers_all = { '<cmd>lua require("hasan.telescope.custom").buffers(false)<CR>',        'Switch all buffers' },
+  grep_string = { '<cmd>lua require("hasan.telescope.custom").grep_string()<CR>',         'Grep string' },
 }
 
 local leader = {
@@ -260,7 +261,7 @@ local leader = {
     M = { ':Telescope marks<CR>',           'Jump to marks' } ,
     r = { ':Telescope oldfiles<CR>',        'Recent files' },
     t = { ':Telescope filetypes<CR>',       'Change filetypes' },
-    s = { ':lua require("hasan.telescope.custom").grep_string()<CR>',         'Grep string' },
+    s = common.grep_string,
     ['/'] = { ':Telescope live_grep<CR>',   'Live grep' },
     ['.'] = { ':Telescope resume<CR>',      'Telescope resume' },
 
@@ -307,7 +308,7 @@ local leader_visual = {
   },
   ['/'] = {
     name = '+search',
-    s = { ':lua require("hasan.telescope.custom").grep_string(true)<CR>',         'Grep string' },
+    s = common.grep_string,
   },
 }
 

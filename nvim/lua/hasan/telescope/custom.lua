@@ -146,15 +146,20 @@ function M.search_plugins()
   extensions.file_browser.file_browser(themes.get_ivy(opts))
 end
 
-function M.grep_string(is_visual)
+function M.grep_string()
+  local mode = vim.fn.mode()
   local word = nil
-  if is_visual then
+
+  if mode == 'v' then
     word = vim.fn['hasan#utils#get_visual_selection']()
   else
     word = vim.fn.input('Grep String: ')
   end
 
-  word = string.gsub(word, '%s+', '')
+  -- word = string.gsub(word, '%s+', '') -- remove spaces
+  if mode ~= 'n' then
+    feedkeys('<esc>', '')
+  end
   if word == '' then
     return
   end

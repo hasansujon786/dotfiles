@@ -5,9 +5,6 @@ local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
 end
-local feedkey = function(key, mode)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-end
 
 cmp.setup({
   window = {
@@ -52,7 +49,7 @@ cmp.setup({
     ['<C-q>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     ['<C-l>'] = cmp.mapping(function(_)
       if has_words_before() and vim.fn['vsnip#jumpable'](1) == 1 then
-        feedkey('<Plug>(vsnip-jump-next)', '')
+        feedkeys('<Plug>(vsnip-jump-next)', '')
       else
         cmp.complete({ config = { sources = { { name = 'vsnip' } } } })
       end
@@ -67,9 +64,9 @@ cmp.setup({
       elseif cmp.visible() then
         cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
       elseif has_words_before() and vim.fn['vsnip#available']() == 1 then
-        feedkey('<Plug>(vsnip-expand-or-jump)', '')
+        feedkeys('<Plug>(vsnip-expand-or-jump)', '')
       elseif vim.fn['hasan#compe#check_front_char']() then
-        feedkey('<Right>', 'n')
+        feedkeys('<Right>', 'n')
       else
         fallback()
       end
@@ -78,7 +75,7 @@ cmp.setup({
       if cmp.visible() then
         cmp.select_prev_item()
       elseif vim.fn['vsnip#jumpable'](-1) == 1 then
-        feedkey('<Plug>(vsnip-jump-prev)', '')
+        feedkeys('<Plug>(vsnip-jump-prev)', '')
       else
         fallback()
       end
@@ -135,7 +132,7 @@ cmp.setup.cmdline('/', {
     ['<CR>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-        feedkey('<CR>', '')
+        feedkeys('<CR>', '')
       else
         fallback()
       end
@@ -144,7 +141,7 @@ cmp.setup.cmdline('/', {
     ['<C-y>'] = cmp.mapping(function(fallback)
       cmp.close()
       vim.defer_fn(function()
-        feedkey('<CR>', '')
+        feedkeys('<CR>', '')
       end, 10)
     end, { 'c' }),
   }),

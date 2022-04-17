@@ -12,7 +12,6 @@ end
 if pcall(require, 'plenary') then
   local plenary_reload = require('plenary.reload').reload_module
 
-
   R = function(moduleName, message)
     plenary_reload(moduleName)
     if message then
@@ -20,6 +19,10 @@ if pcall(require, 'plenary') then
     end
     return require(moduleName)
   end
+end
+
+_G.feedkeys = function(key, mode)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
 -- disabled_built_ins ==============================
@@ -45,13 +48,13 @@ local disabled_built_ins = {
 }
 
 for _, plugin in pairs(disabled_built_ins) do
-  vim.g["loaded_" .. plugin] = 1
+  vim.g['loaded_' .. plugin] = 1
 end
 -- Vsnip ==============================
 -- vim.g.vsnip_namespace = ':'
 vim.g.vsnip_snippet_dir = '~/dotfiles/nvim/.vsnip'
 -- Sneak ==============================
-vim.g['sneak#target_labels'] = ";wertyuopzbnmfLGKHWERTYUIQOPZBNMFJ0123456789"
+vim.g['sneak#target_labels'] = ';wertyuopzbnmfLGKHWERTYUIQOPZBNMFJ0123456789'
 vim.g['sneak#label'] = 1 -- use <tab> to jump through lebles
 vim.g['sneak#use_ic_scs'] = 1 -- case insensitive sneak
 vim.g['sneak#prompt'] = '  '
@@ -62,12 +65,6 @@ vim.g.VM_theme_set_by_colorscheme = 0
 vim.g.user_emmet_leader_key = '<C-c>'
 -- quick-scoope =======================
 vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
--- vim-wiki ===========================
-vim.g.vimwiki_list = {{path='~/vimwiki/', syntax='markdown', ext='.md', auto_toc=1}}
-vim.g.vimwiki_folding = 'expr'
-vim.g.vimwiki_markdown_link_ext = 1
-vim.g.taskwiki_markup_syntax = 'markdown'
-vim.g.vimwiki_key_mappings = {global = 0}
 -- vim-caser ==========================
 vim.g.caser_prefix = '<leader>cs'
 -- git-gutter =========================
@@ -83,8 +80,7 @@ vim.g.gitgutter_floating_window_options = {
   row = 1,
   col = 0,
   width = 10,
-  height = vim.api.nvim_eval("&previewheight"),
+  height = vim.api.nvim_eval('&previewheight'),
   style = 'minimal',
-  border = ui.border.style
+  border = ui.border.style,
 }
-
