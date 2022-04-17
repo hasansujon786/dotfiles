@@ -245,7 +245,8 @@ M.augroup = function(group)
   vim.api.nvim_create_augroup(group, { clear = true })
 
   return function(autocmds)
-    autocmds(function(event, opts, command)
+    autocmds(function(event, command, opts)
+      opts = opts and opts or {}
       -- opts.group = id
       opts.group = group
       local is_function = type(command) == 'function'

@@ -1,6 +1,6 @@
 
 " TrimWhitespace  {{{
-function! hasan#autocmd#trimWhitespace()
+function! hasan#autocmd#trimWhitespace(...)
   let l:save = winsaveview()
   %s/\\\@<!\s\+$//e
   call winrestview(l:save)
@@ -16,7 +16,7 @@ function! hasan#autocmd#fzf_statusline()
 endfunction
 " }}}
 
-function! hasan#autocmd#restore_position()
+function! hasan#autocmd#restore_position(...)
   if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") && expand('%:t') != 'COMMIT_EDITMSG'
     exe "normal g`\""
   endif

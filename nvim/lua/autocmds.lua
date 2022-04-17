@@ -1,53 +1,43 @@
 local utils = require('hasan.utils')
 if vim.fn.exists('g:hasan_telescope_buffers') == 0 then
-  vim.g.hasan_telescope_buffers = {['0']=0} -- hasan#utils#_buflisted_sorted()
+  vim.g.hasan_telescope_buffers = { ['0'] = 0 } -- hasan#utils#_buflisted_sorted()
 end
 
 local autocmds = {
-  packer_user_config = {
-    {'BufWritePost plugins.lua source <afile> | PackerCompile'}
-  },
-  vimrcEx = {
-    {'InsertEnter * norm zz'}, -- center document
-    {'VimResized * :wincmd ='}, -- Vim/tmux layout rebalancing
-    {'FocusGained,BufEnter,CursorHold * :silent! checktime'}, -- auto read when a file is changed from the outside
-    -- {'FocusLost,WinLeave,BufLeave * :silent! noautocmd w'}, -- auto save
-    {'BufWritePre *.vim,*.lua,*.org call hasan#autocmd#trimWhitespace()'},
-    {'BufWinEnter,WinEnter __FLUTTER_DEV_LOG__ normal Gzz'},
-    {'BufReadPost * call hasan#autocmd#restore_position()'},
-    {'TermOpen * setfiletype terminal | set bufhidden=hide'},
-    {'ColorScheme * call hasan#highlight#load_custom_highlight()'},
-
-    {'VimEnter * ++once runtime! autoload/netrw.vim'},
-
-    -- {'WinEnter,BufWinEnter *.vim,*.js,*.lua call hasan#boot#highligt_ruler(1)'},
-  },
-  FileMarks = {
-    -- {'BufLeave *.html normal! mH'},
-    -- {'BufLeave *.js   normal! mJ'},
-    -- {'BufLeave *.ts   normal! mT'},
-    -- {'BufLeave *.vim  normal! mV'},
-    -- {'BufLeave *.css  normal! mC'},
-    {'BufLeave *.txt  normal! mK'},
-  },
-  Fold = {
-    {'FileType vim setlocal foldlevel=0'},
-    {'FileType vim,css,scss,json setlocal foldmethod=marker'},
-    {'FileType css,scss,json setlocal foldmarker={,}'},
-    {'FileType dart setlocal commentstring=//\\ %s'}
-  },
   Telescope = {
-    {'BufWinEnter,WinEnter * let g:hasan_telescope_buffers[bufnr()] = reltimefloat(reltime())'},
-    {'BufDelete * silent! call remove(g:hasan_telescope_buffers, expand("<abuf>"))'}
-  },
-  Nebulous = {
-    {'CursorHold * ++once lua require("hasan.utils.color").my_nebulous_setup()'}
+    { 'BufWinEnter,WinEnter * let g:hasan_telescope_buffers[bufnr()] = reltimefloat(reltime())' },
+    { 'BufDelete * silent! call remove(g:hasan_telescope_buffers, expand("<abuf>"))' },
   },
   VimZoom = {
-    {'User ZoomPost lua ZoomPost()'}
-  }
+    { 'User ZoomPost lua ZoomPost()' },
+  },
   -- {"BufEnter term://* setlocal nonumber norelativenumber"};
 }
 
 utils.create_augroups(autocmds)
 
+local MY_AUGROUP = utils.augroup('MY_AUGROUP')
+MY_AUGROUP(function(autocmd)
+  autocmd('VimResized', 'wincmd =') -- Vim/tmux layout rebalancing
+  autocmd('InsertEnter', 'norm zz')
+  autocmd('TermOpen', 'setfiletype terminal | set bufhidden=hide')
+  autocmd('VimEnter', 'runtime! autoload/netrw.vim', { once = true })
+  autocmd('BufReadPost', vim.fn['hasan#autocmd#restore_position'])
+  autocmd('ColorScheme', vim.fn['hasan#highlight#load_custom_highlight'])
+  autocmd('BufWritePre', vim.fn['hasan#autocmd#trimWhitespace'], { pattern = { '*.vim', '*.lua', '*.org' } })
+  autocmd('BufWritePost', 'source <afile> | PackerCompile ', { pattern = 'plugins.lua' })
+  autocmd('CursorHold', require('hasan.utils.color').my_nebulous_setup, { once = true })
+  autocmd('BufLeave', 'normal! mK', { pattern = '*.txt' })
+  autocmd({ 'FocusGained', 'BufEnter', 'CursorHold' }, ':silent! checktime') -- Vim/tmux layout rebalancing
+  -- -- {'FocusLost,WinLeave,BufLeave * :silent! noautocmd w'}, -- auto save
+  -- {'WinEnter,BufWinEnter *.vim,*.js,*.lua call hasan#boot#highligt_ruler(1)'},
+
+  autocmd('FileType', 'foldlevel=0', { pattern = 'vim ' })
+  autocmd('FileType', 'setlocal foldmethod=marker', { pattern = { 'vim', 'css', 'scss', 'json' } })
+  autocmd('FileType', 'setlocal foldmarker={,}', { pattern = { 'css', 'scss', 'json' } })
+  autocmd('FileType', 'setlocal commentstring=//\\ %s', { pattern = 'dart' })
+  autocmd({ 'BufWinEnter', 'WinEnter' }, 'normal Gzz', { pattern = '__FLUTTER_DEV_LOG__' })
+
+  -- autocmd('BufDelete ', 'silent! call remove(g:hasan_telescope_buffers, expand("<abuf>"))')
+  -- autocmd({ 'BufWinEnter', 'WinEnter' }, 'let g:hasan_telescope_buffers[bufnr()] = reltimefloat(reltime())')
+end)

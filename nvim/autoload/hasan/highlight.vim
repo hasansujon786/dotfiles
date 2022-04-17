@@ -1,4 +1,4 @@
-function hasan#highlight#load_custom_highlight() abort
+function hasan#highlight#load_custom_highlight(...) abort
   "/// Neovim Builin ///"
   hi TextInfo           guifg=#56B6C2 guibg=NONE
   hi TextSuccess        guifg=#61AFEF
