@@ -8,10 +8,6 @@ local autocmds = {
     { 'BufWinEnter,WinEnter * let g:hasan_telescope_buffers[bufnr()] = reltimefloat(reltime())' },
     { 'BufDelete * silent! call remove(g:hasan_telescope_buffers, expand("<abuf>"))' },
   },
-  VimZoom = {
-    { 'User ZoomPost lua ZoomPost()' },
-  },
-  -- {"BufEnter term://* setlocal nonumber norelativenumber"};
 }
 
 utils.create_augroups(autocmds)
@@ -37,6 +33,8 @@ MY_AUGROUP(function(autocmd)
   autocmd('FileType', 'setlocal foldmarker={,}', { pattern = { 'css', 'scss', 'json' } })
   autocmd('FileType', 'setlocal commentstring=//\\ %s', { pattern = 'dart' })
   autocmd({ 'BufWinEnter', 'WinEnter' }, 'normal Gzz', { pattern = '__FLUTTER_DEV_LOG__' })
+
+  autocmd('User', 'lua ZoomPost()', { pattern = 'ZoomPost' })
 
   -- autocmd('BufDelete ', 'silent! call remove(g:hasan_telescope_buffers, expand("<abuf>"))')
   -- autocmd({ 'BufWinEnter', 'WinEnter' }, 'let g:hasan_telescope_buffers[bufnr()] = reltimefloat(reltime())')

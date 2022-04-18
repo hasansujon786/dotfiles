@@ -1,5 +1,8 @@
 local maps = require('hasan.utils.maps')
 
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 -- Use jk to return to normal mode
 maps.inoremap('jk', '<ESC>')
 maps.cnoremap('jk', '<ESC>')

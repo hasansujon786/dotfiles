@@ -54,6 +54,7 @@ return require('packer').startup({
     })
 
     --> Navigation ---------------------------------
+    use({ 'kyazdani42/nvim-tree.lua', config = [[require('config.nv_tree')]] })
     use({'kevinhwang91/nvim-bqf', opt = true, ft = {'qf'}})
     use({ 'ahmedkhalf/project.nvim', opt = true, event = 'VimEnter',
       config = function()
@@ -61,11 +62,14 @@ return require('packer').startup({
       end
     })
     use({ 'ThePrimeagen/harpoon', opt = true, event = 'VimEnter' })
-    use({ 'nvim-telescope/telescope.nvim', config = function() require('config.telescope') end })
-    use({ 'nvim-telescope/telescope-fzy-native.nvim' })
-    use({ 'nvim-telescope/telescope-file-browser.nvim', opt = true, event = 'CursorHold', })
-    use({ 'hasansujon786/telescope-yanklist.nvim', opt = true, event = 'CursorHold', })
-    use({ 'kyazdani42/nvim-tree.lua', config = [[require('config.nv_tree')]] })
+    use({ 'nvim-telescope/telescope.nvim',
+      config = function() require('config.telescope') end,
+      requires = {
+        'nvim-telescope/telescope-fzy-native.nvim',
+        'nvim-telescope/telescope-file-browser.nvim',
+        'hasansujon786/telescope-yanklist.nvim',
+      }
+    })
 
     use({ 'unblevable/quick-scope', opt = true, event = 'CursorHold'})
     use({ 'justinmk/vim-sneak', opt = true, event = 'CursorHold',
