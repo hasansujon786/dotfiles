@@ -136,13 +136,12 @@ maps.cnoremap('<tab>', '<C-z>') -- to fix cmp
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline({
     ['<CR>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
+      if cmp.visible() and cmp.get_selected_entry() then
         cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
         feedkeys('<CR>', '')
       else
         fallback()
       end
-      -- c = cmp.mapping.confirm({ select = true }),
     end, { 'c' }),
     ['<C-y>'] = cmp.mapping(function(fallback)
       cmp.close()
