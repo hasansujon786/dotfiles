@@ -1,4 +1,6 @@
 local cmp = require('cmp')
+local utils = require('hasan.utils')
+local maps = require('hasan.utils.maps')
 local kind_icons = require('hasan.utils.ui.icons').kind
 
 local has_words_before = function()
@@ -121,12 +123,16 @@ vim.g.vsnip_filetypes = {
   dart = { 'flutter' },
 }
 
-vim.cmd([[autocmd FileType org lua CmpOrgmodeSetup()]])
-vim.cmd([[autocmd FileType NeogitCommitMessage lua CmpNeogitCommitMessageSetup()]])
+local CMP_AUGROUP = utils.augroup('CMP_AUGROUP')
+CMP_AUGROUP(function(autocmd)
+  autocmd('FileType', 'lua CmpOrgmodeSetup()', { pattern = { 'org' } })
+  autocmd('FileType', 'lua CmpNeogitCommitMessageSetup()', { pattern = { 'NeogitCommitMessage' } })
+end)
 
 --  inoremap <C-S> <Cmd>lua require('cmp').complete({ config = { sources = { { name = 'vsnip' } } } })<CR>
 -- vim.cmd[[xmap <C-l>   <Plug>(vsnip-cut-text)]]
 
+maps.cnoremap('<tab>', '<C-z>') -- to fix cmp
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline({
     ['<CR>'] = cmp.mapping(function(fallback)
