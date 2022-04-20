@@ -1,6 +1,5 @@
 local cmp = require('cmp')
 local utils = require('hasan.utils')
-local maps = require('hasan.utils.maps')
 local kind_icons = require('hasan.utils.ui.icons').kind
 
 local has_words_before = function()
@@ -132,7 +131,7 @@ end)
 --  inoremap <C-S> <Cmd>lua require('cmp').complete({ config = { sources = { { name = 'vsnip' } } } })<CR>
 -- vim.cmd[[xmap <C-l>   <Plug>(vsnip-cut-text)]]
 
-maps.cnoremap('<tab>', '<C-z>') -- to fix cmp
+keymap('c', '<tab>', '<C-z>', { silent = false }) -- to fix cmp
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline({
     ['<CR>'] = cmp.mapping(function(fallback)

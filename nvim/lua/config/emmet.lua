@@ -1,11 +1,9 @@
-local maps = require('hasan.utils.maps')
--- cst<
-maps.imap('<C-c>', '<nop>')
-maps.nmap('<C-c><C-c>', '<plug>(emmet-expand-abbr)')
-maps.imap('<C-c><C-c>', '<plug>(emmet-expand-abbr)')
-maps.nmap('<C-c>w', 'V%<C-c>,')
-maps.vmap('<C-c>w', '<C-c>,')
-maps.nmap('<C-c>e', 'cst<')
+keymap('i', '<C-c>', '<nop>')
+keymap({ 'n', 'i' }, '<C-c><C-c>', '<plug>(emmet-expand-abbr)')
+keymap('n', '<C-c>e', function() feedkeys('cst<', '') end)
+keymap('n', '<C-c>w', function() feedkeys('V%<C-c>,', '') end)
+keymap('v', '<C-c>w', '<plug>(emmet-expand-abbr)')
+
 -- imap   <C-y>;   <plug>(emmet-expand-word)
 -- imap   <C-y>u   <plug>(emmet-update-tag)
 -- imap   <C-y>d   <plug>(emmet-balance-tag-inward)
