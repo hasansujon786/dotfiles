@@ -25,6 +25,12 @@ _G.feedkeys = function(key, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
+_G.keymap = function(mode, lhs, rhs, opts)
+  local def_opts = { silent = true, noremap = true }
+  opts = vim.tbl_deep_extend('force', def_opts, opts or {})
+  vim.keymap.set(mode, lhs, rhs, opts)
+end
+
 -- disabled_built_ins ==============================
 local disabled_built_ins = {
   'netrw',
