@@ -1,14 +1,12 @@
-local tree = require('nvim-tree')
-
-keymap('n', '<leader>op', ':NvimTreeFindFileToggle<CR>')
+keymap('n', '<leader>op', ':NvimTreeFindFile<CR>')
 keymap('n', '<leader>ob', ':NvimTreeToggle<CR>')
 keymap('n', '<leader>0', ':NvimTreeFocus<CR>')
 keymap('n', '<leader>or', ':NvimTreeRefresh<CR>')
-keymap('n', '-', require("hasan.utils.vinegar").vinegar)
-keymap('n', '<BS>', require("hasan.utils.vinegar").alternate_file)
+keymap('n', '-', require('hasan.utils.vinegar').vinegar)
+keymap('n', '<BS>', require('hasan.utils.vinegar').alternate_file)
 local function cd_root()
   require('nvim-tree.lib').open(vim.loop.cwd())
-  vim.cmd([[normal! gg]])
+  feedkeys('gg', '')
 end
 
 -- init.lua
@@ -60,7 +58,7 @@ local list = {
   -- { key = 'D',                            action = 'trash' },
 }
 
-tree.setup({
+require('nvim-tree').setup({
   disable_netrw = true,
   hijack_netrw = true,
   open_on_setup = false,

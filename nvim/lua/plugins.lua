@@ -5,7 +5,8 @@ local is_installed = fn.isdirectory(install_path) == 1
 if not is_installed then
   print('Installing packer...')
   fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
-  vim.cmd('packadd packer.nvim')
+  local pac_cmd = 'packadd packer.nvim'
+  vim.cmd(pac_cmd)
   print('Installed packer.nvim.')
 end
 
