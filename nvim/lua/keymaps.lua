@@ -29,9 +29,6 @@ keymap({ 'i', 'c' }, '<A-p>', '<C-R>"', noSilent) -- Paste the last item from re
 -- maps.nnoremap('yao', 'va{%V%y')
 -- maps.nnoremap('dao', 'va{%V%d')
 
-keymap('x', '+', ' g<C-a>') -- increase selected numbers
-keymap('x', '-', 'g<C-x>')
-
 keymap('x', '$', 'g_') -- A fix to select end of line
 keymap('v', '.', ':norm.<cr>') -- map . in visual mode
 keymap('v', '>', '>gv') -- Keep selection when indenting/outdenting.
@@ -178,8 +175,8 @@ keymap('n', '<A-m>', '<cmd>FloatermToggle<CR>')
 keymap('n', ']t', '<cmd>FloatermToggle<CR><C-\\><C-n>')
 keymap('n', '[t', '<cmd>FloatermToggle<CR><C-\\><C-n>')
 
-keymap('n', '<C-p>', '<cmd>lua require("telescope.builtin").oldfiles()<CR>') -- Telescope
-keymap('n', '<A-x>', '<cmd>lua require("hasan.telescope.custom").commands()<cr>')
 keymap('n', '//', '<cmd>lua require("hasan.telescope.custom").curbuf(false)<cr>')
 keymap('v', '/', '<cmd>lua require("hasan.telescope.custom").curbuf(true)<cr>')
-keymap({ 'n', 'x' }, '<A-/>', '<cmd>lua require("hasan.telescope.custom").grep_string()<CR>')
+keymap('n', '<C-p>', require('telescope.builtin').oldfiles) -- Telescope
+keymap('n', '<A-x>', require('hasan.telescope.custom').commands)
+keymap({ 'n', 'x' }, '<A-/>', require('hasan.telescope.custom').grep_string)
