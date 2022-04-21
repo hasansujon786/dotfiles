@@ -1,15 +1,20 @@
 
-function s:foo() abort
-  let wincount = tabpagewinnr(tabpagenr(), '$')
-  if wincount > 1
+function s:close_neogit() abort
+  let winCount = tabpagewinnr(tabpagenr(), '$')
+  if winCount > 1
     only
   endif
-  q!
+
+  let tabpageCount = tabpagenr('$')
+  if tabpageCount > 1
+    tabclose
+  else
+    bdelete!
+  endif
 endfunction
 
-
 function s:map(...) abort
-  nmap <buffer> <silent> q :call <SID>foo()<CR>
+  nmap <buffer> <silent> q :call <SID>close_neogit()<CR>
 endfunction
 
 call timer_start(100, funcref('s:map'))
