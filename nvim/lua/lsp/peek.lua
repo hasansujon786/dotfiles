@@ -7,12 +7,7 @@ function M.PeekDefinition()
     vim.api.nvim_set_current_win(peek_util.floating_win)
   else
     local params = vim.lsp.util.make_position_params()
-    return vim.lsp.buf_request(
-      0,
-      'textDocument/definition',
-      params,
-      peek_util.preview_location_callback
-    )
+    return vim.lsp.buf_request(0, 'textDocument/definition', params, peek_util.preview_location_callback)
   end
 end
 
@@ -21,12 +16,7 @@ function M.PeekTypeDefinition()
     vim.api.nvim_set_current_win(peek_util.floating_win)
   else
     local params = vim.lsp.util.make_position_params()
-    return vim.lsp.buf_request(
-      0,
-      'textDocument/typeDefinition',
-      params,
-      peek_util.preview_location_callback
-    )
+    return vim.lsp.buf_request(0, 'textDocument/typeDefinition', params, peek_util.preview_location_callback)
   end
 end
 
@@ -35,12 +25,7 @@ function M.PeekImplementation()
     vim.api.nvim_set_current_win(peek_util.floating_win)
   else
     local params = vim.lsp.util.make_position_params()
-    return vim.lsp.buf_request(
-      0,
-      'textDocument/implementation',
-      params,
-      peek_util.preview_location_callback
-    )
+    return vim.lsp.buf_request(0, 'textDocument/implementation', params, peek_util.preview_location_callback)
   end
 end
 
@@ -74,13 +59,10 @@ function peek_util.preview_location_callback(_, result)
     return nil
   end
   if vim.tbl_islist(result) then
-    peek_util.floating_buf, peek_util.floating_win =
-    peek_util.preview_location(result[1], context)
+    peek_util.floating_buf, peek_util.floating_win = peek_util.preview_location(result[1], context)
   else
-    peek_util.floating_buf, peek_util.floating_win =
-    peek_util.preview_location(result, context)
+    peek_util.floating_buf, peek_util.floating_win = peek_util.preview_location(result, context)
   end
 end
-
 
 return M
