@@ -12,6 +12,7 @@
   "multiLinePasteWarning": false,
   "snapToGridOnResize": true,
   "theme": "system",
+  "useAcrylicInTabRow": true,
   "actions": [
     { "command": "unbound", "keys": "alt+space" },
     { "command": { "action": "copy", "singleLine": false }, "keys": "ctrl+shift+c" },
@@ -38,7 +39,9 @@
     { "command": { "action": "moveFocus", "direction": "right" }, "keys": "alt+shift+l" },
     { "command": { "action": "moveFocus", "direction": "left" }, "keys": "alt+shift+h" },
     { "command": { "action": "moveFocus", "direction": "down" }, "keys": "alt+shift+j" },
-    { "command": { "action": "moveFocus", "direction": "up" }, "keys": "alt+shift+k" }
+    { "command": { "action": "moveFocus", "direction": "up" }, "keys": "alt+shift+k" },
+    { "command": "scrollUp", "keys": "alt+pageup" },
+    { "command": "scrollDown", "keys": "alt+pagedown" }
   ],
   "profiles": {
     "defaults": {
@@ -49,12 +52,12 @@
         "face": "OperatorMonoLig Nerd Font",
         "size": 14
       },
-      "opacity": 50,
+      "opacity": 80,
       "padding": "0, 0, 0, 0",
       "scrollbarState": "hidden",
       "startingDirectory": "F:\\repoes",
       "tabColor": "#1F1F1F",
-      "useAcrylic": true
+      "useAcrylic": false
     },
     "list": [
       {
