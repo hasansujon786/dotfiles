@@ -2,15 +2,29 @@
 
 set -e
 
-input=$1
-case "${input}" in
-  win)     machineCode=0;;
-  lin)     machineCode=1;;
-  ter)     machineCode=2;;
-    *)     machineCode=3
+inputOsName=${1}
+case "${inputOsName}" in
+  win)     osIndex=0;;
+  lin)     osIndex=1;;
+  ter)     osIndex=2;;
+    *)     osIndex=3
 esac
 
-if [[ $machineCode -eq 3 ]]; then
+case "${inputOsName}" in
+  win)  os=windows;;
+  lin)  os=linux;;
+  ter)  os=termux;;
+  *)    os=linux
+esac
+
+case "${inputOsName}" in
+  win)  getter=choco;;
+  lin)  getter='sudo apt';;
+  ter)  getter=apt;;
+  *)    getter=apt
+esac
+
+if [[ $osIndex -eq 3 ]]; then
   echo "error: The following required arguments were not provided:"
   echo "USAGE:
 
@@ -28,23 +42,9 @@ else
   echo "  \__,_|\___/ \__|    |_| |_|_|\___||___/"
   echo ""
 
-  case "${input}" in
-    win)  machine=windows;;
-    lin)  machine=linux;;
-    ter)  machine=termux;;
-    *)    machine=linux
-  esac
-
-  case "${input}" in
-    win)  getter=choco;;
-    lin)  getter='sudo apt';;
-    ter)  getter=apt;;
-    *)    getter=apt
-  esac
-
-  echo \ System: ${machine}
+  echo \ System: ${os}
   echo \ Package manager: ${getter}
-  echo \ code: ${machineCode}
+  echo \ OS Index: ${osIndex}
 fi
 
 ###### utils ######
@@ -53,7 +53,7 @@ util_print() {
   figlet \ $1
 }
 util_setup_figlet() {
-  if [[ "$machine" == "windows" ]]; then
+  if [[ "$os" == "windows" ]]; then
     $getter install -y figlet-go
   else
     sudo apt upgrade && sudo apt update
@@ -72,7 +72,7 @@ util_backUpConfig() {
 util_makeSymlinkPath() {
   # $1 = actual path (from)
   # $2 = symlink path (to)
-  if [[ "$machine" == "windows" ]]; then
+  if [[ "$os" == "windows" ]]; then
     powershell New-Item -ItemType SymbolicLink -Path "$2" -Target "$1"
   else
     ln -s $1 $2
@@ -103,26 +103,26 @@ setup_bash() {
 
   $getter install -y starship
   $getter install -y fzf
-  util_backUpConfig ${bashPath[$machineCode]}
-  util_makeSymlinkPath $HOME/dotfiles/bash/.bashrc ${bashPath[$machineCode]}
+  util_backUpConfig ${bashPath[$osIndex]}
+  util_makeSymlinkPath $HOME/dotfiles/bash/.bashrc ${bashPath[$osIndex]}
 }
 
 setup_wezterm() {
   weztermPath=($HOME/.wezterm.lua $HOME/.config/wezterm/wezterm.lua $HOME/.config/wezterm/wezterm.lua)
   util_print wezterm
 
-  util_backUpConfig ${weztermPath[$machineCode]}
-  util_makeSymlinkPath $HOME/dotfiles/gui/wezterm/.wezterm.lua ${weztermPath[$machineCode]}
+  util_backUpConfig ${weztermPath[$osIndex]}
+  util_makeSymlinkPath $HOME/dotfiles/gui/wezterm/.wezterm.lua ${weztermPath[$osIndex]}
 }
 
 setup_nvim() {
   nvimPath=($HOME/AppData/Local/nvim $HOME/.config/nvim $HOME/.config/nvim)
   util_print nvim
 
-  util_backUpConfig ${nvimPath[$machineCode]}
-  util_makeSymlinkPath $HOME/dotfiles/nvim ${nvimPath[$machineCode]}
+  util_backUpConfig ${nvimPath[$osIndex]}
+  util_makeSymlinkPath $HOME/dotfiles/nvim ${nvimPath[$osIndex]}
 
-  if [[ "$machine" == "windows" ]]; then
+  if [[ "$os" == "windows" ]]; then
     $getter install -y neovim
   else
     # wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
@@ -132,12 +132,12 @@ setup_nvim() {
   fi
 
   packerPath=($HOME/AppData/Local/nvim-data/site/pack/packer/start/packer.nvim, $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim)
-  if [ -d ${packerPath[$machineCode]} ]; then
+  if [ -d ${packerPath[$osIndex]} ]; then
     echo 'packer.nvim already exists'
   else
     echo 'cloning packer.nvim'
-    mkdir -p ${packerPath[$machineCode]}
-    git clone https://github.com/wbthomason/packer.nvim ${packerPath[$machineCode]}
+    mkdir -p ${packerPath[$osIndex]}
+    git clone https://github.com/wbthomason/packer.nvim ${packerPath[$osIndex]}
   fi
   # echo "Installing vim plugins..."
   # nvim +PlugInstall +qall
@@ -147,12 +147,12 @@ setup_lazygit () {
   lazygitPath=($HOME/AppData/Roaming/lazygit $HOME/.config/lazygit $HOME/.config/lazygit)
   util_print lazygit
 
-  util_backUpConfig ${lazygitPath[$machineCode]}
-  util_makeSymlinkPath $HOME/dotfiles/tui/lazygit ${lazygitPath[$machineCode]}
+  util_backUpConfig ${lazygitPath[$osIndex]}
+  util_makeSymlinkPath $HOME/dotfiles/tui/lazygit ${lazygitPath[$osIndex]}
 
-  if [[ "$machine" == "windows" ]]; then
+  if [[ "$os" == "windows" ]]; then
     $getter install -y lazygit
-  elif [[ "$machine" == "ter" ]]; then
+  elif [[ "$os" == "ter" ]]; then
     # install manually for termux
     mkdir -p ./lazy
     export LAZYGIT_VER="0.30.1"
@@ -174,7 +174,7 @@ setup_lazygit () {
 
 setup_tig() {
   util_print tig
-  if [[ "$machine" == "windows" ]]; then
+  if [[ "$os" == "windows" ]]; then
     $getter install -y tig
   fi
   ln -s ~/dotfiles/tui/tig/.tigrc ~/.tigrc
@@ -185,9 +185,9 @@ setup_lf() {
   lfPath=($HOME/AppData/Local/lf $HOME/.config/lf $HOME/.config/lf)
   util_print lf
 
-  util_backUpConfig ${lfPath[$machineCode]}
-  util_makeSymlinkPath $HOME/dotfiles/tui/lf ${lfPath[$machineCode]}
-  if [[ "$machine" == "windows" ]]; then
+  util_backUpConfig ${lfPath[$osIndex]}
+  util_makeSymlinkPath $HOME/dotfiles/tui/lf ${lfPath[$osIndex]}
+  if [[ "$os" == "windows" ]]; then
     $getter install -y lf
   else
     wget https://github.com/gokcehan/lf/releases/download/r24/lf-linux-amd64.tar.gz -O lf-linux-amd64.tar.gz
@@ -205,12 +205,12 @@ setup_alacritty() {
   alacrittyPath=($HOME/AppData/Roaming/alacritty $HOME/.config/alacritty $HOME/.config/alacritty)
   util_print alacritty
 
-  util_backUpConfig ${alacrittyPath[$machineCode]}
-  mkdir -p ${alacrittyPath[$machineCode]}
-  # util_makeSymlinkPath $HOME/dotfiles/alacritty ${alacrittyPath[$machineCode]}
-  util_makeSymlinkPath $HOME/dotfiles/alacritty/alacritty.$machine.yml ${alacrittyPath[$machineCode]}/alacritty.yml
+  util_backUpConfig ${alacrittyPath[$osIndex]}
+  mkdir -p ${alacrittyPath[$osIndex]}
+  # util_makeSymlinkPath $HOME/dotfiles/alacritty ${alacrittyPath[$osIndex]}
+  util_makeSymlinkPath $HOME/dotfiles/alacritty/alacritty.$os.yml ${alacrittyPath[$osIndex]}/alacritty.yml
 
-  if [[ "$machine" == "windows" ]]; then
+  if [[ "$os" == "windows" ]]; then
     $getter install -y alacritty
   fi
 }
@@ -219,11 +219,11 @@ setup_node () {
   util_print nodejs
   # curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 
-  if [[ "$machine" == "windows" ]]; then
+  if [[ "$os" == "windows" ]]; then
     # $getter install -y nodejs
     # choco install nvm
     $getter install -y nodejs-lts
-  elif [[ "$machine" == "linux" ]]; then
+  elif [[ "$os" == "linux" ]]; then
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
     export NVM_DIR="$HOME/.config/nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -266,9 +266,9 @@ install_various_apps() {
   # util_print vit
   # pip3 install vit
 
-  if [[ "$machine" == "windows" ]]; then
+  if [[ "$os" == "windows" ]]; then
     $getter install -y mingw
-  elif [[ "$machine" == "linux" ]]; then
+  elif [[ "$os" == "linux" ]]; then
     $getter install -y build-essential
     $getter install -y ninja-build
   fi
@@ -279,8 +279,8 @@ setup_keypirinha() {
   keypirinhaPath=($HOME/AppData/Roaming/Keypirinha)
   util_print keypirinha
 
-  util_backUpConfig ${keypirinhaPath[$machineCode]}
-  util_makeSymlinkPath $HOME/dotfiles/gui/Keypirinha ${keypirinhaPath[$machineCode]}
+  util_backUpConfig ${keypirinhaPath[$osIndex]}
+  util_makeSymlinkPath $HOME/dotfiles/gui/Keypirinha ${keypirinhaPath[$osIndex]}
   $getter install -y keypirinha
 }
 
@@ -296,8 +296,8 @@ setup_windowsTerminal() {
   wtPath=($HOME/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json)
   # wtPathBeta=($HOME/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState/settings.json)
   $getter install -y microsoft-windows-terminal # --pre
-  rm -rf ${wtPath[$machineCode]}
-  util_makeSymlinkPath $HOME/dotfiles/windows-terminal/settings.json  ${wtPath[$machineCode]}
+  rm -rf ${wtPath[$osIndex]}
+  util_makeSymlinkPath $HOME/dotfiles/windows-terminal/settings.json  ${wtPath[$osIndex]}
 
   # # $getter install -y microsoft-windows-terminal  # --pre
   # choco install -y microsoft-windows-terminal --version=1.11.3471.0 -y
@@ -336,13 +336,13 @@ auto_install_everything() {
   setup_node
   install_various_apps
 
-  if [[ "$machine" == "windows" ]]; then
+  if [[ "$os" == "windows" ]]; then
     start ms-settings:developers
     setup_windowsTerminal
     setup_keypirinha
     $getter install -y quicklook
     setup_sublime
-  elif [[ "$machine" == "linux" ]]; then
+  elif [[ "$os" == "linux" ]]; then
     install_and_setup_tmux
   fi
 }
