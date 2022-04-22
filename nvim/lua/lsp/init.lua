@@ -1,31 +1,40 @@
 local M = {}
-local ui = require('state').ui
+local borderOpts = { border = require('state').ui.border.style }
 
 require('lsp.diagnosgic').setup()
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover,
-  { border = ui.border.style }
-)
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-  vim.lsp.handlers.signature_help,
-  { border = ui.border.style }
-)
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, borderOpts)
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, borderOpts)
 
-local function lsp_document_highlight(client)
-  -- Set autocommands conditional on server_capabilities
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+M.on_attach = function(client, bufnr)
+  M.lsp_autocmds(client, bufnr)
+  M.lsp_buffer_keymaps(client, bufnr)
+
+  -- if client.name == 'tsserver' then
+  -- client.server_capabilities.documentFormattingProvider = false
+  -- client.server_capabilities.documentRangeFormattingProvider = false
+  client.resolved_capabilities.document_formatting = false
+  client.resolved_capabilities.document_range_formatting = false
+  -- end
+end
+
+function M.lsp_autocmds(client, bufnr)
   if client.resolved_capabilities.document_highlight then
-    local lsp_document_highlight = [[
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved,WinLeave,BufWinLeave,BufLeave <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-      ]]
-    vim.cmd(lsp_document_highlight)
+    local augroup = require('hasan.utils').augroup
+    local opts = { buffer = bufnr }
+
+    augroup('lsp_autocmds')(function(autocmd)
+      autocmd('CursorHold', vim.lsp.buf.document_highlight, opts)
+      autocmd({ 'CursorMoved', 'WinLeave', 'BufWinLeave', 'BufLeave' }, vim.lsp.buf.clear_references, opts)
+
+      --   vim.cmd[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
+      --   autocmd BufWritePre *.js,*.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
+    end)
   end
 end
 
-local function lsp_buffer_keymaps(client, bufnr)
+function M.lsp_buffer_keymaps(client, bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
   local filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
   local function buf_set_option(...)
@@ -72,24 +81,9 @@ local function lsp_buffer_keymaps(client, bufnr)
     keymap('n', action_key, ':Telescope lsp_code_actions theme=get_cursor<CR>', opts)
     keymap('v', action_key, ':Telescope lsp_range_code_actions theme=get_cursor<CR>', opts)
   end
-end
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-M.on_attach = function(client, bufnr)
-  lsp_document_highlight(client)
-  lsp_buffer_keymaps(client, bufnr)
-
-  if client.name == 'tsserver' then
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
-  end
-  vim.cmd('command! -buffer Formate lua vim.lsp.buf.formatting()')
-  vim.cmd('command! -buffer FormateSync lua vim.lsp.buf.formatting_sync()')
-  -- if client.resolved_capabilities.document_formatting then
-  --   vim.cmd[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
-  --   autocmd BufWritePre *.js,*.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
-  -- end
+  vim.api.nvim_create_user_command('Format', vim.lsp.buf.formatting, {})
+  vim.api.nvim_create_user_command('FormatSync', vim.lsp.buf.formatting_sync, {})
 end
 
 return M

@@ -1,8 +1,8 @@
 local M = {}
 local ui = require('state').ui
-local diagnotic_icons  = require('hasan.utils.ui.icons').diagnostics
+local diagnotic_icons = require('hasan.utils.ui.icons').diagnostics
 
-M.diagnostic_icon_by_severity = function (severity)
+M.diagnostic_icon_by_severity = function(severity)
   local icon, highlight
   if severity == 1 then
     icon = diagnotic_icons.Error
@@ -20,24 +20,24 @@ M.diagnostic_icon_by_severity = function (severity)
   return icon, highlight
 end
 
-M.jump_to_diagnostic = function (direction)
+M.jump_to_diagnostic = function(direction)
   local opts = {
     float = {
       prefix = function(diagnostic)
         local icon, highlight = M.diagnostic_icon_by_severity(diagnostic.severity)
         return icon .. ' ', highlight
       end,
-    }
+    },
   }
-  if direction == "prev" then
+  if direction == 'prev' then
     vim.diagnostic.goto_prev(opts)
   else
     vim.diagnostic.goto_next(opts)
   end
 end
 
-M.setup = function ()
-  if vim.fn.has "nvim-0.6.0" == 0  then
+M.setup = function()
+  if vim.fn.has('nvim-0.6.0') == 0 then
     return 0
   end
 
@@ -60,7 +60,7 @@ M.setup = function ()
         local icon, highlight = M.diagnostic_icon_by_severity(diagnostic.severity)
         return i .. '/' .. total .. ' ' .. icon .. ' ', highlight
       end,
-    }
+    },
   })
 end
 

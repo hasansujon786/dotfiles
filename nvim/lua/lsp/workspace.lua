@@ -1,12 +1,12 @@
 local lsp = vim.lsp
 local api = vim.api
 
-local METHOD = "workspace/executeCommand"
+local METHOD = 'workspace/executeCommand'
 
 local M = {}
 local make_params = function(bufnr)
   return {
-    command = "_typescript.organizeImports",
+    command = '_typescript.organizeImports',
     arguments = { api.nvim_buf_get_name(bufnr) },
   }
 end

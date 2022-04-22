@@ -62,7 +62,7 @@ return require('packer').startup({
         require('config.project')
       end
     })
-    use({ 'ThePrimeagen/harpoon', opt = true, event = 'VimEnter' })
+    use({ 'ThePrimeagen/harpoon', opt = true, module = 'harpoon' })
     use({ 'nvim-telescope/telescope.nvim',
       config = function() require('config.telescope') end,
       requires = {

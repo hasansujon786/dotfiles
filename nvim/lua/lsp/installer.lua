@@ -2,7 +2,9 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 local cmp_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-if cmp_ok then capabilities = cmp_nvim_lsp.update_capabilities(capabilities) end
+if cmp_ok then
+  capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+end
 
 require('nvim-lsp-installer').on_server_ready(function(server)
   local opts = {
@@ -17,7 +19,7 @@ require('nvim-lsp-installer').on_server_ready(function(server)
     opts.settings = {
       Lua = {
         diagnostics = {
-          globals = { 'vim', 'jit' },
+          globals = { 'vim', 'jit', 'keymap' },
         },
       },
     }
@@ -25,6 +27,8 @@ require('nvim-lsp-installer').on_server_ready(function(server)
 
   -- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
   server:setup(opts)
-  vim.cmd([[ do User LspAttachBuffers ]])
+  local autocmd = [[ do User LspAttachBuffers ]]
+  vim.cmd(autocmd)
 end)
-vim.cmd([[command! LspInstallEssentials lua require("lsp.util").install_essential_servers()]])
+
+vim.api.nvim_create_user_command('LspInstallEssentials', require('lsp.util').install_essential_servers, {})

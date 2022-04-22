@@ -36,6 +36,7 @@ MY_AUGROUP(function(autocmd)
   autocmd({ 'BufWinEnter', 'WinEnter' }, 'normal Gzz', { pattern = '__FLUTTER_DEV_LOG__' })
 
   autocmd('User', 'lua ZoomPost()', { pattern = 'ZoomPost' })
+  autocmd('User', 'lua vim.notify("Packer configuration recompiled")', { pattern = 'PackerCompileDone' })
 
   -- autocmd('BufDelete ', 'silent! call remove(g:hasan_telescope_buffers, expand("<abuf>"))')
   -- autocmd({ 'BufWinEnter', 'WinEnter' }, 'let g:hasan_telescope_buffers[bufnr()] = reltimefloat(reltime())')

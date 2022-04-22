@@ -41,14 +41,14 @@ end
 --     vim.notify(msg, vim.log.levels.INFO, { title = ('Rename: %s -> %s'):format(currName, new) })
 --   end
 
-M._lspRenameChanges = nil
+M._lspRenameChangeList = nil
 M.showLspRenameChanges = function()
   local entries = {}
-  if not M._lspRenameChanges then
+  if not M._lspRenameChangeList then
     return
   end
 
-  for uri, edits in pairs(M._lspRenameChanges) do
+  for uri, edits in pairs(M._lspRenameChangeList) do
     local bufnr = vim.uri_to_bufnr(uri)
     for _, edit in ipairs(edits) do
       local start_line = edit.range.start.line + 1
@@ -120,7 +120,7 @@ M._lspRename = function(value)
         changed_instances_count = changed_instances_count + #changed_file
         changed_files_count = changed_files_count + 1
       end
-      M._lspRenameChanges = res.changes
+      M._lspRenameChangeList = res.changes
     end
 
     -- compose the right print message

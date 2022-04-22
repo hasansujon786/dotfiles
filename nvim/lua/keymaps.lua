@@ -97,6 +97,9 @@ keymap('n', '[q', ':cprev<CR>')
 keymap('n', ']Q', ':clast<CR>')
 keymap('n', '[Q', ':cfirst<CR>')
 
+keymap('n', ']e', ':lua require("harpoon.ui").nav_next()<CR>') -- harpoon
+keymap('n', '[e', ':lua require("harpoon.ui").nav_prev()<CR>')
+
 -- Search ---------------------------------------
 -- Pressing * or # searches for the current selection
 keymap('v', '*', ':<C-u>call hasan#utils#visualSelection("", "")<CR>/<C-R>=@/<CR><CR>')

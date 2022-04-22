@@ -34,22 +34,15 @@
 --   augroup END
 -- ]]
 
-
 Exemark = function()
   local bufnr = vim.fn.bufnr()
-  local ns = vim.api.nvim_create_namespace("virttext_definition")
-  local line = "Text"
+  local ns = vim.api.nvim_create_namespace('virttext_definition')
+  local line = 'Text'
   -- local line = "local line = lines[1]"
   local cursor = vim.api.nvim_win_get_cursor(0)
   local line_nr = cursor[1] - 2
   vim.api.nvim_win_set_cursor(0, cursor)
-  vim.api.nvim_buf_set_extmark(
-    bufnr,
-    ns,
-    line_nr,
-    1,
-  { virt_lines = { { { line, "NormalFloat" } } } }
-    )
+  vim.api.nvim_buf_set_extmark(bufnr, ns, line_nr, 1, { virt_lines = { { { line, 'NormalFloat' } } } })
 end
 
 -- local pos = nvim.win_get_cursor(0)
@@ -57,14 +50,13 @@ end
 -- local _, start = line:find("^%s+")
 -- nvim.win_set_cursor(0, {pos[1], start})
 
-
 -- Telescope lsp_workspace_symbols query=profiles
 -- Telescope lsp_dynamic_workspace_symbols
 
 Edit_macro = function()
   local register = 'i'
 
-  local opts = {default = vim.g.edit_macro_last or ''}
+  local opts = { default = vim.g.edit_macro_last or '' }
 
   if opts.default == '' then
     opts.prompt = 'Create Macro'
@@ -73,7 +65,9 @@ Edit_macro = function()
   end
 
   vim.ui.input(opts, function(value)
-    if value == nil then return end
+    if value == nil then
+      return
+    end
 
     local macro = vim.fn.escape(value, '"')
     vim.cmd(string.format('let @%s="%s"', register, macro))
@@ -82,20 +76,6 @@ Edit_macro = function()
   end)
 end
 
-require("harpoon").setup({
-  mark_branch = true,
-  projects = {
-    ["$HOME/Developer/your-project"] = {
-      term = {
-        cmds = {
-          "docker exec -it web bash",
-        }
-      }
-    }
-  }
-})
-
-
 --Remap space as leader key
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 --Remap for dealing with word wrap
@@ -103,7 +83,7 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers)
 vim.keymap.set('n', '<leader>sf', function()
-  require('telescope.builtin').find_files { previewer = false }
+  require('telescope.builtin').find_files({ previewer = false })
 end)
 
 local opts = { buffer = bufnr }
@@ -123,5 +103,7 @@ vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
 vim.keymap.set('n', '<leader>so', require('telescope.builtin').lsp_document_symbols, opts)
 
-local ts_utils = require("nvim-treesitter.ts_utils")
+local ts_utils = require('nvim-treesitter.ts_utils')
 ts_utils.get_node_text = vim.treesitter.query.get_node_text
+
+vim.api.nvim_create_user_command('Format', vim.lsp.buf.formatting, {})
