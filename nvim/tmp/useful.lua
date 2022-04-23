@@ -107,3 +107,6 @@ local ts_utils = require('nvim-treesitter.ts_utils')
 ts_utils.get_node_text = vim.treesitter.query.get_node_text
 
 vim.api.nvim_create_user_command('Format', vim.lsp.buf.formatting, {})
+
+-- set_lines({lines}, {A}, {B}, {new_lines})           *vim.lsp.util.set_lines()*
+-- vim.lsp.util.open_floating_preview()

@@ -75,16 +75,12 @@ end
 local M = {}
 
 M.project_files = function()
-  local _, ret, _ = utils.get_os_command_output({ 'git', 'rev-parse', '--is-inside-work-tree' })
-  local gopts = {
-    prompt_title = 'Project Files',
-    prompt_prefix = '  ',
-  }
-  if ret == 0 then
-    git_and_buffer_files(gopts)
-  else
-    builtin.find_files()
-  end
+  -- local _, ret, _ = utils.get_os_command_output({ 'git', 'rev-parse', '--is-inside-work-tree' })
+  -- if ret == 0 then
+    git_and_buffer_files({ prompt_title = 'Project Files' })
+  -- else
+  --   builtin.find_files()
+  -- end
 end
 
 function M.git_files()
