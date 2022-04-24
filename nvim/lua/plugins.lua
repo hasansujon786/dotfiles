@@ -135,12 +135,13 @@ return require('packer').startup({
       requires = { 'sindrets/diffview.nvim', after = 'neogit' }
     })
     use({'airblade/vim-gitgutter',
-      disable = true,
+      -- disable = true,
       opt=true,event='CursorHold',
-      config="require('config.gitgutter-config')"
+      config="require('config.gitgutter-config')",
+      commit='d5bae104031bb1633cb5c5178dc7d4ac422b422a'
     })
    use({ 'lewis6991/gitsigns.nvim',
-      -- disable = true,
+      disable = true,
       branch = 'winstage',
       -- tag = 'release',
       opt = true, event = 'CursorHold',
