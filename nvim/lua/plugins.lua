@@ -139,9 +139,10 @@ return require('packer').startup({
       opt=true,event='CursorHold',
       config="require('config.gitgutter-config')"
     })
-    use({ 'lewis6991/gitsigns.nvim',
-      disable = true,
-      tag = 'release',
+   use({ 'lewis6991/gitsigns.nvim',
+      -- disable = true,
+      branch = 'winstage',
+      -- tag = 'release',
       opt = true, event = 'CursorHold',
       config = function ()
         require('config.gitsigns')
