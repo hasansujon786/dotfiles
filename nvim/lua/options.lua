@@ -2,6 +2,9 @@ local u = require('hasan.utils')
 local cmd = vim.cmd
 local opt = vim.opt
 
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 -- Files-backup-undo
 opt.backup = false
 opt.swapfile = false                              -- Turn backup off, since most stuff is in SVN, git etc. anyway...
@@ -150,6 +153,6 @@ opt.textwidth=80                                  -- Hard-wrap text at nth colum
 opt.wrap = false                                  -- No wrap by default
 opt.linebreak = true                              -- Don't break words when wrapping lines
 opt.breakindent = true                            -- Every wrapped line will continue visually indented
-opt.showbreak = '↪  '                -- Make it so that long lines wrap smartly
+opt.showbreak = '↪  '                             -- Make it so that long lines wrap smartly
 opt.cpoptions:append('n')
 

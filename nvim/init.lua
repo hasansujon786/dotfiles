@@ -7,9 +7,9 @@
 
 require('state')
 require('global')
-require('plugins')
 require('options')
 require('keymaps')
+require('plugins')
 require('autocmds')
 require('playground')
 -- nodejs.install

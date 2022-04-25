@@ -1,6 +1,4 @@
 local noSilent = { silent = false }
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
 
 -- Hide search highlighting
 if vim.fn.exists('g:loaded_HLNext') then
