@@ -77,7 +77,7 @@ local M = {}
 M.project_files = function()
   -- local _, ret, _ = utils.get_os_command_output({ 'git', 'rev-parse', '--is-inside-work-tree' })
   -- if ret == 0 then
-    git_and_buffer_files({ prompt_title = 'Project Files' })
+  git_and_buffer_files({ prompt_title = 'Project Files' })
   -- else
   --   builtin.find_files()
   -- end
@@ -309,6 +309,54 @@ end
 
 M.buffers = function(cwd_only)
   builtin.buffers({ cwd_only = cwd_only, sort_mru = true, ignore_current_buffer = cwd_only })
+end
+
+M.emojis = function()
+  local emojis_table = vim.fn.readfile('c:/Users/hasan/dotfiles/bash/emojis.txt', '')
+  local opts = {
+    previewer = false,
+    put_emoji = function(prompt_bufnr, cmd)
+      require('telescope.actions').close(prompt_bufnr)
+      local visual = false
+      local entry = action_state.get_selected_entry()
+      local oldReg = { vim.fn.getreg('0'), vim.fn.getregtype('0') }
+
+      local emo = entry[1]:sub(1, 4)
+      vim.fn.setreg('0', emo, 'v')
+      vim.cmd('normal! ' .. (visual and 'gv' or '') .. '"0' .. cmd)
+
+      vim.defer_fn(function()
+        vim.fn.setreg('0', oldReg[1], oldReg[2])
+      end, 100)
+    end,
+  }
+
+  pickers.new(opts, {
+    finder = finders.new_table({
+      results = emojis_table,
+      entry_maker = opts.entry_maker or make_entry.gen_from_string(opts),
+    }),
+    sorter = conf.file_sorter(opts),
+    attach_mappings = function(_, map)
+      map('n', '<cr>', function(prompt_bufnr)
+        opts.put_emoji(prompt_bufnr, 'p')
+      end)
+      map('n', '<C-t>', function(prompt_bufnr)
+        opts.put_emoji(prompt_bufnr, 'P')
+      end)
+
+      map('i', '<cr>', function(prompt_bufnr)
+        opts.put_emoji(prompt_bufnr, 'p')
+      end)
+      map('i', '<C-t>', function(prompt_bufnr)
+        opts.put_emoji(prompt_bufnr, 'P')
+      end)
+
+      map('i', '<C-v>', nil)
+      map('i', '<C-s>', nil)
+      return true
+    end,
+  }):find()
 end
 
 return M

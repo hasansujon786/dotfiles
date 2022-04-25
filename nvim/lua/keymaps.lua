@@ -181,3 +181,4 @@ keymap('v', '/', '<cmd>lua require("hasan.telescope.custom").curbuf(true)<cr>')
 keymap('n', '<C-p>', require('telescope.builtin').oldfiles) -- Telescope
 keymap('n', '<A-x>', require('hasan.telescope.custom').commands)
 keymap({ 'n', 'x' }, '<A-/>', require('hasan.telescope.custom').grep_string)
+keymap({ 'n', 'i' }, '<C-k>e', require('hasan.telescope.custom').emojis)
