@@ -5,13 +5,14 @@ M.select = function(prompt, choices, callback)
 end
 
 M.reload_this_module = function()
-  local file = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':.'):gsub('\\', '.')
-  file = file:gsub('/', '.')
-  file = file:gsub('nvim.', '')
-  file = file:gsub('lua.', '')
-  file = file:gsub('.lua', '')
-  local module_name = file:gsub('.init', '')
-  R(module_name, 'module reloaded')
+  local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':.')
+  local m_name = M.normalise_path(path):gsub('/', '.')
+
+  m_name = m_name:gsub('nvim.', '')
+  m_name = m_name:gsub('lua.', '')
+  m_name = m_name:gsub('.lua', '')
+  m_name = m_name:gsub('.init', '')
+  R(m_name, 'module reloaded')
 end
 
 M.get_default = function(x, default)
@@ -46,7 +47,8 @@ Target OS names:
 end
 
 M.is_windows = function()
-  return vim.fn.has('win32') == 1
+  local has = vim.fn.has('win32') or vim.fn.has('wsl')
+  return has == 1
 end
 
 M.is_file_exist = function(path)
@@ -271,5 +273,15 @@ end
 --     count = count + 1
 --   end)
 -- end)
+
+function M.normalise_path(path_to_normalise)
+  local normalised_path = path_to_normalise:gsub('\\', '/'):gsub('//', '/')
+
+  if M.is_windows() then
+    normalised_path = normalised_path:sub(1, 1):lower() .. normalised_path:sub(2)
+  end
+
+  return normalised_path
+end
 
 return M
