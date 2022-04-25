@@ -134,14 +134,18 @@ return require('packer').startup({
       end,
       requires = { 'sindrets/diffview.nvim', after = 'neogit' }
     })
-    use({'airblade/vim-gitgutter',opt=true,event='CursorHold',config="require('config.gitgutter-config')"})
-    use({ 'lewis6991/gitsigns.nvim',
-      -- opt = true, event = 'BufRead',
-      branch = 'crlf', opt = true, event = 'BufRead',
+    use({'airblade/vim-gitgutter',
       disable = true,
-      config = function()
+      opt=true,event='CursorHold',
+      config="require('config.gitgutter-config')"
+    })
+    use({ 'lewis6991/gitsigns.nvim',
+      disable = true,
+      tag = 'release',
+      opt = true, event = 'CursorHold',
+      config = function ()
         require('config.gitsigns')
-      end
+      end,
     })
     -- use({'ruifm/gitlinker.nvim'})
     -- ues({'tanvirtin/vgit.nvim'})

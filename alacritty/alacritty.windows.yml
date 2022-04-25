@@ -27,13 +27,12 @@ window:
 font:
   normal:
     # family: FiraCode Nerd Font Mono
-    family: FiraCode NF
-    style: Medium
+    family: OperatorMonoLig Nerd Font
   bold:
-    family: FiraCode NF
+    family: OperatorMonoLig Nerd Font
   italic:
-    family: FiraCode NF
-  size: 13
+    family: OperatorMonoLig Nerd Font
+  size: 14
   offset:
     x: 0
     y: 0
