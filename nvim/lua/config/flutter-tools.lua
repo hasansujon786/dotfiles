@@ -1,6 +1,4 @@
 local ui = require('state').ui
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 require('flutter-tools').setup({
   lsp = {
@@ -14,7 +12,7 @@ require('flutter-tools').setup({
     on_attach = function(client, bufnr)
       require('lsp').on_attach(client, bufnr)
     end,
-    capabilities = capabilities,
+    capabilities = require('lsp.util').update_capabilities(),
     settings = {
       showTodos = true,
       completeFunctionCalls = true,

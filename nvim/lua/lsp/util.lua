@@ -157,4 +157,12 @@ function M.references_with_quickfix()
   end, 20)
 end
 
+function M.update_capabilities()
+  local cmp_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+  return cmp_ok and cmp_nvim_lsp.update_capabilities(capabilities) or capabilities
+end
+
 return M

@@ -11,12 +11,12 @@ M.on_attach = function(client, bufnr)
   M.lsp_autocmds(client, bufnr)
   M.lsp_buffer_keymaps(client, bufnr)
 
-  -- if client.name == 'tsserver' then
-  -- client.server_capabilities.documentFormattingProvider = false
-  -- client.server_capabilities.documentRangeFormattingProvider = false
-  client.resolved_capabilities.document_formatting = false
-  client.resolved_capabilities.document_range_formatting = false
-  -- end
+  if client.name ~= 'dartls' then
+    -- client.server_capabilities.documentFormattingProvider = false
+    -- client.server_capabilities.documentRangeFormattingProvider = false
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
+  end
 end
 
 function M.lsp_autocmds(client, bufnr)

@@ -1,25 +1,17 @@
--- if using cmp.nvim
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-local cmp_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-if cmp_ok then
-  capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
-end
-
 require('nvim-lsp-installer').on_server_ready(function(server)
   local opts = {
     on_attach = require('lsp').on_attach,
     flags = {
       debounce_text_changes = 500,
     },
-    capabilities = capabilities,
+    capabilities = require('lsp.util').update_capabilities(),
   }
 
   if server.name == 'sumneko_lua' then
     opts.settings = {
       Lua = {
         diagnostics = {
-          globals = { 'vim', 'jit', 'keymap' },
+          globals = { 'vim', 'jit', 'keymap', 'P' },
         },
       },
     }

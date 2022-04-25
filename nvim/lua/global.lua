@@ -1,12 +1,8 @@
 local ui = require('state').ui
--- Global functions
--- P = function(...)
---   local objects = vim.tbl_map(vim.inspect, {...})
---   print(unpack(objects))
--- end
-P = function(v)
-  print(vim.inspect(v))
-  return v
+
+P = function(...)
+  vim.pretty_print(...)
+  return ...
 end
 
 if pcall(require, 'plenary') then
