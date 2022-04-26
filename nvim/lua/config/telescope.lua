@@ -1,25 +1,7 @@
 local actions = require('telescope.actions')
 local local_action = require('hasan.telescope.local_action')
 
-local lsp_code_actions = {
-  attach_mappings = function(_, map)
-    map('i', '<tab>', actions.move_selection_next)
-    map('n', '<tab>', actions.move_selection_next)
-    map('i', '<S-tab>', actions.move_selection_previous)
-    map('n', '<S-tab>', actions.move_selection_previous)
-    return true
-  end,
-}
-
 require('telescope').setup({
-  pickers = {
-    lsp_code_actions = lsp_code_actions,
-    lsp_range_code_actions = lsp_code_actions,
-    lsp_document_symbols = {
-      theme = 'dropdown',
-      previewer = false,
-    },
-  },
   defaults = {
     scroll_strategy = 'cycle',
     selection_strategy = 'reset',
@@ -58,17 +40,41 @@ require('telescope').setup({
     },
     -- `file_ignore_patterns = { "scratch/.*", "%.env" }`
     file_ignore_patterns = {
-      "%.gitignore", "%.git/.*",
-      "4_archive/.*",
-      "%.bin/.*", "%.bin%-win/.*", "%.system/.*",
-      "android/.*", "ios/.*", "pubspec.lock"
+      '%.gitignore',
+      '%.git/.*',
+      '4_archive/.*',
+      '%.bin/.*',
+      '%.bin%-win/.*',
+      '%.system/.*',
+      'android/.*',
+      'ios/.*',
+      'pubspec.lock',
     },
-    extensions = {
-      fzy_native = {
-        override_generic_sorter = false,
-        override_file_sorter = true,
-      },
+  },
+  pickers = {
+    lsp_document_symbols = {
+      theme = 'dropdown',
+      previewer = false,
+    },
+  },
+  extensions = {
+    fzy_native = {
+      override_generic_sorter = true,
+      override_file_sorter = true,
+    },
+    ['ui-select'] = {
+      require('telescope.themes').get_cursor({
+        attach_mappings = function(_, map)
+          map('i', '<tab>', actions.move_selection_next)
+          map('n', '<tab>', actions.move_selection_next)
+          map('i', '<S-tab>', actions.move_selection_previous)
+          map('n', '<S-tab>', actions.move_selection_previous)
+          return true
+        end,
+      }),
     },
   },
 })
+
 require('telescope').load_extension('fzy_native')
+require('telescope').load_extension('ui-select')

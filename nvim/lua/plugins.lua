@@ -66,6 +66,7 @@ return require('packer').startup({
     use({ 'nvim-telescope/telescope.nvim',
       config = function() require('config.telescope') end,
       requires = {
+        'nvim-telescope/telescope-ui-select.nvim',
         'nvim-telescope/telescope-fzy-native.nvim',
         'nvim-telescope/telescope-file-browser.nvim',
         'hasansujon786/telescope-yanklist.nvim',
@@ -109,7 +110,6 @@ return require('packer').startup({
         require('config.persisted').setup()
       end,
     })
-    use({ 'tweekmonster/startuptime.vim', opt = true, cmd = 'StartupTime' })
     use({ 'tpope/vim-scriptease', opt = true, cmd = {'PP','Messages'} })
     use({ 'tpope/vim-eunuch', opt = true, cmd = {'Delete','Move','Rename','Mkdir','Chmod'} })
     use({ 'tpope/vim-repeat', opt = true, event = 'BufRead' })
