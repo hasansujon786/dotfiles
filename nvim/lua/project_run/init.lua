@@ -1,3 +1,4 @@
+-- local telescope = require('telescope')
 local _utils = require('hasan.utils')
 local picker = require('project_run.picker')
 local utils = require('project_run.utils')

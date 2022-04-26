@@ -56,20 +56,17 @@ return require('packer').startup({
 
     --> Navigation ---------------------------------
     use({ 'kyazdani42/nvim-tree.lua', config = [[require('config.nv_tree')]] })
-    use({'kevinhwang91/nvim-bqf', opt = true, ft = {'qf'}})
-    use({ 'ahmedkhalf/project.nvim', opt = true, event = 'VimEnter',
-      config = function()
-        require('config.project')
-      end
-    })
+    use({ 'kevinhwang91/nvim-bqf', opt = true, ft = {'qf'} })
     use({ 'ThePrimeagen/harpoon', opt = true, module = 'harpoon' })
     use({ 'nvim-telescope/telescope.nvim',
       config = function() require('config.telescope') end,
+      cmd = 'Telescope', module = 'telescope', opt = true,
       requires = {
-        'nvim-telescope/telescope-ui-select.nvim',
-        'nvim-telescope/telescope-fzy-native.nvim',
-        'nvim-telescope/telescope-file-browser.nvim',
-        'hasansujon786/telescope-yanklist.nvim',
+        { 'nvim-telescope/telescope-ui-select.nvim', config = [[require('telescope').load_extension('ui-select')]] },
+        { 'nvim-telescope/telescope-fzy-native.nvim', config = [[require('telescope').load_extension('fzy_native')]]  },
+        { 'ahmedkhalf/project.nvim', config = [[require('config.project')]] },
+        { 'nvim-telescope/telescope-file-browser.nvim' },
+        { 'hasansujon786/telescope-yanklist.nvim', opt = true, event = 'CursorHold' },
       }
     })
 
