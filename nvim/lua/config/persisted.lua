@@ -28,20 +28,22 @@ M.loadSession = function()
     return
   end
 
-  local sessions = persisted.list()
+  -- C:/Users/hasan/AppData/Local/nvim-data/sessions
   local path_to_trim = 'C:\\Users\\hasan\\AppData\\Local\\nvim%-data\\sessions\\'
 
-  local sessions_short = {}
-  for _, session in pairs(sessions) do
-    sessions_short[#sessions_short + 1] = session:gsub(path_to_trim, '')
-  end
-
-  require('hasan.utils.ui').menu(sessions_short, {
-    title = 'Session to load',
-    on_submit = function(item)
-      vim.cmd('source ' .. vim.fn.fnameescape(sessions[item._index]))
+  vim.ui.select(persisted.list(), {
+    prompt = 'Select tabs or spaces:',
+    format_item = function(item)
+      -- return "I'd like to choose " .. item
+      local title = item.file_path:gsub(path_to_trim, '')
+      return title:gsub('%%', '/')
     end,
-  })
+  }, function(choice)
+    if choice ~= nil then
+      -- P(vim.fn.fnameescape(choice.file_path))
+      vim.cmd('source ' .. vim.fn.fnameescape(choice.file_path))
+    end
+  end)
 end
 
 M.sessionSaveAndQuit = function()
