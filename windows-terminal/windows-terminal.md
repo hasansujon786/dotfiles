@@ -9,3 +9,9 @@ vim.cmd[[!sed -i '18s/18/14/' 'c:\\Users\\hasan\\AppData\\Local\Microsoft\\Windo
 
 
       "intenseTextStyle": "bold"
+
+map  ctrl+enter      send_text normal,application \x1b[13;5u
+map  shift+enter     send_text normal,application \x1b[13;2u
+map  ctrl+tab        send_text normal,application \x1b[9;5u
+map  ctrl+shift+tab  send_text normal,application \x1b[9;6u
+

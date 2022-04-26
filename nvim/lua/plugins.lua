@@ -22,7 +22,7 @@ return require('packer').startup({
     use({ 'hasansujon786/kissline.nvim', opt = true, event = 'VimEnter',
       config = function() require('config.kissline') end
     })
-    use({ 'nvim-lualine/lualine.nvim', config = function() require('config.lualine-config') end })
+    use({ 'nvim-lualine/lualine.nvim', config = function() require('config.lualine') end })
     use({ 'kyazdani42/nvim-web-devicons', config = function() require('config.devicons-config') end })
     use({ 'hasansujon786/notifier.nvim' })
     use({ 'folke/zen-mode.nvim', opt = true, cmd = 'ZenMode',
