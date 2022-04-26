@@ -78,7 +78,7 @@ keymap('n', '<A-->', ':resize -3<CR>')
 keymap('n', '<A-.>', ':vertical resize +5<CR>')
 keymap('n', '<A-,>', ':vertical resize -5<CR>')
 
-keymap('n', '\\', ':ZoomToggle<CR>') -- Zoom a vim pane
+keymap('n', '\\', ':ZenMode<CR>') -- Zoom a vim pane
 keymap('n', '<Bar>', ':wincmd =<cr>')
 
 keymap('n', '<C-j>', '<C-i>') -- Jump between tabs

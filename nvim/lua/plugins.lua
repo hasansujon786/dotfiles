@@ -81,7 +81,6 @@ return require('packer').startup({
     -- use({'tpope/vim-obsession'})
     -- https://github.com/sindrets/winshift.nvim
     --> Utils --------------------------------------
-    use({ 'hasansujon786/vim-zoom', opt = true, cmd={'ZoomToggle'}, config='require("config.zoom-config")' })
     use({ 'MunifTanjim/nui.nvim' })
     use({ 'mg979/vim-visual-multi', opt = true, event = 'CursorHold' })
     use({ 'arthurxavierx/vim-caser', opt = true, event = 'CursorHold' })

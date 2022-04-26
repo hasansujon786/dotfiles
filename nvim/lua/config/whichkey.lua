@@ -248,7 +248,6 @@ local leader = {
     q = { '<C-w>c',                      'Close windows' },
     t = { '<cmd>-tab split<CR>',         'Edit to new tab' },
     O = { '<cmd>tabonly<CR>',            'Keep only tab' },
-    m = { '<cmd>ZoomToggle<CR>',         'Toggle window zoom' },
 
     ['/'] = common.search_wiki_files,
   },
@@ -284,7 +283,6 @@ local leader = {
   ['>'] = common.buffers_all,
   ['<space>'] = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find File in project' },
   ['<tab>'] = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', 'Open Harpoon' },
-  ['\\'] = { '<cmd>ZenMode<CR>',         'Toggle zen mode' },
 
   h = { '<C-w>h',                                         'which_key_ignore' },
   j = { '<C-w>j',                                         'which_key_ignore' },

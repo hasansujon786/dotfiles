@@ -34,7 +34,6 @@ MY_AUGROUP(function(autocmd)
   autocmd('FileType', 'setlocal commentstring=//\\ %s', { pattern = 'dart' })
   autocmd({ 'BufWinEnter', 'WinEnter' }, 'normal Gzz', { pattern = '__FLUTTER_DEV_LOG__' })
 
-  autocmd('User', 'lua ZoomPost()', { pattern = 'ZoomPost' })
   autocmd('User', 'lua vim.notify("Packer configuration recompiled")', { pattern = 'PackerCompileDone' })
   autocmd('User', vim.fn['hasan#highlight#load_custom_highlight'], { pattern = 'PackerCompileDone' })
   autocmd('ColorScheme', vim.fn['hasan#highlight#load_custom_highlight'])
