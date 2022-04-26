@@ -49,6 +49,8 @@ local disabled_built_ins = {
   -- 'matchit'
 }
 
+vim.g.did_load_filetypes = 0
+vim.g.do_filetype_lua = 1
 for _, plugin in pairs(disabled_built_ins) do
   vim.g['loaded_' .. plugin] = 1
 end
