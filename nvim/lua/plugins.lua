@@ -10,9 +10,6 @@ if not is_installed then
   print('Installed packer.nvim.')
 end
 
-vim.g.disable_lsp = false
-vim.g.disable_coc = true
-
 return require('packer').startup({
   function(use)
     use({ 'wbthomason/packer.nvim' })
@@ -27,7 +24,7 @@ return require('packer').startup({
     use({ 'lukas-reineke/indent-blankline.nvim', opt = true, event = 'VimEnter', config = [[require('config.indentLine')]] })
     use({ 'norcalli/nvim-colorizer.lua', opt = true, event = 'CursorHold', config = [[require('config.colorizer')]] })
     use({ 'folke/zen-mode.nvim', opt = true, cmd = 'ZenMode', config = function() require('config.zen') end })
-    use({ 'hasansujon786/notifier.nvim' })
+    use({ 'hasansujon786/notifier.nvim', opt = true, module = 'notifier' })
 
     ------------------------------------------------
     --> Productiviry -------------------------------
@@ -67,53 +64,41 @@ return require('packer').startup({
     ------------------------------------------------
     --> Utils --------------------------------------
     ------------------------------------------------
-    use({ 'tpope/vim-eunuch', opt = true, cmd = {'Delete','Move','Rename','Mkdir','Chmod'} })
-    use({ 'tpope/vim-commentary', opt = true, event = 'BufReadPost' })
-    use({ 'tpope/vim-surround', opt = true, event = 'BufReadPost',  })
     use({ 'MunifTanjim/nui.nvim' })
+    use({ 'nvim-lua/plenary.nvim' })
+    use({ 'tpope/vim-repeat', opt = true, event = 'BufRead' })
+    use({ 'dhruvasagar/vim-open-url', opt = true, event = 'BufRead' })
+    use({ 'tpope/vim-commentary', opt = true, event = 'BufReadPost' })
+    use({ 'tpope/vim-surround', opt = true, event = 'BufReadPost' })
     use({ 'mg979/vim-visual-multi', opt = true, event = 'CursorHold' })
+    use({ 'tpope/vim-eunuch', opt = true, cmd = {'Delete','Move','Rename','Mkdir','Chmod'} })
+    use({ 'folke/which-key.nvim', config = function() require('config.whichkey') end })
+    use({ 'voldikss/vim-floaterm',opt=true,cmd={'FloatermNew','FloatermToggle'},config=[[require('config.floaterm')]] })
+    use({ 'olimorris/persisted.nvim',
+      cmd = {'SessionLoad', 'SessionLoadLast', 'SessionSave'},
+      module = 'persisted', opt = true,
+      config = [[require('config.persisted').setup()]],
+    })
+    use({ 'simrat39/symbols-outline.nvim',
+      opt = true, cmd = { 'SymbolsOutline', 'SymbolsOutlineClose' },
+      setup = [[require('config.symbol_outline').setup()]],
+    })
     use({ 'arthurxavierx/vim-caser', opt = true, event = 'CursorHold' })
     use({ 'NTBBloodbath/color-converter.nvim', opt = true, event = 'CursorHold' })
     use({ 'Konfekt/vim-CtrlXA', opt = true, event = 'CursorHold' })
-    use({ 'nvim-lua/plenary.nvim' })
-    use({ 'voldikss/vim-floaterm', opt = true,
-      cmd = {'FloatermNew','FloatermToggle'},
-      config = function()
-        require('config.floaterm')
-      end
-    })
     use({ 'chentau/marks.nvim',opt=true,event='CursorHold',config=[[require('config.marks-config')]] })
     use({ 'hasansujon786/vim-rel-jump', opt = true, event = 'BufRead' })
-    use({ 'dhruvasagar/vim-open-url', opt = true, event = 'BufRead' })
-    use({ 'folke/which-key.nvim', config = function() require('config.whichkey') end })
-    use({ 'olimorris/persisted.nvim',
-      module = 'persisted', opt = true,
-      cmd = {'SessionLoad', 'SessionLoadLast', 'SessionSave'},
-      config = function()
-        require('config.persisted').setup()
-      end,
-    })
     use({ 'tpope/vim-scriptease', opt = true, cmd = {'PP','Messages'} })
-    use({ 'tpope/vim-repeat', opt = true, event = 'BufRead' })
-    use({ 'simrat39/symbols-outline.nvim',
-      opt = true, cmd = { 'SymbolsOutline', 'SymbolsOutlineClose' },
-      setup = function()
-        require('config.symbol_outline').setup()
-      end,
-    })
 
     ------------------------------------------------
     --> Git ----------------------------------------
     ------------------------------------------------
-    use({ 'TimUntersberger/neogit', opt = true, cmd = 'Neogit',
-      config = function()
-        require('config.neogit')
-      end,
-      requires = { 'sindrets/diffview.nvim', after = 'neogit' }
+    use({ 'TimUntersberger/neogit', cmd = 'Neogit',
+      config = [[require('config.neogit')]], opt = true,
+      requires = { 'sindrets/diffview.nvim' }
     })
-    use({'airblade/vim-gitgutter',
-      -- disable = true,
-      opt=true,event='CursorHold',
+    use({ 'airblade/vim-gitgutter',
+      opt = true, event = 'CursorHold',
       config="require('config.gitgutter-config')",
       commit='d5bae104031bb1633cb5c5178dc7d4ac422b422a'
     })
@@ -121,9 +106,10 @@ return require('packer').startup({
     ------------------------------------------------
     --> Lsp & completions --------------------------
     ------------------------------------------------
+    use({ 'nvim-treesitter/playground', opt = true, cmd = {'TSPlaygroundToggle','TSHighlightCapturesUnderCursor'} })
     use({ 'nvim-treesitter/nvim-treesitter',
       opt = true, event = 'CursorHold',
-      config = function() require('config.treesitter') end,
+      config = [[require('config.treesitter')]],
       requires = {
         'JoosepAlviste/nvim-ts-context-commentstring',
         'nvim-treesitter/nvim-treesitter-textobjects',
@@ -131,23 +117,13 @@ return require('packer').startup({
         'windwp/nvim-ts-autotag',
       }
     })
-    use({ 'nvim-treesitter/playground', opt = true,
-      cmd = {'TSPlaygroundToggle','TSHighlightCapturesUnderCursor'}
-    })
-
     use({ 'neovim/nvim-lspconfig',
       opt = true, event = 'CursorHold',
-      disable = vim.g.disable_lsp,
       config = function() require('lsp') end,
-    })
-    use({ 'jose-elias-alvarez/null-ls.nvim',
-      opt = true, after = 'nvim-lspconfig',
-      config = function() require('lsp.null-ls') end,
-    })
-    use({ 'williamboman/nvim-lsp-installer',
-      opt = true, after = 'nvim-lspconfig',
-      disable = vim.g.disable_lsp,
-      config = function() require('lsp.installer') end,
+      requires = {
+        { 'jose-elias-alvarez/null-ls.nvim', config = function() require('lsp.null-ls') end },
+        { 'williamboman/nvim-lsp-installer', config = function() require('lsp.installer') end },
+      }
     })
     use({ 'hrsh7th/nvim-cmp',
       opt = true, after = 'nvim-lspconfig',
@@ -160,19 +136,12 @@ return require('packer').startup({
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-buffer',
         'hrsh7th/cmp-vsnip',
-        {'hrsh7th/cmp-path', commit ='d83839ae510d18530c6d36b662a9e806d4dceb73'}
+        { 'hrsh7th/cmp-path', commit ='d83839ae510d18530c6d36b662a9e806d4dceb73' },
+        { 'windwp/nvim-autopairs', config = [[require('config.autopairs')]] },
       },
     })
-    use({ 'windwp/nvim-autopairs',
-      opt = true, after = 'nvim-cmp',
-      config = function() require('config.autopairs') end
-    })
-    use({ 'mattn/emmet-vim', opt = true, event = 'BufRead',
-      config = function() require('config.emmet') end
-    })
-    use({ 'akinsho/flutter-tools.nvim', opt = true, ft = {'dart'},
-      config = function() require('config.flutter-tools') end
-    })
+    use({ 'akinsho/flutter-tools.nvim', opt = true, ft = {'dart'}, config = [[require('config.flutter-tools')]] })
+    use({ 'mattn/emmet-vim', opt = true, event = 'BufReadPost', config = [[require('config.emmet')]] })
 
     if not is_installed then
       require('packer').sync()
