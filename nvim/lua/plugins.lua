@@ -21,21 +21,13 @@ return require('packer').startup({
     ------------------------------------------------
     use({ 'navarasu/onedark.nvim', config = function() require('config.onedark') end })
     use({ 'hasansujon786/dashboard-nvim', config = function() require('config.dashboard') end })
-    use({ 'hasansujon786/kissline.nvim', opt = true, event = 'VimEnter',
-      config = function() require('config.kissline') end
-    })
+    use({ 'hasansujon786/kissline.nvim', config = function() require('config.kissline') end })
     use({ 'nvim-lualine/lualine.nvim', config = function() require('config.lualine') end })
     use({ 'kyazdani42/nvim-web-devicons', config = function() require('config.devicons-config') end })
+    use({ 'lukas-reineke/indent-blankline.nvim', opt = true, event = 'VimEnter', config = [[require('config.indentLine')]] })
+    use({ 'norcalli/nvim-colorizer.lua', opt = true, event = 'CursorHold', config = [[require('config.colorizer')]] })
+    use({ 'folke/zen-mode.nvim', opt = true, cmd = 'ZenMode', config = function() require('config.zen') end })
     use({ 'hasansujon786/notifier.nvim' })
-    use({ 'folke/zen-mode.nvim', opt = true, cmd = 'ZenMode',
-      config = function() require('config.zen') end
-    })
-    use({ "lukas-reineke/indent-blankline.nvim",opt = true,event = 'VimEnter',
-      config = function() require('config.indentLine-config') end
-    })
-    use({ 'norcalli/nvim-colorizer.lua', opt = true, event = 'CursorHold',
-      config = function() require('config.colorizer') end
-    })
 
     ------------------------------------------------
     --> Productiviry -------------------------------
@@ -49,11 +41,7 @@ return require('packer').startup({
         {"akinsho/org-bullets.nvim", config = function() require('config.org-bullets') end }
       }
     })
-    use({ 'mkropat/vim-tt', opt = true, event = 'CursorHold',
-      config = function ()
-        vim.g.tt_loaded = 1
-      end
-    })
+    use({ 'mkropat/vim-tt', opt = true, event = 'CursorHold', config = function () vim.g.tt_loaded = 1 end })
 
     ------------------------------------------------
     --> Navigation ---------------------------------
@@ -69,28 +57,24 @@ return require('packer').startup({
         { 'nvim-telescope/telescope-fzy-native.nvim', config = [[require('telescope').load_extension('fzy_native')]]  },
         { 'ahmedkhalf/project.nvim', config = [[require('config.project')]] },
         { 'nvim-telescope/telescope-file-browser.nvim' },
-        { 'hasansujon786/telescope-yanklist.nvim', opt = true, event = 'CursorHold' },
+        { 'hasansujon786/telescope-yanklist.nvim', opt = true, event = 'TextYankPost', module = 'yanklist' },
       }
     })
 
     use({ 'unblevable/quick-scope', opt = true, event = 'CursorHold'})
-    use({ 'justinmk/vim-sneak', opt = true, event = 'CursorHold',
-      after = 'vim-surround',
-      config = function()
-        require('config.sneak')
-      end
-    })
+    use({ 'justinmk/vim-sneak', opt = true, event = 'CursorHold', config = [[require('config.sneak')]] })
 
     ------------------------------------------------
     --> Utils --------------------------------------
     ------------------------------------------------
+    use({ 'tpope/vim-eunuch', opt = true, cmd = {'Delete','Move','Rename','Mkdir','Chmod'} })
+    use({ 'tpope/vim-commentary', opt = true, event = 'BufReadPost' })
+    use({ 'tpope/vim-surround', opt = true, event = 'BufReadPost',  })
     use({ 'MunifTanjim/nui.nvim' })
     use({ 'mg979/vim-visual-multi', opt = true, event = 'CursorHold' })
     use({ 'arthurxavierx/vim-caser', opt = true, event = 'CursorHold' })
     use({ 'NTBBloodbath/color-converter.nvim', opt = true, event = 'CursorHold' })
     use({ 'Konfekt/vim-CtrlXA', opt = true, event = 'CursorHold' })
-    use({ 'tpope/vim-commentary', opt = true, event = 'BufRead' })
-    use({ 'tpope/vim-surround', opt = true, event = 'BufRead',  })
     use({ 'nvim-lua/plenary.nvim' })
     use({ 'voldikss/vim-floaterm', opt = true,
       cmd = {'FloatermNew','FloatermToggle'},
