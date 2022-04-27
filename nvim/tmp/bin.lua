@@ -12,7 +12,6 @@
 -- use({ 'folke/tokyonight.nvim' })
 -- use({'projekt0n/github-nvim-theme'})
 -- use({ 'vimwiki/vimwiki', opt = true, cmd = {'VimwikiIndex','VimwikiTabIndex','VimwikiUISelect'} })
--- use({ 'tpope/vim-eunuch', opt = true, cmd = {'Delete','Move','Rename','Mkdir','Chmod'} })
 -- use({ 'lewis6991/gitsigns.nvim',
 --    disable = true,
 --    branch = 'winstage',
