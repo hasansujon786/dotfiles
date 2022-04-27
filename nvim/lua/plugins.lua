@@ -16,7 +16,9 @@ vim.g.disable_coc = true
 return require('packer').startup({
   function(use)
     use({ 'wbthomason/packer.nvim' })
+    ------------------------------------------------
     --> Visual -------------------------------------
+    ------------------------------------------------
     use({ 'navarasu/onedark.nvim', config = function() require('config.onedark') end })
     use({ 'hasansujon786/dashboard-nvim', config = function() require('config.dashboard') end })
     use({ 'hasansujon786/kissline.nvim', opt = true, event = 'VimEnter',
@@ -34,11 +36,10 @@ return require('packer').startup({
     use({ 'norcalli/nvim-colorizer.lua', opt = true, event = 'CursorHold',
       config = function() require('config.colorizer') end
     })
-    -- use({ 'folke/tokyonight.nvim' })
-    -- use({'projekt0n/github-nvim-theme'})
 
+    ------------------------------------------------
     --> Productiviry -------------------------------
-    -- use({ 'vimwiki/vimwiki', opt = true, cmd = {'VimwikiIndex','VimwikiTabIndex','VimwikiUISelect'} })
+    ------------------------------------------------
     use({ 'nvim-orgmode/orgmode',
       -- commit ='50d1a97b25d77f33d312b4775fbd68217d22c946',
       -- commit ='e287630dad1eceb03292b6283aa73505e539191b', -- working
@@ -54,7 +55,9 @@ return require('packer').startup({
       end
     })
 
+    ------------------------------------------------
     --> Navigation ---------------------------------
+    ------------------------------------------------
     use({ 'kyazdani42/nvim-tree.lua', config = [[require('config.nv_tree')]] })
     use({ 'kevinhwang91/nvim-bqf', opt = true, ft = {'qf'} })
     use({ 'ThePrimeagen/harpoon', opt = true, module = 'harpoon' })
@@ -78,9 +81,9 @@ return require('packer').startup({
       end
     })
 
-    -- use({'tpope/vim-obsession'})
-    -- https://github.com/sindrets/winshift.nvim
+    ------------------------------------------------
     --> Utils --------------------------------------
+    ------------------------------------------------
     use({ 'MunifTanjim/nui.nvim' })
     use({ 'mg979/vim-visual-multi', opt = true, event = 'CursorHold' })
     use({ 'arthurxavierx/vim-caser', opt = true, event = 'CursorHold' })
@@ -107,7 +110,6 @@ return require('packer').startup({
       end,
     })
     use({ 'tpope/vim-scriptease', opt = true, cmd = {'PP','Messages'} })
-    use({ 'tpope/vim-eunuch', opt = true, cmd = {'Delete','Move','Rename','Mkdir','Chmod'} })
     use({ 'tpope/vim-repeat', opt = true, event = 'BufRead' })
     use({ 'simrat39/symbols-outline.nvim',
       opt = true, cmd = { 'SymbolsOutline', 'SymbolsOutlineClose' },
@@ -115,15 +117,10 @@ return require('packer').startup({
         require('config.symbol_outline').setup()
       end,
     })
-    -- use({ 'sunjon/Shade.nvim', config = function() require('config.shade') end })
 
+    ------------------------------------------------
     --> Git ----------------------------------------
-    -- use({ 'tpope/vim-fugitive', opt = true, cmd = {'Git','GBrowse','GV'},
-    --   requires = {
-    --     'tpope/vim-rhubarb',
-    --     'junegunn/gv.vim'
-    --   }
-    -- })
+    ------------------------------------------------
     use({ 'TimUntersberger/neogit', opt = true, cmd = 'Neogit',
       config = function()
         require('config.neogit')
@@ -136,26 +133,10 @@ return require('packer').startup({
       config="require('config.gitgutter-config')",
       commit='d5bae104031bb1633cb5c5178dc7d4ac422b422a'
     })
-   use({ 'lewis6991/gitsigns.nvim',
-      disable = true,
-      branch = 'winstage',
-      -- tag = 'release',
-      opt = true, event = 'CursorHold',
-      config = function ()
-        require('config.gitsigns')
-      end,
-    })
-    -- use({'ruifm/gitlinker.nvim'})
-    -- ues({'tanvirtin/vgit.nvim'})
 
+    ------------------------------------------------
     --> Lsp & completions --------------------------
-    use({ 'neoclide/coc.nvim',
-      opt = true, event = 'CursorHold',
-      disable = vim.g.disable_coc,
-      config = function ()
-        vim.cmd 'source ~/dotfiles/nvim/config/coc.vim'
-      end
-    })
+    ------------------------------------------------
     use({ 'nvim-treesitter/nvim-treesitter',
       opt = true, event = 'CursorHold',
       config = function() require('config.treesitter') end,
@@ -208,27 +189,6 @@ return require('packer').startup({
     use({ 'akinsho/flutter-tools.nvim', opt = true, ft = {'dart'},
       config = function() require('config.flutter-tools') end
     })
-
-    use {
-      'mfussenegger/nvim-dap',
-      disable = true,
-      -- opt = true,
-      -- event = "BufReadPre",
-      -- module = { "dap" },
-      wants = { 'nvim-dap-virtual-text', 'DAPInstall.nvim', 'nvim-dap-ui', 'which-key.nvim' },
-      requires = {
-        'Pocco81/DAPInstall.nvim',
-        'theHamsta/nvim-dap-virtual-text',
-        'rcarriga/nvim-dap-ui',
-        'mfussenegger/nvim-dap-python',
-        'nvim-telescope/telescope-dap.nvim',
-        -- { "leoluz/nvim-dap-go", module = "dap-go" },
-      { 'jbyuki/one-small-step-for-vimkind', module = 'osv' },
-      },
-      config = function()
-        require('config.dap').setup()
-      end,
-    }
 
     if not is_installed then
       require('packer').sync()

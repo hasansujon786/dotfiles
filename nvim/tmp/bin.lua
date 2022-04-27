@@ -1,0 +1,53 @@
+
+-- use({ 'sunjon/Shade.nvim', config = function() require('config.shade') end })
+-- use({'tpope/vim-obsession'})
+-- https://github.com/sindrets/winshift.nvim
+
+-- use({ 'tpope/vim-fugitive', opt = true, cmd = {'Git','GBrowse','GV'},
+--   requires = {
+--     'tpope/vim-rhubarb',
+--     'junegunn/gv.vim'
+--   }
+-- })
+-- use({ 'folke/tokyonight.nvim' })
+-- use({'projekt0n/github-nvim-theme'})
+-- use({ 'vimwiki/vimwiki', opt = true, cmd = {'VimwikiIndex','VimwikiTabIndex','VimwikiUISelect'} })
+-- use({ 'tpope/vim-eunuch', opt = true, cmd = {'Delete','Move','Rename','Mkdir','Chmod'} })
+-- use({ 'lewis6991/gitsigns.nvim',
+--    disable = true,
+--    branch = 'winstage',
+--    -- tag = 'release',
+--    opt = true, event = 'CursorHold',
+--    config = function ()
+--      require('config.gitsigns')
+--    end,
+--  })
+--  -- use({'ruifm/gitlinker.nvim'})
+--  -- ues({'tanvirtin/vgit.nvim'})
+--  use({ 'neoclide/coc.nvim',
+--    opt = true, event = 'CursorHold',
+--    disable = vim.g.disable_coc,
+--    config = function ()
+--      vim.cmd 'source ~/dotfiles/nvim/config/coc.vim'
+--    end
+--  })
+-- use({
+--   'mfussenegger/nvim-dap',
+--   disable = true,
+--   -- opt = true,
+--   -- event = "BufReadPre",
+--   -- module = { "dap" },
+--   wants = { 'nvim-dap-virtual-text', 'DAPInstall.nvim', 'nvim-dap-ui', 'which-key.nvim' },
+--   requires = {
+--     'Pocco81/DAPInstall.nvim',
+--     'theHamsta/nvim-dap-virtual-text',
+--     'rcarriga/nvim-dap-ui',
+--     'mfussenegger/nvim-dap-python',
+--     'nvim-telescope/telescope-dap.nvim',
+--     -- { "leoluz/nvim-dap-go", module = "dap-go" },
+--     { 'jbyuki/one-small-step-for-vimkind', module = 'osv' },
+--   },
+--   config = function()
+--     require('config.dap').setup()
+--   end,
+-- })
