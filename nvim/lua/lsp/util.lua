@@ -31,6 +31,15 @@ M.install_essential_servers = function()
   end
 end
 
+M.code_action = function()
+  _G.topts = require('telescope.themes').get_cursor()
+  vim.lsp.buf.code_action()
+end
+M.range_code_action = function()
+  _G.topts = require('telescope.themes').get_cursor()
+  vim.lsp.buf.range_code_action()
+end
+
 -- local notify_changes = function(changes)
 --   local new
 --   local msg = ''

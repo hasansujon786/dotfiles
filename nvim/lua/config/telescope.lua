@@ -63,16 +63,7 @@ require('telescope').setup({
       override_file_sorter = true,
     },
     ['ui-select'] = {
-      require('telescope.themes').get_cursor({
-        attach_mappings = function(_, map)
-          map('i', '<tab>', actions.move_selection_next)
-          map('n', '<tab>', actions.move_selection_next)
-          map('i', '<S-tab>', actions.move_selection_previous)
-          map('n', '<S-tab>', actions.move_selection_previous)
-          return true
-        end,
-      }),
+      require('telescope.themes').get_dropdown(),
     },
   },
 })
-

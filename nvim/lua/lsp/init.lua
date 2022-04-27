@@ -78,8 +78,8 @@ function M.lsp_buffer_keymaps(client, bufnr)
   end
   local code_action_keys = { '<C-q>', '<C-space>', '<A-space>' }
   for _, action_key in ipairs(code_action_keys) do
-    keymap('n', action_key, vim.lsp.buf.code_action, opts)
-    keymap('v', action_key, vim.lsp.buf.range_code_action, opts)
+    keymap('n', action_key, require('lsp.util').code_action, opts)
+    keymap('v', action_key, require('lsp.util').range_code_action, opts)
   end
 
   vim.api.nvim_create_user_command('Format', vim.lsp.buf.formatting, {})
