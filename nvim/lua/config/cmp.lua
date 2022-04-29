@@ -41,10 +41,7 @@ cmp.setup({
       end
     end, { 'i', 'c' }),
     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-    ['<C-e>'] = cmp.mapping({
-      i = cmp.mapping.abort(),
-      c = cmp.mapping.close(),
-    }),
+    ['<C-e>'] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
     ['<c-space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     ['<M-space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     ['<C-q>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
@@ -55,10 +52,7 @@ cmp.setup({
         cmp.complete({ config = { sources = { { name = 'vsnip' } } } })
       end
     end, { 'i', 's' }),
-    ['<CR>'] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    }),
+    ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Select, select = true }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() and vim.fn['vsnip#available']() == 1 then
         cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
