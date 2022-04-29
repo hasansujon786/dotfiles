@@ -27,19 +27,6 @@ _G.keymap = function(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
-_G.lsp_installer_essential_servers = {
-  'bashls',
-  'html',
-  'vimls',
-  'vuels',
-  'cssls',
-  'jsonls',
-  'tsserver',
-  'emmet_ls',
-  'tailwindcss',
-  'sumneko_lua',
-}
-
 -- disabled_built_ins ==============================
 local disabled_built_ins = {
   'netrw',

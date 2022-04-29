@@ -3,7 +3,7 @@ local api = vim.api
 
 M.install_essential_servers = function()
   local installing_servers = false
-  for _, server_name in ipairs(_G.lsp_installer_essential_servers) do
+  for _, server_name in ipairs(require('lsp.installer').essential_servers) do
     local ok, server = require('nvim-lsp-installer.servers').get_server(server_name)
     if ok then
       if not server:is_installed() then
