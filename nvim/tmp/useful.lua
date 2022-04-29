@@ -110,3 +110,6 @@ vim.api.nvim_create_user_command('Format', vim.lsp.buf.formatting, {})
 
 -- set_lines({lines}, {A}, {B}, {new_lines})           *vim.lsp.util.set_lines()*
 -- vim.lsp.util.open_floating_preview()
+
+--   local autocmd = [[ do User LspAttachBuffers ]]
+--   vim.cmd(autocmd)

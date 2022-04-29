@@ -45,6 +45,7 @@ alias flrp='flutter run -d "192.168.31.252"'
 alias fll='flutter clean'
 alias flc='flutter create'
 alias flcs='flutter create -t skeleton'
+alias fob='cd build/app/outputs/flutter-apk && explorer .'
 
 #adb
 alias acc='adb connect 192.168.31.252 && adb devices'

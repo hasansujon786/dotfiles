@@ -118,7 +118,7 @@ return require('packer').startup({
       }
     })
     use({ 'neovim/nvim-lspconfig',
-      opt = true, event = 'CursorHold',
+      opt = true, event = 'BufReadPost',
       config = function() require('lsp') end,
       requires = {
         { 'jose-elias-alvarez/null-ls.nvim', config = function() require('lsp.null-ls') end },

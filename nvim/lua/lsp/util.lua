@@ -2,20 +2,8 @@ local M = {}
 local api = vim.api
 
 M.install_essential_servers = function()
-  local essential_servers = {
-    'bashls',
-    'html',
-    'vimls',
-    'vuels',
-    'cssls',
-    'jsonls',
-    'tsserver',
-    'emmet_ls',
-    'tailwindcss',
-    'sumneko_lua',
-  }
   local installing_servers = false
-  for _, server_name in ipairs(essential_servers) do
+  for _, server_name in ipairs(_G.lsp_installer_essential_servers) do
     local ok, server = require('nvim-lsp-installer.servers').get_server(server_name)
     if ok then
       if not server:is_installed() then
