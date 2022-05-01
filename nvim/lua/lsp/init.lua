@@ -46,6 +46,7 @@ function M.lsp_buffer_keymaps(client, bufnr)
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   keymap('n', 'K', vim.lsp.buf.hover, opts)
+  keymap('n', 'g.', '<cmd>Telescope lsp_document_symbols<cr>', opts)
   keymap('n', 'gd', vim.lsp.buf.definition, opts)
   keymap('n', 'gD', vim.lsp.buf.declaration, opts)
   keymap('n', 'gr', require('lsp.util').references_with_quickfix, opts)
@@ -66,7 +67,7 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', '[d', '<cmd>lua require("lsp.diagnosgic").jump_to_diagnostic("prev")<CR>', opts)
   keymap('n', ']d', '<cmd>lua require("lsp.diagnosgic").jump_to_diagnostic("next")<CR>', opts)
 
-  keymap('n', '<leader>.', '<cmd>Telescope lsp_document_symbols<cr>', opts)
+  keymap('n', '<leader>a.', '<cmd>Telescope lsp_document_symbols<cr>', opts)
   keymap('n', '<leader>fs', '<cmd>lua vim.lsp.buf.formatting_sync()<CR><cmd>update<CR>', opts)
   keymap('x', '<leader>fs', '<ESC><cmd>lua vim.lsp.buf.range_formatting()<CR><cmd>update<CR>', opts)
   keymap('n', '<leader>aw', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)

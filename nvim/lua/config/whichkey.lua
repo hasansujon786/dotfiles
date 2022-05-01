@@ -281,6 +281,7 @@ local leader = {
   -- ['.'] = common.buffers_cwd,
   e = {'<cmd>lua require("hasan.org").toggle_org_float()<CR>',         'Toggle org float'},
   ['>'] = common.buffers_all,
+  ['.'] = common.buffers_cwd,
   ['<space>'] = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find File in project' },
   ['<tab>'] = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', 'Open Harpoon' },
 
