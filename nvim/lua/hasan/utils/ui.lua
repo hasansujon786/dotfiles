@@ -126,8 +126,9 @@ M.rename_current_file = function()
   })
 end
 
-M.substitute_word = function(isVisual)
-  local curWord = isVisual and vim.fn['hasan#utils#get_visual_selection']() or vim.fn.expand('<cword>')
+M.substitute_word = function()
+  local isVisual = require('hasan.utils').is_visual_mode()
+  local curWord = isVisual and require('hasan.utils').get_visual_selection() or vim.fn.expand('<cword>')
 
   M.input('Substitute Word', {
     default_value = curWord,
@@ -135,7 +136,7 @@ M.substitute_word = function(isVisual)
       local cmd = isVisual and '%s/' .. curWord .. '/' .. newWord .. '/gc'
         or '%s/\\<' .. curWord .. '\\>/' .. newWord .. '/gc'
 
-      vim.fn['hasan#utils#feedkeys'](':<C-u>' .. cmd .. '<CR>', 'n')
+      feedkeys(':<C-u>' .. cmd .. '<CR>', 'n')
       vim.fn.setreg('z', cmd)
     end,
   })
@@ -148,13 +149,13 @@ M.cycle_numbering = function()
 
   -- Cycle through:
   -- - relativenumber + number
-  if (vim.deep_equal({relativenumber, number}, {true, true})) then
+  if vim.deep_equal({ relativenumber, number }, { true, true }) then
     relativenumber, number = false, true
-  elseif (vim.deep_equal({relativenumber, number}, {false, true})) then
+  elseif vim.deep_equal({ relativenumber, number }, { false, true }) then
     relativenumber, number = false, false
-  elseif (vim.deep_equal({relativenumber, number}, {false, false})) then
+  elseif vim.deep_equal({ relativenumber, number }, { false, false }) then
     relativenumber, number = true, true
-  elseif (vim.deep_equal({relativenumber, number}, {true, false})) then
+  elseif vim.deep_equal({ relativenumber, number }, { true, false }) then
     relativenumber, number = false, true
   end
 

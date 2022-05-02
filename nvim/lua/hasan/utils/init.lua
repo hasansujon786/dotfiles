@@ -314,6 +314,11 @@ function M.normalise_path(path_to_normalise)
   return normalised_path
 end
 
+function M.is_visual_mode()
+  local mode = vim.api.nvim_get_mode().mode
+  return mode == 'v' or mode == 'V' or mode == '', mode
+end
+
 function M.get_visual_selection()
   -- this will exit visual mode
   -- use 'gv' to reselect the text
@@ -328,7 +333,7 @@ function M.get_visual_selection()
       cscol, cecol = 0, 999
     end
     -- exit visual mode
-    -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', true)
+    _G.feedkeys('<Esc>', 'n')
   else
     -- otherwise, use the last known visual position
     _, csrow, cscol, _ = unpack(vim.fn.getpos("'<"))

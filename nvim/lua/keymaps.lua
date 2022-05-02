@@ -175,10 +175,10 @@ vim.g.floaterm_keymap_toggle = '<A-m>'
 keymap('n', '<A-m>', '<cmd>FloatermToggle<CR>')
 keymap('n', ']t', '<cmd>FloatermToggle<CR><C-\\><C-n>')
 keymap('n', '[t', '<cmd>FloatermToggle<CR><C-\\><C-n>')
-
-keymap('n', '//', '<cmd>lua require("hasan.telescope.custom").curbuf(false)<cr>')
-keymap('v', '/', '<cmd>lua require("hasan.telescope.custom").curbuf(true)<cr>')
-keymap('n', '<C-p>', '<cmd>lua require("telescope.builtin").oldfiles()<CR>') -- Telescope
+-- Telescope
+keymap('n', '<C-p>', '<cmd>lua require("telescope.builtin").oldfiles()<CR>')
 keymap('n', '<A-x>', '<cmd>lua require("hasan.telescope.custom").commands()<CR>')
-keymap({ 'n', 'x' }, '<A-/>', '<cmd>lua require("hasan.telescope.custom").grep_string()<CR>')
+keymap('n', '//', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>')
+keymap('v', '/', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>')
+keymap({ 'n', 'v' }, '<A-/>', '<cmd>lua require("hasan.telescope.custom").grep_string()<CR>')
 keymap({ 'n', 'i' }, '<C-k>e', '<cmd>lua require("hasan.telescope.custom").emojis()<CR>')

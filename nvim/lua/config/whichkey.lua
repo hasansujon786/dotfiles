@@ -26,6 +26,7 @@ local common = {
   buffers_cwd = { '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>',         'Switch Project buffers' },
   buffers_all = { '<cmd>lua require("hasan.telescope.custom").buffers(false)<CR>',        'Switch all buffers' },
   grep_string = { '<cmd>lua require("hasan.telescope.custom").grep_string()<CR>',         'Grep string' },
+  substitute_word = {'<Cmd>lua require("hasan.utils.ui").substitute_word()<CR>',          'Substitute word'}
 }
 
 local leader = {
@@ -67,7 +68,7 @@ local leader = {
     h = { '<Plug>ColorConvertHSL',                  'Convert color to HSL' },
     r = { '<Plug>ColorConvertRGB',                  'Convert color to RGB' },
 
-    w = {':lua require("hasan.utils.ui").substitute_word(false)<CR>','Substitute word'},
+    w = common.substitute_word,
 
     m = {
       name = '+hightlight-hints',
@@ -303,7 +304,7 @@ local leader_visual = {
   },
   c = {
     name = '+change',
-    w = {':lua require("hasan.utils.ui").substitute_word(true)<CR>','Substitute word'},
+    w = common.substitute_word,
   },
   ['/'] = {
     name = '+search',

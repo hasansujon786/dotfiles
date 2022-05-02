@@ -98,14 +98,14 @@ function M.git_files()
   builtin.git_files(opts)
 end
 
-function M.curbuf(isVisual)
+function M.curbuf()
   local opts = themes.get_dropdown({
     border = true,
     previewer = false,
     shorten_path = false,
   })
-  if isVisual then
-    local word = vim.fn['hasan#utils#get_visual_selection']()
+  if require('hasan.utils').is_visual_mode() then
+    local word = require('hasan.utils').get_visual_selection()
     opts.default_text = word
     vim.fn.setreg('/', word)
   end
@@ -143,19 +143,16 @@ function M.search_plugins()
 end
 
 function M.grep_string()
-  local mode = vim.fn.mode()
+  local isVisual = require('hasan.utils').is_visual_mode()
   local word = nil
 
-  if mode == 'v' then
-    word = vim.fn['hasan#utils#get_visual_selection']()
+  if isVisual then
+    word = require('hasan.utils').get_visual_selection()
   else
     word = vim.fn.input('Grep String: ')
   end
 
   -- word = string.gsub(word, '%s+', '') -- remove spaces
-  if mode ~= 'n' then
-    feedkeys('<esc>', '')
-  end
   if word == '' then
     return
   end
