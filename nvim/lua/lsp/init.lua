@@ -21,16 +21,15 @@ end
 
 function M.lsp_autocmds(client, bufnr)
   if client.resolved_capabilities.document_highlight then
-    local augroup = require('hasan.utils').augroup
-    local opts = { buffer = bufnr }
-
-    augroup('lsp_autocmds')(function(autocmd)
-      autocmd('CursorHold', vim.lsp.buf.document_highlight, opts)
-      autocmd({ 'CursorMoved', 'WinLeave', 'BufWinLeave', 'BufLeave' }, vim.lsp.buf.clear_references, opts)
-
-      --   vim.cmd[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
-      --   autocmd BufWritePre *.js,*.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
-    end)
+    vim.cmd([[
+      augroup lsp_document_highlight
+        autocmd! * <buffer>
+        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved,WinLeave,BufWinLeave,BufLeave <buffer> lua vim.lsp.buf.clear_references()
+      augroup END
+      ]])
+    --   vim.cmd[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
+    --   autocmd BufWritePre *.js,*.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
   end
 end
 
