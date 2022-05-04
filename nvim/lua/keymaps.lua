@@ -57,10 +57,8 @@ keymap('n', '<s-tab>', 'zA')
 keymap('n', 'H', 'H:exec "norm! ". &scrolloff . "k"<cr>') -- jump in file
 keymap('n', 'L', 'L:exec "norm! ". &scrolloff . "j"<cr>')
 
-keymap('n', "'", '`') -- Character wise jumps always
-keymap('v', "'", '`')
-keymap('n', "''", "`'")
-keymap('v', "''", "`'")
+keymap({'n', 'x'}, "'", '`') -- Character wise jumps always
+keymap({'n', 'x'}, "''", "`'")
 
 keymap({ 'n', 'v' }, '<A-d>', '<C-d>') -- Vertical scrolling
 keymap({ 'n', 'v' }, '<A-o>', '<C-d>')

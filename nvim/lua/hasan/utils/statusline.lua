@@ -1,7 +1,7 @@
 local M = {}
 
 local get_lsp_client = function()
-  local msg =  'LSP Inactive'
+  local msg = 'LSP Inactive'
   local buf_ft = vim.bo.filetype
   local clients = vim.lsp.get_active_clients()
   if next(clients) == nil then
@@ -47,49 +47,48 @@ M.space_info = function()
 end
 
 M.harpoon = {
-  toggle = function ()
+  toggle = function()
     local ok, harpoon_mark = pcall(require, 'harpoon.mark')
     return ok and harpoon_mark.status() ~= ''
   end,
-  fn = function ()
+  fn = function()
     local ok, harpoon_mark = pcall(require, 'harpoon.mark')
-    return ok and 'H:'..harpoon_mark.status()
-  end
+    return ok and 'H:' .. harpoon_mark.status()
+  end,
 }
 
 M.spell = {
   use_mode_hl = true,
-  toggle = function ()
+  toggle = function()
     return vim.api.nvim_win_get_option(0, 'spell')
   end,
-  fn = [[%"]]
+  fn = [[%"]],
 }
 
 M.readonly = {
-  toggle = function ()
+  toggle = function()
     return vim.api.nvim_buf_get_option(0, 'readonly')
   end,
-  fn = [[%"]]
+  fn = [[%"]],
 }
 
 M.wrap = {
   use_mode_hl = true,
-  toggle = function ()
+  toggle = function()
     return vim.api.nvim_win_get_option(0, 'wrap')
   end,
-  fn = [[%"w]]
+  fn = [[%"w]],
 }
 
 M.task_timer = {
-  toggle = function ()
-    if vim.g.tt_loaded == 1  then
+  toggle = function()
+    if vim.g.tt_loaded == 1 then
       return vim.fn['tt#is_running']() == 1 or vim.fn['hasan#tt#is_tt_paused']() == 1
     end
   end,
-  fn = function ()
+  fn = function()
     return vim.fn['hasan#tt#statusline_status']()
-  end
+  end,
 }
-
 
 return M
