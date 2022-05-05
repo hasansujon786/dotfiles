@@ -1,4 +1,5 @@
 local noSilent = { silent = false }
+local nvim_set_keymap = vim.api.nvim_set_keymap
 
 -- Hide search highlighting
 if vim.fn.exists('g:loaded_HLNext') then
@@ -31,11 +32,11 @@ keymap('x', '$', 'g_') -- A fix to select end of line
 keymap('v', '.', ':norm.<cr>') -- map . in visual mode
 keymap('v', '>', '>gv') -- Keep selection when indenting/outdenting.
 keymap('v', '<', '<gv')
-vim.api.nvim_set_keymap('v', '<C-g>', '*<C-O>:%s///gn<CR>', noSilent) -- Print the number of occurrences of the current word under the cursor
+nvim_set_keymap('v', '<C-g>', '*<C-O>:%s///gn<CR>', noSilent) -- Print the number of occurrences of the current word under the cursor
 
-vim.api.nvim_set_keymap('n', '<C-_>', 'mz_gcc`z', {}) -- Comment or uncomment lines
-vim.api.nvim_set_keymap('i', '<C-_>', '<ESC>_gccgi', {})
-vim.api.nvim_set_keymap('v', '<C-_>', 'mz_gcgv`z', {})
+nvim_set_keymap('n', '<C-_>', 'mz_gcc`z', {}) -- Comment or uncomment lines
+nvim_set_keymap('i', '<C-_>', '<ESC>_gccgi', {})
+nvim_set_keymap('v', '<C-_>', 'mz_gcgv`z', {})
 
 keymap('n', '<A-j>', ':move +1<CR>==') -- Move lines up and down in normal & visual mode
 keymap('n', '<A-k>', ':move -2<CR>==')
@@ -57,16 +58,23 @@ keymap('n', '<s-tab>', 'zA')
 keymap('n', 'H', 'H:exec "norm! ". &scrolloff . "k"<cr>') -- jump in file
 keymap('n', 'L', 'L:exec "norm! ". &scrolloff . "j"<cr>')
 
-keymap({'n', 'x'}, "'", '`') -- Character wise jumps always
-keymap({'n', 'x'}, "''", "`'")
+keymap({ 'n', 'x' }, "'", '`') -- Character wise jumps always
+keymap({ 'n', 'x' }, "''", "`'")
 
-keymap({ 'n', 'v' }, '<A-d>', '<C-d>') -- Vertical scrolling
-keymap({ 'n', 'v' }, '<A-o>', '<C-d>')
-keymap({ 'n', 'v' }, '<A-u>', '<C-u>')
-keymap({ 'n', 'v' }, '<A-f>', '<C-f>')
-keymap({ 'n', 'v' }, '<A-b>', '<C-b>')
-keymap({ 'n', 'v' }, '<A-y>', '<C-y>')
-keymap({ 'n', 'v' }, '<A-e>', '<C-e>')
+-- Vertical scrolling
+local scroll_maps = {
+  { '<A-d>', '<C-d>' },
+  { '<A-o>', '<C-d>' },
+  { '<A-u>', '<C-u>' },
+  { '<A-f>', '<C-f>' },
+  { '<A-b>', '<C-b>' },
+  { '<A-y>', '<C-y>' },
+  { '<A-e>', '<C-e>' },
+}
+for _, value in pairs(scroll_maps) do
+  nvim_set_keymap('n', value[1], value[2], { noremap = false })
+  nvim_set_keymap('x', value[1], value[2], { noremap = false })
+end
 
 keymap({ 'n', 'v' }, '<A-l>', '20zl') -- Horizontal scroll ---- <ScrollWheelRight> <ScrollWheelLeft>
 keymap({ 'n', 'v' }, '<A-h>', '20zh')

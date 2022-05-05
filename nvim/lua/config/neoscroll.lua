@@ -1,22 +1,14 @@
--- use({ 'karb94/neoscroll.nvim', opt = true, event = 'BufRead',
---   disable = true,
---   config = function()
---     require('config.neoscroll')
---   end
--- })
-require('neoscroll').setup({
-  hide_cursor = false,
-})
+require('neoscroll').setup()
 local map = {}
 
 map['<C-u>'] = { 'scroll', { '-vim.wo.scroll', 'true', '80' } }
 map['<C-d>'] = { 'scroll', { 'vim.wo.scroll', 'true', '80' } }
 map['<C-b>'] = { 'scroll', { '-vim.api.nvim_win_get_height(0)', 'true', '250' } }
 map['<C-f>'] = { 'scroll', { 'vim.api.nvim_win_get_height(0)', 'true', '250' } }
-map['<C-y>'] = { 'scroll', { '-0.10', 'false', '80' } }
-map['<C-e>'] = { 'scroll', { '0.10', 'false', '80' } }
-map['zt'] = { 'zt', { '80' } }
+map['<C-y>'] = { 'scroll', { '-0.10', 'false', '30' } }
+map['<C-e>'] = { 'scroll', { '0.10', 'false', '30' } }
+map['zt'] = { 'zt', { '30' } }
 map['zz'] = { 'zz', { '150' } }
-map['zb'] = { 'zb', { '80' } }
+map['zb'] = { 'zb', { '30' } }
 
 require('neoscroll.config').set_mappings(map)

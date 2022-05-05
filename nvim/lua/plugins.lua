@@ -25,6 +25,7 @@ return require('packer').startup({
     use({ 'norcalli/nvim-colorizer.lua', opt = true, event = 'CursorHold', config = [[require('config.colorizer')]] })
     use({ 'folke/zen-mode.nvim', opt = true, cmd = 'ZenMode', config = function() require('config.zen') end })
     use({ 'hasansujon786/notifier.nvim', opt = true, module = 'notifier' })
+    use({ 'karb94/neoscroll.nvim', config = function () require('config.neoscroll') end, event = 'BufReadPost', opt = true })
 
     ------------------------------------------------
     --> Productiviry -------------------------------
