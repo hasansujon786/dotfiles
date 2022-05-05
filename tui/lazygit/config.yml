@@ -25,10 +25,31 @@ keybinding:
     scrollUpMain-alt1: '{' # main panel scrool up
     scrollDownMain-alt1: '}' # main panel scrool down
     nextScreenMode: 'O'
+    filteringMenu: '<c-f>'
+  commits:
+    renameCommit: 'R'
+    renameCommitWithEditor: '<f2>'
+  files:
+    viewResetOptions: 'X' # -- has conflict
+
 notARepository: "skip" # one of: 'prompt' | 'create' | 'skip'
 customCommands:
-  - key: 'e'
-    command: 'nvim {{.SelectedFile.Name}}'
-    description: 'open in neovim'
-    context: 'files'
+  - key: 'd'
+    command: 'git diff {{.SelectedFile.Name}}'
+    description: 'Open diff'
+    context: 'global' # add all context
     subprocess: true
+  - key: 'G'
+    command: 'git reset --soft HEAD^'
+    description: 'Undo last commit'
+    context: 'commits' # add all context
+
+os:
+  editCommand: 'nvim'
+  editCommandTemplate: '{{editor}} +{{line}} -- {{filename}}'
+  # openCommand: 'start "" {{filename}}'
+
+git:
+  paging:
+    colorArg: always
+    pager: delta --side-by-side --paging=never

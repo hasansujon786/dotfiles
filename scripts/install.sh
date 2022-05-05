@@ -341,6 +341,7 @@ auto_install_everything() {
     setup_windowsTerminal
     setup_keypirinha
     $getter install -y quicklook
+    choco install delta -y
     setup_sublime
   elif [[ "$os" == "linux" ]]; then
     install_and_setup_tmux
