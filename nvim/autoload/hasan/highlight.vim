@@ -10,7 +10,8 @@ function hasan#highlight#load_custom_highlight(...) abort
   hi CursorLineFocus    guibg=#3E4452
   hi IncSearch          guibg=#e86671 gui=underline
   hi SignColumn         guibg=NONE
-  hi FloatBorder        guibg=NONE guifg=#4dbdcb
+  hi FloatBorder        guibg=NONE    guifg=#4dbdcb
+  hi PmenuSel           guibg=#1e242f guifg=NONE
   hi! link NormalFloat Normal
   hi! link Folded Comment
   hi! link WhichKeyFloat Pmenu
@@ -57,28 +58,32 @@ function hasan#highlight#load_custom_highlight(...) abort
   hi! link TelescopePromptBorder  TelescopeBorder
 
   "/// nvim-cmp ///"
-  hi CmpItemAbbrMatchFuzzy   guifg=#d99a5e gui=underline,bold
-  hi CmpItemAbbrMatch        guifg=#d99a5e
-  "
-  hi! link CmpItemMenu Comment
-  hi! CmpItemAbbrDeprecated guifg=#808080 gui=strikethrough
-  "
-  hi! CmpItemKindFunction   guifg=#ca72e4
-  hi! CmpItemKindMethod     guifg=#ca72e4
-  "
-  hi! CmpItemKindVariable   guifg=#5ab0f6
-  hi! link CmpItemKindField     CmpItemKindVariable
-  hi! link CmpItemKindInterface CmpItemKindVariable
-  "
-  hi! CmpItemKindClass      guifg=#ebc275
-  hi! link CmpItemKindEvent CmpItemKindClass
-  hi! link CmpItemKindEnum  CmpItemKindClass
-  hi! link CmpItemKindValue CmpItemKindClass
-  "
-  hi! CmpItemKindKeyword    guifg=#D4D4D4
-  hi! CmpItemKindProperty   guifg=#D4D4D4
-  hi! CmpItemKindUnit       guifg=#D4D4D4
-  hi! CmpItemKindText       guifg=#9CDCFE
+  " CmpItemAbbr
+  hi! CmpItemAbbrMatchFuzzy         guifg=#d99a5e gui=underline,bold
+  hi! CmpItemAbbrMatch              guifg=#d99a5e
+  hi! link CmpItemMenu              Comment
+  hi! CmpItemAbbrDeprecated         guifg=#808080 gui=strikethrough
+  hi! CmpItemKindFunction           guifg=#ca72e4
+  hi! link CmpItemKindMethod        CmpItemKindFunction
+  hi! link CmpItemKindModule        CmpItemKindFunction
+  hi! link CmpItemKindKeyword       CmpItemKindFunction
+  hi! CmpItemKindVariable           guifg=#5ab0f6
+  hi! link CmpItemKindFile          CmpItemKindVariable
+  hi! link CmpItemKindField         CmpItemKindVariable
+  hi! link CmpItemKindInterface     CmpItemKindVariable
+  hi! CmpItemKindClass              guifg=#ebc275
+  hi! link CmpItemKindEvent         CmpItemKindClass
+  hi! link CmpItemKindStruct        CmpItemKindClass
+  hi! link CmpItemKindEnum          CmpItemKindClass
+  hi! link CmpItemKindValue         CmpItemKindClass
+  hi! link CmpItemKindEnumMember    CmpItemKindClass
+  hi! link CmpItemKindConstructor   CmpItemKindClass
+  hi! CmpItemKindProperty           guifg=#D4D4D4
+  hi! link CmpItemKindConstant      CmpItemKindProperty
+  hi! link CmpItemKindTypeParameter CmpItemKindProperty
+  hi! link CmpItemKindUnit          CmpItemKindProperty
+  hi! CmpItemKindText               guifg=#9CDCFE
+  hi! CmpItemKindSnippet            guifg=#9CDCFE
 
   "/// marks.nvim ///"
   hi! link MarkSignNumHL None
