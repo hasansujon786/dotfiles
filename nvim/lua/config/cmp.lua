@@ -2,9 +2,13 @@ local cmp = require('cmp')
 local utils = require('hasan.utils')
 local kind_icons = require('hasan.utils.ui.icons').kind
 
-local has_words_before = function()
+local function has_words_before()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+end
+
+local function tab_out_available()
+  return vim.fn.search('\\%#[]>)}\'"`,;]', 'n') ~= 0
 end
 
 cmp.setup({
@@ -62,7 +66,7 @@ cmp.setup({
         cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
       elseif has_words_before() and vim.fn['vsnip#available']() == 1 then
         feedkeys('<Plug>(vsnip-expand-or-jump)', '')
-      elseif vim.fn['hasan#compe#check_front_char']() then
+      elseif tab_out_available() then
         feedkeys('<Right>', 'n')
       else
         fallback()
