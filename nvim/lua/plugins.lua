@@ -150,6 +150,6 @@ return require('packer').startup({
   end,
   config = {
     max_jobs = 5,
-    snapshot_path = fn.stdpath('config') .. '/tmp'
+    snapshot_path = fn.stdpath('config')
   },
 })

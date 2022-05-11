@@ -34,6 +34,30 @@
 --   augroup END
 -- ]]
 
+local async = require('plenary.async')
+local packer_sync = function()
+  async.run(function()
+    vim.notify.async('Syncing packer.', 'info', {
+      title = 'Packer',
+    })
+  end)
+  local snap_shot_time = os.date('!%Y-%m-%dT%TZ')
+  vim.cmd('PackerSnapshot ' .. snap_shot_time)
+  vim.cmd('PackerSync')
+end
+
+keymap('n', '<leader>ps', '', {
+  callback = packer_sync,
+})
+
+local load = function(mod)
+  package.loaded[mod] = nil
+  return require(mod)
+end
+load 'user.settings'
+load 'user.keymaps'
+load 'user.commands'
+
 Exemark = function()
   local bufnr = vim.fn.bufnr()
   local ns = vim.api.nvim_create_namespace('virttext_definition')
@@ -113,3 +137,57 @@ vim.api.nvim_create_user_command('Format', vim.lsp.buf.formatting, {})
 
 --   local autocmd = [[ do User LspAttachBuffers ]]
 --   vim.cmd(autocmd)
+
+-- M.get_selection = function()
+--   -- interface to call vim functions
+--   local f = vim.fn
+
+--   -- Save register `s`. Just in case.
+--   local temp = f.getreg('s')
+
+--   -- Put current selection to register `s`
+--   vim.cmd('normal! gv"sy')
+
+--   -- Put register `s` in the "search register". Escape newlines and slash
+--   f.setreg('/', f.escape(f.getreg('s'), '/'):gsub('\n', '\\n'))
+
+--   -- Restore register `s`
+--   f.setreg('s', temp)
+-- end
+
+-- M.trailspace_trim = function()
+--   -- Save cursor position to later restore
+--   local curpos = vim.api.nvim_win_get_cursor(0)
+
+--   -- Search and replace trailing whitespace
+--   vim.cmd([[keeppatterns %s/\s\+$//e]])
+--   vim.api.nvim_win_set_cursor(0, curpos)
+-- end
+
+-- M.file_explorer = function(cwd)
+--   if vim.o.lines > 17 then
+--     -- Open file explorer in floating window
+--     require('lir.float').toggle(cwd)
+--   else
+--     -- take the whole window
+--     vim.cmd('edit ' .. (cwd or vim.fn.expand('%:p:h')))
+--   end
+-- end
+
+-- local function theme_change_timeday(start_hour, end_hour)
+--   local time = tonumber(vim.fn.strftime('%H'))
+--   if time < start_hour or time > end_hour then
+--     vim.cmd([[colorscheme onedark]])
+--   else
+--     vim.cmd([[colorscheme blue]])
+--   end
+--   vim.cmd([[doautoall ColorScheme]])
+-- end
+-- vim.api.nvim_create_autocmd('VimEnter', { --FocusGained
+--   pattern = '*',
+--   callback = function()
+--     theme_change_timeday(9, 15)
+--   end,
+--   group = init_group,
+--   -- nested = true, -- dow notwork in this case
+-- })
