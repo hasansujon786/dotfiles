@@ -87,7 +87,7 @@ return require('packer').startup({
     use({ 'arthurxavierx/vim-caser', opt = true, event = 'CursorHold' })
     use({ 'NTBBloodbath/color-converter.nvim', opt = true, event = 'CursorHold' })
     use({ 'Konfekt/vim-CtrlXA', opt = true, event = 'CursorHold' })
-    use({ 'chentau/marks.nvim',opt=true,event='CursorHold',config=[[require('config.marks-config')]] })
+    use({ 'chentoast/marks.nvim',opt=true,event='CursorHold',config=[[require('config.marks-config')]] })
     use({ 'hasansujon786/vim-rel-jump', opt = true, event = 'BufRead' })
     use({ 'tpope/vim-scriptease', opt = true, cmd = {'PP','Messages'} })
 
