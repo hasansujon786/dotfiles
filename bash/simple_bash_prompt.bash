@@ -3,6 +3,10 @@ case "$TERM" in
   xterm-color|*-256color) color_prompt=yes;;
 esac
 
+function set_win_title(){
+  echo -ne "\033]0; $(basename "$PWD") \007"
+}
+
 git-branch-name() {
   git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3-
 }
@@ -14,7 +18,8 @@ dir-and-git-branch() {
 }
 
 re-prompt() {
-  PS1="\n\[\033[35m\][\T∣\d] $(dir-and-git-branch)\n \`if [ \$? = 0 ]; then echo \[\e[0m\]; else echo \[\e[31m\]; fi\`\[\033[0m\] "
+  set_win_title
+  PS1="\n\[\033[35m\][\T∣\d] $(dir-and-git-branch)\n \`if [ \$? = 0 ]; then echo \[\e[0m\]; else echo \[\e[31m\]; fi\`\[\033[0m\] "
 }
 
 if [ "$color_prompt" = yes ]; then

@@ -26,11 +26,5 @@ shopt -s checkwinsize
 [ -f ~/dotfiles/bash/.fzf.sh ] && source ~/dotfiles/bash/.fzf.sh
 [ -f ~/dotfiles/bash/.aliases.bash ] && source ~/dotfiles/bash/.aliases.bash
 [ -f ~/dotfiles/bash/.env ] && source ~/dotfiles/bash/.env
-
-
-function set_win_title(){
-  echo -ne "\033]0; $(basename "$PWD") \007"
-}
-starship_precmd_user_func="set_win_title"
-export STARSHIP_CONFIG=~/dotfiles/bash/starship.toml
-eval "$(starship init bash)"
+[ -f ~/dotfiles/bash/simple_bash_prompt.bash ] && source ~/dotfiles/bash/simple_bash_prompt.bash
+# [ -f ~/dotfiles/bash/starship.bash ] && source ~/dotfiles/bash/starship.bash
