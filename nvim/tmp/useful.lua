@@ -191,3 +191,41 @@ vim.api.nvim_create_user_command('Format', vim.lsp.buf.formatting, {})
 --   group = init_group,
 --   -- nested = true, -- dow notwork in this case
 -- })
+
+-- local colors = require('omega.colors').get()
+-- vim.api.nvim_set_hl(0, 'WinBarSeparator', { fg = colors.grey })
+-- vim.api.nvim_set_hl(0, 'WinBarContent', { fg = colors.green, bg = colors.grey })
+
+_G.winbar = function()
+  if vim.api.nvim_eval_statusline('%f', {})['str'] == '[No Name]' then
+    return ''
+  end
+  return '%#WinBarSeparator#'
+    .. ''
+    .. '%*'
+    .. '%#WinBarContent#'
+    .. '%f'
+    .. '%*'
+    .. '%#WinBarSeparator#'
+    .. ''
+    .. '%*'
+end
+
+-- vim.opt.winbar = "%{%v:lua.require'playground.winbar'.eval()%}"
+-- vim.opt.winbar = "%{%winbar()%}"
+-- vim.opt.winbar = "%{%winbar()%}"
+
+-- local diagnostics_active = true
+-- local toggle_diagnostics = function()
+--   diagnostics_active = not diagnostics_active
+--   if diagnostics_active then
+--     vim.diagnostic.show()
+--   else
+--     vim.diagnostic.hide()
+--   end
+-- end
+
+-- vim.keymap.set('n', '<leader>d', toggle_diagnostics)
+
+-- local parent_dir = Path:new(finder.path):parent()
+
