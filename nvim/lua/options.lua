@@ -64,15 +64,15 @@ opt.showmode = false                              -- don't show mode as lightlin
 opt.modeline = false
 opt.modelines=0
 -- opt.fillchars={eob=' ',vert= '█'}                 -- Suppress ~ at EndOfBuffer
-opt.fillchars = {
-  eob=' ',
-  horiz = '━',
-  horizup = '┻',
-  horizdown = '┳',
-  vert = '┃',
-  vertleft  = '┫',
-  vertright = '┣',
-  verthoriz = '╋',
+vim.opt.fillchars = {
+  eob = ' ',
+  vert = '║',
+  horiz = '═',
+  horizup = '╩',
+  horizdown = '╦',
+  vertleft  = '╣',
+  vertright = '╠',
+  verthoriz = '╬',
 }
 
 opt.belloff = "all" -- Just turn the dang bell off

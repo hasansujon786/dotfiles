@@ -145,13 +145,25 @@ icons = {
 }
 
 vim.opt.fillchars = {
+  eob=' ',
+  vert = '┃',
   horiz = '━',
   horizup = '┻',
   horizdown = '┳',
-  vert = '┃',
   vertleft  = '┫',
   vertright = '┣',
   verthoriz = '╋',
+}
+
+vim.opt.fillchars = {
+  eob = ' ',
+  vert = '║',
+  horiz = '═',
+  horizup = '╩',
+  horizdown = '╦',
+  vertleft =  '╣',
+  vertright = '╠',
+  verthoriz = '╬',
 }
 
 local border = {
@@ -166,14 +178,14 @@ local border = {
 }
 
 local border = {
-    { "╔", "FloatBorder" },
-    { "═", "FloatBorder" },
-    { "╗", "FloatBorder" },
-    { "║", "FloatBorder" },
-    { "╝", "FloatBorder" },
-    { "═", "FloatBorder" },
-    { "╚", "FloatBorder" },
-    { "║", "FloatBorder" },
+  { "╔", "FloatBorder" },
+  { "═", "FloatBorder" },
+  { "╗", "FloatBorder" },
+  { "║", "FloatBorder" },
+  { "╝", "FloatBorder" },
+  { "═", "FloatBorder" },
+  { "╚", "FloatBorder" },
+  { "║", "FloatBorder" },
 }
 
 local border = {
