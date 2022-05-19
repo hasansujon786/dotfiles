@@ -13,11 +13,14 @@ require('flutter-tools').setup({
       require('lsp').on_attach(client, bufnr)
     end,
     capabilities = require('lsp.util').update_capabilities(),
+    -- see the link below for details on each option:
+    -- https://github.com/dart-lang/sdk/blob/master/pkg/analysis_server/tool/lsp_spec/README.md#client-workspace-configuration
     settings = {
       showTodos = true,
       completeFunctionCalls = true,
-      analysisExcludedFolders = { '' },
       lineLength = 120,
+      enableSnippets = false,
+      -- analysisExcludedFolders = { '' },
       -- enableSdkFormatter = false,
     },
   },
