@@ -16,8 +16,8 @@
 __fzf_z__() {
   [ $# -gt 0 ] && z "$*" && return
   local cmd dir
-  cmd="z -l 2>&1"
-  dir=$(eval "$cmd" | fzf --height 50% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//') && printf 'cd -- %q' "$dir"
+  cmd="zoxide query -i -- "$1""
+  dir=$(eval "$cmd") && printf 'cd -- %q' "$dir"
 }
 
 # ALT-j - cd into the selected directory

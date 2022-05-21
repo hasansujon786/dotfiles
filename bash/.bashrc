@@ -19,12 +19,8 @@ HISTFILESIZE=2000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# export NVM_DIR="$HOME/.config/nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-[ -f ~/dotfiles/bash/z.sh ] && source ~/dotfiles/bash/z.sh
+eval "$(zoxide init bash)"
 [ -f ~/dotfiles/bash/.fzf.sh ] && source ~/dotfiles/bash/.fzf.sh
 [ -f ~/dotfiles/bash/.aliases.bash ] && source ~/dotfiles/bash/.aliases.bash
 [ -f ~/dotfiles/bash/.env ] && source ~/dotfiles/bash/.env
 [ -f ~/dotfiles/bash/simple_bash_prompt.bash ] && source ~/dotfiles/bash/simple_bash_prompt.bash
-# [ -f ~/dotfiles/bash/starship.bash ] && source ~/dotfiles/bash/starship.bash

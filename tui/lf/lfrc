@@ -22,44 +22,6 @@ set mouse true
 # "
 
 # ---------------------------------------------------------------------------
-# - Custom commands                                                         -
-# ---------------------------------------------------------------------------
-cmd mkdir %{{ mkdir }}
-cmd touch %{{ touch }}
-cmd doc $lf -doc | less
-cmd quickLook &C:\\Users\\hasan\\AppData\\Local\\Programs\\QuickLook\\QuickLook.exe $Env:f
-cmd systemOpen &explorer $Env:f
-cmd fzf_cd ${{
-  $res="$(fd --hidden --type directory --exclude '.git' | fzf --reverse --inline-info --preview 'ls {}')"
-  if($res -ne "") {
-    lf -remote "send $id cd $res"
-  }
-}}
-cmd jump-to-git-root %{{
-  $_root_dir="$(git rev-parse --show-toplevel)"
-  if($_root_dir -eq "") {
-    return lf -remote "send echo 'Not a Git repo!'"
-  }
-  $_pwd=$(pwd)
-  $pattern = '[\\/]'
-  $_pwd = $_pwd -replace $pattern, '/'
-  if($_root_dir -eq $_pwd) {
-    return lf -remote "send echo 'Already at Git repo root.'"
-  }
-  lf -remote "send $id cd $_root_dir"
-}}
-cmd bulk-rename !{{
-  $tmp_file=($env:pwd + "\tmp_vimv.txt")
-  $file=$env:fx.replace('\', '\\\')
-  $file=$env:fx.replace('"', '')
-  $file | Set-Content $tmp_file
-
-  $tmp_file=$tmp_file.replace('\', '\\\')
-  Invoke-Expression $("bash -c '/c/Users/hasan/dotfiles/tui/lf/vimv " + $tmp_file + "'")
-}}
-
-
-# ---------------------------------------------------------------------------
 # - Bindings                                                                -
 # ---------------------------------------------------------------------------
 ######## Remove some defaults ########
@@ -105,6 +67,7 @@ map <c-r> bulk-rename
 map <a-d> half-down
 map <a-u> half-up
 map <a-c> fzf_cd
+map <a-j> zi
 map -- jump-to-git-root
 map <backspace> updir
 
@@ -141,33 +104,43 @@ map gr cd F:\\repoes
 map ga. cd ~/AppData
 map gan cd ~/AppData/Local/nvim-data
 
-# quickly cd into frecent directories using zoxide, zlua or rupa/z
-cmd z ${{
-  set +u
-    dest=''
-    prefix=''
-    [[ "$OSTYPE" == "darwin"* ]] && prefix='/usr/local'
-    if hash zoxide 2>/dev/null; then
-      dest="$(zoxide query "$@")"
-# See: https://github.com/skywind3000/z.lua
-        elif [ -f "$prefix/etc/profile.d/z.lua" ]; then
-        export _ZL_NO_PROMPT_COMMAND=1
-        dest="$(lua "$prefix/etc/profile.d/z.lua" -e "$@")"
-# See https://github.com/rupa/z
-        elif [ -f "$prefix/etc/profile.d/z.sh" ] || [ -f "$prefix/share/z/z.sh"]; then
-        export _Z_NO_PROMPT_COMMAND=1
-        source "$prefix/etc/profile.d/z.sh" || source "$prefix/share/z/z.sh"
-        dest="$(_z "$@" && pwd)"
-        fi
-
-        if test -n "${dest}"; then
-          lf -remote "send $id cd '${dest}'"
-        else
-          lf -remote "send $id echo 'Invalid directory ${dest}'"
-        fi
+# ---------------------------------------------------------------------------
+# - Custom commands                                                         -
+# ---------------------------------------------------------------------------
+cmd mkdir %{{ mkdir }}
+cmd touch %{{ touch }}
+cmd doc $lf -doc | less
+cmd quickLook &C:\\Users\\hasan\\AppData\\Local\\Programs\\QuickLook\\QuickLook.exe $Env:f
+cmd systemOpen &explorer $Env:f
+cmd fzf_cd ${{
+  $res="$(fd --hidden --type directory --exclude '.git' | fzf --reverse --inline-info --preview 'ls {}')"
+  if($res -ne "") {
+    lf -remote "send $id cd $res"
+  }
 }}
+cmd zi ${{
+  $result="$(zoxide query -i -- "$1")"
+  lf -remote "send ${id} cd '${result}'"
+}}
+cmd jump-to-git-root %{{
+  $_root_dir="$(git rev-parse --show-toplevel)"
+  if($_root_dir -eq "") {
+    return lf -remote "send echo 'Not a Git repo!'"
+  }
+  $_pwd=$(pwd)
+  $pattern = '[\\/]'
+  $_pwd = $_pwd -replace $pattern, '/'
+  if($_root_dir -eq $_pwd) {
+    return lf -remote "send echo 'Already at Git repo root.'"
+  }
+  lf -remote "send $id cd $_root_dir"
+}}
+cmd bulk-rename !{{
+  $tmp_file=($env:pwd + "\tmp_vimv.txt")
+  $file=$env:fx.replace('\', '\\\')
+  $file=$env:fx.replace('"', '')
+  $file | Set-Content $tmp_file
 
-cmd fzf_z ${{
-  sel="$(zoxide query -l | fzf +s)"
-    [ -d "$sel" ] && lf -remote "send $id cd \"$sel\""
+  $tmp_file=$tmp_file.replace('\', '\\\')
+  Invoke-Expression $("bash -c '/c/Users/hasan/dotfiles/tui/lf/vimv " + $tmp_file + "'")
 }}

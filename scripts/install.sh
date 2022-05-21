@@ -255,6 +255,7 @@ install_various_apps() {
   # cargo install --list
   # cargo install stylua vimv
 
+  $getter install -y zoxide
   $getter install -y onefetch
   $getter install -y scrcpy
 
