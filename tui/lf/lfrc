@@ -42,7 +42,7 @@ map i $less $Env:f
 map o open
 map O systemOpen
 map <enter> systemOpen
-map R &{{ explorer $(dirname $Env:f) }}
+map R &{{ explorer.exe /select,"$Env:f" }}
 map <space> quickLook
 map U invert
 map v :toggle; down

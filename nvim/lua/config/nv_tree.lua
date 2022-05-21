@@ -8,6 +8,10 @@ local function cd_root()
   require('nvim-tree.lib').open(vim.loop.cwd())
   feedkeys('gg', '')
 end
+local function system_reveal()
+  local node = require('nvim-tree.lib').get_node_at_cursor()
+  vim.cmd('silent !explorer.exe /select,"' .. node.absolute_path .. '"')
+end
 
 -- init.lua
 local list = {
@@ -18,6 +22,7 @@ local list = {
   { key = 'v',                           action = 'vsplit' },
   { key = 't',                           action = 'tabnew' },
   { key = 'O',                           action = 'system_open' },
+  { key = 'R',                           action = 'system_reveal', action_cb = system_reveal },
   { key = 'f',                           action = 'search_node' },
 
   { key = {'<2-RightMouse>', 'l'},       action = 'cd' },
@@ -36,7 +41,7 @@ local list = {
 
   { key = 'I',                           action = 'toggle_ignored' },
   { key = 'i',                           action = 'toggle_dotfiles' },
-  { key = {'R', 'r'},                    action = 'refresh' },
+  { key = 'r',                           action = 'refresh' },
   { key = 'q',                           action = 'close' },
   { key = 'g?',                          action = 'toggle_help' },
   { key = 'K',                           action = 'toggle_file_info' },
