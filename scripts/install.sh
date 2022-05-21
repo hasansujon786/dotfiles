@@ -258,6 +258,7 @@ install_various_apps() {
   $getter install -y zoxide
   $getter install -y onefetch
   $getter install -y scrcpy
+  $getter install -y jq
 
   # util_print taskwarrior
   # apt install taskwarrior

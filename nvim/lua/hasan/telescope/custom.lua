@@ -320,7 +320,7 @@ M.emojis = function()
 
       local emo = entry[1]:sub(1, 4)
       vim.fn.setreg('0', emo, 'v')
-      vim.cmd('normal! ' .. (visual and 'gv' or '') .. '"0' .. cmd)
+      vim.cmd('normal! ' .. (visual and 'gv' or 'h') .. '"0' .. cmd .. 'll')
 
       vim.defer_fn(function()
         vim.fn.setreg('0', oldReg[1], oldReg[2])
