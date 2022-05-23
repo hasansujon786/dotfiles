@@ -19,8 +19,8 @@ HISTFILESIZE=2000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-eval "$(zoxide init bash)"
 [ -f ~/dotfiles/bash/.fzf.sh ] && source ~/dotfiles/bash/.fzf.sh
 [ -f ~/dotfiles/bash/.aliases.bash ] && source ~/dotfiles/bash/.aliases.bash
 [ -f ~/dotfiles/bash/.env ] && source ~/dotfiles/bash/.env
 [ -f ~/dotfiles/bash/simple_bash_prompt.bash ] && source ~/dotfiles/bash/simple_bash_prompt.bash
+eval "$(zoxide init bash)"
