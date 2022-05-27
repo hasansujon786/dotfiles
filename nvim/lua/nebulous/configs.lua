@@ -15,6 +15,8 @@ M.default = {
     scratchpad = true,
     NeogitStatus = true,
     NeogitPopup = true,
+    log = true,
+    flutterToolsOutline = true,
   },
   nb_blur_hls = {
     'LineNr:Nebulous',
