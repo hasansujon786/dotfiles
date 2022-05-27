@@ -30,8 +30,9 @@ Return
 !0::Send #0
 
 f1::switchToExplorer()
-!f1::closeAllExplorers()
-f2::switchToSavedApp()
+!f1::switchToSavedApp()
+!Esc::closeAllExplorers()
+!z::rebootMiWiFi()
 
 switchToExplorer() {
   ;IfWinNotExist, ahk_class CabinetWClass
@@ -107,7 +108,23 @@ switchToSavedApp() {
   windowSwitcher(savedCLASS, savedEXE)
 }
 
-
+rebootMiWiFi() {
+  Run, brave.exe http://miwifi.com/
+  sleep 2000
+  MouseMove, 559, 600
+  Click
+  SendInput,hasan007007{ENTER}
+  sleep 4000
+  MouseMove, 1160, 150
+  Click
+  SendInput,{tab}{tab}{tab}{tab}{enter}
+  sleep 4000
+  MouseMove, 700, 522
+  Click
+  sleep 1000
+  MouseMove, 596, 420
+  Click
+}
 
 ;******************************************************************************
 ;   Computer information
