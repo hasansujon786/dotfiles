@@ -12,6 +12,20 @@
 local view = require('nvim-tree.view')
 local M = {}
 
+M.toggle_sidebar = function()
+  local readonly = vim.api.nvim_buf_get_option(0, 'readonly')
+  local modifiable = vim.api.nvim_buf_get_option(0, 'modifiable')
+  local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
+
+  if filetype == 'NvimTree' then
+    vim.cmd([[NvimTreeClose]])
+  elseif readonly or not modifiable then
+    vim.cmd([[NvimTreeOpen]])
+  else
+    vim.cmd([[NvimTreeFindFile]])
+  end
+end
+
 local alt_file = nil
 local pre_alt_file = nil
 

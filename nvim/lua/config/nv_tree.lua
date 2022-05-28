@@ -1,9 +1,38 @@
-keymap('n', '<leader>op', ':NvimTreeFindFile<CR>')
-keymap('n', '<leader>ob', ':NvimTreeToggle<CR>')
+-- vim.g.nvim_tree_icons = {
+--   default =        "",
+--   symlink =        "",
+--   git = {
+--     unstaged =     "✗",
+--     staged =       "✓",
+--     unmerged =     "",
+--     renamed =      "➜",
+--     untracked =    "★",
+--     deleted =      "",
+--   },
+--   folder = {
+--     arrow_open =   "",
+--     arrow_closed = "",
+--     default =      "",
+--     open =         "",
+--     empty =        "",
+--     empty_open =   "",
+--     symlink =      "",
+--     symlink_open = "",
+--   },
+--   lsp = {
+--     hint = "",
+--     info = "",
+--     warning = "",
+--     error = "",
+--   }
+-- }
+
 keymap('n', '<leader>0', ':NvimTreeFocus<CR>')
-keymap('n', '<leader>or', ':NvimTreeRefresh<CR>')
-keymap('n', '-', require('hasan.utils.vinegar').vinegar)
-keymap('n', '<BS>', require('hasan.utils.vinegar').alternate_file)
+keymap('n', '<leader>ob', ':NvimTreeToggle<CR>')
+keymap('n', '<leader>op', '<cmd>lua require("hasan.utils.vinegar").toggle_sidebar()<CR>')
+keymap('n', '-', '<cmd>lua require("hasan.utils.vinegar").vinegar()<CR>')
+keymap('n', '<BS>', '<cmd>lua require("hasan.utils.vinegar").alternate_file()<CR>')
+
 local function cd_root()
   require('nvim-tree.lib').open(vim.loop.cwd())
   feedkeys('gg', '')
@@ -11,6 +40,31 @@ end
 local function system_reveal()
   local node = require('nvim-tree.lib').get_node_at_cursor()
   vim.cmd('silent !explorer.exe /select,"' .. node.absolute_path .. '"')
+end
+
+local function vinegar_dir_up()
+  local node = require('nvim-tree.lib').get_node_at_cursor()
+  local cwd = vim.fn.fnamemodify(node.absolute_path, ":h")
+  local parent_cwd = vim.fn.fnamemodify(cwd, ":h")
+
+  require('nvim-tree.lib').open(parent_cwd)
+  require('nvim-tree.actions.find-file').fn(cwd)
+end
+
+local function vinegar_edit_or_cd()
+  local action = 'edit'
+  local node = require('nvim-tree.lib').get_node_at_cursor()
+
+  if node.link_to and not node.nodes then -- TODO: chec what is node.link_to
+    require('nvim-tree.actions.open-file').fn(action, node.link_to)
+    require('nvim-tree.view').close()
+  elseif node.nodes ~= nil then
+    require("nvim-tree.actions.change-dir").fn(require('nvim-tree.lib').get_last_group_node(node).absolute_path)
+    feedkeys('ggj', '')
+  else
+    require('nvim-tree.actions.open-file').fn(action, node.absolute_path)
+    require('nvim-tree.view').close()
+  end
 end
 
 -- init.lua
@@ -23,13 +77,14 @@ local list = {
   { key = 't',                           action = 'tabnew' },
   { key = 'O',                           action = 'system_open' },
   { key = 'R',                           action = 'system_reveal', action_cb = system_reveal },
-  { key = 'f',                           action = 'search_node' },
 
-  { key = {'<2-RightMouse>', 'l'},       action = 'cd' },
-  { key = {'-', 'h'},                    action = 'dir_up' },
+  { key = {'h'},                         action = 'dir_up' },
+  { key = {'-'},                         action = 'vinegar_dir_up', action_cb = vinegar_dir_up },
+  { key = {'<RightMouse>', 'l'},         action = 'vinegar_edit_or_cd', action_cb = vinegar_edit_or_cd },
+  -- { key = {'h'},                         action = 'dir_up', },
   -- { key = 'K',                           action = 'prev_sibling' },
   -- { key = 'J',                           action = 'next_sibling' },
-  { key = 'p',                           action = 'parent_node' },
+  { key = 'u',                           action = 'parent_node' },
   { key = '<Tab>',                       action = 'preview' },
   { key = '[c',                          action = 'prev_git_item' },
   { key = ']c',                          action = 'next_git_item' },
@@ -39,7 +94,10 @@ local list = {
   -- { key = 'L',                            action = 'vsplit_preview', action_cb = vsplit_preview },
   -- { key = 'h',                            action = 'close_node' },
 
-  { key = 'I',                           action = 'toggle_ignored' },
+  { key = 'f',                           action = 'live_filter' },
+  { key = 'c',                           action = 'clear_live_filter' },
+  { key = 'S',                           action = 'search_node' },
+  { key = 'I',                           action = 'toggle_git_ignored' },
   { key = 'i',                           action = 'toggle_dotfiles' },
   { key = 'r',                           action = 'refresh' },
   { key = 'q',                           action = 'close' },
@@ -88,14 +146,13 @@ require('nvim-tree').setup({
     custom = { '*.git', 'node_modules' },
   },
   git = {
-    enable = false,
+    enable = true,
     ignore = true,
     timeout = 500,
   },
   renderer = {
-    indent_markers = {
-      enable = true,
-    },
+    indent_markers = { enable = true },
+    icons = { git_placement = 'signcolumn' },
   },
   view = {
     width = 26,
@@ -103,10 +160,7 @@ require('nvim-tree').setup({
     hide_root_folder = false,
     side = 'left',
     preserve_window_proportions = false,
-    mappings = {
-      custom_only = true,
-      list = list,
-    },
+    mappings = { custom_only = true, list = list },
     number = false,
     relativenumber = false,
     signcolumn = 'yes',
@@ -130,4 +184,3 @@ require('nvim-tree').setup({
     },
   },
 })
-
