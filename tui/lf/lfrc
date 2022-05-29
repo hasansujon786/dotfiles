@@ -68,7 +68,6 @@ map <a-d> half-down
 map <a-u> half-up
 map <a-c> fzf_cd
 map <a-j> zi
-map -- jump-to-git-root
 map <backspace> updir
 
 map <m-1> open  # primary
@@ -101,6 +100,10 @@ map gv cd ~/Videos
 map gm cd ~/Music
 map gD cd ~/Documents
 map gr cd F:\\repoes
+
+# Currant project navigation
+map -- jump-to-git-root
+map -a %lf -remote "send $id cd $(git rev-parse --show-toplevel)/build/app/outputs/"
 
 map ga. cd ~/AppData
 map gan cd ~/AppData/Local/nvim-data
