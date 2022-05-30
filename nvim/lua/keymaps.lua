@@ -139,6 +139,7 @@ keymap({ 'i', 'c' }, '<A-BS>', '<C-W>', noSilent) -- Delete by characters & word
 keymap('i', '<A-d>', '<C-O>dw')
 keymap('c', '<A-d>', '<S-Right><C-W><Delete>', noSilent)
 
+keymap('i', '<C-CR>', '<C-o>o') -- Make & move to a new line under the cursor
 keymap('i', '<A-CR>', '<C-o>o') -- Make & move to a new line under the cursor
 keymap('i', '<A-o>', '<CR><C-o>O') -- Open HTML tags
 

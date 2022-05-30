@@ -18,6 +18,13 @@ map  shift+enter     send_text normal,application \x1b[13;2u
 map  ctrl+tab        send_text normal,application \x1b[9;5u
 map  ctrl+shift+tab  send_text normal,application \x1b[9;6u
 
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# nvim support for alacritty
+- { key: Return, mods: Control, chars: "\x1b[13;5u" }
+- { key: H, mods: Control, chars: "\x1b[104;5u" }
+- { key: I, mods: Control, chars: "\x1b[105;5u" }
+- { key: J, mods: Control, chars: "\x1b[106;5u" }
+- { key: M, mods: Control, chars: "\x1b[109;5u" }
 
 alacritty config https://gist.github.com/hasansujon786/f30fa9d7c57740e5c6e4db35870f7f33
 https://github.com/alexherbo2/alacritty-extended-keys/blob/master/keys.yml

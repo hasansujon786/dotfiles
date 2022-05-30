@@ -18,9 +18,7 @@
     { "command": { "action": "copy", "singleLine": false }, "keys": "ctrl+shift+c" },
     { "command": "paste", "keys": "ctrl+shift+v" },
     { "command": "toggleFullscreen", "keys": "alt+enter" },
-    { "command": { "action": "sendInput", "input": "\u0011" }, "keys": "ctrl+space" },
     { "command": "find", "keys": "ctrl+shift+f" },
-    { "command": { "action": "sendInput", "input": "\u0017" }, "keys": "ctrl+backspace" },
     { "command": { "action": "nextTab" }, "keys": "alt+`" },
     { "command": { "action": "nextTab" }, "keys": "alt+]" },
     { "command": { "action": "prevTab" }, "keys": "alt+shift+`" },
@@ -41,7 +39,13 @@
     { "command": { "action": "moveFocus", "direction": "down" }, "keys": "alt+shift+j" },
     { "command": { "action": "moveFocus", "direction": "up" }, "keys": "alt+shift+k" },
     { "command": "scrollUp", "keys": "alt+pageup" },
-    { "command": "scrollDown", "keys": "alt+pagedown" }
+    { "command": "scrollDown", "keys": "alt+pagedown" },
+
+    { "command": { "action": "sendInput", "input": "\u0011" }, "keys": "ctrl+space" },
+    { "command": { "action": "sendInput", "input": "\u0017" }, "keys": "ctrl+backspace" },
+    { "command": { "action": "sendInput", "input": "\u001b[105;5u" }, "keys": "ctrl+i" },
+    { "command": { "action": "sendInput", "input": "\u001b[109;5u" }, "keys": "ctrl+m" },
+    { "command": { "action": "sendInput", "input": "\u001b[13;5u" }, "keys": "ctrl+enter" }
   ],
   "profiles": {
     "defaults": {
