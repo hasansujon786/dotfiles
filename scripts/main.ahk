@@ -34,20 +34,41 @@ f1::switchToExplorer()
 !Esc::closeAllExplorers()
 !z::rebootMiWiFi()
 
-switchToExplorer() {
-  ;IfWinNotExist, ahk_class CabinetWClass
-  IfWinNotActive, ahk_class CabinetWClass
-    windowSaver()
+; Change Volume:
+!WheelUP::volup()
+!WheelDown::voldown()
+$Volume_Up::volup()
+$Volume_Down::voldown()
 
-  IfWinNotExist, ahk_class CabinetWClass
-    Run, explorer.exe
-  GroupAdd, taranexplorers, ahk_class CabinetWClass
-  if WinActive("ahk_exe explorer.exe")
-    GroupActivate, taranexplorers, r
-  else
-    WinActivate ahk_class CabinetWClass ;you have to use WinActivatebottom if you didn't create a window group.
-}
+; RButton & WheelDown::Send ^{Tab}
+; RButton & WheelUp::Send ^+{Tab}
+; RButton::RButton
 
+capslock::Esc
++capslock::capslock
+
+$Escape::superEscape()
+
+; CapsLock::LCtrl
+; Capslock Up::capsAsCtrl()
+; Enter::RCtrl
+; Enter Up::enterAsCtrl()
+
+
+;1::NavRun("C:\")
+;2::NavRun(A_MyDocuments)
+
+^+r::Send ^r{tab}{tab}{space}{enter}
+;;the top rightmost keys on my K95.
+;Media_Stop::^numpad7
+;Media_Prev::^numpad8
+;Media_Play_Pause::^numpad9
+;Media_Next::^numpadMult
+;Volume_Mute::^numpadDiv
+
+;******************************************************************************
+; Window Switcher functions
+;******************************************************************************
 switchToChrome() {
   IfWinNotExist, ahk_exe chrome.exe
     Run, chrome.exe
@@ -68,12 +89,6 @@ switchToBrave() {
       WinActivate ahk_exe brave.exe
 }
 
-closeAllExplorers() {
-  ;SoundBeep, 1000, 500
-  WinClose,ahk_group taranexplorers
-}
-
-;BEGIN INSTANT APPLICATION SWITCHER SCRIPTS;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 global savedCLASS = "ahk_exe brave.exe"
 global savedEXE = "brave.exe"
 #IfWinActive
@@ -97,17 +112,122 @@ windowSwitcher(theClass, theEXE) {
 }
 
 switchToSavedApp() {
-  ; if savedCLASS = ahk_class Notepad++ ; {
-  ;   ;msgbox,,, is notepad++,0.5
-  ;     if WinActive("ahk_class Notepad++")
-  ;     {
-  ;       sleep 5
-  ;         Send ^{tab}
-  ;     }
-  ; }
   windowSwitcher(savedCLASS, savedEXE)
 }
 
+;******************************************************************************
+; Explorer functions
+;******************************************************************************
+closeAllExplorers() {
+  ;SoundBeep, 1000, 500
+  WinClose,ahk_group taranexplorers
+}
+switchToExplorer() {
+  ;IfWinNotExist, ahk_class CabinetWClass
+  IfWinNotActive, ahk_class CabinetWClass
+    windowSaver()
+
+  IfWinNotExist, ahk_class CabinetWClass
+    Run, explorer.exe
+  GroupAdd, taranexplorers, ahk_class CabinetWClass
+  if WinActive("ahk_exe explorer.exe")
+    GroupActivate, taranexplorers, r
+  else
+    WinActivate ahk_class CabinetWClass ;you have to use WinActivatebottom if you didn't create a window group.
+}
+
+sortExplorerByDate(){
+  IfWinActive, ahk_class CabinetWClass
+  {
+    ;Send,{LCtrl down}{NumpadAdd}{LCtrl up} ;expand name field
+      send {alt}vo{down}{enter} ;sort by date modified, but it functions as a toggle...
+      ;tippy2("sort Explorer by date")
+  }
+}
+
+; http://msdn.microsoft.com/en-us/library/bb774094
+GetActiveExplorer() {
+    static objShell := ComObjCreate("Shell.Application")
+    WinHWND := WinActive("A")    ; Active window
+    for Item in objShell.Windows
+        if (Item.HWND = WinHWND)
+            return Item        ; Return active window object
+    return -1    ; No explorer windows match active window
+}
+
+NavRun(Path) {
+    if (-1 != objIE := GetActiveExplorer())
+        objIE.Navigate(Path)
+    else
+        Run, % Path
+}
+
+;******************************************************************************
+; Utils
+;******************************************************************************
+p(msg) {
+  msgbox,,, %msg%, 3
+}
+
+volup() {
+  SoundGet, volume
+  Send {Volume_Up}
+  ;SoundBeep, 300, 150
+  SoundSet, volume + 10
+}
+voldown() {
+  SoundGet, volume
+  Send {Volume_Down}
+  ;SoundBeep, 300, 150
+  SoundSet, volume - 10
+}
+
+; Long press (> 0.5 sec) on Esc closes window - but if you change your mind you can keep it pressed for 3 more seconds
+superEscape() {
+  KeyWait, Escape, T0.5                         ; Wait no more than 0.5 sec for key release (also suppress auto-repeat)
+  If ErrorLevel                                 ; timeout, so key is still down...
+  {
+    SoundPlay *64                               ; Play an asterisk (Doesn't work for me though!)
+    WinGet, X, ProcessName, A
+    SplashTextOn,,150,,`nRelease button to close %x%`n`nKeep pressing it to NOT close window...
+    KeyWait, Escape, T3                         ; Wait no more than 3 more sec for key to be released
+    SplashTextOff
+    If !ErrorLevel                              ; No timeout, so key was released
+    {
+      PostMessage, 0x112, 0xF060,,, A           ; ...so close window
+      Return
+    }
+    ; Otherwise,
+    SoundPlay *64
+    KeyWait, Escape                             ; Wait for button to be released
+    Return                                      ; Then do nothing...
+  }
+  Send {Esc}
+}
+
+capsAsCtrl() {
+  SendInput, {LControl Up}  ;--For stability
+  If A_TimeSincePriorHotkey < 150
+  {
+    SendInput, {Escape}
+  }
+  Else
+  return
+}
+
+enterAsCtrl() {
+  SendInput, {RControl Up}  ;--For stability
+  If A_TimeSincePriorHotkey < 150
+  {
+    SendInput, {Enter}
+  }
+  Else
+  return
+}
+
+;******************************************************************************
+; Automations
+;******************************************************************************
 rebootMiWiFi() {
   Run, brave.exe http://miwifi.com/
   sleep 2000
@@ -125,45 +245,3 @@ rebootMiWiFi() {
   MouseMove, 596, 420
   Click
 }
-
-;******************************************************************************
-;   Computer information
-;******************************************************************************
-::]myid::
-SendInput %A_UserName%
-Return
-
-::]myip::
-SendInput %A_IPAddress1%
-Return
-
-::]mycomp::
-SendInput %A_ComputerName%
-Return
-
-
-
-printwins() {
-  msgbox,,, savedCLASS is %savedCLASS%,0.5
-  msgbox,,, savedexe is %savedEXE%,0.5
-}
-p(msg) {
-  msgbox,,, savedCLASS is %msg%,0.8
-}
-^+r::Send ^r{tab}{tab}{space}{enter}
-;;the top rightmost keys on my K95.
-;Media_Stop::^numpad7
-;Media_Prev::^numpad8
-;Media_Play_Pause::^numpad9
-;Media_Next::^numpadMult
-;Volume_Mute::^numpadDiv
-sortExplorerByDate(){
-  IfWinActive, ahk_class CabinetWClass
-  {
-    ;Send,{LCtrl down}{NumpadAdd}{LCtrl up} ;expand name field
-      send {alt}vo{down}{enter} ;sort by date modified, but it functions as a toggle...
-      ;tippy2("sort Explorer by date")
-
-  }
-}
-
