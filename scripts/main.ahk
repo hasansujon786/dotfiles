@@ -48,6 +48,12 @@ capslock::Esc
 +capslock::capslock
 
 $Escape::superEscape()
+#SPACE::toggleAlwaysOnTop()       ; Always on Top
+
+; sc046::Scroll Lock
+#o::toggleTransparency()       ;Transparency toggle,
+#NumpadAdd::increaseTransparency()
+#NumpadSub::decreaseTransparency()
 
 ; CapsLock::LCtrl
 ; Capslock Up::capsAsCtrl()
@@ -118,6 +124,11 @@ switchToSavedApp() {
 ;******************************************************************************
 ; Explorer functions
 ;******************************************************************************
+; Press middle mouse button to move up a folder in Explorer
+#IfWinActive, ahk_class CabinetWClass
+`::Send !{Up}
+#IfWinActive
+
 closeAllExplorers() {
   ;SoundBeep, 1000, 500
   WinClose,ahk_group taranexplorers
@@ -224,6 +235,69 @@ enterAsCtrl() {
   Else
   return
 }
+
+toggleTransparency() {
+  WinGetActiveTitle, Title
+  WinGet, TN, Transparent, %Title%
+  ; MsgBox, TN of %Title% is %TN%
+
+  if (TN == "") {
+    WinSet, Transparent, 230, A
+    beep()
+  }
+  else {
+    WinSet, Transparent, OFF, A
+  }
+}
+decreaseTransparency() {
+  WinGetActiveTitle, Title
+    WinGet, TN, Transparent, %Title%
+    if(TN == "") {
+      beep()
+      return
+    }
+
+    if TN < 255
+    EnvAdd, TN, 5
+    WinSet, Transparent, %TN%, %Title%
+}
+increaseTransparency() {
+  WinGetActiveTitle, Title
+    WinGet, TN, Transparent, %Title%
+    if(TN == "") {
+      beep()
+      return
+    }
+
+    if TN > 0
+    EnvSub, TN, 5
+    WinSet, Transparent, %TN%, %Title%
+}
+
+toggleAlwaysOnTop() {
+  Winset, Alwaysontop, , A ; win + space
+}
+
+getMousePos() {
+  MouseGetPos, xpos, ypos
+    xy := "x" xpos " y" ypos
+    ToolTip %xy%
+    Clipboard := xy
+    SetTimer toolTipClear, -1000
+}
+
+tooltipClear() {
+  ToolTip
+}
+
+beep() {
+  SoundBeep, 300, 150
+}
+
+;Suspend hotkeys
+!s::
+suspend, toggle
+return
 
 ;******************************************************************************
 ; Automations

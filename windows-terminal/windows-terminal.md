@@ -3,6 +3,7 @@ https://donsnotes.com/tech/charsets/ascii.html
 http://www.leonerd.org.uk/hacks/fixterms/
 https://www.novell.com/documentation/extend52/Docs/help/Composer/books/TelnetAppendixB.html
 https://docs.microsoft.com/en-us/windows/terminal/customize-settings/actions
+https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
 
 wt -w 0 -F ft -t 3
 vim.cmd[[!sed -i '18s/14/18/' 'c:\\Users\\hasan\\AppData\\Local\Microsoft\\Windows Terminal\\settings.json']]
