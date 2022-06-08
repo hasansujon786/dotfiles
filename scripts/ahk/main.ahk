@@ -6,7 +6,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ;Reload/Execute this script.ahk file
 ::rscript::
 !f5::
-Run, "C:\Users\hasan\dotfiles\scripts\main.ahk"
+Run, "C:\Users\hasan\dotfiles\scripts\ahk\main.ahk"
 Return
 
 #z::
@@ -52,8 +52,8 @@ $Escape::superEscape()
 
 ; sc046::Scroll Lock
 #o::toggleTransparency()       ;Transparency toggle,
-#NumpadAdd::increaseTransparency()
-#NumpadSub::decreaseTransparency()
+#^.::increaseTransparency()
+#^,::decreaseTransparency()
 
 ; CapsLock::LCtrl
 ; Capslock Up::capsAsCtrl()
