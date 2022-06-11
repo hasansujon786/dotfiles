@@ -147,7 +147,7 @@ return require('packer').startup({
       'mfussenegger/nvim-dap',
       opt = true, module = 'dap',
       requires = {
-        'rcarriga/nvim-dap-ui',
+        {'rcarriga/nvim-dap-ui', config = function () require('config.dap').configure_ui() end},
         'theHamsta/nvim-dap-virtual-text',
         'nvim-telescope/telescope-dap.nvim',
       },
