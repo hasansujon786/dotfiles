@@ -8,10 +8,10 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 !f5::
 Run, "C:\Users\hasan\dotfiles\scripts\ahk\main.ahk"
 Return
-
-#z::
-Run, brave.exe https://google.com/ https://www.wikipedia.org/ https://twitter.com/?lang=en/
-Return
+;Suspend hotkeys
+^f5::
+suspend, toggle
+return
 
 #j:: SendInput,{DOWN}
 #l:: SendInput,{RIGHT}
@@ -28,49 +28,46 @@ Return
 !8::Send #8
 !9::Send #9
 !0::Send #0
+PgUp::Send !{ESC}
+PgDn::Send +!{ESC}
 
-f1::switchToExplorer()
-!f1::switchToSavedApp()
-!Esc::closeAllExplorers()
-!z::rebootMiWiFi()
-
+capslock::Esc
++capslock::capslock
+$Escape::superEscape()
+#SPACE::toggleAlwaysOnTop()       ; Always on Top
+#z::rebootMiWiFi()
+#p::AppsKey
+;Transparency toggle,
+#o::toggleTransparency()
+#^.::increaseTransparency()
+#^,::decreaseTransparency()
 ; Change Volume:
 !WheelUP::volup()
 !WheelDown::voldown()
 $Volume_Up::volup()
 $Volume_Down::voldown()
-
-; RButton & WheelDown::Send ^{Tab}
-; RButton & WheelUp::Send ^+{Tab}
-; RButton::RButton
-
-capslock::Esc
-+capslock::capslock
-
-$Escape::superEscape()
-#SPACE::toggleAlwaysOnTop()       ; Always on Top
-
-; sc046::Scroll Lock
-#o::toggleTransparency()       ;Transparency toggle,
-#^.::increaseTransparency()
-#^,::decreaseTransparency()
-
-; CapsLock::LCtrl
-; Capslock Up::capsAsCtrl()
-; Enter::RCtrl
-; Enter Up::enterAsCtrl()
-
+; Explorer
+f1::switchToExplorer()
+!f1::switchToSavedApp()
+!z::closeAllExplorers()
 
 ;1::NavRun("C:\")
 ;2::NavRun(A_MyDocuments)
 
-^+r::Send ^r{tab}{tab}{space}{enter}
+; ^+r::Send ^r{tab}{tab}{space}{enter}
 ;;the top rightmost keys on my K95.
 ;Media_Stop::^numpad7
 ;Media_Prev::^numpad8
 ;Media_Play_Pause::^numpad9
 ;Media_Next::^numpadMult
 ;Volume_Mute::^numpadDiv
+;RButton & WheelDown::Send ^{Tab}
+;RButton & WheelUp::Send ^+{Tab}
+;RButton::RButton
+;CapsLock::LCtrl
+;Capslock Up::capsAsCtrl()
+;Enter::RCtrl
+;Enter Up::enterAsCtrl()
 
 ;******************************************************************************
 ; Window Switcher functions
@@ -294,17 +291,12 @@ beep() {
   SoundBeep, 300, 150
 }
 
-;Suspend hotkeys
-!s::
-suspend, toggle
-return
-
 ;******************************************************************************
 ; Automations
 ;******************************************************************************
 rebootMiWiFi() {
   Run, brave.exe http://miwifi.com/
-  sleep 2000
+  sleep 3000
   MouseMove, 559, 600
   Click
   SendInput,hasan007007{ENTER}
