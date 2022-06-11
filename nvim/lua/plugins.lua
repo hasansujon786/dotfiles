@@ -143,6 +143,18 @@ return require('packer').startup({
     })
     use({ 'akinsho/flutter-tools.nvim', opt = true, ft = {'dart'}, config = [[require('config.flutter-tools')]] })
     use({ 'mattn/emmet-vim', opt = true, event = 'BufReadPost', config = [[require('config.emmet')]] })
+    use {
+      'mfussenegger/nvim-dap',
+      opt = true, module = 'dap',
+      requires = {
+        'rcarriga/nvim-dap-ui',
+        'theHamsta/nvim-dap-virtual-text',
+        'nvim-telescope/telescope-dap.nvim',
+      },
+      config = function ()
+        require('config.dap').setup()
+      end
+    }
 
     if not is_installed then
       require('packer').sync()

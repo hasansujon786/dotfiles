@@ -30,7 +30,31 @@ require('flutter-tools').setup({
     border = ui.border.style,
   },
   debugger = {
-    enabled = false,
+    enabled = true,
+    run_via_dap = true, -- use dap instead of a plenary job to run flutter apps
+    register_configurations = function(paths)
+      local dap = require('dap')
+      -- require("dap.ext.vscode").load_launchjs()
+      local debugger_path = 'C:\\Users\\hasan\\adapters\\Dart-Code\\out\\dist\\debug.js'
+
+      dap.adapters.dart = {
+        type = 'executable',
+        command = 'node',
+        args = { debugger_path, 'flutter' },
+      }
+
+      dap.configurations.dart = {
+        {
+          type = 'dart',
+          request = 'launch',
+          name = 'Launch flutter',
+          dartSdkPath = paths.dart_sdk,
+          flutterSdkPath = paths.flutter_sdk,
+          program = '${workspaceFolder}/lib/main.dart',
+          cwd = '${workspaceFolder}',
+        },
+      }
+    end,
   },
   widget_guides = {
     enabled = true,
