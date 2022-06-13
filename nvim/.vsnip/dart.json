@@ -143,5 +143,14 @@
       "Container(child: const Text('foobar'), color: Colors.blue.shade300),"
     ],
     "description": "Quick Container"
+  },
+  "iffe": {
+    "prefix": "iffe",
+    "body": [
+      "(() {",
+      "  ${1:// Content goes here;}",
+      "})();"
+    ],
+    "description": "iffe"
   }
 }

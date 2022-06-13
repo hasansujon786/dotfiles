@@ -214,6 +214,7 @@ local leader = {
   v = {
     name = '+vim',
     ['/'] = { ':Telescope help_tags<CR>',       'Search Vim help' },
+    ['.'] = { ':echo "Not a Vim file"<CR>',     'Source this file' },
     l = { ':call logevents#LogEvents_Toggle()<CR>',  'Toggle LogEvents' },
     p = {
       name = '+plugin',

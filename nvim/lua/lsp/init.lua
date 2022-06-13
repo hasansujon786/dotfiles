@@ -83,9 +83,6 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', '<leader>aq', require('lsp.util').showLspRenameChanges, opts)
 
   keymap('n', '<C-LeftMouse>', '<LeftMouse><cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  if filetype ~= 'lua' and filetype ~= 'vim' then
-    keymap('n', '<F9>', '<cmd>lua vim.lsp.buf.formatting_sync()<CR><cmd>update<CR>', opts)
-  end
   local code_action_keys = { '<C-q>', '<C-space>', '<A-space>' }
   for _, action_key in ipairs(code_action_keys) do
     keymap('n', action_key, require('lsp.util').code_action, opts)
