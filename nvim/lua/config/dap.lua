@@ -22,6 +22,7 @@ end
 
 function M.setup()
   require('config.dap.keymaps').setup()
+  require('dap').set_log_level('TRACE') --TRACE DEBUG INFO WARN ERROR
 end
 
 return M

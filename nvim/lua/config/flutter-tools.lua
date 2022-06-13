@@ -34,15 +34,12 @@ require('flutter-tools').setup({
     run_via_dap = true, -- use dap instead of a plenary job to run flutter apps
     register_configurations = function(paths)
       local dap = require('dap')
-      -- require("dap.ext.vscode").load_launchjs()
-      local debugger_path = 'C:\\Users\\hasan\\adapters\\Dart-Code\\out\\dist\\debug.js'
 
       dap.adapters.dart = {
         type = 'executable',
         command = 'node',
-        args = { debugger_path, 'flutter' },
+        args = { dap_adapter_path .. '/Dart-Code/out/dist/debug.js', 'flutter' },
       }
-
       dap.configurations.dart = {
         {
           type = 'dart',

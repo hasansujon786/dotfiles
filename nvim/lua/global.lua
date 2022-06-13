@@ -27,6 +27,8 @@ _G.keymap = function(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+_G.dap_adapter_path = vim.fn.stdpath('data') .. '/dap_adapters'
+
 -- disabled_built_ins ==============================
 local disabled_built_ins = {
   'netrw',
