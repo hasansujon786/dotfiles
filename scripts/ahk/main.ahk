@@ -51,6 +51,28 @@ f1::switchToExplorer()
 !f1::switchToSavedApp()
 !z::closeAllExplorers()
 
+#if !winMoveMode
+#Esc::
+  winMoveMode := 1
+  beep()
+Return
+#if
+
+#if winMoveMode
+Esc::
+  winMoveMode := 0
+  beep()
+Return
+l::moveWinRight(25)
+h::moveWinLeft(25)
+k::moveWinUp(25)
+j::moveWinDown(25)
+#l::moveWinRight(200)
+#h::moveWinLeft(200)
+#k::moveWinUp(200)
+#j::moveWinDown(200)
+#if
+
 ;1::NavRun("C:\")
 ;2::NavRun(A_MyDocuments)
 
@@ -116,6 +138,28 @@ windowSwitcher(theClass, theEXE) {
 
 switchToSavedApp() {
   windowSwitcher(savedCLASS, savedEXE)
+}
+
+moveWinRight(val) {
+  wingetpos x, y,,, A
+  moveWindowWithXY(x+val, y)
+}
+moveWinLeft(val) {
+  wingetpos x, y,,, A
+  moveWindowWithXY(x-val, y)
+}
+moveWinUp(val) {
+  wingetpos x, y,,, A
+  moveWindowWithXY(x, y-val)
+}
+moveWinDown(val) {
+  wingetpos x, y,,, A
+  moveWindowWithXY(x, y+val)
+}
+moveWindowWithXY(x, y){
+  mousegetpos, mx, my
+  winmove, A,,%x%, %y%
+  ; mousemove, %mx%, %my%, 0
 }
 
 ;******************************************************************************

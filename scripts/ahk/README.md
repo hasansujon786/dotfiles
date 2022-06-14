@@ -24,10 +24,12 @@ Return
 SendInput %A_ComputerName%
 Return
 
-
-
 printwins() {
   msgbox,,, savedCLASS is %savedCLASS%,0.5
   msgbox,,, savedexe is %savedEXE%,0.5
 }
 
+; if GetKeyState("Shift")
+;     MsgBox At least one Shift key is down.
+; else
+;     MsgBox Neither Shift key is down.
