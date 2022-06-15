@@ -1,3 +1,10 @@
 require('org-bullets').setup({
-  symbols = { '◉', '○', '✸', '✿','♥',''}
+  symbols = {
+    headlines = { '◉', '○', '✸', '✿', '♥', '' },
+    checkboxes = {
+      cancelled = { '', 'OrgCancelled' },
+      done = { '✓', 'OrgDone' },
+      todo = { '˟', 'OrgTODO' },
+    },
+  },
 })
