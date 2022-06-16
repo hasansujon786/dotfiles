@@ -4,7 +4,7 @@ require('org-bullets').setup({
     checkboxes = {
       cancelled = { '', 'OrgCancelled' },
       done = { '✓', 'OrgDone' },
-      todo = { '˟', 'OrgTODO' },
+      todo = { ' ', 'OrgTODO' },
     },
   },
 })

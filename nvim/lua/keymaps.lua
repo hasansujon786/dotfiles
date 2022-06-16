@@ -115,8 +115,9 @@ keymap('v', '#', ':<C-u>call hasan#utils#visualSelection("", "")<CR>?<C-R>=@/<CR
 keymap('n', 'c*', ":let @/='\\<'.expand('<cword>').'\\>'<CR>cgn")
 keymap('x', 'C', '"cy:let @/=@c<CR>cgn')
 
-keymap('n', 'dm', ':%s/<c-r>///g<CR>', noSilent) -- Delete & change all matches
-keymap('n', 'cm', ':%s/<c-r>///g<Left><Left>', noSilent)
+keymap('n', 'cm', ':%s/<c-r>///g<Left><Left>', noSilent) -- Change all matches with prompt
+keymap('n', 'dm', ':%s/<c-r>///g<CR>', noSilent) -- Delete all matches
+keymap('n', 'dM', ':%g/<c-r>//d<CR>', noSilent) -- Delete all lines with matches
 
 -- Insert mode ----------------------------------
 keymap({ 'i', 'c' }, 'jk', '<ESC>') -- Use jk to return to normal mode

@@ -28,6 +28,31 @@ local common = {
   grep_string = { '<cmd>lua require("hasan.telescope.custom").grep_string()<CR>',         'Grep string' },
   substitute_word = {'<Cmd>lua require("hasan.utils.ui").substitute_word()<CR>',          'Substitute word'}
 }
+local w = {
+  name= '+window',
+  h = { '<C-w>h',                      'Window left' },
+  j = { '<C-w>j',                      'Window down' },
+  k = { '<C-w>k',                      'Window up' },
+  l = { '<C-w>l',                      'Window right' },
+  H = { '<C-w>H',                      'Move window left' },
+  J = { '<C-w>J',                      'Move window bottom' },
+  K = { '<C-w>K',                      'Move window top' },
+  L = { '<C-w>L',                      'Move window right' },
+  p = { '<C-w>p',                      'Window previous' },
+  w = { '<C-w>w',                      'Window next' },
+  W = { '<C-w>W',                      'Window previous' },
+  v = { '<C-w>v',                      'Windwo vsplit' },
+  s = { '<C-w>s',                      'Window split' },
+  r = { '<C-w>r',                      'Window rotate+' },
+  R = { '<C-w>R',                      'Window rotate-' },
+  o = { '<C-w>o',                      'Keep only windwo' },
+  c = { '<C-w>c',                      'Close windows' },
+  q = { '<C-w>c',                      'Close windows' },
+  t = { '<cmd>-tab split<CR>',         'Edit to new tab' },
+  O = { '<cmd>tabonly<CR>',            'Keep only tab' },
+
+  ['/'] = common.search_wiki_files,
+}
 
 local leader = {
   a = {
@@ -228,31 +253,7 @@ local leader = {
     },
   },
 
-  w = {
-    name= '+window',
-    h = { '<C-w>h',                      'Window left' },
-    j = { '<C-w>j',                      'Window down' },
-    k = { '<C-w>k',                      'Window up' },
-    l = { '<C-w>l',                      'Window right' },
-    H = { '<C-w>H',                      'Move window left' },
-    J = { '<C-w>J',                      'Move window bottom' },
-    K = { '<C-w>K',                      'Move window top' },
-    L = { '<C-w>L',                      'Move window right' },
-    p = { '<C-w>p',                      'Window previous' },
-    w = { '<C-w>w',                      'Window next' },
-    W = { '<C-w>W',                      'Window previous' },
-    v = { '<C-w>v',                      'Windwo vsplit' },
-    s = { '<C-w>s',                      'Window split' },
-    r = { '<C-w>r',                      'Window rotate+' },
-    R = { '<C-w>R',                      'Window rotate-' },
-    o = { '<C-w>o',                      'Keep only windwo' },
-    c = { '<C-w>c',                      'Close windows' },
-    q = { '<C-w>c',                      'Close windows' },
-    t = { '<cmd>-tab split<CR>',         'Edit to new tab' },
-    O = { '<cmd>tabonly<CR>',            'Keep only tab' },
-
-    ['/'] = common.search_wiki_files,
-  },
+  w = w,
 
   ['/'] = {
     name = '+search',
@@ -307,10 +308,16 @@ local leader_visual = {
     name = '+change',
     w = common.substitute_word,
   },
+  w = w,
   ['/'] = {
     name = '+search',
     s = common.grep_string,
   },
+
+  h = { '<C-w>h',                                         'which_key_ignore' },
+  j = { '<C-w>j',                                         'which_key_ignore' },
+  k = { '<C-w>k',                                         'which_key_ignore' },
+  l = { '<C-w>l',                                         'which_key_ignore' },
 }
 
 wk.register(leader, { prefix = '<leader>' })
