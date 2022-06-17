@@ -51,8 +51,9 @@ alias fob='cd build/app/outputs/flutter-apk && explorer .'
 alias acc='adb connect 192.168.31.252 && adb devices'
 alias add='adb devices'
 alias arr='~/dotfiles/scripts/abd_wifi.sh'
-alias scc='scrcpy -s 192.168.31.252 --always-on-top'
-alias scc2='scrcpy -s f8a8aa489804 --always-on-top'
+alias scr='scrcpy'
+alias scc='scrcpy -s 192.168.31.252'
+alias scc2='scrcpy -s f8a8aa489804'
 
 # handy short cuts #
 alias bashrc="vim ~/dotfiles/bash/.bashrc"

@@ -78,7 +78,7 @@
     ]
   },
   "for loop": {
-    "prefix": "forlp",
+    "prefix": "forloop",
     "body": [
       "for (int i = 1; i <= list.lenght; i++) {",
       "  print(i);",
@@ -152,5 +152,12 @@
       "})();"
     ],
     "description": "iffe"
+  },
+  "print": {
+    "prefix": ["pr", "print"],
+    "body": [
+      "print(${1});"
+    ],
+    "description": "Print to the console"
   }
 }

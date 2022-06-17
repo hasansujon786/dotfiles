@@ -1,6 +1,6 @@
 {
   "log": {
-    "prefix": ["pp"],
+    "prefix": ["pr", "print"],
     "body": "P(${1:$TM_SELECTED_TEXT})"
   },
   "defer": {

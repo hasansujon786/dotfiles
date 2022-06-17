@@ -339,7 +339,7 @@ beep() {
 ; Automations
 ;******************************************************************************
 rebootMiWiFi() {
-  Run, brave.exe http://miwifi.com/
+  Run, http://router.miwifi.com/
   sleep 3000
   MouseMove, 559, 600
   Click
