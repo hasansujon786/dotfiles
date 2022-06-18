@@ -1,6 +1,6 @@
 local M = {}
+local hasNvim8 = vim.fn.has('nvim-0.8') == 1
 local borderOpts = { border = require('state').ui.border.style }
-local hasNvim7 = vim.fn.has('nvim-0.7')
 
 require('lsp.diagnosgic').setup()
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, borderOpts)
@@ -13,18 +13,21 @@ M.on_attach = function(client, bufnr)
   M.lsp_buffer_keymaps(client, bufnr)
 
   if client.name ~= 'dartls' then
-    if hasNvim7 then
-      client.resolved_capabilities.document_formatting = false
-      client.resolved_capabilities.document_range_formatting = false
-    else
+    if hasNvim8 then
       client.server_capabilities.documentFormattingProvider = false
       client.server_capabilities.documentRangeFormattingProvider = false
+    else
+      client.resolved_capabilities.document_formatting = false
+      client.resolved_capabilities.document_range_formatting = false
     end
   end
 end
 
 function M.lsp_autocmds(client, bufnr)
-  if hasNvim7 and client.resolved_capabilities.document_highlight or client.server_capabilities.document_highlight then
+  if
+    hasNvim8 and client.server_capabilities.documentHighlightProvider
+    or client.resolved_capabilities.document_highlight
+  then
     vim.cmd([[
       augroup lsp_document_highlight
         autocmd! * <buffer>
