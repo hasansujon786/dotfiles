@@ -40,3 +40,18 @@ vk   := GetKeyVK(key)
 sc   := GetKeySC(key)
 
 MsgBox, % Format("Name:`t{}`nVK:`t{:X}`nSC:`t{:X}", name, vk, sc)
+
+
+F4::
+run, "C:\Users\Default\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\Window Switcher.lnk"
+; this was originally written for Win 8.1, but it still works in Win 10 despite the
+; shortcut being invisible in File Explorer
+return
+#IfWinActive ahk_class Windows.UI.Core.CoreWindow ahk_exe Explorer.EXE
+l::Send, {Right}
+h::Send, {Left}
+j::Send, {Down}
+k::Send, {Up}
+o::Enter
+x::Delete
+return

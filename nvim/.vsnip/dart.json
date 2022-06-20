@@ -159,5 +159,14 @@
       "print(${1});"
     ],
     "description": "Print to the console"
+  },
+  "addpostframecallback": {
+    "prefix": ["wpfc"],
+    "body": [
+      "WidgetsBinding.instance.addPostFrameCallback((timestamp) {",
+      "  ${1:// Content goes here}",
+      "});"
+    ],
+    "description": "Add post framecallback"
   }
 }

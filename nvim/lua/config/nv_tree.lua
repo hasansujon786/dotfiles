@@ -1,32 +1,3 @@
--- vim.g.nvim_tree_icons = {
---   default =        "",
---   symlink =        "",
---   git = {
---     unstaged =     "✗",
---     staged =       "✓",
---     unmerged =     "",
---     renamed =      "➜",
---     untracked =    "★",
---     deleted =      "",
---   },
---   folder = {
---     arrow_open =   "",
---     arrow_closed = "",
---     default =      "",
---     open =         "",
---     empty =        "",
---     empty_open =   "",
---     symlink =      "",
---     symlink_open = "",
---   },
---   lsp = {
---     hint = "",
---     info = "",
---     warning = "",
---     error = "",
---   }
--- }
-
 keymap('n', '<leader>0', ':NvimTreeFocus<CR>')
 keymap('n', '<leader>ob', ':NvimTreeToggle<CR>')
 keymap('n', '<leader>op', '<cmd>lua require("hasan.utils.vinegar").toggle_sidebar()<CR>')
@@ -184,3 +155,43 @@ require('nvim-tree').setup({
     },
   },
 })
+-- width = function()
+--   local winwidth = vim.fn.winwidth(0)
+--   if winwidth <= 100 then
+--     return 30
+--   elseif winwidth <= 200 then
+--     return 40
+--   else
+--     return 50
+--   end
+-- end,
+
+-- vim.g.nvim_tree_icons = {
+--   default =        "",
+--   symlink =        "",
+--   git = {
+--     unstaged =     "✗",
+--     staged =       "✓",
+--     unmerged =     "",
+--     renamed =      "➜",
+--     untracked =    "★",
+--     deleted =      "",
+--   },
+--   folder = {
+--     arrow_open =   "",
+--     arrow_closed = "",
+--     default =      "",
+--     open =         "",
+--     empty =        "",
+--     empty_open =   "",
+--     symlink =      "",
+--     symlink_open = "",
+--   },
+--   lsp = {
+--     hint = "",
+--     info = "",
+--     warning = "",
+--     error = "",
+--   }
+-- }
+
