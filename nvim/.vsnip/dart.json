@@ -2,8 +2,8 @@
   "Stateless Widget": {
     "prefix": "stlessW",
     "body": [
-      "class ${1:name} extends StatelessWidget {",
-      "  const ${1:name}({Key? key}) : super(key: key);\n",
+      "class ${1:MyStatelessWidget} extends StatelessWidget {",
+      "  const ${1:MyStatelessWidget}({Key? key}) : super(key: key);\n",
       "  @override",
       "  Widget build(BuildContext context) {",
       "    return Container();",
@@ -15,12 +15,12 @@
   "Stateful Widget": {
     "prefix": "stfulW",
     "body": [
-      "class ${1:name} extends StatefulWidget {",
-      "  const ${1:name}({Key? key}) : super(key: key);\n",
+      "class ${1:MyStatefulWidget} extends StatefulWidget {",
+      "  const ${1:MyStatefulWidget}({Key? key}) : super(key: key);\n",
       "  @override",
-      "  _${1:WidgetName}State createState() => _${1:WidgetName}State();",
+      "  State<${1:WidgetName}> createState() => _${1:WidgetName}State();",
       "}\n",
-      "class _${1:index}State extends State<${1:index}> {",
+      "class _${1:WidgetName}State extends State<${1:WidgetName}> {",
       "  @override",
       "  Widget build(BuildContext context) {",
       "    return Container();",
@@ -34,8 +34,8 @@
     "description": "Scaffold a Material Screen",
     "body": [
       "import 'package:flutter/material.dart';\n",
-      "class ${1:name} extends StatelessWidget {",
-      "  const ${1:name}({Key? key}) : super(key: key);\n",
+      "class ${1:MyStatelessWidget} extends StatelessWidget {",
+      "  const ${1:MyStatelessWidget}({Key? key}) : super(key: key);\n",
       "  static const routeName = '/${2:route_name}';",
       "  @override",
       "  Widget build(BuildContext context) {",
@@ -56,11 +56,11 @@
     "description": "Scaffold a Material Screen",
     "body": [
       "import 'package:flutter/material.dart';\n",
-      "class ${1:name} extends StatefulWidget {",
-      "  const ${1:name}({Key? key}) : super(key: key);\n",
+      "class ${1:MyStatefulWidget} extends StatefulWidget {",
+      "  const ${1:MyStatefulWidget}({Key? key}) : super(key: key);\n",
       "  static const routeName = '/${2:route_name}';",
       "  @override",
-      "  _${1:WidgetName}State createState() => _${1:WidgetName}State();",
+      "  State<${1:WidgetName}> createState() => _${1:WidgetName}State();",
       "}\n",
       "class _${1:index}State extends State<${1:index}> {",
       "  @override",
@@ -109,6 +109,13 @@
     ],
     "description": "Navigator.restorablePushNamed"
   },
+  "route_args": {
+    "prefix": ["rarg", "arguments"],
+    "body": [
+      "final args = ModalRoute.of(context)!.settings.arguments as Map<String, String?>;"
+    ],
+    "description": "Access route arguments"
+  },
   "Theme.of": {
     "prefix": "to",
     "body": [
@@ -123,19 +130,19 @@
     ],
     "description": "textTheme"
   },
-  "route_args": {
-    "prefix": "rarg",
-    "body": [
-      "final args = ModalRoute.of(context)!.settings.arguments as Map<String, String?>;"
-    ],
-    "description": "Access route arguments"
-  },
   "Screen height": {
-    "prefix": "sh",
+    "prefix": "sz",
     "body": [
       "double height = MediaQuery.of(context).size.height;"
     ],
     "description": "Screen height"
+  },
+  "MediaQuery": {
+    "prefix": "mq",
+    "body": [
+      "final mq = MediaQuery.of(context);"
+    ],
+    "description": "MediaQuery"
   },
   "Quick Container": {
     "prefix": "dd",

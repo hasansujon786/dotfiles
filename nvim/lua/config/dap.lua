@@ -1,7 +1,18 @@
 local M = {}
 
 function M.configure_ui()
-  require('dapui').setup()
+  require('dapui').setup({
+    icons = { expanded = '▾', collapsed = '▸' },
+    floating = {
+      max_height = nil, -- These can be integers or a float between 0 and 1.
+      max_width = nil, -- Floats will be treated as percentage of your screen.
+      border = 'double', -- Border style. Can be "single", "double" or "rounded"
+      mappings = {
+        close = { 'q', '<Esc>' },
+      },
+    },
+    windows = { indent = 1 },
+  })
 
   local dap_breakpoint = {
     breakpoint = { text = '🟥', texthl = 'DiagnosticError', linehl = '', numhl = '' },
