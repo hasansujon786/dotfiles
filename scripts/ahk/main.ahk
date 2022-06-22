@@ -13,10 +13,12 @@ Return
 suspend, toggle
 return
 
-#j:: SendInput,{DOWN}
-#l:: SendInput,{RIGHT}
-#h:: SendInput,{LEFT}
-#k:: SendInput,{UP}
+#IfWinNotActive, ahk_class CASCADIA_HOSTING_WINDOW_CLASS
+!h:: SendInput,{LEFT}
+!j:: SendInput,{DOWN}
+!k:: SendInput,{UP}
+!l:: SendInput,{RIGHT}
+#IfWinNotActive
 
 !1::Send #1
 !2::Send #2
@@ -30,6 +32,18 @@ return
 !0::Send #0
 PgUp::Send !{ESC}
 PgDn::Send +!{ESC}
+#InputLevel 1
+\::
+ {
+  count++
+  settimer, activebackSlashActions, 300
+ }
+return
+!\::
+  Sendinput, !{tab}
+  sleep 100
+  Sendinput, {ENTER}
+return
 
 capslock::Esc
 +capslock::capslock
@@ -94,6 +108,21 @@ j::moveWinDown(25)
 ;******************************************************************************
 ; Window Switcher functions
 ;******************************************************************************
+activebackSlashActions:
+ {
+   if (count = 1)
+    {
+      SendInput, {\}
+    }
+   else if (count >= 2)
+    {
+      ; msgbox, Double press.
+      Sendinput !{tab}
+    }
+   count := 0
+ }
+return
+
 switchToChrome() {
   IfWinNotExist, ahk_exe chrome.exe
     Run, chrome.exe
