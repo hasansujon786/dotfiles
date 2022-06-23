@@ -9,6 +9,7 @@ local useCodicons = true
 -- https://code.visualstudio.com/docs/editor/intellisense
 
 if not useCodicons then
+  -- nerdicons
   return {
     kind = {
       Function      = '',
@@ -87,6 +88,9 @@ if not useCodicons then
       BigCircle = '',
       BigUnfilledCircle = '',
       ChevronRight = '>',
+      ArrowClosed = '',
+      ArrowOpen = '',
+      CloudDownload = '',
     },
     diagnostics = {
       Error = '',
@@ -103,6 +107,7 @@ if not useCodicons then
     },
   }
 else
+  -- codicons
   return {
     kind = {
       Function      = '',
@@ -181,7 +186,11 @@ else
       Circle    = '',
       BigCircle = '',
       BigUnfilledCircle = '',
-      ChevronRight = '',
+      ChevronRight  = '',
+      ArrowClosed   = '',
+      ArrowOpen     = '',
+      CloudDownload = '',
+      NoteBook      = '',
     },
     diagnostics = {
       Error = '',
@@ -189,6 +198,7 @@ else
       Info  = '',
       Ques  = '',
       Hint  = '',
+      -- Hint = ' ',
     },
     misc = {
       Robot    = '',
