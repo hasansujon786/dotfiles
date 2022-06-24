@@ -229,3 +229,24 @@ end
 
 -- local parent_dir = Path:new(finder.path):parent()
 
+
+local function vertText()
+  local bnr = vim.fn.bufnr('%')
+  local ns_id = vim.api.nvim_create_namespace('demo')
+
+  local line_num = 9
+  local col_num = 5
+  local opts = {
+    end_line = 10,
+    id = 1,
+    virt_text = { { 'demo', 'IncSearch' } },
+    virt_text_pos = 'right_align', -- overlay, eol, right_align
+    virt_lines_leftcol = true,
+    -- virt_text_hide = true,
+    -- virt_text_win_col = 20,
+    -- virt_lines = { { { '           demo line', 'NormalFloat' } } },
+  }
+
+  local mark_id = vim.api.nvim_buf_set_extmark(bnr, ns_id, line_num - 1, col_num, opts) -- vim.api.nvim_buf_del_extmark(bnr, ns_id, id)
+end
+-- vertText()

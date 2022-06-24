@@ -1,3 +1,4 @@
+https://lexikos.github.io/v2/docs/Hotkeys.htm
 
 -- when pressing CapsLock alone, it will activate the Escpae button
 #Include C:\AHK\2nd-keyboard\gui.ahk
@@ -47,7 +48,8 @@ run, "C:\Users\Default\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\
 ; this was originally written for Win 8.1, but it still works in Win 10 despite the
 ; shortcut being invisible in File Explorer
 return
-#IfWinActive ahk_class Windows.UI.Core.CoreWindow ahk_exe Explorer.EXE
+
+#IfWinActive ahk_class Windows.UI.Core.CoreWindow ahk_exe Explorer.EXE ; #IfWinNotActive, ahk_class MultitaskingViewFrame
 l::Send, {Right}
 h::Send, {Left}
 j::Send, {Down}
@@ -55,3 +57,51 @@ k::Send, {Up}
 o::Enter
 x::Delete
 return
+
+LAlt & ]::AltTab
+LAlt & [::ShiftAltTab
+^!s::
+{
+    Send "Sincerely,{enter}John Smith"  ; This line sends keystrokes to the active (foremost) window.
+}
+LControl & RAlt::MsgBox "You pressed AltGr itself."
+
+activebackSlashActions:
+ {
+   if (count = 1)
+    {
+      SendInput, {\}
+    }
+   else if (count >= 2)
+    {
+      ; msgbox, Double press.
+      Sendinput !{tab}
+    }
+   count := 0
+ }
+return
+; \::
+;  {
+;   count++
+;   settimer, activebackSlashActions, 300
+;  }
+; return
+
+;1::NavRun("C:\")
+;2::NavRun(A_MyDocuments)
+
+; ^+r::Send ^r{tab}{tab}{space}{enter}
+;;the top rightmost keys on my K95.
+;Media_Stop::^numpad7
+;Media_Prev::^numpad8
+;Media_Play_Pause::^numpad9
+;Media_Next::^numpadMult
+;Volume_Mute::^numpadDiv
+;RButton & WheelDown::Send ^{Tab}
+;RButton & WheelUp::Send ^+{Tab}
+;RButton::RButton
+;CapsLock::LCtrl
+;Capslock Up::capsAsCtrl()
+;Enter::RCtrl
+;Enter Up::enterAsCtrl()
+

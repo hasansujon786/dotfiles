@@ -33,17 +33,8 @@ return
 PgUp::Send !{ESC}
 PgDn::Send +!{ESC}
 #InputLevel 1
-\::
- {
-  count++
-  settimer, activebackSlashActions, 300
- }
-return
-!\::
-  Sendinput, !{tab}
-  sleep 100
-  Sendinput, {ENTER}
-return
+!\::Send \
+\::alternateTab()
 
 capslock::Esc
 +capslock::capslock
@@ -87,42 +78,16 @@ j::moveWinDown(25)
 #j::moveWinDown(200)
 #if
 
-;1::NavRun("C:\")
-;2::NavRun(A_MyDocuments)
-
-; ^+r::Send ^r{tab}{tab}{space}{enter}
-;;the top rightmost keys on my K95.
-;Media_Stop::^numpad7
-;Media_Prev::^numpad8
-;Media_Play_Pause::^numpad9
-;Media_Next::^numpadMult
-;Volume_Mute::^numpadDiv
-;RButton & WheelDown::Send ^{Tab}
-;RButton & WheelUp::Send ^+{Tab}
-;RButton::RButton
-;CapsLock::LCtrl
-;Capslock Up::capsAsCtrl()
-;Enter::RCtrl
-;Enter Up::enterAsCtrl()
-
 ;******************************************************************************
 ; Window Switcher functions
 ;******************************************************************************
-activebackSlashActions:
- {
-   if (count = 1)
-    {
-      SendInput, {\}
-    }
-   else if (count >= 2)
-    {
-      ; msgbox, Double press.
-      Sendinput !{tab}
-    }
-   count := 0
- }
-return
-
+alternateTab() {
+  Send {alt down}
+  Sleep, 5
+  Send {tab}
+  Sleep, 5
+  Send {alt up}
+}
 switchToChrome() {
   IfWinNotExist, ahk_exe chrome.exe
     Run, chrome.exe
