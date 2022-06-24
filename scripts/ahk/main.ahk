@@ -18,6 +18,7 @@ return
 !j:: SendInput,{DOWN}
 !k:: SendInput,{UP}
 !l:: SendInput,{RIGHT}
+!Backspace::Send ^{Backspace}
 #IfWinNotActive
 
 !1::Send #1
