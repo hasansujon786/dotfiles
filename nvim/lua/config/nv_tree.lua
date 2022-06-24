@@ -15,8 +15,8 @@ end
 
 local function vinegar_dir_up()
   local node = require('nvim-tree.lib').get_node_at_cursor()
-  local cwd = vim.fn.fnamemodify(node.absolute_path, ":h")
-  local parent_cwd = vim.fn.fnamemodify(cwd, ":h")
+  local cwd = vim.fn.fnamemodify(node.absolute_path, ':h')
+  local parent_cwd = vim.fn.fnamemodify(cwd, ':h')
 
   require('nvim-tree.lib').open(parent_cwd)
   require('nvim-tree.actions.find-file').fn(cwd)
@@ -30,7 +30,7 @@ local function vinegar_edit_or_cd()
     require('nvim-tree.actions.open-file').fn(action, node.link_to)
     require('nvim-tree.view').close()
   elseif node.nodes ~= nil then
-    require("nvim-tree.actions.change-dir").fn(require('nvim-tree.lib').get_last_group_node(node).absolute_path)
+    require('nvim-tree.actions.change-dir').fn(require('nvim-tree.lib').get_last_group_node(node).absolute_path)
     feedkeys('ggj', '')
   else
     require('nvim-tree.actions.open-file').fn(action, node.absolute_path)
@@ -93,9 +93,21 @@ local list = {
 }
 
 require('nvim-tree').setup({
+  -- icons = {
+  --   glyphs = {
+  --     git = {
+  --       unstaged = '✗',
+  --       staged = '✓',
+  --       unmerged = '',
+  --       renamed = '➜',
+  --       untracked = '★',
+  --       deleted = '',
+  --       ignored = '◌',
+  --     },
+  --   },
+  -- },
   disable_netrw = true,
   hijack_netrw = true,
-  open_on_setup = false,
   ignore_buffer_on_setup = false,
   ignore_ft_on_setup = {},
   auto_reload_on_write = true,
@@ -108,13 +120,15 @@ require('nvim-tree').setup({
     auto_open = true,
   },
   update_focused_file = {
-    enable = true,
-    update_cwd = true,
+    enable = false,
+    update_cwd = false,
+    update_root = false,
     ignore_list = {},
   },
   filters = {
     dotfiles = false,
     custom = { '*.git', 'node_modules' },
+    -- exclude = {},
   },
   git = {
     enable = true,
@@ -142,16 +156,8 @@ require('nvim-tree').setup({
       global = false,
     },
     open_file = {
-      quit_on_open = false,
+      quit_on_open = true,
       resize_window = false,
-      window_picker = {
-        enable = true,
-        chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-        exclude = {
-          filetype = { 'notify', 'packer', 'qf', 'diff', 'fugitive', 'fugitiveblame' },
-          buftype = { 'nofile', 'terminal', 'help' },
-        },
-      },
     },
   },
 })
@@ -165,33 +171,3 @@ require('nvim-tree').setup({
 --     return 50
 --   end
 -- end,
-
--- vim.g.nvim_tree_icons = {
---   default =        "",
---   symlink =        "",
---   git = {
---     unstaged =     "✗",
---     staged =       "✓",
---     unmerged =     "",
---     renamed =      "➜",
---     untracked =    "★",
---     deleted =      "",
---   },
---   folder = {
---     arrow_open =   "",
---     arrow_closed = "",
---     default =      "",
---     open =         "",
---     empty =        "",
---     empty_open =   "",
---     symlink =      "",
---     symlink_open = "",
---   },
---   lsp = {
---     hint = "",
---     info = "",
---     warning = "",
---     error = "",
---   }
--- }
-

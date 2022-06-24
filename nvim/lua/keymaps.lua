@@ -8,6 +8,7 @@ else
   keymap({ 'n', 'v' }, 'q', '<ESC>:<C-u>nohlsearch<BAR>echo ""<BAR>ColorizerReloadAllBuffers<CR><CR>')
 end
 
+keymap('n', 'A', 'zzA') -- fix InsertEnter zz
 keymap('n', 'ZZ', ':Quit!<CR>') -- Prompt before quitting
 keymap('n', 'Q', 'q') -- Use Q to record macros
 keymap('v', '@', ':norm @', noSilent) -- run macro on selection

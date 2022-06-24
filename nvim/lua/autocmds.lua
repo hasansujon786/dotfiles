@@ -14,7 +14,7 @@ utils.create_augroups(autocmds)
 
 local MY_AUGROUP = utils.augroup('MY_AUGROUP')
 MY_AUGROUP(function(autocmd)
-  autocmd('VimResized', 'wincmd =') -- Vim/tmux layout rebalancing
+  -- autocmd('VimResized', 'wincmd =') -- Vim/tmux layout rebalancing
   autocmd('InsertEnter', 'norm zz')
   autocmd('CmdwinEnter', 'nnoremap <buffer><CR> <CR>')
   autocmd('TermOpen', 'setfiletype terminal | set bufhidden=hide')
