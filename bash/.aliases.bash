@@ -108,6 +108,7 @@ alias gupd='git update'
 alias gcl='git clone --recurse-submodules'
 alias grh='git reset HEAD~1' # --hard
 alias gr='git reset ' # --hard
+alias gcrh='git clean --force && git reset --hard'
 alias gck='git checkout ' # switch brnch | -b to create
 alias glo='git log --oneline --decorate'
 alias lg='lazygit'
