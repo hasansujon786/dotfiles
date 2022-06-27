@@ -10,6 +10,9 @@ sleep 50
 run, https://www.google.d...r#q=%clipboard%
 return
 
+; SoundPlay *64                               ;Default windows sound Play an asterisk (Doesn't work for me though!)
+; tooltip, %exstyle%, % x + 5, % y + 5
+
 ;******************************************************************************
 ;   Computer information
 ;******************************************************************************
@@ -113,3 +116,43 @@ option -> 0 = off
           3 = blur
 color  -> ABGR (alpha | blue | green | red) 0xffd7a78f
 */
+
+switchToChrome() {
+  IfWinNotExist, ahk_exe chrome.exe
+    Run, chrome.exe
+
+    if WinActive("ahk_exe chrome.exe")
+      Sendinput ^{tab}
+    else
+      WinActivate ahk_exe chrome.exe
+}
+switchToBrave() {
+  IfWinNotExist, ahk_exe brave.exe
+    Run, brave.exe
+
+    if WinActive("ahk_exe brave.exe")
+      Sendinput ^{tab}
+    else
+      WinActivate ahk_exe brave.exe
+}
+
+capsAsCtrl() {
+  SendInput, {LControl Up}  ;--For stability
+  If A_TimeSincePriorHotkey < 150
+  {
+    SendInput, {Escape}
+  }
+  Else
+  return
+}
+
+enterAsCtrl() {
+  SendInput, {RControl Up}  ;--For stability
+  If A_TimeSincePriorHotkey < 150
+  {
+    SendInput, {Enter}
+  }
+  Else
+  return
+}
+

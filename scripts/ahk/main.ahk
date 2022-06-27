@@ -74,10 +74,10 @@ l::moveWinRight(25)
 h::moveWinLeft(25)
 k::moveWinUp(25)
 j::moveWinDown(25)
-#l::moveWinRight(200)
-#h::moveWinLeft(200)
-#k::moveWinUp(200)
-#j::moveWinDown(200)
+RIGHT::moveWinRight(200)
+LEFT::moveWinLeft(200)
+UP::moveWinUp(200)
+DOWN::moveWinDown(200)
 #if
 
 ;******************************************************************************
@@ -90,26 +90,6 @@ alternateTab() {
   Sleep, 5
   Send {alt up}
 }
-switchToChrome() {
-  IfWinNotExist, ahk_exe chrome.exe
-    Run, chrome.exe
-
-    if WinActive("ahk_exe chrome.exe")
-      Sendinput ^{tab}
-    else
-      WinActivate ahk_exe chrome.exe
-}
-
-switchToBrave() {
-  IfWinNotExist, ahk_exe brave.exe
-    Run, brave.exe
-
-    if WinActive("ahk_exe brave.exe")
-      Sendinput ^{tab}
-    else
-      WinActivate ahk_exe brave.exe
-}
-
 global savedCLASS = "ahk_exe brave.exe"
 global savedEXE = "brave.exe"
 #IfWinActive
@@ -213,10 +193,6 @@ NavRun(Path) {
 ;******************************************************************************
 ; Utils
 ;******************************************************************************
-p(msg) {
-  msgbox,,, %msg%, 3
-}
-
 volup() {
   SoundGet, volume
   Send {Volume_Up}
@@ -229,7 +205,6 @@ voldown() {
   ;SoundBeep, 300, 150
   SoundSet, volume - 10
 }
-
 ; Long press (> 0.5 sec) on Esc closes window - but if you change your mind you can keep it pressed for 3 more seconds
 superEscape() {
   KeyWait, Escape, T0.5                         ; Wait no more than 0.5 sec for key release (also suppress auto-repeat)
@@ -252,27 +227,6 @@ superEscape() {
   }
   Send {Esc}
 }
-
-capsAsCtrl() {
-  SendInput, {LControl Up}  ;--For stability
-  If A_TimeSincePriorHotkey < 150
-  {
-    SendInput, {Escape}
-  }
-  Else
-  return
-}
-
-enterAsCtrl() {
-  SendInput, {RControl Up}  ;--For stability
-  If A_TimeSincePriorHotkey < 150
-  {
-    SendInput, {Enter}
-  }
-  Else
-  return
-}
-
 toggleTransparency() {
   WinGetActiveTitle, Title
   WinGet, TN, Transparent, %Title%
@@ -310,11 +264,22 @@ increaseTransparency() {
     EnvSub, TN, 5
     WinSet, Transparent, %TN%, %Title%
 }
-
 toggleAlwaysOnTop() {
-  Winset, Alwaysontop, , A ; win + space
-}
+  Winset, Alwaysontop, , A
+  WinGet, title, ProcessName, A
+  WinGet, win_id, ID, A
+  beep()
 
+  WinGet, ExStyle, ExStyle, ahk_id %win_id%
+  If (ExStyle & 0x8)
+    ExStyle = AlwaysOnTop
+  Else
+    ExStyle = Not AlwaysOnTop
+
+  SplashTextOn,,100,,`n%exstyle%`n------------`n%title%
+  sleep 300
+  SplashTextOff
+}
 getMousePos() {
   MouseGetPos, xpos, ypos
     xy := "x" xpos " y" ypos
@@ -322,11 +287,12 @@ getMousePos() {
     Clipboard := xy
     SetTimer toolTipClear, -1000
 }
-
+print(msg) {
+  msgbox,,, %msg%, 1
+}
 tooltipClear() {
   ToolTip
 }
-
 beep() {
   SoundBeep, 300, 150
 }

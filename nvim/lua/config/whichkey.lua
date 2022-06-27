@@ -220,8 +220,9 @@ local leader = {
     B = 'Toggle Onedark',
 
     c = { '<cmd>lua require("hasan.utils").toggle("cursorcolumn")<CR>',    'Toggle cursorcolumn' },
-    w = { '<cmd>lua require("hasan.utils").toggle("wrap")<CR>',            'Toggle wrap' },
     H = { ':call autohl#_AutoHighlightToggle()<CR>',                       'Highlight same words' },
+    s = { ':setlocal spell!<CR>',                                          'Toggle spell' },
+    w = { '<cmd>lua require("hasan.utils").toggle("wrap")<CR>',            'Toggle wrap' },
 
     t = {
       name  = '+task-and-timer',
