@@ -105,3 +105,11 @@ return
 ;Enter::RCtrl
 ;Enter Up::enterAsCtrl()
 
+/*
+TaskBar_SetAttr(option, color)
+option -> 0 = off
+          1 = gradient    (+color)
+          2 = transparent (+color)
+          3 = blur
+color  -> ABGR (alpha | blue | green | red) 0xffd7a78f
+*/
