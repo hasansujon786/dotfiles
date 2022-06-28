@@ -40,6 +40,7 @@ return require('packer').startup({
       }
     })
     use({ 'mkropat/vim-tt', opt = true, event = 'CursorHold', config = function () vim.g.tt_loaded = 1 end })
+    use({ 'ziontee113/color-picker.nvim', config = [[require('config.color-picker')]], opt = true, cmd = 'PickColor' })
 
     ------------------------------------------------
     --> Navigation ---------------------------------
