@@ -11,6 +11,8 @@ require('flutter-tools').setup({
     },
     on_attach = function(client, bufnr)
       require('lsp').on_attach(client, bufnr)
+
+      vim.cmd([[command! PubInstall lua require('hasan.telescope.custom').pub_install()]])
       -- local opts = { noremap = true, silent = true, buffer = bufnr }
       -- keymap('n', '<F9>', ':silent !explorer C:\\Users\\hasan\\dotfiles\\scripts\\flutter_reload.ahk<CR>', opts)
     end,

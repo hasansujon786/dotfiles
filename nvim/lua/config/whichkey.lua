@@ -114,7 +114,7 @@ local leader = {
     t = { ':call _#Insertion(strftime("%H:%M"))<CR>',                'Current time' },
     f = { ':call _#Insertion(expand("%:~"))<CR>',                    'Current file path' },
     F = { ':call _#Insertion(expand("%:t"))<CR>',                    'Current file name' },
-
+    e = { '<cmd>lua require("hasan.telescope.custom").emojis()<CR>', 'Insert emoji' },
     l = {
       t = { ':call _#Insertion(hasan#utils#placeholderImgTag("300x200"))<CR>', 'Placeholder image tag' },
       k = { ':call _#Insertion("https://placekitten.com/g/50/50")<CR>',        'Sample image link' },
