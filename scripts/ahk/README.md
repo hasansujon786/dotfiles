@@ -12,6 +12,8 @@ return
 
 ; SoundPlay *64                               ;Default windows sound Play an asterisk (Doesn't work for me though!)
 ; tooltip, %exstyle%, % x + 5, % y + 5
+# Show notification
+TrayTip, Reloading Script..., %A_ScriptName%, , 1
 
 ;******************************************************************************
 ;   Computer information

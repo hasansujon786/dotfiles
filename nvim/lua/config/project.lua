@@ -1,4 +1,4 @@
-require('project_nvim').setup({ exclude_dirs = {'c:'} })
+require('project_nvim').setup({ exclude_dirs = { 'c:' } })
 require('telescope').load_extension('projects')
 
 require('project_run').setup({
@@ -24,6 +24,12 @@ require('project_run').setup({
           'flutter run',
           function(util)
             util.open_tab(vim.fn.getcwd(), 'adb connect 192.168.31.252 && flutter run')
+          end,
+        },
+        {
+          'pub install',
+          function()
+            require('hasan.telescope.custom').pub_install()
           end,
         },
       }

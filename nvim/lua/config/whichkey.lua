@@ -220,9 +220,10 @@ local leader = {
     b = { ':lua require("hasan.utils.color").toggle_bg_tranparent()<CR>',  'Toggle transparency' },
     B = 'Toggle Onedark',
 
-    c = { '<cmd>lua require("hasan.utils").toggle("cursorcolumn")<CR>',    'Toggle cursorcolumn' },
+    l = { '<cmd>lua require("hasan.utils").toggle("cursorcolumn")<CR>',    'Toggle cursorcolumn' },
+    L = { '<cmd>lua require("hasan.utils").toggle("cursorline")<CR>',      'Toggle cursorline' },
     H = { ':call autohl#_AutoHighlightToggle()<CR>',                       'Highlight same words' },
-    s = { ':setlocal spell!<CR>',                                          'Toggle spell' },
+    s = { '<cmd>lua require("hasan.utils").toggle("spell")<CR>',           'Toggle spell' },
     w = { '<cmd>lua require("hasan.utils").toggle("wrap")<CR>',            'Toggle wrap' },
 
     t = {
