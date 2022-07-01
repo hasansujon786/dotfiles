@@ -23,7 +23,7 @@ opt.backspace={'eol','start','indent'}            -- Configure backspace so it a
 opt.path:append({'**'})
 -- opt.clipboard = "unnamedplus"
 
-opt.lazyredraw = true                             -- Don't redraw while executing macros (good performance config)
+-- opt.lazyredraw = true                          -- Don't redraw while executing macros (good performance config)
 opt.updatetime=100
 opt.timeout = true
 opt.ttimeout = true

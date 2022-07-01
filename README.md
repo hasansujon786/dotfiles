@@ -55,3 +55,6 @@ sudo vim /etc/hostname
 
 # cmp
 https://github.com/hrsh7th/nvim-cmp/issues/231
+
+# vim-surround
+vim.cmd[[ let b:surround_{char2nr('F')} = "function()\n return \r\nend" ]]

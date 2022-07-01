@@ -7,12 +7,13 @@ local opt = vim.opt
 
 local M = {}
 
----------------- Org float --------------------
-local last_bufnr = vim.fn.bufadd('C:\\Users\\hasan\\vimwiki\\home.org')
+---------------- Org float state --------------------
 local last_pop = nil
+local last_bufnr = vim.fn.bufadd(_G.org_home_path)
+local last_buf_name = api.nvim_buf_get_name(last_bufnr)
 
-local function get_title_text()
-  local text = vim.fn.fnamemodify(api.nvim_buf_get_name(last_bufnr), ':t')
+local function get_title_text(bufnr)
+  local text = vim.fn.fnamemodify(api.nvim_buf_get_name(bufnr), ':t')
   return Text(text, 'FloatBorder')
 end
 local function is_cur_win_org_float()
@@ -27,16 +28,19 @@ local function remove_autocmds()
       ]]
 end
 
-
-M.open_org_home = function ()
+M.open_org_home = function()
   if vim.bo.filetype == 'org' then
-    vim.cmd('edit ~/vimwiki/home.org')
+    vim.cmd('edit ' .. org_home_path)
   else
     last_pop = M.open_org_float()
   end
 end
 
 M.open_org_float = function()
+  -- get the bufnr if the buffer was cleared from buflist
+  if vim.fn.bufexists(last_bufnr) == 0 then
+    last_bufnr = vim.fn.bufadd(last_buf_name)
+  end
   if last_pop ~= nil then
     last_pop:unmount()
     remove_autocmds()
@@ -52,13 +56,13 @@ M.open_org_float = function()
     border = {
       style = 'double',
       text = {
-        top = get_title_text(),
-        top_align = "center",
+        top = get_title_text(last_bufnr),
+        top_align = 'center',
       },
     },
     position = {
-      row = "40%",
-      col = "50%",
+      row = '40%',
+      col = '50%',
     },
     size = {
       width = '80%',
@@ -69,8 +73,8 @@ M.open_org_float = function()
       winblend = 5,
       number = true,
       relativenumber = true,
-      signcolumn='yes',
-      numberwidth=2,
+      signcolumn = 'yes',
+      numberwidth = 2,
       -- winhighlight = 'Normal:Normal,FloatBorder:FloatBorder',
     },
   })
@@ -98,17 +102,18 @@ end
 function OrgOnFileChange()
   if is_cur_win_org_float() then
     last_bufnr = api.nvim_buf_get_number(0)
-    last_pop.border:set_text('top', get_title_text(), 'center')
+    last_buf_name = api.nvim_buf_get_name(last_bufnr)
+    last_pop.border:set_text('top', get_title_text(last_bufnr), 'center')
 
     opt.number = true
     opt.relativenumber = true
-    opt.signcolumn='yes'
-    opt.numberwidth=2
+    opt.signcolumn = 'yes'
+    opt.numberwidth = 2
   end
 end
 
 M.toggle_org_float = function()
-  if is_cur_win_org_float() or last_pop ~= nil  then
+  if is_cur_win_org_float() or last_pop ~= nil then
     -- pop:set_size({ width = 20, height = 20 })
     last_pop:unmount()
     remove_autocmds()

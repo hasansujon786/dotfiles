@@ -1,32 +1,6 @@
 local ui = require('state').ui
 
-P = function(...)
-  vim.pretty_print(...)
-  return ...
-end
-
-if pcall(require, 'plenary') then
-  local plenary_reload = require('plenary.reload').reload_module
-
-  R = function(moduleName, message)
-    plenary_reload(moduleName)
-    if message then
-      print(string.format('[%s] - %s', moduleName, message))
-    end
-    return require(moduleName)
-  end
-end
-
-_G.feedkeys = function(key, mode)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-end
-
-_G.keymap = function(mode, lhs, rhs, opts)
-  local def_opts = { silent = true, noremap = true }
-  opts = vim.tbl_deep_extend('force', def_opts, opts or {})
-  vim.keymap.set(mode, lhs, rhs, opts)
-end
-
+_G.org_home_path = 'C:\\Users\\hasan\\vimwiki\\home.org'
 _G.dap_adapter_path = vim.fn.stdpath('data') .. '/dap_adapters'
 
 -- disabled_built_ins ==============================
@@ -90,3 +64,30 @@ vim.g.gitgutter_floating_window_options = {
   style = 'minimal',
   border = ui.border.style,
 }
+
+P = function(...)
+  vim.pretty_print(...)
+  return ...
+end
+
+if pcall(require, 'plenary') then
+  local plenary_reload = require('plenary.reload').reload_module
+
+  R = function(moduleName, message)
+    plenary_reload(moduleName)
+    if message then
+      print(string.format('[%s] - %s', moduleName, message))
+    end
+    return require(moduleName)
+  end
+end
+
+_G.feedkeys = function(key, mode)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+end
+
+_G.keymap = function(mode, lhs, rhs, opts)
+  local def_opts = { silent = true, noremap = true }
+  opts = vim.tbl_deep_extend('force', def_opts, opts or {})
+  vim.keymap.set(mode, lhs, rhs, opts)
+end
