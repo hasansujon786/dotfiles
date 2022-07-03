@@ -1,5 +1,6 @@
 local ui = require('state').ui
 
+_G.org_root_path = 'C:\\Users\\hasan\\vimwiki'
 _G.org_home_path = 'C:\\Users\\hasan\\vimwiki\\home.org'
 _G.dap_adapter_path = vim.fn.stdpath('data') .. '/dap_adapters'
 

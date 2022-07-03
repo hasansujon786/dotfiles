@@ -117,7 +117,7 @@ function M.search_wiki_files()
   builtin.find_files({
     results_title = 'Wiki files',
     prompt_title = 'Search Wiki',
-    cwd = '~/vimwiki',
+    cwd = _G.org_root_path,
     search_dirs = {
       '3_resources/wiki/',
     },
@@ -130,7 +130,7 @@ function M.grep_org_text()
     results_title = 'Org Texts',
     prompt_title = 'Search Org Texts',
     path_display = { 'smart' },
-    cwd = '~/vimwiki',
+    cwd = _G.org_root_path,
   })
 end
 
@@ -162,20 +162,17 @@ function M.grep_string()
 end
 
 function M.file_browser(dir)
-  local opts = {}
-  local cwd = vim.fn.expand('%:p:h')
-  if dir == 'cur_dir' and cwd ~= '' then
-    opts = { cwd = cwd }
-  end
+  local opts = {
+    previewer = false,
+    cwd = dir == 'cur_dir' and vim.fn.expand('%:p:h') or nil,
+  }
   extensions.file_browser.file_browser(themes.get_ivy(opts))
 end
 
 function M.file_files(dir)
-  local opts = {}
-  local cwd = vim.fn.expand('%:h')
-  if dir == 'cur_dir' and cwd ~= '' then
-    opts = { cwd = cwd }
-  end
+  local opts = {
+    cwd = dir == 'cur_dir' and vim.fn.expand('%:h') or nil,
+  }
   builtin.find_files(themes.get_ivy(opts))
 end
 
