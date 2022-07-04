@@ -40,7 +40,7 @@ end
 
 -- init.lua
 local list = {
-  { key = {'<CR>', 'o', '<2-LeftMouse>'},action = 'edit' },
+  { key = 'zo',                          action = 'edit' },
   { key = 'e',                           action = 'edit_in_place' },
   { key = 'E',                           action = 'edit_no_picker' },
   { key = 's',                           action = 'split' },
@@ -121,7 +121,6 @@ require('nvim-tree').setup({
   },
   update_focused_file = {
     enable = true,
-    update_cwd = false,
     update_root = false,
     ignore_list = {},
   },

@@ -40,7 +40,7 @@ function M.vinegar()
     view.close()
   end
   require('nvim-tree').open_replacing_current_buffer()
-  vim.w.vinegar = true
+  vim.b.vinegar = true
 end
 
 function M.alternate_file()
@@ -78,5 +78,18 @@ function M.alternate_file()
 
   vim.cmd([[echo 'No alternate file']])
 end
+
+local function open()
+  feedkeys(vim.b.vinegar and 'e' or 'zo', '')
+end
+M.actions = {
+  open = open,
+  open_n_close = function()
+    open()
+    if view.is_visible() and not vim.b.vinegar then
+      view.close()
+    end
+  end,
+}
 
 return M
