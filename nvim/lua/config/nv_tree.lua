@@ -120,7 +120,7 @@ require('nvim-tree').setup({
     auto_open = true,
   },
   update_focused_file = {
-    enable = false,
+    enable = true,
     update_cwd = false,
     update_root = false,
     ignore_list = {},
@@ -156,7 +156,7 @@ require('nvim-tree').setup({
       global = false,
     },
     open_file = {
-      quit_on_open = true,
+      quit_on_open = false,
       resize_window = false,
     },
   },

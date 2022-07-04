@@ -1,28 +1,20 @@
--- local luv = vim.loop
--- local api = vim.api
--- local lib = require('nvim-tree.lib')
--- local log = require('nvim-tree.log')
--- local colors = require('nvim-tree.colors')
--- local renderer = require('nvim-tree.renderer')
--- local utils = require('nvim-tree.utils')
--- local change_dir = require('nvim-tree.actions.change-dir')
--- local legacy = require('nvim-tree.legacy')
--- local core = require('nvim-tree.core')
--- local tree = require('nvim-tree')
+local api = vim.api
+local tree = require('nvim-tree')
 local view = require('nvim-tree.view')
 local M = {}
 
 M.toggle_sidebar = function()
-  local readonly = vim.api.nvim_buf_get_option(0, 'readonly')
-  local modifiable = vim.api.nvim_buf_get_option(0, 'modifiable')
-  local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
+  local readonly = api.nvim_buf_get_option(0, 'readonly')
+  local modifiable = api.nvim_buf_get_option(0, 'modifiable')
+  local filetype = api.nvim_buf_get_option(0, 'filetype')
 
   if filetype == 'NvimTree' then
     vim.cmd([[NvimTreeClose]])
   elseif readonly or not modifiable then
     vim.cmd([[NvimTreeOpen]])
   else
-    vim.cmd([[NvimTreeFindFile]])
+    -- vim.cmd([[NvimTreeFindFile]])
+    tree.find_file(true, api.nvim_get_current_buf(), true)
   end
 end
 
