@@ -147,14 +147,13 @@ return require('packer').startup({
     use {
       'mfussenegger/nvim-dap',
       opt = true, module = 'dap',
+      config = "require('config.dap').setup()",
       requires = {
-        {'rcarriga/nvim-dap-ui', config = function () require('config.dap').configure_ui() end},
-        'theHamsta/nvim-dap-virtual-text',
+        {'rcarriga/nvim-dap-ui', config = 'require("config.dap").configure_dap_ui()'},
+        {'theHamsta/nvim-dap-virtual-text', config = 'require("config.dap").configure_virtual_text()'},
         'nvim-telescope/telescope-dap.nvim',
+        -- 'jbyuki/one-small-step-for-vimkind',
       },
-      config = function ()
-        require('config.dap').setup()
-      end
     }
 
     if not is_installed then

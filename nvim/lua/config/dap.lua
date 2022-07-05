@@ -1,6 +1,6 @@
 local M = {}
 
-function M.configure_ui()
+function M.configure_dap_ui()
   require('dapui').setup({
     icons = { expanded = '▾', collapsed = '▸' },
     floating = {
@@ -24,16 +24,23 @@ function M.configure_ui()
   vim.fn.sign_define('DapBreakpointRejected', dap_breakpoint.rejected)
 end
 
--- local function configure_debuggers()
---   require('config.dap.lua').setup()
---   -- require("config.dap.python").setup()
---   -- require("config.dap.rust").setup()
---   -- require("config.dap.go").setup()
--- end
+function M.configure_virtual_text()
+  require('nvim-dap-virtual-text').setup()
+end
+
+local function configure_debuggers()
+  -- require("config.dap.python").setup()
+  -- require("config.dap.rust").setup()
+  -- require("config.dap.go").setup()
+
+  require('config.dap.node').setup()
+  -- require('config.dap.lua').setup()
+end
 
 function M.setup()
   require('config.dap.keymaps').setup()
   require('dap').set_log_level('TRACE') --TRACE DEBUG INFO WARN ERROR
+  configure_debuggers()
 end
 
 return M

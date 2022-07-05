@@ -32,6 +32,7 @@ MY_AUGROUP(function(autocmd)
   autocmd('FileType', 'setlocal foldmethod=marker', { pattern = { 'vim', 'css', 'scss', 'json' } })
   autocmd('FileType', 'setlocal foldmarker={,}', { pattern = { 'css', 'scss', 'json' } })
   autocmd({ 'BufWinEnter', 'WinEnter' }, 'normal Gzz', { pattern = '__FLUTTER_DEV_LOG__' })
+  autocmd('FileType', 'setlocal nonumber norelativenumber signcolumn=no', { pattern = 'log' })
 
   autocmd('User', 'lua vim.notify("Packer configuration recompiled")', { pattern = 'PackerCompileDone' })
   autocmd('User', vim.fn['hasan#highlight#load_custom_highlight'], { pattern = 'PackerCompileDone' })

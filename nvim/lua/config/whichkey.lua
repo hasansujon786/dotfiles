@@ -108,6 +108,11 @@ local leader = {
     }
   },
 
+  d = {
+    name = 'Debug',
+    s = { '<cmd>lua require"dap".continue()<cr>',          'Start' },
+  },
+
   i = {
     name = '+insert',
     d = { ':call _#Insertion(strftime("%e %B %Y"))<CR>',             'Current date' },
@@ -275,8 +280,6 @@ local leader = {
     -- m = { ':Bookmarks<CR>',                 'Jump to bookmark' } ,
   },
 
-  y = 'Yank to CB',
-  d = 'Delete to CB',
   q = { '<cmd>Quit<CR>',                                               'Close window' },
   r = { '<cmd>lua require("hasan.utils.ui").cycle_numbering()<CR>',    'Cycle number' },
   R = { '<cmd>lua require("nebulous").toggle_win_blur()<CR>',          'Toggle Nebulous' },
