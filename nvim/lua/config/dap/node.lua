@@ -2,14 +2,6 @@ local dap = require('dap')
 
 return {
   setup = function()
-    --   dap.run({
-    --       type = 'node2',
-    --       request = 'attach',
-    --       cwd = vim.fn.getcwd(),
-    --       sourceMaps = true,
-    --       skipFiles = {'<node_internals>/**/*.js'},
-    --       protocol = 'inspector',
-    --       })
     dap.adapters.node2 = {
       type = 'executable',
       command = 'node',
@@ -33,14 +25,23 @@ return {
         console = 'integratedTerminal',
       },
       {
-        -- For this to work you need to make sure the node process is started with the `--inspect` flag.
-        name = 'Attach to process with javascript/node2',
+        name = 'Attach to javascript/node2',
         type = 'node2',
         request = 'attach',
-        processId = require('dap.utils').pick_process,
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        skipFiles = { '<node_internals>/**/*.js' },
+        protocol = 'inspector',
       },
+      -- {
+      --   -- For this to work you need to make sure the node process is started with the `--inspect` flag.
+      --   name = 'Attach to process with javascript/node2',
+      --   type = 'node2',
+      --   request = 'attach',
+      --   processId = require('dap.utils').pick_process,
+      -- },
       {
-        name = 'Launch javascript/chrome',
+        name = 'Attach to javascript/chrome',
         type = 'chrome',
         request = 'attach',
         program = '${file}',
