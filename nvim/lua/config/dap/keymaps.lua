@@ -14,6 +14,7 @@ function M.setup()
       R = { "<cmd>lua require'dap'.run_to_cursor()<cr>",     'Run to Cursor' },
       t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", 'Toggle Breakpoint' },
       b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", 'Toggle Breakpoint' },
+      B = { "<cmd>lua require'dap'.set_breakpoint(vim.fn.input '[Condition] > ')<cr>",'Conditional Breakpoint' },
 
       i = { "<cmd>lua require'dap'.step_into()<cr>",         'Step Into' },
       o = { "<cmd>lua require'dap'.step_over()<cr>",         'Step Over' },
@@ -33,7 +34,6 @@ function M.setup()
 
       e = { "<cmd>lua require'dapui'.eval()<cr>",            'Evaluate' },
       E = { "<cmd>lua require'dapui'.eval(vim.fn.input '[Expression] > ')<cr>",       'Evaluate Input' },
-      B = { "<cmd>lua require'dap'.set_breakpoint(vim.fn.input '[Condition] > ')<cr>",'Conditional Breakpoint' },
 
       ['.'] = { "<cmd>lua require'telescope'.extensions.dap.commands()<cr>",       'Find DAP Commands' },
       l = {
@@ -116,6 +116,11 @@ return M
 -- vim.keymap.set('n', '<leader>da', function() require"debugHelper".attach() end)
 -- vim.keymap.set('n', '<leader>dA', function() require"debugHelper".attachToRemote() end)
 -- vim.keymap.set('n', '<leader>di', function() require"dap.ui.widgets".hover() end)
+-- vim.keymap.set('n', '<leader>d?', function() local widgets=require"dap.ui.widgets";widgets.centered_float(widgets.scopes) end)
+-- vim.keymap.set('n', '<leader>dk', ':lua require"dap".up()<CR>zz')
+-- vim.keymap.set('n', '<leader>dj', ':lua require"dap".down()<CR>zz')
+-- vim.keymap.set('n', '<leader>dr', ':lua require"dap".repl.toggle({}, "vsplit")<CR><C-w>l')
+
 -- vim.keymap.set('n', '<leader>d?', function() local widgets=require"dap.ui.widgets";widgets.centered_float(widgets.scopes) end)
 -- vim.keymap.set('n', '<leader>dk', ':lua require"dap".up()<CR>zz')
 -- vim.keymap.set('n', '<leader>dj', ':lua require"dap".down()<CR>zz')
