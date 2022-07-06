@@ -7,7 +7,6 @@ require('telescope').setup({
     selection_strategy = 'reset',
     file_sorter = require('telescope.sorters').get_fzy_sorter,
     generic_sorter = require('telescope.sorters').get_generic_fuzzy_sorter,
-    -- prompt_prefix = '  ',
     prompt_prefix = '  ',
     selection_caret = '❯ ',
     layout_config = {
@@ -55,6 +54,12 @@ require('telescope').setup({
     lsp_document_symbols = {
       theme = 'dropdown',
       previewer = false,
+    },
+    find_files = {
+      theme = 'ivy',
+      layout_config = {
+        height = 0.7,
+      },
     },
   },
   extensions = {

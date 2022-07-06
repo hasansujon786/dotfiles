@@ -75,27 +75,12 @@ end
 local M = {}
 
 M.project_files = function()
-  -- local _, ret, _ = utils.get_os_command_output({ 'git', 'rev-parse', '--is-inside-work-tree' })
-  -- if ret == 0 then
-  git_and_buffer_files({ prompt_title = 'Project Files' })
-  -- else
-  --   builtin.find_files()
-  -- end
-end
-
-function M.git_files()
-  local opts = themes.get_dropdown({
-    winblend = 5,
-    previewer = false,
-    shorten_path = false,
-    prompt_prefix = '  ',
-
-    layout_config = {
-      width = 0.25,
-    },
-  })
-
-  builtin.git_files(opts)
+  local _, ret, _ = utils.get_os_command_output({ 'git', 'rev-parse', '--is-inside-work-tree' })
+  if ret == 0 then
+    git_and_buffer_files({ prompt_title = 'Project Files' })
+  else
+    builtin.find_files()
+  end
 end
 
 function M.curbuf()
@@ -135,11 +120,11 @@ function M.grep_org_text()
 end
 
 function M.search_plugins()
-  local opts = {
+  extensions.file_browser.file_browser(themes.get_ivy({
+    previewer = false,
     prompt_title = 'Plugins',
     cwd = vim.fn.glob(vim.fn.stdpath('data') .. '/site/pack/packer'),
-  }
-  extensions.file_browser.file_browser(themes.get_ivy(opts))
+  }))
 end
 
 function M.grep_string()
@@ -162,18 +147,10 @@ function M.grep_string()
 end
 
 function M.file_browser(dir)
-  local opts = {
+  extensions.file_browser.file_browser(themes.get_ivy({
     previewer = false,
-    cwd = dir == 'cur_dir' and vim.fn.expand('%:p:h') or nil,
-  }
-  extensions.file_browser.file_browser(themes.get_ivy(opts))
-end
-
-function M.file_files(dir)
-  local opts = {
     cwd = dir == 'cur_dir' and vim.fn.expand('%:h') or nil,
-  }
-  builtin.find_files(themes.get_ivy(opts))
+  }))
 end
 
 M.projects = function()
@@ -181,14 +158,13 @@ M.projects = function()
     require('telescope.actions').close(prompt_bufnr)
     vim.cmd('split ' .. vim.fn.stdpath('data') .. '/project_nvim/project_history')
   end
-  local projects_options = {
+  require('telescope._extensions').manager.projects.projects(themes.get_dropdown({
     attach_mappings = function(_, map)
       map('i', '<C-e>', edit_projects_file)
       map('n', '<C-e>', edit_projects_file)
       return true
     end,
-  }
-  require('telescope._extensions').manager.projects.projects(themes.get_dropdown(projects_options))
+  }))
 end
 
 M.live_grep_in_folder = function(opts)
@@ -292,7 +268,6 @@ function M.search_project_todos()
   M.grep_string_list({
     results_title = ' Project Todos',
     prompt_title = 'Search Todos',
-    prompt_prefix = ' ',
     path_display = { 'smart' },
     search_list = { 'TODO:', 'DONE:', 'INFO:', 'FIXME:' },
     additional_args = function()

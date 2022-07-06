@@ -155,11 +155,11 @@ local leader = {
   f = {
     name = '+file',
     -- File Command
-    ['.'] = { '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', 'Browse file directory' },
-    d = { '<cmd>lua require("hasan.telescope.custom").file_browser()<cr>',          'Browser project files' },
     b = { '<cmd>lua require("hasan.telescope.custom").file_browser()<cr>',          'Browser project files' },
-    f = { '<cmd>lua require("hasan.telescope.custom").file_files()<cr>',            'Find file' },
-    F = { '<cmd>lua require("hasan.telescope.custom").file_files("cur_dir")<cr>',   'Find file from here' },
+    B = { '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', 'Browse file directory' },
+    f = { ':Telescope find_files<CR>',                                              'Find file' },
+    F = { ':Telescope find_files cwd=<C-R>=expand("%:h")<CR><CR>',                  'Find file from here' },
+    ['.'] = { ':Telescope find_files cwd=<C-R>=expand("%:h")<CR><CR>',                  'Find file from here' },
 
     i = { ':call hasan#utils#file_info()<CR>',                       'Show file info' },
     s = { ':write<CR>',                                              'Save current file' },
@@ -188,7 +188,6 @@ local leader = {
     a = 'Org agenda',
     c = 'Org capture',
     h = {'<cmd>lua require("hasan.org").open_org_home("-tabedit")<CR>', 'Open org home'},
-    ['.'] = {'<cmd>lua require("hasan.org").open_org_home("edit")<CR>', 'Open org home'},
     ['/'] = common.grep_org_text,
 
     t = { ':FloatermNew --wintype=normal --height=12<CR>',      'Open terminal split' },
@@ -265,18 +264,20 @@ local leader = {
 
   ['/'] = {
     name = '+search',
+    ['.'] = { ':telescope resume<cr>',      'telescope resume' },
     b = { ':Telescope buffers<CR>',         'Find buffers' },
     f = { ':Telescope find_files<CR>',      'Find file' },
     k = { ':Telescope keymaps<CR>',         'Look up keymaps' } ,
     M = { ':Telescope marks<CR>',           'Jump to marks' } ,
     r = { ':Telescope oldfiles<CR>',        'Recent files' },
     t = { ':Telescope filetypes<CR>',       'Change filetypes' },
-    s = common.grep_string,
-    ['/'] = { ':Telescope live_grep<CR>',   'Live grep' },
-    ['.'] = { ':Telescope resume<CR>',      'Telescope resume' },
 
     o = common.grep_org_text,
     w = common.search_wiki_files,
+
+    s = common.grep_string,
+    ['/'] = { ':Telescope live_grep<CR>',   'Live grep' },
+    g = { '<cmd>lua require("hasan.telescope.custom").live_grep_in_folder()<cr>', 'Live grep in folder' },
     -- m = { ':Bookmarks<CR>',                 'Jump to bookmark' } ,
   },
 
