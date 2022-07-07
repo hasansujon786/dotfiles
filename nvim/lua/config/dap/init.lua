@@ -19,9 +19,9 @@ function M.configure_dap_ui()
   dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
   local dap_sign = {
-    breakpoint = { text = '🟥', texthl = 'DiagnosticError', linehl = '', numhl = '' },
-    rejected = { text = '', texthl = 'DiagnosticError', linehl = '', numhl = '' },
-    stopped = { text = '', texthl = 'String', numhl = 'String', linehl = 'DiagnosticUnderlineError' },
+    breakpoint = { text = '', texthl = 'RedText', numhl = '', linehl = '' },
+    rejected = { text = '', texthl = 'GrayText', numhl = '', linehl = '' },
+    stopped = { text = '❯', texthl = 'String', numhl = 'String', linehl = 'CursorLineDap' },
   }
   vim.fn.sign_define('DapBreakpoint', dap_sign.breakpoint)
   vim.fn.sign_define('DapStopped', dap_sign.stopped)
@@ -29,7 +29,6 @@ function M.configure_dap_ui()
 
   -- - `DapBreakpointCondition` for conditional breakpoints (default: `C`)
   -- - `DapLogPoint` for log points (default: `L`)
-  -- vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = '', linehl = '', numhl = '' })
 end
 
 function M.configure_virtual_text()
