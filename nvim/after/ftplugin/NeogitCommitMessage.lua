@@ -5,7 +5,7 @@ function CmpNeogitCommitMessageSetup()
   require('cmp').setup.buffer {
     enabled = true,
     sources = {
-      { name = 'vsnip' },
+      { name = 'luasnip' },
       { name = 'spell' },
       { name = 'buffer',
         option = {

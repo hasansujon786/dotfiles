@@ -131,13 +131,13 @@ return require('packer').startup({
       opt = true, after = 'nvim-lspconfig',
       config = function() require('config.cmp') end,
       requires = {
-        'hrsh7th/vim-vsnip',
         'rafamadriz/friendly-snippets',
+        {'L3MON4D3/LuaSnip', opt = true, module = 'luasnip', config='require("config.luasnip")'},
         -- completion sources
         'f3fora/cmp-spell',
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-buffer',
-        'hrsh7th/cmp-vsnip',
+        'saadparwaiz1/cmp_luasnip',
         { 'hrsh7th/cmp-path', commit ='d83839ae510d18530c6d36b662a9e806d4dceb73' },
         { 'windwp/nvim-autopairs', config = [[require('config.autopairs')]] },
       },

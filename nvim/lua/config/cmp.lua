@@ -1,6 +1,7 @@
 local cmp = require('cmp')
 local utils = require('hasan.utils')
 local kind_icons = require('hasan.utils.ui.icons').kind
+local luasnip = require('luasnip')
 
 local function has_words_before()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -23,7 +24,7 @@ cmp.setup({
   },
   snippet = {
     expand = function(args)
-      vim.fn['vsnip#anonymous'](args.body)
+      require('luasnip').lsp_expand(args.body)
     end,
   },
   view = {
@@ -52,20 +53,20 @@ cmp.setup({
     ['<M-space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     ['<C-q>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     ['<C-l>'] = cmp.mapping(function(_)
-      if has_words_before() and vim.fn['vsnip#jumpable'](1) == 1 then
-        feedkeys('<Plug>(vsnip-jump-next)', '')
+      if luasnip.choice_active() then
+        luasnip.change_choice(1)
       else
-        cmp.complete({ config = { sources = { { name = 'vsnip' } } } })
+        cmp.complete({ config = { sources = { { name = 'luasnip' } } } })
       end
     end, { 'i', 's' }),
-    ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Select, select = true }),
+    ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
     ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() and vim.fn['vsnip#available']() == 1 then
-        cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-      elseif cmp.visible() then
-        cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-      elseif has_words_before() and vim.fn['vsnip#available']() == 1 then
-        feedkeys('<Plug>(vsnip-expand-or-jump)', '')
+      if cmp.visible() then
+        cmp.confirm({ behavior = cmp.ConfirmBehavior.Select, select = true })
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+        -- elseif has_words_before() then
+        --   cmp.complete()
       elseif tab_out_available() then
         feedkeys('<Right>', 'n')
       else
@@ -73,10 +74,8 @@ cmp.setup({
       end
     end, { 'i', 's' }),
     ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif vim.fn['vsnip#jumpable'](-1) == 1 then
-        feedkeys('<Plug>(vsnip-jump-prev)', '')
+      if luasnip.jumpable(-1) then
+        luasnip.jump(-1)
       else
         fallback()
       end
@@ -84,7 +83,7 @@ cmp.setup({
   }),
   sources = {
     { name = 'nvim_lsp' },
-    { name = 'vsnip' },
+    { name = 'luasnip' },
     { name = 'buffer', keyword_length = 4 },
     { name = 'path' },
   },
@@ -102,6 +101,7 @@ cmp.setup({
         vsnip = '',
         spell = '暈',
         orgmode = '✿',
+        luasnip = '',
       })[entry.source.name]
       vim_item.menu = string.format('%s %s', string.sub(vim_item.kind, 1, 3), vim_item.menu)
 
@@ -113,23 +113,25 @@ cmp.setup({
   },
 })
 
-vim.g.vsnip_filetypes = {
-  vimspec = { 'vim' },
-  javascriptreact = { 'javascript' },
-  typescriptreact = { 'typescript' },
-  javascript = { 'javascriptreact' },
-  typescript = { 'typescriptreact' },
-  dart = { 'flutter' },
-}
+-- Vsnip ==============================
+-- vim.g.vsnip_namespace = ':'
+-- vim.g.vsnip_snippet_dir = '~/dotfiles/nvim/.vsnip'
+-- inoremap <C-S> <Cmd>lua require('cmp').complete({ config = { sources = { { name = 'vsnip' } } } })<CR>
+-- vim.cmd[[xmap <C-l>   <Plug>(vsnip-cut-text)]]
+-- vim.g.vsnip_filetypes = {
+--   vimspec = { 'vim' },
+--   javascriptreact = { 'javascript' },
+--   typescriptreact = { 'typescript' },
+--   javascript = { 'javascriptreact' },
+--   typescript = { 'typescriptreact' },
+--   dart = { 'flutter' },
+-- }
 
 local CMP_AUGROUP = utils.augroup('CMP_AUGROUP')
 CMP_AUGROUP(function(autocmd)
   autocmd('FileType', 'lua CmpOrgmodeSetup()', { pattern = { 'org' } })
   autocmd('FileType', 'lua CmpNeogitCommitMessageSetup()', { pattern = { 'NeogitCommitMessage' } })
 end)
-
---  inoremap <C-S> <Cmd>lua require('cmp').complete({ config = { sources = { { name = 'vsnip' } } } })<CR>
--- vim.cmd[[xmap <C-l>   <Plug>(vsnip-cut-text)]]
 
 keymap('c', '<tab>', '<C-z>', { silent = false }) -- to fix cmp
 cmp.setup.cmdline('/', {

@@ -10,7 +10,7 @@ function CmpOrgmodeSetup()
     enabled = true,
     sources = {
       { name = 'orgmode' },
-      { name = 'vsnip' },
+      { name = 'luasnip' },
       { name = 'spell' },
       { name = 'buffer'},
       { name = 'path' },

@@ -31,9 +31,6 @@ vim.g.do_filetype_lua = 1
 for _, plugin in pairs(disabled_built_ins) do
   vim.g['loaded_' .. plugin] = 1
 end
--- Vsnip ==============================
--- vim.g.vsnip_namespace = ':'
-vim.g.vsnip_snippet_dir = '~/dotfiles/nvim/.vsnip'
 -- Sneak ==============================
 vim.g['sneak#target_labels'] = ';wertyuopzbnmfLGKHWERTYUIQOPZBNMFJ0123456789'
 vim.g['sneak#label'] = 1 -- use <tab> to jump through lebles
