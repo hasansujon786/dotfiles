@@ -28,8 +28,19 @@ for _, server_name in pairs(M.essential_servers) do
     lspconfig[server_name].setup(require('hasan.utils').merge(opts, {
       settings = {
         Lua = {
+          runtime = {
+            version = 'LuaJIT',
+          },
           diagnostics = {
-            globals = { 'vim', 'jit', 'keymap', 'P' },
+            globals = { 'vim', 'jit', 'keymap', 'P' }, -- Get the language server to recognize the `vim` global
+          },
+          workspace = {
+            library = { -- Make the server aware of Neovim runtime files
+              'C:\\Users\\hasan\\dotfiles\\nvim\\lua',
+            },
+          },
+          telemetry = {
+            enable = false,
           },
         },
       },
