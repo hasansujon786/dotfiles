@@ -50,3 +50,18 @@
 --     require('config.dap').setup()
 --   end,
 -- })
+
+-- Vsnip ==============================
+-- vim.g.vsnip_namespace = ':'
+-- vim.g.vsnip_snippet_dir = '~/dotfiles/nvim/.vsnip'
+-- inoremap <C-S> <Cmd>lua require('cmp').complete({ config = { sources = { { name = 'vsnip' } } } })<CR>
+-- vim.cmd[[xmap <C-l>   <Plug>(vsnip-cut-text)]]
+-- vim.g.vsnip_filetypes = {
+--   vimspec = { 'vim' },
+--   javascriptreact = { 'javascript' },
+--   typescriptreact = { 'typescript' },
+--   javascript = { 'javascriptreact' },
+--   typescript = { 'typescriptreact' },
+--   dart = { 'flutter' },
+-- }
+
