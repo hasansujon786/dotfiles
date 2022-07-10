@@ -31,8 +31,14 @@ cmp.setup({
     entries = { name = 'custom', selection_order = 'top_down' },
   },
   mapping = cmp.mapping.preset.insert({
-    ['<A-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-    ['<A-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+    ['<A-u>'] = cmp.mapping(function()
+      if luasnip.choice_active() then
+        require('luasnip.extras.select_choice')()
+      else
+        cmp.scroll_docs(-4)
+      end
+    end),
+    ['<A-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4)),
     ['<A-n>'] = cmp.mapping(function(_)
       if cmp.visible() then
         cmp.select_next_item()
@@ -59,10 +65,10 @@ cmp.setup({
         cmp.complete({ config = { sources = { { name = 'luasnip' } } } })
       end
     end, { 'i', 's' }),
-    ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+    ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Select, select = true }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        cmp.confirm({ behavior = cmp.ConfirmBehavior.Select, select = true })
+        cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
         -- elseif has_words_before() then
