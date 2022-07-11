@@ -65,6 +65,7 @@ local list = {
   -- { key = 'L',                            action = 'vsplit_preview', action_cb = vsplit_preview },
   -- { key = 'h',                            action = 'close_node' },
 
+  { key = 'm',                           action = 'toggle_mark' },
   { key = 'f',                           action = 'live_filter' },
   { key = 'c',                           action = 'clear_live_filter' },
   { key = 'S',                           action = 'search_node' },

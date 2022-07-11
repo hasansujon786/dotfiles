@@ -1,4 +1,5 @@
 local ls = require('luasnip')
+local icons = require('hasan.utils.ui.icons')
 local types = require('luasnip.util.types')
 ls.config.set_config({
   -- This tells LuaSnip to remember to keep around the last snippet.
@@ -13,12 +14,12 @@ ls.config.set_config({
   -- ext_opts = nil,
   ext_opts = {
     [types.choiceNode] = {
-      passive = { virt_text = { { '●', 'Comment' } } },
-      active = { virt_text = { { '●', 'CmpItemKindClass' } } },
+      passive = { virt_text = { { icons.ui.BigCircle, 'Comment' } } },
+      active = { virt_text = { { icons.ui.BigCircle, 'CmpItemKindClass' } } },
     },
     [types.insertNode] = {
-      passive = { virt_text = { { '●', 'Comment' } } },
-      active = { virt_text = { { '●', 'String' } } },
+      passive = { virt_text = { { icons.ui.BigCircle, 'Comment' } } },
+      active = { virt_text = { { icons.ui.BigCircle, 'String' } } },
     },
   },
 })
