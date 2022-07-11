@@ -81,6 +81,7 @@ if pcall(require, 'plenary') then
 end
 
 _G.feedkeys = function(key, mode)
+  mode = mode == nil and '' or mode
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 

@@ -3,40 +3,7 @@ keymap('n', '<leader>ob', ':NvimTreeToggle<CR>')
 keymap('n', '<leader>op', '<cmd>lua require("hasan.utils.vinegar").toggle_sidebar()<CR>')
 keymap('n', '-', '<cmd>lua require("hasan.utils.vinegar").vinegar()<CR>')
 keymap('n', '<BS>', '<cmd>lua require("hasan.utils.vinegar").alternate_file()<CR>')
-
-local function cd_root()
-  require('nvim-tree.lib').open(vim.loop.cwd())
-  feedkeys('gg', '')
-end
-local function system_reveal()
-  local node = require('nvim-tree.lib').get_node_at_cursor()
-  vim.cmd('silent !explorer.exe /select,"' .. node.absolute_path .. '"')
-end
-
-local function vinegar_dir_up()
-  local node = require('nvim-tree.lib').get_node_at_cursor()
-  local cwd = vim.fn.fnamemodify(node.absolute_path, ':h')
-  local parent_cwd = vim.fn.fnamemodify(cwd, ':h')
-
-  require('nvim-tree.lib').open(parent_cwd)
-  require('nvim-tree.actions.find-file').fn(cwd)
-end
-
-local function vinegar_edit_or_cd()
-  local action = 'edit'
-  local node = require('nvim-tree.lib').get_node_at_cursor()
-
-  if node.link_to and not node.nodes then -- TODO: chec what is node.link_to
-    require('nvim-tree.actions.open-file').fn(action, node.link_to)
-    require('nvim-tree.view').close()
-  elseif node.nodes ~= nil then
-    require('nvim-tree.actions.change-dir').fn(require('nvim-tree.lib').get_last_group_node(node).absolute_path)
-    feedkeys('ggj', '')
-  else
-    require('nvim-tree.actions.open-file').fn(action, node.absolute_path)
-    require('nvim-tree.view').close()
-  end
-end
+local v = require('hasan.utils.vinegar')
 
 -- init.lua
 local list = {
@@ -47,15 +14,14 @@ local list = {
   { key = 'v',                           action = 'vsplit' },
   { key = 't',                           action = 'tabnew' },
   { key = 'O',                           action = 'system_open' },
-  { key = 'R',                           action = 'system_reveal', action_cb = system_reveal },
-
-  { key = {'h'},                         action = 'dir_up' },
-  { key = {'-'},                         action = 'vinegar_dir_up', action_cb = vinegar_dir_up },
-  { key = {'<RightMouse>', 'l'},         action = 'vinegar_edit_or_cd', action_cb = vinegar_edit_or_cd },
-  -- { key = {'h'},                         action = 'dir_up', },
+  { key = 'R',                           action = 'system_reveal', action_cb = v.actions.system_reveal },
+  { key = {'h'},                         action = 'vinegar_dir_up_or_dir_up', action_cb = v.actions.vinegar_dir_up_or_dir_up },
+  { key = {'-'},                         action = 'vinegar_dir_up', action_cb = v.actions.vinegar_dir_up },
+  { key = {'<RightMouse>', 'l'},         action = 'vinegar_edit_or_cd', action_cb = v.actions.vinegar_edit_or_cd },
   -- { key = 'K',                           action = 'prev_sibling' },
   -- { key = 'J',                           action = 'next_sibling' },
-  { key = 'u',                           action = 'parent_node' },
+  { key = 'u',                           action = 'dir_up' },
+  { key = 'p',                           action = 'parent_node' },
   { key = '<Tab>',                       action = 'preview' },
   { key = '[c',                          action = 'prev_git_item' },
   { key = ']c',                          action = 'next_git_item' },
@@ -76,7 +42,7 @@ local list = {
   { key = 'g?',                          action = 'toggle_help' },
   { key = 'K',                           action = 'toggle_file_info' },
   { key = 'X',                           action = 'collapse_all' },
-  { key = 'W',                           action = 'cd_root', action_cb = cd_root },
+  { key = 'W',                           action = 'cd_root', action_cb = v.actions.cd_root },
   { key = 'x',                           action = 'close_node' },
 
   { key = '.',                           action = 'run_file_command' },

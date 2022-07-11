@@ -1,6 +1,7 @@
 local api = vim.api
 local tree = require('nvim-tree')
 local view = require('nvim-tree.view')
+local lib = require('nvim-tree.lib')
 local M = {}
 
 M.toggle_sidebar = function()
@@ -13,8 +14,8 @@ M.toggle_sidebar = function()
   elseif readonly or not modifiable then
     vim.cmd([[NvimTreeOpen]])
   else
-    -- vim.cmd([[NvimTreeFindFile]])
-    tree.find_file(true, api.nvim_get_current_buf(), true)
+    vim.cmd([[NvimTreeFindFile]])
+    -- tree.find_file(true, api.nvim_get_current_buf(), true)
   end
 end
 
@@ -39,7 +40,7 @@ function M.vinegar()
   if view.is_visible() then
     view.close()
   end
-  require('nvim-tree').open_replacing_current_buffer()
+  tree.open_replacing_current_buffer()
   vim.b.vinegar = true
 end
 
@@ -88,6 +89,50 @@ M.actions = {
     open()
     if view.is_visible() and not vim.b.vinegar then
       view.close()
+    end
+  end,
+  vinegar_edit_or_cd = function(node)
+    if node.extension and vim.b.vinegar then
+      feedkeys('e')
+    elseif node.extension and not vim.b.vinegar then
+      feedkeys('E')
+    else
+      lib.open(node.absolute_path)
+      feedkeys('ggj')
+    end
+  end,
+  cd_root = function()
+    lib.open(vim.loop.cwd())
+    feedkeys('gg', '')
+  end,
+  system_reveal = function(node)
+    vim.cmd('silent !explorer.exe /select,"' .. node.absolute_path .. '"')
+  end,
+  vinegar_dir_up = function(node)
+    if node.name == '..' then
+      feedkeys('j')
+      vim.schedule(function()
+        node = lib.get_node_at_cursor()
+        M.actions.vinegar_dir_up(node)
+      end)
+    end
+    if node == nil or node.parent == nil then
+      return
+    end
+    local cwd = node.parent.absolute_path
+    local parent_cwd = vim.fn.fnamemodify(cwd, ':h')
+    if cwd == parent_cwd then
+      return
+    end
+
+    lib.open(parent_cwd)
+    require('nvim-tree.actions.finders.find-file').fn(cwd)
+  end,
+  vinegar_dir_up_or_dir_up = function()
+    if vim.b.vinegar then
+      feedkeys('-')
+    else
+      feedkeys('up')
     end
   end,
 }
