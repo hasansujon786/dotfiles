@@ -11,7 +11,8 @@ function hasan#highlight#load_custom_highlight(...) abort
   hi IncSearch          guibg=#e86671 gui=underline
   hi SignColumn         guibg=NONE
   hi FloatBorder        guibg=NONE    guifg=#4dbdcb
-  hi PmenuSel           guibg=#1e242f guifg=NONE
+  " guibg=#1e242f
+  hi PmenuSel           guibg=#495369 guifg=NONE
   hi RedText            guifg=#ff0000
   hi GrayText           guifg=#7386a5
   hi CursorLineDap      guibg=#16461E guifg=none guisp=none cterm=underline
