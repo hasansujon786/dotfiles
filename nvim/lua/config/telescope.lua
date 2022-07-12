@@ -70,5 +70,6 @@ require('telescope').setup({
     ['ui-select'] = {
       require('telescope.themes').get_dropdown(),
     },
+    project_commands = require('config.project_commands'),
   },
 })

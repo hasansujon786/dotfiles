@@ -50,7 +50,7 @@ return require('packer').startup({
     use({ 'ThePrimeagen/harpoon', opt = true, module = 'harpoon' })
     use({ 'nvim-telescope/telescope.nvim',
       config = function() require('config.telescope') end,
-      cmd = 'Telescope', module = 'telescope', event = 'BufReadPost', opt = true,
+      cmd = 'Telescope', module = 'telescope', opt = true,
       requires = {
         { 'hasansujon786/telescope-ui-select.nvim', config = [[require('telescope').load_extension('ui-select')]] },
         { 'nvim-telescope/telescope-fzy-native.nvim', config = [[require('telescope').load_extension('fzy_native')]]  },

@@ -4,7 +4,7 @@ local t_themes = require('telescope.themes')
 local t_pickers = require('telescope.pickers')
 local t_finders = require('telescope.finders')
 local t_entry_display = require('telescope.pickers.entry_display')
-local utils = require('project_run.utils')
+local utils = require('telescope._extensions.project_commands.utils')
 
 local M = {}
 

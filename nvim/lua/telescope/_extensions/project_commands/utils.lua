@@ -1,5 +1,10 @@
 local Path = require('plenary.path')
-local M = { conf = {} }
+local M = {
+  conf = {
+    default_commands = {},
+    dynamic_commands = nil,
+  },
+}
 
 M.root_has = function(fname)
   local fpath = Path:new(vim.fn.getcwd(), fname)

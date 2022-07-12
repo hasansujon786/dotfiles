@@ -1,11 +1,8 @@
--- local telescope = require('telescope')
 local _utils = require('hasan.utils')
-local picker = require('project_run.picker')
-local utils = require('project_run.utils')
+local picker = require('telescope._extensions.project_commands.picker')
+local utils = require('telescope._extensions.project_commands.utils')
 
-local M = {}
-
-M.scriptsCommandsFromJSON = function(script_file, opts)
+local function scriptsCommandsFromJSON(script_file, opts)
   opts = _utils.merge({
     prompt_title = 'Script commands',
   }, opts or {})
@@ -19,14 +16,14 @@ M.scriptsCommandsFromJSON = function(script_file, opts)
   vim.cmd([[normal! a]])
 end
 
-M.commands = function(opts)
+local function commands(opts)
   opts = _utils.merge({}, opts or {})
-  local dynamic_commands = utils.conf.dynamic_commands
+  local dynamic_commands = utils.conf.commands.dynamic_commands
   local command_list = {}
   if dynamic_commands ~= nil then
     command_list = dynamic_commands(utils)
   end
-  local default_commands = utils.conf.default_commands
+  local default_commands = utils.conf.commands.default_commands
   if #default_commands > 0 then
     for _, v in ipairs(default_commands) do
       table.insert(command_list, v)
@@ -36,14 +33,12 @@ M.commands = function(opts)
   picker.list_picker(opts, command_list, picker.actions.run_cmd)
 end
 
-M.setup = function(opts)
-  opts = _utils.merge({
-    default_commands = {},
-    dynamic_commands = nil,
-  }, opts or {})
-
-  utils.conf.dynamic_commands = opts.dynamic_commands
-  utils.conf.default_commands = opts.default_commands
-end
-
-return M
+return require('telescope').register_extension({
+  setup = function(opts)
+    utils.conf = _utils.merge(utils.conf, opts or {})
+  end,
+  exports = {
+    commands = commands,
+    scriptsCommandsFromJSON = scriptsCommandsFromJSON,
+  },
+})
