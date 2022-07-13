@@ -57,13 +57,8 @@ local w = {
 local leader = {
   a = {
     name = '+lsp',
-    d = 'Show diagnostics',
-    h = 'Show signature help',
     p = { '<cmd>lua require("telescope.builtin").lsp_definitions({ jump_type = "never" })<CR>',   'Preview defination' },
     r = { '<cmd>lua require("telescope.builtin").lsp_references()<CR>',                           'Preview references' },
-    ['+'] = 'Add workspace folder',
-    ['-'] = 'Remove workspace folder',
-    ['?'] = 'List workspace folder',
   },
 
   b = {

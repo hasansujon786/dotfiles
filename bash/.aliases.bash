@@ -141,7 +141,8 @@ alias fgrep='fgrep --color=auto'
 alias le='less -j4'
 alias chex='chmod +x'
 alias cpr='cp -r'
-alias rr='rm -rfI'
+# alias rr='rm -rfI'
+alias rr='remove'
 alias mn='mv -vn'
 alias txf='tar -xf'
 alias uz='unzip'
@@ -195,6 +196,25 @@ lfcd () {
 
 bind '"\eo":"lfcd\C-m"'
 bind '"\el":clear-screen'
-# bind '"\e\ ":magic-space'
+bind '"\e\ ":magic-space'
 bind '"\eq":alias-expand-line'
 bind '" ":"\eq\C-v "'
+
+remove() {
+  while true; do
+    local count=$#
+    if [[ $count = 0 ]]; then
+      echo "rm: missing argument"
+      return
+    fi
+    local item='item'
+    [[  $count -gt 1  ]] && item="items"
+
+    read -p "rm: Do you wish to remove ${count} ${item} (y/n)? " yn
+    case $yn in
+      [Yy]* ) rm -rf $@; break;;
+      [Nn]* ) echo "rm: Canceled"; break;;
+      * ) echo "rm: Please answer yes or no.";;
+    esac
+  done
+}
