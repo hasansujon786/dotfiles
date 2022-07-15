@@ -240,9 +240,10 @@ local leader = {
 
   v = {
     name = '+vim',
-    ['/'] = { '<cmd>Telescope help_tags<CR>',       'Search Vim help' },
-    ['.'] = { '<cmd>echo "Not a Vim file"<CR>',     'Source this file' },
-    l = { '<cmd>call logevents#LogEvents_Toggle()<CR>',  'Toggle LogEvents' },
+    ['/'] = { '<cmd>Telescope help_tags<CR>',              'Search Vim help' },
+    ['.'] = { '<cmd>echo "Not a Vim file"<CR>',            'Source this file' },
+    l = { '<cmd>call logevents#LogEvents_Toggle()<CR>',    'Toggle LogEvents' },
+    r = { '<cmd>write | edit | TSBufEnable highlight<CR>', 'Toggle LogEvents' },
     p = {
       name = '+plugin',
       c = { 'Compile plugin setup' },

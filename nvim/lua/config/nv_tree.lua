@@ -60,19 +60,6 @@ local list = {
 }
 
 require('nvim-tree').setup({
-  -- icons = {
-  --   glyphs = {
-  --     git = {
-  --       unstaged = '✗',
-  --       staged = '✓',
-  --       unmerged = '',
-  --       renamed = '➜',
-  --       untracked = '★',
-  --       deleted = '',
-  --       ignored = '◌',
-  --     },
-  --   },
-  -- },
   disable_netrw = true,
   hijack_netrw = true,
   ignore_buffer_on_setup = false,
@@ -103,7 +90,21 @@ require('nvim-tree').setup({
   },
   renderer = {
     indent_markers = { enable = true },
-    icons = { git_placement = 'signcolumn' },
+    icons = {
+      git_placement = 'signcolumn',
+      show = { folder_arrow = false },
+      -- glyphs = {
+      --   git = {
+      --     unstaged = '✗',
+      --     staged = '✓',
+      --     unmerged = '',
+      --     renamed = '➜',
+      --     untracked = '★',
+      --     deleted = '',
+      --     ignored = '◌',
+      --   },
+      -- },
+    }
   },
   view = {
     width = 26,
