@@ -48,8 +48,8 @@ $Escape::superEscape()
 #^.::increaseTransparency()
 #^,::decreaseTransparency()
 ; Change Volume:
-!WheelUP::volup()
-!WheelDown::voldown()
+#WheelUP::volup()
+#WheelDown::voldown()
 $Volume_Up::volup()
 $Volume_Down::voldown()
 ; Explorer

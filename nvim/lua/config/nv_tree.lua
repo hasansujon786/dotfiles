@@ -3,6 +3,10 @@ keymap('n', '<leader>ob', ':NvimTreeToggle<CR>')
 keymap('n', '<leader>op', '<cmd>lua require("hasan.utils.vinegar").toggle_sidebar()<CR>')
 keymap('n', '-', '<cmd>lua require("hasan.utils.vinegar").vinegar()<CR>')
 keymap('n', '<BS>', '<cmd>lua require("hasan.utils.vinegar").alternate_file()<CR>')
+keymap('n', '[e', '<cmd>lua require("nvim-tree.marks.navigation").prev()<cr>')
+keymap('n', ']e', '<cmd>lua require("nvim-tree.marks.navigation").next()<cr>')
+keymap('n', '<leader>/e', '<cmd> lua require("nvim-tree.marks.navigation").select()<cr>', {desc = 'Explorer bookmarks'})
+-- bulk_move = require("nvim-tree.marks.bulk-move").bulk_move,
 local v = require('hasan.utils.vinegar')
 
 -- init.lua
@@ -56,6 +60,7 @@ local list = {
   { key = '<f2>',                        action = 'rename' },
   { key = '<C-r>',                       action = 'full_rename' },
   { key = '<Delete>',                    action = 'remove' },
+  { key = 'B',                           action = 'bulk_move' }
   -- { key = 'D',                            action = 'trash' },
 }
 
