@@ -291,15 +291,10 @@ local leader = {
   ['<space>'] = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find File in project' },
   ['<tab>'] = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', 'Open Harpoon' },
 
-  h = { '<C-w>h',                                         'which_key_ignore' },
-  j = { '<C-w>j',                                         'which_key_ignore' },
-  k = { '<C-w>k',                                         'which_key_ignore' },
-  l = { '<C-w>l',                                         'which_key_ignore' },
-  ['1'] = { '<cmd>lua require("harpoon.ui").nav_file(1)<CR>', 'which_key_ignore'},
-  ['2'] = { '<cmd>lua require("harpoon.ui").nav_file(2)<CR>', 'which_key_ignore'},
-  ['3'] = { '<cmd>lua require("harpoon.ui").nav_file(3)<CR>', 'which_key_ignore'},
-  ['4'] = { '<cmd>lua require("harpoon.ui").nav_file(4)<CR>', 'which_key_ignore'},
-  ['5'] = { '<cmd>lua require("harpoon.ui").nav_file(5)<CR>', 'which_key_ignore'},
+  h = { '<C-w>h', 'which_key_ignore' },
+  j = { '<C-w>j', 'which_key_ignore' },
+  k = { '<C-w>k', 'which_key_ignore' },
+  l = { '<C-w>l', 'which_key_ignore' },
 }
 
 local leader_visual = {
@@ -317,15 +312,23 @@ local leader_visual = {
     s = common.grep_string,
   },
 
-  h = { '<C-w>h',                                         'which_key_ignore' },
-  j = { '<C-w>j',                                         'which_key_ignore' },
-  k = { '<C-w>k',                                         'which_key_ignore' },
-  l = { '<C-w>l',                                         'which_key_ignore' },
+  h = { '<C-w>h', 'which_key_ignore' },
+  j = { '<C-w>j', 'which_key_ignore' },
+  k = { '<C-w>k', 'which_key_ignore' },
+  l = { '<C-w>l', 'which_key_ignore' },
 }
+
+for i = 0, 9 do
+  leader[tostring(i)] = 'which_key_ignore'
+  local harpoon_rs = '<cmd>lua require("harpoon.ui").nav_file(%s)<CR>'
+  local harpoon_ls = '<leader>%s'
+  keymap('n', harpoon_ls:format(i), harpoon_rs:format(i))
+
+  leader.w[tostring(i)] = 'which_key_ignore'
+  local win_ls = '<leader>w%s'
+  local win_rs = '%s<C-w>w'
+  keymap('n', win_ls:format(i), win_rs:format(i))
+end
 
 wk.register(leader, { prefix = '<leader>' })
 wk.register(leader_visual, { prefix = '<leader>', mode = 'v' })
-
--- for i = 0, 10 do
---   leader[tostring(i)] = "which_key_ignore"
--- end
