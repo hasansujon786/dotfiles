@@ -19,7 +19,10 @@ return require('packer').startup({
     use({ 'navarasu/onedark.nvim', config = function() require('config.onedark') end })
     use({ 'hasansujon786/dashboard-nvim', config = function() require('config.dashboard') end })
     use({ 'hasansujon786/kissline.nvim', config = function() require('config.kissline') end })
-    use({ 'nvim-lualine/lualine.nvim', config = function() require('config.lualine') end })
+    use({ 'nvim-lualine/lualine.nvim',
+      config = function() require('config.lualine') end,
+      commit = '8d956c18258bb128ecf42f95411bb26efd3a5d23'
+    })
     use({ 'kyazdani42/nvim-web-devicons', config = function() require('config.devicons-config') end })
     use({ 'lukas-reineke/indent-blankline.nvim', opt = true, event = 'VimEnter', config = [[require('config.indentLine')]] })
     use({ 'norcalli/nvim-colorizer.lua', opt = true, event = 'CursorHold', config = [[require('config.colorizer')]] })

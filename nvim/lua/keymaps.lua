@@ -102,8 +102,8 @@ keymap('n', '[q', ':cprev<CR>')
 keymap('n', ']Q', ':clast<CR>')
 keymap('n', '[Q', ':cfirst<CR>')
 
-keymap('n', '[w', ':lua require("harpoon.ui").nav_prev()<CR>', {desc = 'Previous harpoon item'}) -- harpoon
-keymap('n', ']w', ':lua require("harpoon.ui").nav_next()<CR>', {desc = 'Next harpoon item'})
+keymap('n', '[w', ':lua require("harpoon.ui").nav_prev()<CR>', { desc = 'Previous harpoon item' }) -- harpoon
+keymap('n', ']w', ':lua require("harpoon.ui").nav_next()<CR>', { desc = 'Next harpoon item' })
 
 -- Search ---------------------------------------
 -- Pressing * or # searches for the current selection

@@ -250,9 +250,8 @@ local leader = {
       C = { '<cmd>PackerClean<CR>',             'Clean plugins' },
       i = { '<cmd>PackerInstall<CR>',           'Install plugins' },
       s = { '<cmd>PackerStatus<CR>',            'Plugin status' },
-      y = { '<cmd>PackerSync<CR>',              'Plugin sync' },
-      u = { '<cmd>PackerUpdate<CR>',            'Update plugins' },
-      p = { '<cmd>lua require("hasan.telescope.custom").search_plugins()<CR>',  'Search plugin files'},
+      y = { '<cmd>lua require("hasan.utils").sync_packer()<CR>',               'Plugin sync' },
+      p = { '<cmd>lua require("hasan.telescope.custom").search_plugins()<CR>', 'Search plugin files'},
     },
   },
 
