@@ -6,8 +6,8 @@ ls.config.set_config({
   -- You can jump back into it even if you move outside of the selection
   history = true,
   -- This one is cool cause if you have dynamic snippets, it updates as you type!
-  updateevents = 'TextChanged,TextChangedI,InsertEnter,InsertLeave',
-  region_check_events = 'InsertEnter',
+  update_events = 'TextChanged,TextChangedI,InsertEnter,InsertLeave',
+  region_check_events = 'InsertEnter,CursorMoved',
   delete_check_events = 'TextChanged,InsertLeave',
   -- Autosnippets:
   enable_autosnippets = false,
