@@ -15,7 +15,7 @@ local get_lsp_client = function()
         lsps = client.name
       else
         if not string.find(lsps, client.name) then
-          lsps = lsps .. ', ' .. client.name
+          lsps = lsps .. ',' .. client.name
         end
       end
     end
