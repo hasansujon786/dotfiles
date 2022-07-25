@@ -21,6 +21,8 @@ vim.g.dashboard_custom_header = {
   [[  /(((((.          ((((#%#%%/*   ]],
   [[    ,(((.            /(%%#*      ]],
   [[       *               *         ]],
+  [[                                 ]],
+  [[         -- aim lower --         ]],
 }
 
 vim.g.dashboard_custom_section = {

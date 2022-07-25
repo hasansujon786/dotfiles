@@ -2,20 +2,22 @@ local M = {}
 local api = vim.api
 
 M.install_essential_servers = function()
-  local installing_servers = false
-  for _, server_name in ipairs(require('lsp.installer').essential_servers) do
-    local ok, server = require('nvim-lsp-installer.servers').get_server(server_name)
-    if ok then
-      if not server:is_installed() then
-        server:install()
-        if not installing_servers then
-          installing_servers = true
-        end
-      end
+  local ok, registry = pcall(require, 'mason-registry')
+  if not ok then
+    print('[Mason] Please install mason and try again')
+  end
+  local essential_servers = require('lsp.lsp_config').essential_servers
+  local not_installed_names = {}
+
+  for _, server_name in ipairs(essential_servers) do
+    if not registry.is_installed(server_name[2]) then
+      table.insert(not_installed_names, server_name[2])
     end
   end
-  if installing_servers then
-    vim.cmd('LspInstallInfo')
+  if #not_installed_names > 0 then
+    require('mason.api.command').MasonInstall(not_installed_names)
+  else
+    print('[Mason] All pkgs were already installed')
   end
 end
 

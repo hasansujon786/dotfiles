@@ -43,9 +43,7 @@ end
 function M.lsp_buffer_keymaps(client, bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
   local function withDesc(desc)
-    return require('hasan.utils').merge({
-      desc = desc,
-    }, opts or {})
+    return require('hasan.utils').merge({ desc = desc }, opts or {})
   end
 
   local filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')

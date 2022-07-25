@@ -1,3 +1,4 @@
+-- { 'williamboman/nvim-lsp-installer', config = function() require('lsp.installer') end },
 require('nvim-lsp-installer').setup({ ensure_installed = { 'sumneko_lua' } })
 local lspconfig = require('lspconfig')
 local M = {
@@ -50,4 +51,3 @@ for _, server_name in pairs(M.essential_servers) do
   end
 end
 
-return M

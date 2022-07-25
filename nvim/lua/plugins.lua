@@ -127,11 +127,12 @@ return require('packer').startup({
       config = function() require('lsp') end,
       requires = {
         { 'jose-elias-alvarez/null-ls.nvim', config = function() require('lsp.null-ls') end },
-        { 'williamboman/nvim-lsp-installer', config = function() require('lsp.installer') end },
+        { 'williamboman/mason.nvim', config = function() require('lsp.lsp_config') end },
+        { 'williamboman/mason-lspconfig.nvim', opt = true, module = 'mason-lspconfig', },
       }
     })
     use({ 'hrsh7th/nvim-cmp',
-      opt = true, after = 'nvim-lspconfig',
+      opt = true, event = 'BufReadPost',
       config = function() require('config.cmp') end,
       requires = {
         'rafamadriz/friendly-snippets',
