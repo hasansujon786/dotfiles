@@ -21,7 +21,7 @@ function M.configure_dap_ui()
   local dap_sign = {
     breakpoint = { text = '', texthl = 'RedText', numhl = '', linehl = '' },
     rejected = { text = '', texthl = 'GrayText', numhl = '', linehl = '' },
-    stopped = { text = '❯', texthl = 'String', numhl = 'String', linehl = 'CursorLineDap' },
+    stopped = { text = '', texthl = 'String', numhl = 'String', linehl = 'CursorLineDap' },
   }
   vim.fn.sign_define('DapBreakpoint', dap_sign.breakpoint)
   vim.fn.sign_define('DapStopped', dap_sign.stopped)

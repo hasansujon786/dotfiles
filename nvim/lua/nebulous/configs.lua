@@ -17,6 +17,7 @@ M.default = {
     NeogitPopup = true,
     log = true,
     flutterToolsOutline = true,
+    packer = true,
   },
   nb_blur_hls = {
     'LineNr:Nebulous',
