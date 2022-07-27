@@ -15,7 +15,7 @@ function hasan#highlight#load_custom_highlight(...) abort
   hi PmenuSel           guibg=#495369 guifg=NONE
   hi RedText            guifg=#ff0000
   hi GrayText           guifg=#7386a5
-  hi CursorLineDap      guibg=#16461E guifg=none guisp=none cterm=underline
+  hi CursorLineDap      guibg=#173F1E guifg=none guisp=none cterm=underline
   hi! link NormalFloat Normal
   hi! link Folded Comment
   hi! link WhichKeyFloat Pmenu
