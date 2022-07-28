@@ -99,6 +99,27 @@ ls.add_snippets('dart', {
       { i(1), i(2), i(0) }
     )
   ),
+  s(
+    'rpcontroller',
+    fmt(
+      [[
+      final {1}ControllerProvider = StateNotifierProvider<{2}Controller, int>((ref) {{
+        return {2}Controller(0);
+      }});
+
+      class {2}Controller extends StateNotifier<int> {{
+        {2}Controller(initialState) : super(initialState);
+        void increment() => state++;
+      }}
+      ]],
+      {
+        i(1, 'counter'),
+        f(function(args)
+          return args[1][1]:gsub('^%l', string.upper)
+        end, { 1 }),
+      }
+    )
+  ),
 }, { key = 'my_dart_snips' })
 
 ls.add_snippets({ 'scss', 'css' }, {
