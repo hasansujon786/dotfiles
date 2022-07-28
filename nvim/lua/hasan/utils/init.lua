@@ -6,14 +6,17 @@ end
 
 M.reload_this_module = function()
   local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':.')
-  local m_name = require('hasan.utils').normalise_path(path)
+  local m_name = M.get_module_name(path)
+  R(m_name, 'module reloaded')
+end
 
+M.get_module_name = function(path)
+  local m_name = require('hasan.utils').normalise_path(path)
   m_name = m_name:gsub('nvim/', '')
   m_name = m_name:gsub('lua/', '')
   m_name = m_name:gsub('/init', '')
   m_name = m_name:gsub('%.lua', '')
-  m_name = m_name:gsub('/', '.')
-  R(m_name, 'module reloaded')
+  return m_name:gsub('/', '.')
 end
 
 M.sync_packer = function()

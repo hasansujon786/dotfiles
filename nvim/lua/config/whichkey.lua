@@ -243,7 +243,9 @@ local leader = {
     ['/'] = { '<cmd>Telescope help_tags<CR>',              'Search Vim help' },
     ['.'] = { '<cmd>echo "Not a Vim file"<CR>',            'Source this file' },
     l = { '<cmd>call logevents#LogEvents_Toggle()<CR>',    'Toggle LogEvents' },
-    r = { '<cmd>write | edit | TSBufEnable highlight<CR>', 'Toggle LogEvents' },
+    h = { '<cmd>silent write | edit | TSBufEnable highlight<CR>', 'Reload hightlight' },
+    r = { '<cmd>lua require("hasan.utils.reload").reload_lua_modules()<CR>', 'Reload neovim' },
+
     p = {
       name = '+plugin',
       c = { 'Compile plugin setup' },
