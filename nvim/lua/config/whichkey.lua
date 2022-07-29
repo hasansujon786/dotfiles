@@ -23,10 +23,10 @@ wk.setup {
 local common = {
   search_wiki_files = { '<cmd>lua require("hasan.telescope.custom").search_wiki_files()<CR>', 'Search org files'},
   grep_org_text = { '<cmd>lua require("hasan.telescope.custom").grep_org_text()<CR>',         'Grep org text'},
-  buffers_cwd = { '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>',         'Switch Project buffers' },
-  buffers_all = { '<cmd>lua require("hasan.telescope.custom").buffers(false)<CR>',        'Switch all buffers' },
-  grep_string = { '<cmd>lua require("hasan.telescope.custom").grep_string()<CR>',         'Grep string' },
-  substitute_word = {'<Cmd>lua require("hasan.utils.ui").substitute_word()<CR>',          'Substitute word'}
+  buffers_cwd = { '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>',             'Switch buffers' },
+  buffers_all = { '<cmd>lua require("hasan.telescope.custom").buffers(false)<CR>',            'Switch all buffers' },
+  grep_string = { '<cmd>lua require("hasan.telescope.custom").grep_string()<CR>',             'Grep string' },
+  substitute_word = {'<Cmd>lua require("hasan.utils.ui").substitute_word()<CR>',              'Substitute word'}
 }
 local w = {
   name= '+window',
@@ -282,15 +282,15 @@ local leader = {
   r = { '<cmd>lua require("hasan.utils.ui").cycle_numbering()<CR>',    'Cycle number' },
   R = { '<cmd>lua require("nebulous").toggle_win_blur()<CR>',          'Toggle Nebulous' },
   s = { '<cmd>write<CR>',                                              'Save file' },
-  x = { '<cmd>call hasan#utils#buffer#_open_scratch_buffer()<CR>',     'Open up scratch buffer' },
-  M = { '<cmd>lua require("harpoon.mark").add_file()<CR>',                 'Mark to Harpoon' },
+  x = { '<cmd>call hasan#utils#buffer#_open_scratch_buffer()<CR>',     'Open scratch buffer' },
+  M = { '<cmd>lua require("harpoon.mark").add_file()<CR>',             'Mark to Harpoon' },
 
   -- ['.'] = common.buffers_cwd,
   e = {'<cmd>lua require("hasan.org").toggle_org_float()<CR>',         'Toggle org float'},
+  ['<tab>'] = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', 'Open Harpoon' },
+  ['<space>'] = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find project file' },
   ['>'] = common.buffers_all,
   ['.'] = common.buffers_cwd,
-  ['<space>'] = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find File in project' },
-  ['<tab>'] = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', 'Open Harpoon' },
 
   h = { '<C-w>h', 'which_key_ignore' },
   j = { '<C-w>j', 'which_key_ignore' },
@@ -320,12 +320,12 @@ local leader_visual = {
 }
 
 for i = 0, 9 do
-  leader[tostring(i)] = 'which_key_ignore'
+  leader[tostring(i)] = { 'which_key_ignore' }
   local harpoon_rs = '<cmd>lua require("harpoon.ui").nav_file(%s)<CR>'
   local harpoon_ls = '<leader>%s'
   keymap('n', harpoon_ls:format(i), harpoon_rs:format(i))
 
-  leader.w[tostring(i)] = 'which_key_ignore'
+  leader.w[tostring(i)] = { 'which_key_ignore' }
   local win_ls = '<leader>w%s'
   local win_rs = '%s<C-w>w'
   keymap('n', win_ls:format(i), win_rs:format(i))
