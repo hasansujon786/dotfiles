@@ -91,4 +91,10 @@ M.task_timer = {
   end,
 }
 
+M.search_count = {
+  fn = function()
+    return vim.fn['hasan#statusline#searchcount']()
+  end,
+}
+
 return M
