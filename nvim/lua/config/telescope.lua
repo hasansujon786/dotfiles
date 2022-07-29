@@ -1,6 +1,22 @@
 local actions = require('telescope.actions')
 local local_action = require('hasan.telescope.local_action')
 
+local custom_mappings = {
+  ['<C-p>'] = actions.move_selection_previous,
+  ['<C-n>'] = actions.move_selection_next,
+  ['<M-p>'] = actions.move_selection_previous,
+  ['<M-n>'] = actions.move_selection_next,
+  ['<C-s>'] = actions.file_split,
+  ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+  ['<esc>'] = actions.close,
+  ['<M-u>'] = actions.preview_scrolling_up,
+  ['<M-d>'] = actions.preview_scrolling_down,
+  ['<C-f>'] = local_action.fedit,
+  ['<C-x>'] = false,
+  ['<C-u>'] = false,
+  ['<C-d>'] = false,
+}
+
 require('telescope').setup({
   defaults = {
     scroll_strategy = 'cycle',
@@ -14,27 +30,7 @@ require('telescope').setup({
     -- prompt_position = "top",
     -- sorting_strategy = "ascending",
     winblend = 0,
-    mappings = {
-      n = {
-        ['<M-p>'] = actions.move_selection_previous,
-        ['<M-n>'] = actions.move_selection_next,
-        ['<C-p>'] = actions.move_selection_previous,
-        ['<C-n>'] = actions.move_selection_next,
-      },
-      i = {
-        ['<M-p>'] = actions.move_selection_previous,
-        ['<M-n>'] = actions.move_selection_next,
-        ['<C-s>'] = actions.file_split,
-        ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
-        ['<esc>'] = actions.close,
-        ['<M-u>'] = actions.preview_scrolling_up,
-        ['<M-d>'] = actions.preview_scrolling_down,
-        ['<C-x>'] = false,
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
-        ['<C-f>'] = local_action.fedit,
-      },
-    },
+    mappings = { n = custom_mappings, i = custom_mappings },
     -- `file_ignore_patterns = { "scratch/.*", "%.env" }`
     file_ignore_patterns = {
       '%.gitignore',

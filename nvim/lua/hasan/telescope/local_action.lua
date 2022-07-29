@@ -5,6 +5,9 @@ local action_state = require('telescope/actions/state')
 -- or create your custom action
 local edit_buffer = function(prompt_bufnr, command)
   local entry = action_state.get_selected_entry()
+  if entry == nil then
+    return require('hasan.utils').Logger:warn('[telescope]: Nothing currently selected')
+  end
   require('telescope.actions').close(prompt_bufnr)
   vim.cmd(string.format('%s %s', command, entry[1]))
 end
