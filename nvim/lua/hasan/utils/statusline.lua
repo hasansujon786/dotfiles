@@ -93,7 +93,14 @@ M.task_timer = {
 
 M.search_count = {
   fn = function()
-    return vim.fn['hasan#statusline#searchcount']()
+    -- vim.fn.getreg('/')
+    local res = vim.fn.searchcount()
+
+    if res.total > 0 and vim.v.hlsearch == 1 then
+      return string.format('[%d/%d]', res.current, res.total)
+    else
+      return ''
+    end
   end,
 }
 
