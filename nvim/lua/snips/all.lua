@@ -1,6 +1,5 @@
 local ls = require('luasnip')
 -- ls.cleanup()
--- some shorthands...
 local s = ls.snippet
 local sn = ls.snippet_node
 local t = ls.text_node
@@ -34,20 +33,6 @@ local function bash(_, _, command)
   return res
 end
 
-ls.add_snippets('lua', {
-  s('req', fmt("local {} = require('{}')", { i(1, 'module'), rep(1) })),
-  s(
-    'rq',
-    fmt("local {} = require('{}')", {
-      f(function(import_name)
-        local parts = vim.split(import_name[1][1], '.', true)
-        return parts[#parts]
-      end, { 1 }),
-      i(1),
-    })
-  ),
-}, { key = 'my_lua_snips' })
-
 ls.add_snippets('all', {
   s('bang', t('#!/usr/bin/env ')),
   s('date', p(os.date, '%d.%m.%Y')),
@@ -78,49 +63,6 @@ ls.add_snippets('all', {
     condition = conds.line_begin,
   }),
 }, { key = 'my_global_snips' })
-
-ls.add_snippets('dart', {
-  s('s', fmt('String {1}{2}', { i(1), t(';') })),
-  s('S', fmt('String? {1}{2}', { i(1), t(';') })),
-  s('i', fmt('Int {1}{2}', { i(1), t(';') })),
-  s('I', fmt('Int? {1}{2}', { i(1), t(';') })),
-  s('d', fmt('double {1}{2}', { i(1), t(';') })),
-  s('D', fmt('double? {1}{2}', { i(1), t(';') })),
-  s('f', fmt('final {1}{2}', { i(1), t(';') })),
-  s('v', fmt('var {1}{2}', { i(1), t(';') })),
-  s(
-    'for',
-    fmt(
-      [[
-      for (final {2} in {1}) {{
-         {3}
-      }}
-      ]],
-      { i(1), i(2), i(0) }
-    )
-  ),
-  s(
-    'rpcontroller',
-    fmt(
-      [[
-      final {1}ControllerProvider = StateNotifierProvider<{2}Controller, int>((ref) {{
-        return {2}Controller(0);
-      }});
-
-      class {2}Controller extends StateNotifier<int> {{
-        {2}Controller(initialState) : super(initialState);
-        void increment() => state++;
-      }}
-      ]],
-      {
-        i(1, 'counter'),
-        f(function(args)
-          return args[1][1]:gsub('^%l', string.upper)
-        end, { 1 }),
-      }
-    )
-  ),
-}, { key = 'my_dart_snips' })
 
 ls.add_snippets({ 'scss', 'css' }, {
   s('v', fmt('var(--{1})', { i(1) })),

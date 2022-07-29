@@ -27,5 +27,5 @@ ls.config.set_config({
 vim.defer_fn(function()
   require('luasnip.loaders.from_vscode').lazy_load()
   require('luasnip.loaders.from_vscode').lazy_load({ paths = { '~/dotfiles/nvim/.vsnip' } })
-  require('config.my_luasnip')
+  require('luasnip.loaders.from_lua').lazy_load({ paths = { '~/dotfiles/nvim/lua/snips' } })
 end, 100)
