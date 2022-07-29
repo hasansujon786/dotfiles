@@ -5,8 +5,6 @@ require('telescope').setup({
   defaults = {
     scroll_strategy = 'cycle',
     selection_strategy = 'reset',
-    file_sorter = require('telescope.sorters').get_fzy_sorter,
-    generic_sorter = require('telescope.sorters').get_generic_fuzzy_sorter,
     prompt_prefix = '  ',
     selection_caret = '❯ ',
     layout_config = {
@@ -63,7 +61,8 @@ require('telescope').setup({
     },
   },
   extensions = {
-    fzy_native = {
+    fzf = {
+      fuzzy = true, -- false will only do exact matching
       override_generic_sorter = true,
       override_file_sorter = true,
     },

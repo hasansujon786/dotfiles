@@ -55,8 +55,8 @@ return require('packer').startup({
       config = function() require('config.telescope') end,
       cmd = 'Telescope', module = 'telescope', opt = true,
       requires = {
+        { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', config = [[require('telescope').load_extension('fzf')]] },
         { 'hasansujon786/telescope-ui-select.nvim', config = [[require('telescope').load_extension('ui-select')]] },
-        { 'nvim-telescope/telescope-fzy-native.nvim', config = [[require('telescope').load_extension('fzy_native')]]  },
         { 'ahmedkhalf/project.nvim', config = [[require('config.project')]] },
         { 'nvim-telescope/telescope-file-browser.nvim' },
         { 'hasansujon786/telescope-yanklist.nvim', opt = true, event = 'TextYankPost', module = 'yanklist' },

@@ -270,6 +270,7 @@ install_various_apps() {
 
   if [[ "$os" == "windows" ]]; then
     $getter install -y mingw
+    $getter install -y make
   elif [[ "$os" == "linux" ]]; then
     $getter install -y build-essential
     $getter install -y ninja-build
