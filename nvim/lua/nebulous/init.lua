@@ -8,11 +8,15 @@ local M = {}
 M.update_all_windows = view.update_all_windows
 
 M.on_focus_lost = function()
-  view.blurWindow(0)
+  -- local win_id = vim.api.nvim_get_current_win()
+  -- view.blurWindow(win_id)
+  vim.cmd([[hi Cursor blend=100]])
 end
 
 M.on_focus_gained = function()
-  view.focusWindow(0)
+  -- local win_id = vim.api.nvim_get_current_win()
+  -- view.focusWindow(win_id)
+  vim.cmd([[hi Cursor blend=0]])
 end
 
 M.toggle = function()
