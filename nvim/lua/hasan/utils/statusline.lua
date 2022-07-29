@@ -94,9 +94,9 @@ M.task_timer = {
 M.search_count = {
   fn = function()
     -- vim.fn.getreg('/')
-    local res = vim.fn.searchcount()
+    local res = vim.fn.searchcount({ maxcount = 1000, timeout = 500 })
 
-    if res.total > 0 and vim.v.hlsearch == 1 then
+    if res.total > 0 and vim.v.hlsearch == 1 and res.incomplete ~= 1 then
       return string.format('[%d/%d]', res.current, res.total)
     else
       return ''
