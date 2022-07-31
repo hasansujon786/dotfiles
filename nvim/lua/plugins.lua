@@ -51,15 +51,16 @@ return require('packer').startup({
     use({ 'kyazdani42/nvim-tree.lua', config = [[require('config.nv_tree')]] })
     use({ 'kevinhwang91/nvim-bqf', opt = true, ft = {'qf'} })
     use({ 'ThePrimeagen/harpoon', opt = true, module = 'harpoon' })
-    use({ 'nvim-telescope/telescope.nvim',
-      config = function() require('config.telescope') end,
-      cmd = 'Telescope', module = 'telescope', opt = true,
+    use({ 'nvim-telescope/telescope.nvim', config = [[require('config.telescope')]],
       requires = {
         { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', config = [[require('telescope').load_extension('fzf')]] },
+      }
+    })
+    use({ 'ahmedkhalf/project.nvim', config = [[require('config.project')]], event = 'CursorHold', opt = true,
+      requires = {
         { 'hasansujon786/telescope-ui-select.nvim', config = [[require('telescope').load_extension('ui-select')]] },
-        { 'ahmedkhalf/project.nvim', config = [[require('config.project')]] },
-        { 'nvim-telescope/telescope-file-browser.nvim' },
         { 'hasansujon786/telescope-yanklist.nvim', opt = true, event = 'TextYankPost', module = 'yanklist' },
+        { 'nvim-telescope/telescope-file-browser.nvim' },
       }
     })
 
@@ -113,7 +114,7 @@ return require('packer').startup({
     ------------------------------------------------
     use({ 'nvim-treesitter/playground', opt = true, cmd = {'TSPlaygroundToggle','TSHighlightCapturesUnderCursor'} })
     use({ 'nvim-treesitter/nvim-treesitter',
-      opt = true, event = 'BufReadPost',
+      opt = true, event = 'CursorHold',
       config = [[require('config.treesitter')]],
       requires = {
         'JoosepAlviste/nvim-ts-context-commentstring',
