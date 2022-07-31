@@ -32,6 +32,7 @@ function hasan#highlight#load_custom_highlight(...) abort
   hi TSConstant        guifg=#E5C07B gui=NONE
   hi TSVariableBuiltin guifg=#E5C07B
   hi! link TSInclude TSKeyword
+  hi OrgDone           guifg=#7CBA4F
 
   "/// LSP variable reference ///"
   hi LspReferenceText  guibg=#3B4048 gui=NONE

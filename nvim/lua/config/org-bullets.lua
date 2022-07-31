@@ -1,10 +1,16 @@
 require('org-bullets').setup({
+  show_current_line = false,
+  concealcursor = true,
+  indent = true,
   symbols = {
-    headlines = { '◉', '○', '✸', '✿', '♥', '' },
+    headlines = { '◉', '○', '✸', '✿', '', '♥' },
     checkboxes = {
       cancelled = { '', 'OrgCancelled' },
-      done = { '✓', 'OrgDone' },
-      todo = { ' ', 'OrgTODO' },
+      half = { '', 'OrgTSCheckboxHalfChecked' },
+      done = { '', 'OrgDone' },
+      todo = { '', 'OrgTODO' },
+      -- done = { '', 'OrgDone' },
+      -- todo = { ' ', 'OrgTODO' },
     },
   },
 })

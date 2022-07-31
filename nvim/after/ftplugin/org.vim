@@ -1,8 +1,9 @@
-setl shiftwidth=1 tabstop=1 softtabstop=1
+setl shiftwidth=2 tabstop=2 softtabstop=2
 setl conceallevel=2 concealcursor=n
 
-nnoremap cic   <cmd>lua require('orgmode').action('org_mappings.toggle_checkbox')<CR>
-nnoremap <C-q> <cmd>lua require('orgmode').action('org_mappings.toggle_checkbox')<CR>
+nnoremap <buffer> cic   <cmd>lua require('orgmode').action('org_mappings.toggle_checkbox')<CR>
+nnoremap <buffer> <C-q> <cmd>lua require('orgmode').action('org_mappings.toggle_checkbox')<CR>
+nnoremap <buffer> <A-space> <cmd>lua require('orgmode').action('org_mappings.toggle_checkbox')<CR>
 
 lua << EOF
 function CmpOrgmodeSetup()
