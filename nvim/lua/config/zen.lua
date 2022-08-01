@@ -1,10 +1,12 @@
-require('zen-mode').setup {
+require('zen-mode').setup({
   window = {
-    backdrop = 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
-    -- height and width can be:
-    width = 0.8,
-    height = 1, -- 1 = 100%
-    -- options = {},
+    backdrop = 1,
+    width = 0.75,
+    height = 0.85, -- 1 = 100%
+    options = {
+      signcolumn = 'no', -- disable signcolumn
+      -- number = false, -- disable number column
+      -- relativenumber = false, -- disable relative numbers
+    },
   },
-}
-
+})

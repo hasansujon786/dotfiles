@@ -1,4 +1,13 @@
 
+function! hasan#utils#buffer#_save() abort "{{{
+  update
+  call timer_start(800, '_echo')
+endfunction
+function! _echo(...) abort
+  echo ''
+endfunction
+" }}}
+
 function! hasan#utils#buffer#_clear() abort "{{{
   " Don't close window, when deleting a buffer
   let currentBufNum = bufnr('%')

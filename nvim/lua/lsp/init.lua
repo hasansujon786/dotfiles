@@ -76,7 +76,7 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', '[d', '<cmd>lua require("lsp.diagnosgic").jump_to_diagnostic("prev")<CR>', withDesc('Lsp: jump to previous diagnosgic'))
   keymap('n', ']d', '<cmd>lua require("lsp.diagnosgic").jump_to_diagnostic("next")<CR>', withDesc('Lsp: jump to next diagnosgic'))
 
-  keymap('n', '<leader>fs', '<cmd>lua vim.lsp.buf.formatting_sync()<CR><cmd>update<CR>', withDesc('Lsp: format and save'))
+  keymap('n', '<leader>fs', '<cmd>lua vim.lsp.buf.formatting_sync()<CR><cmd>call hasan#utils#buffer#_save()<cr>', withDesc('Lsp: format and save'))
   keymap('x', '<leader>fs', '<ESC><cmd>lua vim.lsp.buf.range_formatting()<CR><cmd>update<CR>', withDesc('Lsp: format and save document'))
   keymap('n', '<leader>aw', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', withDesc('Lsp: list workspace folders'))
   keymap('n', '<leader>a+', vim.lsp.buf.add_workspace_folder, withDesc('Lsp: add workspace folder'))
