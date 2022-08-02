@@ -122,4 +122,19 @@ M.toggle_org_float = function()
   end
 end
 
+-- ------------------------------------------------
+-- => create org note
+-- ------------------------------------------------
+M.create_link = function()
+  local template = '[[%s][%s]]'
+  local title = require('hasan.utils').get_visual_selection()
+  feedkeys('"zdiW')
+
+  vim.defer_fn(function()
+    local link = vim.fn.getreg('z')
+    vim.fn.setreg('z', string.format(template, link, title), 'v')
+    vim.cmd([[normal! "zp]])
+  end, 100)
+end
+
 return M

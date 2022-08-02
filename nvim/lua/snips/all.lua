@@ -33,6 +33,10 @@ local function bash(_, _, command)
   return res
 end
 
+local comment_chars = function(_, _, _)
+  return require('luasnip.util.util').buffer_comment_chars()[1]
+end
+
 ls.add_snippets('all', {
   s('bang', t('#!/usr/bin/env ')),
   s('date', p(os.date, '%d.%m.%Y')),
@@ -48,9 +52,7 @@ ls.add_snippets('all', {
   s(
     'todo',
     fmt([[{} {}: {} {}]], {
-      f(function(_, _, _)
-        return require('luasnip.util.util').buffer_comment_chars()[1]
-      end, {}),
+      f(comment_chars, {}),
       c(1, { i(nil, 'TODO'), i(nil, 'FIXME'), i(nil, 'DONE'), i(nil, 'INFO') }),
       p(os.date, '<%d.%m.%y>'),
       i(0),
@@ -62,6 +64,22 @@ ls.add_snippets('all', {
   }, {
     condition = conds.line_begin,
   }),
+  s(
+    '<t',
+    fmt(
+      [[
+      {} ================================================
+      {} => {}
+      {} ================================================
+      ]],
+      {
+        f(comment_chars, {}),
+        f(comment_chars, {}),
+        i(0),
+        f(comment_chars, {}),
+      }
+    )
+  ),
 }, { key = 'my_global_snips' })
 
 ls.add_snippets({ 'scss', 'css' }, {
