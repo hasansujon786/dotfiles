@@ -13,14 +13,6 @@ Return
 suspend, toggle
 return
 
-#IfWinNotActive, ahk_class CASCADIA_HOSTING_WINDOW_CLASS
-!h:: SendInput,{LEFT}
-!j:: SendInput,{DOWN}
-!k:: SendInput,{UP}
-!l:: SendInput,{RIGHT}
-!Backspace::Send ^{Backspace}
-#IfWinNotActive
-
 !1::Send #1
 !2::Send #2
 !3::Send #3
@@ -57,28 +49,18 @@ f1::switchToExplorer()
 !f1::switchToSavedApp()
 !z::closeAllExplorers()
 
-#if !winMoveMode
-#Esc::
-  winMoveMode := 1
-  beep()
-  TaskBar_SetAttr(1, 0xff79C398)
-Return
-#if
-#if winMoveMode
-Esc::
-  winMoveMode := 0
-  beep()
-  TaskBar_SetAttr(1, 0xff1D1D1D)
-Return
-l::moveWinRight(25)
-h::moveWinLeft(25)
-k::moveWinUp(25)
-j::moveWinDown(25)
-RIGHT::moveWinRight(200)
-LEFT::moveWinLeft(200)
-UP::moveWinUp(200)
-DOWN::moveWinDown(200)
-#if
+#IfWinNotActive, ahk_class CASCADIA_HOSTING_WINDOW_CLASS
+!h:: SendInput,{LEFT}
+!j:: SendInput,{DOWN}
+!k:: SendInput,{UP}
+!l:: SendInput,{RIGHT}
+!Backspace::Send ^{Backspace}
+#IfWinNotActive
+
+; Adobe XD
+#IfWinActive, ahk_class ApplicationFrameWindow
+`::Send ^1
+#IfWinActive
 
 ;******************************************************************************
 ; Window Switcher functions
@@ -116,23 +98,50 @@ switchToSavedApp() {
   windowSwitcher(savedCLASS, savedEXE)
 }
 
+;******************************************************************************
+; Window Move Mode
+;******************************************************************************
+#if !winMoveMode
+  #Esc::
+    winMoveMode := 1
+    beep()
+    TaskBar_SetAttr(1, 0xff79C398)
+    Return
+#if
+#if winMoveMode
+  Esc::
+    winMoveMode := 0
+    beep()
+    TaskBar_SetAttr(1, 0xff1D1D1D)
+    Return
+
+  l::moveWinRight(25)
+  h::moveWinLeft(25)
+  k::moveWinUp(25)
+  j::moveWinDown(25)
+  RIGHT::moveWinRight(200)
+  LEFT::moveWinLeft(200)
+  UP::moveWinUp(200)
+  DOWN::moveWinDown(200)
+#if
+
 moveWinRight(val) {
   wingetpos x, y,,, A
-  moveWindowWithXY(x+val, y)
+  moveWindowX_and_Y(x+val, y)
 }
 moveWinLeft(val) {
   wingetpos x, y,,, A
-  moveWindowWithXY(x-val, y)
+  moveWindowX_and_Y(x-val, y)
 }
 moveWinUp(val) {
   wingetpos x, y,,, A
-  moveWindowWithXY(x, y-val)
+  moveWindowX_and_Y(x, y-val)
 }
 moveWinDown(val) {
   wingetpos x, y,,, A
-  moveWindowWithXY(x, y+val)
+  moveWindowX_and_Y(x, y+val)
 }
-moveWindowWithXY(x, y){
+moveWindowX_and_Y(x, y){
   mousegetpos, mx, my
   winmove, A,,%x%, %y%
   ; mousemove, %mx%, %my%, 0

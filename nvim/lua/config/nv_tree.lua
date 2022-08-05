@@ -71,7 +71,7 @@ require('nvim-tree').setup({
   auto_reload_on_write = true,
   open_on_tab = false,
   hijack_cursor = false,
-  update_cwd = false,
+  sync_root_with_cwd = false,
   hijack_unnamed_buffer_when_opening = false,
   hijack_directories = {
     enable = true,
@@ -115,7 +115,7 @@ require('nvim-tree').setup({
     height = 30,
     hide_root_folder = false,
     side = 'left',
-    preserve_window_proportions = false,
+    preserve_window_proportions = true,
     mappings = { custom_only = true, list = list },
     number = false,
     relativenumber = false,
