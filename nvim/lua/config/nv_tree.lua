@@ -71,7 +71,7 @@ require('nvim-tree').setup({
   auto_reload_on_write = true,
   open_on_tab = false,
   hijack_cursor = false,
-  sync_root_with_cwd = false,
+  sync_root_with_cwd = true,
   hijack_unnamed_buffer_when_opening = false,
   hijack_directories = {
     enable = true,
@@ -108,7 +108,7 @@ require('nvim-tree').setup({
       --     ignored = '◌',
       --   },
       -- },
-    }
+    },
   },
   view = {
     width = 26,
