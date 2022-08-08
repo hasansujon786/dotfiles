@@ -280,6 +280,7 @@ M.buffers = function(cwd_only)
   builtin.buffers({ cwd_only = cwd_only, sort_mru = true, ignore_current_buffer = cwd_only })
 end
 
+-- https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
 M.emojis = function()
   local emojis_table = vim.fn.readfile('c:/Users/hasan/dotfiles/bash/emojis.txt', '')
   local opts = {

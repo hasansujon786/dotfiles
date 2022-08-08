@@ -179,7 +179,6 @@ jump-to-git-root() {
   echo "Git repo root: $_root_dir"
   cd $_root_dir
 }
-
 lfcd () {
   tmp="$(mktemp)"
   \lf -last-dir-path="$tmp" "$@"
@@ -193,13 +192,6 @@ lfcd () {
     fi
   fi
 }
-
-bind '"\eo":"lfcd\C-m"'
-bind '"\el":clear-screen'
-bind '"\e\ ":magic-space'
-bind '"\eq":alias-expand-line'
-bind '" ":"\eq\C-v "'
-
 remove() {
   while true; do
     local count=$#
@@ -218,3 +210,12 @@ remove() {
     esac
   done
 }
+
+# auto-expand
+bind '"\e\ ":magic-space'
+bind '"\eq":alias-expand-line'
+bind '" ":"\eq\C-v "'
+
+bind '"\eo":"lfcd\C-m"'
+bind '"\el":clear-screen'
+bind '"\C-x\C-x":edit-and-execute-command'

@@ -1,5 +1,9 @@
 https://phoenixnap.com/kb/change-bash-prompt-linux
 
+# vim mode in bash
+set -o vi
+bind '"jk":vi-movement-mode'
+
 # bind '\C-o:clear-screen'
 # bind '"\eh":"foobar"'
 # bind '"\e[24~":"foobar"'
