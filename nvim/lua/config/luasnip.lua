@@ -24,6 +24,7 @@ ls.config.set_config({
   },
 })
 
+vim.cmd([[command! LuaSnipEditLocal :lua require("luasnip.loaders.from_lua").edit_snippet_files()]])
 vim.defer_fn(function()
   require('luasnip.loaders.from_vscode').lazy_load()
   require('luasnip.loaders.from_vscode').lazy_load({ paths = { '~/dotfiles/nvim/.vsnip' } })

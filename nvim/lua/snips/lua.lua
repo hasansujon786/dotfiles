@@ -19,7 +19,8 @@ local types = require('luasnip.util.types')
 local conds = require('luasnip.extras.expand_conditions')
 
 ls.add_snippets('lua', {
-  s('req', fmt("local {} = require('{}')", { i(1, 'module'), rep(1) })),
+  -- s('req', fmt("local {} = require('{}')", { i(1, 'module'), rep(1) })),
+  s('pr', fmt('P({})', i(1, "'write something'"))),
   s(
     'rq',
     fmt("local {} = require('{}')", {
@@ -29,6 +30,20 @@ ls.add_snippets('lua', {
       end, { 1 }),
       i(1),
     })
+  ),
+  s(
+    'defer',
+    fmt(
+      [[
+      vim.defer_fn(function()
+        {2}
+      end, {1})
+      ]],
+      {
+        i(1, '1000'),
+        i(2, '-- write something'),
+      }
+    )
   ),
 }, { key = 'my_lua_snips' })
 
