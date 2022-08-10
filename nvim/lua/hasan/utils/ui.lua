@@ -29,6 +29,7 @@ M.input = function(title, opts)
     win_options = {
       winblend = 5,
       sidescrolloff = 0,
+      winhighlight = 'Normal:Normal',
     },
   }
 

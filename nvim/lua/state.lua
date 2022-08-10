@@ -4,15 +4,12 @@ local M = {}
 M.ui = {
   border = {
     style = 'rounded',
-    highlight = 'FloatBorder',
+    highlight = 'TextInfo',
     text = {
-      highlight = 'FloatBorder',
+      highlight = 'TextInfo',
       align = 'center',
     },
   },
-  icons = {
-    diagnotic = { Error = '', Warn = '', Hint = '', Info = '' }
-  }
 }
 
 return M
