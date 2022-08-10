@@ -14,18 +14,18 @@ local last_buf_name = api.nvim_buf_get_name(last_bufnr)
 
 local function get_title_text(bufnr)
   local text = vim.fn.fnamemodify(api.nvim_buf_get_name(bufnr), ':t')
-  return Text(text, 'FloatBorder')
+  return Text(text, 'TextInfo')
 end
 local function is_cur_win_org_float()
   return utils.is_floting_window(0) and vim.bo.filetype == 'org'
 end
 local function remove_autocmds()
   last_pop = nil
-  vim.cmd[[
+  vim.cmd([[
       augroup OpenOrg
       au!
       augroup END
-      ]]
+      ]])
 end
 
 M.open_org_home = function()
@@ -70,12 +70,11 @@ M.open_org_float = function()
     },
     -- buf_options = { modifiable = true, readonly = false, },
     win_options = {
-      winblend = 5,
       number = true,
       relativenumber = true,
       signcolumn = 'yes',
       numberwidth = 2,
-      -- winhighlight = 'Normal:Normal,FloatBorder:FloatBorder',
+      winhighlight = 'FloatBorder:FloatBorder',
     },
   })
 
@@ -88,12 +87,12 @@ M.open_org_float = function()
     end)
   end, { once = true })
 
-  vim.cmd[[
+  vim.cmd([[
     augroup OpenOrg
     au!
     au WinEnter,BufWinEnter,BufEnter *.org lua OrgOnFileChange()
     augroup END
-    ]]
+    ]])
 
   -- vim.api.nvim_buf_set_lines(popup.bufnr, 0, 1, false, { 'Hello World' })
   return popup

@@ -10,13 +10,11 @@ function hasan#highlight#load_custom_highlight(...) abort
   hi CursorLineFocus    guibg=#3E4452
   hi IncSearch          guibg=#e86671 gui=underline
   hi SignColumn         guibg=NONE
-  hi FloatBorder        guibg=NONE    guifg=#4dbdcb
   " guibg=#1e242f
   hi PmenuSel           guibg=#495369 guifg=NONE
   hi RedText            guifg=#ff0000
   hi GrayText           guifg=#7386a5
   hi CursorLineDap      guibg=#173F1E guifg=none guisp=none cterm=underline
-  hi! link NormalFloat Normal
   hi! link Folded Comment
   hi! link WhichKeyFloat Pmenu
 
@@ -38,7 +36,6 @@ function hasan#highlight#load_custom_highlight(...) abort
   hi LspReferenceText  guibg=#3B4048 gui=NONE
   hi LspReferenceWrite guibg=#3B4048 gui=NONE
   hi LspReferenceRead  guibg=#3B4048 gui=NONE
-  hi DiagnosticHeader  guifg=#56b6c2 gui=bold
 
   "/// Plugins ///"
   hi! link HLNext IncSearch
@@ -56,8 +53,12 @@ function hasan#highlight#load_custom_highlight(...) abort
   hi DashboardFooter   guifg=#5c6370
   hi DashboardShortcut guifg=#5c6370
   hi DashboardCenter   guifg=#5c6370
-  hi TelescopeBorder guifg=#465673
-  hi TelescopePromptTitle guifg=#d99a5e
+
+  "/// Telescope ///"
+  hi! link TelescopeTitle Comment
+  hi! link TelescopeBorder FloatBorder
+  hi! link TelescopeNormal NormalFloat
+  " border
   hi! link TelescopePreviewBorder TelescopeBorder
   hi! link TelescopeResultsBorder TelescopeBorder
   hi! link TelescopePromptBorder  TelescopeBorder

@@ -35,8 +35,8 @@ MY_AUGROUP(function(autocmd)
   autocmd('FileType', 'setlocal nonumber norelativenumber signcolumn=no', { pattern = 'log' })
 
   autocmd('User', 'lua vim.notify("Packer configuration recompiled")', { pattern = 'PackerCompileDone' })
-  autocmd('User', vim.fn['hasan#highlight#load_custom_highlight'], { pattern = 'PackerCompileDone' })
-  autocmd('ColorScheme', vim.fn['hasan#highlight#load_custom_highlight'])
+  -- autocmd('User', 'lua require("hasan.utils.ui.palatte").set_custom_highlights()', { pattern = 'PackerCompileDone' })
+  autocmd('ColorScheme', 'lua require("hasan.utils.ui.palatte").set_custom_highlights()')
 
   -- autocmd('BufDelete ', 'silent! call remove(g:hasan_telescope_buffers, expand("<abuf>"))')
   -- autocmd({ 'BufWinEnter', 'WinEnter' }, 'let g:hasan_telescope_buffers[bufnr()] = reltimefloat(reltime())')
