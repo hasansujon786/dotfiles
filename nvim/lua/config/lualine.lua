@@ -2,7 +2,6 @@ local sl = require('hasan.utils.statusline')
 
 local onedark = require('lualine.themes.onedark')
 onedark.normal.c.fg = '#68707E'
-onedark.inactive.c.bg = '#384051'
 local only_pad_right = { left = 1, right = 0 }
 
 local filename = function(file_status)

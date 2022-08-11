@@ -4,8 +4,8 @@ function hasan#highlight#load_custom_highlight(...) abort
   hi TextSuccess        guifg=#61AFEF
   hi Cursor             guibg=#61AFEF gui=NONE
   " hi VertSplit          guibg=NONE guifg=#384051
-  hi StatusLine         guibg=#384051 guifg=#ABB2BF
-  hi StatusLineNC       guibg=#384051 guifg=#ABB2BF
+  hi StatusLine         guibg=#2C323C guifg=#ABB2BF
+  hi StatusLineNC       guibg=#2C323C guifg=#ABB2BF
   hi CursorColumn       guibg=#3B4048
   hi CursorLineFocus    guibg=#3E4452
   hi IncSearch          guibg=#e86671 gui=underline
@@ -53,15 +53,11 @@ function hasan#highlight#load_custom_highlight(...) abort
   hi DashboardFooter   guifg=#5c6370
   hi DashboardShortcut guifg=#5c6370
   hi DashboardCenter   guifg=#5c6370
-
-  "/// Telescope ///"
-  hi! link TelescopeTitle Comment
-  hi! link TelescopeBorder FloatBorder
-  hi! link TelescopeNormal NormalFloat
-  " border
-  hi! link TelescopePreviewBorder TelescopeBorder
-  hi! link TelescopeResultsBorder TelescopeBorder
-  hi! link TelescopePromptBorder  TelescopeBorder
+  "/// Floaterm ///"
+  hi! link Floaterm NormalFloatFlat
+  hi! link FloatermBorder FloatBorderFlat
+  "/// symboal-outline.nvim ///"
+  hi FocusedSymbol guibg=#4D5666 guifg=NONE
 
   "/// nvim-cmp ///"
   " CmpItemAbbr
@@ -95,17 +91,24 @@ function hasan#highlight#load_custom_highlight(...) abort
   hi! link MarkSignNumHL None
   hi! link MarkSignHL Comment
 
-  "/// nui.nvim ///"
-  hi NuiMenuItem   guifg=#d99a5e guibg=#2d3343
-  hi NuiMenuNr     guifg=#d99a5e
+  "/// Telescope ///"
+  hi! link TelescopeTitle Comment
+  hi! link TelescopeBorder FloatBorderFlat
+  hi! link TelescopeNormal NormalFloatFlat
+  hi! link TelescopePreviewBorder TelescopeBorder
+  hi! link TelescopeResultsBorder TelescopeBorder
+  hi! link TelescopePromptBorder  TelescopeBorder
 
-  "/// symboal-outline.nvim ///"
-  hi FocusedSymbol guibg=#4D5666 guifg=NONE
+  "/// nui.nvim ///"
+  hi NuiMenuNr     guifg=#d99a5e
+  hi! link NuiNormalFloat NormalFloatFlat
+  hi! link NuiFloatBorder FloatBorderFlat
+  hi! link NuiMenuItem    TelescopeSelectionCaret
 
   "/// nvim-tree.nvim ///"
   hi! link NvimTreeCursorLine CursorLineFocus
   hi! link NvimTreeIndentMarker IndentBlanklineChar
-  hi NvimTreeWindowPicker guibg=#2d3343 guifg=#d99a5e
+  hi! link NvimTreeWindowPicker TelescopeSelectionCaret
 endfunction
 
 " call hasan#highlight#load_custom_highlight()

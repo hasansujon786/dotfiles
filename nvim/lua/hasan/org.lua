@@ -74,7 +74,7 @@ M.open_org_float = function()
       relativenumber = true,
       signcolumn = 'yes',
       numberwidth = 2,
-      winhighlight = 'FloatBorder:FloatBorder',
+      winhighlight = 'Normal:NuiNormalFloat,FloatBorder:NuiFloatBorder,Folded:TextInfo',
     },
   })
 

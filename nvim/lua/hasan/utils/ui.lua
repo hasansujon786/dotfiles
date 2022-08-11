@@ -88,7 +88,7 @@ M.menu = function(list, opts)
       numberwidth = 4,
       -- winblend = 10,
       number = opts.number,
-      winhighlight = 'Normal:TelescopeNormal,CursorLine:NuiMenuItem,CursorLineNr:NuiMenuNr',
+      winhighlight = 'Normal:NuiNormalFloat,CursorLine:NuiMenuItem,CursorLineNr:NuiMenuNr',
     },
   }, {
     lines = menu_items,

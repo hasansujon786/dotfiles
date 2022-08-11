@@ -228,5 +228,5 @@ bind '" ":"\eq\C-v "'
 
 bind '"\eo":"lfcd\C-m"'
 bind '"\el":clear-screen'
-bind '"\C-x\C-x":edit-and-execute-command'
-bind -x '"\C-x\C-e":_edit_wo_executing'
+# bind '"\C-x\C-x":edit-and-execute-command'
+# bind -x '"\C-x\C-e":_edit_wo_executing'

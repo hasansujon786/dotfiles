@@ -18,6 +18,19 @@ local utils = {
       hi EndOfBuffer guibg=NONE
     ]])
   end,
+  make_winhighlight = function(highlight)
+    return table.concat(
+      vim.tbl_map(function(key)
+        return key .. ':' .. highlight[key]
+      end, vim.tbl_keys(highlight)),
+      ','
+    )
+  end,
 }
+
+-- local winhighlight = make_winhighlight({
+--   Normal = "Normal",
+--   FloatBorder = "SpecialChar"
+-- })
 
 return utils
