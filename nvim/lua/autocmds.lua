@@ -34,9 +34,11 @@ MY_AUGROUP(function(autocmd)
   autocmd({ 'BufWinEnter', 'WinEnter' }, 'normal Gzz', { pattern = '__FLUTTER_DEV_LOG__' })
   autocmd('FileType', 'setlocal nonumber norelativenumber signcolumn=no', { pattern = 'log' })
 
-  autocmd('User', 'lua vim.notify("Packer configuration recompiled")', { pattern = 'PackerCompileDone' })
-  -- autocmd('User', 'lua require("hasan.utils.ui.palatte").set_custom_highlights()', { pattern = 'PackerCompileDone' })
   autocmd('ColorScheme', 'lua require("hasan.utils.ui.palatte").set_custom_highlights()')
+  autocmd('User', function()
+    require('hasan.utils.ui.palatte').set_custom_highlights()
+    vim.notify('Packer configuration recompiled')
+  end, { pattern = 'PackerCompileDone' })
 
   -- autocmd('BufDelete ', 'silent! call remove(g:hasan_telescope_buffers, expand("<abuf>"))')
   -- autocmd({ 'BufWinEnter', 'WinEnter' }, 'let g:hasan_telescope_buffers[bufnr()] = reltimefloat(reltime())')
