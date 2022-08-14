@@ -119,8 +119,6 @@ local leader = {
       t = { '<cmd>call _#Insertion(hasan#utils#placeholderImgTag("300x200"))<CR>', 'Placeholder image tag' },
       k = { '<cmd>call _#Insertion("https://placekitten.com/g/50/50")<CR>',        'Sample image link' },
     },
-
-    p = 'Paste form Clip',
   },
 
   g = {

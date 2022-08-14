@@ -161,11 +161,10 @@ keymap('i', '<F5>', '<C-o>:syntax sync fromstart<CR>')
 
 -- Leader keys ----------------------------------
 -- Easier system clipboard usage
-keymap({ 'n', 'v' }, '<leader>ip', '"+p')
 keymap('n', '<leader>y', '"+y')
 keymap('v', '<leader>y', '"+ygv<Esc>')
--- maps.nnoremap('<leader>d', '"+d')
--- maps.vnoremap('<leader>d', '"+d')
+keymap({ 'n', 'v' }, '<leader>ip', '"+p', { desc = 'Paste form system' })
+keymap({ 'n', 'v' }, '<leader>iP', '"+P', { desc = 'Paste form system' })
 -- File commands
 keymap('n', '<leader>fC', ':w <C-R>=expand("%")<CR>', noSilent)
 keymap('n', '<leader>fM', ':Move <C-R>=expand("%")<CR>', noSilent)
@@ -192,3 +191,13 @@ keymap('n', '//', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>')
 keymap('v', '/', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>')
 keymap({ 'n', 'v' }, '<A-/>', '<cmd>lua require("hasan.telescope.custom").grep_string()<CR>')
 keymap({ 'n', 'i' }, '<C-k>e', '<cmd>lua require("hasan.telescope.custom").emojis()<CR>')
+-- yanklist
+keymap('n', 'p', '<Plug>(yanklist-auto-put)')
+keymap('n', 'P', '<Plug>(yanklist-auto-Put)')
+keymap('n', '[r', '<Plug>(yanklist-cycle-forward)', { desc = 'Yanklist forward' })
+keymap('n', ']r', '<Plug>(yanklist-cycle-backward)', { desc = 'Yanklist backward' })
+keymap('n', '<leader>ii', '<Plug>(yanklist-last-item-put)', { desc = 'Paste from yanklist' })
+keymap('n', '<leader>iI', '<Plug>(yanklist-last-item-Put)', { desc = 'Paste from yanklist' })
+-- yanklist visual_mappings
+keymap('v', 'p', '<Plug>(yanklist-auto-put)gvy')
+keymap('v', '<leader>ii', '<Plug>(yanklist-last-item-put)gvy', { desc = 'Paste from yanklist' })
