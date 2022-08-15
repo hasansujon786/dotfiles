@@ -101,7 +101,7 @@ setup_bash() {
   bashPath=($HOME/.bashrc $HOME/.bashrc $HOME/.bashrc)
   util_print bash
 
-  $getter install -y starship
+  # $getter install -y starship
   $getter install -y fzf
   util_backUpConfig ${bashPath[$osIndex]}
   util_makeSymlinkPath $HOME/dotfiles/bash/.bashrc ${bashPath[$osIndex]}
@@ -204,15 +204,14 @@ setup_lf() {
 setup_alacritty() {
   alacrittyPath=($HOME/AppData/Roaming/alacritty $HOME/.config/alacritty $HOME/.config/alacritty)
   util_print alacritty
+  if [[ "$os" == "windows" ]]; then
+    $getter install -y alacritty
+  fi
 
   util_backUpConfig ${alacrittyPath[$osIndex]}
   mkdir -p ${alacrittyPath[$osIndex]}
   # util_makeSymlinkPath $HOME/dotfiles/alacritty ${alacrittyPath[$osIndex]}
   util_makeSymlinkPath $HOME/dotfiles/alacritty/alacritty.$os.yml ${alacrittyPath[$osIndex]}/alacritty.yml
-
-  if [[ "$os" == "windows" ]]; then
-    $getter install -y alacritty
-  fi
 }
 
 setup_node () {
@@ -328,15 +327,15 @@ install_and_setup_tmux() {
 auto_install_everything() {
   echo ' ** Auto Install ** '
 
-  setup_git_defaults
   setup_bash
   setup_alacritty
   setup_nvim
   setup_lazygit
-  # setup_tig
   setup_lf
-  setup_wezterm
   setup_node
+  # setup_tig
+  # setup_wezterm
+  # setup_git_defaults
   install_various_apps
 
   if [[ "$os" == "windows" ]]; then
@@ -344,8 +343,8 @@ auto_install_everything() {
     setup_windowsTerminal
     setup_keypirinha
     $getter install -y quicklook
-    choco install delta -y
-    setup_sublime
+    $getter install -y delta # git highlighter
+    # setup_sublime
   elif [[ "$os" == "linux" ]]; then
     install_and_setup_tmux
   fi
