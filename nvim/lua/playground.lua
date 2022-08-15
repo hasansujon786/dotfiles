@@ -21,3 +21,33 @@
 --     args = {'-e'};
 --   }
 
+-- local function smart_d()
+--   P('i m working')
+--   local l, c = unpack(vim.api.nvim_win_get_cursor(0))
+--   for _, line in ipairs(vim.api.nvim_buf_get_lines(0, l - 1, l, true)) do
+--     if line:match('^%s*$') then
+--       return '"_d'
+--     end
+--   end
+--   return 'd'
+-- end
+-- local function smart_dd()
+--   if vim.api.nvim_get_current_line():match('^%s*$') then
+--     return '"_dd'
+--   else
+--     return 'dd'
+--   end
+-- end
+
+-- vim.keymap.set('v', 'd', smart_d, { noremap = true, expr = true })
+-- vim.keymap.set('n', 'dd', smart_dd, { noremap = true, expr = true })
+
+-- local function delete_special()
+--   local line_data = vim.api.nvim_win_get_cursor(0) -- returns {row, col}
+--   local current_line = vim.api.nvim_buf_get_lines(0, line_data[1] - 1, line_data[1], false)
+--   if current_line[1] == '' then
+--     return '"_dd'
+--   else
+--     return 'dd'
+--   end
+-- end
