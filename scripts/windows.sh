@@ -4,9 +4,7 @@
 # Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
 choco install potplayer -y
-choco install 7zip.install -y
 choco install googlechrome -y
-choco install onefetch -y
 choco install qbittorrent -y
 
 # https://developer.android.com/studio#downloads

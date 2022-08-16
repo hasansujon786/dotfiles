@@ -101,10 +101,17 @@ setup_bash() {
   bashPath=($HOME/.bashrc $HOME/.bashrc $HOME/.bashrc)
   util_print bash
 
-  # $getter install -y starship
-  $getter install -y fzf
   util_backUpConfig ${bashPath[$osIndex]}
   util_makeSymlinkPath $HOME/dotfiles/bash/.bashrc ${bashPath[$osIndex]}
+
+  util_print bash-utils
+  $getter install -y fzf
+  $getter install -y zoxide
+  $getter install -y ripgrep
+  $getter install -y fd
+  $getter install -y wget
+  $getter install -y curl
+  # $getter install -y starship
 }
 
 setup_wezterm() {
@@ -131,14 +138,14 @@ setup_nvim() {
     $getter install -y xclip
   fi
 
-  packerPath=($HOME/AppData/Local/nvim-data/site/pack/packer/start/packer.nvim, $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim)
-  if [ -d ${packerPath[$osIndex]} ]; then
-    echo 'packer.nvim already exists'
-  else
-    echo 'cloning packer.nvim'
-    mkdir -p ${packerPath[$osIndex]}
-    git clone https://github.com/wbthomason/packer.nvim ${packerPath[$osIndex]}
-  fi
+  # packerPath=($HOME/AppData/Local/nvim-data/site/pack/packer/start/packer.nvim $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim)
+  # if [ -d ${packerPath[$osIndex]} ]; then
+  #   echo 'packer.nvim already exists'
+  # else
+  #   echo 'cloning packer.nvim'
+  #   mkdir -p ${packerPath[$osIndex]}
+  #   git clone https://github.com/wbthomason/packer.nvim ${packerPath[$osIndex]}
+  # fi
   # echo "Installing vim plugins..."
   # nvim +PlugInstall +qall
 }
@@ -232,16 +239,6 @@ setup_node () {
 }
 
 install_various_apps() {
-  util_print ripgrep
-  $getter install -y ripgrep
-  $getter install -y fd
-
-  util_print wget
-  $getter install -y wget
-
-  util_print curl
-  $getter install -y curl
-
   util_print python
   $getter install -y python
   # c:\python39\python.exe -m pip install --upgrade pip
@@ -254,7 +251,6 @@ install_various_apps() {
   # cargo install --list
   # cargo install stylua vimv
 
-  $getter install -y zoxide
   $getter install -y onefetch
   $getter install -y scrcpy
   $getter install -y jq
@@ -268,11 +264,12 @@ install_various_apps() {
   # pip3 install vit
 
   if [[ "$os" == "windows" ]]; then
-    $getter install -y mingw
-    $getter install -y make
+    $getter install -y quicklook
+    $getter install -y 7zip.install
+    $getter install -y delta # git highlighter
+    setup_keypirinha
   elif [[ "$os" == "linux" ]]; then
-    $getter install -y build-essential
-    $getter install -y ninja-build
+    install_and_setup_tmux
   fi
 }
 
@@ -301,7 +298,6 @@ setup_windowsTerminal() {
   rm -rf ${wtPath[$osIndex]}
   util_makeSymlinkPath $HOME/dotfiles/windows-terminal/settings.json  ${wtPath[$osIndex]}
 
-  # # $getter install -y microsoft-windows-terminal  # --pre
   # choco install -y microsoft-windows-terminal --version=1.11.3471.0 -y
   # rm -rf $HOME/AppData/Local/Microsoft/Windows\ Terminal/settings.json
   # util_makeSymlinkPath $HOME/dotfiles/windows-terminal/settings.json "'C:\Users\hasan\AppData\Local\Microsoft\Windows Terminal\settings.json'"
@@ -320,34 +316,32 @@ install_and_setup_tmux() {
 
   echo 'Creating .tmux.conf'
   printf 'source-file ~/dotfiles/tmux/.tmux.conf' >> ~/.tmux.conf
-
-  echo 'Done'
 }
 
 auto_install_everything() {
   echo ' ** Auto Install ** '
 
+  if [[ "$os" == "windows" ]]; then
+    start ms-settings:developers
+    setup_windowsTerminal
+    # setup_sublime
+    $getter install -y mingw
+    $getter install -y make
+  elif [[ "$os" == "linux" ]]; then
+    $getter install -y build-essential
+    $getter install -y ninja-build
+  fi
+
   setup_bash
-  setup_alacritty
   setup_nvim
+  setup_node
+  setup_alacritty
   setup_lazygit
   setup_lf
-  setup_node
   # setup_tig
   # setup_wezterm
   # setup_git_defaults
   install_various_apps
-
-  if [[ "$os" == "windows" ]]; then
-    start ms-settings:developers
-    setup_windowsTerminal
-    setup_keypirinha
-    $getter install -y quicklook
-    $getter install -y delta # git highlighter
-    # setup_sublime
-  elif [[ "$os" == "linux" ]]; then
-    install_and_setup_tmux
-  fi
 }
 
 prompt_and_get_answers() {
