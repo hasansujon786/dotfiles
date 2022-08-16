@@ -125,7 +125,8 @@ CMP_AUGROUP(function(autocmd)
   autocmd('FileType', 'lua CmpNeogitCommitMessageSetup()', { pattern = { 'NeogitCommitMessage' } })
 end)
 
--- keymap('c', '<tab>', '<C-z>', { silent = false }) -- to fix cmp
+-- hot fix
+keymap('c', '<tab>', '<C-z>', { silent = false }) -- after using / cmd <tab> stops woring
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline({
     ['<CR>'] = cmp.mapping(function(fallback)

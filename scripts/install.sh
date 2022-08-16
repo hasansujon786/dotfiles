@@ -281,6 +281,7 @@ setup_keypirinha() {
   util_backUpConfig ${keypirinhaPath[$osIndex]}
   util_makeSymlinkPath $HOME/dotfiles/gui/Keypirinha ${keypirinhaPath[$osIndex]}
   $getter install -y keypirinha
+  C:\\ProgramData\\chocolatey\\lib\\keypirinha\\tools\\Keypirinha\\keypirinha.exe
 }
 
 setup_sublime() {
