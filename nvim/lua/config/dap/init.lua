@@ -37,10 +37,6 @@ function M.configure_virtual_text()
 end
 
 local function configure_debuggers()
-  -- require("config.dap.python").setup()
-  -- require("config.dap.rust").setup()
-  -- require("config.dap.go").setup()
-
   require('config.dap.node').setup()
   -- require('config.dap.lua').setup()
 end
