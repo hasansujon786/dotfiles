@@ -1,9 +1,11 @@
 # 🏠 dotfiles
 
+## install on windows
 ```bash
-# install on windows
 git clone https://github.com/hasansujon786/dotfiles ~/dotfiles && cd ~/dotfiles && ./scripts/install.sh win
+```
 
-# install on linux (wip)
+## install on linux (wip)
+```bash
 git clone https://github.com/hasansujon786/dotfiles ~/dotfiles && cd ~/dotfiles && ./scripts/install.sh lin
 ```
