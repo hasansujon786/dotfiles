@@ -8,7 +8,7 @@ shell:
   program: C:\Program Files\Git\bin\bash
   # args:
   # - --command=tmux
-working_directory: f:\repoes
+working_directory: e:\repoes
 
 # Window Customization
 window:
