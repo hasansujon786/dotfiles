@@ -149,3 +149,7 @@ if v:version >= 700
   autocmd BufEnter * call AutoRestoreWinView()
 endif
 " }}}
+
+autocmd BufRead,BufNewFile .eslintrc,.prettierrc,.babelrc set filetype=json
+autocmd BufRead,BufNewFile *.json.* setfiletype json
+autocmd BufRead,BufNewFile *.prisma set filetype=graphql

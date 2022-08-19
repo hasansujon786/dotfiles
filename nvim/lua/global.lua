@@ -6,24 +6,28 @@ _G.dap_adapter_path = vim.fn.stdpath('data') .. '\\dap_adapters' -- 'C:\\Users\\
 
 -- disabled_built_ins ==============================
 local disabled_built_ins = {
+  -- 'matchparen',
+  -- 'matchit',
   'netrw',
   'netrwPlugin',
   'netrwSettings',
   'netrwFileHandlers',
-  -- 'gzip',
-  -- 'zip',
-  -- 'zipPlugin',
-  -- 'tar',
-  -- 'tarPlugin',
-  -- 'getscript',
-  -- 'getscriptPlugin',
-  -- 'vimball',
-  -- 'vimballPlugin',
-  -- '2html_plugin',
-  -- 'logipat',
-  -- 'rrhelper',
-  -- 'spellfile_plugin',
-  -- 'matchit'
+  'tutor_mode_plugin',
+  'remote_plugins',
+  'man',
+  'gzip',
+  'zip',
+  'zipPlugin',
+  'tar',
+  'tarPlugin',
+  'getscript',
+  'getscriptPlugin',
+  'vimball',
+  'vimballPlugin',
+  '2html_plugin',
+  'logipat',
+  'rrhelper',
+  'spellfile_plugin',
 }
 
 vim.g.did_load_filetypes = 0
