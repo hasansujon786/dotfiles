@@ -2,7 +2,7 @@ local ui = require('state').ui
 
 _G.org_root_path = 'C:\\Users\\hasan\\vimwiki'
 _G.org_home_path = 'C:\\Users\\hasan\\vimwiki\\home.org'
-_G.dap_adapter_path = vim.fn.stdpath('data') .. '/dap_adapters' -- 'C:\\Users\\hasan\\AppData\\Local\\nvim-data\\dap_adapters\\'
+_G.dap_adapter_path = vim.fn.stdpath('data') .. '\\dap_adapters' -- 'C:\\Users\\hasan\\AppData\\Local\\nvim-data\\dap_adapters\\'
 
 -- disabled_built_ins ==============================
 local disabled_built_ins = {

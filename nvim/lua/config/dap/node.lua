@@ -5,12 +5,12 @@ return {
     dap.adapters.node2 = {
       type = 'executable',
       command = 'node',
-      args = { dap_adapter_path .. '\\vscode-node-debug2\\out\\src\\nodeDebug.js' },
+      args = { dap_adapter_path .. '\\vscode-node-debug2\\out\\src\\nodeDebug.js' }, -- C:\Users\hasan\AppData\Local\nvim-data/dap_adapters/vscode-node-debug2\\out\\src\\nodeDebug.js'
     }
     dap.adapters.chrome = {
       type = 'executable',
       command = 'node',
-      args = { dap_adapter_path .. '\\vscode-node-debug2\\out\\src\\nodeDebug.js' },
+      args = { dap_adapter_path .. '\\vscode-chrome-debug\\out\\src\\chromeDebug.js' }, -- C:\Users\hasan\AppData\Local\nvim-data/dap_adapters/vscode-chrome-debug/out/src/chromeDebug.js
     }
 
     dap.configurations.javascript = {
