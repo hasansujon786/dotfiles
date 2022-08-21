@@ -30,10 +30,6 @@
       {
         "language": "dart",
         "path": "../../../AppData/Local/nvim-data/site/pack/packer/opt/friendly-snippets/snippets/frameworks/flutter.json"
-      },
-      {
-        "language": "lua",
-        "path": "./lua.json"
       }
     ]
   }
