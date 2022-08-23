@@ -1,0 +1,3 @@
+"command": "workbench.action.increaseViewSize",
+"command": "workbench.action.decreaseViewSize",
+

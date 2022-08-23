@@ -49,7 +49,7 @@ f1::switchToExplorer()
 !f1::switchToSavedApp()
 !z::closeAllExplorers()
 
-#IfWinNotActive, ahk_class CASCADIA_HOSTING_WINDOW_CLASS
+#IfWinNotActive, ahk_class CASCADIA_HOSTING_WINDOW_CLASS || ahk_class Chrome_WidgetWin_1
 !h:: SendInput,{LEFT}
 !j:: SendInput,{DOWN}
 !k:: SendInput,{UP}
