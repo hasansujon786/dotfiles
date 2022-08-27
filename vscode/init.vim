@@ -79,8 +79,9 @@ xnoremap g. <Cmd>call VSCodeNotify('workbench.action.gotoSymbol')<CR>
 nnoremap <silent> <leader>s :<C-u>call VSCodeNotify('workbench.action.files.save')<CR>
 nnoremap <silent> <leader>fs :<C-u>call VSCodeNotify('editor.action.formatDocument')<CR>
 " open Explorer
-nnoremap <silent> <leader>n :<C-u>call VSCodeNotify('workbench.action.toggleSidebarVisibility')<CR>
-nnoremap <silent> <leader>op :<C-u>call VSCodeNotify('workbench.action.focusSideBar')<CR>
+nnoremap <silent> <leader>0 :<C-u>call VSCodeNotify('workbench.action.focusSideBar')<CR>
+nnoremap <silent> <leader>ob :<C-u>call VSCodeNotify('workbench.action.toggleSidebarVisibility')<CR>
+nnoremap <silent> <leader>op :<C-u>call VSCodeNotify('workbench.view.explorer')<CR>
 " Toggle highlighting of current line and column
 nnoremap <silent> <leader>tl :setlocal cursorcolumn!<CR>
 " Git
