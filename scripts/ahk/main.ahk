@@ -39,24 +39,26 @@ $Escape::superEscape()
 #o::toggleTransparency()
 #^.::increaseTransparency()
 #^,::decreaseTransparency()
+; Scroll horizontally
+; ~RButton & WheelUP::scroll_left()
+; ~RButton & WheelDown::scroll_right()
 ; Change Volume:
-#WheelUP::volup()
-#WheelDown::voldown()
-$Volume_Up::volup()
-$Volume_Down::voldown()
+#If MouseIsOver("ahk_class Shell_TrayWnd")
+WheelUP::volup()
+WheelDown::voldown()
+#If
 ; Explorer
 f1::switchToExplorer()
 !f1::switchToSavedApp()
 !z::closeAllExplorers()
-
-#IfWinNotActive, ahk_class CASCADIA_HOSTING_WINDOW_CLASS || ahk_class Chrome_WidgetWin_1
+; Global arrow controls
+#If not WinActive("ahk_exe WindowsTerminal.exe") and not WinActive("ahk_exe alacritty.exe") and not WinActive("ahk_exe Code.exe")
 !h:: SendInput,{LEFT}
 !j:: SendInput,{DOWN}
 !k:: SendInput,{UP}
 !l:: SendInput,{RIGHT}
 !Backspace::Send ^{Backspace}
-#IfWinNotActive
-
+#If
 ; Adobe XD
 #IfWinActive, ahk_class ApplicationFrameWindow
 `::Send ^1
@@ -202,17 +204,27 @@ NavRun(Path) {
 ;******************************************************************************
 ; Utils
 ;******************************************************************************
+MouseIsOver(WinTitle) {
+  MouseGetPos,,, Win
+  return WinExist(WinTitle . " ahk_id " . Win)
+}
 volup() {
-  SoundGet, volume
-  Send {Volume_Up}
-  ;SoundBeep, 300, 150
-  SoundSet, volume + 10
+  SoundSet, +18
+  SendInput {Volume_Up}
 }
 voldown() {
-  SoundGet, volume
-  Send {Volume_Down}
-  ;SoundBeep, 300, 150
-  SoundSet, volume - 10
+  SoundSet, -18
+  SendInput {Volume_Down}
+}
+scroll_left() {
+  MouseGetPos,,,id, fcontrol,1
+  Loop 8 ; <-- Increase for faster scrolling
+  SendMessage, 0x114, 0, 0, %fcontrol%, ahk_id %id% ; 0x114 is WM_HSCROLL and the 0 after it is SB_LINERIGHT.
+}
+scroll_right() {
+  MouseGetPos,,,id, fcontrol,1
+  Loop 8 ; <-- Increase for faster scrolling
+  SendMessage, 0x114, 1, 0, %fcontrol%, ahk_id %id% ;  0x114 is WM_HSCROLL and the 1 after it is SB_LINELEFT.
 }
 ; Long press (> 0.5 sec) on Esc closes window - but if you change your mind you can keep it pressed for 3 more seconds
 superEscape() {

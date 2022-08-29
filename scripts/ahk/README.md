@@ -1,4 +1,9 @@
+https://lexikos.github.io/v2/docs/KeyList.htm
 https://lexikos.github.io/v2/docs/Hotkeys.htm
+
+\::AltTabMenu
+LAlt & j::AltTab
+LAlt & k::ShiftAltTab
 
 -- when pressing CapsLock alone, it will activate the Escpae button
 #Include C:\AHK\2nd-keyboard\gui.ahk
