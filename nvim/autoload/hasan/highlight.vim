@@ -35,7 +35,7 @@ function hasan#highlight#load_custom_highlight(...) abort
 
   "/// LSP variable reference ///"
   hi LspReferenceText  guibg=#3B4048 gui=NONE
-  hi LspReferenceWrite guibg=#3B4048 gui=NONE
+  hi LspReferenceWrite guibg=#463b48 gui=NONE
   hi LspReferenceRead  guibg=#3B4048 gui=NONE
 
   "/// Plugins ///"
@@ -102,8 +102,8 @@ function hasan#highlight#load_custom_highlight(...) abort
 
   "/// nui.nvim ///"
   hi NuiMenuNr     guifg=#d99a5e
-  hi! link NuiNormalFloat NormalFloatFlat
-  hi! link NuiFloatBorder FloatBorderFlat
+  hi! link NuiNormalFloat NormalFloat
+  hi! link NuiFloatBorder FloatBorderHidden
   hi! link NuiMenuItem    TelescopeSelectionCaret
 
   "/// nvim-tree.nvim ///"

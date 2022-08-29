@@ -26,7 +26,8 @@ local common = {
   buffers_cwd = { '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>',             'Switch buffers' },
   buffers_all = { '<cmd>lua require("hasan.telescope.custom").buffers(false)<CR>',            'Switch all buffers' },
   grep_string = { '<cmd>lua require("hasan.telescope.custom").grep_string()<CR>',             'Grep string' },
-  substitute_word = {'<Cmd>lua require("hasan.utils.ui").substitute_word()<CR>',              'Substitute word'}
+  substitute_word = {'<Cmd>lua require("hasan.utils.ui").substitute_word()<CR>',              'Substitute word'},
+  project_files = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>',         'Find project file' },
 }
 local w = {
   name= '+window',
@@ -152,6 +153,7 @@ local leader = {
     B = { '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', 'Browse file directory' },
     f = { '<cmd>Telescope find_files<CR>',                                              'Find file' },
     F = { '<cmd>Telescope find_files cwd=<C-R>=expand("%:h")<CR><CR>',                  'Find file from here' },
+    p = common.project_files,
     ['.'] = { '<cmd>Telescope find_files cwd=<C-R>=expand("%:h")<CR><CR>',                  'Find file from here' },
 
     i = { '<cmd>call hasan#utils#file_info()<CR>',                       'Show file info' },
@@ -281,7 +283,7 @@ local leader = {
   -- ['.'] = common.buffers_cwd,
   e = {'<cmd>lua require("hasan.org").toggle_org_float()<CR>',         'Toggle org float'},
   ['<tab>'] = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', 'Open Harpoon' },
-  ['<space>'] = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find project file' },
+  ['<space>'] = common.project_files,
   ['>'] = common.buffers_all,
   ['.'] = common.buffers_cwd,
 

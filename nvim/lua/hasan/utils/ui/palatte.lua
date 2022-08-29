@@ -6,12 +6,14 @@ local function set_custom_highlights()
   local fg = palatte.cool.fg
   local cursorling_bg = palatte.cool.bg1
   local float_bg = palatte.cool.bg_d
+  local bg3 = palatte.cool.bg3
   -- float_bg = '#1c212c' -- choice 1
 
   util.fg_bg('NormalFloat', fg, normal_bg)
   util.fg_bg('FloatBorder', palatte.cool.cyan, normal_bg)
   util.fg_bg('NormalFloatFlat', fg, float_bg)
   util.fg_bg('FloatBorderFlat', float_bg, float_bg)
+  util.fg_bg('FloatBorderHidden', bg3, normal_bg)
 
   util.fg('TelescopePromptTitle', palatte.cool.orange)
   util.fg_bg('TelescopeSelectionCaret', palatte.cool.orange, cursorling_bg)

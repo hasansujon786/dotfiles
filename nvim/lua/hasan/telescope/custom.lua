@@ -103,10 +103,10 @@ function M.search_wiki_files()
     results_title = 'Wiki files',
     prompt_title = 'Search Wiki',
     cwd = _G.org_root_path,
-    search_dirs = {
-      '3_resources/wiki/',
-    },
-    -- previewer = false
+    previewer = false
+    -- search_dirs = {
+    --   '3_resources/wiki/',
+    -- },
   })
 end
 

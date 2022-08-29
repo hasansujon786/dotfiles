@@ -6,7 +6,8 @@ require('org-bullets').setup({
     headlines = { '◉', '○', '✸', '✿', '', '♥' },
     checkboxes = {
       cancelled = { '', 'OrgCancelled' },
-      half = { '', 'OrgTSCheckboxHalfChecked' },
+      -- half = { '', 'OrgTSCheckboxHalfChecked' },
+      half = { '', 'OrgTSCheckboxHalfChecked' },
       done = { '', 'OrgDone' },
       todo = { '', 'OrgTODO' },
       -- done = { '', 'OrgDone' },
