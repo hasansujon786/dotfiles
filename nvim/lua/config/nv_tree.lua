@@ -93,6 +93,7 @@ require('nvim-tree').setup({
     timeout = 500,
   },
   renderer = {
+    indent_width = 1,
     indent_markers = { enable = true },
     icons = {
       git_placement = 'signcolumn',

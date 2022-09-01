@@ -1,7 +1,7 @@
 local utils = require('hasan.utils')
-
+-- TSInstallSync javascript typescript tsx
 require('nvim-treesitter.configs').setup({
-  ensure_installed = { 'html', 'vim', 'css', 'javascript', 'typescript', 'tsx', 'json', 'lua', 'vue', 'dart', 'bash' },
+  ensure_installed = { 'html', 'vim', 'css', 'json', 'lua', 'vue', 'dart', 'bash' },
   highlight = {
     enable = true, -- false will disable the whole extension
     use_languagetree = false,

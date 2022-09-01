@@ -219,7 +219,9 @@ _edit_wo_executing() {
   READLINE_POINT="${#READLINE_LINE}"
   rm -f "$tmpf"  # -f for those who have alias rm='rm -i'
 }
-
+redrive() {
+  curl --silent -I -L $@ | grep -i location
+}
 
 # auto-expand
 bind '"\e\ ":magic-space'
