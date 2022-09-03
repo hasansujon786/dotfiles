@@ -85,10 +85,7 @@ return require('packer').startup({
       module = 'persisted', opt = true,
       config = [[require('config.persisted').setup()]],
     })
-    use({ 'simrat39/symbols-outline.nvim',
-      opt = true, cmd = { 'SymbolsOutline', 'SymbolsOutlineClose' },
-      setup = [[require('config.symbol_outline').setup()]],
-    })
+    use({ 'simrat39/symbols-outline.nvim', opt = true, cmd = 'SymbolsOutline', config = [[require('config.symbol_outline')]] })
     use({ 'arthurxavierx/vim-caser', opt = true, event = 'CursorHold' })
     use({ 'NTBBloodbath/color-converter.nvim', opt = true, event = 'CursorHold' })
     use({ 'Konfekt/vim-CtrlXA', opt = true, event = 'CursorHold' })
