@@ -54,9 +54,9 @@ local load = function(mod)
   package.loaded[mod] = nil
   return require(mod)
 end
-load 'user.settings'
-load 'user.keymaps'
-load 'user.commands'
+load('user.settings')
+load('user.keymaps')
+load('user.commands')
 
 Exemark = function()
   local bufnr = vim.fn.bufnr()
@@ -229,7 +229,6 @@ end
 
 -- local parent_dir = Path:new(finder.path):parent()
 
-
 local function vertText()
   local bnr = vim.fn.bufnr('%')
   local ns_id = vim.api.nvim_create_namespace('demo')
@@ -250,3 +249,30 @@ local function vertText()
   local mark_id = vim.api.nvim_buf_set_extmark(bnr, ns_id, line_num - 1, col_num, opts) -- vim.api.nvim_buf_del_extmark(bnr, ns_id, id)
 end
 -- vertText()
+
+local fn = vim.fn
+local api = vim.api
+local function get_outline_win()
+  for i = 1, fn.tabpagewinnr(fn.tabpagenr(), '$') do
+    local winid = fn.win_getid(i)
+    local ft = vim.fn.getwinvar(winid, '&ft')
+    if ft == 'Outline' then
+      return winid, i
+    end
+  end
+end
+
+function Focus_with_outline(count)
+  if count == 0 then
+    feedkeys(':<up>')
+    return
+  end
+  local winid = get_outline_win()
+
+  if vim.fn.win_gotoid(winid) == 1 then
+    api.nvim_win_set_cursor(winid, { count, 0 })
+    feedkeys('<cr>')
+  end
+end
+
+-- keymap('n', '<cr>', '<cmd>lua Focus_with_outline(vim.v.count)<cr>')

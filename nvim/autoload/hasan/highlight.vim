@@ -40,6 +40,7 @@ function hasan#highlight#load_custom_highlight(...) abort
 
   "/// Plugins ///"
   hi! link HLNext IncSearch
+  hi WhichKeySeparator guifg=#546178
   hi IndentBlanklineChar guifg=#323a48
   hi QuickScopePrimary   guifg=tomato gui=underline
   hi QuickScopeSecondary guifg=#d78787 gui=underline

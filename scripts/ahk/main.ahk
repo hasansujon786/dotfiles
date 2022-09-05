@@ -28,8 +28,7 @@ PgDn::Send +!{ESC}
 #InputLevel 1
 !\::Send \
 \::alternateTab()
-
-capslock::Esc
+capslock::alternateTab()
 +capslock::capslock
 $Escape::superEscape()
 #SPACE::toggleAlwaysOnTop()       ; Always on Top
@@ -121,10 +120,10 @@ switchToSavedApp() {
   h::moveWinLeft(25)
   k::moveWinUp(25)
   j::moveWinDown(25)
-  RIGHT::moveWinRight(200)
-  LEFT::moveWinLeft(200)
-  UP::moveWinUp(200)
-  DOWN::moveWinDown(200)
+  +l::moveWinRight(200)
+  +h::moveWinLeft(200)
+  +k::moveWinUp(200)
+  +j::moveWinDown(200)
 #if
 
 moveWinRight(val) {

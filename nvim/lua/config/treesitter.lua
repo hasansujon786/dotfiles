@@ -1,5 +1,5 @@
 local utils = require('hasan.utils')
--- TSInstallSync javascript typescript tsx
+-- TSInstallSync javascript typescript tsx org
 require('nvim-treesitter.configs').setup({
   ensure_installed = { 'html', 'vim', 'css', 'json', 'lua', 'vue', 'dart', 'bash' },
   highlight = {

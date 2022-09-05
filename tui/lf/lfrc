@@ -48,7 +48,10 @@ map U invert
 map v :toggle; down
 map V :toggle; up
 map <esc> :clear; setfilter
-map <f-5> push :source<space>C:/Users/hasan/dotfiles/tui/lf/lfrc<enter>
+map <f-5> :{{
+  source C:/Users/hasan/dotfiles/tui/lf/lfrc
+  echo 'Resouced lfrc'
+}}
 map Y :{{
   &echo $Env:fx | clip
   echo 'file name copied..'

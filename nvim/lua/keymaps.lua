@@ -18,7 +18,7 @@ keymap({ 'n', 'v' }, '<CR>', ':<up>', noSilent) -- run last : command easily
 keymap('v', 'p', 'pgvy') -- Prevent selecting and pasting from overwriting what you originally copied.
 keymap('v', 'y', 'ygv<Esc>') -- Keep cursor at the bottom of the visual selection after you yank it.
 keymap('n', 'Y', 'y$') -- Ensure Y works similar to D,C.
-keymap('n', 'gV', '`[v`]') -- Select the last yanked text
+keymap('n', 'gV', '`[v`]', { desc = 'Select the last yanked text' })
 keymap({ 'n', 'x' }, 'x', '"_x') -- Prevent x from overriding the clipboard.
 keymap({ 'n', 'x' }, 'X', '"_X')
 keymap({ 'i', 'c' }, '<C-v>', '<C-R>+', noSilent) -- Paste from + register (system clipboard)
