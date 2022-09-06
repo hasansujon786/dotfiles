@@ -120,13 +120,10 @@ alias tk='taskkill //F //IM'
 alias tkp='taskkill //PID'
 alias tkv='taskkill //F //IM "java.exe"'
 
-## Colorize the ls output ##
-alias ls='ls --color=auto'
-alias lsa='ls -a'
-## Use a long listing format ##
-alias ll='ls -la'
-## Show hidden files ##
-alias l.='ls -d .* --color=auto'
+alias ls='ls --color=auto' # Colorize the ls output
+alias lsa='ls -a --color=auto' # Show all files
+alias ls.='ls -d .* --color=auto' # Show only hidden files
+alias ll='ls -la --color=auto' # Use a long listing format
 
 # handy date shortcuts #
 alias now='date +"%T"'

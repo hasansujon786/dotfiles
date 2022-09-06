@@ -20,8 +20,9 @@ __fzf_z__() {
   dir=$(eval "$cmd") && printf 'cd -- %q' "$dir"
 }
 
-# ALT-j - cd into the selected directory
-bind -m emacs-standard '"\ej": " \C-b\C-k \C-u`__fzf_z__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d"'
+# ALT-e - cd into the selected directory
+bind -m emacs-standard '"\ee": " \C-b\C-k \C-u`__fzf_z__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d\C-h"'
+bind -m emacs-standard '"\ej": " \C-b\C-k \C-u`__fzf_z__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d\C-h"'
 
 __fzf_select__() {
   local cmd="${FZF_CTRL_T_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \

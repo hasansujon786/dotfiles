@@ -16,26 +16,21 @@ return require('packer').startup({
     ------------------------------------------------
     --> Visual -------------------------------------
     ------------------------------------------------
-    use({ 'navarasu/onedark.nvim', config = function() require('config.onedark') end })
-    use({ 'hasansujon786/dashboard-nvim', config = function() require('config.dashboard') end })
-    use({ 'hasansujon786/kissline.nvim', config = function() require('config.kissline') end })
-    use({ 'nvim-lualine/lualine.nvim',
-      config = function() require('config.lualine') end,
-      commit = '8d956c18258bb128ecf42f95411bb26efd3a5d23'
-    })
-    use({ 'kyazdani42/nvim-web-devicons', config = function() require('config.devicons-config') end })
+    use({ 'navarasu/onedark.nvim', config = [[require('config.onedark')]] })
+    use({ 'hasansujon786/dashboard-nvim', config = [[require('config.dashboard')]] })
+    use({ 'hasansujon786/kissline.nvim', config = [[require('config.kissline')]] })
+    use({ 'nvim-lualine/lualine.nvim', config = [[require('config.lualine')]], commit = '8d956c18258bb128ecf42f95411bb26efd3a5d23' })
+    use({ 'kyazdani42/nvim-web-devicons', config = [[require('config.devicons-config')]] })
     use({ 'lukas-reineke/indent-blankline.nvim', opt = true, event = 'VimEnter', config = [[require('config.indentLine')]] })
-    use({ 'norcalli/nvim-colorizer.lua', opt = true, event = 'CursorHold', config = [[require('config.colorizer')]] })
-    use({ 'folke/zen-mode.nvim', opt = true, cmd = 'ZenMode', config = function() require('config.zen') end })
+    use({ 'ziontee113/color-picker.nvim', config = [[require('config.color-picker')]], opt = true, cmd = 'PickColor' })
+    use({ 'NvChad/nvim-colorizer.lua', opt = true, event = 'CursorHold', config = [[require('config.colorizer')]] })
+    use({ 'karb94/neoscroll.nvim', config = [[require('config.neoscroll')]], event = 'BufReadPost', opt = true })
     use({ 'hasansujon786/notifier.nvim', opt = true, module = 'notifier' })
-    use({ 'karb94/neoscroll.nvim', config = function () require('config.neoscroll') end, event = 'BufReadPost', opt = true })
 
     ------------------------------------------------
     --> Productiviry -------------------------------
     ------------------------------------------------
     use({ 'nvim-orgmode/orgmode',
-      -- commit ='50d1a97b25d77f33d312b4775fbd68217d22c946',
-      -- commit ='e287630dad1eceb03292b6283aa73505e539191b', -- working
       opt = true, after = 'nvim-treesitter',
       config = function() require('config.orgmode') end,
       requires = {
@@ -43,8 +38,7 @@ return require('packer').startup({
       }
     })
     use({ 'mkropat/vim-tt', opt = true, event = 'CursorHold', config = function () vim.g.tt_loaded = 1 end })
-    use({ 'ziontee113/color-picker.nvim', config = [[require('config.color-picker')]], opt = true, cmd = 'PickColor' })
-
+    use({ 'folke/zen-mode.nvim', opt = true, cmd = 'ZenMode', config = [[require('config.zen')]] })
     ------------------------------------------------
     --> Navigation ---------------------------------
     ------------------------------------------------
