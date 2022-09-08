@@ -50,11 +50,8 @@ function hasan#highlight#load_custom_highlight(...) abort
   hi VM_Insert  guibg=#3E4452 guifg=#ABB2BF
   hi VM_Mono    guibg=#00af87 guifg=#ffffff
   " hi VM_Cursor
-  " hi DashboardHeader ctermfg=114 guifg=#61AFEF
-  hi DashboardHeader   guifg=#5c6370
-  hi DashboardFooter   guifg=#5c6370
-  hi DashboardShortcut guifg=#5c6370
-  hi DashboardCenter   guifg=#5c6370
+  hi AlphaButtons      guifg=#5c6370
+  hi AlphaHeader       guifg=#5c6370
   "/// Floaterm ///"
   hi! link Floaterm NormalFloatFlat
   hi! link FloatermBorder FloatBorderFlat

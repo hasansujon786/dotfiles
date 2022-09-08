@@ -1,3 +1,10 @@
+-- use({ 'hasansujon786/dashboard-nvim', config = [[require('config.dashboard')]] })
+-- " hi DashboardHeader ctermfg=114 guifg=#61AFEF
+-- hi DashboardHeader   guifg=#5c6370
+-- hi DashboardFooter   guifg=#5c6370
+-- hi DashboardShortcut guifg=#5c6370
+-- hi DashboardCenter   guifg=#5c6370
+
 vim.g.dashboard_default_executive = 'telescope'
 vim.g.dashboard_preview_pipeline = 'lolcat'
 vim.g.dashboard_enable_session = 0

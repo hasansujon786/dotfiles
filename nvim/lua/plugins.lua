@@ -17,7 +17,7 @@ return require('packer').startup({
     --> Visual -------------------------------------
     ------------------------------------------------
     use({ 'navarasu/onedark.nvim', config = [[require('config.onedark')]] })
-    use({ 'hasansujon786/dashboard-nvim', config = [[require('config.dashboard')]] })
+    use({ 'goolord/alpha-nvim', config = [[require('config.alpha')]] })
     use({ 'hasansujon786/kissline.nvim', config = [[require('config.kissline')]] })
     use({ 'nvim-lualine/lualine.nvim', config = [[require('config.lualine')]], commit = '8d956c18258bb128ecf42f95411bb26efd3a5d23' })
     use({ 'kyazdani42/nvim-web-devicons', config = [[require('config.devicons-config')]] })

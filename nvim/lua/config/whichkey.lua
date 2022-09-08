@@ -203,7 +203,7 @@ local leader = {
     t = { '<cmd>lua require("hasan.telescope.custom").search_project_todos()<CR>','Search project todos' },
     -- b = { '<cmd>Telescope file_browser prompt_title=Project\\ Browser cwd=~/repoes<CR>',  'Browse other projects' },
 
-    d = { '<cmd>Dashboard<CR>',                         'Open dashboard' },
+    d = { '<cmd>Alpha<CR>',                             'Open dashboard' },
     l = { '<cmd>SessionLoad<CR>',                       'Load session' },
     s = { '<cmd>SessionSave<CR>',                       'Save session' },
     m = { '<cmd>lua require("config.persisted").loadSession()<CR>',       'Show session menu' },

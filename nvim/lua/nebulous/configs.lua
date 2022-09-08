@@ -19,6 +19,8 @@ M.default = {
     flutterToolsOutline = true,
     packer = true,
     Outline = true,
+    dashboard = true,
+    alpha = true,
   },
   nb_blur_hls = {
     'LineNr:Nebulous',
