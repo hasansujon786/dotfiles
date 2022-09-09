@@ -196,7 +196,7 @@ local leader = {
 
   p = {
     name = '+project',
-    e = { '<cmd>lua require("telescope._extensions").manager.project_commands.commands()<CR>',   'Run project commands' },
+    c = { '<cmd>lua require("telescope._extensions").manager.project_commands.commands()<CR>',   'Run project commands' },
 
     p = { '<cmd>lua require("hasan.telescope.custom").projects()<CR>',            'Switch project' },
     r = { '<cmd>lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>','Find recent files' },

@@ -68,7 +68,7 @@ local options = {
   buttons = {
     type = 'group',
     val = {
-      button('SPC p r', '  Recent File', ':lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>'),
+      button('SPC p r', '  Recent File', ':lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>'),
       button('SPC p l', '  Load session', ':SessionLoad<CR>'),
       button('SPC f f', '  Find Files', ':Telescope find_files<CR>'),
       button('SPC o t', '  Open terminal', ':FloatermNew --wintype=normal --height=10 bash<CR>'),
