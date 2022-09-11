@@ -6,6 +6,7 @@ local cursorline_persist_ft = { qf = true, fern = true, NvimTree = true }
 local cursorline_ignore_bt = { prompt = true }
 local cursorline_ignore_ft = {
   dashboard = true,
+  alpha = true,
   floaterm = true,
   TelescopePrompt = true,
   ['color-picker'] = true,

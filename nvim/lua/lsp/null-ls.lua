@@ -2,7 +2,8 @@
 local null_ls = require('null-ls')
 local b = null_ls.builtins
 local sources = {
-  b.formatting.prettier,
+  -- b.formatting.prettier,
+  b.formatting.prettierd,
   b.formatting.stylua.with({
     extra_args = { '--indent-type', 'Spaces', '--indent-width', '2', '--quote-style', 'AutoPreferSingle' },
   }),
