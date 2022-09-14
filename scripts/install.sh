@@ -284,6 +284,14 @@ setup_keypirinha() {
   C:\\ProgramData\\chocolatey\\lib\\keypirinha\\tools\\Keypirinha\\keypirinha.exe
 }
 
+setup_bugn() {
+  bugnPath=($HOME/AppData/Roaming/bug.n/Config.ini)
+  util_print bug.n
+
+  util_backUpConfig ${bugnPath[$osIndex]}
+  util_makeSymlinkPath $HOME/dotfiles/gui/bugn/Config.ini ${bugnPath[$osIndex]}
+}
+
 setup_sublime() {
   util_print sublime
   rm -rf $HOME/AppData/Roaming/Sublime\ Text/Packages/User/
