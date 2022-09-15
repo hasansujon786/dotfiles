@@ -88,7 +88,7 @@ local leader = {
     x = { '<Plug>ColorConvertHEX',                  'Convert color to HEX' },
     h = { '<Plug>ColorConvertHSL',                  'Convert color to HSL' },
     r = { '<Plug>ColorConvertRGB',                  'Convert color to RGB' },
-    p = { '<cmd>PickColor<cr>',                     'Convert color to RGB' },
+    p = { '<cmd>CccPick<cr>',                       'Pick a color' },
 
     w = common.substitute_word,
 

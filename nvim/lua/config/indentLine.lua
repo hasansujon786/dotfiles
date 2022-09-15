@@ -11,6 +11,7 @@ require('indent_blankline').setup({
     'mason',
     'Outline',
     'alpha',
+    'ccc-ui',
   },
   show_first_indent_level = false,
   -- show_current_context = true,

@@ -22,7 +22,7 @@ return require('packer').startup({
     use({ 'nvim-lualine/lualine.nvim', config = [[require('config.lualine')]], commit = '8d956c18258bb128ecf42f95411bb26efd3a5d23' })
     use({ 'kyazdani42/nvim-web-devicons', config = [[require('config.devicons-config')]] })
     use({ 'lukas-reineke/indent-blankline.nvim', opt = true, event = 'VimEnter', config = [[require('config.indentLine')]] })
-    use({ 'ziontee113/color-picker.nvim', config = [[require('config.color-picker')]], opt = true, cmd = 'PickColor' })
+    use({ 'uga-rosa/ccc.nvim', config=[[require('config.color-picker')]], opt=true, cmd='CccPick' })
     use({ 'NvChad/nvim-colorizer.lua', opt = true, event = 'CursorHold', config = [[require('config.colorizer')]] })
     use({ 'karb94/neoscroll.nvim', config = [[require('config.neoscroll')]], event = 'BufReadPost', opt = true })
     use({ 'hasansujon786/notifier.nvim', opt = true, module = 'notifier' })
