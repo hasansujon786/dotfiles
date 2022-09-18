@@ -8,7 +8,7 @@
   "initialPosition": "80,30",
   "initialRows": 28,
   "largePasteWarning": false,
-  "launchMode": "focus",
+  "launchMode": "default",
   "multiLinePasteWarning": false,
   "snapToGridOnResize": true,
   "theme": "system",
