@@ -95,3 +95,35 @@ _G.keymap = function(mode, lhs, rhs, opts)
   opts = vim.tbl_deep_extend('force', def_opts, opts or {})
   vim.keymap.set(mode, lhs, rhs, opts)
 end
+
+-- prequire {{{
+
+---Protected `require` function
+---@param module_name string
+---@return table | function | Void module
+---@return boolean loaded if module was loaded or not
+_G.prequire = function(module_name)
+  local available, module = pcall(require, module_name)
+  if available then
+    return module, true
+  else
+    local source = debug.getinfo(2, 'S').source:sub(2)
+    source = source:gsub(os.getenv('HOME'), '~') --[[@as string]]
+    local msg = string.format('"%s" requested in "%s" not available', module_name, source)
+    vim.schedule(function()
+      vim.notify_once(msg, vim.log.levels.WARN)
+    end)
+
+    ---@class Void Void has eveything and nothing
+    local void = setmetatable({}, { ---@type Void
+      __index = function(self)
+        return self
+      end,
+      __newindex = function() end,
+      __call = function() end,
+    })
+
+    return void, false
+  end
+end
+-- }}}

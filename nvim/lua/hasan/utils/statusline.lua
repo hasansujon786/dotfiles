@@ -67,9 +67,30 @@ M.spell = {
 
 M.readonly = {
   toggle = function()
-    return vim.api.nvim_buf_get_option(0, 'readonly')
+    return not vim.bo.modifiable or vim.bo.readonly
   end,
   fn = [[%"]],
+}
+
+M.DapMessages = {
+  -- display the dap messages only on the debugged file
+  condition = function()
+    local dap = prequire('dap')
+    -- local session = dap_available and dap.session()
+    local session = dap.session()
+    if session then
+      local filename = vim.api.nvim_buf_get_name(0)
+      if session.config then
+        local progname = session.config.program
+        return filename == progname
+      end
+    end
+    return false
+  end,
+  provider = function()
+    local dap = prequire('dap')
+    return ' ' .. dap.status() .. ' '
+  end,
 }
 
 M.wrap = {
