@@ -151,10 +151,10 @@ local leader = {
     -- File Command
     b = { '<cmd>lua require("hasan.telescope.custom").file_browser()<cr>',          'Browser project files' },
     B = { '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', 'Browse file directory' },
-    f = { '<cmd>Telescope find_files<CR>',                                              'Find file' },
-    F = { '<cmd>Telescope find_files cwd=<C-R>=expand("%:h")<CR><CR>',                  'Find file from here' },
+    f = { '<cmd>Telescope find_files<CR>',                                          'Find file' },
+    F = { ':Telescope find_files cwd=<C-R>=expand("%:h")<CR><CR>',                  'Find file from here' },
     p = common.project_files,
-    ['.'] = { '<cmd>Telescope find_files cwd=<C-R>=expand("%:h")<CR><CR>',                  'Find file from here' },
+    ['.'] = { ':Telescope find_files cwd=<C-R>=expand("%:h")<CR><CR>',              'Find file from here' },
 
     i = { '<cmd>call hasan#utils#file_info()<CR>',                       'Show file info' },
     s = { '<cmd>call hasan#utils#buffer#_save()<cr>',                    'Save current file' },

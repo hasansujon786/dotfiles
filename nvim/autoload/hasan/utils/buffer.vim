@@ -1,6 +1,6 @@
 
 function! hasan#utils#buffer#_save() abort "{{{
-  update
+  write
   call timer_start(800, '_echo')
 endfunction
 function! _echo(...) abort
