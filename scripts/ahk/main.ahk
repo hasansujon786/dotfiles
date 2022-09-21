@@ -34,6 +34,8 @@ $Escape::superEscape()
 #SPACE::toggleAlwaysOnTop()       ; Always on Top
 #z::rebootMiWiFi()
 #p::AppsKey
+PrintScreen::#+s
+#`::#PrintScreen
 ;Transparency toggle,
 #o::toggleTransparency()
 #^.::increaseTransparency()

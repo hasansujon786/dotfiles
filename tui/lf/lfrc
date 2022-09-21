@@ -110,6 +110,7 @@ map -a %lf -remote "send $id cd $(git rev-parse --show-toplevel)/build/app/outpu
 
 map ga. cd ~/AppData
 map gan cd ~/AppData/Local/nvim-data
+map gak cd ~/AppData/Local/Packages/Microsoft.ScreenSketch_8wekyb3d8bbwe/TempState
 map gas cd ~/AppData/Roaming/Microsoft/Windows/Start\ Menu/Programs/Startup
 
 # ---------------------------------------------------------------------------
