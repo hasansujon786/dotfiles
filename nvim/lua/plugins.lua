@@ -97,7 +97,8 @@ return require('packer').startup({
     use({ 'airblade/vim-gitgutter',
       opt = true, event = 'CursorHold',
       config="require('config.gitgutter-config')",
-      commit='d5bae104031bb1633cb5c5178dc7d4ac422b422a'
+      commit='f19b6203191d69de955d91467a5707959572119b'
+      -- commit='d5bae104031bb1633cb5c5178dc7d4ac422b422a'
     })
 
     ------------------------------------------------
