@@ -12,7 +12,7 @@ require('nvim-treesitter.configs').setup({
     enable = true,
     keymaps = {
       init_selection = 'g<tab>', -- maps in normal mode to init the node/scope selection
-      scope_incremental = 'V', -- increment to the upper scope (as defined in locals.scm)
+      scope_incremental = 'O', -- increment to the upper scope (as defined in locals.scm)
       node_incremental = '<tab>', -- increment to the upper named parent
       node_decremental = '<s-tab>', -- decrement to the previous node
     },

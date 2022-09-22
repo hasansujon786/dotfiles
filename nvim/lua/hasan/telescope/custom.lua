@@ -49,27 +49,29 @@ local git_and_buffer_files = function(opts)
   end, git_files)
   local fusedArray = flatten({ bufer_files, git_files })
 
-  pickers.new(opts, {
-    finder = finders.new_table({
-      results = vim.fn['hasan#utils#_uniq'](fusedArray),
-      entry_maker = opts.entry_maker or make_entry.gen_from_file(opts),
-    }),
-    sorter = conf.file_sorter(opts),
-    previewer = conf.file_previewer(opts),
-    -- default_selection_index = 2,
-    selection_strategy = 'reset', -- follow, reset, row
-    color_devicons = true,
-    attach_mappings = function(_, map)
-      map('i', '<cr>', local_action.edit)
-      map('i', '<C-v>', local_action.vsplit)
-      map('i', '<C-s>', local_action.split)
-      map('i', '<C-t>', local_action.tabedit)
+  pickers
+    .new(opts, {
+      finder = finders.new_table({
+        results = vim.fn['hasan#utils#_uniq'](fusedArray),
+        entry_maker = opts.entry_maker or make_entry.gen_from_file(opts),
+      }),
+      sorter = conf.file_sorter(opts),
+      previewer = conf.file_previewer(opts),
+      -- default_selection_index = 2,
+      selection_strategy = 'reset', -- follow, reset, row
+      color_devicons = true,
+      attach_mappings = function(_, map)
+        map('i', '<cr>', local_action.edit)
+        map('i', '<C-v>', local_action.vsplit)
+        map('i', '<C-s>', local_action.split)
+        map('i', '<C-t>', local_action.tabedit)
 
-      -- A return value _must_ be returned. It is an error to not return anything.
-      -- Return false if you don't want any other mappings applied.
-      return true
-    end,
-  }):find()
+        -- A return value _must_ be returned. It is an error to not return anything.
+        -- Return false if you don't want any other mappings applied.
+        return true
+      end,
+    })
+    :find()
 end
 
 local M = {}
@@ -103,7 +105,7 @@ function M.search_wiki_files()
     results_title = 'Wiki files',
     prompt_title = 'Search Wiki',
     cwd = _G.org_root_path,
-    previewer = false
+    previewer = false,
     -- search_dirs = {
     --   '3_resources/wiki/',
     -- },
@@ -180,30 +182,32 @@ M.live_grep_in_folder = function(opts)
   })
   table.insert(data, 1, '.' .. os_sep)
 
-  pickers.new(opts, {
-    prompt_title = 'Folders for Live Grep',
-    finder = finders.new_table({ results = data, entry_maker = make_entry.gen_from_file(opts) }),
-    previewer = conf.file_previewer(opts),
-    sorter = conf.file_sorter(opts),
-    attach_mappings = function(prompt_bufnr)
-      action_set.select:replace(function()
-        local current_picker = action_state.get_current_picker(prompt_bufnr)
-        local dirs = {}
-        local selections = current_picker:get_multi_selection()
-        if vim.tbl_isempty(selections) then
-          table.insert(dirs, action_state.get_selected_entry().value)
-        else
-          for _, selection in ipairs(selections) do
-            table.insert(dirs, selection.value)
+  pickers
+    .new(opts, {
+      prompt_title = 'Folders for Live Grep',
+      finder = finders.new_table({ results = data, entry_maker = make_entry.gen_from_file(opts) }),
+      previewer = conf.file_previewer(opts),
+      sorter = conf.file_sorter(opts),
+      attach_mappings = function(prompt_bufnr)
+        action_set.select:replace(function()
+          local current_picker = action_state.get_current_picker(prompt_bufnr)
+          local dirs = {}
+          local selections = current_picker:get_multi_selection()
+          if vim.tbl_isempty(selections) then
+            table.insert(dirs, action_state.get_selected_entry().value)
+          else
+            for _, selection in ipairs(selections) do
+              table.insert(dirs, selection.value)
+            end
           end
-        end
-        actions._close(prompt_bufnr, current_picker.initial_mode == 'insert')
-        -- require('telescope.builtin').live_grep { search_djirs = dirs }
-        require('telescope.builtin').live_grep({ cwd = dirs[1] })
-      end)
-      return true
-    end,
-  }):find()
+          actions._close(prompt_bufnr, current_picker.initial_mode == 'insert')
+          -- require('telescope.builtin').live_grep { search_djirs = dirs }
+          require('telescope.builtin').live_grep({ cwd = dirs[1] })
+        end)
+        return true
+      end,
+    })
+    :find()
 end
 
 M.commands = function()
@@ -256,12 +260,14 @@ M.grep_string_list = function(opts)
     end
   end
 
-  pickers.new(opts, {
-    prompt_title = 'find todos',
-    finder = finders.new_oneshot_job(args, opts),
-    previewer = conf.grep_previewer(opts),
-    sorter = conf.generic_sorter(opts),
-  }):find()
+  pickers
+    .new(opts, {
+      prompt_title = 'find todos',
+      finder = finders.new_oneshot_job(args, opts),
+      previewer = conf.grep_previewer(opts),
+      sorter = conf.generic_sorter(opts),
+    })
+    :find()
 end
 
 function M.search_project_todos()
@@ -301,32 +307,34 @@ M.emojis = function()
     end,
   }
 
-  pickers.new(opts, {
-    finder = finders.new_table({
-      results = emojis_table,
-      entry_maker = opts.entry_maker or make_entry.gen_from_string(opts),
-    }),
-    sorter = conf.file_sorter(opts),
-    attach_mappings = function(_, map)
-      map('n', '<cr>', function(prompt_bufnr)
-        opts.put_emoji(prompt_bufnr, 'p')
-      end)
-      map('n', '<C-t>', function(prompt_bufnr)
-        opts.put_emoji(prompt_bufnr, 'P')
-      end)
+  pickers
+    .new(opts, {
+      finder = finders.new_table({
+        results = emojis_table,
+        entry_maker = opts.entry_maker or make_entry.gen_from_string(opts),
+      }),
+      sorter = conf.file_sorter(opts),
+      attach_mappings = function(_, map)
+        map('n', '<cr>', function(prompt_bufnr)
+          opts.put_emoji(prompt_bufnr, 'p')
+        end)
+        map('n', '<C-t>', function(prompt_bufnr)
+          opts.put_emoji(prompt_bufnr, 'P')
+        end)
 
-      map('i', '<cr>', function(prompt_bufnr)
-        opts.put_emoji(prompt_bufnr, 'p')
-      end)
-      map('i', '<C-t>', function(prompt_bufnr)
-        opts.put_emoji(prompt_bufnr, 'P')
-      end)
+        map('i', '<cr>', function(prompt_bufnr)
+          opts.put_emoji(prompt_bufnr, 'p')
+        end)
+        map('i', '<C-t>', function(prompt_bufnr)
+          opts.put_emoji(prompt_bufnr, 'P')
+        end)
 
-      map('i', '<C-v>', nil)
-      map('i', '<C-s>', nil)
-      return true
-    end,
-  }):find()
+        map('i', '<C-v>', nil)
+        map('i', '<C-s>', nil)
+        return true
+      end,
+    })
+    :find()
 end
 
 M.pub_install = function()
@@ -346,33 +354,35 @@ M.pub_install = function()
     end,
   }
 
-  pickers.new(opts, {
-    finder = finders.new_table({
-      results = packages,
-      entry_maker = make_entry.gen_from_string(opts),
-    }),
-    sorter = conf.file_sorter(opts),
-    attach_mappings = function(_, map)
-      map('n', '<cr>', function(prompt_bufnr)
-        opts.install_pkg(prompt_bufnr, false)
-      end)
-      map('n', '<C-v>', function(prompt_bufnr)
-        opts.install_pkg(prompt_bufnr, true)
-      end)
-      map('i', '<cr>', function(prompt_bufnr)
-        opts.install_pkg(prompt_bufnr, false)
-      end)
-      map('i', '<C-v>', function(prompt_bufnr)
-        opts.install_pkg(prompt_bufnr, true)
-      end)
+  pickers
+    .new(opts, {
+      finder = finders.new_table({
+        results = packages,
+        entry_maker = make_entry.gen_from_string(opts),
+      }),
+      sorter = conf.file_sorter(opts),
+      attach_mappings = function(_, map)
+        map('n', '<cr>', function(prompt_bufnr)
+          opts.install_pkg(prompt_bufnr, false)
+        end)
+        map('n', '<C-v>', function(prompt_bufnr)
+          opts.install_pkg(prompt_bufnr, true)
+        end)
+        map('i', '<cr>', function(prompt_bufnr)
+          opts.install_pkg(prompt_bufnr, false)
+        end)
+        map('i', '<C-v>', function(prompt_bufnr)
+          opts.install_pkg(prompt_bufnr, true)
+        end)
 
-      map('i', '<C-t>', nil)
-      map('i', '<C-s>', nil)
-      map('n', '<C-t>', nil)
-      map('n', '<C-s>', nil)
-      return true
-    end,
-  }):find()
+        map('i', '<C-t>', nil)
+        map('i', '<C-s>', nil)
+        map('n', '<C-t>', nil)
+        map('n', '<C-s>', nil)
+        return true
+      end,
+    })
+    :find()
 end
 
 return M
