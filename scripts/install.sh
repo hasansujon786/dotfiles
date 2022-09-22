@@ -292,6 +292,12 @@ setup_bugn() {
   util_makeSymlinkPath $HOME/dotfiles/gui/bugn/Config.ini ${bugnPath[$osIndex]}
 }
 
+setup_ahk() {
+  util_print main.ahk
+  rm -rf $HOME/AppData/Roaming/Microsoft/Windows/Start\ Menu/Programs/Startup/main.ahk
+  util_makeSymlinkPath $HOME/dotfiles/scripts/ahk/main.ahk "'C:/Users/hasan/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/main.ahk'"
+}
+
 setup_sublime() {
   util_print sublime
   rm -rf $HOME/AppData/Roaming/Sublime\ Text/Packages/User/
@@ -333,6 +339,7 @@ auto_install_everything() {
   if [[ "$os" == "windows" ]]; then
     start ms-settings:developers
     setup_windowsTerminal
+    setup_ahk
     # setup_sublime
     $getter install -y mingw
     $getter install -y make
