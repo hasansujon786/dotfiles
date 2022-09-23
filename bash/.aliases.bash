@@ -102,6 +102,7 @@ alias gm2m='git branch -m master main'
 
 alias -- --=jump-to-git-root
 alias g='git'
+alias gcm='git commit -m'
 alias gs='git show'
 alias gt='git tag'
 alias gst='git status'

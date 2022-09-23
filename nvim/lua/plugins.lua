@@ -90,9 +90,10 @@ return require('packer').startup({
     ------------------------------------------------
     --> Git ----------------------------------------
     ------------------------------------------------
-    use({ 'TimUntersberger/neogit', cmd = 'Neogit',
-      config = [[require('config.neogit')]], opt = true,
-      requires = { 'sindrets/diffview.nvim' }
+    use({ 'TimUntersberger/neogit',
+      opt = true, cmd = 'Neogit', commit = '64245bb',
+      config = [[require('config.neogit')]],
+      requires = { 'sindrets/diffview.nvim' },
     })
     use({ 'airblade/vim-gitgutter',
       opt = true, event = 'CursorHold',
