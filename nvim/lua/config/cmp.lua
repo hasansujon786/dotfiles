@@ -130,29 +130,27 @@ end)
 
 -- hot fix : after using / <tab> completion stops working
 keymap('c', '<tab>', '<C-z>', { silent = false })
-for _, v in pairs({ '/', '?' }) do
-  cmp.setup.cmdline(v, {
-    mapping = cmp.mapping.preset.cmdline({
-      ['<CR>'] = cmp.mapping(function(fallback)
-        if cmp.visible() and cmp.get_selected_entry() then
-          cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-          feedkeys('<CR>', '')
-        else
-          fallback()
-        end
-      end, { 'c' }),
-      ['<C-y>'] = cmp.mapping(function(_)
-        cmp.close()
-        vim.defer_fn(function()
-          feedkeys('<CR>', '')
-        end, 10)
-      end, { 'c' }),
-    }),
-    sources = {
-      { name = 'buffer', keyword_length = 2 },
-    },
-    view = {
-      entries = { name = 'wildmenu', separator = ' | ' },
-    },
-  })
-end
+cmp.setup.cmdline({ '/', '?' }, {
+  mapping = cmp.mapping.preset.cmdline({
+    ['<CR>'] = cmp.mapping(function(fallback)
+      if cmp.visible() and cmp.get_selected_entry() then
+        cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+        feedkeys('<CR>', '')
+      else
+        fallback()
+      end
+    end),
+    ['<C-y>'] = cmp.mapping(function(_)
+      cmp.close()
+      vim.defer_fn(function()
+        feedkeys('<CR>', '')
+      end, 10)
+    end),
+  }),
+  sources = {
+    { name = 'buffer', keyword_length = 2 },
+  },
+  view = {
+    entries = { name = 'wildmenu', separator = ' | ' },
+  },
+})
