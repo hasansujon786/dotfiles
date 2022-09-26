@@ -31,40 +31,42 @@ cmp.setup({
     entries = { name = 'custom', selection_order = 'top_down' },
   },
   mapping = cmp.mapping.preset.insert({
-    ['<A-u>'] = cmp.mapping(function()
-      if luasnip.choice_active() then
-        require('luasnip.extras.select_choice')()
-      else
-        cmp.scroll_docs(-4)
-      end
-    end),
-    ['<A-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4)),
+    ['<A-u>'] = cmp.mapping.scroll_docs(-4),
+    ['<A-d>'] = cmp.mapping.scroll_docs(4),
     ['<A-n>'] = cmp.mapping(function(_)
       if cmp.visible() then
         cmp.select_next_item()
+      elseif luasnip.choice_active() then
+        luasnip.change_choice(1)
       else
         cmp.complete()
       end
-    end, { 'i', 'c' }),
+    end, { 'i', 'c', 's' }),
     ['<A-p>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
+      elseif luasnip.choice_active() then
+        luasnip.change_choice(-1)
       else
         fallback()
       end
-    end, { 'i', 'c' }),
+    end, { 'i', 'c', 's' }),
+    ['<C-l>'] = cmp.mapping(function(_)
+      cmp.complete({ config = { sources = { { name = 'luasnip' } } } })
+    end),
     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
     ['<C-e>'] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
-    ['<c-space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-    ['<M-space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     ['<C-q>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-    ['<C-l>'] = cmp.mapping(function(_)
-      if luasnip.choice_active() then
-        luasnip.change_choice(1)
-      else
-        cmp.complete({ config = { sources = { { name = 'luasnip' } } } })
-      end
-    end, { 'i', 's' }),
+    ['<c-space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    ['<M-space>'] = cmp.mapping({
+      i = cmp.mapping.complete(),
+      c = cmp.mapping.complete(),
+      s = function(_)
+        if luasnip.choice_active() then
+          require('luasnip.extras.select_choice')()
+        end
+      end,
+    }),
     ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Select, select = true }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -92,6 +94,7 @@ cmp.setup({
     { name = 'luasnip' },
     { name = 'buffer', keyword_length = 4 },
     { name = 'path' },
+    -- { name = 'cmp-tw2css' }
   },
   formatting = {
     fields = { 'kind', 'abbr', 'menu' },
@@ -125,29 +128,31 @@ CMP_AUGROUP(function(autocmd)
   autocmd('FileType', 'lua CmpNeogitCommitMessageSetup()', { pattern = { 'NeogitCommitMessage' } })
 end)
 
--- hot fix
-keymap('c', '<tab>', '<C-z>', { silent = false }) -- after using / cmd <tab> stops woring
-cmp.setup.cmdline('/', {
-  mapping = cmp.mapping.preset.cmdline({
-    ['<CR>'] = cmp.mapping(function(fallback)
-      if cmp.visible() and cmp.get_selected_entry() then
-        cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-        feedkeys('<CR>', '')
-      else
-        fallback()
-      end
-    end, { 'c' }),
-    ['<C-y>'] = cmp.mapping(function(fallback)
-      cmp.close()
-      vim.defer_fn(function()
-        feedkeys('<CR>', '')
-      end, 10)
-    end, { 'c' }),
-  }),
-  sources = {
-    { name = 'buffer', keyword_length = 2 },
-  },
-  view = {
-    entries = { name = 'wildmenu', separator = ' | ' }, -- the user can also specify the `wildmenu` literal string.
-  },
-})
+-- hot fix : after using / <tab> completion stops working
+keymap('c', '<tab>', '<C-z>', { silent = false })
+for _, v in pairs({ '/', '?' }) do
+  cmp.setup.cmdline(v, {
+    mapping = cmp.mapping.preset.cmdline({
+      ['<CR>'] = cmp.mapping(function(fallback)
+        if cmp.visible() and cmp.get_selected_entry() then
+          cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+          feedkeys('<CR>', '')
+        else
+          fallback()
+        end
+      end, { 'c' }),
+      ['<C-y>'] = cmp.mapping(function(_)
+        cmp.close()
+        vim.defer_fn(function()
+          feedkeys('<CR>', '')
+        end, 10)
+      end, { 'c' }),
+    }),
+    sources = {
+      { name = 'buffer', keyword_length = 2 },
+    },
+    view = {
+      entries = { name = 'wildmenu', separator = ' | ' },
+    },
+  })
+end

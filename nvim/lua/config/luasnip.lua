@@ -14,8 +14,8 @@ ls.config.set_config({
   -- ext_opts = nil,
   ext_opts = {
     [types.choiceNode] = {
-      passive = { virt_text = { { icons.ui.BigCircle, 'Comment' } } },
-      active = { virt_text = { { icons.ui.BigCircle, 'CmpItemKindClass' } } },
+      passive = { virt_text = { { '', 'Comment' } } },
+      active = { virt_text = { { '', 'CmpItemKindClass' } } },
     },
     [types.insertNode] = {
       passive = { virt_text = { { icons.ui.BigCircle, 'Comment' } } },
