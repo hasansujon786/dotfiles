@@ -38,7 +38,7 @@ function! hasan#utils#buffer#_clear() abort "{{{
   endif
 
   if bufnr('%') == currentBufNum
-    execute('Dashboard')
+    execute('Alpha')
   endif
 
   if buflisted(currentBufNum)
@@ -73,7 +73,7 @@ function! hasan#utils#buffer#_clear_all() abort "{{{
       catch
       endtry
     endfor
-    exec('Dashboard')
+    execute('Alpha')
   endif
 endfunction "}}}
 
