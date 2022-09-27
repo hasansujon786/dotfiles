@@ -21,17 +21,14 @@ local dl = require('luasnip.extras').dynamic_lambda
 local fmta = require('luasnip.extras.fmt').fmta
 local types = require('luasnip.util.types')
 local conds = require('luasnip.extras.expand_conditions')
-
-local comment_chars = function(_, _, _)
-  return require('luasnip.util.util').buffer_comment_chars()[1]
-end
+local common = require('snips.common')
 
 ls.add_snippets('all', {
   s('bang', t('#!/usr/bin/env ')),
   s(
     'cdate',
     fmt([[{} {} ]], {
-      f(comment_chars, {}),
+      f(common.comment_chars, {}),
       c(1, {
         p(os.date, '%d.%m.%Y - %H:%M'),
         p(os.date, '%d.%m.%Y'),
@@ -41,7 +38,7 @@ ls.add_snippets('all', {
   s(
     'todo',
     fmt([[{} {}: {} {}]], {
-      f(comment_chars, {}),
+      f(common.comment_chars, {}),
       c(1, { i(nil, 'TODO'), i(nil, 'FIXME'), i(nil, 'DONE'), i(nil, 'INFO') }),
       p(os.date, '<%d.%m.%y>'),
       i(0),
@@ -56,10 +53,10 @@ ls.add_snippets('all', {
       {} ================================================
       ]],
       {
-        f(comment_chars, {}),
-        f(comment_chars, {}),
+        f(common.comment_chars, {}),
+        f(common.comment_chars, {}),
         i(0),
-        f(comment_chars, {}),
+        f(common.comment_chars, {}),
       }
     )
   ),

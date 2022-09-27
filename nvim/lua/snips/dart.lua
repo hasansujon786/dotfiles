@@ -17,12 +17,13 @@ local fmt = require('luasnip.extras.fmt').fmt
 local fmta = require('luasnip.extras.fmt').fmta
 local types = require('luasnip.util.types')
 local conds = require('luasnip.extras.expand_conditions')
+local common = require('snips.common')
 
 ls.add_snippets('dart', {
   s('s', fmt('String {1}{2}', { i(1), t(';') })),
   s('S', fmt('String? {1}{2}', { i(1), t(';') })),
-  s('i', fmt('Int {1}{2}', { i(1), t(';') })),
-  s('I', fmt('Int? {1}{2}', { i(1), t(';') })),
+  s('i', fmt('int {1}{2}', { i(1), t(';') })),
+  s('I', fmt('int? {1}{2}', { i(1), t(';') })),
   s('d', fmt('double {1}{2}', { i(1), t(';') })),
   s('D', fmt('double? {1}{2}', { i(1), t(';') })),
   s('f', fmt('final {1}{2}', { i(1), t(';') })),
@@ -58,5 +59,32 @@ ls.add_snippets('dart', {
         end, { 1 }),
       }
     )
+  ),
+  s(
+    'si',
+    fmt([[final {} = MediaQuery.of(context).size{};]], {
+      c(1, { t('width'), t('height'), t('size') }),
+      f(function(args)
+        local choice = args[1][1]
+        if choice == 'size' then
+          return ''
+        end
+        return '.' .. choice
+      end, { 1 }),
+    })
+  ),
+  s(
+    'mq',
+    fmt([[{}MediaQuery.of(context){}]], {
+      c(1, { t('final mq = '), t('') }),
+      f(common.choiceSemicolon, { 1 }),
+    })
+  ),
+  s(
+    'tt',
+    fmt([[{}Theme.of(context).textTheme{}]], {
+      c(1, { t('final tt = '), t('') }),
+      f(common.choiceSemicolon, { 1 }),
+    })
   ),
 }, { key = 'my_dart_snips' })

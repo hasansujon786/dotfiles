@@ -3,7 +3,7 @@
     "prefix": "stlessW",
     "body": [
       "class ${1:MyStatelessWidget} extends StatelessWidget {",
-      "  const ${1:MyStatelessWidget}({Key? key}) : super(key: key);\n",
+      "  const ${1:MyStatelessWidget}({super.key});\n",
       "  @override",
       "  Widget build(BuildContext context) {",
       "    return Container();",
@@ -16,7 +16,7 @@
     "prefix": "stfulW",
     "body": [
       "class ${1:MyStatefulWidget} extends StatefulWidget {",
-      "  const ${1:MyStatefulWidget}({Key? key}) : super(key: key);\n",
+      "  const ${1:MyStatefulWidget}({super.key});\n",
       "  @override",
       "  State<${1:WidgetName}> createState() => _${1:WidgetName}State();",
       "}\n",
@@ -35,7 +35,7 @@
     "body": [
       "import 'package:flutter/material.dart';\n",
       "class ${1:MyStatelessWidget} extends StatelessWidget {",
-      "  const ${1:MyStatelessWidget}({Key? key}) : super(key: key);\n",
+      "  const ${1:MyStatelessWidget}({super.key});\n",
       "  static const routeName = '/${2:route_name}';",
       "  @override",
       "  Widget build(BuildContext context) {",
@@ -57,7 +57,7 @@
     "body": [
       "import 'package:flutter/material.dart';\n",
       "class ${1:MyStatefulWidget} extends StatefulWidget {",
-      "  const ${1:MyStatefulWidget}({Key? key}) : super(key: key);\n",
+      "  const ${1:MyStatefulWidget}({super.key});\n",
       "  static const routeName = '/${2:route_name}';",
       "  @override",
       "  State<${1:WidgetName}> createState() => _${1:WidgetName}State();",
@@ -122,27 +122,6 @@
       "Theme.of(context)"
     ],
     "description": "Theme.of(context)"
-  },
-  "texttheme": {
-    "prefix": "tot",
-    "body": [
-      "Theme.of(context).textTheme"
-    ],
-    "description": "textTheme"
-  },
-  "Screen height": {
-    "prefix": "sz",
-    "body": [
-      "double height = MediaQuery.of(context).size.height;"
-    ],
-    "description": "Screen height"
-  },
-  "MediaQuery": {
-    "prefix": "mq",
-    "body": [
-      "final mq = MediaQuery.of(context);"
-    ],
-    "description": "MediaQuery"
   },
   "Quick Container": {
     "prefix": "dd",
