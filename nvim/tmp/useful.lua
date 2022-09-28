@@ -33,6 +33,7 @@
 --    au VimLeavePre * lua IncreasePadding()
 --   augroup END
 -- ]]
+local M = {}
 
 local async = require('plenary.async')
 local packer_sync = function()
@@ -276,3 +277,24 @@ function Focus_with_outline(count)
 end
 
 -- keymap('n', '<cr>', '<cmd>lua Focus_with_outline(vim.v.count)<cr>')
+
+-- For autocommands, extracted from
+-- https://github.com/norcalli/nvim_utils
+M.create_augroups = function(definitions)
+  for group_name, definition in pairs(definitions) do
+    vim.api.nvim_command('augroup ' .. group_name)
+    vim.api.nvim_command('autocmd!')
+    for _, def in ipairs(definition) do
+      local command = table.concat(vim.tbl_flatten({ 'autocmd', def }), ' ')
+      vim.api.nvim_command(command)
+    end
+    vim.api.nvim_command('augroup END')
+  end
+end
+-- local autocmds = {
+--   Telescope = {
+--     { 'BufWinEnter,WinEnter * let g:hasan_telescope_buffers[bufnr()] = reltimefloat(reltime())' },
+--     { 'BufDelete * silent! call remove(g:hasan_telescope_buffers, expand("<abuf>"))' },
+--   },
+-- }
+-- M.create_augroups(autocmds)

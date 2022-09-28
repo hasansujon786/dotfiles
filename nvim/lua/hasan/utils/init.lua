@@ -157,20 +157,6 @@ M.map = function(mode, lhs, rhs, opts)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
--- For autocommands, extracted from
--- https://github.com/norcalli/nvim_utils
-M.create_augroups = function(definitions)
-  for group_name, definition in pairs(definitions) do
-    vim.api.nvim_command('augroup ' .. group_name)
-    vim.api.nvim_command('autocmd!')
-    for _, def in ipairs(definition) do
-      local command = table.concat(vim.tbl_flatten({ 'autocmd', def }), ' ')
-      vim.api.nvim_command(command)
-    end
-    vim.api.nvim_command('augroup END')
-  end
-end
-
 M.open_git_remote = function(openRoot)
   local Job = require('plenary.job')
   local fpath = nil

@@ -1,4 +1,3 @@
-local utils = require('hasan.utils')
 -- TSInstallSync javascript typescript tsx org
 require('nvim-treesitter.configs').setup({
   ensure_installed = { 'html', 'vim', 'css', 'json', 'lua', 'vue', 'dart', 'bash' },
@@ -104,7 +103,7 @@ require('nvim-treesitter.configs').setup({
   },
 })
 
-function Treesitter_foldexpr()
+_G.my_treesitter_foldexpr = function()
   vim.defer_fn(function()
     vim.wo.foldmethod = 'expr'
 
@@ -122,11 +121,8 @@ function Treesitter_foldexpr()
 end
 
 local treesitter_foldtext_filetypes = 'html,css,javascript,typescript,tsx,typescriptreact,json,lua,vue,dart,org'
-local autocmds = {
-  TS_fold = {
-    { 'FileType', treesitter_foldtext_filetypes, 'lua Treesitter_foldexpr()' },
-    { 'FileType', 'javascript,typescript,tsx,typescriptreact,vue,dart', 'let b:treesitter_import_syntax = "import"' },
-  },
-}
-
-utils.create_augroups(autocmds)
+local import_pattern = 'javascript,typescript,tsx,typescriptreact,vue,dart'
+require('hasan.utils').augroup('MY_TREESITTER_AUGROUP')(function(autocmd)
+  autocmd('FileType', 'lua my_treesitter_foldexpr()', { pattern = treesitter_foldtext_filetypes })
+  autocmd('FileType', 'let b:treesitter_import_syntax = "import"', { pattern = import_pattern })
+end)
