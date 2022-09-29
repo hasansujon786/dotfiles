@@ -8,7 +8,7 @@ utils.augroup('MY_AUGROUP')(function(autocmd)
   autocmd('CmdwinEnter', 'nnoremap <buffer><CR> <CR>')
   autocmd('ColorScheme', 'lua require("hasan.utils.ui.palatte").set_custom_highlights()')
 
-  autocmd('FileType', 'foldlevel=0', { pattern = 'vim' })
+  autocmd('FileType', 'setlocal foldlevel=0', { pattern = 'vim' })
   autocmd('FileType', 'setlocal foldmethod=marker', { pattern = { 'vim', 'css', 'scss', 'json' } })
   autocmd('FileType', 'setlocal foldmarker={,}', { pattern = { 'css', 'scss', 'json' } })
 

@@ -20,6 +20,15 @@ wk.setup {
   show_help = false,
 }
 
+local function loadOrgMode(key)
+  return function ()
+    vim.cmd[[silent PackerLoad orgmode]]
+    vim.defer_fn(function()
+      feedkeys(key)
+    end, 0)
+  end
+end
+
 local common = {
   search_wiki_files = { '<cmd>lua require("hasan.telescope.custom").search_wiki_files()<CR>', 'Search org files'},
   grep_org_text = { '<cmd>lua require("hasan.telescope.custom").grep_org_text()<CR>',         'Grep org text'},
@@ -181,8 +190,8 @@ local leader = {
   o = {
     name = '+open',
     ['/'] = common.grep_org_text,
-    a = 'Org agenda',
-    c = 'Org capture',
+    a = { loadOrgMode('<space>oa'),                                             'Org agenda' },
+    c = { loadOrgMode('<space>oc'),                                             'Org capture' },
     h = {'<cmd>lua require("hasan.org").open_org_home("-tabedit")<CR>',         'Open org home'},
 
     o = { '<cmd>SymbolsOutline<cr>', 'SymbolsOutline' },

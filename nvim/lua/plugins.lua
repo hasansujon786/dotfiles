@@ -30,15 +30,13 @@ return require('packer').startup({
     ------------------------------------------------
     --> Productiviry -------------------------------
     ------------------------------------------------
-    use({ 'nvim-orgmode/orgmode',
-      opt = true, after = 'nvim-treesitter',
-      config = function() require('config.orgmode') end,
-      requires = {
-        {"akinsho/org-bullets.nvim", config = function() require('config.org-bullets') end }
-      }
-    })
     use({ 'mkropat/vim-tt', opt = true, event = 'CursorHold', config = function () vim.g.tt_loaded = 1 end })
     use({ 'folke/zen-mode.nvim', opt = true, cmd = 'ZenMode', config = [[require('config.zen')]] })
+    use({ 'nvim-orgmode/orgmode',
+      opt = true, ft = {'org'},
+      config = function() require('config.orgmode') end,
+      requires = { {'akinsho/org-bullets.nvim', config = function() require('config.org-bullets') end} }
+    })
     ------------------------------------------------
     --> Navigation ---------------------------------
     ------------------------------------------------
