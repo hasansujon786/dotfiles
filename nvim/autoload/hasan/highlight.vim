@@ -37,6 +37,7 @@ function hasan#highlight#load_custom_highlight(...) abort
   hi LspReferenceText  guibg=#3B4048 gui=NONE
   hi LspReferenceWrite guibg=#463b48 gui=NONE
   hi LspReferenceRead  guibg=#3B4048 gui=NONE
+  hi! link LspInfoBorder  FloatBorder
 
   "/// Plugins ///"
   hi! link HLNext IncSearch

@@ -16,7 +16,7 @@ cmp.setup({
   window = {
     -- completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered({
-      winhighlight = 'Normal:Normal,FloatBorder:TelescopeBorder,CursorLine:Visual,Search:None',
+      winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
     }),
   },
   experimental = {

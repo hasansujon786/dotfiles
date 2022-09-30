@@ -1,5 +1,6 @@
 local lspconfig = require('lspconfig')
 require('mason').setup({ max_concurrent_installers = 3, ui = { border = 'rounded' } })
+require('lspconfig.ui.windows').default_options.border = 'rounded'
 require('mason-lspconfig').setup()
 
 local lua_opts = {
