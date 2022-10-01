@@ -87,4 +87,38 @@ ls.add_snippets('dart', {
       f(common.choiceSemicolon, { 1 }),
     })
   ),
+  s(
+    'animationController',
+    fmt(
+      [[
+      late AnimationController _controller;
+      late Animation<double> _opacityAnim;
+
+      @override
+      void initState() {{
+        super.initState();
+        _controller = AnimationController(
+          vsync: this,
+          duration: const Duration(seconds: 2),
+        );
+        final curveAnim = CurvedAnimation(
+          parent: _controller,
+          curve: Curves.fastOutSlowIn,
+          // curve: const Interval(0, 1, curve: Curves.easeOut),
+        );
+        _opacityAnim = Tween<double>(begin: 0, end: 1).animate(curveAnim);
+
+        // _controller.forward();
+        // _controller.repeat(reverse: true);
+      }}
+
+      @override
+      void dispose() {{
+        _controller.dispose();
+        super.dispose();
+      }}
+      ]],
+      {}
+    )
+  ),
 }, { key = 'my_dart_snips' })

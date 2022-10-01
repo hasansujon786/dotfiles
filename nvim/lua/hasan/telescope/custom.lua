@@ -270,12 +270,13 @@ M.grep_string_list = function(opts)
     :find()
 end
 
+local todo_items = { 'TODO', 'DONE', 'INFO', 'FIXME', 'BUG', 'FIXIT', 'ISSUE', 'OPTIM', 'OPTIMIZE', 'WARNING' }
 function M.search_project_todos()
   M.grep_string_list({
     results_title = ' Project Todos',
     prompt_title = 'Search Todos',
     path_display = { 'smart' },
-    search_list = { 'TODO:', 'DONE:', 'INFO:', 'FIXME:' },
+    search_list = todo_items,
     additional_args = function()
       return { '--glob', '!nvim/lua/hasan/telescope/custom.lua', '--glob', '!nvim/legacy/*' }
     end,
