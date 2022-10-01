@@ -1,13 +1,7 @@
 local noSilent = { silent = false }
 local nvim_set_keymap = vim.api.nvim_set_keymap
 
--- Hide search highlighting
-if vim.fn.exists('g:loaded_HLNext') then
-  keymap({ 'n', 'v' }, 'q', '<ESC>:<C-u>call HLNextOff()<BAR>:nohlsearch<BAR>echo ""<BAR>ColorizerReloadAllBuffers<CR>')
-else
-  keymap({ 'n', 'v' }, 'q', '<ESC>:<C-u>nohlsearch<BAR>echo ""<BAR>ColorizerReloadAllBuffers<CR><CR>')
-end
-
+keymap({ 'n', 'v' }, 'q', '<ESC><Cmd>nohlsearch|diffupdate|echo ""<CR>') -- ColorizerReloadAllBuffers
 keymap('n', 'A', 'zzA') -- fix InsertEnter zz
 keymap('n', 'ZZ', ':Quit!<CR>') -- Prompt before quitting
 keymap('n', 'Q', 'q') -- Use Q to record macros

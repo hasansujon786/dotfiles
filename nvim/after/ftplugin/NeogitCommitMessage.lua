@@ -1,5 +1,4 @@
-
-vim.opt.spell=true
+vim.o.spell=true
 
 function CmpNeogitCommitMessageSetup()
   require('cmp').setup.buffer {

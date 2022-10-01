@@ -9,6 +9,7 @@ function hasan#highlight#load_custom_highlight(...) abort
   hi CursorColumn       guibg=#3B4048
   hi CursorLineFocus    guibg=#3E4452
   hi IncSearch          guibg=#e86671 gui=underline
+  hi CurSearch          guibg=#e86671 guifg=#2C323C gui=underline
   hi SignColumn         guibg=NONE
   " guibg=#1e242f
   hi PmenuSel           guibg=#495369 guifg=NONE

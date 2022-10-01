@@ -80,7 +80,6 @@ function! hasan#utils#visualSelection(direction, extra_filter) range "{{{
 
   let @/ = l:pattern
   let @" = l:saved_reg
-  call HLNextSetTrigger()
 endfunction "}}}
 
 " Move VISUAL LINE selection within buffer
