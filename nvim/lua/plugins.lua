@@ -21,11 +21,16 @@ return require('packer').startup({
     use({ 'hasansujon786/kissline.nvim', config = [[require('config.kissline')]] })
     use({ 'nvim-lualine/lualine.nvim', config = [[require('config.lualine')]], commit = '8d956c18258bb128ecf42f95411bb26efd3a5d23' })
     use({ 'kyazdani42/nvim-web-devicons', config = [[require('config.devicons-config')]] })
-    use({ 'lukas-reineke/indent-blankline.nvim', opt = true, event = 'VimEnter', config = [[require('config.indentLine')]] })
-    use({ 'uga-rosa/ccc.nvim', config=[[require('config.color-picker')]], opt=true, cmd='CccPick', branch = '0.7.2' })
-    use({ 'NvChad/nvim-colorizer.lua', opt = true, event = 'CursorHold', config = [[require('config.colorizer')]] })
-    use({ 'karb94/neoscroll.nvim', config = [[require('config.neoscroll')]], event = 'BufReadPost', opt = true })
     use({ 'hasansujon786/notifier.nvim', opt = true, module = 'notifier' })
+    use({ 'folke/which-key.nvim', config = function() require('config.whichkey') end })
+    use({ 'uga-rosa/ccc.nvim', config=[[require('config.color-picker')]], opt=true, cmd='CccPick', branch = '0.7.2' })
+    use({ 'lukas-reineke/indent-blankline.nvim', opt = true, event = 'BufReadPost', config = [[require('config.indentLine')]],
+      requires = {
+        { 'karb94/neoscroll.nvim', config = [[require('config.neoscroll')]] },
+        { 'NvChad/nvim-colorizer.lua', config = [[require('config.colorizer')]] },
+        { 'chentoast/marks.nvim', config=[[require('config.marks-config')]] },
+      }
+    })
 
     ------------------------------------------------
     --> Productiviry -------------------------------
@@ -37,6 +42,7 @@ return require('packer').startup({
       config = function() require('config.orgmode') end,
       requires = { {'akinsho/org-bullets.nvim', config = function() require('config.org-bullets') end} }
     })
+
     ------------------------------------------------
     --> Navigation ---------------------------------
     ------------------------------------------------
@@ -56,33 +62,33 @@ return require('packer').startup({
       }
     })
 
-    use({ 'unblevable/quick-scope', opt = true, event = 'CursorHold'})
-    use({ 'justinmk/vim-sneak', opt = true, event = 'CursorHold', config = [[require('config.sneak')]] })
-
     ------------------------------------------------
     --> Utils --------------------------------------
     ------------------------------------------------
     use({ 'MunifTanjim/nui.nvim' })
     use({ 'nvim-lua/plenary.nvim' })
-    use({ 'tpope/vim-repeat', opt = true, event = 'BufRead' })
-    use({ 'dhruvasagar/vim-open-url', opt = true, event = 'BufRead' })
-    use({ 'tpope/vim-commentary', opt = true, event = 'BufReadPost' })
-    use({ 'tpope/vim-surround', opt = true, event = 'BufReadPost' })
-    use({ 'mg979/vim-visual-multi', opt = true, event = 'CursorHold' })
+    use({ 'tpope/vim-commentary', opt = true, event = 'BufReadPost',
+      requires = {
+        { 'tpope/vim-surround' },
+        { 'tpope/vim-repeat' },
+        { 'mg979/vim-visual-multi' },
+        { 'dhruvasagar/vim-open-url' },
+        { 'arthurxavierx/vim-caser' },
+        { 'NTBBloodbath/color-converter.nvim' },
+        { 'Konfekt/vim-CtrlXA' },
+        { 'hasansujon786/vim-rel-jump' },
+        { 'justinmk/vim-sneak', config = [[require('config.sneak')]] },
+        { 'unblevable/quick-scope' }
+      }
+    })
+
     use({ 'tpope/vim-eunuch', opt = true, cmd = {'Delete','Move','Rename','Mkdir','Chmod'} })
-    use({ 'folke/which-key.nvim', config = function() require('config.whichkey') end })
     use({ 'voldikss/vim-floaterm',opt=true,cmd={'FloatermNew','FloatermToggle'},config=[[require('config.floaterm')]] })
     use({ 'olimorris/persisted.nvim',
       cmd = {'SessionLoad', 'SessionLoadLast', 'SessionSave'},
       module = 'persisted', opt = true,
       config = [[require('config.persisted').setup()]],
     })
-    use({ 'simrat39/symbols-outline.nvim', opt = true, cmd = 'SymbolsOutline', config = [[require('config.symbol_outline')]] })
-    use({ 'arthurxavierx/vim-caser', opt = true, event = 'CursorHold' })
-    use({ 'NTBBloodbath/color-converter.nvim', opt = true, event = 'CursorHold' })
-    use({ 'Konfekt/vim-CtrlXA', opt = true, event = 'CursorHold' })
-    use({ 'chentoast/marks.nvim',opt=true,event='CursorHold',config=[[require('config.marks-config')]] })
-    use({ 'hasansujon786/vim-rel-jump', opt = true, event = 'BufRead' })
     use({ 'tpope/vim-scriptease', opt = true, cmd = {'PP','Messages'} })
 
     ------------------------------------------------
@@ -94,7 +100,7 @@ return require('packer').startup({
       requires = { 'sindrets/diffview.nvim' },
     })
     use({ 'airblade/vim-gitgutter',
-      opt = true, event = 'CursorHold',
+      opt = true, event = 'BufReadPost',
       config="require('config.gitgutter-config')",
       commit='f19b6203191d69de955d91467a5707959572119b'
       -- commit='d5bae104031bb1633cb5c5178dc7d4ac422b422a'
@@ -115,12 +121,12 @@ return require('packer').startup({
       }
     })
     use({ 'neovim/nvim-lspconfig',
-      opt = true, event = 'BufReadPost',
+      opt = true, event = 'BufReadPre',
       config = function() require('lsp') end,
       requires = {
         { 'jose-elias-alvarez/null-ls.nvim', config = function() require('lsp.null-ls') end },
         { 'williamboman/mason.nvim', config = function() require('lsp.lsp_config') end },
-        { 'williamboman/mason-lspconfig.nvim', opt = true, module = 'mason-lspconfig', },
+        { 'williamboman/mason-lspconfig.nvim'},
       }
     })
     use({ 'hrsh7th/nvim-cmp',
@@ -136,10 +142,11 @@ return require('packer').startup({
         'saadparwaiz1/cmp_luasnip',
         { 'hrsh7th/cmp-path', commit ='d83839ae510d18530c6d36b662a9e806d4dceb73' },
         { 'windwp/nvim-autopairs', config = [[require('config.autopairs')]] },
+        { 'mattn/emmet-vim', config = [[require('config.emmet')]] },
       },
     })
+    use({ 'simrat39/symbols-outline.nvim', opt = true, cmd = 'SymbolsOutline', config = [[require('config.symbol_outline')]] })
     use({ 'akinsho/flutter-tools.nvim', opt = true, ft = {'dart'}, config = [[require('config.flutter-tools')]] })
-    use({ 'mattn/emmet-vim', opt = true, event = 'BufReadPost', config = [[require('config.emmet')]] })
     use {
       'mfussenegger/nvim-dap',
       opt = true, module = 'dap',
@@ -147,7 +154,7 @@ return require('packer').startup({
       requires = {
         {'rcarriga/nvim-dap-ui', config = 'require("config.dap").configure_dap_ui()'},
         {'theHamsta/nvim-dap-virtual-text', config = 'require("config.dap").configure_virtual_text()'},
-        'nvim-telescope/telescope-dap.nvim',
+        {'nvim-telescope/telescope-dap.nvim'},
         -- 'jbyuki/one-small-step-for-vimkind',
       },
     }
