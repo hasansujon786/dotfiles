@@ -23,7 +23,7 @@ return require('packer').startup({
     use({ 'kyazdani42/nvim-web-devicons', config = [[require('config.devicons-config')]] })
     use({ 'hasansujon786/notifier.nvim', opt = true, module = 'notifier' })
     use({ 'folke/which-key.nvim', config = function() require('config.whichkey') end })
-    use({ 'uga-rosa/ccc.nvim', config=[[require('config.color-picker')]], opt=true, cmd='CccPick', branch = '0.7.2' })
+    use({ 'uga-rosa/ccc.nvim', config=[[require('config.color-picker')]], opt=true, cmd='CccPick' })
     use({ 'lukas-reineke/indent-blankline.nvim', opt = true, event = 'BufReadPost', config = [[require('config.indentLine')]],
       requires = {
         { 'karb94/neoscroll.nvim', config = [[require('config.neoscroll')]] },

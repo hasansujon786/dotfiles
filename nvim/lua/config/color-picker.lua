@@ -2,7 +2,7 @@ local ccc = require('ccc')
 local mapping = ccc.mapping
 
 ccc.setup({
-  bar_char = 'ﱢ',
+  bar_char = '■',
   point_char = '◇',
   bar_len = 40,
   default_color = '#7321de',
@@ -10,6 +10,17 @@ ccc.setup({
   inputs = {
     ccc.input.hsl,
     ccc.input.rgb,
+  },
+  outputs = {
+    ccc.output.hex,
+    ccc.output.hex_short,
+    ccc.output.css_rgb,
+    ccc.output.css_hsl,
+  },
+  convert = {
+    { ccc.picker.hex, ccc.output.css_rgb },
+    { ccc.picker.css_rgb, ccc.output.css_hsl },
+    { ccc.picker.css_hsl, ccc.output.hex },
   },
   mappings = {
     ['r'] = mapping.toggle_input_mode,
@@ -21,6 +32,10 @@ ccc.setup({
     ['e'] = mapping.increase10,
     ['n'] = mapping.goto_next,
     ['p'] = mapping.goto_prev,
+  },
+  highlighter = {
+    auto_enable = false,
+    lsp = false,
   },
 })
 
