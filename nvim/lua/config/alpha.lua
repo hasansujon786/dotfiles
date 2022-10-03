@@ -104,5 +104,5 @@ alpha.setup({
 --     })
 --     vim.opt.laststatus = 0
 --   end,
--- })
-vim.cmd([[autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2]])
+-- -- })
+-- vim.cmd([[autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2]])

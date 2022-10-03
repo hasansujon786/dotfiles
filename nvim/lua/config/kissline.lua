@@ -1,5 +1,6 @@
 require('kissline').setup({
   disable_line = true,
+  disable_tab = true,
   -- tab_style = 'angel_bar',
-  -- disable_tab = true,
+  eneble_winbar = true,
 })
