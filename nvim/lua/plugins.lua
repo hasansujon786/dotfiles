@@ -18,7 +18,7 @@ return require('packer').startup({
     ------------------------------------------------
     use({ 'navarasu/onedark.nvim', config = [[require('config.onedark')]] })
     use({ 'goolord/alpha-nvim', config = [[require('config.alpha')]] })
-    use({ 'hasansujon786/kissline.nvim', config = [[require('config.kissline')]] })
+    use({ 'hasansujon786/kissline.nvim', config = [[require('config.kissline')]], opt = true, event = 'BufRead' })
     use({ 'nvim-lualine/lualine.nvim', config = [[require('config.lualine')]], commit = '8d956c18258bb128ecf42f95411bb26efd3a5d23' })
     use({ 'kyazdani42/nvim-web-devicons', config = [[require('config.devicons-config')]] })
     use({ 'hasansujon786/notifier.nvim', opt = true, module = 'notifier' })
@@ -125,7 +125,7 @@ return require('packer').startup({
       config = function() require('lsp') end,
       requires = {
         { 'jose-elias-alvarez/null-ls.nvim', config = function() require('lsp.null-ls') end },
-        { 'williamboman/mason.nvim', config = function() require('lsp.lsp_config') end },
+        { 'williamboman/mason.nvim', config = function() require('lsp.lsp-config') end },
         { 'williamboman/mason-lspconfig.nvim'},
       }
     })
