@@ -20,19 +20,19 @@ M.diagnostic_icon_by_severity = function(severity)
   return icon, highlight
 end
 
+local jump_opts = {
+  float = {
+    prefix = function(diagnostic)
+      local icon, highlight = M.diagnostic_icon_by_severity(diagnostic.severity)
+      return icon .. ' ', highlight
+    end,
+  },
+}
 M.jump_to_diagnostic = function(direction)
-  local opts = {
-    float = {
-      prefix = function(diagnostic)
-        local icon, highlight = M.diagnostic_icon_by_severity(diagnostic.severity)
-        return icon .. ' ', highlight
-      end,
-    },
-  }
   if direction == 'prev' then
-    vim.diagnostic.goto_prev(opts)
+    vim.diagnostic.goto_prev(jump_opts)
   else
-    vim.diagnostic.goto_next(opts)
+    vim.diagnostic.goto_next(jump_opts)
   end
 end
 
@@ -41,9 +41,9 @@ M.setup = function()
     return 0
   end
 
-  for icon_type, _ in pairs(diagnotic_icons) do
+  for icon_type, icon in pairs(diagnotic_icons) do
     local hl = 'DiagnosticSign' .. icon_type
-    vim.fn.sign_define(hl, { text = '', texthl = hl, numhl = hl })
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
   vim.diagnostic.config({
     signs = true,

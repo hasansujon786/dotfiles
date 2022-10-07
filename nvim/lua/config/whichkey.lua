@@ -35,7 +35,7 @@ local common = {
   buffers_cwd = { '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>',             'Switch buffers' },
   buffers_all = { '<cmd>lua require("hasan.telescope.custom").buffers(false)<CR>',            'Switch all buffers' },
   grep_string = { '<cmd>lua require("hasan.telescope.custom").grep_string()<CR>',             'Grep string' },
-  substitute_word = {'<Cmd>lua require("hasan.utils.ui").substitute_word()<CR>',              'Substitute word'},
+  substitute_word = {'<cmd>lua require("hasan.utils.ui").substitute_word()<CR>',              'Substitute word'},
   project_files = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>',         'Find project file' },
 }
 local w = {
@@ -287,7 +287,7 @@ local leader = {
   r = { '<cmd>lua require("hasan.utils.ui").cycle_numbering()<CR>',    'Cycle number' },
   R = { '<cmd>lua require("nebulous").toggle_win_blur()<CR>',          'Toggle Nebulous' },
   s = { '<cmd>call hasan#utils#buffer#_save()<cr>',                    'Save file' },
-  x = { '<cmd>call hasan#utils#buffer#_open_scratch_buffer()<CR>',     'Open scratch buffer' },
+  x = { '<cmd>call hasan#utils#buffer#_open_scratch_buffer()<CR>',     'Scratch buffer' },
   M = { '<cmd>lua require("harpoon.mark").add_file()<CR>',             'Mark to Harpoon' },
 
   -- ['.'] = common.buffers_cwd,

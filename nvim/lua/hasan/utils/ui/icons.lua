@@ -196,9 +196,9 @@ else
       ChevronDown   = '',
     },
     diagnostics = {
-      Error = '',
+      Error = '',-- 
       Warn  = '',
-      Info  = '',
+      Info  = '',-- 
       Ques  = '',
       Hint  = '',
       -- Hint = ' ',

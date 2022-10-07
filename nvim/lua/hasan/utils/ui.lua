@@ -132,6 +132,7 @@ M.substitute_word = function()
   local curWord = isVisual and require('hasan.utils').get_visual_selection() or vim.fn.expand('<cword>')
 
   M.input('Substitute Word', {
+    -- TODO: <08.10.22> fix lazy lolading
     default_value = curWord,
     on_submit = function(newWord)
       local cmd = isVisual and '%s/' .. curWord .. '/' .. newWord .. '/gc'
