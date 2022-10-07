@@ -1,5 +1,5 @@
 local M = {}
-local hasNvim8 = vim.fn.has('nvim-0.8') == 1
+-- local hasNvim8 = vim.fn.has('nvim-0.8') == 1
 local borderOpts = { border = require('state').ui.border.style }
 
 require('lsp.diagnosgic').setup()
@@ -13,21 +13,13 @@ M.on_attach = function(client, bufnr)
   M.lsp_buffer_keymaps(client, bufnr)
 
   if client.name ~= 'dartls' then
-    if hasNvim8 then
-      client.server_capabilities.documentFormattingProvider = false
-      client.server_capabilities.documentRangeFormattingProvider = false
-    else
-      client.resolved_capabilities.document_formatting = false
-      client.resolved_capabilities.document_range_formatting = false
-    end
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
   end
 end
 
 function M.lsp_autocmds(client, bufnr)
-  if
-    hasNvim8 and client.server_capabilities.documentHighlightProvider
-    or client.resolved_capabilities.document_highlight
-  then
+  if client.server_capabilities.documentHighlightProvider then
     vim.cmd([[
       augroup lsp_document_highlight
         autocmd! * <buffer>
@@ -46,13 +38,12 @@ function M.lsp_buffer_keymaps(client, bufnr)
     return require('hasan.utils').merge({ desc = desc }, opts or {})
   end
 
-  local filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
-  local function buf_set_option(...)
-    vim.api.nvim_buf_set_option(bufnr, ...)
-  end
-
+  -- local filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
+  -- local function buf_set_option(...)
+  --   vim.api.nvim_buf_set_option(bufnr, ...)
+  -- end
   --Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  -- buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   keymap('n', 'K', vim.lsp.buf.hover, withDesc('Lsp: hover under cursor'))
@@ -76,9 +67,8 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', '[d', '<cmd>lua require("lsp.diagnosgic").jump_to_diagnostic("prev")<CR>', withDesc('Lsp: jump to previous diagnosgic'))
   keymap('n', ']d', '<cmd>lua require("lsp.diagnosgic").jump_to_diagnostic("next")<CR>', withDesc('Lsp: jump to next diagnosgic'))
 
- -- TODO: <02.10.22> update save cmd
-  keymap('n', '<leader>fs', '<cmd>lua vim.lsp.buf.formatting_sync()<CR><cmd>call hasan#utils#buffer#_save()<cr>', withDesc('Lsp: format and save'))
-  keymap('x', '<leader>fs', '<ESC><cmd>lua vim.lsp.buf.range_formatting()<CR><cmd>update<CR>', withDesc('Lsp: format and save document'))
+  keymap('n', '<leader>fs', '<cmd>lua vim.lsp.buf.format({async=false})<CR><cmd>call hasan#utils#buffer#_save()<cr>', withDesc('Lsp: format and save'))
+  keymap('x', '<leader>fs', 'gq<cmd>call hasan#utils#buffer#_save()<cr>', withDesc('Lsp: format and save'))
   keymap('n', '<leader>aw', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', withDesc('Lsp: list workspace folders'))
   keymap('n', '<leader>a+', vim.lsp.buf.add_workspace_folder, withDesc('Lsp: add workspace folder'))
   keymap('n', '<leader>a-', vim.lsp.buf.remove_workspace_folder, withDesc('Lsp: remove workspace folder'))
@@ -91,11 +81,15 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', '<C-LeftMouse>', '<LeftMouse><cmd>lua vim.lsp.buf.definition()<CR>', opts)
   local code_action_keys = { '<C-q>', '<C-space>', '<A-space>' }
   for _, action_key in ipairs(code_action_keys) do
-    keymap({'n', 'x'}, action_key, require('lsp.util').code_action, withDesc('Lsp: code action'))
+    keymap({ 'n', 'x' }, action_key, require('lsp.util').code_action, withDesc('Lsp: code action'))
   end
 
-  vim.api.nvim_create_user_command('Format', vim.lsp.buf.formatting, {})
-  vim.api.nvim_create_user_command('FormatSync', vim.lsp.buf.formatting_sync, {})
+  vim.api.nvim_create_user_command('Format', function ()
+    vim.lsp.buf.format({async=true})
+  end, {})
+  vim.api.nvim_create_user_command('FormatSync', function ()
+    vim.lsp.buf.format({async=false})
+  end, {})
 end
 
 return M

@@ -25,6 +25,8 @@ return
 !0::Send #0
 PgUp::Send !{ESC}
 PgDn::Send +!{ESC}
+!]:: SendInput,^{tab}
+![:: SendInput,^+{tab}
 #InputLevel 1
 !\::Send \
 \::alternateTab()
