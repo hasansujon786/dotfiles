@@ -68,3 +68,4 @@ require('telescope').setup({
     project_commands = require('config.project_commands'),
   },
 })
+require('telescope').load_extension('fzf')

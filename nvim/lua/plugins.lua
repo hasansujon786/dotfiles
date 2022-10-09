@@ -5,8 +5,7 @@ local is_installed = fn.isdirectory(install_path) == 1
 if not is_installed then
   print('Installing packer...')
   fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
-  local pac_cmd = 'packadd packer.nvim'
-  vim.cmd(pac_cmd)
+  vim.cmd({ cmd = 'packadd', args = { 'packer.nvim' } })
   print('Installed packer.nvim.')
 end
 
@@ -18,7 +17,7 @@ return require('packer').startup({
     ------------------------------------------------
     use({ 'navarasu/onedark.nvim', config = [[require('config.onedark')]] })
     use({ 'goolord/alpha-nvim', config = [[require('config.alpha')]] })
-    use({ 'hasansujon786/kissline.nvim', config = [[require('config.kissline')]], opt = true, event = 'BufRead' })
+    use({ 'hasansujon786/kissline.nvim', config = [[require('config.kissline')]] })
     use({ 'nvim-lualine/lualine.nvim', config = [[require('config.lualine')]], commit = '8d956c18258bb128ecf42f95411bb26efd3a5d23' })
     use({ 'kyazdani42/nvim-web-devicons', config = [[require('config.devicons-config')]] })
     use({ 'hasansujon786/notifier.nvim', opt = true, module = 'notifier' })
@@ -51,7 +50,7 @@ return require('packer').startup({
     use({ 'ThePrimeagen/harpoon', opt = true, module = 'harpoon' })
     use({ 'nvim-telescope/telescope.nvim', config = [[require('config.telescope')]],
       requires = {
-        { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', config = [[require('telescope').load_extension('fzf')]] },
+        { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
       }
     })
     use({ 'ahmedkhalf/project.nvim', config = [[require('config.project')]], event = 'CursorHold', opt = true,
@@ -83,7 +82,7 @@ return require('packer').startup({
     })
 
     use({ 'tpope/vim-eunuch', opt = true, cmd = {'Delete','Move','Rename','Mkdir','Chmod'} })
-    use({ 'voldikss/vim-floaterm',opt=true,cmd={'FloatermNew','FloatermToggle'},config=[[require('config.floaterm')]] })
+    use({ 'voldikss/vim-floaterm', opt = true, cmd={'FloatermNew','FloatermToggle'}, config=[[require('config.floaterm')]] })
     use({ 'olimorris/persisted.nvim',
       cmd = {'SessionLoad', 'SessionLoadLast', 'SessionSave'},
       module = 'persisted', opt = true,
@@ -110,9 +109,7 @@ return require('packer').startup({
     --> Lsp & completions --------------------------
     ------------------------------------------------
     use({ 'nvim-treesitter/playground', opt = true, cmd = {'TSPlaygroundToggle','TSHighlightCapturesUnderCursor'} })
-    use({ 'nvim-treesitter/nvim-treesitter',
-      opt = true, event = 'CursorHold',
-      config = [[require('config.treesitter')]],
+    use({ 'nvim-treesitter/nvim-treesitter', opt = true, event = 'CursorHold', config = [[require('config.treesitter')]],
       requires = {
         'JoosepAlviste/nvim-ts-context-commentstring',
         'nvim-treesitter/nvim-treesitter-textobjects',
@@ -120,18 +117,14 @@ return require('packer').startup({
         'windwp/nvim-ts-autotag',
       }
     })
-    use({ 'neovim/nvim-lspconfig',
-      opt = true, event = 'BufReadPre',
-      config = function() require('lsp') end,
+    use({ 'neovim/nvim-lspconfig', opt = true, event = 'BufReadPre', config = function() require('lsp') end,
       requires = {
+        { 'williamboman/mason-lspconfig.nvim', opt = true, module = 'mason-lspconfig' },
         { 'jose-elias-alvarez/null-ls.nvim', config = function() require('lsp.null-ls') end },
         { 'williamboman/mason.nvim', config = function() require('lsp.lsp-config') end },
-        { 'williamboman/mason-lspconfig.nvim'},
       }
     })
-    use({ 'hrsh7th/nvim-cmp',
-      opt = true, event = 'BufReadPost',
-      config = function() require('config.cmp') end,
+    use({ 'hrsh7th/nvim-cmp', opt = true, event = 'BufReadPost', config = function() require('config.cmp') end,
       requires = {
         'rafamadriz/friendly-snippets',
         {'L3MON4D3/LuaSnip', opt = true, module = 'luasnip', config='require("config.luasnip")'},
@@ -147,17 +140,14 @@ return require('packer').startup({
     })
     use({ 'simrat39/symbols-outline.nvim', opt = true, cmd = 'SymbolsOutline', config = [[require('config.symbol_outline')]] })
     use({ 'akinsho/flutter-tools.nvim', opt = true, ft = {'dart'}, config = [[require('config.flutter-tools')]] })
-    use {
-      'mfussenegger/nvim-dap',
-      opt = true, module = 'dap',
-      config = "require('config.dap').setup()",
+    use({ 'mfussenegger/nvim-dap', opt = true, module = 'dap', config = "require('config.dap').setup()",
       requires = {
         {'rcarriga/nvim-dap-ui', config = 'require("config.dap").configure_dap_ui()'},
         {'theHamsta/nvim-dap-virtual-text', config = 'require("config.dap").configure_virtual_text()'},
         {'nvim-telescope/telescope-dap.nvim'},
         -- 'jbyuki/one-small-step-for-vimkind',
       },
-    }
+    })
 
     if not is_installed then
       require('packer').sync()
