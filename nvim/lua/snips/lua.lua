@@ -41,9 +41,23 @@ ls.add_snippets('lua', {
       ]],
       {
         i(1, '1000'),
-        i(2, '-- write something'),
+        i(0, '-- write something'),
       }
     )
   ),
+  s(
+    'ei',
+    fmt(
+      [[
+      elseif {} then
+        {}
+      ]],
+      { i(1), i(0) }
+    )
+  ),
+  s('ee', {
+    t({ 'else', '\t' }),
+    i(0),
+  }),
 }, { key = 'my_lua_snips' })
 

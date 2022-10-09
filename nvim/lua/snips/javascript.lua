@@ -15,13 +15,13 @@ local rep = require('luasnip.extras').rep
 
 ls.add_snippets('javascript', {
   s(
-    { trig = 'for([%w_]+)', regTrig = true, hidden = false },
+    { trig = 'for([%w_]+)', regTrig = true, hidden = true },
     fmt(
       [[
-      for (let {} = 0; {} < {}; {}++) {{
-        {}
+      for (let {1} = 0; {2} < {3}; {4}++) {{
+        {5}
       }}
-      {}
+      {6}
       ]],
       {
         d(1, function(_, snip)

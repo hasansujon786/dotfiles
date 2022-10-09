@@ -52,8 +52,12 @@ cmp.setup({
       end
     end, { 'i', 'c', 's' }),
     ['<C-l>'] = cmp.mapping(function(_)
-      cmp.complete({ config = { sources = { { name = 'luasnip' } } } })
-    end),
+      if luasnip.choice_active() then
+        luasnip.change_choice(1)
+      else
+        cmp.complete({ config = { sources = { { name = 'luasnip' } } } })
+      end
+    end, { 'i', 's' }),
     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
     ['<C-e>'] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
     ['<C-q>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),

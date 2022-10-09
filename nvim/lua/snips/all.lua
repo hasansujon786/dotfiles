@@ -60,6 +60,28 @@ ls.add_snippets('all', {
       }
     )
   ),
+  s(
+    'ei',
+    fmt(
+      [[
+      else if ({}) {{
+        {}
+      }}
+      ]],
+      { i(1), i(0) }
+    )
+  ),
+  s(
+    'ee',
+    fmt(
+      [[
+      else {{
+        {}
+      }}
+      ]],
+      { i(0) }
+    )
+  ),
 }, { key = 'my_global_snips' })
 
 -- TODO: <10.08.22> maybe array don't work
