@@ -38,7 +38,7 @@ o.wildignorecase = true
 opt.shortmess:append('c') --                     Don't pass messages to |ins-completion-menu|
 o.wildoptions = 'pum' --                         Set file completion in command to use pum
 o.mousemodel = 'popup'
-o.pumblend = 4 --                                Set pum background transparent
+-- o.pumblend = 4 --                             Set pum background transparent
 o.pumheight = 10 --                              Makes popup menu smaller
 -- Ignore the following globs in file completions
 o.wildignore =

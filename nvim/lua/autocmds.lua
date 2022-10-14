@@ -4,7 +4,6 @@ if vim.fn.exists('g:hasan_telescope_buffers') == 0 then
 end
 
 utils.augroup('MY_AUGROUP')(function(autocmd)
-  autocmd('InsertEnter', 'norm zz')
   autocmd('CmdwinEnter', 'nnoremap <buffer><CR> <CR>')
   autocmd('ColorScheme', 'lua require("hasan.utils.ui.palatte").set_custom_highlights()')
 

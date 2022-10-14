@@ -51,3 +51,6 @@
 --     return 'dd'
 --   end
 -- end
+
+-- keymap('n', 'g/', 'VHoL<Esc>/\\%V', noSilent)
+-- keymap('n', 'g/', '/\\%><C-r>=line("w0")-1<CR>l\\%<<C-r>=line("w$")+1<CR>l', { silent = false })

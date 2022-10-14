@@ -11,7 +11,7 @@ M.reload_this_module = function()
 end
 
 M.get_module_name = function(path)
-  local m_name = require('hasan.utils').normalise_path(path)
+  local m_name = vim.fs.normalize(path)
   m_name = m_name:gsub('nvim/', '')
   m_name = m_name:gsub('lua/', '')
   m_name = m_name:gsub('/init', '')
