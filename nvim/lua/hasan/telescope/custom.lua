@@ -270,7 +270,7 @@ M.grep_string_list = function(opts)
     :find()
 end
 
-local todo_items = { 'TODO', 'DONE', 'INFO', 'FIXME', 'BUG', 'FIXIT', 'ISSUE', 'OPTIM', 'OPTIMIZE', 'WARNING' }
+local todo_items = { 'TODO:', 'DONE:', 'INFO:', 'FIXME:', 'BUG:', 'FIXIT:', 'ISSUE:', 'OPTIM:', 'OPTIMIZE:', 'WARNING:' }
 function M.search_project_todos()
   M.grep_string_list({
     results_title = ' Project Todos',

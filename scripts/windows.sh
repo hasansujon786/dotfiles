@@ -6,6 +6,7 @@
 choco install potplayer -y
 choco install googlechrome -y
 choco install qbittorrent -y
+choco install ntop.portable
 
 # https://developer.android.com/studio#downloads
 # https://dl.google.com/android/repository/commandlinetools-win-8092744_latest.zip
