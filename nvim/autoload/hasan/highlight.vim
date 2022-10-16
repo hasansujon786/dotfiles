@@ -1,4 +1,4 @@
-function hasan#highlight#load_custom_highlight(...) abort
+function! hasan#highlight#load_custom_highlight(...) abort
   "/// Neovim Builin ///"
   hi TextInfo           guifg=#56B6C2 guibg=NONE
   hi TextSuccess        guifg=#61AFEF
@@ -106,9 +106,10 @@ function hasan#highlight#load_custom_highlight(...) abort
   hi! link NuiMenuItem    TelescopeSelectionCaret
 
   "/// nvim-tree.nvim ///"
-  hi! link NvimTreeCursorLine CursorLineFocus
+  hi! link NvimTreeCursorLine   CursorLineFocus
   hi! link NvimTreeIndentMarker IndentBlanklineChar
   hi! link NvimTreeWindowPicker TelescopeSelectionCaret
+  hi! link NvimTreeWinSeparator VertSplit
 endfunction
 
 " call hasan#highlight#load_custom_highlight()

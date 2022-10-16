@@ -257,7 +257,7 @@ toggleTransparency() {
   ; MsgBox, TN of %Title% is %TN%
 
   if (TN == "") {
-    WinSet, Transparent, 230, A
+    WinSet, Transparent, 245, A
     beep()
   }
   else {
