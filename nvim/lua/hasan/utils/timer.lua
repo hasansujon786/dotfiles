@@ -1,14 +1,16 @@
 local Popup = require('nui.popup')
 local Timer = Popup:extend('Timer')
+local event = require('nui.utils.autocmd').event
 
 local running_instances = 0
+local top_ofset = 1
 
 function Timer:init(popup_options)
   local options = vim.tbl_deep_extend('force', popup_options or {}, {
     border = 'double',
     relative = 'editor',
-    focusable = true,
-    position = { row = running_instances * 3 + 1, col = '100%' },
+    focusable = false,
+    position = { row = top_ofset, col = '100%' },
     size = { width = 10, height = 1 },
     win_options = {
       winhighlight = 'Normal:Normal,FloatBorder:SpecialChar',
@@ -33,6 +35,7 @@ function Timer:countdown(time, step, format)
 
   self:mount()
   running_instances = running_instances + 1
+  top_ofset = top_ofset + 3
 
   local remaining_time = time
 
@@ -45,15 +48,30 @@ function Timer:countdown(time, step, format)
 
     if remaining_time <= 0 then
       self:unmount()
-      running_instances = running_instances - 1
     end
   end, { ['repeat'] = math.ceil(remaining_time / step) })
 end
 
-function _G.foo()
+local M = {}
+
+function M.run(start_time, formatter)
+  formatter = formatter and formatter or '%ss'
   local timer = Timer()
 
-  timer:countdown(1000 * 10, 1000, function(time)
-    return tostring(time / 1000) .. 's'
+  timer:countdown(start_time * 1000, 1000, function(remaining_time)
+    return vim.fn['hasan#tt#format_abbrev_duration'](remaining_time / 1000)
+    -- return string.format(formatter, remaining_time / 1000)
   end)
+
+  timer:on(event.WinClosed, function()
+    running_instances = running_instances - 1
+    if running_instances < 1 then
+      top_ofset = 1
+    end
+  end, { once = true })
+
+  return timer
 end
+
+-- lua require('hasan.utils.timer').run(65)
+return M

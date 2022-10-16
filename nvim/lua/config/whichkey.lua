@@ -232,6 +232,7 @@ local leader = {
 
     t = {
       name  = '+task-and-timer',
+      q = { '<cmd>TimerStop<CR>',                       'Quit the timer' },
       w = { '<cmd>Work<CR>',                            'Start work timer' },
       W = { '<cmd>Work!<CR>',                           'Start custom timer' },
       s = { '<cmd>TimerShow<CR>',                       'Show timer status' },

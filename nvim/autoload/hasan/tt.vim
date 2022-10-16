@@ -21,7 +21,7 @@ function! hasan#tt#update_current_status()
 endfunction
 
 
-function hasan#tt#work(custom_time) abort
+function! hasan#tt#work(custom_time) abort
   let start_from_begin = 1
   let work_time = get(g:, 'tt_default_time', 25)
 
@@ -58,6 +58,7 @@ function! hasan#tt#break()
   call tt#start_timer()
   call tt#when_done('AfterBreak')
   lua require('notifier').alert({vim.fn['hasan#tt#msg']()}, {title = 'TaskTimer'})
+  " lua require('hasan.utils.timer').run()
 endfunction
 
 " augroup TtAirline
@@ -80,4 +81,27 @@ function! hasan#tt#statusline_status()
     endtry
   endif
 endfunction
+
+function! hasan#tt#format_abbrev_duration(duration)
+  let l:hours = a:duration / 60 / 60
+  let l:minutes = a:duration / 60 % 60
+  let l:seconds = a:duration % 60
+
+  if a:duration <= 60
+    return printf('%d:%02d', l:minutes, l:seconds)
+  elseif l:hours > 0
+    let l:displayed_hours = l:hours
+    if l:minutes > 0 || l:seconds > 0
+      let l:displayed_hours += 1
+    endif
+    return printf('%dh', l:displayed_hours)
+  else
+    let l:displayed_minutes = l:minutes
+    if l:seconds > 0
+      let l:displayed_minutes += 1
+    endif
+    return printf('%dm', l:displayed_minutes)
+  endif
+endfunction
+
 
