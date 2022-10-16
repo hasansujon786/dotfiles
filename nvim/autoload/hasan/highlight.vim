@@ -101,7 +101,6 @@ function hasan#highlight#load_custom_highlight(...) abort
   hi! link TelescopePromptBorder  TelescopeBorder
 
   "/// nui.nvim ///"
-  hi NuiMenuNr     guifg=#d99a5e
   hi! link NuiNormalFloat NormalFloat
   hi! link NuiFloatBorder FloatBorderHidden
   hi! link NuiMenuItem    TelescopeSelectionCaret

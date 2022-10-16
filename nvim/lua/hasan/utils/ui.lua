@@ -7,17 +7,14 @@ local ui = require('state').ui
 
 local M = {}
 
-M.input = function(title, opts)
+function M.input(title, opts)
   local widht = 25
-  local t_widht = opts.default_value and string.len(opts.default_value) or 25
+  local text_width = opts.default_value and string.len(opts.default_value) + 1 or widht
 
-  local popup_options = {
+  local input = Input({
     relative = 'cursor',
-    position = {
-      row = 1,
-      col = 0,
-    },
-    size = utils.get_default(opts.size, t_widht > widht and t_widht or widht),
+    position = { row = 1, col = 0 },
+    size = utils.get_default(opts.size, text_width > widht and text_width or widht),
     border = {
       style = ui.border.style,
       highlight = ui.border.highlight,
@@ -27,13 +24,10 @@ M.input = function(title, opts)
       },
     },
     win_options = {
-      winblend = 5,
       sidescrolloff = 0,
       winhighlight = 'Normal:Normal',
     },
-  }
-
-  local input = Input(popup_options, opts)
+  }, opts)
   -- mount/open the component
   input:mount()
 
@@ -48,37 +42,38 @@ M.input = function(title, opts)
   end)
 end
 
-M.menu = function(list, opts)
+function M.menu(list, opts)
+  local menu_items = {}
+  local width = 20
+  for _, item in pairs(list) do
+    table.insert(menu_items, Menu.item(item))
+    local len = string.len(item) + 6
+    if len > width then
+      width = len
+    end
+  end
+
   opts = utils.merge({
     title = nil,
-    size = #list > 8 and { height = 8 } or nil,
+    size = #list > 8 and { height = 8, width = width } or { width = width },
     title_align = 'center',
     number = true,
-    position = '20%',
+    position = { row = '40%', col = '30%' },
     on_close = nil,
     on_submit = function(item)
       print('SUBMITTED', vim.inspect(item._index))
     end,
   }, opts or {})
 
-  local menu_items = {}
-  for _, item in pairs(list) do
-    table.insert(menu_items, Menu.item(item))
-  end
-
   local menu = Menu({
     relative = 'editor',
     size = opts.size,
     position = opts.position,
     border = {
-      padding = {
-        top = 1,
-        bottom = 1,
-        left = opts.number and 0 or 2,
-        right = opts.number and 3 or 2,
-      },
+      -- left = opts.number and 0 or 2, right = opts.number and 3 or 2,
+      padding = { top = 1, bottom = 1, left = 0, right = 0 },
       style = ui.border.style,
-      highlight = 'TelescopeBorder',
+      highlight = ui.border.highlight,
       text = {
         top = opts.title and Text(opts.title) or nil,
         top_align = opts.title_align,
@@ -86,13 +81,12 @@ M.menu = function(list, opts)
     },
     win_options = {
       numberwidth = 4,
-      -- winblend = 10,
       number = opts.number,
-      winhighlight = 'Normal:NuiNormalFloat,CursorLine:NuiMenuItem,CursorLineNr:NuiMenuNr',
+      winhighlight = 'Normal:Normal,CursorLine:NuiMenuItem,CursorLineNr:NuiMenuItem',
     },
   }, {
     lines = menu_items,
-    max_width = 70,
+    max_width = 20,
     keymap = {
       focus_next = { 'j', '<Down>', '<Tab>' },
       focus_prev = { 'k', '<Up>', '<S-Tab>' },
@@ -114,7 +108,7 @@ M.menu = function(list, opts)
   end, { once = true })
 end
 
-M.rename_current_file = function()
+function M.rename_current_file()
   local currNameFileName = vim.fn.expand('%:t')
 
   M.input('Rename File', {
@@ -127,7 +121,7 @@ M.rename_current_file = function()
   })
 end
 
-M.substitute_word = function()
+function M.substitute_word()
   local isVisual = require('hasan.utils').is_visual_mode()
   local curWord = isVisual and require('hasan.utils').get_visual_selection() or vim.fn.expand('<cword>')
 
@@ -145,7 +139,7 @@ M.substitute_word = function()
 end
 
 local number_flag = 'number_cycled'
-M.cycle_numbering = function()
+function M.cycle_numbering()
   local relativenumber = vim.wo.relativenumber
   local number = vim.wo.number
 

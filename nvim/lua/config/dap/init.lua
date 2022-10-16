@@ -19,7 +19,7 @@ function M.configure_dap_ui()
   dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
   local dap_sign = {
-    stopped = { text = '', texthl = 'NuiMenuNr', numhl = 'NuiMenuNr', linehl = 'CursorLineDap' },
+    stopped = { text = '', texthl = 'NuiMenuItem', numhl = 'NuiMenuItem', linehl = 'CursorLineDap' },
     breakpoint = { text = '', texthl = 'RedText', numhl = '', linehl = '' },
     bcondition = { text = '', texthl = 'RedText', numhl = '', linehl = '' },
     rejected = { text = '', texthl = 'GrayText', numhl = '', linehl = '' },
