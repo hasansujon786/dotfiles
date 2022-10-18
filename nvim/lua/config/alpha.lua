@@ -41,9 +41,9 @@ local options = {
   header = {
     type = 'text',
     val = {
-      [[       ,               /*        ]],
-      [[     ,//,              *##*,     ]],
-      [[   ,((((//,            /####%*   ]],
+      [[       ,               ,         ]],
+      [[     ,//,              %#*,      ]],
+      [[   ,((((//,            /###%*,   ]],
       [[ ,((((((////,          /######%. ]],
       [[ ///((((((((((,        *#######. ]],
       [[ //////(((((((((,      *#######. ]],
@@ -82,7 +82,7 @@ local options = {
 
 alpha.setup({
   layout = {
-    options.headerPaddingTop,
+    -- options.headerPaddingTop,
     options.header,
     options.headerPaddingBottom,
     options.buttons,

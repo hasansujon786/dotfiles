@@ -109,7 +109,9 @@ return require('packer').startup({
     --> Lsp & completions --------------------------
     ------------------------------------------------
     use({ 'nvim-treesitter/playground', opt = true, cmd = {'TSPlaygroundToggle','TSHighlightCapturesUnderCursor'} })
-    use({ 'nvim-treesitter/nvim-treesitter', opt = true, event = 'CursorHold', config = [[require('config.treesitter')]],
+    use({ 'nvim-treesitter/nvim-treesitter',
+      commit = 'c853370', opt = true, event = 'CursorHold',
+      config = [[require('config.treesitter')]],
       requires = {
         'JoosepAlviste/nvim-ts-context-commentstring',
         'nvim-treesitter/nvim-treesitter-textobjects',
