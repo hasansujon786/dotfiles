@@ -21,18 +21,24 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! link WhichKeyFloat Pmenu
 
   "/// Treesitter highlights ///"
-  hi TSTagDelimiter    guifg=#ABB2BF
+  hi TSField           guifg=#e86671
   hi TSProperty        guifg=#e86671
   hi TSVariable        guifg=#e86671
+  hi TSVariableBuiltin guifg=#E5C07B
+
+  hi TSTagDelimiter    guifg=#ABB2BF
   hi TSNamespace       guifg=#e86671
-  hi TSField           guifg=#e86671
   " hi TSParameter       guifg=#e86671 gui=italic
   hi TSTagAttribute    guifg=#D19A66 gui=italic
   hi TSConstructor     guifg=#E5C07B gui=NONE
   hi TSConstant        guifg=#E5C07B gui=NONE
-  hi TSVariableBuiltin guifg=#E5C07B
   hi! link TSInclude TSKeyword
   hi OrgDone           guifg=#7CBA4F
+
+  hi! link @field    TSField
+  hi! link @property TSField
+  hi! link @variable TSVariable
+  hi! link @variable.builtin TSVariableBuiltin
 
   "/// LSP variable reference ///"
   hi LspReferenceText  guibg=#3B4048 gui=NONE
