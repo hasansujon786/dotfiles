@@ -12,6 +12,7 @@ require('indent_blankline').setup({
     'Outline',
     'alpha',
     'ccc-ui',
+    '2048',
   },
   show_first_indent_level = false,
   -- show_current_context = true,

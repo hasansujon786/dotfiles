@@ -1,6 +1,10 @@
 local noSilent = { silent = false }
 local nvim_set_keymap = vim.api.nvim_set_keymap
 
+keymap('n', 'I', 'zzI')
+keymap('n', 'i', 'zzi')
+keymap('n', 'a', 'zza')
+
 keymap({ 'n', 'v' }, 'q', '<ESC><Cmd>nohlsearch|diffupdate|echo ""<CR>') -- ColorizerReloadAllBuffers
 keymap('n', 'A', 'zzA') -- fix InsertEnter zz
 keymap('n', 'ZZ', ':Quit!<CR>') -- Prompt before quitting

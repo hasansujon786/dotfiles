@@ -63,6 +63,8 @@ o.showcmd = true --                              Shows size of visual selection 
 o.showmode = false --                            Don't show mode as lightline already does
 o.modeline = false
 o.modelines = 0
+o.showtabline = 1
+o.cmdheight = 1 --                               Height of the command bar
 -- opt.fillchars={eob=' ',vert= '█'}             -- Suppress ~ at EndOfBuffer
 vim.opt.fillchars = {
   eob = ' ',
@@ -90,7 +92,6 @@ o.numberwidth = 4
 o.signcolumn = 'yes' --                          Always show the signcolumn,
 
 -- Windwo & buffer
-o.cmdheight = 1 --                               Height of the command bar
 o.equalalways = false --                         I don't like my windows changing all the time
 o.splitright = true --                           Prefer windows splitting to the right
 o.splitbelow = true --                           Prefer windows splitting to the bottom

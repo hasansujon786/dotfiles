@@ -42,6 +42,27 @@ M.lsp_status = {
   end,
 }
 
+--     return '%='
+M.tabs = {
+  fn = function()
+    local lastTabNr = vim.fn.tabpagenr('$')
+    local curTabNr = vim.fn.tabpagenr()
+    P(lastTabNr, curTabNr)
+    local list = {}
+    for i = 1, lastTabNr do
+      if i == curTabNr then
+        --  
+        table.insert(list, '')
+      else
+        table.insert(list, '')
+      end
+    end
+    P(table.concat(list, ' '))
+    return table.concat(list, ' ')
+  end,
+}
+-- require('hasan.utils.statusline').tabs.fn()
+
 M.space_info = function()
   return "%{&expandtab?'Spc:'.&shiftwidth:'Tab:'.&shiftwidth}"
 end
