@@ -48,7 +48,7 @@ return require('packer').startup({
     use({ 'ziontee113/neo-minimap', config = 'require("config.neo_minimap")' })
     use({ 'kyazdani42/nvim-tree.lua', config = [[require('config.nv_tree')]] })
     use({ 'kevinhwang91/nvim-bqf', opt = true, ft = {'qf'} })
-    use({ 'ThePrimeagen/harpoon', opt = true, module = 'harpoon' })
+    use({ 'hasansujon786/harpoon', opt = true, module = 'harpoon' })
     use({ 'nvim-telescope/telescope.nvim', config = [[require('config.telescope')]],
       requires = {
         { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },

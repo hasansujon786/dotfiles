@@ -1,5 +1,20 @@
 local nm = require('neo-minimap')
 
+nm.setup_defaults({
+  height_toggle = { 12, 36 },
+  hl_group = 'LineNr', -- Number hl
+  auto_jump = true,
+  width = 44,
+  height = 12,
+  -- height_toggle_index = 1,
+  -- query_index = 1,
+  win_opts = {
+    scrolloff = 2,
+    relativenumber = true,
+    numberwidth = 1,
+  },
+  open_win_opts = { border = 'rounded' },
+})
 -- nm.source_on_save('~\dotfiles\nvim\lua\config\neo_minimap.lua')
 
 -- Lua
@@ -39,17 +54,6 @@ nm.set({ 'zi', 'zo', 'zu' }, '*.lua', {
     { 'function', '<C-k>', false },
     { 'keymap', '<A-j>', true },
     { 'keymap', '<A-k>', false },
-  },
-
-  -- auto_jump = false,
-  height_toggle = { 12, 36 },
-  hl_group = 'Number', -- Number hl
-
-  open_win_opts = { border = 'rounded' },
-  win_opts = {
-    scrolloff = 1,
-    relativenumber = true,
-    numberwidth = 1,
   },
 })
 -- ~\dotfiles\nvim\lua\snips\all.lua
