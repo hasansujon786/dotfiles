@@ -112,7 +112,7 @@ require('nvim-tree').setup({
     },
   },
   view = {
-    width = 27,
+    width = 28,
     hide_root_folder = false,
     side = 'left',
     preserve_window_proportions = true,
