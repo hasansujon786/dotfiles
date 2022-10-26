@@ -26,8 +26,8 @@ function! VisualNumber()
 	normal v
 	call search('\(^\|[^0-9\.]\d\)', 'becW')
 endfunction
-xnoremap <silent> in :<C-u>call VisualNumber()<CR>
-onoremap <silent> in :<C-u>normal vin<CR>
+xnoremap <silent> id :<C-u>call VisualNumber()<CR>
+onoremap <silent> id :<C-u>normal vin<CR>
 
 " buffer pseudo-text objects
 " --------------------------

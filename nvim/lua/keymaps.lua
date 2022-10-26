@@ -46,8 +46,6 @@ keymap('x', '<A-j>', ':call hasan#utils#visual_move_down()<CR>')
 
 keymap('n', 'gx', '<Plug>(exchange-operator)') -- Exchange_operator.vim
 keymap('v', 'gx', '<Plug>(exchange-operator)')
-keymap('n', '<P', '<Plug>(swap-parameter-prev):call repeat#set("\\<Plug>(swap-parameter-prev)")<CR>')
-keymap('n', '>P', '<Plug>(swap-parameter-next):call repeat#set("\\<Plug>(swap-parameter-next)")<CR>')
 
 keymap('n', 'z.', ':%foldclose<CR>') -- Fold
 keymap('n', '<tab>', 'za')

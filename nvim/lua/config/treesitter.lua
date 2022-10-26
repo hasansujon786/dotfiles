@@ -54,11 +54,11 @@ require('nvim-treesitter.configs').setup({
         ['aP'] = '@parameter.outer',
         ['am'] = '@class.outer',
         ['im'] = '@class.inner',
-        ['ao'] = '@block.outer',
-        ['io'] = '@block.inner',
+        ['ak'] = '@block.outer',
+        ['ik'] = '@block.inner',
         ['aM'] = '@comment.outer',
-        -- @conditional.inner
-        -- @conditional.outer
+        ['in'] = '@conditional.inner',
+        ['an'] = '@conditional.outer',
         -- @loop.inner
         -- @loop.outer
       },
@@ -66,22 +66,22 @@ require('nvim-treesitter.configs').setup({
     swap = {
       enable = true,
       swap_next = {
-        ['<Plug>(swap-parameter-next)'] = '@parameter.inner',
+        ['<Plug>(ts-swap-parameter-next)'] = '@parameter.inner',
       },
       swap_previous = {
-        ['<Plug>(swap-parameter-prev)'] = '@parameter.inner',
+        ['<Plug>(ts-swap-parameter-prev)'] = '@parameter.inner',
       },
     },
     move = {
       enable = true,
       set_jumps = false, -- whether to set jumps in the jumplist
       goto_next_start = {
-        [']]'] = '@function.outer',
-        [']m'] = '@class.outer',
+        ['<Plug>(ts-jump-next-s-func)'] = '@function.outer',
+        ['<Plug>(ts-jump-next-s-class)'] = '@class.outer',
       },
       goto_previous_start = {
-        ['[['] = '@function.outer',
-        ['[m'] = '@class.outer',
+        ['<Plug>(ts-jump-prev-s-func)'] = '@function.outer',
+        ['<Plug>(ts-jump-prev-s-class)'] = '@class.outer',
       },
       goto_next_end = {
         [']['] = '@function.outer',
@@ -102,6 +102,14 @@ require('nvim-treesitter.configs').setup({
     -- }
   },
 })
+
+keymap('n', '<P', '<Plug>(ts-swap-parameter-prev):call repeat#set("\\<Plug>(ts-swap-parameter-prev)")<CR>')
+keymap('n', '>P', '<Plug>(ts-swap-parameter-next):call repeat#set("\\<Plug>(ts-swap-parameter-next)")<CR>')
+
+keymap('n', '[e', '<Plug>(ts-jump-prev-s-func)zz')
+keymap('n', ']e', '<Plug>(ts-jump-next-s-func)zz')
+keymap('n', '[m', '<Plug>(ts-jump-prev-s-class)zz')
+keymap('n', ']m', '<Plug>(ts-jump-next-s-class)zz')
 
 _G.my_treesitter_foldexpr = function()
   vim.defer_fn(function()
