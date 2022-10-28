@@ -65,6 +65,10 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! link FloatermBorder FloatBorderFlat
   "/// symboal-outline.nvim ///"
   hi FocusedSymbol guibg=#4D5666 guifg=NONE
+  "/// Lualine ///"
+  hi LualineTabActive    guifg=#98C379 guibg=#3E4452
+  hi LualineTabInactive  guifg=#7386a5 guibg=#3E4452
+  hi LualineTabSp        guifg=#2c3545 guibg=#3E4452
 
   "/// nvim-cmp ///"
   " CmpItemAbbr

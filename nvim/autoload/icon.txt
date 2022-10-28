@@ -3,7 +3,7 @@
 " https://fsymbols.com/all/
 
 Powerline characters:
-               
+                 
  ﰖ    
   
   ● ● • . .

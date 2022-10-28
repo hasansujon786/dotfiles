@@ -10,6 +10,8 @@ utils.augroup('MY_AUGROUP')(function(autocmd)
   autocmd('FileType', 'setlocal foldlevel=0', { pattern = 'vim' })
   autocmd('FileType', 'setlocal foldmethod=marker', { pattern = { 'vim', 'css', 'scss', 'json' } })
   autocmd('FileType', 'setlocal foldmarker={,}', { pattern = { 'css', 'scss', 'json' } })
+  autocmd('FileType', 'setlocal foldmarker={,}', { pattern = { 'css', 'scss', 'json' } })
+  autocmd({ 'BufNewFile', 'BufRead' }, 'set filetype=jsonc', { pattern = { '*.json', 'tsconfig.json' } })
 
   autocmd('BufDelete', 'silent! call remove(g:hasan_telescope_buffers, expand("<abuf>"))')
   autocmd({ 'BufWinEnter', 'WinEnter' }, 'let g:hasan_telescope_buffers[bufnr()] = reltimefloat(reltime())')

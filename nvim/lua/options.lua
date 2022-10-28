@@ -63,7 +63,7 @@ o.showcmd = true --                              Shows size of visual selection 
 o.showmode = false --                            Don't show mode as lightline already does
 o.modeline = false
 o.modelines = 0
-o.showtabline = 1
+o.showtabline = 0
 o.cmdheight = 1 --                               Height of the command bar
 -- opt.fillchars={eob=' ',vert= '█'}             -- Suppress ~ at EndOfBuffer
 vim.opt.fillchars = {

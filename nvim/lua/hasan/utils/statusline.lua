@@ -1,5 +1,9 @@
 local M = {}
 
+function M.withHl(text, hl)
+  return string.format('%%#%s#%s', hl, text)
+end
+
 local get_lsp_client = function()
   local msg = 'LSP Inactive'
   local buf_ft = vim.bo.filetype
@@ -42,26 +46,25 @@ M.lsp_status = {
   end,
 }
 
---     return '%='
 M.tabs = {
+  cond = function()
+    return vim.fn.tabpagenr('$') > 1
+  end,
   fn = function()
+    local tab = { active = '', inactive = '' }
     local lastTabNr = vim.fn.tabpagenr('$')
     local curTabNr = vim.fn.tabpagenr()
-    P(lastTabNr, curTabNr)
     local list = {}
     for i = 1, lastTabNr do
       if i == curTabNr then
-        --  
-        table.insert(list, '')
+        table.insert(list, M.withHl(tab.active, 'LualineTabActive'))
       else
-        table.insert(list, '')
+        table.insert(list, M.withHl(tab.inactive, 'LualineTabInactive'))
       end
     end
-    P(table.concat(list, ' '))
-    return table.concat(list, ' ')
+    return string.format('%s%s', table.concat(list, ' '), M.withHl('▕', 'LualineTabSp'))
   end,
 }
--- require('hasan.utils.statusline').tabs.fn()
 
 M.space_info = function()
   return "%{&expandtab?'Spc:'.&shiftwidth:'Tab:'.&shiftwidth}"
