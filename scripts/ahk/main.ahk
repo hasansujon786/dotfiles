@@ -37,7 +37,8 @@ $Escape::superEscape()
 #z::rebootMiWiFi()
 #p::AppsKey
 PrintScreen::#+s
-#`::#PrintScreen
+#`::takeScreenshot()
+; #`::#PrintScreen
 ;Transparency toggle,
 #o::toggleTransparency()
 #^.::increaseTransparency()
@@ -207,6 +208,13 @@ NavRun(Path) {
 ;******************************************************************************
 ; Utils
 ;******************************************************************************
+takeScreenshot() {
+  SendInput,#{PrintScreen}
+  beep()
+  SplashTextOn,,60,, Your screenshort has saved
+  sleep 300
+  SplashTextOff
+}
 MouseIsOver(WinTitle) {
   MouseGetPos,,, Win
   return WinExist(WinTitle . " ahk_id " . Win)
