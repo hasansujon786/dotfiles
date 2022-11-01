@@ -9,8 +9,7 @@ local M = {}
 
 ---------------- Org float state --------------------
 local last_pop = nil
-local last_bufnr = vim.fn.bufadd(_G.org_home_path)
-local last_buf_name = api.nvim_buf_get_name(last_bufnr)
+local last_bufnr = 0
 
 local function get_title_text(bufnr)
   local text = vim.fn.fnamemodify(api.nvim_buf_get_name(bufnr), ':t')
@@ -22,7 +21,7 @@ end
 local function remove_autocmds()
   last_pop = nil
   vim.cmd([[
-      augroup OpenOrg
+      augroup OrgFloatWin
       au!
       augroup END
       ]])
@@ -39,7 +38,7 @@ end
 M.open_org_float = function()
   -- get the bufnr if the buffer was cleared from buflist
   if vim.fn.bufexists(last_bufnr) == 0 then
-    last_bufnr = vim.fn.bufadd(last_buf_name)
+    last_bufnr = vim.fn.bufadd(_G.org_home_path)
   end
   if last_pop ~= nil then
     last_pop:unmount()
@@ -79,6 +78,9 @@ M.open_org_float = function()
   })
 
   popup:mount()
+  if vim.bo.filetype == '' then
+    vim.bo.filetype = 'org'
+  end
 
   popup:on({ event.WinClosed }, function()
     vim.schedule(function()
@@ -88,9 +90,9 @@ M.open_org_float = function()
   end, { once = true })
 
   vim.cmd([[
-    augroup OpenOrg
+    augroup OrgFloatWin
     au!
-    au WinEnter,BufWinEnter,BufEnter *.org lua OrgOnFileChange()
+    au WinEnter,BufWinEnter,BufEnter *.org lua OnFloatWinEnter()
     augroup END
     ]])
 
@@ -98,10 +100,9 @@ M.open_org_float = function()
   return popup
 end
 
-function OrgOnFileChange()
+function OnFloatWinEnter()
   if is_cur_win_org_float() then
     last_bufnr = api.nvim_buf_get_number(0)
-    last_buf_name = api.nvim_buf_get_name(last_bufnr)
     last_pop.border:set_text('top', get_title_text(last_bufnr), 'center')
 
     opt.number = true

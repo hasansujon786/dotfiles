@@ -72,7 +72,7 @@ local options = {
       button('SPC p l', '  Load session', ':SessionLoad<CR>'),
       button('SPC f f', '  Find Files', ':Telescope find_files<CR>'),
       button('SPC o t', '  Open terminal', ':FloatermNew --wintype=normal --height=10 bash<CR>'),
-      button('SPC e s', '  Settings', ':e $MYVIMRC | :cd ~/dotfiles/ <CR>'),
+      button('SPC v s', '  Settings', ':e $MYVIMRC | :cd ~/dotfiles/ <CR>'),
     },
     opts = { spacing = 1 },
   },
