@@ -25,9 +25,9 @@ local essential_servers = {
   { 'cssls', 'css-lsp' },
   { 'jsonls', 'json-lsp' },
   { 'tsserver', 'typescript-language-server' },
-  { 'emmet_ls', 'emmet-ls' },
   { 'tailwindcss', 'tailwindcss-language-server' },
   { 'sumneko_lua', 'lua-language-server', lua_opts },
+  -- { 'emmet_ls', 'emmet-ls' },
 }
 
 local default_opts = {

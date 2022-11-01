@@ -34,18 +34,19 @@ require('lualine').setup({
   },
   sections = {
     lualine_a = { { 'mode', separator = { left = '' }, right_padding = 2 } },
-    -- lualine_b = { filetype, filename(false) },
     lualine_b = {
       { sl.tabs.fn, cond = sl.tabs.cond, padding = { left = 1, right = 0 } },
-      { 'branch', icon = '' },
+      filetype,
+      filename(false),
     },
     lualine_c = {},
     lualine_x = {
       sl.lsp_status.fn,
       { sl.harpoon.fn, cond = sl.harpoon.toggle },
       { sl.task_timer.fn, cond = sl.task_timer.toggle },
+      { 'branch', icon = '' },
       sl.space_info,
-      { 'filetype', icons_enabled = false },
+      -- { 'filetype', icons_enabled = false },
     },
     lualine_y = {
       { sl.readonly.fn, cond = sl.readonly.toggle, padding = only_pad_right },
