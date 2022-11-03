@@ -22,7 +22,7 @@ local function remove_autocmds()
   last_pop = nil
   vim.cmd([[
       augroup OrgFloatWin
-      au!
+        au!
       augroup END
       ]])
 end
@@ -91,8 +91,8 @@ M.open_org_float = function()
 
   vim.cmd([[
     augroup OrgFloatWin
-    au!
-    au WinEnter,BufWinEnter,BufEnter *.org lua OnFloatWinEnter()
+      au!
+      au WinEnter,BufWinEnter,BufEnter *.org lua OnFloatWinEnter()
     augroup END
     ]])
 

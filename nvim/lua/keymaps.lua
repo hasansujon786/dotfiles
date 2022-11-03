@@ -117,6 +117,18 @@ keymap('n', 'cm', ':%s/<c-r>///g<Left><Left>', noSilent) -- Change all matches w
 keymap('n', 'dm', ':%s/<c-r>///g<CR>', noSilent) -- Delete all matches
 keymap('n', 'dM', ':%g/<c-r>//d<CR>', noSilent) -- Delete all lines with matches
 
+keymap({ 'n', 'v' }, 'g/', '<ESC>/\\%V', noSilent) -- search in visual selection
+keymap('n', 'z/', function() -- search in visible viewport
+  local scrolloff = vim.wo.scrolloff
+  vim.wo.scrolloff = 0
+  feedkeys('VHoLo0<Esc>/\\%V')
+
+  vim.defer_fn(function()
+    vim.wo.scrolloff = scrolloff
+  end, 10)
+end, noSilent)
+-- keymap({ 'n', 'v' }, 'z/', '/\\%><C-r>=line("w0")-1<CR>l\\%<<C-r>=line("w$")+1<CR>l', { silent = false })
+
 -- Insert mode ----------------------------------
 keymap({ 'i', 'c' }, 'jk', '<ESC>') -- Use jk to return to normal mode
 keymap('t', '<C-o>', '<C-\\><C-n>')
