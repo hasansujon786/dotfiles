@@ -31,9 +31,9 @@ local essential_servers = {
 }
 
 local default_opts = {
-  on_attach = require('lsp').on_attach,
+  on_attach = require('config.lsp').on_attach,
   flags = { debounce_text_changes = 500 },
-  capabilities = require('lsp.util').update_capabilities(),
+  capabilities = require('config.lsp.util').update_capabilities(),
 }
 
 for _, server_name in pairs(essential_servers) do

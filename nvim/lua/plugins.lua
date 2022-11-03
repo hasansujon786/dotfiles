@@ -15,7 +15,7 @@ return require('packer').startup({
     ------------------------------------------------
     --> Visual -------------------------------------
     ------------------------------------------------
-    use({ 'navarasu/onedark.nvim', config = [[require('config.onedark')]] })
+    use({ 'navarasu/onedark.nvim', config = [[require('config.one_dark')]] })
     use({ 'goolord/alpha-nvim', config = [[require('config.alpha')]] })
     use({ 'hasansujon786/kissline.nvim', config = [[require('config.kissline')]] })
     use({ 'nvim-lualine/lualine.nvim', config = [[require('config.lualine')]], commit = '8d956c18258bb128ecf42f95411bb26efd3a5d23' })
@@ -120,11 +120,11 @@ return require('packer').startup({
         'windwp/nvim-ts-autotag',
       }
     })
-    use({ 'neovim/nvim-lspconfig', opt = true, event = 'BufReadPre', config = function() require('lsp') end,
+    use({ 'neovim/nvim-lspconfig', opt = true, event = 'BufReadPre', config = function() require('config.lsp') end,
       requires = {
         { 'williamboman/mason-lspconfig.nvim', opt = true, module = 'mason-lspconfig' },
-        { 'jose-elias-alvarez/null-ls.nvim', config = function() require('lsp.null-ls') end },
-        { 'williamboman/mason.nvim', config = function() require('lsp.lsp-config') end },
+        { 'jose-elias-alvarez/null-ls.nvim', config = function() require('config.lsp.null-ls') end },
+        { 'williamboman/mason.nvim', config = function() require('config.lsp.lsp-config') end },
       }
     })
     use({ 'hrsh7th/nvim-cmp', opt = true, event = 'BufReadPost', config = function() require('config.cmp') end,

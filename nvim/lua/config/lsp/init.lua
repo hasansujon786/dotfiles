@@ -2,7 +2,7 @@ local M = {}
 -- local hasNvim8 = vim.fn.has('nvim-0.8') == 1
 local borderOpts = { border = require('state').ui.border.style }
 
-require('lsp.diagnosgic').setup()
+require('config.lsp.diagnosgic').setup()
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, borderOpts)
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, borderOpts)
 
@@ -50,14 +50,14 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', 'g.', '<cmd>Telescope lsp_document_symbols<cr>', withDesc('Lsp: document symbols'))
   keymap('n', 'gd', vim.lsp.buf.definition, withDesc('Lsp: go to definition'))
   keymap('n', 'gD', vim.lsp.buf.declaration, withDesc('Lsp: go to declaration'))
-  keymap('n', 'gr', require('lsp.util').references_with_quickfix, withDesc('Lsp: go to references'))
+  keymap('n', 'gr', require('config.lsp.util').references_with_quickfix, withDesc('Lsp: go to references'))
   keymap('n', 'gR', vim.lsp.buf.references, withDesc('Lsp: go to references'))
   keymap('n', 'gy', vim.lsp.buf.type_definition, withDesc('Lsp: type definition'))
   keymap('n', 'gI', vim.lsp.buf.implementation, withDesc('Lsp: type implementation'))
-  keymap('n', 'gp', require('lsp.peek').PeekDefinition, withDesc('Lsp: peek definition'))
-  keymap('n', 'gP', require('lsp.peek').PeekTypeDefinition, withDesc('Lsp: peek type definition'))
-  -- keymap('n', 'gpI', require('lsp.peek').PeekImplementation, opts)
-  keymap('n', '<F2>', require('lsp.util').lspRename, withDesc('Lsp: rename under cursor'))
+  keymap('n', 'gp', require('config.lsp.peek').PeekDefinition, withDesc('Lsp: peek definition'))
+  keymap('n', 'gP', require('config.lsp.peek').PeekTypeDefinition, withDesc('Lsp: peek type definition'))
+  -- keymap('n', 'gpI', require('config.lsp.peek').PeekImplementation, opts)
+  keymap('n', '<F2>', require('config.lsp.util').lspRename, withDesc('Lsp: rename under cursor'))
   keymap({ 'i', 'n' }, '<C-k>h', function()
     if require('cmp').visible() then
       require('cmp').close()
@@ -75,13 +75,13 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', '<leader>ad', vim.diagnostic.setloclist, withDesc('Lsp: show local diagnostics'))
   keymap('n', '<leader>aD', vim.diagnostic.setqflist, withDesc('Lsp: show global diagnostics'))
   keymap('n', '<leader>al', vim.diagnostic.open_float, withDesc('Lsp: show current diagnostics'))
-  keymap('n', '<leader>ai', require('lsp.workspace').ts_organize_imports_sync, withDesc('Lsp: organize ts imports'))
-  keymap('n', '<leader>aq', require('lsp.util').showLspRenameChanges, withDesc('Lsp: show lsp rename'))
+  keymap('n', '<leader>ai', require('config.lsp.workspace').ts_organize_imports_sync, withDesc('Lsp: organize ts imports'))
+  keymap('n', '<leader>aq', require('config.lsp.util').showLspRenameChanges, withDesc('Lsp: show lsp rename'))
 
   keymap('n', '<C-LeftMouse>', '<LeftMouse><cmd>lua vim.lsp.buf.definition()<CR>', opts)
   local code_action_keys = { '<C-q>', '<C-space>', '<A-space>' }
   for _, action_key in ipairs(code_action_keys) do
-    keymap({ 'n', 'x' }, action_key, require('lsp.util').code_action, withDesc('Lsp: code action'))
+    keymap({ 'n', 'x' }, action_key, require('config.lsp.util').code_action, withDesc('Lsp: code action'))
   end
 
   vim.api.nvim_create_user_command('Format', function ()

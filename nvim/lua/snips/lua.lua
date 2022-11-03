@@ -46,6 +46,21 @@ ls.add_snippets('lua', {
     )
   ),
   s(
+    'schedule',
+    fmt(
+      [[
+      local timer = vim.loop.new_timer()
+      timer:start(0, 3000, vim.schedule_wrap(function()
+        -- timer:close()
+        {}
+      end))
+      ]],
+      {
+        i(0, '-- write something'),
+      }
+    )
+  ),
+  s(
     'ei',
     fmt(
       [[
@@ -60,4 +75,3 @@ ls.add_snippets('lua', {
     i(0),
   }),
 }, { key = 'my_lua_snips' })
-
