@@ -131,8 +131,7 @@ opt.listchars = {
   -- eol = "¬",
 }
 o.joinspaces = false --                          Two spaces and grade school, we're done
-cmd([[set iskeyword+=-]]) --                     Treat dash separated words as a word text object
-cmd([[set iskeyword-=#]]) --                     Remove # from part of word
+opt.iskeyword:append('-') --                     Treat dash separated words as a word text object
 -- opt.matchpairs:append({'<:>','«:»','｢:｣'}) --    Match angle brackets...)
 opt.whichwrap:append('<,>,[,],h,l') --           Allow left/right & h/l key to move to the previous/next line
 -- code folding settings
