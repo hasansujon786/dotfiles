@@ -35,13 +35,28 @@ end
 -- deleteAllComments()
 -- deleteAllComments()
 
-return M
+function M.reload()
+  if vim.bo.buftype == '' then
+    -- if vim.fn.exists(':LspStop') ~= 0 then
+    --   vim.cmd('LspStop')
+    -- end
 
+    for name, _ in pairs(package.loaded) do
+      if name:match('^config') or name:match('^hasan') or name:match('^core') then
+        package.loaded[name] = nil
+        R(name)
+        -- P(name)
+      end
+    end
+    P('Neovim reloaded')
+  end
+end
+
+return M
 
 -- del lines            %s/\v(print).*/
 -- insert end of lines  %s/\v(regex).*\zs/ \1
 -- wrap all lines with quote %s/^\|$/'/g
-
 
 -- :g/foo/d - Delete all lines containing the string “foo”. ...
 -- :g!/foo/d - Delete all lines not containing the string “foo”.

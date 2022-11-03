@@ -59,26 +59,3 @@ keymap('n', '<leader>n', function()
     require('2048').startGame()
   end, 500)
 end)
-
-function _G.recompile()
-  if vim.bo.buftype == '' then
-    -- if vim.fn.exists(':LspStop') ~= 0 then
-    --   vim.cmd('LspStop')
-    -- end
-
-    for name, _ in pairs(package.loaded) do
-      if name:match('^config') or name:match('^hasan') then
-        package.loaded[name] = nil
-        R(name)
-        -- P(name)
-      end
-
-      -- if name:match('^config') then
-      --   -- package.loaded[name] = nil
-      --   if name == 'config.config.one_dark' then
-      --     P(name)
-      --   end
-      -- end
-    end
-  end
-end

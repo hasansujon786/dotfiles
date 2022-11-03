@@ -6,8 +6,8 @@ command! OpenInVSCode    exe "silent !code --goto '" . expand("%") . ":" . line(
 command! OpenCwdInVSCode exe "silent !code '" . getcwd() . "' --goto '" . expand("%") . ":" . line(".") . ":" . col(".") . "'" | redraw!
 command! LspLogPath lua vim.cmd('edit '..vim.lsp.get_log_path())
 command! LspInstallEssentials lua require('config.lsp.util').install_essential_servers()
-command! LuaSnipEdit :lua require("luasnip.loaders").edit_snippet_files()
-
+command! LuaSnipEdit lua require("luasnip.loaders").edit_snippet_files()
+command! ReloadConfig lua require('hasan.utils.file').reload()
 nmap <silent> <Plug>(fix-current-world) :call hasan#repeat#fix_word()<CR>
 
 " local cmd = api.nvim_create_user_command

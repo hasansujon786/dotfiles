@@ -64,8 +64,8 @@ function M.lsp_buffer_keymaps(client, bufnr)
     end
     vim.lsp.buf.signature_help()
   end, withDesc('Lsp: show signature help'))
-  keymap('n', '[d', '<cmd>lua require("lsp.diagnosgic").jump_to_diagnostic("prev")<CR>', withDesc('Lsp: jump to previous diagnosgic'))
-  keymap('n', ']d', '<cmd>lua require("lsp.diagnosgic").jump_to_diagnostic("next")<CR>', withDesc('Lsp: jump to next diagnosgic'))
+  keymap('n', '[d', '<cmd>lua require("config.lsp.diagnosgic").jump_to_diagnostic("prev")<CR>', withDesc('Lsp: jump to previous diagnosgic'))
+  keymap('n', ']d', '<cmd>lua require("config.lsp.diagnosgic").jump_to_diagnostic("next")<CR>', withDesc('Lsp: jump to next diagnosgic'))
 
   keymap('n', '<leader>fs', '<cmd>lua vim.lsp.buf.format({async=false})<CR><cmd>call hasan#utils#buffer#_save()<cr>', withDesc('Lsp: format and save'))
   keymap('x', '<leader>fs', 'gq<cmd>call hasan#utils#buffer#_save()<cr>', withDesc('Lsp: format and save'))
@@ -91,6 +91,5 @@ function M.lsp_buffer_keymaps(client, bufnr)
     vim.lsp.buf.format({async=false})
   end, {})
 end
-P('lsp init')
 
 return M
