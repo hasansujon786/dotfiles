@@ -1,4 +1,4 @@
-local ui = require('state').ui
+local ui = require('core.state').ui
 
 require('flutter-tools').setup({
   lsp = {

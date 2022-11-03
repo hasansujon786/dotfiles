@@ -30,7 +30,7 @@ return require('packer').startup({
         { 'chentoast/marks.nvim', config=[[require('config.marks-config')]] },
       }
     })
-
+    use({ 'hasansujon786/2048.nvim' })
     ------------------------------------------------
     --> Productiviry -------------------------------
     ------------------------------------------------

@@ -1,6 +1,6 @@
 local M = {}
 -- local hasNvim8 = vim.fn.has('nvim-0.8') == 1
-local borderOpts = { border = require('state').ui.border.style }
+local borderOpts = { border = require('core.state').ui.border.style }
 
 require('config.lsp.diagnosgic').setup()
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, borderOpts)
@@ -91,5 +91,6 @@ function M.lsp_buffer_keymaps(client, bufnr)
     vim.lsp.buf.format({async=false})
   end, {})
 end
+P('lsp init')
 
 return M

@@ -5,12 +5,12 @@
 ----------------------------------------------------------
 ----------------------------------------------------------
 
-require('state')
-require('global')
-require('options')
-require('keymaps')
-require('plugins')
-require('autocmds')
-require('playground')
+require('core.state')
+require('core.global')
+require('core.options')
+require('core.keymaps')
+require('core.plugins')
+require('core.autocmds')
+require('core.playground')
 -- nodejs.install
 -- https://cj.rs/blog/tips/nvim-plugin-development/

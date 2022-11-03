@@ -18,7 +18,7 @@ utils.augroup('MY_AUGROUP')(function(autocmd)
 
   autocmd('CursorHold', function()
     vim.defer_fn(function()
-      require('lazy')
+      require('core.lazy')
     end, 50)
   end, { once = true })
 end)

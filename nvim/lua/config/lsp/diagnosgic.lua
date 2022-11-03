@@ -1,5 +1,5 @@
 local M = {}
-local ui = require('state').ui
+local ui = require('core.state').ui
 local diagnotic_icons = require('hasan.utils.ui.icons').diagnostics
 
 M.diagnostic_icon_by_severity = function(severity)
