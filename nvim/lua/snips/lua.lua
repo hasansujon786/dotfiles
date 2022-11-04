@@ -21,6 +21,7 @@ local conds = require('luasnip.extras.expand_conditions')
 ls.add_snippets('lua', {
   -- s('req', fmt("local {} = require('{}')", { i(1, 'module'), rep(1) })),
   s('pr', fmt('P({})', i(1, "'write something'"))),
+  s('notify', fmt('vim.notify({}, vim.log.levels.WARN)', { i(0) })),
   s(
     'rq',
     fmt("local {} = require('{}')", {

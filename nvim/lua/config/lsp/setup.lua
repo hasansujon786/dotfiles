@@ -84,11 +84,11 @@ function M.lsp_buffer_keymaps(client, bufnr)
     keymap({ 'n', 'x' }, action_key, require('config.lsp.util').code_action, withDesc('Lsp: code action'))
   end
 
-  vim.api.nvim_create_user_command('Format', function ()
-    vim.lsp.buf.format({async=true})
+  vim.api.nvim_create_user_command('Format', function()
+    vim.lsp.buf.format({ async = true })
   end, {})
-  vim.api.nvim_create_user_command('FormatSync', function ()
-    vim.lsp.buf.format({async=false})
+  vim.api.nvim_create_user_command('FormatSync', function()
+    vim.lsp.buf.format({ async = false })
   end, {})
 end
 

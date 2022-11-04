@@ -111,7 +111,7 @@ return require('packer').startup({
     ------------------------------------------------
     use({ 'nvim-treesitter/playground', opt = true, cmd = {'TSPlaygroundToggle','TSHighlightCapturesUnderCursor'} })
     use({ 'nvim-treesitter/nvim-treesitter',
-      opt = true, event = 'CursorHold', -- commit = 'c853370',
+      opt = true, event = 'BufReadPre', -- commit = 'c853370',
       config = [[require('config.treesitter')]],
       requires = {
         'JoosepAlviste/nvim-ts-context-commentstring',
