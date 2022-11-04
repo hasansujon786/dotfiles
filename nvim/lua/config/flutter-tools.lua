@@ -10,7 +10,7 @@ require('flutter-tools').setup({
       virtual_text_str = '■',
     },
     on_attach = function(client, bufnr)
-      require('config.lsp').on_attach(client, bufnr)
+      require('config.lsp.setup').on_attach(client, bufnr)
 
       vim.cmd([[command! PubInstall lua require('hasan.telescope.custom').pub_install()]])
       -- local opts = { noremap = true, silent = true, buffer = bufnr }

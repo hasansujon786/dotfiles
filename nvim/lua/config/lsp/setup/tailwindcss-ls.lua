@@ -1,5 +1,5 @@
 local lspconfig = require('lspconfig')
-local lsp = require('lsp')
+local lsp = require('config.lsp.setup')
 
 -- "C:\\Users\\hasan\\tailwindcss-intellisense\\extension\\dist\\server\\tailwindServer.js",
 lspconfig.tailwindcss.setup {

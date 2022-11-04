@@ -120,14 +120,14 @@ return require('packer').startup({
         'windwp/nvim-ts-autotag',
       }
     })
-    use({ 'neovim/nvim-lspconfig', opt = true, event = 'BufReadPre', config = function() require('config.lsp') end,
+    use({ 'neovim/nvim-lspconfig', opt = true, event = 'BufReadPre', config = function() require('config.lsp.setup') end,
       requires = {
         { 'williamboman/mason-lspconfig.nvim', opt = true, module = 'mason-lspconfig' },
         { 'jose-elias-alvarez/null-ls.nvim', config = function() require('config.lsp.null-ls') end },
         { 'williamboman/mason.nvim', config = function() require('config.lsp.lsp-config') end },
       }
     })
-    use({ 'hrsh7th/nvim-cmp', opt = true, event = 'BufReadPost', config = function() require('config.cmp') end,
+    use({ 'hrsh7th/nvim-cmp', opt = true, event = 'BufReadPost', config = function() require('config.cmp_setup') end,
       requires = {
         'rafamadriz/friendly-snippets',
         {'L3MON4D3/LuaSnip', opt = true, module = 'luasnip', config='require("config.luasnip")'},
