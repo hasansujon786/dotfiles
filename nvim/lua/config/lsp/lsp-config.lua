@@ -18,6 +18,7 @@ local lua_opts = {
 }
 
 local essential_servers = {
+  -- [1] is for lspconfig & [2] is to install lsp-server with mason
   { 'bashls', 'bash-language-server' },
   { 'html', 'html-lsp' },
   { 'vimls', 'vim-language-server' },
@@ -27,6 +28,7 @@ local essential_servers = {
   { 'tsserver', 'typescript-language-server' },
   { 'tailwindcss', 'tailwindcss-language-server' },
   { 'sumneko_lua', 'lua-language-server', lua_opts },
+  { 'astro', 'astro-language-server' },
   -- { 'emmet_ls', 'emmet-ls' },
 }
 

@@ -6,13 +6,15 @@ require('config.lsp.diagnosgic').setup()
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, borderOpts)
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, borderOpts)
 
+local use_builtin_lsp_formatter = { 'dartls', 'astro' }
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 M.on_attach = function(client, bufnr)
   M.lsp_autocmds(client, bufnr)
   M.lsp_buffer_keymaps(client, bufnr)
 
-  if client.name ~= 'dartls' then
+  if not vim.tbl_contains(use_builtin_lsp_formatter, client.name) then
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
   end
