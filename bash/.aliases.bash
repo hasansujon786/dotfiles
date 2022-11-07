@@ -140,6 +140,7 @@ alias le='less -j4'
 alias chex='chmod +x'
 alias cpr='cp -r'
 # alias rr='rm -rfI'
+alias rm='trash'
 alias rr='remove'
 alias mn='mv -vn'
 alias txf='tar -xf'
@@ -200,9 +201,10 @@ remove() {
     local item='item'
     [[  $count -gt 1  ]] && item="items"
 
-    read -p "rm: Do you wish to remove ${count} ${item} (y/n)? " yn
+    read -p "trash: Do you wish to remove ${count} ${item} (y/n)? " yn
     case $yn in
-      [Yy]* ) rm -rf $@; break;;
+      # [Yy]* ) rm -rf $@; break;;
+      [Yy]* ) trash $@; break;;
       [Nn]* ) echo "rm: Canceled"; break;;
       * ) echo "rm: Please answer yes or no.";;
     esac
