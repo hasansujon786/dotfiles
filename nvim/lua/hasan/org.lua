@@ -37,7 +37,7 @@ end
 
 M.open_org_float = function()
   -- get the bufnr if the buffer was cleared from buflist
-  if vim.fn.bufexists(last_bufnr) == 0 then
+  if last_bufnr == 0 or vim.fn.bufexists(last_bufnr) == 0 then
     last_bufnr = vim.fn.bufadd(_G.org_home_path)
   end
   if last_pop ~= nil then
@@ -48,7 +48,7 @@ M.open_org_float = function()
   local popup = Popup({
     -- bufnr = vim.api.nvim_get_current_buf(),
     bufnr = last_bufnr,
-    zindex = 10,
+    zindex = 49,
     relative = 'editor',
     enter = true,
     focusable = true,

@@ -8,10 +8,13 @@ nm.setup_defaults({
   height = 12,
   -- height_toggle_index = 1,
   -- query_index = 1,
+  disable_indentaion = false,
   win_opts = {
     scrolloff = 2,
     relativenumber = true,
+    number = true,
     numberwidth = 1,
+    winhl = 'CursorLineNr:LineNr,NormalFloat:',
   },
   open_win_opts = { border = 'rounded' },
 })
@@ -72,5 +75,13 @@ nm.set('zi', { 'typescriptreact', 'javascriptreact', 'javascript' }, {
   ((function_declaration) @cap) ;; matches function declarations
   ((arrow_function) @cap) ;; matches arrow functions
   ((identifier) @cap (#vim-match? @cap "^use.*")) ;; matches hooks (useState, useEffect, use***, etc...)
+  ]],
+})
+
+nm.set('zi', { 'dart' }, {
+  query = [[
+  ;; query
+  ((function_signature) @cap) ;; matches function declarations
+  ((class_definition) @cap) ;; matches class declarations
   ]],
 })
