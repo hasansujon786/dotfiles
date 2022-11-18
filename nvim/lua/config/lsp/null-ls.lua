@@ -17,7 +17,7 @@ local sources = {
   --     return utils.root_has_file(".eslintrc.js")
   --   end,
   -- }),
-  b.diagnostics.todo_comments
+  -- b.diagnostics.todo_comments
 }
 
 null_ls.setup({ sources = sources })

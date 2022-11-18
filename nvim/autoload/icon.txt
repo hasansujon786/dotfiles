@@ -1,99 +1,40 @@
-" http://shapecatcher.com/
-" https://fsymbols.com/draw/
-" https://fsymbols.com/all/
+-- http://shapecatcher.com/
+-- https://fsymbols.com/draw/
+-- https://fsymbols.com/all/
 
-Powerline characters:
-                 
- ﰖ    
-  
-  ● ● • . .
-ﮊ         💡💥❌⭕📛🛑🚫🔇🔕⛔❗❕❓❔🔅🔱🌟🌞🌚🌑🌝💧🔥📌⌛⏳⌚⏰📦💰🔍🔎🔒🔓🔏🔐🔑🧿
-✅❎⏬⏩⏪🔀🔁🔂🔼🔽⬆⬇🔘🔴🟠🟡🟢🔵🟣🟤⚫🟧🟥⚪🟨🟩🟪🟪🟫🔲🔳⬛⬜◽◾
-        
-         
-       
-  ﬘   
-▾▸         « »       ❮ ❯ ▲ ▶ ▼ ◀ △ ▷ ▽ ◁ 🔺🔻
- ↳ ↪ ➤  |>    ›  ❯ 	 ➜  
-         …
-30°
-  ◎ ●   ✹ ✚ ✭ ✪ ★ ⌘ ☠
-‖ ▎   ┃ ║ ╬ █
-'─│─│╭╮╯╰'
-    﨣 🟦 🟥
-numbers_sup = {'¹','²','³','⁴','⁵','⁶','⁷','⁸','⁹','⁰'}
-▁ ▂ ▃ ▄ ▅ ▆ ▇ █ ■ ﱢ ▀ ▔ ▏ ▎ ▍ ▌ ▋ ▊ ▉ ▐ ▕ ▖ ▗ ▘ ▙ ▚ ▛ ▜ ▝ ▞ ▟ ░ ▒ ▓
-  פּ     蘒練  some other good icons
-ﮫ 羽 ﲊ
+-- https://github.com/microsoft/vscode/blob/main/src/vs/base/common/codicons.ts
+-- go to the above and then enter <c-v>u<unicode> and the symbold should appear
+-- or go here and upload the font file: https://mathew-kurian.github.io/CharacterMap/
+-- find more here: https://www.nerdfonts.com/cheat-sheet
+-- https://www.chrisatmachine.com/Neovim/26-lsp-symbols/
+-- https://code.visualstudio.com/docs/editor/intellisense
 
 -- Gallery https://microsoft.github.io/vscode-codicons/dist/codicon.html
 -- https://raw.githubusercontent.com/microsoft/vscode-codicons/main/dist/codicon.csv
 -- https://www.chrisatmachine.com/Neovim/26-lsp-symbols/
 -- https://code.visualstudio.com/docs/editor/intellisense
--- '', -- Function
--- '﬌', -- Snippet
--- '', -- Reference
--- '', -- Folder
- --   פּ ﯟ   蘒練 some other good icons
 
--- it from coc.vim by chrisAtMachine
-"suggest.completionItemKindLabels": {
-
-  " -- Module = "",
-  "method": "  ",
-  "function": "  ",
-  "variable": "[]",
-  "field": "  ",
-  "typeParameter": "<>",
-  "constant": "  ",
-  "class": " פּ ",
-  "interface": " 蘒",
-  "struct": "  ",
-  "event": "  ",
-  "operator": "  ",
-  "module": "  ",
-  "property": "  ",
-  "enum": " 練",
-  "reference": "  ",
-  "keyword": "  ",
-  "file": "  ",
-  "folder": " ﱮ ",
-  "color": "  ",
-  "unit": " 塞 ",
-  "snippet": "  ",
-  "text": "  ",
-  "constructor": "  ",
-  "value": "  ",
-  "enumMember": "  "
-},
-
-vim_item.kind = ({
-  Class = 'ﴯ',
-  Constant = '',
-  Color = '',
-  Constructor = '',
-  Enum = '',
-  EnumMember = '',
-  Event = '',
-  Field = 'ﰠ',
-  File = '',
-  Folder = '',
-  Function = '',
-  Interface = '',
-  Keyword = '',
-  Method = '',
-  Module = '',
-  Operator = '',
-  Property = 'ﰠ',
-  Reference = '',
-  Snippet = "",
-  Struct = 'פּ',
-  Text = '',
-  TypeParameter = '',
-  Unit = '塞',
-  Value = '',
-  Variable = ''
-})[vim_item.kind]
+Powerline characters:
+                 
+ ﰖ    
+💡💥❌⭕📛🛑🚫🔇🔕⛔❗❕❓❔🔅🔱🌟🌞🌚🌑🌝💧🔥📌⌛⏳⌚⏰📦💰🔍🔎🔒🔓🔏🔐🔑🧿
+✅❎⏬⏩⏪🔀🔁🔂🔼🔽⬆⬇🔘🔴🟠🟡🟢🔵🟣🟤⚫🟧🟥⚪🟨🟩🟪🟪🟫🔲🔳⬛⬜◽◾
+            
+                ﮊ 
+            ⤷    ﰟ
+ «»    ❮❯ ❰❱   ▾▸ ▲▶▼◀ △▷▽◁ 🔺🔻
+ ↳ ↪ ➤  |>    ›  ❯ 	 ➜ 
+        …
+  ◎   ● •    ✹ ✚ ✭ ✪ ★ ⌘ ☠ 30°
+‖ ▎   ┃ ║ ╬ █
+'─│─│╭╮╯╰'
+    﨣 🟦 🟥
+numbers_sup = {'¹','²','³','⁴','⁵','⁶','⁷','⁸','⁹','⁰'}
+▁ ▂ ▃ ▄ ▅ ▆ ▇ █ ■ ﱢ ▀ ▔ ▎ ▍ ▌ ▋ ▊ ▉ ▐  ▖ ▗ ▘ ▙ ▚ ▛ ▜ ▝ ▞ ▟ ░ ▒ ▓
+ ⦿ ℰ   #   ƒ  ﬌           ﰠ   ﴯ   ﮫ 羽 ﲊ
+-- LineLeft      = '▏',
+-- LineMiddle    = '│',
+-- LineRight     = '▕',
 
 -- symbols for autocomplete
 vim.lsp.protocol.CompletionItemKind = {
@@ -122,30 +63,6 @@ vim.lsp.protocol.CompletionItemKind = {
   "   (Event)",
   "   (Operator)",
   "   (TypeParameter)",
-}
-
-icons = {
-  Class = " ",
-  Color = " ",
-  Constant = " ",
-  Constructor = " ",
-  Enum = "了 ",
-  EnumMember = " ",
-  Field = " ",
-  File = " ",
-  Folder = " ",
-  Function = " ",
-  Interface = "ﰮ ",
-  Keyword = " ",
-  Method = "ƒ",
-  Module = " ",
-  Property = " ",
-  Snippet = "﬌ ",
-  Struct = " ",
-  Text = " ",
-  Unit = " ",
-  Value = " ",
-  Variable = " ",
 }
 
 vim.opt.fillchars = {
@@ -241,148 +158,6 @@ local border = {
  ◓ ◖ ◗ ◔ ◕ ◴ ◵ ◶ ◷ ◍ ◌ ◉ ◎ ◦ ◙ ◚ ◛ ◠ ◡ ◜◝ ◞ ◟ ◆ ◇ ▮ ▬ ▭ ▯ ■ □ ▢ ▣ ▪ ▫ ◧ ◨ ◩ ◪ ◫
  ◰ ◱ ◲ ◳ ▲ ▶ ▼ ◀ ◄ ◥ ◢ ◣ ◤─
 
--- preset of icons
-icon_preset = {
-  url_marker = ' ',
-  select_marker = '',
-  { ' ', 'Sub-project' },
-  { ' ', 'Journal, newspaper, weekly and daily news' },
-  { ' ', 'For when you have an idea' },
-  { ' ', 'Note taking?' },
-  { '陼', 'Task management' },
-  { ' ', 'Uncheck, empty square or backlog' },
-  { ' ', 'Full square or on-going' },
-  { ' ', 'Check or done' },
-  { ' ', 'Trash bin, deleted, cancelled, etc.' },
-  { ' ', 'GitHub' },
-  { ' ', 'Monitoring' },
-  { ' ', 'Internet, Earth, everyone!' },
-  { ' ', 'Frozen, on-hold' },
-}
-
-symbols = {
-  File = {icon = "", hl = "TSURI"},
-  Module = {icon = "", hl = "TSNamespace"},
-  Namespace = {icon = "", hl = "TSNamespace"},
-  Package = {icon = "", hl = "TSNamespace"},
-  Class = {icon = "𝓒", hl = "TSType"},
-  Method = {icon = "ƒ", hl = "TSMethod"},
-  Property = {icon = "", hl = "TSMethod"},
-  Field = {icon = "", hl = "TSField"},
-  Constructor = {icon = "", hl = "TSConstructor"},
-  Enum = {icon = "ℰ", hl = "TSType"},
-  Interface = {icon = "ﰮ", hl = "TSType"},
-  Function = {icon = "", hl = "TSFunction"},
-  Variable = {icon = "", hl = "TSConstant"},
-  Constant = {icon = "", hl = "TSConstant"},
-  String = {icon = "𝓐", hl = "TSString"},
-  Number = {icon = "#", hl = "TSNumber"},
-  Boolean = {icon = "⊨", hl = "TSBoolean"},
-  Array = {icon = "", hl = "TSConstant"},
-  Object = {icon = "⦿", hl = "TSType"},
-  Key = {icon = "🔐", hl = "TSType"},
-  Null = {icon = "NULL", hl = "TSType"},
-  EnumMember = {icon = "", hl = "TSField"},
-  Struct = {icon = "𝓢", hl = "TSType"},
-  Event = {icon = "🗲", hl = "TSType"},
-  Operator = {icon = "+", hl = "TSOperator"},
-  TypeParameter = {icon = "𝙏", hl = "TSParameter"}
-}
-}
-
-
-https://github.com/ecosse3/nvim
-local icons = {
-  abc                 = '  ',
-  arrowReturn         = '  ',
-  bomb                = '  ',
-  box                 = '  ',
-  buffer              = ' ﬘ ',
-  calculator          = '  ',
-  checkSquare         = '  ',
-  container           = '  ',
-  cubeTree            = '  ',
-  curlies             = '  ',
-  database            = ' ﬘ ',
-  emptyBox            = '  ',
-  error               = '  ',
-  errorOutline        = '  ',
-  errorSlash          = ' ﰸ ',
-  f                   = '  ',
-  fileBg              = '  ',
-  fileCopy            = '  ',
-  fileCutCorner       = '  ',
-  fileNoBg            = '  ',
-  fileNoLines         = '  ',
-  fileNoLinesBg       = '  ',
-  folder              = '  ',
-  folderNoBg          = '  ',
-  folderOpen          = '  ',
-  folderOpen2         = ' ﱮ ',
-  folderOpenNoBg      = '  ',
-  gears               = '  ',
-  git                 = '  ',
-  gitAdd              = '  ',
-  gitChange           = ' 柳',
-  gitRemove           = '  ',
-  happyFace           = ' ﲃ ',
-  hexCutOut           = '  ',
-  info                = '  ',
-  infoOutline         = '  ',
-  key                 = '  ',
-  light               = '  ',
-  lightbulb           = '  ',
-  lightbulbOutline    = '  ',
-  m                   = ' m ',
-  numbers             = '  ',
-  paint               = '  ',
-  paragraph           = '  ',
-  pencil              = '  ',
-  pie                 = '  ',
-  rectangleIntersect  = ' 練',
-  ribbon              = '  ',
-  ribbonNoBg          = '  ',
-  ruler               = '  ',
-  scissors            = '  ',
-  scope               = '  ',
-  search              = '  ',
-  search2             = '  ',
-  settings            = '  ',
-  settings2           = '  ',
-  sort                = '  ',
-  spell               = ' 暈',
-  snippet             = '  ',
-  t                   = '  ',
-  terminal            = '  ',
-  threeDots           = '  ',
-  threeDotsBoxed      = '  ',
-  timer               = '  ',
-  toggleSelected      = ' 蘒',
-  tree                = '  ',
-  treeDiagram         = '  ',
-  vim                 = '  ',
-  warningCircle       = '  ',
-  warningTriangle     = '  ',
-  warningTriangleNoBg = '  ',
-  wrench              = '  ',
-  clouldCode          = ' ﲳ ',
-  flowerOrg           = ' ✿ ',
-  heart               = ' ♥ ',
-  circleBg            = ' ● ',
-  circleOutline       = ' ○ ',
-  circleOutline2      = ' ◉ ',
-  startBg             = '  ',
-  asterisk            = ' ✸ ',
-  loading             = '  ',
-  hash                = '  ',
-  disk                = '  ',
-  disk2               = '  ',
-  wathc               = '  ',
-  lock                = '  ',
-  lock2               = '  ',
-}
-
-return icons
 short_name	character	unicode
 account		EB99
 activate-breakpoints		EA97
@@ -804,78 +579,4 @@ workspace-unknown		EBC3
 workspace-untrusted		EBC2
 zoom-in		EB81
 zoom-out		EB82
-
--- neorg icons
-local M = {}
-
-M.todo = {
-  pending = {
-    icon = "",
-  },
-  uncertain = {
-    icon = "?",
-  },
-  urgent = {
-    icon = "",
-  },
-  on_hold = {
-    icon = "",
-  },
-  cancelled = {
-    icon = "",
-  },
-}
-
-M.list = {
-  level_1 = {
-    icon = "",
-  },
-
-  level_2 = {
-    icon = " ",
-  },
-
-  level_3 = {
-    icon = "  ",
-  },
-
-  level_4 = {
-    icon = "   ",
-  },
-
-  level_5 = {
-    icon = "    ",
-  },
-
-  level_6 = {
-    icon = "     ",
-  },
-}
-
-M.heading = {
-  level_1 = {
-    icon = "",
-  },
-
-  level_2 = {
-    icon = " ",
-  },
-
-  level_3 = {
-    icon = "  ",
-  },
-
-  level_4 = {
-    enabled = true,
-    icon = "   ﰟ",
-  },
-
-  level_5 = {
-    icon = "    ▶",
-  },
-
-  level_6 = {
-    icon = "     ⤷",
-  },
-}
 

@@ -11,9 +11,7 @@
 "     let g:loaded_python_provider = 1
 " endif
 
-vim.opt.list = true
-vim.opt.listchars:append("space:⋅")
-vim.opt.listchars:append("eol:↴")
+call matchadd('Function', '@\w\+')
 
 function! s:MakeHeader(level) abort
     " s/\v^(#* )?/\=repeat('#', a:level).' '/
