@@ -16,7 +16,7 @@ require('colorizer').setup({
     css_fn = false, -- Enable all CSS *functions*: rgb_fn, hsl_fn
     mode = 'background', -- Set the display mode. 'foreground', 'background', 'virtualtext'
     virtualtext = '■',
-    tailwind = true, -- Available methods are false / true / "normal" / "lsp" / "both" | True is same as normal
+    tailwind = 'lsp', -- Available methods are false / true / "normal" / "lsp" / "both" | True is same as normal
   },
   buftypes = {
     '!prompt',

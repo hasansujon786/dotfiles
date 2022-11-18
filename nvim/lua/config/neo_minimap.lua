@@ -8,7 +8,7 @@ nm.setup_defaults({
   height = 12,
   -- height_toggle_index = 1,
   -- query_index = 1,
-  disable_indentaion = false,
+  disable_indentation = false,
   win_opts = {
     scrolloff = 2,
     relativenumber = true,

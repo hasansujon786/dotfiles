@@ -2,10 +2,16 @@ local cmp = require('cmp')
 local utils = require('hasan.utils')
 local kind_icons = require('hasan.utils.ui.icons').kind
 local luasnip = require('luasnip')
+local ELLIPSIS_CHAR = '…'
+local MAX_LABEL_WIDTH = 40
 
 local function has_words_before()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+end
+
+local function get_ws(max, len)
+  return (' '):rep(max - len)
 end
 
 local function tab_out_available()
@@ -17,6 +23,12 @@ cmp.setup({
     -- completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered({
       winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
+    }),
+    completion = cmp.config.window.bordered({
+      -- side_padding = 0,
+      -- col_offset = -2,
+      border = 'none',
+      winhighlight = 'Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
     }),
   },
   experimental = {
@@ -102,9 +114,9 @@ cmp.setup({
   },
   formatting = {
     fields = { 'kind', 'abbr', 'menu' },
-    format = function(entry, vim_item)
+    format = function(entry, item)
       -- NOTE: order matters
-      vim_item.menu = ({
+      item.menu = ({
         nvim_lsp = 'ﲳ',
         nvim_lua = '',
         treesitter = '',
@@ -116,12 +128,21 @@ cmp.setup({
         orgmode = '✿',
         luasnip = '',
       })[entry.source.name]
-      vim_item.menu = string.format('%s %s', string.sub(vim_item.kind, 1, 3), vim_item.menu)
+      item.menu = string.format('%s %s', string.sub(item.kind, 1, 3), item.menu)
 
       -- Kind icons
       -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
-      vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
-      return vim_item
+      item.kind = string.format('%s', kind_icons[item.kind])
+
+      -- Turncate label
+      local content = item.abbr
+      if #content > MAX_LABEL_WIDTH then
+        item.abbr = vim.fn.strcharpart(content, 0, MAX_LABEL_WIDTH) .. ELLIPSIS_CHAR
+      else
+        item.abbr = content .. get_ws(MAX_LABEL_WIDTH, #content)
+      end
+
+      return item
     end,
   },
 })
