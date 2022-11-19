@@ -49,25 +49,20 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! CmpItemKindSnippet            guifg=#9CDCFE
 
   "/// Treesitter highlights ///"
-  hi OrgDone           guifg=#7CBA4F
-  " hi TSNamespace       guifg=#e86671 i don't know
-  " hi TSParameter       guifg=#e86671 gui=italic
-  " hi TSConstructor     guifg=#E5C07B gui=NONE
-  " hi TSConstant        guifg=#E5C07B gui=NONE
-  hi TSField           guifg=#e86671
-  hi TSProperty        guifg=#e86671
-  hi TSVariable        guifg=#e86671
-  hi TSVariableBuiltin guifg=#E5C07B
-  hi TSTagAttribute    guifg=#D19A66 gui=italic
-  hi TSTagDelimiter    guifg=#ABB2BF gui=NONE
-
-  hi! link @field            TSField
-  hi! link @property         TSField
-  hi! link @variable         TSVariable
-  hi! link @variable.builtin TSVariableBuiltin
-  hi! link @tag.delimiter    TSTagDelimiter
-  hi! link @tag.attribute    TSTagAttribute
-  hi! link htmlTag           @tag.delimiter
+  hi OrgDone                    guifg=#7CBA4F
+  hi TSRed                      guifg=#e86671
+  hi! link @field               TSRed
+  hi! link @property            TSRed
+  hi! link @variable            TSRed
+  hi! link htmlTag              @tag.delimiter
+  hi! link @punctuation.special @keyword
+  hi! @tag.delimiter            guifg=#ABB2BF gui=NONE
+  hi! @variable.builtin         guifg=#E5C07B
+  hi! @tag.attribute            guifg=#D19A66 gui=italic
+  " custom highlights
+  hi! @css.class                guifg=#D19A66
+  hi! link @css.id              @method
+  hi! link @css.pseudo_element  @attribute
 
   "/// LSP variable reference ///"
   hi LspReferenceText  guibg=#3B4048 gui=NONE
@@ -87,8 +82,9 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi VM_Insert  guibg=#3E4452 guifg=#ABB2BF
   hi VM_Mono    guibg=#00af87 guifg=#ffffff
   " hi VM_Cursor
-  hi AlphaButtons      guifg=#5c6370
-  hi AlphaHeader       guifg=#5c6370
+  hi AlphaTag          guifg=#424957
+  hi AlphaHeader       guifg=#4d5666
+  hi AlphaButtons      guifg=#546178
   "/// Floaterm ///"
   hi! link Floaterm NormalFloatFlat
   hi! link FloatermBorder FloatBorderFlat
@@ -122,8 +118,3 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! link NvimTreeWindowPicker TelescopeSelectionCaret
   hi! link NvimTreeWinSeparator VertSplit
 endfunction
-
-" call hasan#highlight#load_custom_highlight()
-" hi VertSplit          guifg=#4D5666 guibg=#363d49
-" hi VertSplit          guifg=#181a1f guibg=NONE
-" hi Nebulous guibg=#363d49 -- ori

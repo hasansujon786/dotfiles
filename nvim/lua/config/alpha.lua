@@ -32,8 +32,8 @@ local function button(sc, txt, keybind)
 end
 
 -- dynamic header padding
-local marginTopPercent = 0.1
-local headerPadding = vim.fn.max({ 2, vim.fn.floor(vim.fn.winheight(0) * marginTopPercent) }) - 1
+-- local marginTopPercent = 0.1
+-- local headerPadding = vim.fn.max({ 2, vim.fn.floor(vim.fn.winheight(0) * marginTopPercent) }) - 1
 
 local options = {
   header = {
@@ -54,15 +54,23 @@ local options = {
       [[  /(((((.          ((((#%#%%/*   ]],
       [[    ,(((.            /(%%#*      ]],
       [[       *               *         ]],
-      [[                                 ]],
-      [[         -- aim lower --         ]],
     },
     opts = {
       position = 'center',
       hl = 'AlphaHeader',
     },
   },
-
+  tag = {
+    type = 'text',
+    val = {
+      [[                                 ]],
+      [[        -- Neovim 0.8.1 --       ]],
+    },
+    opts = {
+      position = 'center',
+      hl = 'AlphaTag',
+    },
+  },
   buttons = {
     type = 'group',
     val = {
@@ -74,14 +82,15 @@ local options = {
     },
     opts = { spacing = 1 },
   },
-  headerPaddingTop = { type = 'padding', val = headerPadding },
-  headerPaddingBottom = { type = 'padding', val = 2 },
+  headerPaddingTop = { type = 'padding', val = 1 },
+  headerPaddingBottom = { type = 'padding', val = 1 },
 }
 
 alpha.setup({
   layout = {
     options.headerPaddingTop,
     options.header,
+    options.tag,
     options.headerPaddingBottom,
     options.buttons,
   },
@@ -95,6 +104,7 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = 'alpha',
   callback = function()
     -- store current statusline value and use that
+    vim.wo.scrolloff = 0
     local old_winbar = vim.opt.winbar
     local old_laststatus = vim.opt.laststatus
     local old_showtabline = vim.opt.showtabline

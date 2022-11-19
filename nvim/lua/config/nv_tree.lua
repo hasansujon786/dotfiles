@@ -92,6 +92,13 @@ require('nvim-tree').setup({
     ignore = true,
     timeout = 500,
   },
+  tab = {
+    sync = {
+      open = true,
+      close = true,
+      ignore = {'NeogitStatus'},
+    },
+  },
   renderer = {
     indent_width = 1,
     indent_markers = { enable = true },
