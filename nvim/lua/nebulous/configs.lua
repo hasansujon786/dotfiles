@@ -21,6 +21,7 @@ M.default = {
     Outline = true,
     dashboard = true,
     alpha = true,
+    floaterm = true,
   },
   nb_blur_hls = {
     'LineNr:Nebulous',

@@ -1,6 +1,5 @@
-local present, alpha = pcall(require, 'alpha')
-
-if not present then
+local ok, alpha = pcall(require, 'alpha')
+if not ok then
   return
 end
 
@@ -32,10 +31,9 @@ local function button(sc, txt, keybind)
   }
 end
 
--- -- dynamic header padding
--- local fn = vim.fn
--- local marginTopPercent = 0.1
--- local headerPadding = fn.max({ 2, fn.floor(fn.winheight(0) * marginTopPercent) })
+-- dynamic header padding
+local marginTopPercent = 0.1
+local headerPadding = vim.fn.max({ 2, vim.fn.floor(vim.fn.winheight(0) * marginTopPercent) }) - 1
 
 local options = {
   header = {
@@ -76,13 +74,13 @@ local options = {
     },
     opts = { spacing = 1 },
   },
-  headerPaddingTop = { type = 'padding', val = 1 },
+  headerPaddingTop = { type = 'padding', val = headerPadding },
   headerPaddingBottom = { type = 'padding', val = 2 },
 }
 
 alpha.setup({
   layout = {
-    -- options.headerPaddingTop,
+    options.headerPaddingTop,
     options.header,
     options.headerPaddingBottom,
     options.buttons,
@@ -91,18 +89,25 @@ alpha.setup({
 })
 
 -- Disable statusline in dashboard
--- vim.api.nvim_create_autocmd('FileType', {
---   pattern = 'alpha',
---   callback = function()
---     -- store current statusline value and use that
---     local old_laststatus = vim.opt.laststatus
---     vim.api.nvim_create_autocmd('BufUnload', {
---       buffer = 0,
---       callback = function()
---         vim.opt.laststatus = old_laststatus
---       end,
---     })
---     vim.opt.laststatus = 0
---   end,
--- -- })
--- vim.cmd([[autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2]])
+vim.api.nvim_create_augroup('alpha_tabline', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+  group = 'alpha_tabline',
+  pattern = 'alpha',
+  callback = function()
+    -- store current statusline value and use that
+    local old_winbar = vim.opt.winbar
+    local old_laststatus = vim.opt.laststatus
+    local old_showtabline = vim.opt.showtabline
+    vim.api.nvim_create_autocmd('BufUnload', {
+      buffer = 0,
+      callback = function()
+        vim.opt.laststatus = old_laststatus
+        vim.opt.showtabline = old_showtabline
+        vim.opt.winbar = old_winbar
+      end,
+    })
+    vim.opt.laststatus = 0
+    vim.opt.showtabline = 0
+    vim.opt.winbar = ''
+  end,
+})

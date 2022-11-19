@@ -21,7 +21,6 @@ function! hasan#highlight#load_custom_highlight(...) abort
   "/// nvim-cmp ///"
   hi! Pmenu                         guibg=#202631 guifg=#a5b0c5
   hi! PmenuThumb                    guibg=#404959
-  hi! PmenuSel                      guibg=#495369 guifg=NONE
   " CmpItemAbbr
   hi! CmpItemMenu                   guifg=#4D5666
   hi! CmpItemAbbrMatchFuzzy         guifg=#d99a5e gui=underline,bold

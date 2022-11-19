@@ -234,7 +234,7 @@ local nerdicons =  {
     Robot    = 'ﮧ',
     Squirrel = '',
     Tag      = '',
-    Watch    = '',
+    Watch    = '',
   },
   Other = other,
 }
