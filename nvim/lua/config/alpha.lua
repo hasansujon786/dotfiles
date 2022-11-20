@@ -32,8 +32,8 @@ local function button(sc, txt, keybind)
 end
 
 -- dynamic header padding
--- local marginTopPercent = 0.1
--- local headerPadding = vim.fn.max({ 2, vim.fn.floor(vim.fn.winheight(0) * marginTopPercent) }) - 1
+local marginTopPercent = 0.1
+local headerPadding = vim.fn.max({ 2, vim.fn.floor(vim.fn.winheight(0) * marginTopPercent) }) - 1
 
 local options = {
   header = {
@@ -82,7 +82,7 @@ local options = {
     },
     opts = { spacing = 1 },
   },
-  headerPaddingTop = { type = 'padding', val = 1 },
+  headerPaddingTop = { type = 'padding', val = headerPadding },
   headerPaddingBottom = { type = 'padding', val = 1 },
 }
 
