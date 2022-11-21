@@ -54,6 +54,7 @@
       "colorScheme": "One Half Dark",
       "cursorShape": "filledBox",
       "font": {
+        // monalisa
         "face": "OperatorMonoLig Nerd Font",
         "size": 14
       },

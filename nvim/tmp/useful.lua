@@ -298,3 +298,11 @@ end
 --   },
 -- }
 -- M.create_augroups(autocmds)
+
+-- .luarc.json
+-- {
+--     "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+--     "Lua.diagnostics.disable": [
+--         "deprecated"
+--     ]
+-- }
