@@ -94,10 +94,15 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi LualineTabActive    guifg=#98C379 guibg=#3E4452
   hi LualineTabInactive  guifg=#7386a5 guibg=#3E4452
   hi LualineTabSp        guifg=#2c3545 guibg=#3E4452
-
   "/// marks.nvim ///"
   hi! link MarkSignNumHL None
   hi! link MarkSignHL Comment
+  "/// glance.nvim ///"
+  hi GlancePreviewBorderBottom guifg=#111925 guibg=#1B222E
+  hi GlanceListBorderBottom    guifg=#111925 guibg=#151C28
+  hi! link GlancePreviewMatch  LspReferenceText
+  hi! link GlanceListMatch     LspReferenceWrite
+  hi! link GlanceIndent IndentBlanklineChar
 
   "/// Telescope ///"
   hi! link TelescopeTitle Comment

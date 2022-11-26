@@ -127,6 +127,7 @@ return require('packer').startup({
         { 'williamboman/mason.nvim', config = function() require('config.lsp.lsp-config') end },
       }
     })
+    use({ 'dnlhc/glance.nvim', config = function() require('config.glance') end, opt = true, cmd = 'Glance' })
     use({ 'hrsh7th/nvim-cmp', opt = true, event = 'BufReadPost', config = function() require('config.cmp_setup') end,
       requires = {
         'rafamadriz/friendly-snippets',
