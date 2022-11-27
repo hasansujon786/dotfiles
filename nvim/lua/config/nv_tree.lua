@@ -100,6 +100,8 @@ require('nvim-tree').setup({
     },
   },
   renderer = {
+    -- root_folder_label = ":~:s?$?/..?",
+    root_folder_label = ":~:s?$?\\\\..?",
     indent_width = 1,
     indent_markers = { enable = true },
     icons = {
