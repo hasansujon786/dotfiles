@@ -24,13 +24,14 @@ ls.config.set_config({
   },
 })
 
-require('luasnip').filetype_extend('javascriptreact', { 'javascript' })
-require('luasnip').filetype_extend('typescript', { 'javascript' })
-require('luasnip').filetype_extend('typescriptreact', { 'javascript' })
+-- require('luasnip').filetype_extend('javascriptreact', { 'javascript' }) -- (to, {from})
+-- require('luasnip').filetype_extend('javascript', { 'javascriptreact' })
+-- require('luasnip').filetype_extend('typescript', { 'javascript' })
+-- require('luasnip').filetype_extend('typescriptreact', { 'javascript' })
 
 vim.cmd([[command! LuaSnipEditLocal :lua require("luasnip.loaders.from_lua").edit_snippet_files()]])
 vim.defer_fn(function()
-  require('luasnip.loaders.from_vscode').lazy_load()
-  require('luasnip.loaders.from_vscode').lazy_load({ paths = { '~/dotfiles/nvim/.vsnip' } })
   require('luasnip.loaders.from_lua').lazy_load({ paths = { '~/dotfiles/nvim/lua/snips' } })
+  require('luasnip.loaders.from_vscode').lazy_load({ paths = { '~/dotfiles/nvim/.vsnip' } })
+  require('luasnip.loaders.from_vscode').lazy_load()
 end, 100)

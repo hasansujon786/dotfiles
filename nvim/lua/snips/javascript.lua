@@ -35,4 +35,5 @@ ls.add_snippets('javascript', {
       }
     )
   ),
+  s('cn', fmt([[className='{}']], { i(0) })),
 }, { key = 'my_js_snips' })

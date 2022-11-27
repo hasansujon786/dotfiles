@@ -3,7 +3,7 @@ local sl = require('hasan.utils.statusline')
 local onedark = require('lualine.themes.onedark')
 onedark.normal.c.fg = '#68707E'
 onedark.normal.b.fg = '#8b95a7'
-local only_pad_right = { left = 1, right = 0 }
+local only_pad_left = { left = 1, right = 0 }
 
 local filename = function(file_status)
   return {
@@ -45,13 +45,14 @@ require('lualine').setup({
       { sl.harpoon.fn, cond = sl.harpoon.toggle },
       { sl.task_timer.fn, cond = sl.task_timer.toggle },
       { 'branch', icon = '' },
+      { 'fileformat', padding = only_pad_left },
       sl.space_info,
       -- { 'filetype', icons_enabled = false },
     },
     lualine_y = {
-      { sl.readonly.fn, cond = sl.readonly.toggle, padding = only_pad_right },
-      { sl.spell.fn, cond = sl.spell.toggle, padding = only_pad_right },
-      { sl.wrap.fn, cond = sl.wrap.toggle, padding = only_pad_right },
+      { sl.readonly.fn, cond = sl.readonly.toggle, padding = only_pad_left },
+      { sl.spell.fn, cond = sl.spell.toggle, padding = only_pad_left },
+      { sl.wrap.fn, cond = sl.wrap.toggle, padding = only_pad_left },
       'progress',
     },
     lualine_z = { { 'location', separator = { right = '' }, left_padding = 2 } },
