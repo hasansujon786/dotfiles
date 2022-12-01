@@ -2,9 +2,9 @@ keymap('n', '<leader>ob', ':NvimTreeToggle<CR>', {desc = 'Toggle explorer'})
 keymap('n', '<leader>op', '<cmd>lua require("hasan.utils.vinegar").toggle_sidebar()<CR>', {desc = 'Open explorer'})
 keymap('n', '-', '<cmd>lua require("hasan.utils.vinegar").vinegar()<CR>', {desc = 'Vinegar'})
 keymap('n', '<BS>', '<cmd>lua require("hasan.utils.vinegar").alternate_file()<CR>', {desc = 'Alternate file'})
-keymap('n', '[e', '<cmd>lua require("nvim-tree.marks.navigation").prev()<cr>', {desc = 'Previous tree mark'})
-keymap('n', ']e', '<cmd>lua require("nvim-tree.marks.navigation").next()<cr>', {desc = 'Next tree mark'})
 keymap('n', '<leader>/e', '<cmd> lua require("nvim-tree.marks.navigation").select()<cr>', {desc = 'Search tree marks'})
+-- keymap('n', '[e', '<cmd>lua require("nvim-tree.marks.navigation").prev()<cr>', {desc = 'Previous tree mark'})
+-- keymap('n', ']e', '<cmd>lua require("nvim-tree.marks.navigation").next()<cr>', {desc = 'Next tree mark'})
 -- bulk_move = require("nvim-tree.marks.bulk-move").bulk_move,
 local v = require('hasan.utils.vinegar')
 

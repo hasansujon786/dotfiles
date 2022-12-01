@@ -103,6 +103,8 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! link GlancePreviewMatch  LspReferenceText
   hi! link GlanceListMatch     LspReferenceWrite
   hi! link GlanceIndent IndentBlanklineChar
+  hi! link GlanceListCursorLine CursorLineFocus
+  " hi! link GlancePreviewCursorLine CursorLineFocus
 
   "/// Telescope ///"
   hi! link TelescopeTitle Comment

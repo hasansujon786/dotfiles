@@ -19,15 +19,21 @@ glance.setup({
   },
   mappings = {
     list = {
+      ['<A-n>'] = actions.next_location, -- Bring the cursor to the next location skipping groups in the list
+      ['<A-p>'] = actions.previous_location, -- Bring the cursor to the previous location skipping groups in the list
       ['<BS>'] = actions.enter_win('preview'), -- Focus preview window
       ['<leader>l'] = actions.enter_win('preview'), -- Focus preview window
       ['<leader>h'] = actions.enter_win('preview'), -- Focus preview window
+      ['<leader>q'] = actions.close,
       -- ['<Esc>'] = false -- disable a mapping
     },
     preview = {
+      ['<A-n>'] = actions.next_location, -- Bring the cursor to the next location skipping groups in the list
+      ['<A-p>'] = actions.previous_location, -- Bring the cursor to the previous location skipping groups in the list
       ['<BS>'] = actions.enter_win('list'), -- Focus list window
       ['<leader>l'] = actions.enter_win('list'), -- Focus list window
       ['<leader>h'] = actions.enter_win('list'), -- Focus list window
+      ['<leader>q'] = actions.close,
     },
   },
   hooks = {
