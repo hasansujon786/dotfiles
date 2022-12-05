@@ -6,7 +6,7 @@ M.install_essential_servers = function()
   if not ok then
     print('[Mason] Please install mason and try again')
   end
-  local essential_servers = require('lsp.lsp_config').essential_servers
+  local essential_servers = require('config.lsp.lsp-config').essential_servers
   local not_installed_names = {}
 
   for _, server_name in ipairs(essential_servers) do

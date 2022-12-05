@@ -338,7 +338,9 @@ auto_install_everything() {
 
   if [[ "$os" == "windows" ]]; then
     start ms-settings:developers
-    setup_windowsTerminal
+    choco install pwsh -y
+    choco install autohotkey -y
+    # setup_windowsTerminal
     setup_ahk
     # setup_sublime
     $getter install -y mingw
