@@ -30,8 +30,7 @@ PgDn::Send +!{ESC}
 #InputLevel 1
 !\::Send \
 \::alternateTab()
-capslock::alternateTab()
-+capslock::capslock
+#Enter::SetCapsLockState, % (t:=!t) ?  "On" beep() :  "Off" beep()
 $Escape::superEscape()
 #SPACE::toggleAlwaysOnTop()       ; Always on Top
 #z::rebootMiWiFi()
