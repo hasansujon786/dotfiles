@@ -106,8 +106,10 @@ require('nvim-treesitter.configs').setup({
 keymap('n', '<P', '<Plug>(ts-swap-parameter-prev):call repeat#set("\\<Plug>(ts-swap-parameter-prev)")<CR>')
 keymap('n', '>P', '<Plug>(ts-swap-parameter-next):call repeat#set("\\<Plug>(ts-swap-parameter-next)")<CR>')
 
-keymap('n', '[e', '<Plug>(ts-jump-prev-s-func)zz')
-keymap('n', ']e', '<Plug>(ts-jump-next-s-func)zz')
+keymap('n', '[f', '<Plug>(ts-jump-prev-s-func)zz')
+keymap('n', ']f', '<Plug>(ts-jump-next-s-func)zz')
+keymap('n', '[[', '<Plug>(ts-jump-prev-s-func)zz')
+keymap('n', ']]', '<Plug>(ts-jump-next-s-func)zz')
 keymap('n', '[m', '<Plug>(ts-jump-prev-s-class)zz')
 keymap('n', ']m', '<Plug>(ts-jump-next-s-class)zz')
 

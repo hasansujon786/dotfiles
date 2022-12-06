@@ -1,3 +1,4 @@
+# fd --type f --hidden --exclude .git | fzf | xargs nvim
 #     ____      ____
 #    / __/___  / __/
 #   / /_/_  / / /_
@@ -117,23 +118,26 @@ fk() {
 }
 
 fo() {
-  IFS=$'\n' out=("$(fzf --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)")
+  IFS=$'\n' out=("$(fzf --reverse --query="$1" --exit-0 --expect=alt-o,ctrl-e)")
   key=$(head -1 <<< "$out")
   file=$(head -2 <<< "$out" | tail -1)
   if [ -n "$file" ]; then
-    if [[ "$key" = ctrl-e ]]; then
-      # ${EDITOR:-nvim} "$file"
-      nvim "$file"
-    else
+    if [[ "$key" = alt-o ]]; then
       explorer "$file"
       printf 'explorer %q' "$file"
+    else
+      # ${EDITOR:-nvim} "$file"
+      nvim "$file"
     fi
   fi
 }
 
-fif() {
+fn() {
   if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
-  nvim $(rg --files-with-matches --no-messages --smart-case "$1" | fzf --preview "cat {}")
+  files=$(rg --files-with-matches --no-messages --smart-case "$1" | fzf --reverse --multi --preview "cat {}")
+  if [ -n "$files" ]; then
+    nvim $files
+  fi
 }
 
 b() {

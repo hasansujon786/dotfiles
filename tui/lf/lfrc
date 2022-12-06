@@ -92,9 +92,9 @@ map Zu %{{ unzip $Env:f }}
 # ---------------------------------------------------------------------------
 
 map .. cd ~/Desktop
-map .c cd C:\\
-map .f cd F:\\
-map .e cd E:\\
+map .c cd C:\\ windows
+map .d cd D:\\ work
+map .e cd E:\\ movies
 
 map g. cd ~/dotfiles
 map gd cd ~/Downloads
@@ -102,7 +102,7 @@ map gp cd ~/Pictures
 map gv cd ~/Videos
 map gm cd ~/Music
 map gD cd ~/Documents
-map gr cd F:\\repoes
+map gr cd D:\\repoes
 
 # Currant project navigation
 map -- jump-to-git-root
