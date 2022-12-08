@@ -108,8 +108,11 @@ alias gt='git tag'
 alias gst='git status'
 alias gupd='git update'
 alias gcl='git clone --recurse-submodules'
-alias grh='git reset HEAD~1' # --hard
-alias gr='git reset ' # --hard
+# Use --soft if you want to keep your changes
+# Use --hard if you don't care about keeping the changes you made
+alias gr='git reset ' # unstage files (Use --hard/--soft)
+alias grh='git reset HEAD~1' # (Use --hard/--soft)
+alias grvh='git revert HEAD' # Undo a public commit
 alias gcrh='git clean --force && git reset --hard'
 alias gck='git checkout ' # switch brnch | -b to create
 alias glo='git log --oneline --decorate'
