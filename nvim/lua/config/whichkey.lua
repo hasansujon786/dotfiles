@@ -136,7 +136,9 @@ local leader = {
     ['/'] = { '<cmd>Telescope git_status<CR>',         'Find git files*' },
     c = { '<cmd>Telescope git_commits<CR>',            'Look up commits' },
     C = { '<cmd>Telescope git_bcommits<CR>',           'Look up buffer commits' },
-    b = { '<cmd>Telescope git_branches<CR>',           'Checkout git branch' },
+    n = { '<cmd>Telescope git_branches<CR>',           'Checkout git branch' },
+
+    b = { '<cmd>lua require("hasan.utils.init").open_git_remote(true)<CR>',    'Browse git repo' },
     B = { '<cmd>lua require("hasan.utils.init").open_git_remote(false)<CR>',   'Browse git repo' },
 
     g = { '<cmd>Neogit<CR>',                                                    'Open Neogit' },
@@ -144,11 +146,11 @@ local leader = {
     t = { '<cmd>FloatermNew --height=1.0 --width=1.0 tig<CR>',                  'Open tig' },
 
     p = 'Preview hunk',
-    r = 'Reset hunk',
     s = 'Stage hunk',
-    u = 'Undo last hunk',
+    r = 'Reset hunk',
     R = 'Reset buffer',
-    H = { '<cmd>GitGutterLineHighlightsToggle<CR>',    'Highlight hunks' },
+    u = 'Undo last hunk',
+    L = { '<cmd>GitGutterLineHighlightsToggle<CR>',    'Highlight hunks' },
     T = { '<cmd>GitGutterToggle<CR>',                  'Toggle Signes' },
     ['.'] = { '<cmd>silent !git add %<CR>',            'Stage current file' },
     -- f = { '<cmd>diffget //2<cr>',                      'diffget ours' },

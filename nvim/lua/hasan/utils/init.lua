@@ -157,13 +157,13 @@ M.map = function(mode, lhs, rhs, opts)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-M.open_git_remote = function(openRoot)
+M.open_git_remote = function(open_root)
   local Job = require('plenary.job')
   local fpath = nil
   local isReadonly = vim.api.nvim_buf_get_option(0, 'readonly')
   local isModifiable = vim.api.nvim_buf_get_option(0, 'modifiable')
   if not isReadonly and isModifiable then
-    fpath = vim.fn.expand('%')
+    fpath = vim.fs.normalize(vim.fn.expand('%'))
   end
 
   local j = Job:new({
@@ -187,12 +187,12 @@ M.open_git_remote = function(openRoot)
 
   if ok_remote and ok_branch then
     local full_remote_path = remote_root
-    if fpath and not openRoot then
+    if fpath and not open_root then
       full_remote_path = string.format('%s/blob/%s/%s', remote_root, branch, fpath)
     end
 
     vim.cmd('OpenURL ' .. full_remote_path)
-    print(full_remote_path)
+    vim.notify(full_remote_path, vim.log.levels.INFO)
   else
     return ''
   end
@@ -300,14 +300,14 @@ end
 --   end)
 -- end)
 
-function M.normalise_path(path_to_normalise)
-  local normalised_path = path_to_normalise:gsub('\\', '/'):gsub('//', '/')
+function M.normalize_path(path_to_normalise)
+  local normalized_path = path_to_normalise:gsub('\\', '/'):gsub('//', '/')
 
   if M.is_windows() then
-    normalised_path = normalised_path:sub(1, 1):lower() .. normalised_path:sub(2)
+    normalized_path = normalized_path:sub(1, 1):lower() .. normalized_path:sub(2)
   end
 
-  return normalised_path
+  return normalized_path
 end
 
 function M.is_visual_mode()
