@@ -65,16 +65,15 @@ o.modeline = false
 o.modelines = 0
 o.showtabline = 0
 o.cmdheight = 1 --                               Height of the command bar
--- opt.fillchars={eob=' ',vert= '█'}             -- Suppress ~ at EndOfBuffer
 vim.opt.fillchars = {
   eob = ' ',
-  vert = '║',
-  horiz = ' ',
-  horizup = '║',
+  vert = '▎',
+  horiz = '▁',
+  horizup = '▎',
   horizdown = ' ',
-  vertleft = '║',
-  vertright = '║',
-  verthoriz = '║',
+  vertleft = '▎',
+  vertright = '▎',
+  verthoriz = '▎',
 }
 
 o.belloff = 'all' --                             Just turn the dang bell off
