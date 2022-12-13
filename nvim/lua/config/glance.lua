@@ -58,3 +58,9 @@ glance.setup({
     enable = true, -- Available strating from nvim-0.8+
   },
 })
+
+-- use({ 'dnlhc/glance.nvim', config = function() require('config.glance') end, opt = true, cmd = 'Glance' })
+-- keymap('n', 'gd', '<cmd>Glance definitions<CR>', withDesc('Lsp: go to definition'))
+-- keymap('n', 'gr', '<cmd>Glance references<CR>', withDesc('Lsp: go to references'))
+-- keymap('n', 'gy', '<cmd>Glance type_definitions<CR>', withDesc('Lsp: type definition'))
+-- keymap('n', 'gm', '<cmd>Glance implementations<CR>', withDesc('Lsp: type implementation'))
