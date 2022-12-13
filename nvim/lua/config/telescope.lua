@@ -63,4 +63,5 @@ require('telescope').setup({
     project_commands = require('config.project_commands'),
   },
 })
+-- FIXME: <13.12.22> create build folder before install
 require('telescope').load_extension('fzf')

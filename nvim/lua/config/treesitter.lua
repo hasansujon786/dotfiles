@@ -1,6 +1,6 @@
 -- TSInstallSync javascript typescript tsx org
 require('nvim-treesitter.configs').setup({
-  ensure_installed = { 'html', 'vim', 'css', 'json', 'lua', 'vue', 'dart', 'bash' },
+  ensure_installed = { 'html', 'vim', 'css', 'json', 'lua', 'vue', 'dart', 'bash', 'help' },
   highlight = {
     enable = true, -- false will disable the whole extension
     use_languagetree = false,
