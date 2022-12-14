@@ -19,7 +19,7 @@ alias vll='nvim -c "SessionLoad"'
 alias vst='nvim --startuptime startup.log -c exit && tail -100 startup.log'
 alias cd.='cd ~/dotfiles && nvim'
 alias cdk='cd ~/AppData/Local/nvim-data/site/pack/packer/opt/kissline.nvim && nvim'
-alias dc='/c/Program\ Files/Google/Chrome/Application/chrome.exe --remote-debugging-port=9222'
+alias ch='/c/Program\ Files/Google/Chrome/Application/chrome.exe --remote-debugging-port=9222'
 
 # Tmux
 alias t="tmux new -As pasta"

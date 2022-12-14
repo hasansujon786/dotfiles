@@ -1,7 +1,5 @@
-local dap = require('dap')
-
 return {
-  setup = function()
+  setup = function(dap)
     dap.adapters.node2 = {
       type = 'executable',
       command = 'node',
@@ -41,7 +39,7 @@ return {
       --   processId = require('dap.utils').pick_process,
       -- },
       {
-        name = 'Attach to javascript/chrome',
+        name = 'Attach Chrome',
         type = 'chrome',
         request = 'attach',
         program = '${file}',

@@ -37,7 +37,8 @@ function M.configure_virtual_text()
 end
 
 local function configure_debuggers()
-  require('config.dap.node').setup()
+  local dap = require('dap')
+  require('config.dap.node').setup(dap)
   -- require('config.dap.lua').setup()
 end
 
