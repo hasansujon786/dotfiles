@@ -1,6 +1,6 @@
 -- Built-in actions
 local transform_mod = require('telescope.actions.mt').transform_mod
-local action_state = require('telescope/actions/state')
+local action_state = require('telescope.actions.state')
 
 -- or create your custom action
 local edit_buffer = function(prompt_bufnr, command)

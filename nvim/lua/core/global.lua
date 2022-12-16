@@ -73,13 +73,13 @@ P = function(...)
   return ...
 end
 
-if pcall(require, 'plenary') then
-  local plenary_reload = require('plenary.reload').reload_module
+R = function(moduleName, message)
+  if pcall(require, 'plenary') then
+    local plenary_reload = require('plenary.reload').reload_module
 
-  R = function(moduleName, message)
     plenary_reload(moduleName)
     if message then
-      print(string.format('[%s] - %s', moduleName, message))
+      vim.notify(string.format('[%s] - %s', moduleName, message), vim.log.levels.WARN)
     end
     return require(moduleName)
   end
