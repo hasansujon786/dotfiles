@@ -18,6 +18,7 @@ alias vl='nvim -c "normal '\''0"'
 alias vll='nvim -c "SessionLoad"'
 alias vst='nvim --startuptime startup.log -c exit && tail -100 startup.log'
 alias cd.='cd ~/dotfiles && nvim'
+alias nvr='nvim --listen "127.0.0.1:6666"'
 alias cdk='cd ~/AppData/Local/nvim-data/site/pack/packer/opt/kissline.nvim && nvim'
 alias ch='/c/Program\ Files/Google/Chrome/Application/chrome.exe --remote-debugging-port=9222'
 

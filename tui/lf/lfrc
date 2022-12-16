@@ -36,6 +36,7 @@ map I set hidden!
 map H top
 map L bottom
 map e $nvim $Env:f
+map E %{{ nvim --server "127.0.0.1:6666" --remote "$Env:f" }}
 map w $bash
 map W $powershell
 map i $less $Env:f
