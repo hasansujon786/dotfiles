@@ -157,31 +157,11 @@ function M.references_with_quickfix()
 end
 
 function M.update_capabilities()
-  -- local cmp_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-  -- if cmp_ok then
-  --   cmp_nvim_lsp.default_capabilities()
-  -- end
-
-  return {
-    textDocument = {
-      completion = {
-        completionItem = {
-          commitCharactersSupport = true,
-          deprecatedSupport = true,
-          insertReplaceSupport = true,
-          labelDetailsSupport = true,
-          preselectSupport = true,
-          resolveSupport = {
-            properties = { 'documentation', 'detail', 'additionalTextEdits' },
-          },
-          snippetSupport = true,
-          tagSupport = {
-            valueSet = { 1 },
-          },
-        },
-      },
-    },
-  }
+  local cmp_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+  if cmp_ok then
+    return cmp_nvim_lsp.default_capabilities()
+  end
+  vim.notify('cmp_nvim_lsp not loaded with lsp-config', vim.log.levels.WARN)
 end
 
 return M

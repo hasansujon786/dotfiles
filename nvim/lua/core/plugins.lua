@@ -122,6 +122,7 @@ return require('packer').startup({
     })
     use({ 'neovim/nvim-lspconfig', opt = true, event = 'BufReadPre', config = function() require('config.lsp.setup') end,
       requires = {
+        { 'hrsh7th/cmp-nvim-lsp', opt = true, module = 'cmp-nvim-lsp' },
         { 'williamboman/mason-lspconfig.nvim', opt = true, module = 'mason-lspconfig' },
         { 'jose-elias-alvarez/null-ls.nvim', config = function() require('config.lsp.null-ls') end },
         { 'williamboman/mason.nvim', config = function() require('config.lsp.lsp-config') end },
@@ -133,7 +134,6 @@ return require('packer').startup({
         {'L3MON4D3/LuaSnip', opt = true, module = 'luasnip', config='require("config.luasnip")'},
         -- completion sources
         'f3fora/cmp-spell',
-        'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-buffer',
         'saadparwaiz1/cmp_luasnip',
         { 'hrsh7th/cmp-path', commit ='d83839ae510d18530c6d36b662a9e806d4dceb73' },
