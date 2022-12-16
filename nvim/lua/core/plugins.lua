@@ -45,8 +45,7 @@ return require('packer').startup({
     ------------------------------------------------
     --> Navigation ---------------------------------
     ------------------------------------------------
-    use({ 'ziontee113/neo-minimap', config = 'require("config.neo_minimap")' })
-    use({ 'kyazdani42/nvim-tree.lua', config = [[require('config.nv_tree')]] })
+    use({ 'kyazdani42/nvim-tree.lua', config = [[require('config.nv_tree')]], opt = true, event = 'CursorHold' })
     use({ 'kevinhwang91/nvim-bqf', opt = true, ft = {'qf'} })
     use({ 'hasansujon786/harpoon', opt = true, module = 'harpoon' })
     use({ 'nvim-telescope/telescope.nvim', config = [[require('config.telescope')]],
@@ -118,6 +117,7 @@ return require('packer').startup({
         'nvim-treesitter/nvim-treesitter-textobjects',
         'michaeljsmith/vim-indent-object',
         'windwp/nvim-ts-autotag',
+        { 'ziontee113/neo-minimap', config = 'require("config.neo_minimap")' }
       }
     })
     use({ 'neovim/nvim-lspconfig', opt = true, event = 'BufReadPre', config = function() require('config.lsp.setup') end,
