@@ -37,9 +37,8 @@ $Escape::superEscape()
 #p::AppsKey
 PrintScreen::#+s
 #`::takeScreenshot()
-#PgUp::bt()
-#PgDn::bt("Off")
-#b::bt("Off") bt()
+#q::bt()bt()
+#+b::bt()
 ;Transparency toggle,
 #o::toggleTransparency()
 #^.::increaseTransparency()
@@ -219,7 +218,8 @@ bt(onOff := "On") {
       MsgBox, 48, Error, File not found.`n`n%ps%
         Return
     } Else SoundBeep, 1500 - 500 * (onOff = "On")
-  RunWait, powershell -command %ps% -BluetoothStatus %onOff%,, Hide
+  ; RunWait, powershell -command %ps% -BluetoothStatus %onOff%,, Hide
+  RunWait, powershell -command %ps%,, Hide
     SoundBeep, 1000 + 500 * (onOff = "On")
 }
 takeScreenshot() {

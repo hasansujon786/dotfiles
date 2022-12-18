@@ -1,6 +1,3 @@
-[CmdletBinding()] Param (
-    [Parameter(Mandatory=$true)][ValidateSet('Off', 'On')][string]$BluetoothStatus
-)
 If ((Get-Service bthserv).Status -eq 'Stopped') { Start-Service bthserv }
 Add-Type -AssemblyName System.Runtime.WindowsRuntime
 $asTaskGeneric = ([System.WindowsRuntimeSystemExtensions].GetMethods() | ? { $_.Name -eq 'AsTask' -and $_.GetParameters().Count -eq 1 -and $_.GetParameters()[0].ParameterType.Name -eq 'IAsyncOperation`1' })[0]
@@ -16,4 +13,5 @@ Await ([Windows.Devices.Radios.Radio]::RequestAccessAsync()) ([Windows.Devices.R
 $radios = Await ([Windows.Devices.Radios.Radio]::GetRadiosAsync()) ([System.Collections.Generic.IReadOnlyList[Windows.Devices.Radios.Radio]])
 $bluetooth = $radios | ? { $_.Kind -eq 'Bluetooth' }
 [Windows.Devices.Radios.RadioState,Windows.System.Devices,ContentType=WindowsRuntime] | Out-Null
+if ($bluetooth.state -eq 'On') {$BluetoothStatus = 'Off'} else {$BluetoothStatus = 'On'}
 Await ($bluetooth.SetStateAsync($BluetoothStatus)) ([Windows.Devices.Radios.RadioAccessStatus]) | Out-Null
