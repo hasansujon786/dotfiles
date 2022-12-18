@@ -37,7 +37,9 @@ $Escape::superEscape()
 #p::AppsKey
 PrintScreen::#+s
 #`::takeScreenshot()
-; #`::#PrintScreen
+#PgUp::bt()
+#PgDn::bt("Off")
+#b::bt("Off") bt()
 ;Transparency toggle,
 #o::toggleTransparency()
 #^.::increaseTransparency()
@@ -211,6 +213,15 @@ NavRun(Path) {
 ;******************************************************************************
 ; Utils
 ;******************************************************************************
+bt(onOff := "On") {
+  Static ps := "C:\\Users\\hasan\\dotfiles\\scripts\\ahk\\toggle_bluetooth.ps1"
+    If !FileExist(ps) {
+      MsgBox, 48, Error, File not found.`n`n%ps%
+        Return
+    } Else SoundBeep, 1500 - 500 * (onOff = "On")
+  RunWait, powershell -command %ps% -BluetoothStatus %onOff%,, Hide
+    SoundBeep, 1000 + 500 * (onOff = "On")
+}
 takeScreenshot() {
   SendInput,#{PrintScreen}
   beep()
