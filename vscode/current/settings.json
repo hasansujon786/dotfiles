@@ -1,0 +1,31 @@
+{
+    "workbench.colorTheme": "One Dark Pro",
+    "[dart]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+            80
+        ],
+        "editor.selectionHighlight": false,
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": false
+    },
+    "dart.debugExternalPackageLibraries": true,
+    "dart.debugSdkLibraries": false,
+    "editor.fontFamily": "'OperatorMonoLig Nerd Font', Consolas, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "editor.fontWeight": "normal",
+    "editor.fontSize": 16,
+    "editor.minimap.enabled": false,
+    "editor.stickyScroll.enabled": false,
+    "editor.tabSize": 2,
+    "editor.lineNumbers": "relative",
+    "workbench.list.defaultFindMode": "highlight",
+    "workbench.editor.revealIfOpen": true,
+    "vscode-neovim.neovimClean": true,
+    "vscode-neovim.logOutputToConsole": true,
+    "vscode-neovim.neovimExecutablePaths.win32": "C:\\tools\\neovim\\nvim-win64\\bin\\nvim.exe",
+    "vscode-neovim.neovimInitVimPaths.win32": "C:\\Users\\hasan\\dotfiles\\vscode\\init.lua"
+}

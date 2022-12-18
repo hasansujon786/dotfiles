@@ -181,3 +181,31 @@ function! s:vscodeFormat(...) abort
   call VSCodeCallRange('editor.action.formatSelection', line1, line2, 0)
 endfunction
 call VSCodeExtensionNotify('visual-edit', b:multipleCursorsAppend, b:multipleCursorsVisualMode, line("'<"), line("'>"), col("'>"), b:multipleCursorsSkipEmpty)
+
+" alt solution ===================================================================================
+" { "key": "alt+a", "command": "vscode-neovim.send", "args": "<a-a>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+b", "command": "vscode-neovim.send", "args": "<a-b>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+c", "command": "vscode-neovim.send", "args": "<a-c>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+d", "command": "vscode-neovim.send", "args": "<a-d>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+e", "command": "vscode-neovim.send", "args": "<a-e>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+f", "command": "vscode-neovim.send", "args": "<a-f>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+g", "command": "vscode-neovim.send", "args": "<a-g>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+h", "command": "vscode-neovim.send", "args": "<a-h>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+i", "command": "vscode-neovim.send", "args": "<a-i>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+j", "command": "vscode-neovim.send", "args": "<a-j>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+k", "command": "vscode-neovim.send", "args": "<a-k>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+l", "command": "vscode-neovim.send", "args": "<a-l>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+m", "command": "vscode-neovim.send", "args": "<a-m>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+n", "command": "vscode-neovim.send", "args": "<a-n>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+o", "command": "vscode-neovim.send", "args": "<a-o>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+p", "command": "vscode-neovim.send", "args": "<a-p>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+q", "command": "vscode-neovim.send", "args": "<a-q>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+r", "command": "vscode-neovim.send", "args": "<a-r>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+s", "command": "vscode-neovim.send", "args": "<a-s>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+t", "command": "vscode-neovim.send", "args": "<a-t>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+u", "command": "vscode-neovim.send", "args": "<a-u>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+v", "command": "vscode-neovim.send", "args": "<a-v>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+w", "command": "vscode-neovim.send", "args": "<a-w>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+x", "command": "vscode-neovim.send", "args": "<a-x>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+y", "command": "vscode-neovim.send", "args": "<a-y>", "when": "editorTextFocus && neovim.init" },
+" { "key": "alt+z", "command": "vscode-neovim.send", "args": "<a-z>", "when": "editorTextFocus && neovim.init" },

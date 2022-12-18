@@ -1,0 +1,222 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "ctrl+f",
+        "command": "actions.find",
+        "when": "editorTextFocus || editorFocus || editorIsOpen"
+    },
+    {
+        "key": "/",
+        "command": "list.find",
+        "when": "listFocus && listSupportsFind"
+    },
+    {
+        "key": "escape",
+        "command": "list.closeFind",
+        "when": "listFocus"
+    },
+    {
+        "key": "ctrl+tab",
+        "command": "workbench.action.nextEditor"
+    },
+    {
+        "key": "ctrl+shift+tab",
+        "command": "workbench.action.previousEditor"
+    },
+    {
+        "key": "ctrl+space",
+        "command": "editor.action.quickFix",
+        "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+backspace",
+        "command": "deleteWordLeft",
+        "when": "textInputFocus && !editorReadonly && neovim.mode != 'insert"
+    },
+    // {
+    //     "key": "space space",
+    //     "command": "workbench.action.quickOpen",
+    //     "when": "neovim.mode != insert"
+    // },
+    {
+        "key": "alt+p",
+        "command": "workbench.action.quickOpenSelectPrevious",
+        "when": "inQuickOpen"
+    },
+    {
+        "key": "alt+n",
+        "command": "workbench.action.quickOpenSelectNext",
+        "when": "inQuickOpen"
+    },
+    {
+        "key": "alt+p",
+        "command": "list.focusUp",
+        "when": "inReferenceSearchEditor && neovim.mode == 'normal'"
+    },
+    {
+        "key": "alt+n",
+        "command": "list.focusDown",
+        "when": "inReferenceSearchEditor && neovim.mode == 'normal'"
+    },
+    {
+        "key": "alt+p",
+        "command": "list.focusUp",
+        "when": "listFocus && !inputFocus"
+    },
+    {
+        "key": "alt+n",
+        "command": "list.focusDown",
+        "when": "listFocus && !inputFocus"
+    },
+    {
+        "key": "alt+p",
+        "command": "selectPrevCodeAction",
+        "when": "codeActionMenuVisible"
+    },
+    {
+        "key": "alt+n",
+        "command": "selectNextCodeAction",
+        "when": "codeActionMenuVisible"
+    },
+    {
+        "key": "alt+p",
+        "command": "selectPrevSuggestion",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+    },
+    {
+        "key": "alt+n",
+        "command": "selectNextSuggestion",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+    },
+    // ================================================
+    // => NeoVim Normal mode bindings
+    // ================================================
+    // Vertical scrolling
+    {
+        "key": "alt+u",
+        "command": "vscode-neovim.ctrl-u",
+        "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'"
+    },
+    {
+        "key": "alt+d",
+        "command": "vscode-neovim.ctrl-d",
+        "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'"
+    },
+    {
+        "key": "alt+o",
+        "command": "vscode-neovim.ctrl-d",
+        "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'"
+    },
+    // {
+    //     "key": "alt+k",
+    //     "command": "editor.action.moveLinesUpAction",
+    //     "when": "editorTextFocus && !editorReadonly && neovim.mode != insert"
+    // },
+    // {
+    //     "key": "alt+j",
+    //     "command": "editor.action.moveLinesDownAction",
+    //     "when": "editorTextFocus && !editorReadonly && neovim.mode != insert"
+    // },
+    // Resize pans
+    {
+        "key": "alt+.",
+        "command": "workbench.action.increaseViewWidth",
+        "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode == 'normal'"
+    },
+    {
+        "key": "alt+,",
+        "command": "workbench.action.decreaseViewWidth",
+        "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode == 'normal'"
+    },
+    {
+        "key": "alt+=",
+        "command": "workbench.action.increaseViewHeight",
+        "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode == 'normal'"
+    },
+    {
+        "key": "alt+-",
+        "command": "workbench.action.decreaseViewHeight",
+        "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode == 'normal'"
+    },
+    // ================================================
+    // => NeoVim Insert mode bindings
+    // ================================================
+    {
+        "command": "vscode-neovim.compositeEscape1",
+        "key": "j",
+        "when": "neovim.mode == insert && editorTextFocus",
+        "args": "j"
+    },
+    {
+        "command": "vscode-neovim.compositeEscape2",
+        "key": "k",
+        "when": "neovim.mode == insert && editorTextFocus",
+        "args": "k"
+    },
+    // Move cursor by character
+    {
+        "key": "alt+k",
+        "command": "cursorUp",
+        "when": "neovim.mode == insert"
+    },
+    {
+        "key": "alt+j",
+        "command": "cursorDown",
+        "when": "neovim.mode == insert"
+    },
+    {
+        "key": "alt+h",
+        "command": "cursorLeft",
+        "when": "neovim.mode == insert"
+    },
+    {
+        "key": "alt+l",
+        "command": "cursorRight",
+        "when": "neovim.mode == insert"
+    },
+    // Move cursor by words
+    {
+        "key": "alt+f",
+        "command": "cursorWordEndRight",
+        "when": "textInputFocus && neovim.mode == insert"
+    },
+    {
+        "key": "alt+b",
+        "command": "cursorWordStartLeft",
+        "when": "textInputFocus && neovim.mode == insert"
+    },
+    // Jump cursor to start & end of a line
+    {
+        "key": "ctrl+a",
+        "command": "cursorHome",
+        "when": "textInputFocus && neovim.mode == insert"
+    },
+    {
+        "key": "ctrl+e",
+        "command": "cursorEnd",
+        "when": "textInputFocus && neovim.mode == insert"
+    },
+    // Delete by characters & words
+    {
+        "key": "ctrl+d",
+        "command": "deleteRight",
+        "when": "textInputFocus && neovim.mode == insert"
+    },
+    {
+        "key": "alt+d",
+        "command": "deleteWordRight",
+        "when": "textInputFocus && neovim.mode == insert"
+    },
+    // ================================================================================================
+    {
+        "key": "f5",
+        "command": "workbench.action.restartExtensionHost"
+    },
+    {
+        "key": "alt+m", // or whatever binding you choose
+        "command": "cursorMove",
+        "args": {
+            "to": "viewPortCenter"
+        }
+    }
+]

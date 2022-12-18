@@ -62,6 +62,10 @@ f1::switchToExplorer()
 !l:: SendInput,{RIGHT}
 !Backspace::Send ^{Backspace}
 #If
+#If WinActive("ahk_exe Code.exe")
+!Backspace::Send ^{Backspace}
+!SPACE::Send ^{SPACE}
+#If
 ; Adobe XD
 #IfWinActive, ahk_class ApplicationFrameWindow
 `::Send ^1
