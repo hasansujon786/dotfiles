@@ -107,16 +107,18 @@
         "command": "vscode-neovim.ctrl-d",
         "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'"
     },
-    // {
-    //     "key": "alt+k",
-    //     "command": "editor.action.moveLinesUpAction",
-    //     "when": "editorTextFocus && !editorReadonly && neovim.mode != insert"
-    // },
-    // {
-    //     "key": "alt+j",
-    //     "command": "editor.action.moveLinesDownAction",
-    //     "when": "editorTextFocus && !editorReadonly && neovim.mode != insert"
-    // },
+    {
+        "key": "alt+j",
+        "command": "vscode-neovim.send",
+        "args": "<a-j>",
+        "when": "editorTextFocus && neovim.init"
+    },
+    {
+        "key": "alt+k",
+        "command": "vscode-neovim.send",
+        "args": "<a-k>",
+        "when": "editorTextFocus && neovim.init"
+    },
     // Resize pans
     {
         "key": "alt+.",
@@ -211,12 +213,5 @@
     {
         "key": "f5",
         "command": "workbench.action.restartExtensionHost"
-    },
-    {
-        "key": "alt+m", // or whatever binding you choose
-        "command": "cursorMove",
-        "args": {
-            "to": "viewPortCenter"
-        }
     }
 ]
