@@ -38,7 +38,7 @@ $Escape::superEscape()
 PrintScreen::#+s
 #`::takeScreenshot()
 #q::bt()bt()
-#+b::bt()
+#^b::bt()
 ;Transparency toggle,
 #o::toggleTransparency()
 #^.::increaseTransparency()

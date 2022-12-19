@@ -62,13 +62,13 @@ keymap({ 'n', 'v' }, '<Leader>P', '"+P')
 keymap('n', '?', "<Cmd>call VSCodeNotify('workbench.action.findInFiles', { 'query': expand('<cword>')})<CR>")
 
 -- => LSP -------------------------------------------
-keymap({'n', 'x'}, 'gd', '<Cmd>call VSCodeNotify("editor.action.revealDefinition")<CR>')
-keymap({'n', 'x'}, 'gD', '<Cmd>call VSCodeNotify("editor.action.revealDeclaration")<CR>')
-keymap({'n', 'x'}, 'gr', '<Cmd>call VSCodeNotify("editor.action.referenceSearch.trigger")<CR>')
-keymap({'n', 'x'}, 'gR', '<Cmd>call VSCodeNotify("references-view.findReferences")<CR>')
-keymap({'n', 'x'}, 'gp', '<Cmd>call VSCodeNotify("editor.action.peekDefinition")<CR>')
-keymap({'n', 'x'}, 'gP', '<Cmd>call VSCodeNotify("editor.action.peekDeclaration")<CR>')
-keymap({'n', 'x'}, 'go', '<Cmd>call VSCodeNotify("workbench.action.gotoSymbol")<CR>')
+keymap({ 'n', 'x' }, 'gd', '<Cmd>call VSCodeNotify("editor.action.revealDefinition")<CR>')
+keymap({ 'n', 'x' }, 'gD', '<Cmd>call VSCodeNotify("editor.action.revealDeclaration")<CR>')
+keymap({ 'n', 'x' }, 'gr', '<Cmd>call VSCodeNotify("editor.action.referenceSearch.trigger")<CR>')
+keymap({ 'n', 'x' }, 'gR', '<Cmd>call VSCodeNotify("references-view.findReferences")<CR>')
+keymap({ 'n', 'x' }, 'gp', '<Cmd>call VSCodeNotify("editor.action.peekDefinition")<CR>')
+keymap({ 'n', 'x' }, 'gP', '<Cmd>call VSCodeNotify("editor.action.peekDeclaration")<CR>')
+keymap({ 'n', 'x' }, 'go', '<Cmd>call VSCodeNotify("workbench.action.gotoSymbol")<CR>')
 
 -- => Leader commands -------------------------------
 keymap('n', '<leader><leader>', '<Cmd>call VSCodeNotify("workbench.action.quickOpen")<CR>')
@@ -93,6 +93,10 @@ keymap('n', '<leader>gs', '<Cmd>call VSCodeNotify("git.stageSelectedRanges")<CR>
 -- keymap('n', '<leader>gu', '<Cmd>call VSCodeNotify("git.unstageSelectedRanges")<CR>')
 
 -- => Navigation ------------------------------------
+keymap('n', '<A-k>', '<Cmd>lua MoveCurrentline("Up")<CR>')
+keymap('n', '<A-j>', '<Cmd>lua MoveCurrentline("Down")<CR>')
+keymap('v', '<A-k>', '<Cmd>lua MoveVisualSelection("Up")<CR>')
+keymap('v', '<A-j>', '<Cmd>lua MoveVisualSelection("Down")<CR>')
 -- Jump between tabs
 keymap('n', 'gl', '<Cmd>call VSCodeNotify("workbench.action.nextEditorInGroup")<CR>')
 keymap('n', 'gh', '<Cmd>call VSCodeNotify("workbench.action.previousEditorInGroup")<CR>')
@@ -117,10 +121,63 @@ keymap('n', '[c', '<Cmd>call VSCodeNotify("workbench.action.editor.previousChang
 keymap('n', ']c', '<Cmd>call VSCodeNotify("workbench.action.editor.nextChange")<CR>')
 keymap('n', '<C-j>', '<Cmd>call VSCodeNotify("workbench.action.navigateForward")<CR>')
 
--- keymap('v', 'K', '<Cmd>call VSCodeNotify("editor.action.moveLinesUpAction")<CR>')
--- keymap('v', 'J', '<Cmd>call VSCodeNotify("editor.action.moveLinesDownAction")<CR>')
--- keymap('x', 'K', '<Cmd>call VSCodeNotifyVisual("editor.action.moveLinesUpAction", 0)<CR>')
--- keymap('x', 'J', '<Cmd>call VSCodeNotifyVisual("editor.action.moveLinesDownAction", 0)<CR>')
 -- editor.action.goToReferences
 -- editor.action.triggerSuggest
--- workbench.view.scm
+
+function MoveCurrentline(direction)
+  local line = vim.fn.line('.')
+  vim.fn.cursor(direction == 'Up' and line - 1 or line + 1, 0)
+  vim.fn.VSCodeNotify('editor.action.moveLines' .. direction .. 'Action')
+end
+function MoveVisualSelection(direction)
+  local cursorLine = vim.fn.line('v')
+  local cursorStartLine = vim.fn.line('.')
+
+  local startLine = cursorLine
+  local endLine = cursorStartLine
+
+  if direction == 'Up' then
+    if startLine < endLine then
+      local tmp = startLine
+      startLine = endLine
+      endLine = tmp
+    end
+  else -- == "Down"
+    if startLine > endLine then
+      local tmp = startLine
+      startLine = endLine
+      endLine = tmp
+    end
+  end
+
+  -- move lines
+  vim.fn.VSCodeCallRange('editor.action.moveLines' .. direction .. 'Action', startLine, endLine, 1)
+
+  -- move visual selection
+  if direction == 'Up' then
+    if endLine > 1 then
+      startLine = startLine - 1
+      endLine = endLine - 1
+
+      -- exit visual mode
+      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<esc>', true, false, true), 'x', true)
+
+      -- select range
+      vim.cmd('normal!' .. startLine .. 'GV' .. endLine .. 'G')
+      -- vim.api.nvim_command(tostring(endLine)) -- move cursor
+      -- vim.api.nvim_feedkeys("V", 'n', false) -- enter visual line mode
+      -- vim.api.nvim_command(tostring(startLine)) -- move cursor
+    end
+  else -- == "Down"
+    if endLine < vim.api.nvim_buf_line_count(0) then
+      startLine = startLine + 1
+      endLine = endLine + 1
+    end
+
+    -- exit visual mode
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<esc>', true, false, true), 'x', true)
+
+    -- select range
+    vim.cmd('normal!' .. startLine .. 'GV' .. endLine .. 'G')
+  end
+end
