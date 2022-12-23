@@ -122,7 +122,7 @@ return require('packer').startup({
     })
     use({ 'neovim/nvim-lspconfig', opt = true, event = 'BufReadPre', config = function() require('config.lsp.setup') end,
       requires = {
-        'hrsh7th/cmp-nvim-lsp',
+        { 'hrsh7th/cmp-nvim-lsp', opt = true, module = 'cmp_nvim_lsp' },
         { 'williamboman/mason-lspconfig.nvim', opt = true, module = 'mason-lspconfig' },
         { 'jose-elias-alvarez/null-ls.nvim', config = function() require('config.lsp.null-ls') end },
         { 'williamboman/mason.nvim', config = function() require('config.lsp.lsp-config') end },
