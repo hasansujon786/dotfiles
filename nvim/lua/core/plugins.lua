@@ -25,6 +25,7 @@ return require('packer').startup({
     use({ 'uga-rosa/ccc.nvim', config=[[require('config.color-picker')]], opt=true, cmd='CccPick' })
     use({ 'lukas-reineke/indent-blankline.nvim', opt = true, event = 'BufReadPost', config = [[require('config.indentLine')]],
       requires = {
+        { 'kevinhwang91/nvim-hlslens', config = [[require('config.hlslens')]] },
         { 'karb94/neoscroll.nvim', config = [[require('config.neoscroll')]] },
         { 'NvChad/nvim-colorizer.lua', config = [[require('config.colorizer')]] },
         { 'chentoast/marks.nvim', config=[[require('config.marks-config')]] },

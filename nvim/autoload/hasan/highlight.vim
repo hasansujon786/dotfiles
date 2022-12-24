@@ -71,7 +71,8 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! link LspInfoBorder  FloatBorder
 
   "/// Plugins ///"
-  hi! link HLNext IncSearch
+  hi! link HlSearchNear IncSearch
+  hi! link HlSearchLensNear WildMenu
   hi WhichKeySeparator guifg=#546178
   hi IndentBlanklineChar guifg=#323a48
   hi QuickScopePrimary   guifg=tomato gui=underline
