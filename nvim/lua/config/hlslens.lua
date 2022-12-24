@@ -6,8 +6,8 @@ require('hlslens').setup({
   -- float_shadow_blend = 10
 })
 
-keymap('n', 'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]])
-keymap('n', 'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]])
+keymap({ 'n', 'x' }, 'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR>zzzv<Cmd>lua require('hlslens').start()<CR>]])
+keymap({ 'n', 'x' }, 'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR>zzzv<Cmd>lua require('hlslens').start()<CR>]])
 keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]])
 keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]])
 keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]])
