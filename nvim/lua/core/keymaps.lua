@@ -105,6 +105,10 @@ keymap('n', ']w', ':lua require("harpoon.ui").nav_next()<CR>', { desc = 'Next ha
 
 -- Search ---------------------------------------
 -- Pressing * or # searches for the current selection
+keymap({ 'n', 'x' }, 'n', 'nzzzv')
+keymap({ 'n', 'x' }, 'n', 'nzzzv')
+keymap('n', '*', '*zzzv')
+keymap('n', '#', '#zzzv')
 keymap('v', '*', ':<C-u>call hasan#utils#visualSelection("", "")<CR>/<C-R>=@/<CR><CR>')
 keymap('v', '#', ':<C-u>call hasan#utils#visualSelection("", "")<CR>?<C-R>=@/<CR><CR>')
 -- vnoremap * "xy/<C-R>x<CR>
