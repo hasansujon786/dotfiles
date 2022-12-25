@@ -40,13 +40,16 @@ M.cursorline_hide = function(winid)
 end
 
 M.cur_pos = function()
-  local w_start, w_current, w_end = vim.fn.line('w0'), vim.fn.line('.'), vim.fn.line('w$')
-  local w_center = math.floor((w_end - w_start) / 2 + w_start)
-  local isCursorAtCenter = w_center == w_current
-  local isCursorAtAbove = w_center > w_current
-  local def = isCursorAtCenter and 0 or isCursorAtAbove and w_center - w_current or w_current - w_center
+  local line_start, line_current, line_end = vim.fn.line('w0'), vim.fn.line('.'), vim.fn.line('w$')
+  local viewport_lines = line_end - line_start
+  local line_center = math.floor(viewport_lines / 2 + line_start)
+  local cursor_at_center = line_center == line_current
+  local cursor_at_top = line_center > line_current
+  local differ_from_center = cursor_at_center and 0
+    or cursor_at_top and line_center - line_current
+    or line_current - line_center
 
-  return isCursorAtCenter, isCursorAtAbove, def
+  return cursor_at_center, cursor_at_top, differ_from_center, viewport_lines
 end
 
 return M
