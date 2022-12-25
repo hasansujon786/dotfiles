@@ -76,7 +76,6 @@ return require('packer').startup({
         { 'arthurxavierx/vim-caser' },
         { 'NTBBloodbath/color-converter.nvim' },
         { 'Konfekt/vim-CtrlXA' },
-        { 'hasansujon786/vim-rel-jump' },
         { 'justinmk/vim-sneak', config = [[require('config.sneak')]] },
         { 'unblevable/quick-scope' }
       }

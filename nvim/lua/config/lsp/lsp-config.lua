@@ -7,7 +7,6 @@ local M = {}
 function M.update_capabilities()
   local cmp_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
   if cmp_ok then
-    P('update_capabilities ok')
     return cmp_nvim_lsp.default_capabilities()
   end
   vim.notify('cmp_nvim_lsp not loaded with lsp-config', vim.log.levels.WARN)

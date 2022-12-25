@@ -1,7 +1,7 @@
 local noSilent = { silent = false }
 local nvim_set_keymap = vim.api.nvim_set_keymap
 
-keymap({ 'n', 'v' }, 'q', '<ESC><Cmd>nohlsearch|diffupdate|echo ""<CR>') -- ColorizerReloadAllBuffers
+keymap({ 'n', 'v' }, 'q', '<ESC><Cmd>nohlsearch|diffupdate<CR>') -- ColorizerReloadAllBuffers
 keymap('n', 'ZZ', ':Quit!<CR>') -- Prompt before quitting
 keymap('n', 'Q', 'q') -- Use Q to record macros
 keymap('v', '@', ':norm @', noSilent) -- run macro on selection
@@ -53,6 +53,9 @@ keymap('n', '<tab>', 'za')
 keymap('n', '<s-tab>', 'zA')
 
 -- Navigation -----------------------------------
+keymap('n', 'j', function() vim.fn['reljump#jump']('j') end)
+keymap('n', 'k', function() vim.fn['reljump#jump']('k') end)
+
 keymap('n', 'H', 'H:exec "norm! ". &scrolloff . "k"<cr>') -- jump in file
 keymap('n', 'L', 'L:exec "norm! ". &scrolloff . "j"<cr>')
 
@@ -123,9 +126,7 @@ keymap('n', 'z/', function() -- search in visible viewport
   vim.wo.scrolloff = 0
   feedkeys('VHoLo0<Esc>/\\%V')
 
-  vim.defer_fn(function()
-    vim.wo.scrolloff = scrolloff
-  end, 10)
+  vim.defer_fn(function() vim.wo.scrolloff = scrolloff end, 10)
 end, noSilent)
 -- keymap({ 'n', 'v' }, 'z/', '/\\%><C-r>=line("w0")-1<CR>l\\%<<C-r>=line("w$")+1<CR>l', { silent = false })
 
