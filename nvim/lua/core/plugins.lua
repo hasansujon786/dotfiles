@@ -27,7 +27,6 @@ return require('packer').startup({
       requires = {
         { 'kevinhwang91/nvim-hlslens', config = [[require('config.hlslens')]] },
         { 'karb94/neoscroll.nvim', config = [[require('config.neoscroll')]] },
-        { 'NvChad/nvim-colorizer.lua', config = [[require('config.colorizer')]] },
         { 'chentoast/marks.nvim', config=[[require('config.marks-config')]] },
       }
     })
@@ -117,7 +116,8 @@ return require('packer').startup({
         'nvim-treesitter/nvim-treesitter-textobjects',
         'michaeljsmith/vim-indent-object',
         'windwp/nvim-ts-autotag',
-        { 'ziontee113/neo-minimap', config = 'require("config.neo_minimap")' }
+        { 'ziontee113/neo-minimap', config = 'require("config.neo_minimap")' },
+        { 'NvChad/nvim-colorizer.lua', config = [[require('config.colorizer')]] },
       }
     })
     use({ 'neovim/nvim-lspconfig', opt = true, event = 'BufReadPre', config = function() require('config.lsp.setup') end,

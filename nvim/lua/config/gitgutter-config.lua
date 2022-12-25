@@ -3,7 +3,7 @@ keymap('n', '[c', '<Plug>(GitGutterPrevHunk)')
 keymap('n', '<leader>gp', '<Plug>(GitGutterPreviewHunk)')
 keymap('n', '<leader>gs', '<Plug>(GitGutterStageHunk)')
 keymap('n', '<leader>gr', '<Plug>(GitGutterUndoHunk)')
-keymap('n', '<leader>gq', ':GitGutterQuickFix | copen<CR>')
+keymap('n', '<leader>gq', '<Cmd>GitGutterQuickFix | copen<CR>')
 
 keymap('o', 'ih', '<Plug>(GitGutterTextObjectInnerPending)')
 keymap('o', 'ah', '<Plug>(GitGutterTextObjectOuterPending)')

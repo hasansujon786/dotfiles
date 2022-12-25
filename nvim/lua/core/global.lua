@@ -50,6 +50,7 @@ vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
 -- vim-caser ==========================
 vim.g.caser_prefix = '<leader>cs'
 -- git-gutter =========================
+vim.g.gitgutter_show_msg_on_hunk_jumping = 0
 vim.g.gitgutter_map_keys = 0
 local gitgutter_icon = '▏'
 vim.g.gitgutter_sign_added = gitgutter_icon

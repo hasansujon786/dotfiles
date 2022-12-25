@@ -31,7 +31,8 @@ PgDn::Send +!{ESC}
 !\::Send \
 \::alternateTab()
 Capslock::alternateTab()
-#Capslock::SetCapsLockState, % (t:=!t) ?  "On" beep() :  "Off" beep()
+#\::toggleCapsLosck()
+#Capslock::toggleCapsLosck()
 $Escape::superEscape()
 #SPACE::toggleAlwaysOnTop()       ; Always on Top
 #z::rebootMiWiFi()
@@ -213,6 +214,9 @@ NavRun(Path) {
 ;******************************************************************************
 ; Utils
 ;******************************************************************************
+toggleCapsLosck() {
+  SetCapsLockState, % (t:=!t) ?  "On" beep() :  "Off" beep()
+}
 bt(onOff := "On") {
   Static ps := "C:\\Users\\hasan\\dotfiles\\scripts\\ahk\\toggle_bluetooth.ps1"
     If !FileExist(ps) {
