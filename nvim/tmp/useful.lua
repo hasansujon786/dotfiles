@@ -2,41 +2,9 @@ local c = require('onedark.colors')
 local util = require('onedark.util')
 P(util.darken('#ca72e4', 0.2, c.bg0))
 
--- This is your alacritty.yml
--- 01 | # Window Customization
--- 02 | window:
--- 03 |   dimensions:
--- 04 |     columns: 100
--- 05 |     lines: 25
--- 06 |   padding:
--- 07 |     x: 20
--- 08 |     y: 20
--- 09 |   # decorations: none
--- 10 |   dynamic_title: true
--- 12 |   startup_mode: Windowed # Maximized Fullscreen
--- 13 | background_opacity: 0.92
+local ts_utils = require('nvim-treesitter.ts_utils')
+ts_utils.get_node_text = vim.treesitter.query.get_node_text
 
--- function Sad(line_nr, from, to, fname)
---   vim.cmd(string.format("silent !sed -i '%ss/%s/%s/' %s", line_nr, from, to, fname))
--- end
-
--- function IncreasePadding()
---   foo('19', 0, 20, '~/dotfiles/alacritty/alacritty.windows.yml')
---   foo('20', 0, 20, '~/dotfiles/alacritty/alacritty.windows.yml')
--- end
-
--- function DecreasePadding()
---   Sad('19', 20, 0, '~/dotfiles/alacritty/alacritty.windows.yml')
---   Sad('20', 20, 0, '~/dotfiles/alacritty/alacritty.windows.yml')
--- end
-
--- vim.cmd[[
---   augroup ChangeAlacrittyPadding
---    au!
---    au VimEnter * lua DecreasePadding()
---    au VimLeavePre * lua IncreasePadding()
---   augroup END
--- ]]
 local M = {}
 
 local async = require('plenary.async')
@@ -105,33 +73,8 @@ Edit_macro = function()
   end)
 end
 
---Remap space as leader key
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
---Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers)
-vim.keymap.set('n', '<leader>sf', function() require('telescope.builtin').find_files({ previewer = false }) end)
-
-local opts = { buffer = bufnr }
-vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
-vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
-vim.keymap.set('n', '<leader>wl', function() vim.inspect(vim.lsp.buf.list_workspace_folders()) end, opts)
-vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
-vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
-vim.keymap.set('n', '<leader>so', require('telescope.builtin').lsp_document_symbols, opts)
-
-local ts_utils = require('nvim-treesitter.ts_utils')
-ts_utils.get_node_text = vim.treesitter.query.get_node_text
-
-vim.api.nvim_create_user_command('Format', vim.lsp.buf.formatting, {})
 
 -- set_lines({lines}, {A}, {B}, {new_lines})           *vim.lsp.util.set_lines()*
 -- vim.lsp.util.open_floating_preview()
@@ -275,56 +218,4 @@ function Focus_with_outline(count)
     feedkeys('<cr>')
   end
 end
-
 -- keymap('n', '<cr>', '<cmd>lua Focus_with_outline(vim.v.count)<cr>')
-
--- For autocommands, extracted from
--- https://github.com/norcalli/nvim_utils
-M.create_augroups = function(definitions)
-  for group_name, definition in pairs(definitions) do
-    vim.api.nvim_command('augroup ' .. group_name)
-    vim.api.nvim_command('autocmd!')
-    for _, def in ipairs(definition) do
-      local command = table.concat(vim.tbl_flatten({ 'autocmd', def }), ' ')
-      vim.api.nvim_command(command)
-    end
-    vim.api.nvim_command('augroup END')
-  end
-end
--- local autocmds = {
---   Telescope = {
---     { 'BufWinEnter,WinEnter * let g:hasan_telescope_buffers[bufnr()] = reltimefloat(reltime())' },
---     { 'BufDelete * silent! call remove(g:hasan_telescope_buffers, expand("<abuf>"))' },
---   },
--- }
--- M.create_augroups(autocmds)
-
--- .luarc.json
--- {
---     "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
---     "Lua.diagnostics.disable": [
---         "deprecated"
---     ]
--- }
-
--- hide hlsearch on CursorMoved
-local hl_ns = vim.api.nvim_create_namespace('search')
-local hlsearch_group = vim.api.nvim_create_augroup('hlsearch_group', { clear = true })
-local function manage_hlsearch(char)
-  local key = vim.fn.keytrans(char)
-  local keys = { '<CR>', 'n', 'N', '*', '#', '?', '/' }
-
-  if vim.fn.mode() == 'n' then
-    if not vim.tbl_contains(keys, key) then
-      vim.cmd([[ :set nohlsearch ]])
-    elseif vim.tbl_contains(keys, key) then
-      vim.cmd([[ :set hlsearch ]])
-    end
-  end
-
-  vim.on_key(nil, hl_ns)
-end
-vim.api.nvim_create_autocmd('CursorMoved', {
-  group = hlsearch_group,
-  callback = function() vim.on_key(manage_hlsearch, hl_ns) end,
-})

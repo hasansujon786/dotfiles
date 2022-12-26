@@ -10,9 +10,9 @@ local v = require('hasan.utils.vinegar')
 
 -- init.lua
 local list = {
-  { key = 'zo',                          action = 'edit' },
-  { key = 'e',                           action = 'edit_in_place' },
-  { key = 'E',                           action = 'edit_no_picker' },
+  { key = 'zZ',                          action = 'edit' },
+  { key = 'zE',                          action = 'edit_no_picker' },
+  { key = 'E',                           action = 'edit_in_place' },
   { key = 's',                           action = 'split' },
   { key = 'v',                           action = 'vsplit' },
   { key = 't',                           action = 'tabnew' },

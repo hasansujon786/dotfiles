@@ -1,67 +1,52 @@
+-- _G.nvimTreeEnter = function()
+--   vim.cmd('highlight! Cursor blend=100')
+--   vim.opt.guicursor = { 'n:Cursor/lCursor', 'v-c-sm:block', 'i-ci-ve:ver25', 'r-cr-o:hor2' }
+--   P('foo')
+-- end
+-- _G.nvimTreeLeave = function()
+--   vim.cmd('highlight! Cursor blend=NONE')
+--   vim.opt.guicursor = { 'n-v-c-sm:block', 'i-ci-ve:ver25', 'r-cr-o:hor20' }
+--   P('moo')
+-- end
+-- local function init(info)
+--   nvimTreeEnter()
+--   utils.augroup('NvimTreeCursor')(function(autocmd)
+--     autocmd({ 'WinLeave', 'BufLeave' }, nvimTreeLeave, { buffer = info.buf })
+--     autocmd('WinEnter', nvimTreeEnter, { buffer = info.buf })
+--     -- autocmd('FileType', 'setlocal foldlevel=0', { pattern = 'vim' })
+--   end)
+-- end
+-- autocmd('FileType', init, { pattern = 'NvimTree' })
 
--- use({ 'sunjon/Shade.nvim', config = function() require('config.shade') end })
--- use({'tpope/vim-obsession'})
--- https://github.com/sindrets/winshift.nvim
-
--- use({ 'tpope/vim-fugitive', opt = true, cmd = {'Git','GBrowse','GV'},
---   requires = {
---     'tpope/vim-rhubarb',
---     'junegunn/gv.vim'
---   }
--- })
--- use({ 'folke/tokyonight.nvim' })
--- use({'projekt0n/github-nvim-theme'})
--- use({ 'vimwiki/vimwiki', opt = true, cmd = {'VimwikiIndex','VimwikiTabIndex','VimwikiUISelect'} })
--- use({ 'lewis6991/gitsigns.nvim',
---    disable = true,
---    branch = 'winstage',
---    -- tag = 'release',
---    opt = true, event = 'CursorHold',
---    config = function ()
---      require('config.gitsigns')
---    end,
---  })
---  -- use({'ruifm/gitlinker.nvim'})
---  -- ues({'tanvirtin/vgit.nvim'})
---  use({ 'neoclide/coc.nvim',
---    opt = true, event = 'CursorHold',
---    disable = vim.g.disable_coc,
---    config = function ()
---      vim.cmd 'source ~/dotfiles/nvim/config/coc.vim'
---    end
---  })
--- use({
---   'mfussenegger/nvim-dap',
---   disable = true,
---   -- opt = true,
---   -- event = "BufReadPre",
---   -- module = { "dap" },
---   wants = { 'nvim-dap-virtual-text', 'DAPInstall.nvim', 'nvim-dap-ui', 'which-key.nvim' },
---   requires = {
---     'Pocco81/DAPInstall.nvim',
---     'theHamsta/nvim-dap-virtual-text',
---     'rcarriga/nvim-dap-ui',
---     'mfussenegger/nvim-dap-python',
---     'nvim-telescope/telescope-dap.nvim',
---     -- { "leoluz/nvim-dap-go", module = "dap-go" },
---     { 'jbyuki/one-small-step-for-vimkind', module = 'osv' },
---   },
---   config = function()
---     require('config.dap').setup()
---   end,
--- })
-
--- Vsnip ==============================
--- vim.g.vsnip_namespace = ':'
--- vim.g.vsnip_snippet_dir = '~/dotfiles/nvim/.vsnip'
--- inoremap <C-S> <Cmd>lua require('cmp').complete({ config = { sources = { { name = 'vsnip' } } } })<CR>
--- vim.cmd[[xmap <C-l>   <Plug>(vsnip-cut-text)]]
--- vim.g.vsnip_filetypes = {
---   vimspec = { 'vim' },
---   javascriptreact = { 'javascript' },
---   typescriptreact = { 'typescript' },
---   javascript = { 'javascriptreact' },
---   typescript = { 'typescriptreact' },
---   dart = { 'flutter' },
--- }
-
+-- change alacritty config on vim enter
+-- This is your alacritty.yml
+-- 01 | # Window Customization
+-- 02 | window:
+-- 03 |   dimensions:
+-- 04 |     columns: 100
+-- 05 |     lines: 25
+-- 06 |   padding:
+-- 07 |     x: 20
+-- 08 |     y: 20
+-- 09 |   # decorations: none
+-- 10 |   dynamic_title: true
+-- 12 |   startup_mode: Windowed # Maximized Fullscreen
+-- 13 | background_opacity: 0.92
+-- function Sad(line_nr, from, to, fname)
+--   vim.cmd(string.format("silent !sed -i '%ss/%s/%s/' %s", line_nr, from, to, fname))
+-- end
+-- function IncreasePadding()
+--   foo('19', 0, 20, '~/dotfiles/alacritty/alacritty.windows.yml')
+--   foo('20', 0, 20, '~/dotfiles/alacritty/alacritty.windows.yml')
+-- end
+-- function DecreasePadding()
+--   Sad('19', 20, 0, '~/dotfiles/alacritty/alacritty.windows.yml')
+--   Sad('20', 20, 0, '~/dotfiles/alacritty/alacritty.windows.yml')
+-- end
+-- vim.cmd[[
+--   augroup ChangeAlacrittyPadding
+--    au!
+--    au VimEnter * lua DecreasePadding()
+--    au VimLeavePre * lua IncreasePadding()
+--   augroup END
+-- ]]

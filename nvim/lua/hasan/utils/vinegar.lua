@@ -80,11 +80,10 @@ function M.alternate_file()
   vim.cmd([[echo 'No alternate file']])
 end
 
-local function open()
-  feedkeys(vim.b.vinegar and 'e' or 'zo', '')
-end
+local function open() feedkeys(vim.b.vinegar and 'E' or 'zZ') end
 M.actions = {
   open = open,
+  edit_in_place = function() feedkeys(vim.b.vinegar and 'E' or 'zE') end,
   open_n_close = function()
     open()
     if view.is_visible() and not vim.b.vinegar then
@@ -93,9 +92,9 @@ M.actions = {
   end,
   vinegar_edit_or_cd = function(node)
     if node.extension and vim.b.vinegar then
-      feedkeys('e')
-    elseif node.extension and not vim.b.vinegar then
       feedkeys('E')
+    elseif node.extension and not vim.b.vinegar then
+      feedkeys('zE')
     else
       lib.open(node.absolute_path)
       feedkeys('ggj')
@@ -105,9 +104,7 @@ M.actions = {
     lib.open(vim.loop.cwd())
     feedkeys('gg', '')
   end,
-  system_reveal = function(node)
-    vim.cmd('silent !explorer.exe /select,"' .. node.absolute_path .. '"')
-  end,
+  system_reveal = function(node) vim.cmd('silent !explorer.exe /select,"' .. node.absolute_path .. '"') end,
   vinegar_dir_up = function(node)
     if node.name == '..' then
       feedkeys('j')
