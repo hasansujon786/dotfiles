@@ -69,6 +69,10 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi LspReferenceWrite guibg=#463b48 gui=NONE
   hi LspReferenceRead  guibg=#3B4048 gui=NONE
   hi! link LspInfoBorder  FloatBorder
+  hi DiagnosticLineNrWarn  guifg=#ebc275 guibg=#4C4944
+  hi DiagnosticLineNrError guifg=#ef5f6b guibg=#4D3542
+  hi DiagnosticLineNrInfo  guifg=#4dbdcb guibg=#2C4855
+  hi DiagnosticLineNrHint  guifg=#ca72e4 guibg=#45395A
 
   "/// Plugins ///"
   hi! link HlSearchNear IncSearch

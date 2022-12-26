@@ -104,7 +104,6 @@ local other = {
   BoldArrowLeft       = '',
   BoldArrowRight      = '',
   BoldArrowUp         = '',
-  BoldClose           = '',
   BoxChecked          = '',
   ChevronShortUp      = '',
   ChevronShortDown    = '',
@@ -132,6 +131,13 @@ local other = {
   Monitoring          = '',
   Globe               = '',
   Frozen              = '',
+  diagnostics = {
+    Error = '',
+    Warn  = '',
+    Info  = '',
+    Ques  = '',
+    Hint  = '',
+  },
 }
 
 -- nerdicons

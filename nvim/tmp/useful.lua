@@ -1,3 +1,7 @@
+local c = require('onedark.colors')
+local util = require('onedark.util')
+P(util.darken('#ca72e4', 0.2, c.bg0))
+
 -- This is your alacritty.yml
 -- 01 | # Window Customization
 -- 02 | window:
@@ -107,9 +111,7 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers)
-vim.keymap.set('n', '<leader>sf', function()
-  require('telescope.builtin').find_files({ previewer = false })
-end)
+vim.keymap.set('n', '<leader>sf', function() require('telescope.builtin').find_files({ previewer = false }) end)
 
 local opts = { buffer = bufnr }
 vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
@@ -119,9 +121,7 @@ vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
 vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
 vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
 vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
-vim.keymap.set('n', '<leader>wl', function()
-  vim.inspect(vim.lsp.buf.list_workspace_folders())
-end, opts)
+vim.keymap.set('n', '<leader>wl', function() vim.inspect(vim.lsp.buf.list_workspace_folders()) end, opts)
 vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
 vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
@@ -326,7 +326,5 @@ local function manage_hlsearch(char)
 end
 vim.api.nvim_create_autocmd('CursorMoved', {
   group = hlsearch_group,
-  callback = function()
-    vim.on_key(manage_hlsearch, hl_ns)
-  end,
+  callback = function() vim.on_key(manage_hlsearch, hl_ns) end,
 })

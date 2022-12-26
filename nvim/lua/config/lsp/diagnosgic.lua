@@ -1,6 +1,6 @@
 local M = {}
 local ui = require('core.state').ui
-local diagnotic_icons = require('hasan.utils.ui.icons').diagnostics
+local diagnotic_icons = require('hasan.utils.ui.icons').Other.diagnostics
 
 M.diagnostic_icon_by_severity = function(severity)
   local icon, highlight
@@ -43,7 +43,8 @@ M.setup = function()
 
   for icon_type, icon in pairs(diagnotic_icons) do
     local hl = 'DiagnosticSign' .. icon_type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+    vim.fn.sign_define(hl, { numhl = 'DiagnosticLineNr' .. icon_type })
+    -- vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
   vim.diagnostic.config({
     signs = true,
@@ -52,7 +53,7 @@ M.setup = function()
     virtual_text = false,
     severity_sort = true,
     float = {
-      focusable = false,
+      focusable = true,
       border = ui.border.style,
       source = false,
       header = { ' Diagnostics:', 'TextInfo' },
