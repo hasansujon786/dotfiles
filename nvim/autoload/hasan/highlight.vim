@@ -75,6 +75,7 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi DiagnosticLineNrHint  guifg=#ca72e4 guibg=#45395A
 
   "/// Plugins ///"
+  hi! link LazyNormal NormalFloatFlat
   hi! link HlSearchNear IncSearch
   hi! link HlSearchLensNear WildMenu
   hi WhichKeySeparator guifg=#546178

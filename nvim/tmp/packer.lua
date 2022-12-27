@@ -161,3 +161,11 @@ return require('packer').startup({
     snapshot_path = fn.stdpath('config')
   },
 })
+
+-- require('core.plugins')
+-- autocmd('BufWritePost', 'source <afile> | PackerCompile ', { pattern = 'plugins.lua' })
+-- autocmd('User', function()
+--   require('hasan.utils.ui.palatte').set_custom_highlights()
+--   vim.notify('Packer configuration recompiled')
+-- end, { pattern = 'PackerCompileDone' })
+

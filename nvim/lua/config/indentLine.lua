@@ -13,6 +13,7 @@ require('indent_blankline').setup({
     'alpha',
     'ccc-ui',
     '2048',
+    'lazy',
   },
   show_first_indent_level = false,
   -- show_current_context = true,

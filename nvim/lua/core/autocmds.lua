@@ -5,20 +5,30 @@ end
 
 utils.augroup('MY_AUGROUP')(function(autocmd)
   autocmd('CmdwinEnter', 'nnoremap <buffer><CR> <CR>')
-  autocmd('ColorScheme', 'lua require("hasan.utils.ui.palatte").set_custom_highlights()')
+  autocmd('ColorScheme', function()
+    require('hasan.utils.ui.palatte').set_custom_highlights()
+    require('hasan.utils.color').my_nebulous_setup()
+  end)
 
-  autocmd('FileType', 'setlocal foldlevel=0', { pattern = 'vim' })
-  autocmd('FileType', 'setlocal foldmethod=marker', { pattern = { 'vim', 'css', 'scss', 'json' } })
-  autocmd('FileType', 'setlocal foldmarker={,}', { pattern = { 'css', 'scss', 'json' } })
-  autocmd('FileType', 'setlocal foldmarker={,}', { pattern = { 'css', 'scss', 'json' } })
-  autocmd({ 'BufNewFile', 'BufRead' }, 'set filetype=jsonc', { pattern = { '*.json', 'tsconfig.json' } })
+  autocmd('FileType', 'setl foldlevel=0', { pattern = 'vim' })
+  autocmd('FileType', 'setl foldmethod=marker', { pattern = { 'vim', 'css', 'scss', 'json' } })
+  autocmd('FileType', 'setl foldmarker={,}', { pattern = { 'css', 'scss', 'json' } })
+  autocmd('FileType', 'setl foldmarker={,}', { pattern = { 'css', 'scss', 'json' } })
+  autocmd({ 'BufNewFile', 'BufRead' }, 'setl filetype=jsonc', { pattern = { '*.json', 'tsconfig.json' } })
+
+  autocmd('BufReadPost', vim.fn['hasan#autocmd#restore_position'])
+  autocmd('TermOpen', 'setfiletype terminal | set bufhidden=hide')
+  autocmd('BufLeave', 'normal! mK', { pattern = '*.txt' })
+  autocmd('BufWritePre', vim.fn['hasan#autocmd#trimWhitespace'], { pattern = { '*.vim', '*.lua', '*.org', '*.ahk' } })
+  autocmd('FileType', 'setlocal nonumber norelativenumber signcolumn=no', { pattern = 'log' })
+  autocmd({ 'BufWinEnter', 'WinEnter' }, 'normal Gzz', { pattern = '__FLUTTER_DEV_LOG__' })
+  autocmd({ 'FocusGained', 'BufEnter', 'CursorHold' }, ':silent! checktime')
 
   autocmd('BufDelete', 'silent! call remove(g:hasan_telescope_buffers, expand("<abuf>"))')
   autocmd({ 'BufWinEnter', 'WinEnter' }, 'let g:hasan_telescope_buffers[bufnr()] = reltimefloat(reltime())')
 
-  autocmd('CursorHold', function()
-    vim.defer_fn(function()
-      require('core.lazy')
-    end, 50)
-  end, { once = true })
+  -- autocmd('VimResized', 'wincmd =') -- Vim/tmux layout rebalancing
+  -- {'FocusLost,WinLeave,BufLeave * :silent! noautocmd w'}, -- auto save
+  -- {'WinEnter,BufWinEnter *.vim,*.js,*.lua call hasan#boot#highligt_ruler(1)'},
+  -- autocmd('VimEnter', 'runtime! autoload/netrw.vim', { once = true })
 end)

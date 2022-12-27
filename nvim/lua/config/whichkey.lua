@@ -256,16 +256,8 @@ local leader = {
     l = { '<cmd>call logevents#LogEvents_Toggle()<CR>',    'Toggle LogEvents' },
     R = { '<cmd>ReloadConfig<CR>',                         'Reload neovim' },
     H = { '<cmd>silent write | edit | TSBufEnable highlight<CR>', 'Reload hightlight' },
-
-    p = {
-      name = '+plugin',
-      c = { 'Compile plugin setup' },
-      C = { '<cmd>PackerClean<CR>',             'Clean plugins' },
-      i = { '<cmd>PackerInstall<CR>',           'Install plugins' },
-      s = { '<cmd>PackerStatus<CR>',            'Plugin status' },
-      y = { '<cmd>lua require("hasan.utils").sync_packer()<CR>',               'Plugin sync' },
-      p = { '<cmd>lua require("hasan.telescope.custom").search_plugins()<CR>', 'Search plugin files'},
-    },
+    p = { '<cmd>Lazy home<CR>',            'Plugin status' },
+    P = { '<cmd>lua require("hasan.telescope.custom").search_plugins()<CR>', 'Search plugin files'},
   },
 
   w = w,

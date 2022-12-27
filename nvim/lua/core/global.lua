@@ -3,38 +3,9 @@ local ui = require('core.state').ui
 _G.org_root_path = 'C:\\Users\\hasan\\vimwiki'
 _G.org_home_path = 'C:\\Users\\hasan\\vimwiki\\home.org'
 _G.dap_adapter_path = vim.fn.stdpath('data') .. '\\dap_adapters' -- 'C:\\Users\\hasan\\AppData\\Local\\nvim-data\\dap_adapters\\'
+_G.plugin_path = vim.fn.stdpath('data') .. '/lazy'
+-- _G.dap_adapter_path = vim.fn.stdpath('data') .. '\\mason\\packages' -- 'C:\\Users\\hasan\\AppData\\Local\\nvim-data\\dap_adapters\\'
 
--- disabled_built_ins ==============================
-local disabled_built_ins = {
-  -- 'matchparen',
-  -- 'matchit',
-  'netrw',
-  'netrwPlugin',
-  'netrwSettings',
-  'netrwFileHandlers',
-  'tutor_mode_plugin',
-  'remote_plugins',
-  'man',
-  'gzip',
-  'zip',
-  'zipPlugin',
-  'tar',
-  'tarPlugin',
-  'getscript',
-  'getscriptPlugin',
-  'vimball',
-  'vimballPlugin',
-  '2html_plugin',
-  'logipat',
-  'rrhelper',
-  'spellfile_plugin',
-}
-
--- vim.g.did_load_filetypes = 0
--- vim.g.do_filetype_lua = 1
-for _, plugin in pairs(disabled_built_ins) do
-  vim.g['loaded_' .. plugin] = 1
-end
 -- Sneak ==============================
 vim.g['sneak#target_labels'] = ';wertyuopzbnmfLGKHWERTYUIQOPZBNMFJ0123456789'
 vim.g['sneak#label'] = 1 -- use <tab> to jump through lebles
@@ -111,15 +82,11 @@ _G.prequire = function(module_name)
     local source = debug.getinfo(2, 'S').source:sub(2)
     source = source:gsub(os.getenv('HOME'), '~') --[[@as string]]
     local msg = string.format('"%s" requested in "%s" not available', module_name, source)
-    vim.schedule(function()
-      vim.notify_once(msg, vim.log.levels.WARN)
-    end)
+    vim.schedule(function() vim.notify_once(msg, vim.log.levels.WARN) end)
 
     ---@class Void Void has eveything and nothing
     local void = setmetatable({}, { ---@type Void
-      __index = function(self)
-        return self
-      end,
+      __index = function(self) return self end,
       __newindex = function() end,
       __call = function() end,
     })

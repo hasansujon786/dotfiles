@@ -59,6 +59,7 @@ keymap('n', 'k', function() vim.fn['reljump#jump']('k') end)
 keymap('n', 'H', 'H:exec "norm! ". &scrolloff . "k"<cr>') -- jump in file
 keymap('n', 'L', 'L:exec "norm! ". &scrolloff . "j"<cr>')
 
+keymap('n', '<BS>', '<c-^>')
 keymap({ 'n', 'x' }, "'", '`') -- Character wise jumps always
 keymap({ 'n', 'x' }, "''", "`'")
 
@@ -178,8 +179,6 @@ keymap({ 'n', 'v' }, '<leader>iP', '"+P', { desc = 'Paste form system' })
 keymap('n', '<leader>fC', ':w <C-R>=expand("%")<CR>', noSilent)
 keymap('n', '<leader>fM', ':Move <C-R>=expand("%")<CR>', noSilent)
 keymap('n', '<leader>fe', ":edit <C-R>=expand('%:p:h') . '\\'<CR>", noSilent)
--- packer commands
-keymap('n', '<leader>vpc', ':PackerCompile<CR>', noSilent)
 
 -- maps.nnoremap('<leader>p:', ':silent ! tmux-windowizer $(pwd) ', {silent = false}) -- run project cmd
 -- maps.nnoremap('<leader>p;', ':silent ! tmux-send-keys $(pwd) ', {silent = false})

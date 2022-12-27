@@ -125,7 +125,7 @@ function M.search_plugins()
   extensions.file_browser.file_browser(themes.get_ivy({
     previewer = false,
     prompt_title = 'Plugins',
-    cwd = vim.fn.glob(vim.fn.stdpath('data') .. '/site/pack/packer'),
+    cwd = vim.fn.glob(_G.plugin_path),
   }))
 end
 

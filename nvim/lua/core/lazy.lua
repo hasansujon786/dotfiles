@@ -1,25 +1,28 @@
-local utils = require('hasan.utils')
+local lazypath = _G.plugin_path .. '/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  P('Install lazy.nvim')
+  local lazyURL = 'https://github.com/folke/lazy.nvim.git'
+  vim.fn.system({ 'git', 'clone', '--filter=blob:none', '--single-branch', lazyURL, lazypath })
+end
+vim.opt.runtimepath:prepend(lazypath)
 
-utils.augroup('MY_LAZY_AUGROUP')(function(autocmd)
-  -- autocmd('VimResized', 'wincmd =') -- Vim/tmux layout rebalancing
-  autocmd('BufReadPost', vim.fn['hasan#autocmd#restore_position'])
-  autocmd('BufWritePost', 'source <afile> | PackerCompile ', { pattern = 'plugins.lua' })
-  autocmd('WinLeave', require('hasan.utils.color').my_nebulous_setup, { once = true })
-
-  autocmd('User', function()
-    require('hasan.utils.ui.palatte').set_custom_highlights()
-    vim.notify('Packer configuration recompiled')
-  end, { pattern = 'PackerCompileDone' })
-
-  autocmd({ 'FocusGained', 'BufEnter', 'CursorHold' }, ':silent! checktime')
-  autocmd('TermOpen', 'setfiletype terminal | set bufhidden=hide')
-  autocmd('BufLeave', 'normal! mK', { pattern = '*.txt' })
-  autocmd('BufWritePre', vim.fn['hasan#autocmd#trimWhitespace'], { pattern = { '*.vim', '*.lua', '*.org', '*.ahk' } })
-  autocmd('BufWritePost', 'source <afile> | PackerCompile ', { pattern = 'plugins.lua' })
-  autocmd({ 'BufWinEnter', 'WinEnter' }, 'normal Gzz', { pattern = '__FLUTTER_DEV_LOG__' })
-  autocmd('FileType', 'setlocal nonumber norelativenumber signcolumn=no', { pattern = 'log' })
-
-  -- {'FocusLost,WinLeave,BufLeave * :silent! noautocmd w'}, -- auto save
-  -- {'WinEnter,BufWinEnter *.vim,*.js,*.lua call hasan#boot#highligt_ruler(1)'},
-  -- autocmd('VimEnter', 'runtime! autoload/netrw.vim', { once = true })
-end)
+require('lazy').setup('core.plug', {
+  install = { colorscheme = { 'onedark', 'habamax' } },
+  performance = {
+    cache = {
+      enabled = true,
+    },
+    rtp = {
+      disabled_plugins = {
+        'gzip',
+        'matchit',
+        'matchparen',
+        'netrwPlugin',
+        'tarPlugin',
+        'tohtml',
+        'tutor',
+        'zipPlugin',
+      },
+    },
+  },
+})
