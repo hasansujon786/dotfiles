@@ -34,11 +34,7 @@ return {
     'kyazdani42/nvim-tree.lua',
     config = function() require('config.nv_tree') end,
     lazy = true,
-    keys = {
-      { '<leader>op', '<cmd>lua require("hasan.utils.vinegar").toggle_sidebar()<CR>', desc = 'Toggle explorer' },
-      { '-', '<cmd>lua require("hasan.utils.vinegar").vinegar()<CR>', desc = 'Vinegar' },
-      { '<leader>ob', ':NvimTreeToggle<CR>', desc = 'Toggle explorer' },
-    },
+    event = 'CursorHold',
   },
   { 'kevinhwang91/nvim-bqf', lazy = true, ft = { 'qf' } },
   { 'hasansujon786/harpoon', lazy = true, module = 'harpoon' },
