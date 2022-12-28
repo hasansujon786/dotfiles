@@ -23,9 +23,9 @@ wk.setup {
 local function loadOrgMode(key)
   return function()
     if package.loaded['nvim-treesitter'] == nil then
-      vim.cmd([[PackerLoad nvim-treesitter]])
+      vim.cmd([[Lazy load nvim-treesitter]])
     end
-    vim.cmd([[silent PackerLoad orgmode]])
+    vim.cmd([[Lazy load orgmode]])
     vim.defer_fn(function()
       feedkeys(key)
     end, 0)

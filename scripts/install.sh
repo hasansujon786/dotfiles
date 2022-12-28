@@ -137,17 +137,6 @@ setup_nvim() {
     # sudo mv nvim.appimage ~/dotfiles/bin/nvim
     $getter install -y xclip
   fi
-
-  # packerPath=($HOME/AppData/Local/nvim-data/site/pack/packer/start/packer.nvim $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim)
-  # if [ -d ${packerPath[$osIndex]} ]; then
-  #   echo 'packer.nvim already exists'
-  # else
-  #   echo 'cloning packer.nvim'
-  #   mkdir -p ${packerPath[$osIndex]}
-  #   git clone https://github.com/wbthomason/packer.nvim ${packerPath[$osIndex]}
-  # fi
-  # echo "Installing vim plugins..."
-  # nvim +PlugInstall +qall
 }
 
 setup_lazygit () {

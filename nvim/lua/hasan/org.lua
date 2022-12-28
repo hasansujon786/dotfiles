@@ -5,7 +5,7 @@ local event = require('nui.utils.autocmd').event
 local api = vim.api
 local opt = vim.opt
 if package.loaded['nvim-treesitter'] == nil then
-  vim.cmd([[PackerLoad nvim-treesitter]])
+  vim.cmd([[Lazy load nvim-treesitter]])
 end
 
 local M = {}

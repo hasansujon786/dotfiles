@@ -19,13 +19,6 @@ M.get_module_name = function(path)
   return m_name:gsub('/', '.')
 end
 
-M.sync_packer = function()
-  print('Syncing packer.')
-  local snap_shot_time = os.date('%Y_%m_%d_%H_%M')
-  vim.cmd('PackerSnapshot ' .. snap_shot_time)
-  vim.cmd('PackerSync')
-end
-
 M.get_default = function(x, default)
   return M.if_nil(x, default, x)
 end
