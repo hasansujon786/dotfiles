@@ -2,10 +2,14 @@
 ; #Warn  ; Enable warnings to assist with detecting common errors.
 ; SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
+#SingleInstance Force
 
 ;Reload/Execute this script.ahk file
 ::rscript::
-!f5::
+f5::
+SplashTextOn,,60,, reloaded
+sleep 300
+SplashTextOff
 Run, "C:\Users\hasan\dotfiles\scripts\ahk\main.ahk"
 Return
 ;Suspend hotkeys
@@ -41,6 +45,8 @@ PrintScreen::#+s
 #`::takeScreenshot()
 #q::bt()bt()
 #^b::bt()
+#m::quake_nvim(false)
+#y::quake_nvim(true)
 ;Transparency toggle,
 #o::toggleTransparency()
 #^.::increaseTransparency()
@@ -394,4 +400,28 @@ rebootMiWiFi() {
   sleep 1000
   MouseMove, 596, 420
   Click
+}
+quake_nvim(copy := false) {
+  Static ps := "C:\\Users\\hasan\\dotfiles\\scripts\\ahk\\quaka.ps1"
+  Static file := "C:\\Users\\hasan\\dotfiles\\scripts\\ahk\\clip.txt"
+  IfWinActive, quake_nvim
+  {
+    FileRead, file_content, %file%
+    Clipboard := file_content
+    file_content := ""
+    WinClose ; alternateTab()
+    FileDelete, %file%
+    return
+  }
+
+  ; copy contents from current focused input
+  if (copy == true) {
+    Send, {Ctrl down}ac{Ctrl up}
+  }
+
+  SplashTextOn,,60,, Opening nvim
+  Fileappend, %clipboard%, %file%
+  sleep 100
+  SplashTextOff
+  RunWait, powershell -command %ps%,, Hide
 }
