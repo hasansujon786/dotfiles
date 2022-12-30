@@ -221,7 +221,11 @@ NavRun(Path) {
 ; Utils
 ;******************************************************************************
 toggleCapsLosck() {
-  SetCapsLockState, % (t:=!t) ?  "On" beep() :  "Off" beep()
+  SplashTextOn,200,60,, Toggle Capslock
+  beep()
+  SetCapsLockState % !GetKeyState("CapsLock", "T")
+  Sleep, 300
+  SplashTextOff
 }
 bt(onOff := "On") {
   Static ps := "C:\\Users\\hasan\\dotfiles\\scripts\\ahk\\toggle_bluetooth.ps1"
