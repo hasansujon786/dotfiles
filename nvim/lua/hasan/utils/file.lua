@@ -52,6 +52,13 @@ function M.reload()
   end
 end
 
+local on_windows = vim.loop.os_uname().version:match('Windows')
+function M.join_paths(...) -- Function from nvim-lspconfig
+  local path_sep = on_windows and '\\' or '/'
+  local result = table.concat({ ... }, path_sep)
+  return result
+end
+
 return M
 
 -- del lines            %s/\v(print).*/

@@ -22,6 +22,11 @@ keymap({ 'n', 'x' }, 'x', '"_x') -- Prevent x from overriding the clipboard.
 keymap({ 'n', 'x' }, 'X', '"_X')
 keymap({ 'i', 'c' }, '<C-v>', '<C-R>+', noSilent) -- Paste from + register (system clipboard)
 keymap({ 'i', 'c' }, '<A-p>', '<C-R>"', noSilent) -- Paste the last item from register
+-- Easier system clipboard usage
+keymap('n', '<leader>y', '"+y')
+keymap('v', '<leader>y', '"+ygv<Esc>')
+keymap({ 'n', 'v' }, '<leader>ip', '"+p', { desc = 'Paste from system' })
+keymap({ 'n', 'v' }, '<leader>iP', '"+P', { desc = 'Paste from system' })
 
 -- Modify & rearange texts ----------------------
 -- maps.vnoremap('ao', '<ESC>va{%V%') -- Select a block {} of code
@@ -170,11 +175,6 @@ keymap('n', '<F5>', '<Esc>:syntax sync fromstart<CR>')
 keymap('i', '<F5>', '<C-o>:syntax sync fromstart<CR>')
 
 -- Leader keys ----------------------------------
--- Easier system clipboard usage
-keymap('n', '<leader>y', '"+y')
-keymap('v', '<leader>y', '"+ygv<Esc>')
-keymap({ 'n', 'v' }, '<leader>ip', '"+p', { desc = 'Paste form system' })
-keymap({ 'n', 'v' }, '<leader>iP', '"+P', { desc = 'Paste form system' })
 -- File commands
 keymap('n', '<leader>fC', ':w <C-R>=expand("%")<CR>', noSilent)
 keymap('n', '<leader>fM', ':Move <C-R>=expand("%")<CR>', noSilent)
