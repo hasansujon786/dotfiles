@@ -32,9 +32,9 @@ return {
   ------------------------------------------------
   {
     'kyazdani42/nvim-tree.lua',
-    config = function() require('config.nv_tree') end,
     lazy = true,
     event = 'CursorHold',
+    config = function() require('config.nv_tree') end,
   },
   { 'kevinhwang91/nvim-bqf', lazy = true, ft = { 'qf' } },
   { 'hasansujon786/harpoon', lazy = true, module = 'harpoon' },

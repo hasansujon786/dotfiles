@@ -1,10 +1,10 @@
 local api = vim.api
 local M = {}
 
-local cursorline_focus_ft = { list = true, fern = true, qf = true }
-local cursorline_persist_ft = { qf = true, fern = true, NvimTree = true }
-local cursorline_ignore_bt = { prompt = true }
-local cursorline_ignore_ft = {
+local cl_focus_ft = { list = true, fern = true, qf = true }
+local cl_persist_ft = { qf = true, fern = true, NvimTree = true, DiffviewFiles = true }
+local cl_disable_bt = { prompt = true }
+local cl_disable_ft = {
   dashboard = true,
   alpha = true,
   floaterm = true,
@@ -17,11 +17,11 @@ M.cursorline_show = function(winid)
   local ftype = api.nvim_buf_get_option(bufnr, 'filetype')
   local btype = api.nvim_buf_get_option(bufnr, 'buftype')
 
-  if cursorline_ignore_ft[ftype] or cursorline_ignore_bt[btype] then
+  if cl_disable_ft[ftype] or cl_disable_bt[btype] then
     return
   end
   -- change hightligt to a contrasted color
-  if cursorline_focus_ft[ftype] then
+  if cl_focus_ft[ftype] then
     vim.cmd([[setl winhighlight=CursorLine:CursorLineFocus]])
   end
 
@@ -32,7 +32,7 @@ M.cursorline_hide = function(winid)
   local bufnr = api.nvim_win_get_buf(winid)
   local ftype = api.nvim_buf_get_option(bufnr, 'filetype')
   -- local btype = api.nvim_buf_get_option(bufnr, 'buftype')
-  if cursorline_persist_ft[ftype] then
+  if cl_persist_ft[ftype] then
     return
   end
 

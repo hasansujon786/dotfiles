@@ -60,7 +60,7 @@ local w = {
   R = { '<C-w>R',                      'Window rotate-' },
   o = { '<C-w>o',                      'Keep only windwo' },
   c = { '<C-w>c',                      'Close windows' },
-  q = { '<C-w>c',                      'Close windows' },
+  q = { '<cmd>tabclose<CR>',           'Close tab' },
   t = { '<cmd>-tab split<CR>',         'Edit to new tab' },
   O = { '<cmd>tabonly<CR>',            'Keep only tab' },
 

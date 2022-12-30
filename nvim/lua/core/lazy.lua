@@ -1,12 +1,13 @@
 local lazypath = _G.plugin_path .. '/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
-  P('Install lazy.nvim')
-  local lazyURL = 'https://github.com/folke/lazy.nvim.git'
-  vim.fn.system({ 'git', 'clone', '--filter=blob:none', '--single-branch', lazyURL, lazypath })
+  print('Installing lazy.nvim...................')
+  vim.fn.system({ 'git', 'clone', '--filter=blob:none', 'https://github.com/folke/lazy.nvim.git', lazypath })
+  vim.fn.system({ 'git', '-C', lazypath, 'checkout', 'tags/stable' }) -- last stable release
 end
 vim.opt.runtimepath:prepend(lazypath)
 
 require('lazy').setup('core.plug', {
+  concurrency = 10,
   install = { colorscheme = { 'onedark', 'habamax' } },
   performance = {
     cache = {
