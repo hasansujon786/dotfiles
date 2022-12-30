@@ -30,6 +30,10 @@ M.default = {
     -- 'Normal:Nebulous',
     -- 'NormalNC:Nebulous',
   },
+  dynamic_rules = {
+    active = nil,
+    deactive = nil,
+  },
 }
 
 M.options = M.default

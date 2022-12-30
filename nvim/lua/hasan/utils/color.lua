@@ -11,6 +11,13 @@ M.my_nebulous_setup = function()
     on_blur = function(winid)
       require('hasan.utils.ui.cursorline').cursorline_hide(winid)
     end,
+    dynamic_rules = {
+      deactive = function(info)
+        if vim.t.diffview_view_initialized then
+          return true
+        end
+      end,
+    },
   })
 end
 

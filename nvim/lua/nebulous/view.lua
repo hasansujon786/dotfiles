@@ -6,19 +6,23 @@ local api = vim.api
 local view = {}
 
 view.focusWindow = function(winid)
-  if utils.win_has_blacklist_filetype(winid) or utils.is_floting_window(winid) then
+  if utils.win_has_blacklist_ft(winid) or utils.is_floting_win(winid) then
     return
   end
   fn.setwinvar(winid, '&winhighlight', '')
   pcall(vim.fn.matchdelete, winid, winid)
 end
 
-view.blurWindow = function(winid)
-  if utils.win_has_blacklist_filetype(winid) or utils.is_floting_window(winid) then
+view.blurWindow = function(win)
+  local has_bl, float_win, dynamic_disable =
+    utils.win_has_blacklist_ft(win), utils.is_floting_win(win), utils.has_dynamically_deactive(win)
+
+  if has_bl or float_win or dynamic_disable then
     return
   end
-  fn.setwinvar(winid, '&winhighlight', table.concat(config.options.nb_blur_hls, ','))
-  pcall(fn.matchadd, 'Nebulous', '.', 200, winid, { window = winid })
+
+  fn.setwinvar(win, '&winhighlight', table.concat(config.options.nb_blur_hls, ','))
+  pcall(fn.matchadd, 'Nebulous', '.', 200, win, { window = win })
 end
 
 view.update_all_windows = function(shouldCheckFloat)
@@ -27,7 +31,7 @@ view.update_all_windows = function(shouldCheckFloat)
   end
 
   -- check update windows again if there is a floating window
-  if utils.is_floting_window(0) and shouldCheckFloat then
+  if utils.is_floting_win(0) and shouldCheckFloat then
     vim.defer_fn(function()
       view.update_all_windows(false)
     end, 1)
@@ -35,8 +39,8 @@ view.update_all_windows = function(shouldCheckFloat)
   end
 
   -- loop only for current tab's winnr
-  for i = 1, fn.tabpagewinnr(fn.tabpagenr(), '$') do
-    local cur_win_id = fn.win_getid(i)
+  for win_nr = 1, fn.tabpagewinnr(fn.tabpagenr(), '$') do
+    local cur_win_id = fn.win_getid(win_nr)
     if utils.is_current_window(cur_win_id) then
       if config.options.on_focus then -- run custom user event function
         config.options.on_focus(cur_win_id)
