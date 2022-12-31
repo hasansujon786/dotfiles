@@ -1,20 +1,20 @@
-﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+﻿#NoEnv ; Recommended for performance and compatibility with future AutoHotkey releases.
 ; #Warn  ; Enable warnings to assist with detecting common errors.
 ; SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
-SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
+SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
 #SingleInstance Force
 
 ;Reload/Execute this script.ahk file
 ::rscript::
 f5::
-SplashTextOn,,60,, reloaded
-sleep 300
-SplashTextOff
-Run, "C:\Users\hasan\dotfiles\scripts\ahk\main.ahk"
+  SplashTextOn,,60,, reloaded
+  sleep 300
+  SplashTextOff
+  Run, "C:\Users\hasan\dotfiles\scripts\ahk\main.ahk"
 Return
 ;Suspend hotkeys
 ^f5::
-suspend, toggle
+  suspend, toggle
 return
 
 !1::Send #1
@@ -38,7 +38,7 @@ Capslock::alternateTab()
 #\::toggleCapsLosck()
 #Capslock::toggleCapsLosck()
 $Escape::superEscape()
-#SPACE::toggleAlwaysOnTop()       ; Always on Top
+#SPACE::toggleAlwaysOnTop() ; Always on Top
 #z::rebootMiWiFi()
 #p::AppsKey
 PrintScreen::#+s
@@ -56,8 +56,8 @@ PrintScreen::#+s
 ; ~RButton & WheelDown::scroll_right()
 ; Change Volume:
 #If MouseIsOver("ahk_class Shell_TrayWnd")
-WheelUP::volup()
-WheelDown::voldown()
+  WheelUP::volup()
+  WheelDown::voldown()
 #If
 ; Explorer
 f1::switchToExplorer()
@@ -65,19 +65,19 @@ f1::switchToExplorer()
 !z::closeAllExplorers()
 ; Global arrow controls
 #If not WinActive("ahk_exe WindowsTerminal.exe") and not WinActive("ahk_exe alacritty.exe") and not WinActive("ahk_exe Code.exe")
-!h:: SendInput,{LEFT}
-!j:: SendInput,{DOWN}
-!k:: SendInput,{UP}
-!l:: SendInput,{RIGHT}
-!Backspace::Send ^{Backspace}
+  !h:: SendInput,{LEFT}
+  !j:: SendInput,{DOWN}
+  !k:: SendInput,{UP}
+  !l:: SendInput,{RIGHT}
+  !Backspace::Send ^{Backspace}
 #If
 #If WinActive("ahk_exe Code.exe")
-!Backspace::Send ^{Backspace}
-!SPACE::Send ^{SPACE}
+  !Backspace::Send ^{Backspace}
+  !SPACE::Send ^{SPACE}
 #If
 ; Adobe XD
 #IfWinActive, ahk_class ApplicationFrameWindow
-`::Send ^1
+  `::Send ^1
 #IfWinActive
 
 ;******************************************************************************
@@ -95,21 +95,21 @@ global savedEXE = "brave.exe"
 #IfWinActive
 windowSaver() {
   WinGet, lolexe, ProcessName, A
-    ;global savedCLASS = "ahk_class "lolclass
-    global savedCLASS = "ahk_exe "lolexe
-    WinGetClass, lolclass, A ; "A" refers to the currently active window
-    global savedEXE = lolexe ;is this the way to do it? IDK.
-    ;msgbox, %savedCLASS%
-    ;msgbox, %savedEXE%
+  ;global savedCLASS = "ahk_class "lolclass
+  global savedCLASS = "ahk_exe "lolexe
+  WinGetClass, lolclass, A ; "A" refers to the currently active window
+  global savedEXE = lolexe ;is this the way to do it? IDK.
+  ;msgbox, %savedCLASS%
+  ;msgbox, %savedEXE%
 }
 
 #IfWinActive
 windowSwitcher(theClass, theEXE) {
   ;msgbox,,, switching to `nsavedCLASS = %theClass% `nsavedEXE = %theEXE%, 0.5
-    IfWinNotExist, %theClass%
+  IfWinNotExist, %theClass%
     Run, % theEXE
-    if not WinActive(theClass)
-      WinActivate %theClass%
+  if not WinActive(theClass)
+    WinActivate %theClass%
 }
 
 switchToSavedApp() {
@@ -124,14 +124,14 @@ switchToSavedApp() {
     winMoveMode := 1
     beep()
     TaskBar_SetAttr(1, 0xff79C398)
-    Return
+  Return
 #if
 #if winMoveMode
   Esc::
     winMoveMode := 0
     beep()
     TaskBar_SetAttr(1, 0xff1D1D1D)
-    Return
+  Return
 
   l::moveWinRight(25)
   h::moveWinLeft(25)
@@ -168,10 +168,88 @@ moveWindowX_and_Y(x, y){
 ;******************************************************************************
 ; Explorer functions
 ;******************************************************************************
-; Press middle mouse button to move up a folder in Explorer
-#IfWinActive, ahk_class CabinetWClass
-`::Send !{Up}
-#IfWinActive
+explorerInsertMode := false
+explorerToggleInsert() {
+  global
+  If explorerInsertMode
+  {
+    ToolTip
+    explorerInsertMode := false
+  } else {
+    WinGetPos, X, Y, Width, Height
+    ToolTip, INSERT, 10, Height - 35
+    explorerInsertMode := true
+  }
+}
+
+#If WinActive("ahk_class CabinetWClass") && explorerInsertMode
+  {
+    Esc::
+    ~Enter::
+      explorerToggleInsert()
+    return
+  }
+
+#If WinActive("ahk_class CabinetWClass") && !explorerInsertMode
+  {
+    i:: explorerToggleInsert()
+    j:: Send, {Down}
+    k:: Send, {Up}
+    h:: Send, {Left}
+    l:: Send, {Right}
+    ^u:: Send, {PgUp}
+    ^d:: Send, {PgDn}
+    +h:: Send, !{Up}
+    +l:: Send, !{Left}
+    q:: Send, !{F4}
+    /:: Send, ^f
+    x:: Send, {Delete}
+    u:: Send, ^z
+    ^r:: Send, ^y
+
+    f::
+      explorerInsertMode := true
+      Input, findChar, T1 L1
+      Send, %findChar%
+      explorerInsertMode := false
+    return
+
+    r::
+    c::
+      Send, {F2}
+      explorerToggleInsert()
+    return
+
+    o::
+    +o::
+      Send, ^+n
+      explorerToggleInsert()
+    return
+
+    Space::
+      ControlGetFocus, focusedControl
+      If (focusedControl == "DirectUIHWND2")
+      {
+        ControlFocus, SysTreeView321, A
+      } else {
+        ControlFocus, DirectUIHWND2, A
+      }
+    return
+
+    ~Enter::
+      ControlGetFocus, focusedControl
+      If (focusedControl == "SysTreeView321")
+      {
+        Sleep, 100
+        ControlFocus, DirectUIHWND2, A
+        Send, {Down}
+        Send, {Up}
+        Send, {Right}
+        Send, {Left}
+      }
+    return
+  }
+
 
 closeAllExplorers() {
   ;SoundBeep, 1000, 500
@@ -195,26 +273,26 @@ sortExplorerByDate(){
   IfWinActive, ahk_class CabinetWClass
   {
     ;Send,{LCtrl down}{NumpadAdd}{LCtrl up} ;expand name field
-      send {alt}vo{down}{enter} ;sort by date modified, but it functions as a toggle...
-      ;tippy2("sort Explorer by date")
+    send {alt}vo{down}{enter} ;sort by date modified, but it functions as a toggle...
+    ;tippy2("sort Explorer by date")
   }
 }
 
 ; http://msdn.microsoft.com/en-us/library/bb774094
 GetActiveExplorer() {
-    static objShell := ComObjCreate("Shell.Application")
-    WinHWND := WinActive("A")    ; Active window
-    for Item in objShell.Windows
-        if (Item.HWND = WinHWND)
-            return Item        ; Return active window object
-    return -1    ; No explorer windows match active window
+  static objShell := ComObjCreate("Shell.Application")
+  WinHWND := WinActive("A") ; Active window
+  for Item in objShell.Windows
+    if (Item.HWND = WinHWND)
+      return Item ; Return active window object
+  return -1 ; No explorer windows match active window
 }
 
 NavRun(Path) {
-    if (-1 != objIE := GetActiveExplorer())
-        objIE.Navigate(Path)
-    else
-        Run, % Path
+  if (-1 != objIE := GetActiveExplorer())
+    objIE.Navigate(Path)
+  else
+    Run, % Path
 }
 
 ;******************************************************************************
@@ -229,13 +307,13 @@ toggleCapsLosck() {
 }
 bt(onOff := "On") {
   Static ps := "C:\\Users\\hasan\\dotfiles\\scripts\\ahk\\toggle_bluetooth.ps1"
-    If !FileExist(ps) {
-      MsgBox, 48, Error, File not found.`n`n%ps%
-        Return
-    } Else SoundBeep, 1500 - 500 * (onOff = "On")
-  ; RunWait, powershell -command %ps% -BluetoothStatus %onOff%,, Hide
-  RunWait, powershell -command %ps%,, Hide
-    SoundBeep, 1000 + 500 * (onOff = "On")
+  If !FileExist(ps) {
+    MsgBox, 48, Error, File not found.`n`n%ps%
+    Return
+  } Else SoundBeep, 1500 - 500 * (onOff = "On")
+    ; RunWait, powershell -command %ps% -BluetoothStatus %onOff%,, Hide
+    RunWait, powershell -command %ps%,, Hide
+  SoundBeep, 1000 + 500 * (onOff = "On")
 }
 takeScreenshot() {
   SendInput,#{PrintScreen}
@@ -259,32 +337,32 @@ voldown() {
 scroll_left() {
   MouseGetPos,,,id, fcontrol,1
   Loop 8 ; <-- Increase for faster scrolling
-  SendMessage, 0x114, 0, 0, %fcontrol%, ahk_id %id% ; 0x114 is WM_HSCROLL and the 0 after it is SB_LINERIGHT.
+    SendMessage, 0x114, 0, 0, %fcontrol%, ahk_id %id% ; 0x114 is WM_HSCROLL and the 0 after it is SB_LINERIGHT.
 }
 scroll_right() {
   MouseGetPos,,,id, fcontrol,1
   Loop 8 ; <-- Increase for faster scrolling
-  SendMessage, 0x114, 1, 0, %fcontrol%, ahk_id %id% ;  0x114 is WM_HSCROLL and the 1 after it is SB_LINELEFT.
+    SendMessage, 0x114, 1, 0, %fcontrol%, ahk_id %id% ;  0x114 is WM_HSCROLL and the 1 after it is SB_LINELEFT.
 }
 ; Long press (> 0.5 sec) on Esc closes window - but if you change your mind you can keep it pressed for 3 more seconds
 superEscape() {
-  KeyWait, Escape, T0.5                         ; Wait no more than 0.5 sec for key release (also suppress auto-repeat)
-  If ErrorLevel                                 ; timeout, so key is still down...
+  KeyWait, Escape, T0.5 ; Wait no more than 0.5 sec for key release (also suppress auto-repeat)
+  If ErrorLevel ; timeout, so key is still down...
   {
-    SoundPlay *64                               ; Play an asterisk (Doesn't work for me though!)
+    SoundPlay *64 ; Play an asterisk (Doesn't work for me though!)
     WinGet, X, ProcessName, A
     SplashTextOn,,150,,`nRelease button to close %x%`n`nKeep pressing it to NOT close window...
-    KeyWait, Escape, T3                         ; Wait no more than 3 more sec for key to be released
+    KeyWait, Escape, T3 ; Wait no more than 3 more sec for key to be released
     SplashTextOff
-    If !ErrorLevel                              ; No timeout, so key was released
+    If !ErrorLevel ; No timeout, so key was released
     {
-      PostMessage, 0x112, 0xF060,,, A           ; ...so close window
+      PostMessage, 0x112, 0xF060,,, A ; ...so close window
       Return
     }
     ; Otherwise,
     SoundPlay *64
-    KeyWait, Escape                             ; Wait for button to be released
-    Return                                      ; Then do nothing...
+    KeyWait, Escape ; Wait for button to be released
+    Return ; Then do nothing...
   }
   Send {Esc}
 }
@@ -303,27 +381,27 @@ toggleTransparency() {
 }
 decreaseTransparency() {
   WinGetActiveTitle, Title
-    WinGet, TN, Transparent, %Title%
-    if(TN == "") {
-      beep()
-      return
-    }
+  WinGet, TN, Transparent, %Title%
+  if(TN == "") {
+    beep()
+    return
+  }
 
-    if TN < 255
+  if TN < 255
     EnvAdd, TN, 5
-    WinSet, Transparent, %TN%, %Title%
+  WinSet, Transparent, %TN%, %Title%
 }
 increaseTransparency() {
   WinGetActiveTitle, Title
-    WinGet, TN, Transparent, %Title%
-    if(TN == "") {
-      beep()
-      return
-    }
+  WinGet, TN, Transparent, %Title%
+  if(TN == "") {
+    beep()
+    return
+  }
 
-    if TN > 0
+  if TN > 0
     EnvSub, TN, 5
-    WinSet, Transparent, %TN%, %Title%
+  WinSet, Transparent, %TN%, %Title%
 }
 toggleAlwaysOnTop() {
   Winset, Alwaysontop, , A
@@ -343,10 +421,10 @@ toggleAlwaysOnTop() {
 }
 getMousePos() {
   MouseGetPos, xpos, ypos
-    xy := "x" xpos " y" ypos
-    ToolTip %xy%
-    Clipboard := xy
-    SetTimer toolTipClear, -1000
+  xy := "x" xpos " y" ypos
+  ToolTip %xy%
+  Clipboard := xy
+  SetTimer toolTipClear, -1000
 }
 print(msg) {
   msgbox,,, %msg%, 1
@@ -359,30 +437,30 @@ beep() {
 }
 TaskBar_SetAttr(accent_state := 0, gradient_color := "0x01000000")
 {
-    static init, hTrayWnd, ver := DllCall("GetVersion") & 0xff < 10
-    static pad := A_PtrSize = 8 ? 4 : 0, WCA_ACCENT_POLICY := 19
+  static init, hTrayWnd, ver := DllCall("GetVersion") & 0xff < 10
+  static pad := A_PtrSize = 8 ? 4 : 0, WCA_ACCENT_POLICY := 19
 
-    if !(init) {
-        if (ver)
-            throw Exception("Minimum support client: Windows 10", -1)
-        if !(hTrayWnd := DllCall("user32\FindWindow", "str", "Shell_TrayWnd", "ptr", 0, "ptr"))
-            throw Exception("Failed to get the handle", -1)
-        init := 1
-    }
+  if !(init) {
+    if (ver)
+      throw Exception("Minimum support client: Windows 10", -1)
+    if !(hTrayWnd := DllCall("user32\FindWindow", "str", "Shell_TrayWnd", "ptr", 0, "ptr"))
+      throw Exception("Failed to get the handle", -1)
+    init := 1
+  }
 
-    accent_size := VarSetCapacity(ACCENT_POLICY, 16, 0)
-    NumPut((accent_state > 0 && accent_state < 4) ? accent_state : 0, ACCENT_POLICY, 0, "int")
+  accent_size := VarSetCapacity(ACCENT_POLICY, 16, 0)
+  NumPut((accent_state > 0 && accent_state < 4) ? accent_state : 0, ACCENT_POLICY, 0, "int")
 
-    if (accent_state >= 1) && (accent_state <= 2) && (RegExMatch(gradient_color, "0x[[:xdigit:]]{8}"))
-        NumPut(gradient_color, ACCENT_POLICY, 8, "int")
+  if (accent_state >= 1) && (accent_state <= 2) && (RegExMatch(gradient_color, "0x[[:xdigit:]]{8}"))
+    NumPut(gradient_color, ACCENT_POLICY, 8, "int")
 
-    VarSetCapacity(WINCOMPATTRDATA, 4 + pad + A_PtrSize + 4 + pad, 0)
+  VarSetCapacity(WINCOMPATTRDATA, 4 + pad + A_PtrSize + 4 + pad, 0)
     && NumPut(WCA_ACCENT_POLICY, WINCOMPATTRDATA, 0, "int")
     && NumPut(&ACCENT_POLICY, WINCOMPATTRDATA, 4 + pad, "ptr")
     && NumPut(accent_size, WINCOMPATTRDATA, 4 + pad + A_PtrSize, "uint")
-    if !(DllCall("user32\SetWindowCompositionAttribute", "ptr", hTrayWnd, "ptr", &WINCOMPATTRDATA))
-        throw Exception("Failed to set transparency / blur", -1)
-    return true
+  if !(DllCall("user32\SetWindowCompositionAttribute", "ptr", hTrayWnd, "ptr", &WINCOMPATTRDATA))
+    throw Exception("Failed to set transparency / blur", -1)
+  return true
 }
 
 ;******************************************************************************

@@ -2,6 +2,7 @@ local ok, alpha = pcall(require, 'alpha')
 if not ok then
   return
 end
+local v = vim.version()
 
 local function button(sc, txt, keybind)
   local sc_ = sc:gsub('%s', ''):gsub('SPC', '<leader>')
@@ -60,11 +61,10 @@ local options = {
       hl = 'AlphaHeader',
     },
   },
-  tag = {
+  version = {
     type = 'text',
     val = {
-      [[                                 ]],
-      [[        -- Neovim 0.8.1 --       ]],
+      string.format([[-- Neovim %s.%s.%s --]], v.major, v.minor, v.patch),
     },
     opts = {
       position = 'center',
@@ -90,7 +90,8 @@ alpha.setup({
   layout = {
     options.headerPaddingTop,
     options.header,
-    options.tag,
+    options.headerPaddingBottom,
+    options.version,
     options.headerPaddingBottom,
     options.buttons,
   },
