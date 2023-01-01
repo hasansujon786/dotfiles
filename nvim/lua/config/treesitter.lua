@@ -54,11 +54,13 @@ require('nvim-treesitter.configs').setup({
         ['aP'] = '@parameter.outer',
         ['am'] = '@class.outer',
         ['im'] = '@class.inner',
-        ['ak'] = '@block.outer',
-        ['ik'] = '@block.inner',
         ['aM'] = '@comment.outer',
         ['in'] = '@conditional.inner',
         ['an'] = '@conditional.outer',
+        ['ak'] = '@pair.outer',
+        ['ik'] = '@pair.inner',
+        ['aL'] = '@block.outer',
+        ['iL'] = '@block.inner',
         -- @loop.inner
         -- @loop.outer
       },
