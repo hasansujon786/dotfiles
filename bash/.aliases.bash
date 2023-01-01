@@ -34,28 +34,29 @@ alias ta="tmux attach"
 alias wtt='wt -w 0 nt -d .'
 alias rgb='wt -w 0 nt -p PowerShell powershell -c rgb-tui'
 
-# React native
+# Android
 alias grc="./gradlew clean"
-alias grrc="cd android && ./gradlew clean && cd .."
-alias bure='cd android && ./gradlew bundleRelease'
-alias asre='cd android && ./gradlew assembleRelease'
-alias asde='cd android && ./gradlew assembleDebug'
+alias bure='./gradlew bundleRelease'
+alias asre='./gradlew assembleRelease'
+alias asde='./gradlew assembleDebug'
 alias inre='react-native run-android --variant=release'
 
 # Flutter
 alias flr='flutter run'
-alias flrp='flutter run -d "192.168.31.252"'
+alias flrp='flutter run -d "$MY_PHONE_IP"'
 alias fll='flutter clean'
 alias flc='flutter create'
 alias flcs='flutter create -t skeleton'
 alias fob='cd build/app/outputs/flutter-apk && explorer .'
 
 #adb
-alias acc='adb connect 192.168.31.252 && adb devices'
+alias acc='adb connect $MY_PHONE_IP && adb devices'
+alias acd='adb disconnect $MY_PHONE_IP && adb devices'
+alias adk='adb kill-server'
 alias add='adb devices'
 alias arr='~/dotfiles/scripts/abd_wifi.sh'
 alias scr='scrcpy'
-alias scc='scrcpy -s 192.168.31.252'
+alias scc='scrcpy -s $MY_PHONE_IP'
 alias scc2='scrcpy -s f8a8aa489804'
 
 # handy short cuts #
