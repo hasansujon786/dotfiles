@@ -43,10 +43,10 @@ $Escape::superEscape()
 #p::AppsKey
 PrintScreen::#+s
 #`::takeScreenshot()
-#q::bt()bt()
-#^b::bt()
-#m::quake_nvim(false)
+#q::bt()
+#+q::bt()bt()
 #y::quake_nvim(true)
+#+y::quake_nvim(false)
 ;Transparency toggle,
 #o::toggleTransparency()
 #^.::increaseTransparency()
@@ -183,73 +183,72 @@ explorerToggleInsert() {
 }
 
 #If WinActive("ahk_class CabinetWClass") && explorerInsertMode
-  {
-    Esc::
-    ~Enter::
-      explorerToggleInsert()
-    return
-  }
+  Esc::
+  ~Enter::
+    explorerToggleInsert()
+  return
+#If
 
 #If WinActive("ahk_class CabinetWClass") && !explorerInsertMode
-  {
-    i:: explorerToggleInsert()
-    j:: Send, {Down}
-    k:: Send, {Up}
-    h:: Send, {Left}
-    l:: Send, {Right}
-    ^u:: Send, {PgUp}
-    ^d:: Send, {PgDn}
-    +h:: Send, !{Up}
-    +l:: Send, !{Left}
-    q:: Send, !{F4}
-    /:: Send, ^f
-    x:: Send, {Delete}
-    u:: Send, ^z
-    ^r:: Send, ^y
+  i:: explorerToggleInsert()
+  j:: Send, {Down}
+  k:: Send, {Up}
+  h:: Send, {Left}
+  l:: Send, {Right}
+  ^u:: Send, {PgUp}
+  ^d:: Send, {PgDn}
+  +h:: Send, !{Up}
+  +l:: Send, !{Left}
+  g:: Send, {Home}
+  +g:: Send, {End}
+  q:: Send, !{F4}
+  /:: Send, ^f
+  x:: Send, {Delete}
+  u:: Send, ^z
+  ^r:: Send, ^y
 
-    f::
-      explorerInsertMode := true
-      Input, findChar, T1 L1
-      Send, %findChar%
-      explorerInsertMode := false
-    return
+  f::
+    explorerInsertMode := true
+    Input, findChar, T1 L1
+    Send, %findChar%
+    explorerInsertMode := false
+  return
 
-    r::
-    c::
-      Send, {F2}
-      explorerToggleInsert()
-    return
+  r::
+  c::
+    Send, {F2}
+    explorerToggleInsert()
+  return
 
-    o::
-    +o::
-      Send, ^+n
-      explorerToggleInsert()
-    return
+  o::
+  +o::
+    Send, ^+n
+    explorerToggleInsert()
+  return
 
-    Space::
-      ControlGetFocus, focusedControl
-      If (focusedControl == "DirectUIHWND2")
-      {
-        ControlFocus, SysTreeView321, A
-      } else {
-        ControlFocus, DirectUIHWND2, A
-      }
-    return
+  Space::
+    ControlGetFocus, focusedControl
+    If (focusedControl == "DirectUIHWND2")
+    {
+      ControlFocus, SysTreeView321, A
+    } else {
+      ControlFocus, DirectUIHWND2, A
+    }
+  return
 
-    ~Enter::
-      ControlGetFocus, focusedControl
-      If (focusedControl == "SysTreeView321")
-      {
-        Sleep, 100
-        ControlFocus, DirectUIHWND2, A
-        Send, {Down}
-        Send, {Up}
-        Send, {Right}
-        Send, {Left}
-      }
-    return
-  }
-
+  ~Enter::
+    ControlGetFocus, focusedControl
+    If (focusedControl == "SysTreeView321")
+    {
+      Sleep, 100
+      ControlFocus, DirectUIHWND2, A
+      Send, {Down}
+      Send, {Up}
+      Send, {Right}
+      Send, {Left}
+    }
+  return
+#If
 
 closeAllExplorers() {
   ;SoundBeep, 1000, 500
@@ -486,14 +485,16 @@ rebootMiWiFi() {
 quake_nvim(copy := false) {
   Static ps := "C:\\Users\\hasan\\dotfiles\\scripts\\ahk\\quaka.ps1"
   Static file := "C:\\Users\\hasan\\dotfiles\\scripts\\ahk\\clip.txt"
-  IfWinActive, quake_nvim
-  {
+  if WinActive("quake_nvim") {
     FileRead, file_content, %file%
     Clipboard := file_content
     file_content := ""
     WinClose ; alternateTab()
-    FileDelete, %file%
     return
+  }
+
+  if !WinActive("quake_nvim") {
+    FileDelete, %file%
   }
 
   ; copy contents from current focused input

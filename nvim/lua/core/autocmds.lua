@@ -16,13 +16,19 @@ utils.augroup('MY_AUGROUP')(function(autocmd)
   autocmd('FileType', 'setl foldmarker={,}', { pattern = { 'css', 'scss', 'json' } })
   autocmd({ 'BufNewFile', 'BufRead' }, 'setl filetype=jsonc', { pattern = { '*.json', 'tsconfig.json' } })
 
-  autocmd('BufReadPost', vim.fn['hasan#autocmd#restore_position'])
   autocmd('TermOpen', 'setfiletype terminal | set bufhidden=hide')
   autocmd('BufLeave', 'normal! mK', { pattern = '*.txt' })
   autocmd('BufWritePre', vim.fn['hasan#autocmd#trimWhitespace'], { pattern = { '*.vim', '*.lua', '*.org', '*.ahk' } })
   autocmd('FileType', 'setlocal nonumber norelativenumber signcolumn=no', { pattern = 'log' })
   autocmd({ 'BufWinEnter', 'WinEnter' }, 'normal Gzz', { pattern = '__FLUTTER_DEV_LOG__' })
   autocmd({ 'FocusGained', 'BufEnter', 'CursorHold' }, ':silent! checktime')
+  autocmd('BufReadPost', function()
+    local mark = vim.api.nvim_buf_get_mark(0, '"')
+    local lcount = vim.api.nvim_buf_line_count(0)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end)
 
   autocmd('BufDelete', 'silent! call remove(g:hasan_telescope_buffers, expand("<abuf>"))')
   autocmd({ 'BufWinEnter', 'WinEnter' }, 'let g:hasan_telescope_buffers[bufnr()] = reltimefloat(reltime())')
