@@ -15,11 +15,10 @@ function M.input(title, win_config, opts)
     relative = 'cursor',
     position = { row = 2, col = 0 },
     size = text_width > min_width and text_width or min_width,
-    border = utils.get_default(win_config.border, {
+    border = {
       style = ui.border.style,
-      highlight = ui.border.highlight,
-      text = { top = Text(title, ui.border.text.highlight), top_align = ui.border.text.align },
-    }),
+      text = title and { top = Text(title, ui.border.text.highlight), top_align = ui.border.text.align },
+    },
     win_options = {
       sidescrolloff = 0,
       winhighlight = 'Normal:Normal',
@@ -109,6 +108,9 @@ function M.menu(list, opts)
 end
 
 function M.rename_current_file()
+  local config = require('nebulous.configs')
+  config.pause(100)
+
   if not vim.bo.modifiable or vim.bo.readonly then
     vim.notify('This file is readonly', vim.log.levels.WARN)
     return
@@ -116,14 +118,14 @@ function M.rename_current_file()
 
   local currNameFileName = vim.fn.expand('%:t')
 
-  M.input('Rename File', {
+  M.input(nil, {
     relative = 'win',
     size = 25,
     border = { style = { '', '', '', '▏', '', '', '', '▏' } },
     position = { row = -1, col = 0 },
     win_options = {
       sidescrolloff = 0,
-      winhighlight = 'Normal:NormalFloatFlat',
+      winhighlight = 'Normal:NormalFloatFlat,FloatBorder:KisslineWinbarIndicatorActive',
     },
   }, {
     default_value = currNameFileName,

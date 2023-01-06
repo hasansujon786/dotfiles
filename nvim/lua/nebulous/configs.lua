@@ -2,10 +2,10 @@ local M = {}
 
 M.default = {
   init_wb_with_disabled = false,
+  nb_is_disabled = false,
+  is_win_blur_disabled = false,
   on_focus = nil,
   on_blur = nil,
-  nb_is_disabled = true,
-  is_win_blur_disabled = true,
   nb_blacklist_filetypes = {
     fern = true,
     NvimTree = true,
@@ -40,6 +40,20 @@ M.options = M.default
 
 M.updateConfigs = function(opts)
   M.options = opts
+end
+
+M.resume = function()
+  M.options.is_win_blur_disabled = false
+end
+
+M.pause = function(time)
+  M.options.is_win_blur_disabled = true
+
+  if time ~= nil and time > 1 then
+    vim.defer_fn(function()
+      M.resume()
+    end, time)
+  end
 end
 
 return M
