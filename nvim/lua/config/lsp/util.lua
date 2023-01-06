@@ -74,7 +74,7 @@ M.lspRename = function()
   -- end
   local currName = vim.fn.expand('<cword>')
 
-  require('hasan.utils.ui').input('Rename', {
+  require('hasan.utils.ui').input('Rename', {}, {
     default_value = currName,
     on_submit = function(newName)
       if #newName > 0 and newName ~= currName then

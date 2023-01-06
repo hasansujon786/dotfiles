@@ -7,27 +7,26 @@ local ui = require('core.state').ui
 
 local M = {}
 
-function M.input(title, opts)
-  local widht = 25
-  local text_width = opts.default_value and string.len(opts.default_value) + 1 or widht
+function M.input(title, win_config, opts)
+  local min_width = 26
+  local text_width = win_config.default_value and string.len(win_config.default_value) + 1 or min_width
 
-  local input = Input({
+  win_config = utils.merge({
     relative = 'cursor',
-    position = { row = 1, col = 0 },
-    size = utils.get_default(opts.size, text_width > widht and text_width or widht),
-    border = {
+    position = { row = 2, col = 0 },
+    size = text_width > min_width and text_width or min_width,
+    border = utils.get_default(win_config.border, {
       style = ui.border.style,
       highlight = ui.border.highlight,
-      text = {
-        top = Text(title, ui.border.text.highlight),
-        top_align = ui.border.text.align,
-      },
-    },
+      text = { top = Text(title, ui.border.text.highlight), top_align = ui.border.text.align },
+    }),
     win_options = {
       sidescrolloff = 0,
       winhighlight = 'Normal:Normal',
     },
-  }, opts)
+  }, win_config or {})
+
+  local input = Input(win_config, opts)
   -- mount/open the component
   input:mount()
 
@@ -35,7 +34,8 @@ function M.input(title, opts)
   input:map('n', '<Esc>', input.input_props.on_close, { noremap = true })
   input:map('i', '<C-c>', input.input_props.on_close, { noremap = true })
   input:map('n', '<C-c>', input.input_props.on_close, { noremap = true })
-
+  input:map('i', '<C-w>', '<C-o>ciw', { noremap = true })
+  input:map('i', '<A-BS>', '<C-o>ciw', { noremap = true })
   -- unmount component when cursor leaves buffer
   input:on(event.BufLeave, function()
     input:unmount()
@@ -109,9 +109,23 @@ function M.menu(list, opts)
 end
 
 function M.rename_current_file()
+  if not vim.bo.modifiable or vim.bo.readonly then
+    vim.notify('This file is readonly', vim.log.levels.WARN)
+    return
+  end
+
   local currNameFileName = vim.fn.expand('%:t')
 
   M.input('Rename File', {
+    relative = 'win',
+    size = 25,
+    border = { style = { '', '', '', '▏', '', '', '', '▏' } },
+    position = { row = -1, col = 0 },
+    win_options = {
+      sidescrolloff = 0,
+      winhighlight = 'Normal:NormalFloatFlat',
+    },
+  }, {
     default_value = currNameFileName,
     on_submit = function(newName)
       if string.len(newName) > 0 then
@@ -125,7 +139,7 @@ function M.substitute_word()
   local isVisual = require('hasan.utils').is_visual_mode()
   local curWord = isVisual and require('hasan.utils').get_visual_selection() or vim.fn.expand('<cword>')
 
-  M.input('Substitute Word', {
+  M.input('Substitute Word', {}, {
     -- TODO: <08.10.22> fix lazy lolading
     default_value = curWord,
     on_submit = function(newWord)
