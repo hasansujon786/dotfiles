@@ -108,14 +108,12 @@ function M.menu(list, opts)
 end
 
 function M.rename_current_file()
-  local config = require('nebulous.configs')
-  config.pause(100)
-
   if not vim.bo.modifiable or vim.bo.readonly then
     vim.notify('This file is readonly', vim.log.levels.WARN)
     return
   end
 
+  require('nebulous.configs').pause(100)
   local currNameFileName = vim.fn.expand('%:t')
 
   M.input(nil, {
