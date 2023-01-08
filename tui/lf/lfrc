@@ -92,6 +92,10 @@ map Zu %{{ unzip $Env:f }}
 # - Navigation Shortcut                                                     -
 # ---------------------------------------------------------------------------
 
+# Currant project navigation
+map -- jump-to-git-root
+map -a %lf -remote "send $id cd $(git rev-parse --show-toplevel)/build/app/outputs/"
+
 map .. cd ~/Desktop
 map .c cd C:\\ windows
 map .d cd D:\\ work
@@ -105,14 +109,11 @@ map gm cd ~/Music
 map gD cd ~/Documents
 map gr cd D:\\repoes
 
-# Currant project navigation
-map -- jump-to-git-root
-map -a %lf -remote "send $id cd $(git rev-parse --show-toplevel)/build/app/outputs/"
-
 map ga. cd ~/AppData
 map gan cd ~/AppData/Local/nvim-data
-map gak cd ~/AppData/Local/Packages/Microsoft.ScreenSketch_8wekyb3d8bbwe/TempState
-map gas cd ~/AppData/Roaming/Microsoft/Windows/Start\ Menu/Programs/Startup
+map gaN cd ~/AppData/Local/Temp/nvim
+map gas cd ~/AppData/Local/Packages/Microsoft.ScreenSketch_8wekyb3d8bbwe/TempState
+map gaM cd ~/AppData/Roaming/Microsoft/Windows/Start\ Menu/Programs/Startup
 
 # ---------------------------------------------------------------------------
 # - Custom commands                                                         -
