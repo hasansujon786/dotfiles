@@ -28,8 +28,6 @@ function M.configure_dap_ui()
   vim.fn.sign_define('DapBreakpoint', dap_sign.breakpoint)
   vim.fn.sign_define('DapBreakpointRejected', dap_sign.rejected)
   vim.fn.sign_define('DapBreakpointCondition', dap_sign.bcondition)
-
-  -- - `DapLogPoint` for log points (default: `L`)
 end
 
 function M.configure_virtual_text()
@@ -38,7 +36,8 @@ end
 
 local function configure_debuggers()
   local dap = require('dap')
-  require('config.dap.node').setup(dap)
+  require('config.dap.typescript').setup(dap)
+  -- require('config.dap.node').setup(dap)
   -- require('config.dap.lua').setup()
 end
 

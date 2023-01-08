@@ -196,6 +196,7 @@ return {
     config = function() require('config.dap').setup() end,
     dependencies = {
       'nvim-telescope/telescope-dap.nvim',
+      'mxsdev/nvim-dap-vscode-js',
       { 'rcarriga/nvim-dap-ui', config = function() require('config.dap').configure_dap_ui() end },
       { 'theHamsta/nvim-dap-virtual-text', config = function() require('config.dap').configure_virtual_text() end },
       -- 'jbyuki/one-small-step-for-vimkind',

@@ -5,6 +5,7 @@ alias ya='yarn android'
 alias ys='yarn start'
 alias yd='yarn dev'
 # npm
+alias no="NODE_OPTIONS='--inspect'"
 alias ni='node --inspect '
 alias ns='npm start'
 alias nd='npm run dev'
