@@ -7,6 +7,10 @@ local ui = require('core.state').ui
 
 local M = {}
 
+function M.telescope_cursor_theme_pre()
+  _G.topts = require('telescope.themes').get_cursor()
+end
+
 function M.input(title, win_config, opts)
   local min_width = 26
   local text_width = win_config.default_value and string.len(win_config.default_value) + 1 or min_width
@@ -89,7 +93,7 @@ function M.menu(list, opts)
     keymap = {
       focus_next = { 'j', '<Down>', '<Tab>' },
       focus_prev = { 'k', '<Up>', '<S-Tab>' },
-      close = { '<Esc>', '<C-c>' },
+      close = { '<Esc>', '<C-c>', 'q' },
       submit = { '<CR>', '<Space>' },
     },
     on_close = opts.on_close,
@@ -140,13 +144,12 @@ function M.substitute_word()
   local curWord = isVisual and require('hasan.utils').get_visual_selection() or vim.fn.expand('<cword>')
 
   M.input('Substitute Word', {}, {
-    -- TODO: <08.10.22> fix lazy lolading
     default_value = curWord,
     on_submit = function(newWord)
       local cmd = isVisual and '%s/' .. curWord .. '/' .. newWord .. '/gc'
         or '%s/\\<' .. curWord .. '\\>/' .. newWord .. '/gc'
 
-      feedkeys(':<C-u>' .. cmd .. '<CR>', 'n')
+      feedkeys('<Cmd>' .. cmd .. '<CR>', 'n')
       vim.fn.setreg('z', cmd)
     end,
   })

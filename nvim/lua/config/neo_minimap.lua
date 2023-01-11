@@ -21,7 +21,7 @@ nm.setup_defaults({
 -- nm.source_on_save('~\dotfiles\nvim\lua\config\neo_minimap.lua')
 
 -- Lua
-nm.set({ 'zi', 'zo', 'zu' }, '*.lua', {
+nm.set({ 'zo', 'zi', 'zu' }, '*.lua', {
   events = { 'BufEnter' },
   query = {
     [[
@@ -69,7 +69,7 @@ nm.set({ 'zi', 'zo', 'zu' }, '*.lua', {
 -- })
 
 -- Typescript React
-nm.set('zi', { 'typescriptreact', 'javascriptreact', 'javascript' }, {
+nm.set('zo', { 'typescriptreact', 'javascriptreact', 'javascript' }, {
   query = [[
   ;; query
   ((function_declaration) @cap) ;; matches function declarations
@@ -78,7 +78,7 @@ nm.set('zi', { 'typescriptreact', 'javascriptreact', 'javascript' }, {
   ]],
 })
 
-nm.set('zi', { 'dart' }, {
+nm.set('zo', { 'dart' }, {
   query = [[
   ;; query
   ((function_signature) @cap) ;; matches function declarations

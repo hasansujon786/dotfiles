@@ -126,8 +126,8 @@ keymap('n', 'cm', ':%s/<c-r>///g<Left><Left>', noSilent) -- Change all matches w
 keymap('n', 'dm', ':%s/<c-r>///g<CR>', noSilent) -- Delete all matches
 keymap('n', 'dM', ':%g/<c-r>//d<CR>', noSilent) -- Delete all lines with matches
 
-keymap({ 'n', 'v' }, 'g/', '<ESC>/\\%V', noSilent) -- search in visual selection
-keymap('n', 'z/', function() -- search in visible viewport
+keymap({ 'n', 'v' }, 'z/', '<ESC>/\\%V', noSilent) -- search in visual selection
+keymap('n', 'Z/', function() -- search in visible viewport
   local scrolloff = vim.wo.scrolloff
   vim.wo.scrolloff = 0
   feedkeys('VHoLo0<Esc>/\\%V')

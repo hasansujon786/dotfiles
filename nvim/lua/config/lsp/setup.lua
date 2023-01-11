@@ -57,7 +57,7 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', 'gy', vim.lsp.buf.type_definition, withDesc('Lsp: type definition'))
 
   keymap('n', 'K', vim.lsp.buf.hover, withDesc('Lsp: hover under cursor'))
-  keymap('n', 'go', '<cmd>Telescope lsp_document_symbols<cr>', withDesc('Lsp: document symbols'))
+  keymap('n', 'g/', '<cmd>Telescope lsp_document_symbols<cr>', withDesc('Lsp: document symbols'))
   -- keymap('n', 'gpI', require('config.lsp.peek').PeekImplementation, opts)
   keymap('n', '<F2>', require('config.lsp.util').lspRename, withDesc('Lsp: rename under cursor'))
   keymap({ 'i', 'n' }, '<C-k>h', function()

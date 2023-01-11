@@ -22,11 +22,11 @@ M.install_essential_servers = function()
 end
 
 M.code_action = function()
-  _G.topts = require('telescope.themes').get_cursor()
+  require('hasan.utils.ui').telescope_cursor_theme_pre()
   vim.lsp.buf.code_action()
 end
 M.range_code_action = function()
-  _G.topts = require('telescope.themes').get_cursor()
+  require('hasan.utils.ui').telescope_cursor_theme_pre()
   vim.lsp.buf.range_code_action()
 end
 
