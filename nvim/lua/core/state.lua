@@ -12,4 +12,10 @@ M.ui = {
   },
 }
 
+_G.state = {
+  file = {
+    format_on_save = true,
+  },
+}
+
 return M

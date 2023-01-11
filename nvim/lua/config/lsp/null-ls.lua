@@ -20,5 +20,21 @@ local sources = {
   -- }),
   -- b.diagnostics.todo_comments
 }
+local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+local on_attach = function(client, bufnr)
+  if client.supports_method('textDocument/formatting') then
+    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      group = augroup,
+      buffer = bufnr,
+      callback = function()
+        if not state.file.format_on_save then
+          return
+        end
+        vim.lsp.buf.format({ bufnr = bufnr }) -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+      end,
+    })
+  end
+end
 
-null_ls.setup({ sources = sources })
+null_ls.setup({ sources = sources, on_attach = on_attach })

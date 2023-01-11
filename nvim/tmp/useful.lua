@@ -221,3 +221,14 @@ function Focus_with_outline(count)
   end
 end
 -- keymap('n', '<cr>', '<cmd>lua Focus_with_outline(vim.v.count)<cr>')
+
+-- vim.o.foldcolumn = '1'
+-- vim.o.foldlevel = 99
+-- vim.o.foldlevelstart = 99
+-- vim.o.foldenable = true
+-- vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+-- vim.o.statuscolumn = '%C%=%l%s'
+-- vim.o.foldnestmax = 1
+
+-- vim.o.statuscolumn = ' %=%@NumCb@%{v:relnum?v:relnum:v:lnum}%s'
+-- vim.o.statuscolumn="%=%T%@NumCb@%r%@SignCb@%s%T"
