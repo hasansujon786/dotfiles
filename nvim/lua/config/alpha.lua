@@ -4,28 +4,27 @@ if not ok then
 end
 local v = vim.version()
 
-local function button(sc, txt, keybind)
-  local sc_ = sc:gsub('%s', ''):gsub('SPC', '<leader>')
-
+local function button(map, sc, desc, cmd)
   local opts = {
     position = 'center',
-    text = txt,
+    text = desc,
     shortcut = sc,
     cursor = 5,
     width = 38,
     align_shortcut = 'right',
     hl = 'AlphaButtons',
+    hl_shortcut = 'AlphaShourtCut',
   }
 
-  if keybind then
-    opts.keymap = { 'n', sc_, keybind, { noremap = true, silent = true } }
+  if cmd then
+    opts.keymap = { 'n', map, cmd, { noremap = true, silent = true } }
   end
 
   return {
     type = 'button',
-    val = txt,
+    val = desc,
     on_press = function()
-      local key = vim.api.nvim_replace_termcodes(sc_, true, false, true) or ''
+      local key = vim.api.nvim_replace_termcodes(map, true, false, true) or ''
       vim.api.nvim_feedkeys(key, 'normal', false)
     end,
     opts = opts,
@@ -74,11 +73,16 @@ local options = {
   buttons = {
     type = 'group',
     val = {
-      button('SPC p r', '  Recent File', ':lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>'),
-      button('SPC p l', '  Load session', ':SessionLoad<CR>'),
-      button('SPC f f', '  Find Files', ':Telescope find_files<CR>'),
-      button('SPC o t', '  Open terminal', ':FloatermNew --wintype=normal --height=10<CR>'),
-      button('SPC v s', '  Settings', ':e $MYVIMRC | :cd ~/dotfiles/ <CR>'),
+      button(
+        '<leader>pr',
+        ' SPC P R ',
+        '  Recent File',
+        '<cmd>lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>'
+      ),
+      button('<leader>pl', ' SPC P L ', '  Load session', '<cmd>SessionLoad<CR>'),
+      button('<leader>ff', ' SPC F F ', '  Find Files', '<cmd>Telescope find_files<CR>'),
+      button('<leader>ot', ' SPC O T ', '  Open terminal', '<cmd>FloatermNew --wintype=normal --height=10<CR>'),
+      button('<leader>vs', ' SPC V S ', '  Settings', '<cmd>e ~/dotfiles/nvim/lua/core/state.lua<CR>'),
     },
     opts = { spacing = 1 },
   },

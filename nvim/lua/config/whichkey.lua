@@ -127,7 +127,7 @@ local leader = {
     t = { '<cmd>call _#Insertion(strftime("%H:%M"))<CR>',                'Current time' },
     f = { '<cmd>call _#Insertion(expand("%:~"))<CR>',                    'Current file path' },
     F = { '<cmd>call _#Insertion(expand("%:t"))<CR>',                    'Current file name' },
-    e = { '<cmd>lua require("hasan.telescope.custom").emojis()<CR>', 'Insert emoji' },
+    e = { '<cmd>lua require("hasan.telescope.custom").emojis()<CR>',     'Insert emoji' },
     l = {
       t = { '<cmd>call _#Insertion(hasan#utils#placeholderImgTag("300x200"))<CR>', 'Placeholder image tag' },
       k = { '<cmd>call _#Insertion("https://placekitten.com/g/50/50")<CR>',        'Sample image link' },
@@ -217,9 +217,9 @@ local leader = {
     t = { '<cmd>lua require("hasan.telescope.custom").search_project_todos()<CR>','Search project todos' },
     -- b = { '<cmd>Telescope file_browser prompt_title=Project\\ Browser cwd=~/repoes<CR>',  'Browse other projects' },
 
-    d = { '<cmd>Alpha<CR>',                             'Open dashboard' },
-    l = { '<cmd>SessionLoad<CR>',                       'Load session' },
-    s = { '<cmd>SessionSave<CR>',                       'Save session' },
+    d = { '<cmd>Alpha<CR>',                                               'Open dashboard' },
+    l = { '<cmd>SessionLoad<CR>',                                         'Load session' },
+    s = { '<cmd>SessionSave<CR>',                                         'Save session' },
     m = { '<cmd>lua require("config.persisted").loadSession()<CR>',       'Show session menu' },
     z = { '<cmd>lua require("config.persisted").sessionSaveAndQuit()<CR>','Save session and quit' },
   },
@@ -251,12 +251,13 @@ local leader = {
 
   v = {
     name = '+vim',
-    ['/'] = { '<cmd>Telescope help_tags<CR>',              'Search Vim help' },
-    ['.'] = { '<cmd>echo "Not a Vim file"<CR>',            'Source this file' },
-    l = { '<cmd>call logevents#LogEvents_Toggle()<CR>',    'Toggle LogEvents' },
-    R = { '<cmd>ReloadConfig<CR>',                         'Reload neovim' },
-    H = { '<cmd>silent write | edit | TSBufEnable highlight<CR>', 'Reload hightlight' },
-    p = { '<cmd>Lazy home<CR>',            'Plugin status' },
+    ['/'] = { '<cmd>Telescope help_tags<CR>',                                'Search Vim help' },
+    ['.'] = { '<cmd>echo "Not a Vim file"<CR>',                              'Source this file' },
+    l = { '<cmd>call logevents#LogEvents_Toggle()<CR>',                      'Toggle LogEvents' },
+    R = { '<cmd>ReloadConfig<CR>',                                           'Reload neovim' },
+    H = { '<cmd>silent write | edit | TSBufEnable highlight<CR>',            'Reload hightlight' },
+    p = { '<cmd>Lazy home<CR>',                                              'Plugin status' },
+    s = { '<cmd>e ~/dotfiles/nvim/lua/core/state.lua<CR>',                   'Open settings'},
     P = { '<cmd>lua require("hasan.telescope.custom").search_plugins()<CR>', 'Search plugin files'},
   },
 
