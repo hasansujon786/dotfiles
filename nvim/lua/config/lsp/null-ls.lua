@@ -28,7 +28,7 @@ local on_attach = function(client, bufnr)
       group = augroup,
       buffer = bufnr,
       callback = function()
-        if not state.file.format_on_save then
+        if not state.file.format_save then
           return
         end
         vim.lsp.buf.format({ bufnr = bufnr }) -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead

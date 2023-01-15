@@ -171,7 +171,7 @@ local leader = {
     ['.'] = { ':Telescope find_files cwd=<C-R>=expand("%:h")<CR><CR>',              'Find file from here' },
 
     i = { '<cmd>call hasan#utils#file_info()<CR>',                       'Show file info' },
-    s = { '<cmd>call hasan#utils#buffer#_save()<cr>',                    'Save current file' },
+    s = { '<cmd>silent w<cr>',                                           'Save current file' },
     S = { '<cmd>wa<CR>',                                                 'Save all file' },
     y = { '<cmd>call hasan#utils#CopyFileNameToClipBoard(1)<CR>',        'Yank path name' },
     Y = { '<cmd>call hasan#utils#CopyFileNameToClipBoard(0)<CR>',        'Yank file name' },
@@ -284,7 +284,7 @@ local leader = {
   q = { '<cmd>Quit<CR>',                                               'Close window' },
   r = { '<cmd>lua require("hasan.utils.ui").cycle_numbering()<CR>',    'Cycle number' },
   R = { '<cmd>lua require("nebulous").toggle_win_blur()<CR>',          'Toggle Nebulous' },
-  s = { '<cmd>call hasan#utils#buffer#_save()<cr>',                    'Save file' },
+  s = { '<cmd>silent w<cr>',                                           'Save current file' },
   x = { '<cmd>call hasan#utils#buffer#_open_scratch_buffer()<CR>',     'Scratch buffer' },
   M = { '<cmd>lua require("harpoon.mark").add_file()<CR>',             'Mark to Harpoon' },
 

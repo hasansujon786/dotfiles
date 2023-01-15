@@ -59,6 +59,15 @@ function M.join_paths(...) -- Function from nvim-lspconfig
   return result
 end
 
+function M.smart_save_buffer()
+  if state.file.format_save then
+    vim.cmd([[silent noa write]])
+  else
+    vim.lsp.buf.format({ async = false })
+    vim.cmd([[silent write]])
+  end
+end
+
 return M
 
 -- del lines            %s/\v(print).*/
