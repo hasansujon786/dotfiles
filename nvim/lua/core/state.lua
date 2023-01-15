@@ -14,7 +14,7 @@ M.ui = {
 
 _G.state = {
   file = {
-    format_on_save = true,
+    format_save = true,
   },
 }
 

@@ -56,8 +56,8 @@ PrintScreen::#+s
 ; ~RButton & WheelDown::scroll_right()
 ; Change Volume:
 #If MouseIsOver("ahk_class Shell_TrayWnd")
-  WheelUP::volup()
-  WheelDown::voldown()
+  ~LAlt & WheelUP::volup()
+  ~LAlt & WheelDown::voldown()
 #If
 ; Explorer
 f1::switchToExplorer()
