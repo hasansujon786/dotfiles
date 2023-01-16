@@ -19,7 +19,6 @@ o.spellfile = '~/dotfiles/nvim/spell/en.utf-8.add'
 -- Controls
 o.mouse = 'a'
 opt.backspace = { 'eol', 'start', 'indent' } --  Configure backspace so it acts as it should act
-opt.path:append({ '**' })
 -- o.clipboard = "unnamedplus"
 
 -- o.lazyredraw = true --                           Don't redraw while executing macros (good performance config)
@@ -118,6 +117,9 @@ o.infercase = true
 o.hlsearch = true
 o.incsearch = true --                            Show where the pattern, as it was typed.
 o.inccommand = 'nosplit' --                      Interactive find replace preview
+o.grepprg = [[rg --hidden --smart-case --vimgrep]]
+opt.path:append({ '**' })
+-- opt.grepformat = { '%f:%l:%c:%m' }
 
 -- Text appearance
 o.list = true

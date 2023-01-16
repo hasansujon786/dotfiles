@@ -51,16 +51,17 @@ alias flcs='flutter create -t skeleton'
 alias fob='cd build/app/outputs/flutter-apk && explorer .'
 
 #adb
-alias acc='adb connect $MY_PHONE_IP && adb devices'
-alias acd='adb disconnect $MY_PHONE_IP && adb devices'
 alias adk='adb kill-server'
 alias add='adb devices'
 alias adu='adb uninstall'
+alias ada='adb disconnect'
+alias adc='~/dotfiles/scripts/device_cmd.sh adb disconnect'
+alias acc='~/dotfiles/scripts/device_cmd.sh adb connect'
 alias adlp='adb shell pm list packages' # adb shell pm list packages -f -3
 alias arr='~/dotfiles/scripts/abd_wifi.sh'
 alias scr='scrcpy'
-alias scc='scrcpy -s $MY_PHONE_IP'
-alias scc2='scrcpy -s f8a8aa489804'
+alias scc='~/dotfiles/scripts/device_cmd.sh scrcpy -s'
+alias sccl='scrcpy -s f8a8aa489804'
 
 # handy short cuts #
 alias bashrc="vim ~/dotfiles/bash/.bashrc"
