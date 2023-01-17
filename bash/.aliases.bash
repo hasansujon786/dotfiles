@@ -55,12 +55,12 @@ alias adk='adb kill-server'
 alias add='adb devices'
 alias adu='adb uninstall'
 alias ada='adb disconnect'
-alias adc='~/dotfiles/scripts/device_cmd.sh adb disconnect'
-alias acc='~/dotfiles/scripts/device_cmd.sh adb connect'
+alias adc='~/dotfiles/scripts/ld.sh "adb disconnect"'
+alias acc='~/dotfiles/scripts/ld.sh "adb connect"'
 alias adlp='adb shell pm list packages' # adb shell pm list packages -f -3
 alias arr='~/dotfiles/scripts/abd_wifi.sh'
 alias scr='scrcpy'
-alias scc='~/dotfiles/scripts/device_cmd.sh scrcpy -s'
+alias scc='~/dotfiles/scripts/ld.sh.sh "scrcpy -s"'
 alias sccl='scrcpy -s f8a8aa489804'
 
 # handy short cuts #
