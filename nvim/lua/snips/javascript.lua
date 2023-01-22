@@ -36,4 +36,37 @@ ls.add_snippets('javascript', {
     )
   ),
   s('cn', fmt([[className='{}']], { i(0) })),
+  s(
+    'fetchthen',
+    fmt(
+      [[
+      fetch({})
+        .then((response) => response.json())
+        .then((json) => {{
+          console.log(json)
+        }})
+        .catch((error) => console.error(error))
+      ]],
+      {
+        i(1, "'api-endpoint'"),
+      }
+    )
+  ),
+  s(
+    'fetchtry',
+    fmt(
+      [[
+      try {{
+        var res = await fetch({})
+        var data = res.json()
+        console.log(data)
+      }} catch (error) {{
+        console.log(error)
+      }}
+      ]],
+      {
+        i(1, "'api-endpoint'"),
+      }
+    )
+  ),
 }, { key = 'my_js_snips' })

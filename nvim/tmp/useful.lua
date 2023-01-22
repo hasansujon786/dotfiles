@@ -232,3 +232,37 @@ end
 
 -- vim.o.statuscolumn = ' %=%@NumCb@%{v:relnum?v:relnum:v:lnum}%s'
 -- vim.o.statuscolumn="%=%T%@NumCb@%r%@SignCb@%s%T"
+
+---- https://www.reddit.com/r/neovim/comments/10fpqbp/gist_statuscolumn_separate_diagnostics_and/
+--local M = {}
+--_G.Status = M
+-----@return {name:string, text:string, texthl:string}[]
+--function M.get_signs()
+--  local buf = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
+--  return vim.tbl_map(function(sign)
+--    return vim.fn.sign_getdefined(sign.name)[1]
+--  end, vim.fn.sign_getplaced(buf, { group = '*', lnum = vim.v.lnum })[1].signs)
+--end
+--function M.column()
+--  local sign, git_sign
+--  for _, s in ipairs(M.get_signs()) do
+--    if s.name:find('GitGutter') then
+--      git_sign = s
+--    else
+--      sign = s
+--    end
+--  end
+
+--  local components = {
+--    sign and ('%#' .. sign.texthl .. '#' .. sign.text .. '%*') or '',
+--    -- sign and ('%#' .. sign.texthl .. '#' .. icons[sign.name] .. '%*') or '',
+--    [[%=]],
+--    [[%{&nu?(&rnu&&v:relnum?v:relnum:v:lnum):''}]],
+--    -- git_sign and ('%#' .. git_sign.texthl .. '#' .. git_sign.text .. '%*') or '  ',
+--    git_sign and ('%#' .. git_sign.texthl .. '#' .. '▏' .. '%*') or ' ',
+--  }
+--  return table.concat(components, '')
+--end
+
+---- vim.opt.statuscolumn = [[%=%{v:relnum?v:relnum:v:lnum} ]]
+---- vim.opt.statuscolumn = [[%!v:lua.Status.column()]]
