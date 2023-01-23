@@ -27,6 +27,7 @@ return
 !8::Send #8
 !9::Send #9
 !0::Send #0
+!Enter::Send {f11}
 PgUp::Send !{ESC}
 PgDn::Send +!{ESC}
 !]:: SendInput,^{tab}

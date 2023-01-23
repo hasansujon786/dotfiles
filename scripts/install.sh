@@ -289,8 +289,13 @@ setup_ahk() {
 
 setup_sublime() {
   util_print sublime
+  choco install sublimetext4 --pre -y
   rm -rf $HOME/AppData/Roaming/Sublime\ Text/Packages/User/
-  util_makeSymlinkPath $HOME/dotfiles/gui/sublime_text "'C:\Users\hasan\AppData\Roaming\Sublime Text\Packages\User'"
+  rm -rf $HOME/AppData/Roaming/SublimeUserConfig
+  mkdir -p $HOME/AppData/Roaming/Sublime\ Text/Packages/
+
+  util_makeSymlinkPath $HOME/dotfiles/gui/sublime_text $HOME/AppData/Roaming/SublimeUserConfig
+  mv $HOME/AppData/Roaming/SublimeUserConfig $HOME/AppData/Roaming/Sublime\ Text/Packages/User
 }
 
 setup_windowsTerminal() {
