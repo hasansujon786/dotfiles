@@ -10,7 +10,10 @@ require('lazy').setup({
   spec = {
     { import = 'core.plug' },
   },
-  concurrency = 10,
+  concurrency = 5,
+  git = {
+    timeout = 120, -- kill processes that take more than 2 minutes
+  },
   install = { colorscheme = { 'onedark', 'habamax' } },
   performance = {
     cache = {

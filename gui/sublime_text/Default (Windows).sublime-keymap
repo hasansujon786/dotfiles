@@ -27,6 +27,8 @@
   { "keys": ["ctrl+f"], "command": "show_panel", "args": {"panel": "find", "reverse": false} },
   { "keys": ["alt+k"], "command": "swap_line_up" },
   { "keys": ["alt+j"], "command": "swap_line_down" },
+  { "keys": ["ctrl+tab"], "command": "next_view" },
+  { "keys": ["ctrl+shift+tab"], "command": "prev_view" },
   // open setting
   { "keys": ["ctrl+,"], "command": "edit_settings", "args": { "base_file": "${packages}/Default/Preferences.sublime-settings", "default": "// Settings in here override those in \"Default/Preferences.sublime-settings\",\n// and are overridden in turn by syntax-specific settings.\n{\n\t$0\n}\n" } },
   // { "keys": ["ctrl+shift+h"], "command": "show_panel", "args": {"panel": "find_in_files"} },

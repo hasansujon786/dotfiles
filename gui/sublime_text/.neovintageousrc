@@ -39,6 +39,7 @@ nnoremap <leader>ws <C-w>s
 nnoremap <leader>wv <C-w>v
 nnoremap <Bslash> :ToggleZoomPane fraction=1<CR>
 nnoremap <Bar> <C-w>=
+nnoremap <leader>u :ToggleDistractionFree<CR>
 
 nnoremap <A-.> :PanePaneResize dimension=width resize=increase<CR>
 nnoremap <A-,> :PanePaneResize dimension=width resize=decrease<CR>
@@ -66,8 +67,8 @@ nnoremap gd <f12>
 " AceJump
 " nnoremap s :AceJumpWord<CR>
 " nnoremap S :AceJumpWord<CR>
-nnoremap <leader>J :AceJumpLine<CR> 
-nnoremap <leader>K :AceJumpLine<CR> 
+nnoremap <leader>J :AceJumpLine<CR>
+nnoremap <leader>K :AceJumpLine<CR>
 
 " nnoremap <leader>ws :CarryFileToPane direction=down<CR>
 " nnoremap <leader>wv :CarryFileToPane direction=right<CR>
