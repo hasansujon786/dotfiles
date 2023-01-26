@@ -64,7 +64,8 @@ return {
   --> Productiviry -------------------------------
   ------------------------------------------------
   { 'mkropat/vim-tt', lazy = true, event = 'CursorHold', config = function() vim.g.tt_loaded = 1 end },
-  { 'folke/zen-mode.nvim', lazy = true, cmd = 'ZenMode', config = function() require('config.zen') end },
+  -- { 'folke/zen-mode.nvim', lazy = true, cmd = 'ZenMode', config = function() require('config.zen') end },
+  { 'hasansujon786/zen-mode.nvim', lazy = true, cmd = 'ZenMode', config = function() require('config.zen') end, branch = 'win-border' },
   {
     'nvim-orgmode/orgmode',
     lazy = true,

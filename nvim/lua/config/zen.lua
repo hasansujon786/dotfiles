@@ -1,6 +1,7 @@
 require('zen-mode').setup({
+  border = { '', '', '', '│', '', '', '', '│' },
   window = {
-    backdrop = 0.94,
+    backdrop = 1,
     width = 0.75,
     height = 1, -- 1 = 100%
     options = {

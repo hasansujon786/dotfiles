@@ -3,6 +3,7 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi TextInfo           guifg=#56B6C2 guibg=NONE
   hi TextSuccess        guifg=#61AFEF
   hi Cursor             guibg=#61AFEF gui=NONE
+  hi ZenBorder          guifg=#1c212c
   hi VertSplit          guifg=#2b3043
   hi StatusLine         guibg=#2C323C guifg=#ABB2BF
   hi StatusLineNC       guibg=#2C323C guifg=#ABB2BF
