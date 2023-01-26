@@ -14,8 +14,11 @@ M.ui = {
 
 _G.state = {
   file = {
-    format_save = true,
+    format_save = false,
   },
+  treesitter = {
+    auto_conceal_html_class = true
+  }
 }
 
 return M

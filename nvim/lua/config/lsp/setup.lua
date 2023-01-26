@@ -14,6 +14,9 @@ M.on_attach = function(client, bufnr)
   M.lsp_autocmds(client, bufnr)
   M.lsp_buffer_keymaps(client, bufnr)
 
+  if client.name == 'tailwindcss' and state.treesitter.auto_conceal_html_class then
+    require('hasan.utils.ts_query').setup_tailwindcss(bufnr)
+  end
   if not vim.tbl_contains(use_builtin_lsp_formatter, client.name) then
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
