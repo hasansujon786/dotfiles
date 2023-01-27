@@ -87,7 +87,7 @@ o.qftf = '{info -> v:lua.require("hasan.utils.ui.qf").qftf(info)}'
 -- Numbers
 o.number = true
 o.relativenumber = true
-o.numberwidth = 4
+o.numberwidth = 3
 o.signcolumn = 'yes' --                          Always show the signcolumn,
 
 -- Windwo & buffer

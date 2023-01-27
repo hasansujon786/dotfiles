@@ -18,6 +18,7 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi CursorLineDap      guibg=#173F1E guifg=none guisp=none cterm=underline
   hi! WhichKeyFloat     guibg=#2d3343
   hi! link Folded Comment
+  hi! link Conceal String
 
   "/// nvim-cmp ///"
   hi! Pmenu                         guibg=#202631 guifg=#a5b0c5
@@ -133,4 +134,8 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! link NvimTreeIndentMarker IndentBlanklineChar
   hi! link NvimTreeWindowPicker TelescopeSelectionCaret
   hi! link NvimTreeWinSeparator VertSplit
+
+  "/// Nebulous ///"
+  hi NebulousInvisibe   guifg=#242B38
+  hi NebulousDarker     guifg=#2a303c
 endfunction

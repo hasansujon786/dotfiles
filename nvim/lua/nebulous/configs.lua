@@ -27,8 +27,11 @@ M.default = {
     'LineNr:Nebulous',
     'LineNrAbove:Nebulous',
     'LineNrBelow:Nebulous',
-    -- 'Normal:Nebulous',
-    -- 'NormalNC:Nebulous',
+    'Conceal:Nebulous',
+    'IndentBlanklineChar:NebulousDarker',
+    'GitGutterAdd:NebulousInvisibe',
+    'GitGutterChange:NebulousInvisibe',
+    'GitGutterDelete:NebulousInvisibe',
   },
   dynamic_rules = {
     active = nil,
