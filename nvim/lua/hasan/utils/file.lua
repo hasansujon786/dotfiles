@@ -60,7 +60,7 @@ function M.join_paths(...) -- Function from nvim-lspconfig
 end
 
 function M.smart_save_buffer()
-  if state.file.format_save then
+  if state.file.auto_format then
     vim.cmd([[silent noa write]])
   else
     vim.lsp.buf.format({ async = false })
