@@ -18,12 +18,6 @@ local filename = function(file_status)
     },
   }
 end
-local filetype = {
-  'filetype',
-  colored = true,
-  icon_only = true,
-  padding = { left = 1, right = 0 },
-}
 
 require('lualine').setup({
   options = {
@@ -36,7 +30,12 @@ require('lualine').setup({
     lualine_a = { { 'mode', separator = { left = '' }, right_padding = 2 } },
     lualine_b = {
       { sl.tabs.fn, cond = sl.tabs.cond, padding = { left = 1, right = 0 } },
-      filetype,
+      {
+        'filetype',
+        colored = true,
+        icon_only = true,
+        padding = { left = 1, right = 0 },
+      },
       filename(false),
     },
     lualine_c = {},

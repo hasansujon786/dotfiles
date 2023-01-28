@@ -151,7 +151,7 @@ function M.open_org_float()
     augroup OrgFloatWin
       au!
       au WinEnter,BufWinEnter,BufEnter *.org lua require('hasan.org').onOrgWinEnter()
-      au WinResized * lua _G.org_onWinResized()
+      au VimResized * lua _G.org_onWinResized()
     augroup END
     ]])
 

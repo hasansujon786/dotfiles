@@ -46,6 +46,17 @@ M.lsp_status = {
   end,
 }
 
+M.modified = {
+  function()
+    return '●'
+  end,
+  cond = function()
+    return vim.bo.modified
+  end,
+  padding = { left = 1, right = 0 },
+  color = { fg = '#97CA72' },
+}
+
 M.tabs = {
   cond = function()
     return vim.fn.tabpagenr('$') > 1
