@@ -24,11 +24,7 @@ utils.augroup('MY_AUGROUP')(function(autocmd)
   autocmd({ 'BufWinEnter', 'WinEnter' }, 'normal Gzz', { pattern = '__FLUTTER_DEV_LOG__' })
   autocmd({ 'FocusGained', 'BufEnter', 'CursorHold' }, ':silent! checktime')
   autocmd('BufReadPost', function()
-    local mark = vim.api.nvim_buf_get_mark(0, '"')
-    local lcount = vim.api.nvim_buf_line_count(0)
-    if mark[1] > 0 and mark[1] <= lcount then
-      pcall(vim.api.nvim_win_set_cursor, 0, mark)
-    end
+    require('hasan.utils.win').restore_cussor_pos()
   end)
 
   autocmd('BufDelete', 'silent! call remove(g:hasan_telescope_buffers, expand("<abuf>"))')
