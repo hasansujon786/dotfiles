@@ -100,12 +100,12 @@ M.actions = {
     elseif node.extension and not vim.b.vinegar then
       feedkeys('zE')
     else
-      lib.open(node.absolute_path)
+      lib.open({ path = node.absolute_path })
       feedkeys('ggj')
     end
   end,
   cd_root = function()
-    lib.open(vim.loop.cwd())
+    lib.open({ path = vim.loop.cwd() })
     feedkeys('gg', '')
   end,
   system_reveal = function(node)
@@ -125,20 +125,22 @@ M.actions = {
     if node == nil or node.parent == nil then
       return
     end
+
     local cwd = node.parent.absolute_path
-    local parent_cwd = vim.fn.fnamemodify(cwd, ':h')
-    if cwd == parent_cwd then
+    local open_path = vim.fn.fnamemodify(cwd, ':h')
+    if cwd == open_path then
       return
     end
 
-    lib.open(parent_cwd)
+    lib.open({ path = open_path })
     require('nvim-tree.actions.finders.find-file').fn(cwd)
   end,
   vinegar_dir_up_or_dir_up = function()
     if vim.b.vinegar then
       feedkeys('-')
     else
-      feedkeys('up')
+      -- TODO: <29.01.23> update this
+      feedkeys('uP')
     end
   end,
 }

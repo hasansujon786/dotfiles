@@ -30,12 +30,3 @@
 > https://vimways.org/2019/
 
 sudo vim /etc/hostname
-
-# cmp
-https://github.com/hrsh7th/nvim-cmp/issues/231
-
-# vim-surround
-vim.cmd[[ let b:surround_{char2nr('F')} = "function()\n return \r\nend" ]]
-
-# winbar
-https://github.com/max397574/omega-nvim/blob/a3fcd501805105494fb5231c035e9181a5aaf50a/lua/omega/core/settings/init.lua#L67

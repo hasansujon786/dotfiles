@@ -266,3 +266,18 @@ end
 
 ---- vim.opt.statuscolumn = [[%=%{v:relnum?v:relnum:v:lnum} ]]
 ---- vim.opt.statuscolumn = [[%!v:lua.Status.column()]]
+
+-- {'samodostal/image.nvim'},
+-- {'m00qek/baleia.nvim'},
+-- require('image').setup {
+-- render = {
+--   min_padding = 5,
+--   show_label = true,
+--   use_dither = true,
+--   foreground_color = true,
+--   background_color = true
+-- },
+-- events = {
+--   update_on_nvim_resize = true,
+-- },
+-- }
