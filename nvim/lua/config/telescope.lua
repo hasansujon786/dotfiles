@@ -12,6 +12,7 @@ local custom_mappings = {
   ['<M-u>'] = actions.preview_scrolling_up,
   ['<M-d>'] = actions.preview_scrolling_down,
   ['<C-f>'] = local_action.fedit,
+  ['<M-o>'] = local_action.quicklook,
   ['<C-x>'] = false,
   ['<C-u>'] = false,
   ['<C-d>'] = false,

@@ -28,6 +28,14 @@ local local_action = transform_mod({
   fedit = function(prompt_bufnr)
     edit_buffer(prompt_bufnr, 'Fedit')
   end,
+  quicklook = function(_)
+    local entry = action_state.get_selected_entry()
+    if entry == nil then
+      return require('hasan.utils').Logger:warn('[telescope]: Nothing currently selected')
+    end
+
+    require('hasan.utils.file').quickLook({ string.format('%s/%s', entry.cwd, entry[1]) })
+  end,
 })
 
 return local_action

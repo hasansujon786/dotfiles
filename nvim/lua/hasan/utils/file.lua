@@ -1,3 +1,5 @@
+local Job = require('plenary.job')
+
 local M = {}
 
 local js = {
@@ -66,6 +68,27 @@ function M.smart_save_buffer()
     vim.lsp.buf.format({ async = false })
     vim.cmd([[silent write]])
   end
+end
+
+function M.quickLook(args)
+  local bg_job = nil
+  bg_job = Job:new({
+    command = 'C:\\Users\\hasan\\AppData\\Local\\Programs\\QuickLook\\QuickLook.exe',
+    args = args,
+    -- cwd = vim.loop.cwd(),
+  })
+  bg_job:start()
+
+  -- bg_job:after_success(vim.schedule_wrap(function(_)
+  --   -- on_pub_get(j:result())
+  --   bg_job = nil
+  --   P('after_success')
+  -- end))
+  bg_job:after_failure(vim.schedule_wrap(function(_)
+    -- on_pub_get(j:stderr_result(), true)
+    bg_job = nil
+    vim.notify('There someting went wrong while opening QuickLook', vim.log.levels.WARN)
+  end))
 end
 
 return M

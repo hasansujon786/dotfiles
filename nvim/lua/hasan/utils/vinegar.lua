@@ -80,10 +80,14 @@ function M.alternate_file()
   vim.cmd([[echo 'No alternate file']])
 end
 
-local function open() feedkeys(vim.b.vinegar and 'E' or 'zZ') end
+local function open()
+  feedkeys(vim.b.vinegar and 'E' or 'zZ')
+end
 M.actions = {
   open = open,
-  edit_in_place = function() feedkeys(vim.b.vinegar and 'E' or 'zE') end,
+  edit_in_place = function()
+    feedkeys(vim.b.vinegar and 'E' or 'zE')
+  end,
   open_n_close = function()
     open()
     if view.is_visible() and not vim.b.vinegar then
@@ -104,7 +108,12 @@ M.actions = {
     lib.open(vim.loop.cwd())
     feedkeys('gg', '')
   end,
-  system_reveal = function(node) vim.cmd('silent !explorer.exe /select,"' .. node.absolute_path .. '"') end,
+  system_reveal = function(node)
+    vim.cmd('silent !explorer.exe /select,"' .. node.absolute_path .. '"')
+  end,
+  quickLook = function(node)
+    require('hasan.utils.file').quickLook({ node.absolute_path })
+  end,
   vinegar_dir_up = function(node)
     if node.name == '..' then
       feedkeys('j')
