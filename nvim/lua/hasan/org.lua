@@ -17,11 +17,8 @@ local last_bufnr = 0
 _G.org_onWinResized = nil
 
 local fn = {
-  set_winbar = function(pop)
-    local title = vim.fn.fnamemodify(api.nvim_buf_get_name(last_bufnr), ':t')
-    local width = pop.win_config.width
-    local pad = (width / 2) - (string.len(title) / 2)
-    vim.wo.winbar = string.format('%s%s%s', string.rep(' ', pad), '%#TextInfo#', title)
+  set_winbar = function()
+    vim.wo.winbar = '%{%v:lua.require("hasan.org").winbar()%}'
   end,
   is_cur_win_org_float = function()
     return utils.is_floting_window(0) and vim.bo.filetype == 'org'
@@ -53,11 +50,7 @@ local fn = {
         relative = 'editor',
         enter = true,
         focusable = true,
-        border = {
-          style = { '│', ' ', '│', '│', '│', ' ', '│', '│' },
-          -- style = 'double',
-          -- text = { top = get_title_text(last_bufnr), top_align = 'center' },
-        },
+        border = { style = { '│', ' ', '│', '│', '│', ' ', '│', '│' } },
         -- position = {
         --   row = '40%',
         --   col = '50%',
@@ -131,7 +124,7 @@ function M.open_org_float()
 
   layout:mount()
   require('hasan.utils.win').restore_cussor_pos()
-  fn.set_winbar(pop_main)
+  fn.set_winbar()
   if vim.bo.filetype == '' then
     vim.bo.filetype = 'org'
   end
@@ -173,7 +166,7 @@ end
 function M.onOrgWinEnter()
   if fn.is_cur_win_org_float() then
     last_bufnr = api.nvim_buf_get_number(0)
-    fn.set_winbar(last_main_pop)
+    fn.set_winbar()
     -- last_pop.border:set_text('top', get_title_text(last_bufnr), 'center')
 
     opt.number = true
@@ -181,6 +174,15 @@ function M.onOrgWinEnter()
     opt.signcolumn = 'yes'
     opt.numberwidth = 2
   end
+end
+
+function M.winbar()
+  local title = vim.fn.fnamemodify(api.nvim_buf_get_name(0), ':t')
+  local width = vim.api.nvim_win_get_width(0)
+  local pad = (width / 2) - (string.len(title) / 2)
+  local color = vim.bo.modified and '%#TSRed#' or '%#TextInfo#'
+
+  return string.format('%s%s%s', string.rep(' ', pad), color, title)
 end
 
 -- ------------------------------------------------
