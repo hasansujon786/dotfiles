@@ -135,14 +135,6 @@ M.actions = {
     lib.open({ path = open_path })
     require('nvim-tree.actions.finders.find-file').fn(cwd)
   end,
-  vinegar_dir_up_or_dir_up = function()
-    if vim.b.vinegar then
-      feedkeys('-')
-    else
-      -- TODO: <29.01.23> update this
-      feedkeys('uP')
-    end
-  end,
 }
 
 return M
