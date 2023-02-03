@@ -306,14 +306,25 @@ toggleCapsLosck() {
   SplashTextOff
 }
 bt(onOff := "On") {
+  SysGet, mWidth, 78
+  SysGet, mHeight, 79
+  Progress, b w200,, Toggling Bluetooth, BluetoothStatus
+  WinMove, BluetoothStatus,, mWidth - 220, mHeight - 70
+  Progress, 70
   Static ps := "C:\\Users\\hasan\\dotfiles\\scripts\\ahk\\toggle_bluetooth.ps1"
+
   If !FileExist(ps) {
-    MsgBox, 48, Error, File not found.`n`n%ps%
+    Progress, Off
+    MsgBox, 48, Error, File not found.`n%ps%
     Return
   } Else SoundBeep, 1500 - 500 * (onOff = "On")
     ; RunWait, powershell -command %ps% -BluetoothStatus %onOff%,, Hide
     RunWait, powershell -command %ps%,, Hide
   SoundBeep, 1000 + 500 * (onOff = "On")
+
+  Progress, 100
+  Sleep, 600
+  Progress, Off
 }
 takeScreenshot() {
   SendInput,#{PrintScreen}

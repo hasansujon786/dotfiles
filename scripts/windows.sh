@@ -8,6 +8,8 @@ choco install potplayer -y
 choco install ntop.portable -y
 choco install googlechrome -y
 choco install sharpkeys -y
+choco install riot -y
+choco install guidgen-console -y
 
 # https://developer.android.com/studio#downloads
 # https://dl.google.com/android/repository/commandlinetools-win-8092744_latest.zip
