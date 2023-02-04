@@ -40,6 +40,9 @@ M.essential_servers = {
   { 'astro', 'astro-language-server' },
   -- { 'emmet_ls', 'emmet-ls' },
 }
+M.extra_tools = {
+  'stylua',
+}
 
 local default_opts = {
   on_attach = require('config.lsp.setup').on_attach,

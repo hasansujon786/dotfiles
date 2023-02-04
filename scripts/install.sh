@@ -238,7 +238,7 @@ install_various_apps() {
   util_print rust
   $getter install -y rust
   # cargo install --list
-  # cargo install stylua vimv
+  # cargo install vimv
 
   $getter install -y onefetch
   $getter install -y scrcpy
@@ -283,13 +283,16 @@ setup_bugn() {
 
 setup_ahk() {
   util_print main.ahk
+  choco install autohotkey -y
+
   rm -rf $HOME/AppData/Roaming/Microsoft/Windows/Start\ Menu/Programs/Startup/main.ahk
   util_makeSymlinkPath $HOME/dotfiles/scripts/ahk/main.ahk "'C:/Users/hasan/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/main.ahk'"
+  explorer C:\\Users\\hasan\\dotfiles\\scripts\\ahk\\main.ahk
 }
 
 setup_sublime() {
   util_print sublime
-  choco install sublimetext4 --pre -y
+  # choco install sublimetext4 --pre -y
   rm -rf $HOME/AppData/Roaming/Sublime\ Text/Packages/User/
   rm -rf $HOME/AppData/Roaming/SublimeUserConfig
   mkdir -p $HOME/AppData/Roaming/Sublime\ Text/Packages/
@@ -333,9 +336,8 @@ auto_install_everything() {
   if [[ "$os" == "windows" ]]; then
     start ms-settings:developers
     choco install pwsh -y
-    choco install autohotkey -y
-    # setup_windowsTerminal
     setup_ahk
+    setup_windowsTerminal
     # setup_sublime
     $getter install -y mingw
     $getter install -y make
