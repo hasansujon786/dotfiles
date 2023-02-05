@@ -253,10 +253,16 @@ install_various_apps() {
   # pip3 install vit
 
   if [[ "$os" == "windows" ]]; then
-    $getter install -y quicklook
-    $getter install -y 7zip.install
-    $getter install -y delta # git highlighter
     setup_keypirinha
+    $getter install -y 7zip.install
+    $getter install -y sharpkeys
+    $getter install -y potplayer
+    $getter install -y quicklook
+    $getter install -y delta # git highlighter
+    $getter install -y instanteyedropper.app
+    $getter install -y ntop.portable
+    $getter install -y riot
+    $getter install -y googlechrome
   elif [[ "$os" == "linux" ]]; then
     install_and_setup_tmux
   fi
@@ -292,7 +298,7 @@ setup_ahk() {
 
 setup_sublime() {
   util_print sublime
-  # choco install sublimetext4 --pre -y
+  $getter install -y sublimetext4
   rm -rf $HOME/AppData/Roaming/Sublime\ Text/Packages/User/
   rm -rf $HOME/AppData/Roaming/SublimeUserConfig
   mkdir -p $HOME/AppData/Roaming/Sublime\ Text/Packages/
@@ -335,10 +341,11 @@ auto_install_everything() {
 
   if [[ "$os" == "windows" ]]; then
     start ms-settings:developers
-    choco install pwsh -y
-    setup_ahk
+    $getter install pwsh -y
+    $getter install -y brave
     setup_windowsTerminal
-    # setup_sublime
+    setup_ahk
+    setup_sublime
     $getter install -y mingw
     $getter install -y make
   elif [[ "$os" == "linux" ]]; then
