@@ -289,11 +289,12 @@ setup_bugn() {
 
 setup_ahk() {
   util_print main.ahk
-  choco install autohotkey -y
+  ahkPath="C:\\Users\\$USERNAME\\AppData\\Roaming\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\main.ahk"
 
-  rm -rf $HOME/AppData/Roaming/Microsoft/Windows/Start\ Menu/Programs/Startup/main.ahk
-  util_makeSymlinkPath $HOME/dotfiles/scripts/ahk/main.ahk "'C:/Users/hasan/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/main.ahk'"
-  explorer C:\\Users\\hasan\\dotfiles\\scripts\\ahk\\main.ahk
+  choco install autohotkey -y
+  rm -rf "$ahkPath"
+  util_makeSymlinkPath $HOME/dotfiles/scripts/ahk/main.ahk "'$ahkPath'"
+  explorer $ahkPath
 }
 
 setup_sublime() {
