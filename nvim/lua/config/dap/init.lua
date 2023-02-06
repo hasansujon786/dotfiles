@@ -14,7 +14,10 @@ function M.configure_dap_ui()
     },
     windows = { indent = 1 },
   })
-  dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+  dap.listeners.after.event_initialized['dapui_config'] = function()
+    vim.notify('Debugger connected', vim.log.levels.INFO)
+  end
+  -- dap.listeners.after.event_initialized['dapui_config'] = dapui.open
   dap.listeners.before.event_terminated['dapui_config'] = dapui.close
   dap.listeners.before.event_exited['dapui_config'] = dapui.close
 

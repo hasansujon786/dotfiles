@@ -32,7 +32,7 @@ require('flutter-tools').setup({
     border = ui.border.style,
   },
   debugger = {
-    enabled = true,
+    enabled = false,
     run_via_dap = true, -- use dap instead of a plenary job to run flutter apps
     register_configurations = function(paths)
       local dap = require('dap')
