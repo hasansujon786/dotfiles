@@ -5,7 +5,27 @@ require('onedark').setup({
   toggle_style_key = '<leader>tB',
   toggle_style_list = { 'light', 'cool', 'deep', 'dark', 'darker' },
   -- colors = {},
-  -- highlights = {},
+  highlights = {
+    ['@variable.builtin'] = { fg = '$yellow' },
+    ['@variable'] = { fg = '$red' },
+    ['@property'] = { fg = '$red' },
+    ['@field'] = { fg = '$red' },
+    ['@punctuation.special'] = { fg = '$purple' },
+    ['OrgDone'] = { fg = '$green' },
+
+    ['@tag'] = { fg = '$red' },
+    ['@tag.delimiter'] = { fg = '$fg' },
+    ['@tag.attribute'] = { fg = '$orange' },
+    ['@text.title'] = { fg = '$fg' },
+
+    -- custom extends highlights
+    ['@css.class'] = { fg = '$orange' },
+    ['@css.id'] = { fg = '$blue' },
+    ['@css.pseudo_element'] = { fg = '$purple' },
+
+    -- hi! link @punctuation.special @keyword
+    -- ["@function"] = {fg = '#222222', sp = '$cyan', fmt = 'underline,italic,bold'},
+  },
   -- Options are italic, bold, underline, none
   code_style = {
     comments = 'italic',

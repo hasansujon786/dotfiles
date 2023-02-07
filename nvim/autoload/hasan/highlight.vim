@@ -50,22 +50,6 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! CmpItemKindText               guifg=#9CDCFE
   hi! CmpItemKindSnippet            guifg=#9CDCFE
 
-  "/// Treesitter highlights ///"
-  hi OrgDone                    guifg=#7CBA4F
-  hi TSRed                      guifg=#e86671
-  hi! link @field               TSRed
-  hi! link @property            TSRed
-  hi! link @variable            TSRed
-  hi! link htmlTag              @tag.delimiter
-  hi! link @punctuation.special @keyword
-  hi! @tag.delimiter            guifg=#ABB2BF gui=NONE
-  hi! @variable.builtin         guifg=#E5C07B
-  hi! @tag.attribute            guifg=#D19A66 gui=italic
-  " custom highlights
-  hi! @css.class                guifg=#D19A66
-  hi! link @css.id              @method
-  hi! link @css.pseudo_element  @attribute
-
   "/// LSP variable reference ///"
   hi LspReferenceText  guibg=#3B4048 gui=NONE
   hi LspReferenceWrite guibg=#463b48 gui=NONE

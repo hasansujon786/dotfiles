@@ -119,6 +119,7 @@ alias gt='git tag'
 alias gst='git status'
 alias gupd='git update'
 alias gcl='git clone --recurse-submodules'
+alias gb='git branch --sort=-committerdate| fzf --height=20% |xargs git checkout'
 # Use --soft if you want to keep your changes
 # Use --hard if you don't care about keeping the changes you made
 alias gr='git reset ' # unstage files (Use --hard/--soft)
