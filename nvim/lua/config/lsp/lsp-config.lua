@@ -36,7 +36,7 @@ M.essential_servers = {
   { 'jsonls', 'json-lsp' },
   { 'tsserver', 'typescript-language-server' },
   { 'tailwindcss', 'tailwindcss-language-server' },
-  { 'sumneko_lua', 'lua-language-server', lua_opts },
+  { 'lua_ls', 'lua-language-server', lua_opts },
   { 'astro', 'astro-language-server' },
   -- { 'emmet_ls', 'emmet-ls' },
 }

@@ -5,7 +5,7 @@ require('nvim-treesitter.configs').setup({
     enable = true, -- false will disable the whole extension
     use_languagetree = false,
     disable = { 'vim' },
-    additional_vim_regex_highlighting = { 'org', 'html', 'vim' }, -- Required since TS highlighter doesn't support all syntax features (conceal)
+    additional_vim_regex_highlighting = { 'org', 'vim' }, -- Required since TS highlighter doesn't support all syntax features (conceal)
   },
   incremental_selection = {
     enable = true,

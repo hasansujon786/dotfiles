@@ -14,7 +14,6 @@ local function run_flutter_cmd(args, msg)
     command = 'C:\\tools\\flutter\\bin\\flutter.BAT',
     args = args,
     cwd = vim.loop.cwd(),
-    -- cwd = 'F:\\repoes\\flutter-apps\\tut-flutter-max',
   })
   pub_get_job:after_success(vim.schedule_wrap(function(j)
     on_pub_get(j:result())

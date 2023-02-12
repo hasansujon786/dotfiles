@@ -27,6 +27,8 @@ return
 !8::Send #8
 !9::Send #9
 !0::Send #0
+#l::Send ^#{Right}
+#h::Send ^#{Left}
 !Enter::Send {f11}
 PgUp::Send !{ESC}
 PgDn::Send +!{ESC}

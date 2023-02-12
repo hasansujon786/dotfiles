@@ -107,7 +107,7 @@ map gp cd ~/Pictures
 map gv cd ~/Videos
 map gm cd ~/Music
 map gD cd ~/Documents
-map gr cd D:\\repoes
+map gr cd E:\\repoes
 
 map ga. cd ~/AppData
 map gan cd ~/AppData/Local/nvim-data
