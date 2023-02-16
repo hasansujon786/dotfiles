@@ -1,11 +1,11 @@
 -- TSInstallSync javascript typescript tsx org
 require('nvim-treesitter.configs').setup({
-  ensure_installed = { 'html', 'vim', 'css', 'json', 'lua', 'vue', 'dart', 'bash', 'help' },
+  ensure_installed = { 'html', 'vim', 'css', 'json', 'lua', 'vue', 'dart', 'bash', 'help', 'markdown', 'markdown_inline', },
   highlight = {
     enable = true, -- false will disable the whole extension
     use_languagetree = false,
     disable = { 'vim' },
-    additional_vim_regex_highlighting = { 'org', 'vim' }, -- Required since TS highlighter doesn't support all syntax features (conceal)
+    additional_vim_regex_highlighting = { 'org', 'vim', 'markdown' }, -- Required since TS highlighter doesn't support all syntax features (conceal)
   },
   incremental_selection = {
     enable = true,

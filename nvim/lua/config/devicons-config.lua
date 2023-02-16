@@ -10,7 +10,7 @@ require('nvim-web-devicons').set_icon({
     name = 'BranchCycle',
   },
   org = {
-    icon = '🦄',
+    icon = '◉',
     color = '#75A899',
     name = 'Org',
   },

@@ -56,7 +56,7 @@ util_setup_figlet() {
   if [[ "$os" == "windows" ]]; then
     $getter install -y figlet-go
   else
-    sudo apt upgrade && sudo apt update
+    sudo apt update -y && sudo apt upgrade -y
     $getter install -y figlet
   fi
 }
