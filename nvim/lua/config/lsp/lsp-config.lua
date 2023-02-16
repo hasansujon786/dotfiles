@@ -1,4 +1,5 @@
 local lspconfig = require('lspconfig')
+local util = require('lspconfig.util')
 require('mason').setup({ max_concurrent_installers = 3, ui = { border = 'rounded' } })
 require('lspconfig.ui.windows').default_options.border = 'rounded'
 require('mason-lspconfig').setup()
@@ -26,6 +27,18 @@ local lua_opts = {
   },
 }
 
+local tailwindcss_opts = {
+  root_dir = util.root_pattern(
+    'tailwind.config.js',
+    'tailwind.config.ts',
+    'postcss.config.js',
+    'postcss.config.ts',
+    'package.json',
+    'node_modules'
+    -- '.git'
+  ),
+}
+
 -- index [1] is for lspconfig & [2] is to install lsp-server with mason
 M.essential_servers = {
   { 'bashls', 'bash-language-server' },
@@ -35,7 +48,7 @@ M.essential_servers = {
   { 'cssls', 'css-lsp' },
   { 'jsonls', 'json-lsp' },
   { 'tsserver', 'typescript-language-server' },
-  { 'tailwindcss', 'tailwindcss-language-server' },
+  { 'tailwindcss', 'tailwindcss-language-server', tailwindcss_opts },
   { 'lua_ls', 'lua-language-server', lua_opts },
   { 'astro', 'astro-language-server' },
   -- { 'emmet_ls', 'emmet-ls' },
