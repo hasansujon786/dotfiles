@@ -73,6 +73,7 @@ return {
     config = function() require('config.orgmode') end,
     dependencies = { { 'akinsho/org-bullets.nvim', config = function() require('config.org-bullets') end } },
   },
+  { 'epwalsh/obsidian.nvim', config = function() require('config.obsidian') end },
 
   ------------------------------------------------
   --> Utils --------------------------------------

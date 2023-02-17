@@ -35,6 +35,7 @@ end
 local common = {
   search_wiki_files = { '<cmd>lua require("hasan.telescope.custom").search_wiki_files()<CR>', 'Search org files'},
   grep_org_text = { '<cmd>lua require("hasan.telescope.custom").grep_org_text()<CR>',         'Grep org text'},
+  obsidianQuickSwitch = { '<cmd>ObsidianQuickSwitch<CR>',         'Obsidian quick switch'},
   buffers_cwd = { '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>',             'Switch buffers' },
   buffers_all = { '<cmd>lua require("hasan.telescope.custom").buffers(false)<CR>',            'Switch all buffers' },
   grep_string = { '<cmd>lua require("hasan.telescope.custom").grep_string()<CR>',             'Grep string' },
@@ -274,6 +275,7 @@ local leader = {
     r = { '<cmd>Telescope oldfiles<CR>',        'Recent files' },
     t = { '<cmd>Telescope filetypes<CR>',       'Change filetypes' },
 
+    q = common.obsidianQuickSwitch,
     o = common.grep_org_text,
     w = common.search_wiki_files,
 
