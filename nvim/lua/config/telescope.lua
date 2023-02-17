@@ -44,6 +44,7 @@ require('telescope').setup({
       '%.system/.*',
       'android/.*',
       'ios/.*',
+      'gui/sublime_text/.*',
       'pubspec.lock',
     },
   },

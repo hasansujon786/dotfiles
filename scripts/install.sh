@@ -299,13 +299,15 @@ setup_ahk() {
 
 setup_sublime() {
   util_print sublime
-  $getter install -y sublimetext4
-  rm -rf $HOME/AppData/Roaming/Sublime\ Text/Packages/User/
-  rm -rf $HOME/AppData/Roaming/SublimeUserConfig
-  mkdir -p $HOME/AppData/Roaming/Sublime\ Text/Packages/
+  sublimePath="C:\\Users\\$USERNAME\\AppData\\Roaming\\Sublime Text\\Packages"
 
-  util_makeSymlinkPath $HOME/dotfiles/gui/sublime_text $HOME/AppData/Roaming/SublimeUserConfig
-  mv $HOME/AppData/Roaming/SublimeUserConfig $HOME/AppData/Roaming/Sublime\ Text/Packages/User
+  $getter install -y sublimetext4
+  mkdir -p "$sublimePath"
+  rm -rf "$sublimePath\\User"
+  rm -rf "$sublimePath\\Theme - One Dark"
+
+  util_makeSymlinkPath $HOME/dotfiles/gui/sublime_text/User "'$sublimePath\\User'"
+  util_makeSymlinkPath $HOME/dotfiles/gui/sublime_text/theme "'$sublimePath\\Theme - One Dark'"
 }
 
 setup_windowsTerminal() {
