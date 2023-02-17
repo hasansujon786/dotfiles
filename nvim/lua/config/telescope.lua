@@ -39,8 +39,6 @@ require('telescope').setup({
       '%.gitignore',
       '%.git/.*',
       '4_archive/.*',
-      '%.bin/.*',
-      '%.bin%-win/.*',
       '%.system/.*',
       'android/.*',
       'ios/.*',
