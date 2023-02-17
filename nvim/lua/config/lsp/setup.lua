@@ -15,7 +15,7 @@ M.on_attach = function(client, bufnr)
   M.lsp_buffer_keymaps(client, bufnr)
 
   if client.name == 'tailwindcss' and state.treesitter.auto_conceal_html_class then
-    require('hasan.utils.ts_query').setup_tailwindcss(bufnr)
+    require('config.lsp.setup.tailwindcss').setup_conceal(bufnr)
   end
   if not vim.tbl_contains(use_builtin_lsp_formatter, client.name) then
     client.server_capabilities.documentFormattingProvider = false
@@ -81,7 +81,7 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', '<leader>ad', vim.diagnostic.setloclist, desc('Lsp: show local diagnostics'))
   keymap('n', '<leader>aD', vim.diagnostic.setqflist, desc('Lsp: show global diagnostics'))
   keymap('n', '<leader>al', vim.diagnostic.open_float, desc('Lsp: show current diagnostics'))
-  keymap('n', '<leader>ai', require('config.lsp.workspace').ts_organize_imports_sync, desc('Lsp: organize ts imports'))
+  keymap('n', '<leader>ai', require('config.lsp.setup.tsserver').ts_organize_imports_sync, desc('Lsp: organize ts imports'))
   keymap('n', '<leader>aq', require('config.lsp.util').showLspRenameChanges, desc('Lsp: show lsp rename'))
 
   keymap('n', '<C-LeftMouse>', '<LeftMouse><cmd>lua vim.lsp.buf.definition()<CR>', opts)

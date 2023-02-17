@@ -281,3 +281,29 @@ end
 --   update_on_nvim_resize = true,
 -- },
 -- }
+
+-- null_ls.register({
+--   name = 'my-actions',
+--   method = { null_ls.methods.CODE_ACTION },
+--   filetypes = { '_all' },
+--   generator = {
+--     fn = function()
+--       return {
+--         {
+--           title = 'add "hi mom"',
+--           action = function()
+--             local current_row = vim.api.nvim_win_get_cursor(0)[1]
+--             vim.api.nvim_buf_set_lines(0, current_row, current_row, true, { 'hi mom' })
+--           end,
+--         },
+--         {
+--           title = 'add "hi mark"',
+--           action = function()
+--             local current_row = vim.api.nvim_win_get_cursor(0)[1]
+--             vim.api.nvim_buf_set_lines(0, current_row, current_row, true, { 'hi mom' })
+--           end,
+--         },
+--       }
+--     end,
+--   },
+-- })
