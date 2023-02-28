@@ -36,6 +36,8 @@ ls.add_snippets('javascript', {
     )
   ),
   s('cn', fmt([[className='{}']], { i(0) })),
+  s('exf', fmt([[export * from './{}']], { i(0) })),
+  s('exfd', fmt([[export {{ default as {} }} from './{}']], { i(0, 'packageName'), i(1) })),
   s(
     'fetchthen',
     fmt(

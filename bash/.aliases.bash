@@ -33,9 +33,10 @@ alias ta="tmux attach"
 # Windows Terminal
 # alias wt="c:\\\Program\ Files\\\WindowsApps\\\Microsoft.WindowsTerminal_1.11.3471.0_x64__8wekyb3d8bbwe\\\wt.exe"
 alias wtt='wt -w 0 nt -d .'
-alias rgb='wt -w 0 nt -p PowerShell powershell -c rgb-tui'
-alias s='sub'
-sub() {
+alias dx='pwsh -Command dxdiag'
+alias su='subl'
+alias sub='subl'
+subl() {
   "C:\Program Files\Sublime Text\subl.exe" $@
 }
 
@@ -64,7 +65,7 @@ alias acc='~/dotfiles/scripts/ld.sh "adb connect"'
 alias adlp='adb shell pm list packages' # adb shell pm list packages -f -3
 alias arr='~/dotfiles/scripts/abd_wifi.sh'
 alias scr='scrcpy'
-alias scc='~/dotfiles/scripts/ld.sh.sh "scrcpy -s"'
+alias scc='~/dotfiles/scripts/ld.sh "scrcpy -s"'
 alias sccl='scrcpy -s f8a8aa489804'
 
 # handy short cuts #

@@ -69,13 +69,24 @@ nm.set({ 'zo', 'zi', 'zu' }, '*.lua', {
 -- })
 
 -- Typescript React
-nm.set('zo', { 'typescriptreact', 'javascriptreact', 'javascript' }, {
-  query = [[
-  ;; query
-  ((function_declaration) @cap) ;; matches function declarations
-  ((arrow_function) @cap) ;; matches arrow functions
-  ((identifier) @cap (#vim-match? @cap "^use.*")) ;; matches hooks (useState, useEffect, use***, etc...)
-  ]],
+nm.set({ 'zo', 'zi' }, { 'typescriptreact', 'javascriptreact', 'javascript' }, {
+  query = {
+    [[
+    ;; query
+    ((function_declaration) @cap) ;; matches function declarations
+    ((identifier) @cap (#vim-match? @cap "^use[A-Z]")) ;; matches hooks (useState, useEffect, use***, etc...)
+    ]],
+    [[
+    ;; query
+    ((arrow_function) @cap) ;; any arrow functions
+    ]],
+  },
+  regex = {
+    {
+      [[\(const\|let\)\s\w*\s=\s\(.*\)\s=>]], -- arrow_function with declarations
+    },
+    {},
+  },
 })
 
 nm.set('zo', { 'dart' }, {
