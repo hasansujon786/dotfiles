@@ -13,6 +13,8 @@ alias ncc='npm cache clean --force'
 
 # Vim
 alias v.='nvim .'
+alias ve='zi && nvim'
+alias ne='zi && nvim'
 alias vim=nvim
 alias v=nvim
 alias lv=vl

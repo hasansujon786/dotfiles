@@ -118,7 +118,7 @@ fk() {
 }
 
 fo() {
-  IFS=$'\n' out=("$(fzf --reverse --query="$1" --exit-0 --expect=alt-o,ctrl-e)")
+  IFS=$'\n' out=("$(fzf --query="$1" --exit-0 --expect=alt-o,ctrl-e)")
   key=$(head -1 <<< "$out")
   file=$(head -2 <<< "$out" | tail -1)
   if [ -n "$file" ]; then
