@@ -4,17 +4,19 @@ alias ycc='yarn cache clean'
 alias ya='yarn android'
 alias ys='yarn start'
 alias yd='yarn dev'
+alias si='zi && sc'
+alias sc='~/dotfiles/scripts/sc.sh'
 # npm
 alias no="NODE_OPTIONS='--inspect'"
-alias ni='node --inspect '
+alias nri='node --inspect '
 alias ns='npm start'
 alias nd='npm run dev'
 alias ncc='npm cache clean --force'
 
 # Vim
 alias v.='nvim .'
-alias ve='zi && nvim'
-alias ne='zi && nvim'
+alias vi='zi && nvim'
+alias ni='zi && nvim'
 alias vim=nvim
 alias v=nvim
 alias lv=vl
