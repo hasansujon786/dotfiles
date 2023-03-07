@@ -119,7 +119,7 @@ return {
     'TimUntersberger/neogit',
     lazy = true,
     cmd = 'Neogit',
-    commit = '64245bb',
+    commit = '7be1e93',
     config = function() require('config.neogit') end,
     dependencies = 'sindrets/diffview.nvim',
   },
@@ -128,8 +128,6 @@ return {
     lazy = true,
     event = 'BufReadPost',
     config = function() require('config.gitgutter-config') end,
-    commit = 'f19b6203191d69de955d91467a5707959572119b',
-    -- commit='d5bae104031bb1633cb5c5178dc7d4ac422b422a'
   },
   ------------------------------------------------
   --> Lsp & completions --------------------------
@@ -137,7 +135,7 @@ return {
   {
     'nvim-treesitter/nvim-treesitter',
     lazy = true,
-    event = 'BufReadPre', -- commit = 'c853370',
+    event = 'BufReadPre',
     config = function() require('config.treesitter') end,
     dependencies = {
       'JoosepAlviste/nvim-ts-context-commentstring',
@@ -174,7 +172,7 @@ return {
       'f3fora/cmp-spell',
       'hrsh7th/cmp-buffer',
       'saadparwaiz1/cmp_luasnip',
-      { 'hrsh7th/cmp-path', commit = 'd83839ae510d18530c6d36b662a9e806d4dceb73' },
+      'hrsh7th/cmp-path',
       { 'windwp/nvim-autopairs', config = function() require('config.autopairs') end },
       { 'mattn/emmet-vim', config = function() require('config.emmet') end },
     },

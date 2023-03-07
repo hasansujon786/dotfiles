@@ -4,6 +4,7 @@ iab xdate <C-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
 iab <expr> dts strftime("%c")
 iab <expr> modt strftime("%c", getftime(expand('%')))
 iab reutrn return
+iab lenght length
 iab re return
 iab widht width
 iab todo; TODO:
