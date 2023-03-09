@@ -5,7 +5,7 @@ return {
   ------------------------------------------------
   { 'navarasu/onedark.nvim', lazy = false },
   { 'goolord/alpha-nvim', config = function() require('config.alpha') end },
-  { 'kyazdani42/nvim-web-devicons', config = function() require('config.devicons-config') end },
+  { 'kyazdani42/nvim-web-devicons', lazy = true, config = function() require('config.devicons-config') end },
   -- { 'hasansujon786/notifier.nvim', opt = true, module = 'notifier' },
   { 'folke/which-key.nvim', config = function() require('config.whichkey') end },
   { 'uga-rosa/ccc.nvim', config = function() require('config.color-picker') end, opt = true, cmd = 'CccPick' },
@@ -40,23 +40,14 @@ return {
   { 'hasansujon786/harpoon', lazy = true, module = 'harpoon' },
   {
     'nvim-telescope/telescope.nvim',
+    lazy = true, event = 'VeryLazy',
     config = function() require('config.telescope') end,
     dependencies = {
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-    },
-  },
-  {
-    'ahmedkhalf/project.nvim',
-    lazy = true,
-    event = 'CursorHold',
-    config = function() require('config.project') end,
-    dependencies = {
-      {
-        'hasansujon786/telescope-ui-select.nvim',
-        config = function() require('telescope').load_extension('ui-select') end,
-      },
       { 'hasansujon786/telescope-yanklist.nvim' },
       { 'nvim-telescope/telescope-file-browser.nvim' },
+      { 'ahmedkhalf/project.nvim', config = function() require('config.project') end },
+      { 'hasansujon786/telescope-ui-select.nvim' },
     },
   },
 
@@ -73,7 +64,7 @@ return {
     config = function() require('config.orgmode') end,
     dependencies = { { 'akinsho/org-bullets.nvim', config = function() require('config.org-bullets') end } },
   },
-  { 'epwalsh/obsidian.nvim', config = function() require('config.obsidian') end },
+  -- { 'epwalsh/obsidian.nvim', config = function() require('config.obsidian') end },
 
   ------------------------------------------------
   --> Utils --------------------------------------
@@ -163,7 +154,7 @@ return {
   {
     'hrsh7th/nvim-cmp',
     lazy = true,
-    event = 'BufReadPost',
+    event = 'VeryLazy',
     config = function() require('config.cmp_setup') end,
     dependencies = {
       'rafamadriz/friendly-snippets',

@@ -7,6 +7,9 @@ require('onedark').setup({
   -- colors = {},
   highlights = {
     ['@variable.builtin'] = { fg = '$yellow' },
+    -- ['@lsp.typemod.function.readonly'] = { fg = '$yellow' },
+    -- ['@lsp.typemod.variable.readonly'] = { fg = '$yellow' },
+    ['@constant'] = { fg = '$yellow' },
     ['@variable'] = { fg = '$red' },
     ['@property'] = { fg = '$red' },
     ['@field'] = { fg = '$red' },

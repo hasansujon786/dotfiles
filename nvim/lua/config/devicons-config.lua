@@ -9,6 +9,11 @@ require('nvim-web-devicons').set_icon({
     color = '#F14C28',
     name = 'BranchCycle',
   },
+  DiffviewFiles = {
+    icon = '',
+    color = '#F14C28',
+    name = 'TelescopePrompt',
+  },
   org = {
     icon = '◉',
     color = '#75A899',
