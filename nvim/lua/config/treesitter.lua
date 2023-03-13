@@ -118,10 +118,7 @@ keymap('n', ']m', '<Plug>(ts-jump-next-s-class)zz')
 _G.my_treesitter_foldexpr = function()
   vim.defer_fn(function()
     vim.wo.foldmethod = 'expr'
-
-    if vim.bo.filetype == 'org' then
-      vim.wo.foldexpr = 'OrgmodeFoldExpr()'
-    elseif vim.b.treesitter_import_syntax ~= nil then
+    if vim.b.treesitter_import_syntax ~= nil then
       vim.wo.foldexpr = string.format(
         "v:lnum==1?'>1':getline(v:lnum)=~'%s'?1:nvim_treesitter#foldexpr()",
         vim.b.treesitter_import_syntax

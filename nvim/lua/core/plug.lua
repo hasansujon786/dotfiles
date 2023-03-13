@@ -3,7 +3,7 @@ return {
   ------------------------------------------------
   --> Visual -------------------------------------
   ------------------------------------------------
-  { 'navarasu/onedark.nvim', lazy = false },
+  { 'navarasu/onedark.nvim', lazy = true },
   { 'goolord/alpha-nvim', config = function() require('config.alpha') end },
   { 'kyazdani42/nvim-web-devicons', lazy = true, config = function() require('config.devicons-config') end },
   -- { 'hasansujon786/notifier.nvim', opt = true, module = 'notifier' },
