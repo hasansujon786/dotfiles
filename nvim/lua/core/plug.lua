@@ -19,11 +19,7 @@ return {
       { 'karb94/neoscroll.nvim', config = function() require('config.neoscroll') end },
       { 'chentoast/marks.nvim', config = function() require('config.marks-config') end },
       { 'hasansujon786/kissline.nvim', config = function() require('config.kissline') end },
-      {
-        'nvim-lualine/lualine.nvim',
-        config = function() require('config.lualine') end,
-        commit = '8d956c18258bb128ecf42f95411bb26efd3a5d23',
-      },
+      { 'freddiehaddad/feline.nvim', config = function() require('config.feline') end },
     },
   },
 

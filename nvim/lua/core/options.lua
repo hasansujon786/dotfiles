@@ -63,6 +63,7 @@ o.showmode = false --                            Don't show mode as lightline al
 o.modeline = false
 o.modelines = 0
 o.showtabline = 0
+o.laststatus = 3
 o.cmdheight = 1 --                               Height of the command bar
 vim.opt.fillchars = {
   eob = ' ',
