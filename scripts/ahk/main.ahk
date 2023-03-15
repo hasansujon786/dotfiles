@@ -48,8 +48,9 @@ PrintScreen::#+s
 #`::takeScreenshot()
 #q::bt()
 #+q::bt()bt()
-#y::quake_nvim(true)
-#+y::quake_nvim(false)
+#y::quake_nvim(true) ; edit from current input field
+#+y::quake_nvim(false) ; edit from last clipboard text
+#^y::quake_nvim(false) ; edit from last clipboard text
 ;Transparency toggle,
 #o::toggleTransparency()
 #^.::increaseTransparency()
@@ -500,6 +501,8 @@ quake_nvim(copy := false) {
   Static ps := "C:\\Users\\hasan\\dotfiles\\scripts\\ahk\\quaka.ps1"
   Static file := "C:\\Users\\hasan\\dotfiles\\scripts\\ahk\\clip.txt"
   if WinActive("quake_nvim") {
+    SendInput,{Esc}:w{Enter}
+    sleep 50
     FileRead, file_content, %file%
     Clipboard := file_content
     file_content := ""

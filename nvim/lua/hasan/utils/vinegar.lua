@@ -14,7 +14,8 @@ M.toggle_sidebar = function()
   elseif readonly or not modifiable then
     vim.cmd([[NvimTreeOpen]])
   else
-    vim.cmd([[NvimTreeFindFile]])
+    vim.cmd([[NvimTreeFocus]])
+    -- vim.cmd([[NvimTreeFindFile]])
     -- tree.find_file(true, api.nvim_get_current_buf(), true)
   end
 end
