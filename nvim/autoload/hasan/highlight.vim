@@ -102,6 +102,7 @@ function! hasan#highlight#load_custom_highlight(...) abort
   " hi! link GlancePreviewCursorLine CursorLineFocus
 
   "/// Telescope ///"
+  hi! TelescopeMatching gui=NONE
   hi! link TelescopeTitle Comment
   hi! link TelescopeBorder FloatBorderFlat
   hi! link TelescopeNormal NormalFloatFlat
