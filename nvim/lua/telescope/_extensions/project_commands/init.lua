@@ -8,10 +8,11 @@ local function scriptsCommandsFromJSON(script_file, opts)
   }, opts or {})
 
   local exists, path = utils.root_has(script_file)
-  if not exists then
+  if not exists or not path then
     print('Not found ' .. script_file)
     return 0
   end
+
   picker.list_picker(opts, utils.get_project_scripts(path.filename), picker.actions.run_script)
   vim.cmd([[normal! a]])
 end

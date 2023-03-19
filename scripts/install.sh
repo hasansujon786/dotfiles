@@ -148,6 +148,7 @@ setup_bash() {
 setup_wezterm() {
   weztermPath=($HOME/.wezterm.lua $HOME/.config/wezterm/wezterm.lua $HOME/.config/wezterm/wezterm.lua)
   util_print wezterm
+  $getter install wezterm -y
 
   util_backUpConfig ${weztermPath[$osIndex]}
   util_makeSymlinkPath $HOME/dotfiles/gui/wezterm/.wezterm.lua ${weztermPath[$osIndex]}
@@ -388,13 +389,13 @@ auto_install_everything() {
   fi
 
   setup_bash
+  setup_wezterm
   setup_nvim
   setup_node
   setup_alacritty
   setup_lazygit
   setup_lf
   # setup_tig
-  # setup_wezterm
   # setup_git_defaults
   install_various_apps
 }

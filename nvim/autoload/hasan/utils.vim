@@ -183,7 +183,8 @@ function! hasan#utils#foldtext() " {{{
   let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
   let fillcharcount = windowwidth - len(line)
 
-  return line .' ['.foldedlinecount.'ℓ]'. repeat(" ",fillcharcount)
+  " return line .' ['.foldedlinecount.'ℓ]'. repeat(" ",fillcharcount)
+  return line .'... ['.foldedlinecount.'ℓ]'. repeat(" ",fillcharcount)
 endfunction
 " }}}
 
