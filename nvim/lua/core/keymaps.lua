@@ -43,10 +43,13 @@ nvim_set_keymap('n', '<C-_>', 'mz_gcc`z', {}) -- Comment or uncomment lines
 nvim_set_keymap('i', '<C-_>', '<ESC>_gccgi', {})
 nvim_set_keymap('v', '<C-_>', 'mz_gcgv`z', {})
 
-keymap('n', '<A-j>', ':move +1<CR>==') -- Move lines up and down in normal & visual mode
-keymap('n', '<A-k>', ':move -2<CR>==')
-keymap('x', '<A-k>', ':call hasan#utils#visual_move_up()<CR>')
-keymap('x', '<A-j>', ':call hasan#utils#visual_move_down()<CR>')
+local code_action_keys = { { '<A-k>', '<A-j>' }, { '<up>', '<down>' } }
+for _, action_key in ipairs(code_action_keys) do
+  keymap('n', action_key[1], ':move -2<CR>==')
+  keymap('n', action_key[2], ':move +1<CR>==') -- Move lines up and down in normal & visual mode
+  keymap('x', action_key[1], ':call hasan#utils#visual_move_up()<CR>')
+  keymap('x', action_key[2], ':call hasan#utils#visual_move_down()<CR>')
+end
 -- vnoremap <silent> <A-k> :move '<-2<CR>gv=gv
 -- vnoremap <silent> <A-j> :move '>+1<CR>gv=gv
 

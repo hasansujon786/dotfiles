@@ -1,5 +1,11 @@
 https://lexikos.github.io/v2/docs/KeyList.htm
 https://lexikos.github.io/v2/docs/Hotkeys.htm
+```
+# = Windows
++ = Shift
+^ = Ctrl
+! = Alt
+```
 
 \::AltTabMenu
 LAlt & j::AltTab

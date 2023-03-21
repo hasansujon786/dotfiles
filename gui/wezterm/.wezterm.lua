@@ -1,4 +1,5 @@
 local wezterm = require('wezterm')
+local act = wezterm.action
 
 local SOLID_LEFT_ARROW = ''
 local SOLID_RIGHT_ARROW = ''
@@ -85,6 +86,7 @@ return {
   tab_max_width = 30,
   initial_rows = 28,
   initial_cols = 114,
+  enable_scroll_bar = false,
   set_environment_variables = {
     EDITOR = 'nvim',
   },
@@ -98,12 +100,12 @@ return {
     'Consolas',
   }),
   font_size = 13.5,
+  underline_thickness = '2pt',
   default_prog = { 'C:\\Program Files\\Git\\bin\\bash.exe' },
   default_cwd = 'E:\\repoes',
   -- default_gui_startup_args = {'start'}
-  color_scheme = 'OneHalfDark',
   hide_tab_bar_if_only_one_tab = false,
-  window_background_opacity = 0.98,
+  window_background_opacity = 0.96,
   -- window_background_image = 'C:\\Users\\hasan\\Pictures\\do-more-y3.jpg'
   -- tab_bar_at_bottom = true,
   unzoom_on_switch_pane = true,
@@ -125,26 +127,26 @@ return {
   },
   keys = {
     -- { key = ',', mods = 'ALT', action = 'ShowTabNavigator' },
-    { key = 'p', mods = 'SHIFT|CTRL', action = 'ShowLauncher' },
+    -- { key = 'p', mods = 'SHIFT|CTRL', action = 'ShowLauncher' },
     { key = ' ', mods = 'CTRL', action = { SendString = '\x11' } },
     { key = 'Backspace', mods = 'CTRL', action = { SendKey = { key = 'w', mods = 'CTRL' } } },
     {
       key = 'F11',
       action = wezterm.action_callback(function(window, pane)
-        -- local overrides = window:get_config_overrides() or {}
-        -- if not window:get_dimensions().is_full_screen then
-        --   overrides.enable_tab_bar = false
-        -- else
-        --   overrides.enable_tab_bar = true
-        -- end
-        -- window:set_config_overrides(overrides)
+        local overrides = window:get_config_overrides() or {}
+        if not window:get_dimensions().is_full_screen then
+          overrides.enable_tab_bar = false
+        else
+          overrides.enable_tab_bar = true
+        end
+        window:set_config_overrides(overrides)
         window:perform_action('ToggleFullScreen', pane)
       end),
     },
     {
       key = 'l',
       mods = 'SHIFT|CTRL',
-      action = wezterm.action({
+      action = act({
         SpawnCommandInNewTab = {
           args = { 'lf' },
           cwd = '.',
@@ -152,47 +154,51 @@ return {
         },
       }),
     },
-    -- { key = 'b', mods = 'LEADER', action = wezterm.action({ EmitEvent = 'toggle-opacity' }) },
-    { key = 'b', mods = 'LEADER', action = wezterm.action({ EmitEvent = 'toggle-tab-bar' }) },
-    { key = 'w', mods = 'SHIFT|CTRL', action = wezterm.action({ CloseCurrentPane = { confirm = false } }) },
+    -- { key = 'b', mods = 'LEADER', action = act({ EmitEvent = 'toggle-opacity' }) },
+    { key = 'b', mods = 'LEADER', action = act({ EmitEvent = 'toggle-tab-bar' }) },
+    { key = 'w', mods = 'SHIFT|CTRL', action = act({ CloseCurrentPane = { confirm = false } }) },
     -- tabs
-    { key = '[', mods = 'ALT', action = wezterm.action({ ActivateTabRelative = -1 }) },
-    { key = ']', mods = 'ALT', action = wezterm.action({ ActivateTabRelative = 1 }) },
-    { key = '{', mods = 'SHIFT|ALT', action = wezterm.action({ MoveTabRelative = -1 }) },
-    { key = '}', mods = 'SHIFT|ALT', action = wezterm.action({ MoveTabRelative = 1 }) },
+    { key = '[', mods = 'ALT', action = act({ ActivateTabRelative = -1 }) },
+    { key = ']', mods = 'ALT', action = act({ ActivateTabRelative = 1 }) },
+    { key = '{', mods = 'SHIFT|ALT', action = act({ MoveTabRelative = -1 }) },
+    { key = '}', mods = 'SHIFT|ALT', action = act({ MoveTabRelative = 1 }) },
     -- tmux style key bindings
-    { key = 'c', mods = 'LEADER', action = wezterm.action({ SpawnTab = 'CurrentPaneDomain' }) },
-    { key = 'x', mods = 'LEADER', action = wezterm.action({ CloseCurrentPane = { confirm = false } }) },
+    { key = 'c', mods = 'LEADER', action = act({ SpawnTab = 'CurrentPaneDomain' }) },
+    { key = 'x', mods = 'LEADER', action = act({ CloseCurrentPane = { confirm = false } }) },
     { key = 'z', mods = 'LEADER', action = 'TogglePaneZoomState' },
-    { key = '-', mods = 'LEADER', action = wezterm.action({ SplitVertical = { domain = 'CurrentPaneDomain' } }) },
-    { key = '\\', mods = 'LEADER', action = wezterm.action({ SplitHorizontal = { domain = 'CurrentPaneDomain' } }) },
-    { key = 'h', mods = 'LEADER', action = wezterm.action({ ActivatePaneDirection = 'Left' }) },
-    { key = 'j', mods = 'LEADER', action = wezterm.action({ ActivatePaneDirection = 'Down' }) },
-    { key = 'k', mods = 'LEADER', action = wezterm.action({ ActivatePaneDirection = 'Up' }) },
-    { key = 'l', mods = 'LEADER', action = wezterm.action({ ActivatePaneDirection = 'Right' }) },
-    { key = 'H', mods = 'LEADER|SHIFT', action = wezterm.action({ AdjustPaneSize = { 'Left', 5 } }) },
-    { key = 'J', mods = 'LEADER|SHIFT', action = wezterm.action({ AdjustPaneSize = { 'Down', 5 } }) },
-    { key = 'K', mods = 'LEADER|SHIFT', action = wezterm.action({ AdjustPaneSize = { 'Up', 5 } }) },
-    { key = 'L', mods = 'LEADER|SHIFT', action = wezterm.action({ AdjustPaneSize = { 'Right', 5 } }) },
-    { key = '1', mods = 'LEADER', action = wezterm.action({ ActivateTab = 0 }) },
-    { key = '2', mods = 'LEADER', action = wezterm.action({ ActivateTab = 1 }) },
-    { key = '3', mods = 'LEADER', action = wezterm.action({ ActivateTab = 2 }) },
-    { key = '4', mods = 'LEADER', action = wezterm.action({ ActivateTab = 3 }) },
-    { key = '5', mods = 'LEADER', action = wezterm.action({ ActivateTab = 4 }) },
-    { key = '6', mods = 'LEADER', action = wezterm.action({ ActivateTab = 5 }) },
-    { key = '7', mods = 'LEADER', action = wezterm.action({ ActivateTab = 6 }) },
-    { key = '8', mods = 'LEADER', action = wezterm.action({ ActivateTab = 7 }) },
-    { key = '9', mods = 'LEADER', action = wezterm.action({ ActivateTab = 8 }) },
-    { key = '&', mods = 'LEADER|SHIFT', action = wezterm.action({ CloseCurrentTab = { confirm = true } }) },
+    { key = '-', mods = 'LEADER', action = act({ SplitVertical = { domain = 'CurrentPaneDomain' } }) },
+    { key = '\\', mods = 'LEADER', action = act({ SplitHorizontal = { domain = 'CurrentPaneDomain' } }) },
+    { key = 'h', mods = 'LEADER', action = act({ ActivatePaneDirection = 'Left' }) },
+    { key = 'j', mods = 'LEADER', action = act({ ActivatePaneDirection = 'Down' }) },
+    { key = 'k', mods = 'LEADER', action = act({ ActivatePaneDirection = 'Up' }) },
+    { key = 'l', mods = 'LEADER', action = act({ ActivatePaneDirection = 'Right' }) },
+    { key = 'H', mods = 'LEADER|SHIFT', action = act({ AdjustPaneSize = { 'Left', 5 } }) },
+    { key = 'J', mods = 'LEADER|SHIFT', action = act({ AdjustPaneSize = { 'Down', 5 } }) },
+    { key = 'K', mods = 'LEADER|SHIFT', action = act({ AdjustPaneSize = { 'Up', 5 } }) },
+    { key = 'L', mods = 'LEADER|SHIFT', action = act({ AdjustPaneSize = { 'Right', 5 } }) },
+    { key = '1', mods = 'LEADER', action = act({ ActivateTab = 0 }) },
+    { key = '2', mods = 'LEADER', action = act({ ActivateTab = 1 }) },
+    { key = '3', mods = 'LEADER', action = act({ ActivateTab = 2 }) },
+    { key = '4', mods = 'LEADER', action = act({ ActivateTab = 3 }) },
+    { key = '5', mods = 'LEADER', action = act({ ActivateTab = 4 }) },
+    { key = '6', mods = 'LEADER', action = act({ ActivateTab = 5 }) },
+    { key = '7', mods = 'LEADER', action = act({ ActivateTab = 6 }) },
+    { key = '8', mods = 'LEADER', action = act({ ActivateTab = 7 }) },
+    { key = '9', mods = 'LEADER', action = act({ ActivateTab = 8 }) },
+    { key = '&', mods = 'LEADER|SHIFT', action = act({ CloseCurrentTab = { confirm = true } }) },
     -- tmux custom bindings
     { key = 'o', mods = 'LEADER', action = 'ActivateLastTab' },
-    { key = 'v', mods = 'LEADER', action = wezterm.action({ SplitHorizontal = {} }) },
-    { key = 's', mods = 'LEADER', action = wezterm.action({ SplitVertical = {} }) },
+    { key = 'v', mods = 'LEADER', action = act({ SplitHorizontal = {} }) },
+    { key = 's', mods = 'LEADER', action = act({ SplitVertical = {} }) },
   },
   mouse_bindings = {
     { event = { Up = { streak = 1, button = 'Left' } }, mods = 'CTRL', action = 'OpenLinkAtMouseCursor' },
     { event = { Drag = { streak = 1, button = 'Left' } }, mods = 'CTRL|SHIFT', action = 'StartWindowDrag' },
   },
+  command_palette_bg_color = '#222222',
+  command_palette_fg_color = '#c0c0c0',
+  command_palette_font_size = 18.0,
+  color_scheme = 'OneHalfDark',
   colors = {
     background = '#242B38',
     tab_bar = {

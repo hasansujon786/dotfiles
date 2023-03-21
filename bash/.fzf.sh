@@ -21,6 +21,21 @@ __fzf_z__() {
   dir=$(eval "$cmd") && printf 'cd -- %q' "$dir"
 }
 
+l() {
+  [ $# -gt 0 ] && z "$*" && return
+  local cmd dir
+  cmd="zoxide query -i -- "$1""
+  dir=$(eval "$cmd")
+
+  term_cmd="wezterm cli spawn --cwd \"$dir\""
+  id=$(eval "$term_cmd")
+  echo "yarn start" | wezterm cli send-text --pane-id $id
+  cd $dir && nvim
+
+  # wt -w 0 nt -d $dir -p "Bash" C:\\Program Files\\Git\\bin\\bash -c "yarn start"
+  # cd $dir && nvim
+}
+
 # ALT-e - cd into the selected directory
 bind -m emacs-standard '"\ee": " \C-b\C-k \C-u`__fzf_z__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d\C-h"'
 bind -m emacs-standard '"\ej": " \C-b\C-k \C-u`__fzf_z__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d\C-h"'

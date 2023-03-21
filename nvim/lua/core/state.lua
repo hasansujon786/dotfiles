@@ -1,4 +1,4 @@
-vim.g.bg_tranparent = false
+vim.g.bg_tranparent = true
 local M = {}
 
 M.ui = {

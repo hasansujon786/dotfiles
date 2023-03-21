@@ -68,16 +68,16 @@ f1::switchToExplorer()
 !f1::switchToSavedApp()
 !z::closeAllExplorers()
 ; Global arrow controls
-#If not WinActive("ahk_exe WindowsTerminal.exe") and not WinActive("ahk_exe alacritty.exe") and not WinActive("ahk_exe Code.exe")
+!Backspace::Send ^{Backspace}
+!SPACE::Send ^{SPACE}
+!j:: SendInput,{DOWN}
+!k:: SendInput,{UP}
+#If not WinActive("ahk_exe WindowsTerminal.exe") and not WinActive("ahk_exe alacritty.exe") and not WinActive("ahk_exe Code.exe") and not WinActive("ahk_exe wezterm-gui.exe")
   !h:: SendInput,{LEFT}
-  !j:: SendInput,{DOWN}
-  !k:: SendInput,{UP}
   !l:: SendInput,{RIGHT}
-  !Backspace::Send ^{Backspace}
 #If
 #If WinActive("ahk_exe Code.exe")
   !Backspace::Send ^{Backspace}
-  !SPACE::Send ^{SPACE}
 #If
 ; Adobe XD
 #IfWinActive, ahk_class ApplicationFrameWindow

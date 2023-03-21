@@ -1,3 +1,4 @@
+wezterm ls-fonts --text "✘"
 
 ```lua
   action = wezterm.action_callback(function(window, pane)
