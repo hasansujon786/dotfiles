@@ -66,23 +66,26 @@ wezterm.on('toggle-opacity', function(window, pane)
   window:set_config_overrides(overrides)
 end)
 
+local fixed_tab_bar = false
 wezterm.on('toggle-tab-bar', function(window, pane)
   local overrides = window:get_config_overrides() or {}
-  if overrides.enable_tab_bar then
-    overrides.enable_tab_bar = false
-  else
+  if not overrides.enable_tab_bar then
     overrides.enable_tab_bar = true
+  else
+    overrides.enable_tab_bar = false
   end
+  fixed_tab_bar = overrides.enable_tab_bar
   window:set_config_overrides(overrides)
 end)
 
 return {
-  -- tab_bar_style = {
-  --   new_tab_left = 'x',
-  --   active_tab_right = 'x',
-  --   inactive_tab_left = 'x',
-  --   inactive_tab_right = 'x',
-  -- },
+  check_for_updates = false,
+  use_dead_keys = false,
+  warn_about_missing_glyphs = false,
+  -- animation_fps = 1,
+  -- cursor_blink_ease_in = 'Constant',
+  -- cursor_blink_ease_out = 'Constant',
+  -- cursor_blink_rate = 0,
   tab_max_width = 30,
   initial_rows = 28,
   initial_cols = 114,
@@ -100,6 +103,7 @@ return {
     'Consolas',
   }),
   font_size = 13.5,
+  -- harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }, -- Disable ligatures
   underline_thickness = '2pt',
   default_prog = { 'C:\\Program Files\\Git\\bin\\bash.exe' },
   default_cwd = 'E:\\repoes',
@@ -133,13 +137,16 @@ return {
     {
       key = 'F11',
       action = wezterm.action_callback(function(window, pane)
-        local overrides = window:get_config_overrides() or {}
-        if not window:get_dimensions().is_full_screen then
-          overrides.enable_tab_bar = false
-        else
-          overrides.enable_tab_bar = true
+        if not fixed_tab_bar then
+          local overrides = window:get_config_overrides() or {}
+          if not window:get_dimensions().is_full_screen then
+            overrides.enable_tab_bar = false
+          else
+            overrides.enable_tab_bar = true
+          end
+          window:set_config_overrides(overrides)
         end
-        window:set_config_overrides(overrides)
+
         window:perform_action('ToggleFullScreen', pane)
       end),
     },
@@ -155,7 +162,7 @@ return {
       }),
     },
     -- { key = 'b', mods = 'LEADER', action = act({ EmitEvent = 'toggle-opacity' }) },
-    { key = 'b', mods = 'LEADER', action = act({ EmitEvent = 'toggle-tab-bar' }) },
+    { key = 't', mods = 'SHIFT|ALT', action = act({ EmitEvent = 'toggle-tab-bar' }) },
     { key = 'w', mods = 'SHIFT|CTRL', action = act({ CloseCurrentPane = { confirm = false } }) },
     -- tabs
     { key = '[', mods = 'ALT', action = act({ ActivateTabRelative = -1 }) },
@@ -194,6 +201,24 @@ return {
   mouse_bindings = {
     { event = { Up = { streak = 1, button = 'Left' } }, mods = 'CTRL', action = 'OpenLinkAtMouseCursor' },
     { event = { Drag = { streak = 1, button = 'Left' } }, mods = 'CTRL|SHIFT', action = 'StartWindowDrag' },
+  },
+  launch_menu = {
+    {
+      label = 'Git Bash',
+      args = { 'C:\\Program Files\\Git\\bin\\bash.exe' },
+    },
+    {
+      label = 'PowerShell Core',
+      args = { 'pwsh' },
+    },
+    {
+      label = 'Command Prompt',
+      args = { 'cmd' },
+    },
+    {
+      label = 'PowerShell',
+      args = { 'powershell.exe', '-NoLogo' },
+    },
   },
   command_palette_bg_color = '#222222',
   command_palette_fg_color = '#c0c0c0',
