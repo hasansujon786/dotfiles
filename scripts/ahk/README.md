@@ -169,3 +169,10 @@ enterAsCtrl() {
   return
 }
 
+# loop
+x::
+While (GetKeyState("x", "P")) {
+  Send 123
+    Sleep 500
+}
+Return

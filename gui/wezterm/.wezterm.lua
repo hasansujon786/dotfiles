@@ -109,6 +109,7 @@ return {
   default_cwd = 'E:\\repoes',
   -- default_gui_startup_args = {'start'}
   hide_tab_bar_if_only_one_tab = false,
+  hide_mouse_cursor_when_typing = true,
   window_background_opacity = 0.96,
   -- window_background_image = 'C:\\Users\\hasan\\Pictures\\do-more-y3.jpg'
   -- tab_bar_at_bottom = true,

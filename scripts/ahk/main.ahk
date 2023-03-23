@@ -525,3 +525,38 @@ quake_nvim(copy := false) {
   SplashTextOff
   RunWait, powershell -command %ps%,, Hide
 }
+;******************************************************************************
+; Youtube
+;******************************************************************************
++^#RButton::
+  If (activeYTmode)
+  {
+    activeYTmode := 0
+    beep()
+    TaskBar_SetAttr(1, 0xff1D1D1D)
+  } else {
+    activeYTmode := 1
+    beep()
+    TaskBar_SetAttr(1, 0xff0000ff)
+  }
+Return
+#if activeYTmode
+  RButton::ytRemovetFromWL()
+  Esc::
+    activeYTmode := 0
+    beep()
+    TaskBar_SetAttr(1, 0xff1D1D1D)
+  Return
+#if
+ytRemovetFromWL() {
+  ; Remove item from watch list
+  Send {LButton}
+  Sleep 2
+  Send {tab}
+  Sleep 1
+  Send {tab}
+  Sleep .5
+  Send {tab}
+  Sleep .5
+  Send {Enter}
+}

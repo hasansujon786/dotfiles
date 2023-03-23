@@ -1,5 +1,6 @@
 local actions = require('telescope.actions')
 local local_action = require('hasan.telescope.local_action')
+local fb_actions = require('telescope._extensions.file_browser.actions')
 
 local custom_mappings = {
   ['<C-p>'] = actions.move_selection_previous,
@@ -63,6 +64,57 @@ require('telescope').setup({
       require('telescope.themes').get_dropdown(),
     },
     project_commands = require('config.project_commands'),
+    file_browser = {
+      cwd_to_path = false,
+      grouped = true,
+      files = false, -- false: start with all dirs
+      hidden = false,
+      hide_parent_dir = true,
+      prompt_path = true,
+      quiet = false,
+      dir_icon = '',
+      dir_icon_hl = 'Default',
+      display_stat = { date = true, size = true },
+      git_status = true,
+      mappings = {
+        ['i'] = {
+          ['<A-c>'] = fb_actions.create,
+          ['<S-CR>'] = fb_actions.create_from_prompt,
+          ['<A-r>'] = fb_actions.rename,
+          ['<A-m>'] = fb_actions.move,
+          ['<A-y>'] = fb_actions.copy,
+          ['<A-d>'] = fb_actions.remove,
+          ['<C-o>'] = fb_actions.open,
+          ['<C-e>'] = fb_actions.goto_home_dir,
+          ['<C-t>'] = fb_actions.change_cwd,
+          ['<C-f>'] = fb_actions.toggle_browser,
+          ['<C-s>'] = fb_actions.toggle_all,
+
+          -- ['<C-h>'] = fb_actions.toggle_hidden,
+          ['<C-h>'] = false,
+          ['<C-u>'] = fb_actions.goto_cwd,
+          ['<tab>'] = actions.select_default,
+          ['<bs>'] = local_action.fb_dir_up_or_bs,
+
+          ['<C-w>'] = local_action.fb_test,
+        },
+        ['n'] = {
+          ['c'] = fb_actions.create,
+          ['r'] = fb_actions.rename,
+          ['m'] = fb_actions.move,
+          ['y'] = fb_actions.copy,
+          ['d'] = fb_actions.remove,
+          ['o'] = fb_actions.open,
+          ['g'] = fb_actions.goto_parent_dir,
+          ['e'] = fb_actions.goto_home_dir,
+          ['w'] = fb_actions.goto_cwd,
+          ['t'] = fb_actions.change_cwd,
+          ['f'] = fb_actions.toggle_browser,
+          ['h'] = fb_actions.toggle_hidden,
+          ['s'] = fb_actions.toggle_all,
+        },
+      },
+    },
   },
 })
 require('telescope').load_extension('fzf')
