@@ -42,7 +42,6 @@ Capslock::alternateTab()
 #Capslock::toggleCapsLosck()
 $Escape::superEscape()
 #SPACE::toggleAlwaysOnTop() ; Always on Top
-#z::rebootMiWiFi()
 #p::AppsKey
 PrintScreen::#+s
 #`::takeScreenshot()
@@ -480,23 +479,6 @@ TaskBar_SetAttr(accent_state := 0, gradient_color := "0x01000000")
 ;******************************************************************************
 ; Automations
 ;******************************************************************************
-rebootMiWiFi() {
-  Run, http://router.miwifi.com/
-  sleep 3000
-  MouseMove, 559, 600
-  Click
-  SendInput,hasan007007{ENTER}
-  sleep 4000
-  MouseMove, 1160, 150
-  Click
-  SendInput,{tab}{tab}{tab}{tab}{enter}
-  sleep 4000
-  MouseMove, 700, 522
-  Click
-  sleep 1000
-  MouseMove, 596, 420
-  Click
-}
 quake_nvim(copy := false) {
   Static ps := "C:\\Users\\hasan\\dotfiles\\scripts\\ahk\\quaka.ps1"
   Static file := "C:\\Users\\hasan\\dotfiles\\scripts\\ahk\\clip.txt"
@@ -529,34 +511,5 @@ quake_nvim(copy := false) {
 ; Youtube
 ;******************************************************************************
 +^#RButton::
-  If (activeYTmode)
-  {
-    activeYTmode := 0
-    beep()
-    TaskBar_SetAttr(1, 0xff1D1D1D)
-  } else {
-    activeYTmode := 1
-    beep()
-    TaskBar_SetAttr(1, 0xff0000ff)
-  }
+  Run, "C:\Users\hasan\dotfiles\scripts\ahk\automation_mode.ahk"
 Return
-#if activeYTmode
-  RButton::ytRemovetFromWL()
-  Esc::
-    activeYTmode := 0
-    beep()
-    TaskBar_SetAttr(1, 0xff1D1D1D)
-  Return
-#if
-ytRemovetFromWL() {
-  ; Remove item from watch list
-  Send {LButton}
-  Sleep 2
-  Send {tab}
-  Sleep 1
-  Send {tab}
-  Sleep .5
-  Send {tab}
-  Sleep .5
-  Send {Enter}
-}

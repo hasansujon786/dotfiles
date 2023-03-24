@@ -1,10 +1,15 @@
-https://lexikos.github.io/v2/docs/KeyList.htm
-https://lexikos.github.io/v2/docs/Hotkeys.htm
+## Links
+  https://lexikos.github.io/v2/docs/KeyList.htm
+  https://lexikos.github.io/v2/docs/Hotkeys.htm
+  - [Running AutoHotkey Scripts at a Specific Time](https://www.youtube.com/watch?v=UbX3QtGOsTU)
+  - [How to Launch AutoHotkey Scripts At Startup](https://www.youtube.com/watch?v=0kGP8S9o7qI)
+
 ```
 # = Windows
 + = Shift
 ^ = Ctrl
 ! = Alt
+* = Wildcard (*CapsLock::)
 ```
 
 \::AltTabMenu

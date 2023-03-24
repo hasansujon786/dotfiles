@@ -11,6 +11,7 @@
 # choco install gimp -y
 # choco install vlc -y
 # choco install emacs -y
+pip install Pillow
 
 # choco install qbittorrent -y
 # choco install etcher -y

@@ -79,6 +79,11 @@ wezterm.on('toggle-tab-bar', function(window, pane)
 end)
 
 return {
+  initial_rows = 28,
+  initial_cols = 114,
+  tab_max_width = 30,
+  hide_tab_bar_if_only_one_tab = false,
+  window_decorations = 'NONE', -- RESIZE
   check_for_updates = false,
   use_dead_keys = false,
   warn_about_missing_glyphs = false,
@@ -86,14 +91,12 @@ return {
   -- cursor_blink_ease_in = 'Constant',
   -- cursor_blink_ease_out = 'Constant',
   -- cursor_blink_rate = 0,
-  tab_max_width = 30,
-  initial_rows = 28,
-  initial_cols = 114,
   enable_scroll_bar = false,
   set_environment_variables = {
     EDITOR = 'nvim',
   },
   status_update_interval = 1000,
+  freetype_load_flags = 'NO_HINTING',
   font = wezterm.font_with_fallback({
     {
       family = 'OperatorMonoLig Nerd Font',
@@ -103,12 +106,12 @@ return {
     'Consolas',
   }),
   font_size = 13.5,
-  -- harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }, -- Disable ligatures
   underline_thickness = '2pt',
+  adjust_window_size_when_changing_font_size = false,
+  -- harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }, -- Disable ligatures
   default_prog = { 'C:\\Program Files\\Git\\bin\\bash.exe' },
   default_cwd = 'E:\\repoes',
   -- default_gui_startup_args = {'start'}
-  hide_tab_bar_if_only_one_tab = false,
   hide_mouse_cursor_when_typing = true,
   window_background_opacity = 0.96,
   -- window_background_image = 'C:\\Users\\hasan\\Pictures\\do-more-y3.jpg'
@@ -117,8 +120,6 @@ return {
   exit_behavior = 'Close',
   enable_tab_bar = true,
   window_close_confirmation = 'NeverPrompt',
-  adjust_window_size_when_changing_font_size = false,
-  window_decorations = 'NONE',
   leader = { key = 'b', mods = 'CTRL', timeout_milliseconds = 1000 },
   window_padding = {
     left = 0,
@@ -126,6 +127,7 @@ return {
     top = 0,
     bottom = 0,
   },
+  pane_focus_follows_mouse = false,
   inactive_pane_hsb = {
     saturation = 0.9,
     brightness = 0.8,
