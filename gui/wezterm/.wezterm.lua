@@ -91,6 +91,7 @@ return {
   -- cursor_blink_ease_in = 'Constant',
   -- cursor_blink_ease_out = 'Constant',
   -- cursor_blink_rate = 0,
+  hide_mouse_cursor_when_typing = true,
   enable_scroll_bar = false,
   set_environment_variables = {
     EDITOR = 'nvim',
@@ -112,7 +113,6 @@ return {
   default_prog = { 'C:\\Program Files\\Git\\bin\\bash.exe' },
   default_cwd = 'E:\\repoes',
   -- default_gui_startup_args = {'start'}
-  hide_mouse_cursor_when_typing = true,
   window_background_opacity = 0.96,
   -- window_background_image = 'C:\\Users\\hasan\\Pictures\\do-more-y3.jpg'
   -- tab_bar_at_bottom = true,

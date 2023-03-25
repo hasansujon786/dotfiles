@@ -14,7 +14,7 @@ TaskBar_SetAttr(1, 0xff0000ff)
   Esc::
     activeYTmode := 0
     beep()
-    TaskBar_SetAttr(1, 0xff1D1D1D)
+    TaskBar_SetAttr(1, 0xff101010)
     ExitApp
   Return
 
@@ -23,16 +23,6 @@ TaskBar_SetAttr(1, 0xff0000ff)
   x::deleteFbaseUser()
   #z::rebootMiWiFi()
 #if
-; If (activeYTmode)
-; {
-;   activeYTmode := 0
-;   beep()
-;   TaskBar_SetAttr(1, 0xff1D1D1D)
-; } else {
-;   activeYTmode := 1
-;   beep()
-;   TaskBar_SetAttr(1, 0xff0000ff)
-; }
 
 
 print(msg) {
@@ -118,7 +108,7 @@ rebootMiWiFi() {
 beep() {
   SoundBeep, 300, 150
 }
-TaskBar_SetAttr(accent_state := 0, gradient_color := "0x01000000")
+TaskBar_SetAttr(accent_state := 0, gradient_color := "0xff101010")
 {
   static init, hTrayWnd, ver := DllCall("GetVersion") & 0xff < 10
   static pad := A_PtrSize = 8 ? 4 : 0, WCA_ACCENT_POLICY := 19
