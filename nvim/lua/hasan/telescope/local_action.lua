@@ -37,38 +37,23 @@ local local_action = transform_mod({
 
     require('hasan.utils.file').quickLook({ string.format('%s/%s', entry.cwd, entry[1]) })
   end,
-  fb_dir_up_or_bs = function(prompt_bufnr)
+  hack_goto_parent_dir = function(prompt_bufnr)
     local current_picker = action_state.get_current_picker(prompt_bufnr)
-    local input = current_picker:_get_prompt()
 
-    if input == '' then
-      fb_actions.goto_parent_dir(prompt_bufnr)
+    if current_picker:_get_prompt() == '' then
+      fb_actions.goto_parent_dir(prompt_bufnr, false)
     else
-      feedkeys('<c-h>')
+      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-u>', true, false, true), 'tn', false)
     end
   end,
-  fb_test = function(prompt_bufnr)
-    -- local entry = action_state.get_selected_entry()
+  hack_goto_cwd = function(prompt_bufnr)
+    local current_picker = action_state.get_current_picker(prompt_bufnr)
 
-    -- local current_picker = action_state.get_current_picker(prompt_bufnr)
-    -- local input = current_picker:_get_prompt()
-
-    -- -- local Path = require('plenary.path')
-    -- -- local os_sep = Path.path.sep
-
-    -- -- local finder = current_picker.finder
-    -- -- local input = (finder.files and finder.path or finder.cwd) .. os_sep .. current_picker:_get_prompt()
-
-    -- if input == '' then
-    --   fb_actions.goto_parent_dir(prompt_bufnr)
-    -- else
-    --   feedkeys('<c-h>')
-    -- end
-    -- -- if entry == nil then
-    -- --   return require('hasan.utils').Logger:warn('[telescope]: Nothing currently selected')
-    -- -- end
-
-    -- -- require('hasan.utils.file').quickLook({ string.format('%s/%s', entry.cwd, entry[1]) })
+    if current_picker:_get_prompt() == '' then
+      fb_actions.goto_cwd(prompt_bufnr)
+    else
+      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-u>', true, false, true), 'tn', false)
+    end
   end,
 })
 

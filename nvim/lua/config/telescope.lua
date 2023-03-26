@@ -84,19 +84,19 @@ require('telescope').setup({
           ['<A-m>'] = fb_actions.move,
           ['<A-y>'] = fb_actions.copy,
           ['<A-d>'] = fb_actions.remove,
+
           ['<C-o>'] = fb_actions.open,
           ['<C-e>'] = fb_actions.goto_home_dir,
           ['<C-t>'] = fb_actions.change_cwd,
           ['<C-f>'] = fb_actions.toggle_browser,
           ['<C-s>'] = fb_actions.toggle_all,
+          ['<C-h>'] = fb_actions.toggle_hidden,
+          ['<C-g>'] = fb_actions.goto_parent_dir,
+          ['<bs>'] = fb_actions.backspace,
 
-          -- ['<C-h>'] = fb_actions.toggle_hidden,
-          ['<C-h>'] = false,
-          ['<C-u>'] = fb_actions.goto_cwd,
           ['<tab>'] = actions.select_default,
-          ['<bs>'] = local_action.fb_dir_up_or_bs,
-
-          ['<C-w>'] = local_action.fb_test,
+          ['<C-w>'] = local_action.hack_goto_parent_dir,
+          ['<C-u>'] = local_action.hack_goto_cwd,
         },
         ['n'] = {
           ['c'] = fb_actions.create,
