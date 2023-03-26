@@ -96,28 +96,43 @@ require('nvim-tree').setup({
     sync = {
       open = true,
       close = true,
-      ignore = {'NeogitStatus'},
+      ignore = { 'NeogitStatus' },
     },
   },
   renderer = {
     -- root_folder_label = ":~:s?$?/..?",
-    root_folder_label = ":~:s?$?\\\\..?",
+    root_folder_label = ':~:s?$?\\\\..?',
     indent_width = 1,
     indent_markers = { enable = true },
     icons = {
       git_placement = 'signcolumn',
       show = { folder_arrow = false },
-      -- glyphs = {
-      --   git = {
-      --     unstaged = '✗',
-      --     staged = '✓',
-      --     unmerged = '',
-      --     renamed = '➜',
-      --     untracked = '★',
-      --     deleted = '',
-      --     ignored = '◌',
-      --   },
-      -- },
+      padding = ' ',
+      glyphs = {
+        default = '',
+        symlink = '',
+        bookmark = '',
+        modified = '●',
+        folder = {
+          arrow_closed = '',
+          arrow_open = '',
+          default = '', -- 
+          open = '', -- 
+          empty = '',
+          empty_open = '',
+          symlink = '',
+          symlink_open = '',
+        },
+        -- git = {
+        --   unstaged = '✗',
+        --   staged = '✓',
+        --   unmerged = '',
+        --   renamed = '➜',
+        --   untracked = '★',
+        --   deleted = '',
+        --   ignored = '◌',
+        -- },
+      },
     },
   },
   view = {

@@ -134,3 +134,131 @@
 --     client.server_capabilities.semanticTokensProvider = nil
 --   end,
 -- })
+
+-- local c = {
+--   vim_mode = {
+--     provider = {
+--       name = 'vi_mode',
+--       opts = { show_mode_name = true, padding = 'center' },
+--     },
+--     icon = '',
+--     hl = hl_sections.main,
+--     left_sep = { str = 'left_rounded', hl = hl_sections.main_sep },
+--   },
+--   separator = { provider = '' },
+--   file_name = {
+--     provider = {
+--       name = 'file_info',
+--       opts = {
+--         type = 'relative-short',
+--         file_modified_icon = '',
+--         file_readonly_icon = '',
+--         path_sep = '/',
+--       },
+--     },
+--     hl = { bg = 'layer1', fg = 'muted1' },
+--     left_sep = 'block',
+--     right_sep = { separators.block, separators.right_rounded },
+--   },
+--   lsp_client_names = { provider = 'lsp_client_names', hl = hl_sections.muted_text, left_sep = ' ', right_sep = ' ' },
+--   lsp_status = {
+--     provider = function()
+--       local progress_message = vim.lsp.util.get_progress_messages()
+--       if #progress_message == 0 then
+--         return get_lsp_client()
+--       end
+
+--       local status = {}
+--       for _, msg in pairs(progress_message) do
+--         table.insert(status, (msg.percentage or 0) .. '%% ' .. (msg.title or ''))
+--       end
+--       return table.concat(status, ' ')
+--     end,
+--     hl = hl_sections.muted_text,
+--     left_sep = ' ',
+--     right_sep = ' ',
+--   },
+--   harpoon = {
+--     provider = function()
+--       local ok, harpoon_mark = pcall(require, 'harpoon.mark')
+
+--       if ok and harpoon_mark.status() ~= '' then
+--         return ok and 'H:' .. harpoon_mark.status()
+--       end
+--       return ''
+--     end,
+--     hl = hl_sections.muted_text,
+--     left_sep = ' ',
+--     right_sep = ' ',
+--   },
+--   file_type = {
+--     provider = { name = 'file_type', opts = { filetype_icon = true, case = 'titlecase' } },
+--     hl = { fg = 'red', bg = 'darkblue', style = 'bold' },
+--     left_sep = 'block',
+--     right_sep = 'block',
+--   },
+--   file_encoding = {
+--     provider = 'file_encoding',
+--     hl = { fg = 'orange', bg = 'darkblue', style = 'italic' },
+--     left_sep = 'block',
+--     right_sep = 'block',
+--   },
+--   file_format = {
+--     provider = 'file_format',
+--     hl = { fg = 'orange', bg = 'darkblue', style = 'italic' },
+--     left_sep = 'block',
+--     right_sep = 'block',
+--   },
+--   line_percentage = {
+--     provider = 'line_percentage',
+--     hl = { bg = 'layer1', fg = 'muted1' },
+--     right_sep = 'block',
+--     left_sep = { separators.left_rounded, separators.block },
+--   },
+--   scroll_bar = {
+--     provider = 'scroll_bar',
+--     hl = { fg = 'yellow', bg = 'NONE' },
+--   },
+--   space_info = {
+--     provider = "%{&expandtab?'Spc:'.&shiftwidth:'Tab:'.&shiftwidth}",
+--     hl = hl_sections.muted_text,
+--     left_sep = ' ',
+--     right_sep = ' ',
+--   },
+--   location = {
+--     provider = '%3l:%-2v',
+--     hl = hl_sections.main,
+--     left_sep = 'block',
+--     right_sep = {
+--       str = 'right_rounded',
+--       hl = hl_sections.main_sep,
+--     },
+--   },
+--   tabs = {
+--     provider = function()
+--       local last_tab_nr = vim.fn.tabpagenr('$')
+--       if last_tab_nr == 1 then
+--         return ''
+--       end
+
+--       local list = {}
+--       local tab = { active = '', inactive = '' }
+--       local cur_tab_nr = vim.fn.tabpagenr()
+
+--       for i = 1, last_tab_nr do
+--         if i == cur_tab_nr then
+--           table.insert(list, withHl(tab.active, 'LualineTabActive'))
+--         else
+--           table.insert(list, withHl(tab.inactive, 'LualineTabInactive'))
+--         end
+--       end
+--       return table.concat(list, ' ')
+--     end,
+--     left_sep = { str = ' ', hl = { bg = 'hiddenBg' } },
+--     right_sep = { str = '▕', hl = { fg = '#2c3545', bg = 'hiddenBg' } },
+--   },
+--   diagnostic_errors = { provider = 'diagnostic_errors', hl = { fg = 'red' } },
+--   diagnostic_warnings = { provider = 'diagnostic_warnings', hl = { fg = 'yellow' } },
+--   diagnostic_hints = { provider = 'diagnostic_hints', hl = { fg = 'aqua' } },
+--   diagnostic_info = { provider = 'diagnostic_info' },
+-- }

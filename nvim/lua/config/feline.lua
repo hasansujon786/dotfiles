@@ -1,5 +1,5 @@
-local line_ok, feline = pcall(require, 'feline')
-if not line_ok then
+local feline_ok, feline = pcall(require, 'feline')
+if not feline_ok then
   return
 end
 
@@ -23,7 +23,23 @@ local one_monokai = {
   layer1 = '#363C51',
   muted1 = '#8b95a7',
   muted2 = '#68707E',
-  hiddenBg = '#3E4452',
+  layer1_hideen = '#3E4452',
+}
+
+local hl_sections = {
+  muted_text = { fg = 'muted2' },
+  layer1 = { bg = 'layer1', fg = 'muted1' },
+  main = function()
+    return {
+      bg = require('feline.providers.vi_mode').get_mode_color(),
+      fg = 'darkblue',
+      style = 'bold',
+      name = 'NeovimModeHLColor',
+    }
+  end,
+  main_sep = function()
+    return { fg = require('feline.providers.vi_mode').get_mode_color(), bg = 'NONE' }
+  end,
 }
 
 local get_lsp_client = function()
@@ -60,23 +76,11 @@ local c = {
       opts = { show_mode_name = true, padding = 'center' },
     },
     icon = '',
-    hl = function()
-      return {
-        bg = require('feline.providers.vi_mode').get_mode_color(),
-        fg = 'darkblue',
-        style = 'bold',
-        name = 'NeovimModeHLColor',
-      }
-    end,
-    left_sep = {
-      str = 'left_rounded',
-      hl = function()
-        return { fg = require('feline.providers.vi_mode').get_mode_color(), bg = 'NONE' }
-      end,
-    },
+    hl = hl_sections.main,
+    left_sep = { str = 'left_rounded', hl = hl_sections.main_sep },
   },
   separator = { provider = '' },
-  fileinfo = {
+  file_name = {
     provider = {
       name = 'file_info',
       opts = {
@@ -86,11 +90,10 @@ local c = {
         path_sep = '/',
       },
     },
-    hl = { bg = 'layer1', fg = 'muted1' },
+    hl = hl_sections.layer1,
     left_sep = 'block',
     right_sep = { separators.block, separators.right_rounded },
   },
-  lsp_client_names = { provider = 'lsp_client_names', hl = { fg = 'muted2' }, left_sep = ' ', right_sep = ' ' },
   lsp_status = {
     provider = function()
       local progress_message = vim.lsp.util.get_progress_messages()
@@ -104,21 +107,22 @@ local c = {
       end
       return table.concat(status, ' ')
     end,
-    hl = { fg = 'muted2' },
+    hl = hl_sections.muted_text,
     left_sep = ' ',
     right_sep = ' ',
   },
-  file_type = {
-    provider = { name = 'file_type', opts = { filetype_icon = true, case = 'titlecase' } },
-    hl = { fg = 'red', bg = 'darkblue', style = 'bold' },
-    left_sep = 'block',
-    right_sep = 'block',
-  },
-  file_encoding = {
-    provider = 'file_encoding',
-    hl = { fg = 'orange', bg = 'darkblue', style = 'italic' },
-    left_sep = 'block',
-    right_sep = 'block',
+  harpoon = {
+    provider = function()
+      local ok, harpoon_mark = pcall(require, 'harpoon.mark')
+
+      if ok and harpoon_mark.status() ~= '' then
+        return ok and 'H:' .. harpoon_mark.status()
+      end
+      return ''
+    end,
+    hl = hl_sections.muted_text,
+    left_sep = ' ',
+    right_sep = ' ',
   },
   file_format = {
     provider = 'file_format',
@@ -126,42 +130,23 @@ local c = {
     left_sep = 'block',
     right_sep = 'block',
   },
-  line_percentage = {
+  scroll_percentage = {
     provider = 'line_percentage',
-    hl = { bg = 'layer1', fg = 'muted1' },
+    hl = hl_sections.layer1,
     right_sep = 'block',
     left_sep = { separators.left_rounded, separators.block },
   },
-  scroll_bar = {
-    provider = 'scroll_bar',
-    hl = { fg = 'yellow', bg = 'NONE' },
-  },
   space_info = {
     provider = "%{&expandtab?'Spc:'.&shiftwidth:'Tab:'.&shiftwidth}",
-    hl = { fg = 'muted2' },
+    hl = hl_sections.muted_text,
     left_sep = ' ',
     right_sep = ' ',
   },
   location = {
     provider = '%3l:%-2v',
-    hl = function()
-      return {
-        bg = require('feline.providers.vi_mode').get_mode_color(),
-        fg = 'darkblue',
-        style = 'bold',
-        name = 'NeovimModeHLColor',
-      }
-    end,
+    hl = hl_sections.main,
     left_sep = 'block',
-    right_sep = {
-      str = 'right_rounded',
-      hl = function()
-        return {
-          fg = require('feline.providers.vi_mode').get_mode_color(),
-          bg = 'NONE',
-        }
-      end,
-    },
+    right_sep = { str = 'right_rounded', hl = hl_sections.main_sep },
   },
   tabs = {
     provider = function()
@@ -183,8 +168,8 @@ local c = {
       end
       return table.concat(list, ' ')
     end,
-    left_sep = { str = ' ', hl = { bg = 'hiddenBg' } },
-    right_sep = { str = '▕', hl = { fg = '#2c3545', bg = 'hiddenBg' } },
+    left_sep = { str = ' ', hl = { bg = 'layer1_hideen' } },
+    right_sep = { str = '▕', hl = { fg = '#2c3545', bg = 'layer1_hideen' } },
   },
   diagnostic_errors = { provider = 'diagnostic_errors', hl = { fg = 'red' } },
   diagnostic_warnings = { provider = 'diagnostic_warnings', hl = { fg = 'yellow' } },
@@ -195,7 +180,7 @@ local c = {
 local left = {
   c.vim_mode,
   c.tabs,
-  c.fileinfo,
+  c.file_name,
 }
 local middle = {
   c.diagnostic_errors,
@@ -204,10 +189,10 @@ local middle = {
   c.diagnostic_info,
 }
 local right = {
-  -- c.lsp_client_names,
+  c.harpoon,
   c.lsp_status,
   c.space_info,
-  c.line_percentage,
+  c.scroll_percentage,
   c.location,
 }
 
