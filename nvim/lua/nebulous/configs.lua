@@ -22,6 +22,13 @@ M.default = {
     dashboard = true,
     alpha = true,
     floaterm = true,
+    -- dap-float
+    dapui_scopes = true,
+    dapui_breakpoints = true,
+    dapui_stacks = true,
+    dapui_watches = true,
+    dapui_console = true,
+    ['dap-repl'] = true,
   },
   nb_blur_hls = {
     'LineNr:Nebulous',

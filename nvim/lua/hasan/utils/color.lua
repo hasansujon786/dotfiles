@@ -16,6 +16,9 @@ M.my_nebulous_setup = function()
         if vim.t.diffview_view_initialized then
           return true
         end
+        if vim.t.disable_nebulous then
+          return true
+        end
       end,
     },
   })

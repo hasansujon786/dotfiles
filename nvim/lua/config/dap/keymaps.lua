@@ -33,7 +33,7 @@ function M.setup()
       g = { "<cmd>lua require'dap'.session()<cr>",           'Get Session' },
 
       e = { "<cmd>lua require'dapui'.eval()<cr>",            'Evaluate' },
-      E = { "<cmd>lua require'dapui'.eval(vim.fn.input '[Expression] > ')<cr>",       'Evaluate Input' },
+      E = { "<cmd>lua require'dapui'.eval(vim.fn.input '[Expression] > ')<cr>",    'Evaluate Input' },
 
       ['.'] = { "<cmd>lua require'telescope'.extensions.dap.commands()<cr>",       'Find DAP Commands' },
       l = {
