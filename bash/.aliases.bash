@@ -12,6 +12,8 @@ alias nri='node --inspect '
 alias ns='npm start'
 alias nd='npm run dev'
 alias ncc='npm cache clean --force'
+# expo
+alias esc='npx expo start --clear'
 
 # Vim
 alias v.='nvim .'
@@ -115,6 +117,7 @@ alias grget='git remote get-url origin'
 alias gpr='hub pull-request'
 alias gci='hub issue create'
 alias gm2m='git branch -m master main'
+alias gsup='git push --set-upstream origin main'
 
 alias -- --=jump-to-git-root
 alias g='git'

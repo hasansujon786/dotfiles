@@ -22,6 +22,26 @@ M.setup = function(dap)
   for _, ext in ipairs(exts) do
     dap.configurations[ext] = {
       {
+        type = 'pwa-chrome',
+        request = 'attach',
+        name = 'Attach Program (pwa-chrome)',
+        program = '${file}',
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        port = 9222,
+        -- port = function() return vim.fn.input('Select port: ', 9222) end,
+        webRoot = '${workspaceFolder}',
+      },
+      {
+        type = 'pwa-node',
+        request = 'attach',
+        port = 9222,
+        name = 'Attach Program (pwa-node, select pid)',
+        cwd = vim.fn.getcwd(),
+        -- processId = dap_utils.pick_process,
+        skipFiles = { '<node_internals>/**' },
+      },
+      {
         type = 'pwa-node',
         request = 'launch',
         name = 'Launch Current File (pwa-node)',
@@ -89,26 +109,6 @@ M.setup = function(dap)
         runtimeArgs = { 'test', '--inspect-brk', '--allow-all', '${file}' },
         runtimeExecutable = 'deno',
         attachSimplePort = 9229,
-      },
-      {
-        type = 'pwa-chrome',
-        request = 'attach',
-        name = 'Attach Program (pwa-chrome)',
-        program = '${file}',
-        cwd = vim.fn.getcwd(),
-        sourceMaps = true,
-        port = 9222,
-        -- port = function() return vim.fn.input('Select port: ', 9222) end,
-        webRoot = '${workspaceFolder}',
-      },
-      {
-        type = 'pwa-node',
-        request = 'attach',
-        port = 9222,
-        name = 'Attach Program (pwa-node, select pid)',
-        cwd = vim.fn.getcwd(),
-        -- processId = dap_utils.pick_process,
-        skipFiles = { '<node_internals>/**' },
       },
       -- {
       --   type = "node2",

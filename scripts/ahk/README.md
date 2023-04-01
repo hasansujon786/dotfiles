@@ -181,3 +181,22 @@ While (GetKeyState("x", "P")) {
     Sleep 500
 }
 Return
+
+toggleWezterm() {
+  WinGetClass, className, A
+  if(className == "org.wezfurlong.wezterm") {
+    WinMinimize, ahk_exe wezterm-gui.exe
+    return
+  }
+
+  if (WinExist("ahk_exe wezterm-gui.exe")) {
+    WinActivate, ahk_exe wezterm-gui.exe
+  }
+  else {
+    Run wezterm-gui.exe
+    WinWait, ahk_exe wezterm-gui.exe
+    if (WinExist("ahk_exe wezterm-gui.exe")) {
+      center_current_window()
+    }
+  }
+}

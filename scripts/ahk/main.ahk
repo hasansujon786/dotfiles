@@ -61,6 +61,7 @@ PrintScreen::#+s
 #If MouseIsOver("ahk_class Shell_TrayWnd")
   ~LAlt & WheelUP::volup()
   ~LAlt & WheelDown::voldown()
+  MButton::openVolumeController()
 #If
 ; Explorer
 f1::switchToExplorer()
@@ -136,6 +137,7 @@ switchToSavedApp() {
     TaskBar_SetAttr(1, 0xff101010)
   Return
 
+  c::center_current_window()
   l::moveWinRight(25)
   h::moveWinLeft(25)
   k::moveWinUp(25)
@@ -144,7 +146,25 @@ switchToSavedApp() {
   +h::moveWinLeft(200)
   +k::moveWinUp(200)
   +j::moveWinDown(200)
+
+  .::changeWinSize("width", 10)
+  ,::changeWinSize("width", -10)
+  =::changeWinSize("height", 10)
+  -::changeWinSize("height", -10)
+  !.::changeWinSize("width", 50)
+  !,::changeWinSize("width", -50)
+  !=::changeWinSize("height", 50)
+  !-::changeWinSize("height", -50)
 #if
+changeWinSize(direction, val) {
+  WinGetPos,,, Width, Height, A
+  if (direction == "width") {
+    winmove, A,, , ,Width + val,
+  }  else {
+    winmove, A,, , , , Height + val
+  }
+  ; WinMove, %WinTitle%,, (A_ScreenWidth/2)-(Width/2), (A_ScreenHeight/2)-(Height/2)
+}
 
 moveWinRight(val) {
   wingetpos x, y,,, A
@@ -166,6 +186,13 @@ moveWindowX_and_Y(x, y){
   mousegetpos, mx, my
   winmove, A,,%x%, %y%
   ; mousemove, %mx%, %my%, 0
+}
+center_current_window() {
+  WinGetTitle, active_window_title, A
+  WinGetPos,,, w_width, w_height, %active_window_title%
+    targetX := (A_ScreenWidth/2)-(w_width/2)
+    targetY := (A_ScreenHeight/2)-(w_height/2)
+  WinMove, %active_window_title%,, %targetX%, %targetY%
 }
 
 ;******************************************************************************
@@ -347,6 +374,13 @@ voldown() {
   SoundSet, -18
   SendInput {Volume_Down}
 }
+openVolumeController() {
+  Run C:\Windows\System32\SndVol.exe
+  WinWait, ahk_exe SndVol.exe
+  If WinExist("ahk_exe SndVol.exe")
+  WinActivate, ahk_exe SndVol.exe
+  WinMove, ahk_exe SndVol.exe,, 880, 400
+}
 scroll_left() {
   MouseGetPos,,,id, fcontrol,1
   Loop 8 ; <-- Increase for faster scrolling
@@ -484,7 +518,7 @@ quake_nvim(copy := false) {
   Static file := "C:\\Users\\hasan\\dotfiles\\scripts\\ahk\\clip.txt"
   if WinActive("quake_nvim") {
     SendInput,{Esc}:w{Enter}
-    sleep 50
+    sleep 200
     FileRead, file_content, %file%
     Clipboard := file_content
     file_content := ""
