@@ -3,6 +3,7 @@
 ; SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
 #SingleInstance Force
+; C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\
 
 ;Reload/Execute this script.ahk file
 ::rscript::
@@ -29,11 +30,10 @@ return
 !0::Send #0
 #l::Send ^#{Right}
 #h::Send ^#{Left}
-!Enter::Send {f11}
-PgUp::Send !{ESC}
-PgDn::Send +!{ESC}
 !]:: SendInput,^{tab}
 ![:: SendInput,^+{tab}
+!Enter::Send {f11}
+!x::toggleWinRestore()
 #InputLevel 1
 !\::Send \
 \::alternateTab()
@@ -137,6 +137,7 @@ switchToSavedApp() {
     TaskBar_SetAttr(1, 0xff101010)
   Return
 
+  r::resetWin()
   c::center_current_window()
   l::moveWinRight(25)
   h::moveWinLeft(25)
@@ -156,6 +157,10 @@ switchToSavedApp() {
   !=::changeWinSize("height", 50)
   !-::changeWinSize("height", -50)
 #if
+resetWin() {
+  winmove, A,, , ,1140, 644
+  center_current_window()
+}
 changeWinSize(direction, val) {
   WinGetPos,,, Width, Height, A
   if (direction == "width") {
@@ -194,7 +199,60 @@ center_current_window() {
     targetY := (A_ScreenHeight/2)-(w_height/2)
   WinMove, %active_window_title%,, %targetX%, %targetY%
 }
+winPinToSide(side) {
+  s_height := A_ScreenHeight - 30
+  target_x := 0
+  target_y := 0
 
+  if (side == "left") {
+    w_width := A_ScreenWidth / 2
+    w_height := s_height
+  }  else if  (side == "right"){
+    w_width := A_ScreenWidth / 2
+    w_height := s_height
+    target_x := w_width
+  }
+
+  WinRestore, A
+  WinMove, A,, target_x,target_y,w_width,w_height
+}
+;******************************************************************************
+; Custom layout
+;******************************************************************************
+#[::winPinToSide("left")
+#]::winPinToSide("right")
+#1::layoutCode()
+#2::layoutCodeFloat()
+
+layoutCodeFloat() {
+  layoutSelectWin("ahk_exe brave.exe", "brave.exe", "full")
+  layoutSelectWin("ahk_exe wezterm-gui.exe", "wezterm-gui.exe", "center")
+}
+layoutCode() {
+  layoutSelectWin("ahk_exe brave.exe", "brave.exe", "right")
+  layoutSelectWin("ahk_exe wezterm-gui.exe", "wezterm-gui.exe", "left")
+}
+layoutSelectWin(EXE_FULL, EXE, side) {
+  if (not WinExist(EXE_FULL)) {
+    Run %EXE%
+      WinWait, %EXE_FULL%
+      layoutSelectWin_fn(EXE_FULL, EXE, side)
+      return
+  }
+  layoutSelectWin_fn(EXE_FULL, EXE, side)
+}
+layoutSelectWin_fn(EXE_FULL, EXE, side) {
+  if (WinExist(EXE_FULL)) {
+    WinActivate, %EXE_FULL%
+      if(side == "center") {
+        resetWin()
+      } else if (side == "full") {
+        WinMaximize, A
+      } else {
+        winPinToSide(side)
+      }
+  }
+}
 ;******************************************************************************
 ; Explorer functions
 ;******************************************************************************
@@ -327,6 +385,16 @@ NavRun(Path) {
 ;******************************************************************************
 ; Utils
 ;******************************************************************************
+toggleWinRestore() {
+  ; WinGet WindowID, ID, A
+  ; WinGet WindowSize, MinMax, ahk_id %WindowID%
+  WinGet MX, MinMax, A
+  if (MX) {
+    WinRestore A
+  } else {
+    WinMaximize A
+  }
+}
 toggleCapsLosck() {
   SplashTextOn,200,60,, Toggle Capslock
   beep()
