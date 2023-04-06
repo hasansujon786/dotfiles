@@ -16,7 +16,7 @@ nm.setup_defaults({
     numberwidth = 1,
     winhl = 'CursorLineNr:LineNr,NormalFloat:',
   },
-  open_win_opts = { border = 'rounded' },
+  open_win_opts = { border = 'rounded', zindex = 1111 },
 })
 -- nm.source_on_save('~\dotfiles\nvim\lua\config\neo_minimap.lua')
 

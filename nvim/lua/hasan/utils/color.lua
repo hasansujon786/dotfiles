@@ -1,18 +1,23 @@
 local cmd = vim.cmd
 local api = vim.api
+local utils = require('hasan.utils')
 local M = {}
 
 M.my_nebulous_setup = function()
   require('nebulous').setup({
     -- init_wb_with_disabled = vim.g.bg_tranparent,
-    on_focus = function(winid)
-      require('hasan.utils.ui.cursorline').cursorline_show(winid)
+    on_focus = function(info, _)
+      -- local winid, winnr = info.winid, info.winnr
+      require('hasan.utils.ui.cursorline').cursorline_show(info.winid)
     end,
-    on_blur = function(winid)
-      require('hasan.utils.ui.cursorline').cursorline_hide(winid)
+    on_blur = function(info)
+      local winid = info.winid
+      if not utils.is_floting_window(winid) then
+        require('hasan.utils.ui.cursorline').cursorline_hide(winid)
+      end
     end,
     dynamic_rules = {
-      deactive = function(info)
+      deactive = function(_)
         if vim.t.diffview_view_initialized then
           return true
         end
@@ -21,6 +26,16 @@ M.my_nebulous_setup = function()
         end
       end,
     },
+    ignore_alternate_win = function(winid, is_floting_win)
+      if is_floting_win then
+        local win_conf = api.nvim_win_get_config(winid)
+        if win_conf.width == 44 and win_conf.height == 12 and win_conf.zindex == 1111 then
+          return true
+        end
+      end
+
+      return false
+    end,
   })
 end
 
@@ -40,7 +55,7 @@ M.toggle_bg_tranparent = function()
   end
 end
 
-function M.get_hl(name)
+M.get_hl = function(name)
   local ok, hl = pcall(vim.api.nvim_get_hl_by_name, name, true)
   if not ok then
     return
