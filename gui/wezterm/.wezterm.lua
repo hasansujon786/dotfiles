@@ -106,7 +106,7 @@ return {
     'Cascadia Code',
     'Consolas',
   }),
-  font_size = 13.5,
+  font_size = 13,
   underline_thickness = '2pt',
   adjust_window_size_when_changing_font_size = false,
   -- harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }, -- Disable ligatures

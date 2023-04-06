@@ -27,6 +27,11 @@ M.my_nebulous_setup = function()
       end,
     },
     ignore_alternate_win = function(winid, is_float)
+      local ft = vim.fn.getwinvar(winid, '&ft')
+      if ft == 'noice' then
+        return true
+      end
+
       if is_float then
         local win_conf = api.nvim_win_get_config(winid)
         if win_conf.width == 44 and win_conf.height == 12 and win_conf.zindex == 1111 then

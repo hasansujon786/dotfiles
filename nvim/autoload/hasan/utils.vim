@@ -8,11 +8,11 @@ function! hasan#utils#confirmQuit(writeFile) "{{{
   if (a:writeFile == '!' && &modified) | :silent write | endif
 
   if (isLastTab && &modified)
-    call _#echoWarn('>>> Save this buffer & quit the app? <<<')
-    if (confirm("", "&Yes\n&No", 2) == 1)| :wq |endif
+    " call _#echoWarn('>>> Save this buffer & quit the app? <<<')
+    if (confirm(">>> Save this buffer & quit the app? <<<", "&Yes\n&No", 2) == 1)| :wq |endif
   elseif (isLastTab)
-    call _#echoSuccess('>>> Do you want to quit the app? <<<')
-    if (confirm("", "&Yes\n&No", 2)==1)| :quit |endif
+    " call _#echoSuccess('>>> Do you want to quit the app? <<<')
+    if (confirm(">>> Do you want to quit the app? <<<", "&Yes\n&No", 2)==1)| :quit |endif
   else
     :quit
   endif

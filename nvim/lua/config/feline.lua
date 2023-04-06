@@ -214,5 +214,6 @@ feline.setup({
     BLOCK = 'dark_red',
     REPLACE = 'red',
     COMMAND = 'aqua',
+    CONFIRM = 'orange',
   },
 })

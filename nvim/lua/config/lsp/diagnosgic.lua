@@ -2,6 +2,10 @@ local M = {}
 local ui = require('core.state').ui
 local diagnotic_icons = require('hasan.utils.ui.icons').Other.diagnostics
 
+-- local borderOpts = { border = require('core.state').ui.border.style }
+-- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, borderOpts)
+-- vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, borderOpts)
+
 M.diagnostic_icon_by_severity = function(severity)
   local icon, highlight
   if severity == 1 then

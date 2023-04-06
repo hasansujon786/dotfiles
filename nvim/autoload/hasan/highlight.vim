@@ -8,7 +8,7 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi StatusLine         guibg=#2C323C guifg=#ABB2BF
   hi StatusLineNC       guibg=#2C323C guifg=#ABB2BF
   hi CursorColumn       guibg=#3B4048
-  hi CursorLineFocus    guibg=#3E4452
+  hi CursorLineFocus    guibg=#343e4f
   hi IncSearch          guibg=#e86671 gui=underline
   hi CurSearch          guibg=#e86671 guifg=#2C323C gui=underline
   hi SignColumn         guibg=NONE
@@ -60,6 +60,7 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi DiagnosticLineNrError guifg=#ef5f6b guibg=#4D3542
   hi DiagnosticLineNrInfo  guifg=#4dbdcb guibg=#2C4855
   hi DiagnosticLineNrHint  guifg=#ca72e4 guibg=#45395A
+  hi DiagnosticUnnecessary gui=underline
 
   "/// Plugins ///"
   hi! link LazyNormal NormalFloatFlat
@@ -120,6 +121,7 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! link NvimTreeIndentMarker IndentBlanklineChar
   hi! link NvimTreeWindowPicker TelescopeSelectionCaret
   hi! link NvimTreeWinSeparator VertSplit
+  hi! link NvimTreeNormal Pmenu
 
   "/// Nebulous ///"
   hi NebulousInvisibe   guifg=#242B38

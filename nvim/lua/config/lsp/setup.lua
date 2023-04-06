@@ -1,10 +1,7 @@
 local M = {}
 -- local hasNvim8 = vim.fn.has('nvim-0.8') == 1
-local borderOpts = { border = require('core.state').ui.border.style }
 
 require('config.lsp.diagnosgic').setup()
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, borderOpts)
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, borderOpts)
 
 local use_builtin_lsp_formatter = { 'dartls', 'astro' }
 
@@ -23,7 +20,7 @@ M.on_attach = function(client, bufnr)
   end
 end
 
-function M.lsp_autocmds(client, bufnr)
+M.lsp_autocmds = function(client, bufnr)
   if client.server_capabilities.documentHighlightProvider then
     vim.cmd([[
       augroup lsp_document_highlight
@@ -37,7 +34,7 @@ function M.lsp_autocmds(client, bufnr)
   end
 end
 
-function M.lsp_buffer_keymaps(client, bufnr)
+M.lsp_buffer_keymaps = function(client, bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
   local function desc(str)
     return require('hasan.utils').merge({ desc = str }, opts or {})
@@ -62,6 +59,7 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', 'K', vim.lsp.buf.hover, desc('Lsp: hover under cursor'))
   keymap('n', 'g/', '<cmd>Telescope lsp_document_symbols<cr>', desc('Lsp: document symbols'))
   keymap('n', 'go', '<cmd>Telescope lsp_document_symbols<cr>', desc('Lsp: document symbols'))
+  keymap('n', 'g.', '<cmd>Telescope lsp_document_symbols<cr>', desc('Lsp: document symbols'))
   -- keymap('n', 'gpI', require('config.lsp.peek').PeekImplementation, opts)
   keymap('n', '<F2>', require('config.lsp.util').lspRename, desc('Lsp: rename under cursor'))
   keymap({ 'i', 'n' }, '<C-k>h', function()

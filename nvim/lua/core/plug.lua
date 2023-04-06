@@ -3,6 +3,7 @@ return {
   ------------------------------------------------
   --> Visual -------------------------------------
   ------------------------------------------------
+  { 'folke/noice.nvim', lazy = true, event = 'VeryLazy', config = function() require('config.noice') end },
   { 'navarasu/onedark.nvim', lazy = true },
   { 'goolord/alpha-nvim', config = function() require('config.alpha') end },
   { 'kyazdani42/nvim-web-devicons', lazy = true, config = function() require('config.devicons-config') end },

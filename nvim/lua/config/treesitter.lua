@@ -1,6 +1,9 @@
 -- TSInstallSync javascript typescript tsx org
+local parsers =
+  { 'html', 'vim', 'css', 'json', 'lua', 'vue', 'dart', 'bash', 'help', 'markdown', 'markdown_inline', 'regex' }
+
 require('nvim-treesitter.configs').setup({
-  ensure_installed = { 'html', 'vim', 'css', 'json', 'lua', 'vue', 'dart', 'bash', 'help', 'markdown', 'markdown_inline', },
+  ensure_installed = parsers,
   highlight = {
     enable = true, -- false will disable the whole extension
     use_languagetree = false,

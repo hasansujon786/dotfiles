@@ -13,7 +13,6 @@ o.undofile = true
 o.undolevels = 1500 --                           persistent undo between file reloads
 opt.viewoptions:remove({ 'folds', 'curdir' }) -- see: https://vi.stackexchange.com/questions/11903/working-directory-different-than-current-file-directory
 -- Spell
-o.spelllang = 'en_us' --                         Speak proper English | en_gb
 opt.complete:append({ 'kspell' })
 o.spellfile = '~/dotfiles/nvim/spell/en.utf-8.add'
 -- Controls
@@ -64,7 +63,7 @@ o.modeline = false
 o.modelines = 0
 o.showtabline = 0
 o.laststatus = 3
-o.cmdheight = 1 --                               Height of the command bar
+o.cmdheight = 0 --                               Height of the command bar
 vim.opt.fillchars = {
   eob = ' ',
   vert = '▎',
