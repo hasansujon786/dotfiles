@@ -5,7 +5,7 @@ local utils = {
     local ft = vim.fn.getwinvar(winid, '&ft')
     return config.options.nb_blacklist_filetypes[ft]
   end,
-  is_floting_win = function(winid)
+  is_floating_win = function(winid)
     return vim.api.nvim_win_get_config(winid).relative ~= ''
   end,
   is_current_window = function(winid)

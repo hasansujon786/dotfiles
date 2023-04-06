@@ -12,7 +12,7 @@ M.my_nebulous_setup = function()
     end,
     on_blur = function(info)
       local winid = info.winid
-      if not utils.is_floting_window(winid) then
+      if not utils.is_floating_win(winid) then
         require('hasan.utils.ui.cursorline').cursorline_hide(winid)
       end
     end,
@@ -26,8 +26,8 @@ M.my_nebulous_setup = function()
         end
       end,
     },
-    ignore_alternate_win = function(winid, is_floting_win)
-      if is_floting_win then
+    ignore_alternate_win = function(winid, is_float)
+      if is_float then
         local win_conf = api.nvim_win_get_config(winid)
         if win_conf.width == 44 and win_conf.height == 12 and win_conf.zindex == 1111 then
           return true

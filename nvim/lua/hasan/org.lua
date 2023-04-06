@@ -21,7 +21,7 @@ local fn = {
     vim.wo.winbar = '%{%v:lua.require("hasan.org").winbar()%}'
   end,
   is_cur_win_org_float = function()
-    return utils.is_floting_window(0) and vim.bo.filetype == 'org'
+    return utils.is_floating_win(0) and vim.bo.filetype == 'org'
   end,
   remove_autocmds = function()
     if last_layout then
@@ -131,7 +131,7 @@ function M.open_org_float()
 
   pop_main:on({ event.WinLeave }, function()
     vim.schedule(function()
-      if utils.is_floting_window(0) then
+      if utils.is_floating_win(0) then
         return
       end
 

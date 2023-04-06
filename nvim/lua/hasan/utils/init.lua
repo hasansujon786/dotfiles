@@ -60,7 +60,7 @@ function M.tbl_concat(...)
   return result
 end
 
-M.is_floting_window = function(winid)
+M.is_floating_win = function(winid)
   return vim.api.nvim_win_get_config(winid).relative ~= ''
 end
 
