@@ -158,7 +158,7 @@ switchToSavedApp() {
   !-::changeWinSize("height", -50)
 #if
 resetWin() {
-  winmove, A,, , ,1140, 644
+  winmove, A,, , ,1140, 644 ; resize window
   center_current_window()
 }
 changeWinSize(direction, val) {
@@ -225,23 +225,31 @@ winPinToSide(side) {
 #2::layoutCodeFloat()
 
 layoutCodeFloat() {
-  layoutSelectWin("ahk_exe brave.exe", "brave.exe", "full")
-  layoutSelectWin("ahk_exe wezterm-gui.exe", "wezterm-gui.exe", "center")
+  layout_winAction("ahk_exe brave.exe", "brave.exe", "full")
+  layout_winAction("ahk_exe wezterm-gui.exe", "wezterm-gui.exe", "center")
+  ; layout_winAction("ahk_exe chrome.exe", "chrome.exe", "full")
+  ; layout_winAction("ahk_exe Code.exe", "Code.exe", "center")
 }
 layoutCode() {
-  layoutSelectWin("ahk_exe brave.exe", "brave.exe", "right")
-  layoutSelectWin("ahk_exe wezterm-gui.exe", "wezterm-gui.exe", "left")
+  layout_winAction("ahk_exe brave.exe", "brave.exe", "right")
+  layout_winAction("ahk_exe wezterm-gui.exe", "wezterm-gui.exe", "left")
+  ; layout_winAction("ahk_exe chrome.exe", "chrome.exe", "right")
+  ; layout_winAction("ahk_exe Code.exe", "Code.exe", "left")
 }
-layoutSelectWin(EXE_FULL, EXE, side) {
+layout_winAction(EXE_FULL, EXE, side) {
   if (not WinExist(EXE_FULL)) {
-    Run %EXE%
-      WinWait, %EXE_FULL%
-      layoutSelectWin_fn(EXE_FULL, EXE, side)
-      return
+    if (EXE == "Code.exe") {
+      Run, C:\Users\%A_UserName%\AppData\Local\Programs\Microsoft VS Code\Code.exe
+    } else {
+      Run, %EXE%
+    }
+    WinWait, %EXE_FULL%
+    layout_selectWin(EXE_FULL, EXE, side)
+    return
   }
-  layoutSelectWin_fn(EXE_FULL, EXE, side)
+  layout_selectWin(EXE_FULL, EXE, side)
 }
-layoutSelectWin_fn(EXE_FULL, EXE, side) {
+layout_selectWin(EXE_FULL, EXE, side) {
   if (WinExist(EXE_FULL)) {
     WinActivate, %EXE_FULL%
       if(side == "center") {
