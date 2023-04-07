@@ -41,7 +41,12 @@ vim.g.gitgutter_floating_window_options = {
 }
 
 P = function(...)
-  vim.pretty_print(...)
+  local hasNvim9 = vim.fn.has('nvim-0.9') == 1
+  if hasNvim9 then
+    vim.print(...)
+  else
+    vim.pretty_print(...)
+  end
   return ...
 end
 
@@ -82,11 +87,15 @@ _G.prequire = function(module_name)
     local source = debug.getinfo(2, 'S').source:sub(2)
     source = source:gsub(os.getenv('HOME'), '~') --[[@as string]]
     local msg = string.format('"%s" requested in "%s" not available', module_name, source)
-    vim.schedule(function() vim.notify_once(msg, vim.log.levels.WARN) end)
+    vim.schedule(function()
+      vim.notify_once(msg, vim.log.levels.WARN)
+    end)
 
     ---@class Void Void has eveything and nothing
     local void = setmetatable({}, { ---@type Void
-      __index = function(self) return self end,
+      __index = function(self)
+        return self
+      end,
       __newindex = function() end,
       __call = function() end,
     })

@@ -594,7 +594,7 @@ quake_nvim(copy := false) {
   Static file := "C:\\Users\\hasan\\dotfiles\\scripts\\ahk\\clip.txt"
   if WinActive("quake_nvim") {
     SendInput,{Esc}:w{Enter}
-    sleep 200
+    sleep 500
     FileRead, file_content, %file%
     Clipboard := file_content
     file_content := ""

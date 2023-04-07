@@ -31,7 +31,7 @@ require('noice').setup({
     signature = {
       enabled = true,
       auto_open = {
-        enabled = true,
+        enabled = false,
         trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
         luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
         throttle = 50, -- Debounce lsp signature help request by 50ms
@@ -70,6 +70,32 @@ require('noice').setup({
     -- inc_rename = false, -- enables an input dialog for inc-rename.nvim
   },
 })
+-- -- redirect ":hi"
+-- require("noice").redirect("hi")
+-- -- redirect some function
+-- require("noice").redirect(function()
+--   print("test")
+-- end)
+
+keymap('c', '<c-x>', function()
+  require('noice').redirect(vim.fn.getcmdline())
+  -- vim.defer_fn(function()
+  --   -- write something
+  --   feedkeys('<Esc>', 'c')
+  -- end, 1000)
+end, { desc = 'Redirect Cmdline' })
+
+keymap({ 'i', 's' }, '<A-d>', function()
+  if not require('noice.lsp').scroll(4) then
+    return '<A-d>'
+  end
+end, { silent = true, expr = true })
+
+keymap({ 'i', 's' }, '<A-u>', function()
+  if not require('noice.lsp').scroll(-4) then
+    return '<A-u>'
+  end
+end, { silent = true, expr = true })
 
 -- (field) NoiceView._view_opts: NoiceNotifyOptions|NoiceViewBaseOptions|NuiPopupOptions|NuiSplitOptions|{ type: "popup"|"split" } {
 --     align?: "center"|"left"|"line-center"|"line-left"|"line-right"...(+4),

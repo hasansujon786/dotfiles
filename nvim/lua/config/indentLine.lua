@@ -14,6 +14,7 @@ require('indent_blankline').setup({
     'ccc-ui',
     '2048',
     'lazy',
+    'noice',
   },
   show_first_indent_level = false,
   -- show_current_context = true,
