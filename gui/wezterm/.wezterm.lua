@@ -79,8 +79,8 @@ wezterm.on('toggle-tab-bar', function(window, pane)
 end)
 
 return {
-  initial_rows = 28,
-  initial_cols = 114,
+  initial_rows = 30,
+  initial_cols = 120,
   tab_max_width = 30,
   hide_tab_bar_if_only_one_tab = false,
   window_decorations = 'NONE', -- RESIZE

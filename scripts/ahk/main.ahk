@@ -158,7 +158,7 @@ switchToSavedApp() {
   !-::changeWinSize("height", -50)
 #if
 resetWin() {
-  winmove, A,, , ,1140, 644 ; resize window
+  winmove, A,, , ,1200, 658 ; resize window
   center_current_window()
 }
 changeWinSize(direction, val) {

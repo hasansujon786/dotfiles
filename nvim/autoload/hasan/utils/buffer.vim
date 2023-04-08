@@ -15,8 +15,7 @@ function! hasan#utils#buffer#_clear() abort "{{{
   let bdcmd = 'bdelete '
 
   if (&modified)
-    call _#echoWarn('>>> Save this buffer before close? <<<')
-    let choice = confirm('', "&Yes\n&No\n&Cancel", 3)
+    let choice = confirm('>>> Save this buffer before close? <<<', "&Yes\n&No\n&Cancel", 3)
     if (choice == 1)
       exec('silent w')
     elseif (choice == 2)
@@ -47,8 +46,7 @@ function! hasan#utils#buffer#_clear() abort "{{{
 endfunction " }}}
 
 function! hasan#utils#buffer#_clear_other() abort "{{{
-  call _#echoWarn('>>> Kill other buffers? <<<')
-  if confirm('', "&Yes\n&No\n&Cancel", 3) == 1
+  if confirm('>>> Kill other buffers? <<<', "&Yes\n&No", 2) == 1
     :silent wa
     let blisted = filter(range(1, bufnr('$')), 'buflisted(v:val)')
     for i in blisted
@@ -63,8 +61,7 @@ function! hasan#utils#buffer#_clear_other() abort "{{{
 endfunction "}}}
 
 function! hasan#utils#buffer#_clear_all() abort "{{{
-  call _#echoWarn('>>> Kill all buffers? <<<')
-  if confirm('', "&Yes\n&No\n&Cancel", 3) == 1
+  if confirm('>>> Kill all buffers? <<<', "&Yes\n&No", 2) == 1
     :silent wa
     let blisted = filter(range(1, bufnr('$')), 'buflisted(v:val)')
     for i in blisted

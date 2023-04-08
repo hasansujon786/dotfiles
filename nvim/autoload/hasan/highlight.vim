@@ -79,8 +79,8 @@ function! hasan#highlight#load_custom_highlight(...) abort
   "/// Alpha ///"
   hi AlphaTag        guifg=#424957
   hi AlphaHeader     guifg=#4d5666
-  hi AlphaButtons    guifg=#546178
-  hi AlphaShourtCut  guifg=#546178 guibg=#28303e
+  hi AlphaButtons    guifg=#546178 gui=NONE
+  hi AlphaShourtCut  guifg=#546178 guibg=#28303e gui=NONE
   "/// Floaterm ///"
   hi! link Floaterm NormalFloatFlat
   hi! link FloatermBorder FloatBorderFlat

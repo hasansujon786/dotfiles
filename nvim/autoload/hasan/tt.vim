@@ -29,8 +29,8 @@ function! hasan#tt#work(custom_time) abort
     let work_time = input({'prompt':'Set a time> ','default': work_time})
     if work_time < 1 | return | endif
   elseif (tt#is_running() || hasan#tt#is_tt_paused() && a:custom_time == 0)
-    call _#echoWarn('>>> Cancel the current timer & start a new timer? <<<')
-    let start_from_begin = confirm("", "&Yes\n&No", 1)
+    " call _#echoWarn('')
+    let start_from_begin = confirm(">>> Cancel the current timer & start a new timer? <<<", "&Yes\n&No", 1)
     if start_from_begin == 2 || start_from_begin == 0 | return | endif
   endif
 

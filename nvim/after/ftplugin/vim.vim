@@ -1,2 +1,2 @@
 call hasan#formatoptions#setup()
-nnoremap <buffer> <leader>v. <cmd>write<CR><cmd>so %<CR>
+nnoremap <buffer> <leader>v. <cmd>write<CR>:so %<CR>
