@@ -8,7 +8,7 @@ return {
   { 'goolord/alpha-nvim', config = function() require('config.alpha') end },
   { 'kyazdani42/nvim-web-devicons', lazy = true, config = function() require('config.devicons-config') end },
   -- { 'hasansujon786/notifier.nvim', opt = true, module = 'notifier' },
-  { 'folke/which-key.nvim', config = function() require('config.whichkey') end },
+  { 'folke/which-key.nvim', lazy = true, event = 'VimEnter', config = function() require('config.whichkey') end },
   { 'uga-rosa/ccc.nvim', config = function() require('config.color-picker') end, opt = true, cmd = 'CccPick' },
   {
     'lukas-reineke/indent-blankline.nvim',
@@ -16,7 +16,7 @@ return {
     event = 'BufReadPost',
     config = function() require('config.indentLine') end,
     dependencies = {
-      { 'kevinhwang91/nvim-hlslens', config = function() require('config.hlslens') end },
+      -- { 'kevinhwang91/nvim-hlslens', config = function() require('config.hlslens') end },
       { 'karb94/neoscroll.nvim', config = function() require('config.neoscroll') end },
       { 'chentoast/marks.nvim', config = function() require('config.marks-config') end },
       { 'hasansujon786/kissline.nvim', config = function() require('config.kissline') end },
@@ -66,7 +66,7 @@ return {
   ------------------------------------------------
   --> Utils --------------------------------------
   ------------------------------------------------
-  'nvim-lua/plenary.nvim',
+  { 'nvim-lua/plenary.nvim', lazy = true, module = 'plenary' },
   { 'MunifTanjim/nui.nvim', lazy = true, module = 'nui' },
   {
     'tpope/vim-commentary',
@@ -92,7 +92,6 @@ return {
     cmd = { 'FloatermNew', 'FloatermToggle' },
     config = function() require('config.floaterm') end,
   },
-  { 'tpope/vim-scriptease', lazy = true, cmd = { 'PP', 'Messages' } },
   {
     'olimorris/persisted.nvim',
     lazy = true,

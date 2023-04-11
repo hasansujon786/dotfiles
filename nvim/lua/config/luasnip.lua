@@ -18,8 +18,8 @@ ls.config.set_config({
       active = { virt_text = { { '', 'CmpItemKindClass' } } },
     },
     [types.insertNode] = {
-      passive = { virt_text = { { icons.ui.BigCircle, 'Comment' } } },
-      active = { virt_text = { { icons.ui.BigCircle, 'String' } } },
+      passive = { virt_text = { { icons.ui.Circle, 'Comment' } } },
+      active = { virt_text = { { icons.ui.Circle, 'String' } } },
     },
   },
 })

@@ -1,5 +1,10 @@
 ## dotfiles
-  https://github.com/yutkat/dotfiles/blob/main/.config/wezterm/wezterm.lua
+https://github.com/yutkat/dotfiles/blob/main/.config/wezterm/wezterm.lua
+
+## Theme
+https://github.com/neapsix/wezterm
+hi Normal guibg=#FAF4EC
+hi Normal guibg=#F2E9E0
 
 ## cli
 wezterm ls-fonts --text "✘"

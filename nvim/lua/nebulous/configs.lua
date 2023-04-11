@@ -22,6 +22,7 @@ M.default = {
     dashboard = true,
     alpha = true,
     floaterm = true,
+    noice = true,
     -- dap-float
     dapui_scopes = true,
     dapui_breakpoints = true,

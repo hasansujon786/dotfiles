@@ -14,7 +14,3 @@ git clone https://github.com/hasansujon786/dotfiles ~/dotfiles && cd ~/dotfiles 
 ```bash
 git clone https://github.com/hasansujon786/dotfiles ~/dotfiles && cd ~/dotfiles && ./scripts/install.sh lin
 ```
-
-https://github.com/neapsix/wezterm
-hi Normal guibg=#FAF4EC
-hi Normal guibg=#F2E9E0

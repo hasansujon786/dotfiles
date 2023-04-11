@@ -9,6 +9,7 @@ command! LspInstallEssentials lua require('config.lsp.util').install_essential_s
 command! LuaSnipEdit lua require("luasnip.loaders").edit_snippet_files()
 command! ReloadConfig lua require('hasan.utils.file').reload()
 command! ProjectCommands lua require("telescope._extensions").manager.project_commands.commands()
+command! Messages NoiceHistory
 nmap <silent> <Plug>(fix-current-world) :call hasan#repeat#fix_word()<CR>
 
 " local cmd = api.nvim_create_user_command
