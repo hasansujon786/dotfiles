@@ -1,0 +1,10 @@
+{
+  "Stateless Widget": {
+    "prefix": "gauto-col",
+    "body": [
+      "grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));"
+    ],
+    "description": "Create auto grid columns"
+  }
+}
+

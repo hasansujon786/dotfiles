@@ -20,6 +20,38 @@ local function set_custom_highlights()
   util.bg('TelescopeSelection', cursorling_bg)
 
   vim.fn['hasan#highlight#load_custom_highlight']()
+
+  -- https://github.com/folke/tokyonight.nvim/blob/main/lua/tokyonight/theme.lua#L255-L272
+  local links = {
+    -- ['@lsp.type.comment'] = '@comment',
+    -- ['@lsp.type.namespace'] = '@namespace',
+    -- ['@lsp.type.type'] = '@type',
+    -- ['@lsp.type.class'] = '@type',
+    -- ['@lsp.type.enum'] = '@type',
+    -- ['@lsp.type.interface'] = '@type',
+    -- ['@lsp.type.struct'] = '@structure',
+    -- ['@lsp.type.parameter'] = '@parameter',
+    -- ['@lsp.type.variable'] = '@variable',
+    -- ['@lsp.type.property'] = '@property',
+    -- ['@lsp.type.enumMember'] = '@constant',
+    -- ['@lsp.type.function'] = '@function',
+    -- ['@lsp.type.method'] = '@method',
+    -- ['@lsp.type.macro'] = '@macro',
+    -- ['@lsp.type.decorator'] = '@function',
+    -- ['@lsp.type.keyword'] = { link = '@keyword' },
+
+    ['@lsp.mod.readonly'] = '@Constant',
+    -- ['@lsp.typemod.variable.readonly'] = '@constant',
+    ['@lsp.typemod.method.defaultLibrary'] = '@function.builtin',
+    ['@lsp.typemod.function.defaultLibrary'] = '@function.builtin',
+    ['@lsp.typemod.operator.injected'] = '@operator',
+    ['@lsp.typemod.string.injected'] = '@string',
+    ['@lsp.typemod.variable.defaultLibrary'] = '@variable.builtin',
+    ['@lsp.typemod.variable.injected'] = '@variable',
+  }
+  for newgroup, oldgroup in pairs(links) do
+    vim.api.nvim_set_hl(0, newgroup, { link = oldgroup, default = true })
+  end
 end
 
 return {

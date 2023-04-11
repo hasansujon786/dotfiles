@@ -24,6 +24,12 @@
         "path": "./javascriptreact.json"
       },
       {
+        "language": [
+          "css"
+        ],
+        "path": "./css.json"
+      },
+      {
         "language": "dart",
         "path": "./dart.json"
       },

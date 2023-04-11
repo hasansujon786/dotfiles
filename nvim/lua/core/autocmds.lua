@@ -7,7 +7,7 @@ utils.augroup('MY_AUGROUP')(function(autocmd)
   autocmd('CmdwinEnter', 'nnoremap <buffer><CR> <CR>')
   autocmd('ColorScheme', function()
     require('hasan.utils.ui.palatte').set_custom_highlights()
-    require('hasan.utils.color').my_nebulous_setup()
+    require('config.nebulous').my_nebulous_setup()
   end)
 
   autocmd('FileType', 'setl foldlevel=0', { pattern = 'vim' })

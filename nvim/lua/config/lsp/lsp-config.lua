@@ -23,6 +23,7 @@ local lua_opts = {
         library = { 'C:\\Users\\hasan\\dotfiles\\nvim\\lua' }, -- Make the server aware of Neovim runtime files
       },
       telemetry = { enable = false },
+      -- semantic = { enable = false },
     },
   },
 }
