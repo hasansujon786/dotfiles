@@ -10,6 +10,7 @@ hi Normal guibg=#F2E9E0
 wezterm ls-fonts --text "✘"
 
 ## Custom keymap
+- https://www.reddit.com/r/neovim/comments/12hyi9t/make_scr_cscr_stab_ctab_work_in_neovim_kitty/
 - using: https://stackoverflow.com/questions/16359878/how-to-map-shift-enter
 map shift+enter              send_text all \x1b[13;2u      # <s-cr>
 map ctrl+enter               send_text all \x1b[13;5u      # <c-cr>

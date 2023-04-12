@@ -5,9 +5,13 @@ function! s:hop(open_cmd) abort
   exec a:open_cmd.' '. filepath
 endfunction
 
-nnoremap <silent> <buffer> l :call <SID>hop('edit')<CR>
-nnoremap <silent> <buffer> t :call <SID>hop('tabnew')<CR>
-nnoremap <silent> <buffer> s :call <SID>hop('split')<CR>
-nnoremap <silent> <buffer> v :call <SID>hop('vsplit')<CR>
-nnoremap <silent> <buffer> f :call <SID>hop('Fedit')<CR>
-nnoremap <silent> <buffer> q :wq<CR>
+nnoremap <silent> <buffer> l <cmd>call <SID>hop('edit')<CR>
+nnoremap <silent> <buffer> t <cmd>call <SID>hop('tabnew')<CR>
+nnoremap <silent> <buffer> s <cmd>call <SID>hop('split')<CR>
+nnoremap <silent> <buffer> v <cmd>call <SID>hop('vsplit')<CR>
+nnoremap <silent> <buffer> f <cmd>call <SID>hop('Fedit')<CR>
+nnoremap <silent> <buffer> q <cmd>wq<CR>
+
+for key in [1,2,3,4,5,6,7,8,9]
+  exec 'nnoremap <silent> <buffer> '.key.' <cmd>'.key.'<CR><cmd>call <SID>hop("edit")<CR>'
+endfor

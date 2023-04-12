@@ -183,7 +183,7 @@ keymap('n', '<F5>', '<Esc>:syntax sync fromstart<CR>')
 keymap('i', '<F5>', '<C-o>:syntax sync fromstart<CR>')
 
 -- Leader keys ----------------------------------
-keymap('n', '<leader>e', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', { desc = 'Open Harpoon' })
+keymap('n', '<leader>e', '<cmd>lua require("hasan.org").toggle_org_float()<CR>', { desc = 'Toggle org float' })
 keymap({ 'n', 'x' }, '<leader>s', '<cmd>silent w<cr>', { desc = 'Save current file' })
 keymap({ 'n', 'x' }, '<leader>q', '<cmd>Quit<CR>', { desc = 'Close window' })
 keymap({ 'n', 'x' }, '<leader>h', '<C-w>h', { desc = 'which_key_ignore' })
@@ -202,7 +202,7 @@ for i = 0, 9 do
 end
 keymap('n', '[w', ':lua require("harpoon.ui").nav_prev()<CR>', { desc = 'Previous harpoon item' }) -- harpoon
 keymap('n', ']w', ':lua require("harpoon.ui").nav_next()<CR>', { desc = 'Next harpoon item' })
-keymap('n', '<leader><tab>', '<cmd>lua require("hasan.org").toggle_org_float()<CR>', { desc = 'Toggle org float' })
+keymap('n', '<leader><tab>', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', { desc = 'Open Harpoon' })
 
 local common = {
   search_wiki_files = { '<cmd>lua require("hasan.telescope.custom").search_wiki_files()<CR>', 'Search org files' },

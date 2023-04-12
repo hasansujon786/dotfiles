@@ -1,3 +1,4 @@
+local first_init = true
 local utils = require('hasan.utils')
 if vim.fn.exists('g:hasan_telescope_buffers') == 0 then
   vim.g.hasan_telescope_buffers = { ['0'] = 0 } -- used in hasan#utils#_buflisted_sorted()
@@ -7,7 +8,15 @@ utils.augroup('MY_AUGROUP')(function(autocmd)
   autocmd('CmdwinEnter', 'nnoremap <buffer><CR> <CR>')
   autocmd('ColorScheme', function()
     require('hasan.utils.ui.palatte').set_custom_highlights()
-    require('config.nebulous').my_nebulous_setup()
+
+    if first_init then
+      vim.defer_fn(function()
+        require('config.nebulous').my_nebulous_setup()
+      end, 500)
+    else
+      require('config.nebulous').my_nebulous_setup()
+    end
+    first_init = false
   end)
 
   autocmd('FileType', 'setl foldlevel=0', { pattern = 'vim' })

@@ -14,7 +14,7 @@ require('core.options')
 require('core.keymaps')
 require('core.lazy')
 require('core.autocmds')
-require('core.playground')
 require('config.one_dark')
+-- require('core.playground')
 -- nodejs.install
 -- https://cj.rs/blog/tips/nvim-plugin-development/
