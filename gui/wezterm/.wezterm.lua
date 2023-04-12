@@ -133,10 +133,7 @@ return {
     brightness = 0.8,
   },
   keys = {
-    -- { key = ',', mods = 'ALT', action = 'ShowTabNavigator' },
-    -- { key = 'p', mods = 'SHIFT|CTRL', action = 'ShowLauncher' },
-    { key = ' ', mods = 'CTRL', action = { SendString = '\x11' } },
-    { key = 'Backspace', mods = 'CTRL', action = { SendKey = { key = 'w', mods = 'CTRL' } } },
+    -- { key = ',', mods  'ALT', action = 'ShowTabNavigator' },
     {
       key = 'F11',
       action = wezterm.action_callback(function(window, pane)
@@ -200,6 +197,14 @@ return {
     { key = 'o', mods = 'LEADER', action = 'ActivateLastTab' },
     { key = 'v', mods = 'LEADER', action = act({ SplitHorizontal = {} }) },
     { key = 's', mods = 'LEADER', action = act({ SplitVertical = {} }) },
+
+    -- Custom inputs
+    { key = ' ', mods = 'CTRL', action = { SendString = '\x11' } },
+    { key = 'i', mods = 'CTRL', action = { SendString = '\x1b[105;5u' } },
+    { key = 'm', mods = 'CTRL', action = { SendString = '\x1b[109;5u' } },
+    { key = 'Enter', mods = 'SHIFT', action = { SendString = '\x1b[13;2u' } },
+    { key = 'Enter', mods = 'CTRL', action = { SendString = '\x1b[13;5u' } },
+    { key = 'Backspace', mods = 'CTRL', action = { SendKey = { key = 'w', mods = 'CTRL' } } },
   },
   mouse_bindings = {
     { event = { Up = { streak = 1, button = 'Left' } }, mods = 'CTRL', action = 'OpenLinkAtMouseCursor' },

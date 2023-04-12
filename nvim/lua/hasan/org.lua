@@ -41,7 +41,7 @@ local fn = {
         border = 'none',
         focusable = false,
         zindex = 49,
-        -- win_options = { winhighlight = 'Normal:CursorColumn' },
+        win_options = { winhighlight = 'Normal:Normal' },
       },
       main = {
         -- bufnr = vim.api.nvim_get_current_buf(),
@@ -67,7 +67,7 @@ local fn = {
           numberwidth = 2,
           concealcursor = 'n',
           conceallevel = 2,
-          winhighlight = 'FloatBorder:ZenBorder,Folded:OrgHeadlineLevel1',
+          winhighlight = 'Normal:Normal,FloatBorder:ZenBorder,Folded:OrgHeadlineLevel1',
         },
       },
     }
@@ -91,7 +91,7 @@ local fn = {
       },
       size = {
         width = '100%',
-        height = '96%',
+        height = vim.o.cmdheight == 0 and '98%' or '96%',
       },
     }, Layout.Box(panes, { dir = 'row' }))
 

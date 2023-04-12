@@ -6,13 +6,6 @@ require('hlslens').setup({
   -- float_shadow_blend = 10
 })
 
-keymap({ 'n', 'x' }, 'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR>zzzv<Cmd>lua require('hlslens').start()<CR>]])
-keymap({ 'n', 'x' }, 'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR>zzzv<Cmd>lua require('hlslens').start()<CR>]])
-keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]])
-keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]])
-keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]])
-keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]])
-
 vim.cmd([[
   aug VMlens
     au!
@@ -20,3 +13,16 @@ vim.cmd([[
     au User visual_multi_exit lua require('config.vmlens').exit()
   aug END
 ]])
+
+local kopts = { noremap = true, silent = true }
+local hl_next = [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]]
+local hl_prev = [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]]
+
+vim.api.nvim_set_keymap('n', 'n', hl_next, kopts)
+vim.api.nvim_set_keymap('n', 'N', hl_prev, kopts)
+vim.api.nvim_set_keymap('x', 'n', hl_next, kopts)
+vim.api.nvim_set_keymap('x', 'N', hl_prev, kopts)
+vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)

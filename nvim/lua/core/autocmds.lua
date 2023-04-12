@@ -17,7 +17,7 @@ utils.augroup('MY_AUGROUP')(function(autocmd)
   autocmd({ 'BufNewFile', 'BufRead' }, 'setl filetype=jsonc', { pattern = { '*.json', 'tsconfig.json' } })
   autocmd({ 'BufWinEnter', 'WinEnter' }, function()
     vim.defer_fn(function()
-      vim.wo.winhighlight = 'FloatBorder:ZenBorder,Folded:OrgHeadlineLevel1'
+      vim.wo.winhighlight = 'Normal:Normal,FloatBorder:ZenBorder,Folded:OrgHeadlineLevel1'
     end, 1)
   end, { pattern = '*.org' })
 
