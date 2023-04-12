@@ -23,8 +23,8 @@ keymap({ 'n', 'x' }, 'X', '"_X')
 keymap({ 'i', 'c' }, '<C-v>', '<C-R>+', noSilent) -- Paste from + register (system clipboard)
 keymap({ 'i', 'c' }, '<A-p>', '<C-R>"', noSilent) -- Paste the last item from register
 -- Easier system clipboard usage
-keymap('n', '<leader>y', '"+y')
-keymap('v', '<leader>y', '"+ygv<Esc>')
+keymap('n', '<leader>y', '"+y', { desc = 'Yank to system' })
+keymap('v', '<leader>y', '"+ygv<Esc>', { desc = 'Yank to system' })
 keymap({ 'n', 'v' }, '<leader>ip', '"+p', { desc = 'Paste from system' })
 keymap({ 'n', 'v' }, '<leader>iP', '"+P', { desc = 'Paste from system' })
 
@@ -61,8 +61,12 @@ keymap('n', '<tab>', 'za')
 keymap('n', '<s-tab>', 'zA')
 
 -- Navigation -----------------------------------
-keymap('n', 'j', function() vim.fn['reljump#jump']('j') end)
-keymap('n', 'k', function() vim.fn['reljump#jump']('k') end)
+keymap('n', 'j', function()
+  vim.fn['reljump#jump']('j')
+end)
+keymap('n', 'k', function()
+  vim.fn['reljump#jump']('k')
+end)
 
 keymap('n', 'H', 'H:exec "norm! ". &scrolloff . "k"<cr>') -- jump in file
 keymap('n', 'L', 'L:exec "norm! ". &scrolloff . "j"<cr>')
@@ -97,8 +101,10 @@ keymap('n', '<A-,>', ':vertical resize -5<CR>')
 keymap('n', '\\', ':ZenMode<CR>') -- Zoom a vim pane
 keymap('n', '<leader>u', ':ZenMode<CR>') -- Zoom a vim pane
 keymap('n', '<Bar>', ':wincmd =<cr>')
-
-keymap('n', '<C-j>', '<C-i>') -- Jump between tabs
+-- Jumplist
+keymap('n', '<C-i>', '<C-i>')
+keymap('n', '<C-j>', '<C-i>')
+-- Jump between tabs
 keymap({ 'n', 'v' }, 'gl', 'gt')
 keymap({ 'n', 'v' }, 'gh', 'gT')
 
@@ -111,9 +117,6 @@ keymap('n', ']q', ':cnext<CR>')
 keymap('n', '[q', ':cprev<CR>')
 keymap('n', ']Q', ':clast<CR>')
 keymap('n', '[Q', ':cfirst<CR>')
-
-keymap('n', '[w', ':lua require("harpoon.ui").nav_prev()<CR>', { desc = 'Previous harpoon item' }) -- harpoon
-keymap('n', ']w', ':lua require("harpoon.ui").nav_next()<CR>', { desc = 'Next harpoon item' })
 
 -- Search ---------------------------------------
 -- Pressing * or # searches for the current selection
@@ -135,7 +138,9 @@ keymap('n', 'Z/', function() -- search in visible viewport
   vim.wo.scrolloff = 0
   feedkeys('VHoLo0<Esc>/\\%V')
 
-  vim.defer_fn(function() vim.wo.scrolloff = scrolloff end, 10)
+  vim.defer_fn(function()
+    vim.wo.scrolloff = scrolloff
+  end, 10)
 end, noSilent)
 -- keymap({ 'n', 'v' }, 'z/', '/\\%><C-r>=line("w0")-1<CR>l\\%<<C-r>=line("w$")+1<CR>l', { silent = false })
 
@@ -178,10 +183,48 @@ keymap('n', '<F5>', '<Esc>:syntax sync fromstart<CR>')
 keymap('i', '<F5>', '<C-o>:syntax sync fromstart<CR>')
 
 -- Leader keys ----------------------------------
+keymap('n', '<leader>e', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', { desc = 'Open Harpoon' })
+keymap({ 'n', 'x' }, '<leader>s', '<cmd>silent w<cr>', { desc = 'Save current file' })
+keymap({ 'n', 'x' }, '<leader>q', '<cmd>Quit<CR>', { desc = 'Close window' })
+keymap({ 'n', 'x' }, '<leader>h', '<C-w>h', { desc = 'which_key_ignore' })
+keymap({ 'n', 'x' }, '<leader>j', '<C-w>j', { desc = 'which_key_ignore' })
+keymap({ 'n', 'x' }, '<leader>k', '<C-w>k', { desc = 'which_key_ignore' })
+keymap({ 'n', 'x' }, '<leader>l', '<C-w>l', { desc = 'which_key_ignore' })
+
+for i = 0, 9 do
+  local harpoon_ls = '<leader>%s'
+  local harpoon_rs = '<cmd>lua require("harpoon.ui").nav_file(%s)<CR>'
+  keymap('n', harpoon_ls:format(i), harpoon_rs:format(i), { desc = 'which_key_ignore' })
+
+  local win_ls = '<leader>w%s'
+  local win_rs = '%s<C-w>w'
+  keymap('n', win_ls:format(i), win_rs:format(i), { desc = 'which_key_ignore' })
+end
+keymap('n', '[w', ':lua require("harpoon.ui").nav_prev()<CR>', { desc = 'Previous harpoon item' }) -- harpoon
+keymap('n', ']w', ':lua require("harpoon.ui").nav_next()<CR>', { desc = 'Next harpoon item' })
+keymap('n', '<leader><tab>', '<cmd>lua require("hasan.org").toggle_org_float()<CR>', { desc = 'Toggle org float' })
+
+local common = {
+  search_wiki_files = { '<cmd>lua require("hasan.telescope.custom").search_wiki_files()<CR>', 'Search org files' },
+  project_files = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find project file' },
+  substitute_word = { '<cmd>lua require("hasan.utils.ui").substitute_word()<CR>', 'Substitute word' },
+}
+keymap({ 'n', 'v' }, '<leader>cw', common.substitute_word[1], { desc = common.substitute_word[2] })
 -- File commands
 keymap('n', '<leader>fC', ':w <C-R>=expand("%")<CR>', noSilent)
 keymap('n', '<leader>fM', ':Move <C-R>=expand("%")<CR>', noSilent)
 keymap('n', '<leader>fe', ":edit <C-R>=expand('%:p:h') . '\\'<CR>", noSilent)
+
+-- Telescope
+keymap('n', '<leader><leader>', common.project_files[1], { desc = common.project_files[2] })
+keymap('n', '<leader>w/', common.search_wiki_files[1], { desc = common.search_wiki_files[2] })
+keymap('n', '<leader>/w', common.search_wiki_files[1], { desc = common.search_wiki_files[2] })
+keymap('n', '<C-p>', '<cmd>lua require("telescope.builtin").oldfiles()<CR>')
+keymap('n', '<A-x>', '<cmd>lua require("hasan.telescope.custom").commands()<CR>')
+keymap('n', '//', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>', { desc = 'which_key_ignore' })
+keymap('v', '/', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>')
+keymap({ 'n', 'v' }, '<A-/>', '<cmd>lua require("hasan.telescope.custom").grep_string()<CR>')
+keymap({ 'n', 'i' }, '<C-k>e', '<cmd>lua require("hasan.telescope.custom").emojis()<CR>')
 
 -- maps.nnoremap('<leader>p:', ':silent ! tmux-windowizer $(pwd) ', {silent = false}) -- run project cmd
 -- maps.nnoremap('<leader>p;', ':silent ! tmux-send-keys $(pwd) ', {silent = false})
@@ -195,13 +238,6 @@ vim.g.floaterm_keymap_toggle = '<A-m>'
 keymap('n', '<A-m>', '<cmd>FloatermToggle<CR>')
 keymap('n', ']t', '<cmd>FloatermToggle<CR><C-\\><C-n>')
 keymap('n', '[t', '<cmd>FloatermToggle<CR><C-\\><C-n>')
--- Telescope
-keymap('n', '<C-p>', '<cmd>lua require("telescope.builtin").oldfiles()<CR>')
-keymap('n', '<A-x>', '<cmd>lua require("hasan.telescope.custom").commands()<CR>')
-keymap('n', '//', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>', { desc = 'which_key_ignore' })
-keymap('v', '/', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>')
-keymap({ 'n', 'v' }, '<A-/>', '<cmd>lua require("hasan.telescope.custom").grep_string()<CR>')
-keymap({ 'n', 'i' }, '<C-k>e', '<cmd>lua require("hasan.telescope.custom").emojis()<CR>')
 -- yanklist
 keymap('n', 'p', '<Plug>(yanklist-auto-put)')
 keymap('n', 'P', '<Plug>(yanklist-auto-Put)')

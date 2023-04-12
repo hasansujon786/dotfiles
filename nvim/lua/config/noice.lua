@@ -85,12 +85,11 @@ require('noice').setup({
 --   print("test")
 -- end)
 
-keymap('c', '<c-x>', function()
+keymap('c', '<S-CR>', function()
   require('noice').redirect(vim.fn.getcmdline())
-  -- vim.defer_fn(function()
-  --   -- write something
-  --   feedkeys('<Esc>', 'c')
-  -- end, 1000)
+  vim.defer_fn(function()
+    feedkeys('<C-c>')
+  end, 10)
 end, { desc = 'Redirect Cmdline' })
 
 keymap({ 'i', 's' }, '<A-d>', function()

@@ -8,7 +8,7 @@ return {
   { 'goolord/alpha-nvim', config = function() require('config.alpha') end },
   { 'kyazdani42/nvim-web-devicons', lazy = true, config = function() require('config.devicons-config') end },
   -- { 'hasansujon786/notifier.nvim', opt = true, module = 'notifier' },
-  { 'folke/which-key.nvim', lazy = true, event = 'VimEnter', config = function() require('config.whichkey') end },
+  { 'folke/which-key.nvim', lazy = true, event = 'VeryLazy', config = function() require('config.whichkey') end },
   { 'uga-rosa/ccc.nvim', config = function() require('config.color-picker') end, opt = true, cmd = 'CccPick' },
   {
     'lukas-reineke/indent-blankline.nvim',

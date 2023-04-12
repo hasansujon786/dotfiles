@@ -1,5 +1,5 @@
 local wk = require('which-key')
-wk.setup {
+wk.setup({
   window = {
     border = 'none', -- none, single, double, shadow
     position = 'bottom', -- bottom, top
@@ -18,7 +18,7 @@ wk.setup {
     ['<Tab>'] = 'TAB',
   },
   show_help = false,
-}
+})
 
 local function loadOrgMode(key)
   return function()
@@ -33,14 +33,8 @@ local function loadOrgMode(key)
 end
 
 local common = {
-  search_wiki_files = { '<cmd>lua require("hasan.telescope.custom").search_wiki_files()<CR>', 'Search org files'},
-  grep_org_text = { '<cmd>lua require("hasan.telescope.custom").grep_org_text()<CR>',         'Grep org text'},
-  obsidianQuickSwitch = { '<cmd>ObsidianQuickSwitch<CR>',         'Obsidian quick switch'},
   buffers_cwd = { '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>',             'Switch buffers' },
   buffers_all = { '<cmd>lua require("hasan.telescope.custom").buffers(false)<CR>',            'Switch all buffers' },
-  grep_string = { '<cmd>lua require("hasan.telescope.custom").grep_string()<CR>',             'Grep string' },
-  substitute_word = {'<cmd>lua require("hasan.utils.ui").substitute_word()<CR>',              'Substitute word'},
-  project_files = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>',         'Find project file' },
 }
 local w = {
   name= '+window',
@@ -64,8 +58,6 @@ local w = {
   q = { '<cmd>tabclose<CR>',           'Close tab' },
   t = { '<cmd>-tab split<CR>',         'Edit to new tab' },
   O = { '<cmd>tabonly<CR>',            'Keep only tab' },
-
-  ['/'] = common.search_wiki_files,
 }
 
 local leader = {
@@ -103,8 +95,7 @@ local leader = {
     r = { '<Plug>ColorConvertRGB',                  'Convert color to RGB' },
     p = { '<cmd>CccPick<cr>',                       'Pick a color' },
 
-    w = common.substitute_word,
-
+    -- TODO: <12.04.23> change keymap
     m = {
       name = '+hightlight-hints',
       x = { '<cmd>call hiiw#ClearInterestingWord()<cr>',          'Clear hints' },
@@ -168,7 +159,7 @@ local leader = {
     B = { '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', 'Browse file directory' },
     f = { '<cmd>Telescope find_files<CR>',                                          'Find file' },
     F = { ':Telescope find_files cwd=<C-R>=expand("%:h")<CR><CR>',                  'Find file from here' },
-    p = common.project_files,
+    p = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>',         'Find project file' },
     ['.'] = { ':Telescope find_files cwd=<C-R>=expand("%:h")<CR><CR>',              'Find file from here' },
 
     i = { '<cmd>call hasan#utils#file_info()<CR>',                       'Show file info' },
@@ -195,7 +186,6 @@ local leader = {
 
   o = {
     name = '+open',
-    ['/'] = common.grep_org_text,
     a = { loadOrgMode('<space>oa'),                                             'Org agenda' },
     c = { loadOrgMode('<space>oc'),                                             'Org capture' },
     h = {'<cmd>lua require("hasan.org").open_org_home("-tabedit")<CR>',         'Open org home'},
@@ -275,34 +265,17 @@ local leader = {
     r = { '<cmd>Telescope oldfiles<CR>',        'Recent files' },
     t = { '<cmd>Telescope filetypes<CR>',       'Change filetypes' },
 
-    q = common.obsidianQuickSwitch,
-    o = common.grep_org_text,
-    w = common.search_wiki_files,
-
-    s = common.grep_string,
     ['/'] = { '<cmd>Telescope live_grep<CR>',   'Live grep' },
     g = { '<cmd>lua require("hasan.telescope.custom").live_grep_in_folder()<cr>', 'Live grep in folder' },
-    -- m = { '<cmd>Bookmarks<CR>',                 'Jump to bookmark' } ,
+    o = { '<cmd>lua require("hasan.telescope.custom").grep_org_text()<CR>',       'Grep org text'},
   },
 
-  q = { '<cmd>Quit<CR>',                                               'Close window' },
   r = { '<cmd>lua require("hasan.utils.ui").cycle_numbering()<CR>',    'Cycle number' },
-  R = { '<cmd>lua require("nebulous").toggle_win_blur()<CR>',          'Toggle Nebulous' },
-  s = { '<cmd>silent w<cr>',                                           'Save current file' },
   x = { '<cmd>call hasan#utils#buffer#_open_scratch_buffer()<CR>',     'Scratch buffer' },
   M = { '<cmd>lua require("harpoon.mark").add_file()<CR>',             'Mark to Harpoon' },
 
-  -- ['.'] = common.buffers_cwd,
-  e = {'<cmd>lua require("hasan.org").toggle_org_float()<CR>',         'Toggle org float'},
-  ['<tab>'] = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', 'Open Harpoon' },
-  ['<space>'] = common.project_files,
   ['>'] = common.buffers_all,
   ['.'] = common.buffers_cwd,
-
-  h = { '<C-w>h', 'which_key_ignore' },
-  j = { '<C-w>j', 'which_key_ignore' },
-  k = { '<C-w>k', 'which_key_ignore' },
-  l = { '<C-w>l', 'which_key_ignore' },
 }
 
 local leader_visual = {
@@ -310,33 +283,9 @@ local leader_visual = {
     name = '+open',
     y = { '<cmd>lua require("yanklist").yanklist({is_visual=true,initial_mode="normal"})<CR>', 'Yank list' },
   },
-  c = {
-    name = '+change',
-    w = common.substitute_word,
-  },
-  w = w,
-  ['/'] = {
-    name = '+search',
-    s = common.grep_string,
-  },
-
-  h = { '<C-w>h', 'which_key_ignore' },
-  j = { '<C-w>j', 'which_key_ignore' },
-  k = { '<C-w>k', 'which_key_ignore' },
-  l = { '<C-w>l', 'which_key_ignore' },
+  c = { name = '+change' },
+  ['/'] = { name = '+search' },
 }
-
-for i = 0, 9 do
-  leader[tostring(i)] = { 'which_key_ignore' }
-  local harpoon_rs = '<cmd>lua require("harpoon.ui").nav_file(%s)<CR>'
-  local harpoon_ls = '<leader>%s'
-  keymap('n', harpoon_ls:format(i), harpoon_rs:format(i))
-
-  leader.w[tostring(i)] = { 'which_key_ignore' }
-  local win_ls = '<leader>w%s'
-  local win_rs = '%s<C-w>w'
-  keymap('n', win_ls:format(i), win_rs:format(i))
-end
 
 wk.register(leader, { prefix = '<leader>' })
 wk.register(leader_visual, { prefix = '<leader>', mode = 'v' })

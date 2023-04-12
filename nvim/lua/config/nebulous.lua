@@ -3,6 +3,8 @@ local api = vim.api
 local utils = require('hasan.utils')
 local M = {}
 
+keymap('n', '<leader>R', '<cmd>lua require("nebulous").toggle_win_blur()<CR>', { desc = 'Toggle Nebulous' })
+
 M.my_nebulous_setup = function()
   require('nebulous').setup({
     -- init_wb_with_disabled = vim.g.bg_tranparent,

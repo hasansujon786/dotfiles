@@ -26,7 +26,7 @@ require('indent_blankline').setup({
 -- https://github.com/lukas-reineke/indent-blankline.nvim/issues/118
 local indent_wrap_mapping = function(mapping)
   if vim.g.loaded_indent_blankline == 1 then
-    return mapping .. ':IndentBlanklineRefresh<CR>'
+    return mapping .. '<cmd>IndentBlanklineRefresh<CR>'
   else
     return mapping
   end

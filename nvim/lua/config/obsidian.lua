@@ -4,3 +4,6 @@ require('obsidian').setup({
     nvim_cmp = true, -- if using nvim-cmp, otherwise set to false
   },
 })
+
+-- q = common.obsidianQuickSwitch,
+-- obsidianQuickSwitch = { '<cmd>ObsidianQuickSwitch<CR>',         'Obsidian quick switch'},
