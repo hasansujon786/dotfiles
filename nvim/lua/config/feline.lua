@@ -9,30 +9,29 @@ local function withHl(text, hl)
 end
 
 local one_monokai = {
-  fg = '#abb2bf',
+  fg = '#a5b0c5',
   bg = '#2D3343',
-  green = '#98c379',
-  yellow = '#e5c07b',
-  purple = '#c678dd',
-  orange = '#d19a66',
-  peanut = '#f6d5a4',
-  red = '#e06c75',
-  aqua = '#61afef',
-  darkblue = '#282c34',
+  bg1 = '#3e425d',
+  bg_hidden = '#3E4452',
+  green = '#97ca72',
+  yellow = '#ebc275',
+  purple = '#ca72e4',
+  orange = '#d99a5e',
+  red = '#ef5f6b',
+  aqua = '#6db9f7',
   dark_red = '#f75f5f',
-  layer1 = '#363C51',
-  muted1 = '#8b95a7',
-  muted2 = '#68707E',
-  layer1_hideen = '#3E4452',
+  dark_blue = '#282c34',
+  gray = '#8b95a7',
+  muted = '#68707E',
 }
 
 local hl_sections = {
-  muted_text = { fg = 'muted2' },
-  layer1 = { bg = 'layer1', fg = 'muted1' },
+  muted_text = { fg = 'muted' },
+  layer1 = { bg = 'bg1', fg = 'gray' },
   main = function()
     return {
       bg = require('feline.providers.vi_mode').get_mode_color(),
-      fg = 'darkblue',
+      fg = 'dark_blue',
       style = 'bold',
       name = 'NeovimModeHLColor',
     }
@@ -126,7 +125,7 @@ local c = {
   },
   file_format = {
     provider = 'file_format',
-    hl = { fg = 'orange', bg = 'darkblue', style = 'italic' },
+    hl = { fg = 'orange', bg = 'dark_blue', style = 'italic' },
     left_sep = 'block',
     right_sep = 'block',
   },
@@ -168,8 +167,8 @@ local c = {
       end
       return table.concat(list, ' ')
     end,
-    left_sep = { str = ' ', hl = { bg = 'layer1_hideen' } },
-    right_sep = { str = '▕', hl = { fg = '#2c3545', bg = 'layer1_hideen' } },
+    left_sep = { str = ' ', hl = { bg = 'bg_hidden' } },
+    right_sep = { str = '▕', hl = { fg = '#2c3545', bg = 'bg_hidden' } },
   },
   diagnostic_errors = { provider = 'diagnostic_errors', hl = { fg = 'red' } },
   diagnostic_warnings = { provider = 'diagnostic_warnings', hl = { fg = 'yellow' } },
