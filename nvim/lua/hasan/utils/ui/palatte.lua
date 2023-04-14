@@ -48,6 +48,8 @@ local function set_custom_highlights()
     ['@lsp.typemod.string.injected'] = '@string',
     ['@lsp.typemod.variable.defaultLibrary'] = '@variable.builtin',
     ['@lsp.typemod.variable.injected'] = '@variable',
+    ['@lsp.typemod.function.declaration'] = '@function',
+    ['@lsp.typemod.function.readonly'] = '@function',
   }
   for newgroup, oldgroup in pairs(links) do
     vim.api.nvim_set_hl(0, newgroup, { link = oldgroup, default = true })

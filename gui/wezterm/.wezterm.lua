@@ -4,7 +4,7 @@ local act = wezterm.action
 local SOLID_LEFT_ARROW = ''
 local SOLID_RIGHT_ARROW = ''
 
-wezterm.on('update-right-status', function(window, pane)
+wezterm.on('update-right-status', function(window, _)
   local cells = {}
 
   local date = wezterm.strftime('  %a %b %-d   ')
@@ -25,7 +25,7 @@ wezterm.on('update-right-status', function(window, pane)
   local num_cells = 0 -- How many cells have been formatted
 
   -- Translate a cell into elements
-  local function push(text, is_last)
+  local function push(text, _)
     local cell_no = num_cells + 1
     table.insert(elements, { Foreground = { Color = colors[cell_no] } })
     table.insert(elements, { Text = SOLID_LEFT_ARROW })
@@ -56,7 +56,7 @@ end)
 --   return ' ' .. tab.active_pane.title .. ' '
 -- end)
 
-wezterm.on('toggle-opacity', function(window, pane)
+wezterm.on('toggle-opacity', function(window, _)
   local overrides = window:get_config_overrides() or {}
   if not overrides.window_background_opacity then
     overrides.window_background_opacity = 0.5
@@ -67,7 +67,7 @@ wezterm.on('toggle-opacity', function(window, pane)
 end)
 
 local fixed_tab_bar = false
-wezterm.on('toggle-tab-bar', function(window, pane)
+wezterm.on('toggle-tab-bar', function(window, _)
   local overrides = window:get_config_overrides() or {}
   if not overrides.enable_tab_bar then
     overrides.enable_tab_bar = true
@@ -83,7 +83,7 @@ return {
   initial_cols = 120,
   tab_max_width = 30,
   hide_tab_bar_if_only_one_tab = false,
-  window_decorations = 'NONE', -- RESIZE
+  window_decorations = 'NONE', -- RESIZE,INTEGRATED_BUTTONS
   check_for_updates = false,
   use_dead_keys = false,
   warn_about_missing_glyphs = false,
@@ -133,7 +133,22 @@ return {
     brightness = 0.8,
   },
   keys = {
-    -- { key = ',', mods  'ALT', action = 'ShowTabNavigator' },
+    {
+      key = 'F2',
+      mods = 'ALT',
+      action = act.PromptInputLine({
+        description = wezterm.format({
+          { Attribute = { Intensity = 'Bold' } },
+          { Foreground = { AnsiColor = 'Fuchsia' } },
+          { Text = 'Enter name for tab' },
+        }),
+        action = wezterm.action_callback(function(window, _, line)
+          if line then
+            window:active_tab():set_title(line)
+          end
+        end),
+      }),
+    },
     {
       key = 'F11',
       action = wezterm.action_callback(function(window, pane)
@@ -161,7 +176,9 @@ return {
         },
       }),
     },
+    -- { key = ',', mods  'ALT', action = 'ShowTabNavigator' },
     -- { key = 'b', mods = 'LEADER', action = act({ EmitEvent = 'toggle-opacity' }) },
+    { key = 'r', mods = 'CTRL|SHIFT', action = wezterm.action_callback(wezterm.reload_configuration) },
     { key = 't', mods = 'SHIFT|ALT', action = act({ EmitEvent = 'toggle-tab-bar' }) },
     { key = 'w', mods = 'SHIFT|CTRL', action = act({ CloseCurrentPane = { confirm = false } }) },
     -- tabs
@@ -230,7 +247,7 @@ return {
   },
   command_palette_bg_color = '#222222',
   command_palette_fg_color = '#c0c0c0',
-  command_palette_font_size = 18.0,
+  command_palette_font_size = 14.0,
   color_scheme = 'OneHalfDark',
   colors = {
     background = '#242B38',
