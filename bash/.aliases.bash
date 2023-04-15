@@ -123,18 +123,20 @@ alias -- --=jump-to-git-root
 alias g='git'
 alias gcm='git commit -m'
 alias gs='git show'
+alias gd='git diff'
 alias gt='git tag'
 alias gst='git status'
 alias gupd='git update'
 alias gcl='git clone --recurse-submodules'
-alias gb='git branch --sort=-committerdate| fzf --height=20% |xargs git checkout'
+alias gb='git branch --sort=-committerdate | fzf --border-label="Checkout Recent Branch" --preview "git diff {1} --color=always" | xargs git checkout'
+alias gbn='git checkout -b' # create & switch branch
+alias gck='git checkout' # switch brnch
 # Use --soft if you want to keep your changes
 # Use --hard if you don't care about keeping the changes you made
 alias gr='git reset ' # unstage files (Use --hard/--soft)
 alias grh='git reset HEAD~1' # (Use --hard/--soft)
 alias grvh='git revert HEAD' # Undo a public commit
 alias gcrh='git clean --force && git reset --hard'
-alias gck='git checkout ' # switch brnch | -b to create
 alias glo='git log --oneline --decorate'
 alias lg='lazygit'
 

@@ -1,6 +1,6 @@
 -- TSInstallSync javascript typescript tsx org
 local parsers =
-  { 'html', 'vim', 'css', 'json', 'lua', 'vue', 'dart', 'bash', 'help', 'markdown', 'markdown_inline', 'regex' }
+  { 'html', 'vim', 'css', 'json', 'lua', 'vue', 'dart', 'bash', 'vimdoc', 'markdown', 'markdown_inline', 'regex' }
 
 require('nvim-treesitter.configs').setup({
   ensure_installed = parsers,
