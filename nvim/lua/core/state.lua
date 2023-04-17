@@ -1,4 +1,3 @@
-vim.g.bg_tranparent = true
 local M = {}
 
 M.ui = {
@@ -18,6 +17,9 @@ _G.state = {
   },
   treesitter = {
     auto_conceal_html_class = true,
+  },
+  theme = {
+    bg_tranparent = true,
   },
 }
 

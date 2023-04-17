@@ -2,6 +2,16 @@ local Job = require('plenary.job')
 
 local M = {}
 
+M.config_root = function()
+  local configDir = os.getenv('PVIM')
+  if configDir then
+    configDir = configDir .. '/config'
+  else
+    configDir = vim.fn.stdpath('config')
+  end
+  return configDir
+end
+
 local js = {
   comment = '\\/\\/ ',
   log = 'print(',

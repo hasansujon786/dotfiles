@@ -2,18 +2,19 @@ local cmd = vim.cmd
 local M = {}
 
 M.toggle_bg_tranparent = function()
+  local statePath = vim.fs.normalize(require('hasan.utils.file').config_root() .. '/lua/core/state.lua')
   local normal = vim.g.onedark_theme_colors[vim.g.onedark_config.style].normal
 
-  if not vim.g.bg_tranparent then
-    vim.g.bg_tranparent = true
+  if not state.theme.bg_tranparent then
+    state.theme.bg_tranparent = true
     -- require('nebulous.view').disable_win_blur()
     cmd(string.format('hi Normal guibg=%s guifg=%s', 'None', normal.fg))
-    cmd([[silent !sed -i '01s/false/true/' ~/dotfiles/nvim/lua/core/state.lua]])
+    cmd(string.format("silent !sed -i '22s/false/true/' %s", statePath))
   else
-    vim.g.bg_tranparent = false
+    state.theme.bg_tranparent = false
     -- require('nebulous').init()
     cmd(string.format('hi Normal guibg=%s guifg=%s', normal.bg, normal.fg))
-    cmd([[silent !sed -i '01s/true/false/' ~/dotfiles/nvim/lua/core/state.lua]])
+    cmd(string.format("silent !sed -i '22s/true/false/' %s", statePath))
   end
 end
 
