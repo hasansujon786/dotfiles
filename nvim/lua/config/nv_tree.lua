@@ -9,6 +9,17 @@ local vngr = require('hasan.utils.vinegar')
 local vopen = vngr.actions.open_or_edit_in_place
 local vclose = vngr.actions.open_n_close
 
+local SORT_METHODS = {
+  'name',
+  'modification_time',
+  'extension',
+  -- 'case_sensitive',
+}
+local sort_current = 1
+local sort_by = function()
+  return SORT_METHODS[sort_current]
+end
+
 local function on_attach(bufnr)
   local api = require('nvim-tree.api')
 
@@ -45,6 +56,8 @@ local function on_attach(bufnr)
   vim.keymap.set('n', 'E',     api.tree.expand_all,                   opts('Expand All'))
   vim.keymap.set('n', 'K',     api.node.show_info_popup,              opts('Info'))
   vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
+  vim.keymap.set('n', 'gs',    vngr.actions.git_add,                  opts('Git Add'))
+  vim.keymap.set('n', 'gu',    vngr.actions.git_add,                  opts('Git Add'))
   -- vim.keymap.set('n', 'S',     api.tree.search_node,                  opts('Search'))
 
   -- vinegar
@@ -59,12 +72,16 @@ local function on_attach(bufnr)
   vim.keymap.set('n', 'R',     vngr.actions.system_reveal,            opts('Reveal In System'))
   vim.keymap.set('n', 'i',     vngr.actions.quickLook,                opts('Reveal In System'))
   vim.keymap.set('n', '<CR>',  vclose(api.node.open.edit),            opts('Open'))
-  vim.keymap.set('n', '<C-t>', api.node.open.tab,                     opts('Open: New Tab'))
-  vim.keymap.set('n', '<C-v>', api.node.open.vertical,                opts('Open: Vertical Split'))
-  vim.keymap.set('n', '<C-x>', api.node.open.horizontal,              opts('Open: Horizontal Split'))
   vim.keymap.set('n', '<Tab>', api.node.open.preview,                 opts('Open Preview'))
   vim.keymap.set('n', '<2-LeftMouse>',  api.node.open.edit,           opts('Open'))
   vim.keymap.set('n', '<2-RightMouse>', api.tree.change_root_to_node, opts('CD'))
+  vim.keymap.set('n', 'v',     api.node.open.vertical,                opts('Open: Vertical Split'))
+  vim.keymap.set('n', 's',     api.node.open.horizontal,              opts('Open: Horizontal Split'))
+  vim.keymap.set('n', 't', function()
+    local node = api.tree.get_node_under_cursor()
+    vim.cmd('wincmd l')
+    api.node.open.tab(node)
+  end, opts('Open: New Tab'))
 
   -- FILE MANAGEMENT
   vim.keymap.set('n', '.',     api.node.run.cmd,                      opts('Run Command'))
@@ -81,6 +98,15 @@ local function on_attach(bufnr)
   vim.keymap.set('n', 'y',     api.fs.copy.filename,                  opts('Copy Name'))
   vim.keymap.set('n', 'Y',     api.fs.copy.relative_path,             opts('Copy Relative Path'))
   vim.keymap.set('n', 'gy',    api.fs.copy.absolute_path,             opts('Copy Absolute Path'))
+  vim.keymap.set('n', 'g.', function()
+    if sort_current >= #SORT_METHODS then
+      sort_current = 1
+    else
+      sort_current = sort_current + 1
+    end
+    api.tree.reload()
+    print(SORT_METHODS[sort_current])
+  end, opts('Cycle Sort'))
 
 
   -- -- You might tidy things by removing these along with their default mapping.
@@ -96,6 +122,7 @@ end
 
 require('nvim-tree').setup({
   on_attach = on_attach,
+  sort_by = sort_by,
   disable_netrw = true,
   hijack_netrw = true,
   auto_reload_on_write = true,
@@ -185,13 +212,3 @@ require('nvim-tree').setup({
     },
   },
 })
--- width = function()
---   local winwidth = vim.fn.winwidth(0)
---   if winwidth <= 100 then
---     return 30
---   elseif winwidth <= 200 then
---     return 40
---   else
---     return 50
---   end
--- end,
