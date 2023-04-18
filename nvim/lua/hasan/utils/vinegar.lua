@@ -2,6 +2,7 @@ local api = vim.api
 local tree = require('nvim-tree')
 local view = require('nvim-tree.view')
 local lib = require('nvim-tree.lib')
+local tapi = require('nvim-tree.api')
 local M = {}
 
 M.toggle_sidebar = function()
@@ -20,17 +21,6 @@ end
 
 local alt_file = nil
 local pre_alt_file = nil
-
--- function ShowAlt()
---   local st = ''
---   if alt_file then
---     st = 'alt_file: ' .. alt_file
---   end
---   if pre_alt_file then
---     st = st .. '     pre_alt_file: ' .. pre_alt_file
---   end
---   print(st)
--- end
 
 function M.vinegar()
   alt_file = vim.fn.expand('%')
@@ -79,46 +69,53 @@ function M.alternate_file()
   vim.cmd([[echo 'No alternate file']])
 end
 
-local function open()
-  feedkeys(vim.b.vinegar and 'E' or 'zZ')
-end
 M.actions = {
-  open = open,
-  edit_in_place = function()
-    feedkeys(vim.b.vinegar and 'E' or 'zE')
-  end,
-  open_n_close = function()
-    open()
-    if view.is_visible() and not vim.b.vinegar then
-      view.close()
+  open_or_edit_in_place = function(cmd)
+    return function()
+      if vim.b.vinegar then
+        tapi.node.open.replace_tree_buffer()
+      else
+        cmd()
+      end
     end
   end,
-  vinegar_edit_or_cd = function(node)
+  open_n_close = function(cmd)
+    return function()
+      cmd()
+      if view.is_visible() and not vim.b.vinegar then
+        view.close()
+      end
+    end
+  end,
+  vinegar_edit_or_cd = function()
+    local node = tapi.tree.get_node_under_cursor()
     if node.extension and vim.b.vinegar then
-      feedkeys('E')
+      tapi.node.open.replace_tree_buffer()
     elseif node.extension and not vim.b.vinegar then
-      feedkeys('zE')
+      tapi.node.open.no_window_picker()
     else
       lib.open({ path = node.absolute_path })
       feedkeys('ggj')
     end
   end,
-  cd_root = function()
+  jump_to_root = function()
     lib.open({ path = vim.loop.cwd() })
     feedkeys('gg', '')
   end,
-  system_reveal = function(node)
+  system_reveal = function()
+    local node = tapi.tree.get_node_under_cursor()
     vim.cmd('silent !explorer.exe /select,"' .. node.absolute_path .. '"')
   end,
-  quickLook = function(node)
+  quickLook = function()
+    local node = tapi.tree.get_node_under_cursor()
     require('hasan.utils.file').quickLook({ node.absolute_path })
   end,
-  vinegar_dir_up = function(node)
+  vinegar_dir_up = function()
+    local node = tapi.tree.get_node_under_cursor()
     if node.name == '..' then
       feedkeys('j')
       vim.schedule(function()
-        node = lib.get_node_at_cursor()
-        M.actions.vinegar_dir_up(node)
+        M.actions.vinegar_dir_up()
       end)
     end
     if node == nil or node.parent == nil then
