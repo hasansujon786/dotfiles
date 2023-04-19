@@ -186,6 +186,11 @@ end
 vim.api.nvim_create_autocmd('WinClosed', {
   callback = function()
     local winnr = tonumber(vim.fn.expand('<amatch>'))
+    local is_floating_win = vim.api.nvim_win_get_config(winnr).relative ~= ''
+    if is_floating_win then
+      return
+    end
+
     vim.schedule_wrap(tab_win_closed(winnr))
   end,
   nested = true,
