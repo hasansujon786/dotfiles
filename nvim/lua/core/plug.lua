@@ -106,7 +106,7 @@ return {
     'TimUntersberger/neogit',
     lazy = true,
     cmd = 'Neogit',
-    commit = '039ff32', -- 7be1e93
+    commit = '69a6ca7',
     config = function() require('config.neogit') end,
     dependencies = 'sindrets/diffview.nvim',
   },
