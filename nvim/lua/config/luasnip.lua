@@ -34,4 +34,21 @@ vim.defer_fn(function()
   require('luasnip.loaders.from_lua').lazy_load({ paths = { '~/dotfiles/nvim/lua/snips' } })
   require('luasnip.loaders.from_vscode').lazy_load({ paths = { '~/dotfiles/nvim/.vsnip' } })
   require('luasnip.loaders.from_vscode').lazy_load()
+
+  -- LuaSnip Snippet History Fix (Seems to work really well, I think.)
+  -- https://github.com/Aumnescio/dotfiles/blob/a3efe4d1fdbc7592dd0d84f39539a93b7a119e43/nvim/init.lua#L3365
+  local luasnip_fix_augroup = vim.api.nvim_create_augroup('MyLuaSnipHistory', { clear = true })
+  vim.api.nvim_create_autocmd('ModeChanged', {
+    pattern = '*',
+    callback = function()
+      if
+        ((vim.v.event.old_mode == 's' and vim.v.event.new_mode == 'n') or vim.v.event.old_mode == 'i')
+        and require('luasnip').session.current_nodes[vim.api.nvim_get_current_buf()]
+        and not require('luasnip').session.jump_active
+      then
+        require('luasnip').unlink_current()
+      end
+    end,
+    group = luasnip_fix_augroup,
+  })
 end, 100)
