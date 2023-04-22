@@ -1,0 +1,24 @@
+{
+  "debug css": {
+    "prefix": "dbg",
+    "body": [
+      "const style = document.createElement('style');",
+      "style.textContent = `",
+      "  .dbg *:not(path):not(g) {",
+      "    color: hsla(210, 100%, 100%, 0.9) !important;",
+      "    background: hsla(210, 100%, 50%, 0.5) !important;",
+      "    outline: solid 0.25rem hsla(210, 100%, 100%, 0.5) !important;",
+      "    box-shadow: none !important;",
+      "  }",
+      "`;",
+      "document.head.appendChild(style);",
+      "",
+      "window.addEventListener('mouseup', (e) => {",
+      "  if (!e.altKey) return;",
+      "  let el = document.querySelector('body');",
+      "  el.classList.toggle('dbg');",
+      "});"
+    ],
+    "description": "css debug"
+  }
+}

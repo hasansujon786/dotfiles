@@ -30,6 +30,17 @@
         "path": "./css.json"
       },
       {
+        "language": "html",
+        "path": "./html.json"
+      },
+      {
+        "language": [
+          "html",
+          "javascript"
+        ],
+        "path": "./dbgcss.json"
+      },
+      {
         "language": "dart",
         "path": "./dart.json"
       },

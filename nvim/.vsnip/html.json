@@ -1,0 +1,12 @@
+{
+  "link:css": {
+    "prefix": "link:css",
+    "body": "<link href=\"style.css\" rel=\"stylesheet\" />",
+    "description": "link style sheet"
+  },
+  "script:js": {
+    "prefix": "script:js",
+    "body": "<script src=\"script.js\"></script>",
+    "description": "link js file"
+  }
+}
