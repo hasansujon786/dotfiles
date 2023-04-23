@@ -45,6 +45,7 @@ return {
       { 'nvim-telescope/telescope-file-browser.nvim' },
       { 'ahmedkhalf/project.nvim', config = function() require('config.project') end },
       { 'hasansujon786/telescope-ui-select.nvim' },
+      { 'stefandtw/quickfix-reflector.vim' },
     },
   },
 
@@ -66,7 +67,6 @@ return {
   ------------------------------------------------
   --> Utils --------------------------------------
   ------------------------------------------------
-  { 'gabrielpoca/replacer.nvim', lazy = true, module = 'replacer' },
   { 'nvim-lua/plenary.nvim', lazy = true, module = 'plenary' },
   { 'MunifTanjim/nui.nvim', lazy = true, module = 'nui' },
   {
