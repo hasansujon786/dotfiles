@@ -9,7 +9,7 @@ return {
   { 'kyazdani42/nvim-web-devicons', lazy = true, config = function() require('config.devicons-config') end },
   -- { 'hasansujon786/notifier.nvim', opt = true, module = 'notifier' },
   { 'folke/which-key.nvim', lazy = true, event = 'VeryLazy', config = function() require('config.whichkey') end },
-  { 'uga-rosa/ccc.nvim', config = function() require('config.color-picker') end, opt = true, cmd = 'CccPick' },
+  { 'uga-rosa/ccc.nvim', lazy = true, config = function() require('config.color-picker') end, cmd = 'CccPick' },
   {
     'lukas-reineke/indent-blankline.nvim',
     lazy = true,
@@ -66,6 +66,7 @@ return {
   ------------------------------------------------
   --> Utils --------------------------------------
   ------------------------------------------------
+  { 'gabrielpoca/replacer.nvim', lazy = true, module = 'replacer' },
   { 'nvim-lua/plenary.nvim', lazy = true, module = 'plenary' },
   { 'MunifTanjim/nui.nvim', lazy = true, module = 'nui' },
   {

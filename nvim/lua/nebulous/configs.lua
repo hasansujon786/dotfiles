@@ -40,6 +40,7 @@ M.default = {
     'GitGutterAdd:NebulousInvisibe',
     'GitGutterChange:NebulousInvisibe',
     'GitGutterDelete:NebulousInvisibe',
+    'NonText:NebulousInvisibe',
   },
   dynamic_rules = {
     active = nil,

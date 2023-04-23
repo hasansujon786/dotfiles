@@ -1,4 +1,3 @@
-local cmd = vim.cmd
 local o = vim.o
 local opt = vim.opt
 
@@ -66,13 +65,13 @@ o.laststatus = 3
 o.cmdheight = 0 --                               Height of the command bar
 vim.opt.fillchars = {
   eob = ' ',
-  vert = '▎',
+  vert = '┃',
   horiz = '▁',
-  horizup = '▎',
+  horizup = '┃',
   horizdown = ' ',
-  vertleft = '▎',
-  vertright = '▎',
-  verthoriz = '▎',
+  vertleft = '┃',
+  vertright = '┃',
+  verthoriz = '┃',
 }
 
 o.belloff = 'all' --                             Just turn the dang bell off
