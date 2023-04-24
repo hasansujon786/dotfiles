@@ -145,7 +145,7 @@ return {
       { 'hrsh7th/cmp-nvim-lsp', lazy = true, module = 'cmp_nvim_lsp' },
       { 'williamboman/mason-lspconfig.nvim', lazy = true, module = 'mason-lspconfig' },
       { 'jose-elias-alvarez/null-ls.nvim', config = function() require('config.lsp.null-ls') end },
-      { 'williamboman/mason.nvim', config = function() require('config.lsp.lsp-config') end },
+      { 'williamboman/mason.nvim', config = function() require('config.lsp.lsp-config') end, build = ':MasonUpdate' },
     },
   },
   {

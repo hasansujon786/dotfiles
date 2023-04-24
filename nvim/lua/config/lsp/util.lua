@@ -6,13 +6,17 @@ M.install_essential_servers = function()
   if not ok then
     print('[Mason] Please install mason and try again')
   end
-  local all_servers = vim.tbl_map(function(item)
-    return item[2]
-  end, require('config.lsp.lsp-config').essential_servers)
-  local extra_tools = require('config.lsp.lsp-config').extra_tools
 
+  -- Get mason server names to install
+  local masaon_server_names = {}
+  local extra_tools = require('config.lsp.lsp-config').extra_tools
+  for _, server_config in pairs(require('config.lsp.lsp-config').essential_servers) do
+    table.insert(masaon_server_names, server_config[1])
+  end
+
+  -- Get not installed servers
   local not_installed_servers = {}
-  for _, server_name in ipairs(vim.tbl_flatten({ all_servers, extra_tools })) do
+  for _, server_name in ipairs(vim.tbl_flatten({ masaon_server_names, extra_tools })) do
     if not registry.is_installed(server_name) then
       table.insert(not_installed_servers, server_name)
     end
@@ -140,6 +144,7 @@ M._lspRename = function(value)
   end)
 end
 
+---Open quickfix with current ref selected
 function M.references_with_quickfix()
   local valid_fmt = '%s │%5d:%-3d│'
   local search_fmt = "call search('%s')"

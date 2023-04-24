@@ -7,8 +7,7 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi VertSplit          guifg=#2b3043
   hi StatusLine         guibg=#2C323C guifg=#ABB2BF
   hi StatusLineNC       guibg=#2C323C guifg=#ABB2BF
-  hi CursorColumn       guibg=#3B4048
-  hi CursorLineFocus    guibg=#343e4f
+  hi CursorLineFocus    guibg=#363C51
   hi IncSearch          guibg=#e86671 gui=underline
   hi CurSearch          guibg=#e86671 guifg=#2C323C gui=underline
   hi SignColumn         guibg=NONE
@@ -20,9 +19,10 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! WhichKeyFloat     guibg=#2d3343
   hi! link Folded Comment
   hi! link Conceal String
+  hi! link CursorColumn CursorLineFocus
 
   "/// nvim-cmp ///"
-  hi! Pmenu                         guibg=#202631 guifg=#a5b0c5
+  hi! link Pmenu NormalFloatFlat
   hi! PmenuThumb                    guibg=#404959
   " CmpItemAbbr
   hi! CmpItemMenu                   guifg=#4D5666
@@ -64,6 +64,8 @@ function! hasan#highlight#load_custom_highlight(...) abort
 
   "/// Plugins ///"
   hi! link LazyNormal NormalFloatFlat
+  hi! link LazyButton CursorLineFocus
+  hi! link MasonNormal NormalFloatFlat
   hi! link HlSearchNear IncSearch
   hi! link HlSearchLensNear WildMenu
   hi WhichKeySeparator guifg=#546178
@@ -103,7 +105,6 @@ function! hasan#highlight#load_custom_highlight(...) abort
   " hi! link GlancePreviewCursorLine CursorLineFocus
 
   "/// Telescope ///"
-  hi! TelescopeMatching gui=NONE
   hi! link TelescopeTitle Comment
   hi! link TelescopeBorder FloatBorderFlat
   hi! link TelescopeNormal NormalFloatFlat
@@ -121,7 +122,7 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! link NvimTreeIndentMarker IndentBlanklineChar
   hi! link NvimTreeWindowPicker TelescopeSelectionCaret
   hi! link NvimTreeWinSeparator VertSplit
-  hi! link NvimTreeNormal Pmenu
+  hi! NvimTreeNormal guibg=#222835 guifg=#a5b0c5
 
   "/// Nebulous ///"
   hi NebulousInvisibe   guifg=#242B38
