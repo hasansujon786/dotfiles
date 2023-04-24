@@ -1,4 +1,4 @@
-setlocal nobuflisted
+setlocal nobuflisted norelativenumber signcolumn=no
 
 nmap     <silent><buffer> <C-s> <C-x>
 nnoremap <silent><nowait><buffer> q :cclose<Bar>:lclose<CR>

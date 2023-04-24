@@ -33,8 +33,16 @@ return {
     event = 'CursorHold',
     config = function() require('config.nv_tree') end,
   },
-  { 'kevinhwang91/nvim-bqf', lazy = true, ft = { 'qf' } },
   { 'hasansujon786/harpoon', lazy = true, module = 'harpoon' },
+  { 'kevinhwang91/nvim-bqf', lazy = true, module = 'bqf' },
+  { 'stefandtw/quickfix-reflector.vim',
+    lazy = true, ft = { 'qf' },
+    config = function()
+      vim.defer_fn(function()
+        require('bqf').bootstrap()
+      end, 50)
+    end
+  },
   {
     'nvim-telescope/telescope.nvim',
     lazy = true, event = 'VeryLazy',
@@ -45,7 +53,6 @@ return {
       { 'nvim-telescope/telescope-file-browser.nvim' },
       { 'ahmedkhalf/project.nvim', config = function() require('config.project') end },
       { 'hasansujon786/telescope-ui-select.nvim' },
-      { 'stefandtw/quickfix-reflector.vim' },
     },
   },
 
