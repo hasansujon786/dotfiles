@@ -307,3 +307,18 @@ end
 --     end,
 --   },
 -- })
+
+-- tbl_add_reverse_lookup = <function 794>,
+-- tbl_contains = <function 795>,
+-- tbl_count = <function 796>,
+-- tbl_deep_extend = <function 797>,
+-- tbl_extend = <function 798>,
+-- tbl_filter = <function 799>,
+-- tbl_flatten = <function 800>,
+-- tbl_get = <function 801>,
+-- tbl_isempty = <function 802>,
+-- tbl_islist = <function 803>,
+-- tbl_keys = <function 804>,
+-- tbl_map = <function 805>,
+-- tbl_values = <function 806>,
+
