@@ -6,7 +6,7 @@ M.default = {
   is_win_blur_disabled = false,
   on_focus = nil,
   on_blur = nil,
-  nb_blacklist_filetypes = {
+  blacklist_ft = {
     'fern',
     'NvimTree',
     'fzf',
