@@ -31,14 +31,15 @@ local function set_custom_highlights()
     -- ['@lsp.type.interface'] = '@type',
     -- ['@lsp.type.struct'] = '@structure',
     -- ['@lsp.type.parameter'] = '@parameter',
-    -- ['@lsp.type.variable'] = '@variable',
-    -- ['@lsp.type.property'] = '@property',
+    ['@lsp.type.variable'] = '@variable',
+    ['@lsp.type.property'] = '@property',
+    ['@lsp.type.member'] = '@method',
     -- ['@lsp.type.enumMember'] = '@constant',
     -- ['@lsp.type.function'] = '@function',
     -- ['@lsp.type.method'] = '@method',
     -- ['@lsp.type.macro'] = '@macro',
     -- ['@lsp.type.decorator'] = '@function',
-    -- ['@lsp.type.keyword'] = { link = '@keyword' },
+    -- ['@lsp.type.keyword'] = '@keyword',
 
     ['@lsp.mod.readonly'] = '@Constant',
     -- ['@lsp.typemod.variable.readonly'] = '@constant',
@@ -52,7 +53,7 @@ local function set_custom_highlights()
     ['@lsp.typemod.function.readonly'] = '@function',
   }
   for newgroup, oldgroup in pairs(links) do
-    vim.api.nvim_set_hl(0, newgroup, { link = oldgroup, default = true })
+    vim.api.nvim_set_hl(0, newgroup, { link = oldgroup, default = false })
   end
 end
 
