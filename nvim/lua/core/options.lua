@@ -94,7 +94,7 @@ o.equalalways = false --                         I don't like my windows changin
 o.splitright = true --                           Prefer windows splitting to the right
 o.splitbelow = true --                           Prefer windows splitting to the bottom
 o.hidden = true
-o.switchbuf = 'useopen' --                       Specify the behavior when switching between buffers (enable hidden unsaved buffers)
+o.switchbuf = 'useopen,uselast' --               Specify the behavior when switching between buffers (enable hidden unsaved buffers)
 -- set diffopt+=vertical --                      Always use vertical diffs
 
 -- Tabbing
