@@ -82,7 +82,7 @@ local options = {
       button('<leader>pl', ' SPC P L ', '  Load session', '<cmd>SessionLoad<CR>'),
       button('<leader>ff', ' SPC F F ', '  Find Files', '<cmd>Telescope find_files<CR>'),
       button('<leader>ot', ' SPC O T ', '  Open terminal', '<cmd>FloatermNew --wintype=normal --height=10<CR>'),
-      button('<leader>vs', ' SPC V S ', '  Settings', '<cmd>e ~/dotfiles/nvim/lua/core/state.lua<CR>'),
+      button('<leader>vs', ' SPC V S ', '  Settings', '<cmd>lua require("hasan.utils.file").open_settings()<CR>'),
     },
     opts = { spacing = 1 },
   },
@@ -100,29 +100,4 @@ alpha.setup({
     options.buttons,
   },
   opts = {},
-})
-
--- Disable statusline in dashboard
-vim.api.nvim_create_augroup('alpha_tabline', { clear = true })
-vim.api.nvim_create_autocmd('FileType', {
-  group = 'alpha_tabline',
-  pattern = 'alpha',
-  callback = function()
-    -- store current statusline value and use that
-    vim.wo.scrolloff = 0
-    local old_winbar = vim.opt.winbar
-    local old_laststatus = vim.opt.laststatus
-    local old_showtabline = vim.opt.showtabline
-    vim.api.nvim_create_autocmd('BufUnload', {
-      buffer = 0,
-      callback = function()
-        vim.opt.laststatus = old_laststatus
-        vim.opt.showtabline = old_showtabline
-        vim.opt.winbar = old_winbar
-      end,
-    })
-    vim.opt.laststatus = 0
-    vim.opt.showtabline = 0
-    vim.opt.winbar = ''
-  end,
 })

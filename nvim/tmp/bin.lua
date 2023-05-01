@@ -262,3 +262,28 @@
 --   diagnostic_hints = { provider = 'diagnostic_hints', hl = { fg = 'aqua' } },
 --   diagnostic_info = { provider = 'diagnostic_info' },
 -- }
+
+-- -- Disable statusline in dashboard
+-- vim.api.nvim_create_augroup('alpha_tabline', { clear = true })
+-- vim.api.nvim_create_autocmd('FileType', {
+--   group = 'alpha_tabline',
+--   pattern = 'alpha',
+--   callback = function()
+--     -- store current statusline value and use that
+--     vim.wo.scrolloff = 0
+--     local old_winbar = vim.opt.winbar
+--     local old_laststatus = vim.opt.laststatus
+--     local old_showtabline = vim.opt.showtabline
+--     vim.api.nvim_create_autocmd('BufUnload', {
+--       buffer = 0,
+--       callback = function()
+--         vim.opt.laststatus = old_laststatus
+--         vim.opt.showtabline = old_showtabline
+--         vim.opt.winbar = old_winbar
+--       end,
+--     })
+--     vim.opt.laststatus = 0
+--     vim.opt.showtabline = 0
+--     vim.opt.winbar = ''
+--   end,
+-- })

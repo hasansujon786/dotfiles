@@ -62,6 +62,7 @@ o.modeline = false
 o.modelines = 0
 o.showtabline = 0
 o.laststatus = 3
+o.statusline = ' '
 o.cmdheight = 0 --                               Height of the command bar
 vim.opt.fillchars = {
   eob = ' ',
