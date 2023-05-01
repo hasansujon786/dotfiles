@@ -205,7 +205,7 @@ feline.setup({
   },
   theme = one_monokai,
   vi_mode_colors = {
-    NORMAL = 'green',
+    NORMAL = has_pvim and 'red' or 'green',
     OP = 'green',
     INSERT = 'aqua',
     VISUAL = 'purple',
@@ -214,5 +214,12 @@ feline.setup({
     REPLACE = 'red',
     COMMAND = 'aqua',
     CONFIRM = 'orange',
+  },
+  force_inactive = {
+    filetypes = {},
+    buftypes = {
+      '^terminal$',
+    },
+    bufnames = {},
   },
 })

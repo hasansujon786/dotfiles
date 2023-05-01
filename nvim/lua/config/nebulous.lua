@@ -1,4 +1,3 @@
-local cmd = vim.cmd
 local api = vim.api
 local utils = require('hasan.utils')
 local M = {}
@@ -36,7 +35,7 @@ M.my_nebulous_setup = function()
 
       if is_float then
         local win_conf = api.nvim_win_get_config(winid)
-        if win_conf.width == 44 and win_conf.height == 12 and win_conf.zindex == 1111 then
+        if win_conf.width == 44 and win_conf.height == 15 and win_conf.zindex == 1111 then
           return true
         end
       end

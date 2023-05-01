@@ -322,3 +322,16 @@ end
 -- tbl_map = <function 805>,
 -- tbl_values = <function 806>,
 
+local function toggleQf()
+  local ft = vim.bo.filetype
+  if ft == 'qf' then
+    vim.cmd.cclose()
+  else
+    vim.cmd.copen()
+  end
+end
+
+function _G.exec_user_autocmds(pattern)
+  return vim.api.nvim_exec_autocmds('User', { pattern = pattern, modeline = false })
+end
+-- exec_user_autocmds('LightspeedEnter')

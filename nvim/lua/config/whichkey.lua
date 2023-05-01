@@ -249,7 +249,7 @@ local leader = {
     R = { '<cmd>ReloadConfig<CR>',                                           'Reload neovim' },
     H = { '<cmd>silent write | edit | TSBufEnable highlight<CR>',            'Reload hightlight' },
     p = { '<cmd>Lazy home<CR>',                                              'Plugin status' },
-    s = { '<cmd>e ~/dotfiles/nvim/lua/core/state.lua<CR>',                   'Open settings'},
+    s = { '<cmd>lua require("hasan.utils.file").open_settings()<CR>',        'Open settings'},
     P = { '<cmd>lua require("hasan.telescope.custom").search_plugins()<CR>', 'Search plugin files'},
   },
 

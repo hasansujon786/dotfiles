@@ -1,5 +1,6 @@
 local ui = require('core.state').ui
 
+_G.has_pvim = os.getenv('PVIM') and true or false
 _G.org_root_path = 'C:\\Users\\hasan\\vimwiki'
 _G.org_home_path = 'C:\\Users\\hasan\\vimwiki\\home.org'
 _G.dap_adapter_path = vim.fn.stdpath('data') .. '\\dap_adapters' -- 'C:\\Users\\hasan\\AppData\\Local\\nvim-data\\dap_adapters\\'
