@@ -49,7 +49,7 @@ map U invert
 map v :toggle; down
 map V :toggle; up
 map <esc> :clear; setfilter
-map <f-5> :{{
+map so :{{
   source C:/Users/hasan/dotfiles/tui/lf/lfrc
   echo 'Resouced lfrc'
 }}

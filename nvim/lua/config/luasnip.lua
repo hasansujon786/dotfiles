@@ -29,10 +29,11 @@ ls.config.set_config({
 -- require('luasnip').filetype_extend('typescript', { 'javascript' })
 -- require('luasnip').filetype_extend('typescriptreact', { 'javascript' })
 
+local configPath = require('hasan.utils.file').config_root()
 vim.cmd([[command! LuaSnipEditLocal :lua require("luasnip.loaders.from_lua").edit_snippet_files()]])
 vim.defer_fn(function()
-  require('luasnip.loaders.from_lua').lazy_load({ paths = { '~/dotfiles/nvim/lua/snips' } })
-  require('luasnip.loaders.from_vscode').lazy_load({ paths = { '~/dotfiles/nvim/.vsnip' } })
+  require('luasnip.loaders.from_lua').lazy_load({ paths = { configPath .. '/lua/snips' } })
+  require('luasnip.loaders.from_vscode').lazy_load({ paths = { configPath .. '/.vsnip' } })
   require('luasnip.loaders.from_vscode').lazy_load()
 
   -- LuaSnip Snippet History Fix (Seems to work really well, I think.)

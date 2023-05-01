@@ -90,7 +90,8 @@ alias c='clear && pwd && ls'
 alias h='history'
 alias o='explorer'
 alias open='explorer'
-alias du='du -h --max-depth=0 '
+alias dus='du -h --max-depth=1 --exclude=node_modules* | sort -rh'
+alias dua='du -s * --exclude=node_modules* | sort -rn | cut -f2- | xargs -d "\n" du -sh'
 alias lf='lfcd'
 # Copy the PWD to the Clipboard
 alias cpd="pwd | tr -d '\n' | clip && echo 'pwd copied to clipboard'"
