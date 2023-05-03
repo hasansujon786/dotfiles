@@ -107,6 +107,11 @@ return {
     cmd = { 'SessionLoad', 'SessionLoadLast', 'SessionSave' },
     config = function() require('config.persisted').setup() end,
   },
+  {
+    'Wansmer/treesj',
+    keys = { '<leader>m' },
+    config = function() require('config.treeSJ') end,
+  },
   ------------------------------------------------
   --> Git ----------------------------------------
   ------------------------------------------------
