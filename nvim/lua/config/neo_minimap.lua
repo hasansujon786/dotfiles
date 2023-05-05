@@ -113,3 +113,12 @@ nm.set('zo', { 'dart' }, {
     ]],
   },
 })
+
+-- local group = vim.api.nvim_create_augroup('TestGroup', { clear = true })
+-- vim.api.nvim_create_autocmd('User', {
+--   pattern = 'NeoMinimapEnter',
+--   group = group,
+--   callback = function(info)
+--     print('minimap window opened')
+--   end,
+-- })

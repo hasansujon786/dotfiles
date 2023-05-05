@@ -1,9 +1,6 @@
 local noSilent = { silent = false }
 local nvim_set_keymap = vim.api.nvim_set_keymap
 
-keymap('n', '<Leader>H', ':lua require("replacer").run()<cr>', { silent = true })
-keymap('n', '<Leader>K', ':lua require("replacer").run({ rename_files = false })<cr>', { silent = true })
-
 keymap({ 'n', 'v' }, 'q', '<ESC><Cmd>nohlsearch|diffupdate|echo ""<CR>') -- ColorizerReloadAllBuffers
 keymap('n', 'ZZ', ':Quit!<CR>') -- Prompt before quitting
 keymap('n', 'Q', 'q') -- Use Q to record macros

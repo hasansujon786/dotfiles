@@ -109,8 +109,12 @@ return {
   },
   {
     'Wansmer/treesj',
-    keys = { '<leader>m' },
     config = function() require('config.treeSJ') end,
+    keys = {
+      { '<leader>fm', '<cmd>TSJToggle<CR>', desc = 'TreeSJ: Toggle' },
+      { '<leader>fj', '<cmd>TSJSplit<CR>', desc = 'TreeSJ: Split' },
+      { '<leader>fJ', '<cmd>TSJJoin<CR>', desc = 'TreeSJ: Join' },
+    },
   },
   ------------------------------------------------
   --> Git ----------------------------------------
