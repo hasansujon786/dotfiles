@@ -217,7 +217,7 @@ local leader = {
 
   t = {
     name = '+toggle',
-    b = { '<cmd>lua require("hasan.utils.color").toggle_bg_tranparent()<CR>',  'Toggle transparency' },
+    b = { '<cmd>lua require("hasan.utils.color").toggle_bg_tranparent(false)<CR>',  'Toggle transparency' },
     B = 'Toggle Onedark',
 
     l = { '<cmd>lua require("hasan.utils").toggle("cursorcolumn")<CR>',    'Toggle cursorcolumn' },

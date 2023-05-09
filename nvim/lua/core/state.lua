@@ -13,7 +13,7 @@ M.ui = {
 
 _G.state = {
   file = {
-    auto_format = false,
+    auto_format = false, -- Auto format with null-ls
   },
   treesitter = {
     auto_conceal_html_class = true,
