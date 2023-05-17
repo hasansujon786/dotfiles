@@ -170,7 +170,15 @@ b() {
     | xargs start
 }
 
-emo () {
+emo() {
   fzf < /c/Users/hasan/dotfiles/bash/emojis.txt | sed 's/ .*//'
+}
+
+em() {
+  # basename /root/video.old.mp4 | sed 's/\.[^.]*$//'
+  rg --files --max-depth=1 ~/.android/avd/ \
+    | fzf \
+    | xargs -I{} basename -s .ini {} \
+    | xargs ~/AppData/Local/Android/Sdk/emulator/emulator -netdelay none -netspeed full -avd
 }
 

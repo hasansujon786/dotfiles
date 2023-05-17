@@ -55,6 +55,7 @@ alias bure='./gradlew bundleRelease'
 alias asre='./gradlew assembleRelease'
 alias asde='./gradlew assembleDebug'
 alias inre='react-native run-android --variant=release'
+alias emd='~/AppData/Local/Android/Sdk/emulator/emulator -avd default_device -netdelay none -netspeed full'
 
 # Flutter
 alias flr='flutter run'

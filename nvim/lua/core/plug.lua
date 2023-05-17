@@ -167,7 +167,7 @@ return {
   {
     'hrsh7th/nvim-cmp',
     lazy = true,
-    event = 'VeryLazy',
+    event = 'BufReadPost',
     config = function() require('config.cmp_setup') end,
     dependencies = {
       'rafamadriz/friendly-snippets',
