@@ -216,12 +216,8 @@ feline.setup({
     CONFIRM = 'orange',
   },
   force_inactive = {
-    filetypes = {
-      'alpha',
-    },
-    buftypes = {
-      '^terminal$',
-    },
+    filetypes = {},
+    buftypes = { '^terminal$' },
     bufnames = {},
   },
 })

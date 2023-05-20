@@ -3,6 +3,10 @@ last_arg=${@:$#}
 main_cmd=${1}
 scan_count=3
 
+# 1. Connect device with USB.
+# 2. Run "arr"
+# 3. Run "acc"
+
 # if [[ "$last_arg" == "-f" || "$last_arg" == "-s" || "$last_arg" == "-sf" ]]; then
 #   main_cmd=${@:1:$#-1}
 # fi

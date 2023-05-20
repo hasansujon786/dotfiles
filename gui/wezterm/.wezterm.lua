@@ -152,17 +152,15 @@ return {
     {
       key = 'F11',
       action = wezterm.action_callback(function(window, pane)
-        if not fixed_tab_bar then
-          local overrides = window:get_config_overrides() or {}
-          if not window:get_dimensions().is_full_screen then
-            overrides.enable_tab_bar = false
-          else
-            overrides.enable_tab_bar = true
-          end
-          window:set_config_overrides(overrides)
-        end
-
         window:perform_action('ToggleFullScreen', pane)
+
+        local overrides = window:get_config_overrides() or {}
+        if window:get_dimensions().is_full_screen then
+          overrides.enable_tab_bar = false
+        else
+          overrides.enable_tab_bar = true
+        end
+        window:set_config_overrides(overrides)
       end),
     },
     {
