@@ -26,6 +26,7 @@ local one_monokai = {
 }
 
 local hl_sections = {
+  light_text = { fg = 'fg' },
   muted_text = { fg = 'muted' },
   layer1 = { bg = 'bg1', fg = 'gray' },
   main = function()
@@ -123,6 +124,24 @@ local c = {
     left_sep = ' ',
     right_sep = ' ',
   },
+  search = {
+    provider = function()
+      local search = require('noice').api.status.search
+      return search.has() and search.get() or ''
+    end,
+    hl = hl_sections.light_text,
+    left_sep = ' ',
+    right_sep = ' ',
+  },
+  record = {
+    provider = function()
+      local record = require('noice').api.status.mode
+      return record.has() and record.get() or ''
+    end,
+    hl = { fg = 'bg', bg = 'red' },
+    left_sep = 'left_rounded',
+    right_sep = 'right_rounded',
+  },
   file_format = {
     provider = 'file_format',
     hl = { fg = 'orange', bg = 'dark_blue', style = 'italic' },
@@ -180,6 +199,7 @@ local left = {
   c.vim_mode,
   c.tabs,
   c.file_name,
+  c.search,
 }
 local middle = {
   c.diagnostic_errors,
@@ -188,6 +208,7 @@ local middle = {
   c.diagnostic_info,
 }
 local right = {
+  c.record,
   c.harpoon,
   c.lsp_status,
   c.space_info,
