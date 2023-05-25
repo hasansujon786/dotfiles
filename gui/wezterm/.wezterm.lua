@@ -108,6 +108,7 @@ return {
   }),
   font_size = 13,
   underline_thickness = '2pt',
+  underline_position = '-2pt',
   adjust_window_size_when_changing_font_size = false,
   -- harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }, -- Disable ligatures
   default_prog = { 'C:\\Program Files\\Git\\bin\\bash.exe' },

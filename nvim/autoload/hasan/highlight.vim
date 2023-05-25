@@ -20,6 +20,7 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! link Folded Comment
   hi! link Conceal String
   hi! link CursorColumn CursorLineFocus
+  hi TelescopeMatching gui=NONE
 
   "/// nvim-cmp ///"
   hi! link Pmenu NormalFloatFlat
