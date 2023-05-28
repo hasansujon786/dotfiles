@@ -57,7 +57,7 @@ R = function(moduleName, message)
 
     plenary_reload(moduleName)
     if message then
-      vim.notify(string.format('[%s] - %s', moduleName, message), vim.log.levels.WARN)
+      vim.notify(string.format('[%s] - %s', moduleName, message), vim.log.levels.INFO)
     end
     return require(moduleName)
   end

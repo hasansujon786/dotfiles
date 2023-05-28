@@ -10,6 +10,9 @@ M.ui = {
     },
   },
 }
+M.telescope = {
+  todo_keyfaces = { 'TODO:', 'DONE:', 'INFO:', 'FIXME:', 'BUG:', 'FIXIT:', 'ISSUE:', 'OPTIM:', 'OPTIMIZE:' },
+}
 
 _G.state = {
   file = {

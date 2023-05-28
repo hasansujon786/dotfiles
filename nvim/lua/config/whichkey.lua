@@ -35,6 +35,7 @@ end
 local common = {
   buffers_cwd = { '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>',             'Switch buffers' },
   buffers_all = { '<cmd>lua require("hasan.telescope.custom").buffers(false)<CR>',            'Switch all buffers' },
+  browse_cur_dir = { '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', 'Browse cur directory' },
 }
 local w = {
   name= '+window',
@@ -156,7 +157,7 @@ local leader = {
     name = '+file',
     -- File Command
     b = { '<cmd>lua require("hasan.telescope.custom").file_browser()<cr>',          'Browser project files' },
-    B = { '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', 'Browse file directory' },
+    B = common.browse_cur_dir,
     f = { '<cmd>Telescope find_files<CR>',                                          'Find file' },
     F = { ':Telescope find_files cwd=<C-R>=expand("%:h")<CR><CR>',                  'Find file from here' },
     p = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>',         'Find project file' },
@@ -275,7 +276,7 @@ local leader = {
   M = { '<cmd>lua require("harpoon.mark").add_file()<CR>',             'Mark to Harpoon' },
 
   ['>'] = common.buffers_all,
-  ['.'] = common.buffers_cwd,
+  ['.'] = common.browse_cur_dir,
 }
 
 local leader_visual = {

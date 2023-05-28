@@ -150,8 +150,11 @@ end
 
 function M.file_browser(dir)
   extensions.file_browser.file_browser(themes.get_ivy({
+    path = dir == 'cur_dir' and vim.fn.expand('%:h') or nil,
+    hide_parent_dir = true,
+    files = dir == 'cur_dir', -- false: start with all dirs
+    prompt_path = true,
     previewer = false,
-    cwd = dir == 'cur_dir' and vim.fn.expand('%:h') or nil,
   }))
 end
 
@@ -262,7 +265,7 @@ M.grep_string_list = function(opts)
 
   pickers
     .new(opts, {
-      prompt_title = 'find todos',
+      prompt_title = 'Grep String List',
       finder = finders.new_oneshot_job(args, opts),
       previewer = conf.grep_previewer(opts),
       sorter = conf.generic_sorter(opts),
@@ -270,15 +273,14 @@ M.grep_string_list = function(opts)
     :find()
 end
 
-local todo_items = { 'TODO:', 'DONE:', 'INFO:', 'FIXME:', 'BUG:', 'FIXIT:', 'ISSUE:', 'OPTIM:', 'OPTIMIZE:', 'WARNING:' }
 function M.search_project_todos()
   M.grep_string_list({
     results_title = ' Project Todos',
     prompt_title = 'Search Todos',
     path_display = { 'smart' },
-    search_list = todo_items,
+    search_list = require('core.state').telescope.todo_keyfaces,
     additional_args = function()
-      return { '--glob', '!nvim/lua/hasan/telescope/custom.lua', '--glob', '!nvim/legacy/*' }
+      return { '--glob', '!nvim/lua/core/state.lua', '--glob', '!nvim/legacy/*' }
     end,
   })
 end
