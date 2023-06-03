@@ -68,3 +68,29 @@ map ctrl+shift+l             send_text all \x1b[76;5u      # <c-s-l>
    }
 
 ```
+
+# Tab Compnents
+```lua
+local cell_num = 1 -- How many cells have been formatted
+local function stacked(text, _)
+  local colors = { '#3c1361', '#52307c', '#663a82', '#7c5295', '#b491c8' }
+
+  table.insert(elements, { Foreground = { Color = colors[cell_num] } })
+  table.insert(elements, { Text = SOLID_LEFT_ARROW })
+
+  table.insert(elements, { Foreground = { Color = text_fg } })
+  table.insert(elements, { Background = { Color = colors[cell_num] } })
+  table.insert(elements, { Text = ' ' .. text .. ' ' })
+
+  -- if not is_last then
+  --   table.insert(elements, { Foreground = { Color = colors[cell_num + 1] } })
+  --   table.insert(elements, { Text = SOLID_LEFT_ARROW })
+  -- end
+  cell_num = cell_num + 1
+end
+
+local function simple(text, _)
+  table.insert(elements, { Foreground = { Color = text_fg } })
+  table.insert(elements, { Text = text })
+end
+```

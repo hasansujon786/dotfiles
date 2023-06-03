@@ -17,7 +17,7 @@ Return
 ^f5::
   suspend, toggle
 return
-
+; Window Navigation
 !1::Send #1
 !2::Send #2
 !3::Send #3
@@ -30,19 +30,26 @@ return
 !0::Send #0
 #l::Send ^#{Right}
 #h::Send ^#{Left}
-!]:: SendInput,^{tab}
-![:: SendInput,^+{tab}
-!Enter::Send {f11}
-!x::toggleWinRestore()
 #InputLevel 1
 !\::Send \
 \::alternateTab()
 Capslock::alternateTab()
 #\::toggleCapsLosck()
 #Capslock::toggleCapsLosck()
+; Window manazement
+!x::toggleWinRestore()
+!]::SendInput,^{tab}
+![::SendInput,^+{tab}
+#[::winPinToSide("left")
+#]::winPinToSide("right")
+!Enter::Send {f11}
+!Escape::resetWin()
 $Escape::superEscape()
 #SPACE::toggleAlwaysOnTop() ; Always on Top
-#p::AppsKey
+; Layout
+#o::layoutCodeFloat()
+#p::layoutCode()
+; #p::AppsKey
 PrintScreen::#+s
 #`::takeScreenshot()
 #q::bt()
@@ -51,7 +58,7 @@ PrintScreen::#+s
 #+y::quake_nvim(false) ; edit from last clipboard text
 #^y::quake_nvim(false) ; edit from last clipboard text
 ;Transparency toggle,
-#o::toggleTransparency()
+#^/::toggleTransparency()
 #^.::increaseTransparency()
 #^,::decreaseTransparency()
 ; Scroll horizontally
@@ -158,7 +165,7 @@ switchToSavedApp() {
   !-::changeWinSize("height", -50)
 #if
 resetWin() {
-  winmove, A,, , ,1200, 658 ; resize window
+  winmove, A,, , ,1216, 680 ; resize window
   center_current_window()
 }
 changeWinSize(direction, val) {
@@ -219,11 +226,6 @@ winPinToSide(side) {
 ;******************************************************************************
 ; Custom layout
 ;******************************************************************************
-#[::winPinToSide("left")
-#]::winPinToSide("right")
-#1::layoutCode()
-#2::layoutCodeFloat()
-
 layoutCodeFloat() {
   layout_winAction("ahk_exe brave.exe", "brave.exe", "full")
   layout_winAction("ahk_exe wezterm-gui.exe", "wezterm-gui.exe", "center")

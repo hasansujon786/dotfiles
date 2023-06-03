@@ -5,46 +5,23 @@ local SOLID_LEFT_ARROW = ''
 local SOLID_RIGHT_ARROW = ''
 
 wezterm.on('update-right-status', function(window, _)
-  local cells = {}
-
-  local date = wezterm.strftime('  %a %b %-d   ')
-  local time = wezterm.strftime('  %I:%M %p   ')
-  table.insert(cells, time)
-  table.insert(cells, date)
+  local time = wezterm.strftime('  %I:%M %p     ')
+  local date = wezterm.strftime('  %a %b %-d ')
+  local cells = { time, date }
 
   -- Color palette for the backgrounds of each cell
-  local colors = {
-    '#3c1361',
-    '#52307c',
-    '#663a82',
-    '#7c5295',
-    '#b491c8',
-  }
   local text_fg = '#c0c0c0' -- Foreground color for the text across the fade
   local elements = {} -- The elements to be formatted
-  local num_cells = 0 -- How many cells have been formatted
-
   -- Translate a cell into elements
-  local function push(text, _)
-    local cell_no = num_cells + 1
-    table.insert(elements, { Foreground = { Color = colors[cell_no] } })
-    table.insert(elements, { Text = SOLID_LEFT_ARROW })
-
+  local function simple(text, _)
     table.insert(elements, { Foreground = { Color = text_fg } })
-    table.insert(elements, { Background = { Color = colors[cell_no] } })
-    table.insert(elements, { Text = ' ' .. text .. ' ' })
-    -- if not is_last then
-    --   table.insert(elements, { Foreground = { Color = colors[cell_no + 1] } })
-    --   table.insert(elements, { Text = SOLID_LEFT_ARROW })
-    -- end
-    num_cells = num_cells + 1
+    table.insert(elements, { Text = text })
   end
 
   while #cells > 0 do
-    local cell = table.remove(cells, 1)
-    push(cell, #cells == 0)
+    local cellText = table.remove(cells, 1)
+    simple(cellText, #cells == 0)
   end
-
   window:set_right_status(wezterm.format(elements))
 end)
 
@@ -69,21 +46,21 @@ end)
 local fixed_tab_bar = false
 wezterm.on('toggle-tab-bar', function(window, _)
   local overrides = window:get_config_overrides() or {}
-  if not overrides.enable_tab_bar then
-    overrides.enable_tab_bar = true
-  else
+  if fixed_tab_bar then
     overrides.enable_tab_bar = false
+  else
+    overrides.enable_tab_bar = true
   end
   fixed_tab_bar = overrides.enable_tab_bar
   window:set_config_overrides(overrides)
 end)
 
 return {
-  initial_rows = 30,
+  initial_rows = 29,
   initial_cols = 120,
   tab_max_width = 30,
   hide_tab_bar_if_only_one_tab = false,
-  window_decorations = 'NONE', -- RESIZE,INTEGRATED_BUTTONS
+  window_decorations = 'INTEGRATED_BUTTONS', -- NONE,RESIZE
   check_for_updates = false,
   use_dead_keys = false,
   warn_about_missing_glyphs = false,
@@ -161,6 +138,8 @@ return {
         else
           overrides.enable_tab_bar = true
         end
+
+        fixed_tab_bar = overrides.enable_tab_bar
         window:set_config_overrides(overrides)
       end),
     },
