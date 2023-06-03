@@ -40,13 +40,13 @@ Capslock::alternateTab()
 !x::toggleWinRestore()
 !]::SendInput,^{tab}
 ![::SendInput,^+{tab}
-#[::winPinToSide("left")
-#]::winPinToSide("right")
 !Enter::Send {f11}
 !Escape::resetWin()
 $Escape::superEscape()
 #SPACE::toggleAlwaysOnTop() ; Always on Top
 ; Layout
+#[::winPinToSide("left")
+#]::winPinToSide("right")
 #o::layoutCodeFloat()
 #p::layoutCode()
 ; #p::AppsKey
@@ -207,35 +207,46 @@ center_current_window() {
   WinMove, %active_window_title%,, %targetX%, %targetY%
 }
 winPinToSide(side) {
-  s_height := A_ScreenHeight - 30
-  target_x := 0
-  target_y := 0
+  WinRestore, A
+  if (side == "left") {
+    Send #{Left}
+  }  else if  (side == "right"){
+    Send #{Right}
+  }
+  Send {ESC}
+}
+winPinToSide_custom(side) {
+  y_start := 0
+  x_start := 0
+  s_height := A_ScreenHeight - 24
+  s_half := (A_ScreenWidth / 2) + 15
 
   if (side == "left") {
-    w_width := A_ScreenWidth / 2
-    w_height := s_height
+    x_start := -8
   }  else if  (side == "right"){
-    w_width := A_ScreenWidth / 2
-    w_height := s_height
-    target_x := w_width
+    x_start := s_half - 24
   }
 
   WinRestore, A
-  WinMove, A,, target_x,target_y,w_width,w_height
+  WinMove, A,, x_start, y_start, s_half, s_height
 }
 ;******************************************************************************
 ; Custom layout
 ;******************************************************************************
 layoutCodeFloat() {
   layout_winAction("ahk_exe brave.exe", "brave.exe", "full")
-  layout_winAction("ahk_exe wezterm-gui.exe", "wezterm-gui.exe", "center")
   ; layout_winAction("ahk_exe chrome.exe", "chrome.exe", "full")
+
+  layout_winAction("ahk_exe wezterm-gui.exe", "wezterm-gui.exe", "center")
+  ; layout_winAction("ahk_exe WindowsTerminal.exe", "wt.exe", "center")
   ; layout_winAction("ahk_exe Code.exe", "Code.exe", "center")
 }
 layoutCode() {
   layout_winAction("ahk_exe brave.exe", "brave.exe", "right")
-  layout_winAction("ahk_exe wezterm-gui.exe", "wezterm-gui.exe", "left")
   ; layout_winAction("ahk_exe chrome.exe", "chrome.exe", "right")
+
+  layout_winAction("ahk_exe wezterm-gui.exe", "wezterm-gui.exe", "left")
+  ; layout_winAction("ahk_exe WindowsTerminal.exe", "wt.exe", "left")
   ; layout_winAction("ahk_exe Code.exe", "Code.exe", "left")
 }
 layout_winAction(EXE_FULL, EXE, side) {
@@ -551,7 +562,7 @@ getMousePos() {
   Clipboard := xy
   SetTimer toolTipClear, -1000
 }
-print(msg) {
+P(msg) {
   msgbox,,, %msg%, 1
 }
 tooltipClear() {
