@@ -207,13 +207,18 @@ center_current_window() {
   WinMove, %active_window_title%,, %targetX%, %targetY%
 }
 winPinToSide(side) {
-  WinRestore, A
+  isFullScreen := isWindowFullScreen( "A" )
+  if (isFullScreen) {
+    Send {f11}
+  } else {
+    WinRestore, A
+  }
+
   if (side == "left") {
     Send #{Left}
   }  else if  (side == "right"){
     Send #{Right}
   }
-  Send {ESC}
 }
 winPinToSide_custom(side) {
   y_start := 0
@@ -244,7 +249,7 @@ layoutCodeFloat() {
 layoutCode() {
   layout_winAction("ahk_exe brave.exe", "brave.exe", "right")
   ; layout_winAction("ahk_exe chrome.exe", "chrome.exe", "right")
-
+  Send {ESC}
   layout_winAction("ahk_exe wezterm-gui.exe", "wezterm-gui.exe", "left")
   ; layout_winAction("ahk_exe WindowsTerminal.exe", "wt.exe", "left")
   ; layout_winAction("ahk_exe Code.exe", "Code.exe", "left")
@@ -597,6 +602,20 @@ TaskBar_SetAttr(accent_state := 0, gradient_color := "0xff101010")
   if !(DllCall("user32\SetWindowCompositionAttribute", "ptr", hTrayWnd, "ptr", &WINCOMPATTRDATA))
     throw Exception("Failed to set transparency / blur", -1)
   return true
+}
+isWindowFullScreen( winTitle ) {
+  ;checks if the specified window is full screen
+  winID := WinExist( winTitle )
+
+  If ( !winID )
+  Return false
+
+  WinGet style, Style, ahk_id %WinID%
+  WinGetPos ,,,winW,winH, %winTitle%
+  ; 0x7fffff is WS_BORDER.
+  ; 0x1fffffff is WS_MINIMIZE.
+  ; no border and not minimized
+  Return ((style & 0x207fffff) or winH < A_ScreenHeight or winW < A_ScreenWidth) ? false : true
 }
 
 ;******************************************************************************
