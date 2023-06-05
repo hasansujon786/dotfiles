@@ -23,6 +23,8 @@ local one_monokai = {
   dark_blue = '#282c34',
   gray = '#8b95a7',
   muted = '#68707E',
+  cyan = '#4dbdcb',
+  cyan_dark = '#2C4855',
 }
 
 local hl_sections = {
@@ -70,6 +72,11 @@ local get_lsp_client = function()
 end
 
 local c = {
+  empty = {
+    provider = function()
+      return ''
+    end,
+  },
   vim_mode = {
     provider = {
       name = 'vi_mode',
@@ -129,9 +136,9 @@ local c = {
       local search = require('noice').api.status.search
       return search.has() and search.get() or ''
     end,
-    hl = hl_sections.light_text,
-    left_sep = ' ',
-    right_sep = ' ',
+    hl = { fg = 'cyan', bg = 'cyan_dark' },
+    left_sep = 'left_rounded',
+    right_sep = 'right_rounded',
   },
   record = {
     provider = function()
@@ -199,9 +206,9 @@ local left = {
   c.vim_mode,
   c.tabs,
   c.file_name,
-  c.search,
 }
 local middle = {
+  c.search,
   c.diagnostic_errors,
   c.diagnostic_warnings,
   c.diagnostic_hints,

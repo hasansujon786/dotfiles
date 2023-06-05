@@ -10,9 +10,6 @@ M.ui = {
     },
   },
 }
-M.telescope = {
-  todo_keyfaces = { 'TODO:', 'DONE:', 'INFO:', 'FIXME:', 'BUG:', 'FIXIT:', 'ISSUE:', 'OPTIM:', 'OPTIMIZE:' },
-}
 
 _G.state = {
   file = {
@@ -24,6 +21,10 @@ _G.state = {
   theme = {
     bg_tranparent = true,
   },
+}
+
+M.telescope = {
+  todo_keyfaces = { 'TODO:', 'DONE:', 'INFO:', 'FIXME:', 'BUG:', 'FIXIT:', 'ISSUE:', 'OPTIM:', 'OPTIMIZE:' },
 }
 
 return M
