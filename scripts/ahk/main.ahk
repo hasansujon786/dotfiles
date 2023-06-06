@@ -45,8 +45,8 @@ Capslock::alternateTab()
 $Escape::superEscape()
 #SPACE::toggleAlwaysOnTop() ; Always on Top
 ; Layout
-#[::winPinToSide("left")
-#]::winPinToSide("right")
+#[::winPinToSide("left", true)
+#]::winPinToSide("right", true)
 #o::layoutCodeFloat()
 #p::layoutCode()
 ; #p::AppsKey
@@ -206,14 +206,13 @@ center_current_window() {
     targetY := (A_ScreenHeight/2)-(w_height/2)
   WinMove, %active_window_title%,, %targetX%, %targetY%
 }
-winPinToSide(side) {
-  isFullScreen := isWindowFullScreen( "A" )
-  if (isFullScreen) {
-    Send {f11}
-  } else {
-    WinRestore, A
+winPinToSide(side, checkFullscreen) {
+  if (checkFullscreen) {
+    autoToggleFullScreen()
+    sleep 50
   }
 
+  WinRestore, A
   if (side == "left") {
     Send #{Left}
   }  else if  (side == "right"){
@@ -255,6 +254,8 @@ layoutCode() {
   ; layout_winAction("ahk_exe Code.exe", "Code.exe", "left")
 }
 layout_winAction(EXE_FULL, EXE, side) {
+  autoToggleFullScreen()
+
   if (not WinExist(EXE_FULL)) {
     if (EXE == "Code.exe") {
       Run, C:\Users\%A_UserName%\AppData\Local\Programs\Microsoft VS Code\Code.exe
@@ -270,13 +271,14 @@ layout_winAction(EXE_FULL, EXE, side) {
 layout_selectWin(EXE_FULL, EXE, side) {
   if (WinExist(EXE_FULL)) {
     WinActivate, %EXE_FULL%
-      if(side == "center") {
-        resetWin()
-      } else if (side == "full") {
-        WinMaximize, A
-      } else {
-        winPinToSide(side)
-      }
+
+    if(side == "center") {
+      resetWin()
+    } else if (side == "full") {
+      WinMaximize, A
+    } else {
+      winPinToSide(side, false)
+    }
   }
 }
 ;******************************************************************************
@@ -616,6 +618,12 @@ isWindowFullScreen( winTitle ) {
   ; 0x1fffffff is WS_MINIMIZE.
   ; no border and not minimized
   Return ((style & 0x207fffff) or winH < A_ScreenHeight or winW < A_ScreenWidth) ? false : true
+}
+autoToggleFullScreen() {
+  isFullScreen := isWindowFullScreen( "A" )
+  if (isFullScreen) {
+    Send {f11}
+  }
 }
 
 ;******************************************************************************
