@@ -33,6 +33,17 @@ local reload_lua_modules = function()
   end
 end
 
+-- vim.api.nvim_create_user_command('PackageReload', function(info)
+--   for _, pkg in ipairs(info.fargs) do
+--     package.loaded[pkg] = nil
+--     require(pkg)
+--   end
+-- end, {
+--   nargs = '+',
+--   complete = function(_, _, _) return vim.tbl_keys(package.loaded) end,
+--   desc = 'Clear cached lua modules and re-require them',
+-- })
+
 return {
   reload_lua_modules = reload_lua_modules,
 }

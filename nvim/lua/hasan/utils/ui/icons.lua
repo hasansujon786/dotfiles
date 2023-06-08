@@ -135,8 +135,9 @@ local other = {
     Error = '',
     Warn  = '',
     Info  = '',
-    Ques  = '',
-    Hint  = '',
+    Ques  = '', -- 
+    Hint  = '',
+    Ok    = '',
   },
 }
 
@@ -170,10 +171,10 @@ local nerdicons =  {
     Text          = '',
   },
   type = {
-    Array   = '',
-    Number  = '',
+    Array   = '',
+    Number  = '#',
     String  = '',
-    Boolean = '蘒',
+    Boolean = '⊨',
     Object  = '',
   },
   documents = {
@@ -203,7 +204,7 @@ local nerdicons =  {
     Dashboard = '',
     History   = '',
     Comment   = '',
-    Bug       = '',
+    Bug       = '', -- 
     Code      = '',
     Telescope = '',
     Gear      = '',
@@ -235,6 +236,8 @@ local nerdicons =  {
     Info  = '',
     Ques  = '',
     Hint  = '',
+    -- hint = '󱤅 ',
+    -- other = '󰠠 ',
   },
   misc = {
     Robot    = 'ﮧ',

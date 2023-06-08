@@ -88,7 +88,7 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! link Floaterm NormalFloatFlat
   hi! link FloatermBorder FloatBorderFlat
   "/// symboal-outline.nvim ///"
-  hi FocusedSymbol guibg=#4D5666 guifg=NONE
+  hi! link FocusedSymbol DiagnosticLineNrWarn
   "/// Lualine ///"
   hi LualineTabActive    guifg=#97CA72 guibg=#3E4452
   hi LualineTabInactive  guifg=#7386a5 guibg=#3E4452
