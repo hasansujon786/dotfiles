@@ -123,11 +123,11 @@ function M.rename_current_file()
   M.input(nil, {
     relative = 'win',
     size = 25,
-    border = { style = { '', '', '', '▏', '', '', '', '▏' } },
+    border = { style = { '', '', '', '▕', '', '', '', '▎' } },
     position = { row = -1, col = 0 },
     win_options = {
       sidescrolloff = 0,
-      winhighlight = 'Normal:NormalFloatFlat,FloatBorder:KisslineWinbarIndicatorActive',
+      winhighlight = 'Normal:NormalFloatFlat,FloatBorder:KisslineWinbarRenameBorder',
     },
   }, {
     default_value = currNameFileName,
