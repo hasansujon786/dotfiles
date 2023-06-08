@@ -39,7 +39,7 @@ return {
     lazy = true, ft = { 'qf' },
     config = function()
       vim.defer_fn(function()
-        require('bqf').bootstrap()
+        require('config.bqf')
       end, 50)
     end
   },

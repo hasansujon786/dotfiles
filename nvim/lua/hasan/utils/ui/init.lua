@@ -122,8 +122,8 @@ function M.rename_current_file()
 
   M.input(nil, {
     relative = 'win',
-    size = 25,
-    border = { style = { '', '', '', '▕', '', '', '', '▎' } },
+    size = 26,
+    border = { style = { '', '', '', '▎', '', '', '', '▎' } },
     position = { row = -1, col = 0 },
     win_options = {
       sidescrolloff = 0,
