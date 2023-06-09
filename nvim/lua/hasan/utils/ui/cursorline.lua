@@ -1,10 +1,10 @@
 local api = vim.api
 local M = {}
 
-local cl_focus_ft = { list = true, fern = true, qf = true }
-local cl_persist_ft = { qf = true, fern = true, NvimTree = true, DiffviewFiles = true }
-local cl_disable_bt = { prompt = true }
-local cl_disable_ft = {
+local use_vivid_hl_ftype = { list = true, fern = true, qf = true }
+local force_persist_ft = { qf = true, fern = true, NvimTree = true, DiffviewFiles = true, Outline = true }
+local force_hide_btype = { prompt = true }
+local force_hide_ftype = {
   dashboard = true,
   alpha = true,
   floaterm = true,
@@ -13,16 +13,18 @@ local cl_disable_ft = {
 }
 
 M.cursorline_show = function(winid)
+  local default_vivid_cl = 'CursorLine:CursorLineFocus'
   local bufnr = api.nvim_win_get_buf(winid)
   local ftype = api.nvim_buf_get_option(bufnr, 'filetype')
   local btype = api.nvim_buf_get_option(bufnr, 'buftype')
 
-  if cl_disable_ft[ftype] or cl_disable_bt[btype] then
+  if force_hide_ftype[ftype] or force_hide_btype[btype] then
     return
   end
   -- change hightligt to a contrasted color
-  if cl_focus_ft[ftype] then
-    vim.cmd([[setl winhighlight=CursorLine:CursorLineFocus]])
+  local vivid_hl_value = use_vivid_hl_ftype[ftype]
+  if vivid_hl_value then
+    vim.wo.winhighlight = type(vivid_hl_value) == 'string' and vivid_hl_value or default_vivid_cl
   end
 
   api.nvim_win_set_option(winid, 'cursorline', true)
@@ -32,7 +34,7 @@ M.cursorline_hide = function(winid)
   local bufnr = api.nvim_win_get_buf(winid)
   local ftype = api.nvim_buf_get_option(bufnr, 'filetype')
   -- local btype = api.nvim_buf_get_option(bufnr, 'buftype')
-  if cl_persist_ft[ftype] then
+  if force_persist_ft[ftype] then
     return
   end
 

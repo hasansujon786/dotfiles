@@ -3,6 +3,8 @@ local k = icon.kind
 local t = icon.type
 
 local opts = {
+  show_numbers = false,
+  show_relative_numbers = false,
   highlight_hovered_item = true,
   show_guides = true,
   auto_preview = false,
@@ -10,8 +12,6 @@ local opts = {
   relative_width = true,
   width = 20,
   auto_close = false,
-  show_numbers = true,
-  show_relative_numbers = true,
   show_symbol_details = true,
   preview_bg_highlight = 'Normal',
   autofold_depth = nil,
@@ -65,5 +65,16 @@ local opts = {
     TypeParameter = { icon = k.TypeParameter, hl = '@parameter' },
   },
 }
+
+require('hasan.utils').augroup('MY_SYMBOL_AUGROUP')(function(autocmd)
+  autocmd({ 'WinEnter', 'FileType' }, function()
+    vim.wo.winhighlight = 'CursorLine:CursorlineSymbol,CursorLineNr:DiagnosticLineNrWarn'
+    vim.cmd([[setl relativenumber]])
+  end, { pattern = 'Outline' })
+
+  autocmd({ 'WinLeave' }, function()
+    vim.cmd([[setl norelativenumber]])
+  end, { pattern = 'Outline' })
+end)
 
 require('symbols-outline').setup(opts)
