@@ -28,8 +28,6 @@ return
 !8::Send #8
 !9::Send #9
 !0::Send #0
-#l::Send ^#{Right}
-#h::Send ^#{Left}
 #InputLevel 1
 !\::Send \
 \::alternateTab()
@@ -38,8 +36,10 @@ Capslock::alternateTab()
 #Capslock::toggleCapsLosck()
 ; Window manazement
 !x::toggleWinRestore()
-!]::SendInput,^{tab}
 ![::SendInput,^+{tab}
+!]::SendInput,^{tab}
++![::SendInput,^+{PgUp}
++!]::SendInput,^+{PgDn}
 !Enter::Send {f11}
 !Escape::resetWin()
 $Escape::superEscape()
@@ -49,7 +49,10 @@ $Escape::superEscape()
 #]::winPinToSide("right", true)
 #o::layoutCodeFloat()
 #p::layoutCode()
-; #p::AppsKey
+; Vertual Desktop
+#l::Send ^#{Right}
+#h::Send ^#{Left}
+; Utils
 PrintScreen::#+s
 #`::takeScreenshot()
 #q::bt()
@@ -57,6 +60,7 @@ PrintScreen::#+s
 #y::quake_nvim(true) ; edit from current input field
 #+y::quake_nvim(false) ; edit from last clipboard text
 #^y::quake_nvim(false) ; edit from last clipboard text
+#;::SendInput {AppsKey}
 ;Transparency toggle,
 #^/::toggleTransparency()
 #^.::increaseTransparency()
