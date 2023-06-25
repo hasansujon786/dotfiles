@@ -29,7 +29,7 @@ l() {
 
   term_cmd="wezterm cli spawn --cwd \"$dir\""
   id=$(eval "$term_cmd")
-  echo "yarn start" | wezterm cli send-text --pane-id $id
+  echo "yarn dev" | wezterm cli send-text --pane-id $id
   cd $dir && nvim
 
   # wt -w 0 nt -d $dir -p "Bash" C:\\Program Files\\Git\\bin\\bash -c "yarn start"

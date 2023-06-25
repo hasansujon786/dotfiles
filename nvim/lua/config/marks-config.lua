@@ -1,9 +1,9 @@
-require'marks'.setup {
+require('marks').setup({
   mappings = {
     set = 'm',
-    delete = 'm-',
+    delete = 'm-', -- specific {key}
     delete_line = 'm--',
-    delete_buf = 'dx<space>',
+    delete_buf = 'dax',
     set_next = 'm,',
     toggle = 'm=',
     preview = 'm;',
@@ -36,7 +36,7 @@ require'marks'.setup {
   cyclic = true,
   force_write_shada = true, -- whether the shada file is updated after modifying uppercase marks. default false
   refresh_interval = 250,
-  sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
+  sign_priority = { lower = 10, upper = 15, builtin = 8, bookmark = 20 },
   -- disables mark tracking for specific filetypes. default {}
   excluded_filetypes = {},
   -- marks.nvim allows you to configure up to 10 bookmark groups, each with its own
@@ -49,4 +49,4 @@ require'marks'.setup {
   bookmark_3 = { sign = '✸' },
   bookmark_4 = { sign = '✿' },
   bookmark_5 = { sign = '♥' },
-}
+})

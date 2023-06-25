@@ -128,9 +128,9 @@ keymap('v', '#', '<Cmd>call hasan#utils#visualSelection("", "")<CR>?<C-R>=@/<CR>
 keymap('n', 'c*', ":let @/='\\<'.expand('<cword>').'\\>'<CR>cgn")
 keymap('x', 'C', '"cy:let @/=@c<CR>cgn')
 
-keymap('n', 'cm', ':%s/<c-r>///g<Left><Left>', noSilent) -- Change all matches with prompt
-keymap('n', 'dm', ':%s/<c-r>///g<CR>', noSilent) -- Delete all matches
-keymap('n', 'dM', ':%g/<c-r>//d<CR>', noSilent) -- Delete all lines with matches
+keymap('n', 'cm', ':%s/<c-r>///g<Left><Left>', { desc = 'Change all matches with prompt', silent = false })
+keymap('n', 'dm', ':%s/<c-r>///g<CR>', { desc = 'Delete all matches' })
+keymap('n', 'dM', ':%g/<c-r>//d<CR>', { desc = 'Delete all lines with matches' })
 
 keymap({ 'n', 'v' }, 'z/', '<ESC>/\\%V', noSilent) -- search in visual selection
 keymap('n', 'Z/', function() -- search in visible viewport
