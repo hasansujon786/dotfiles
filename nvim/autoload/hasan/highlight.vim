@@ -73,8 +73,8 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi IndentBlanklineChar guifg=#323a48
   hi QuickScopePrimary   guifg=tomato gui=underline
   hi QuickScopeSecondary guifg=#d78787 gui=underline
-  hi Sneak      gui=bold guibg=#ccff88 guifg=black
-  hi! link SneakScope Cursor
+  hi link SneakScope IncSearch
+  hi Sneak      guibg=#ccff88 guifg=black gui=bold
   hi VM_Extend  guibg=#5C6370 guifg=#ABB2BF
   hi VM_Insert  guibg=#3E4452 guifg=#ABB2BF
   hi VM_Mono    guibg=#00af87 guifg=#ffffff
