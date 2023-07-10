@@ -21,24 +21,33 @@ __fzf_z__() {
   dir=$(eval "$cmd") && printf 'cd -- %q' "$dir"
 }
 
-l() {
+__fzf_z_plus__() {
   [ $# -gt 0 ] && z "$*" && return
-  local cmd dir
-  cmd="zoxide query -i -- "$1""
-  dir=$(eval "$cmd")
+  local out key dir
+  IFS=$'\n' out=("$(zoxide query -l | fzf --query="$1" --exit-0 --expect=alt-o,ctrl-e,alt-e --border-label='Zoxide')")
+  key=$(head -1 <<< "$out")
+  dir=$(head -2 <<< "$out" | tail -1)
 
-  term_cmd="wezterm cli spawn --cwd \"$dir\""
-  id=$(eval "$term_cmd")
-  echo "yarn dev" | wezterm cli send-text --pane-id $id
-  cd $dir && nvim
-
-  # wt -w 0 nt -d $dir -p "Bash" C:\\Program Files\\Git\\bin\\bash -c "yarn start"
-  # cd $dir && nvim
+  if [ -n "$dir" ]; then
+    if [[ "$key" = alt-o ]]; then
+      term_cmd="wezterm cli spawn --cwd \"$dir\""
+      id=$(eval "$term_cmd")
+      echo "yarn dev" | wezterm cli send-text --pane-id $id
+      printf 'cd -- %q && nvim' "$dir"
+      # wt -w 0 nt -d $dir -p "Bash" C:\\Program Files\\Git\\bin\\bash -c "yarn start"
+      # cd $dir && nvim
+    elif [[ "$key" = ctrl-e ]]; then
+      printf 'explorer %q' "$dir"
+    elif [[ "$key" = alt-e ]]; then
+      printf 'cd -- %q && lfcd' "$dir"
+    else
+      printf 'cd -- %q' "$dir"
+    fi
+  fi
 }
 
 # ALT-e - cd into the selected directory
-bind -m emacs-standard '"\ee": " \C-b\C-k \C-u`__fzf_z__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d\C-h"'
-bind -m emacs-standard '"\ej": " \C-b\C-k \C-u`__fzf_z__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d\C-h"'
+bind -m emacs-standard '"\eo": " \C-b\C-k \C-u`__fzf_z_plus__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d\C-h"'
 
 __fzf_select__() {
   local cmd="${FZF_CTRL_T_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
