@@ -1,0 +1,14 @@
+{
+  "twMerge": {
+    "prefix": "twMerge",
+    "body": [
+      "// yarn add tailwind-merge class-variance-authority clsx",
+      "import { clsx, type ClassValue } from 'clsx'",
+      "import { twMerge } from 'tailwind-merge'\n",
+      "export function cn(...inputs: ClassValue[]) {",
+      "  return twMerge(clsx(inputs))",
+      "}"
+    ],
+    "description": "twMerge"
+  }
+}
