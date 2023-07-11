@@ -61,6 +61,7 @@ o.showmode = false --                            Don't show mode as lightline al
 o.modeline = false
 o.modelines = 0
 o.showtabline = 0
+o.winbar = ' '
 o.laststatus = 3
 o.statusline = ' '
 o.cmdheight = 0 --                               Height of the command bar

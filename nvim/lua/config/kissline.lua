@@ -26,6 +26,9 @@ require('kissline').setup({
     Outline = function()
       return { '▎ OUTLINE', 'NvimTreeWinBar', false, false, false }
     end,
+    alpha = function()
+      return { '', '', false, false, false }
+    end,
   },
   actions = {
     rename = {

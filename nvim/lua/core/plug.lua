@@ -3,13 +3,18 @@ return {
   ------------------------------------------------
   --> Visual -------------------------------------
   ------------------------------------------------
-  { 'folke/noice.nvim', lazy = true, event = 'VeryLazy', config = function() require('config.noice') end, module = 'noice' },
   { 'navarasu/onedark.nvim', lazy = true },
   { 'goolord/alpha-nvim', config = function() require('config.alpha') end },
   { 'kyazdani42/nvim-web-devicons', lazy = true, config = function() require('config.devicons-config') end },
   -- { 'hasansujon786/notifier.nvim', opt = true, module = 'notifier' },
-  { 'folke/which-key.nvim', lazy = true, event = 'VeryLazy', config = function() require('config.whichkey') end },
   { 'uga-rosa/ccc.nvim', lazy = true, config = function() require('config.color-picker') end, cmd = 'CccPick' },
+  { 'folke/noice.nvim', lazy = true, event = 'VeryLazy', module = 'noice',
+    config = function() require('config.noice') end,
+    dependencies = {
+      { 'hasansujon786/kissline.nvim', config = function() require('config.kissline') end },
+      { 'folke/which-key.nvim', config = function() require('config.whichkey') end },
+    }
+  },
   {
     'lukas-reineke/indent-blankline.nvim',
     lazy = true,
@@ -19,7 +24,6 @@ return {
       -- { 'kevinhwang91/nvim-hlslens', config = function() require('config.hlslens') end },
       { 'karb94/neoscroll.nvim', config = function() require('config.neoscroll') end },
       { 'chentoast/marks.nvim', config = function() require('config.marks-config') end },
-      { 'hasansujon786/kissline.nvim', config = function() require('config.kissline') end },
       { 'freddiehaddad/feline.nvim', config = function() require('config.feline') end },
     },
   },

@@ -6,7 +6,7 @@ local SOLID_RIGHT_ARROW = ''
 
 wezterm.on('update-right-status', function(window, _)
   local time = wezterm.strftime('  %I:%M %p     ')
-  local date = wezterm.strftime('  %a %b %-d ')
+  local date = wezterm.strftime('  %a %b %-d    ')
   local cells = { time, date }
 
   -- Color palette for the backgrounds of each cell
@@ -60,7 +60,7 @@ return {
   initial_cols = 120,
   tab_max_width = 30,
   hide_tab_bar_if_only_one_tab = false,
-  window_decorations = 'INTEGRATED_BUTTONS', -- NONE,RESIZE
+  window_decorations = 'RESIZE', -- NONE,INTEGRATED_BUTTONS
   check_for_updates = false,
   use_dead_keys = false,
   warn_about_missing_glyphs = false,
