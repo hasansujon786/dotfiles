@@ -1,26 +1,30 @@
 local M = {}
 -- local hasNvim8 = vim.fn.has('nvim-0.8') == 1
 
-require('config.lsp.diagnosgic').setup()
-
-local use_builtin_lsp_formatter = { 'dartls', 'astro' }
-
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-M.on_attach = function(client, bufnr)
+function M.on_attach(client, bufnr)
   M.lsp_autocmds(client, bufnr)
   M.lsp_buffer_keymaps(client, bufnr)
 
   if client.name == 'tailwindcss' and state.treesitter.auto_conceal_html_class then
     require('config.lsp.setup.tailwindcss').setup_conceal(bufnr)
   end
-  if not vim.tbl_contains(use_builtin_lsp_formatter, client.name) then
+  if not vim.tbl_contains(require('config.lsp.lsp-config').use_builtin_lsp_formatter, client.name) then
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
   end
 end
 
-M.lsp_autocmds = function(client, bufnr)
+function M.update_capabilities()
+  local cmp_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+  if cmp_ok then
+    return cmp_nvim_lsp.default_capabilities()
+  end
+  vim.notify('cmp_nvim_lsp not loaded with lsp-config', vim.log.levels.WARN)
+end
+
+function M.lsp_autocmds(client, bufnr)
   if client.server_capabilities.documentHighlightProvider then
     vim.cmd([[
       augroup lsp_document_highlight
@@ -34,7 +38,7 @@ M.lsp_autocmds = function(client, bufnr)
   end
 end
 
-M.lsp_buffer_keymaps = function(client, bufnr)
+function M.lsp_buffer_keymaps(client, bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
   local function desc(str)
     return require('hasan.utils').merge({ desc = str }, opts or {})
@@ -49,7 +53,7 @@ M.lsp_buffer_keymaps = function(client, bufnr)
 
   keymap('n', 'gd', vim.lsp.buf.definition, desc('Lsp: go to definition'))
   keymap('n', 'gD', vim.lsp.buf.declaration, desc('Lsp: go to declaration'))
-  keymap('n', 'gr', require('config.lsp.util').references_with_quickfix, desc('Lsp: go to references'))
+  keymap('n', 'gr', require('config.lsp.util').references_and_focus_cur_ref, desc('Lsp: go to references'))
   keymap('n', 'gR', vim.lsp.buf.references, desc('Lsp: go to references'))
   keymap('n', 'gp', require('config.lsp.peek').PeekDefinition, desc('Lsp: peek definition'))
   keymap('n', 'gP', require('config.lsp.peek').PeekTypeDefinition, desc('Lsp: peek type definition'))

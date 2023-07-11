@@ -32,7 +32,6 @@ M.qftf = function(info)
   return ret
 end
 
-
 M.valid_qf_fname = function(bufnr)
   local fname = fn.bufname(bufnr)
   if fname == '' then
