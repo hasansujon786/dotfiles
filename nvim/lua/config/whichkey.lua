@@ -226,7 +226,7 @@ local leader = {
     h = { '<cmd>call autohl#_AutoHighlightToggle()<CR>',                   'Highlight same words' },
     s = { '<cmd>lua require("hasan.utils").toggle("spell")<CR>',           'Toggle spell' },
     w = { '<cmd>lua require("hasan.utils").toggle("wrap")<CR>',            'Toggle wrap' },
-    o = { '<cmd>lua require("config.lsp.setup.tailwindcss").toggle_conceallevel()<CR>','Toggle conceallevel' },
+    o = { '<cmd>lua require("config.lsp.server.tailwindcss").toggle_conceallevel()<CR>','Toggle conceallevel' },
 
     t = {
       name  = '+task-and-timer',

@@ -6,7 +6,7 @@ local diagnotic_icons = require('hasan.utils.ui.icons').Other.diagnostics
 -- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, borderOpts)
 -- vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, borderOpts)
 
-M.diagnostic_icon_by_severity = function(severity)
+function M.diagnostic_icon_by_severity(severity)
   local icon, highlight
   if severity == 1 then
     icon = diagnotic_icons.Error
@@ -32,7 +32,8 @@ local jump_opts = {
     end,
   },
 }
-M.jump_to_diagnostic = function(direction)
+
+function M.jump_to_diagnostic(direction)
   if direction == 'prev' then
     vim.diagnostic.goto_prev(jump_opts)
   else
@@ -40,7 +41,7 @@ M.jump_to_diagnostic = function(direction)
   end
 end
 
-M.setup = function()
+function M.setup()
   if vim.fn.has('nvim-0.6.0') == 0 then
     return 0
   end

@@ -4,14 +4,14 @@ local api = vim.api
 local METHOD = 'workspace/executeCommand'
 
 local M = {}
-local make_params = function(bufnr)
+local function make_params(bufnr)
   return {
     command = '_typescript.organizeImports',
     arguments = { api.nvim_buf_get_name(bufnr) },
   }
 end
 
-M.ts_organize_imports_async = function(bufnr, post)
+function M.ts_organize_imports_async(bufnr, post)
   bufnr = bufnr or api.nvim_get_current_buf()
 
   lsp.buf_request(bufnr, METHOD, make_params(bufnr), function(err)
@@ -21,7 +21,7 @@ M.ts_organize_imports_async = function(bufnr, post)
   end)
 end
 
-M.ts_organize_imports_sync = function(bufnr)
+function M.ts_organize_imports_sync(bufnr)
   bufnr = bufnr or api.nvim_get_current_buf()
 
   lsp.buf_request_sync(bufnr, METHOD, make_params(bufnr), 500)

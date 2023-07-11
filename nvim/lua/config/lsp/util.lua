@@ -1,7 +1,7 @@
 local M = {}
 local api = vim.api
 
-M.install_essential_servers = function()
+function M.install_essential_servers()
   local ok, registry = pcall(require, 'mason-registry')
   if not ok then
     print('[Mason] Please install mason and try again')
@@ -29,11 +29,11 @@ M.install_essential_servers = function()
   end
 end
 
-M.code_action = function()
+function M.code_action()
   require('hasan.utils.ui').telescope_cursor_theme_pre()
   vim.lsp.buf.code_action()
 end
-M.range_code_action = function()
+function M.range_code_action()
   require('hasan.utils.ui').telescope_cursor_theme_pre()
   vim.lsp.buf.range_code_action()
 end
@@ -49,7 +49,7 @@ end
 --   end
 
 M._lspRenameChangeList = nil
-M.showLspRenameChanges = function()
+function M.showLspRenameChanges()
   local entries = {}
   if not M._lspRenameChangeList then
     return
@@ -73,7 +73,7 @@ M.showLspRenameChanges = function()
   vim.cmd([[copen]])
 end
 
-M.lspRename = function()
+function M.lspRename()
   -- https://www.youtube.com/watch?v=tAVxxdFFYMU
   -- local tshl = require('nvim-treesitter-playground.hl-info').get_treesitter_hl()
   -- if tshl and #tshl > 0 then
@@ -92,7 +92,7 @@ M.lspRename = function()
   })
 end
 
-M._lspRename = function(value)
+function M._lspRename(value)
   local lsp_params = vim.lsp.util.make_position_params()
   if not value or #value == 0 then
     return
@@ -131,7 +131,7 @@ M._lspRename = function(value)
     end
 
     -- compose the right print message
-    print(
+    vim.notify(
       string.format(
         'renamed %s instance%s in %s file%s. %s',
         changed_instances_count,
@@ -139,7 +139,8 @@ M._lspRename = function(value)
         changed_files_count,
         changed_files_count == 1 and '' or 's',
         changed_files_count > 1 and "To save them run ':wa'" or ''
-      )
+      ),
+      vim.log.levels.INFO
     )
   end)
 end

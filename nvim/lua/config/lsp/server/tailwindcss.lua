@@ -46,7 +46,7 @@ local function conceal_html_class(bufnr)
   vim.b.class_conceal_ns_ids = ns_ids
 end
 
-M.setup_conceal = function(bufnr)
+function M.setup_conceal(bufnr)
   if vim.b.class_conceal_active == false then
     return
   end
@@ -67,7 +67,7 @@ M.setup_conceal = function(bufnr)
   })
 end
 
-M.toggle_conceallevel = function()
+function M.toggle_conceallevel()
   if not vim.b.class_conceal_active then
     vim.b.class_conceal_active = true
     M.setup_conceal(0)

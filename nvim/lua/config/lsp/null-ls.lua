@@ -21,7 +21,7 @@ local sources = {
   -- b.diagnostics.todo_comments
 }
 local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
-local on_attach = function(client, bufnr)
+local function on_attach(client, bufnr)
   if client.supports_method('textDocument/formatting') then
     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
     vim.api.nvim_create_autocmd('BufWritePre', {
