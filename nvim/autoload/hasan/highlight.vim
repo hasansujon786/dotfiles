@@ -125,7 +125,7 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! link NvimTreeWindowPicker TelescopeSelectionCaret
   hi! link NvimTreeWinSeparator VertSplit
   hi! NvimTreeNormal guibg=#1E242E guifg=#a5b0c5
-  hi! NvimTreeWinBar guibg=#1E242E guifg=#546178
+  hi! NvimTreeWinBar guibg=#242B38 guifg=#75A899
 
   "/// Nebulous ///"
   hi NebulousInvisibe   guifg=#242B38
