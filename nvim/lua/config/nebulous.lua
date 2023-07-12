@@ -1,7 +1,7 @@
 local api = vim.api
 local utils = require('hasan.utils')
 local M = {
-  alternate_winid_to_ignore = 3,
+  alternate_winid_to_ignore = nil,
   ignore_alternate_filetypes = { 'noice', 'Outline', 'NvimTree' },
 }
 
@@ -55,9 +55,12 @@ require('hasan.utils').augroup('MY_NEBULOUS_SETUP')(function(autocmd)
     end
 
     vim.defer_fn(function()
-      local winid = require('config.nebulous').alternate_winid_to_ignore
-      require('nebulous.view').focusWindow(winid)
-      require('hasan.utils.ui.cursorline').cursorline_show(winid)
+      if M.alternate_winid_to_ignore ~= nil then
+        local winid = M.alternate_winid_to_ignore
+        require('nebulous.view').focusWindow(winid)
+        require('hasan.utils.ui.cursorline').cursorline_show(winid)
+        M.alternate_winid_to_ignore = nil
+      end
     end, 10)
   end, { pattern = M.ignore_alternate_filetypes })
 end)
