@@ -73,12 +73,6 @@ require('hasan.utils').augroup('MY_SYMBOL_AUGROUP')(function(autocmd)
     vim.cmd([[setl relativenumber]])
   end, { pattern = 'Outline' })
 
-  autocmd('FileType', function()
-    local winid = require('config.nebulous').alternate_winid_to_ignore
-    require('nebulous.view').focusWindow(winid)
-    require('hasan.utils.ui.cursorline').cursorline_show(winid)
-  end, { pattern = 'Outline' })
-
   autocmd({ 'WinLeave' }, function()
     vim.cmd([[setl norelativenumber]])
   end, { pattern = 'Outline' })
