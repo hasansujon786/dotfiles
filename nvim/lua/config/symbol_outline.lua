@@ -68,8 +68,15 @@ local opts = {
 
 require('hasan.utils').augroup('MY_SYMBOL_AUGROUP')(function(autocmd)
   autocmd({ 'WinEnter', 'FileType' }, function()
-    vim.wo.winhighlight = 'CursorLine:CursorlineSymbol,CursorLineNr:DiagnosticLineNrWarn'
+    -- vim.wo.winhighlight = 'Normal:NvimTreeNormal,CursorLine:CursorLineFocus,CursorLineNr:CursorLineFocus'
+    vim.wo.winhighlight = 'CursorLine:CursorLineFocus,CursorLineNr:CursorLineFocus'
     vim.cmd([[setl relativenumber]])
+  end, { pattern = 'Outline' })
+
+  autocmd('FileType', function()
+    local winid = require('config.nebulous').alternate_winid_to_ignore
+    require('nebulous.view').focusWindow(winid)
+    require('hasan.utils.ui.cursorline').cursorline_show(winid)
   end, { pattern = 'Outline' })
 
   autocmd({ 'WinLeave' }, function()

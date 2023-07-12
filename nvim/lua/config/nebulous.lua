@@ -1,6 +1,6 @@
 local api = vim.api
 local utils = require('hasan.utils')
-local M = {}
+local M = { alternate_winid_to_ignore = 0 }
 
 keymap('n', '<leader>R', '<cmd>lua require("nebulous").toggle_win_blur()<CR>', { desc = 'Toggle Nebulous' })
 
@@ -28,11 +28,13 @@ M.my_nebulous_setup = function()
       end,
     },
     ignore_alternate_win = function(winid, is_float)
-      local ft = vim.fn.getwinvar(winid, '&ft')
-      if ft == 'noice' then
+      local ignore_filetypes = { 'noice', 'Outline' }
+
+      if vim.tbl_contains(ignore_filetypes, vim.o.ft) then
         return true
       end
 
+      -- neo-minimap
       if is_float then
         local win_conf = api.nvim_win_get_config(winid)
         if win_conf.width == 44 and win_conf.height == 15 and win_conf.zindex == 1111 then
@@ -43,6 +45,11 @@ M.my_nebulous_setup = function()
       return false
     end,
   })
+end
+
+M.toggle_symbol_outline = function()
+  M.alternate_winid_to_ignore = vim.api.nvim_get_current_win()
+  vim.cmd([[SymbolsOutline]])
 end
 
 return M
