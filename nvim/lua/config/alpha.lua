@@ -32,8 +32,8 @@ local function button(map, sc, desc, cmd)
 end
 
 -- dynamic header padding
-local marginTopPercent = 0.1
-local headerPadding = vim.fn.max({ 2, vim.fn.floor(vim.fn.winheight(0) * marginTopPercent) }) - 1
+-- local marginTopPercent = 0.1
+-- local headerPadding = vim.fn.max({ 2, vim.fn.floor(vim.fn.winheight(0) * marginTopPercent) }) - 1
 
 local options = {
   header = {
@@ -63,7 +63,7 @@ local options = {
   version = {
     type = 'text',
     val = {
-      string.format([[-- Neovim %s.%s.%s --]], v.major, v.minor, v.patch),
+      string.format([[-- NeoVim %s.%s.%s --]], v.major, v.minor, v.patch),
     },
     opts = {
       position = 'center',
@@ -86,7 +86,7 @@ local options = {
     },
     opts = { spacing = 1 },
   },
-  headerPaddingTop = { type = 'padding', val = headerPadding },
+  headerPaddingTop = { type = 'padding', val = 1 },
   headerPaddingBottom = { type = 'padding', val = 1 },
 }
 
