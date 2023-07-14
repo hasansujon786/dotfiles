@@ -30,18 +30,18 @@ __fzf_z_plus__() {
 
   if [ -n "$dir" ]; then
     if [[ "$key" = alt-o ]]; then
+      printf 'cd -- %q' "$dir"
+    elif [[ "$key" = ctrl-e ]]; then
+      printf 'explorer %q' "$dir"
+    elif [[ "$key" = alt-e ]]; then
+      printf 'cd -- %q && lfcd' "$dir"
+    else
       term_cmd="wezterm cli spawn --cwd \"$dir\""
       id=$(eval "$term_cmd")
       echo "yarn dev" | wezterm cli send-text --pane-id $id
       printf 'cd -- %q && nvim' "$dir"
       # wt -w 0 nt -d $dir -p "Bash" C:\\Program Files\\Git\\bin\\bash -c "yarn start"
       # cd $dir && nvim
-    elif [[ "$key" = ctrl-e ]]; then
-      printf 'explorer %q' "$dir"
-    elif [[ "$key" = alt-e ]]; then
-      printf 'cd -- %q && lfcd' "$dir"
-    else
-      printf 'cd -- %q' "$dir"
     fi
   fi
 }
