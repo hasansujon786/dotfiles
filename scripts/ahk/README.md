@@ -4,27 +4,42 @@
   - [Running AutoHotkey Scripts at a Specific Time](https://www.youtube.com/watch?v=UbX3QtGOsTU)
   - [How to Launch AutoHotkey Scripts At Startup](https://www.youtube.com/watch?v=0kGP8S9o7qI)
 
+## Info
+
 ```
 # = Windows
 + = Shift
 ^ = Ctrl
 ! = Alt
 * = Wildcard (*CapsLock::)
-```
 
-\::AltTabMenu
-LAlt & j::AltTab
-LAlt & k::ShiftAltTab
-
--- when pressing CapsLock alone, it will activate the Escpae button
 #Include C:\AHK\2nd-keyboard\gui.ahk
-Run, C:\Users\hasan\Downloads\Video
 
 $^+v::
 send, ^c
 sleep 50
 run, https://www.google.d...r#q=%clipboard%
 return
+```
+
+## Window Swicher
+
+```
+F4::
+  Run, "C:\Users\Default\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\Window Switcher.lnk"
+Return
+
+\::AltTabMenu
+LAlt & j::AltTab
+LAlt & k::ShiftAltTab
+#IfWinActive ahk_class Windows.UI.Core.CoreWindow ahk_exe Explorer.EXE ; #IfWinNotActive, ahk_class MultitaskingViewFrame
+
+LAlt & ]::AltTab
+LAlt & [::ShiftAltTab
+```
+
+
+## Other
 
 ; SoundPlay *64                               ;Default windows sound Play an asterisk (Doesn't work for me though!)
 ; tooltip, %exstyle%, % x + 5, % y + 5
@@ -63,24 +78,7 @@ sc   := GetKeySC(key)
 
 MsgBox, % Format("Name:`t{}`nVK:`t{:X}`nSC:`t{:X}", name, vk, sc)
 
-
-F4::
-run, "C:\Users\Default\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\Window Switcher.lnk"
-; this was originally written for Win 8.1, but it still works in Win 10 despite the
-; shortcut being invisible in File Explorer
-return
-
-#IfWinActive ahk_class Windows.UI.Core.CoreWindow ahk_exe Explorer.EXE ; #IfWinNotActive, ahk_class MultitaskingViewFrame
-l::Send, {Right}
-h::Send, {Left}
-j::Send, {Down}
-k::Send, {Up}
-o::Enter
-x::Delete
-return
-
-LAlt & ]::AltTab
-LAlt & [::ShiftAltTab
+```
 ^!s::
 {
     Send "Sincerely,{enter}John Smith"  ; This line sends keystrokes to the active (foremost) window.
@@ -200,3 +198,4 @@ toggleWezterm() {
     }
   }
 }
+```

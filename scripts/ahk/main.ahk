@@ -45,13 +45,10 @@ Capslock::alternateTab()
 $Escape::superEscape()
 #SPACE::toggleAlwaysOnTop() ; Always on Top
 ; Layout
-#[::winPinToSide("left", true)
-#]::winPinToSide("right", true)
 #o::layoutCodeFloat()
 #p::layoutCode()
-; Vertual Desktop
-#l::Send ^#{Right}
-#h::Send ^#{Left}
+; #[::winPinToSide("left", true)
+; #]::winPinToSide("right", true)
 ; Utils
 PrintScreen::#+s
 #`::takeScreenshot()
@@ -72,7 +69,7 @@ PrintScreen::#+s
 #If MouseIsOver("ahk_class Shell_TrayWnd")
   ~LAlt & WheelUP::volup()
   ~LAlt & WheelDown::voldown()
-  MButton::openVolumeController()
+  ~LAlt & RButton::openVolumeController()
 #If
 ; Explorer
 f1::switchToExplorer()
@@ -142,6 +139,11 @@ switchToSavedApp() {
   Return
 #if
 #if winMoveMode
+  q::
+    winMoveMode := 0
+    beep()
+    TaskBar_SetAttr(1, 0xff101010)
+  Return
   Esc::
     winMoveMode := 0
     beep()
@@ -167,7 +169,43 @@ switchToSavedApp() {
   !,::changeWinSize("width", -50)
   !=::changeWinSize("height", 50)
   !-::changeWinSize("height", -50)
+
+  [::navToDesktop("left")
+  ]::navToDesktop("right")
 #if
+
+; AltTabMenu & Vertual Desktop
+!/::SendInput,^!{Tab}
+#h::navToDesktop("left")
+#l::navToDesktop("right")
+#[::navToDesktop("left")
+#]::navToDesktop("right")
+!p::navToDesktop("left")
+!n::navToDesktop("right")
+#If WinActive("ahk_class MultitaskingViewFrame") or WinActive("ahk_class Windows.UI.Core.CoreWindow")
+  ; *WheelDown::Send {Blind}{Tab}
+  ; *WheelUp::Send {Blind}+{Tab}
+  q::Send {Esc}
+  l::Send {Right}
+  h::Send {Left}
+  j::Send {Down}
+  k::Send {Up}
+  o::Send {Enter}
+  x::Send {Delete}
+  d::Send {PgDn}
+  u::Send {PgUp}
+  [::navToDesktop("left")
+  ]::navToDesktop("right")
+  n::Send ^#d
+#If
+
+navToDesktop(side) {
+  if (side == "left") {
+    Send ^#{Left}
+  }  else if  (side == "right"){
+    Send ^#{Right}
+  }
+}
 resetWin() {
   winmove, A,, , ,1216, 661 ; resize window
   center_current_window()
