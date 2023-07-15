@@ -1,10 +1,9 @@
-local neogit = require('neogit')
-
-neogit.setup({
+require('neogit').setup({
+  disable_insert_on_commit = 'auto',
   disable_signs = false,
   disable_hint = false,
   disable_context_highlighting = false,
-  disable_commit_confirmation = false,
+  disable_commit_confirmation = true,
   auto_refresh = true,
   disable_builtin_notifications = false,
   use_magit_keybindings = false,

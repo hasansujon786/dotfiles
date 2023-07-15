@@ -132,4 +132,11 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi NebulousDarker     guifg=#2a303c
 
   hi KisslineWinbarRenameBorder  guifg=#61afef guibg=#1E242E
+
+  "/// Neogit ///"
+  hi! link NeogitDiffContext Normal
+  hi! link NeogitCursorLine CursorLine
+  hi NeogitDiffContextHighlight guibg=#323945
+  hi NeogitHunkHeader           guifg=#242b38 guibg=#7c8088 gui=bold
+  hi NeogitHunkHeaderHighlight  guifg=#242b38 guibg=#c3a7e5 gui=bold
 endfunction

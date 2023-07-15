@@ -124,10 +124,10 @@ return {
   --> Git ----------------------------------------
   ------------------------------------------------
   {
-    'TimUntersberger/neogit',
+    'NeogitOrg/neogit',
     lazy = true,
     cmd = 'Neogit',
-    commit = '69a6ca7',
+    -- 'TimUntersberger/neogit', -- commit = '69a6ca7',
     config = function() require('config.neogit') end,
     dependencies = 'sindrets/diffview.nvim',
   },
