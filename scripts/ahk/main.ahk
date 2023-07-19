@@ -17,39 +17,10 @@ Return
 ^f5::
   suspend, toggle
 return
-; Window Navigation
-!1::Send #1
-!2::Send #2
-!3::Send #3
-!4::Send #4
-!5::Send #5
-!6::Send #6
-!7::Send #7
-!8::Send #8
-!9::Send #9
-!0::Send #0
-#InputLevel 1
-!\::Send \
-\::alternateTab()
-Capslock::alternateTab()
+
+; Utils
 #\::toggleCapsLosck()
 #Capslock::toggleCapsLosck()
-; Window manazement
-!x::toggleWinRestore()
-![::SendInput,^+{tab}
-!]::SendInput,^{tab}
-+![::SendInput,^+{PgUp}
-+!]::SendInput,^+{PgDn}
-!Enter::Send {f11}
-!Escape::resetWin()
-$Escape::superEscape()
-#SPACE::toggleAlwaysOnTop() ; Always on Top
-; Layout
-#o::layoutCodeFloat()
-#p::layoutCode()
-; #[::winPinToSide("left", true)
-; #]::winPinToSide("right", true)
-; Utils
 PrintScreen::#+s
 #`::takeScreenshot()
 #q::bt()
@@ -93,95 +64,48 @@ f1::switchToExplorer()
 #IfWinActive
 
 ;******************************************************************************
-; Window Switcher functions
+; Window manazement
 ;******************************************************************************
-alternateTab() {
-  Send {alt down}
-  Sleep, 5
-  Send {tab}
-  Sleep, 5
-  Send {alt up}
-}
-global savedCLASS = "ahk_exe brave.exe"
-global savedEXE = "brave.exe"
-#IfWinActive
-windowSaver() {
-  WinGet, lolexe, ProcessName, A
-  ;global savedCLASS = "ahk_class "lolclass
-  global savedCLASS = "ahk_exe "lolexe
-  WinGetClass, lolclass, A ; "A" refers to the currently active window
-  global savedEXE = lolexe ;is this the way to do it? IDK.
-  ;msgbox, %savedCLASS%
-  ;msgbox, %savedEXE%
-}
+!1::Send #1
+!2::Send #2
+!3::Send #3
+!4::Send #4
+!5::Send #5
+!6::Send #6
+!7::Send #7
+!8::Send #8
+!9::Send #9
+!0::Send #0
+#InputLevel 1
+!\::Send \
+\::alternateTab()
+Capslock::alternateTab()
+!`::switchBetweenSameApps()
 
-#IfWinActive
-windowSwitcher(theClass, theEXE) {
-  ;msgbox,,, switching to `nsavedCLASS = %theClass% `nsavedEXE = %theEXE%, 0.5
-  IfWinNotExist, %theClass%
-    Run, % theEXE
-  if not WinActive(theClass)
-    WinActivate %theClass%
-}
-
-switchToSavedApp() {
-  windowSwitcher(savedCLASS, savedEXE)
-}
-
-;******************************************************************************
-; Window Move Mode
-;******************************************************************************
-#if !winMoveMode
-  #Esc::
-    winMoveMode := 1
-    beep()
-    TaskBar_SetAttr(1, 0xff79C398)
-  Return
-#if
-#if winMoveMode
-  q::
-    winMoveMode := 0
-    beep()
-    TaskBar_SetAttr(1, 0xff101010)
-  Return
-  Esc::
-    winMoveMode := 0
-    beep()
-    TaskBar_SetAttr(1, 0xff101010)
-  Return
-
-  r::resetWin()
-  c::center_current_window()
-  l::moveWinRight(25)
-  h::moveWinLeft(25)
-  k::moveWinUp(25)
-  j::moveWinDown(25)
-  +l::moveWinRight(200)
-  +h::moveWinLeft(200)
-  +k::moveWinUp(200)
-  +j::moveWinDown(200)
-
-  .::changeWinSize("width", 10)
-  ,::changeWinSize("width", -10)
-  =::changeWinSize("height", 10)
-  -::changeWinSize("height", -10)
-  !.::changeWinSize("width", 50)
-  !,::changeWinSize("width", -50)
-  !=::changeWinSize("height", 50)
-  !-::changeWinSize("height", -50)
-
-  [::navToDesktop("left")
-  ]::navToDesktop("right")
-#if
-
-; AltTabMenu & Vertual Desktop
-!/::SendInput,^!{Tab}
+#m::WinMinimize,a
+^#m::Send #{m}
+!x::toggleWinRestore()
+![::SendInput,^+{tab}
+!]::SendInput,^{tab}
++![::SendInput,^+{PgUp}
++!]::SendInput,^+{PgDn}
+!Enter::Send {f11}
+!Escape::resetWin()
+$Escape::superEscape()
+#SPACE::toggleAlwaysOnTop() ; Always on Top
+; Vertual Desktop
 #h::navToDesktop("left")
 #l::navToDesktop("right")
 #[::navToDesktop("left")
 #]::navToDesktop("right")
-!p::navToDesktop("left")
-!n::navToDesktop("right")
+; Layout
+#o::layoutCodeFloat()
+#p::layoutCode()
+; #[::winPinToSide("left", true)
+; #]::winPinToSide("right", true)
+
+; AltTabMenu & TaskView
+; !/::SendInput,^!{Tab}
 #If WinActive("ahk_class MultitaskingViewFrame") or WinActive("ahk_class Windows.UI.Core.CoreWindow")
   ; *WheelDown::Send {Blind}{Tab}
   ; *WheelUp::Send {Blind}+{Tab}
@@ -197,7 +121,60 @@ switchToSavedApp() {
   [::navToDesktop("left")
   ]::navToDesktop("right")
   n::Send ^#d
+ +x::Send ^#{F4}
 #If
+
+;******************************************************************************
+; Window Move Mode
+;******************************************************************************
+#if !winMode
+  !w::
+    winMode := 1
+    beep()
+    TaskBar_SetAttr(1, 0xff79C398)
+  Return
+#if
+#if winMode
+  r::resetWin()
+  c::center_current_window()
+
+  l::moveWinRight(25)
+  h::moveWinLeft(25)
+  k::moveWinUp(25)
+  j::moveWinDown(25)
+  +l::moveWinRight(200)
+  +h::moveWinLeft(200)
+  +k::moveWinUp(200)
+  +j::moveWinDown(200)
+
+  .::changeWinSize("width", 10)
+  ,::changeWinSize("width", -10)
+  =::changeWinSize("height", 10)
+  -::changeWinSize("height", -10)
+  +.::changeWinSize("width", 50)
+  +,::changeWinSize("width", -50)
+  +=::changeWinSize("height", 50)
+  +-::changeWinSize("height", -50)
+
+  [::navToDesktop("left")
+  ]::navToDesktop("right")
+
+  q::
+    winMode := 0
+    beep()
+    TaskBar_SetAttr(1, 0xff101010)
+  Return
+  Esc::
+    winMode := 0
+    beep()
+    TaskBar_SetAttr(1, 0xff101010)
+  Return
+  LWin::
+    winMode := 0
+    beep()
+    TaskBar_SetAttr(1, 0xff101010)
+  Return
+#if
 
 navToDesktop(side) {
   if (side == "left") {
@@ -276,6 +253,61 @@ winPinToSide_custom(side) {
   WinRestore, A
   WinMove, A,, x_start, y_start, s_half, s_height
 }
+;******************************************************************************
+; Window Switcher functions
+;******************************************************************************
+alternateTab() {
+  Send {alt down}
+  Sleep, 5
+  Send {tab}
+  Sleep, 5
+  Send {alt up}
+}
+global savedCLASS = "ahk_exe brave.exe"
+global savedEXE = "brave.exe"
+#IfWinActive
+windowSaver() {
+  WinGet, lolexe, ProcessName, A
+  ;global savedCLASS = "ahk_class "lolclass
+  global savedCLASS = "ahk_exe "lolexe
+  WinGetClass, lolclass, A ; "A" refers to the currently active window
+  global savedEXE = lolexe ;is this the way to do it? IDK.
+  ;msgbox, %savedCLASS%
+  ;msgbox, %savedEXE%
+}
+#IfWinActive
+windowSwitcher(theClass, theEXE) {
+  ;msgbox,,, switching to `nsavedCLASS = %theClass% `nsavedEXE = %theEXE%, 0.5
+  IfWinNotExist, %theClass%
+    Run, % theEXE
+  if not WinActive(theClass)
+    WinActivate %theClass%
+}
+switchToSavedApp() {
+  windowSwitcher(savedCLASS, savedEXE)
+}
+; Extracts the application title from the window's full title
+ExtractAppTitle(FullTitle) {
+  return SubStr(FullTitle, InStr(FullTitle, " ", false, -1) + 1)
+}
+switchBetweenSameApps() {
+  WinGet, activeProcessName, ProcessName, A
+  if (activeProcessName = "chrome.exe") {
+    ; Switch a "Chrome App or Chrome Website Shortcut" open windows based on the same application title
+    WinGetTitle, FullTitle, A
+    AppTitle := ExtractAppTitle(FullTitle)
+    SetTitleMatchMode, 2
+    WinGet, windowsWithSameTitleList, List, %AppTitle%
+    WinActivate, % "ahk_id " windowsWithSameTitleList%windowsWithSameTitleList%
+  } else {
+    ; Switch "App" open windows based on the same process and class
+    WinGetClass, activeClass, A
+    SetTitleMatchMode, 2
+    WinGet, windowsListWithSameProcessAndClass, List, ahk_exe %activeProcessName% ahk_class %activeClass%
+    WinActivate, % "ahk_id " windowsListWithSameProcessAndClass%windowsListWithSameProcessAndClass%
+  }
+}
+
 ;******************************************************************************
 ; Custom layout
 ;******************************************************************************

@@ -4,6 +4,9 @@
   - [Running AutoHotkey Scripts at a Specific Time](https://www.youtube.com/watch?v=UbX3QtGOsTU)
   - [How to Launch AutoHotkey Scripts At Startup](https://www.youtube.com/watch?v=0kGP8S9o7qI)
 
+### Repoes
+- [autohotkey-windows-mac-keyboard](https://github.com/stroebjo/autohotkey-windows-mac-keyboard/tree/master)
+
 ## Info
 
 ```
@@ -29,13 +32,13 @@ F4::
   Run, "C:\Users\Default\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\Window Switcher.lnk"
 Return
 
+<#Tab::AltTab ; these < > character specifices L or R side
 \::AltTabMenu
-LAlt & j::AltTab
-LAlt & k::ShiftAltTab
-#IfWinActive ahk_class Windows.UI.Core.CoreWindow ahk_exe Explorer.EXE ; #IfWinNotActive, ahk_class MultitaskingViewFrame
-
 LAlt & ]::AltTab
 LAlt & [::ShiftAltTab
+~RButton & WheelUp::AltTab
+~RButton & WheelDown::ShiftAltTab
+#IfWinActive ahk_class Windows.UI.Core.CoreWindow ahk_exe Explorer.EXE ; #IfWinNotActive, ahk_class MultitaskingViewFrame
 ```
 
 

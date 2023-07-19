@@ -86,17 +86,16 @@ local options = {
     },
     opts = { spacing = 1 },
   },
-  headerPaddingTop = { type = 'padding', val = 1 },
-  headerPaddingBottom = { type = 'padding', val = 1 },
+  padding1 = { type = 'padding', val = 1 },
+  -- paddingAuto = { type = 'padding', val = headerPadding },
 }
 
 alpha.setup({
   layout = {
-    options.headerPaddingTop,
     options.header,
-    options.headerPaddingBottom,
+    options.padding1,
     options.version,
-    options.headerPaddingBottom,
+    options.padding1,
     options.buttons,
   },
   opts = {},
