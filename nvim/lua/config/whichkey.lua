@@ -35,7 +35,7 @@ end
 local common = {
   buffers_cwd = { '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>',             'Switch buffers' },
   buffers_all = { '<cmd>lua require("hasan.telescope.custom").buffers(false)<CR>',            'Switch all buffers' },
-  browse_cur_dir = { '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', 'Browse cur directory' },
+  browse_cur_dir = { '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>','Browse cur directory' },
 }
 local w = {
   name= '+window',
@@ -140,6 +140,17 @@ local leader = {
     g = { '<cmd>Neogit<CR>',                                                    'Open Neogit' },
     l = { '<cmd>FloatermNew --height=1.0 --width=1.0 lazygit<CR>',              'Open lazygit' },
     t = { '<cmd>FloatermNew --height=1.0 --width=1.0 tig<CR>',                  'Open tig' },
+
+    d = {
+      function()
+        if next(require('diffview.lib').views) == nil then
+          vim.cmd('DiffviewOpen')
+        else
+          vim.cmd('DiffviewClose')
+        end
+      end,
+      'Open Diffview',
+    },
 
     p = 'Preview hunk',
     s = 'Stage hunk',

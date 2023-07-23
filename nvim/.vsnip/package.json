@@ -29,7 +29,7 @@
           "javascript",
           "typescript"
         ],
-        "path": "./javascript.json"
+        "path": "./javascript_typescript.json"
       },
       {
         "language": [

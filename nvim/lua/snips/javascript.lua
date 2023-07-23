@@ -1,4 +1,5 @@
 local ls = require('luasnip')
+local shared = require('snips.js_shared')
 
 local s = ls.snippet
 local i = ls.insert_node
@@ -35,9 +36,6 @@ ls.add_snippets('javascript', {
       }
     )
   ),
-  s('cn', fmt([[className='{}']], { i(0) })),
-  s('exf', fmt([[export * from './{}']], { i(0) })),
-  s('exfd', fmt([[export {{ default as {} }} from './{}']], { i(0, 'packageName'), i(1) })),
   s(
     'fetchthen',
     fmt(
@@ -71,4 +69,7 @@ ls.add_snippets('javascript', {
       }
     )
   ),
+  shared.jsxClassName,
+  shared.exim,
+  shared.eximDefault,
 }, { key = 'my_js_snips' })

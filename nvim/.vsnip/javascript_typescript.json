@@ -1,0 +1,26 @@
+{
+  "twMerge": {
+    "prefix": "twMerge",
+    "body": [
+      "// yarn add tailwind-merge class-variance-authority clsx",
+      "import { clsx, type ClassValue } from 'clsx'",
+      "import { twMerge } from 'tailwind-merge'\n",
+      "export function cn(...inputs: ClassValue[]) {",
+      "  return twMerge(clsx(inputs))",
+      "}"
+    ],
+    "description": "twMerge"
+  },
+  "array from & map": {
+    "prefix": "fromMap",
+    "body": [
+      "Array.from({ length: ${1:5} }, (_, i) => i + 1).map((item, idx) => ${0:// map item here})"
+    ],
+    "description": "create an array programmatically and map over"
+  },
+  "array from": {
+    "prefix": "from",
+    "body": ["Array.from({ length: ${1:5} }, (_, i) => ${2:i + 1})"],
+    "description": "create an array programmatically"
+  }
+}
