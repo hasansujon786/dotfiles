@@ -19,10 +19,12 @@ Return
 return
 
 ; Utils
+!m::Volume_Mute
+PrintScreen::Send #+{s}
+^#`::Send #+{s}
+#`::takeScreenshot()
 #\::toggleCapsLosck()
 #Capslock::toggleCapsLosck()
-PrintScreen::#+s
-#`::takeScreenshot()
 #q::bt()
 #+q::bt()bt()
 #y::quake_nvim(true) ; edit from current input field
@@ -351,7 +353,8 @@ layout_selectWin(EXE_FULL, EXE, side) {
     } else if (side == "full") {
       WinMaximize, A
     } else {
-      winPinToSide(side, false)
+      ; winPinToSide(side, false)
+      winPinToSide_custom(side)
     }
   }
 }
