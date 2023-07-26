@@ -100,13 +100,35 @@ $Escape::superEscape()
 #l::navToDesktop("right")
 #[::navToDesktop("left")
 #]::navToDesktop("right")
+
+;******************************************************************************
 ; Layout
-#o::layoutCodeFloat()
-#p::layoutCode()
+;******************************************************************************
+#p::
+  current_layout := 0
+  beep()
+  layoutCode()
+Return
+#if !current_layout
+#o::
+  current_layout := 1
+  beep()
+  layoutCodeFloat()
+Return
+#if
+#if current_layout
+#o::
+  current_layout := 0
+  beep()
+  layoutCode()
+Return
+#if
 ; #[::winPinToSide("left", true)
 ; #]::winPinToSide("right", true)
 
+;******************************************************************************
 ; AltTabMenu & TaskView
+;******************************************************************************
 ; !/::SendInput,^!{Tab}
 #If WinActive("ahk_class MultitaskingViewFrame") or WinActive("ahk_class Windows.UI.Core.CoreWindow")
   ; *WheelDown::Send {Blind}{Tab}
