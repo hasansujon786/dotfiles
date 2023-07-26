@@ -24,7 +24,7 @@ re-prompt() {
   local NOCOLOR="\033[0m"
   local head="\>\>"
 
-  PS1="\n\[${PINK}\][\T∣\d] \[${BLUE}\]\w $(git-branch)\n\`if [ \$? = 0 ]; then echo \[\e[0m\]$head; else echo \[\e[31m\]$head; fi\`\[${NOCOLOR}\] "
+  PS1="\[${PINK}\][\T∣\d] \[${BLUE}\]\w $(git-branch)\n\`if [ \$? = 0 ]; then echo \[\e[0m\]$head; else echo \[\e[31m\]$head; fi\`\[${NOCOLOR}\] "
 }
 
 if [ "$color_prompt" = yes ]; then

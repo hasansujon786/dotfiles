@@ -106,22 +106,31 @@ $Escape::superEscape()
 ;******************************************************************************
 #p::
   current_layout := 0
-  beep()
   layoutCode()
 Return
-#if !current_layout
 #o::
   current_layout := 1
-  beep()
   layoutCodeFloat()
 Return
+#if !current_layout
+  #;::
+    current_layout := 1
+    layoutCodeFloat()
+  Return
+  !;::
+    current_layout := 1
+    layoutCodeFloat()
+  Return
 #if
 #if current_layout
-#o::
-  current_layout := 0
-  beep()
-  layoutCode()
-Return
+  #;::
+    current_layout := 0
+    layoutCode()
+  Return
+  !;::
+    current_layout := 0
+    layoutCode()
+  Return
 #if
 ; #[::winPinToSide("left", true)
 ; #]::winPinToSide("right", true)
@@ -336,6 +345,7 @@ switchBetweenSameApps() {
 ; Custom layout
 ;******************************************************************************
 layoutCodeFloat() {
+  beep()
   layout_winAction("ahk_exe brave.exe", "brave.exe", "full")
   ; layout_winAction("ahk_exe chrome.exe", "chrome.exe", "full")
 
@@ -344,6 +354,7 @@ layoutCodeFloat() {
   ; layout_winAction("ahk_exe Code.exe", "Code.exe", "center")
 }
 layoutCode() {
+  beep()
   layout_winAction("ahk_exe brave.exe", "brave.exe", "right")
   ; layout_winAction("ahk_exe chrome.exe", "chrome.exe", "right")
   Send {ESC}
