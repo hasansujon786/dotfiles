@@ -113,21 +113,21 @@ Return
   layoutCodeFloat()
 Return
 #if !current_layout
-  #;::
+  #'::
     current_layout := 1
     layoutCodeFloat()
   Return
-  !;::
+  !'::
     current_layout := 1
     layoutCodeFloat()
   Return
 #if
 #if current_layout
-  #;::
+  #'::
     current_layout := 0
     layoutCode()
   Return
-  !;::
+  !'::
     current_layout := 0
     layoutCode()
   Return

@@ -43,15 +43,13 @@ wezterm.on('toggle-opacity', function(window, _)
   window:set_config_overrides(overrides)
 end)
 
-local fixed_tab_bar = false
+local is_tab_bar_forced_hidden = false
 wezterm.on('toggle-tab-bar', function(window, _)
   local overrides = window:get_config_overrides() or {}
-  if fixed_tab_bar then
-    overrides.enable_tab_bar = false
-  else
-    overrides.enable_tab_bar = true
-  end
-  fixed_tab_bar = overrides.enable_tab_bar
+
+  overrides.enable_tab_bar = not overrides.enable_tab_bar
+  is_tab_bar_forced_hidden = not overrides.enable_tab_bar
+
   window:set_config_overrides(overrides)
 end)
 
@@ -132,15 +130,13 @@ return {
       action = wezterm.action_callback(function(window, pane)
         window:perform_action('ToggleFullScreen', pane)
 
-        local overrides = window:get_config_overrides() or {}
-        if window:get_dimensions().is_full_screen then
-          overrides.enable_tab_bar = false
-        else
-          overrides.enable_tab_bar = true
-        end
+        if not is_tab_bar_forced_hidden then
+          local overrides = window:get_config_overrides() or {}
 
-        fixed_tab_bar = overrides.enable_tab_bar
-        window:set_config_overrides(overrides)
+          overrides.enable_tab_bar = not window:get_dimensions().is_full_screen
+
+          window:set_config_overrides(overrides)
+        end
       end),
     },
     {
