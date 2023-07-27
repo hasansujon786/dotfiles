@@ -51,6 +51,7 @@ local get_lsp_client = function()
   if next(clients) == nil then
     return msg
   end
+
   local lsps = ''
   for _, client in ipairs(clients) do
     local filetypes = client.config.filetypes
@@ -122,18 +123,19 @@ local c = {
   },
   scroll_bar = {
     provider = function()
-      local chars = setmetatable({ ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', }, { __index = function() return ' ' end, })
-      local line_ratio = vim.api.nvim_win_get_cursor(0)[1] / vim.api.nvim_buf_line_count(0)
-      local position = math.floor(line_ratio * 100)
-      local pad = position < 10 and ' ' or ''
+      local chars = setmetatable({ ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', }, { __index = function() return ' ' end, })
+      local lines = vim.api.nvim_buf_line_count(0)
+      local curr_line = vim.api.nvim_win_get_cursor(0)[1]
+      local line_ratio = curr_line / lines
 
-      local icon = chars[math.floor(line_ratio * #chars)] .. pad .. position .. '%%'
-      if position <= 5 then
-        icon = ' TOP'
-      elseif position >= 95 then
-        icon = ' BOT'
+      if curr_line == 1 then
+        return ' TOP'
+      elseif curr_line == lines then
+        return ' Bot'
+      else
+        local icon = chars[math.floor(line_ratio * #chars)]
+        return string.format('%s%2d%%%%', icon, math.ceil(line_ratio * 99))
       end
-      return icon
     end,
     hl = function()
       local position = math.floor(vim.api.nvim_win_get_cursor(0)[1] / vim.api.nvim_buf_line_count(0) * 100)
@@ -144,10 +146,7 @@ local c = {
       elseif position >= 95 then
         fg = 'red'
       end
-      return {
-        fg = fg,
-        bg = 'bg1',
-      }
+      return { fg = fg, bg = 'bg1' }
     end,
     right_sep = 'block',
     left_sep = { separators.left_rounded, separators.block },
