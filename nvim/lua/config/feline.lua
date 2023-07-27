@@ -101,7 +101,42 @@ local c = {
     left_sep = 'block',
     right_sep = { separators.block, separators.right_rounded },
   },
+  scroll_bar = {
+    provider = function()
+      local chars = setmetatable({ ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', }, { __index = function() return ' ' end, })
+      local line_ratio = vim.api.nvim_win_get_cursor(0)[1] / vim.api.nvim_buf_line_count(0)
+      local position = math.floor(line_ratio * 100)
+      local pad = position < 10 and ' ' or ''
+
+      local icon = chars[math.floor(line_ratio * #chars)] .. pad .. position .. '%%'
+      if position <= 5 then
+        icon = ' TOP'
+      elseif position >= 95 then
+        icon = ' BOT'
+      end
+      return icon
+    end,
+    hl = function()
+      local position = math.floor(vim.api.nvim_win_get_cursor(0)[1] / vim.api.nvim_buf_line_count(0) * 100)
+      local fg = 'purple'
+
+      if position <= 5 then
+        fg = 'aqua'
+      elseif position >= 95 then
+        fg = 'red'
+      end
+      return {
+        fg = fg,
+        bg = 'bg1',
+      }
+    end,
+    right_sep = 'block',
+    left_sep = { separators.left_rounded, separators.block },
+  },
   lsp_status = {
+    enabled = function()
+      return vim.o.columns > 85
+    end,
     provider = function()
       local progress_message = vim.lsp.util.get_progress_messages()
       if #progress_message == 0 then
@@ -162,6 +197,9 @@ local c = {
     left_sep = { separators.left_rounded, separators.block },
   },
   space_info = {
+    enabled = function()
+      return vim.o.columns > 85
+    end,
     provider = "%{&expandtab?'Spc:'.&shiftwidth:'Tab:'.&shiftwidth}",
     hl = hl_sections.muted_text,
     left_sep = ' ',
@@ -219,7 +257,7 @@ local right = {
   c.harpoon,
   c.lsp_status,
   c.space_info,
-  c.scroll_percentage,
+  c.scroll_bar,
   c.location,
 }
 
