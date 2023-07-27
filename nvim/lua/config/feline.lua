@@ -88,6 +88,9 @@ local c = {
   },
   separator = { provider = '' },
   file_name = {
+    enabled = function()
+      return vim.o.columns > 85
+    end,
     provider = {
       name = 'file_info',
       opts = {
@@ -97,6 +100,22 @@ local c = {
         path_sep = '/',
       },
     },
+    hl = hl_sections.layer1,
+    left_sep = 'block',
+    right_sep = { separators.block, separators.right_rounded },
+  },
+  file_name_mini = {
+    enabled = function()
+      return vim.o.columns < 85
+    end,
+    provider = {
+      name = 'file_info',
+      opts = {
+        file_modified_icon = '',
+        file_readonly_icon = '',
+      },
+    },
+    short_provider = ' ',
     hl = hl_sections.layer1,
     left_sep = 'block',
     right_sep = { separators.block, separators.right_rounded },
@@ -177,8 +196,12 @@ local c = {
   },
   record = {
     provider = function()
-      local record = require('noice').api.status.mode
-      return record.has() and record.get() or ''
+      local recording_register = vim.fn.reg_recording()
+      if recording_register == '' then
+        return ''
+      else
+        return '@' .. recording_register
+      end
     end,
     hl = { fg = 'bg', bg = 'red' },
     left_sep = 'left_rounded',
@@ -234,16 +257,17 @@ local c = {
     left_sep = { str = ' ', hl = { bg = 'bg_hidden' } },
     right_sep = { str = '▕', hl = { fg = '#2c3545', bg = 'bg_hidden' } },
   },
-  diagnostic_errors = { provider = 'diagnostic_errors', hl = { fg = 'red' } },
-  diagnostic_warnings = { provider = 'diagnostic_warnings', hl = { fg = 'yellow' } },
-  diagnostic_hints = { provider = 'diagnostic_hints', hl = { fg = 'aqua' } },
-  diagnostic_info = { provider = 'diagnostic_info' },
+  diagnostic_errors = { provider = 'diagnostic_errors', hl = { fg = 'red' }, short_provider = '' },
+  diagnostic_warnings = { provider = 'diagnostic_warnings', hl = { fg = 'yellow' }, short_provider = '' },
+  diagnostic_hints = { provider = 'diagnostic_hints', hl = { fg = 'aqua' }, short_provider = '' },
+  diagnostic_info = { provider = 'diagnostic_info', short_provider = '' },
 }
 
 local left = {
   c.vim_mode,
   c.tabs,
   c.file_name,
+  c.file_name_mini,
 }
 local middle = {
   c.search,
