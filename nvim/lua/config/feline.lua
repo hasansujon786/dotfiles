@@ -45,31 +45,16 @@ local hl_sections = {
 }
 
 local get_lsp_client = function()
-  local msg = 'LSP Inactive'
-  local buf_ft = vim.bo.filetype
-  local clients = vim.lsp.get_active_clients()
-  if next(clients) == nil then
-    return msg
+  local buf_clients = vim.lsp.buf_get_clients(0)
+  if next(buf_clients) == nil then
+    return 'LSP Inactive'
   end
 
-  local lsps = ''
-  for _, client in ipairs(clients) do
-    local filetypes = client.config.filetypes
-    if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-      if lsps == '' then
-        lsps = client.name
-      else
-        if not string.find(lsps, client.name) then
-          lsps = lsps .. ',' .. client.name
-        end
-      end
-    end
+  local clients = {}
+  for _, client in pairs(buf_clients) do
+    clients[#clients + 1] = client.name
   end
-  if lsps == '' then
-    return msg
-  else
-    return lsps
-  end
+  return table.concat(clients, ',')
 end
 
 local c = {
