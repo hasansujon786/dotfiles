@@ -17,6 +17,19 @@ M.open_settings = function()
   vim.cmd.edit(path)
 end
 
+function M.openInCode(only_file)
+  local positin = vim.api.nvim_win_get_cursor(0)
+  local buf = vim.api.nvim_buf_get_name(0)
+  local cmd = ''
+
+  if only_file then
+    cmd = string.format('! code --goto "%s":%d:%d', buf, positin[1], positin[2] + 1)
+  else
+    cmd = string.format('! code "%s" --goto "%s":%d:%d', vim.loop.cwd(), buf, positin[1], positin[2] + 1)
+  end
+  vim.cmd(cmd)
+end
+
 local js = {
   comment = '\\/\\/ ',
   log = 'print(',

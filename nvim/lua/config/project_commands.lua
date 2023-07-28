@@ -14,6 +14,12 @@ return {
           util.open_tab(vim.fn.getcwd(), 'lf')
         end,
       },
+      {
+        'Open Cwd in VSCode',
+        function(_)
+          require('hasan.utils.file').openInCode(false)
+        end,
+      },
     },
     dynamic_commands = function(utils)
       if utils.root_has('pubspec.yaml') then
