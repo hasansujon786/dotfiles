@@ -18,3 +18,5 @@ git clone https://github.com/hasansujon786/dotfiles ~/dotfiles && cd ~/dotfiles 
 ```bash
 git clone https://github.com/hasansujon786/dotfiles ~/dotfiles && cd ~/dotfiles && ./scripts/install.sh lin
 ```
+
+https://github.com/vscode-neovim/vscode-neovim/releases/tag/v0.4.0

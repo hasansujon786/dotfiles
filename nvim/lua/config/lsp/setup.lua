@@ -40,8 +40,8 @@ function M.lsp_autocmds(client)
 end
 
 function M.server_specific_setup(client, bufnr)
-  if client.name == 'tailwindcss' and state.treesitter.auto_conceal_html_class then
-    require('config.lsp.server.tailwindcss').setup_conceal(bufnr)
+  if client.name == 'tailwindcss' then
+    require('config.lsp.server.tailwindcss').setup(bufnr)
   end
 end
 
