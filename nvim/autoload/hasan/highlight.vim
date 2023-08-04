@@ -94,6 +94,9 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi LualineTabActive    guifg=#97CA72 guibg=#3E4452
   hi LualineTabInactive  guifg=#7386a5 guibg=#3E4452
   hi LualineTabSp        guifg=#2c3545 guibg=#3E4452
+  hi WinbarTabGreen      guifg=#97CA72 guibg=#242B38
+  hi WinbarTabMuted      guifg=#3d4451 guibg=#242B38
+  hi WinbarTabItem       guifg=#5C6370 guibg=#242B38
   "/// marks.nvim ///"
   hi! link MarkSignNumHL None
   hi! link MarkSignHL Comment

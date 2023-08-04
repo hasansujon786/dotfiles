@@ -1,3 +1,4 @@
+-- { 'hasansujon786/kissline.nvim', config = function() require('config.kissline') end },
 local clicable = require('kissline.utils.atoms').clicable
 
 local winbars = {
@@ -40,16 +41,16 @@ require('kissline').setup({
   },
 })
 
-_G.explorer_new = function()
-  require('nvim-tree.api').fs.create()
-end
-_G.explorer_refesh = function()
-  require('nvim-tree.api').tree.reload()
-end
-_G.explorer_collasp_all = function()
-  vim.cmd([[NvimTreeOpen]])
-  require('hasan.utils.vinegar').actions.jump_to_root()
-end
-_G.explorer_menu = function(val)
-  P('explorer_menu', val)
-end
+-- _G.explorer_new = function()
+--   require('nvim-tree.api').fs.create()
+-- end
+-- _G.explorer_refesh = function()
+--   require('nvim-tree.api').tree.reload()
+-- end
+-- _G.explorer_collasp_all = function()
+--   vim.cmd([[NvimTreeOpen]])
+--   require('hasan.utils.vinegar').actions.jump_to_root()
+-- end
+-- _G.explorer_menu = function(val)
+--   P('explorer_menu', val)
+-- end

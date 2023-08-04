@@ -25,6 +25,10 @@ local one_monokai = {
   muted = '#68707E',
   cyan = '#4dbdcb',
   cyan_dark = '#2C4855',
+  app_bg = '#242B38',
+  bg_dark = '#1E242E',
+  darkest = '#151820',
+  olive = '#75A899'
 }
 
 local hl_sections = {
@@ -295,3 +299,5 @@ feline.setup({
     bufnames = {},
   },
 })
+
+require('config.feline-winbar')

@@ -11,8 +11,8 @@ return {
   { 'folke/noice.nvim', lazy = true, event = 'VeryLazy', module = 'noice',
     config = function() require('config.noice') end,
     dependencies = {
-      { 'hasansujon786/kissline.nvim', config = function() require('config.kissline') end },
       { 'folke/which-key.nvim', config = function() require('config.whichkey') end },
+      { 'freddiehaddad/feline.nvim', config = function() require('config.feline') end },
     }
   },
   {
@@ -24,7 +24,6 @@ return {
       -- { 'kevinhwang91/nvim-hlslens', config = function() require('config.hlslens') end },
       { 'karb94/neoscroll.nvim', config = function() require('config.neoscroll') end },
       { 'chentoast/marks.nvim', config = function() require('config.marks-config') end },
-      { 'freddiehaddad/feline.nvim', config = function() require('config.feline') end },
     },
   },
 
