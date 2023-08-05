@@ -57,7 +57,7 @@ local w = {
       provider = function()
         return generateWinTab(isActive)
       end,
-      short_provider = ' ',
+      short_provider = '',
       hl = { bg = 'app_bg', fg = isActive and 'White' or 'muted', style = 'NONE' },
       left_sep = { str = icon.bar, hl = { bg = 'app_bg', fg = isActive and 'aqua' or 'app_bg' } },
       right_sep = { str = icon.barEnd, hl = { bg = 'app_bg', fg = 'darkest' } },

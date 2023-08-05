@@ -36,9 +36,11 @@ __fzf_z_plus__() {
     elif [[ "$key" = alt-e ]]; then
       printf 'cd -- %q && lfcd' "$dir"
     else
-      term_cmd="wezterm cli spawn --cwd \"$dir\""
-      id=$(eval "$term_cmd")
-      echo "yarn dev" | wezterm cli send-text --pane-id $id
+      if [ -f $dir/package.json ]; then
+        term_cmd="wezterm cli spawn --cwd \"$dir\""
+        id=$(eval "$term_cmd")
+        echo "yarn dev" | wezterm cli send-text --pane-id $id
+      fi
       printf 'cd -- %q && nvim' "$dir"
       # wt -w 0 nt -d $dir -p "Bash" C:\\Program Files\\Git\\bin\\bash -c "yarn start"
       # cd $dir && nvim
