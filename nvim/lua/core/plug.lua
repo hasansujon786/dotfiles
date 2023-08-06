@@ -126,9 +126,10 @@ return {
     'NeogitOrg/neogit',
     lazy = true,
     cmd = 'Neogit',
-    -- 'TimUntersberger/neogit', -- commit = '69a6ca7',
     config = function() require('config.neogit') end,
-    dependencies = 'sindrets/diffview.nvim',
+    dependencies = {
+      { 'sindrets/diffview.nvim', config = function() require('config.diffview') end }
+    },
   },
   {
     'airblade/vim-gitgutter',
