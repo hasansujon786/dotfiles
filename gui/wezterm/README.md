@@ -67,9 +67,36 @@ map ctrl+shift+l             send_text all \x1b[76;5u      # <c-s-l>
      },
    }
 
+-- Custm command
+wezterm.on('augment-command-palette', function(window, pane)
+  return {
+    {
+      brief = 'Rename tab',
+      icon = 'md_rename_box',
+
+      action = act.PromptInputLine({
+        description = 'Enter new name for tab',
+        action = wezterm.action_callback(function(window, pane, line)
+          if line then
+            window:active_tab():set_title(line)
+          end
+        end),
+      }),
+    },
+  }
+end)
 ```
 
-# Tab Compnents
+## Debug
+```lua
+-- debug_key_events = true,
+wezterm.on('update-status', function(window, pane)
+  local mods, leds = window:keyboard_modifiers()
+  window:set_right_status('mods=' .. mods .. ' leds=' .. leds)
+end)
+```
+
+## Tab Compnents
 ```lua
 local cell_num = 1 -- How many cells have been formatted
 local function stacked(text, _)

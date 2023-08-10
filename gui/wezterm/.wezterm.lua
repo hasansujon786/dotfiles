@@ -58,8 +58,8 @@ return {
   initial_cols = 120,
   tab_max_width = 30,
   hide_tab_bar_if_only_one_tab = false,
-  window_decorations = 'RESIZE', -- NONE,INTEGRATED_BUTTONS
-  check_for_updates = false,
+  window_decorations = 'INTEGRATED_BUTTONS', -- NONE,RESIZE
+  check_for_updates = true,
   use_dead_keys = false,
   warn_about_missing_glyphs = false,
   -- animation_fps = 1,
