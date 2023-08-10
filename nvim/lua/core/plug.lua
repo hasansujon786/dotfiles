@@ -187,7 +187,7 @@ return {
   {
     'simrat39/symbols-outline.nvim',
     lazy = true,
-    cmd = 'SymbolsOutline',
+    cmd = { 'SymbolsOutline', 'SymbolsOutlineOpen' },
     config = function() require('config.symbol_outline') end,
   },
   {

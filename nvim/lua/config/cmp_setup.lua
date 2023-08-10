@@ -25,10 +25,12 @@ cmp.setup({
       winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
     }),
     completion = cmp.config.window.bordered({
-      -- side_padding = 0,
-      -- col_offset = -2,
       border = 'none',
-      winhighlight = 'Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
+      col_offset = 1,
+      winhighlight = 'Normal:Pmenu,FloatBorder:CmpBorder,CursorLine:Visual,Search:None',
+
+      -- border = { '🭽', '▔', '🭾', '▕', '🭿', '▁', '🭼', '▏' },
+      -- side_padding = 0,
     }),
   },
   experimental = {
@@ -153,7 +155,7 @@ CMP_AUGROUP(function(autocmd)
   autocmd('FileType', 'lua CmpNeogitCommitMessageSetup()', { pattern = { 'NeogitCommitMessage' } })
 end)
 
--- hot fix : after using / <tab> completion stops working
+-- hot fix: after using / <tab> completion stops working
 keymap('c', '<tab>', '<C-z>', { silent = false })
 cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline({
@@ -177,5 +179,11 @@ cmp.setup.cmdline({ '/', '?' }, {
   },
   view = {
     entries = { name = 'wildmenu', separator = ' | ' },
+  },
+  formatting = {
+    fields = { 'kind', 'abbr', 'menu' },
+    format = function(_, item)
+      return item
+    end,
   },
 })

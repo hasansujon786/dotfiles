@@ -5,9 +5,8 @@ local function set_custom_highlights()
   local normal_bg = palatte.cool.bg0
   local fg = palatte.cool.fg
   local cursorling_bg = palatte.cool.bg1
-  local float_bg = palatte.cool.bg_d
+  local float_bg = '#1c212c' -- palatte.cool.bg_d
   local bg3 = palatte.cool.bg3
-  -- float_bg = '#1c212c' -- choice 1
 
   util.fg_bg('NormalFloat', fg, normal_bg)
   util.fg_bg('FloatBorder', palatte.cool.cyan, normal_bg)
@@ -18,6 +17,8 @@ local function set_custom_highlights()
   util.fg('TelescopePromptTitle', palatte.cool.orange)
   util.fg_bg('TelescopeSelectionCaret', palatte.cool.orange, cursorling_bg)
   util.bg('TelescopeSelection', cursorling_bg)
+
+  util.fg_bg('CmpBorder', '#111925', float_bg)
 
   vim.fn['hasan#highlight#load_custom_highlight']()
 
