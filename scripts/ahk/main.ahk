@@ -139,7 +139,7 @@ Return
 ; AltTabMenu & TaskView
 ;******************************************************************************
 #/::SendInput,^!{Tab}
-#If WinActive("ahk_class MultitaskingViewFrame") or WinActive("ahk_class Windows.UI.Core.CoreWindow")
+#If WinActive("ahk_class MultitaskingViewFrame") ; or WinActive("ahk_class Windows.UI.Core.CoreWindow")
   ; *WheelDown::Send {Blind}{Tab}
   ; *WheelUp::Send {Blind}+{Tab}
   q::Send {Esc}
