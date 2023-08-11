@@ -127,6 +127,7 @@ alias gsup='git push --set-upstream origin main'
 alias -- --=jump-to-git-root
 alias g='git'
 alias gcm='git commit -m'
+alias gcam='git commit -am'
 alias gs='git show'
 alias gd='git diff'
 alias gt='git tag'
@@ -142,7 +143,10 @@ alias gr='git reset ' # unstage files (Use --hard/--soft)
 alias grh='git reset HEAD~1' # (Use --hard/--soft)
 alias grvh='git revert HEAD' # Undo a public commit
 alias gcrh='git clean --force && git reset --hard'
+alias grlc='git reset --soft HEAD^'
 alias glo='git log --oneline --decorate'
+alias gme='git merge'
+alias gms='git merge --squash'
 alias lg='lazygit'
 
 # kill port
