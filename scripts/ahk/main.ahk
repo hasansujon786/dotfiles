@@ -19,10 +19,10 @@ Return
 return
 
 ; Utils
-!m::Volume_Mute
-PrintScreen::Send #+{s}
 ^#`::Send #+{s}
++#`::Send #+{s}
 #`::takeScreenshot()
+PrintScreen::Send #+{s}
 #\::toggleCapsLosck()
 #Capslock::toggleCapsLosck()
 #q::bt()
@@ -39,6 +39,9 @@ PrintScreen::Send #+{s}
 ; ~RButton & WheelUP::scroll_left()
 ; ~RButton & WheelDown::scroll_right()
 ; Change Volume:
+#Del::Volume_Mute
+#PgUp::volup()
+#PgDn::voldown()
 #If MouseIsOver("ahk_class Shell_TrayWnd")
   ~LAlt & WheelUP::volup()
   ~LAlt & WheelDown::voldown()

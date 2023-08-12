@@ -147,6 +147,7 @@ alias grlc='git reset --soft HEAD^'
 alias glo='git log --oneline --decorate'
 alias gme='git merge'
 alias gms='git merge --squash'
+alias grbi='git rebase --interactive main'
 alias lg='lazygit'
 
 # kill port

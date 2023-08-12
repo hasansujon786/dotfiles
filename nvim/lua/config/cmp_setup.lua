@@ -106,6 +106,13 @@ cmp.setup({
         fallback()
       end
     end, { 'i', 's' }),
+    ['<C-k>i'] = function()
+      if cmp.visible_docs() then
+        cmp.close_docs()
+      else
+        cmp.open_docs()
+      end
+    end,
   }),
   sources = {
     { name = 'nvim_lsp' },

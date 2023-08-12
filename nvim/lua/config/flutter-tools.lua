@@ -16,7 +16,7 @@ require('flutter-tools').setup({
       -- local opts = { noremap = true, silent = true, buffer = bufnr }
       -- keymap('n', '<F9>', ':silent !explorer C:\\Users\\hasan\\dotfiles\\scripts\\flutter_reload.ahk<CR>', opts)
     end,
-    capabilities = require('config.lsp.lsp-config').update_capabilities(),
+    capabilities = require('config.lsp.setup').update_capabilities(),
     -- see the link below for details on each option:
     -- https://github.com/dart-lang/sdk/blob/master/pkg/analysis_server/tool/lsp_spec/README.md#client-workspace-configuration
     settings = {
