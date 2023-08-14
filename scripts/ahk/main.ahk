@@ -18,6 +18,10 @@ Return
   suspend, toggle
 return
 
+::]dd::
+  SendInput %A_MM%-%A_DD%-%A_YYYY%
+return
+
 ; Utils
 ^#`::Send #+{s}
 +#`::Send #+{s}
@@ -39,9 +43,9 @@ PrintScreen::Send #+{s}
 ; ~RButton & WheelUP::scroll_left()
 ; ~RButton & WheelDown::scroll_right()
 ; Change Volume:
-#Del::Volume_Mute
-#PgUp::volup()
-#PgDn::voldown()
+!Del::Volume_Mute
+!PgUp::volup()
+!PgDn::voldown()
 #If MouseIsOver("ahk_class Shell_TrayWnd")
   ~LAlt & WheelUP::volup()
   ~LAlt & WheelDown::voldown()
@@ -435,6 +439,11 @@ explorerToggleInsert() {
   x:: Send, {Delete}
   u:: Send, ^z
   ^r:: Send, ^y
+  ^k::
+    Send {F2}
+    Send {RIGHT}
+    SendInput -%A_MM%-%A_DD%
+  return
 
   f::
     explorerInsertMode := true

@@ -53,16 +53,14 @@ TrayTip, Reloading Script..., %A_ScriptName%, , 1
 ;   Computer information
 ;******************************************************************************
 ::]myid::
-SendInput %A_UserName%
+  SendInput %A_UserName%
 Return
-
-::]myip::
-SendInput %A_IPAddress1%
-Return
-
-::]mycomp::
-SendInput %A_ComputerName%
-Return
+A_IPAddress1
+A_ComputerName
+A_YYYY
+A_MM
+A_DD
+A_Now
 
 printwins() {
   msgbox,,, savedCLASS is %savedCLASS%,0.5

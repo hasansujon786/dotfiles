@@ -33,7 +33,7 @@ require('nvim-treesitter.configs').setup({
     },
   },
   context_commentstring = { enable = true },
-  indent = { enable = true },
+  indent = { enable = true, disable = { 'dart' } },
   autotag = { enable = true },
   autopairs = { enable = true },
   playground = {
