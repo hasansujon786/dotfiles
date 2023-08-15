@@ -132,10 +132,10 @@ return {
     },
   },
   {
-    'airblade/vim-gitgutter',
+    'lewis6991/gitsigns.nvim',
     lazy = true,
     event = 'BufReadPost',
-    config = function() require('config.gitgutter-config') end,
+    config = function() require('config.gitsigns') end,
   },
   ------------------------------------------------
   --> Lsp & completions --------------------------

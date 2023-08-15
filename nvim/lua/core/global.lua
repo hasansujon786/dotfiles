@@ -1,5 +1,3 @@
-local ui = require('core.state').ui
-
 _G.has_pvim = os.getenv('PVIM') and true or false
 _G.org_root_path = 'C:\\Users\\hasan\\vimwiki'
 _G.org_home_path = 'C:\\Users\\hasan\\vimwiki\\home.org'
@@ -21,25 +19,6 @@ vim.g.user_emmet_leader_key = '<C-c>'
 vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
 -- vim-caser ==========================
 vim.g.caser_prefix = '<leader>cs'
--- git-gutter =========================
-vim.g.gitgutter_show_msg_on_hunk_jumping = 0
-vim.g.gitgutter_map_keys = 0
-local gitgutter_icon = '▏'
-vim.g.gitgutter_sign_added = gitgutter_icon
-vim.g.gitgutter_sign_modified = gitgutter_icon
-vim.g.gitgutter_sign_removed = gitgutter_icon
-vim.g.gitgutter_sign_removed_first_line = gitgutter_icon
-vim.g.gitgutter_sign_removed_above_and_below = gitgutter_icon
-vim.g.gitgutter_sign_modified_removed = gitgutter_icon
-vim.g.gitgutter_floating_window_options = {
-  relative = 'cursor',
-  row = 1,
-  col = 0,
-  width = 10,
-  height = vim.api.nvim_eval('&previewheight'),
-  style = 'minimal',
-  border = ui.border.style,
-}
 
 P = function(...)
   local hasNvim9 = vim.fn.has('nvim-0.9') == 1
