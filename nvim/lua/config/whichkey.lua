@@ -130,9 +130,9 @@ local leader = {
   g = {
     name = '+git',
     ['/'] = { '<cmd>Telescope git_status<CR>',         'Find git files*' },
+    b = { '<cmd>Telescope git_branches<CR>',           'Checkout git branch' },
     c = { '<cmd>Telescope git_commits<CR>',            'Look up commits' },
     C = { '<cmd>Telescope git_bcommits<CR>',           'Look up buffer commits' },
-    b = { '<cmd>Telescope git_branches<CR>',           'Checkout git branch' },
 
     o = { '<cmd>lua require("hasan.utils.init").open_git_remote(true)<CR>',    'Open git repo' },
     O = { '<cmd>lua require("hasan.utils.init").open_git_remote(false)<CR>',   'Open git repo' },
@@ -152,12 +152,7 @@ local leader = {
       'Open Diffview',
     },
 
-    p = 'Preview hunk',
-    s = 'Stage hunk',
-    r = 'Reset hunk',
-    R = 'Reset buffer',
-    u = 'Undo last hunk',
-    ['.'] = { '<cmd>silent !git add %<CR>',            'Stage current file' },
+    ['.'] = { '<cmd>silent !git add %<CR>',            'Git: Stage current file' },
     -- f = { '<cmd>diffget //2<cr>',                      'diffget ours' },
     -- j = { '<cmd>diffget //3<CR>',                      'diffget theirs' },
   },

@@ -1,10 +1,10 @@
 require('gitsigns').setup({
   signs = {
-    add          = {hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
-    change       = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-    delete       = {hl = 'GitSignsDelete', text = '│', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    topdelete    = {hl = 'GitSignsDelete', text = '│', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    changedelete = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    add          = {hl = 'GitSignsAdd'   , text = '▏', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+    change       = {hl = 'GitSignsChange', text = '▏', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    delete       = {hl = 'GitSignsDelete', text = '▏', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    topdelete    = {hl = 'GitSignsDelete', text = '▏', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    changedelete = {hl = 'GitSignsChange', text = '▏', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
   },
   preview_config = {
     border = 'rounded',
@@ -21,37 +21,29 @@ require('gitsigns').setup({
 
     -- Navigation
     map('n', ']c', function()
-      if vim.wo.diff then
-        return ']c'
-      end
-      vim.schedule(function()
-        gs.next_hunk()
-      end)
+      if vim.wo.diff then return ']c' end
+      vim.schedule(function() gs.next_hunk() end)
       return '<Ignore>'
-    end, { expr = true })
+    end, { expr = true, desc = 'Git: Jump to hunk' })
 
     map('n', '[c', function()
-      if vim.wo.diff then
-        return '[c'
-      end
-      vim.schedule(function()
-        gs.prev_hunk()
-      end)
+      if vim.wo.diff then return '[c' end
+      vim.schedule(function() gs.prev_hunk() end)
       return '<Ignore>'
-    end, { expr = true })
+    end, { expr = true, desc = 'Git: Jump to hunk' })
 
     -- Actions
-    map({ 'n', 'v' }, '<leader>gs', ':Gitsigns stage_hunk<CR>')
-    map('n', '<leader>gS', gs.stage_buffer, { desc = 'Stage current buffer' })
-    map({ 'n', 'v' }, '<leader>gr', ':Gitsigns reset_hunk<CR>')
-    map('n', '<leader>gu', gs.undo_stage_hunk)
-    map('n', '<leader>gR', gs.reset_buffer)
-    map('n', '<leader>gp', gs.preview_hunk)
-    map('n', '<leader>gm', gs.toggle_current_line_blame, { desc = 'Toggle git blame' })
-    map('n', '<leader>gM', function()
-      gs.blame_line({ full = true })
-    end, { desc = 'Open git blame Win' })
-    map('n', '<leader>gL', gs.toggle_deleted, { desc = 'Highlight delete hunks'})
+    map('n', '<leader>gs', gs.stage_hunk, { desc = 'Git: Stage hunk' })
+    map('n', '<leader>gr', gs.reset_hunk, { desc = 'Git: Reset hunk' })
+    map('v', '<leader>gs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end, { desc = 'Git: Stage hunk' })
+    map('v', '<leader>gr', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end, { desc = 'Git: Reset hunk' })
+    map('n', '<leader>gS', gs.stage_buffer, { desc = 'Git: Stage buffer' })
+    map('n', '<leader>gR', gs.reset_buffer, { desc = 'Git: Reset buffer' })
+    map('n', '<leader>gu', gs.undo_stage_hunk, { desc = 'Git: Undo last stage' })
+    map('n', '<leader>gp', gs.preview_hunk, { desc = 'Git: Preview hunk' })
+    map('n', '<leader>gm', function() gs.blame_line{full=true} end, { desc = 'Git: Preview blame' })
+    map('n', '<leader>gM', gs.toggle_current_line_blame, { desc = 'Git: Toggle blame line' })
+    map('n', '<leader>gL', gs.toggle_deleted, { desc = 'Git: Highlight delete hunks'})
     -- map('n', '<leader>gd', gs.diffthis)
     -- map('n', '<leader>gD', function() gs.diffthis('~') end)
 
