@@ -28,7 +28,7 @@ local one_monokai = {
   app_bg = '#242B38',
   bg_dark = '#1E242E',
   darkest = '#151820',
-  olive = '#75A899'
+  olive = '#75A899',
 }
 
 local hl_sections = {
@@ -79,7 +79,7 @@ local c = {
   separator = { provider = '' },
   file_name = {
     enabled = function()
-      return vim.o.columns > 85
+      return vim.o.columns > 80
     end,
     provider = {
       name = 'file_info',
@@ -90,13 +90,20 @@ local c = {
         path_sep = '/',
       },
     },
+    short_provider = {
+      name = 'file_info',
+      opts = {
+        file_modified_icon = '',
+        file_readonly_icon = '',
+      },
+    },
     hl = hl_sections.layer1,
     left_sep = 'block',
     right_sep = { separators.block, separators.right_rounded },
   },
   file_name_mini = {
     enabled = function()
-      return vim.o.columns < 85
+      return vim.o.columns <= 80
     end,
     provider = {
       name = 'file_info',
@@ -156,6 +163,7 @@ local c = {
       end
       return table.concat(status, ' ')
     end,
+    short_provider = '',
     hl = hl_sections.muted_text,
     left_sep = ' ',
     right_sep = ' ',
@@ -169,6 +177,12 @@ local c = {
       end
       return ''
     end,
+    hl = hl_sections.muted_text,
+    left_sep = ' ',
+    right_sep = ' ',
+  },
+  branch = {
+    provider = { name = 'git_branch' },
     hl = hl_sections.muted_text,
     left_sep = ' ',
     right_sep = ' ',
@@ -268,6 +282,7 @@ local right = {
   c.record,
   c.harpoon,
   c.lsp_status,
+  c.branch,
   c.space_info,
   c.scroll_bar,
   c.location,
