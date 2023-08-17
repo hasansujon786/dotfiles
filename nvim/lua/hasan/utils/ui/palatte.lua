@@ -19,6 +19,8 @@ local function set_custom_highlights()
   util.bg('TelescopeSelection', cursorling_bg)
 
   util.fg_bg('CmpBorder', '#111925', float_bg)
+  util.fg_bg('WhichKeyFloat', fg, cursorling_bg)
+  util.fg_bg('WhichKeyBorder ', normal_bg, cursorling_bg)
 
   vim.fn['hasan#highlight#load_custom_highlight']()
 

@@ -19,30 +19,7 @@ require('neogit').setup({
   },
   integrations = {
     diffview = true,
-  },
-  -- Setting any section to `false` will make the section not render at all
-  sections = {
-    untracked = {
-      folded = false,
-    },
-    unstaged = {
-      folded = false,
-    },
-    staged = {
-      folded = false,
-    },
-    stashes = {
-      folded = true,
-    },
-    unpulled = {
-      folded = true,
-    },
-    unmerged = {
-      folded = false,
-    },
-    recent = {
-      folded = true,
-    },
+    telescope = true,
   },
   -- mappings = {
   --   -- modify status buffer mappings

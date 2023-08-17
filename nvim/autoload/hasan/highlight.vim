@@ -15,8 +15,6 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi WhiteText          guifg=#ffffff
   hi GrayText           guifg=#7386a5
   hi CursorLineDap      guibg=#173F1E guifg=none guisp=none cterm=underline
-  hi StatusLine         guibg=#2D3343
-  hi! WhichKeyFloat     guibg=#2d3343
   hi! link Folded Comment
   hi! link Conceal String
   hi! link CursorColumn CursorLineFocus

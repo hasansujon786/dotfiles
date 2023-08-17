@@ -6,7 +6,7 @@ vim.g.maplocalleader = ' '
 
 -- Files-backup-undo
 o.backup = false
-o.swapfile = false --                            Turn backup off, since most stuff is in SVN, git etc. anyway...
+o.swapfile = true --                            Turn backup off, since most stuff is in SVN, git etc. anyway...
 o.writebackup = false
 o.undofile = true
 o.undolevels = 1500 --                           persistent undo between file reloads
@@ -82,7 +82,7 @@ o.guifont = 'JetBrains Mono NL:h12:w6' --              OperatorMonoLig Nerd Font
 o.guicursor =
   'n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175'
 o.title = true
-o.titlestring = "-- %{fnamemodify(getcwd(), ':t')} --" -- what the title of the window will be set to
+o.titlestring = "  %{fnamemodify(getcwd(), ':t')} " -- what the title of the window will be set to
 o.qftf = '{info -> v:lua.require("hasan.utils.ui.qf").qftf(info)}'
 
 -- Numbers
