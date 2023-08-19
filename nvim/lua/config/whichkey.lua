@@ -176,7 +176,11 @@ local leader = {
     e = 'Edit in current dir',
     C = 'Copy this file',
     M = 'Move/rename file',
-    X = { '<cmd>call hasan#autocmd#trimWhitespace()<CR>',            'Remove white space'},
+    x = {
+      name = '+remove',
+      ['/'] = { '<cmd>lua require("hasan.utils.file").delete_lines_with("comment")<CR>',     'Delete all comments' },
+      x = { '<cmd>call hasan#autocmd#trimWhitespace()<CR>',                                      'Remove white space'},
+    },
 
     w  = { '<Plug>(fix-current-world)',        'Fix current world' },
 

@@ -31,17 +31,20 @@ function M.openInCode(only_file)
 end
 
 local js = {
-  comment = '\\/\\/ ',
-  log = 'print(',
+  comment = '\\/\\/',
+  log = 'console.log(',
 }
 local filetype_options = {
   lua = {
-    comment = '-- ',
+    comment = '--',
     log = 'print(',
   },
   dart = {
-    comment = '\\/\\/ ',
+    comment = '\\/\\/',
     log = 'print(',
+  },
+  yaml = {
+    comment = '\\#',
   },
   javascript = js,
   typescript = js,
@@ -49,21 +52,19 @@ local filetype_options = {
   typescriptreact = js,
 }
 
-function M.delete_all_lines_with(what_to_delete)
+function M.delete_lines_with(what_to_delete)
   local opts = filetype_options[vim.bo.filetype]
   if not opts or not opts[what_to_delete] then
     return
   end
 
-  vim.cmd('g/' .. opts[what_to_delete] .. '/d')
+  local prefix = '^\\s*'
+  vim.cmd('g/' .. prefix .. opts[what_to_delete] .. '/d')
 end
 
 -- M.delete_all_lines_with('comment')
 -- M.delete_all_lines_with('log')
--- require('hasan.utils.file').delete_all_lines_with('comment')
--- deleteAllComments()
--- deleteAllComments()
--- deleteAllComments()
+-- require('hasan.utils.file').delete_lines_with('comment')
 
 function M.reload()
   if vim.bo.buftype == '' then
@@ -125,6 +126,7 @@ return M
 -- insert end of lines  %s/\v(regex).*\zs/ \1
 -- wrap all lines with quote %s/^\|$/'/g
 
+-- :g/\zs-- /d only first match from a line
 -- :g/foo/d - Delete all lines containing the string “foo”. ...
 -- :g!/foo/d - Delete all lines not containing the string “foo”.
 -- :g/^#/d - Remove all comments from a Bash script. ...
