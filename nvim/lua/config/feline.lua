@@ -27,6 +27,7 @@ local one_monokai = {
   cyan_dark = '#2C4855',
   app_bg = '#242B38',
   bg_dark = '#1E242E',
+  bg_darker = '#1c212c',
   darkest = '#151820',
   olive = '#75A899',
 }

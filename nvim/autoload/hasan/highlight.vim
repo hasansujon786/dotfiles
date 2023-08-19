@@ -84,6 +84,7 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi AlphaShourtCut  guifg=#7386a5 guibg=#28303e gui=NONE
   "/// Floaterm ///"
   hi! link Floaterm NormalFloatFlat
+  hi! link FloatermNC NormalFloatFlat
   hi! link FloatermBorder FloatBorderFlat
   "/// symboal-outline.nvim ///"
   hi! link FocusedSymbol DiagnosticLineNrHint

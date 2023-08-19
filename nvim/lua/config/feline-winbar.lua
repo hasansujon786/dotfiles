@@ -52,7 +52,7 @@ local hl_sections = {
 }
 
 local w = {
-  wintabProvider = function(isActive)
+  wintabItem = function(isActive)
     return {
       provider = function()
         return generateWinTab(isActive)
@@ -67,6 +67,11 @@ local w = {
     provider = '',
     short_provider = '',
     hl = { bg = 'bg_dark', fg = 'bg_dark' },
+  },
+  empty_darker = {
+    provider = '',
+    short_provider = '',
+    hl = { bg = 'bg_darker', fg = 'fg' },
   },
   harpoon = {
     provider = function()
@@ -105,50 +110,30 @@ local w = {
 
 require('feline').winbar.setup({
   components = {
-    active = {
-      {
-        w.wintabProvider(true),
-        w.empty,
-      },
-      {
-        w.harpoon,
-      },
-    },
-    inactive = {
-      {
-        w.wintabProvider(false),
-        w.empty,
-      },
-    },
+    active = { { w.wintabItem(true), w.empty }, { w.harpoon } },
+    inactive = { { w.wintabItem(false), w.empty } },
   },
   conditional_components = {
     {
       condition = function()
         return bo.filetype == 'NvimTree'
       end,
-      active = {
-        {
-          w.NvimTree,
-        },
-        {
-          w.NvimTreeTools,
-        },
-      },
-      inactive = {
-        {
-          w.NvimTree,
-        },
-        {
-          w.NvimTreeTools,
-        },
-      },
+      active = { { w.NvimTree }, { w.NvimTreeTools } },
+      inactive = { { w.NvimTree }, { w.NvimTreeTools } },
     },
     {
       condition = function()
-        return bo.filetype == 'alpha'
+        return vim.tbl_contains({ 'alpha' }, bo.filetype)
       end,
       active = {},
       inactive = {},
+    },
+    {
+      condition = function()
+        return vim.tbl_contains({ 'floaterm' }, bo.filetype)
+      end,
+      active = { { w.empty_darker } },
+      inactive = { { w.empty_darker } },
     },
   },
 })
