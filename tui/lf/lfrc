@@ -80,6 +80,7 @@ map <m-3> systemOpen  # middle
 map <m-up> up
 map <m-down> down
 
+map zi adb_install
 map z. $du -h -d1 | less
 map zf filter
 # Archive bindings
@@ -122,6 +123,7 @@ cmd mkdir %{{ mkdir }}
 cmd touch %{{ touch }}
 cmd doc $lf -doc | less
 cmd quickLook &C:\\Users\\hasan\\AppData\\Local\\Programs\\QuickLook\\QuickLook.exe $Env:f
+cmd adb_install &{{ C:\\Users\\hasan\\dotfiles\\scripts\\adb_install.sh "$Env:f" }}
 cmd systemOpen &explorer $Env:f
 cmd fzf_cd ${{
   $res="$(fd --hidden --type directory --exclude '.git' | fzf --reverse --inline-info --preview 'ls {}')"

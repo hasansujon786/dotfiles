@@ -17,4 +17,24 @@ local rep = require('luasnip.extras').rep
 ls.add_snippets('typescript', {
   shared.exim,
   shared.eximDefault,
+  s(
+    '_scaffoldGoToRoute',
+    fmt(
+      [[
+      export const routes = {{
+        home: '/',
+        blog: '/blog',
+        about: '/about',
+      }} as const
+
+      type Route = (typeof routes)[keyof typeof routes]
+
+      export function goToRoute(route: Route) {{
+        console.log('goToRoute', route)
+      }}
+      ]],
+      {
+      }
+    )
+  ),
 }, { key = 'my_ts_snips' })

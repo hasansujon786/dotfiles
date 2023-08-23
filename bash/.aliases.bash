@@ -30,7 +30,6 @@ alias vll='nvim -c "SessionLoad"'
 alias vst='nvim --startuptime startup.log -c exit && tail -100 startup.log'
 alias cd.='cd ~/dotfiles && nvim'
 alias nvr='nvim --listen "127.0.0.1:6666"'
-alias cdk='cd ~/AppData/Local/nvim-data/site/pack/packer/opt/kissline.nvim && nvim'
 alias ch='/c/Program\ Files/Google/Chrome/Application/chrome.exe --remote-debugging-port=9222'
 
 # Tmux
@@ -72,6 +71,7 @@ alias adu='adb uninstall'
 alias ada='adb disconnect'
 alias adc='~/dotfiles/scripts/ld.sh "adb disconnect"'
 alias acc='~/dotfiles/scripts/ld.sh "adb connect"'
+alias aii='~/dotfiles/scripts/adb_install.sh'
 alias adlp='adb shell pm list packages' # adb shell pm list packages -f -3
 alias arr='~/dotfiles/scripts/abd_wifi.sh'
 alias scr='scrcpy'
