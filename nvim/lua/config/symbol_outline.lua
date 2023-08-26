@@ -70,12 +70,12 @@ require('hasan.utils').augroup('MY_SYMBOL_AUGROUP')(function(autocmd)
   autocmd({ 'WinEnter', 'FileType' }, function()
     -- vim.wo.winhighlight = 'Normal:NvimTreeNormal,CursorLine:CursorLineFocus,CursorLineNr:CursorLineFocus'
     vim.wo.winhighlight = 'CursorLine:CursorLineFocus,CursorLineNr:CursorLineFocus'
-    vim.cmd([[setl relativenumber]])
+    -- vim.cmd([[setl relativenumber]])
   end, { pattern = 'Outline' })
 
-  autocmd({ 'WinLeave' }, function()
-    vim.cmd([[setl norelativenumber]])
-  end, { pattern = 'Outline' })
+  -- autocmd({ 'WinLeave' }, function()
+  --   vim.cmd([[setl norelativenumber]])
+  -- end, { pattern = 'Outline' })
 end)
 
 require('symbols-outline').setup(opts)

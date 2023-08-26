@@ -43,20 +43,42 @@ ls.add_snippets('dart', {
     'rpcontroller',
     fmt(
       [[
-      final {1}ControllerProvider = StateNotifierProvider<{2}Controller, int>((ref) {{
-        return {2}Controller(0);
+      final {1}Provider = StateNotifierProvider<{2}StateNotifier, int>((ref) {{
+        return {2}StateNotifier();
       }});
 
-      class {2}Controller extends StateNotifier<int> {{
-        {2}Controller(initialState) : super(initialState);
+      class {2}StateNotifier extends StateNotifier<int> {{
+        {2}StateNotifier(initialState) : super(initialState);
         void increment() => state++;
       }}
       ]],
       {
         i(1, 'counter'),
-        f(function(args)
-          return args[1][1]:gsub('^%l', string.upper)
-        end, { 1 }),
+        f(common.get_insert_node_and_upper_first_char, { 1 }),
+      }
+    )
+  ),
+  s(
+    'rpStateModel',
+    fmt(
+      [[
+      class {1}State {{
+        {2}State({{required this.name, required this.age}});
+
+        String name;
+        int age;
+
+        {2}State copyWith({{String? name, int? age}}) {{
+          return {2}State(
+            name: name ?? this.name,
+            age: age ?? this.age,
+          );
+        }}
+      }}
+      ]],
+      {
+        i(1, 'User'),
+        f(common.get_insert_node, { 1 }),
       }
     )
   ),

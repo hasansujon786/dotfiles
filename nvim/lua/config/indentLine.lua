@@ -15,7 +15,8 @@ require('indent_blankline').setup({
     '2048',
     'lazy',
     'noice',
-    'NeogitPopup'
+    'NeogitPopup',
+    'flutterToolsOutline',
   },
   show_first_indent_level = false,
   -- show_current_context = true,

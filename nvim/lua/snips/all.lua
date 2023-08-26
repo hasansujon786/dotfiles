@@ -82,8 +82,3 @@ ls.add_snippets('all', {
     )
   ),
 }, { key = 'my_global_snips' })
-
--- TODO: <10.08.22> maybe array don't work
-ls.add_snippets({ 'scss', 'css' }, {
-  s('v', fmt('var(--{1})', { i(1) })),
-}, { key = 'my_css_snips' })
