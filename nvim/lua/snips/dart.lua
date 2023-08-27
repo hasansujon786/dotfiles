@@ -40,7 +40,7 @@ ls.add_snippets('dart', {
     )
   ),
   s(
-    'rpcontroller',
+    'rpStateNotifier',
     fmt(
       [[
       final {1}Provider = StateNotifierProvider<{2}StateNotifier, int>((ref) {{
@@ -62,14 +62,14 @@ ls.add_snippets('dart', {
     'rpStateModel',
     fmt(
       [[
-      class {1}State {{
-        {2}State({{required this.name, required this.age}});
+      class {1} {{
+        {2}({{required this.name, required this.age}});
 
         String name;
         int age;
 
-        {2}State copyWith({{String? name, int? age}}) {{
-          return {2}State(
+        {2} copyWith({{String? name, int? age}}) {{
+          return {2}(
             name: name ?? this.name,
             age: age ?? this.age,
           );
@@ -77,7 +77,7 @@ ls.add_snippets('dart', {
       }}
       ]],
       {
-        i(1, 'User'),
+        i(1, 'UserModel'),
         f(common.get_insert_node, { 1 }),
       }
     )

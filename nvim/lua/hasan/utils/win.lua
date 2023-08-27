@@ -8,4 +8,14 @@ function M.restore_cussor_pos()
   end
 end
 
+function M.focusWinIfExists(ft)
+  for _, winid in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    local buf = vim.api.nvim_win_get_buf(winid)
+    if vim.bo[buf].filetype == ft then
+      vim.api.nvim_set_current_win(winid)
+      return winid
+    end
+  end
+end
+
 return M

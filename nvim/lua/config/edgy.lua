@@ -38,23 +38,24 @@ require('edgy').setup({
       end,
     },
     {
-      ft = 'log',
-      wo = { winbar = true, winhighlight = dark_bar },
-    },
-    {
       ft = 'scratchpad',
       wo = { winbar = false },
     },
   },
   right = {
     {
+      ft = 'flutterToolsOutline',
+      open = 'FlutterOutlineOpen',
+      wo = { winbar = true, winhighlight = gray_bar },
+    },
+    {
       ft = 'Outline',
       open = 'SymbolsOutlineOpen',
       wo = { winbar = true, winhighlight = gray_bar },
     },
     {
-      ft = 'flutterToolsOutline',
-      open = 'FlutterOutlineOpen',
+      ft = 'log',
+      open = 'FlutterLogOpen',
       wo = { winbar = true, winhighlight = gray_bar },
     },
   },
