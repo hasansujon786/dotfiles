@@ -128,13 +128,13 @@ require('feline').winbar.setup({
       active = {},
       inactive = {},
     },
-    {
-      condition = function()
-        return vim.tbl_contains({ 'floaterm' }, bo.filetype)
-      end,
-      active = { { w.empty_darker } },
-      inactive = { { w.empty_darker } },
-    },
+    -- {
+    --   condition = function()
+    --     return vim.tbl_contains({ 'floaterm' }, bo.filetype)
+    --   end,
+    --   active = { { w.empty_darker } },
+    --   inactive = { { w.empty_darker } },
+    -- },
   },
 })
 

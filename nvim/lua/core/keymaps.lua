@@ -200,8 +200,8 @@ for i = 0, 9 do
   local win_rs = '%s<C-w>w'
   keymap('n', win_ls:format(i), win_rs:format(i), { desc = 'which_key_ignore' })
 end
-keymap('n', '[w', ':lua require("harpoon.ui").nav_prev()<CR>', { desc = 'Previous harpoon item' }) -- harpoon
-keymap('n', ']w', ':lua require("harpoon.ui").nav_next()<CR>', { desc = 'Next harpoon item' })
+keymap('n', '[e', ':lua require("harpoon.ui").nav_prev()<CR>', { desc = 'Previous harpoon item' }) -- harpoon
+keymap('n', ']e', ':lua require("harpoon.ui").nav_next()<CR>', { desc = 'Next harpoon item' })
 keymap('n', '<leader><tab>', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', { desc = 'Open Harpoon' })
 
 local common = {

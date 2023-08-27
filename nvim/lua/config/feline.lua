@@ -311,7 +311,8 @@ feline.setup({
   },
   force_inactive = {
     filetypes = {},
-    buftypes = { '^terminal$' },
+    buftypes = {},
+    -- buftypes = { '^terminal$' },
     bufnames = {},
   },
 })

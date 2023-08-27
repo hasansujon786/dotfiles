@@ -2,7 +2,14 @@ local api = vim.api
 local M = {}
 
 local use_vivid_hl_ftype = { list = true, fern = true, qf = true }
-local force_persist_ft = { qf = true, fern = true, NvimTree = true, DiffviewFiles = true, Outline = true }
+local force_persist_ft = {
+  qf = true,
+  fern = true,
+  NvimTree = true,
+  DiffviewFiles = true,
+  Outline = true,
+  flutterToolsOutline = true,
+}
 local force_hide_btype = { prompt = true }
 local force_hide_ftype = {
   dashboard = true,

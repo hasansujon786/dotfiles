@@ -26,6 +26,7 @@ return {
       { 'chentoast/marks.nvim', config = function() require('config.marks-config') end },
     },
   },
+  { 'folke/edgy.nvim', event = 'VeryLazy', config = function() require('config.edgy') end },
 
   ------------------------------------------------
   --> Navigation ---------------------------------
