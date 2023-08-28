@@ -1,6 +1,7 @@
 {
   "Stateless Widget": {
     "prefix": "stlessW",
+    "description": "Create a Stateless widget",
     "body": [
       "class ${1:MyStatelessWidget} extends StatelessWidget {",
       "  const ${1:MyStatelessWidget}({super.key});\n",
@@ -9,11 +10,11 @@
       "    return Container();",
       "  }",
       "}"
-    ],
-    "description": "Create a Stateless widget"
+    ]
   },
   "Stateful Widget": {
     "prefix": "stfulW",
+    "description": "Create a Stateful widget",
     "body": [
       "class ${1:MyStatefulWidget} extends StatefulWidget {",
       "  const ${1:MyStatefulWidget}({super.key});\n",
@@ -26,8 +27,7 @@
       "    return Container();",
       "  }",
       "}"
-    ],
-    "description": "Create a Stateful widget"
+    ]
   },
   "Material App Scaffold Stateless": {
     "prefix": "sfless",
@@ -77,82 +77,54 @@
       "}"
     ]
   },
-  "for loop": {
-    "prefix": "forloop",
-    "body": [
-      "for (int i = 1; i <= list.lenght; i++) {",
-      "  print(i);",
-      "}"
-    ],
-    "description": "for loop"
-  },
-  "for loop object": {
-    "prefix": "forin",
-    "body": [
-      "for (final object in flybyObjects) {",
-      "  print(object);",
-      "}"
-    ],
-    "description": "for in loop"
-  },
   "pushNamed": {
     "prefix": "nvp",
-    "body": [
-      "Navigator.pushNamed(context, ${1:RouteView.routeName});"
-    ],
-    "description": "Navigator.pushNamed"
+    "description": "Navigator.pushNamed",
+    "body": ["Navigator.pushNamed(context, ${1:RouteView.routeName});"]
   },
   "restorablePushNamed": {
     "prefix": "nvrp",
+    "description": "Navigator.restorablePushNamed",
     "body": [
       "Navigator.restorablePushNamed(context, ${1:RouteView.routeName});"
-    ],
-    "description": "Navigator.restorablePushNamed"
+    ]
   },
   "route_args": {
     "prefix": ["rarg", "arguments"],
+    "description": "Access route arguments",
     "body": [
       "final args = ModalRoute.of(context)!.settings.arguments as Map<String, String?>;"
-    ],
-    "description": "Access route arguments"
+    ]
   },
   "Theme.of": {
     "prefix": "to",
-    "body": [
-      "Theme.of(context)"
-    ],
-    "description": "Theme.of(context)"
+    "description": "Theme.of(context)",
+    "body": ["Theme.of(context)"]
   },
   "Quick Container": {
     "prefix": "dd",
+    "description": "Quick Container",
     "body": [
       "Container(child: const Text('foobar'), color: Colors.blue.shade300),"
-    ],
-    "description": "Quick Container"
+    ]
   },
   "iffe": {
     "prefix": "iffe",
-    "body": [
-      "(() {",
-      "  ${1:// Content goes here;}",
-      "})();"
-    ],
-    "description": "iffe"
+    "description": "iffe",
+    "body": ["(() {", "  ${1:// Content goes here;}", "})();"]
   },
   "print": {
     "prefix": ["pr", "print"],
-    "body": [
-      "print(${1});"
-    ],
-    "description": "Print to the console"
+    "description": "Print to the console",
+    "body": ["print(${1});"]
   },
   "addpostframecallback": {
     "prefix": ["wpfc"],
+    "description": "Add post framecallback",
     "body": [
       "WidgetsBinding.instance.addPostFrameCallback((timestamp) {",
       "  ${1:// Content goes here}",
       "});"
-    ],
-    "description": "Add post framecallback"
+    ]
   }
 }

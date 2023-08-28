@@ -2,7 +2,7 @@ local wk = require('which-key')
 wk.setup({
   window = {
     position = 'bottom', -- bottom, top
-    border = { '▔', '▔', '▔', '', '▁', '▁', '▁', '' },
+    border = { ' ', ' ', ' ', '', '▁', '▁', '▁', '' },
     margin = { 0, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
     padding = { 1, 0, 1, 0 }, -- extra window padding [top, right, bottom, left]
   },

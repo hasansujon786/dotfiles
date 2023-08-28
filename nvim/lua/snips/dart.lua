@@ -29,17 +29,6 @@ ls.add_snippets('dart', {
   s('f', fmt('final {1}{2}', { i(1), t(';') })),
   s('v', fmt('var {1}{2}', { i(1), t(';') })),
   s(
-    'for',
-    fmt(
-      [[
-      for (final {2} in {1}) {{
-         {3}
-      }}
-      ]],
-      { i(1), i(2), i(0) }
-    )
-  ),
-  s(
     'rpStateNotifier',
     fmt(
       [[
