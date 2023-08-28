@@ -1,7 +1,9 @@
 local cmp = require('cmp')
+local compare = require('cmp.config.compare')
 local utils = require('hasan.utils')
 local kind_icons = require('hasan.utils.ui.icons').kind
 local luasnip = require('luasnip')
+
 local ELLIPSIS_CHAR = '…'
 local MAX_LABEL_WIDTH = 40
 
@@ -16,6 +18,18 @@ end
 
 local function tab_out_available()
   return vim.fn.search('\\%#[]>)}\'"`,;]', 'n') ~= 0
+end
+
+local function mapping_open_suggetions()
+  return cmp.mapping({
+    i = cmp.mapping.complete(),
+    c = cmp.mapping.complete(),
+    s = function(_)
+      if luasnip.choice_active() then
+        require('luasnip.extras.select_choice')()
+      end
+    end,
+  })
 end
 
 cmp.setup({
@@ -74,17 +88,9 @@ cmp.setup({
     end, { 'i', 's' }),
     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
     ['<C-e>'] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
-    ['<C-q>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-    ['<c-space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-    ['<M-space>'] = cmp.mapping({
-      i = cmp.mapping.complete(),
-      c = cmp.mapping.complete(),
-      s = function(_)
-        if luasnip.choice_active() then
-          require('luasnip.extras.select_choice')()
-        end
-      end,
-    }),
+    ['<C-q>'] = mapping_open_suggetions(),
+    ['<c-space>'] = mapping_open_suggetions(),
+    ['<M-space>'] = mapping_open_suggetions(),
     ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Select, select = true }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -120,6 +126,21 @@ cmp.setup({
     { name = 'buffer', keyword_length = 4 },
     { name = 'path' },
     -- { name = 'cmp-tw2css' }
+  },
+  sorting = {
+    priority_weight = 2,
+    comparators = {
+      compare.offset,
+      compare.exact,
+      -- compare.scopes,
+      compare.score,
+      compare.recently_used,
+      compare.kind,
+      compare.locality,
+      -- compare.sort_text,
+      compare.length,
+      compare.order,
+    },
   },
   formatting = {
     fields = { 'kind', 'abbr', 'menu' },
