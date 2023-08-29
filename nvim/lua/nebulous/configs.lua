@@ -36,12 +36,14 @@ M.default = {
     'LineNr:Nebulous',
     'LineNrAbove:Nebulous',
     'LineNrBelow:Nebulous',
+    'Comment:Nebulous', -- flutter closing tags
     'Conceal:Nebulous',
-    'IndentBlanklineChar:NebulousDarker',
     'GitGutterAdd:NebulousInvisibe',
     'GitGutterChange:NebulousInvisibe',
     'GitGutterDelete:NebulousInvisibe',
     'NonText:NebulousInvisibe',
+    'IndentBlanklineChar:NebulousDarker',
+    'FlutterWidgetGuides:NebulousDarker'
   },
   dynamic_rules = {
     active = nil,

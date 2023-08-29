@@ -100,8 +100,7 @@ return {
   { 'tpope/vim-eunuch', lazy = true, cmd = { 'Delete', 'Move', 'Rename', 'Mkdir', 'Chmod' } },
   {
     'voldikss/vim-floaterm',
-    lazy = true,
-    cmd = { 'FloatermNew', 'FloatermToggle' },
+    commit = 'bcaeabf', lazy = true, cmd = { 'FloatermNew', 'FloatermToggle' },
     config = function() require('config.floaterm') end,
   },
   {

@@ -1,6 +1,8 @@
 local ui = require('core.state').ui
 
 require('flutter-tools').setup({
+  ui = { border = ui.border.style },
+  widget_guides = { enabled = true },
   lsp = {
     color = { -- show the derived colours for dart variables
       enabled = true,
@@ -12,10 +14,21 @@ require('flutter-tools').setup({
     on_attach = function(client, bufnr)
       require('config.lsp.setup').on_attach(client, bufnr)
 
-      create_command('PubInstall', function(_)
+      -- Custom keymap
+      keymap(
+        'n',
+        '<leader>fc',
+        '<Cmd>lua require("telescope").extensions.flutter.commands()<CR>',
+        { desc = 'Flutter: Show commands', buffer = bufnr }
+      )
+      keymap('n', '<leader>fr', '<Cmd>FlutterRestart<CR>', { desc = 'Flutter: Lsp restart', buffer = bufnr })
+      -- lua require('project_run.utils').open_tab(vim.fn.getcwd(), 'adb connect 192.168.31.252 && flutter run')
+
+      -- Commands
+      command('PubInstall', function(_)
         require('hasan.telescope.custom').pub_install()
       end)
-      create_command('FlutterLogOpen', function(_)
+      command('FlutterLogOpen', function(_)
         local winFound = require('hasan.utils.win').focusWinIfExists('log')
         if not winFound then
           vim.cmd([[vertical 30new | b __FLUTTER_DEV_LOG__]])
@@ -33,9 +46,6 @@ require('flutter-tools').setup({
       -- analysisExcludedFolders = { '' },
       -- enableSdkFormatter = false,
     },
-  },
-  ui = {
-    border = ui.border.style,
   },
   debugger = {
     enabled = false,
@@ -60,8 +70,5 @@ require('flutter-tools').setup({
         },
       }
     end,
-  },
-  widget_guides = {
-    enabled = true,
   },
 })

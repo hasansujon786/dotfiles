@@ -53,7 +53,7 @@ _G.keymap = function(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
-_G.create_command = function(name, callback, opts)
+_G.command = function(name, callback, opts)
   vim.api.nvim_create_user_command(name, callback, opts or {})
 end
 

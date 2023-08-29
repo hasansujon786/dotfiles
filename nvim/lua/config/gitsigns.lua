@@ -49,6 +49,6 @@ require('gitsigns').setup({
 
     -- Text object
     map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
-    map({ 'o', 'x' }, 'oh', ':<C-U>Gitsigns select_hunk<CR>')
+    map({ 'o', 'x' }, 'ah', ':<C-U>Gitsigns select_hunk<CR>')
   end,
 })
