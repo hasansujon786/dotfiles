@@ -106,14 +106,14 @@ return {
     {
       'folke/which-key.nvim',
       config = function()
-        require('configs.module.whichkey')
+        require('config.module.whichkey')
       end,
     },
     {
       'freddiehaddad/feline.nvim',
       config = function()
-        require('configs.module.feline')
-        require('configs.module.feline-winbar')
+        require('config.module.feline')
+        require('config.module.feline-winbar')
       end,
     },
   },

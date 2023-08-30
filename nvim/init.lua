@@ -14,7 +14,7 @@ require('hasan.core.options')
 require('hasan.core.keymaps')
 require('hasan.core.lazy')
 require('hasan.core.autocmds')
-require('configs.module.onedark')
+require('config.module.onedark')
 -- require('core.playground')
 -- nodejs.install
 -- https://cj.rs/blog/tips/nvim-plugin-development/

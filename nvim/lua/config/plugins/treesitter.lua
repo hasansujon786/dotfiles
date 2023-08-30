@@ -166,7 +166,7 @@ return {
       {
         'ziontee113/neo-minimap',
         config = function()
-          require('configs.module.neo_minimap')
+          require('config.module.neo_minimap')
         end,
       },
       {

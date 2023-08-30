@@ -21,7 +21,7 @@ return {
     lazy = true,
     module = 'dap',
     config = function()
-      require('configs.module.dap').setup()
+      require('config.module.dap').setup()
     end,
     dependencies = {
       'nvim-telescope/telescope-dap.nvim',
@@ -29,13 +29,13 @@ return {
       {
         'rcarriga/nvim-dap-ui',
         config = function()
-          require('configs.module.dap').configure_dap_ui()
+          require('config.module.dap').configure_dap_ui()
         end,
       },
       {
         'theHamsta/nvim-dap-virtual-text',
         config = function()
-          require('configs.module.dap').configure_virtual_text()
+          require('config.module.dap').configure_virtual_text()
         end,
       },
       -- 'jbyuki/one-small-step-for-vimkind',

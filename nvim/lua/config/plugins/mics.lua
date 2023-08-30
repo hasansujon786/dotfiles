@@ -9,7 +9,7 @@ return {
     module = 'persisted',
     cmd = { 'SessionLoad', 'SessionLoadLast', 'SessionSave' },
     config = function()
-      require('configs.module.persisted').setup()
+      require('config.module.persisted').setup()
     end,
   },
   {
