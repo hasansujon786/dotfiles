@@ -8,13 +8,13 @@
 -- https://roadmap.sh/flutter
 -- https://github.com/olexale/flutter_roadmap
 
-require('core.state')
-require('core.global')
-require('core.options')
-require('core.keymaps')
-require('core.lazy')
-require('core.autocmds')
-require('config.one_dark')
+require('hasan.core.state')
+require('hasan.core.global')
+require('hasan.core.options')
+require('hasan.core.keymaps')
+require('hasan.core.lazy')
+require('hasan.core.autocmds')
+require('configs.module.onedark')
 -- require('core.playground')
 -- nodejs.install
 -- https://cj.rs/blog/tips/nvim-plugin-development/

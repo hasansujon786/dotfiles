@@ -3,7 +3,7 @@ local Input = require('nui.input')
 local Menu = require('nui.menu')
 local Text = require('nui.text')
 local event = require('nui.utils.autocmd').event
-local ui = require('core.state').ui
+local ui = require('hasan.core.state').ui
 
 local M = {}
 

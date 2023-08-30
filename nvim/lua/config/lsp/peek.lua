@@ -1,5 +1,5 @@
 local M = {}
-local ui = require('core.state').ui
+local ui = require('hasan.core.state').ui
 local peek_util = {}
 
 function M.PeekDefinition()

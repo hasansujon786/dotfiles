@@ -1,8 +1,8 @@
 local M = {}
-local ui = require('core.state').ui
+local ui = require('hasan.core.state').ui
 local diagnotic_icons = require('hasan.utils.ui.icons').Other.diagnostics
 
--- local borderOpts = { border = require('core.state').ui.border.style }
+-- local borderOpts = { border = require('hasan.core.state').ui.border.style }
 -- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, borderOpts)
 -- vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, borderOpts)
 
