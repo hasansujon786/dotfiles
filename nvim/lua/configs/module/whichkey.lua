@@ -199,7 +199,7 @@ local leader = {
     c = { loadOrgMode('<space>oc'),                                             'Org capture' },
     h = {'<cmd>lua require("hasan.org").open_org_home("-tabedit")<CR>',         'Open org home'},
 
-    o = { '<cmd>lua require("config.nebulous").toggle_symbol_outline()<cr>',    'SymbolsOutline' },
+    o = { '<cmd>lua require("config.module.nebulous").toggle_symbol_outline()<cr>',    'SymbolsOutline' },
     t = { '<cmd>FloatermNew --wintype=normal --height=12<CR>',                  'Open terminal split' },
     T = { '<cmd>FloatermNew<CR>',                                               'Open terminal popup' },
     q = { '<cmd>call hasan#window#toggle_quickfix(1)<CR>',                      'Open Quickfix list' },

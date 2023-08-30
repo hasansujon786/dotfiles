@@ -68,7 +68,7 @@ return {
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
         },
-        project_commands = require('config.project_commands'),
+        project_commands = require('config.module.project_commands'),
         file_browser = {
           cwd_to_path = false,
           grouped = true,
