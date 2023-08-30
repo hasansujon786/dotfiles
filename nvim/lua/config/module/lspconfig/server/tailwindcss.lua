@@ -224,7 +224,7 @@ end
 
 function M.setup(bufnr)
   if state.treesitter.auto_conceal_html_class then
-    require('config.lsp.server.tailwindcss').setup_conceal(bufnr)
+    require('config.module.lspconfig.server.tailwindcss').setup_conceal(bufnr)
   end
 
   keymap('n', 'gK', M.peekTwStyles, { desc = 'Peek tailwind styles', buffer = bufnr })

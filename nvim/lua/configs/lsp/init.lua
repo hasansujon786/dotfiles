@@ -7,7 +7,7 @@ return {
       {
         'williamboman/mason.nvim',
         config = function()
-          require('config.lsp')
+          require('config.module.lspconfig')
         end,
         build = ':MasonUpdate',
       },

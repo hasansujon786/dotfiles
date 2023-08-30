@@ -14,7 +14,7 @@ return {
         virtual_text_str = '■',
       },
       on_attach = function(client, bufnr)
-        require('config.lsp.setup').on_attach(client, bufnr)
+        require('config.module.lspconfig.setup').on_attach(client, bufnr)
 
         -- Custom keymap
         keymap(
@@ -37,7 +37,7 @@ return {
           end
         end)
       end,
-      capabilities = require('config.lsp.setup').update_capabilities(),
+      capabilities = require('config.module.lspconfig.setup').update_capabilities(),
       -- see the link below for details on each option:
       -- https://github.com/dart-lang/sdk/blob/master/pkg/analysis_server/tool/lsp_spec/README.md#client-workspace-configuration
       settings = {

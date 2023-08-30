@@ -2,7 +2,7 @@ command! -bang Delview call hasan#utils#delete_view(<q-bang>)
 command! -bang Quit call hasan#utils#confirmQuit(<q-bang>)
 command! ClearRegister call hasan#utils#clear_register()
 command! LspLogPath lua vim.cmd('edit '..vim.lsp.get_log_path())
-command! LspInstallEssentials lua require('config.lsp.util').install_essential_servers()
+command! LspInstallEssentials lua require('config.module.lspconfig.util').install_essential_servers()
 command! LuaSnipEdit lua require("luasnip.loaders").edit_snippet_files()
 command! ProjectCommands lua require("telescope._extensions").manager.project_commands.commands()
 command! Messages NoiceHistory

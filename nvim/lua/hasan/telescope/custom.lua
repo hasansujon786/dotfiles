@@ -353,7 +353,7 @@ M.pub_install = function()
       require('telescope.actions').close(prompt_bufnr)
       local pkg = action_state.get_selected_entry()[1]
       local cmd = { 'pub', 'add', pkg, as_dev and '--dev' }
-      require('config.lsp.server.flutter').run_flutter_cmd(cmd, { 'Installing ' .. pkg })
+      require('config.module.lspconfig.server.flutter').run_flutter_cmd(cmd, { 'Installing ' .. pkg })
     end,
   }
 

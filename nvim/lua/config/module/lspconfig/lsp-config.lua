@@ -16,9 +16,9 @@ local M = {
     'stylua',
   },
   default_opts = {
-    on_attach = require('config.lsp.setup').on_attach,
+    on_attach = require('config.module.lspconfig.setup').on_attach,
     flags = { debounce_text_changes = 500 },
-    capabilities = require('config.lsp.setup').update_capabilities(),
+    capabilities = require('config.module.lspconfig.setup').update_capabilities(),
   },
   use_builtin_lsp_formatter = { 'dartls', 'astro' },
 }
