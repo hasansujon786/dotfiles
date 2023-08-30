@@ -132,4 +132,12 @@ ls.add_snippets('dart', {
       {}
     )
   ),
+  s(
+    '_outline:RoundedRectangleBorder',
+    fmt([[RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0))]], { })
+  ),
+  s(
+    '_outline:StadiumBorder',
+    fmt([[const StadiumBorder()]], { })
+  ),
 }, { key = 'my_dart_snips' })

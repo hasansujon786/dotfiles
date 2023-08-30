@@ -47,9 +47,11 @@ M.loadSession = function()
 end
 
 M.sessionSaveAndQuit = function()
-  vim.cmd('wall')
-  require('persisted').save()
-  vim.cmd('qall')
+  vim.cmd[[
+    wall
+    SessionSave
+    qall
+  ]]
 end
 
 return M

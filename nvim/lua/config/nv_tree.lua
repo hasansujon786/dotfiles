@@ -9,6 +9,26 @@ local vngr = require('hasan.utils.vinegar')
 local vopen = vngr.actions.open_or_edit_in_place
 local vclose = vngr.actions.open_n_close
 
+local function find_directory_and_focus()
+  local actions = require('telescope.actions')
+  local action_state = require('telescope.actions.state')
+
+  require('telescope.builtin').find_files({
+    find_command = { 'fd', '--type', 'directory', '--hidden', '--exclude', '.git/*' },
+    attach_mappings = function(prompt_bufnr, _)
+      actions.select_default:replace(function()
+        local api = require('nvim-tree.api')
+
+        actions.close(prompt_bufnr)
+        local selection = action_state.get_selected_entry()
+        api.tree.open()
+        api.tree.find_file(selection.cwd .. '/' .. selection.value)
+      end)
+      return true
+    end,
+  })
+end
+
 local SORT_METHODS = {
   'name',
   'modification_time',
@@ -44,8 +64,8 @@ local function on_attach(bufnr)
   vim.keymap.set('n', 'B',     api.tree.toggle_no_buffer_filter,      opts('Toggle No Buffer'))
   vim.keymap.set('n', 'c',     api.tree.toggle_custom_filter,         opts('Toggle Hidden'))
   vim.keymap.set('n', 'C',     api.tree.toggle_git_clean_filter,      opts('Toggle Git Clean'))
-  vim.keymap.set('n', 'F',     api.live_filter.clear,                 opts('Clean Filter'))
-  vim.keymap.set('n', 'f',     api.live_filter.start,                 opts('Filter'))
+  -- vim.keymap.set('n', 'F',     api.live_filter.clear,                 opts('Clean Filter'))
+  -- vim.keymap.set('n', 'f',     api.live_filter.start,                 opts('Filter'))
   vim.keymap.set('n', 'i',     api.tree.toggle_hidden_filter,         opts('Toggle Dotfiles'))
   vim.keymap.set('n', 'I',     api.tree.toggle_gitignore_filter,      opts('Toggle Git Ignore'))
   vim.keymap.set('n', 'm',     api.marks.toggle,                      opts('Toggle Bookmark'))
@@ -84,6 +104,7 @@ local function on_attach(bufnr)
   end, opts('Open: New Tab'))
 
   -- FILE MANAGEMENT
+  vim.keymap.set('n', 'fd',    find_directory_and_focus,              opts('Find directory'))
   vim.keymap.set('n', '.',     api.node.run.cmd,                      opts('Run Command'))
   vim.keymap.set('n', 'a',     api.fs.create,                         opts('Create'))
   vim.keymap.set('n', 'M',     api.marks.bulk.move,                   opts('Move Bookmarked'))
