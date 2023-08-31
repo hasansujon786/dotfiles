@@ -1,8 +1,4 @@
 return {
-  'L3MON4D3/LuaSnip',
-  lazy = true,
-  module = 'luasnip',
-  dependencies = { 'rafamadriz/friendly-snippets' },
   config = function()
     local ls = require('luasnip')
     local icons = require('hasan.utils.ui.icons')

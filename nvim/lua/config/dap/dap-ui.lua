@@ -33,21 +33,4 @@ function M.configure_dap_ui()
   vim.fn.sign_define('DapBreakpointCondition', dap_sign.bcondition)
 end
 
-function M.configure_virtual_text()
-  require('nvim-dap-virtual-text').setup()
-end
-
-local function configure_debuggers()
-  local dap = require('dap')
-  require('config.dap.typescript').setup(dap)
-  -- require('config.dap.node').setup(dap)
-  -- require('config.dap.lua').setup()
-end
-
-function M.setup()
-  require('config.dap.keymaps').setup()
-  require('dap').set_log_level('TRACE') --TRACE DEBUG INFO WARN ERROR
-  configure_debuggers()
-end
-
 return M

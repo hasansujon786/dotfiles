@@ -199,7 +199,7 @@ local leader = {
     c = { loadOrgMode('<space>oc'),                                             'Org capture' },
     h = {'<cmd>lua require("hasan.org").open_org_home("-tabedit")<CR>',         'Open org home'},
 
-    o = { '<cmd>lua require("config.module.nebulous").toggle_symbol_outline()<cr>',    'SymbolsOutline' },
+    o = { '<cmd>lua require("config.ui.nebulous").toggle_symbol_outline()<cr>',    'SymbolsOutline' },
     t = { '<cmd>FloatermNew --wintype=normal --height=12<CR>',                  'Open terminal split' },
     T = { '<cmd>FloatermNew<CR>',                                               'Open terminal popup' },
     q = { '<cmd>call hasan#window#toggle_quickfix(1)<CR>',                      'Open Quickfix list' },
@@ -220,8 +220,8 @@ local leader = {
     d = { '<cmd>Alpha<CR>',                                               'Open dashboard' },
     l = { '<cmd>SessionLoad<CR>',                                         'Load session' },
     s = { '<cmd>SessionSave<CR>',                                         'Save session' },
-    m = { '<cmd>lua require("config.module.persisted").loadSession()<CR>',       'Show session menu' },
-    z = { '<cmd>lua require("config.module.persisted").sessionSaveAndQuit()<CR>','Save session and quit' },
+    m = { '<cmd>lua require("config.mics.persisted").loadSession()<CR>',       'Show session menu' },
+    z = { '<cmd>lua require("config.mics.persisted").sessionSaveAndQuit()<CR>','Save session and quit' },
   },
 
   t = {
@@ -234,7 +234,7 @@ local leader = {
     h = { '<cmd>call autohl#_AutoHighlightToggle()<CR>',                   'Highlight same words' },
     s = { '<cmd>lua require("hasan.utils").toggle("spell")<CR>',           'Toggle spell' },
     w = { '<cmd>lua require("hasan.utils").toggle("wrap")<CR>',            'Toggle wrap' },
-    o = { '<cmd>lua require("config.module.lspconfig.server.tailwindcss").toggle_conceallevel()<CR>','Toggle conceallevel' },
+    o = { '<cmd>lua require("config.lsp.lspconfig.server.tailwindcss").toggle_conceallevel()<CR>','Toggle conceallevel' },
 
     t = {
       name  = '+task-and-timer',

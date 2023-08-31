@@ -8,10 +8,7 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require('lazy').setup({
   spec = {
-    { import = 'config.plugins' },
-    { import = 'config.lsp' },
-    { import = 'config.completion' },
-    { import = 'config.git' },
+    { import = 'config' },
   },
   concurrency = 5,
   git = {

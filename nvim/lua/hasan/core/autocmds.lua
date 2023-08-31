@@ -11,10 +11,10 @@ utils.augroup('MY_AUGROUP')(function(autocmd)
 
     if first_init then
       vim.defer_fn(function()
-        require('config.module.nebulous').my_nebulous_setup()
+        require('config.ui.nebulous').my_nebulous_setup()
       end, 500)
     else
-      require('config.module.nebulous').my_nebulous_setup()
+      require('config.ui.nebulous').my_nebulous_setup()
     end
     first_init = false
   end)

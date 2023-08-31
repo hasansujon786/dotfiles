@@ -9,8 +9,8 @@ function M.install_essential_servers()
 
   -- Get mason server names to install
   local masaon_server_names = {}
-  local extra_tools = require('config.module.lspconfig.lsp-config').extra_tools
-  for _, server_config in pairs(require('config.module.lspconfig.lsp-config').essential_servers) do
+  local extra_tools = require('config.lsp.lspconfig.lsp-config').extra_tools
+  for _, server_config in pairs(require('config.lsp.lspconfig.lsp-config').essential_servers) do
     table.insert(masaon_server_names, server_config[1])
   end
 
