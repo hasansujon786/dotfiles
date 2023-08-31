@@ -129,25 +129,6 @@ function M.search_plugins()
   }))
 end
 
-function M.grep_string()
-  local isVisual = require('hasan.utils').is_visual_mode()
-  local word = nil
-
-  if isVisual then
-    word = require('hasan.utils').get_visual_selection()
-  else
-    word = vim.fn.input('Grep String: ')
-  end
-
-  -- word = string.gsub(word, '%s+', '') -- remove spaces
-  if word == '' then
-    return
-  end
-
-  vim.fn.setreg('/', word)
-  builtin.grep_string({ search = word })
-end
-
 function M.file_browser(dir)
   extensions.file_browser.file_browser(themes.get_ivy({
     path = dir == 'cur_dir' and vim.fn.expand('%:h') or nil,
@@ -231,6 +212,25 @@ M.commands = function()
   -- builtin.commands(opts)
 end
 
+function M.grep_string()
+  local isVisual = require('hasan.utils').is_visual_mode()
+  local word = nil
+
+  if isVisual then
+    word = require('hasan.utils').get_visual_selection()
+  else
+    word = vim.fn.input('Grep String: ')
+  end
+
+  -- word = string.gsub(word, '%s+', '') -- remove spaces
+  if word == '' then
+    return
+  end
+
+  vim.fn.setreg('/', word)
+  builtin.grep_string({ search = word })
+end
+
 M.grep_string_list = function(opts)
   opts = opts and opts or {}
 
@@ -251,11 +251,7 @@ M.grep_string_list = function(opts)
     additional_args = opts.additional_args(opts)
   end
 
-  local args = flatten({
-    vimgrep_arguments,
-    additional_args,
-    search_list,
-  })
+  local args = flatten({ vimgrep_arguments, additional_args, search_list })
 
   if search_dirs then
     for _, path in ipairs(search_dirs) do
@@ -264,7 +260,7 @@ M.grep_string_list = function(opts)
   end
 
   pickers
-    .new(opts, {
+    .new(themes.get_dropdown(opts), {
       prompt_title = 'Grep String List',
       finder = finders.new_oneshot_job(args, opts),
       previewer = conf.grep_previewer(opts),
@@ -275,7 +271,6 @@ end
 
 function M.search_project_todos()
   M.grep_string_list({
-    results_title = ' Project Todos',
     prompt_title = 'Search Todos',
     path_display = { 'smart' },
     search_list = require('hasan.core.state').telescope.todo_keyfaces,
@@ -353,7 +348,7 @@ M.pub_install = function()
       require('telescope.actions').close(prompt_bufnr)
       local pkg = action_state.get_selected_entry()[1]
       local cmd = { 'pub', 'add', pkg, as_dev and '--dev' }
-      require('config.lsp.lspconfig.server.flutter').run_flutter_cmd(cmd, { 'Installing ' .. pkg })
+      require('config.lsp.util.server.flutter').run_flutter_cmd(cmd, { 'Installing ' .. pkg })
     end,
   }
 

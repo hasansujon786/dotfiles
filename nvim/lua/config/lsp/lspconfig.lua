@@ -1,6 +1,5 @@
 local M = {
-  -- Index [1] is to install lsp-server with mason, [2] is for lspconfig
-  essential_servers = {
+  essential_servers = { -- Index [1] is to install lsp-server with mason, [2] is for lspconfig
     bashls = { 'bash-language-server' },
     html = { 'html-lsp' },
     vimls = { 'vim-language-server' },
@@ -16,9 +15,9 @@ local M = {
     'stylua',
   },
   default_opts = {
-    on_attach = require('config.lsp.lspconfig.setup').on_attach,
+    on_attach = require('config.lsp.util.setup').on_attach,
     flags = { debounce_text_changes = 500 },
-    capabilities = require('config.lsp.lspconfig.setup').update_capabilities('lsp-config'),
+    capabilities = require('config.lsp.util.setup').update_capabilities('lsp-config'),
   },
   use_builtin_lsp_formatter = { 'dartls', 'astro' },
 }
@@ -49,5 +48,17 @@ M.essential_servers.tailwindcss[2] = {
     -- '.git'
   ),
 }
+
+M.setup = function()
+  local lspconfig = require('lspconfig')
+  require('lspconfig.ui.windows').default_options.border = 'rounded'
+  for server_name, server_config in pairs(M.essential_servers) do
+    if server_config[2] == nil then
+      lspconfig[server_name].setup(M.default_opts)
+    else
+      lspconfig[server_name].setup(require('hasan.utils').merge(M.default_opts, server_config[2]))
+    end
+  end
+end
 
 return M

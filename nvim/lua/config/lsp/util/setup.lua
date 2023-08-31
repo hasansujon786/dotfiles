@@ -19,7 +19,7 @@ function M.update_capabilities(fname)
 end
 
 function M.setup_format(client)
-  if not vim.tbl_contains(require('config.lsp.lspconfig.lsp-config').use_builtin_lsp_formatter, client.name) then
+  if not vim.tbl_contains(require('config.lsp.util').use_builtin_lsp_formatter, client.name) then
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
   end
@@ -41,7 +41,7 @@ end
 
 function M.server_specific_setup(client, bufnr)
   if client.name == 'tailwindcss' then
-    require('config.lsp.lspconfig.server.tailwindcss').setup(bufnr)
+    require('config.lsp.util.server.tailwindcss').setup(bufnr)
   end
 end
 
@@ -61,23 +61,23 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', '<C-LeftMouse>', '<LeftMouse><cmd>lua vim.lsp.buf.definition()<CR>', opts)
   keymap('n', 'gd', vim.lsp.buf.definition, desc('Lsp: go to definition'))
   keymap('n', 'gD', vim.lsp.buf.declaration, desc('Lsp: go to declaration'))
-  keymap('n', 'gr', require('config.lsp.lspconfig.util').references_and_focus_cur_ref, desc('Lsp: go to references'))
+  keymap('n', 'gr', require('config.lsp.util').references_and_focus_cur_ref, desc('Lsp: go to references'))
   keymap('n', 'gR', vim.lsp.buf.references, desc('Lsp: go to references'))
-  keymap('n', 'gp', require('config.lsp.lspconfig.peek').PeekDefinition, desc('Lsp: peek definition'))
-  keymap('n', 'gP', require('config.lsp.lspconfig.peek').PeekTypeDefinition, desc('Lsp: peek type definition'))
+  keymap('n', 'gp', require('config.lsp.util.peek').PeekDefinition, desc('Lsp: peek definition'))
+  keymap('n', 'gP', require('config.lsp.util.peek').PeekTypeDefinition, desc('Lsp: peek type definition'))
   keymap('n', 'gm', vim.lsp.buf.implementation, desc('Lsp: type implementation'))
   keymap('n', 'gy', vim.lsp.buf.type_definition, desc('Lsp: type definition'))
   keymap('n', 'K', vim.lsp.buf.hover, desc('Lsp: hover under cursor'))
-  -- keymap('n', 'gpI', require('config.lsp.lspconfig.peek').PeekImplementation, opts)
+  -- keymap('n', 'gpI', require('config.lsp.util.peek').PeekImplementation, opts)
 
   -- Action, Prompt, Search
   keymap('n', 'g/', '<cmd>Telescope lsp_document_symbols<cr>', desc('Lsp: document symbols'))
   keymap('n', 'go', '<cmd>Telescope lsp_document_symbols<cr>', desc('Lsp: document symbols'))
   keymap('n', 'g.', '<cmd>Telescope lsp_document_symbols<cr>', desc('Lsp: document symbols'))
-  keymap('n', '<F2>', require('config.lsp.lspconfig.util').lspRename, desc('Lsp: rename under cursor'))
-  keymap('n', '<leader>aq', require('config.lsp.lspconfig.util').showLspRenameChanges, desc('Lsp: show lsp rename'))
+  keymap('n', '<F2>', require('config.lsp.util').lspRename, desc('Lsp: rename under cursor'))
+  keymap('n', '<leader>aq', require('config.lsp.util').showLspRenameChanges, desc('Lsp: show lsp rename'))
   for _, action_key in ipairs({ '<C-q>', '<C-space>', '<A-space>' }) do
-    keymap({ 'n', 'x' }, action_key, require('config.lsp.lspconfig.util').code_action, desc('Lsp: code action'))
+    keymap({ 'n', 'x' }, action_key, require('config.lsp.util').code_action, desc('Lsp: code action'))
   end
 
   -- Insert mode bind
@@ -93,10 +93,10 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', '<leader>aD', vim.diagnostic.setqflist, desc('Lsp: show global diagnostics'))
   keymap('n', '<leader>al', vim.diagnostic.open_float, desc('Lsp: show current diagnostics'))
   keymap('n', '[d', function()
-    require('config.lsp.lspconfig.diagnosgic').jump_to_diagnostic('prev')
+    require('config.lsp.util.diagnosgic').jump_to_diagnostic('prev')
   end, desc('Lsp: jump to previous diagnosgic'))
   keymap('n', ']d', function()
-    require('config.lsp.lspconfig.diagnosgic').jump_to_diagnostic('next')
+    require('config.lsp.util.diagnosgic').jump_to_diagnostic('next')
   end, desc('Lsp: jump to next diagnosgic'))
 
   -- Format
@@ -121,7 +121,7 @@ function M.lsp_buffer_keymaps(client, bufnr)
   -- Server specific
   if client.name == 'tsserver' then
     keymap('n', '<leader>ai', function()
-      require('config.lsp.lspconfig.server.tsserver').ts_organize_imports_sync()
+      require('config.lsp.util.server.tsserver').ts_organize_imports_sync()
     end, desc('Lsp: organize ts imports'))
   end
 end

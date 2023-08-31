@@ -1,5 +1,4 @@
 local M = {}
-local ui = require('hasan.core.state').ui
 local diagnotic_icons = require('hasan.utils.ui.icons').Other.diagnostics
 
 -- local borderOpts = { border = require('hasan.core.state').ui.border.style }
@@ -42,11 +41,7 @@ function M.jump_to_diagnostic(direction)
 end
 
 function M.setup()
-  if vim.fn.has('nvim-0.6.0') == 0 then
-    return 0
-  end
-
-  for icon_type, icon in pairs(diagnotic_icons) do
+  for icon_type, _ in pairs(diagnotic_icons) do
     local hl = 'DiagnosticSign' .. icon_type
     vim.fn.sign_define(hl, { numhl = 'DiagnosticLineNr' .. icon_type })
     -- vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
@@ -55,11 +50,19 @@ function M.setup()
     signs = true,
     underline = true,
     update_in_insert = false,
-    virtual_text = false,
     severity_sort = true,
+    -- virtual_text = {
+    --   spacing = 4,
+    --   source = 'if_many',
+    --   prefix = '●',
+    --   -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
+    --   -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
+    --   -- prefix = "icons",
+    -- },
+    virtual_text = false,
     float = {
       focusable = true,
-      border = ui.border.style,
+      border = require('hasan.core.state').ui.border.style,
       source = false,
       header = { ' Diagnostics:', 'TextInfo' },
       prefix = function(diagnostic, i, total)
