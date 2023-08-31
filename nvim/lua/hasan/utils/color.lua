@@ -59,4 +59,13 @@ M.fg_bg = function(group, fgcol, bgcol)
   cmd('hi ' .. group .. ' guifg=' .. fgcol .. ' guibg=' .. bgcol)
 end
 
+M.make_winhighlight = function(highlight)
+  return table.concat(
+    vim.tbl_map(function(key)
+      return key .. ':' .. highlight[key]
+    end, vim.tbl_keys(highlight)),
+    ','
+  )
+end
+
 return M
