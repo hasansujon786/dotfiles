@@ -9,6 +9,7 @@ vim.opt.runtimepath:prepend(lazypath)
 require('lazy').setup({
   spec = {
     { import = 'config' },
+    { import = 'config.git' },
   },
   concurrency = 5,
   git = {
