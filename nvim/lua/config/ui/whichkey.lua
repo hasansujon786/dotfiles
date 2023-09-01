@@ -220,8 +220,8 @@ local leader = {
     d = { '<cmd>Alpha<CR>',                                               'Open dashboard' },
     l = { '<cmd>SessionLoad<CR>',                                         'Load session' },
     s = { '<cmd>SessionSave<CR>',                                         'Save session' },
-    m = { '<cmd>lua require("config.mics.persisted").loadSession()<CR>',       'Show session menu' },
-    z = { '<cmd>lua require("config.mics.persisted").sessionSaveAndQuit()<CR>','Save session and quit' },
+    m = { '<cmd>lua require("config.telescope.persisted").loadSession()<CR>',       'Show session menu' },
+    z = { '<cmd>lua require("config.telescope.persisted").sessionSaveAndQuit()<CR>','Save session and quit' },
   },
 
   t = {

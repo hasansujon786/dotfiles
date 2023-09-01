@@ -1,7 +1,7 @@
 return {
   'lukas-reineke/indent-blankline.nvim',
   lazy = true,
-  event = 'BufReadPost',
+  event = 'VeryLazy',
   opts = {
     buftype_exclude = { 'terminal', 'prompt' },
     filetype_exclude = {

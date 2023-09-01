@@ -143,5 +143,14 @@ return {
         -- require('telescope').load_extension('projects')
       end,
     },
+    {
+      'olimorris/persisted.nvim',
+      lazy = true,
+      module = 'persisted',
+      cmd = { 'SessionLoad', 'SessionLoadLast', 'SessionSave' },
+      config = function()
+        require('config.telescope.persisted').setup()
+      end,
+    },
   },
 }

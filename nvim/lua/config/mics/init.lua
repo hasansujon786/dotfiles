@@ -4,23 +4,13 @@ return {
   { 'MunifTanjim/nui.nvim', lazy = true, module = 'nui' },
   { 'tpope/vim-eunuch', lazy = true, cmd = { 'Delete', 'Move', 'Rename', 'Mkdir', 'Chmod' } },
   {
-    'olimorris/persisted.nvim',
-    lazy = true,
-    module = 'persisted',
-    cmd = { 'SessionLoad', 'SessionLoadLast', 'SessionSave' },
-    config = function()
-      require('config.mics.persisted').setup()
-    end,
-  },
-  {
     'tpope/vim-commentary',
     lazy = true,
-    event = 'BufReadPost',
+    event = 'CursorHold',
     dependencies = {
       'mg979/vim-visual-multi',
       'tpope/vim-surround',
       'tpope/vim-repeat',
-      'mg979/vim-visual-multi',
       'arthurxavierx/vim-caser',
       'NTBBloodbath/color-converter.nvim',
       'unblevable/quick-scope',

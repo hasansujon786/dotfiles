@@ -1,7 +1,7 @@
 return {
   'hrsh7th/nvim-cmp',
   lazy = true,
-  event = 'BufReadPost',
+  event = 'InsertEnter',
   config = function()
     local cmp = require('cmp')
     local compare = require('cmp.config.compare')

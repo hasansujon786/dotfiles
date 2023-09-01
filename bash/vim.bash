@@ -2,13 +2,14 @@
 #   command immediately. (Good for validating before running, and for performing
 #   history expansion).
 __edit_without_executing() {
-    local editor="${EDITOR:-nano}"
-    local tmpf="$(mktemp)"
-    printf '%s\n' "$READLINE_LINE" >| "$tmpf"
-    "$editor" "$tmpf"
-    READLINE_LINE="$(<"$tmpf")"
-    READLINE_POINT="${#READLINE_LINE}"
-    rm -f "$tmpf" >/dev/null 2>&1
+  local editor="${EDITOR:-nano}"
+  local tmpf="$(mktemp)"
+  printf '%s\n' "$READLINE_LINE" >| "$tmpf"
+  # NVIM_APPNAME=nvims nvim "$tmpf"
+  "$editor" "$tmpf"
+  READLINE_LINE="$(<"$tmpf")"
+  READLINE_POINT="${#READLINE_LINE}"
+  rm -f "$tmpf" >/dev/null 2>&1
 }
 
 # bind to "C-x e" in all modes

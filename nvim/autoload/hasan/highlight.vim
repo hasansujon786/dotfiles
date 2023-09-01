@@ -5,8 +5,8 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi Cursor             guibg=#61AFEF gui=NONE
   hi ZenBorder          guifg=#1c212c
   hi VertSplit          guifg=#2b3043
-  hi StatusLine         guibg=#2C323C guifg=#ABB2BF
-  hi StatusLineNC       guibg=#2C323C guifg=#ABB2BF
+  hi StatusLine         guibg=#2D3343 guifg=#ABB2BF
+  hi StatusLineNC       guibg=#2D3343 guifg=#ABB2BF
   hi CursorLineFocus    guibg=#363C51
   hi IncSearch          guibg=#e86671 gui=underline
   hi CurSearch          guibg=#e86671 guifg=#2C323C gui=underline

@@ -21,13 +21,15 @@ return {
           require('config.ui.whichkey')
         end,
       },
-      {
-        'freddiehaddad/feline.nvim',
-        config = function()
-          require('config.ui.feline')
-          require('config.ui.feline_winbar')
-        end,
-      },
     },
+  },
+  {
+    'freddiehaddad/feline.nvim',
+    lazy = true,
+    event = 'BufReadPost',
+    config = function()
+      require('config.ui.feline')
+      require('config.ui.feline_winbar')
+    end,
   },
 }

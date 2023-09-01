@@ -19,7 +19,7 @@ return {
   {
     'lewis6991/gitsigns.nvim',
     lazy = true,
-    event = 'BufReadPost',
+    event = 'VeryLazy',
     config = function()
       require('config.git.gitsigns')
     end,
