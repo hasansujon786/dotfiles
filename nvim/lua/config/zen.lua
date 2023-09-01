@@ -1,6 +1,3 @@
--- use({ 'hasansujon786/2048.nvim' })
--- { 'folke/zen-mode.nvim', lazy = true, cmd = 'ZenMode', config = function() require('config.zen') end },
--- { 'epwalsh/obsidian.nvim', config = function() require('config.obsidian') end },
 return {
   'hasansujon786/zen-mode.nvim', -- FORK: feat(border): add border to main window
   branch = 'win-border',
@@ -34,7 +31,4 @@ return {
     --   vim.o.cmdheight = 1
     -- end,
   },
-  -- config = function()
-  --   require('config.zen')
-  -- end,
 }
