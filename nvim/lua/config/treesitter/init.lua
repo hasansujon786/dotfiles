@@ -2,7 +2,7 @@ return {
   {
     'nvim-treesitter/nvim-treesitter',
     lazy = true,
-    event = 'BufReadPre',
+    event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       -- TSInstallSync javascript typescript tsx org
       local parsers = {

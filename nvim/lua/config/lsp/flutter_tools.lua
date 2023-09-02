@@ -1,4 +1,7 @@
 return {
+  'akinsho/flutter-tools.nvim',
+  lazy = true,
+  ft = { 'dart' },
   config = function()
     require('flutter-tools').setup({
       ui = { border = require('hasan.core.state').ui.border.style },
@@ -15,19 +18,12 @@ return {
           require('config.lsp.util.setup').on_attach(client, bufnr)
 
           -- Custom keymap
-          keymap(
-            'n',
-            '<leader>fc',
-            '<Cmd>lua require("telescope").extensions.flutter.commands()<CR>',
-            { desc = 'Flutter: Show commands', buffer = bufnr }
-          )
+          keymap( 'n', '<leader>fc', '<Cmd>lua require("telescope").extensions.flutter.commands()<CR>', { desc = 'Flutter: Show commands', buffer = bufnr })
           keymap('n', '<leader>fr', '<Cmd>FlutterRestart<CR>', { desc = 'Flutter: Lsp restart', buffer = bufnr })
           -- lua require('project_run.utils').open_tab(vim.fn.getcwd(), 'adb connect 192.168.31.252 && flutter run')
 
           -- Commands
-          command('PubInstall', function(_)
-            require('hasan.telescope.custom').pub_install()
-          end)
+          command('PubInstall', function(_) require('hasan.telescope.custom').pub_install() end)
           command('FlutterLogOpen', function(_)
             local winFound = require('hasan.utils.win').focusWinIfExists('log')
             if not winFound then

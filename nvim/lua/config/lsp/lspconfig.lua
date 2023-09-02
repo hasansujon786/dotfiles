@@ -1,64 +1,35 @@
-local M = {
-  essential_servers = { -- Index [1] is to install lsp-server with mason, [2] is for lspconfig
-    bashls = { 'bash-language-server' },
-    html = { 'html-lsp' },
-    vimls = { 'vim-language-server' },
-    vuels = { 'vetur-vls' },
-    cssls = { 'css-lsp' },
-    jsonls = { 'json-lsp' },
-    tsserver = { 'typescript-language-server' },
-    tailwindcss = { 'tailwindcss-language-server' },
-    lua_ls = { 'lua-language-server' },
-    astro = { 'astro-language-server' },
-  },
-  extra_tools = {
-    'stylua',
-  },
-  default_opts = {
-    on_attach = require('config.lsp.util.setup').on_attach,
-    flags = { debounce_text_changes = 500 },
-    capabilities = require('config.lsp.util.setup').update_capabilities('lsp-config'),
-  },
-  use_builtin_lsp_formatter = { 'dartls', 'astro' },
-}
-
-M.essential_servers.lua_ls[2] = {
-  settings = {
-    Lua = {
-      runtime = { version = 'LuaJIT' },
-      diagnostics = { globals = { 'vim', 'jit', 'keymap', 'P' } },
-      workspace = {
-        -- library = vim.api.nvim_get_runtime_file('', true),
-        library = { 'C:\\Users\\hasan\\dotfiles\\nvim\\lua' }, -- Make the server aware of Neovim runtime files
-      },
-      telemetry = { enable = false },
-      -- semantic = { enable = false },
-    },
-  },
-}
-
-M.essential_servers.tailwindcss[2] = {
-  root_dir = require('lspconfig.util').root_pattern(
-    'tailwind.config.js',
-    'tailwind.config.ts',
-    'postcss.config.js',
-    'postcss.config.ts',
-    'package.json',
-    'node_modules'
-    -- '.git'
-  ),
-}
-
-M.setup = function()
+local lspconfig_setup = function()
   local lspconfig = require('lspconfig')
+  local settings = require('config.lsp.util.settings')
+
   require('lspconfig.ui.windows').default_options.border = 'rounded'
-  for server_name, server_config in pairs(M.essential_servers) do
+  for server_name, server_config in pairs(settings.essential_servers) do
     if server_config[2] == nil then
-      lspconfig[server_name].setup(M.default_opts)
+      lspconfig[server_name].setup(settings.default_opts)
     else
-      lspconfig[server_name].setup(require('hasan.utils').merge(M.default_opts, server_config[2]))
+      lspconfig[server_name].setup(require('hasan.utils').merge(settings.default_opts, server_config[2]))
     end
   end
 end
 
-return M
+return {
+  'neovim/nvim-lspconfig',
+  lazy = true,
+  event = { 'BufReadPre', 'BufNewFile' },
+  dependencies = {
+    {
+      'williamboman/mason.nvim',
+      opts = { max_concurrent_installers = 3, ui = { border = 'none', height = 0.8 } },
+      config = function(_, opts)
+        require('mason').setup(opts)
+        -- local modles
+        lspconfig_setup()
+        require('config.lsp.util.diagnosgic').setup()
+      end,
+      build = ':MasonUpdate',
+    },
+    { 'hrsh7th/cmp-nvim-lsp', lazy = true, module = 'cmp_nvim_lsp' },
+    { 'williamboman/mason-lspconfig.nvim', lazy = true, module = 'mason-lspconfig' },
+    { 'jose-elias-alvarez/null-ls.nvim' },
+  },
+}

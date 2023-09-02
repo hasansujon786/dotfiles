@@ -1,5 +1,8 @@
 return {
-  setup = function()
+  'jose-elias-alvarez/null-ls.nvim',
+  lazy = true,
+  module = 'null-ls',
+  config = function()
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/MAIN.md
     local null_ls = require('null-ls')
     local b = null_ls.builtins

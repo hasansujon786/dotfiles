@@ -9,8 +9,8 @@ function M.install_essential_servers()
 
   -- Get mason server names to install
   local masaon_server_names = {}
-  local extra_tools = require('config.lsp.lspconfig').extra_tools
-  for _, server_config in pairs(require('config.lsp.lspconfig').essential_servers) do
+  local extra_tools = require('config.lsp.util.settings').extra_tools
+  for _, server_config in pairs(require('config.lsp.util.settings').essential_servers) do
     table.insert(masaon_server_names, server_config[1])
   end
 
@@ -32,10 +32,6 @@ end
 function M.code_action()
   require('hasan.utils.ui').telescope_cursor_theme_pre()
   vim.lsp.buf.code_action()
-end
-function M.range_code_action()
-  require('hasan.utils.ui').telescope_cursor_theme_pre()
-  vim.lsp.buf.range_code_action()
 end
 
 -- local notify_changes = function(changes)
