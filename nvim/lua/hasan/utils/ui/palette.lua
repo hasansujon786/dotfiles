@@ -22,12 +22,6 @@ local function set_custom_highlights()
   util.fg_bg('WhichKeyFloat', fg, cursorling_bg)
   util.fg_bg('WhichKeyBorder ', normal_bg, cursorling_bg)
 
-  if state.theme.bg_tranparent then
-    util.bg('NoiceMini ', '#343f50')
-  else
-    util.bg('NoiceMini ', normal_bg)
-  end
-
   vim.fn['hasan#highlight#load_custom_highlight']()
 
   -- https://github.com/folke/tokyonight.nvim/blob/main/lua/tokyonight/theme.lua#L255-L272
