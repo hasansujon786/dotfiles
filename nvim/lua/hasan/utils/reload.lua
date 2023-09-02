@@ -46,4 +46,7 @@ end
 
 return {
   reload_lua_modules = reload_lua_modules,
+  reload_app_state = function()
+    require('hasan.utils.color').toggle_bg_tranparent(true)
+  end,
 }

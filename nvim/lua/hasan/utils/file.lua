@@ -13,7 +13,7 @@ M.config_root = function()
 end
 
 M.open_settings = function()
-  local path = vim.fs.normalize(M.config_root() .. '\\lua\\core\\state.lua')
+  local path = vim.fs.normalize(M.config_root() .. '\\lua\\hasan\\core\\state.lua')
   vim.cmd.edit(path)
 end
 

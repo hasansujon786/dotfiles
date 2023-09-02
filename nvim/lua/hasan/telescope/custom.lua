@@ -275,7 +275,7 @@ function M.search_project_todos()
     path_display = { 'smart' },
     search_list = require('hasan.core.state').telescope.todo_keyfaces,
     additional_args = function()
-      return { '--glob', '!nvim/lua/core/state.lua', '--glob', '!nvim/legacy/*' }
+      return { '--glob', '!nvim/lua/hasan/core/state.lua', '--glob', '!nvim/legacy/*' }
     end,
   })
 end
