@@ -224,6 +224,7 @@ return {
   'kyazdani42/nvim-tree.lua',
   lazy = true,
   event = 'CursorHold',
+  commit = '0074120',
   opts = {
     on_attach = on_attach,
     sort_by = sort_by,

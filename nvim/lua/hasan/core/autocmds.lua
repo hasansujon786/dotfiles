@@ -7,7 +7,7 @@ end
 utils.augroup('MY_AUGROUP')(function(autocmd)
   autocmd('CmdwinEnter', 'nnoremap <buffer><CR> <CR>')
   autocmd('ColorScheme', function()
-    require('hasan.utils.ui.palatte').set_custom_highlights()
+    require('hasan.utils.ui.palette').set_custom_highlights()
 
     if first_init then
       vim.defer_fn(function()

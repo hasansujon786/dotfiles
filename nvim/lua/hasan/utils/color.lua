@@ -22,6 +22,7 @@ M.toggle_bg_tranparent = function(followState)
     state.theme.bg_tranparent = not state.theme.bg_tranparent
     cmd(string.format("silent !sed -i '%s' %s", stateValue, statePath))
   end
+  require('hasan.utils.ui.palette').set_custom_highlights()
 end
 
 M.get_hl = function(name)
