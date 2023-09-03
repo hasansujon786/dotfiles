@@ -12,6 +12,7 @@ alias nri='node --inspect '
 alias ns='npm start'
 alias nd='npm run dev'
 alias ncc='npm cache clean --force'
+alias esint='npm init @eslint/config'
 # expo
 alias esc='npx expo start --clear'
 # tsc

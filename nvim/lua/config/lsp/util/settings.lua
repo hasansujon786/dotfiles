@@ -10,6 +10,7 @@ local M = {
     tailwindcss = { 'tailwindcss-language-server' },
     lua_ls = { 'lua-language-server' },
     astro = { 'astro-language-server' },
+    eslint = { 'eslint-lsp' },
   },
   extra_tools = {
     'stylua',

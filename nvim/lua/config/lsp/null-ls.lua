@@ -1,3 +1,16 @@
+-- local conditions = {
+--   eslint_d = function(utils)
+--     return utils.root_has_file(
+--       '.eslintrc',
+--       '.eslintrc.js',
+--       '.eslintrc.cjs',
+--       '.eslintrc.yaml',
+--       '.eslintrc.yml',
+--       '.eslintrc.json'
+--     )
+--   end,
+-- }
+
 return {
   'jose-elias-alvarez/null-ls.nvim',
   lazy = true,
@@ -13,17 +26,18 @@ return {
       -- b.formatting.stylua.with({
       --   extra_args = { '--indent-type', 'Spaces', '--indent-width', '2', '--quote-style', 'AutoPreferSingle' },
       -- }),
+
+      -- b.diagnostics.todo_comments
+
       -- b.code_actions.eslint, -- eslint or eslint_d
       -- b.diagnostics.eslint, -- eslint or eslint_d
-
       -- b.diagnostics.eslint.with({
-      --   only_local = "node_modules/.bin",
       --   -- prefer_local = "node_modules/.bin",
-      --   condition = function(utils)
-      --     return utils.root_has_file(".eslintrc.js")
-      --   end,
+      --   only_local = 'node_modules/.bin',
       -- }),
-      -- b.diagnostics.todo_comments
+      -- buffer keybind => https://github.com/mantoni/eslint_d.js/
+      -- b.code_actions.eslint_d.with({ condition = conditions.eslint_d, only_local = 'node_modules/.bin' }),
+      -- b.diagnostics.eslint_d.with({ condition = conditions.eslint_d, only_local = 'node_modules/.bin' }),
     }
     local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
     local function on_attach(client, bufnr)
@@ -36,12 +50,12 @@ return {
             if not state.file.auto_format then
               return
             end
-            vim.lsp.buf.format({ bufnr = bufnr }) -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+            vim.lsp.buf.format({ bufnr = bufnr })
           end,
         })
       end
     end
 
-    null_ls.setup({ sources = sources, on_attach = on_attach })
+    null_ls.setup({ border = 'rounded', sources = sources, on_attach = on_attach, diagnostics_format = '#{m} (#{s})' })
   end,
 }

@@ -51,10 +51,11 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! CmpItemKindSnippet            guifg=#9CDCFE
 
   "/// LSP variable reference ///"
-  hi LspReferenceText  guibg=#3B4048 gui=NONE
-  hi LspReferenceWrite guibg=#463b48 gui=NONE
-  hi LspReferenceRead  guibg=#3B4048 gui=NONE
-  hi! link LspInfoBorder  FloatBorder
+  hi! link LspInfoBorder     FloatBorder
+  hi! link NullLsInfoBorder  FloatBorder
+  hi LspReferenceText      guibg=#3B4048 gui=NONE
+  hi LspReferenceWrite     guibg=#463b48 gui=NONE
+  hi LspReferenceRead      guibg=#3B4048 gui=NONE
   hi DiagnosticLineNrWarn  guifg=#ebc275 guibg=#4C4944
   hi DiagnosticLineNrError guifg=#ef5f6b guibg=#4D3542
   hi DiagnosticLineNrInfo  guifg=#4dbdcb guibg=#2C4855
