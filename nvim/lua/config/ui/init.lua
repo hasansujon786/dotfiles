@@ -1,7 +1,7 @@
 return {
   { 'navarasu/onedark.nvim', lazy = true },
   {
-    'kyazdani42/nvim-web-devicons',
+    'nvim-tree/nvim-web-devicons',
     lazy = true,
     config = function()
       require('config.ui.web_devicons')
@@ -26,7 +26,7 @@ return {
   {
     'freddiehaddad/feline.nvim',
     lazy = true,
-    event = 'BufReadPost',
+    event = { 'BufReadPost', 'VeryLazy' },
     config = function()
       require('config.ui.feline')
       require('config.ui.feline_winbar')

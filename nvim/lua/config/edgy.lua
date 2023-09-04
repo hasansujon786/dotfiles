@@ -99,13 +99,31 @@ return {
           end,
           wo = { winbar = false },
         },
+        {
+          ft = 'neo-tree',
+          open = 'Neotree filesystem left',
+          filter = function(buf, win)
+            local pos = vim.api.nvim_buf_get_var(buf, 'neo_tree_position')
+            if pos == 'current' or require('hasan.utils').is_floating_win(win) then
+              return false
+            end
+            return true
+          end,
+          wo = { winbar = true },
+        },
+      },
+      options = {
+        left = { size = 35 },
+        bottom = { size = 10 },
+        right = { size = 30 },
+        top = { size = 10 },
       },
       wo = {
         winbar = true,
         winhighlight = 'WinBar:EdgyWinBar,Normal:EdgyNormal',
       },
       animate = {
-        enabled = true,
+        enabled = false,
         fps = 100, -- frames per second
         cps = 200, -- cells per second
         on_begin = function()

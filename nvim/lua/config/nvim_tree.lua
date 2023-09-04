@@ -1,11 +1,3 @@
-keymap('n', '-', '<cmd>lua require("hasan.utils.vinegar").vinegar()<CR>', { desc = 'Vinegar' })
-keymap('n', '<BS>', '<cmd>lua require("hasan.utils.vinegar").alternate_file()<CR>', { desc = 'Alternate file' })
-keymap('n', '<leader>ob', ':NvimTreeToggle<CR>', { desc = 'Toggle explorer' })
-keymap('n', '<leader>op', '<cmd>lua require("hasan.utils.vinegar").toggle_sidebar()<CR>', { desc = 'Open explorer' })
-keymap('n', '<leader>/e', '<cmd>lua require("nvim-tree.marks.navigation").select()<cr>', { desc = 'Search tree marks' })
--- keymap('n', '[e', '<cmd>lua require("nvim-tree.marks.navigation").prev()<cr>', {desc = 'Previous tree mark'})
--- keymap('n', ']e', '<cmd>lua require("nvim-tree.marks.navigation").next()<cr>', {desc = 'Next tree mark'})
-
 local sort_current = 1
 local SORT_METHODS = {
   'name',
@@ -222,9 +214,19 @@ end
 
 return {
   'kyazdani42/nvim-tree.lua',
+  enabled = false,
   lazy = true,
   event = 'CursorHold',
   commit = '0074120',
+  init = function ()
+    keymap('n', '-', '<cmd>lua require("hasan.utils.vinegar").vinegar()<CR>', { desc = 'Vinegar' })
+    keymap('n', '<BS>', '<cmd>lua require("hasan.utils.vinegar").alternate_file()<CR>', { desc = 'Alternate file' })
+    keymap('n', '<leader>ob', ':NvimTreeToggle<CR>', { desc = 'Toggle explorer' })
+    keymap('n', '<leader>op', '<cmd>lua require("hasan.utils.vinegar").toggle_sidebar()<CR>', { desc = 'Open explorer' })
+    keymap('n', '<leader>/e', '<cmd>lua require("nvim-tree.marks.navigation").select()<cr>', { desc = 'Search tree marks' })
+    -- keymap('n', '[e', '<cmd>lua require("nvim-tree.marks.navigation").prev()<cr>', {desc = 'Previous tree mark'})
+    -- keymap('n', ']e', '<cmd>lua require("nvim-tree.marks.navigation").next()<cr>', {desc = 'Next tree mark'})
+  end,
   opts = {
     on_attach = on_attach,
     sort_by = sort_by,

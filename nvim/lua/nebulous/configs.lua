@@ -9,6 +9,7 @@ M.default = {
   blacklist_ft = {
     'fern',
     'NvimTree',
+    'neo-tree',
     'fzf',
     'floating',
     'qf',
