@@ -6,12 +6,17 @@ require('onedark').setup({
   toggle_style_list = { 'light', 'cool', 'deep', 'dark', 'darker' },
   -- colors = {},
   highlights = {
-    ['@variable.builtin'] = { fg = '$yellow' },
     ['@constant'] = { fg = '$yellow' },
+    ['@constant.builtin'] = { fg = '$yellow' },
+    ['@constant.macro'] = { fg = '$yellow' },
+    ['@variable.builtin'] = { fg = '$yellow' },
+
+    ['@field'] = { fg = '$red' },
     ['@variable'] = { fg = '$red' },
     ['@property'] = { fg = '$red' },
-    ['@field'] = { fg = '$red' },
+
     ['@punctuation.special'] = { fg = '$purple' },
+
     ['OrgDone'] = { fg = '$green' },
 
     ['@tag'] = { fg = '$red' },

@@ -196,5 +196,14 @@ return {
       },
     },
   },
-  { 'nvim-treesitter/playground', lazy = true, cmd = { 'TSPlaygroundToggle', 'TSHighlightCapturesUnderCursor' } },
+  {
+    'nvim-treesitter/playground',
+    lazy = true,
+    cmd = {
+      'TSPlaygroundToggle',
+      'TSHighlightCapturesUnderCursor',
+      'TSCaptureUnderCursor',
+      'TSNodeUnderCursor',
+    },
+  },
 }
