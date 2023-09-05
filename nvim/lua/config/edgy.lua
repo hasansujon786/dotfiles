@@ -109,11 +109,11 @@ return {
             end
             return true
           end,
-          wo = { winbar = true },
+          wo = { winbar = false, winhighlight = '' },
         },
       },
       options = {
-        left = { size = 35 },
+        left = { size = 30 },
         bottom = { size = 10 },
         right = { size = 30 },
         top = { size = 10 },

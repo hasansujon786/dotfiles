@@ -19,16 +19,33 @@ return {
       '<leader>op',
       function()
         vim.g.cwd = vim.loop.cwd()
-        -- vim.cmd('Neotree filesystem left reveal_file=%:p')
-        vim.cmd('Neotree filesystem left')
+        require('config.ui.nebulous').mark_as_alternate_win()
+        local readonly = vim.api.nvim_buf_get_option(0, 'readonly')
+        local modifiable = vim.api.nvim_buf_get_option(0, 'modifiable')
+        local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
+
+        if filetype == 'neo-tree' then
+          vim.cmd([[Neotree close]])
+        elseif readonly or not modifiable then
+          vim.cmd([[Neotree filesystem left]])
+        else
+          vim.cmd([[Neotree filesystem left reveal_file=%:p]])
+        end
       end,
-      desc = 'NeoTree: Open sidebar',
+      desc = 'NeoTree: Toggle sidebar',
     },
     {
       '-',
       function()
         vim.g.cwd = vim.loop.cwd()
-        vim.cmd('Neotree position=current dir=%:p:h reveal_file=%:p')
+        local readonly = vim.api.nvim_buf_get_option(0, 'readonly')
+        local modifiable = vim.api.nvim_buf_get_option(0, 'modifiable')
+
+        if readonly or not modifiable then
+          vim.cmd([[Neotree filesystem position=current]])
+        else
+          vim.cmd([[Neotree filesystem position=current dir=%:p:h reveal_file=%:p]])
+        end
       end,
       desc = 'NeoTree: Open vinegar',
     },
@@ -51,7 +68,7 @@ return {
     close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
     popup_border_style = 'rounded',
     enable_git_status = true,
-    enable_diagnostics = true,
+    enable_diagnostics = false,
     enable_normal_mode_for_inputs = false, -- Enable normal mode for input dialogs.
     open_files_do_not_replace_types = { 'terminal', 'trouble', 'qf' }, -- when opening files, do not use windows containing these filetypes or buftypes
     sort_case_insensitive = false, -- used when sorting files and directories in the tree
@@ -82,16 +99,16 @@ return {
         expander_highlight = 'NeoTreeExpander',
       },
       icon = {
-        folder_closed = '',
-        folder_open = '',
-        folder_empty = '󰜌',
+        folder_closed = '',
+        folder_open = '',
+        folder_empty = '',
         -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
         -- then these will never be used.
-        default = '*',
+        default = '',
         highlight = 'NeoTreeFileIcon',
       },
       modified = {
-        symbol = '[+]',
+        symbol = '•',
         highlight = 'NeoTreeModified',
       },
       name = {
@@ -102,16 +119,16 @@ return {
       git_status = {
         symbols = {
           -- Change type
-          added = '', -- or "✚", but this is redundant info if you use git_status_colors on the name
-          modified = '', -- or "", but this is redundant info if you use git_status_colors on the name
-          deleted = '✖', -- this can only be used in the git_status source
-          renamed = '󰁕', -- this can only be used in the git_status source
+          added = 'A', -- or "✚", but this is redundant info if you use git_status_colors on the name
+          modified = 'M', -- or "", but this is redundant info if you use git_status_colors on the name
+          deleted = 'D', -- this can only be used in the git_status source
+          renamed = 'R', -- this can only be used in the git_status source
           -- Status type
-          untracked = '',
-          ignored = '',
-          unstaged = '󰄱',
-          staged = '',
+          untracked = 'U',
           conflict = '',
+          ignored = '◌',
+          unstaged = '',
+          staged = '',
         },
       },
       -- If you don't want to use these columns, you can set `enabled = false` for each of them individually
@@ -127,69 +144,67 @@ return {
     commands = {},
     window = {
       position = 'left',
-      width = 40,
-      mapping_options = {
-        noremap = true,
-        nowait = true,
-      },
+      width = 30,
+      mapping_options = { noremap = true, nowait = true },
       mappings = {
-        ['<space>'] = {
-          'toggle_node',
-          nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
-        },
+        ['<space>'] = 'none',
+        ['l'] = 'open',
+        ['o'] = 'open', -- open_drop
         ['<cr>'] = 'open',
         ['<2-LeftMouse>'] = 'open',
-        ['<esc>'] = 'cancel', -- close preview or floating neo-tree window
-        ['P'] = { 'toggle_preview', config = { use_float = true } },
-        ['l'] = 'focus_preview',
         ['s'] = 'open_split',
         ['v'] = 'open_vsplit',
+        ['t'] = 'open_tabnew', -- open_tab_drop
+        ['w'] = 'open_with_window_picker',
+        ['P'] = { 'toggle_preview', config = { use_float = true } },
         -- ["S"] = "split_with_window_picker",
         -- ["s"] = "vsplit_with_window_picker",
-        ['t'] = 'open_tabnew',
-        -- ["<cr>"] = "open_drop",
-        -- ["t"] = "open_tab_drop",
-        ['w'] = 'open_with_window_picker',
-        --["P"] = "toggle_preview", -- enter preview mode, which shows the current node without focusing
-        ['C'] = 'close_node',
-        -- ['C'] = 'close_all_subnodes',
-        ['z'] = 'close_all_nodes',
-        --["Z"] = "expand_all_nodes",
-        ['a'] = {
-          'add',
-          -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
-          -- some commands may take optional config options, see `:h neo-tree-mappings` for details
-          config = {
-            show_path = 'none', -- "none", "relative", "absolute"
-          },
-        },
+        ['<esc>'] = 'cancel', -- close preview or floating neo-tree window
+        ['x'] = 'close_node',
+        ['X'] = 'close_all_nodes',
+        ['zr'] = 'expand_all_nodes',
+        ['zR'] = 'expand_all_nodes',
+        ['zc'] = 'close_all_nodes',
+        ['zC'] = 'close_all_nodes',
+        ['Z'] = 'close_all_subnodes',
+        ['z'] = 'none',
+        -- ['zc'] = 'close_all_subnodes',
+
+        -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
+        ['a'] = { 'add', config = { show_path = 'none' } }, -- "none", "relative", "absolute"
         ['A'] = 'add_directory', -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
-        ['d'] = 'delete',
-        ['r'] = 'rename',
+        ['d'] = 'cut_to_clipboard',
         ['y'] = 'copy_to_clipboard',
-        ['x'] = 'cut_to_clipboard',
         ['p'] = 'paste_from_clipboard',
-        ['c'] = 'copy', -- takes text input for destination, also accepts the optional config.show_path option like "add":
-        -- ["c"] = {
-        --  "copy",
-        --  config = {
-        --    show_path = "none" -- "none", "relative", "absolute"
-        --  }
-        --}
-        ['m'] = 'move', -- takes text input for destination, also accepts the optional config.show_path option like "add".
+        ['D'] = 'delete',
+        ['<f2>'] = 'rename',
+        ['<C-x>'] = 'cut_to_clipboard',
+        ['<C-c>'] = 'copy_to_clipboard',
+        ['<C-v>'] = 'paste_from_clipboard',
+        ['<delete>'] = 'delete',
+        ['c'] = 'none',
+        ['m'] = 'none',
+        -- ['c'] = 'copy', -- takes text input for destination, also accepts the optional config.show_path option like "add":
+        -- ['c'] = { 'copy', config = { show_path = 'none' } }, -- "none", "relative", "absolute"
+        -- ['m'] = 'move', -- takes text input for destination, also accepts the optional config.show_path option like "add".
         ['q'] = 'close_window',
-        ['R'] = 'refresh',
         ['?'] = 'show_help',
         ['<'] = 'prev_source',
         ['>'] = 'next_source',
-        ['i'] = 'show_file_details',
+        ['K'] = 'show_file_details',
+        ['<C-l>'] = 'refresh',
       },
     },
     nesting_rules = {},
     filesystem = {
+      -- bind_to_cwd = true, -- true creates a 2-way binding between vim's cwd and neo-tree's root
+      -- cwd_target = {
+      --   sidebar = 'window', -- sidebar is when position = left or right
+      --   current = 'window', -- current is when position = current
+      -- },
       filtered_items = {
         visible = false, -- when true, they will just be displayed differently than normal items
-        hide_dotfiles = true,
+        hide_dotfiles = false,
         hide_gitignored = true,
         hide_hidden = true, -- only works on Windows for hidden files/directories
         hide_by_name = {
@@ -266,11 +281,11 @@ return {
           end,
           ['H'] = 'toggle_hidden',
           ['/'] = 'fuzzy_finder',
-          ['D'] = 'fuzzy_finder_directory',
+          -- ['D'] = 'fuzzy_finder_directory',
           ['#'] = 'fuzzy_sorter', -- fuzzy sorting using the fzy algorithm
           -- ["D"] = "fuzzy_sorter_directory",
           ['f'] = 'filter_on_submit',
-          ['<c-x>'] = 'clear_filter',
+          -- ['<c-x>'] = 'clear_filter',
           ['[c'] = 'prev_git_modified',
           [']c'] = 'next_git_modified',
           -- ['o'] = { 'show_help', nowait = false, config = { title = 'Order by', prefix_key = 'o' } },
@@ -281,7 +296,6 @@ return {
           -- ['on'] = { 'order_by_name', nowait = false },
           -- ['os'] = { 'order_by_size', nowait = false },
           -- ['ot'] = { 'order_by_type', nowait = false },
-          ['o'] = 'open',
           ['oc'] = 'none',
           ['od'] = 'none',
           ['og'] = 'none',
@@ -320,7 +334,6 @@ return {
           -- ['on'] = { 'order_by_name', nowait = false },
           -- ['os'] = { 'order_by_size', nowait = false },
           -- ['ot'] = { 'order_by_type', nowait = false },
-          ['o'] = 'none',
           ['oc'] = 'none',
           ['od'] = 'none',
           ['om'] = 'none',
@@ -348,7 +361,6 @@ return {
           -- ['on'] = { 'order_by_name', nowait = false },
           -- ['os'] = { 'order_by_size', nowait = false },
           -- ['ot'] = { 'order_by_type', nowait = false },
-          ['o'] = 'none',
           ['oc'] = 'none',
           ['od'] = 'none',
           ['om'] = 'none',

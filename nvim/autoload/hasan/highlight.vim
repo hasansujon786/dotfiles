@@ -15,6 +15,7 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi WhiteText          guifg=#ffffff
   hi GrayText           guifg=#7386a5
   hi CursorLineDap      guibg=#173F1E guifg=none guisp=none cterm=underline
+  hi SidebarDark        guifg=#a5b0c5 guibg=#1e242e
   hi! link Folded Comment
   hi! link Conceal String
   hi! link CursorColumn CursorLineFocus
@@ -129,6 +130,18 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! link NvimTreeWinSeparator VertSplit
   hi! NvimTreeNormal guibg=#1E242E guifg=#a5b0c5
   hi! NvimTreeWinBar guibg=#242B38 guifg=#75A899
+
+  "/// neo-tree.nvim ///"
+  hi! link NeoTreeModified       String
+  hi! link NeoTreeMessage        Comment
+  hi! link NeoTreeDimText        Comment
+  hi! link NeoTreeIndentMarker   IndentBlanklineChar
+  hi! link NeoTreeCursorLine     CursorLineFocus
+  hi! link NeoTreeNormal         SidebarDark
+  hi! link NeoTreeNormalNC       SidebarDark
+  hi! link NeoTreeWinSeparator   WinSeparator
+  hi! link NeoTreeVertSplit      WinSeparator
+  hi! NeoTreeGitUntracked gui=NONE
 
   "/// Nebulous ///"
   hi NebulousInvisibe   guifg=#242B38

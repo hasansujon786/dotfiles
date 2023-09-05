@@ -9,6 +9,7 @@ local force_persist_ft = {
   DiffviewFiles = true,
   Outline = true,
   flutterToolsOutline = true,
+  ['neo-tree'] = true,
 }
 local force_hide_btype = { prompt = true }
 local force_hide_ftype = {

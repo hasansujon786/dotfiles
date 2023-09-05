@@ -229,15 +229,6 @@ keymap({ 'n', 'i' }, '<C-k>e', '<cmd>lua require("hasan.telescope.custom").emoji
 -- maps.nnoremap('<leader>p:', ':silent ! tmux-windowizer $(pwd) ', {silent = false}) -- run project cmd
 -- maps.nnoremap('<leader>p;', ':silent ! tmux-send-keys $(pwd) ', {silent = false})
 
--- Floaterm
-vim.g.floaterm_keymap_new = '<C-\\>c'
-vim.g.floaterm_keymap_prev = '<C-\\>p'
-vim.g.floaterm_keymap_next = '<C-\\>n'
-vim.g.floaterm_keymap_kill = '<A-q>'
-vim.g.floaterm_keymap_toggle = '<A-m>'
-keymap('n', '<A-m>', '<cmd>FloatermToggle<CR>')
-keymap('n', ']t', '<cmd>FloatermToggle<CR><C-\\><C-n>')
-keymap('n', '[t', '<cmd>FloatermToggle<CR><C-\\><C-n>')
 -- yanklist
 keymap('n', 'p', '<Plug>(yanklist-auto-put)')
 keymap('n', 'P', '<Plug>(yanklist-auto-Put)')

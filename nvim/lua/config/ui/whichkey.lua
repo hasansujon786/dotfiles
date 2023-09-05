@@ -138,8 +138,6 @@ local leader = {
     O = { '<cmd>lua require("hasan.utils.init").open_git_remote(false)<CR>',   'Open git repo' },
 
     g = { '<cmd>Neogit<CR>',                                                    'Open Neogit' },
-    l = { '<cmd>FloatermNew --height=1.0 --width=1.0 lazygit<CR>',              'Open lazygit' },
-    t = { '<cmd>FloatermNew --height=1.0 --width=1.0 tig<CR>',                  'Open tig' },
 
     d = {
       function()
@@ -200,11 +198,8 @@ local leader = {
     h = {'<cmd>lua require("hasan.org").open_org_home("-tabedit")<CR>',         'Open org home'},
 
     o = { '<cmd>lua require("config.ui.nebulous").toggle_symbol_outline()<cr>',    'SymbolsOutline' },
-    t = { '<cmd>FloatermNew --wintype=normal --height=12<CR>',                  'Open terminal split' },
-    T = { '<cmd>FloatermNew<CR>',                                               'Open terminal popup' },
     q = { '<cmd>call hasan#window#toggle_quickfix(1)<CR>',                      'Open Quickfix list' },
     l = { '<cmd>call hasan#window#toggle_quickfix(0)<CR>',                      'Open Local list' },
-    f = { '<cmd>FloatermNew --height=1.0 --width=1.0 --opener=edit lf<CR>',     'Open lf' },
     y = { '<cmd>lua require("yanklist").yanklist({initial_mode="normal"})<CR>', 'Yank list' },
   },
 

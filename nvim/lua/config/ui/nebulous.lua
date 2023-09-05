@@ -2,8 +2,12 @@ local api = vim.api
 local utils = require('hasan.utils')
 local M = {
   alternate_winid_to_ignore = nil,
-  ignore_alternate_filetypes = { 'noice', 'Outline', 'NvimTree' },
+  ignore_alternate_filetypes = { 'noice', 'Outline', 'NvimTree', 'neo-tree' },
 }
+M.mark_as_alternate_win = function(winid)
+  local win = winid or vim.api.nvim_get_current_win()
+  M.alternate_winid_to_ignore = win
+end
 
 keymap('n', '<leader>R', '<cmd>lua require("nebulous").toggle_win_blur()<CR>', { desc = 'Toggle Nebulous' })
 
@@ -31,7 +35,10 @@ M.my_nebulous_setup = function()
       end,
     },
     ignore_alternate_win = function(winid, is_float)
-      if vim.tbl_contains(M.ignore_alternate_filetypes, vim.o.ft) then
+      local buf = vim.api.nvim_win_get_buf(winid)
+      local ft = vim.api.nvim_buf_get_option(buf, 'filetype')
+
+      if vim.tbl_contains(M.ignore_alternate_filetypes, ft) then
         return true
       end
 
