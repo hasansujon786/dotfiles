@@ -48,7 +48,8 @@ end
 local hl_sections = {
   light_text = { fg = 'fg' },
   muted_text = { fg = 'muted' },
-  muted_app_bg = { fg = 'olive', bg = 'app_bg' },
+  tool_tab = { fg = 'olive', bg = 'bg_app' },
+  tool_tab_nc = { fg = 'muted', bg = 'bg_app' },
 }
 
 local w = {
@@ -58,9 +59,9 @@ local w = {
         return generateWinTab(isActive)
       end,
       short_provider = '',
-      hl = { bg = 'app_bg', fg = isActive and 'White' or 'muted', style = 'NONE' },
-      left_sep = { str = icon.bar, hl = { bg = 'app_bg', fg = isActive and 'aqua' or 'app_bg' } },
-      right_sep = { str = icon.barEnd, hl = { bg = 'app_bg', fg = 'darkest' } },
+      hl = { bg = 'bg_app', fg = isActive and 'White' or 'muted', style = 'NONE' },
+      left_sep = { str = icon.bar, hl = { bg = 'bg_app', fg = isActive and 'aqua' or 'bg_app' } },
+      right_sep = { str = icon.barEnd, hl = { bg = 'bg_app', fg = 'bg_darkest' } },
     }
   end,
   empty = {
@@ -86,11 +87,11 @@ local w = {
     left_sep = ' ',
     right_sep = ' ',
   },
-  NvimTree = {
+  side_bar_explorer = {
     provider = '▎ EXPLORER',
-    hl = hl_sections.muted_app_bg,
+    hl = hl_sections.tool_tab,
     left_sep = '',
-    right_sep = { str = '', hl = hl_sections.muted_app_bg },
+    right_sep = { str = '', hl = hl_sections.tool_tab },
   },
   NvimTreeTools = {
     provider = function()
@@ -102,9 +103,9 @@ local w = {
         clicable(' ', 'explorer_menu', 3)
       )
     end,
-    hl = hl_sections.muted_app_bg,
+    hl = hl_sections.tool_tab,
     left_sep = '',
-    right_sep = { str = '', hl = hl_sections.muted_app_bg },
+    right_sep = { str = '', hl = hl_sections.tool_tab },
   },
 }
 
@@ -116,10 +117,11 @@ require('feline').winbar.setup({
   conditional_components = {
     {
       condition = function()
-        return bo.filetype == 'NvimTree'
+        local ft = bo.filetype
+        return ft == 'neo-tree' or ft == 'NvimTree'
       end,
-      active = { { w.NvimTree }, { w.NvimTreeTools } },
-      inactive = { { w.NvimTree }, { w.NvimTreeTools } },
+      active = { { w.side_bar_explorer }, { w.NvimTreeTools } },
+      inactive = { { w.side_bar_explorer }, { w.NvimTreeTools } },
     },
     {
       condition = function()

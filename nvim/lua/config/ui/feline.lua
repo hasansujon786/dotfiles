@@ -8,28 +8,30 @@ local function withHl(text, hl)
   return string.format('%%#%s#%s', hl, text)
 end
 
-local one_monokai = {
-  fg = '#a5b0c5',
-  bg = '#2D3343',
-  bg1 = '#3e425d',
-  bg_hidden = '#3E4452',
+local one_dark = {
+  red = '#ef5f6b',
+  aqua = '#6db9f7',
+  olive = '#75A899',
   green = '#97ca72',
   yellow = '#ebc275',
   purple = '#ca72e4',
   orange = '#d99a5e',
-  red = '#ef5f6b',
-  aqua = '#6db9f7',
   dark_red = '#f75f5f',
   dark_blue = '#282c34',
+  cyan_dark = '#2C4855',
+  cyan = '#4dbdcb',
+
+  fg = '#a5b0c5',
   gray = '#8b95a7',
   muted = '#68707E',
-  cyan = '#4dbdcb',
-  cyan_dark = '#2C4855',
-  app_bg = '#242B38',
+
+  bg_app = '#242B38',
   bg_dark = '#1E242E',
   bg_darker = '#1c212c',
-  darkest = '#151820',
-  olive = '#75A899',
+  bg_darkest = '#151820',
+  bg_hidden = '#3E4452',
+  bg1 = '#3e425d',
+  bg = '#2D3343',
 }
 
 local hl_sections = {
@@ -297,7 +299,7 @@ feline.setup({
       right,
     },
   },
-  theme = one_monokai,
+  theme = one_dark,
   vi_mode_colors = {
     NORMAL = has_pvim and 'red' or 'green',
     OP = 'green',
@@ -316,4 +318,3 @@ feline.setup({
     bufnames = {},
   },
 })
-

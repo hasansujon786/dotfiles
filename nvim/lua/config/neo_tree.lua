@@ -13,6 +13,7 @@ return {
   'nvim-neo-tree/neo-tree.nvim',
   lazy = true,
   -- event = 'CursorHold',
+  cmd = { 'Neotree' },
   branch = 'v3.x',
   keys = {
     {
