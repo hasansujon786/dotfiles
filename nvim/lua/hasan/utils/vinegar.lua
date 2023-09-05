@@ -5,7 +5,7 @@ local api = require('nvim-tree.api')
 local M = {}
 
 M.toggle_sidebar = function()
-  require('config.ui.nebulous').alternate_winid_to_ignore = vim.api.nvim_get_current_win()
+  require('config.ui.nebulous').mark_as_alternate_win()
   local readonly = vim.api.nvim_buf_get_option(0, 'readonly')
   local modifiable = vim.api.nvim_buf_get_option(0, 'modifiable')
   local filetype = vim.api.nvim_buf_get_option(0, 'filetype')

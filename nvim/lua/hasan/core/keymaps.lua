@@ -186,10 +186,10 @@ keymap('i', '<F5>', '<C-o>:syntax sync fromstart<CR>')
 keymap('n', '<leader>e', '<cmd>lua require("hasan.org").toggle_org_float()<CR>', { desc = 'Toggle org float' })
 keymap({ 'n', 'x' }, '<leader>s', '<cmd>silent w<cr>', { desc = 'Save current file' })
 keymap({ 'n', 'x' }, '<leader>q', '<cmd>Quit<CR>', { desc = 'Close window' })
-keymap({ 'n', 'x' }, '<leader>h', '<C-w>h', { desc = 'which_key_ignore' })
-keymap({ 'n', 'x' }, '<leader>j', '<C-w>j', { desc = 'which_key_ignore' })
-keymap({ 'n', 'x' }, '<leader>k', '<C-w>k', { desc = 'which_key_ignore' })
-keymap({ 'n', 'x' }, '<leader>l', '<C-w>l', { desc = 'which_key_ignore' })
+keymap({ 'n', 'x' }, '<leader>h', '<cmd>lua handle_win_cmd("wincmd h")<CR>', { desc = 'which_key_ignore' })
+keymap({ 'n', 'x' }, '<leader>j', '<cmd>lua handle_win_cmd("wincmd j")<CR>', { desc = 'which_key_ignore' })
+keymap({ 'n', 'x' }, '<leader>k', '<cmd>lua handle_win_cmd("wincmd k")<CR>', { desc = 'which_key_ignore' })
+keymap({ 'n', 'x' }, '<leader>l', '<cmd>lua handle_win_cmd("wincmd l")<CR>', { desc = 'which_key_ignore' })
 
 for i = 0, 9 do
   local harpoon_ls = '<leader>%s'

@@ -53,6 +53,16 @@ _G.keymap = function(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+_G.handle_win_cmd = function(wincmd, reversed)
+  if reversed then
+    vim.cmd(wincmd)
+    require('config.ui.nebulous').mark_as_alternate_win()
+  else
+    require('config.ui.nebulous').mark_as_alternate_win()
+    vim.cmd(wincmd)
+  end
+end
+
 _G.command = function(name, callback, opts)
   vim.api.nvim_create_user_command(name, callback, opts or {})
 end

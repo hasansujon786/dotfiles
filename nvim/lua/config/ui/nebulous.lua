@@ -6,8 +6,18 @@ local M = {
 }
 M.mark_as_alternate_win = function(winid)
   local win = winid or vim.api.nvim_get_current_win()
-  M.alternate_winid_to_ignore = win
+  local buf = vim.api.nvim_win_get_buf(win)
+  local ft = vim.api.nvim_buf_get_option(buf, 'filetype')
+
+  if not vim.tbl_contains(M.ignore_alternate_filetypes, ft) then
+    M.alternate_winid_to_ignore = win
+  end
 end
+M.handle_win_change = function(wincmd)
+  M.mark_as_alternate_win()
+  vim.cmd(wincmd)
+end
+-- lua P(require('config.ui.nebulous').alternate_winid_to_ignore)
 
 keymap('n', '<leader>R', '<cmd>lua require("nebulous").toggle_win_blur()<CR>', { desc = 'Toggle Nebulous' })
 
@@ -55,25 +65,29 @@ M.my_nebulous_setup = function()
   })
 end
 
+local function remove_blur_alt()
+  vim.defer_fn(function()
+    local winid = M.alternate_winid_to_ignore
+    if winid ~= nil then
+      require('nebulous.view').focusWindow(winid)
+      require('hasan.utils.ui.cursorline').cursorline_show(winid)
+      -- M.alternate_winid_to_ignore = nil
+    end
+  end, 10)
+end
+
 require('hasan.utils').augroup('MY_NEBULOUS_SETUP')(function(autocmd)
   autocmd('FileType', function(info)
     if info.file == 'noice' then
       return
     end
 
-    vim.defer_fn(function()
-      if M.alternate_winid_to_ignore ~= nil then
-        local winid = M.alternate_winid_to_ignore
-        require('nebulous.view').focusWindow(winid)
-        require('hasan.utils.ui.cursorline').cursorline_show(winid)
-        M.alternate_winid_to_ignore = nil
-      end
-    end, 10)
+    remove_blur_alt()
   end, { pattern = M.ignore_alternate_filetypes })
 end)
 
 M.toggle_symbol_outline = function()
-  M.alternate_winid_to_ignore = vim.api.nvim_get_current_win()
+  M.mark_as_alternate_win()
   vim.cmd([[SymbolsOutline]])
 end
 

@@ -29,11 +29,11 @@ view.update_all_windows = function(shouldCheckFloat)
   if config.options.nb_is_disabled then
     return
   end
-  local is_float_win = utils.is_floating_win(0)
-  local _winid = api.nvim_get_current_win()
+  local cur_winid = api.nvim_get_current_win()
+  local is_float_win = utils.is_floating_win(cur_winid)
 
   -- Skip from blur the alternate window
-  if config.options.ignore_alternate_win ~= nil and config.options.ignore_alternate_win(_winid, is_float_win) then
+  if config.options.ignore_alternate_win ~= nil and config.options.ignore_alternate_win(cur_winid, is_float_win) then
     return
   end
 
