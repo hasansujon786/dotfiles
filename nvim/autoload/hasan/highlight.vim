@@ -142,6 +142,9 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! link NeoTreeVertSplit      WinSeparator
   hi! NeoTreeGitUntracked        gui=NONE
   hi! NeoTreeDirectoryIcon       guifg=#8094B4
+  hi! link NeoTreeFloatNormal    TelescopeNormal
+  hi! NeoTreeFloatBorder         guibg=#1C212C guifg=#4dbdcb
+  hi! NeoTreeFloatTitle          guibg=#4dbdcb guifg=#1C212C
   " hi! NeoTreeWinSeparator        guifg=#2b3043 guibg=#1e242e
 
   "/// Nebulous ///"

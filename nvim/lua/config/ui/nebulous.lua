@@ -2,7 +2,7 @@ local api = vim.api
 local utils = require('hasan.utils')
 local M = {
   alternate_winid_to_ignore = nil,
-  ignore_alternate_filetypes = { 'noice', 'Outline', 'NvimTree', 'neo-tree' },
+  ignore_alternate_filetypes = { 'noice', 'Outline', 'NvimTree', 'neo-tree', 'neo-tree-popup' },
 }
 M.mark_as_alternate_win = function(winid)
   local win = winid or vim.api.nvim_get_current_win()
