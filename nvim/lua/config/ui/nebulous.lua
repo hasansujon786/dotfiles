@@ -13,10 +13,6 @@ M.mark_as_alternate_win = function(winid)
     M.alternate_winid_to_ignore = win
   end
 end
-M.handle_win_change = function(wincmd)
-  M.mark_as_alternate_win()
-  vim.cmd(wincmd)
-end
 -- lua P(require('config.ui.nebulous').alternate_winid_to_ignore)
 
 keymap('n', '<leader>R', '<cmd>lua require("nebulous").toggle_win_blur()<CR>', { desc = 'Toggle Nebulous' })

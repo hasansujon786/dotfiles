@@ -53,8 +53,8 @@ _G.keymap = function(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
-_G.handle_win_cmd = function(wincmd, reversed)
-  if reversed then
+_G.handle_win_cmd = function(wincmd, lazySave)
+  if lazySave then
     vim.cmd(wincmd)
     require('config.ui.nebulous').mark_as_alternate_win()
   else
