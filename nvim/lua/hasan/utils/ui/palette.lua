@@ -22,6 +22,15 @@ local function set_custom_highlights()
   util.fg_bg('WhichKeyFloat', fg, cursorling_bg)
   util.fg_bg('WhichKeyBorder ', normal_bg, cursorling_bg)
 
+  -- neo-tree
+  local ac = '#2D3343'
+  local nc = '#40465b'
+  local sp = ac
+  util.fg_bg('NeoTreeTabActive', '#ffffff', ac)
+  util.fg_bg('NeoTreeTabInactive', '#8b95a7', nc)
+  util.fg_bg('NeoTreeTabSeparatorActive', sp, ac)
+  util.fg_bg('NeoTreeTabSeparatorInactive', sp, nc)
+
   vim.fn['hasan#highlight#load_custom_highlight']()
 
   -- https://github.com/folke/tokyonight.nvim/blob/main/lua/tokyonight/theme.lua#L255-L272

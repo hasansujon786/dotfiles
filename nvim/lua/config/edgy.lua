@@ -113,7 +113,7 @@ return {
         },
       },
       options = {
-        left = { size = 30 },
+        left = { size = 31 },
         bottom = { size = 10 },
         right = { size = 30 },
         top = { size = 10 },
