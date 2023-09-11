@@ -23,13 +23,16 @@ local function set_custom_highlights()
   util.fg_bg('WhichKeyBorder ', normal_bg, cursorling_bg)
 
   -- neo-tree
-  local ac = '#2D3343'
-  local nc = '#40465b'
-  local sp = ac
-  util.fg_bg('NeoTreeTabActive', '#ffffff', ac)
-  util.fg_bg('NeoTreeTabInactive', '#8b95a7', nc)
-  util.fg_bg('NeoTreeTabSeparatorActive', sp, ac)
-  util.fg_bg('NeoTreeTabSeparatorInactive', sp, nc)
+  local sp = '#1E242E'
+  local btn = {
+    normal = { fg = fg, bg = '#3E425D' },
+    muted = { fg = '#8b95a7', bg = '#3E425D' },
+    active = { fg = '#ffffff', bg = '#2D3343' },
+  }
+  util.fg_bg('NeoTreeTabActive', btn.active.fg, btn.active.bg)
+  util.fg_bg('NeoTreeTabInactive', btn.muted.fg, btn.muted.bg)
+  util.fg_bg('NeoTreeTabSeparatorActive', sp, btn.active.bg)
+  util.fg_bg('NeoTreeTabSeparatorInactive', sp, btn.muted.bg)
 
   vim.fn['hasan#highlight#load_custom_highlight']()
 

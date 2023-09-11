@@ -58,6 +58,42 @@ return {
     -- vim.fn.sign_define('DiagnosticSignInfo', { text = ' ', texthl = 'DiagnosticSignInfo' })
     -- vim.fn.sign_define('DiagnosticSignHint', { text = '󰌵', texthl = 'DiagnosticSignHint' })
 
+    local highlights = require('neo-tree.ui.highlights')
+    local comp = require('neo-tree.sources.common.components')
+
+    opts.filesystem.components = {
+      icon = function(config, node, state)
+        local icon = config.default or ' '
+        local highlight = config.highlight or highlights.FILE_ICON
+        if node.type == 'directory' then
+          highlight = highlights.DIRECTORY_ICON
+          if node:get_depth() == 1 then -- my logic
+            icon = ''
+          elseif node.loaded and not node:has_children() then
+            icon = not node.empty_expanded and config.folder_empty or config.folder_empty_open
+          elseif node:is_expanded() then
+            icon = config.folder_open or '-'
+          else
+            icon = config.folder_closed or '+'
+          end
+        elseif node.type == 'file' or node.type == 'terminal' then
+          local success, web_devicons = pcall(require, 'nvim-web-devicons')
+          if success then
+            local devicon, hl = web_devicons.get_icon(node.name)
+            icon = devicon or icon
+            highlight = hl or highlight
+          end
+        end
+
+        local filtered_by = comp.filtered_by(config, node, state)
+
+        return {
+          text = icon .. ' ',
+          highlight = filtered_by.highlight or highlight,
+        }
+      end,
+    }
+
     require('neo-tree').setup(opts)
   end,
   dependencies = {
@@ -67,21 +103,21 @@ return {
   },
   opts = {
     source_selector = {
-      winbar = false, -- toggle to show selector on winbar
+      winbar = true, -- toggle to show selector on winbar
       statusline = false, -- toggle to show selector on statusline
       show_scrolled_off_parent_node = false, -- boolean
       sources = { -- table
         {
           source = 'filesystem', -- string
-          display_name = ' 󰉓 Files ', -- string | nil
+          display_name = '  Files', -- string | nil
         },
         {
           source = 'buffers', -- string
-          display_name = ' 󰈚 Bufs ', -- string | nil
+          display_name = ' ﬘ Bufs ', -- string | nil
         },
         {
           source = 'git_status', -- string
-          display_name = ' 󰊢 Git ', -- string | nil
+          display_name = '  Git ', -- string | nil
         },
       },
       content_layout = 'center', -- string
@@ -115,7 +151,7 @@ return {
       },
       indent = {
         indent_size = 1,
-        padding = 1, -- extra padding on left hand side
+        padding = 0, -- extra padding on left hand side
         -- indent guides
         with_markers = true,
         indent_marker = '│',
@@ -220,6 +256,10 @@ return {
         ['?'] = 'show_help',
         ['<'] = 'prev_source',
         ['>'] = 'next_source',
+        ['{'] = 'prev_source',
+        ['}'] = 'next_source',
+        ['[['] = 'prev_source',
+        [']]'] = 'next_source',
         ['K'] = 'show_file_details',
         ['<C-l>'] = 'refresh',
       },

@@ -63,8 +63,8 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi DiagnosticUnnecessary gui=underline
 
   "/// Plugins ///"
+  hi! LazyButton      guibg=#3E425D guifg=#ABB2BF
   hi! link LazyNormal NormalFloatFlat
-  hi! link LazyButton CursorLineFocus
   hi! link MasonNormal NormalFloatFlat
   hi! link HlSearchNear IncSearch
   hi! link HlSearchLensNear WildMenu
@@ -145,6 +145,7 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! link NeoTreeFloatNormal    TelescopeNormal
   hi! NeoTreeFloatBorder         guibg=#1C212C guifg=#4dbdcb
   hi! NeoTreeFloatTitle          guibg=#4dbdcb guifg=#1C212C
+  " hi! NeoTreeRootName            guifg=#ABB2BF gui=bold
   " hi! NeoTreeWinSeparator        guifg=#2b3043 guibg=#1e242e
 
   "/// Nebulous ///"

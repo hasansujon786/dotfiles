@@ -118,7 +118,7 @@ require('feline').winbar.setup({
     {
       condition = function()
         local ft = bo.filetype
-        return ft == 'neo-tree' or ft == 'NvimTree'
+        return ft == 'NvimTree'
       end,
       active = { { w.side_bar_explorer }, { w.NvimTreeTools } },
       inactive = { { w.side_bar_explorer }, { w.NvimTreeTools } },
