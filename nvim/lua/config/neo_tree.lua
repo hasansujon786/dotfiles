@@ -1,3 +1,27 @@
+local util = {}
+util.isEmpty = function(s)
+  return s == nil or s == ''
+end
+util.isNeoTreeWindow = function(name)
+  return string.match(name, 'neo%-tree filesystem') ~= nil
+    or string.match(name, 'neo%-tree buffers') ~= nil
+    or string.match(name, 'neo%-tree git_status') ~= nil
+end
+util.save_altfile = function()
+  vim.g.cwd = vim.loop.cwd()
+  local alt = vim.fn.expand('%:p')
+  local pre_alt = vim.fn.expand('#:p')
+  if not util.isNeoTreeWindow(alt) then
+    vim.w.alt_file = alt
+  end
+  if not util.isNeoTreeWindow(pre_alt) then
+    vim.w.pre_alt_file = pre_alt
+  end
+end
+function Foo()
+  P('alt=' .. vim.w.alt_file .. '| prealt=' .. vim.w.pre_alt_file)
+end
+
 local function vinegar_dir_up(state)
   local Path = require('plenary.path')
   -- local node = state.tree:get_node()
@@ -6,6 +30,61 @@ local function vinegar_dir_up(state)
   local cur_dir = state.path
   local parent_dir = Path:new(cur_dir):parent()
   require('neo-tree.sources.filesystem').navigate(state, parent_dir.filename, cur_dir)
+end
+
+local function open_vinegar()
+  util.save_altfile()
+
+  local readonly = vim.api.nvim_buf_get_option(0, 'readonly')
+  local modifiable = vim.api.nvim_buf_get_option(0, 'modifiable')
+
+  if readonly or not modifiable then
+    vim.cmd([[Neotree filesystem position=current]])
+  else
+    vim.cmd([[Neotree filesystem position=current dir=%:p:h reveal_file=%:p]])
+  end
+end
+
+local function edit_alternate_file()
+  if vim.o.filetype == 'neo-tree' then
+    if vim.b.neo_tree_position == 'current' then
+      P('first')
+      return feedkeys('<c-^>')
+    end
+    return feedkeys('q')
+  end
+
+  local alt_file = vim.w.alt_file
+  local pre_alt_file = vim.w.pre_alt_file
+  -- store curret native values
+  local current_file = vim.fn.expand('%:p')
+  local current_alt_file = vim.fn.expand('#:p')
+
+  if not util.isEmpty(current_alt_file) and not util.isNeoTreeWindow(current_alt_file) then
+    P('aa')
+    return feedkeys('<c-^>')
+  end
+
+  -- if alt is neo-tree
+  if util.isNeoTreeWindow(current_alt_file) then
+    if current_file == alt_file and not util.isEmpty(pre_alt_file) then
+      P('bb')
+      return vim.cmd('e ' .. pre_alt_file)
+    elseif current_file ~= alt_file and not util.isEmpty(alt_file) then
+      P('cc')
+      return vim.cmd('e ' .. alt_file)
+    else
+      return vim.notify('E23: No alternate file', vim.log.levels.ERROR)
+    end
+  else
+    if current_file == alt_file and not util.isEmpty(pre_alt_file) then
+      P('dd')
+      return vim.cmd('e ' .. pre_alt_file)
+    end
+  end
+
+  P('last')
+  feedkeys('<c-^>')
 end
 
 -- if vim.fn.filereadable(path) == 0 then
@@ -35,23 +114,11 @@ return {
       end,
       desc = 'NeoTree: Toggle sidebar',
     },
-    {
-      '-',
-      function()
-        vim.g.cwd = vim.loop.cwd()
-        local readonly = vim.api.nvim_buf_get_option(0, 'readonly')
-        local modifiable = vim.api.nvim_buf_get_option(0, 'modifiable')
-
-        if readonly or not modifiable then
-          vim.cmd([[Neotree filesystem position=current]])
-        else
-          vim.cmd([[Neotree filesystem position=current dir=%:p:h reveal_file=%:p]])
-        end
-      end,
-      desc = 'NeoTree: Open vinegar',
-    },
+    { '-', open_vinegar, desc = 'NeoTree: Open vinegar' },
   },
   config = function(_, opts)
+    keymap('n', '<bs>', edit_alternate_file, { desc = 'Edit alternate file' })
+
     -- If you want icons for diagnostic errors, you'll need to define them somewhere:
     -- vim.fn.sign_define('DiagnosticSignError', { text = ' ', texthl = 'DiagnosticSignError' })
     -- vim.fn.sign_define('DiagnosticSignWarn', { text = ' ', texthl = 'DiagnosticSignWarn' })
@@ -309,7 +376,7 @@ return {
       -- instead of relying on nvim autocmd events.
       window = {
         mappings = {
-          ['<bs>'] = 'navigate_up',
+          ['<bs>'] = 'none',
           ['.'] = 'set_root',
           ['-'] = function(state)
             vinegar_dir_up(state)
@@ -347,6 +414,18 @@ return {
               require('neo-tree.sources.filesystem').navigate(state, vim.g.cwd)
             end
             feedkeys('ggj')
+          end,
+          ['i'] = function(state)
+            local node = state.tree:get_node()
+            require('hasan.utils.file').quickLook({ node:get_id() })
+          end,
+          ['R'] = function(state)
+            local node = state.tree:get_node()
+            vim.cmd('silent !explorer.exe /select,"' .. node:get_id() .. '"')
+          end,
+          ['O'] = function(state)
+            local node = state.tree:get_node()
+            vim.cmd('silent !explorer.exe "' .. node:get_id() .. '"')
           end,
           ['H'] = 'toggle_hidden',
           ['/'] = 'fuzzy_finder',
