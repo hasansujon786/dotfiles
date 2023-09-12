@@ -1,9 +1,10 @@
+local data_path = vim.fn.stdpath('data')
 _G.has_pvim = os.getenv('PVIM') and true or false
 _G.org_root_path = 'C:\\Users\\hasan\\vimwiki'
 _G.org_home_path = 'C:\\Users\\hasan\\vimwiki\\home.org'
-_G.dap_adapter_path = vim.fn.stdpath('data') .. '\\dap_adapters' -- 'C:\\Users\\hasan\\AppData\\Local\\nvim-data\\dap_adapters\\'
-_G.plugin_path = vim.fn.stdpath('data') .. '/lazy'
--- _G.dap_adapter_path = vim.fn.stdpath('data') .. '\\mason\\packages' -- 'C:\\Users\\hasan\\AppData\\Local\\nvim-data\\dap_adapters\\'
+_G.dap_adapter_path = data_path .. '/dap_adapters' -- 'C:\\Users\\hasan\\AppData\\Local\\nvim-data\\dap_adapters\\'
+_G.plugin_path = data_path .. '/lazy'
+_G.path_mason = data_path .. '/mason'
 
 -- Sneak ==============================
 vim.g['sneak#target_labels'] = ';wertyuopzbnmfLGKHWERTYUIQOPZBNMFJ0123456789'

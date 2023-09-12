@@ -14,6 +14,7 @@ local M = {
   },
   extra_tools = {
     'stylua',
+    'dart-debug-adapter',
   },
   use_builtin_lsp_formatter = { 'dartls', 'astro' },
   default_opts = {
