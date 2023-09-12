@@ -319,6 +319,7 @@ return {
         -- ['c'] = 'copy', -- takes text input for destination, also accepts the optional config.show_path option like "add":
         -- ['c'] = { 'copy', config = { show_path = 'none' } }, -- "none", "relative", "absolute"
         -- ['m'] = 'move', -- takes text input for destination, also accepts the optional config.show_path option like "add".
+        ['r'] = 'refresh',
         ['q'] = 'close_window',
         ['?'] = 'show_help',
         ['<'] = 'prev_source',
@@ -328,7 +329,6 @@ return {
         ['[['] = 'prev_source',
         [']]'] = 'next_source',
         ['K'] = 'show_file_details',
-        ['<C-l>'] = 'refresh',
       },
     },
     nesting_rules = {},

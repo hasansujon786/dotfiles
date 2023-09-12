@@ -1,3 +1,6 @@
+-- Dap configs:
+-- https://github.com/dreamsofcode-io/neovim-nodejs/blob/main/configs/dap.lua
+
 local function configure_debuggers()
   local dap = require('dap')
   require('config.dap.typescript').setup(dap)
