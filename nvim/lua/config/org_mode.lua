@@ -2,6 +2,9 @@ return {
   'nvim-orgmode/orgmode',
   lazy = true,
   ft = { 'org' },
+  keys = {
+    { '<leader>e', '<cmd>lua require("hasan.org").toggle_org_float()<CR>', desc = 'Toggle org float' },
+  },
   opts = {
     org_agenda_files = { '~/vimwiki/**/*' },
     org_default_notes_file = '~/vimwiki/5_inbox/refile.org',

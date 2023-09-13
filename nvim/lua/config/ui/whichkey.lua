@@ -200,7 +200,6 @@ local leader = {
     o = { '<cmd>lua require("config.ui.nebulous").toggle_symbol_outline()<cr>',    'SymbolsOutline' },
     q = { '<cmd>call hasan#window#toggle_quickfix(1)<CR>',                      'Open Quickfix list' },
     l = { '<cmd>call hasan#window#toggle_quickfix(0)<CR>',                      'Open Local list' },
-    y = { '<cmd>lua require("yanklist").yanklist({initial_mode="normal"})<CR>', 'Yank list' },
   },
 
   p = {
@@ -283,10 +282,7 @@ local leader = {
 }
 
 local leader_visual = {
-  o = {
-    name = '+open',
-    y = { '<cmd>lua require("yanklist").yanklist({is_visual=true,initial_mode="normal"})<CR>', 'Yank list' },
-  },
+  o = { name = '+open' },
   c = { name = '+change' },
   ['/'] = { name = '+search' },
 }

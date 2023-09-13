@@ -124,11 +124,70 @@ return {
     })
     require('telescope').load_extension('fzf')
     require('telescope').load_extension('ui-select')
+
+    local common = {
+      search_wiki_files = { '<cmd>lua require("hasan.telescope.custom").search_wiki_files()<CR>', 'Search org files' },
+      project_files = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find project file' },
+    }
+    -- Telescope
+    keymap('n', '<leader><leader>', common.project_files[1], { desc = common.project_files[2] })
+    keymap('n', '<leader>w/', common.search_wiki_files[1], { desc = common.search_wiki_files[2] })
+    keymap('n', '<leader>/w', common.search_wiki_files[1], { desc = common.search_wiki_files[2] })
+    keymap('n', '<C-p>', '<cmd>lua require("telescope.builtin").oldfiles()<CR>')
+    keymap('n', '<A-x>', '<cmd>lua require("hasan.telescope.custom").commands()<CR>')
+    keymap('n', '//', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>', { desc = 'which_key_ignore' })
+    keymap('v', '/', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>', { desc = 'which_key_ignore' })
+    keymap({ 'n', 'v' }, '<A-/>', '<cmd>lua require("hasan.telescope.custom").grep_string()<CR>')
+    keymap({ 'n', 'i' }, '<C-k>e', '<cmd>lua require("hasan.telescope.custom").emojis()<CR>')
   end,
   dependencies = {
-    { 'hasansujon786/harpoon', lazy = true, module = 'harpoon' },
+    {
+      'hasansujon786/harpoon',
+      lazy = true,
+      module = 'harpoon',
+      config = function()
+        for i = 0, 9 do
+          local harpoon_ls = '<leader>%s'
+          local harpoon_rs = '<cmd>lua require("harpoon.ui").nav_file(%s)<CR>'
+          keymap('n', harpoon_ls:format(i), harpoon_rs:format(i), { desc = 'which_key_ignore' })
+
+          local win_ls = '<leader>w%s'
+          local win_rs = '%s<C-w>w'
+          keymap('n', win_ls:format(i), win_rs:format(i), { desc = 'which_key_ignore' })
+        end
+
+        keymap('n', '[e', '<cmd>lua require("harpoon.ui").nav_prev()<CR>', { desc = 'Previous harpoon item' }) -- harpoon
+        keymap('n', ']e', '<cmd>lua require("harpoon.ui").nav_next()<CR>', { desc = 'Next harpoon item' })
+
+        keymap(
+          'n',
+          '<leader><tab>',
+          '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>',
+          { desc = 'Open Harpoon' }
+        )
+      end,
+    },
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-    { 'hasansujon786/telescope-yanklist.nvim' },
+    {
+      'hasansujon786/telescope-yanklist.nvim',
+      config = function()
+        -- Yanklist
+        keymap('n', 'p', '<Plug>(yanklist-auto-put)')
+        keymap('v', 'p', '<Plug>(yanklist-auto-put)gvy')
+        keymap('n', 'P', '<Plug>(yanklist-auto-Put)')
+        keymap('n', '<leader>ii', '<Plug>(yanklist-last-item-put)', { desc = 'Paste from yanklist' })
+        keymap('v', '<leader>ii', '<Plug>(yanklist-last-item-put)gvy', { desc = 'Paste from yanklist' })
+        keymap('n', '<leader>iI', '<Plug>(yanklist-last-item-Put)', { desc = 'Paste from yanklist' })
+
+        -- Cycle yanklist
+        keymap('n', '[r', '<Plug>(yanklist-cycle-forward)', { desc = 'Yanklist forward' })
+        keymap('n', ']r', '<Plug>(yanklist-cycle-backward)', { desc = 'Yanklist backward' })
+
+        -- Yanklist telescope
+        keymap('n', '<leader>oy', '<cmd>lua require("yanklist").yanklist({initial_mode="normal"})<CR>', { desc = 'Show Yank list' })
+        keymap('v', '<leader>oy', '<cmd>lua require("yanklist").yanklist({is_visual=true,initial_mode="normal"})<CR>', { desc = 'Show Yank list' })
+      end,
+    },
     { 'nvim-telescope/telescope-file-browser.nvim' },
     { 'hasansujon786/telescope-ui-select.nvim' },
     {

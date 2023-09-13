@@ -11,3 +11,6 @@ fi
 
 shift
 tmux send-keys -t $target "$*"
+
+# -- maps.nnoremap('<leader>p:', ':silent ! tmux-windowizer $(pwd) ', {silent = false}) -- run project cmd
+# -- maps.nnoremap('<leader>p;', ':silent ! tmux-send-keys $(pwd) ', {silent = false})

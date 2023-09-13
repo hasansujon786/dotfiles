@@ -131,6 +131,7 @@ keymap('x', 'C', '"cy:let @/=@c<CR>cgn')
 keymap('n', 'cm', ':%s/<c-r>///g<Left><Left>', { desc = 'Change all matches with prompt', silent = false })
 keymap('n', 'dm', ':%s/<c-r>///g<CR>', { desc = 'Delete all matches' })
 keymap('n', 'dM', ':%g/<c-r>//d<CR>', { desc = 'Delete all lines with matches' })
+keymap({ 'n', 'v' }, '<leader>cw', '<cmd>lua require("hasan.utils.ui").substitute_word()<CR>', { desc = 'Substitute word' })
 
 keymap({ 'n', 'v' }, 'z/', '<ESC>/\\%V', noSilent) -- search in visual selection
 keymap('n', 'Z/', function() -- search in visible viewport
@@ -183,7 +184,6 @@ keymap('n', '<F5>', '<Esc>:syntax sync fromstart<CR>')
 keymap('i', '<F5>', '<C-o>:syntax sync fromstart<CR>')
 
 -- Leader keys ----------------------------------
-keymap('n', '<leader>e', '<cmd>lua require("hasan.org").toggle_org_float()<CR>', { desc = 'Toggle org float' })
 keymap({ 'n', 'x' }, '<leader>s', '<cmd>silent w<cr>', { desc = 'Save current file' })
 keymap({ 'n', 'x' }, '<leader>q', '<cmd>Quit<CR>', { desc = 'Close window' })
 keymap({ 'n', 'x' }, '<leader>h', '<cmd>lua handle_win_cmd("wincmd h")<CR>', { desc = 'which_key_ignore' })
@@ -191,51 +191,8 @@ keymap({ 'n', 'x' }, '<leader>j', '<cmd>lua handle_win_cmd("wincmd j")<CR>', { d
 keymap({ 'n', 'x' }, '<leader>k', '<cmd>lua handle_win_cmd("wincmd k")<CR>', { desc = 'which_key_ignore' })
 keymap({ 'n', 'x' }, '<leader>l', '<cmd>lua handle_win_cmd("wincmd l")<CR>', { desc = 'which_key_ignore' })
 
-for i = 0, 9 do
-  local harpoon_ls = '<leader>%s'
-  local harpoon_rs = '<cmd>lua require("harpoon.ui").nav_file(%s)<CR>'
-  keymap('n', harpoon_ls:format(i), harpoon_rs:format(i), { desc = 'which_key_ignore' })
 
-  local win_ls = '<leader>w%s'
-  local win_rs = '%s<C-w>w'
-  keymap('n', win_ls:format(i), win_rs:format(i), { desc = 'which_key_ignore' })
-end
-keymap('n', '[e', ':lua require("harpoon.ui").nav_prev()<CR>', { desc = 'Previous harpoon item' }) -- harpoon
-keymap('n', ']e', ':lua require("harpoon.ui").nav_next()<CR>', { desc = 'Next harpoon item' })
-keymap('n', '<leader><tab>', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', { desc = 'Open Harpoon' })
-
-local common = {
-  search_wiki_files = { '<cmd>lua require("hasan.telescope.custom").search_wiki_files()<CR>', 'Search org files' },
-  project_files = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find project file' },
-  substitute_word = { '<cmd>lua require("hasan.utils.ui").substitute_word()<CR>', 'Substitute word' },
-}
-keymap({ 'n', 'v' }, '<leader>cw', common.substitute_word[1], { desc = common.substitute_word[2] })
 -- File commands
 keymap('n', '<leader>fC', ':w <C-R>=expand("%")<CR>', noSilent)
 keymap('n', '<leader>fM', ':Move <C-R>=expand("%")<CR>', noSilent)
 keymap('n', '<leader>fe', ":edit <C-R>=expand('%:p:h') . '\\'<CR>", noSilent)
-
--- Telescope
-keymap('n', '<leader><leader>', common.project_files[1], { desc = common.project_files[2] })
-keymap('n', '<leader>w/', common.search_wiki_files[1], { desc = common.search_wiki_files[2] })
-keymap('n', '<leader>/w', common.search_wiki_files[1], { desc = common.search_wiki_files[2] })
-keymap('n', '<C-p>', '<cmd>lua require("telescope.builtin").oldfiles()<CR>')
-keymap('n', '<A-x>', '<cmd>lua require("hasan.telescope.custom").commands()<CR>')
-keymap('n', '//', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>', { desc = 'which_key_ignore' })
-keymap('v', '/', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>')
-keymap({ 'n', 'v' }, '<A-/>', '<cmd>lua require("hasan.telescope.custom").grep_string()<CR>')
-keymap({ 'n', 'i' }, '<C-k>e', '<cmd>lua require("hasan.telescope.custom").emojis()<CR>')
-
--- maps.nnoremap('<leader>p:', ':silent ! tmux-windowizer $(pwd) ', {silent = false}) -- run project cmd
--- maps.nnoremap('<leader>p;', ':silent ! tmux-send-keys $(pwd) ', {silent = false})
-
--- yanklist
-keymap('n', 'p', '<Plug>(yanklist-auto-put)')
-keymap('n', 'P', '<Plug>(yanklist-auto-Put)')
-keymap('n', '[r', '<Plug>(yanklist-cycle-forward)', { desc = 'Yanklist forward' })
-keymap('n', ']r', '<Plug>(yanklist-cycle-backward)', { desc = 'Yanklist backward' })
-keymap('n', '<leader>ii', '<Plug>(yanklist-last-item-put)', { desc = 'Paste from yanklist' })
-keymap('n', '<leader>iI', '<Plug>(yanklist-last-item-Put)', { desc = 'Paste from yanklist' })
--- yanklist visual_mappings
-keymap('v', 'p', '<Plug>(yanklist-auto-put)gvy')
-keymap('v', '<leader>ii', '<Plug>(yanklist-last-item-put)gvy', { desc = 'Paste from yanklist' })
