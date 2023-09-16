@@ -165,6 +165,26 @@ return {
         ['[W'] = function(win)
           win:prev({ pinned = false, focus = true })
         end,
+        -- increase width
+        ['<A-.>'] = function(win)
+          win:resize('width', 2)
+        end,
+        -- decrease width
+        ['<A-,>'] = function(win)
+          win:resize('width', -2)
+        end,
+        -- increase height
+        ['<A-=>'] = function(win)
+          win:resize('height', 2)
+        end,
+        -- decrease height
+        ['<A-->'] = function(win)
+          win:resize('height', -2)
+        end,
+        -- reset all custom sizing
+        ['|'] = function(win)
+          win.view.edgebar:equalize()
+        end,
       },
     })
   end,

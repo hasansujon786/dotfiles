@@ -31,6 +31,9 @@ require('onedark').setup({
 
     -- hi! link @punctuation.special @keyword
     -- ["@function"] = {fg = '#222222', sp = '$cyan', fmt = 'underline,italic,bold'},
+
+    -- UI:
+    ['GitSignsChangedelete'] = { fg = '$orange' },
   },
   -- Options are italic, bold, underline, none
   code_style = {

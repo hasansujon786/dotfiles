@@ -3,6 +3,7 @@ return {
     'nvim-treesitter/nvim-treesitter',
     lazy = true,
     event = { 'BufReadPre', 'BufNewFile' },
+    cmd = { 'TSUpdate', 'TSUpdateSync' },
     config = function()
       -- TSInstallSync javascript typescript tsx org
       local parsers = {
