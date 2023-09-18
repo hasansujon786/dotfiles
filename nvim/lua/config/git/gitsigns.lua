@@ -4,11 +4,12 @@ return {
   event = 'VeryLazy',
   opts = {
     signs = {
-      add          = { text = '▏', hl = 'GitSignsAdd',          numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
-      change       = { text = '▏', hl = 'GitSignsChange',       numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-      delete       = { text = '▸', hl = 'GitSignsDelete',       numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-      topdelete    = { text = '▹', hl = 'GitSignsDelete',       numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-      changedelete = { text = '▏', hl = 'GitSignsChangedelete', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+      add          = { text = '│', hl = 'GitSignsAdd',    numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+      change       = { text = '┊', hl = 'GitSignsChange', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+      delete       = { text = '▸', hl = 'GitSignsDelete', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+      topdelete    = { text = '▹', hl = 'GitSignsDelete', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+      changedelete = { text = '┊', hl = 'GitSignsChange', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+      untracked    = { text = '┆', hl = 'GitSignsAdd',    numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
     },
     preview_config = {
       border = 'rounded',

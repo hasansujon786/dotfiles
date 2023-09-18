@@ -5,10 +5,10 @@ P(util.darken('#ca72e4', 0.2, c.bg0))
 local ts_utils = require('nvim-treesitter.ts_utils')
 ts_utils.get_node_text = vim.treesitter.query.get_node_text
 
-local alt = vim.fn.bufnr("#")
+local alt = vim.fn.bufnr('#')
 
 vim.api.nvim_win_call(win, function()
-    vim.opt.winhighlight:append({ Normal = "DapUINormal", EndOfBuffer = "DapUIEndOfBuffer" })
+  vim.opt.winhighlight:append({ Normal = 'DapUINormal', EndOfBuffer = 'DapUIEndOfBuffer' })
 end)
 
 jit.os:find('Windows')

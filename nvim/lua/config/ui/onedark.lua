@@ -6,6 +6,8 @@ require('onedark').setup({
   toggle_style_list = { 'light', 'cool', 'deep', 'dark', 'darker' },
   -- colors = {},
   highlights = {
+    -- Ex: ["@function"] = {fg = '#cyan', sp = '$blue', fmt = 'underline,italic,bold'},
+
     ['@constant'] = { fg = '$yellow' },
     ['@constant.builtin'] = { fg = '$yellow' },
     ['@constant.macro'] = { fg = '$yellow' },
@@ -29,11 +31,10 @@ require('onedark').setup({
     ['@css.id'] = { fg = '$blue' },
     ['@css.pseudo_element'] = { fg = '$purple' },
 
-    -- hi! link @punctuation.special @keyword
-    -- ["@function"] = {fg = '#222222', sp = '$cyan', fmt = 'underline,italic,bold'},
-
     -- UI:
-    ['GitSignsChangedelete'] = { fg = '$orange' },
+    ['GitSignsAdd'] = { fg = '#109868' },
+    ['GitSignsDelete'] = { fg = '#9A353D' },
+    ['GitSignsChange'] = { fg = '$yellow' },
   },
   -- Options are italic, bold, underline, none
   code_style = {
