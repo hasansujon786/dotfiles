@@ -2,10 +2,18 @@ return {
   'lukas-reineke/indent-blankline.nvim',
   lazy = true,
   event = 'VeryLazy',
+  -- init = function()
+  --   -- vim.g.indent_blankline_show_first_indent_level = false
+
+  --   -- vim.g.indent_blankline_char = '▏'
+  --   -- vim.g.indent_blankline_show_current_context = false
+  -- end,
   opts = {
     buftype_exclude = { 'terminal', 'prompt' },
     filetype_exclude = {
+      'qf',
       'help',
+      'neo-tree',
       'dashboard',
       'packer',
       'NvimTree',
@@ -22,11 +30,10 @@ return {
       'NeogitPopup',
       'flutterToolsOutline',
     },
-    show_first_indent_level = false,
-    -- show_current_context = true,
-    -- space_char_blankline = ' ',
   },
-  config = function()
+  config = function(_, opts)
+    require('indent_blankline').setup(opts)
+
     -- For wrapping mappings related to folding and horizontal shifting so that
     -- indent-blankline.nvim can update immediately. See:
     -- https://github.com/lukas-reineke/indent-blankline.nvim/issues/118

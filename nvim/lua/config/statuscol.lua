@@ -61,6 +61,7 @@ return {
         },
       },
       ft_ignore = {
+        'help',
         'fern',
         'NvimTree',
         'neo-tree',
