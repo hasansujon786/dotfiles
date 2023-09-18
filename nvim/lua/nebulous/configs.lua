@@ -34,17 +34,26 @@ M.default = {
     -- dap-float
   },
   nb_blur_hls = {
+    -- numbers
     'LineNr:Nebulous',
     'LineNrAbove:Nebulous',
     'LineNrBelow:Nebulous',
+    -- other texts
     'Comment:Nebulous', -- flutter closing tags
     'Conceal:Nebulous',
+    'NonText:NebulousInvisibe',
+    -- Indent line
+    'IndentBlanklineChar:NebulousDarker',
+    'FlutterWidgetGuides:NebulousDarker',
+    -- Git
+    'GitSignsAdd:NebulousInvisibe',
+    'GitSignsChange:NebulousInvisibe',
+    'GitSignsDelete:NebulousInvisibe',
+    'GitSignsDelete:NebulousInvisibe',
+    'GitSignsChange:NebulousInvisibe',
     'GitGutterAdd:NebulousInvisibe',
     'GitGutterChange:NebulousInvisibe',
     'GitGutterDelete:NebulousInvisibe',
-    'NonText:NebulousInvisibe',
-    'IndentBlanklineChar:NebulousDarker',
-    'FlutterWidgetGuides:NebulousDarker'
   },
   dynamic_rules = {
     active = nil,
