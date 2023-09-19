@@ -10,22 +10,28 @@ endfunction
 
 function! hasan#utils#buffer#_clear() abort "{{{
   " Don't close window, when deleting a buffer
-  let currentBufNum = bufnr('%')
-  let alternateBufNum = bufnr('#')
-  let bdcmd = 'bdelete '
+  let cur_buf = bufnr('%')
+  let alt_buf = bufnr('#')
+  let buf_del_cmd = 'silent bdelete '
 
   if (&modified)
     let choice = confirm('>>> Save this buffer before close? <<<', "&Yes\n&No\n&Cancel", 3)
     if (choice == 1)
       exec('silent w')
     elseif (choice == 2)
-      let bdcmd = 'bdelete! '
+      let buf_del_cmd = 'silent bdelete! '
     elseif(choice == 3)
-      return 0
+      return
     endif
   endif
 
-  if buflisted(alternateBufNum)
+  " Destroy win if it is not modifiable window
+  if &modifiable == 0
+    execute(buf_del_cmd.cur_buf)
+    return
+  endif
+
+  if buflisted(alt_buf)
     buffer #
   else
     try
@@ -36,12 +42,13 @@ function! hasan#utils#buffer#_clear() abort "{{{
     endtry
   endif
 
-  if bufnr('%') == currentBufNum
+  " Show dashboard if there is no other buffer
+  if bufnr('%') == cur_buf || bufname('%') == ''
     execute('Alpha')
   endif
 
-  if buflisted(currentBufNum)
-    execute('silent '.bdcmd.currentBufNum)
+  if buflisted(cur_buf)
+    execute(buf_del_cmd.cur_buf)
   endif
 endfunction " }}}
 
