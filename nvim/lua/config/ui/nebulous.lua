@@ -58,6 +58,28 @@ M.my_nebulous_setup = function()
 
       return false
     end,
+    nb_blur_hls = {
+      -- numbers
+      'LineNr:Nebulous',
+      'LineNrAbove:Nebulous',
+      'LineNrBelow:Nebulous',
+      -- Other highlights
+      'Comment:NebulousItalic', -- flutter closing tags
+      'Conceal:Nebulous',
+      'NonText:NebulousInvisibe',
+      -- Indent line
+      'IndentBlanklineChar:NebulousDarker',
+      'FlutterWidgetGuides:NebulousDarker',
+      -- Git
+      'GitSignsAdd:NebulousInvisibe',
+      'GitSignsChange:NebulousInvisibe',
+      'GitSignsDelete:NebulousInvisibe',
+      'GitSignsDelete:NebulousInvisibe',
+      'GitSignsChange:NebulousInvisibe',
+      'GitGutterAdd:NebulousInvisibe',
+      'GitGutterChange:NebulousInvisibe',
+      'GitGutterDelete:NebulousInvisibe',
+    },
   })
 end
 

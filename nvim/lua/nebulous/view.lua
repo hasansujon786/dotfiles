@@ -14,10 +14,10 @@ view.focusWindow = function(winid)
 end
 
 view.blurWindow = function(winid)
-  local has_bl, float_win, dynamic_disable =
+  local has_blacklisted, float_win, dynamic_disable =
     utils.win_has_blacklist_ft(winid), utils.is_floating_win(winid), utils.has_dynamically_deactive(winid)
 
-  if has_bl or float_win or dynamic_disable then
+  if has_blacklisted or float_win or dynamic_disable then
     return
   end
 

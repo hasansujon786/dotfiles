@@ -150,8 +150,11 @@ function! hasan#highlight#load_custom_highlight(...) abort
   " hi! NeoTreeWinSeparator        guifg=#2b3043 guibg=#1e242e
 
   "/// Nebulous ///"
-  hi NebulousInvisibe   guifg=#242B38
+  hi Nebulous           guifg=#323c4e
+  hi NebulousItalic     guifg=#323c4e gui=italic
   hi NebulousDarker     guifg=#2a303c
+  hi NebulousInvisibe   guifg=#242B38
+  hi EndOfBuffer        guibg=NONE
 
   hi KisslineWinbarRenameBorder  guifg=#61afef guibg=#1E242E
 

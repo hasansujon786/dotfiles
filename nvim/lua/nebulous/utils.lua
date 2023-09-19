@@ -22,11 +22,7 @@ local utils = {
     return deactive_rule
   end,
   setup_colors = function()
-    vim.cmd([[
-      " hi! link Nebulous PmenuThumb
-      hi Nebulous guifg=#323c4e
-      hi EndOfBuffer guibg=NONE
-    ]])
+    vim.cmd([[highlight default link Nebulous LineNr]])
   end,
   make_winhighlight = function(highlight)
     return table.concat(
