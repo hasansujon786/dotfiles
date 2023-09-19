@@ -33,7 +33,7 @@ view.update_all_windows = function(shouldCheckFloat)
   local is_float_win = utils.is_floating_win(cur_winid)
 
   -- Skip from blur the alternate window
-  if config.options.ignore_alternate_win ~= nil and config.options.ignore_alternate_win(cur_winid, is_float_win) then
+  if config.options.filter ~= nil and config.options.filter(cur_winid, is_float_win) then
     return
   end
 

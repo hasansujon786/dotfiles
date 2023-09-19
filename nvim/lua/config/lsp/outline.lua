@@ -2,6 +2,16 @@ return {
   'simrat39/symbols-outline.nvim',
   lazy = true,
   cmd = { 'SymbolsOutline', 'SymbolsOutlineOpen' },
+  keys = {
+    {
+      '<leader>oo',
+      function()
+        require('config.ui.nebulous').mark_as_alternate_win()
+        vim.cmd([[SymbolsOutline]])
+      end,
+      desc = 'Toggle SymbolsOutline',
+    },
+  },
   config = function()
     local icon = require('hasan.utils.ui.icons')
     local k = icon.kind

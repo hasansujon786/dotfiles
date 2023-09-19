@@ -2,14 +2,15 @@ local api = vim.api
 local utils = require('hasan.utils')
 local M = {
   alternate_winid_to_ignore = nil,
-  ignore_alternate_filetypes = { 'noice', 'Outline', 'NvimTree', 'neo-tree', 'neo-tree-popup', 'flutterToolsOutline' },
+  skip_update_on_focus_ft = { 'neo-tree-popup' },
+  ignore_alt_win_ft = { 'noice', 'Outline', 'NvimTree', 'neo-tree', 'flutterToolsOutline' },
 }
 M.mark_as_alternate_win = function(winid)
   local win = winid or vim.api.nvim_get_current_win()
   local buf = vim.api.nvim_win_get_buf(win)
   local ft = vim.api.nvim_buf_get_option(buf, 'filetype')
 
-  if not vim.tbl_contains(M.ignore_alternate_filetypes, ft) then
+  if not vim.tbl_contains(M.ignore_alt_win_ft, ft) then
     M.alternate_winid_to_ignore = win
   end
 end
@@ -40,11 +41,11 @@ M.my_nebulous_setup = function()
         end
       end,
     },
-    ignore_alternate_win = function(winid, is_float)
+    filter = function(winid, is_float)
       local buf = vim.api.nvim_win_get_buf(winid)
       local ft = vim.api.nvim_buf_get_option(buf, 'filetype')
 
-      if vim.tbl_contains(M.ignore_alternate_filetypes, ft) then
+      if vim.tbl_contains(M.ignore_alt_win_ft, ft) or vim.tbl_contains(M.skip_update_on_focus_ft, ft) then
         return true
       end
 
@@ -102,12 +103,7 @@ require('hasan.utils').augroup('MY_NEBULOUS_SETUP')(function(autocmd)
     end
 
     remove_blur_alt()
-  end, { pattern = M.ignore_alternate_filetypes })
+  end, { pattern = M.ignore_alt_win_ft })
 end)
-
-M.toggle_symbol_outline = function()
-  M.mark_as_alternate_win()
-  vim.cmd([[SymbolsOutline]])
-end
 
 return M
