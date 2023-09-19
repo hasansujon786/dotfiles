@@ -125,14 +125,9 @@ return {
     require('telescope').load_extension('fzf')
     require('telescope').load_extension('ui-select')
 
-    local common = {
-      search_wiki_files = { '<cmd>lua require("hasan.telescope.custom").search_wiki_files()<CR>', 'Search org files' },
-      project_files = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find project file' },
-    }
-    -- Telescope
-    keymap('n', '<leader><leader>', common.project_files[1], { desc = common.project_files[2] })
-    keymap('n', '<leader>w/', common.search_wiki_files[1], { desc = common.search_wiki_files[2] })
-    keymap('n', '<leader>/w', common.search_wiki_files[1], { desc = common.search_wiki_files[2] })
+    -- keymaps
+    local project_files = '<cmd>lua require("hasan.telescope.custom").project_files()<cr>'
+    keymap('n', '<leader><leader>', project_files, { desc = 'Find project file' })
     keymap('n', '<C-p>', '<cmd>lua require("telescope.builtin").oldfiles()<CR>')
     keymap('n', '<A-x>', '<cmd>lua require("hasan.telescope.custom").commands()<CR>')
     keymap('n', '//', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>', { desc = 'which_key_ignore' })

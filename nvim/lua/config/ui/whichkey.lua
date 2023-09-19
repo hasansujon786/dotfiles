@@ -20,18 +20,6 @@ wk.setup({
   show_help = false,
 })
 
-local function loadOrgMode(key)
-  return function()
-    if package.loaded['nvim-treesitter'] == nil then
-      vim.cmd([[Lazy load nvim-treesitter]])
-    end
-    vim.cmd([[Lazy load orgmode]])
-    vim.defer_fn(function()
-      feedkeys(key)
-    end, 0)
-  end
-end
-
 local common = {
   buffers_cwd = { '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>',             'Switch buffers' },
   buffers_all = { '<cmd>lua require("hasan.telescope.custom").buffers(false)<CR>',            'Switch all buffers' },
@@ -193,11 +181,6 @@ local leader = {
 
   o = {
     name = '+open',
-    a = { loadOrgMode('<space>oa'),                                             'Org agenda' },
-    c = { loadOrgMode('<space>oc'),                                             'Org capture' },
-    h = {'<cmd>lua require("hasan.org").open_org_home("-tabedit")<CR>',         'Open org home'},
-
-    o = { '<cmd>lua require("config.ui.nebulous").toggle_symbol_outline()<cr>',    'SymbolsOutline' },
     q = { '<cmd>call hasan#window#toggle_quickfix(1)<CR>',                      'Open Quickfix list' },
     l = { '<cmd>call hasan#window#toggle_quickfix(0)<CR>',                      'Open Local list' },
   },
@@ -270,7 +253,6 @@ local leader = {
 
     ['/'] = { '<cmd>Telescope live_grep<CR>',   'Live grep' },
     g = { '<cmd>lua require("hasan.telescope.custom").live_grep_in_folder()<cr>', 'Live grep in folder' },
-    o = { '<cmd>lua require("hasan.telescope.custom").grep_org_text()<CR>',       'Grep org text'},
   },
 
   r = { '<cmd>lua require("hasan.utils.ui").cycle_numbering()<CR>',    'Cycle number' },

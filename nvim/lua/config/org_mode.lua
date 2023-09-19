@@ -1,9 +1,29 @@
+local function loadOrgMode(key)
+  return function()
+    if package.loaded['nvim-treesitter'] == nil then
+      vim.cmd([[Lazy load nvim-treesitter]])
+    end
+    vim.cmd([[Lazy load orgmode]])
+    vim.defer_fn(function()
+      feedkeys(key)
+    end, 0)
+  end
+end
+
 return {
   'nvim-orgmode/orgmode',
   lazy = true,
   ft = { 'org' },
   keys = {
     { '<leader>e', '<cmd>lua require("hasan.org").toggle_org_float()<CR>', desc = 'Toggle org float' },
+    { '<leader>oh', '<cmd>lua require("hasan.org").open_org_home("-tabedit")<CR>', desc = 'Open org home' },
+
+    { '<leader>oa', loadOrgMode('<space>oa'), desc = 'org agenda' },
+    { '<leader>oc', loadOrgMode('<space>oc'), desc = 'org capture' },
+
+    { '<leader>/o', '<cmd>lua require("hasan.telescope.custom").grep_org_text()<CR>', desc = 'Grep org text' },
+    { '<leader>/w', '<cmd>lua require("hasan.telescope.custom").search_wiki_files()<CR>', desc = 'Search org files' },
+    { '<leader>w/', '<cmd>lua require("hasan.telescope.custom").search_wiki_files()<CR>', desc = 'Search org files' },
   },
   opts = {
     org_agenda_files = { '~/vimwiki/**/*' },
