@@ -2,7 +2,7 @@ local api = vim.api
 local utils = require('hasan.utils')
 local M = {
   alternate_winid_to_ignore = nil,
-  ignore_alternate_filetypes = { 'noice', 'Outline', 'NvimTree', 'neo-tree', 'neo-tree-popup' },
+  ignore_alternate_filetypes = { 'noice', 'Outline', 'NvimTree', 'neo-tree', 'neo-tree-popup', 'flutterToolsOutline' },
 }
 M.mark_as_alternate_win = function(winid)
   local win = winid or vim.api.nvim_get_current_win()
@@ -96,7 +96,8 @@ end
 
 require('hasan.utils').augroup('MY_NEBULOUS_SETUP')(function(autocmd)
   autocmd('FileType', function(info)
-    if info.file == 'noice' then
+    -- If noice or vinegar win then skip
+    if info.file == 'noice' or require('config.neo_tree').vinegar_helper.isNeoTreeWindow(info.file) then
       return
     end
 

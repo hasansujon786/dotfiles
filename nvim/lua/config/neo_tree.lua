@@ -94,6 +94,7 @@ return {
   -- event = 'CursorHold',
   cmd = { 'Neotree' },
   branch = 'v3.x',
+  vinegar_helper = util,
   keys = {
     {
       '<leader>op',

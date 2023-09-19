@@ -64,7 +64,7 @@ function M.menu(list, opts)
     position = { row = '40%', col = '30%' },
     on_close = nil,
     on_submit = function(item)
-      print('SUBMITTED', vim.inspect(item._index))
+      print('SUBMITTED', vim.inspect(item.text))
     end,
   }, opts or {})
 

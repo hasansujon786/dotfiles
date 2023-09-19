@@ -29,6 +29,7 @@ return {
       'noice',
       'NeogitPopup',
       'flutterToolsOutline',
+      'neo-tree-popup',
     },
   },
   config = function(_, opts)

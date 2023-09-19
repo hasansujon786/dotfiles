@@ -74,7 +74,7 @@ return {
         {
           ft = 'flutterToolsOutline',
           open = 'FlutterOutlineOpen',
-          -- wo = { winbar = true, winhighlight = gray_bar },
+          wo = { winbar = true, winhighlight = gray_bar },
         },
         {
           ft = 'Outline',
@@ -84,7 +84,7 @@ return {
         {
           ft = 'log',
           open = 'FlutterLogOpen',
-          -- wo = { winbar = true, winhighlight = gray_bar },
+          wo = { winbar = true, winhighlight = gray_bar },
         },
       },
       left = {
