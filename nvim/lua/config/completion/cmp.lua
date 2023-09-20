@@ -3,6 +3,7 @@ local compare = require('cmp.config.compare')
 local utils = require('hasan.utils')
 local kind_icons = require('hasan.utils.ui.icons').kind
 local luasnip = require('luasnip')
+local hover = require('hasan.core.state').ui.hover
 
 local ELLIPSIS_CHAR = '…'
 local MAX_LABEL_WIDTH = 40
@@ -34,14 +35,14 @@ end
 
 cmp.setup({
   window = {
-    -- completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered({
-      winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
+      winhighlight = hover.winhighlight,
+      border = hover.border,
     }),
     completion = cmp.config.window.bordered({
+      winhighlight = hover.winhighlight,
       border = 'none',
       col_offset = 1,
-      winhighlight = 'Normal:Pmenu,FloatBorder:CmpBorder,CursorLine:Visual,Search:None',
 
       -- border = { '🭽', '▔', '🭾', '▕', '🭿', '▁', '🭼', '▏' },
       -- side_padding = 0,
@@ -105,14 +106,17 @@ cmp.setup({
         fallback()
       end
     end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
+    ['<S-Tab>'] = cmp.mapping(function(_)
       if luasnip.jumpable(-1) then
         luasnip.jump(-1)
       else
-        fallback()
+        local _, col = unpack(vim.api.nvim_win_get_cursor(0))
+        if col ~= 0 then
+          feedkeys('<Bs>')
+        end
       end
     end, { 'i', 's' }),
-    ['<C-i>'] = function()
+    ['<C-k>'] = function()
       if cmp.visible_docs() then
         cmp.close_docs()
       end

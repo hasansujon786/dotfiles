@@ -199,7 +199,7 @@ return {
       show_separator_on_edge = false, -- boolean
     },
     close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
-    popup_border_style = { '🭽', '▔', '🭾', '▕', '🭿', '▁', '🭼', '▏' },
+    popup_border_style = require('hasan.core.state').ui.hover.border,
     enable_git_status = true,
     enable_diagnostics = false,
     enable_normal_mode_for_inputs = false, -- Enable normal mode for input dialogs.

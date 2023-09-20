@@ -1,62 +1,19 @@
+local hover = require('hasan.core.state').ui.hover
+
 require('noice').setup({
-  -- views = {
-  -- cmdline_popup = {
-  --   position = {
-  --     row = '35%',
-  --     col = '50%',
-  --   },
-  --   border = {
-  --     style = 'none',
-  --     padding = { 2, 3 },
-  --     filter_options = {},
-  --   },
-  --   win_options = {
-  --     winhighlight = {
-  --       Normal = 'NormalFloatFlat',
-  --     },
-  --   },
-  -- },
-  -- },
-  messages = {
-    enabled = true, -- enables the Noice messages UI
-    view = 'notify', -- default view for messages
-    view_error = 'notify', -- view for errors
-    view_warn = 'notify', -- view for warnings
-    view_history = 'messages', -- view for :messages
-    view_search = false, -- view for search count messages. Set to `false` to disable
+  presets = {
+    command_palette = true, -- position the cmdline and popupmenu together
+    lsp_doc_border = true, -- add a border to hover docs and signature help
+    bottom_search = false, -- use a classic bottom cmdline for search
+    -- long_message_to_split = true, -- long messages will be sent to a split
+    -- inc_rename = false, -- enables an input dialog for inc-rename.nvim
   },
   lsp = {
-    progress = {
-      enabled = false,
-    },
+    progress = { enabled = false },
     override = {
       ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
       ['vim.lsp.util.stylize_markdown'] = true,
       ['cmp.entry.get_documentation'] = true,
-    },
-    hover = { enabled = true },
-    signature = {
-      enabled = true,
-      auto_open = {
-        enabled = false,
-        trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
-        luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
-        throttle = 50, -- Debounce lsp signature help request by 50ms
-      },
-      view = 'hover', -- when nil, use defaults from documentation
-      opts = {
-        anchor = 'SW',
-        size = { width = 50 },
-        position = { row = 1, col = 3 },
-        border = { style = 'none', padding = { 1, 1 } },
-        win_options = { winhighlight = { Normal = 'NormalFloatFlat' } },
-      },
-    },
-    message = {
-      -- Messages shown by lsp servers
-      enabled = true,
-      view = 'notify',
-      opts = {},
     },
     -- defaults for hover and signature help
     documentation = {
@@ -69,16 +26,52 @@ require('noice').setup({
         win_options = { concealcursor = 'n', conceallevel = 3 },
       },
     },
+    hover = {
+      enabled = true,
+      opts = {
+        anchor = 'SW', -- FIXME: get auto anchor
+        position = { row = 1, col = 2 },
+        size = { width = 50 },
+        border = { style = hover.border, padding = { 0, 1 } },
+        win_options = { winhighlight = hover.winhighlight, showbreak = ' ' },
+      },
+    },
+    signature = {
+      enabled = true,
+      auto_open = {
+        enabled = false,
+        trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
+        luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
+        throttle = 50, -- Debounce lsp signature help request by 50ms
+      },
+      view = 'hover', -- when nil, use defaults from documentation
+      opts = {
+        anchor = 'SW',
+        position = { row = 1, col = 3 },
+        size = { width = 50 },
+        zindex = 1010,
+        border = { style = hover.border, padding = { 0, 1 } },
+        win_options = { winhighlight = hover.winhighlight, showbreak = ' ' },
+      },
+    },
+    message = {
+      -- Messages shown by lsp servers
+      enabled = true,
+      view = 'notify',
+      opts = {},
+    },
   },
-  presets = {
-    command_palette = true, -- position the cmdline and popupmenu together
-    lsp_doc_border = true, -- add a border to hover docs and signature help
-    bottom_search = true, -- use a classic bottom cmdline for search
-    -- long_message_to_split = true, -- long messages will be sent to a split
-    -- inc_rename = false, -- enables an input dialog for inc-rename.nvim
+  messages = {
+    enabled = true, -- enables the Noice messages UI
+    view = 'notify', -- default view for messages
+    view_error = 'notify', -- view for errors
+    view_warn = 'notify', -- view for warnings
+    view_history = 'messages', -- view for :messages
+    view_search = false, -- view for search count messages. Set to `false` to disable
   },
 })
 
+-- Redirect cmdline result to a popup
 keymap('c', '<S-CR>', function()
   require('noice').redirect(vim.fn.getcmdline())
   vim.defer_fn(function()
@@ -86,12 +79,12 @@ keymap('c', '<S-CR>', function()
   end, 10)
 end, { desc = 'Redirect Cmdline' })
 
+-- hover & signature widow scrooll
 keymap({ 'i', 's' }, '<A-d>', function()
   if not require('noice.lsp').scroll(4) then
     return '<A-d>'
   end
 end, { silent = true, expr = true })
-
 keymap({ 'i', 's' }, '<A-u>', function()
   if not require('noice.lsp').scroll(-4) then
     return '<A-u>'

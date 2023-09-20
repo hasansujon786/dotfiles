@@ -9,6 +9,11 @@ M.ui = {
       align = 'center',
     },
   },
+  hover = {
+    -- winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
+    winhighlight = 'Normal:Pmenu,FloatBorder:CmpBorder,CursorLine:Visual,Search:None',
+    border = { '🭽', '▔', '🭾', '▕', '🭿', '▁', '🭼', '▏' },
+  },
 }
 
 _G.state = {
