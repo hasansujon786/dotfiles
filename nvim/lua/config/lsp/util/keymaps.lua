@@ -35,14 +35,6 @@ function M.lsp_buffer_keymaps(client, bufnr)
     keymap({ 'n', 'x' }, action_key, require('config.lsp.util.extras').code_action, desc('Lsp: code action'))
   end
 
-  -- Insert mode bind
-  keymap({ 'i', 'n' }, '<C-k>h', function()
-    if require('cmp').visible() then
-      require('cmp').close()
-    end
-    vim.lsp.buf.signature_help()
-  end, desc('Lsp: show signature help'))
-
   -- Diagnostics
   keymap('n', '<leader>ad', vim.diagnostic.setloclist, desc('Lsp: show local diagnostics'))
   keymap('n', '<leader>aD', vim.diagnostic.setqflist, desc('Lsp: show global diagnostics'))
@@ -60,6 +52,7 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', '<leader>a+', vim.lsp.buf.add_workspace_folder, desc('Lsp: add workspace folder'))
   keymap('n', '<leader>a-', vim.lsp.buf.remove_workspace_folder, desc('Lsp: remove workspace folder'))
   keymap('n', '<leader>aw', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, desc('Lsp: list workspace folders'))
+  keymap('n', '<leader>ak', vim.lsp.buf.signature_help, desc('Lsp: show signature help'))
 
   -- Server specific
   if client.name == 'tsserver' then

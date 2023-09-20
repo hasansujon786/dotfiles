@@ -172,8 +172,8 @@ keymap('i', '<A-o>', '<CR><C-o>O') -- Open HTML tags
 
 keymap('i', '<C-u>', '<C-G>u<C-U>') -- CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo, so that you can undo CTRL-U after inserting a line break.
 
-keymap('i', '<C-k><C-p>', '<c-g>u<Esc>[s1z=`]a<c-g>u') -- Fix previous misspelled world
-keymap('i', '<C-k><C-u>', '<c-g>u<Esc>BgUiwgi') -- Uppercase current word
+keymap('i', '<C-k>', '<c-g>u<Esc>BgUiwgi', { desc = 'Uppercase current word' })
+keymap('i', '<C-g><C-g>', '<c-g>u<Esc>[s1z=`]a<c-g>u', { desc = 'Fix previous misspelled world' })
 
 -- Function keys --------------------------------
 keymap('n', '<F3>', ':set paste! paste?<CR>')

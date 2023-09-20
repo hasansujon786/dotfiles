@@ -45,7 +45,9 @@ require('noice').setup({
       },
       view = 'hover', -- when nil, use defaults from documentation
       opts = {
-        position = { row = 2, col = 0 },
+        anchor = 'SW',
+        size = { width = 50 },
+        position = { row = 1, col = 3 },
         border = { style = 'none', padding = { 1, 1 } },
         win_options = { winhighlight = { Normal = 'NormalFloatFlat' } },
       },

@@ -133,7 +133,7 @@ return {
     keymap('n', '//', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>', { desc = 'which_key_ignore' })
     keymap('v', '/', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>', { desc = 'which_key_ignore' })
     keymap({ 'n', 'v' }, '<A-/>', '<cmd>lua require("hasan.telescope.custom").grep_string()<CR>')
-    keymap({ 'n', 'i' }, '<C-k>e', '<cmd>lua require("hasan.telescope.custom").emojis()<CR>')
+    command('EmojiPicker', require('hasan.telescope.custom').emojis)
   end,
   dependencies = {
     {
