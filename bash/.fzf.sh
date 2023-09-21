@@ -186,10 +186,8 @@ emo() {
 }
 
 em() {
-  # basename /root/video.old.mp4 | sed 's/\.[^.]*$//'
-  rg --files --max-depth=1 ~/.android/avd/ \
-    | fzf \
-    | xargs -I{} basename -s .ini {} \
-    | xargs ~/AppData/Local/Android/Sdk/emulator/emulator -netdelay none -netspeed full -avd
+  # ~/AppData/Local/Android/Sdk/emulator/emulator
+  emulator -list-avds \
+    | fzf --height=10 \
+    | xargs emulator -netdelay none -netspeed full -avd
 }
-
