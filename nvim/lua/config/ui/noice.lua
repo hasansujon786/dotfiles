@@ -28,30 +28,32 @@ require('noice').setup({
     },
     hover = {
       enabled = true,
+      view = 'hover', -- when nil, use defaults from documentation
       opts = {
-        anchor = 'SW', -- FIXME: get auto anchor
-        position = { row = 1, col = 2 },
+        anchor = 'SW',
+        zindex = 1010,
         size = { width = 50 },
+        position = { row = 1, col = 3 },
         border = { style = hover.border, padding = { 0, 1 } },
-        win_options = { winhighlight = hover.winhighlight, showbreak = ' ' },
+        win_options = { winhighlight = hover.winhighlight, showbreak = 'NONE' },
       },
     },
     signature = {
       enabled = true,
+      view = 'hover', -- when nil, use defaults from documentation
+      opts = {
+        anchor = 'SW',
+        zindex = 1010,
+        size = { width = 50 },
+        position = { row = 1, col = 3 },
+        border = { style = hover.border, padding = { 0, 1 } },
+        win_options = { winhighlight = hover.winhighlight, showbreak = 'NONE' },
+      },
       auto_open = {
         enabled = false,
         trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
         luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
         throttle = 50, -- Debounce lsp signature help request by 50ms
-      },
-      view = 'hover', -- when nil, use defaults from documentation
-      opts = {
-        anchor = 'SW',
-        position = { row = 1, col = 3 },
-        size = { width = 50 },
-        zindex = 1010,
-        border = { style = hover.border, padding = { 0, 1 } },
-        win_options = { winhighlight = hover.winhighlight, showbreak = ' ' },
       },
     },
     message = {
