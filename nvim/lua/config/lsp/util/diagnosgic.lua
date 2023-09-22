@@ -31,7 +31,6 @@ local jump_opts = {
     end,
   },
 }
-
 function M.jump_to_diagnostic(direction)
   if direction == 'prev' then
     vim.diagnostic.goto_prev(jump_opts)

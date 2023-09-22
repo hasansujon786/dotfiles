@@ -87,4 +87,10 @@ M.pub_install = function()
     :find()
 end
 
+M.setup = function()
+  command('PubInstall', function(_)
+    M.pub_install()
+  end)
+end
+
 return M

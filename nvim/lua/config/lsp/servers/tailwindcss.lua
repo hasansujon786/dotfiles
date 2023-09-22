@@ -225,12 +225,13 @@ end
 return {
   setup = function(_, bufnr)
     if state.treesitter.auto_conceal_html_class then
-      require('config.lsp.util.server.tailwindcss').setup_conceal(bufnr)
+      M.setup_conceal(bufnr)
     end
 
     keymap('n', 'gK', M.peekTwStyles, { desc = 'Peek tailwind styles', buffer = bufnr })
+    keymap('n', 'to', M.toggle_conceallevel, { desc = 'Toggle conceallevel', buffer = bufnr })
   end,
-  lsp_config = {
+  settings = {
     root_dir = require('lspconfig.util').root_pattern(
       'tailwind.config.js',
       'tailwind.config.ts',

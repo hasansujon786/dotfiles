@@ -1,8 +1,12 @@
 local M = {}
 local api = vim.api
 
+function M.get_global_conf()
+  return require('config.lsp.util.configs')
+end
+
 function M.get_server_conf(lsp_name)
-  local ok, module = pcall(require, 'config.lsp.util.servers.' .. lsp_name)
+  local ok, module = pcall(require, 'config.lsp.servers.' .. lsp_name)
   if ok then
     return module
   end
@@ -14,17 +18,17 @@ function M.install_essential_servers()
   if not ok then
     print('[Mason] Please install mason and try again')
   end
+  local g_conf = M.get_global_conf()
 
   -- Get mason server names to install
-  local masaon_server_names = {}
-  local extra_tools = require('config.lsp.util.configs').extra_tools
-  for _, server_config in pairs(require('config.lsp.util.configs').essential_servers) do
-    table.insert(masaon_server_names, server_config[1])
+  local masaon_pkgs = g_conf.extra_tools
+  for _, s_value in pairs(g_conf.essential_servers) do
+    table.insert(masaon_pkgs, s_value[1])
   end
 
   -- Get not installed servers
   local not_installed_servers = {}
-  for _, server_name in ipairs(vim.tbl_flatten({ masaon_server_names, extra_tools })) do
+  for _, server_name in ipairs(masaon_pkgs) do
     if not registry.is_installed(server_name) then
       table.insert(not_installed_servers, server_name)
     end
@@ -77,26 +81,7 @@ function M.showLspRenameChanges()
   vim.cmd([[copen]])
 end
 
-function M.lspRename()
-  -- https://www.youtube.com/watch?v=tAVxxdFFYMU
-  -- local tshl = require('nvim-treesitter-playground.hl-info').get_treesitter_hl()
-  -- if tshl and #tshl > 0 then
-  --   local ind = tshl[#tshl]:match('^.*()%*%*.*%*%*')
-  --   tshl = tshl[#tshl]:sub(ind + 2, -3)
-  -- end
-  local currName = vim.fn.expand('<cword>')
-
-  require('hasan.utils.ui').input('Rename', {}, {
-    default_value = currName,
-    on_submit = function(newName)
-      if #newName > 0 and newName ~= currName then
-        M._lspRename(newName)
-      end
-    end,
-  })
-end
-
-function M._lspRename(value)
+local function _lspRename(value)
   local lsp_params = vim.lsp.util.make_position_params()
   if not value or #value == 0 then
     return
@@ -147,6 +132,25 @@ function M._lspRename(value)
       vim.log.levels.INFO
     )
   end)
+end
+
+function M.lspRename()
+  -- https://www.youtube.com/watch?v=tAVxxdFFYMU
+  -- local tshl = require('nvim-treesitter-playground.hl-info').get_treesitter_hl()
+  -- if tshl and #tshl > 0 then
+  --   local ind = tshl[#tshl]:match('^.*()%*%*.*%*%*')
+  --   tshl = tshl[#tshl]:sub(ind + 2, -3)
+  -- end
+  local currName = vim.fn.expand('<cword>')
+
+  require('hasan.utils.ui').input('Rename', {}, {
+    default_value = currName,
+    on_submit = function(newName)
+      if #newName > 0 and newName ~= currName then
+        _lspRename(newName)
+      end
+    end,
+  })
 end
 
 ---Open quickfix with current ref focused

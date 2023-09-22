@@ -1,5 +1,5 @@
 return {
-  lsp_config = {
+  settings = {
     settings = {
       Lua = {
         runtime = { version = 'LuaJIT' },

@@ -1,13 +1,21 @@
+local lsp_extras = require('config.lsp.util.extras')
 local M = {}
 
 function M.server_specific_setup(client, bufnr)
-  local local_conf = require('config.lsp.util.extras').get_server_conf(client.name)
+  local g_conf = lsp_extras.get_global_conf()
+  local local_conf = lsp_extras.get_server_conf(client.name)
 
+  --------------------------------------------------
+  -------- Initialize Local setup ------------------
+  --------------------------------------------------
   if local_conf and local_conf.setup then
     local_conf.setup(client, bufnr)
   end
 
-  if not vim.tbl_contains(require('config.lsp.util.configs').use_builtin_lsp_formatter, client.name) then
+  --------------------------------------------------
+  -------- Disable defalut formatter ---------------
+  --------------------------------------------------
+  if g_conf ~= nil and not vim.tbl_contains(g_conf.use_builtin_lsp_formatter, client.name) then
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
   end
@@ -41,24 +49,6 @@ function M.on_attach(client, bufnr)
   M.lsp_autocmds(client)
   M.server_specific_setup(client, bufnr)
   require('config.lsp.util.keymaps').lsp_buffer_keymaps(client, bufnr)
-end
-
-function M.init_lspconfig()
-  local lspconfig = require('lspconfig')
-  require('lspconfig.ui.windows').default_options.border = 'rounded'
-
-  -- default lsp configs
-  local global_conf = require('config.lsp.util.configs')
-
-  for server_name, _ in pairs(global_conf.essential_servers) do
-    local local_conf = require('config.lsp.util.extras').get_server_conf(server_name)
-    if local_conf == nil or local_conf.lsp_config == nil then
-      lspconfig[server_name].setup(global_conf.default_opts)
-    else
-      local opts = require('hasan.utils').merge(global_conf.default_opts, local_conf.lsp_config)
-      lspconfig[server_name].setup(opts)
-    end
-  end
 end
 
 return M
