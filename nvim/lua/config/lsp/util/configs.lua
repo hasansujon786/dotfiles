@@ -24,31 +24,4 @@ local M = {
   },
 }
 
-M.essential_servers.lua_ls[2] = {
-  settings = {
-    Lua = {
-      runtime = { version = 'LuaJIT' },
-      diagnostics = { globals = { 'vim', 'jit', 'keymap', 'P' } },
-      workspace = {
-        -- library = vim.api.nvim_get_runtime_file('', true),
-        library = { 'C:\\Users\\hasan\\dotfiles\\nvim\\lua' }, -- Make the server aware of Neovim runtime files
-      },
-      telemetry = { enable = false },
-      -- semantic = { enable = false },
-    },
-  },
-}
-
-M.essential_servers.tailwindcss[2] = {
-  root_dir = require('lspconfig.util').root_pattern(
-    'tailwind.config.js',
-    'tailwind.config.ts',
-    'postcss.config.js',
-    'postcss.config.ts',
-    'package.json',
-    'node_modules'
-    -- '.git'
-  ),
-}
-
 return M

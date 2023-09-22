@@ -222,12 +222,23 @@ end
 -- ]]
 -- )
 
-function M.setup(bufnr)
-  if state.treesitter.auto_conceal_html_class then
-    require('config.lsp.util.server.tailwindcss').setup_conceal(bufnr)
-  end
+return {
+  setup = function(_, bufnr)
+    if state.treesitter.auto_conceal_html_class then
+      require('config.lsp.util.server.tailwindcss').setup_conceal(bufnr)
+    end
 
-  keymap('n', 'gK', M.peekTwStyles, { desc = 'Peek tailwind styles', buffer = bufnr })
-end
-
-return M
+    keymap('n', 'gK', M.peekTwStyles, { desc = 'Peek tailwind styles', buffer = bufnr })
+  end,
+  lsp_config = {
+    root_dir = require('lspconfig.util').root_pattern(
+      'tailwind.config.js',
+      'tailwind.config.ts',
+      'postcss.config.js',
+      'postcss.config.ts'
+      -- 'package.json',
+      -- 'node_modules'
+      -- '.git'
+    ),
+  },
+}

@@ -1,6 +1,14 @@
 local M = {}
 local api = vim.api
 
+function M.get_server_conf(lsp_name)
+  local ok, module = pcall(require, 'config.lsp.util.servers.' .. lsp_name)
+  if ok then
+    return module
+  end
+  return nil
+end
+
 function M.install_essential_servers()
   local ok, registry = pcall(require, 'mason-registry')
   if not ok then
@@ -9,8 +17,8 @@ function M.install_essential_servers()
 
   -- Get mason server names to install
   local masaon_server_names = {}
-  local extra_tools = require('config.lsp.util.settings').extra_tools
-  for _, server_config in pairs(require('config.lsp.util.settings').essential_servers) do
+  local extra_tools = require('config.lsp.util.configs').extra_tools
+  for _, server_config in pairs(require('config.lsp.util.configs').essential_servers) do
     table.insert(masaon_server_names, server_config[1])
   end
 

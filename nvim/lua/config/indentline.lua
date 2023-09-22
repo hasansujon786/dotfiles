@@ -20,6 +20,7 @@ return {
       'Trouble',
       'WhichKey',
       'lsp-installer',
+      'lspinfo',
       'mason',
       'Outline',
       'alpha',

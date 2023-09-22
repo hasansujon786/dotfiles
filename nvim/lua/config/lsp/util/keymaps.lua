@@ -53,11 +53,6 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', '<leader>a-', vim.lsp.buf.remove_workspace_folder, desc('Lsp: remove workspace folder'))
   keymap('n', '<leader>aw', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, desc('Lsp: list workspace folders'))
   keymap('n', '<leader>ak', vim.lsp.buf.signature_help, desc('Lsp: show signature help'))
-
-  -- Server specific
-  if client.name == 'tsserver' then
-    keymap('n', '<leader>ai', function() require('config.lsp.util.server.tsserver').ts_organize_imports_sync() end, desc('Lsp: organize ts imports'))
-  end
 end
 
 return M
