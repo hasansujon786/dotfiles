@@ -1,3 +1,4 @@
+local widgets = require('hasan.utils.widgets')
 local M = {}
 
 function M.rename_current_file()
@@ -20,7 +21,7 @@ function M.rename_current_file()
     },
   }
 
-  require('hasan.utils.widgets').input({
+  widgets.get_input({
     default_value = currNameFileName,
     win_config = win_config,
   }, function(newName)
@@ -34,7 +35,7 @@ function M.substitute_word()
   local isVisual = require('hasan.utils').is_visual_mode()
   local curWord = isVisual and require('hasan.utils').get_visual_selection() or vim.fn.expand('<cword>')
 
-  require('hasan.utils.widgets').input({
+  widgets.get_input({
     prompt = 'Substitute Word',
     default_value = curWord,
   }, function(newWord)

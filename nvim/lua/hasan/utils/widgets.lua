@@ -20,20 +20,10 @@ M.get_confirmation = function(opts, callback)
   end
 end
 
-M.get_input = function(opts, callback)
-  if opts.use_ui_input ~= nil and opts.use_ui_input == false then
-    async.run(function()
-      return vim.fn.input(opts)
-    end, callback)
-  else
-    vim.ui.input(opts, callback)
-  end
-end
-
 -- Prompts the user for input
 -- @param opts {prompt,prefix,win_config}
 -- @param on_confirm {function}
-M.input = function(opts, callback)
+M.get_input = function(opts, callback)
   local min_width = 26
   local text_width = opts.default and string.len(opts.default) + 1 or min_width
 
@@ -77,13 +67,25 @@ end
 -- @param items {list}
 -- @param opts {prompt,win_config}
 -- @param on_confirm {function}
-M.select = function(items, opts, callback)
-  local width = 20
-  local max_width = 70
+M.get_select = function(items, opts, callback)
+  local right_pad = 6
+  local width = opts.min_width or 20
+  local max_width = opts.max_width or 60
+  local format_item = opts.format_item or function(item)
+    return tostring(item.__raw_item or item)
+  end
+
   local menu_items = {}
-  for _, item in pairs(items) do
-    table.insert(menu_items, Menu.item(item))
-    local len = string.len(item) + 6
+  for index, item in ipairs(items) do
+    if type(item) ~= 'table' then
+      item = { __raw_item = item }
+    end
+    item.index = index
+    local item_text = format_item(item)
+    menu_items[index] = Menu.item(item_text, item)
+
+    -- Update width
+    local len = string.len(item_text)
     if len > width then
       width = len
     end
@@ -108,10 +110,11 @@ M.select = function(items, opts, callback)
   opts.prompt = nil
   opts.prompt_align = nil
   opts.win_config = nil
+  opts.format_item = nil
 
   opts = utils.merge({
     max_width = max_width,
-    min_width = width > max_width and max_width or width,
+    min_width = (width > max_width and max_width or width) + right_pad,
     max_height = 8,
     keymap = {
       focus_next = { 'j', '<Down>', '<Tab>' },
