@@ -42,7 +42,7 @@ function M.install_essential_servers()
 end
 
 function M.code_action()
-  require('hasan.utils.ui').telescope_cursor_theme_pre()
+  require('hasan.utils.widgets').use_telescope_cursor_theme_pre()
   vim.lsp.buf.code_action()
 end
 
@@ -143,14 +143,14 @@ function M.lspRename()
   -- end
   local currName = vim.fn.expand('<cword>')
 
-  require('hasan.utils.ui').input('Rename', {}, {
+  require('hasan.utils.widgets').input({
+    prompt = 'Rename',
     default_value = currName,
-    on_submit = function(newName)
-      if #newName > 0 and newName ~= currName then
-        _lspRename(newName)
-      end
-    end,
-  })
+  }, function(newName)
+    if #newName > 0 and newName ~= currName then
+      _lspRename(newName)
+    end
+  end)
 end
 
 ---Open quickfix with current ref focused

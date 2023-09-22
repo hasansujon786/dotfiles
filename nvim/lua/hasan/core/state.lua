@@ -4,10 +4,6 @@ M.ui = {
   border = {
     style = 'rounded',
     highlight = 'TextInfo',
-    text = {
-      highlight = 'TextInfo',
-      align = 'center',
-    },
   },
   hover = {
     -- winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
