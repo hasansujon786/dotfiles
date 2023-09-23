@@ -19,6 +19,19 @@ return {
     vim.g.floaterm_keymap_toggle = '<A-m>'
     keymap('n', ']t', '<cmd>FloatermToggle<CR><C-\\><C-n>')
     keymap('n', '[t', '<cmd>FloatermToggle<CR><C-\\><C-n>')
+
+    -- Handle nebulous on WinClosed
+    local utils = require('hasan.utils')
+    local function on_closed(info)
+      utils.augroup('FTERM_NESTED')(function(autocmd)
+        autocmd({ 'WinClosed' }, function(_)
+          vim.defer_fn(require('nebulous').update_all_windows, 30)
+        end, { buffer = info.buf })
+      end)
+    end
+    utils.augroup('FTERM')(function(autocmd)
+      autocmd({ 'User' }, on_closed, { pattern = 'FloatermOpen' })
+    end)
   end,
   config = function()
     -- Configs
