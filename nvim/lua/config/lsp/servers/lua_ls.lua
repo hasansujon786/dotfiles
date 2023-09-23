@@ -2,6 +2,9 @@ return {
   settings = {
     settings = {
       Lua = {
+        completion = {
+          callSnippet = 'Replace',
+        },
         runtime = { version = 'LuaJIT' },
         diagnostics = { globals = { 'vim', 'jit', 'keymap', 'P' } },
         workspace = {

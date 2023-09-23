@@ -116,12 +116,12 @@ cmp.setup({
         end
       end
     end, { 'i', 's' }),
-    ['<C-k>'] = function()
+    ['<C-k>'] = cmp.mapping(function()
       if cmp.visible_docs() then
         cmp.close_docs()
       end
       vim.lsp.buf.signature_help()
-    end,
+    end, { 'i', 's' }),
   }),
   sources = {
     { name = 'nvim_lsp' },

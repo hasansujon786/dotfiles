@@ -22,6 +22,10 @@ return {
   lazy = true,
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
+    { 'folke/neodev.nvim', lazy = true },
+    { 'hrsh7th/cmp-nvim-lsp', lazy = true, module = 'cmp_nvim_lsp' },
+    { 'williamboman/mason-lspconfig.nvim', lazy = true, module = 'mason-lspconfig' },
+    { 'jose-elias-alvarez/null-ls.nvim' },
     {
       'williamboman/mason.nvim',
       opts = { max_concurrent_installers = 3, ui = { border = 'none', height = 0.8 } },
@@ -32,8 +36,5 @@ return {
       end,
       build = ':MasonUpdate',
     },
-    { 'hrsh7th/cmp-nvim-lsp', lazy = true, module = 'cmp_nvim_lsp' },
-    { 'williamboman/mason-lspconfig.nvim', lazy = true, module = 'mason-lspconfig' },
-    { 'jose-elias-alvarez/null-ls.nvim' },
   },
 }

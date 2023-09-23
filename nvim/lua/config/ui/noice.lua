@@ -32,7 +32,7 @@ require('noice').setup({
       opts = {
         anchor = 'SW',
         zindex = 1010,
-        size = { width = 50 },
+        -- size = { width = 50 },
         position = { row = 1, col = 3 },
         border = { style = hover.border, padding = { 0, 1 } },
         win_options = { winhighlight = hover.winhighlight, showbreak = 'NONE' },
@@ -44,7 +44,7 @@ require('noice').setup({
       opts = {
         anchor = 'SW',
         zindex = 1010,
-        size = { width = 50 },
+        -- size = { width = 50 },
         position = { row = 1, col = 3 },
         border = { style = hover.border, padding = { 0, 1 } },
         win_options = { winhighlight = hover.winhighlight, showbreak = 'NONE' },
