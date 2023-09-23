@@ -7,6 +7,56 @@ local ui = require('hasan.core.state').ui
 local async = require('plenary.async')
 local M = {}
 
+--------------------------------------------------
+-------- UIInput ---------------------------------
+--------------------------------------------------
+local UIInput = Input:extend('UIInput')
+function UIInput:init(opts, on_confirm)
+  local border_top_text = opts.prompt
+  local default_value = tostring(opts.default or '')
+  local prefix = tostring(opts.prefix or '')
+
+  local win_config = utils.merge({
+    relative = 'cursor',
+    position = { row = 2, col = 0 },
+    size = { width = math.max(20, vim.api.nvim_strwidth(default_value .. prefix) + 1) },
+    border = {
+      style = ui.border.style,
+      text = border_top_text and { top = Text(border_top_text, ui.border.highlight) },
+    },
+    win_options = {
+      sidescrolloff = 0,
+      winhighlight = 'Normal:Normal,FloatBorder:Normal',
+    },
+  }, opts.win_config or {})
+
+  UIInput.super.init(self, win_config, {
+    default_value = default_value,
+    prompt = prefix,
+    on_close = function()
+      on_confirm(nil)
+    end,
+    on_submit = function(value)
+      on_confirm(value)
+    end,
+  })
+
+  -- cancel operation if cursor leaves input
+  self:on(event.BufLeave, function()
+    on_confirm(nil)
+  end, { once = true })
+
+  local map_opt = { noremap = true, nowait = true }
+  local exit_win = function()
+    on_confirm(nil)
+  end
+  -- cancel operation if <Esc> is pressed
+  self:map('n', '<Esc>', exit_win, map_opt)
+  self:map('i', '<Esc>', exit_win, map_opt)
+  self:map('i', '<C-c>', '<Esc>', map_opt)
+  -- self:map('i', '<A-BS>', '<C-o>ciw', { noremap = true })
+end
+
 M.get_confirmation = function(opts, callback)
   if opts.use_ui_input then
     opts.prompt = opts.prompt .. ' [y/N]'
@@ -20,47 +70,49 @@ M.get_confirmation = function(opts, callback)
   end
 end
 
+local input_ui
 -- Prompts the user for input
--- @param opts {prompt,prefix,win_config}
+-- @param opts {prompt,default,prefix,win_config}
 -- @param on_confirm {function}
 M.get_input = function(opts, callback)
-  local min_width = 26
-  local text_width = opts.default and string.len(opts.default) + 1 or min_width
+  assert(type(callback) == 'function', 'missing on_confirm function')
 
-  local win_config = utils.merge({
-    relative = 'cursor',
-    position = { row = 2, col = 0 },
-    size = text_width > min_width and text_width or min_width,
-    border = {
-      style = ui.border.style,
-      text = opts.prompt and { top = Text(opts.prompt, ui.border.highlight) },
-    },
-    win_options = {
-      sidescrolloff = 0,
-      winhighlight = 'Normal:Normal',
-    },
-  }, opts.win_config or {})
-  opts.win_config = nil
+  if input_ui then
+    -- ensure single ui.input operation
+    vim.api.nvim_err_writeln('busy: another input is pending!')
+    return
+  end
 
-  opts.on_submit = opts.on_submit or callback
-  opts.prompt = opts.prefix
-  opts.default_value = opts.default_value or opts.default
-  opts.default = nil
-
-  local input = Input(win_config, opts)
-  -- mount/open the component
-  input:mount()
-
-  input:map('i', '<Esc>', input.input_props.on_close, { noremap = true })
-  input:map('n', '<Esc>', input.input_props.on_close, { noremap = true })
-  input:map('i', '<C-c>', input.input_props.on_close, { noremap = true })
-  input:map('n', '<C-c>', input.input_props.on_close, { noremap = true })
-  input:map('i', '<C-w>', '<C-o>ciw', { noremap = true })
-  input:map('i', '<A-BS>', '<C-o>ciw', { noremap = true })
-  -- unmount component when cursor leaves buffer
-  input:on(event.BufLeave, function()
-    input:unmount()
+  input_ui = UIInput(opts, function(value)
+    if input_ui then
+      -- if it's still mounted, unmount it
+      input_ui:unmount()
+    end
+    -- pass the input value
+    callback(value)
+    -- indicate the operation is done
+    input_ui = nil
   end)
+
+  input_ui:mount()
+end
+
+M.get_tabbar_input = function(opts, callback)
+  opts.prompt = nil
+  opts = utils.merge({
+    win_config = {
+      relative = 'win',
+      size = 26,
+      border = { style = { '', '', '', '▎', '', '', '', '▎' } },
+      position = { row = -1, col = 0 },
+      win_options = {
+        sidescrolloff = 0,
+        winhighlight = 'Normal:NormalFloatFlat,FloatBorder:KisslineWinbarRenameBorder',
+      },
+    },
+  }, opts or {})
+
+  M.get_input(opts, callback)
 end
 
 -- Prompts the user to pick from a list of items
@@ -114,7 +166,7 @@ M.get_select = function(items, opts, callback)
 
   opts = utils.merge({
     max_width = max_width,
-    min_width = (width > max_width and max_width or width) + right_pad,
+    min_width = math.min(width, max_width) + right_pad,
     max_height = 8,
     keymap = {
       focus_next = { 'j', '<Down>', '<Tab>' },
@@ -137,10 +189,6 @@ M.get_select = function(items, opts, callback)
     vim.cmd([[hi Cursor blend=0]])
     menu.menu_props.on_close()
   end, { once = true })
-end
-
-function M.use_telescope_cursor_theme_pre()
-  _G.topts = require('telescope.themes').get_cursor()
 end
 
 return M

@@ -10,22 +10,9 @@ function M.rename_current_file()
   require('nebulous.configs').pause(100)
   local currNameFileName = vim.fn.expand('%:t')
 
-  local win_config = {
-    relative = 'win',
-    size = 26,
-    border = { style = { '', '', '', '▎', '', '', '', '▎' } },
-    position = { row = -1, col = 0 },
-    win_options = {
-      sidescrolloff = 0,
-      winhighlight = 'Normal:NormalFloatFlat,FloatBorder:KisslineWinbarRenameBorder',
-    },
-  }
-
-  widgets.get_input({
-    default_value = currNameFileName,
-    win_config = win_config,
-  }, function(newName)
-    if string.len(newName) > 0 then
+  local opt = { default = currNameFileName }
+  widgets.get_tabbar_input(opt, function(newName)
+    if newName and string.len(newName) > 0 then
       vim.cmd('Rename ' .. newName)
     end
   end)
@@ -35,10 +22,12 @@ function M.substitute_word()
   local isVisual = require('hasan.utils').is_visual_mode()
   local curWord = isVisual and require('hasan.utils').get_visual_selection() or vim.fn.expand('<cword>')
 
-  widgets.get_input({
-    prompt = 'Substitute Word',
-    default_value = curWord,
-  }, function(newWord)
+  local opts = { prompt = 'Substitute Word', default = curWord }
+  widgets.get_input(opts, function(newWord)
+    if not newWord then
+      return
+    end
+
     local cmd = isVisual and '%s/' .. curWord .. '/' .. newWord .. '/gc'
       or '%s/\\<' .. curWord .. '\\>/' .. newWord .. '/gc'
 

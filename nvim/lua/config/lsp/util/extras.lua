@@ -41,11 +41,6 @@ function M.install_essential_servers()
   end
 end
 
-function M.code_action()
-  require('hasan.utils.widgets').use_telescope_cursor_theme_pre()
-  vim.lsp.buf.code_action()
-end
-
 -- local notify_changes = function(changes)
 --   local new
 --   local msg = ''
@@ -143,11 +138,9 @@ function M.lspRename()
   -- end
   local currName = vim.fn.expand('<cword>')
 
-  require('hasan.utils.widgets').get_input({
-    prompt = 'Rename',
-    default_value = currName,
-  }, function(newName)
-    if #newName > 0 and newName ~= currName then
+  local opt = { prompt = 'Rename', default = currName }
+  require('hasan.utils.widgets').get_input(opt, function(newName)
+    if newName and newName ~= currName then
       _lspRename(newName)
     end
   end)

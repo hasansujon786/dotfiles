@@ -67,6 +67,10 @@ return {
         },
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
+          kind = {
+            codeaction = require('telescope.themes').get_cursor(),
+            cursor = require('telescope.themes').get_cursor(),
+          },
         },
         project_commands = require('config.telescope.project_commands'),
         file_browser = {
