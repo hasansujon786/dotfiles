@@ -94,7 +94,8 @@ function M.smart_save_buffer()
   if state.file.auto_format then
     vim.cmd([[silent noa write]])
   else
-    vim.lsp.buf.format({ async = false })
+    -- vim.lsp.buf.format({ async = false })
+    require('conform').format({ lsp_fallback = true })
     vim.cmd([[silent write]])
   end
 end

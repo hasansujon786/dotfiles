@@ -14,7 +14,7 @@ return {
           virtual_text = true,
           virtual_text_str = '■',
         },
-        on_attach = require('config.lsp.util.servers.flutter').setup,
+        on_attach = require('config.lsp.servers.flutter').setup,
         capabilities = require('config.lsp.util.setup').update_capabilities('flutter_tools'),
         -- see the link below for details on each option:
         -- https://github.com/dart-lang/sdk/blob/master/pkg/analysis_server/tool/lsp_spec/README.md#client-workspace-configuration

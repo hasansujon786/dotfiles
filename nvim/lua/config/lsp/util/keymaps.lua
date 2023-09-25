@@ -46,8 +46,8 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', '<leader>fs', function() require('hasan.utils.file').smart_save_buffer() end, desc('Lsp: format and save'))
   keymap('x', '<leader>fs', 'gq<cmd>silent noa write<cr>', desc('Lsp: format current selection'))
 
-  command('Format', function(_) vim.lsp.buf.format({ async = true }) end)
-  command('FormatSync', function() vim.lsp.buf.format({ async = false }) end)
+  -- command('Format', function(_) vim.lsp.buf.format({ async = true }) end)
+  -- command('FormatSync', function() vim.lsp.buf.format({ async = false }) end)
 
   keymap('n', '<leader>a+', vim.lsp.buf.add_workspace_folder, desc('Lsp: add workspace folder'))
   keymap('n', '<leader>a-', vim.lsp.buf.remove_workspace_folder, desc('Lsp: remove workspace folder'))

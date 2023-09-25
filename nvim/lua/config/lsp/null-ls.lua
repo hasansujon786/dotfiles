@@ -15,6 +15,7 @@ return {
   'jose-elias-alvarez/null-ls.nvim',
   lazy = true,
   module = 'null-ls',
+  enabled = false,
   config = function()
     -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/MAIN.md
     local null_ls = require('null-ls')
