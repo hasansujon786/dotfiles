@@ -60,7 +60,10 @@ f1::switchToExplorer()
 !SPACE::Send ^{SPACE}
 !j:: SendInput,{DOWN}
 !k:: SendInput,{UP}
-#If not WinActive("ahk_exe WindowsTerminal.exe") and not WinActive("ahk_exe alacritty.exe") and not WinActive("ahk_exe Code.exe") and not WinActive("ahk_exe wezterm-gui.exe")
+#If not WinActive("ahk_exe WindowsTerminal.exe")
+  and not WinActive("ahk_exe alacritty.exe")
+  and not WinActive("ahk_exe wezterm-gui.exe")
+  ; and not WinActive("ahk_exe Code.exe")
   !h:: SendInput,{LEFT}
   !l:: SendInput,{RIGHT}
 #If

@@ -59,7 +59,7 @@ keymap({ 'n', 'v' }, '<Leader>p', '"+p')
 keymap({ 'n', 'v' }, '<Leader>P', '"+P')
 
 -- => Search ----------------------------------------
-keymap('n', '?', "<Cmd>call VSCodeNotify('workbench.action.findInFiles', { 'query': expand('<cword>')})<CR>")
+keymap('n', '<A-/>', "<Cmd>call VSCodeNotify('workbench.action.findInFiles', { 'query': expand('<cword>')})<CR>")
 
 -- => LSP -------------------------------------------
 keymap({ 'n', 'x' }, 'gd', '<Cmd>call VSCodeNotify("editor.action.revealDefinition")<CR>')
@@ -69,6 +69,9 @@ keymap({ 'n', 'x' }, 'gR', '<Cmd>call VSCodeNotify("references-view.findReferenc
 keymap({ 'n', 'x' }, 'gp', '<Cmd>call VSCodeNotify("editor.action.peekDefinition")<CR>')
 keymap({ 'n', 'x' }, 'gP', '<Cmd>call VSCodeNotify("editor.action.peekDeclaration")<CR>')
 keymap({ 'n', 'x' }, 'go', '<Cmd>call VSCodeNotify("workbench.action.gotoSymbol")<CR>')
+
+keymap('n', '<C-space>', '<Cmd>call VSCodeNotify("editor.action.quickFix")<CR>')
+keymap('i', '<C-space>', '<Cmd>call VSCodeNotify("editor.action.triggerSuggest")<CR>')
 
 -- => Leader commands -------------------------------
 keymap('n', '<leader><leader>', '<Cmd>call VSCodeNotify("workbench.action.quickOpen")<CR>')

@@ -45,8 +45,8 @@ nvim_set_keymap('v', '<C-_>', 'mz_gcgv`z', {})
 
 local code_action_keys = { { '<A-k>', '<A-j>' }, { '<up>', '<down>' } }
 for _, action_key in ipairs(code_action_keys) do
-  keymap('n', action_key[1], ':move -2<CR>==')
-  keymap('n', action_key[2], ':move +1<CR>==') -- Move lines up and down in normal & visual mode
+  keymap('n', action_key[1], '<cmd>move -2<CR>==')
+  keymap('n', action_key[2], '<cmd>move +1<CR>==') -- Move lines up and down in normal & visual mode
   keymap('x', action_key[1], ':call hasan#utils#visual_move_up()<CR>')
   keymap('x', action_key[2], ':call hasan#utils#visual_move_down()<CR>')
 end
@@ -131,7 +131,12 @@ keymap('x', 'C', '"cy:let @/=@c<CR>cgn')
 keymap('n', 'cm', ':%s/<c-r>///g<Left><Left>', { desc = 'Change all matches with prompt', silent = false })
 keymap('n', 'dm', ':%s/<c-r>///g<CR>', { desc = 'Delete all matches' })
 keymap('n', 'dM', ':%g/<c-r>//d<CR>', { desc = 'Delete all lines with matches' })
-keymap({ 'n', 'v' }, '<leader>cw', '<cmd>lua require("hasan.utils.ui").substitute_word()<CR>', { desc = 'Substitute word' })
+keymap(
+  { 'n', 'v' },
+  '<leader>cw',
+  '<cmd>lua require("hasan.utils.ui").substitute_word()<CR>',
+  { desc = 'Substitute word' }
+)
 
 keymap({ 'n', 'v' }, 'z/', '<ESC>/\\%V', noSilent) -- search in visual selection
 keymap('n', 'Z/', function() -- search in visible viewport
@@ -190,7 +195,6 @@ keymap({ 'n', 'x' }, '<leader>h', '<cmd>lua handle_win_cmd("wincmd h")<CR>', { d
 keymap({ 'n', 'x' }, '<leader>j', '<cmd>lua handle_win_cmd("wincmd j")<CR>', { desc = 'which_key_ignore' })
 keymap({ 'n', 'x' }, '<leader>k', '<cmd>lua handle_win_cmd("wincmd k")<CR>', { desc = 'which_key_ignore' })
 keymap({ 'n', 'x' }, '<leader>l', '<cmd>lua handle_win_cmd("wincmd l")<CR>', { desc = 'which_key_ignore' })
-
 
 -- File commands
 keymap('n', '<leader>fC', ':w <C-R>=expand("%")<CR>', noSilent)
