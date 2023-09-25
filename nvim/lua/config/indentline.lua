@@ -11,6 +11,7 @@ return {
   opts = {
     buftype_exclude = { 'terminal', 'prompt' },
     filetype_exclude = {
+      'Glance',
       'qf',
       'help',
       'neo-tree',

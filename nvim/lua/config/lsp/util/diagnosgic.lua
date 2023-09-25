@@ -31,12 +31,11 @@ local jump_opts = {
     end,
   },
 }
-function M.jump_to_diagnostic(direction)
-  if direction == 'prev' then
-    vim.diagnostic.goto_prev(jump_opts)
-  else
-    vim.diagnostic.goto_next(jump_opts)
-  end
+function M.diagnostic_prev()
+  vim.diagnostic.goto_prev(jump_opts)
+end
+function M.diagnostic_next()
+  vim.diagnostic.goto_next(jump_opts)
 end
 
 function M.setup()

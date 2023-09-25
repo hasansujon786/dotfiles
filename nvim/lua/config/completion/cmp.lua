@@ -126,7 +126,15 @@ cmp.setup({
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    { name = 'buffer', keyword_length = 4 },
+    {
+      name = 'buffer',
+      keyword_length = 4,
+      -- option = {
+      --   get_bufnrs = function()
+      --     return vim.api.nvim_list_bufs()
+      --   end,
+      -- },
+    },
     { name = 'path' },
     -- { name = 'cmp-tw2css' }
   },

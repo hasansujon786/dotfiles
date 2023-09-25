@@ -4,22 +4,25 @@ return {
   enabled = true,
   event = 'VeryLazy',
   config = function()
-    local ts = { { 'prettierd', 'prettier' } } -- Use a sub-list to run only the first available formatter
+    local prettier = { { 'prettierd', 'prettier' } } -- Use a sub-list to run only the first available formatter
 
     require('conform').setup({
       formatters_by_ft = {
 
         lua = { 'stylua' },
-        javascript = ts,
-        typescript = ts,
-        javascriptreact = ts,
-        typescriptreact = ts,
-        html = ts,
-        css = ts,
+
+        javascript = prettier,
+        typescript = prettier,
+        javascriptreact = prettier,
+        typescriptreact = prettier,
+        html = prettier,
+        css = prettier,
+        json = prettier,
+        jsonc = prettier,
 
         ['_'] = { 'trim_whitespace' },
       },
-      format_on_save = function(_)
+      format_on_save = function(_) -- bufnr
         -- Disable with a global or buffer-local variable
         -- if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
         if not state.file.auto_format then
