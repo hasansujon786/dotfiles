@@ -6,6 +6,19 @@ return {
     local glance = require('glance')
     local actions = glance.actions
 
+    local encodding = 'utf-16'
+    local last_data = {}
+    local function save_last_data(results, method)
+      local d = { results = results, method = method, encodding = encodding }
+      table.insert(last_data, d)
+    end
+    keymap('n', '<leader>a.', function()
+      if #last_data == 0 then
+        return vim.notify('No last data', vim.log.levels.INFO, { title = 'Glance' })
+      end
+      glance.resume(last_data[#last_data])
+    end, { desc = 'Lsp: Glance resume' })
+
     glance.setup({
       height = 18, -- Height of the window
       zindex = 20,
@@ -47,6 +60,9 @@ return {
             jump(results[1]) -- argument is optional
           else
             open(results) -- argument is optional
+            vim.defer_fn(function()
+              save_last_data(results, method)
+            end, 100)
           end
         end,
       },
@@ -62,6 +78,26 @@ return {
       winbar = {
         enable = true, -- Available strating from nvim-0.8+
       },
+      preview_win_opts = { -- Configure preview window options
+        cursorline = true,
+        number = true,
+        wrap = false,
+      },
     })
   end,
 }
+
+-- Glance.resume = function(opts)
+--   local parent_bufnr = vim.api.nvim_get_current_buf()
+--   local parent_winnr = vim.api.nvim_get_current_win()
+--   local params = vim.lsp.util.make_position_params()
+
+--   create(
+--     opts.results,
+--     parent_bufnr,
+--     parent_winnr,
+--     params,
+--     opts.method,
+--     opts.offset_encoding
+--   )
+-- end

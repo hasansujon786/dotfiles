@@ -33,7 +33,6 @@ function M.lsp_buffer_keymaps(_, bufnr)
   keymap('n', 'g/', '<cmd>Telescope lsp_document_symbols<cr>', desc('Lsp: document symbols'))
   keymap('n', 'go', '<cmd>Telescope lsp_document_symbols<cr>', desc('Lsp: document symbols'))
   keymap('n', 'g.', '<cmd>Telescope lsp_document_symbols<cr>', desc('Lsp: document symbols'))
-  keymap('n', '<leader>aq', require('config.lsp.util.extras').showLspRenameChanges, desc('Lsp: show lsp rename'))
   for _, action_key in ipairs({ '<C-q>', '<C-space>', '<A-space>' }) do
     keymap({ 'n', 'x' }, action_key, vim.lsp.buf.code_action, desc('Lsp: code action'))
   end
@@ -52,9 +51,12 @@ function M.lsp_buffer_keymaps(_, bufnr)
   -- command('Format', function(_) vim.lsp.buf.format({ async = true }) end)
   -- command('FormatSync', function() vim.lsp.buf.format({ async = false }) end)
 
+  keymap('n', '<leader>ar', '<cmd>Telescope lsp_references<CR>', desc('Lsp: Preview references'))
+  keymap('n', '<leader>ak', vim.lsp.buf.signature_help, desc('Lsp: show signature help'))
+  keymap('n', '<leader>aq', require('config.lsp.util.extras').showLspRenameChanges, desc('Lsp: show lsp rename'))
+
   keymap('n', '<leader>a+', vim.lsp.buf.add_workspace_folder, desc('Lsp: add workspace folder'))
   keymap('n', '<leader>a-', vim.lsp.buf.remove_workspace_folder, desc('Lsp: remove workspace folder'))
-  keymap('n', '<leader>ak', vim.lsp.buf.signature_help, desc('Lsp: show signature help'))
   keymap('n', '<leader>aw', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, desc('Lsp: list workspace folders'))

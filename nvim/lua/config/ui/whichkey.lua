@@ -50,11 +50,7 @@ local w = {
 }
 
 local leader = {
-  a = {
-    name = '+lsp',
-    p = { '<cmd>lua require("telescope.builtin").lsp_definitions({ jump_type = "never" })<CR>',   'Preview defination' },
-    r = { '<cmd>lua require("telescope.builtin").lsp_references()<CR>',                           'Preview references' },
-  },
+  a = { name = '+lsp' },
 
   b = {
     name = '+buffer',

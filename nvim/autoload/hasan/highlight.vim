@@ -101,15 +101,6 @@ function! hasan#highlight#load_custom_highlight(...) abort
   "/// marks.nvim ///"
   hi! link MarkSignNumHL None
   hi! link MarkSignHL Comment
-  "/// glance.nvim ///"
-  hi GlancePreviewBorderBottom guifg=#111925 guibg=#1B222E
-  hi GlanceListBorderBottom    guifg=#111925 guibg=#151C28
-  hi! link GlancePreviewMatch  LspReferenceText
-  hi! link GlanceListMatch     LspReferenceWrite
-  hi! link GlanceIndent IndentBlanklineChar
-  hi! link GlanceListCursorLine CursorLineFocus
-  " hi! link GlancePreviewCursorLine CursorLineFocus
-
   "/// Telescope ///"
   hi TelescopeMatching gui=NONE
   hi! link TelescopeTitle Comment
