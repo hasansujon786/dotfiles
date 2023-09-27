@@ -5,19 +5,26 @@ return {
   config = function()
     local glance = require('glance')
     local actions = glance.actions
+    local offset_encoding = 'utf-16'
+    local glance_history = {}
 
-    local encodding = 'utf-16'
-    local last_data = {}
     local function save_last_data(results, method)
-      local d = { results = results, method = method, encodding = encodding }
-      table.insert(last_data, d)
+      local d = { results = results, method = method }
+      table.insert(glance_history, d)
     end
-    keymap('n', '<leader>a.', function()
-      if #last_data == 0 then
+    local resume = function()
+      if #glance_history == 0 then
         return vim.notify('No last data', vim.log.levels.INFO, { title = 'Glance' })
       end
-      glance.resume(last_data[#last_data])
-    end, { desc = 'Lsp: Glance resume' })
+      local last_history = glance_history[#glance_history]
+
+      local parent_bufnr = vim.api.nvim_get_current_buf()
+      local parent_winnr = vim.api.nvim_get_current_win()
+      local params = vim.lsp.util.make_position_params()
+
+      glance.open_history(last_history.results, parent_bufnr, parent_winnr, params, last_history.method, offset_encoding)
+    end
+    keymap('n', '<leader>a.', resume, { desc = 'Lsp: Glance resume' })
 
     glance.setup({
       height = 18, -- Height of the window
@@ -86,18 +93,3 @@ return {
     })
   end,
 }
-
--- Glance.resume = function(opts)
---   local parent_bufnr = vim.api.nvim_get_current_buf()
---   local parent_winnr = vim.api.nvim_get_current_win()
---   local params = vim.lsp.util.make_position_params()
-
---   create(
---     opts.results,
---     parent_bufnr,
---     parent_winnr,
---     params,
---     opts.method,
---     opts.offset_encoding
---   )
--- end
