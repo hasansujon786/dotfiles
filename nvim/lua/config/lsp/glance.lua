@@ -1,5 +1,5 @@
 return {
-  'dnlhc/glance.nvim',
+  'hasansujon786/glance.nvim',
   opt = true,
   cmd = 'Glance',
   config = function()

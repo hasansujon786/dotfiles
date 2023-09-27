@@ -8,13 +8,11 @@ M.toggle_bg_tranparent = function(followState)
   if state.theme.bg_tranparent and not followState or not state.theme.bg_tranparent and followState then
     -- remove transparent
     cmd(string.format('hi Normal guibg=%s guifg=%s', normal.bg, normal.fg))
-    stateValue = '22s/true/false/'
-    -- require('nebulous').init()
+    stateValue = '5s/true/false/'
   else
     -- make transparent
     cmd(string.format('hi Normal guibg=%s guifg=%s', 'None', normal.fg))
-    stateValue = '22s/false/true/'
-    -- require('nebulous.view').disable_win_blur()
+    stateValue = '5s/false/true/'
   end
 
   if not followState then
@@ -25,12 +23,15 @@ M.toggle_bg_tranparent = function(followState)
   require('hasan.utils.ui.palette').set_custom_highlights()
 end
 
-M.get_hl = function(name)
-  local ok, hl = pcall(vim.api.nvim_get_hl_by_name, name, true)
+M.get_hl = function(name, opts)
+  opts = opts or {}
+  opts.name = name
+  local ok, hl = pcall(vim.api.nvim_get_hl, opts.ns_id or 0, opts)
   if not ok then
     return
   end
-  for _, key in pairs({ 'foreground', 'background', 'special' }) do
+
+  for _, key in pairs({ 'fg', 'bg', 'special' }) do
     if hl[key] then
       hl[key] = string.format('#%06x', hl[key])
     end

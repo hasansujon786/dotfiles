@@ -74,6 +74,7 @@ require('noice').setup({
 })
 
 -- Redirect cmdline result to a popup
+keymap('n', '<leader><cr>', '<cmd>Noice last<CR>', { desc = 'Noice Last Message' })
 keymap('c', '<S-CR>', function()
   require('noice').redirect(vim.fn.getcmdline())
   vim.defer_fn(function()

@@ -2,6 +2,7 @@ return {
   'NeogitOrg/neogit',
   lazy = true,
   cmd = 'Neogit',
+  commit = '4e54383',
   opts = {
     disable_insert_on_commit = 'auto',
     disable_signs = false,
