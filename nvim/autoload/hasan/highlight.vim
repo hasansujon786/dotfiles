@@ -70,7 +70,6 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! link HlSearchNear IncSearch
   hi! link HlSearchLensNear WildMenu
   hi WhichKeySeparator guifg=#546178
-  hi IndentBlanklineChar guifg=#323a48
   hi QuickScopePrimary   guifg=tomato gui=underline
   hi QuickScopeSecondary guifg=#d78787 gui=underline
   hi link SneakScope IncSearch
@@ -90,6 +89,10 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! link FloatermBorder FloatBorderFlat
   "/// symboal-outline.nvim ///"
   hi! link FocusedSymbol DiagnosticLineNrHint
+  "/// indent-blankline.nvim ///"
+  hi IndentBlanklineChar guifg=#323a48
+  hi IblIndent guifg=#323a48
+  hi IblScope  guifg=#546178
 
   "/// Lualine ///"
   hi LualineTabActive    guifg=#97CA72 guibg=#3E4452
@@ -117,7 +120,7 @@ function! hasan#highlight#load_custom_highlight(...) abort
 
   "/// nvim-tree.nvim ///"
   hi! link NvimTreeCursorLine   CursorLineFocus
-  hi! link NvimTreeIndentMarker IndentBlanklineChar
+  hi! link NvimTreeIndentMarker IblIndent
   hi! link NvimTreeWindowPicker TelescopeSelectionCaret
   hi! link NvimTreeWinSeparator VertSplit
   hi! NvimTreeNormal guibg=#1E242E guifg=#a5b0c5
@@ -127,7 +130,7 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! link NeoTreeModified       String
   hi! link NeoTreeMessage        Comment
   hi! link NeoTreeDimText        Comment
-  hi! link NeoTreeIndentMarker   IndentBlanklineChar
+  hi! link NeoTreeIndentMarker   IblIndent
   hi! link NeoTreeCursorLine     CursorLineFocus
   hi! link NeoTreeNormal         SidebarDark
   hi! link NeoTreeNormalNC       SidebarDark
@@ -157,19 +160,19 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi NeogitHunkHeaderHighlight  guifg=#242b38 guibg=#c3a7e5 gui=bold
 
   "/// glance.nvim ///"
-  hi GlanceBorder               guifg=#1C212C guibg=NONE
-  hi! GlanceBorderTop           guifg=#1E242E guibg=NONE
-  hi GlanceWinBarFilename       guifg=#ffffff guibg=#2D3343
-  hi GlanceWinBarFilepath       guifg=#546178 guibg=#2D3343
-  hi GlanceWinBarTitle          guifg=#a5b0c6 guibg=#2D3343
-  hi GlancePreviewNormal        guifg=#a5b0c6 guibg=#1E242E
-  hi GlanceListFilename         guifg=#5ab0f6 guibg=NONE
-  hi GlanceFoldIcon             guifg=#a5b0c6 guifg=#a5b0c6
-  hi GlanceListNormal           guifg=#8b95a7 guibg=#242B38
-  hi! link GlancePreviewMatch   LspReferenceText
-  hi! link GlanceListMatch      LspReferenceWrite
-  hi! link GlanceIndent         IndentBlanklineChar
-  hi! link GlanceListCursorLine CursorLineFocus
+  hi GlanceBorder                    guifg=#1C212C guibg=NONE
+  hi! GlanceBorderTop                guifg=#1E242E guibg=NONE
+  hi GlanceWinBarFilename            guifg=#ffffff guibg=#2D3343
+  hi GlanceWinBarFilepath            guifg=#546178 guibg=#2D3343
+  hi GlanceWinBarTitle               guifg=#a5b0c6 guibg=#2D3343
+  hi GlancePreviewNormal             guifg=#a5b0c6 guibg=#1E242E
+  hi GlanceListFilename              guifg=#5ab0f6 guibg=NONE
+  hi GlanceFoldIcon                  guifg=#a5b0c6 guifg=#a5b0c6
+  hi GlanceListNormal                guifg=#8b95a7 guibg=#242B38
+  hi! link GlancePreviewMatch        LspReferenceText
+  hi! link GlanceListMatch           LspReferenceWrite
+  hi! link GlanceIndent              IblIndent
+  hi! link GlanceListCursorLine      CursorLineFocus
   hi! link GlanceListBorderBottom    GlanceBorder
   hi! link GlancePreviewBorderBottom GlanceBorder
 endfunction
