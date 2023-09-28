@@ -21,7 +21,7 @@ return {
   },
   {
     'mg979/vim-visual-multi',
-    keys = { '<leader>vv', '<C-n>' },
+    keys = { { '<leader>vv', mode = nx }, { '<C-n>', mode = nx } },
     init = function()
       vim.g.VM_leader = '<leader>vv'
       vim.g.VM_theme_set_by_colorscheme = 0
@@ -29,21 +29,21 @@ return {
   },
   {
     'arthurxavierx/vim-caser',
-    keys = { '<leader>cs' },
+    keys = { { '<leader>cs', mode = nx } },
     init = function()
       vim.g.caser_prefix = '<leader>cs'
     end,
   },
   {
     'unblevable/quick-scope',
-    keys = { 'f', 'F', 't', 'T' },
+    keys = { { 'f', mode = nx }, { 'F', mode = nx }, { 't', mode = nx }, { 'T', mode = nx } },
     init = function()
       vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
     end,
   },
   {
     'justinmk/vim-sneak',
-    keys = { 's', 'S' },
+    keys = { { 's', mode = nx }, { 'S', mode = nx } },
     init = function()
       vim.g['sneak#target_labels'] = ';wertyuopzbnmfLGKHWERTYUIQOPZBNMFJ0123456789'
       vim.g['sneak#label'] = 1 -- use <tab> to jump through lebles

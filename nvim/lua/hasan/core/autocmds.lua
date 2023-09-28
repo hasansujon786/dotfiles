@@ -1,19 +1,9 @@
-local first_init = true
 if vim.fn.exists('g:hasan_telescope_buffers') == 0 then
   vim.g.hasan_telescope_buffers = { ['0'] = 0 } -- used in hasan#utils#_buflisted_sorted()
 end
 
 augroup('MY_AUGROUP')(function(autocmd)
   autocmd('CmdwinEnter', 'nnoremap <buffer><CR> <CR>')
-  autocmd('ColorScheme', function()
-    if first_init then
-      vim.defer_fn(require('hasan.nebulous').my_nebulous_setup, 500)
-    else
-      require('hasan.nebulous').my_nebulous_setup()
-      require('hasan.utils.ui.palette').set_custom_highlights()
-    end
-    first_init = false
-  end)
 
   autocmd('FileType', 'setl foldlevel=0', { pattern = 'vim' })
   autocmd('FileType', 'setl foldmethod=marker', { pattern = { 'vim', 'css', 'scss', 'json' } })

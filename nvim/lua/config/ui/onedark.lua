@@ -65,5 +65,15 @@ return {
     }
 
     require('hasan.utils.ui.palette').set_custom_highlights()
+    vim.defer_fn(function()
+      require('hasan.nebulous').my_nebulous_setup()
+
+      augroup('THEME_AUGROUP')(function(autocmd)
+        autocmd('ColorScheme', function()
+          require('hasan.nebulous').my_nebulous_setup()
+          require('hasan.utils.ui.palette').set_custom_highlights()
+        end)
+      end)
+    end, 500)
   end,
 }
