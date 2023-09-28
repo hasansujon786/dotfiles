@@ -6,7 +6,7 @@ return {
     {
       '<leader>oo',
       function()
-        require('config.ui.nebulous').mark_as_alternate_win()
+        require('hasan.nebulous').mark_as_alternate_win()
         vim.cmd([[SymbolsOutline]])
       end,
       desc = 'Toggle SymbolsOutline',

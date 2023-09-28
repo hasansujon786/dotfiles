@@ -75,6 +75,7 @@ keymap('i', '<C-space>', '<Cmd>call VSCodeNotify("editor.action.triggerSuggest")
 
 -- => Leader commands -------------------------------
 keymap('n', '<leader><leader>', '<Cmd>call VSCodeNotify("workbench.action.quickOpen")<CR>')
+keymap('n', '<leader>pp', '<Cmd>call VSCodeNotify("workbench.action.openRecent")<CR>')
 -- Save file
 keymap('n', '<leader>s', '<Cmd>call VSCodeNotify("workbench.action.files.save")<CR>')
 keymap('n', '<leader>fs', '<Cmd>call VSCodeNotify("editor.action.formatDocument")<CR>')

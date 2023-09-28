@@ -57,9 +57,9 @@ end
 _G.handle_win_cmd = function(wincmd, lazySave)
   if lazySave then
     vim.cmd(wincmd)
-    require('config.ui.nebulous').mark_as_alternate_win()
+    require('hasan.nebulous').mark_as_alternate_win()
   else
-    require('config.ui.nebulous').mark_as_alternate_win()
+    require('hasan.nebulous').mark_as_alternate_win()
     vim.cmd(wincmd)
   end
 end

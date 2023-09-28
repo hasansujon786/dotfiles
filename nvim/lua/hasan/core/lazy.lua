@@ -11,6 +11,7 @@ require('lazy').setup({
     { import = 'config' },
     { import = 'config.lsp' },
     { import = 'config.git' },
+    { import = 'config.ui' },
   },
   concurrency = 5,
   git = {

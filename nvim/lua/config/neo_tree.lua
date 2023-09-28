@@ -100,7 +100,7 @@ return {
       '<leader>op',
       function()
         vim.g.cwd = vim.loop.cwd()
-        require('config.ui.nebulous').mark_as_alternate_win()
+        require('hasan.nebulous').mark_as_alternate_win()
         local readonly = vim.api.nvim_buf_get_option(0, 'readonly')
         local modifiable = vim.api.nvim_buf_get_option(0, 'modifiable')
         local filetype = vim.api.nvim_buf_get_option(0, 'filetype')

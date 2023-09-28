@@ -14,7 +14,7 @@ M.mark_as_alternate_win = function(winid)
     M.alternate_winid_to_ignore = win
   end
 end
--- lua P(require('config.ui.nebulous').alternate_winid_to_ignore)
+-- lua P(require('hasan.nebulous').alternate_winid_to_ignore)
 
 keymap('n', '<leader>R', '<cmd>lua require("nebulous").toggle_win_blur()<CR>', { desc = 'Toggle Nebulous' })
 
