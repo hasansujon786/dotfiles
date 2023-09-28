@@ -261,38 +261,6 @@ function M.toggle(option, silent)
   end
 end
 
-M.augroup = function(group)
-  -- local id = vim.api.nvim_create_augroup(group, { clear = true })
-  vim.api.nvim_create_augroup(group, { clear = true })
-
-  return function(autocmds)
-    autocmds(function(event, command, opts)
-      opts = opts and opts or {}
-      -- opts.group = id
-      opts.group = group
-      local is_function = type(command) == 'function'
-      opts.callback = is_function and command or nil
-      opts.command = not is_function and command or nil
-
-      vim.api.nvim_create_autocmd(event, opts)
-    end)
-  end
-end
--- local NULL_LS_AUGROUP = augroup('NULL_LS_AUGROUP')
--- NULL_LS_AUGROUP(function(autocmd)
---   -- autocmd({ 'BufWritePre' }, { buffer = bufnr }, function()
---   --   vim.lsp.buf.formatting_sync()
---   -- end)
-
---   -- Also you can add a many autocmds as you'd like here
---   -- For example:
---   local count = 1
---   autocmd({ 'CursorMoved' }, { buffer = vim.api.nvim_win_get_buf(0) }, function()
---     print(string.format('cursor moved %d times', count))
---     count = count + 1
---   end)
--- end)
-
 function M.normalize_path(path_to_normalise)
   local normalized_path = path_to_normalise:gsub('\\', '/'):gsub('//', '/')
 

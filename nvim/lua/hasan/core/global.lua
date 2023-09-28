@@ -6,21 +6,6 @@ _G.dap_adapter_path = data_path .. '/dap_adapters' -- 'C:\\Users\\hasan\\AppData
 _G.plugin_path = data_path .. '/lazy'
 _G.path_mason = data_path .. '/mason'
 
--- Sneak ==============================
-vim.g['sneak#target_labels'] = ';wertyuopzbnmfLGKHWERTYUIQOPZBNMFJ0123456789'
-vim.g['sneak#label'] = 1 -- use <tab> to jump through lebles
-vim.g['sneak#use_ic_scs'] = 1 -- case insensitive sneak
-vim.g['sneak#prompt'] = '  '
--- vim-visual-multi ===================
-vim.g.VM_leader = '<leader>vv'
-vim.g.VM_theme_set_by_colorscheme = 0
--- emmet ==============================
-vim.g.user_emmet_leader_key = '<C-c>'
--- quick-scoope =======================
-vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
--- vim-caser ==========================
-vim.g.caser_prefix = '<leader>cs'
-
 P = function(...)
   local hasNvim9 = vim.fn.has('nvim-0.9') == 1
   if hasNvim9 then
@@ -43,18 +28,18 @@ R = function(moduleName, message)
   end
 end
 
-_G.feedkeys = function(key, mode)
+function _G.feedkeys(key, mode)
   mode = mode == nil and '' or mode
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
-_G.keymap = function(mode, lhs, rhs, opts)
+function _G.keymap(mode, lhs, rhs, opts)
   local def_opts = { silent = true, noremap = true }
   opts = vim.tbl_deep_extend('force', def_opts, opts or {})
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
-_G.handle_win_cmd = function(wincmd, lazySave)
+function _G.handle_win_cmd(wincmd, lazySave)
   if lazySave then
     vim.cmd(wincmd)
     require('hasan.nebulous').mark_as_alternate_win()
@@ -64,8 +49,25 @@ _G.handle_win_cmd = function(wincmd, lazySave)
   end
 end
 
-_G.command = function(name, callback, opts)
+function _G.command(name, callback, opts)
   vim.api.nvim_create_user_command(name, callback, opts or {})
+end
+
+function _G.augroup(group)
+  vim.api.nvim_create_augroup(group, { clear = true })
+
+  return function(autocmds)
+    autocmds(function(event, command, opts)
+      opts = opts and opts or {}
+      -- opts.group = id
+      opts.group = group
+      local is_function = type(command) == 'function'
+      opts.callback = is_function and command or nil
+      opts.command = not is_function and command or nil
+
+      vim.api.nvim_create_autocmd(event, opts)
+    end)
+  end
 end
 
 -- prequire {{{
@@ -74,7 +76,7 @@ end
 ---@param module_name string
 ---@return table | function | Void module
 ---@return boolean loaded if module was loaded or not
-_G.prequire = function(module_name)
+function _G.prequire(module_name)
   local available, module = pcall(require, module_name)
   if available then
     return module, true

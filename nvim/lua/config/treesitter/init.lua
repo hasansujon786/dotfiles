@@ -154,7 +154,7 @@ return {
 
       local treesitter_foldtext_filetypes = 'html,css,javascript,typescript,tsx,typescriptreact,json,lua,vue,dart,org'
       local import_pattern = 'javascript,typescript,tsx,typescriptreact,vue,dart'
-      require('hasan.utils').augroup('MY_TREESITTER_AUGROUP')(function(autocmd)
+      augroup('MY_TREESITTER_AUGROUP')(function(autocmd)
         autocmd('FileType', 'lua my_treesitter_foldexpr()', { pattern = treesitter_foldtext_filetypes })
         autocmd('FileType', 'let b:treesitter_import_syntax = "import"', { pattern = import_pattern })
       end)

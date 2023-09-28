@@ -1,10 +1,9 @@
 local first_init = true
-local utils = require('hasan.utils')
 if vim.fn.exists('g:hasan_telescope_buffers') == 0 then
   vim.g.hasan_telescope_buffers = { ['0'] = 0 } -- used in hasan#utils#_buflisted_sorted()
 end
 
-utils.augroup('MY_AUGROUP')(function(autocmd)
+augroup('MY_AUGROUP')(function(autocmd)
   autocmd('CmdwinEnter', 'nnoremap <buffer><CR> <CR>')
   autocmd('ColorScheme', function()
     if first_init then

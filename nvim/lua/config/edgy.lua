@@ -33,17 +33,17 @@ return {
     })
 
     local custom_color_ft = { 'floaterm' }
-    require('hasan.utils').augroup('MY_EDGY_AUGROUP')(function(autocmd)
+    augroup('MY_EDGY_AUGROUP')(function(autocmd)
       autocmd({ 'FileType' }, function(_)
         local win = vim.api.nvim_get_current_win()
         if vim.api.nvim_win_get_config(win).relative == '' then
           reset_edgy_win_hl()
           vim.cmd([[
-      augroup edgy_custom_hl
-        autocmd! * <buffer>
-        autocmd WinEnter,BufEnter <buffer> lua reset_edgy_win_hl()
-      augroup END
-      ]])
+            augroup edgy_custom_hl
+              autocmd! * <buffer>
+              autocmd WinEnter,BufEnter <buffer> lua reset_edgy_win_hl()
+            augroup END
+          ]])
         end
       end, { pattern = custom_color_ft })
     end)

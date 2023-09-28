@@ -95,7 +95,7 @@ local function remove_blur_alt()
   end, 10)
 end
 
-require('hasan.utils').augroup('MY_NEBULOUS_SETUP')(function(autocmd)
+augroup('MY_NEBULOUS_SETUP')(function(autocmd)
   autocmd('FileType', function(info)
     -- If noice or vinegar win then skip
     if info.file == 'noice' or require('config.neo_tree').vinegar_helper.isNeoTreeWindow(info.file) then

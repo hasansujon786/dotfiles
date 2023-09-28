@@ -1,5 +1,8 @@
 return {
   'mattn/emmet-vim',
+  init = function()
+    vim.g.user_emmet_leader_key = '<C-c>'
+  end,
   config = function()
     keymap('i', '<C-c>', '<nop>')
     keymap({ 'n', 'i' }, '<C-c><C-c>', '<plug>(emmet-expand-abbr)')

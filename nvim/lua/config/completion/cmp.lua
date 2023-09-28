@@ -188,8 +188,7 @@ cmp.setup({
   },
 })
 
-local CMP_AUGROUP = utils.augroup('CMP_AUGROUP')
-CMP_AUGROUP(function(autocmd)
+augroup('CMP_AUGROUP')(function(autocmd)
   autocmd('FileType', 'lua CmpOrgmodeSetup()', { pattern = { 'org' } })
   autocmd('FileType', 'lua CmpNeogitCommitMessageSetup()', { pattern = { 'NeogitCommitMessage' } })
 end)
