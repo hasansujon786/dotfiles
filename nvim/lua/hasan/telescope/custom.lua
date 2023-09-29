@@ -281,7 +281,12 @@ function M.search_project_todos()
 end
 
 M.buffers = function(cwd_only)
-  builtin.buffers({ cwd_only = cwd_only, sort_mru = true, ignore_current_buffer = cwd_only })
+  builtin.buffers({
+    prompt_title = cwd_only and 'Search buffers' or 'Search all buffers',
+    cwd_only = cwd_only,
+    sort_mru = true,
+    ignore_current_buffer = true,
+  })
 end
 
 -- https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion

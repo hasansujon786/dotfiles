@@ -2,7 +2,8 @@ return {
   'stevearc/conform.nvim',
   lazy = true,
   enabled = true,
-  event = 'VeryLazy',
+  module = 'conform',
+  event = 'BufWritePre',
   config = function()
     local prettier = { { 'prettierd', 'prettier' } } -- Use a sub-list to run only the first available formatter
 

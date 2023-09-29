@@ -76,6 +76,7 @@ return {
         view_history = 'messages', -- view for :messages
         view_search = false, -- view for search count messages. Set to `false` to disable
       },
+      views = { mini = { win_options = { winblend = 0 } } },
     })
 
     -- Redirect cmdline result to a popup
@@ -99,7 +100,4 @@ return {
       end
     end, { silent = true, expr = true })
   end,
-  dependencies = {
-    'folke/which-key.nvim',
-  },
 }

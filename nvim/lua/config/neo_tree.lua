@@ -18,9 +18,9 @@ util.save_altfile = function()
     vim.w.pre_alt_file = pre_alt
   end
 end
-function Foo()
-  P('alt=' .. vim.w.alt_file .. '| prealt=' .. vim.w.pre_alt_file)
-end
+-- function Foo()
+--   P('alt=' .. vim.w.alt_file .. '| prealt=' .. vim.w.pre_alt_file)
+-- end
 
 local function vinegar_dir_up(state)
   local Path = require('plenary.path')
@@ -47,8 +47,7 @@ end
 
 local function edit_alternate_file()
   if vim.o.filetype == 'neo-tree' then
-    if vim.b.neo_tree_position == 'current' then
-      P('first')
+    if vim.b['neo_tree_position'] == 'current' then
       return feedkeys('<c-^>')
     end
     return feedkeys('q')
@@ -61,29 +60,24 @@ local function edit_alternate_file()
   local current_alt_file = vim.fn.expand('#:p')
 
   if not util.isEmpty(current_alt_file) and not util.isNeoTreeWindow(current_alt_file) then
-    P('aa')
     return feedkeys('<c-^>')
   end
 
   -- if alt is neo-tree
   if util.isNeoTreeWindow(current_alt_file) then
     if current_file == alt_file and not util.isEmpty(pre_alt_file) then
-      P('bb')
-      return vim.cmd('e ' .. pre_alt_file)
+      return vim.cmd.edit(pre_alt_file)
     elseif current_file ~= alt_file and not util.isEmpty(alt_file) then
-      P('cc')
-      return vim.cmd('e ' .. alt_file)
+      return vim.cmd.edit(alt_file)
     else
       return vim.notify('E23: No alternate file', vim.log.levels.ERROR)
     end
   else
     if current_file == alt_file and not util.isEmpty(pre_alt_file) then
-      P('dd')
-      return vim.cmd('e ' .. pre_alt_file)
+      return vim.cmd.edit(pre_alt_file)
     end
   end
 
-  P('last')
   feedkeys('<c-^>')
 end
 

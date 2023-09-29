@@ -51,7 +51,7 @@ local hl_sections = {
   end,
 }
 
-local get_lsp_client = function()
+local function get_lsp_client()
   local buf_clients = vim.lsp.get_active_clients()
   if next(buf_clients) == nil then
     return 'LSP Inactive'
@@ -164,7 +164,7 @@ local c = {
       for _, msg in pairs(progress_message) do
         table.insert(status, (msg.percentage or 0) .. '%% ' .. (msg.title or ''))
       end
-      return table.concat(status, ' ')
+      return status[#status]
     end,
     short_provider = '',
     hl = hl_sections.muted_text,

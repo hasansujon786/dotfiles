@@ -1,12 +1,11 @@
--- use({ 'ziontee113/color-picker.nvim', config = [[require('config.color-picker')]], opt = true, cmd = 'PickColor' })
--- require('color-picker').setup({
---   ['icons'] = { 'ﱢ', '' },
---   ['text_highlight_group'] = 'WhiteText',
--- })
 return {
   'uga-rosa/ccc.nvim',
   lazy = true,
   cmd = 'CccPick',
+  keys = {
+    { '<leader>cp', '<cmd>CccPick<cr>', desc = 'Open color picker' },
+    { '<leader>cc', '<cmd>CccConvert<cr>', desc = 'Cycle color format' },
+  },
   config = function()
     local ccc = require('ccc')
     local mapping = ccc.mapping
@@ -50,3 +49,11 @@ return {
     })
   end,
 }
+
+-- {
+--  c = { '<Plug>ColorConvertCycle', 'Cycle color' },
+--  x = { '<Plug>ColorConvertHEX', 'Convert color to HEX' },
+--  h = { '<Plug>ColorConvertHSL', 'Convert color to HSL' },
+--  r = { '<Plug>ColorConvertRGB', 'Convert color to RGB' },
+--  'NTBBloodbath/color-converter.nvim',
+-- },

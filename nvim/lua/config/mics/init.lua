@@ -1,18 +1,17 @@
--- { 'mkropat/vim-tt', lazy = true, event = 'CursorHold', config = function() vim.g.tt_loaded = 1 end },
-local nx = { 'n', 'x' }
+local nx, nxo = { 'n', 'x' }, { 'n', 'x', 'o' }
 return {
   { 'nvim-lua/plenary.nvim', lazy = true, module = 'plenary' },
   { 'MunifTanjim/nui.nvim', lazy = true, module = 'nui' },
   { 'tpope/vim-eunuch', lazy = true, cmd = { 'Delete', 'Move', 'Rename', 'Mkdir', 'Chmod' } },
   {
-    'tpope/vim-commentary',
+    'tpope/vim-repeat',
     lazy = true,
-    event = 'CursorHold',
-    dependencies = {
-      'tpope/vim-surround',
-      'tpope/vim-repeat',
-      'NTBBloodbath/color-converter.nvim',
-    },
+    event = 'BufReadPost',
+    dependencies = 'tpope/vim-surround',
+  },
+  {
+    'tpope/vim-commentary',
+    keys = { 'gcc', 'gcu', { 'gc', mode = nxo } },
   },
   {
     'dhruvasagar/vim-open-url',
@@ -20,6 +19,7 @@ return {
     cmd = 'OpenURL',
   },
   {
+    -- TODO: debug keymap
     'mg979/vim-visual-multi',
     keys = { { '<leader>vv', mode = nx }, { '<C-n>', mode = nx } },
     init = function()
@@ -36,14 +36,14 @@ return {
   },
   {
     'unblevable/quick-scope',
-    keys = { { 'f', mode = nx }, { 'F', mode = nx }, { 't', mode = nx }, { 'T', mode = nx } },
+    keys = { { 'f', mode = nxo }, { 'F', mode = nxo }, { 't', mode = nxo }, { 'T', mode = nxo } },
     init = function()
       vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
     end,
   },
   {
     'justinmk/vim-sneak',
-    keys = { { 's', mode = nx }, { 'S', mode = nx } },
+    keys = { { 's', mode = nx }, { 'S', mode = nx }, { 'z', mode = 'o' }, { 'Z', mode = 'o' } },
     init = function()
       vim.g['sneak#target_labels'] = ';wertyuopzbnmfLGKHWERTYUIQOPZBNMFJ0123456789'
       vim.g['sneak#label'] = 1 -- use <tab> to jump through lebles

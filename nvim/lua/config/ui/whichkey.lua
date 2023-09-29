@@ -1,6 +1,7 @@
 return {
   'folke/which-key.nvim',
   lazy = true,
+  event = 'VeryLazy',
   config = function()
     local wk = require('which-key')
     wk.setup({
@@ -81,11 +82,6 @@ return {
 
       c = {
         name = '+change',
-        c = { '<Plug>ColorConvertCycle', 'Cycle color' },
-        x = { '<Plug>ColorConvertHEX', 'Convert color to HEX' },
-        h = { '<Plug>ColorConvertHSL', 'Convert color to HSL' },
-        r = { '<Plug>ColorConvertRGB', 'Convert color to RGB' },
-        p = { '<cmd>CccPick<cr>', 'Pick a color' },
 
         -- TODO: <12.04.23> change keymap
         m = {
@@ -220,19 +216,6 @@ return {
         h = { '<cmd>call autohl#_AutoHighlightToggle()<CR>', 'Highlight same words' },
         s = { '<cmd>lua require("hasan.utils").toggle("spell")<CR>', 'Toggle spell' },
         w = { '<cmd>lua require("hasan.utils").toggle("wrap")<CR>', 'Toggle wrap' },
-
-        t = {
-          name = '+task-and-timer',
-          q = { '<cmd>TimerStop<CR>', 'Quit the timer' },
-          w = { '<cmd>Work<CR>', 'Start work timer' },
-          W = { '<cmd>Work!<CR>', 'Start custom timer' },
-          s = { '<cmd>TimerShow<CR>', 'Show timer status' },
-          p = { '<cmd>TimerToggle<CR>', 'Pause or Paly' },
-          b = { '<cmd>Break<CR>', 'Take a break' },
-          o = { '<cmd>OpenTasks<CR>', 'Open tasks' },
-          u = { '<cmd>UpdateCurrentTimer<CR>', 'Update current timer' },
-          U = { '<cmd>UpdateCurrentStatus<CR>', 'Update current status' },
-        },
       },
 
       v = {
@@ -252,7 +235,7 @@ return {
       ['/'] = {
         name = '+search',
         ['.'] = { '<cmd>Telescope resume<cr>', 'Telescope resume' },
-        b = { '<cmd>Telescope buffers<CR>', 'Find buffers' },
+        b = common.buffers_cwd,
         f = { '<cmd>Telescope find_files<CR>', 'Find file' },
         k = { '<cmd>Telescope keymaps<CR>', 'Look up keymaps' },
         M = { '<cmd>Telescope marks<CR>', 'Jump to marks' },
@@ -266,8 +249,9 @@ return {
       r = { '<cmd>lua require("hasan.utils.ui").cycle_numbering()<CR>', 'Cycle number' },
       x = { '<cmd>call hasan#utils#buffer#_open_scratch_buffer()<CR>', 'Scratch buffer' },
 
-      ['>'] = common.buffers_all,
-      ['.'] = common.browse_cur_dir,
+      [','] = common.browse_cur_dir,
+      ['>'] = common.buffers_cwd,
+      ['.'] = common.buffers_all,
     }
 
     local leader_visual = {
