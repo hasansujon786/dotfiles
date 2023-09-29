@@ -13,7 +13,7 @@ return {
 
     ccc.setup({
       bar_char = '■',
-      point_char = '◇',
+      point_char = '⏽',
       bar_len = 40,
       default_color = '#7321de',
       save_on_quit = true,

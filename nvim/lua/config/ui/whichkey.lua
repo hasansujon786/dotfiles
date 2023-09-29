@@ -265,7 +265,6 @@ return {
 
       r = { '<cmd>lua require("hasan.utils.ui").cycle_numbering()<CR>', 'Cycle number' },
       x = { '<cmd>call hasan#utils#buffer#_open_scratch_buffer()<CR>', 'Scratch buffer' },
-      M = { '<cmd>lua require("harpoon.mark").add_file()<CR>', 'Mark to Harpoon' },
 
       ['>'] = common.buffers_all,
       ['.'] = common.browse_cur_dir,

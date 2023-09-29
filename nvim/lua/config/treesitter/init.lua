@@ -165,12 +165,6 @@ return {
       'michaeljsmith/vim-indent-object',
       'windwp/nvim-ts-autotag',
       {
-        'ziontee113/neo-minimap',
-        config = function()
-          require('config.treesitter.neo_minimap')
-        end,
-      },
-      {
         'NvChad/nvim-colorizer.lua',
         opts = {
           filetypes = {
@@ -196,6 +190,14 @@ return {
         },
       },
     },
+  },
+  {
+    'ziontee113/neo-minimap',
+    lazy = true,
+    event = 'BufReadPost',
+    config = function()
+      require('config.treesitter.neo_minimap')
+    end,
   },
   {
     'nvim-treesitter/playground',

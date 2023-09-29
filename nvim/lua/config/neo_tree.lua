@@ -185,7 +185,7 @@ return {
         },
         {
           source = 'git_status', -- string
-          display_name = '  Git ', -- string | nil
+          display_name = '  Git ', -- string | nil
         },
       },
       content_layout = 'center', -- string

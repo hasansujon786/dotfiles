@@ -1,7 +1,7 @@
 return {
   'lukas-reineke/indent-blankline.nvim',
   lazy = true,
-  event = 'VeryLazy', -- V2: 9637670896b68805430e2f72cf5d16be5b97a22a
+  event = 'BufReadPost', -- V2: 9637670896b68805430e2f72cf5d16be5b97a22a
   main = 'ibl',
   opts = {
     indent = {

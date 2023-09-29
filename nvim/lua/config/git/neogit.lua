@@ -18,8 +18,8 @@ return {
     kind = 'tab',
     signs = {
       -- { CLOSED, OPENED }
-      section = { '', '' },
-      item = { '', '' },
+      section = { '', '' },
+      item = { '', '' },
       hunk = { '', '' },
     },
     integrations = {
