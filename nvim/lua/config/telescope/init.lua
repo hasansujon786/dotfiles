@@ -204,9 +204,7 @@ return {
       end
     end,
     opts = {
-      menu = {
-        width = 80
-      },
+      menu = { width = 80 },
     },
   },
 }

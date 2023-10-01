@@ -57,6 +57,16 @@ end
 
 -- Telescope lsp_workspace_symbols query=profiles
 -- Telescope lsp_dynamic_workspace_symbols
+-- vim.api.nvim_create_autocmd('User', {
+--   pattern = 'TelescopePreviewerLoaded',
+--   callback = function(args)
+--     if args.data.filetype ~= 'help' then
+--       vim.wo.number = true
+--     elseif args.data.bufname:match('*.csv') then
+--       vim.wo.wrap = false
+--     end
+--   end,
+-- })
 
 Edit_macro = function()
   local register = 'i'
