@@ -2,6 +2,7 @@ return {
   'stevearc/conform.nvim',
   lazy = true,
   enabled = true,
+  cmd = 'ConformInfo',
   module = 'conform',
   event = 'BufWritePre',
   config = function()

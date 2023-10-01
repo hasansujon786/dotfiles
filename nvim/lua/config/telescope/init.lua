@@ -186,7 +186,7 @@ return {
     end,
   },
   {
-    'ThePrimeagen/harpoon',
+    'hasansujon786/harpoon',
     lazy = true,
     module = 'harpoon',
     keys = {
@@ -203,5 +203,10 @@ return {
         keymap('n', win_ls:format(i), win_rs:format(i), { desc = 'which_key_ignore' })
       end
     end,
+    opts = {
+      menu = {
+        width = 80
+      },
+    },
   },
 }
