@@ -64,6 +64,7 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi DiagnosticUnderlineError gui=underline guifg=#E61B1B
 
   "/// Plugins ///"
+  hi! NoiceMini guibg=#000000
   hi! LazyButton      guibg=#3E425D guifg=#ABB2BF
   hi! link LazyNormal NormalFloatFlat
   hi! link MasonNormal NormalFloatFlat

@@ -1,8 +1,16 @@
+local nx = { 'n', 'x' }
 return {
   'karb94/neoscroll.nvim',
   lazy = true,
-  event = 'VeryLazy',
+  event = 'WinScrolled',
   opts = {},
+  keys = {
+    { '<C-u>', mode = nx },
+    { '<C-d>', mode = nx },
+    { 'zt', mode = nx },
+    { 'zz', mode = nx },
+    { 'zb', mode = nx },
+  },
   config = function()
     require('neoscroll').setup()
     local map = {}
