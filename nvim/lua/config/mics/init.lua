@@ -15,16 +15,37 @@ return {
   },
   {
     'dhruvasagar/vim-open-url',
-    keys = { { 'gB', mode = nx }, { 'g<CR>', mode = nx }, { 'gG', mode = nx } },
+    keys = {
+      { 'gB', desc = 'Url: Open on browser', mode = nx },
+      { 'g<CR>', desc = 'Url: Search on Dukdukgo', mode = nx },
+      { 'gG', desc = 'Url: Search on Google', mode = nx },
+    },
     cmd = 'OpenURL',
   },
   {
     -- TODO: debug keymap
     'mg979/vim-visual-multi',
-    keys = { { '<leader>vv', mode = nx }, { '<C-n>', mode = nx } },
+    keys = {
+      { 'gb', '<Plug>(VM-Find-Under)', desc = 'VM: Select under cursor', mode = 'n' },
+      { 'gb', '<Plug>(VM-Find-Subword-Under)', desc = 'VM: Select under cursor', mode = 'x' },
+      { '<leader>n', mode = nx },
+      { '<C-n>', mode = nx },
+      { '<C-up>', mode = nx },
+      { '<C-down>', mode = nx },
+    },
     init = function()
-      vim.g.VM_leader = '<leader>vv'
+      vim.g.VM_leader = '<leader>n'
       vim.g.VM_theme_set_by_colorscheme = 0
+    end,
+    config = function()
+      augroup('MY_VM')(function(autocmd)
+        autocmd('User', function()
+          vim.api.nvim_set_hl(0, 'CurSearch', { link = 'None' })
+        end, { pattern = 'visual_multi_start' })
+        autocmd('User', function()
+          vim.api.nvim_set_hl(0, 'CurSearch', { link = 'IncSearch' })
+        end, { pattern = 'visual_multi_exit' })
+      end)
     end,
   },
   {

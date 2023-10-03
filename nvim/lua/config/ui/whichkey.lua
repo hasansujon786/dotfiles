@@ -58,7 +58,8 @@ return {
     }
 
     local leader = {
-      a = { name = '+lsp' },
+      a = { name = '+lsp', d = 'Lsp: show global diagnostics' },
+      n = { name = '+visual-multi', A = 'VM: Select All' },
 
       b = {
         name = '+buffer',
@@ -257,7 +258,7 @@ return {
     local leader_visual = {
       o = { name = '+open' },
       c = { name = '+change' },
-      ['/'] = { name = '+search' },
+      n = { name = '+visual-multi' },
     }
 
     wk.register(leader, { prefix = '<leader>' })

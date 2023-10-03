@@ -8,14 +8,14 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi StatusLine         guibg=#2D3343 guifg=#ABB2BF
   hi StatusLineNC       guibg=#2D3343 guifg=#ABB2BF
   hi CursorLineFocus    guibg=#363C51
-  hi IncSearch          guibg=#e86671 gui=underline
-  hi CurSearch          guibg=#e86671 guifg=#2C323C gui=underline
   hi SignColumn         guibg=NONE
   hi RedText            guifg=#ff0000
   hi WhiteText          guifg=#ffffff
   hi GrayText           guifg=#7386a5
   hi CursorLineDap      guibg=#173F1E guifg=none guisp=none cterm=underline
   hi SidebarDark        guifg=#a5b0c5 guibg=#1e242e
+  hi IncSearch          guibg=#e86671 guifg=#2C323C gui=underline
+  hi! link CurSearch IncSearch
   hi! link Folded Comment
   hi! link Conceal String
   hi! link CursorColumn CursorLineFocus
