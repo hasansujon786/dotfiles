@@ -11,7 +11,11 @@ return {
   },
   {
     'tpope/vim-commentary',
-    keys = { 'gcc', 'gcu', { 'gc', mode = nxo } },
+    keys = {
+      { 'gc', desc = 'Commentary', mode = nxo },
+      { 'gcc', desc = 'Commentary line' },
+      { 'gcu', desc = 'Commentary block' },
+    },
   },
   {
     'dhruvasagar/vim-open-url',
@@ -36,6 +40,10 @@ return {
     init = function()
       vim.g.VM_leader = '<leader>n'
       vim.g.VM_theme_set_by_colorscheme = 0
+      vim.g.VM_maps = {
+        -- ['Slash Search'] = 'gM',
+        ['I BS'] = '<C-h>',
+      }
     end,
     config = function()
       augroup('MY_VM')(function(autocmd)
@@ -50,7 +58,7 @@ return {
   },
   {
     'arthurxavierx/vim-caser',
-    keys = { { '<leader>cs', mode = nx } },
+    keys = { { '<leader>cs', desc = 'vim-caser', mode = nx } },
     init = function()
       vim.g.caser_prefix = '<leader>cs'
     end,
