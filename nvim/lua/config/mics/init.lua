@@ -27,7 +27,6 @@ return {
     cmd = 'OpenURL',
   },
   {
-    -- TODO: debug keymap
     'mg979/vim-visual-multi',
     keys = {
       { 'gb', '<Plug>(VM-Find-Under)', desc = 'VM: Select under cursor', mode = 'n' },

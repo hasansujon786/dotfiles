@@ -4,15 +4,15 @@ local function init_lspconfig()
 
   -- default lsp configs
   local lsp_extras = require('config.lsp.util.extras')
-  local g_conf = lsp_extras.get_global_conf()
+  local global_conf = lsp_extras.get_global_conf()
 
-  for server_name, _ in pairs(g_conf.essential_servers) do
-    local local_conf = lsp_extras.get_server_conf(server_name)
-    if local_conf == nil or local_conf.settings == nil then
-      lspconfig[server_name].setup(g_conf.default_opts)
+  for key_server_name, _ in pairs(global_conf.essential_servers) do
+    local local_conf = lsp_extras.get_server_conf(key_server_name)
+    if local_conf == nil or local_conf.opts == nil then
+      lspconfig[key_server_name].setup(global_conf.default_opts)
     else
-      local opts = require('hasan.utils').merge(g_conf.default_opts, local_conf.settings)
-      lspconfig[server_name].setup(opts)
+      local opts = require('hasan.utils').merge(global_conf.default_opts, local_conf.opts)
+      lspconfig[key_server_name].setup(opts)
     end
   end
 end

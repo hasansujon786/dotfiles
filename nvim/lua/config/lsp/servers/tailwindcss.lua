@@ -5,7 +5,6 @@
 local namespace = vim.api.nvim_create_namespace('class_conceal')
 local group = vim.api.nvim_create_augroup('class_conceal', { clear = true })
 local M = {}
-local hasNvim9 = vim.fn.has('nvim-0.9') == 1
 
 local function del_buffer_extmark()
   if vim.b.class_conceal_ns_ids ~= nil then
@@ -19,7 +18,7 @@ local function conceal_html_class(bufnr)
   local language_tree = vim.treesitter.get_parser(bufnr, 'html')
   local syntax_tree = language_tree:parse()
   local root = syntax_tree[1]:root()
-  local parser = hasNvim9 and vim.treesitter.query.parse or vim.treesitter.parse_query
+  local parser = vim.treesitter.query.parse
 
   local query = parser(
     'html',
@@ -231,7 +230,7 @@ return {
     keymap('n', 'gK', M.peekTwStyles, { desc = 'Peek tailwind styles', buffer = bufnr })
     keymap('n', 'to', M.toggle_conceallevel, { desc = 'Toggle conceallevel', buffer = bufnr })
   end,
-  settings = {
+  opts = {
     root_dir = require('lspconfig.util').root_pattern(
       'tailwind.config.js',
       'tailwind.config.ts',

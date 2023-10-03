@@ -1,5 +1,5 @@
 return {
-  settings = {
+  opts = {
     settings = {
       Lua = {
         completion = {
