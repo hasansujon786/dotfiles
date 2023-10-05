@@ -192,8 +192,8 @@ return {
     keys = {
       { '<leader>M', '<cmd>lua require("harpoon.mark").add_file()<CR>', desc = 'Harpoon: Add file' },
       { '<leader><tab>', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', desc = 'Harpoon: Toggle menu' },
-      { '[e', '<cmd>lua require("harpoon.ui").nav_prev()<CR>', desc = 'Harpoon: Prev item' },
-      { ']e', '<cmd>lua require("harpoon.ui").nav_next()<CR>', desc = 'Harpoon: Next item' },
+      { '[<tab>', '<cmd>lua require("harpoon.ui").nav_prev()<CR>', desc = 'Harpoon: Prev item' },
+      { ']<tab>', '<cmd>lua require("harpoon.ui").nav_next()<CR>', desc = 'Harpoon: Next item' },
     },
     init = function()
       local harpoon_ls, harpoon_rs = '<leader>%s', '<cmd>lua require("harpoon.ui").nav_file(%s)<CR>'

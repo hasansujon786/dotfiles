@@ -6,7 +6,7 @@ return {
     local relculright = false
     -- local builtin = require('statuscol.builtin')
 
-    local function custom_lnumfunc(args, _)
+    local function custom_line_num_func(args, _)
       -- if args.sclnu and fa.sign and fa.sign.wins[args.win].signs[args.lnum] then
       --   return '%=' .. M.signfunc(args, fa)
       -- end
@@ -48,15 +48,28 @@ return {
         --   click = 'v:lua.ScSa',
         -- },
         {
-          sign = { name = { '.*' }, maxwidth = 2, colwidth = 1, auto = true, wrap = true },
+          sign = {
+            name = { '.*' }, -- table of lua patterns to match the sign name against
+            text = { '.*' }, -- table of lua patterns to match the extmark sign text against
+            namespace = { '.*' }, -- table of lua patterns to match the extmark sign namespace against
+            maxwidth = 2,
+            colwidth = 1,
+            auto = true,
+            wrap = true,
+          },
           click = 'v:lua.ScSa',
         },
         {
-          text = { custom_lnumfunc },
+          text = { custom_line_num_func },
           click = 'v:lua.ScLa',
         },
         {
-          sign = { name = { 'GitSign' }, colwidth = 1, auto = false, wrap = true },
+          sign = {
+            namespace = { 'gitsigns' },
+            colwidth = 1,
+            auto = false,
+            wrap = true,
+          },
           click = 'v:lua.ScSa',
         },
       },
@@ -93,40 +106,42 @@ return {
   dependencies = {
     {
       'chentoast/marks.nvim',
+    keys = {
+      { 'm/', '<cmd>MarksListBuf<CR>', desc = 'Marks: Show buf list' },
+    },
       opts = {
         mappings = {
           set = 'm',
           delete = 'm-', -- specific {key}
           delete_line = 'm--',
-          delete_buf = 'dax',
+          delete_buf = 'm-_',
           set_next = 'm,',
-          toggle = 'm=',
-          preview = 'm;',
-          next = 'm]',
-          prev = 'm[',
+          toggle = 'm;',
+          preview = "m'",
+          prev = '[e',
+          next = ']e',
 
           -- set_bookmark0 = 'm0',
           -- delete_bookmark0 = 'dm0',
           -- next_bookmark = 'm}',
           -- prev_bookmark = 'm{',
           -- delete_bookmark = 'dm=',
+          -- annotate = 'm<CR>',
 
-          next_bookmark0 = "'0",
-          prev_bookmark0 = "'0",
-          next_bookmark1 = "'1",
-          prev_bookmark1 = "'1",
-          next_bookmark2 = "'2",
-          prev_bookmark2 = "'2",
-          next_bookmark3 = "'3",
-          prev_bookmark3 = "'3",
-          next_bookmark4 = "'4",
-          prev_bookmark4 = "'4",
-          next_bookmark5 = "'5",
-          prev_bookmark5 = "'5",
-
-          annotate = 'm<CR>',
+          -- next_bookmark0 = "'0",
+          -- prev_bookmark0 = "'0",
+          -- next_bookmark1 = "'1",
+          -- prev_bookmark1 = "'1",
+          -- next_bookmark2 = "'2",
+          -- prev_bookmark2 = "'2",
+          -- next_bookmark3 = "'3",
+          -- prev_bookmark3 = "'3",
+          -- next_bookmark4 = "'4",
+          -- prev_bookmark4 = "'4",
+          -- next_bookmark5 = "'5",
+          -- prev_bookmark5 = "'5",
         },
-        default_mappings = true,
+        default_mappings = false,
         -- builtin_marks = { ".", "<", ">", "^" }, -- which builtin marks to show. default {}
         cyclic = true,
         force_write_shada = true, -- whether the shada file is updated after modifying uppercase marks. default false
