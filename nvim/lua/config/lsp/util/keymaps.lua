@@ -25,7 +25,7 @@ function M.lsp_buffer_keymaps(_, bufnr)
   keymap('n', 'gP', require('config.lsp.util.peek').PeekDefinition, desc('Lsp: peek definition'))
   keymap('n', 'gY', require('config.lsp.util.peek').PeekTypeDefinition, desc('Lsp: peek type definition'))
   -- keymap('n', 'gpm', require('config.lsp.util.peek').PeekImplementation, desc('Lsp: peek implementation'))
-  keymap('n', '<C-LeftMouse>', '<LeftMouse><cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  keymap('n', '<C-LeftMouse>', '<LeftMouse><cmd>lua vim.lsp.buf.definition()<CR>', desc('which_key_ignore'))
 
   -- Action, Prompt, Search
   keymap('n', 'K', vim.lsp.buf.hover, desc('Lsp: hover under cursor'))

@@ -71,6 +71,7 @@ return {
   },
   {
     'justinmk/vim-sneak',
+    enabled = not vim.g.use_flash,
     keys = { { 's', mode = nx }, { 'S', mode = nx }, { 'z', mode = 'o' }, { 'Z', mode = 'o' } },
     init = function()
       vim.g['sneak#target_labels'] = ';wertyuopzbnmfLGKHWERTYUIQOPZBNMFJ0123456789'
@@ -85,7 +86,7 @@ return {
   {
     'Konfekt/vim-CtrlXA',
     lazy = true,
-    keys = { '<C-a>', '<C-x>' },
+    keys = { { '<C-a>', desc = 'Increment number and more' }, { '<C-x>', desc = 'Decrement number and more' } },
     config = function()
       vim.fn['hasan#CtrlXA#update']()
     end,

@@ -1,8 +1,13 @@
 {
   "auto grid": {
-    "prefix": "gauto-col",
+    "prefix": "gac",
     "body": ["grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));"],
     "description": "Create auto grid columns"
+  },
+  "auto grid2": {
+    "prefix": "gacm",
+    "body": ["grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));"],
+    "description": "Create auto grid columns witn min()"
   },
   "debug css": {
     "prefix": "dbg",

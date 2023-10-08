@@ -94,6 +94,8 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi IndentBlanklineChar guifg=#323a48
   hi IblIndent guifg=#323a48
   hi IblScope  guifg=#546178
+  "/// Flash ///"
+  hi FlashBackdrop guifg=#546178
 
   "/// Lualine ///"
   hi LualineTabActive    guifg=#97CA72 guibg=#3E4452
