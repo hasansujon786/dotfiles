@@ -61,7 +61,7 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi DiagnosticLineNrInfo  guifg=#4dbdcb guibg=#2C4855
   hi DiagnosticLineNrHint  guifg=#ca72e4 guibg=#45395A
   hi DiagnosticUnnecessary gui=underline
-  hi DiagnosticUnderlineError gui=underline guifg=#E61B1B
+  " hi DiagnosticUnderlineError gui=underline guifg=#E61B1B
 
   "/// Plugins ///"
   hi! NoiceMini guibg=#000000
