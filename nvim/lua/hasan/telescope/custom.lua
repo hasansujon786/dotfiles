@@ -129,6 +129,14 @@ function M.search_plugins()
   }))
 end
 
+function M.search_nvim_data()
+  extensions.file_browser.file_browser(themes.get_ivy({
+    previewer = true,
+    prompt_title = 'Nvim user data',
+    cwd = vim.fn.stdpath('data'),
+  }))
+end
+
 function M.file_browser(dir)
   extensions.file_browser.file_browser(themes.get_ivy({
     path = dir == 'cur_dir' and vim.fn.expand('%:h') or nil,

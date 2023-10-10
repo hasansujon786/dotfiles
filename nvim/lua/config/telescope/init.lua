@@ -77,7 +77,7 @@ return {
           file_browser = {
             cwd_to_path = false,
             grouped = true,
-            files = false, -- false: start with all dirs
+            files = true, -- false: start with all dirs
             hidden = false,
             hide_parent_dir = true,
             prompt_path = true,

@@ -18,6 +18,14 @@ return {
       silent = true,
     },
     { '<C-c>w', '<plug>(emmet-expand-abbr)', desc = 'Emmet: Wrap tag', mode = 'v', silent = true },
+    {
+      '<C-c>x',
+      function()
+        feedkeys('dst', '')
+      end,
+      desc = 'Emmet: Remove current tag',
+      silent = true,
+    },
   },
 }
 

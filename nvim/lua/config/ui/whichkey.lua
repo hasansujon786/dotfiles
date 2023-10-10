@@ -223,6 +223,7 @@ return {
         name = '+vim',
         ['/'] = { '<cmd>Telescope help_tags<CR>', 'Search Vim help' },
         ['.'] = { '<cmd>echo "Not a Vim file"<CR>', 'Source this file' },
+        d = { '<cmd>lua require("hasan.telescope.custom").search_nvim_data()<CR>', 'Search nvim data' },
         l = { '<cmd>call logevents#LogEvents_Toggle()<CR>', 'Toggle LogEvents' },
         R = { '<cmd>ReloadConfig<CR>', 'Reload neovim' },
         H = { '<cmd>silent write | edit | TSBufEnable highlight<CR>', 'Reload hightlight' },
