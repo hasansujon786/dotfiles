@@ -28,8 +28,8 @@ function M.setup()
       p = { "<cmd>lua require'dap'.pause.toggle()<cr>",      'Pause' },
 
       q = { "<cmd>lua require'dap'.close()<cr>",             'Quit' },
-      x = { "<cmd>lua require'dap'.terminate()<cr>",         'Terminate' },
-      d = { "<cmd>lua require'dap'.disconnect()<cr>",        'Disconnect' },
+      D = { "<cmd>lua require'dap'.disconnect()<cr>",        'Disconnect' },
+      X = { "<cmd>lua require'dap'.terminate()<cr>",         'Terminate' },
       g = { "<cmd>lua require'dap'.session()<cr>",           'Get Session' },
 
       e = { "<cmd>lua require'dapui'.eval()<cr>",            'Evaluate' },

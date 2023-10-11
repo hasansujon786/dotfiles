@@ -70,6 +70,11 @@ return {
           ft = 'scratchpad',
           wo = { winbar = false },
         },
+        {
+          ft = 'log',
+          open = 'FlutterLogOpen',
+          wo = { winbar = true, winhighlight = dark_bar },
+        },
       },
       right = {
         {
@@ -80,11 +85,6 @@ return {
         {
           ft = 'Outline',
           open = 'SymbolsOutlineOpen',
-          wo = { winbar = true, winhighlight = gray_bar },
-        },
-        {
-          ft = 'log',
-          open = 'FlutterLogOpen',
           wo = { winbar = true, winhighlight = gray_bar },
         },
       },
