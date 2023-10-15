@@ -288,12 +288,12 @@ function M.search_project_todos()
   })
 end
 
-M.buffers = function(cwd_only)
+M.buffers = function(is_cwd_only)
   builtin.buffers({
-    prompt_title = cwd_only and 'Search buffers' or 'Search all buffers',
-    cwd_only = cwd_only,
+    prompt_title = is_cwd_only and 'Search buffers' or 'Search all buffers',
+    cwd_only = is_cwd_only,
     sort_mru = true,
-    ignore_current_buffer = true,
+    ignore_current_buffer = is_cwd_only,
   })
 end
 

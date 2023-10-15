@@ -44,7 +44,7 @@ function M.lsp_buffer_keymaps(_, bufnr)
   keymap('n', ']d', require('config.lsp.util.diagnosgic').diagnostic_next, desc('Lsp: diagnosgic next'))
 
   -- Format
-  keymap('n', '<leader>fs', require('hasan.utils.file').smart_save_buffer, desc('Lsp: format and save'))
+  keymap('n', '<leader>fs', '<cmd>FormatBufSync<CR>', desc('Lsp: format and save'))
   keymap('x', '<leader>fs', 'gq<cmd>silent noa write<cr>', desc('Lsp: format current selection'))
 
   -- command('Format', function(_) vim.lsp.buf.format({ async = true }) end)

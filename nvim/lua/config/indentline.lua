@@ -9,7 +9,11 @@ return {
       smart_indent_cap = true,
       -- highlight = '',
     },
-    scope = { enabled = false, show_start = false },
+    scope = {
+      enabled = false,
+      show_start = false,
+      show_exact_scope = false,
+    },
     exclude = {
       filetypes = {
         'Glance',

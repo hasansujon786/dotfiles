@@ -197,6 +197,6 @@ keymap({ 'n', 'x' }, '<leader>k', '<cmd>lua handle_win_cmd("wincmd k")<CR>', { d
 keymap({ 'n', 'x' }, '<leader>l', '<cmd>lua handle_win_cmd("wincmd l")<CR>', { desc = 'which_key_ignore' })
 
 -- File commands
-keymap('n', '<leader>fC', ':w <C-R>=expand("%")<CR>', noSilent)
-keymap('n', '<leader>fM', ':Move <C-R>=expand("%")<CR>', noSilent)
-keymap('n', '<leader>fe', ":edit <C-R>=expand('%:p:h') . '\\'<CR>", noSilent)
+keymap('n', '<leader>fC', ':w <C-R>=expand("%")<CR>', { silent = false, desc = 'Copy this file' })
+keymap('n', '<leader>fe', ":edit <C-R>=expand('%:p:h') . '\\'<CR>", { silent = false, desc = 'Edit in current dir' })
+keymap('n', '<leader>fM', ':Move <C-R>=expand("%")<CR>', { silent = false, desc = 'Move/rename file' })

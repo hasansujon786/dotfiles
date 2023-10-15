@@ -90,16 +90,6 @@ function M.join_paths(...) -- Function from nvim-lspconfig
   return result
 end
 
-function M.smart_save_buffer()
-  if state.file.auto_format then
-    vim.cmd([[silent noa write]])
-  else
-    -- vim.lsp.buf.format({ async = false })
-    require('conform').format({ lsp_fallback = true })
-    vim.cmd([[silent write]])
-  end
-end
-
 function M.quickLook(args)
   local bg_job = nil
   bg_job = Job:new({

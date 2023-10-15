@@ -14,4 +14,5 @@ command! LuaSnipEdit lua require("luasnip.loaders").edit_snippet_files()
 " Lsp
 command! LspLogPath lua vim.cmd.edit(vim.lsp.get_log_path())
 command! LspInstallEssentials lua require('config.lsp.util.extras').install_essential_servers()
+command! SkipAutoFormatSave silent noa write
 

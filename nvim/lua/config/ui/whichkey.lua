@@ -146,22 +146,16 @@ return {
       f = {
         name = '+file',
         -- File Command
+        ['.'] = common.browse_cur_dir,
         b = { '<cmd>lua require("hasan.telescope.custom").file_browser()<cr>', 'Browser project files' },
-        B = common.browse_cur_dir,
         f = { '<cmd>Telescope find_files<CR>', 'Find file' },
         F = { ':Telescope find_files cwd=<C-R>=expand("%:h")<CR><CR>', 'Find file from here' },
         p = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find project file' },
-        ['.'] = { ':Telescope find_files cwd=<C-R>=expand("%:h")<CR><CR>', 'Find file from here' },
 
         i = { '<cmd>call hasan#utils#file_info()<CR>', 'Show file info' },
-        s = { '<cmd>silent w<cr>', 'Save current file' },
-        S = { '<cmd>wa<CR>', 'Save all file' },
         y = { '<cmd>call hasan#utils#CopyFileNameToClipBoard(1)<CR>', 'Yank path name' },
         Y = { '<cmd>call hasan#utils#CopyFileNameToClipBoard(0)<CR>', 'Yank file name' },
         R = { '<cmd>lua require("hasan.utils.ui").rename_current_file()<CR>', 'Rename file' },
-        e = 'Edit in current dir',
-        C = 'Copy this file',
-        M = 'Move/rename file',
         x = {
           name = '+remove',
           ['/'] = { '<cmd>lua require("hasan.utils.file").delete_lines_with("comment")<CR>', 'Delete all comments' },
@@ -252,8 +246,8 @@ return {
       x = { '<cmd>call hasan#utils#buffer#_open_scratch_buffer()<CR>', 'Scratch buffer' },
 
       [','] = common.browse_cur_dir,
-      ['>'] = common.buffers_cwd,
-      ['.'] = common.buffers_all,
+      ['>'] = common.buffers_all,
+      ['.'] = common.buffers_cwd,
     }
 
     local leader_visual = {
