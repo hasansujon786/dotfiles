@@ -7,11 +7,11 @@ SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
 
 ;Reload/Execute this script.ahk file
 ::rscript::
-f5::
+!f5::
   SplashTextOn,,60,, reloaded
   sleep 300
   SplashTextOff
-  Run, "C:\Users\hasan\dotfiles\scripts\ahk\main.ahk"
+  Run, C:\Users\%A_UserName%\dotfiles\scripts\ahk\main.ahk
 Return
 ;Suspend hotkeys
 ^f5::
@@ -786,5 +786,5 @@ quake_nvim(copy := false) {
 ; Youtube
 ;******************************************************************************
 +^#RButton::
-  Run, "C:\Users\hasan\dotfiles\scripts\ahk\automation_mode.ahk"
+  Run, C:\Users\%A_UserName%\dotfiles\scripts\ahk\automation_mode.ahk
 Return

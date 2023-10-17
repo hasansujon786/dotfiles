@@ -29,9 +29,12 @@ R = function(moduleName, message)
   end
 end
 
+function _G.t(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
 function _G.feedkeys(key, mode)
   mode = mode == nil and '' or mode
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+  vim.api.nvim_feedkeys(t(key), mode, true)
 end
 
 function _G.keymap(mode, lhs, rhs, opts)
