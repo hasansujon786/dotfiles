@@ -81,7 +81,7 @@ return {
     'Cascadia Code',
     'Consolas',
   }),
-  font_size = 13,
+  font_size = 14,
   underline_thickness = '2pt',
   underline_position = '-2pt',
   adjust_window_size_when_changing_font_size = false,

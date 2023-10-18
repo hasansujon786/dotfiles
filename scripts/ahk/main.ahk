@@ -227,7 +227,8 @@ navToDesktop(side) {
   }
 }
 resetWin() {
-  winmove, A,, , ,1216, 660 ; resize window
+  ; winmove, A,, , ,1216, 660 ; 768
+  winmove, A,, , ,1400, 834 ; 1080
   center_current_window()
 }
 changeWinSize(direction, val) {
@@ -282,15 +283,16 @@ winPinToSide(side, checkFullscreen) {
   }
 }
 winPinToSide_custom(side) {
+  tb_height = 24
   y_start := 0
   x_start := 0
-  s_height := A_ScreenHeight - 24
-  s_half := (A_ScreenWidth / 2) + 15
+  s_height := A_ScreenHeight - tb_height
+  s_half := (A_ScreenWidth / 2) + 16 ; Increase 16px width to fill right side margin
 
   if (side == "left") {
-    x_start := -8
-  }  else if  (side == "right"){
-    x_start := s_half - 24
+    x_start := -8 ; remove default left margin
+  } else if  (side == "right") {
+    x_start := s_half - 24 ; remove default left margin
   }
 
   WinRestore, A
