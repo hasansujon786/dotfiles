@@ -228,7 +228,7 @@ navToDesktop(side) {
 }
 resetWin() {
   ; winmove, A,, , ,1216, 660 ; 768
-  winmove, A,, , ,1400, 834 ; 1080
+  winmove, A,, , ,1406, 834 ; 1080
   center_current_window()
 }
 changeWinSize(direction, val) {

@@ -37,8 +37,13 @@ return {
     end
 
     -- dynamic header padding
-    -- local marginTopPercent = 0.1
-    -- local headerPadding = vim.fn.max({ 2, vim.fn.floor(vim.fn.winheight(0) * marginTopPercent) }) - 1
+    local contetnHeight = 27
+    local winHeight = vim.fn.winheight(0)
+    local marginTopPercent = 0.1
+    local headerPadding = 0
+    if winHeight > contetnHeight and winHeight - contetnHeight > 3 then
+      headerPadding = math.max(2, math.floor(winHeight * marginTopPercent))
+    end
 
     local options = {
       header = {
@@ -97,11 +102,12 @@ return {
         opts = { spacing = 1 },
       },
       padding1 = { type = 'padding', val = 1 },
-      -- paddingAuto = { type = 'padding', val = headerPadding },
+      paddingAuto = { type = 'padding', val = headerPadding },
     }
 
     alpha.setup({
       layout = {
+        options.paddingAuto,
         options.header,
         options.padding1,
         options.version,
