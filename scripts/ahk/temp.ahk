@@ -3,20 +3,13 @@
   SendInput(A_MM "-" A_DD "-" A_YYYY)
 }
 
-;******************************************************************************
-; Window Switcher functions
-;******************************************************************************
 ; Explorer
 f1::switchToExplorer()
 !f1::switchToSavedApp()
 !z::closeAllExplorers()
-alternateTab() {
-  Send("{alt down}")
-  Sleep(5)
-  Send("{tab}")
-  Sleep(5)
-  Send("{alt up}")
-}
+;******************************************************************************
+; Window Switcher functions
+;******************************************************************************
 savedCLASS := "ahk_exe brave.exe"
 savedEXE := "brave.exe"
 #HotIf
@@ -39,6 +32,53 @@ windowSwitcher(theClass, theEXE) {
 }
 switchToSavedApp() {
   windowSwitcher(savedCLASS, savedEXE)
+}
+
+;******************************************************************************
+; Explorer functions
+;******************************************************************************
+closeAllExplorers() {
+  ;SoundBeep, 1000, 500
+  WinClose("ahk_group taranexplorers")
+}
+switchToExplorer() {
+  ;IfWinNotExist, ahk_class CabinetWClass
+  if !WinActive("ahk_class CabinetWClass")
+    windowSaver()
+
+  if !WinExist("ahk_class CabinetWClass")
+    Run("explorer.exe")
+  GroupAdd("taranexplorers", "ahk_class CabinetWClass")
+  if WinActive("ahk_exe explorer.exe")
+    GroupActivate("taranexplorers", "r")
+  else
+    WinActivate("ahk_class CabinetWClass") ;you have to use WinActivatebottom if you didn't create a window group.
+}
+
+sortExplorerByDate(){
+  if WinActive("ahk_class CabinetWClass")
+  {
+    ;Send,{LCtrl down}{NumpadAdd}{LCtrl up} ;expand name field
+    Send("{alt}vo{down}{enter}") ;sort by date modified, but it functions as a toggle...
+    ;tippy2("sort Explorer by date")
+  }
+}
+
+; http://msdn.microsoft.com/en-us/library/bb774094
+GetActiveExplorer() {
+  static objShell := ComObject("Shell.Application")
+  WinHWND := WinActive("A") ; Active window
+  for Item in objShell.Windows
+    if (Item.HWND = WinHWND)
+      return Item ; Return active window object
+  return -1 ; No explorer windows match active window
+}
+
+NavRun(Path) {
+  if (-1 != objIE := GetActiveExplorer())
+    objIE.Navigate(Path)
+  else
+    Run(Path)
 }
 
 
