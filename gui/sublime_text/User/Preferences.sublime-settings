@@ -19,7 +19,7 @@
 	"line_padding_top": 2,
 	"margin": 0,
 	"match_selection": true,
-	"neovintageous_build_version": 12700,
+	"neovintageous_build_version": 13200,
 	"neovintageous_search_cur_style": "fill",
 	"neovintageous_search_inc_style": "fill",
 	"neovintageous_search_occ_style": "fill",
@@ -50,4 +50,5 @@
 		"dist",
 		".nuxt"
 	],
+	"vintageous_use_super_keys": false,
 }
