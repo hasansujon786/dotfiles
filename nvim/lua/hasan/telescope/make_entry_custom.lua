@@ -6,10 +6,32 @@ local utils = require('telescope.utils')
 local make_entry = require('telescope.make_entry')
 -- local sorters = require 'telescope/sorters'
 
-local iconwidth = 2
+local ICON_WIDTH = 2
 
-M.get_path_and_tail = function(filename)
-  -- local utils = require('telescope.utils')
+local my_path_tail = function(path, os_sep)
+  for i = #path, 1, -1 do
+    if path:sub(i, i) == os_sep then
+      return path:sub(i + 1, -1)
+    end
+  end
+  return path
+end
+
+M.get_path_and_tail_alternate = function(filename)
+  local bufname_tail = my_path_tail(filename, '/')
+  local path_without_tail = require('plenary.strings').truncate(filename, #filename - #bufname_tail - 1, '')
+  local path_to_display = utils.transform_path({
+    path_display = { 'truncate' },
+  }, path_without_tail)
+
+  return bufname_tail, path_to_display
+end
+
+M.get_path_and_tail = function(filename, sep)
+  if sep then
+    return M.get_path_and_tail_alternate(filename)
+  end
+
   local bufname_tail = utils.path_tail(filename)
   local path_without_tail = require('plenary.strings').truncate(filename, #filename - #bufname_tail, '')
   local path_to_display = utils.transform_path({
@@ -19,21 +41,22 @@ M.get_path_and_tail = function(filename)
   return bufname_tail, path_to_display
 end
 
-function M.gen_from_fiel_tail(opts)
+function M.gen_from_file(opts)
+  opts = opts or {}
   local entry_make = make_entry.gen_from_file(opts)
   return function(line)
     local entry = entry_make(line)
     local displayer = entry_display.create({
       separator = ' ',
       items = {
-        { width = iconwidth },
+        { width = ICON_WIDTH },
         { width = nil },
         { remaining = true },
       },
     })
     entry.display = function(et)
       -- https://github.com/nvim-telescope/telescope.nvim/blob/master/lua/telescope/make_entry.lua
-      local tail_raw, path_to_display = M.get_path_and_tail(et.value)
+      local tail_raw, path_to_display = M.get_path_and_tail(et.value, opts.dir_separator)
       local tail = tail_raw .. ' '
       local icon, iconhl = utils.get_devicons(tail_raw)
 
@@ -53,18 +76,11 @@ function M.gen_from_buffer(opts)
   opts = opts or {}
 
   local disable_devicons = opts.disable_devicons
-
-  local icon_width = 0
-  if not disable_devicons then
-    local icon, _ = utils.get_devicons('fname', disable_devicons)
-    icon_width = strings.strdisplaywidth(icon)
-  end
-
   local cwd = vim.fn.expand(opts.cwd or '.')
 
   local make_display = function(entry)
     -- bufnr_width + modes + icon + 3 spaces + : + lnum
-    opts.__prefix = opts.bufnr_width + 4 + icon_width + 3 + 1 + #tostring(entry.lnum)
+    opts.__prefix = opts.bufnr_width + 4 + ICON_WIDTH + 3 + 1 + #tostring(entry.lnum)
     local bufname_tail = utils.path_tail(entry.filename)
     local path_without_tail = require('plenary.strings').truncate(entry.filename, #entry.filename - #bufname_tail, '')
     local path_to_display = utils.transform_path({
@@ -78,7 +94,7 @@ function M.gen_from_buffer(opts)
       items = {
         { width = opts.bufnr_width },
         { width = 4 },
-        { width = icon_width },
+        { width = ICON_WIDTH },
         { width = bufname_width },
         { remaining = true },
       },

@@ -31,7 +31,7 @@ return {
         defaults = {
           scroll_strategy = 'cycle',
           selection_strategy = 'reset',
-          prompt_prefix = '  ',
+          prompt_prefix = '  ',
           selection_caret = '❯ ',
           layout_config = {
             height = 0.7,
@@ -41,7 +41,6 @@ return {
           -- sorting_strategy = "ascending",
           winblend = 0,
           mappings = { n = custom_mappings, i = custom_mappings },
-          -- `file_ignore_patterns = { "scratch/.*", "%.env" }`
           file_ignore_patterns = {
             '%.gitignore',
             '%.git/.*',

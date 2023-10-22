@@ -1,5 +1,4 @@
 local Path = require('plenary.path')
-local scan = require('plenary.scandir')
 local utils = require('telescope.utils')
 local themes = require('telescope.themes')
 local finders = require('telescope.finders')
@@ -8,6 +7,7 @@ local builtin = require('telescope.builtin')
 local actions = require('telescope.actions')
 local make_entry = require('telescope.make_entry')
 local my_make_entry = require('hasan.telescope.make_entry_custom')
+local my_theme = require('hasan.telescope.theme')
 local action_set = require('telescope.actions.set')
 local action_state = require('telescope.actions.state')
 local extensions = require('telescope').extensions
@@ -52,6 +52,7 @@ local git_and_buffer_files = function(opts)
 
   pickers
     .new(opts, {
+      prompt_title = 'Project Files',
       finder = finders.new_table({
         results = vim.fn['hasan#utils#_uniq'](fusedArray),
         entry_maker = opts.entry_maker or make_entry.gen_from_file(opts),
@@ -80,36 +81,18 @@ local M = {}
 M.project_files = function()
   local _, ret, _ = utils.get_os_command_output({ 'git', 'rev-parse', '--is-inside-work-tree' })
   if ret == 0 then
-    git_and_buffer_files({ prompt_title = 'Project Files' })
+    git_and_buffer_files(my_theme.get_top_panel({
+      entry_maker = my_make_entry.gen_from_file({ dir_separator = '/' }),
+    }))
   else
-    builtin.find_files()
+    M.my_find_files()
   end
 end
 
 M.my_find_files = function()
-  builtin.find_files({
-    entry_maker = my_make_entry.gen_from_fiel_tail({}),
-    sorting_strategy = 'ascending',
-    layout_strategy = 'center',
-    border = true,
-    borderchars = {
-      -- prompt = { '▔', ' ', ' ', ' ', '▔', '▔', ' ', ' ' },
-      -- results = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-
-      prompt = { '─', '│', ' ', '│', '╭', '╮', '│', '│' },
-      results = { '─', '│', '─', '│', '├', '┤', '╯', '╰' },
-      preview = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-    },
-    layout_config = {
-      anchor = 'N',
-      width = 100,
-      height = 0.6,
-    },
-    results_title = false,
-    -- prompt_title = false,
-    previewer = false,
-    -- layout_config = { width = 100 },
-  })
+  builtin.find_files(my_theme.get_top_panel({
+    entry_maker = my_make_entry.gen_from_file(),
+  }))
 end
 
 function M.curbuf()
@@ -128,15 +111,15 @@ function M.curbuf()
 end
 
 function M.search_wiki_files()
-  builtin.find_files({
-    results_title = 'Wiki files',
+  builtin.find_files(my_theme.get_top_panel({
     prompt_title = 'Search Wiki',
     cwd = _G.org_root_path,
     previewer = false,
+    entry_maker = my_make_entry.gen_from_file(),
     -- search_dirs = {
     --   '3_resources/wiki/',
     -- },
-  })
+  }))
 end
 
 function M.grep_org_text()
@@ -191,7 +174,7 @@ end
 M.live_grep_in_folder = function(opts)
   opts = opts or {}
   local data = {}
-  scan.scan_dir(vim.loop.cwd(), {
+  require('plenary.scandir').scan_dir(vim.loop.cwd(), {
     hidden = opts.hidden,
     only_dirs = true,
     respect_gitignore = true,
@@ -204,9 +187,18 @@ M.live_grep_in_folder = function(opts)
   pickers
     .new(opts, {
       prompt_title = 'Folders for Live Grep',
+      results_title = false,
       finder = finders.new_table({ results = data, entry_maker = make_entry.gen_from_file(opts) }),
       previewer = conf.file_previewer(opts),
       sorter = conf.file_sorter(opts),
+      sorting_strategy = 'ascending',
+      layout_strategy = 'horizontal',
+      layout_config = {
+        prompt_position = 'top',
+        anchor = 'N',
+        width = 0.7,
+        -- height = 0.6,
+      },
       attach_mappings = function(prompt_bufnr)
         action_set.select:replace(function()
           local current_picker = action_state.get_current_picker(prompt_bufnr)
@@ -219,9 +211,9 @@ M.live_grep_in_folder = function(opts)
               table.insert(dirs, selection.value)
             end
           end
-          actions._close(prompt_bufnr, current_picker.initial_mode == 'insert')
+          actions.close(prompt_bufnr)
           -- require('telescope.builtin').live_grep { search_djirs = dirs }
-          require('telescope.builtin').live_grep({ cwd = dirs[1] })
+          builtin.live_grep({ cwd = dirs[1] })
         end)
         return true
       end,
@@ -230,21 +222,7 @@ M.live_grep_in_folder = function(opts)
 end
 
 M.commands = function()
-  local opts = {
-    layout_strategy = 'vertical',
-    sorting_strategy = 'ascending',
-    layout_config = {
-      -- preview_cutoff = 10,
-      anchor = 'N',
-      prompt_position = 'top',
-      -- mirror = ,
-      width = 0.7,
-      height = 0.8,
-    },
-  }
-  builtin.commands(themes.get_dropdown(opts))
-  -- builtin.commands(themes.get_ivy(opts))
-  -- builtin.commands(opts)
+  builtin.commands(my_theme.get_top_panel())
 end
 
 function M.grep_string()
@@ -352,7 +330,7 @@ M.emojis = function()
   }
 
   pickers
-    .new(opts, {
+    .new(my_theme.get_top_panel(opts), {
       finder = finders.new_table({
         results = emojis_table,
         entry_maker = opts.entry_maker or make_entry.gen_from_string(opts),
