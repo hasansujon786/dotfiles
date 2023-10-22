@@ -5,7 +5,7 @@ local function set_custom_highlights()
   local normal_bg = palette.cool.bg0
   local fg = palette.cool.fg
   local cursorling_bg = palette.cool.bg1
-  local float_bg = '#1c212c' -- palette.cool.bg_d
+  local float_bg = '#21252B' -- '#1c212c' palette.cool.bg_d
   local bg3 = palette.cool.bg3
 
   util.fg_bg('NormalFloat', fg, normal_bg)

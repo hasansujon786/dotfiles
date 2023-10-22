@@ -148,7 +148,7 @@ return {
         -- File Command
         ['.'] = common.browse_cur_dir,
         b = { '<cmd>lua require("hasan.telescope.custom").file_browser()<cr>', 'Browser project files' },
-        f = { '<cmd>Telescope find_files<CR>', 'Find file' },
+        f = { '<cmd>lua require("hasan.telescope.custom").my_find_files()<cr>', 'Find file' },
         F = { ':Telescope find_files cwd=<C-R>=expand("%:h")<CR><CR>', 'Find file from here' },
         p = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find project file' },
 

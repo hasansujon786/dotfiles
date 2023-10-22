@@ -7,6 +7,7 @@ local pickers = require('telescope.pickers')
 local builtin = require('telescope.builtin')
 local actions = require('telescope.actions')
 local make_entry = require('telescope.make_entry')
+local my_make_entry = require('hasan.telescope.make_entry_custom')
 local action_set = require('telescope.actions.set')
 local action_state = require('telescope.actions.state')
 local extensions = require('telescope').extensions
@@ -83,6 +84,32 @@ M.project_files = function()
   else
     builtin.find_files()
   end
+end
+
+M.my_find_files = function()
+  builtin.find_files({
+    entry_maker = my_make_entry.gen_from_fiel_tail({}),
+    sorting_strategy = 'ascending',
+    layout_strategy = 'center',
+    border = true,
+    borderchars = {
+      -- prompt = { '▔', ' ', ' ', ' ', '▔', '▔', ' ', ' ' },
+      -- results = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+
+      prompt = { '─', '│', ' ', '│', '╭', '╮', '│', '│' },
+      results = { '─', '│', '─', '│', '├', '┤', '╯', '╰' },
+      preview = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+    },
+    layout_config = {
+      anchor = 'N',
+      width = 100,
+      height = 0.6,
+    },
+    results_title = false,
+    -- prompt_title = false,
+    previewer = false,
+    -- layout_config = { width = 100 },
+  })
 end
 
 function M.curbuf()
@@ -289,12 +316,18 @@ function M.search_project_todos()
 end
 
 M.buffers = function(is_cwd_only)
-  builtin.buffers({
+  local opts = {
     prompt_title = is_cwd_only and 'Search buffers' or 'Search all buffers',
     cwd_only = is_cwd_only,
     sort_mru = true,
+    previewer = false,
     ignore_current_buffer = is_cwd_only,
-  })
+    entry_maker = my_make_entry.gen_from_buffer({
+      bufnr_width = 3,
+      sort_mru = true,
+    }),
+  }
+  builtin.buffers(themes.get_dropdown(opts))
 end
 
 -- https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion

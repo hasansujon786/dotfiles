@@ -54,7 +54,7 @@ return {
           },
         },
         pickers = {
-          find_files = { theme = 'ivy', layout_config = { height = 0.7 } },
+          -- find_files = { theme = 'ivy', layout_config = { height = 0.7 } },
           lsp_document_symbols = { theme = 'dropdown' },
           lsp_references = { theme = 'dropdown' },
           grep_string = { theme = 'dropdown' },
