@@ -265,7 +265,7 @@ bind '"\e\ ":magic-space'
 bind '"\eq":alias-expand-line'
 bind '" ":"\eq\C-v "'
 
-bind '"\ee":"\C-ulfcd\C-m"'
+bind '"\eo":"\C-ulfcd\C-m"'
 # bind '"\el":clear-screen'
 # bind '"\C-x\C-x":edit-and-execute-command'
 # bind -x '"\C-x\C-e":_edit_wo_executing'

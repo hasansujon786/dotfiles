@@ -9,19 +9,23 @@ return {
       local fb_actions = require('telescope._extensions.file_browser.actions')
 
       local custom_mappings = {
+        ['<M-u>'] = actions.preview_scrolling_up,
+        ['<M-d>'] = actions.preview_scrolling_down,
         ['<C-p>'] = actions.move_selection_previous,
         ['<C-n>'] = actions.move_selection_next,
         ['<M-p>'] = actions.move_selection_previous,
         ['<M-n>'] = actions.move_selection_next,
         ['<M-k>'] = actions.move_selection_previous,
         ['<M-j>'] = actions.move_selection_next,
-        ['<C-s>'] = actions.file_split,
+
         ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+        ['<C-s>'] = actions.file_split,
         ['<esc>'] = actions.close,
-        ['<M-u>'] = actions.preview_scrolling_up,
-        ['<M-d>'] = actions.preview_scrolling_down,
+
         ['<C-f>'] = local_action.fedit,
         ['<M-o>'] = local_action.quicklook,
+        ['<M-t>'] = local_action.focus_file_tree,
+
         ['<C-x>'] = false,
         ['<C-u>'] = false,
         ['<C-d>'] = false,
@@ -96,7 +100,7 @@ return {
 
                 ['<C-o>'] = fb_actions.open,
                 ['<C-e>'] = fb_actions.goto_home_dir,
-                ['<C-t>'] = fb_actions.change_cwd,
+                -- ['<C-t>'] = fb_actions.change_cwd,
                 ['<C-f>'] = fb_actions.toggle_browser,
                 ['<C-s>'] = fb_actions.toggle_all,
                 ['<C-h>'] = fb_actions.toggle_hidden,
@@ -104,7 +108,7 @@ return {
                 ['<bs>'] = fb_actions.backspace,
 
                 ['<tab>'] = actions.select_default,
-                ['<C-w>'] = local_action.hack_goto_parent_dir,
+                ['<C-w>'] = local_action.delete_world_or_goto_parent_dir,
                 ['<C-u>'] = local_action.hack_goto_cwd,
               },
               ['n'] = {

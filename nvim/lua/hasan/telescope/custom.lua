@@ -62,16 +62,6 @@ local git_and_buffer_files = function(opts)
       -- default_selection_index = 2,
       selection_strategy = 'reset', -- follow, reset, row
       color_devicons = true,
-      attach_mappings = function(_, map)
-        map('i', '<cr>', local_action.edit)
-        map('i', '<C-v>', local_action.vsplit)
-        map('i', '<C-s>', local_action.split)
-        map('i', '<C-t>', local_action.tabedit)
-
-        -- A return value _must_ be returned. It is an error to not return anything.
-        -- Return false if you don't want any other mappings applied.
-        return true
-      end,
     })
     :find()
 end
