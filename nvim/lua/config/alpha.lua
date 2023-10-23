@@ -83,21 +83,11 @@ return {
       buttons = {
         type = 'group',
         val = {
-          button(
-            '<leader>pr',
-            ' SPC P R ',
-            '  Recent File',
-            '<cmd>lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>'
-          ),
-          button('<leader>pl', ' SPC P L ', '  Load session', '<cmd>SessionLoad<CR>'),
-          button('<leader>ff', ' SPC F F ', '  Find Files', '<cmd>Telescope find_files<CR>'),
-          button('<leader>ot', ' SPC O T ', '  Open terminal', '<cmd>FloatermNew --wintype=normal --height=10<CR>'),
-          button(
-            '<leader>vs',
-            ' SPC V S ',
-            '  Settings',
-            '<cmd>lua require("hasan.utils.file").open_settings()<CR>'
-          ),
+          button('<leader>pr', ' SPC P R ', '  Recent File', '<cmd>lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>'),
+          button('<leader>pl', ' SPC P L ', '  Load session', '<cmd>SessionLoad<CR>'),
+          button('<leader>ff', ' SPC F F ', '  Find Files', '<cmd>lua require("hasan.telescope.custom").my_find_files()<CR>'),
+          button('<leader>ot', ' SPC O T ', '  Open terminal', '<cmd>FloatermNew --wintype=normal --height=10<CR>'),
+          button('<leader>vs', ' SPC V S ', '  Settings', '<cmd>lua require("hasan.utils.file").open_settings()<CR>'),
         },
         opts = { spacing = 1 },
       },
