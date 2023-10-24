@@ -122,11 +122,10 @@ return {
         c = { '<cmd>Telescope git_commits<CR>', 'Look up commits' },
         C = { '<cmd>Telescope git_bcommits<CR>', 'Look up buffer commits' },
 
-        o = { '<cmd>lua require("hasan.utils.init").open_git_remote(true)<CR>', 'Open git repo' },
-        O = { '<cmd>lua require("hasan.utils.init").open_git_remote(false)<CR>', 'Open git repo' },
+        h = { '<cmd>lua require("hasan.utils.init").open_git_remote(true)<CR>', 'Open git repo' },
+        H = { '<cmd>lua require("hasan.utils.init").open_git_remote(false)<CR>', 'Open git repo with file' },
 
         g = { '<cmd>Neogit<CR>', 'Open Neogit' },
-
         d = {
           function()
             if next(require('diffview.lib').views) == nil then
@@ -149,7 +148,7 @@ return {
         ['.'] = common.browse_cur_dir,
         b = { '<cmd>lua require("hasan.telescope.custom").file_browser()<cr>', 'Browser project files' },
         f = { '<cmd>lua require("hasan.telescope.custom").my_find_files()<cr>', 'Find file' },
-        F = { ':Telescope find_files cwd=<C-R>=expand("%:h")<CR><CR>', 'Find file from here' },
+        F = { '<cmd>lua require("hasan.telescope.custom").my_find_files("cur_dir")<cr>', 'Find file from here' },
         p = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find project file' },
 
         i = { '<cmd>call hasan#utils#file_info()<CR>', 'Show file info' },
@@ -192,7 +191,7 @@ return {
         p = { '<cmd>lua require("hasan.telescope.custom").projects()<CR>', 'Switch project' },
         r = { '<cmd>lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>', 'Find recent files' },
         t = { '<cmd>lua require("hasan.telescope.custom").search_project_todos()<CR>', 'Search project todos' },
-        -- b = { '<cmd>Telescope file_browser prompt_title=Project\\ Browser cwd=~/repoes<CR>',  'Browse other projects' },
+        b = { '<cmd>lua require("hasan.telescope.custom").project_browser()<CR>',  'Browse other projects' },
 
         d = { '<cmd>Alpha<CR>', 'Open dashboard' },
         l = { '<cmd>SessionLoad<CR>', 'Load session' },

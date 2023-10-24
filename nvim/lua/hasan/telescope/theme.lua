@@ -32,7 +32,12 @@ M.theme_top_panel_opt = (function()
     },
     layout_config = {
       anchor = 'N',
-      width = 100,
+      width = function(_, max_columns, _, _)
+        if max_columns <= 106 then
+          return max_columns - 10
+        end
+        return 100
+      end,
       height = 0.6,
     },
     results_title = false,

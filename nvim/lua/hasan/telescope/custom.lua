@@ -13,7 +13,6 @@ local action_state = require('telescope.actions.state')
 local extensions = require('telescope').extensions
 -- local sorters = require 'telescope/sorters'
 
-local local_action = require('hasan.telescope.local_action')
 local conf = require('telescope.config').values
 local os_sep = Path.path.sep
 
@@ -79,9 +78,10 @@ M.project_files = function()
   end
 end
 
-M.my_find_files = function()
+M.my_find_files = function(dir)
   builtin.find_files(my_theme.get_top_panel({
     entry_maker = my_make_entry.gen_from_file(),
+    cwd = dir == 'cur_dir' and vim.fn.expand('%:h') or nil,
   }))
 end
 
@@ -145,6 +145,15 @@ function M.file_browser(dir)
     prompt_path = true,
     previewer = false,
   }))
+end
+
+function M.project_browser()
+  extensions.file_browser.file_browser({
+    cwd = 'E:\\repoes',
+    hide_parent_dir = true,
+    prompt_path = true,
+    previewer = true,
+  })
 end
 
 M.projects = function()

@@ -78,6 +78,7 @@ return {
           },
           project_commands = require('config.telescope.project_commands'),
           file_browser = {
+            theme = 'ivy',
             cwd_to_path = false,
             grouped = true,
             files = true, -- false: start with all dirs
