@@ -73,6 +73,15 @@ return {
           require('hasan.nebulous').my_nebulous_setup()
           require('hasan.utils.ui.palette').set_custom_highlights()
         end)
+
+        autocmd('BufWritePost', function()
+          vim.defer_fn(function()
+            vim.cmd.source('nvim/autoload/hasan/highlight.vim')
+            R('hasan.utils.ui.palette', nil)
+
+            require('hasan.utils.ui.palette').set_custom_highlights()
+          end, 300)
+        end, { pattern = { 'palette.lua', 'highlight.vim' } })
       end)
     end, 500)
   end,

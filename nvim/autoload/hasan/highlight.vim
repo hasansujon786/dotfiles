@@ -163,9 +163,9 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi NeogitHunkHeaderHighlight  guifg=#242b38 guibg=#c3a7e5 gui=bold
 
   "/// glance.nvim ///"
-  hi GlanceBorder                    guifg=#1C212C guibg=NONE
-  hi! GlanceBorderTop                guifg=#1E242E guibg=NONE
-  hi GlanceWinBarFilename            guifg=#ffffff guibg=#2D3343
+  hi GlanceBorder                    guifg=#67a3d4 guibg=NONE
+  hi GlanceBorderTop                 guifg=#67a3d4 guibg=NONE
+  hi GlanceWinBarFilename            guifg=#e8e8e8 guibg=#2D3343
   hi GlanceWinBarFilepath            guifg=#546178 guibg=#2D3343
   hi GlanceWinBarTitle               guifg=#a5b0c6 guibg=#2D3343
   hi GlancePreviewNormal             guifg=#a5b0c6 guibg=#1E242E

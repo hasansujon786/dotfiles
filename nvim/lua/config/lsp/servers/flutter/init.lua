@@ -23,7 +23,7 @@ return {
       require('hasan.nebulous').mark_as_alternate_win()
       local winFound = require('hasan.utils.win').focusWinIfExists('log')
       if not winFound then
-        vim.cmd([[split 26new | b __FLUTTER_DEV_LOG__]])
+        vim.cmd([[26split | b __FLUTTER_DEV_LOG__]])
       end
     end)
 
