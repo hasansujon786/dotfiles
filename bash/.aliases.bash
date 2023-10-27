@@ -20,7 +20,6 @@ alias tsw='tsc -w'
 alias tsi='tsc --init'
 
 # Vim
-alias lazy='NVIM_APPNAME=lazy nvim'
 alias v.='nvim .'
 alias vi='zi && nvim'
 alias ni='zi && nvim'
