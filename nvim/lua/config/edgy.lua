@@ -57,66 +57,73 @@ return {
       end, 10)
     end
 
+    -- // layout config:
+    local bottom = {
+      {
+        ft = 'floaterm',
+        wo = { winbar = true, winhighlight = dark_bar },
+        filter = function(_, win)
+          return vim.api.nvim_win_get_config(win).relative == ''
+        end,
+      },
+      {
+        ft = 'scratchpad',
+        wo = { winbar = false },
+      },
+    }
+    local left = {
+      {
+        ft = 'NvimTree',
+        open = 'NvimTreeOpen',
+        filter = function(_, _)
+          if vim.b.vinegar then
+            return false
+          end
+          return true
+        end,
+        wo = { winbar = false },
+      },
+      {
+        ft = 'neo-tree',
+        open = 'Neotree filesystem left',
+        filter = function(buf, win)
+          local pos = vim.api.nvim_buf_get_var(buf, 'neo_tree_position')
+          if pos == 'current' or require('hasan.utils').is_floating_win(win) then
+            return false
+          end
+          return true
+        end,
+        wo = { winbar = false, winhighlight = '' },
+      },
+    }
+    local right = {
+      {
+        ft = 'flutterToolsOutline',
+        open = 'FlutterOutlineOpen',
+        wo = { winbar = true, winhighlight = gray_bar },
+      },
+      {
+        ft = 'Outline',
+        open = 'SymbolsOutlineOpen',
+        wo = { winbar = true, winhighlight = gray_bar },
+      },
+    }
+
+    -- // dynamic config: flutter log
+    table.insert(require('hasan.core.state').ui.edgy.open_flutter_log_on_right and right or bottom, {
+      ft = 'log',
+      open = 'FlutterLogOpen',
+      wo = { winbar = true, winhighlight = dark_bar },
+    })
+
     require('edgy').setup({
-      bottom = {
-        {
-          ft = 'floaterm',
-          wo = { winbar = true, winhighlight = dark_bar },
-          filter = function(_, win)
-            return vim.api.nvim_win_get_config(win).relative == ''
-          end,
-        },
-        {
-          ft = 'scratchpad',
-          wo = { winbar = false },
-        },
-        {
-          ft = 'log',
-          open = 'FlutterLogOpen',
-          wo = { winbar = true, winhighlight = dark_bar },
-        },
-      },
-      right = {
-        {
-          ft = 'flutterToolsOutline',
-          open = 'FlutterOutlineOpen',
-          wo = { winbar = true, winhighlight = gray_bar },
-        },
-        {
-          ft = 'Outline',
-          open = 'SymbolsOutlineOpen',
-          wo = { winbar = true, winhighlight = gray_bar },
-        },
-      },
-      left = {
-        {
-          ft = 'NvimTree',
-          open = 'NvimTreeOpen',
-          filter = function(_, _)
-            if vim.b.vinegar then
-              return false
-            end
-            return true
-          end,
-          wo = { winbar = false },
-        },
-        {
-          ft = 'neo-tree',
-          open = 'Neotree filesystem left',
-          filter = function(buf, win)
-            local pos = vim.api.nvim_buf_get_var(buf, 'neo_tree_position')
-            if pos == 'current' or require('hasan.utils').is_floating_win(win) then
-              return false
-            end
-            return true
-          end,
-          wo = { winbar = false, winhighlight = '' },
-        },
-      },
+      bottom = bottom,
+      right = right,
+      left = left,
       options = {
         left = { size = 31 },
         bottom = { size = 10 },
-        right = { size = 30 },
+        right = { size = 40 },
         top = { size = 10 },
       },
       wo = {
@@ -168,11 +175,11 @@ return {
         end,
         -- increase width
         ['<A-.>'] = function(win)
-          win:resize('width', 2)
+          win:resize('width', 5)
         end,
         -- decrease width
         ['<A-,>'] = function(win)
-          win:resize('width', -2)
+          win:resize('width', -5)
         end,
         -- increase height
         ['<A-=>'] = function(win)

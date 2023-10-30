@@ -53,5 +53,28 @@ return {
         end,
       },
     })
+
+    command('FlutterLogToggleLayout', function(_)
+      local updated_layout = not require('hasan.core.state').ui.edgy.open_flutter_log_on_right
+      require('hasan.core.state').ui.edgy.open_flutter_log_on_right = updated_layout
+      require('config.edgy').config()
+    end)
+    command('FlutterLogOpen', function(_)
+      require('hasan.nebulous').mark_as_alternate_win()
+      local winFound = require('hasan.utils.win').focusWinIfExists('log')
+      if not winFound then
+        if require('hasan.core.state').ui.edgy.open_flutter_log_on_right then
+          vim.cmd([[26vsplit | b __FLUTTER_DEV_LOG__]])
+        else
+          vim.cmd([[26split | b __FLUTTER_DEV_LOG__]])
+        end
+      end
+    end)
+
+    require('config.lsp.servers.flutter.pub').setup()
+    augroup('MY_FLUTTER_AUGROUP')(function(autocmd)
+      autocmd({ 'FileType' }, 'setlocal nonumber norelativenumber signcolumn=no', { pattern = 'log' })
+      autocmd({ 'BufWinEnter', 'WinEnter' }, 'normal Gzt', { pattern = '__FLUTTER_DEV_LOG__' })
+    end)
   end,
 }

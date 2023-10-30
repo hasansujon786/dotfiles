@@ -18,15 +18,5 @@ return {
     keymap('n', '<Plug>FlutterPkgToRelative', "<cmd>lua require('config.lsp.servers.flutter.code_action').package_to_relative_import()<CR>")
     keymap('n', '<leader>am', '<Plug>FlutterPkgToRelative', desc('Lsp: relative import'))
     -- stylua: ignore end
-
-    command('FlutterLogOpen', function(_)
-      require('hasan.nebulous').mark_as_alternate_win()
-      local winFound = require('hasan.utils.win').focusWinIfExists('log')
-      if not winFound then
-        vim.cmd([[26split | b __FLUTTER_DEV_LOG__]])
-      end
-    end)
-
-    require('config.lsp.servers.flutter.pub').setup()
   end,
 }

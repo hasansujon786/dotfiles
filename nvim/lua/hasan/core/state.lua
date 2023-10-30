@@ -22,6 +22,9 @@ M.ui = {
     winhighlight = 'Normal:Pmenu,FloatBorder:CmpBorder,CursorLine:Visual,Search:None',
     border = { '🭽', '▔', '🭾', '▕', '🭿', '▁', '🭼', '▏' },
   },
+  edgy = {
+    open_flutter_log_on_right = true,
+  },
 }
 
 M.telescope = {
