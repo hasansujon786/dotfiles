@@ -77,9 +77,11 @@ keymap({ 'n', 'x' }, "''", "`'")
 
 -- Vertical scrolling
 local scroll_maps = {
+  { '<A-u>', '<C-u>' },
   { '<A-d>', '<C-d>' },
   { '<A-o>', '<C-d>' },
-  { '<A-u>', '<C-u>' },
+  { '<PageUp>', '<C-u>' },
+  { '<PageDown>', '<C-d>' },
   { '<A-f>', '<C-f>' },
   { '<A-b>', '<C-b>' },
   { '<A-y>', '<C-y>' },

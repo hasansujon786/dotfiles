@@ -18,8 +18,6 @@ f5:: {
 
 #`::takeScreenshot()
 PrintScreen::Send("#+{s}")
-#\::toggleCapsLosck()
-#Capslock::toggleCapsLosck()
 #q::toggleBluetooth()
 #+q::toggleBluetooth() toggleBluetooth()
 #;::SendInput("{AppsKey}")
@@ -65,7 +63,8 @@ PrintScreen::Send("#+{s}")
 #InputLevel 1
 !\::Send("\")
 \::alternateTab()
-Capslock::alternateTab()
+!Capslock::toggleCapsLosck()
+*Capslock::alternateTab()
 !`::switchBetweenSameApps()
 
 ^#m::Send("#{m}")

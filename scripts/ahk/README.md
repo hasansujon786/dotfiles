@@ -200,3 +200,26 @@ toggleWezterm() {
   }
 }
 ```
+
+```ahk
+*CapsLock::
+SetKeyDelay -1
+Send {Blind}{alt DownR}
+Return
+*CapsLock Up::
+SetKeyDelay -1
+Send {Blind}{alt up}
+; If (A_PriorKey = "CapsLock")
+;  SetCapsLockState, % !GetKeyState("CapsLock", "T")
+Return
+
+
+*Enter::Send {Blind}{Alt DownR}        ; Use ENTER as Ctrl key
+*Enter Up::
+  RegExMatch(A_ThisHotkey, "\*\K\S+", hk) ; Enter
+  Send % "{Blind}{Alt up}"
+  Send % "{Blind}{Alt up}" (A_PriorKey = hk ? "{" hk "}" : "")
+  ; If (A_PriorKey = hk)
+  ;   alternateTab()
+Return
+```

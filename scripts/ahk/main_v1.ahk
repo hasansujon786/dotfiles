@@ -11,7 +11,7 @@ SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
   SplashTextOn,,60,, reloaded
   sleep 300
   SplashTextOff
-  Run, C:\Users\%A_UserName%\dotfiles\scripts\ahk\main.ahk
+  Run, C:\Users\%A_UserName%\dotfiles\scripts\ahk\main_v1.ahk
 Return
 ;Suspend hotkeys
 ^f5::

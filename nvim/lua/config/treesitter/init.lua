@@ -84,6 +84,7 @@ return {
               ['aC'] = '@conditional.outer',
               ['iP'] = '@parameter.inner',
               ['aP'] = '@parameter.outer',
+              ['a.'] = { query = '@scope', query_group = 'locals', desc = 'Select language scope' },
               -- @loop.inner
               -- @loop.outer
             },
