@@ -63,7 +63,8 @@ PrintScreen::Send("#+{s}")
 #InputLevel 1
 !\::Send("\")
 \::alternateTab()
-!Capslock::toggleCapsLosck()
+#\::toggleCapsLosck()
+#Capslock::toggleCapsLosck()
 *Capslock::alternateTab()
 !`::switchBetweenSameApps()
 
