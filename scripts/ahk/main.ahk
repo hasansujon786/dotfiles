@@ -60,12 +60,14 @@ PrintScreen::Send("#+{s}")
 !8::Send("#8")
 !9::Send("#9")
 !0::Send("#0")
+
 #InputLevel 1
 !\::Send("\")
 \::alternateTab()
-!Capslock::toggleCapsLosck()
 *Capslock::alternateTab()
 !`::switchBetweenSameApps()
+#\::toggleCapsLosck()
+#Capslock::toggleCapsLosck()
 
 ^#m::Send("#{m}")
 #m::WinMinimize("a")

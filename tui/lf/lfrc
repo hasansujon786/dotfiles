@@ -99,8 +99,8 @@ map -a %lf -remote "send $id cd $(git rev-parse --show-toplevel)/build/app/outpu
 
 map .. cd ~/Desktop
 map .c cd C:\\ windows
-map .d cd D:\\ work
-map .e cd E:\\ movies
+map .d cd D:\\ videos
+map .e cd E:\\ hasan
 
 map g. cd ~/dotfiles
 map gd cd ~/Downloads
