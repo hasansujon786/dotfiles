@@ -277,15 +277,3 @@ explorerToggleInsert() {
   }
 #HotIf
 
-; f1::{
-;   height := 80
-;   width := 200
-;   xPos := PosX("center", 0, width)
-;   yPos := PosY("bottom", 0, height)
-
-;   myGui := Gui(), myGui.BackColor := "White", myGui.Opt("+AlwaysOnTop -Caption +ToolWindow")
-;   myGui.Add("Text",, "reloaded"),
-;   myGui.Show("x" xPos " y" ypos "w" width " h" height " NA")
-;   Sleep(5000)
-;   myGui.Destroy
-; }

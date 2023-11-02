@@ -124,28 +124,45 @@ toggleWinRestore() {
   }
 }
 toggleCapsLosck() {
-  SplashTextGui := Gui("ToolWindow -Sysmenu Disabled", ), SplashTextGui.Add("Text",, "Toggle Capslock"), SplashTextGui.Show("w200 h60")
+  isCapsOn := !GetKeyState("CapsLock", "T")
+  SetCapsLockState(isCapsOn)
+
+  color := "cBlack"
+  msg := "Capslock Off"
+  SplashTextGui := Gui("ToolWindow +AlwaysOnTop -Sysmenu Disabled -Caption"), SplashTextGui.Title := "CapsLosckStatus", SplashTextGui.SetFont("s20", "Arial")
+  if (isCapsOn) {
+    color := "cWhite"
+    msg := "Capslock On"
+    SplashTextGui.BackColor := "Red"
+  }
+  SplashTextGui.Add("Text" ,"x0 w220 Center " color, msg)
+  SplashTextGui.Show("w220 h70 NA")
   beep()
-  SetCapsLockState(!GetKeyState("CapsLock", "T"))
-  Sleep(300)
+
+  Sleep(700)
   SplashTextGui.Destroy
 }
 toggleBluetooth(onOff := "On") {
   mWidth := SysGet(78)
   mHeight := SysGet(79)
-  ProgressGui := Gui("-Caption"), ProgressGui.Title := "BluetoothStatus" , ProgressGui.SetFont("Bold"), ProgressGui.AddText("x0 w200 Center", "Toggling Bluetooth"), gocProgress := ProgressGui.AddProgress("x10 w180 h20"), ProgressGui.Show("W200")
-  WinMove(mWidth - 210, mHeight - 90, , , "BluetoothStatus")
+  ProgressGui := Gui("-Caption +AlwaysOnTop"), ProgressGui.Title := "BluetoothStatus"
+  ProgressGui.SetFont("Bold s10", "Arial"), ProgressGui.AddText("x0 w200 Center", "Toggling Bluetooth")
+  gocProgress := ProgressGui.AddProgress("x10 w180 h20")
+  ProgressGui.Show("W200 NA")
+  WinMove(mWidth - 210, mHeight - 100, , , "BluetoothStatus")
   gocProgress.Value := 70
   Static ps := "C:\\Users\\hasan\\dotfiles\\scripts\\ahk\\toggle_bluetooth.ps1"
 
-  If !FileExist(ps) {
+  if !FileExist(ps) {
     ProgressGui.Destroy
     MsgBox("File not found.`n" ps, "Error", 48)
     Return
-  } Else   SoundBeep(1500 - 500 * (onOff = "On"))
+  } else   {
+    SoundBeep(1500 - 500 * (onOff = "On"))
     ; RunWait, powershell -command %ps% -BluetoothStatus %onOff%,, Hide
     RunWait("powershell -command " ps, , "Hide")
-  SoundBeep(1000 + 500 * (onOff = "On"))
+    SoundBeep(1000 + 500 * (onOff = "On"))
+  }
 
   gocProgress.Value := 100
   Sleep(600)
@@ -154,7 +171,8 @@ toggleBluetooth(onOff := "On") {
 takeScreenshot() {
   SendInput("#{PrintScreen}")
   beep()
-  SplashTextGui := Gui("ToolWindow -Sysmenu Disabled", ), SplashTextGui.Add("Text",, "Your screenshort has saved"), SplashTextGui.Show("w200 h60")
+  SplashTextGui := Gui("ToolWindow -Sysmenu Disabled +AlwaysOnTop -Caption", ), SplashTextGui.SetFont("s14", "Arial"), SplashTextGui.Add("Text", "x0 Center w200", "Your screenshort has saved")
+  SplashTextGui.Show("w200 h80 NA")
   Sleep(300)
   SplashTextGui.Destroy
 }
@@ -273,7 +291,7 @@ switchBetweenSameApps() {
 ; Custom layout
 ;******************************************************************************
 layoutCodeFloat() {
-  beep()
+  ; beep()
   layout_winAction("ahk_exe brave.exe", "brave.exe", "full")
   ; layout_winAction("ahk_exe chrome.exe", "chrome.exe", "full")
 
@@ -282,7 +300,7 @@ layoutCodeFloat() {
   ; layout_winAction("ahk_exe Code.exe", "Code.exe", "center")
 }
 layoutCode() {
-  beep()
+  ; beep()
   layout_winAction("ahk_exe brave.exe", "brave.exe", "right")
   ; layout_winAction("ahk_exe chrome.exe", "chrome.exe", "right")
   Send("{ESC}")
