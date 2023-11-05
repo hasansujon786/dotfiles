@@ -4,8 +4,11 @@ return {
   event = 'VeryLazy',
   enabled = vim.g.use_flash,
   opts = {
-    labels = ';wertyguopzxbnmf0123456789',
-    label = { rainbow = { enabled = false, shade = 5 } },
+    labels = ';asdfghjklwertyuiopxcvbnm',
+    label = {
+      current = true,
+      rainbow = { enabled = false, shade = 5 },
+    },
     modes = { char = { enabled = false } },
     search = {
       exclude = {

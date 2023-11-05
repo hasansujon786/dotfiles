@@ -28,6 +28,7 @@ return {
     { 'jose-elias-alvarez/null-ls.nvim' },
     {
       'williamboman/mason.nvim',
+      cmd = { 'Mason', 'MasonInstall', 'MasonUpdate' },
       opts = { max_concurrent_installers = 3, ui = { border = 'none', height = 0.8 } },
       config = function(_, opts)
         require('mason').setup(opts)
