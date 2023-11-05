@@ -113,16 +113,20 @@ util_makeSymlinkPath() {
 
 ###### setup functions ######
 setup_git_defaults() {
+  gitconfigPath=($HOME/.gitconfig $HOME/.gitconfig $HOME/.gitconfig)
   util_print git
 
-  echo ">> Type your github username."
-  read git_user_name
-  echo ">> Type your github email."
-  read git_user_email
+  util_backUpConfig ${gitconfigPath[$osIndex]}
+  util_makeSymlinkPath $HOME/dotfiles/bash/.gitconfig ${gitconfigPath[$osIndex]}
 
-  git config --global user.email $git_user_email
-  git config --global user.name "$git_user_name"
-  git config --global credential.helper store
+  # echo ">> Type your github username."
+  # read git_user_name
+  # echo ">> Type your github email."
+  # read git_user_email
+
+  # git config --global user.email $git_user_email
+  # git config --global user.name "$git_user_name"
+  # git config --global credential.helper store
 
   # git config --global credential.helper 'cache --timeout=86400'
   # git credential-cache exit
@@ -291,7 +295,7 @@ install_various_apps() {
     $getter install -y potplayer
     $getter install -y quicklook
     $getter install -y delta # git highlighter
-    $getter install -y instanteyedropper.app
+    # $getter install -y instanteyedropper.app
     $getter install -y ntop.portable
     $getter install -y riot
     $getter install -y googlechrome
@@ -342,18 +346,17 @@ setup_sublime() {
   util_makeSymlinkPath $HOME/dotfiles/gui/sublime_text/theme "'$sublimePath\\Theme - One Dark'"
 }
 
+# C:\Users\hasan\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState
 setup_windowsTerminal() {
   util_print WinTerminal
-
-  wtPath=($HOME/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json)
+  wtPath=($HOME/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState)
   # wtPathBeta=($HOME/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState/settings.json)
-  $getter install -y microsoft-windows-terminal # --pre
-  rm -rf ${wtPath[$osIndex]}
-  util_makeSymlinkPath $HOME/dotfiles/windows-terminal/settings.json  ${wtPath[$osIndex]}
 
-  # choco install -y microsoft-windows-terminal --version=1.11.3471.0 -y
-  # rm -rf $HOME/AppData/Local/Microsoft/Windows\ Terminal/settings.json
-  # util_makeSymlinkPath $HOME/dotfiles/windows-terminal/settings.json "'C:\Users\hasan\AppData\Local\Microsoft\Windows Terminal\settings.json'"
+  $getter install -y microsoft-windows-terminal # --pre
+
+  mkdir -p ${wtPath[$osIndex]}
+  util_backUpConfig ${wtPath[$osIndex]}/settings.json
+  util_makeSymlinkPath $HOME/dotfiles/windows-terminal/settings.json  ${wtPath[$osIndex]}/settings.json
 }
 
 install_and_setup_tmux() {
@@ -379,10 +382,11 @@ auto_install_everything() {
     $getter install pwsh -y
     $getter install -y brave
     setup_windowsTerminal
-    setup_ahk
     setup_sublime
+    # setup_ahk
     $getter install -y mingw
     $getter install -y make
+    $getter install -y obsidian
   elif [[ "$os" == "linux" ]]; then
     $getter install -y build-essential
     $getter install -y ninja-build
