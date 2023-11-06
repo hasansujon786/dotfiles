@@ -287,3 +287,8 @@
 --     vim.opt.winbar = ''
 --   end,
 -- })
+
+-- Devicon highlight
+-- local tail, path = telescopePickers.getPathAndTail(entry.filename)
+-- local tailForDisplay = tail .. ' '
+-- local icon, iconHighlight = telescopeUtilities.get_devicons(tail)
