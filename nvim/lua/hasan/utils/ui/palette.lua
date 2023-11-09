@@ -29,10 +29,18 @@ local function set_custom_highlights()
     muted = { fg = '#8b95a7', bg = '#3E425D' },
     active = { fg = '#ffffff', bg = '#2D3343' },
   }
-  util.fg_bg('NeoTreeTabActive', btn.active.fg, btn.active.bg)
-  util.fg_bg('NeoTreeTabInactive', btn.muted.fg, btn.muted.bg)
-  util.fg_bg('NeoTreeTabSeparatorActive', sp, btn.active.bg)
-  util.fg_bg('NeoTreeTabSeparatorInactive', sp, btn.muted.bg)
+
+  if require('hasan.core.state').ui.neotree.source_selector_style == 'minimal' then
+    vim.api.nvim_set_hl(0, 'NeoTreeTabActive', { underline = true, fg = btn.active.fg, bg = sp })
+    util.fg_bg('NeoTreeTabInactive', btn.muted.fg, sp)
+    util.fg_bg('NeoTreeTabSeparatorActive', btn.active.fg, sp)
+    util.fg_bg('NeoTreeTabSeparatorInactive', btn.muted.fg, sp)
+  else
+    util.fg_bg('NeoTreeTabActive', btn.active.fg, btn.active.bg)
+    util.fg_bg('NeoTreeTabInactive', btn.muted.fg, btn.muted.bg)
+    util.fg_bg('NeoTreeTabSeparatorActive', sp, btn.active.bg)
+    util.fg_bg('NeoTreeTabSeparatorInactive', sp, btn.muted.bg)
+  end
 
   vim.fn['hasan#highlight#load_custom_highlight']()
 

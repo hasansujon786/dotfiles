@@ -25,6 +25,9 @@ M.ui = {
   edgy = {
     open_flutter_log_on_right = true,
   },
+  neotree = {
+    source_selector_style = 'minimal' -- defalut | minimal
+  }
 }
 
 M.telescope = {

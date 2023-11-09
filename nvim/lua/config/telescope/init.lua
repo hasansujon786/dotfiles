@@ -35,7 +35,7 @@ return {
         defaults = {
           scroll_strategy = 'cycle',
           selection_strategy = 'reset',
-          prompt_prefix = '  ',
+          prompt_prefix = '   ',
           selection_caret = '❯ ',
           layout_config = {
             height = 0.7,

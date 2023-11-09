@@ -64,6 +64,8 @@ alias fll='flutter clean'
 alias flc='flutter create'
 alias flcs='flutter create -t skeleton'
 alias fob='cd build/app/outputs/flutter-apk && explorer .'
+alias dbb='dart run build_runner build --delete-conflicting-outputs'
+alias dbw='dart run build_runner watch --delete-conflicting-outputs'
 
 #adb
 alias adk='adb kill-server'

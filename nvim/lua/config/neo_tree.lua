@@ -156,6 +156,28 @@ return {
       end,
     }
 
+    -- Alternate source_selector_style
+    if require('hasan.core.state').ui.neotree.source_selector_style == 'minimal' then
+      opts.source_selector.sources = {
+        {
+          source = 'filesystem', -- string
+          display_name = '  ', -- string | nil
+        },
+        {
+          source = 'buffers', -- string
+          display_name = ' ﬘ ', -- string | nil
+        },
+        {
+          source = 'git_status', -- string
+          display_name = '  ', -- string | nil
+        },
+      }
+      opts.source_selector.content_layout = 'start'
+      opts.source_selector.tabs_layout = false
+      opts.source_selector.separator = { left = '', right = ' ' }
+      opts.source_selector.padding = 1
+    end
+
     require('neo-tree').setup(opts)
   end,
   dependencies = {
@@ -282,7 +304,7 @@ return {
         ['s'] = 'open_split',
         ['v'] = 'open_vsplit',
         ['t'] = 'open_tabnew', -- open_tab_drop
-        ['w'] = 'open_with_window_picker',
+        -- ['w'] = 'open_with_window_picker',
         ['P'] = { 'toggle_preview', config = { use_float = true } },
         -- ["S"] = "split_with_window_picker",
         -- ["s"] = "vsplit_with_window_picker",
@@ -317,10 +339,9 @@ return {
         ['r'] = 'refresh',
         ['q'] = 'close_window',
         ['?'] = 'show_help',
-        ['<'] = 'prev_source',
-        ['>'] = 'next_source',
-        ['{'] = 'prev_source',
-        ['}'] = 'next_source',
+        ['b'] = 'prev_source',
+        ['w'] = 'next_source',
+        ['e'] = 'next_source',
         ['[['] = 'prev_source',
         [']]'] = 'next_source',
         ['K'] = 'show_file_details',
