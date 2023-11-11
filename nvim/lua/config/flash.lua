@@ -1,7 +1,6 @@
 local nx, nxo = { 'n', 'x' }, { 'n', 'x', 'o' }
 return {
   'folke/flash.nvim',
-  event = 'VeryLazy',
   enabled = vim.g.use_flash,
   opts = {
     labels = ';asdfghjklwertyuiopxcvbnm',

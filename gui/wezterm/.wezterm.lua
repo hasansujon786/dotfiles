@@ -58,7 +58,7 @@ return {
   initial_cols = 120,
   tab_max_width = 30,
   hide_tab_bar_if_only_one_tab = false,
-  window_decorations = 'INTEGRATED_BUTTONS', -- NONE,RESIZE
+  window_decorations = 'RESIZE', -- NONE,INTEGRATED_BUTTONS
   check_for_updates = true,
   use_dead_keys = false,
   warn_about_missing_glyphs = false,
@@ -73,15 +73,31 @@ return {
   },
   status_update_interval = 1000,
   freetype_load_flags = 'NO_HINTING',
+  font_size = 13.4,
   font = wezterm.font_with_fallback({
-    {
-      family = 'OperatorMonoLig Nerd Font',
-      weight = 'Bold',
-    },
+    { family = 'OperatorMonoLig Nerd Font', weight = 700 }, -- Medium|Bold
     'Cascadia Code',
     'Consolas',
   }),
-  font_size = 14,
+  font_rules = {
+    { -- Bold
+      intensity = 'Bold',
+      italic = false,
+      font = wezterm.font({
+        family = 'OperatorMonoLig Nerd Font',
+        weight = 700, -- Medium|Bold
+      }),
+    },
+    { -- Bold Italic
+      intensity = 'Bold',
+      italic = true,
+      font = wezterm.font({
+        family = 'Monaspace Radon',
+        weight = 500,
+        -- style = 'Italic',
+      }),
+    },
+  },
   underline_thickness = '2pt',
   underline_position = '-2pt',
   adjust_window_size_when_changing_font_size = false,
@@ -150,7 +166,7 @@ return {
         },
       }),
     },
-    -- { key = ',', mods  'ALT', action = 'ShowTabNavigator' },
+    -- { key = ',', mods = 'ALT', action = 'ShowTabNavigator' },
     -- { key = 'b', mods = 'LEADER', action = act({ EmitEvent = 'toggle-opacity' }) },
     { key = 'r', mods = 'CTRL|SHIFT', action = wezterm.action_callback(wezterm.reload_configuration) },
     { key = 't', mods = 'SHIFT|ALT', action = act({ EmitEvent = 'toggle-tab-bar' }) },
@@ -163,7 +179,6 @@ return {
     -- tmux style key bindings
     { key = 'c', mods = 'LEADER', action = act({ SpawnTab = 'CurrentPaneDomain' }) },
     { key = 'x', mods = 'LEADER', action = act({ CloseCurrentPane = { confirm = false } }) },
-    { key = 'z', mods = 'LEADER', action = 'TogglePaneZoomState' },
     { key = '-', mods = 'LEADER', action = act({ SplitVertical = { domain = 'CurrentPaneDomain' } }) },
     { key = '\\', mods = 'LEADER', action = act({ SplitHorizontal = { domain = 'CurrentPaneDomain' } }) },
     { key = 'h', mods = 'LEADER', action = act({ ActivatePaneDirection = 'Left' }) },
@@ -185,6 +200,8 @@ return {
     { key = '9', mods = 'LEADER', action = act({ ActivateTab = 8 }) },
     { key = '&', mods = 'LEADER|SHIFT', action = act({ CloseCurrentTab = { confirm = true } }) },
     -- tmux custom bindings
+    { key = 'b', mods = 'LEADER', action = 'ShowLauncher' },
+    { key = '.', mods = 'LEADER', action = 'TogglePaneZoomState' },
     { key = 'o', mods = 'LEADER', action = 'ActivateLastTab' },
     { key = 'v', mods = 'LEADER', action = act({ SplitHorizontal = {} }) },
     { key = 's', mods = 'LEADER', action = act({ SplitVertical = {} }) },
