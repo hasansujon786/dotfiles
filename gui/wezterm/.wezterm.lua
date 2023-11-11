@@ -1,8 +1,14 @@
 local wezterm = require('wezterm')
 local act = wezterm.action
 
-local SOLID_LEFT_ARROW = ''
-local SOLID_RIGHT_ARROW = ''
+-- local SOLID_LEFT_ARROW = ''
+-- local SOLID_RIGHT_ARROW = ''
+
+local key_stack_mode = nil
+local function exit_key_stack(window, pane)
+  key_stack_mode = nil
+  window:perform_action('PopKeyTable', pane)
+end
 
 wezterm.on('update-right-status', function(window, _)
   local time = wezterm.strftime('  %I:%M %p     ')
@@ -21,6 +27,12 @@ wezterm.on('update-right-status', function(window, _)
   while #cells > 0 do
     local cellText = table.remove(cells, 1)
     simple(cellText, #cells == 0)
+  end
+
+  if key_stack_mode then
+    table.insert(elements, 1, { Text = '    ' })
+    table.insert(elements, 1, { Text = key_stack_mode })
+    table.insert(elements, 1, { Foreground = { Color = '#97CA72' } })
   end
   window:set_right_status(wezterm.format(elements))
 end)
@@ -166,6 +178,18 @@ return {
         },
       }),
     },
+
+    -- stack mode
+    {
+      key = 'w',
+      mods = 'LEADER',
+      action = wezterm.action_callback(function(window, pane)
+        key_stack_mode = 'Win Stack'
+        window:perform_action({ ActivateKeyTable = { name = 'resize_pane', one_shot = false } }, pane)
+      end),
+      -- action = act.ActivateKeyTable({ name = 'resize_pane', one_shot = false }),
+    },
+
     -- { key = ',', mods = 'ALT', action = 'ShowTabNavigator' },
     -- { key = 'b', mods = 'LEADER', action = act({ EmitEvent = 'toggle-opacity' }) },
     { key = 'r', mods = 'CTRL|SHIFT', action = wezterm.action_callback(wezterm.reload_configuration) },
@@ -218,23 +242,45 @@ return {
     { event = { Up = { streak = 1, button = 'Left' } }, mods = 'CTRL', action = 'OpenLinkAtMouseCursor' },
     { event = { Drag = { streak = 1, button = 'Left' } }, mods = 'CTRL|SHIFT', action = 'StartWindowDrag' },
   },
+  key_tables = {
+    -- name="resize_pane", one_shot=false.
+    resize_pane = {
+      -- { key = 'LeftArrow', action = act.AdjustPaneSize({ 'Left', 1 }) },
+      -- { key = 'RightArrow', action = act.AdjustPaneSize({ 'Right', 1 }) },
+      -- { key = 'UpArrow', action = act.AdjustPaneSize({ 'Up', 1 }) },
+      -- { key = 'DownArrow', action = act.AdjustPaneSize({ 'Down', 1 }) },
+
+      { key = 'h', action = act.AdjustPaneSize({ 'Left', 1 }) },
+      { key = 'l', action = act.AdjustPaneSize({ 'Right', 1 }) },
+      { key = 'k', action = act.AdjustPaneSize({ 'Up', 1 }) },
+      { key = 'j', action = act.AdjustPaneSize({ 'Down', 1 }) },
+
+      -- Cancel the mode by pressing escape
+      { key = 'Escape', action = wezterm.action_callback(exit_key_stack) },
+    },
+
+    -- Defines the keys that are active in our activate-pane mode.
+    -- 'activate_pane' here corresponds to the name="activate_pane" in
+    -- the key assignments above.
+    -- activate_pane = {
+    --   { key = 'LeftArrow', action = act.ActivatePaneDirection('Left') },
+    --   { key = 'h', action = act.ActivatePaneDirection('Left') },
+
+    --   { key = 'RightArrow', action = act.ActivatePaneDirection('Right') },
+    --   { key = 'l', action = act.ActivatePaneDirection('Right') },
+
+    --   { key = 'UpArrow', action = act.ActivatePaneDirection('Up') },
+    --   { key = 'k', action = act.ActivatePaneDirection('Up') },
+
+    --   { key = 'DownArrow', action = act.ActivatePaneDirection('Down') },
+    --   { key = 'j', action = act.ActivatePaneDirection('Down') },
+    -- },
+  },
   launch_menu = {
-    {
-      label = 'Git Bash',
-      args = { 'C:\\Program Files\\Git\\bin\\bash.exe' },
-    },
-    {
-      label = 'PowerShell Core',
-      args = { 'pwsh' },
-    },
-    {
-      label = 'Command Prompt',
-      args = { 'cmd' },
-    },
-    {
-      label = 'PowerShell',
-      args = { 'powershell.exe', '-NoLogo' },
-    },
+    { label = 'Git Bash', args = { 'C:\\Program Files\\Git\\bin\\bash.exe' } },
+    { label = 'PowerShell Core', args = { 'pwsh' } },
+    { label = 'Command Prompt', args = { 'cmd' } },
+    { label = 'PowerShell', args = { 'powershell.exe', '-NoLogo' } },
   },
   command_palette_bg_color = '#222222',
   command_palette_fg_color = '#c0c0c0',

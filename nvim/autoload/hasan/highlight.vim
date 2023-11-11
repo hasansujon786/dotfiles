@@ -15,9 +15,9 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi CursorLineDap      guibg=#173F1E guifg=none guisp=none cterm=underline
   hi SidebarDark        guifg=#a5b0c5 guibg=#1e242e
   hi IncSearch          guibg=#e86671 guifg=#2C323C gui=underline
-  hi! link CurSearch IncSearch
-  hi! link Folded Comment
-  hi! link Conceal String
+  hi! link CurSearch    IncSearch
+  hi! link Folded       Comment
+  hi! link Conceal      String
   hi! link CursorColumn CursorLineFocus
 
   "/// nvim-cmp ///"
@@ -53,31 +53,32 @@ function! hasan#highlight#load_custom_highlight(...) abort
   "/// LSP variable reference ///"
   hi! link LspInfoBorder     FloatBorder
   hi! link NullLsInfoBorder  FloatBorder
-  hi LspReferenceText      guibg=#3B4048 gui=NONE
-  hi LspReferenceWrite     guibg=#463b48 gui=NONE
-  hi LspReferenceRead      guibg=#3B4048 gui=NONE
-  hi DiagnosticLineNrWarn  guifg=#ebc275 guibg=#4C4944
-  hi DiagnosticLineNrError guifg=#ef5f6b guibg=#4D3542
-  hi DiagnosticLineNrInfo  guifg=#4dbdcb guibg=#2C4855
-  hi DiagnosticLineNrHint  guifg=#ca72e4 guibg=#45395A
-  hi DiagnosticUnnecessary gui=underline
+  hi LspReferenceText        guibg=#3B4048 gui=NONE
+  hi LspReferenceWrite       guibg=#463b48 gui=NONE
+  hi LspReferenceRead        guibg=#3B4048 gui=NONE
+  hi DiagnosticLineNrWarn    guifg=#ebc275 guibg=#4C4944
+  hi DiagnosticLineNrError   guifg=#ef5f6b guibg=#4D3542
+  hi DiagnosticLineNrInfo    guifg=#4dbdcb guibg=#2C4855
+  hi DiagnosticLineNrHint    guifg=#ca72e4 guibg=#45395A
+  hi DiagnosticUnnecessary   gui=underline
   " hi DiagnosticUnderlineError gui=underline guifg=#E61B1B
 
   "/// Plugins ///"
-  hi! NoiceMini guibg=#000000
-  hi! LazyButton      guibg=#3E425D guifg=#ABB2BF
-  hi! link LazyNormal NormalFloatFlat
-  hi! link MasonNormal NormalFloatFlat
-  hi! link HlSearchNear IncSearch
-  hi! link HlSearchLensNear WildMenu
-  hi WhichKeySeparator guifg=#546178
-  hi QuickScopePrimary   guifg=tomato gui=underline
-  hi QuickScopeSecondary guifg=#d78787 gui=underline
-  hi link SneakScope IncSearch
-  hi Sneak      guibg=#ccff88 guifg=black gui=bold
-  hi VM_Extend  guibg=#5C6370 guifg=#ABB2BF
-  hi VM_Insert  guibg=#3E4452 guifg=#ABB2BF
-  hi VM_Mono    guibg=#00af87 guifg=#ffffff
+  hi NoiceMini               guibg=#000000
+  hi LazyButton              guibg=#3E425D guifg=#8b95a7
+  hi! link LazyButtonActive  WildMenu
+  hi! link LazyNormal        NormalFloatFlat
+  hi! link MasonNormal       NormalFloatFlat
+  hi! link HlSearchNear      IncSearch
+  hi! link HlSearchLensNear  WildMenu
+  hi WhichKeySeparator       guifg=#546178
+  hi QuickScopePrimary       guifg=tomato gui=underline
+  hi QuickScopeSecondary     guifg=#d78787 gui=underline
+  hi VM_Extend               guibg=#5C6370 guifg=#ABB2BF
+  hi VM_Insert               guibg=#3E4452 guifg=#ABB2BF
+  hi VM_Mono                 guibg=#00af87 guifg=#ffffff
+  hi Sneak                   guibg=#ccff88 guifg=black gui=bold
+  hi! link SneakScope        IncSearch
   " hi VM_Cursor
   "/// Alpha ///"
   hi AlphaTag        guifg=#546178
@@ -126,25 +127,25 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! link NvimTreeIndentMarker IblIndent
   hi! link NvimTreeWindowPicker TelescopeSelectionCaret
   hi! link NvimTreeWinSeparator VertSplit
-  hi! NvimTreeNormal guibg=#1E242E guifg=#a5b0c5
-  hi! NvimTreeWinBar guibg=#242B38 guifg=#75A899
+  hi! NvimTreeNormal            guibg=#1E242E guifg=#a5b0c5
+  hi! NvimTreeWinBar            guibg=#242B38 guifg=#75A899
 
   "/// neo-tree.nvim ///"
-  hi! link NeoTreeModified       String
-  hi! link NeoTreeMessage        Comment
-  hi! link NeoTreeDimText        Comment
-  hi! link NeoTreeIndentMarker   IblIndent
-  hi! link NeoTreeCursorLine     CursorLineFocus
-  hi! link NeoTreeNormal         SidebarDark
-  hi! link NeoTreeNormalNC       SidebarDark
-  hi! link NeoTreeVertSplit      WinSeparator
-  hi! NeoTreeGitUntracked        gui=NONE
-  hi! NeoTreeDirectoryIcon       guifg=#8094B4
-  hi! link NeoTreeFloatNormal    TelescopeNormal
-  hi! NeoTreeFloatBorder         guibg=#1C212C guifg=#4dbdcb
-  hi! NeoTreeFloatTitle          guibg=#4dbdcb guifg=#1C212C
-  " hi! NeoTreeRootName            guifg=#ABB2BF gui=bold
-  " hi! NeoTreeWinSeparator        guifg=#2b3043 guibg=#1e242e
+  hi! link NeoTreeModified      String
+  hi! link NeoTreeMessage       Comment
+  hi! link NeoTreeDimText       Comment
+  hi! link NeoTreeIndentMarker  IblIndent
+  hi! link NeoTreeCursorLine    CursorLineFocus
+  hi! link NeoTreeNormal        SidebarDark
+  hi! link NeoTreeNormalNC      SidebarDark
+  hi! link NeoTreeVertSplit     WinSeparator
+  hi! NeoTreeGitUntracked       gui=NONE
+  hi! NeoTreeDirectoryIcon      guifg=#8094B4
+  hi! link NeoTreeFloatNormal   TelescopeNormal
+  hi! NeoTreeFloatBorder        guibg=#1C212C guifg=#4dbdcb
+  hi! NeoTreeFloatTitle         guibg=#4dbdcb guifg=#1C212C
+  " hi! NeoTreeRootName           guifg=#ABB2BF gui=bold
+  " hi! NeoTreeWinSeparator       guifg=#2b3043 guibg=#1e242e
 
   "/// Nebulous ///"
   hi Nebulous           guifg=#323c4e
@@ -156,8 +157,8 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi KisslineWinbarRenameBorder  guifg=#61afef guibg=#1E242E
 
   "/// Neogit ///"
-  hi! link NeogitDiffContext Normal
-  hi! link NeogitCursorLine CursorLine
+  hi! link NeogitDiffContext    Normal
+  hi! link NeogitCursorLine     CursorLine
   hi NeogitDiffContextHighlight guibg=#323945
   hi NeogitHunkHeader           guifg=#242b38 guibg=#7c8088 gui=bold
   hi NeogitHunkHeaderHighlight  guifg=#242b38 guibg=#c3a7e5 gui=bold

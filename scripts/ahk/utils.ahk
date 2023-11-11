@@ -350,7 +350,8 @@ navToDesktop(side) {
 }
 resetWin() {
   if (A_ScreenHeight >= 1080) {
-    WinMove(, , 1406, 834, "A") ; 1080
+    ; old width: 834
+    WinMove(, , 1406, 845, "A") ; 1080
   }  else {
     WinMove(, , 1216, 660, "A") ; 768
   }
