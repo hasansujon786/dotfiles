@@ -142,8 +142,8 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! NeoTreeGitUntracked       gui=NONE
   hi! NeoTreeDirectoryIcon      guifg=#8094B4
   hi! link NeoTreeFloatNormal   TelescopeNormal
-  hi! NeoTreeFloatBorder        guibg=#1C212C guifg=#4dbdcb
-  hi! NeoTreeFloatTitle         guibg=#4dbdcb guifg=#1C212C
+  hi! NeoTreeFloatBorder        guibg=#21252B guifg=#4dbdcb
+  hi! NeoTreeFloatTitle         guibg=#4dbdcb guifg=#21252B
   " hi! NeoTreeRootName           guifg=#ABB2BF gui=bold
   " hi! NeoTreeWinSeparator       guifg=#2b3043 guibg=#1e242e
 
@@ -157,11 +157,21 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi KisslineWinbarRenameBorder  guifg=#61afef guibg=#1E242E
 
   "/// Neogit ///"
-  hi! link NeogitDiffContext    Normal
-  hi! link NeogitCursorLine     CursorLine
-  hi NeogitDiffContextHighlight guibg=#323945
-  hi NeogitHunkHeader           guifg=#242b38 guibg=#7c8088 gui=bold
-  hi NeogitHunkHeaderHighlight  guifg=#242b38 guibg=#c3a7e5 gui=bold
+  hi! link NeogitDiffContext         Normal
+  hi! link NeogitCursorLine          CursorLine
+  hi NeogitHunkHeader                guifg=#242b38 guibg=#7c8088 gui=bold
+  hi NeogitDiffContextHighlight      guibg=#323945
+  hi NeogitHunkHeaderHighlight       guifg=#242b38 guibg=#c3a7e5 gui=bold
+  "/// DiffView ///"
+  hi! DiffDelete                     guibg=#3c2729 guifg=#1c212c
+  hi! link DiffviewNormal            SidebarDark
+  hi! link DiffviewEndOfBuffer       DiffviewNormal
+  hi! link DiffviewCursorLine        CursorLineFocus
+  hi! link DiffviewFolderSign        NeoTreeDirectoryIcon
+  hi! link DiffviewFilePanelTitle    DiffviewFilePanelCounter
+  hi! link DiffviewFilePanelRootPath NeoTreeRootName
+  hi! link DiffviewStatusUntracked   DiffviewFilePanelDeletions
+  hi! link DiffviewStatusModified    NeoTreeGitModified
 
   "/// glance.nvim ///"
   hi GlanceBorder                    guifg=#67a3d4 guibg=NONE

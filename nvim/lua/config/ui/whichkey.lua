@@ -122,22 +122,9 @@ return {
         c = { '<cmd>Telescope git_commits<CR>', 'Look up commits' },
         C = { '<cmd>Telescope git_bcommits<CR>', 'Look up buffer commits' },
 
-        h = { '<cmd>lua require("hasan.utils.init").open_git_remote(true)<CR>', 'Open git repo' },
-        H = { '<cmd>lua require("hasan.utils.init").open_git_remote(false)<CR>', 'Open git repo with file' },
-
-        g = { '<cmd>Neogit<CR>', 'Open Neogit' },
-        d = {
-          function()
-            if next(require('diffview.lib').views) == nil then
-              vim.cmd('DiffviewOpen')
-            else
-              vim.cmd('DiffviewClose')
-            end
-          end,
-          'Open Diffview',
-        },
-
-        ['.'] = { '<cmd>silent !git add %<CR>', 'Git: Stage current file' },
+        o = { '<cmd>lua require("hasan.utils.init").open_git_remote(true)<CR>', 'Open git repo' },
+        O = { '<cmd>lua require("hasan.utils.init").open_git_remote(false)<CR>', 'Open git repo with file' },
+        -- ['.'] = { '<cmd>silent !git add %<CR>', 'Git: Stage current file' },
         -- f = { '<cmd>diffget //2<cr>',                      'diffget ours' },
         -- j = { '<cmd>diffget //3<CR>',                      'diffget theirs' },
       },

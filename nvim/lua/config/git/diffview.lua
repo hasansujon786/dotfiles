@@ -1,6 +1,23 @@
 return {
   'sindrets/diffview.nvim',
   lazy = true,
+  keys = {
+    {
+      '<leader>gd',
+      function()
+        if next(require('diffview.lib').views) == nil then
+          vim.cmd('DiffviewOpen')
+        else
+          vim.cmd('DiffviewClose')
+        end
+      end,
+      desc = 'Open Diffview',
+    },
+    { '<leader>gD', '<cmd>DiffviewFileHistory<CR>', desc = 'Open Repo History' },
+    { '<leader>gf', '<cmd>DiffviewFileHistory --follow %<cr>',  desc = 'Open File history' },
+    { '<leader>gf', "<Esc><Cmd>'<,'>DiffviewFileHistory --follow<CR>", desc = 'Range history', mode = 'v' },
+    { '<leader>gF', '<Cmd>.DiffviewFileHistory --follow<CR>', desc = 'Line history' }
+  },
   config = function()
     local actions = require('diffview.actions')
     require('diffview').setup({
@@ -21,6 +38,10 @@ return {
         done = '✓',
       },
       view = {
+        default = {
+          layout = 'diff2_horizontal',
+          winbar_info = true,          -- See ':h diffview-config-view.x.winbar_info'
+        },
         merge_tool = {
           -- Config for conflicted files in diff views during a merge or rebase.
           layout = 'diff3_mixed',
@@ -41,8 +62,10 @@ return {
         },
         win_config = {                      -- See |diffview-config-win_config|
           position = 'left',
-          width = 35,
-          win_opts = {},
+          width = 33,
+          win_opts = {
+            signcolumn = 'no'
+          },
         },
       },
       file_history_panel = {
@@ -127,7 +150,7 @@ return {
           { 'n', 'o',              actions.select_entry,                   { desc = 'Open the diff for the selected entry' } },
           { 'n', 'l',              actions.select_entry,                   { desc = 'Open the diff for the selected entry' } },
           { 'n', '<2-LeftMouse>',  actions.select_entry,                   { desc = 'Open the diff for the selected entry' } },
-          { 'n', '-',              actions.toggle_stage_entry,             { desc = 'Stage / unstage the selected entry' } },
+          { 'n', 'u',              actions.toggle_stage_entry,             { desc = 'Stage / unstage the selected entry' } },
           { 'n', 'S',              actions.stage_all,                      { desc = 'Stage all entries' } },
           { 'n', 'U',              actions.unstage_all,                    { desc = 'Unstage all entries' } },
           { 'n', 'X',              actions.restore_entry,                  { desc = 'Restore entry to the state on the left side' } },

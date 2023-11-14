@@ -32,6 +32,7 @@ M.default = {
     'dapui_console',
     'dap-repl',
     -- dap-float
+    'DiffviewFiles',
   },
   nb_blur_hls = {
     -- numbers

@@ -2,7 +2,10 @@ return {
   'NeogitOrg/neogit',
   lazy = true,
   cmd = 'Neogit',
-  commit = '4e54383',
+  commit = '835ef4b', -- 4e54383
+  keys = {
+    { '<leader>gg', '<cmd>Neogit<CR>', desc = 'Open Neogit' },
+  },
   opts = {
     disable_insert_on_commit = 'auto',
     disable_signs = false,

@@ -74,6 +74,7 @@ vim.opt.fillchars = {
   vertleft = '┃',
   vertright = '┃',
   verthoriz = '┃',
+  diff = '╱'
 }
 
 o.belloff = 'all' --                             Just turn the dang bell off
