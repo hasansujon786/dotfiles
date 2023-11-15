@@ -39,6 +39,16 @@ M.toggle_win_blur = function()
   end
 end
 
+M.pause = function(time, auto_dispose)
+  config.options.is_win_blur_disabled = true
+
+  if auto_dispose or auto_dispose == nil then
+    vim.defer_fn(function()
+      config.options.is_win_blur_disabled = false
+    end, time or 1000)
+  end
+end
+
 M.init = function(init_state)
   config.options.nb_is_disabled = false
   config.options.is_win_blur_disabled = _utils.get_default(init_state, false)

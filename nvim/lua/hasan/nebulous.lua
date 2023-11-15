@@ -33,10 +33,10 @@ M.my_nebulous_setup = function()
     end,
     dynamic_rules = {
       deactive = function(_)
-        if vim.t.diffview_view_initialized then
+        if vim.t['diffview_view_initialized'] then
           return true
         end
-        if vim.t.disable_nebulous then
+        if vim.t['disable_nebulous'] then
           return true
         end
       end,

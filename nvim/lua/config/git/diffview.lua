@@ -1,3 +1,4 @@
+local nebulous = '<cmd>lua require("nebulous.init").pause(2000)<CR>'
 return {
   'sindrets/diffview.nvim',
   lazy = true,
@@ -6,6 +7,7 @@ return {
       '<leader>gd',
       function()
         if next(require('diffview.lib').views) == nil then
+          require('nebulous.init').pause(2000)
           vim.cmd('DiffviewOpen')
         else
           vim.cmd('DiffviewClose')
@@ -13,63 +15,54 @@ return {
       end,
       desc = 'Open Diffview',
     },
-    { '<leader>gD', '<cmd>DiffviewFileHistory<CR>', desc = 'Open Repo History' },
-    { '<leader>gf', '<cmd>DiffviewFileHistory --follow %<cr>',  desc = 'Open File history' },
-    { '<leader>gf', "<Esc><Cmd>'<,'>DiffviewFileHistory --follow<CR>", desc = 'Range history', mode = 'v' },
-    { '<leader>gF', '<Cmd>.DiffviewFileHistory --follow<CR>', desc = 'Line history' }
+    { '<leader>gD', nebulous .. '<cmd>DiffviewFileHistory<CR>', desc = 'Open Repo History' },
+    { '<leader>gf', nebulous .. '<cmd>DiffviewFileHistory --follow %<cr>', desc = 'Open File history' },
+    { '<leader>gf', nebulous .. "<Esc><Cmd>'<,'>DiffviewFileHistory --follow<CR>", desc = 'Range history', mode = 'v' },
+    { '<leader>gF', nebulous .. '<Cmd>.DiffviewFileHistory --follow<CR>', desc = 'Line history' },
   },
   config = function()
     local actions = require('diffview.actions')
     require('diffview').setup({
-      diff_binaries = false,    -- Show diffs for binaries
+      diff_binaries = false, -- Show diffs for binaries
       enhanced_diff_hl = false, -- See |diffview-config-enhanced_diff_hl|
-      git_cmd = { 'git' },      -- The git executable followed by default args.
-      hg_cmd = { 'hg' },        -- The hg executable followed by default args.
-      use_icons = true,         -- Requires nvim-web-devicons
-      show_help_hints = true,   -- Show hints for how to open the help panel
-      watch_index = true,       -- Update views and index buffers when the git index changes.
-      icons = {                 -- Only applies when use_icons is true.
-        folder_closed = '',
-        folder_open = '',
-      },
-      signs = {
-        fold_closed = '',
-        fold_open = '',
-        done = '✓',
-      },
+      git_cmd = { 'git' }, -- The git executable followed by default args.
+      hg_cmd = { 'hg' }, -- The hg executable followed by default args.
+      use_icons = true, -- Requires nvim-web-devicons
+      show_help_hints = true, -- Show hints for how to open the help panel
+      watch_index = true, -- Update views and index buffers when the git index changes.
+      icons = { folder_closed = '', folder_open = '' },
+      signs = { fold_closed = '', fold_open = '', done = '✓' },
       view = {
         default = {
           layout = 'diff2_horizontal',
-          winbar_info = true,          -- See ':h diffview-config-view.x.winbar_info'
+          winbar_info = true, -- See ':h diffview-config-view.x.winbar_info'
         },
         merge_tool = {
           -- Config for conflicted files in diff views during a merge or rebase.
           layout = 'diff3_mixed',
-          disable_diagnostics = true,   -- Temporarily disable diagnostics for conflict buffers while in the view.
-          winbar_info = true,           -- See |diffview-config-view.x.winbar_info|
+          disable_diagnostics = true, -- Temporarily disable diagnostics for conflict buffers while in the view.
+          winbar_info = true, -- See |diffview-config-view.x.winbar_info|
         },
         file_history = {
           -- Config for changed files in file history views.
           layout = 'diff2_horizontal',
-          winbar_info = false,          -- See |diffview-config-view.x.winbar_info|
+          winbar_info = false, -- See |diffview-config-view.x.winbar_info|
         },
       },
       file_panel = {
-        listing_style = 'tree',             -- One of 'list' or 'tree'
-        tree_options = {                    -- Only applies when listing_style is 'tree'
-          flatten_dirs = true,              -- Flatten dirs that only contain one single dir
-          folder_statuses = 'only_folded',  -- One of 'never', 'only_folded' or 'always'.
+        listing_style = 'tree', -- One of 'list' or 'tree'
+        tree_options = { -- Only applies when listing_style is 'tree'
+          flatten_dirs = true, -- Flatten dirs that only contain one single dir
+          folder_statuses = 'only_folded', -- One of 'never', 'only_folded' or 'always'.
         },
-        win_config = {                      -- See |diffview-config-win_config|
+        win_config = { -- See |diffview-config-win_config|
           position = 'left',
           width = 33,
-          win_opts = {
-            signcolumn = 'no'
-          },
+          win_opts = { signcolumn = 'no' },
         },
       },
       file_history_panel = {
-        log_options = {   -- See |diffview-config-log_options|
+        log_options = { -- See |diffview-config-log_options|
           git = {
             single_file = {
               diff_merges = 'combined',
@@ -83,17 +76,18 @@ return {
             multi_file = {},
           },
         },
-        win_config = {    -- See |diffview-config-win_config|
+        win_config = { -- See |diffview-config-win_config|
           position = 'bottom',
           height = 16,
           win_opts = {},
         },
       },
-      default_args = {    -- Default args prepended to the arg-list for the listed commands
+      default_args = { -- Default args prepended to the arg-list for the listed commands
         DiffviewOpen = {},
         DiffviewFileHistory = {},
       },
-      hooks = {},         -- See |diffview-config-hooks|
+      hooks = {}, -- See |diffview-config-hooks|
+      -- stylua: ignore
       keymaps = {
         disable_defaults = false, -- Disable the default keymaps
         view = {

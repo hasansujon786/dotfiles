@@ -5,19 +5,21 @@ local fn = vim.fn
 local api = vim.api
 local view = {}
 
+local function ignore_win(winid)
+  return utils.win_has_blacklist_ft(winid) or utils.is_floating_win(winid) or utils.has_dynamically_deactive(winid)
+end
+
 view.focusWindow = function(winid)
-  if utils.win_has_blacklist_ft(winid) or utils.is_floating_win(winid) then
+  if ignore_win(winid) then
     return
   end
+
   fn.setwinvar(winid, '&winhighlight', '')
   pcall(vim.fn.matchdelete, winid, winid)
 end
 
 view.blurWindow = function(winid)
-  local has_blacklisted, float_win, dynamic_disable =
-    utils.win_has_blacklist_ft(winid), utils.is_floating_win(winid), utils.has_dynamically_deactive(winid)
-
-  if has_blacklisted or float_win or dynamic_disable then
+  if ignore_win(winid) then
     return
   end
 
@@ -29,11 +31,11 @@ view.update_all_windows = function(shouldCheckFloat)
   if config.options.nb_is_disabled then
     return
   end
-  local cur_winid = api.nvim_get_current_win()
-  local is_float_win = utils.is_floating_win(cur_winid)
+  local focused_winid = api.nvim_get_current_win()
+  local is_float_win = utils.is_floating_win(focused_winid)
 
   -- Skip from blur the alternate window
-  if config.options.filter ~= nil and config.options.filter(cur_winid, is_float_win) then
+  if config.options.filter ~= nil and config.options.filter(focused_winid, is_float_win) then
     return
   end
 

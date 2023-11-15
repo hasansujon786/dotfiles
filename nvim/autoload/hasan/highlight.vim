@@ -163,7 +163,7 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi NeogitDiffContextHighlight      guibg=#323945
   hi NeogitHunkHeaderHighlight       guifg=#242b38 guibg=#c3a7e5 gui=bold
   "/// DiffView ///"
-  hi! DiffDelete                     guibg=#3c2729 guifg=#1c212c
+  hi! DiffviewDiffDelete             guibg=#3c2729 guifg=#1c212c
   hi! link DiffviewNormal            SidebarDark
   hi! link DiffviewEndOfBuffer       DiffviewNormal
   hi! link DiffviewCursorLine        CursorLineFocus
