@@ -33,7 +33,7 @@ return {
           {
             'pub install',
             function()
-              require('hasan.telescope.custom').pub_install()
+              require('config.lsp.servers.flutter.pub').pub_install()
             end,
           },
         }
