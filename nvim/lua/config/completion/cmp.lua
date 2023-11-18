@@ -8,6 +8,14 @@ return {
     local kind_icons = require('hasan.utils.ui.icons').kind
     local luasnip = require('luasnip')
     local hover = require('hasan.core.state').ui.hover
+    local types = require('cmp.types')
+
+    -- https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#completionItemKind
+    local kind_mapper = types.lsp.CompletionItemKind
+    local kind_score = {
+      -- Field = 2,
+      Variable = 1,
+    }
 
     local ELLIPSIS_CHAR = '…'
     local MAX_LABEL_WIDTH = 40
@@ -148,7 +156,29 @@ return {
           -- compare.scopes,
           compare.score,
           compare.recently_used,
-          compare.kind,
+          -- compare.kind,
+          function(entry1, entry2)
+            local kind1 = entry1:get_kind()
+            local kind2 = entry2:get_kind()
+            -- my custom sort
+            kind1 = kind1 == types.lsp.CompletionItemKind.Text and 100 or kind_score[kind_mapper[kind1]] or kind1
+            kind2 = kind2 == types.lsp.CompletionItemKind.Text and 100 or kind_score[kind_mapper[kind2]] or kind2
+            if kind1 ~= kind2 then
+              if kind1 == types.lsp.CompletionItemKind.Snippet then
+                return true
+              end
+              if kind2 == types.lsp.CompletionItemKind.Snippet then
+                return false
+              end
+              local diff = kind1 - kind2
+              if diff < 0 then
+                return true
+              elseif diff > 0 then
+                return false
+              end
+            end
+            return nil
+          end,
           compare.locality,
           -- compare.sort_text,
           compare.length,
