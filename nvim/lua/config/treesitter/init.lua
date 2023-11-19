@@ -39,7 +39,6 @@ return {
             node_decremental = '<s-tab>', -- decrement to the previous node
           },
         },
-        context_commentstring = { enable = true },
         indent = { enable = true, disable = { 'dart' } },
         autotag = { enable = true },
         autopairs = { enable = true },
@@ -161,7 +160,6 @@ return {
       end)
     end,
     dependencies = {
-      'JoosepAlviste/nvim-ts-context-commentstring',
       'nvim-treesitter/nvim-treesitter-textobjects',
       'michaeljsmith/vim-indent-object',
       'windwp/nvim-ts-autotag',
