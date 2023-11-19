@@ -1,7 +1,8 @@
 local noSilent = { silent = false }
 local nvim_set_keymap = vim.api.nvim_set_keymap
 
-keymap({ 'n', 'v' }, 'q', '<ESC><Cmd>nohlsearch|diffupdate|echo ""<CR>') -- ColorizerReloadAllBuffers
+keymap('n', 'q', '<ESC><Cmd>nohlsearch<CR><C-l>')
+keymap('v', 'q', '<ESC>')
 keymap('n', 'ZZ', ':Quit!<CR>') -- Prompt before quitting
 keymap('n', 'Q', 'q') -- Use Q to record macros
 keymap('v', '@', ':norm @', noSilent) -- run macro on selection
