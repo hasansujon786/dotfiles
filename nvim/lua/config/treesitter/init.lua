@@ -201,6 +201,14 @@ return {
     end,
   },
   {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    lazy = true,
+    event = 'BufReadPost',
+    config = function()
+      require('ts_context_commentstring').setup()
+    end,
+  },
+  {
     'nvim-treesitter/playground',
     lazy = true,
     cmd = {

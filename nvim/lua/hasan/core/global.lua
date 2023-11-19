@@ -1,3 +1,6 @@
+vim.g.skip_ts_context_commentstring_module = true
+vim.g.use_flash = true
+
 local data_path = vim.fn.stdpath('data')
 _G.has_pvim = os.getenv('PVIM') and true or false
 _G.org_root_path = 'C:\\Users\\hasan\\vimwiki'
@@ -5,7 +8,6 @@ _G.org_home_path = 'C:\\Users\\hasan\\vimwiki\\home.org'
 _G.dap_adapter_path = data_path .. '/dap_adapters' -- 'C:\\Users\\hasan\\AppData\\Local\\nvim-data\\dap_adapters\\'
 _G.plugin_path = data_path .. '/lazy'
 _G.path_mason = data_path .. '/mason'
-vim.g.use_flash = true
 
 P = function(...)
   local hasNvim9 = vim.fn.has('nvim-0.9') == 1
