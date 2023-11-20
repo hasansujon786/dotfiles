@@ -26,6 +26,7 @@ return {
     })
 
     local common = {
+      findFiles = { '<cmd>lua require("hasan.telescope.custom").my_find_files()<cr>', 'Find file' },
       buffers_cwd = { '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>', 'Switch buffers' },
       buffers_all = { '<cmd>lua require("hasan.telescope.custom").buffers(false)<CR>', 'Switch all buffers' },
       browse_cur_dir = {
@@ -134,7 +135,7 @@ return {
         -- File Command
         ['.'] = common.browse_cur_dir,
         b = { '<cmd>lua require("hasan.telescope.custom").file_browser()<cr>', 'Browser project files' },
-        f = { '<cmd>lua require("hasan.telescope.custom").my_find_files()<cr>', 'Find file' },
+        f = common.findFiles,
         F = { '<cmd>lua require("hasan.telescope.custom").my_find_files("cur_dir")<cr>', 'Find file from here' },
         p = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find project file' },
 
@@ -178,7 +179,7 @@ return {
         p = { '<cmd>lua require("hasan.telescope.custom").projects()<CR>', 'Switch project' },
         r = { '<cmd>lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>', 'Find recent files' },
         t = { '<cmd>lua require("hasan.telescope.custom").search_project_todos()<CR>', 'Search project todos' },
-        b = { '<cmd>lua require("hasan.telescope.custom").project_browser()<CR>',  'Browse other projects' },
+        b = { '<cmd>lua require("hasan.telescope.custom").project_browser()<CR>', 'Browse other projects' },
 
         d = { '<cmd>Alpha<CR>', 'Open dashboard' },
         l = { '<cmd>SessionLoad<CR>', 'Load session' },
@@ -218,11 +219,10 @@ return {
         name = '+search',
         ['.'] = { '<cmd>Telescope resume<cr>', 'Telescope resume' },
         b = common.buffers_cwd,
-        f = { '<cmd>Telescope find_files<CR>', 'Find file' },
+        f = common.findFiles,
         k = { '<cmd>Telescope keymaps<CR>', 'Look up keymaps' },
-        M = { '<cmd>Telescope marks<CR>', 'Jump to marks' },
         r = { '<cmd>Telescope oldfiles<CR>', 'Recent files' },
-        t = { '<cmd>Telescope filetypes<CR>', 'Change filetypes' },
+        t = { '<cmd>Telescope filetypes theme=get_dropdown<CR>', 'Change filetypes' },
 
         ['/'] = { '<cmd>Telescope live_grep<CR>', 'Live grep' },
         g = { '<cmd>lua require("hasan.telescope.custom").live_grep_in_folder()<cr>', 'Live grep in folder' },
@@ -231,7 +231,6 @@ return {
       r = { '<cmd>lua require("hasan.utils.ui").cycle_numbering()<CR>', 'Cycle number' },
       x = { '<cmd>call hasan#utils#buffer#_open_scratch_buffer()<CR>', 'Scratch buffer' },
 
-      [','] = common.browse_cur_dir,
       ['>'] = common.buffers_all,
       ['.'] = common.buffers_cwd,
     }

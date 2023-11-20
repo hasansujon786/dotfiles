@@ -20,28 +20,32 @@ return {
   Space = { provider = ' ' },
   LSPActive = {
     condition = conditions.lsp_attached,
-    -- update = { 'LspAttach', 'LspDetach' }, LspProgressUpdate
+    update = {
+      'LspAttach',
+      'LspDetach',
+      -- 'User',
+      -- pattern = { 'LspProgressUpdate', 'LspRequest' },
+    },
     hl = mutedText,
     { provider = '  ' },
     {
       provider = function()
-        local progress_message = vim.lsp.util.get_progress_messages()
+        -- -- lsp progress
+        -- local progress_message = vim.lsp.util.get_progress_messages()
+        -- if #progress_message > 0 then
+        --   local status = {}
+        --   for _, msg in pairs(progress_message) do
+        --     table.insert(status, (msg.percentage or 0) .. '%% ' .. (msg.title or ''))
+        --   end
+        --   return status[#status]
+        -- end
 
         -- lsp name
-        if #progress_message == 0 then
-          local names = {}
-          for _, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
-            table.insert(names, server.name)
-          end
-          return table.concat(names, ',')
+        local names = {}
+        for _, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+          table.insert(names, server.name)
         end
-
-        -- lsp progress
-        local status = {}
-        for _, msg in pairs(progress_message) do
-          table.insert(status, (msg.percentage or 0) .. '%% ' .. (msg.title or ''))
-        end
-        return status[#status]
+        return table.concat(names, ',')
       end,
     },
     on_click = {
@@ -63,14 +67,25 @@ return {
     init = function(self)
       self.filetype = vim.bo.filetype
       self.icon = require('nvim-web-devicons').get_icon_by_filetype(self.filetype, { default = true })
+      if self.filetype == '' then
+        self.filetype = 'Plain Text'
+      end
     end,
     hl = mutedText,
-    update = { 'BufReadPost', 'BufEnter' },
+    update = { 'BufReadPost', 'BufEnter', 'BufLeave' },
     { provider = '  ' },
     {
       provider = function(self)
         return self.icon .. ' ' .. self.filetype
       end,
+    },
+    on_click = {
+      callback = function()
+        vim.defer_fn(function()
+          vim.cmd('Telescope filetypes theme=get_dropdown')
+        end, 100)
+      end,
+      name = 'heirline_Filetype',
     },
   },
   ShowCmd = {
@@ -161,12 +176,6 @@ return {
     { provider = '%4l:%-2v' },
     { provider = '', hl = modeBlockAlt },
     hl = modeBlock,
-    on_click = {
-      callback = function()
-        vim.diagnostic.setqflist()
-      end,
-      name = 'heirline_diagnostics',
-    },
   },
   ViMode = {
     init = function(self)
@@ -240,6 +249,14 @@ return {
       hl = layerBlock,
     },
     { provider = '█ ', hl = layerBlockAlt },
+    on_click = {
+      callback = function()
+        vim.defer_fn(function()
+          vim.cmd('Telescope git_branches')
+        end, 100)
+      end,
+      name = 'heirline_git_branches',
+    },
   },
   DAPMessages = {
     condition = function()
@@ -270,6 +287,12 @@ return {
       self.hints = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
       self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
     end,
+    on_click = {
+      callback = function()
+        vim.diagnostic.setloclist()
+      end,
+      name = 'heirline_diagnostics',
+    },
     update = { 'DiagnosticChanged', 'BufEnter' },
     {
       provider = function(self)

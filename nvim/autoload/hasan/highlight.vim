@@ -139,13 +139,13 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! link NeoTreeNormal        SidebarDark
   hi! link NeoTreeNormalNC      SidebarDark
   hi! link NeoTreeVertSplit     WinSeparator
+  hi! link NeoTreeWinSeparator  WinSeparator
   hi! NeoTreeGitUntracked       gui=NONE
   hi! NeoTreeDirectoryIcon      guifg=#8094B4
   hi! link NeoTreeFloatNormal   TelescopeNormal
   hi! NeoTreeFloatBorder        guibg=#21252B guifg=#4dbdcb
   hi! NeoTreeFloatTitle         guibg=#4dbdcb guifg=#21252B
   " hi! NeoTreeRootName           guifg=#ABB2BF gui=bold
-  " hi! NeoTreeWinSeparator       guifg=#2b3043 guibg=#1e242e
 
   "/// Nebulous ///"
   hi Nebulous           guifg=#323c4e
