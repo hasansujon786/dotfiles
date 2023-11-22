@@ -2,6 +2,14 @@ return {
   'akinsho/flutter-tools.nvim',
   lazy = true,
   ft = { 'dart' },
+  keys = {
+    {
+      '<leader>fc',
+      '<Cmd>lua require("telescope").extensions.flutter.commands()<CR>',
+      ft = { 'yaml', 'dart' },
+      desc = 'Flutter: Show commands',
+    },
+  },
   config = function()
     require('flutter-tools').setup({
       ui = { border = require('hasan.core.state').ui.border.style },
@@ -53,6 +61,9 @@ return {
         end,
       },
     })
+
+    keymap('n', '<leader>fr', '<Cmd>FlutterRestart<CR>', { desc = 'Flutter: Lsp restart' })
+    keymap('n', '<leader>dd', '<Cmd>FlutterLogOpen<CR>', { desc = 'Flutter: Open log' })
 
     command('FlutterLogToggleLayout', function(_)
       local updated_layout = not require('hasan.core.state').ui.edgy.open_flutter_log_on_right

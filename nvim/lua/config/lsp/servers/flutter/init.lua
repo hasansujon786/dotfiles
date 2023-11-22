@@ -5,11 +5,6 @@ return {
     local function desc(d)
       return { desc = d, buffer = bufnr }
     end
-
-    -- stylua: ignore
-    keymap('n', '<leader>fc', '<Cmd>lua require("telescope").extensions.flutter.commands()<CR>', desc('Flutter: Show commands'))
-    keymap('n', '<leader>fr', '<Cmd>FlutterRestart<CR>', desc('Flutter: Lsp restart'))
-    keymap('n', '<leader>dd', '<Cmd>FlutterLogOpen<CR>', desc('Flutter: Open log'))
     -- lua require('project_run.utils').open_tab(vim.fn.getcwd(), 'adb connect 192.168.31.252 && flutter run')
 
     -- Custom code actions
