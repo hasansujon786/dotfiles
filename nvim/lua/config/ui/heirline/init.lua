@@ -36,6 +36,7 @@ return {
       {
         c.ViMode,
         c.GitBranch,
+        c.layerEndleft,
         c.MacroRec,
         {
           c.Fill,
@@ -87,7 +88,7 @@ return {
         disable_winbar_cb = function(args)
           return conditions.buffer_matches({
             buftype = { 'nofile', 'prompt', 'help', 'quickfix' },
-            filetype = { '^git.*', 'fugitive', 'Trouble', 'dashboard', 'harpoon' },
+            filetype = { '^git.*', 'fugitive', 'Trouble', 'dashboard', 'harpoon', 'floaterm' },
           }, args.buf)
         end,
         colors = {

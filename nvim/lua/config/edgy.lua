@@ -104,8 +104,8 @@ return {
       },
       {
         ft = 'Outline',
-        open = 'SymbolsOutlineOpen',
-        wo = { winbar = true, winhighlight = gray_bar },
+        open = 'Outline',
+        wo = { winbar = true, winhighlight = dark_bar },
       },
     }
 

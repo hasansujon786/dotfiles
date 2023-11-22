@@ -24,7 +24,7 @@ return {
       'LspAttach',
       'LspDetach',
       -- 'User',
-      -- pattern = { 'LspProgressUpdate', 'LspRequest' },
+      -- pattern = { 'LspProgressUpdate', 'LspRequest' }, -- 'LspProgress'
     },
     hl = mutedText,
     { provider = '  ' },
@@ -241,14 +241,14 @@ return {
     init = function(self)
       self.status_dict = vim.b['gitsigns_status_dict']
     end,
-    update = { 'BufReadPost', 'BufEnter' },
+    update = { 'BufReadPost', 'BufEnter', 'BufWinEnter', 'BufWinLeave' },
     {
       provider = function(self)
         return '  ' .. self.status_dict.head
       end,
       hl = layerBlock,
     },
-    { provider = '█ ', hl = layerBlockAlt },
+    { provider = '█', hl = layerBlockAlt },
     on_click = {
       callback = function()
         vim.defer_fn(function()
@@ -258,6 +258,7 @@ return {
       name = 'heirline_git_branches',
     },
   },
+  layerEndleft = { provider = ' ', hl = layerBlockAlt },
   DAPMessages = {
     condition = function()
       local ok, dap = pcall(require, 'dap')
