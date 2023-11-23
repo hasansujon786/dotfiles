@@ -138,8 +138,8 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! link NeoTreeCursorLine    CursorLineFocus
   hi! link NeoTreeNormal        SidebarDark
   hi! link NeoTreeNormalNC      SidebarDark
-  hi! link NeoTreeVertSplit     WinSeparator
-  hi! link NeoTreeWinSeparator  WinSeparator
+  hi! link NeoTreeVertSplit     EdgyWinSeparator
+  hi! link NeoTreeWinSeparator  EdgyWinSeparator
   hi! NeoTreeGitUntracked       gui=NONE
   hi! NeoTreeDirectoryIcon      guifg=#8094B4
   hi! link NeoTreeFloatNormal   TelescopeNormal

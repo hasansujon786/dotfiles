@@ -15,6 +15,7 @@ return {
     color.fg_bg('EdgyWinBarDark', cyan, bg_dark)
     color.fg_bg('EdgyWinBarLight', cyan, bg_gray)
     color.fg_bg('EdgyNormalDark', fg, bg_dark)
+    color.fg_bg('EdgyWinSeparator', bg_gray, bg_dark)
 
     local dark_bar = color.make_winhighlight({
       Winbar = 'EdgyWinBarDark',
@@ -22,6 +23,7 @@ return {
       EdgyTitle = 'EdgyWinBarDark',
       EdgyIconActive = 'EdgyWinBarDark',
       Normal = 'EdgyNormalDark',
+      WinSeparator = 'EdgyWinSeparator',
     })
 
     local gray_bar = color.make_winhighlight({
@@ -95,17 +97,18 @@ return {
         end,
         wo = { winbar = false, winhighlight = '' },
       },
+      {
+        ft = 'Outline',
+        open = 'Outline',
+        size = { height = 0.4 },
+        wo = { winbar = true, winhighlight = dark_bar },
+      },
     }
     local right = {
       {
         ft = 'flutterToolsOutline',
         open = 'FlutterOutlineOpen',
         wo = { winbar = true, winhighlight = gray_bar },
-      },
-      {
-        ft = 'Outline',
-        open = 'Outline',
-        wo = { winbar = true, winhighlight = dark_bar },
       },
     }
 
