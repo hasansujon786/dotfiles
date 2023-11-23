@@ -38,8 +38,8 @@ return {
         highlight_hovered_item = true, -- Show parents
       },
       symbol_folding = {
-        autofold_depth = 2,
-        auto_unfold = { hovered = false, only = false },
+        -- autofold_depth = nil,
+        -- auto_unfold = { hovered = true, only = true },
         markers = { '', '' },
       },
       preview_window = {

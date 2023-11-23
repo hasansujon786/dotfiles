@@ -25,16 +25,18 @@ return {
       if utils.root_has('pubspec.yaml') then
         return {
           {
-            'flutter run',
-            function(util)
-              util.open_tab(vim.fn.getcwd(), 'adb connect 192.168.31.252 && flutter run')
+            'Flutter run chrome',
+            function()
+              require('flutter-tools.commands').run_command('-d chrome --web-port 5000')
             end,
+            description = 'Run chrome on port 5000',
           },
           {
-            'pub install',
+            'Pub install',
             function()
               require('config.lsp.servers.flutter.pub').pub_install()
             end,
+            description = 'Install packages in you prorject',
           },
         }
       end
@@ -42,7 +44,7 @@ return {
       if utils.root_has('package.json') then
         return {
           {
-            'package.json',
+            'Package.json',
             function()
               require('telescope._extensions').manager.project_commands.scriptsCommandsFromJSON('package.json')
             end,

@@ -6,7 +6,7 @@ return {
     {
       '<leader>fc',
       '<Cmd>lua require("telescope").extensions.flutter.commands()<CR>',
-      ft = { 'yaml', 'dart' },
+      ft = { 'yaml', 'dart', 'log' },
       desc = 'Flutter: Show commands',
     },
   },
