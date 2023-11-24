@@ -1,53 +1,56 @@
+# https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#defaulthttps://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#default
 reporting: 'on'
 startuppopupversion: 1
 gui:
+  nerdFontsVersion: 3
+  border: 'rounded'
+  authorColors:
+    # 'John Smith': 'red'
+    '*': 'yellow'
   theme:
     lightTheme: false # For terminals with a light background
     activeBorderColor:
-      - green
+      - cyan
       - bold
     inactiveBorderColor:
-      - "#546178"
+      - '#546178'
     optionsTextColor:
-      - "#546178"
+      - '#546178'
     selectedLineBgColor:
-      - reverse
+      - '#363C51'
     selectedRangeBgColor:
       - reverse
 keybinding:
   universal:
-    # quit: '<esc>'
-    # quit-alt1: '<c-c>' # alternative/alias of quit
-    # return: 'q' # return to previous menu, will quit if there's nowhere to return
     remove: 'x'
-    optionMenu: 'm' # show help menu
-    createRebaseOptionsMenu: 'X'
-    scrollUpMain-alt1: '{' # main panel scrool up
-    scrollDownMain-alt1: '}' # main panel scrool down
-    nextScreenMode: 'O'
+    scrollUpMain-alt1: 'u'
+    scrollDownMain-alt1: 'd'
+    nextScreenMode: "'"
+    prevScreenMode: '"'
     filteringMenu: '<c-f>'
+    gotoTop: 'g'
+    gotoBottom: 'G'
   commits:
     renameCommit: 'R'
     renameCommitWithEditor: '<f2>'
+    viewResetOptions: 'X'
   files:
     viewResetOptions: 'X' # -- has conflict
 
-notARepository: "skip" # one of: 'prompt' | 'create' | 'skip'
+notARepository: 'skip' # one of: 'prompt' | 'create' | 'skip'
 customCommands:
-  - key: 'd'
-    command: 'git diff {{.SelectedFile.Name}}'
-    description: 'Open diff'
-    context: 'global' # add all context
-    subprocess: true
-  - key: 'G'
-    command: 'git reset --soft HEAD^'
-    description: 'Undo last commit'
-    context: 'commits' # add all context
+  # - key: 'd'
+  #   command: 'git diff {{.SelectedFile.Name}}'
+  #   description: 'Open diff'
+  #   context: 'global' # add all context
+  #   subprocess: true
+  # - key: 'G'
+  #   command: 'git reset --soft HEAD^'
+  #   description: 'Undo last commit'
+  #   context: 'commits' # add all context
 
 os:
-  editCommand: 'nvim'
-  editCommandTemplate: '{{editor}} +{{line}} -- {{filename}}'
-  # openCommand: 'start "" {{filename}}'
+  editPreset: 'nvim' # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#configuring-file-editing
 
 git:
   paging:
