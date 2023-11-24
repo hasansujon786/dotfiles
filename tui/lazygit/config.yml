@@ -39,15 +39,15 @@ keybinding:
 
 notARepository: 'skip' # one of: 'prompt' | 'create' | 'skip'
 customCommands:
-  # - key: 'd'
-  #   command: 'git diff {{.SelectedFile.Name}}'
-  #   description: 'Open diff'
-  #   context: 'global' # add all context
-  #   subprocess: true
-  # - key: 'G'
-  #   command: 'git reset --soft HEAD^'
-  #   description: 'Undo last commit'
-  #   context: 'commits' # add all context
+  - key: 'D'
+    command: 'git diff {{.SelectedFile.Name}}'
+    description: 'Open diff'
+    context: 'global' # add all context
+    subprocess: true
+  - key: 'U'
+    command: 'git reset --soft HEAD^'
+    description: 'Undo last commit'
+    context: 'commits' # add all context
 
 os:
   editPreset: 'nvim' # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#configuring-file-editing
