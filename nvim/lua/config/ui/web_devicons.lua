@@ -262,18 +262,6 @@ return {
         cterm_color = '185',
         name = 'Babelrc',
       },
-      ['tsconfig.build.json'] = {
-        icon = '',
-        color = '#519aba',
-        cterm_color = '74',
-        name = 'Ts',
-      },
-      ['tsconfig.json'] = {
-        icon = '',
-        color = '#519aba',
-        cterm_color = '74',
-        name = 'Ts',
-      },
       ['vite.config.js'] = {
         icon = '',
         color = '#FD971F',

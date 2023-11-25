@@ -63,20 +63,16 @@ return {
       return (ftime > 0) and os.date('%c', ftime)
     end,
   },
-  FileTypeWithIcon = {
+  FileType = {
     init = function(self)
-      self.filetype = vim.bo.filetype
-      self.icon = require('nvim-web-devicons').get_icon_by_filetype(self.filetype, { default = true })
-      if self.filetype == '' then
-        self.filetype = 'Plain Text'
-      end
+      self.filetype = vim.bo.filetype == '' and 'Plain Text' or vim.bo.filetype
     end,
     hl = mutedText,
     update = { 'BufReadPost', 'BufEnter', 'BufLeave' },
     { provider = '  ' },
     {
       provider = function(self)
-        return self.icon .. ' ' .. self.filetype
+        return self.filetype
       end,
     },
     on_click = {

@@ -51,10 +51,11 @@ local FileIcon = {
   end,
 }
 
-local Init = {
+local FnameProvider = {
   -- let's first set up some attributes needed by this component and it's children
   init = function(self)
-    self.filename = vim.api.nvim_buf_get_name(0)
+    local path = vim.api.nvim_buf_get_name(0)
+    self.filename = (path == '' and 'Empty ') or path:match('([^/\\]+)[/\\]*$')
   end,
 }
 
@@ -68,7 +69,7 @@ local FileNameModifer = {
 }
 
 FileNameBlock = utils.insert(
-  Init,
+  FnameProvider,
   FileIcon,
   utils.insert(FileNameModifer, FileName), -- a new table where FileName is a child of FileNameModifier
   FileFlags,

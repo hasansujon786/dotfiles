@@ -7,9 +7,8 @@ return {
   config = function()
     vim.opt.showcmdloc = 'statusline'
     local conditions = require('heirline.conditions')
-
-    local c = require('config.ui.heirline.comp')
-    local w = require('config.ui.heirline.win')
+    local sl = require('config.ui.heirline.statusline')
+    local wb = require('config.ui.heirline.winbar')
 
     local StatusLine = {
       static = {
@@ -34,23 +33,23 @@ return {
         end,
       },
       {
-        c.ViMode,
-        c.GitBranch,
-        c.layerEndleft,
-        c.MacroRec,
+        sl.ViMode,
+        sl.GitBranch,
+        sl.layerEndleft,
+        sl.MacroRec,
         {
-          c.Fill,
-          c.SearchCount,
-          c.Diagnostics,
-          c.Fill,
+          sl.Fill,
+          sl.SearchCount,
+          sl.Diagnostics,
+          sl.Fill,
         },
-        c.ShowCmd,
-        c.Harpoon,
-        c.LSPActive,
-        c.FileTypeWithIcon,
-        c.SpaceInfo,
-        c.ScrollPercentageBall,
-        c.Location,
+        sl.ShowCmd,
+        sl.Harpoon,
+        sl.LSPActive,
+        sl.FileType,
+        sl.SpaceInfo,
+        sl.ScrollPercentageBall,
+        sl.Location,
       },
     }
 
@@ -71,14 +70,14 @@ return {
           return not conditions.is_active()
         end,
         {
-          { hl = { fg = 'muted', force = true }, w.BarStart },
-          { hl = { fg = 'muted', force = true }, w.FileNameBlock },
-          w.BarEnd,
-          w.Rest,
+          { hl = { fg = 'muted', force = true }, wb.BarStart },
+          { hl = { fg = 'muted', force = true }, wb.FileNameBlock },
+          wb.BarEnd,
+          wb.Rest,
         },
       },
       -- A winbar for regular files
-      { w.BarStart, w.FileNameBlock, w.BarEnd, w.Rest },
+      { wb.BarStart, wb.FileNameBlock, wb.BarEnd, wb.Rest },
     }
 
     require('heirline').setup({
