@@ -244,7 +244,7 @@ return {
     update = { 'BufReadPost', 'BufEnter', 'BufWinEnter', 'BufWinLeave' },
     {
       provider = function(self)
-        return '  ' .. self.status_dict.head
+        return '  ' .. self.status_dict.head
       end,
       hl = layerBlock,
     },

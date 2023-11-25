@@ -22,6 +22,8 @@ gui:
       - reverse
 keybinding:
   universal:
+    optionMenu: 'm' # show help menu
+    createRebaseOptionsMenu: 'K'
     remove: 'x'
     scrollUpMain-alt1: 'u'
     scrollDownMain-alt1: 'd'
@@ -36,6 +38,8 @@ keybinding:
     viewResetOptions: 'X'
   files:
     viewResetOptions: 'X' # -- has conflict
+  stash:
+    popStash: 'K'
 
 notARepository: 'skip' # one of: 'prompt' | 'create' | 'skip'
 customCommands:
