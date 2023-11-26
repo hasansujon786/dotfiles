@@ -288,6 +288,7 @@ return {
   color_scheme = 'OneHalfDark',
   colors = {
     background = '#242B38',
+    foreground = '#abb2bf',
     tab_bar = {
       active_tab = {
         bg_color = '#1E1C1C',

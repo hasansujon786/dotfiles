@@ -2,9 +2,7 @@ function! hasan#highlight#load_custom_highlight(...) abort
   "/// Neovim Builin ///"
   hi TextInfo           guifg=#56B6C2 guibg=NONE
   hi TextSuccess        guifg=#61AFEF
-  hi Cursor             guibg=#61AFEF gui=NONE
   hi ZenBorder          guifg=#1c212c
-  hi VertSplit          guifg=#2b3043
   hi StatusLine         guibg=#2D3343 guifg=#ABB2BF
   hi StatusLineNC       guibg=#2D3343 guifg=#ABB2BF
   hi CursorLineFocus    guibg=#363C51
@@ -121,14 +119,6 @@ function! hasan#highlight#load_custom_highlight(...) abort
   hi! link NuiNormalFloat NormalFloat
   hi! link NuiFloatBorder FloatBorderHidden
   hi! link NuiMenuItem    TelescopeSelectionCaret
-
-  "/// nvim-tree.nvim ///"
-  hi! link NvimTreeCursorLine   CursorLineFocus
-  hi! link NvimTreeIndentMarker IblIndent
-  hi! link NvimTreeWindowPicker TelescopeSelectionCaret
-  hi! link NvimTreeWinSeparator VertSplit
-  hi! NvimTreeNormal            guibg=#1E242E guifg=#a5b0c5
-  hi! NvimTreeWinBar            guibg=#242B38 guifg=#75A899
 
   "/// neo-tree.nvim ///"
   hi! link NeoTreeModified      String

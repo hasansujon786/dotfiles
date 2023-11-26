@@ -246,7 +246,13 @@ return {
       },
       ['.eslintrc.js'] = {
         icon = '',
-        color = '#4b32c3',
+        color = '#7C7CEA',
+        cterm_color = '56',
+        name = 'Eslintrc',
+      },
+      ['.eslintrc.json'] = {
+        icon = '',
+        color = '#7C7CEA',
         cterm_color = '56',
         name = 'Eslintrc',
       },
