@@ -70,20 +70,6 @@ return {
     end,
   },
   {
-    'justinmk/vim-sneak',
-    enabled = not vim.g.use_flash,
-    keys = { { 's', mode = nx }, { 'S', mode = nx }, { 'z', mode = 'o' }, { 'Z', mode = 'o' } },
-    init = function()
-      vim.g['sneak#target_labels'] = ';wertyuopzbnmfLGKHWERTYUIQOPZBNMFJ0123456789'
-      vim.g['sneak#label'] = 1 -- use <tab> to jump through lebles
-      vim.g['sneak#use_ic_scs'] = 1 -- case insensitive sneak
-      vim.g['sneak#prompt'] = '  '
-    end,
-    config = function()
-      require('config.mics.sneak')
-    end,
-  },
-  {
     'Konfekt/vim-CtrlXA',
     lazy = true,
     keys = { { '<C-a>', desc = 'Increment number and more' }, { '<C-x>', desc = 'Decrement number and more' } },

@@ -1,6 +1,4 @@
 vim.g.skip_ts_context_commentstring_module = true
-vim.g.use_flash = true
-vim.g.use_pro = true
 
 local data_path = vim.fn.stdpath('data')
 _G.has_pvim = os.getenv('PVIM') and true or false

@@ -286,8 +286,9 @@ local codicons = {
     Boolean       = '',
     Object        = '', -- 󰅩
     Namespace     = '',
-    Copilot       = '🤖',
+    Copilot       = '',
     Package       = '',
+   Table          = '',
   },
   documents = {
     File       = '',

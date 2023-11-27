@@ -230,7 +230,8 @@ local function set_custom_highlights()
     MarkSignHL          = { link = 'Comment' },
     QuickScopePrimary   = { fg = 'tomato', underline = true },
     QuickScopeSecondary = { fg = '#d78787', underline = true },
-    TabBarInputBorder   = { fg = c.blue, bg = c.bg_d }
+    TabBarInputBorder   = { fg = c.blue, bg = c.bg_d },
+    WhichKeySeparator   = { fg = c.grey },
   }
   -- { underline = true, fg = btn.active.fg, bg = sp }
   for hlName, option in pairs(highlights) do

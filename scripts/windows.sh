@@ -25,3 +25,5 @@ pip install Pillow
 # choco install etcher -y
 # choco install slack -y
 # choco install Xming -y
+#
+choco install golang -y
