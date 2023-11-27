@@ -15,7 +15,7 @@ _G.state = {
 M.ui = {
   border = {
     style = 'rounded',
-    highlight = 'TextInfo',
+    highlight = 'DiagnosticHint',
   },
   hover = {
     -- winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',

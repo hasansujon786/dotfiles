@@ -57,10 +57,10 @@ fu! _#echoError (...)
   call _#Echo(['ErrorMsg', join(a:000, ' ')])
 endfu
 fu! _#echoInfo (...)
-  call _#Echo(['TextInfo', join(a:000, ' ')])
+  call _#Echo(['DiagnosticHint', join(a:000, ' ')])
 endfu
 fu! _#echoSuccess (...)
-  call _#Echo(['TextSuccess', join(a:000, ' ')])
+  call _#Echo(['DiagnosticInfo', join(a:000, ' ')])
 endfu
 
 

@@ -25,7 +25,7 @@ function M.configure_dap_ui()
     stopped = { text = '', texthl = 'NuiMenuItem', numhl = 'NuiMenuItem', linehl = 'CursorLineDap' },
     breakpoint = { text = '', texthl = 'RedText', numhl = '', linehl = '' },
     bcondition = { text = '', texthl = 'RedText', numhl = '', linehl = '' },
-    rejected = { text = '', texthl = 'GrayText', numhl = '', linehl = '' },
+    rejected = { text = '', texthl = 'MutedText', numhl = '', linehl = '' },
   }
   vim.fn.sign_define('DapStopped', dap_sign.stopped)
   vim.fn.sign_define('DapBreakpoint', dap_sign.breakpoint)

@@ -106,7 +106,7 @@ local fn = {
   end,
   -- get_title_text = function(bufnr)
   --   local text = vim.fn.fnamemodify(api.nvim_buf_get_name(bufnr), ':t')
-  --   return Text(text, 'TextInfo')
+  --   return Text(text, 'DiagnosticHint')
   -- end
 }
 
@@ -180,7 +180,7 @@ function M.winbar()
   local title = vim.fn.fnamemodify(api.nvim_buf_get_name(0), ':t')
   local width = vim.api.nvim_win_get_width(0)
   local pad = (width / 2) - (string.len(title) / 2)
-  local color = vim.bo.modified and '%#TSRed#' or '%#TextInfo#'
+  local color = vim.bo.modified and '%#TSRed#' or '%#DiagnosticHint#'
 
   return string.format('%s%s%s', string.rep(' ', pad), color, title)
 end

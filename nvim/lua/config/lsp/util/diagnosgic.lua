@@ -62,7 +62,7 @@ function M.setup()
       focusable = true,
       border = require('hasan.core.state').ui.border.style,
       source = false,
-      header = { ' Diagnostics:', 'TextInfo' },
+      header = { ' Diagnostics:', 'DiagnosticHint' },
       prefix = function(diagnostic, i, total)
         local icon, highlight = M.diagnostic_icon_by_severity(diagnostic.severity)
         return i .. '/' .. total .. ' ' .. icon .. ' ', highlight

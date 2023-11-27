@@ -2,16 +2,16 @@ local cmd = vim.cmd
 local M = {}
 
 M.toggle_bg_tranparent = function(followState)
-  local normal = vim.g.onedark_theme_colors[vim.g.onedark_config.style].normal
+  local hl_normal = vim.g.onedark_theme_colors.dark_vivid.normal
   local stateValue = nil
 
   if state.theme.bg_tranparent and not followState or not state.theme.bg_tranparent and followState then
     -- remove transparent
-    cmd(string.format('hi Normal guibg=%s guifg=%s', normal.bg, normal.fg))
+    cmd(string.format('hi Normal guibg=%s guifg=%s', hl_normal.bg, hl_normal.fg))
     stateValue = '5s/true/false/'
   else
     -- make transparent
-    cmd(string.format('hi Normal guibg=%s guifg=%s', 'None', normal.fg))
+    cmd(string.format('hi Normal guibg=%s guifg=%s', 'None', hl_normal.fg))
     stateValue = '5s/false/true/'
   end
 

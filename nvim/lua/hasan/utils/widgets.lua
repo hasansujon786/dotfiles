@@ -107,7 +107,7 @@ M.get_tabbar_input = function(opts, callback)
       position = { row = -1, col = 0 },
       win_options = {
         sidescrolloff = 0,
-        winhighlight = 'Normal:NormalFloatFlat,FloatBorder:KisslineWinbarRenameBorder',
+        winhighlight = 'Normal:NormalFloatFlat,FloatBorder:TabBarInputBorder',
       },
     },
   }, opts or {})

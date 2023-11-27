@@ -59,31 +59,5 @@ return {
     })
 
     require('onedark').load()
-
-    vim.g.onedark_theme_colors = {
-      dark = { normal = { bg = '#282c34', fg = '#abb2bf' } },
-      cool = { normal = { bg = '#242b38', fg = '#a5b0c5' } },
-    }
-
-    require('hasan.utils.ui.palette').set_custom_highlights()
-    vim.defer_fn(function()
-      require('hasan.nebulous').my_nebulous_setup()
-
-      augroup('THEME_AUGROUP')(function(autocmd)
-        autocmd('ColorScheme', function()
-          require('hasan.nebulous').my_nebulous_setup()
-          require('hasan.utils.ui.palette').set_custom_highlights()
-        end)
-
-        autocmd('BufWritePost', function()
-          vim.defer_fn(function()
-            vim.cmd.source('nvim/autoload/hasan/highlight.vim')
-            R('hasan.utils.ui.palette', nil)
-
-            require('hasan.utils.ui.palette').set_custom_highlights()
-          end, 300)
-        end, { pattern = { 'palette.lua', 'highlight.vim' } })
-      end)
-    end, 500)
   end,
 }

@@ -42,10 +42,10 @@ call nebulous#init()
 function! nebulous#toggle() abort
   if nebulous#is_disabled()
     call nebulous#on()
-    call _#Echo(['TextInfo', '[Nebulous]'], 'on')
+    call _#Echo(['DiagnosticHint', '[Nebulous]'], 'on')
   else
     call nebulous#off()
-    call _#Echo(['TextInfo', '[Nebulous]'], 'off')
+    call _#Echo(['DiagnosticHint', '[Nebulous]'], 'off')
   endif
 endfunction
 

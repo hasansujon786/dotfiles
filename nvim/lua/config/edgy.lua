@@ -24,6 +24,7 @@ return {
       EdgyIconActive = 'EdgyWinBarDark',
       Normal = 'EdgyNormalDark',
       WinSeparator = 'EdgyWinSeparator',
+      CursorLine = 'CursorLineFocus',
     })
 
     local gray_bar = color.make_winhighlight({

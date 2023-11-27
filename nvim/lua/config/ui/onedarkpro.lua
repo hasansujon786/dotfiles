@@ -28,20 +28,25 @@ return {
         bg1        = '#2d3343',
         -- bg2        = '#343e4f',
         bg3        = '#363c51',
-        -- bg_d       = '#1e242e',
+        bg_d       = '#1e242e',
         -- black      = '#151820',
       },
       highlights = {
-        -- ui
+        -- "/// Neovim Builin ///"
         ['Cursor'] = { bg = '${blue}' },
         ['CursorLineNr'] = { fg = '${fg}' },
         ['DiagnosticSignInfo'] = { fg = '${cyan}' },
         ['Cursorline'] = { bg = '${bg1}' },
         ['Visual'] = { bg = '${bg3}' },
-        ['PmenuSbar'] = { bg = '${bg1}' },
-        ['PmenuSel'] = { bg = '${blue}', fg = '${bg}' },
-        ['PmenuThumb'] = { bg = '#404959' },
         ['WinSeparator'] = { fg = '${bg1}' },
+        ['StatusLine'] = { fg = '${fg}', bg = '${bg1}' },
+        ['IncSearch'] = { fg = '${bg}', bg = '#e86671' },
+        ['Search'] = { fg = '${bg}', bg = '${highlight}' },
+        ['SidebarDark'] = { fg = '${fg}', bg = '${bg_d}' },
+        ['RedText'] = { fg = '#ff0000' },
+        ['ZenBorder'] = { fg = '#1c212c' },
+        ['MutedText'] = { fg = '${light_grey}' },
+        ['CursorLineDap'] = { bg = '#173F1E', underline = false },
 
         -- global treesitter
         ['@field.lua'] = { link = '@property' },
@@ -94,29 +99,21 @@ return {
         highlight_inactive_windows = false,
       },
     })
-    vim.cmd.colorscheme('onedark_vivid')
 
-    vim.g.onedark_theme_colors = {
-      dark = { normal = { bg = '#282c34', fg = '#abb2bf' } },
-      cool = { normal = { bg = '#242b38', fg = '#a5b0c5' } },
-    }
-
-    require('hasan.utils.ui.palette').set_custom_highlights()
-    vim.defer_fn(function()
-      require('hasan.nebulous').my_nebulous_setup()
-      augroup('THEME_AUGROUP')(function(autocmd)
-        autocmd('ColorScheme', function()
-          require('hasan.nebulous').my_nebulous_setup()
-          require('hasan.utils.ui.palette').set_custom_highlights()
-        end)
-        autocmd('BufWritePost', function()
-          vim.defer_fn(function()
-            vim.cmd.source('nvim/autoload/hasan/highlight.vim')
-            R('hasan.utils.ui.palette', nil)
-            require('hasan.utils.ui.palette').set_custom_highlights()
-          end, 300)
-        end, { pattern = { 'palette.lua', 'highlight.vim' } })
+    augroup('THEME_AUGROUP')(function(autocmd)
+      autocmd('ColorScheme', function()
+        require('hasan.utils.ui.palette').set_custom_highlights()
+        vim.defer_fn(require('hasan.nebulous').my_nebulous_setup, 300)
       end)
-    end, 500)
+
+      autocmd('BufWritePost', function()
+        vim.defer_fn(function()
+          R('hasan.utils.ui.palette', nil)
+          require('hasan.utils.ui.palette').set_custom_highlights()
+        end, 300)
+      end, { pattern = { 'palette.lua' } })
+    end)
+
+    vim.cmd.colorscheme('onedark_vivid')
   end,
 }

@@ -69,7 +69,7 @@ M.my_nebulous_setup = function()
       'Conceal:Nebulous',
       'NonText:NebulousInvisibe',
       -- Indent line
-      'IndentBlanklineChar:NebulousDarker',
+      'IblIndent:NebulousDarker',
       'FlutterWidgetGuides:NebulousDarker',
       -- Git
       'GitSignsAdd:NebulousInvisibe',
