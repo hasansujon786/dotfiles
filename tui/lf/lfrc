@@ -39,12 +39,12 @@ map e $nvim $Env:f
 map E %{{ nvim --server "127.0.0.1:6666" --remote "$Env:f" }}
 map w $bash
 map W $powershell
-map i $less $Env:f
 map o open
 map O systemOpen
 map <enter> systemOpen
 map R &{{ explorer.exe /select,"$Env:f" }}
-map <space> quickLook
+map i quickLook
+map I $less $Env:f
 map U invert
 map v :toggle; down
 map V :toggle; up

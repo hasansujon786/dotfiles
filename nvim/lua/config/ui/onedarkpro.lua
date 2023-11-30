@@ -51,6 +51,7 @@ return {
         ['@field.lua'] = { link = '@property' },
         ['@constant'] = { fg = '${yellow}' },
         ['@constant.builtin'] = { fg = '${orange}' },
+        ['@parameter.lua'] = { link = '@parameter' },
 
         ['@tag.attribute'] = { fg = '${orange}', italic = true },
         ['@punctuation.special'] = { fg = '${purple}' },

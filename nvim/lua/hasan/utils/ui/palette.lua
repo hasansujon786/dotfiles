@@ -212,8 +212,8 @@ local function set_custom_highlights()
     IblIndent = { fg = c.bg3 },
     IblScope  = { fg = c.grey },
   -- /// Folke collection ///
-    FlakashMatch = { link = 'Cursorline' },
-    FlakashLabel = { fg = c.black, bg = c.green },
+    FlashMatch = { fg = c.fg, bg = c.bg3 },
+    FlashLabel = { fg = c.black, bg = c.green },
     NoiceMini    = { bg = '#000000' },
     LazyButton   = { bg = '#3E425D', fg = c.fg },
     LazyButtonActive = { link = 'WildMenu' },

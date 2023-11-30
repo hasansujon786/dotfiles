@@ -21,6 +21,9 @@ return {
         ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
         ['<C-s>'] = actions.file_split,
         ['<esc>'] = actions.close,
+        ['<M-q>'] = function(...)
+          require('telescope.actions.layout').toggle_preview(...)
+        end,
 
         ['<C-f>'] = local_action.fedit,
         ['<M-o>'] = local_action.quicklook,
