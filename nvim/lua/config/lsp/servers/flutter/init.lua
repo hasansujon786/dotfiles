@@ -1,3 +1,30 @@
+-- https://github.com/neovim/neovim/blob/master/runtime/lua/vim/lsp/buf.lua#L809
+-- client.commands = {
+-- "edit.sortMembers",
+-- "edit.organizeImports",
+-- "edit.fixAll",
+-- "edit.sendWorkspaceEdit",
+-- "refactor.perform",
+-- "refactor.validate",
+-- "dart.logAction",
+-- "dart.refactor.convert_all_formal_parameters_to_named",
+-- "dart.refactor.convert_selected_formal_parameters_to_named",
+-- "dart.refactor.move_selected_formal_parameters_left",
+-- "dart.refactor.move_top_level_to_file"
+-- },
+
+local function lsp_command(bufnr, cmd)
+  return function()
+    local arg1 = { path = vim.api.nvim_buf_get_name(bufnr) }
+    local action = { command = cmd, arguments = { arg1 } }
+    require('config.lsp.util.extras').execute(action, bufnr, function(err)
+      if err then
+        require('hasan.utils.logger').Logger:error(err)
+      end
+    end)
+  end
+end
+
 return {
   setup = function(client, bufnr)
     require('config.lsp.util.setup').on_attach(client, bufnr)
@@ -8,10 +35,20 @@ return {
     -- lua require('project_run.utils').open_tab(vim.fn.getcwd(), 'adb connect 192.168.31.252 && flutter run')
 
     -- Custom code actions
-    -- stylua: ignore start
-    keymap('n', '<leader>ai', "<cmd>lua require('config.lsp.servers.flutter.code_action').organize_imports_async()<CR>", desc('Lsp: organize imports'))
-    keymap('n', '<Plug>FlutterPkgToRelative', "<cmd>lua require('config.lsp.servers.flutter.code_action').package_to_relative_import()<CR>")
-    keymap('n', '<leader>am', '<Plug>FlutterPkgToRelative', desc('Lsp: relative import'))
-    -- stylua: ignore end
+    keymap('n', '<leader>a.', lsp_command(bufnr, 'edit.fixAll'), desc('Lsp: fix all'))
+    keymap('n', '<leader>ai', lsp_command(bufnr, 'edit.organizeImports'), desc('Lsp: organize imports'))
+
+    keymap('n', '<leader>am', function()
+      vim.lsp.buf.code_action({
+        apply = true,
+        context = {
+          only = {
+            'quickfix.convert.toRelativeImport',
+            'quickfix.convert.toRelativeImport.multi',
+          },
+          diagnostics = {},
+        },
+      })
+    end, desc('Lsp: relative import'))
   end,
 }

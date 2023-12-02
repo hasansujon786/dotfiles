@@ -24,7 +24,7 @@ return {
 
       glance.open_history(last_history.results, parent_bufnr, parent_winnr, params, last_history.method, offset_encoding)
     end
-    keymap('n', '<leader>a.', resume, { desc = 'Lsp: Glance resume' })
+    keymap('n', '<leader>og', resume, { desc = 'Lsp: Glance resume' })
 
     glance.setup({
       height = 18, -- Height of the window
