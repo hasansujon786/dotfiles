@@ -84,15 +84,16 @@ local function set_custom_highlights()
   -- stylua: ignore
   local highlights = {
   -- /// LSP ///
-    LspReferenceText      = { bg = '#3B4048', },
-    LspReferenceWrite     = { bg = '#463b48', },
-    LspReferenceRead      = { bg = '#3B4048', },
-    DiagnosticLineNrWarn  = { fg = '#ebc275', bg = '#4C4944' },
-    DiagnosticLineNrError = { fg = '#ef5f6b', bg = '#4D3542' },
-    DiagnosticLineNrInfo  = { fg = '#4dbdcb', bg = '#2C4855' },
-    DiagnosticLineNrHint  = { fg = '#ca72e4', bg = '#45395A' },
-    DiagnosticUnnecessary = { underline = true },
-    LspInfoBorder         = { link = 'FloatBorder' },
+    LspReferenceText        = { bg = '#3B4048', },
+    LspReferenceWrite       = { bg = '#463b48', },
+    LspReferenceRead        = { bg = '#3B4048', },
+    DiagnosticLineNrWarn    = { fg = '#ebc275', bg = '#4C4944' },
+    DiagnosticLineNrError   = { fg = '#ef5f6b', bg = '#4D3542' },
+    DiagnosticLineNrInfo    = { fg = '#4dbdcb', bg = '#2C4855' },
+    DiagnosticLineNrHint    = { fg = '#ca72e4', bg = '#45395A' },
+    DiagnosticUnnecessary   = { underline = true },
+    DiagnosticUnderlineInfo = { fg = 'none', underline = true },
+    LspInfoBorder           = { link = 'FloatBorder' },
 
   -- /// glance.nvim ///
     GlanceWinBarTitle         = { fg = c.fg, bg = c.bg1 },

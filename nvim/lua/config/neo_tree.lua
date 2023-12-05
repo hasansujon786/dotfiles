@@ -1,4 +1,7 @@
 local util = {}
+-- function Foo()
+--   P('alt=' .. vim.w.alt_file .. '| prealt=' .. vim.w.pre_alt_file)
+-- end
 util.isEmpty = function(s)
   return s == nil or s == ''
 end
@@ -18,9 +21,17 @@ util.save_altfile = function()
     vim.w.pre_alt_file = pre_alt
   end
 end
--- function Foo()
---   P('alt=' .. vim.w.alt_file .. '| prealt=' .. vim.w.pre_alt_file)
--- end
+
+util.copy_path = function(state, is_absolute)
+  local os_sep = require('plenary.path').path.sep
+  local node = state.tree:get_node()
+  local f = is_absolute == true and node.path or vim.fn.fnamemodify(node.path, ':.')
+  if os_sep == '\\' then
+    f = f:gsub('\\', '/')
+  end
+  vim.notify(f, vim.log.levels.INFO)
+  vim.cmd(string.format('let @%s="%s"', '+', f))
+end
 
 local function vinegar_dir_up(state)
   local Path = require('plenary.path')
@@ -340,6 +351,18 @@ return {
         ['q'] = 'close_window',
         ['?'] = 'show_help',
         ['K'] = 'show_file_details',
+        ['gy'] = {
+          function(state)
+            util.copy_path(state, false)
+          end,
+          desc = 'Copy current path',
+        },
+        ['gY'] = {
+          function(state)
+            util.copy_path(state, true)
+          end,
+          desc = 'Copy absolute path',
+        },
 
         ['b'] = 'prev_source',
         ['w'] = 'next_source',

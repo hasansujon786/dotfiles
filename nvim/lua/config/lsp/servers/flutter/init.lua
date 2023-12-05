@@ -24,6 +24,20 @@ local function lsp_command(bufnr, cmd)
     end)
   end
 end
+keymap('n', '<Plug>FlutterPkgToRelative', function()
+  vim.lsp.buf.code_action({
+    apply = true,
+    context = {
+      only = {
+        'refactor.convert.packageToRelativeImport',
+        'quickfix.convert.toRelativeImport.multi',
+        -- 'quickfix.convert.toRelativeImport',
+      },
+      diagnostics = {},
+    },
+  })
+  vim.fn['repeat#set'](t('<Plug>FlutterPkgToRelative'))
+end)
 
 return {
   setup = function(client, bufnr)
@@ -37,18 +51,6 @@ return {
     -- Custom code actions
     keymap('n', '<leader>a.', lsp_command(bufnr, 'edit.fixAll'), desc('Lsp: fix all'))
     keymap('n', '<leader>ai', lsp_command(bufnr, 'edit.organizeImports'), desc('Lsp: organize imports'))
-
-    keymap('n', '<leader>am', function()
-      vim.lsp.buf.code_action({
-        apply = true,
-        context = {
-          only = {
-            'quickfix.convert.toRelativeImport',
-            'quickfix.convert.toRelativeImport.multi',
-          },
-          diagnostics = {},
-        },
-      })
-    end, desc('Lsp: relative import'))
+    keymap('n', '<leader>am', '<Plug>FlutterPkgToRelative', desc('Lsp: organize imports'))
   end,
 }

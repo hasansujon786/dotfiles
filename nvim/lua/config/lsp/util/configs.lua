@@ -11,6 +11,7 @@ local M = {
     lua_ls = { 'lua-language-server' },
     astro = { 'astro-language-server' },
     eslint = { 'eslint-lsp' },
+    gopls = { 'gopls' },
   },
   extra_tools = {
     'stylua',

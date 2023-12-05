@@ -52,6 +52,7 @@ return {
         ['@constant'] = { fg = '${yellow}' },
         ['@constant.builtin'] = { fg = '${orange}' },
         ['@parameter.lua'] = { link = '@parameter' },
+        ['@keyword.operator.lua'] = { link = '@keyword' },
 
         ['@tag.attribute'] = { fg = '${orange}', italic = true },
         ['@punctuation.special'] = { fg = '${purple}' },
