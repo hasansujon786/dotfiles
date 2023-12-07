@@ -4,7 +4,8 @@ mkdir -p C:\\Users\\$USERNAME\\AppData\\Local\\nvim-data\\dap_adapters\\
 
 # vscode-js-debug
 cd C:\\Users\\$USERNAME\\AppData\\Local\\nvim-data\\dap_adapters\\
-export VSCODE_JS_VER="1.82.0"
+export VSCODE_JS_VER="1.85.0"
+rm -rf vscode-js-debug
 curl -O -J -L https://codeload.github.com/microsoft/vscode-js-debug/zip/refs/tags/v${VSCODE_JS_VER}
 unzip vscode-js-debug-${VSCODE_JS_VER}.zip && mv vscode-js-debug-${VSCODE_JS_VER} vscode-js-debug && cd vscode-js-debug
 npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out

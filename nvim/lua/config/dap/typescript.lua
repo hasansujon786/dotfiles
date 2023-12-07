@@ -23,6 +23,24 @@ M.setup = function(dap)
   for _, ext in ipairs(exts) do
     dap.configurations[ext] = {
       {
+        name = 'Start Chrome with "localhost"',
+        type = 'pwa-chrome',
+        request = 'launch',
+        program = '${file}',
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        port = 9222,
+        webRoot = '${workspaceFolder}',
+        -- url = 'http://localhost:3000',
+        url = function()
+          return 'http://localhost:' .. vim.fn.input({ prompt = 'Select port: ', default = 3000 })
+        end,
+
+        -- runtimeArgs = { '--restore-last-session', '--remote-debugging-port=9222' },
+        -- userDataDir = false,
+        -- userDataDir = '${workspaceFolder}/.vscode/vscode-chrome-debug-userdatadir',
+      },
+      {
         type = 'pwa-chrome',
         request = 'attach',
         name = 'Attach Program (pwa-chrome)',
@@ -111,6 +129,7 @@ M.setup = function(dap)
         runtimeExecutable = 'deno',
         attachSimplePort = 9229,
       },
+
       -- {
       --   type = "node2",
       --   request = "attach",

@@ -31,7 +31,8 @@ alias vll='nvim -c "SessionLoad"'
 alias vst='nvim --startuptime startup.log -c exit && tail -100 startup.log'
 alias cd.='cd ~/dotfiles && nvim'
 alias nvr='nvim --listen "127.0.0.1:6666"'
-alias ch='/c/Program\ Files/Google/Chrome/Application/chrome.exe --remote-debugging-port=9222'
+alias ch='start chrome --restore-last-session --remote-debugging-port=9222' # --args
+# alias ch='/c/Program\ Files/Google/Chrome/Application/chrome.exe --restore-last-session --remote-debugging-port=9222'
 
 # Tmux
 alias t="tmux new -As pasta"
