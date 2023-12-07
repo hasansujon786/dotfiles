@@ -6,7 +6,7 @@ keymap('v', 'q', '<ESC>')
 keymap('n', 'ZZ', ':Quit!<CR>') -- Prompt before quitting
 keymap('n', 'Q', 'q') -- Use Q to record macros
 keymap('v', '@', ':norm @', noSilent) -- run macro on selection
-keymap({ 'n', 'v' }, '<CR>', ':<up>', noSilent) -- run last : command easily
+keymap({ 'n', 'x' }, '<CR>', ':<up>', noSilent) -- run last : command easily
 
 -- fix InsertEnter zz
 keymap('n', 'A', 'zzA')
