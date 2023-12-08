@@ -45,7 +45,7 @@ return {
         ['RedText'] = { fg = '#ff0000' },
         ['ZenBorder'] = { fg = '#1c212c' },
         ['MutedText'] = { fg = '${light_grey}' },
-        ['CursorLineDap'] = { bg = '#173F1E', underline = false },
+        ['DapCursorLine'] = { bg = '#173F1E', underline = false },
 
         -- global treesitter
         ['@field.lua'] = { link = '@property' },

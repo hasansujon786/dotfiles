@@ -56,6 +56,8 @@ return {
               flutterSdkPath = paths.flutter_sdk,
               program = '${workspaceFolder}/lib/main.dart',
               cwd = '${workspaceFolder}',
+              -- toolArgs = { '-d', 'Edge' },
+              --skipFiles = ["**/node_modules/**", "!**/node_modules/my-module/**"]
             },
           }
         end,

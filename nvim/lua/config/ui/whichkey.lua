@@ -18,9 +18,10 @@ return {
         align = 'left', -- align columns left, center or right
       },
       key_labels = {
-        ['<space>'] = 'SPC',
-        ['<CR>'] = 'RET',
-        ['<Tab>'] = 'TAB',
+        ['<space>'] = '󱁐 ',
+        ['<CR>'] = '󰌑 ',
+        ['<Tab>'] = ' ',
+        ['.'] = '•',
       },
       show_help = false,
     })
@@ -98,10 +99,7 @@ return {
         },
       },
 
-      d = {
-        name = 'Debug',
-        s = { '<cmd>lua require"dap".continue()<cr>', 'Start' },
-      },
+      d = { name = 'Debug' },
 
       i = {
         name = '+insert',

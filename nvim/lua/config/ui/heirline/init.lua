@@ -7,8 +7,10 @@ return {
   config = function()
     vim.opt.showcmdloc = 'statusline'
     local conditions = require('heirline.conditions')
+    -- local utils = require('heirline.utils')
     local sl = require('config.ui.heirline.statusline')
     local wb = require('config.ui.heirline.winbar')
+    local dapui_filetypes = { 'dapui_scopes', 'dapui_breakpoints', 'dapui_stacks', 'dapui_watches' }
 
     local StatusLine = {
       static = {
@@ -55,29 +57,30 @@ return {
 
     local WinBars = {
       fallthrough = false,
-      -- { -- A special winbar for terminals
-      --   condition = function()
-      --     return conditions.buffer_matches({ buftype = { 'terminal' } })
-      --   end,
-      --   utils.surround({ '', '' }, 'dark_red', {
-      --     c.FileType,
-      --     c.Gap,
-      --     -- TerminalName,
-      --   }),
-      -- },
-      { -- An inactive winbar for regular files
+      { -- DapUI sidebar
+        fallthrough = false,
         condition = function()
-          return not conditions.is_active()
+          return conditions.buffer_matches({ filetype = dapui_filetypes })
         end,
-        {
-          { hl = { fg = 'muted', force = true }, wb.BarStart },
-          { hl = { fg = 'muted', force = true }, wb.FileNameBlock },
-          wb.BarEnd,
-          wb.Rest,
-        },
+        { { wb.FileNameBlock, hl = { fg = 'light_grey', bg = 'bg_d', force = true } }, wb.Rest },
       },
-      -- A winbar for regular files
-      { wb.BarStart, wb.FileNameBlock, wb.BarEnd, wb.Rest },
+      {
+        fallthrough = false,
+        { -- Default inactive winbar for regular files
+          condition = function()
+            return not conditions.is_active()
+          end,
+          {
+            { provider = ' ' },
+            { hl = { fg = 'muted', force = true }, wb.FileNameBlock },
+            wb.FileControlls,
+            wb.BarEnd,
+            wb.Rest,
+          },
+        },
+        -- Default active winbar for regular files
+        { wb.BarStart, wb.FileNameBlock, wb.FileControlls, wb.BarEnd, wb.Rest },
+      },
     }
 
     require('heirline').setup({
@@ -85,6 +88,9 @@ return {
       winbar = WinBars,
       opts = {
         disable_winbar_cb = function(args)
+          if conditions.buffer_matches({ filetype = dapui_filetypes }, args.buf) then
+            return false
+          end
           return conditions.buffer_matches({
             buftype = { 'nofile', 'prompt', 'help', 'quickfix' },
             filetype = { '^git.*', 'fugitive', 'Trouble', 'dashboard', 'harpoon', 'floaterm' },
