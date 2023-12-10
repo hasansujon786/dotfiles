@@ -49,17 +49,7 @@ local function set_custom_highlights()
   local fg = c.fg
   local cursorling_bg = c.bg1
   local float_bg = '#21252B' -- '#1c212c' c.bg_d
-  local bg3 = c.bg3
-
-  util.fg_bg('NormalFloat', fg, normal_bg)
-  util.fg_bg('FloatBorder', c.cyan, normal_bg)
-  util.fg_bg('NormalFloatFlat', fg, float_bg)
-  util.fg_bg('FloatBorderFlat', float_bg, float_bg)
-  util.fg_bg('FloatBorderHidden', bg3, normal_bg)
-
-  util.fg_bg('CmpBorder', '#111925', float_bg)
-  util.fg_bg('WhichKeyFloat', fg, cursorling_bg)
-  util.fg_bg('WhichKeyBorder ', normal_bg, cursorling_bg)
+  local dark_border = '#111925'
 
   -- neo-tree
   local sp = '#1E242E'
@@ -83,6 +73,12 @@ local function set_custom_highlights()
 
   -- stylua: ignore
   local highlights = {
+    NormalFloat             = { fg = fg, bg = normal_bg },
+    FloatBorder             = { fg = c.cyan, bg = normal_bg },
+    NormalFloatFlat         = { fg = fg, bg = float_bg },
+    FloatBorderFlat         = { fg = dark_border, bg = float_bg },
+    FloatBorderHidden       = { fg = c.bg3, bg = normal_bg },
+
   -- /// LSP ///
     LspReferenceText        = { bg = '#3B4048', },
     LspReferenceWrite       = { bg = '#463b48', },
@@ -133,7 +129,9 @@ local function set_custom_highlights()
   -- /// Telescope ///
     TelescopePromptPrefix   = { fg = c.green },
     TelescopeSelectionCaret = { fg = c.orange, bg = cursorling_bg },
-    TelescopePromptTitle    = { fg = c.orange },
+    TelescopePromptTitle    = { fg = c.orange, bg = dark_border },
+    TelescopePreviewTitle   = { fg = c.bg3, bg = dark_border },
+    TelescopeResultsTitle   = { fg = c.bg3, bg = dark_border },
     TelescopeMatching       = { fg = c.orange },
     TelescopeTitle          = { link = 'Comment' },
     TelescopeBorder         = { link = 'FloatBorderFlat' },
@@ -161,6 +159,7 @@ local function set_custom_highlights()
     PmenuSel              = { bg = c.blue, fg = c.bg0 },
     PmenuSbar             = { bg = c.bg1 },
     PmenuThumb            = { bg = '#404959' },
+    CmpBorder             = { fg = dark_border, bg = float_bg },
     CmpItemMenu           = { fg = c.grey },
     CmpItemAbbrMatchFuzzy = { fg = '#d99a5e', underline = true },
     CmpItemAbbrMatch      = { fg = '#d99a5e' },
@@ -233,6 +232,8 @@ local function set_custom_highlights()
     QuickScopeSecondary = { fg = '#d78787', underline = true },
     TabBarInputBorder   = { fg = c.blue, bg = c.bg_d },
     WhichKeySeparator   = { fg = c.grey },
+    WhichKeyFloat       = { fg = fg, bg = cursorling_bg },
+    WhichKeyBorder      = { fg = normal_bg, bg = cursorling_bg },
   }
   -- { underline = true, fg = btn.active.fg, bg = sp }
   for hlName, option in pairs(highlights) do

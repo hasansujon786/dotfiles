@@ -86,11 +86,7 @@ M.my_find_files = function(dir)
 end
 
 function M.curbuf()
-  local opts = themes.get_dropdown({
-    border = true,
-    previewer = false,
-    shorten_path = false,
-  })
+  local opts = my_theme.get_dropdown({ previewer = false, shorten_path = false })
   if require('hasan.utils').is_visual_mode() then
     local word = require('hasan.utils').get_visual_selection()
     opts.default_text = word
@@ -161,7 +157,7 @@ M.projects = function()
     require('telescope.actions').close(prompt_bufnr)
     vim.cmd('split ' .. vim.fn.stdpath('data') .. '/project_nvim/project_history')
   end
-  require('telescope._extensions').manager.projects.projects(themes.get_dropdown({
+  require('telescope._extensions').manager.projects.projects(my_theme.get_dropdown({
     attach_mappings = function(_, map)
       map('i', '<C-e>', edit_projects_file)
       map('n', '<C-e>', edit_projects_file)
@@ -272,7 +268,7 @@ M.grep_string_list = function(opts)
   end
 
   pickers
-    .new(themes.get_dropdown(opts), {
+    .new(my_theme.get_dropdown(opts), {
       prompt_title = 'Grep String List',
       finder = finders.new_oneshot_job(args, opts),
       previewer = conf.grep_previewer(opts),
@@ -304,7 +300,7 @@ M.buffers = function(is_cwd_only)
       sort_mru = true,
     }),
   }
-  builtin.buffers(themes.get_dropdown(opts))
+  builtin.buffers(my_theme.get_dropdown(opts))
 end
 
 -- https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion

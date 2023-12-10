@@ -1,6 +1,5 @@
 local t_action_state = require('telescope.actions.state')
 local t_conf = require('telescope.config').values
-local t_themes = require('telescope.themes')
 local t_pickers = require('telescope.pickers')
 local t_finders = require('telescope.finders')
 local t_entry_display = require('telescope.pickers.entry_display')
@@ -9,7 +8,7 @@ local utils = require('telescope._extensions.project_commands.utils')
 local M = {}
 
 M.list_picker = function(opts, results, runner)
-  t_pickers.new(t_themes.get_dropdown(opts), {
+  t_pickers.new(require('hasan.telescope.theme').get_dropdown(opts), {
     finder = t_finders.new_table({
       results = results,
       entry_maker = opts.entry_maker or M.make_entry_form_list,

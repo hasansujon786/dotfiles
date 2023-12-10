@@ -4,6 +4,7 @@ return {
     lazy = true,
     event = 'VeryLazy',
     config = function()
+      local state = require('hasan.core.state')
       local actions = require('telescope.actions')
       local local_action = require('hasan.telescope.local_action')
       local fb_actions = require('telescope._extensions.file_browser.actions')
@@ -34,8 +35,11 @@ return {
         ['<C-d>'] = false,
       }
 
+      local dropdown_opts = { theme = 'dropdown', borderchars = require('hasan.core.state').border_groups.edged_top }
       require('telescope').setup({
         defaults = {
+          results_title = false,
+          preview_title = false,
           scroll_strategy = 'cycle',
           selection_strategy = 'reset',
           prompt_prefix = '   ',
@@ -44,6 +48,7 @@ return {
             height = 0.7,
             width = 0.8,
           },
+          borderchars = state.border_groups[state.ui.telescope_border_style],
           -- prompt_position = "top",
           -- sorting_strategy = "ascending",
           winblend = 0,
@@ -61,10 +66,10 @@ return {
         },
         pickers = {
           -- find_files = { theme = 'ivy', layout_config = { height = 0.7 } },
-          lsp_document_symbols = { theme = 'dropdown' },
-          lsp_references = { theme = 'dropdown' },
-          grep_string = { theme = 'dropdown' },
-          live_grep = { theme = 'dropdown' },
+          lsp_document_symbols = dropdown_opts,
+          lsp_references = dropdown_opts,
+          grep_string = dropdown_opts,
+          live_grep = dropdown_opts,
         },
         extensions = {
           fzf = {
@@ -73,10 +78,10 @@ return {
             override_file_sorter = true,
           },
           ['ui-select'] = {
-            require('telescope.themes').get_dropdown(),
+            require('hasan.telescope.theme').get_dropdown(),
             kind = {
-              codeaction = require('telescope.themes').get_cursor(),
-              cursor = require('telescope.themes').get_cursor(),
+              codeaction = require('hasan.telescope.theme').get_cursor(),
+              cursor = require('hasan.telescope.theme').get_cursor(),
             },
           },
           project_commands = require('config.telescope.project_commands'),
@@ -136,6 +141,7 @@ return {
       })
       require('telescope').load_extension('fzf')
       require('telescope').load_extension('ui-select')
+      require('hasan.telescope.theme').setup()
 
       -- keymaps
       local project_files = '<cmd>lua require("hasan.telescope.custom").project_files()<cr>'

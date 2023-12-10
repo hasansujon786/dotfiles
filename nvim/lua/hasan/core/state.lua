@@ -17,6 +17,7 @@ M.ui = {
     style = 'rounded',
     highlight = 'DiagnosticHint',
   },
+  telescope_border_style = 'edged',
   hover = {
     -- winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
     winhighlight = 'Normal:Pmenu,FloatBorder:CmpBorder,CursorLine:Visual,Search:None',
@@ -32,6 +33,30 @@ M.ui = {
 
 M.telescope = {
   todo_keyfaces = { 'TODO:', 'DONE:', 'INFO:', 'FIXME:', 'BUG:', 'FIXIT:', 'ISSUE:', 'OPTIM:', 'OPTIMIZE:' },
+}
+
+M.border_groups = {
+  rounded = {
+    prompt = { '─', '│', ' ', '│', '╭', '╮', '│', '│' },
+    results = { '─', '│', '─', '│', '├', '┤', '╯', '╰' },
+    preview = { '─', '│', '─', '│', '├', '┤', '╯', '╰' },
+  },
+  edged = {
+    prompt = { '▔', '▕', '▁', '▏', '🭽', '🭾', '🭿', '🭼' },
+    results = { '▔', '▕', '▁', '▏', '🭽', '🭾', '🭿', '🭼' },
+    preview = { '▔', '▕', '▁', '▏', '🭽', '🭾', '🭿', '🭼' },
+    -- results = { '▁', '▕', '▁', '▏', '🭼', '🭿', '🭿', '🭼' },
+  },
+  edged_top = {
+    prompt = { '▔', '▕', '▁', '▏', '🭽', '🭾', '🭿', '🭼' },
+    preview = { '▔', '▕', ' ', '▏', '🭽', '🭾', '▕', '▏' },
+    results = { '▁', '▕', '▁', '▏', '🭼', '🭿', '🭿', '🭼' },
+  },
+  empty = {
+    preview = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+    prompt = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+    results = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+  },
 }
 
 return M
