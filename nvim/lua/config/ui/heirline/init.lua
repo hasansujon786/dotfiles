@@ -62,7 +62,11 @@ return {
         condition = function()
           return conditions.buffer_matches({ filetype = dapui_filetypes })
         end,
-        { { wb.FileNameBlock, hl = { fg = 'light_grey', bg = 'bg_d', force = true } }, wb.Rest },
+        {
+          { provider = ' ', hl = { bg = 'bg_d' } },
+          { wb.FileNameBlock(), hl = { fg = 'light_grey', bg = 'bg_d', force = true } },
+          wb.Rest,
+        },
       },
       {
         fallthrough = false,
@@ -70,16 +74,10 @@ return {
           condition = function()
             return not conditions.is_active()
           end,
-          {
-            { provider = ' ' },
-            { hl = { fg = 'muted', force = true }, wb.FileNameBlock },
-            wb.FileControlls,
-            wb.BarEnd,
-            wb.Rest,
-          },
+          { sl.Space, { hl = { fg = 'muted', force = true }, wb.WinBarFileName }, wb.BarEnd, wb.Rest },
         },
         -- Default active winbar for regular files
-        { wb.BarStart, wb.FileNameBlock, wb.FileControlls, wb.BarEnd, wb.Rest },
+        { wb.BarStart, wb.WinBarFileName, wb.BarEnd, wb.Rest },
       },
     }
 

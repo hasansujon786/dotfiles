@@ -121,3 +121,16 @@ local function simple(text, _)
   table.insert(elements, { Text = text })
 end
 ```
+
+## Text format
+```lua
+wezterm.format({
+  -- turn on underlines
+  { Attribute = { Underline = 'Single' } },
+  -- make the underline red
+  { Text = '\x1b[58:2::255:0:0m' },
+  -- { Attribute = { Intensity = 'Bold' } },
+  { Foreground = { AnsiColor = 'Fuchsia' } },
+  { Text = 'Enter name for tab' },
+})
+```
