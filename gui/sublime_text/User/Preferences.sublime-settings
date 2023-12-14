@@ -35,10 +35,7 @@
 	"ignored_packages":
 	[
 		"JavaScript",
-		"Six",
-		"TypeScript",
 		"Vintage",
-		"Vintageous",
 	],
 	"folder_exclude_patterns":
 	[
@@ -51,4 +48,5 @@
 		".nuxt"
 	],
 	"vintageous_use_super_keys": false,
+	"index_files": true,
 }

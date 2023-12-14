@@ -11,11 +11,7 @@ return {
   },
   {
     'tpope/vim-commentary',
-    keys = {
-      { 'gc', desc = 'Commentary', mode = nxo },
-      { 'gcc', desc = 'Commentary line' },
-      { 'gcu', desc = 'Commentary block' },
-    },
+    keys = { { 'gc', desc = 'Commentary', mode = nxo } },
   },
   {
     'dhruvasagar/vim-open-url',
@@ -72,9 +68,26 @@ return {
   {
     'Konfekt/vim-CtrlXA',
     lazy = true,
-    keys = { { '<C-a>', desc = 'Increment number and more' }, { '<C-x>', desc = 'Decrement number and more' } },
+    keys = {
+      { '<C-a>', desc = 'Increment number and more' },
+      { '<C-x>', desc = 'Decrement number and more' },
+    },
     config = function()
       vim.fn['hasan#CtrlXA#update']()
     end,
+  },
+  {
+    'Wansmer/treesj',
+    opts = {
+      use_default_keymaps = false,
+      max_join_length = 1000,
+      -- langs = {},
+      dot_repeat = true,
+    },
+    keys = {
+      { '<leader>fm', '<cmd>TSJToggle<CR>', desc = 'TreeSJ: Toggle' },
+      { '<leader>fj', '<cmd>TSJSplit<CR>', desc = 'TreeSJ: Split' },
+      { '<leader>fJ', '<cmd>TSJJoin<CR>', desc = 'TreeSJ: Join' },
+    },
   },
 }

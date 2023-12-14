@@ -106,20 +106,20 @@ return {
   dependencies = {
     {
       'chentoast/marks.nvim',
-    keys = {
-      { 'm/', '<cmd>MarksListBuf<CR>', desc = 'Marks: Show buf list' },
-    },
+      keys = {
+        { 'm/', '<cmd>MarksListBuf<CR>', desc = 'Marks: Show buf list' },
+      },
       opts = {
         mappings = {
-          set = 'm',
+          -- set = 'm',
           delete = 'm-', -- specific {key}
           delete_line = 'm--',
-          delete_buf = 'm-_',
+          delete_buf = 'm_',
           set_next = 'm,',
           toggle = 'm;',
           preview = "m'",
-          prev = '[e',
-          next = ']e',
+          prev = '[w',
+          next = ']w',
 
           -- set_bookmark0 = 'm0',
           -- delete_bookmark0 = 'dm0',
@@ -142,11 +142,11 @@ return {
           -- prev_bookmark5 = "'5",
         },
         default_mappings = false,
-        -- builtin_marks = { ".", "<", ">", "^" }, -- which builtin marks to show. default {}
+        -- builtin_marks = { '.', '<', '>', '^' }, -- which builtin marks to show. default {}
         cyclic = true,
         force_write_shada = true, -- whether the shada file is updated after modifying uppercase marks. default false
         refresh_interval = 250,
-        sign_priority = { lower = 10, upper = 15, builtin = 8, bookmark = 20 },
+        sign_priority = { builtin = 8, lower = 10, upper = 15, bookmark = 20 },
         -- disables mark tracking for specific filetypes. default {}
         excluded_filetypes = {},
         -- marks.nvim allows you to configure up to 10 bookmark groups, each with its own

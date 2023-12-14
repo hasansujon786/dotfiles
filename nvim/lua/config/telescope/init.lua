@@ -35,7 +35,7 @@ return {
         ['<C-d>'] = false,
       }
 
-      local dropdown_opts = { theme = 'dropdown', borderchars = require('hasan.core.state').border_groups.edged_top }
+      local dropdown_opts = require('hasan.telescope.theme').center_layout_opts
       require('telescope').setup({
         defaults = {
           results_title = false,
@@ -44,13 +44,12 @@ return {
           selection_strategy = 'reset',
           prompt_prefix = '   ',
           selection_caret = '❯ ',
+          -- sorting_strategy = "ascending",
           layout_config = {
             height = 0.7,
             width = 0.8,
           },
           borderchars = state.border_groups[state.ui.telescope_border_style],
-          -- prompt_position = "top",
-          -- sorting_strategy = "ascending",
           winblend = 0,
           mappings = { n = custom_mappings, i = custom_mappings },
           file_ignore_patterns = {

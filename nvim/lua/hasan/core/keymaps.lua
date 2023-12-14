@@ -74,7 +74,6 @@ keymap('n', 'L', 'L:exec "norm! ". &scrolloff . "j"<cr>')
 
 keymap('n', '<BS>', '<c-^>')
 keymap({ 'n', 'x' }, "'", '`') -- Character wise jumps always
-keymap({ 'n', 'x' }, "''", "`'")
 
 -- Vertical scrolling
 local scroll_maps = {

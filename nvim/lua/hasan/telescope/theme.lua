@@ -23,19 +23,22 @@ M.top_panel_default_opts = {
   previewer = false,
 }
 
+M.center_layout_opts = {
+  theme = 'dropdown',
+  borderchars = require('hasan.core.state').border_groups.edged_top,
+}
+
 M.get_top_panel = function(opts)
   return not opts and M.top_panel_default_opts or vim.tbl_deep_extend('force', M.top_panel_default_opts, opts)
 end
 
 M.get_dropdown = function(opts)
-  local d = { borderchars = require('hasan.core.state').border_groups.edged_top }
-  opts = vim.tbl_deep_extend('force', d, opts or {})
+  opts = vim.tbl_deep_extend('force', M.center_layout_opts, opts or {})
   return require('telescope.themes').get_dropdown(opts)
 end
 
 M.get_cursor = function(opts)
-  local d = { borderchars = require('hasan.core.state').border_groups.edged_top }
-  opts = vim.tbl_deep_extend('force', d, opts or {})
+  opts = vim.tbl_deep_extend('force', M.center_layout_opts, opts or {})
   return require('telescope.themes').get_cursor(opts)
 end
 

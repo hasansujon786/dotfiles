@@ -1,6 +1,5 @@
 return {
   'hasansujon786/glance.nvim',
-  opt = true,
   cmd = 'Glance',
   config = function()
     local glance = require('glance')

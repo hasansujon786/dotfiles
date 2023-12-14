@@ -65,11 +65,10 @@ alias fll='flutter clean'
 alias flc='flutter create'
 alias flcs='flutter create -t skeleton'
 alias fob='cd build/app/outputs/flutter-apk && explorer .'
+alias dp='dart pub'
 alias dbb='dart run build_runner build --delete-conflicting-outputs'
 alias dbw='dart run build_runner watch --delete-conflicting-outputs'
-alias dout='dart pub outdated'
-alias dup='dart pub upgrade'
-alias dupm='dart pub upgrade --major-versions'
+alias dpum='dart pub upgrade --major-versions'
 
 #adb
 alias adk='adb kill-server'
@@ -156,6 +155,7 @@ alias gme='git merge'
 alias gms='git merge --squash'
 alias grbi='git rebase --interactive main'
 alias lg='lazygit'
+alias gsd='pwd | xargs git config --global --add safe.directory'
 
 # kill port
 alias fp='tasklist | findstr' # search string
