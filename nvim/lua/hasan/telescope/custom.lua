@@ -96,27 +96,6 @@ function M.curbuf()
   builtin.current_buffer_fuzzy_find(opts)
 end
 
-function M.search_wiki_files()
-  builtin.find_files(my_theme.get_top_panel({
-    prompt_title = 'Search Wiki',
-    cwd = _G.org_root_path,
-    previewer = false,
-    entry_maker = my_make_entry.gen_from_file(),
-    -- search_dirs = {
-    --   '3_resources/wiki/',
-    -- },
-  }))
-end
-
-function M.grep_org_text()
-  builtin.live_grep({
-    results_title = 'Org Texts',
-    prompt_title = 'Search Org Texts',
-    path_display = { 'smart' },
-    cwd = _G.org_root_path,
-  })
-end
-
 function M.search_plugins()
   extensions.file_browser.file_browser(themes.get_ivy({
     previewer = false,

@@ -5,7 +5,7 @@ vnoremap <buffer> - <cmd>lua require('hasan.org').create_link()<CR>
 nnoremap <buffer> cic   <cmd>lua require('orgmode').action('org_mappings.toggle_checkbox')<CR>
 nnoremap <buffer> <C-q> <cmd>lua require('orgmode').action('org_mappings.toggle_checkbox')<CR>
 nnoremap <buffer> <A-space> <cmd>lua require('orgmode').action('org_mappings.toggle_checkbox')<CR>
-nnoremap <buffer> <leader><space> <cmd>lua require("hasan.telescope.custom").search_wiki_files()<CR>
+nnoremap <buffer> <leader><space> <cmd>Telescope find_files cwd=C:\\Users\\hasan\\vimwiki<CR>
 
 lua << EOF
 function CmpOrgmodeSetup()

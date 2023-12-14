@@ -21,9 +21,9 @@ return {
     { '<leader>oa', loadOrgMode('<space>oa'), desc = 'org agenda' },
     { '<leader>oc', loadOrgMode('<space>oc'), desc = 'org capture' },
 
-    { '<leader>/o', '<cmd>lua require("hasan.telescope.custom").grep_org_text()<CR>', desc = 'Grep org text' },
-    { '<leader>/w', '<cmd>lua require("hasan.telescope.custom").search_wiki_files()<CR>', desc = 'Search org files' },
-    { '<leader>w/', '<cmd>lua require("hasan.telescope.custom").search_wiki_files()<CR>', desc = 'Search org files' },
+    { '<leader>/o', '<cmd>Telescope live_grep cwd=C:\\Users\\hasan\\vimwiki<CR>', desc = 'Grep org text' },
+    { '<leader>/w', '<cmd>Telescope find_files cwd=C:\\Users\\hasan\\vimwiki<CR>', desc = 'Search org files' },
+    { '<leader>w/', '<cmd>Telescope find_files cwd=C:\\Users\\hasan\\vimwiki<CR>', desc = 'Search org files' },
   },
   opts = {
     org_agenda_files = { '~/vimwiki/**/*' },
