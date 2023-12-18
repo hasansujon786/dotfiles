@@ -68,7 +68,6 @@ end)
 return {
   initial_rows = 29,
   initial_cols = 120,
-  tab_max_width = 30,
   hide_tab_bar_if_only_one_tab = false,
   window_decorations = 'RESIZE', -- NONE,INTEGRATED_BUTTONS
   check_for_updates = true,
@@ -125,17 +124,9 @@ return {
   enable_tab_bar = true,
   window_close_confirmation = 'NeverPrompt',
   leader = { key = 'b', mods = 'CTRL', timeout_milliseconds = 1000 },
-  window_padding = {
-    left = 0,
-    right = 0,
-    top = 0,
-    bottom = 0,
-  },
+  window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
   pane_focus_follows_mouse = false,
-  inactive_pane_hsb = {
-    saturation = 0.9,
-    brightness = 0.8,
-  },
+  inactive_pane_hsb = { saturation = 0.9, brightness = 0.8 },
   keys = {
     {
       key = 'F2',

@@ -24,9 +24,24 @@ map ctrl+shift+j             send_text all \x1b[74;5u      # <c-s-j> (not <c-J>,
 map ctrl+shift+k             send_text all \x1b[75;5u      # <c-s-k>
 map ctrl+shift+h             send_text all \x1b[72;5u      # <c-s-h>
 map ctrl+shift+l             send_text all \x1b[76;5u      # <c-s-l>
+act.SendKey({ key = '\x1b' }), -- escape
 
 ## lua code
 ```lua
+wezterm.on('gui-startup', function(cmd)
+  local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+  window:gui_window():maximize()
+end)
+
+local multiple_actions = function(keys)
+  local actions = {}
+  for key in keys:gmatch('.') do
+    table.insert(actions, act.SendKey({ key = key }))
+  end
+  table.insert(actions, act.SendKey({ key = '\n' }))
+  return act.Multiple(actions)
+end
+
   action = wezterm.action_callback(function(window, pane)
     -- window:perform_action(wezterm.action{Multiple={
     --   -- {SendKey={mods='CTRL', key='l'}},
