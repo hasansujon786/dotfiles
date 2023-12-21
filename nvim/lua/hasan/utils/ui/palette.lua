@@ -10,6 +10,7 @@ local c = {
 
   fg = '#a5b0c5',
   grey = '#546178',
+  white = '#d5d5d5',
   muted = '#68707E',
   layer = '#3E425D',
   light_grey = '#7d899f',
@@ -95,19 +96,19 @@ local function set_custom_highlights()
     DiagnosticUnderlineError= { fg = 'none', underline = true, sp = c.red },
 
   -- /// glance.nvim ///
-    GlanceWinBarTitle         = { fg = c.fg, bg = c.bg1 },
-    GlanceWinBarFilename      = { fg = c.fg, bg = c.bg0 },
-    GlanceWinBarFilepath      = { fg = c.grey, bg = c.bg0 },
-    GlanceBorder              = { fg = c.bg3 },
-    GlanceListNormal          = { fg = c.light_grey, bg = c.bg0 },
     GlancePreviewNormal       = { fg = c.fg, bg = c.bg_d },
-    GlanceBorderTop           = { fg = c.bg3 },
-    GlanceListFilename        = { fg = c.blue },
-    GlanceFoldIcon            = { fg = c.blue },
+    GlanceListNormal          = { fg = c.light_grey, bg = c.bg0 },
+    GlanceWinBarFilename      = { fg = c.white, bg = c.bg0 },
+    GlanceWinBarFilepath      = { fg = c.light_grey, bg = c.bg0 },
+    GlanceWinBarTitle         = { fg = c.light_grey, bg = c.bg1 }, -- reference count
+    GlanceFoldIcon            = { fg = c.light_grey },
+    GlanceListFilename        = { fg = c.white },
     GlanceIndent              = { fg = c.bg1 },
+    GlanceBorder              = { fg = c.dark_blue },
+    GlanceListCursorLine      = { bg = '#233d57' },
     GlancePreviewMatch        = { link = 'LspReferenceText' },
     GlanceListMatch           = { link = 'LspReferenceWrite' },
-    GlanceListCursorLine      = { link = 'CursorLineFocus' },
+    GlanceBorderTop           = { link = 'GlanceBorder' },
     GlanceListBorderBottom    = { link = 'GlanceBorder' },
     GlancePreviewBorderBottom = { link = 'GlanceBorder' },
 

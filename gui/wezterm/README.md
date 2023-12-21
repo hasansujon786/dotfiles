@@ -1,5 +1,10 @@
 ## dotfiles
 https://github.com/yutkat/dotfiles/blob/main/.config/wezterm/wezterm.lua
+https://gist.github.com/gsuuon/5511f0aa10c10c6cbd762e0b3e596b71
+
+## plugins
+https://github.com/sei40kr/wez-status-generator
+https://github.com/sei40kr/wez-per-project-workspace
 
 ## Theme
 https://github.com/neapsix/wezterm
@@ -8,6 +13,7 @@ hi Normal guibg=#F2E9E0
 
 ## cli
 wezterm ls-fonts --text "✘"
+wezterm cli spawn nvim
 
 ## Custom keymap
 - https://www.reddit.com/r/neovim/comments/12hyi9t/make_scr_cscr_stab_ctab_work_in_neovim_kitty/
