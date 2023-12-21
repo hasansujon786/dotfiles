@@ -17,19 +17,36 @@ local function scriptsCommandsFromJSON(script_file, opts)
   vim.cmd([[normal! a]])
 end
 
-local function commands(opts)
-  opts = _utils.merge({}, opts or {})
-  local dynamic_commands = utils.conf.commands.dynamic_commands
-  local command_list = {}
-  if dynamic_commands ~= nil then
-    command_list = dynamic_commands(utils)
-  end
-  local default_commands = utils.conf.commands.default_commands
-  if #default_commands > 0 then
-    for _, v in ipairs(default_commands) do
-      table.insert(command_list, v)
+local function parse_project_commands()
+  local all_commands = {}
+
+  -- Get dynamic commands
+  local dynamic_commands_func = utils.conf.dynamic_commands
+  if dynamic_commands_func ~= nil and type(dynamic_commands_func) == 'function' then
+    local dy_commands = dynamic_commands_func(utils)
+    if dy_commands ~= nil and #dy_commands > 0 then
+      all_commands = dy_commands
     end
   end
+
+  -- Get default commands
+  local default_commands = utils.conf.default_commands
+  if type(default_commands) == 'table' and #default_commands > 0 then
+    if #all_commands > 0 then
+      for _, v in ipairs(default_commands) do
+        table.insert(all_commands, v)
+      end
+    else
+      all_commands = default_commands
+    end
+  end
+
+  return all_commands
+end
+
+local function commands(opts)
+  opts = _utils.merge({}, opts or {})
+  local command_list = parse_project_commands()
 
   picker.list_picker(opts, command_list, picker.actions.run_cmd)
 end
@@ -40,6 +57,7 @@ return require('telescope').register_extension({
   end,
   exports = {
     commands = commands,
+    parse_project_commands = parse_project_commands,
     scriptsCommandsFromJSON = scriptsCommandsFromJSON,
   },
 })

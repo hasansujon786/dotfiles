@@ -1,8 +1,9 @@
 local Path = require('plenary.path')
 local M = {
   conf = {
-    default_commands = {},
+    default_commands = nil,
     dynamic_commands = nil,
+    open_tab_func = nil,
   },
 }
 
@@ -24,26 +25,14 @@ M.get_project_scripts = function(fpath)
 end
 
 -- local lines = popup_file:readlines()
-M.open_tab = function(dir, cmd_arg)
-  if not cmd_arg then
-    return
-  end
-  local cmd = {}
-  if vim.fn.has('win32') == 1 then
-    -- local winTermPath =
-    --   'silent !"c:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.11.3471.0_x64__8wekyb3d8bbwe\\wt.exe"'
-    local winTermPath = 'silent !"wt"'
-    local profile = '-p "Bash" C:\\Program Files\\Git\\bin\\bash'
-    local command_str = '-c "source ~/dotfiles/bash/.env && %s"'
-
-    cmd = { winTermPath, '-w 0 nt -d', dir, profile, command_str:format(cmd_arg) }
-  else
-    -- vim.cmd('silent !tmux-windowizer $(pwd) ' .. entry.value[2])
-    print('Project_run:WIP')
+M.open_tab = function(cwd, user_cmd, opts)
+  if not user_cmd or not cwd then
     return
   end
 
-  vim.cmd(table.concat(cmd, ' '))
+  if M.conf.open_tab_func ~= nil and type(M.conf.open_tab_func) == 'function' then
+    return M.conf.open_tab_func(cwd, user_cmd, opts)
+  end
 end
-
+-- require("telescope._extensions.project_commands.utils").conf
 return M
