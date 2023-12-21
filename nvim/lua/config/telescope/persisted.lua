@@ -10,18 +10,40 @@ M.setup = function()
     autoload = false,
     allowed_dirs = nil,
     ignored_dirs = nil,
-    -- before_save = function()
-    --   -- Clear out Minimap before saving the session
-    --   -- With Minimap open it stops the session restoring to the last cursor position
-    --   pcall(vim.cmd, 'bw minimap')
-    -- end,
-    after_save = function()
-      print('persisted: session saved')
+  })
+
+  local group = vim.api.nvim_create_augroup('PersistedHooks', { clear = true })
+  vim.api.nvim_create_autocmd({ 'User' }, {
+    pattern = 'PersistedSavePre',
+    group = group,
+    callback = function()
+      local ok, edgy = pcall(require, 'edgy.commands')
+
+      if ok then
+        edgy.close()
+      end
+    end,
+  })
+  vim.api.nvim_create_autocmd({ 'User' }, {
+    pattern = 'PersistedTelescopeLoadPre',
+    group = group,
+    callback = function(session)
+      -- Save the currently loaded session
+      require('persisted').save({ session = vim.g.persisted_loaded_session })
+      vim.api.nvim_input('<ESC><cmd>%bd!<CR>')
     end,
   })
 end
 
-M.loadSession = function()
+M.save_and_exit = function()
+  vim.cmd([[
+    wall
+    SessionSave
+    qall
+  ]])
+end
+
+M.load_session = function()
   local ok, persisted = pcall(require, 'persisted')
   if not ok then
     print('persisted not installed')
@@ -44,14 +66,6 @@ M.loadSession = function()
       vim.cmd('source ' .. vim.fn.fnameescape(choice.file_path))
     end
   end)
-end
-
-M.sessionSaveAndQuit = function()
-  vim.cmd[[
-    wall
-    SessionSave
-    qall
-  ]]
 end
 
 return M

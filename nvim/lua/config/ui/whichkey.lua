@@ -182,8 +182,8 @@ return {
         d = { '<cmd>Alpha<CR>', 'Open dashboard' },
         l = { '<cmd>SessionLoad<CR>', 'Load session' },
         s = { '<cmd>SessionSave<CR>', 'Save session' },
-        m = { '<cmd>lua require("config.telescope.persisted").loadSession()<CR>', 'Show session menu' },
-        z = { '<cmd>lua require("config.telescope.persisted").sessionSaveAndQuit()<CR>', 'Save session and quit' },
+        m = { '<cmd>lua require("telescope._extensions").manager.persisted.persisted()<CR>', 'Show session menu' },
+        z = { '<cmd>lua require("config.telescope.persisted").save_and_exit()<CR>', 'Save session and quit' },
       },
 
       t = {

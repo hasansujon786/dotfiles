@@ -83,6 +83,7 @@ return {
               cursor = require('hasan.telescope.theme').get_cursor(),
             },
           },
+          persisted = require('hasan.telescope.theme').get_dropdown(),
           project_commands = require('config.telescope.project_commands'),
           file_browser = {
             theme = 'ivy',
