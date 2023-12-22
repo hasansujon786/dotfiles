@@ -41,7 +41,7 @@ end)
 
 return {
   setup = function(client, bufnr)
-    require('config.lsp.util.setup').on_attach(client, bufnr)
+    require('config.lsp.util.setup').default_opts.on_attach(client, bufnr)
 
     local function desc(d)
       return { desc = d, buffer = bufnr }

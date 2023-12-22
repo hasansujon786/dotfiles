@@ -2,7 +2,23 @@ local M = {}
 local api = vim.api
 
 function M.get_global_conf()
-  return require('config.lsp.util.configs')
+  return require('config.lsp.util.setup')
+end
+
+function M.get_server_conf(lsp_name)
+  local ok, module = pcall(require, 'config.lsp.servers.' .. lsp_name)
+  if ok then
+    return module
+  end
+  return nil
+end
+
+function M.update_capabilities(fname)
+  local cmp_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+  if cmp_ok then
+    return cmp_nvim_lsp.default_capabilities()
+  end
+  vim.notify(fname .. ': cmp_nvim_lsp not loaded with lsp-config', vim.log.levels.WARN)
 end
 
 function M.execute(action, bufnr, on_complete)
@@ -23,14 +39,6 @@ function M.execute(action, bufnr, on_complete)
   else
     vim.lsp.buf_request(bufnr, 'workspace/executeCommand', action, on_complete)
   end
-end
-
-function M.get_server_conf(lsp_name)
-  local ok, module = pcall(require, 'config.lsp.servers.' .. lsp_name)
-  if ok then
-    return module
-  end
-  return nil
 end
 
 function M.install_essential_servers()

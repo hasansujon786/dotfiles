@@ -8,12 +8,15 @@ local function init_lspconfig()
 
   for key_server_name, _ in pairs(global_conf.essential_servers) do
     local local_conf = lsp_extras.get_server_conf(key_server_name)
+    local opts = nil
+
     if local_conf == nil or local_conf.opts == nil then
-      lspconfig[key_server_name].setup(global_conf.default_opts)
+      opts = global_conf.default_opts
     else
-      local opts = require('hasan.utils').merge(global_conf.default_opts, local_conf.opts)
-      lspconfig[key_server_name].setup(opts)
+      opts = require('hasan.utils').merge(global_conf.default_opts, local_conf.opts)
     end
+
+    lspconfig[key_server_name].setup(opts)
   end
 end
 
