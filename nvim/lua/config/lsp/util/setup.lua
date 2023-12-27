@@ -42,11 +42,12 @@ local M = {
     tailwindcss = { 'tailwindcss-language-server' },
     lua_ls = { 'lua-language-server' },
     astro = { 'astro-language-server' },
-    eslint = { 'eslint-lsp' },
+    -- eslint = { 'eslint-lsp' },
     gopls = { 'gopls' },
   },
   extra_tools = {
     'stylua',
+    'prettierd',
     'dart-debug-adapter',
   },
   use_builtin_lsp_formatter = { 'dartls', 'astro' },

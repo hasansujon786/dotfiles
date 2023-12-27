@@ -44,11 +44,13 @@ function M.lsp_buffer_keymaps(_, bufnr)
   keymap('n', ']d', require('config.lsp.util.diagnosgic').diagnostic_next, desc('Lsp: diagnosgic next'))
 
   -- Format
-  keymap('n', '<leader>fs', '<cmd>FormatBuf<CR>', desc('Lsp: format and save'))
-  keymap('x', '<leader>fs', 'gq<cmd>silent noa write<cr>', desc('Lsp: format current selection'))
-
-  -- command('Format', function(_) vim.lsp.buf.format({ async = true }) end)
-  -- command('FormatSync', function() vim.lsp.buf.format({ async = false }) end)
+  keymap({ 'n', 'x' }, '<leader>fs', '<cmd>lua vim.lsp.buf.format()<CR>', desc('Lsp: format and save'))
+  command('Format', function(_)
+    vim.lsp.buf.format({ async = true })
+  end)
+  command('FormatSync', function()
+    vim.lsp.buf.format({ async = false })
+  end)
 
   keymap('n', '<leader>ar', '<cmd>Telescope lsp_references<CR>', desc('Lsp: Preview references'))
   keymap('n', '<leader>ak', vim.lsp.buf.signature_help, desc('Lsp: show signature help'))

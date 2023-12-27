@@ -3,7 +3,7 @@ local prettier = { { 'prettierd', 'prettier' } } -- Use a sub-list to run only t
 return {
   'stevearc/conform.nvim',
   lazy = true,
-  enabled = true,
+  enabled = false,
   cmd = { 'ConformInfo', 'FormatBuf', 'FormatBufSync' },
   module = 'conform',
   event = 'BufWritePre',
@@ -32,6 +32,9 @@ return {
     end,
   },
   config = function(_, opts)
+    -- keymap('n', '<leader>fs', '<cmd>FormatBuf<CR>', desc('Lsp: format and save'))
+    -- keymap('x', '<leader>fs', 'gq<cmd>silent noa write<cr>', desc('Lsp: format current selection'))
+
     require('conform').setup(opts)
     -- utils
     local function get_visulal_range(args)

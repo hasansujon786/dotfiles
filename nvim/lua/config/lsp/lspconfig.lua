@@ -28,7 +28,7 @@ return {
     { 'folke/neodev.nvim', lazy = true },
     { 'hrsh7th/cmp-nvim-lsp', lazy = true, module = 'cmp_nvim_lsp' },
     { 'williamboman/mason-lspconfig.nvim', lazy = true, module = 'mason-lspconfig' },
-    { 'jose-elias-alvarez/null-ls.nvim' },
+    { 'nvimtools/none-ls.nvim' },
     {
       'williamboman/mason.nvim',
       cmd = { 'Mason', 'MasonInstall', 'MasonUpdate' },
