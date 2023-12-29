@@ -23,19 +23,17 @@ function M.diagnostic_icon_by_severity(severity)
   return icon, highlight
 end
 
-local jump_opts = {
-  float = {
-    prefix = function(diagnostic)
-      local icon, highlight = M.diagnostic_icon_by_severity(diagnostic.severity)
-      return icon .. ' ', highlight
-    end,
-  },
-}
-function M.diagnostic_prev()
-  vim.diagnostic.goto_prev(jump_opts)
+local diagnostic_prefix = function(diagnostic)
+  local icon, highlight = M.diagnostic_icon_by_severity(diagnostic.severity)
+  return icon .. ' ', highlight
 end
-function M.diagnostic_next()
-  vim.diagnostic.goto_next(jump_opts)
+-- credit: https://www.joshmedeski.com/
+M.diagnostic_goto = function(next, severity)
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go({ severity = severity, float = { prefix = diagnostic_prefix } })
+  end
 end
 
 function M.setup()

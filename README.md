@@ -1,6 +1,6 @@
 # 🏠 dotfiles
 
-## Windwos
+## Windows
 
 1. Install Chocolatey & Git Bash with PowerShell
 
