@@ -104,8 +104,8 @@ return {
         ['<M-space>'] = mapping_open_suggetions(),
         ['<CR>'] = cmp.mapping({
           i = function(fallback)
-            if cmp.visible() and cmp.get_active_entry() then
-              cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+            if cmp.visible() then
+              cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
             else
               fallback()
             end
@@ -114,13 +114,15 @@ return {
         }),
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+            cmp.confirm({ select = true })
           elseif luasnip.expand_or_locally_jumpable() then
             luasnip.expand_or_jump()
           -- elseif has_words_before() then
           --   cmp.complete()
           elseif tab_out_available() then
             feedkeys('<Right>', 'n')
+          elseif vim.api.nvim_get_mode().mode == 's' then
+            feedkeys('<C-o>e<Esc>a')
           else
             fallback()
           end
