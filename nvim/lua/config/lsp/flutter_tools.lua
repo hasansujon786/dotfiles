@@ -84,6 +84,12 @@ return {
       end
     end)
 
+    augroup('MY_DART_LSP_AUGROUP')(function(autocmd)
+      autocmd('User', function()
+        vim.lsp.semantic_tokens.force_refresh()
+      end, { pattern = 'LspProgressUpdate', once = true })
+    end)
+
     require('config.lsp.servers.flutter.pub').setup()
     augroup('MY_FLUTTER_AUGROUP')(function(autocmd)
       autocmd({ 'FileType' }, 'setlocal nonumber norelativenumber signcolumn=no', { pattern = 'log' })

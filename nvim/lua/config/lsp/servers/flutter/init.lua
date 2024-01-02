@@ -38,6 +38,12 @@ keymap('n', '<Plug>FlutterPkgToRelative', function()
   })
   vim.fn['repeat#set'](t('<Plug>FlutterPkgToRelative'))
 end)
+local fix_all = function()
+  vim.lsp.buf.code_action({
+    apply = true,
+    context = { only = { 'source.fixAll' }, diagnostics = {} },
+  })
+end
 
 return {
   setup = function(client, bufnr)
@@ -49,7 +55,7 @@ return {
     -- lua require('project_run.utils').open_tab(vim.fn.getcwd(), 'adb connect 192.168.31.252 && flutter run')
 
     -- Custom code actions
-    keymap('n', '<leader>a.', lsp_command(bufnr, 'edit.fixAll'), desc('Lsp: fix all'))
+    keymap('n', '<leader>a.', fix_all, desc('Lsp: fix all'))
     keymap('n', '<leader>ai', lsp_command(bufnr, 'edit.organizeImports'), desc('Lsp: organize imports'))
     keymap('n', '<leader>am', '<Plug>FlutterPkgToRelative', desc('Lsp: organize imports'))
   end,

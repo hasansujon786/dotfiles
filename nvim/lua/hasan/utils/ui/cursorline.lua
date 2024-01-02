@@ -11,6 +11,7 @@ local force_persist_ft = {
   flutterToolsOutline = true,
   DiffviewFileHistory = true,
   ['neo-tree'] = true,
+  tsplayground = true,
 }
 local force_hide_btype = { prompt = true }
 local force_hide_ftype = {

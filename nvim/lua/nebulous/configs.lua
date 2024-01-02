@@ -33,6 +33,7 @@ M.default = {
     'dap-repl',
     -- dap-float
     'DiffviewFiles',
+    'tsplayground',
   },
   nb_blur_hls = {
     -- numbers
