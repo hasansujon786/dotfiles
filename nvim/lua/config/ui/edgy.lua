@@ -1,7 +1,7 @@
 return {
   'folke/edgy.nvim',
   event = 'VeryLazy',
-  commit = '4ccc1c6',
+  -- commit = '4ccc1c6',
   lazy = true, -- make sure we load this during startup if it is your main colorscheme
   config = function()
     local color = require('hasan.utils.color')
@@ -90,8 +90,8 @@ return {
         ft = 'neo-tree',
         open = 'Neotree filesystem left',
         filter = function(buf, win)
-          local pos = vim.api.nvim_buf_get_var(buf, 'neo_tree_position')
-          if pos == 'current' or require('hasan.utils').is_floating_win(win) then
+          local ok, pos = pcall(vim.api.nvim_buf_get_var, buf, 'neo_tree_position')
+          if ok and pos == 'current' or require('hasan.utils').is_floating_win(win) then
             return false
           end
           return true
