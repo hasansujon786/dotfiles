@@ -1,11 +1,20 @@
 local M = {}
 local api = vim.api
 
-function M.get_global_conf()
+function M.get_lspconfig(lsp_name)
+  local local_conf = M.import_server_local_module(lsp_name)
+  if local_conf ~= nil and local_conf.opts ~= nil then
+    return require('hasan.utils').merge(M.get_setup_opts().default_opts, local_conf.opts)
+  end
+
+  return M.get_setup_opts().default_opts
+end
+
+function M.get_setup_opts()
   return require('config.lsp.util.setup')
 end
 
-function M.get_server_conf(lsp_name)
+function M.import_server_local_module(lsp_name)
   local ok, module = pcall(require, 'config.lsp.servers.' .. lsp_name)
   if ok then
     return module
@@ -46,7 +55,7 @@ function M.install_essential_servers()
   if not ok then
     print('[Mason] Please install mason and try again')
   end
-  local g_conf = M.get_global_conf()
+  local g_conf = M.get_setup_opts()
 
   -- Get mason server names to install
   local masaon_pkgs = g_conf.extra_tools

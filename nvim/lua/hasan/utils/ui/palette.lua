@@ -94,6 +94,7 @@ local function set_custom_highlights()
     DiagnosticUnderlineWarn = { link = 'DiagnosticUnderlineError' },
     DiagnosticUnderlineHint = { link = 'DiagnosticUnderlineError' },
     DiagnosticUnderlineError= { fg = 'none', underline = true, sp = c.red },
+    NullLsInfoBorder        = { link = 'FloatBorder' },
 
   -- /// glance.nvim ///
     GlancePreviewNormal       = { fg = c.fg, bg = c.bg_d },

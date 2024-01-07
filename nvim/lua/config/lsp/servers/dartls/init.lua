@@ -13,11 +13,11 @@
 -- "dart.refactor.move_top_level_to_file"
 -- },
 
-local function lsp_command(bufnr, cmd)
+local function lsp_command(buffer, cmd)
   return function()
-    local arg1 = { path = vim.api.nvim_buf_get_name(bufnr) }
+    local arg1 = { path = vim.api.nvim_buf_get_name(buffer) }
     local action = { command = cmd, arguments = { arg1 } }
-    require('config.lsp.util.extras').execute(action, bufnr, function(err)
+    require('config.lsp.util.extras').execute(action, buffer, function(err)
       if err then
         require('hasan.utils.logger').Logger:error(err)
       end
@@ -46,17 +46,16 @@ local fix_all = function()
 end
 
 return {
-  setup = function(client, bufnr)
-    require('config.lsp.util.setup').default_opts.on_attach(client, bufnr)
-
+  setup = function(_, buffer)
     local function desc(d)
-      return { desc = d, buffer = bufnr }
+      return { desc = d, buffer = buffer }
     end
     -- lua require('project_run.utils').open_tab(vim.fn.getcwd(), 'adb connect 192.168.31.252 && flutter run')
 
     -- Custom code actions
     keymap('n', '<leader>a.', fix_all, desc('Lsp: fix all'))
-    keymap('n', '<leader>ai', lsp_command(bufnr, 'edit.organizeImports'), desc('Lsp: organize imports'))
+    keymap('n', '<leader>ai', lsp_command(buffer, 'edit.organizeImports'), desc('Lsp: organize imports'))
     keymap('n', '<leader>am', '<Plug>FlutterPkgToRelative', desc('Lsp: organize imports'))
   end,
 }
+

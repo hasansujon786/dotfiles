@@ -1,8 +1,8 @@
 local lsp_extras = require('config.lsp.util.extras')
 
-local function server_specific_setup(client, bufnr)
-  local g_conf = lsp_extras.get_global_conf()
-  local local_conf = lsp_extras.get_server_conf(client.name)
+local function load_specific_setup(client, bufnr)
+  local g_conf = lsp_extras.get_setup_opts()
+  local local_conf = lsp_extras.import_server_local_module(client.name)
 
   -- Initialize Local setup ------------------
   if local_conf and local_conf.setup then
@@ -10,7 +10,7 @@ local function server_specific_setup(client, bufnr)
   end
 
   -- Disable defalut formatter ---------------
-  if g_conf ~= nil and not vim.tbl_contains(g_conf.use_builtin_lsp_formatter, client.name) then
+  if not vim.tbl_contains(g_conf.use_builtin_lsp_formatter, client.name) then
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
   end
@@ -32,36 +32,39 @@ end
 
 local M = {
   essential_servers = { -- Index [1] is to install lsp-server with mason, [2] is for lspconfig
-    bashls = { 'bash-language-server' },
+    -- Webdev
     html = { 'html-lsp' },
-    vimls = { 'vim-language-server' },
-    vuels = { 'vetur-vls' },
     cssls = { 'css-lsp' },
-    jsonls = { 'json-lsp' },
     tsserver = { 'typescript-language-server' },
-    tailwindcss = { 'tailwindcss-language-server' },
-    lua_ls = { 'lua-language-server' },
+    jsonls = { 'json-lsp' },
+    -- Frameworkd
     astro = { 'astro-language-server' },
-    -- eslint = { 'eslint-lsp' },
+    volar = { 'vue-language-server' }, -- vuels = { 'vetur-vls' },
+    tailwindcss = { 'tailwindcss-language-server' },
+    -- Lsps
+    bashls = { 'bash-language-server' },
+    lua_ls = { 'lua-language-server' },
+    vimls = { 'vim-language-server' },
     gopls = { 'gopls' },
+    -- Tools
+    -- eslint = { 'eslint-lsp' },
   },
   extra_tools = {
     'stylua',
+    'eslint_d',
     'prettierd',
     'dart-debug-adapter',
   },
-  use_builtin_lsp_formatter = { 'dartls', 'astro' },
+  use_builtin_lsp_formatter = { 'dartls', 'astro', 'null-ls' },
   default_opts = {
     flags = { debounce_text_changes = 500 },
-    capabilities = require('config.lsp.util.extras').update_capabilities('lsp-config'),
-    -- Use an on_attach function to only map the following keys
-    -- after the language server attaches to the current buffer
-    on_attach = function(client, bufnr)
-      lsp_autocmds(client)
-      server_specific_setup(client, bufnr)
-      require('config.lsp.util.keymaps').lsp_buffer_keymaps(client, bufnr)
-    end,
+    capabilities = require('config.lsp.util.extras').update_capabilities('setup.lua'),
   },
+  onLspAttach = function(client, bufnr)
+    require('config.lsp.util.keymaps').lsp_buffer_keymaps(client, bufnr)
+    lsp_autocmds(client)
+    load_specific_setup(client, bufnr)
+  end,
 }
 
 return M

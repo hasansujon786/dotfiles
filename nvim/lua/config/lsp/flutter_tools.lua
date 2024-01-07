@@ -22,7 +22,6 @@ return {
           virtual_text = true,
           virtual_text_str = '■',
         },
-        on_attach = require('config.lsp.servers.flutter').setup,
         capabilities = require('config.lsp.util.extras').update_capabilities('flutter_tools'),
         -- see the link below for details on each option:
         -- https://github.com/dart-lang/sdk/blob/master/pkg/analysis_server/tool/lsp_spec/README.md#client-workspace-configuration
@@ -90,16 +89,13 @@ return {
       vim.notify('No window found', vim.log.levels.WARN)
     end)
 
-    augroup('MY_DART_LSP_AUGROUP')(function(autocmd)
-      autocmd('User', function()
-        vim.lsp.semantic_tokens.force_refresh()
-      end, { pattern = 'LspProgressUpdate', once = true })
-    end)
-
-    require('config.lsp.servers.flutter.pub').setup()
+    require('config.lsp.servers.dartls.pub').setup()
     augroup('MY_FLUTTER_AUGROUP')(function(autocmd)
       autocmd({ 'FileType' }, 'setlocal nonumber norelativenumber signcolumn=no', { pattern = 'log' })
       autocmd({ 'BufWinEnter', 'WinEnter' }, 'normal Gzt', { pattern = '__FLUTTER_DEV_LOG__' })
+      autocmd('User', function()
+        vim.lsp.semantic_tokens.force_refresh()
+      end, { pattern = 'LspProgressUpdate', once = true })
     end)
   end,
 }

@@ -33,6 +33,11 @@ augroup('MY_AUGROUP')(function(autocmd)
   autocmd('BufDelete', 'silent! call remove(g:hasan_telescope_buffers, expand("<abuf>"))')
   autocmd({ 'BufWinEnter', 'WinEnter' }, 'let g:hasan_telescope_buffers[bufnr()] = reltimefloat(reltime())')
 
+  autocmd('LspAttach', function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    require('config.lsp.util.extras').get_setup_opts().onLspAttach(client, args.buf)
+  end)
+
   -- autocmd('VimResized', 'wincmd =') -- Vim/tmux layout rebalancing
   -- {'FocusLost,WinLeave,BufLeave * :silent! noautocmd w'}, -- auto save
   -- {'WinEnter,BufWinEnter *.vim,*.js,*.lua call hasan#boot#highligt_ruler(1)'},
