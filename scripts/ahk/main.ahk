@@ -185,4 +185,14 @@ winMode := 0
   }
 #HotIf
 
+ytRemovetFromWL() {
+  Send("{LButton}")
+  sleep(100)
+  Send("{tab}")
+  Send("{tab}")
+  Send("{tab}")
+  Send("{Enter}")
+}
+~LAlt & LButton::ytRemovetFromWL()
+
 #Include %A_ScriptDir%\vim_explorer.ahk

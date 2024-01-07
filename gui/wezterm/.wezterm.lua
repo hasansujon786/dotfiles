@@ -37,33 +37,23 @@ wezterm.on('update-right-status', function(window, _)
   window:set_right_status(wezterm.format(elements))
 end)
 
--- wezterm.on('window-config-reloaded', function(window, pane)
---   window:toast_notification('wezterm', 'configuration reloaded!', nil, 4000)
--- end)
-
--- wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
---   return ' ' .. tab.active_pane.title .. ' '
--- end)
-
-wezterm.on('toggle-opacity', function(window, _)
-  local overrides = window:get_config_overrides() or {}
-  if not overrides.window_background_opacity then
-    overrides.window_background_opacity = 0.5
-  else
-    overrides.window_background_opacity = nil
-  end
-  window:set_config_overrides(overrides)
-end)
-
 local is_tab_bar_forced_hidden = false
 wezterm.on('toggle-tab-bar', function(window, _)
   local overrides = window:get_config_overrides() or {}
 
   overrides.enable_tab_bar = not overrides.enable_tab_bar
   is_tab_bar_forced_hidden = not overrides.enable_tab_bar
-
   window:set_config_overrides(overrides)
 end)
+
+local bg_opacity = 0.96
+local function toggle_opacity(window, _)
+  local overrides = window:get_config_overrides() or {}
+
+  bg_opacity = bg_opacity > 0.9 and 0.9 or 0.96
+  overrides.window_background_opacity = bg_opacity
+  window:set_config_overrides(overrides)
+end
 
 return {
   initial_rows = 29,
@@ -116,7 +106,7 @@ return {
   default_prog = { 'C:\\Program Files\\Git\\bin\\bash.exe' },
   default_cwd = 'E:\\repoes',
   -- default_gui_startup_args = {'start'}
-  window_background_opacity = 0.96,
+  window_background_opacity = bg_opacity,
   -- window_background_image = 'C:\\Users\\hasan\\Pictures\\do-more-y3.jpg'
   -- tab_bar_at_bottom = true,
   unzoom_on_switch_pane = true,
@@ -182,7 +172,6 @@ return {
     },
 
     -- { key = ',', mods = 'ALT', action = 'ShowTabNavigator' },
-    -- { key = 'b', mods = 'LEADER', action = act({ EmitEvent = 'toggle-opacity' }) },
     { key = 'r', mods = 'CTRL|SHIFT', action = wezterm.action_callback(wezterm.reload_configuration) },
     { key = 't', mods = 'SHIFT|ALT', action = act({ EmitEvent = 'toggle-tab-bar' }) },
     { key = 'w', mods = 'SHIFT|CTRL', action = act({ CloseCurrentPane = { confirm = false } }) },
@@ -220,6 +209,7 @@ return {
     { key = 'o', mods = 'LEADER', action = 'ActivateLastTab' },
     { key = 'v', mods = 'LEADER', action = act({ SplitHorizontal = {} }) },
     { key = 's', mods = 'LEADER', action = act({ SplitVertical = {} }) },
+    { key = 'b', mods = 'LEADER|CTRL', action = wezterm.action_callback(toggle_opacity) },
 
     -- Custom inputs
     { key = ' ', mods = 'CTRL', action = { SendString = '\x11' } },

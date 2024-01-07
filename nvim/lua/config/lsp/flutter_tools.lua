@@ -75,13 +75,19 @@ return {
     command('FlutterLogOpen', function(_)
       require('hasan.nebulous').mark_as_alternate_win()
       local winFound = require('hasan.utils.win').focusWinIfExists('log')
-      if not winFound then
-        if require('hasan.core.state').ui.edgy.open_flutter_log_on_right then
-          vim.cmd([[26vsplit | b __FLUTTER_DEV_LOG__]])
-        else
-          vim.cmd([[26split | b __FLUTTER_DEV_LOG__]])
+      if winFound then
+        return
+      end
+      local splitCmd = require('hasan.core.state').ui.edgy.open_flutter_log_on_right and '26vsplit' or '26split'
+
+      for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+        local bufname = vim.api.nvim_buf_get_name(bufnr)
+        if string.match(bufname, '__FLUTTER_DEV_LOG__') ~= nil then
+          vim.cmd(splitCmd .. ' | b __FLUTTER_DEV_LOG__')
+          return
         end
       end
+      vim.notify('No window found', vim.log.levels.WARN)
     end)
 
     augroup('MY_DART_LSP_AUGROUP')(function(autocmd)

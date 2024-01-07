@@ -106,6 +106,26 @@ wezterm.on('augment-command-palette', function(window, pane)
     },
   }
 end)
+
+-- { key = 'b', mods = 'LEADER', action = act({ EmitEvent = 'toggle-opacity' }) },
+wezterm.on('toggle-opacity', function(window, _)
+  local overrides = window:get_config_overrides() or {}
+  if not overrides.window_background_opacity then
+    overrides.window_background_opacity = 0.5
+  else
+    overrides.window_background_opacity = nil
+  end
+  window:set_config_overrides(overrides)
+end)
+
+-- wezterm.on('window-config-reloaded', function(window, pane)
+--   window:toast_notification('wezterm', 'configuration reloaded!', nil, 4000)
+-- end)
+
+-- wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
+--   return ' ' .. tab.active_pane.title .. ' '
+-- end)
+
 ```
 
 ## Debug
