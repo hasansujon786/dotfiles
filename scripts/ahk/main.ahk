@@ -89,24 +89,18 @@ $Escape::superEscape()
 ;******************************************************************************
 ; Layout
 ;******************************************************************************
+layout_loading := 0
 current_layout := 0
-#p::{
-  Global current_layout := 0
-  layoutCode()
-}
-#o::{
-  Global current_layout := 1
-  layoutCodeFloat()
-}
-#'::{
-  if (current_layout == 0) {
-    Global current_layout := 1
-    layoutCodeFloat()
-  }  else if (current_layout == 1){
-    Global current_layout := 0
-    layoutCode()
+#p::changeLayoutTo("code")
+#o::changeLayoutTo("focus_custom")
+#'::toggleLayout()
+
+#HotIf layout_loading
+  LWin::{
+    return
   }
-}
+#HotIf
+
 ; #[::winPinToSide("left", true)
 ; #]::winPinToSide("right", true)
 

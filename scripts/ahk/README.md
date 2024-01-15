@@ -222,4 +222,9 @@ Return
   ; If (A_PriorKey = hk)
   ;   alternateTab()
 Return
-```
+
+$RAlt::
+    Click, Down
+    KeyWait, RAlt
+    Click, Up
+return

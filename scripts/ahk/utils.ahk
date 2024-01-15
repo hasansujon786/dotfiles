@@ -250,9 +250,7 @@ toggleAlwaysOnTop() {
 ;******************************************************************************
 alternateTab() {
   Send("{alt down}")
-  Sleep(5)
   Send("{tab}")
-  Sleep(5)
   Send("{alt up}")
 }
 ; Extracts the application title from the window's full title
@@ -290,25 +288,47 @@ switchBetweenSameApps() {
 ;******************************************************************************
 ; Custom layout
 ;******************************************************************************
-layoutCodeFloat() {
-  ; beep()
-  layout_winAction("ahk_exe brave.exe", "brave.exe", "full")
-  ; layout_winAction("ahk_exe chrome.exe", "chrome.exe", "full")
+; "wt.exe", "ahk_exe WindowsTerminal.exe" ; "Code.exe", "ahk_exe Code.exe"
+EDITOR_EXE := ["wezterm-gui.exe", "ahk_exe wezterm-gui.exe"]
+BROWSER_EXE := ["brave.exe", "ahk_exe brave.exe"] ; chrome.exe
 
-  layout_winAction("ahk_exe wezterm-gui.exe", "wezterm-gui.exe", "center")
-  ; layout_winAction("ahk_exe WindowsTerminal.exe", "wt.exe", "center")
-  ; layout_winAction("ahk_exe Code.exe", "Code.exe", "center")
+changeLayoutTo(layoutName) {
+  Global layout_loading := 1
+
+  Switch layoutName {
+  Case "code":
+    Global current_layout := 0
+    layoutAction(BROWSER_EXE[2], BROWSER_EXE[1], "right")
+    Send("{ESC}")
+    layoutAction(EDITOR_EXE[2], EDITOR_EXE[1], "left")
+
+  Case "float":
+    Global current_layout := 1
+    layoutAction(BROWSER_EXE[2], BROWSER_EXE[1], "maximized")
+    layoutAction(EDITOR_EXE[2], EDITOR_EXE[1], "center")
+
+  Case "focus":
+    Global current_layout := 1
+    layoutAction(BROWSER_EXE[2], BROWSER_EXE[1], "maximized")
+    layoutAction(EDITOR_EXE[2], EDITOR_EXE[1], "maximized")
+
+  Case "focus_custom":
+    Global current_layout := 1
+    layoutAction(BROWSER_EXE[2], BROWSER_EXE[1], "maximized")
+    layoutAction(EDITOR_EXE[2], EDITOR_EXE[1], "maximized_custom")
+
+  ; Default:
+  }
+  Global layout_loading := 0
 }
-layoutCode() {
-  ; beep()
-  layout_winAction("ahk_exe brave.exe", "brave.exe", "right")
-  ; layout_winAction("ahk_exe chrome.exe", "chrome.exe", "right")
-  Send("{ESC}")
-  layout_winAction("ahk_exe wezterm-gui.exe", "wezterm-gui.exe", "left")
-  ; layout_winAction("ahk_exe WindowsTerminal.exe", "wt.exe", "left")
-  ; layout_winAction("ahk_exe Code.exe", "Code.exe", "left")
+toggleLayout() {
+  if (current_layout == 0) {
+    changeLayoutTo("focus_custom")
+  }  else if (current_layout == 1){
+    changeLayoutTo("code")
+  }
 }
-layout_winAction(EXE_FULL, EXE, side) {
+layoutAction(EXE_FULL, EXE, side) {
   autoExitFullScreen()
 
   if (not WinExist(EXE_FULL)) {
@@ -318,19 +338,24 @@ layout_winAction(EXE_FULL, EXE, side) {
       Run(EXE)
     }
     ErrorLevel := !WinWait(EXE_FULL)
-    layout_selectWin(EXE_FULL, EXE, side)
+    runLayoutAction(EXE_FULL, EXE, side)
     return
   }
-  layout_selectWin(EXE_FULL, EXE, side)
+
+  runLayoutAction(EXE_FULL, EXE, side)
 }
-layout_selectWin(EXE_FULL, EXE, side) {
+runLayoutAction(EXE_FULL, EXE, side) {
   if (WinExist(EXE_FULL)) {
     WinActivate(EXE_FULL)
 
     if(side == "center") {
       resetWin()
-    } else if (side == "full") {
+    } else if (side == "maximized") {
       WinMaximize("A")
+    } else if (side == "maximized_custom") {
+      WinMove(-8, 1, A_ScreenWidth + 16, A_ScreenHeight - 30, "A")
+      ; WinMove(, , A_ScreenWidth + 8, A_ScreenHeight - 36, "A")
+      ; centerCurrentWindow()
     } else {
       ; winPinToSide(side, false)
       winPinToSide_custom(side)
@@ -389,12 +414,16 @@ moveWindowX_and_Y(x, y){
   ; mousemove, %mx%, %my%, 0
 }
 centerCurrentWindow() {
-  win_title := WinGetTitle("A")
-  WinGetPos(, , &win_width, &win_height, win_title)
+  try {
+    win_title := WinGetTitle("A")
+    WinGetPos(, , &win_width, &win_height, win_title)
 
-  targetX := (A_ScreenWidth/2) - (win_width/2)
-  targetY := (A_ScreenHeight/2) - (win_height/2)
-  WinMove(targetX, targetY, , , win_title)
+    targetX := (A_ScreenWidth/2) - (win_width/2)
+    targetY := ((A_ScreenHeight - 30)/2) - (win_height/2)
+    WinMove(targetX, targetY, , , win_title)
+  } catch Error as err {
+    P("Error found, could not center the window")
+  }
 }
 winPinToSide(side, checkFullscreen) {
   if (checkFullscreen) {
