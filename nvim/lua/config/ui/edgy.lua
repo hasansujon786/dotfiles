@@ -89,12 +89,9 @@ return {
       {
         ft = 'neo-tree',
         open = 'Neotree filesystem left',
-        filter = function(buf, win)
+        filter = function(buf, _)
           local ok, pos = pcall(vim.api.nvim_buf_get_var, buf, 'neo_tree_position')
-          if ok and pos == 'current' or require('hasan.utils').is_floating_win(win) then
-            return false
-          end
-          return true
+          return ok and pos == 'left'
         end,
         wo = { winbar = false, winhighlight = '' },
       },
@@ -118,6 +115,10 @@ return {
       ft = 'log',
       open = 'FlutterLogOpen',
       wo = { winbar = true, winhighlight = dark_bar },
+      filter = function(_, win)
+        local is_floating_win = vim.api.nvim_win_get_config(win).relative ~= ''
+        return not is_floating_win
+      end,
     })
 
     require('edgy').setup({

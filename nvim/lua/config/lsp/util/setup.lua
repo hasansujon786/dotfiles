@@ -32,12 +32,12 @@ end
 
 local M = {
   essential_servers = { -- Index [1] is to install lsp-server with mason, [2] is for lspconfig
-    -- Webdev
+    -- Frontend
     html = { 'html-lsp' },
     cssls = { 'css-lsp' },
     tsserver = { 'typescript-language-server' },
     jsonls = { 'json-lsp' },
-    -- Frameworkd
+    -- Frameworks
     astro = { 'astro-language-server' },
     volar = { 'vue-language-server' }, -- vuels = { 'vetur-vls' },
     tailwindcss = { 'tailwindcss-language-server' },
