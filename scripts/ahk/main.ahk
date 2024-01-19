@@ -108,7 +108,10 @@ current_layout := 0
 ; AltTabMenu & TaskView Vim Mode
 ;******************************************************************************
 #/::SendInput("^!{Tab}")
-#HotIf WinActive("ahk_class MultitaskingViewFrame") ; or WinActive("ahk_class Windows.UI.Core.CoreWindow")
+#HotIf WinActive("ahk_class MultitaskingViewFrame")
+  or MouseIsOver("ahk_class ApplicationFrameWindow") or MouseIsOver("ahk_class Shell_LightDismissOverlay")
+  ; or WinActive("ahk_class Windows.UI.Core.CoreWindow")
+
   ; *WheelDown::Send {Blind}{Tab}
   ; *WheelUp::Send {Blind}+{Tab}
   q::Send("{Esc}")
