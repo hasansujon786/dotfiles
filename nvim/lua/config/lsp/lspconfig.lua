@@ -3,7 +3,6 @@ return {
   lazy = true,
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
-    { 'folke/neodev.nvim', lazy = true },
     { 'hrsh7th/cmp-nvim-lsp', lazy = true, module = 'cmp_nvim_lsp' },
     { 'williamboman/mason-lspconfig.nvim', lazy = true, module = 'mason-lspconfig' },
     { 'nvimtools/none-ls.nvim' },

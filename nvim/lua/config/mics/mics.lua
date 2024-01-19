@@ -1,5 +1,6 @@
 local nx, nxo = { 'n', 'x' }, { 'n', 'x', 'o' }
 return {
+  { 'folke/neodev.nvim', lazy = true, ft = { 'lua' } },
   { 'nvim-lua/plenary.nvim', lazy = true, module = 'plenary' },
   { 'MunifTanjim/nui.nvim', lazy = true, module = 'nui' },
   { 'tpope/vim-eunuch', lazy = true, cmd = { 'Delete', 'Move', 'Rename', 'Mkdir', 'Chmod' } },
@@ -88,6 +89,15 @@ return {
       { '<leader>fm', '<cmd>TSJToggle<CR>', desc = 'TreeSJ: Toggle' },
       { '<leader>fj', '<cmd>TSJSplit<CR>', desc = 'TreeSJ: Split' },
       { '<leader>fJ', '<cmd>TSJJoin<CR>', desc = 'TreeSJ: Join' },
+    },
+  },
+  {
+    'max397574/better-escape.nvim',
+    lazy = true,
+    event = 'InsertEnter',
+    opts = {
+      mapping = { 'jk' }, -- a table with mappings to use
+      timeout = 350, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
     },
   },
 }

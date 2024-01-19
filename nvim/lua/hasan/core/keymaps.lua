@@ -153,7 +153,7 @@ end, noSilent)
 -- keymap({ 'n', 'v' }, 'z/', '/\\%><C-r>=line("w0")-1<CR>l\\%<<C-r>=line("w$")+1<CR>l', { silent = false })
 
 -- Insert mode ----------------------------------
-keymap({ 'i', 'c' }, 'jk', '<ESC>') -- Use jk to return to normal mode
+-- keymap({ 'i', 'c' }, 'jk', '<ESC>') -- Use jk to return to normal mode
 keymap('t', '<C-o>', '<C-\\><C-n>')
 
 keymap({ 'i', 'c' }, '<A-h>', '<left>', noSilent) -- Move cursor by character
