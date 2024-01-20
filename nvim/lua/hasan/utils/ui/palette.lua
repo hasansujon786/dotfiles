@@ -101,12 +101,12 @@ local function set_custom_highlights()
     GlanceListNormal          = { fg = c.light_grey, bg = c.bg0 },
     GlanceWinBarFilename      = { fg = c.white, bg = c.bg0 },
     GlanceWinBarFilepath      = { fg = c.light_grey, bg = c.bg0 },
-    GlanceWinBarTitle         = { fg = c.light_grey, bg = c.bg1 }, -- reference count
+    GlanceWinBarTitle         = { fg = c.orange, bg = c.bg1 }, -- reference count
     GlanceFoldIcon            = { fg = c.light_grey },
     GlanceListFilename        = { fg = c.white },
     GlanceIndent              = { fg = c.bg1 },
     GlanceBorder              = { fg = c.dark_blue },
-    GlanceListCursorLine      = { bg = '#233d57' },
+    GlanceListCursorLine      = { link = 'Visual' },
     GlancePreviewMatch        = { link = 'LspReferenceText' },
     GlanceListMatch           = { link = 'LspReferenceWrite' },
     GlanceBorderTop           = { link = 'GlanceBorder' },
@@ -246,8 +246,7 @@ local function set_custom_highlights()
   end
 
   local links = {
-    CursorLineFocus = 'Visual',
-    CursorColumn = 'Visual',
+    CursorColumn = 'CursorLineFocus',
     CurSearch = 'IncSearch',
     Folded = 'Comment',
     Conceal = 'String',

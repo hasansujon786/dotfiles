@@ -34,9 +34,10 @@ return {
         -- "/// Neovim Builin ///"
         ['Cursor'] = { bg = '${blue}' },
         ['CursorLineNr'] = { fg = '${fg}' },
-        ['DiagnosticSignInfo'] = { fg = '${cyan}' },
         ['Cursorline'] = { bg = '${bg1}' },
-        ['Visual'] = { bg = '${bg3}' },
+        ['CursorLineFocus'] = { bg = '${bg3}' },
+        ['Visual'] = { bg = '#204364' },
+        ['DiagnosticSignInfo'] = { fg = '${cyan}' },
         ['WinSeparator'] = { fg = '${bg1}' },
         ['StatusLine'] = { fg = '${fg}', bg = '${bg1}' },
         ['IncSearch'] = { fg = '${bg}', bg = '#e86671' },

@@ -191,11 +191,11 @@ return {
         b = { '<cmd>lua require("hasan.utils.color").toggle_bg_tranparent(false)<CR>', 'Toggle transparency' },
         B = 'Toggle Onedark',
 
-        l = { '<cmd>lua require("hasan.utils").toggle("cursorcolumn")<CR>', 'Toggle cursorcolumn' },
-        L = { '<cmd>lua require("hasan.utils").toggle("cursorline")<CR>', 'Toggle cursorline' },
+        l = { '<cmd>lua require("hasan.utils.logger").toggle("cursorcolumn")<CR>', 'Toggle cursorcolumn' },
+        L = { '<cmd>lua require("hasan.utils.logger").toggle("cursorline")<CR>', 'Toggle cursorline' },
         h = { '<cmd>call autohl#_AutoHighlightToggle()<CR>', 'Highlight same words' },
-        s = { '<cmd>lua require("hasan.utils").toggle("spell")<CR>', 'Toggle spell' },
-        w = { '<cmd>lua require("hasan.utils").toggle("wrap")<CR>', 'Toggle wrap' },
+        s = { '<cmd>lua require("hasan.utils.logger").toggle("spell")<CR>', 'Toggle spell' },
+        w = { '<cmd>lua require("hasan.utils.logger").toggle("wrap")<CR>', 'Toggle wrap' },
       },
 
       v = {
