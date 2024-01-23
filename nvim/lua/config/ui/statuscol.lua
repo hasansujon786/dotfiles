@@ -42,7 +42,6 @@ return {
     require('statuscol').setup({
       relculright = relculright,
       segments = {
-        -- { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
         -- {
         --   sign = { name = { 'Diagnostic' }, maxwidth = 2, auto = true },
         --   click = 'v:lua.ScSa',
@@ -72,6 +71,7 @@ return {
           },
           click = 'v:lua.ScSa',
         },
+        -- { text = { require('statuscol.builtin').foldfunc }, click = 'v:lua.ScFa' },
       },
       ft_ignore = {
         'help',

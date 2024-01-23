@@ -77,6 +77,10 @@ vim.opt.fillchars = {
   vertright = '┃',
   verthoriz = '┃',
   diff = '╱',
+  fold = ' ',
+  foldclose = '',
+  foldsep = '',
+  foldopen = '',
 }
 
 o.belloff = 'all' --                             Just turn the dang bell off
@@ -133,8 +137,8 @@ opt.listchars = {
   tab = '→ ',
   nbsp = '␣',
   trail = '•',
-  extends = '',
-  precedes = '',
+  extends = '›',
+  precedes = '‹',
   -- space = "•",
   -- eol = "¬",
 }
@@ -147,6 +151,7 @@ o.foldtext = 'hasan#utils#foldtext()'
 o.foldnestmax = 2 --                             Maximum nesting of folds
 o.foldlevelstart = 99 --                         Sets 'foldlevel' when starting to edit a buffer
 o.foldenable = true --                           Don't fold by default
+-- o.foldcolumn = 'auto:1'
 -- Scroll aside
 o.sidescroll = 1
 o.scrolloff = 1 --                               Set 1 lines to the cursor - when moving vertically using j/k
