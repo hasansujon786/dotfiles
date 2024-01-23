@@ -1,7 +1,7 @@
 return {
   'folke/noice.nvim',
   lazy = true,
-  event = 'VeryLazy',
+  event = 'CursorHold',
   config = function()
     local hover = require('hasan.core.state').ui.hover
 

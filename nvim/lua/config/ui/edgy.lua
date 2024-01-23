@@ -1,6 +1,6 @@
 return {
   'folke/edgy.nvim',
-  event = 'VeryLazy',
+  event = 'WinNew', -- 'VeryLazy'
   -- commit = '4ccc1c6',
   lazy = true, -- make sure we load this during startup if it is your main colorscheme
   config = function()

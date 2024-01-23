@@ -4,6 +4,9 @@ return {
     lazy = true,
     event = { 'BufReadPre', 'BufNewFile' },
     cmd = { 'TSUpdate', 'TSUpdateSync' },
+    keys = {
+      { '<leader>vh', '<Cmd>TSCaptureUnderCursor<CR>', desc = 'Show ts highlight' },
+    },
     config = function()
       -- TSInstallSync javascript typescript tsx org
       local parsers = {
