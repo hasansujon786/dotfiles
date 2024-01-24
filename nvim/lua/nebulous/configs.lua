@@ -12,6 +12,7 @@ M.default = {
     'neo-tree',
     'fzf',
     'floating',
+    'edgy',
     'qf',
     'scratchpad',
     'NeogitStatus',

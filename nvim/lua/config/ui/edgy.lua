@@ -12,28 +12,37 @@ return {
     local bg_dark = '#1E242E'
     local bg_gray = '#2D3343'
 
-    color.fg_bg('EdgyWinBarDark', cyan, bg_dark)
+    color.fg('EdgyTitle', cyan)
     color.fg_bg('EdgyWinBarLight', cyan, bg_gray)
+
     color.fg_bg('EdgyNormalDark', fg, bg_dark)
+    color.fg_bg('EdgyWinBarDark', cyan, bg_dark)
     color.fg_bg('EdgyWinSeparator', bg_gray, bg_dark)
+
+    local left_chars = 'horiz:━,horizup:x,horizdown:x,vert:┃,vertleft:┃,vertright:x,verthoriz:x,eob: ,'
+    -- left_chars =
+    --   'stl: ,stlnc: ,wbr: ,horiz:─,horizup:x,horizdown:x,vert:┃,vertleft:┃,vertright:x,verthoriz:x,fold:1,foldopen:2,foldclose:3,foldsep:4,diff:5,msgsep:6,eob: ,lastline:8'
 
     local dark_bar = color.make_winhighlight({
       Winbar = 'EdgyWinBarDark',
+      WinBarNC = 'EdgyWinBarDark',
       EdgyIcon = 'EdgyWinBarDark',
       EdgyTitle = 'EdgyWinBarDark',
       EdgyIconActive = 'EdgyWinBarDark',
       Normal = 'EdgyNormalDark',
       WinSeparator = 'EdgyWinSeparator',
-      CursorLine = 'CursorLineFocus',
+      -- CursorLine = 'CursorLineFocus',
     })
 
     local gray_bar = color.make_winhighlight({
       Winbar = 'EdgyWinBarLight',
+      WinBarNC = 'EdgyWinBarLight',
       EdgyIcon = 'EdgyWinBarLight',
       EdgyTitle = 'EdgyWinBarLight',
       EdgyIconActive = 'EdgyWinBarLight',
-      CursorLine = 'CursorLineFocus',
       Normal = 'EdgyNormal',
+      -- WinSeparator = 'EdgyWinSeparator',
+      -- CursorLine = 'CursorLineFocus',
     })
 
     local custom_color_ft = { 'floaterm' }
@@ -88,18 +97,20 @@ return {
       },
       {
         ft = 'neo-tree',
+        pinned = false,
         open = 'Neotree filesystem left',
         filter = function(buf, _)
           local ok, pos = pcall(vim.api.nvim_buf_get_var, buf, 'neo_tree_position')
           return ok and pos == 'left'
         end,
-        wo = { winbar = false, winhighlight = '' },
+        wo = { winbar = false, winhighlight = '', fillchars = left_chars },
       },
       {
         ft = 'Outline',
+        pinned = false,
         open = 'Outline',
         size = { height = 0.4 },
-        wo = { winbar = true, winhighlight = dark_bar },
+        wo = { winbar = true, winhighlight = dark_bar, fillchars = left_chars },
       },
     }
     local right = {
@@ -122,6 +133,8 @@ return {
     })
 
     require('edgy').setup({
+      icons = { closed = '', open = '' },
+      exit_when_last = false,
       bottom = bottom,
       right = right,
       left = left,
