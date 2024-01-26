@@ -146,4 +146,33 @@ function M.gen_from_buffer(opts)
   end
 end
 
+function M.gen_from_tailwindcolors(opts)
+  opts = opts or {}
+
+  local make_display = function(entry)
+    local displayer = entry_display.create({
+      separator = ' ',
+      items = {
+        { width = 2 },
+        { width = 15 },
+        { remaining = true },
+      },
+    })
+
+    return displayer({
+      { 'x', 'TelescopeResultsNumber' },
+      { entry.ordinal },
+      { entry.value, 'TelescopeResultsComment' },
+    })
+  end
+
+  return function(et)
+    return make_entry.set_default_entry_mt({
+      value = et.hex,
+      ordinal = et.groupName .. '-' .. et.scale,
+      display = make_display,
+    }, opts)
+  end
+end
+
 return M

@@ -71,6 +71,18 @@ local local_action = transform_mod({
       reveal_force_cwd = true, -- change cwd without asking if needed
     })
   end,
+  put_emoji = function(prompt_bufnr, str, cmd)
+    require('telescope.actions').close(prompt_bufnr)
+    local visual = false
+    local oldReg = { vim.fn.getreg('0'), vim.fn.getregtype('0') }
+
+    vim.fn.setreg('0', str, 'v')
+    vim.cmd('normal! ' .. (visual and 'gv' or 'h') .. '"0' .. cmd .. 'll')
+
+    vim.defer_fn(function()
+      vim.fn.setreg('0', oldReg[1], oldReg[2])
+    end, 100)
+  end,
 })
 
 return local_action

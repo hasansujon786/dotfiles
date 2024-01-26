@@ -11,6 +11,7 @@ local my_theme = require('hasan.telescope.theme')
 local action_set = require('telescope.actions.set')
 local action_state = require('telescope.actions.state')
 local extensions = require('telescope').extensions
+local local_action = require('hasan.telescope.local_action')
 -- local sorters = require 'telescope/sorters'
 
 local conf = require('telescope.config').values
@@ -282,53 +283,78 @@ M.buffers = function(is_cwd_only)
   builtin.buffers(my_theme.get_dropdown(opts))
 end
 
+local function put_mappings(get_entry_value)
+  if not get_entry_value then
+    get_entry_value = function()
+      local entry = action_state.get_selected_entry()
+      return entry.value
+    end
+  end
+
+  return function(_, map)
+    map('n', '<cr>', function(prompt_bufnr)
+      local_action.put_emoji(prompt_bufnr, get_entry_value(), 'p')
+    end)
+    map('n', '<C-t>', function(prompt_bufnr)
+      local_action.put_emoji(prompt_bufnr, get_entry_value(), 'P')
+    end)
+
+    map('i', '<cr>', function(prompt_bufnr)
+      local_action.put_emoji(prompt_bufnr, get_entry_value(), 'p')
+    end)
+    map('i', '<C-t>', function(prompt_bufnr)
+      local_action.put_emoji(prompt_bufnr, get_entry_value(), 'P')
+    end)
+
+    map('i', '<C-v>', nil)
+    map('i', '<C-s>', nil)
+    return true
+  end
+end
+
 -- https://github.com/ikatyang/emoji-cheat-sheet#smileys--emotion
 M.emojis = function()
   local emojis_table = vim.fn.readfile('c:/Users/hasan/dotfiles/bash/emojis.txt', '')
-  local opts = {
-    previewer = false,
-    put_emoji = function(prompt_bufnr, cmd)
-      require('telescope.actions').close(prompt_bufnr)
-      local visual = false
-      local entry = action_state.get_selected_entry()
-      local oldReg = { vim.fn.getreg('0'), vim.fn.getregtype('0') }
-
-      local emo = entry[1]:sub(1, 4)
-      vim.fn.setreg('0', emo, 'v')
-      vim.cmd('normal! ' .. (visual and 'gv' or 'h') .. '"0' .. cmd .. 'll')
-
-      vim.defer_fn(function()
-        vim.fn.setreg('0', oldReg[1], oldReg[2])
-      end, 100)
-    end,
-  }
+  local opts = { previewer = false }
 
   pickers
     .new(my_theme.get_top_panel(opts), {
+      finder = finders.new_table({ results = emojis_table, entry_maker = make_entry.gen_from_string(opts) }),
+      sorter = conf.file_sorter(opts),
+      attach_mappings = put_mappings(function()
+        local entry = action_state.get_selected_entry()
+        return entry[1]:sub(1, 4)
+      end),
+    })
+    :find()
+end
+
+local function get_project_scripts()
+  local data = vim.fn.readfile('C:\\Users\\hasan\\dotfiles\\.system\\src\\tailwind_colors.json')
+  local sc = vim.fn.json_decode(data)
+  if sc == nil then
+    return
+  end
+
+  local list = {}
+  for group, colorScales in pairs(sc) do
+    for scale, hex in pairs(colorScales) do
+      table.insert(list, { groupName = group:lower(), scale = scale, hex = hex })
+    end
+  end
+  return list
+end
+
+M.colors = function()
+  local opts = { previewer = false }
+  pickers
+    .new(my_theme.get_top_panel(opts), {
       finder = finders.new_table({
-        results = emojis_table,
-        entry_maker = opts.entry_maker or make_entry.gen_from_string(opts),
+        results = get_project_scripts(),
+        entry_maker = my_make_entry.gen_from_tailwindcolors(opts),
       }),
       sorter = conf.file_sorter(opts),
-      attach_mappings = function(_, map)
-        map('n', '<cr>', function(prompt_bufnr)
-          opts.put_emoji(prompt_bufnr, 'p')
-        end)
-        map('n', '<C-t>', function(prompt_bufnr)
-          opts.put_emoji(prompt_bufnr, 'P')
-        end)
-
-        map('i', '<cr>', function(prompt_bufnr)
-          opts.put_emoji(prompt_bufnr, 'p')
-        end)
-        map('i', '<C-t>', function(prompt_bufnr)
-          opts.put_emoji(prompt_bufnr, 'P')
-        end)
-
-        map('i', '<C-v>', nil)
-        map('i', '<C-s>', nil)
-        return true
-      end,
+      attach_mappings = put_mappings(),
     })
     :find()
 end

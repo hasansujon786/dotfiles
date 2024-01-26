@@ -279,6 +279,7 @@ install_various_apps() {
   $getter install -y onefetch
   $getter install -y scrcpy
   $getter install -y jq
+  $getter install -y tldr
 
   # util_print taskwarrior
   # apt install taskwarrior

@@ -108,6 +108,7 @@ return {
         f = { '<cmd>call _#Insertion(expand("%:~"))<CR>', 'Current file path' },
         F = { '<cmd>call _#Insertion(expand("%:t"))<CR>', 'Current file name' },
         e = { '<cmd>lua require("hasan.telescope.custom").emojis()<CR>', 'Insert emoji' },
+        c = { '<cmd>lua require("hasan.telescope.custom").colors()<CR>', 'Insert colors' },
         l = {
           t = { '<cmd>call _#Insertion(hasan#utils#placeholderImgTag("300x200"))<CR>', 'Placeholder image tag' },
           k = { '<cmd>call _#Insertion("https://placekitten.com/g/50/50")<CR>', 'Sample image link' },
