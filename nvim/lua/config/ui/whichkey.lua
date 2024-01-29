@@ -124,7 +124,7 @@ return {
 
         o = { '<cmd>lua require("hasan.utils.init").open_git_remote(true)<CR>', 'Open git repo' },
         O = { '<cmd>lua require("hasan.utils.init").open_git_remote(false)<CR>', 'Open git repo with file' },
-        -- ['.'] = { '<cmd>silent !git add %<CR>', 'Git: Stage current file' },
+        ['.'] = { '<cmd>silent !git add %<CR>', 'Git: Stage file' },
         -- f = { '<cmd>diffget //2<cr>',                      'diffget ours' },
         -- j = { '<cmd>diffget //3<CR>',                      'diffget theirs' },
       },
@@ -230,8 +230,8 @@ return {
       r = { '<cmd>lua require("hasan.utils.ui").cycle_numbering()<CR>', 'Cycle number' },
       x = { '<cmd>call hasan#utils#buffer#_open_scratch_buffer()<CR>', 'Scratch buffer' },
 
-      ['>'] = common.buffers_all,
-      ['.'] = common.buffers_cwd,
+      ['.'] = common.buffers_all,
+      ['m'] = common.buffers_cwd,
     }
 
     local leader_visual = {

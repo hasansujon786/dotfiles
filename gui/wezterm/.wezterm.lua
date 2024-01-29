@@ -265,7 +265,8 @@ return {
   },
   command_palette_bg_color = '#222222',
   command_palette_fg_color = '#c0c0c0',
-  command_palette_font_size = 14.0,
+  command_palette_font_size = 16.0,
+  command_palette_rows = 24,
   color_scheme = 'OneHalfDark',
   colors = {
     background = '#242B38',
@@ -279,4 +280,8 @@ return {
       },
     },
   },
+  -- window_frame = {
+  --   inactive_titlebar_bg = 'none',
+  --   active_titlebar_bg = 'none',
+  -- },
 }

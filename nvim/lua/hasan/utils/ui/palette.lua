@@ -220,6 +220,7 @@ local function set_custom_highlights()
     FlashMatch = { fg = c.fg, bg = c.bg3 },
     FlashLabel = { fg = c.black, bg = c.green },
     NoiceMini    = { bg = '#000000' },
+    NoiceFormatConfirmDefault  = { link = 'LazyButton' },
     LazyButton   = { bg = '#3E425D', fg = c.fg },
     LazyButtonActive = { link = 'WildMenu' },
     LazyNormal       = { link = 'NormalFloatFlat' },

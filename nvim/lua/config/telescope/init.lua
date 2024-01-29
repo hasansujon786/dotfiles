@@ -149,6 +149,7 @@ return {
       keymap('n', '<leader><leader>', project_files, { desc = 'Find project file' })
       keymap('n', '<C-p>', '<cmd>lua require("telescope.builtin").oldfiles()<CR>')
       keymap('n', '<A-x>', '<cmd>lua require("hasan.telescope.custom").commands()<CR>')
+      keymap('n', 'g.', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>', { desc = 'which_key_ignore' })
       keymap('n', '//', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>', { desc = 'which_key_ignore' })
       keymap('v', '/', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>', { desc = 'which_key_ignore' })
       keymap({ 'n', 'v' }, '<A-/>', '<cmd>lua require("hasan.telescope.custom").grep_string()<CR>')

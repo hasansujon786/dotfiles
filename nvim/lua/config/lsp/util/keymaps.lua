@@ -1,6 +1,6 @@
 local M = {}
 
-function M.lsp_buffer_keymaps(_, bufnr)
+function M.lsp_buffer_keymaps(client, bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
   local function desc(str)
     return require('hasan.utils').merge({ desc = str }, opts or {})
@@ -30,8 +30,10 @@ function M.lsp_buffer_keymaps(_, bufnr)
   -- Action, Prompt, Search
   keymap('n', 'K', vim.lsp.buf.hover, desc('Lsp: hover under cursor'))
   keymap('n', '<F2>', require('config.lsp.util.extras').lspRename, desc('Lsp: rename under cursor'))
-  keymap('n', 'go', require('hasan.telescope.lsp').prettyDocumentSymbols, desc('Lsp: document symbols'))
-  keymap('n', 'g.', require('hasan.telescope.lsp').prettyDocumentSymbols, desc('Lsp: document symbols'))
+  if client.server_capabilities.documentSymbolProvider then
+    keymap('n', 'go', require('hasan.telescope.lsp').prettyDocumentSymbols, desc('Lsp: document symbols'))
+    keymap('n', '//', require('hasan.telescope.lsp').prettyDocumentSymbols, desc('Lsp: document symbols'))
+  end
   for _, action_key in ipairs({ '<C-q>', '<C-space>', '<A-space>' }) do
     keymap({ 'n', 'x' }, action_key, vim.lsp.buf.code_action, desc('Lsp: code action'))
   end
