@@ -6,15 +6,20 @@ return {
   config = function()
     local null_ls = require('null-ls')
     local b = null_ls.builtins -- https://github.com/nvimtools/none-ls.nvim/blob/main/doc/MAIN.md
+    local eslint_d = {
+      condition = function(utils)
+        return utils.root_has_file({ '.eslintrc.js', '.eslintrc.json' })
+      end,
+    }
     local sources = {
       b.formatting.stylua,
 
       -- b.diagnostics.todo_comments
 
       b.formatting.prettierd,
-      b.diagnostics.eslint_d,
-      b.code_actions.eslint_d,
-      b.formatting.eslint_d,
+      b.diagnostics.eslint_d.with(eslint_d),
+      b.code_actions.eslint_d.with(eslint_d),
+      b.formatting.eslint_d.with(eslint_d),
     }
 
     local augroup = vim.api.nvim_create_augroup('LspFormatting', {})

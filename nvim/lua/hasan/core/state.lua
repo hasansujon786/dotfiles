@@ -20,7 +20,7 @@ M.ui = {
   telescope_border_style = 'edged',
   hover = {
     -- winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
-    winhighlight = 'Normal:Pmenu,FloatBorder:CmpBorder,CursorLine:Visual,Search:None',
+    winhighlight = 'Normal:Pmenu,FloatBorder:CmpBorder,CursorLine:CursorLineFocus,Search:None',
     border = { '🭽', '▔', '🭾', '▕', '🭿', '▁', '🭼', '▏' },
   },
   edgy = {
