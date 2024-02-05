@@ -64,6 +64,7 @@ return {
         ['@tag.delimiter'] = { link = '@punctuation.bracket' },
         ['@punctuation.bracket.tsx'] = { link = '@punctuation.bracket' },
         ['@punctuation.bracket.typescript'] = { link = '@punctuation.bracket' },
+        ['@odp.statement.punctuation.bracket.javascript'] = { link = '@punctuation.bracket' },
         ['@punctuation.bracket.lua'] = { link = '@punctuation.bracket' },
         -- global treesitter
 

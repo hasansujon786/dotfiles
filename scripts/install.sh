@@ -268,7 +268,7 @@ install_various_apps() {
   $getter install -y python
   # c:\python39\python.exe -m pip install --upgrade pip
   # pip install --user --upgrade pynvim
-  # python -m pip install --upgrade Pillow
+  python -m pip install --upgrade Pillow
   # python -m pip install --upgrade mupdf
 
   util_print rust
