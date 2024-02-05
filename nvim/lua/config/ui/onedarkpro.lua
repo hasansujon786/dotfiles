@@ -70,6 +70,8 @@ return {
 
         -- ts,js
         ['@tag.attribute.tsx'] = { link = '@tag.attribute' },
+        ['@tag.tsx'] = { link = '@type' },
+        ['@tag.javascript'] = { link = '@tag.tsx' },
 
         -- css
         ['@css'] = { fg = '${orange}' },

@@ -6,19 +6,9 @@
   },
   "auto grid2": {
     "prefix": "gacm",
-    "body": ["grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));"],
-    "description": "Create auto grid columns witn min()"
-  },
-  "debug css": {
-    "prefix": "dbug",
     "body": [
-      ".dbug *:not(path):not(g) {",
-      "  color: hsla(210, 100%, 100%, 0.9) !important;",
-      "  background: hsla(210, 100%, 50%, 0.5) !important;",
-      "  outline: solid 0.25rem hsla(210, 100%, 100%, 0.5) !important;",
-      "  box-shadow: none !important;",
-      "}"
+      "grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));"
     ],
-    "description": "css debug"
+    "description": "Create auto grid columns witn min()"
   }
 }

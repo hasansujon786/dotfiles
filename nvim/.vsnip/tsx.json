@@ -1,0 +1,12 @@
+{
+  "interfactProps": {
+    "prefix": "propsic",
+    "body": "interface Props extends React.ComponentPropsWithoutRef<'div'>  { }",
+    "description": "Props with html element ref"
+  },
+  "typeProps": {
+    "prefix": "propstype",
+    "body": "type Props = React.ComponentPropsWithoutRef<'button'> & {}",
+    "description": "Props with html element ref"
+  }
+}

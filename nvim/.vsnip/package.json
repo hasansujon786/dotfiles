@@ -22,14 +22,20 @@
           "javascriptreact",
           "typescriptreact"
         ],
-        "path": "./javascriptreact.json"
+        "path": "./jsx.json"
       },
       {
         "language": [
           "javascript",
-          "typescript"
+          "typescript",
+          "javascriptreact",
+          "typescriptreact"
         ],
         "path": "./javascript_typescript.json"
+      },
+      {
+        "language": "typescriptreact",
+        "path": "./tsx.json"
       },
       {
         "language": [
@@ -42,19 +48,19 @@
         "path": "./html.json"
       },
       {
-        "language": [
-          "html",
-          "javascript"
-        ],
-        "path": "./dbgcss.json"
-      },
-      {
         "language": "dart",
         "path": "./dart.json"
       },
       {
         "language": "dart",
         "path": "../../../AppData/Local/nvim-data/lazy/friendly-snippets/snippets/frameworks/flutter.json"
+      },
+      {
+        "language": [
+          "html",
+          "javascript"
+        ],
+        "path": "./dbgcss.json"
       }
     ]
   }
