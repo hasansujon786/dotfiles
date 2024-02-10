@@ -145,11 +145,10 @@ return {
       require('hasan.telescope.theme').setup()
 
       -- keymaps
-      local project_files = '<cmd>lua require("hasan.telescope.custom").project_files()<cr>'
-      keymap('n', '<leader><leader>', project_files, { desc = 'Find project file' })
+      local pfiles_opt = { desc = 'Find project file' }
+      keymap('n', '<leader><leader>', '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', pfiles_opt)
       keymap('n', '<C-p>', '<cmd>lua require("telescope.builtin").oldfiles()<CR>')
       keymap('n', '<A-x>', '<cmd>lua require("hasan.telescope.custom").commands()<CR>')
-      keymap('n', 'g.', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>', { desc = 'which_key_ignore' })
       keymap('n', '//', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>', { desc = 'which_key_ignore' })
       keymap('v', '/', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>', { desc = 'which_key_ignore' })
       keymap({ 'n', 'v' }, '<A-/>', '<cmd>lua require("hasan.telescope.custom").grep_string()<CR>')

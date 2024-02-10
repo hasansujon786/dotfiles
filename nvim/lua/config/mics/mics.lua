@@ -17,17 +17,21 @@ return {
   {
     'dhruvasagar/vim-open-url',
     keys = {
-      { 'gB', desc = 'Url: Open on browser', mode = nx },
-      { 'g<CR>', desc = 'Url: Search on Dukdukgo', mode = nx },
-      { 'gG', desc = 'Url: Search on Google', mode = nx },
+      { 'gB', '<Plug>(open-url-browser)', desc = 'Url: Open on browser', mode = nx },
+      { 'gG', '<Plug>(open-url-search-google)', desc = 'Url: Search on Google', mode = nx },
     },
     cmd = 'OpenURL',
+    init = function()
+      vim.g.open_url_default_mappings = 0
+    end,
   },
   {
     'mg979/vim-visual-multi',
     keys = {
       { 'gb', '<Plug>(VM-Find-Under)', desc = 'VM: Select under cursor', mode = 'n' },
       { 'gb', '<Plug>(VM-Find-Subword-Under)', desc = 'VM: Select under cursor', mode = 'x' },
+      { 'g<cr>', '<Plug>(VM-Select-All)', desc = 'VM: Select under cursor', mode = 'n' },
+      { 'g<cr>', '<Plug>(VM-Visual-All)', desc = 'VM: Select under cursor', mode = 'x' },
       { '<leader>n', mode = nx },
       { '<C-n>', mode = nx },
       { '<C-up>', mode = nx },

@@ -32,7 +32,7 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', '<F2>', require('config.lsp.util.extras').lspRename, desc('Lsp: rename under cursor'))
   if client.server_capabilities.documentSymbolProvider then
     keymap('n', 'go', require('hasan.telescope.lsp').prettyDocumentSymbols, desc('Lsp: document symbols'))
-    keymap('n', '//', require('hasan.telescope.lsp').prettyDocumentSymbols, desc('Lsp: document symbols'))
+    keymap('n', 'g.', require('hasan.telescope.lsp').prettyDocumentSymbols, desc('Lsp: document symbols'))
   end
   for _, action_key in ipairs({ '<C-q>', '<C-space>', '<A-space>' }) do
     keymap({ 'n', 'x' }, action_key, vim.lsp.buf.code_action, desc('Lsp: code action'))
