@@ -27,5 +27,20 @@
     "prefix": "cl",
     "body": "console.log($0)",
     "description": "console log"
+  },
+  "export all": {
+    "prefix": "exfrom",
+    "body": "export * from './$0'",
+    "description": "export all"
+  },
+  "export default": {
+    "prefix": "exasdefault",
+    "body": "export { default as ${2:modulename} } from './$1'",
+    "description": "export as default"
+  },
+  "jsxClassName": {
+    "prefix": "cn",
+    "body": "className='$0'",
+    "description": "jsx className"
   }
 }

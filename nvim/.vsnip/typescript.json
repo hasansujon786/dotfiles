@@ -1,0 +1,13 @@
+{
+  "value as union type": {
+    "prefix": "typeofkeyof",
+    "body": "type Route = (typeof ${1:routes})[keyof typeof ${1:routes}]",
+    "description": "get object values as union type"
+  },
+  "typePrettify": {
+    "prefix": "typePrettify",
+    "body": ["type Prettify<T> = {", "  [K in keyof T]: T[K]", "} & {}"],
+    "description": "Prettify any nested type"
+  }
+}
+

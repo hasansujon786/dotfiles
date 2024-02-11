@@ -1,5 +1,4 @@
 local ls = require('luasnip')
-local shared = require('snips.js_shared')
 
 local s = ls.snippet
 local i = ls.insert_node
@@ -15,8 +14,6 @@ local fmt = require('luasnip.extras.fmt').fmt
 local rep = require('luasnip.extras').rep
 
 ls.add_snippets('typescript', {
-  shared.exim,
-  shared.eximDefault,
   s(
     '_scaffoldGoToRoute',
     fmt(
@@ -33,8 +30,7 @@ ls.add_snippets('typescript', {
         console.log('goToRoute', route)
       }}
       ]],
-      {
-      }
+      {}
     )
   ),
 }, { key = 'my_ts_snips' })

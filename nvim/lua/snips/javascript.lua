@@ -1,5 +1,4 @@
 local ls = require('luasnip')
-local shared = require('snips.js_shared')
 
 local s = ls.snippet
 local i = ls.insert_node
@@ -69,7 +68,4 @@ ls.add_snippets('javascript', {
       }
     )
   ),
-  shared.jsxClassName,
-  shared.exim,
-  shared.eximDefault,
 }, { key = 'my_js_snips' })

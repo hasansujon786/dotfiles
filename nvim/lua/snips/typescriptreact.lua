@@ -1,5 +1,4 @@
 local ls = require('luasnip')
-local shared = require('snips.js_shared')
 local common = require('snips.common')
 
 local s = ls.snippet
@@ -16,7 +15,6 @@ local fmt = require('luasnip.extras.fmt').fmt
 local rep = require('luasnip.extras').rep
 
 ls.add_snippets('typescriptreact', {
-  shared.jsxClassName,
   s(
     'useCounterContext',
     fmt(
