@@ -1,30 +1,31 @@
+sideBarCnn :=  "SysTreeView321"
+explorerCnn := "DirectUIHWND3" ; DirectUIHWND2
 ;******************************************************************************
 ; Explorer Vim Mode
 ;******************************************************************************
-explorerInsertMode := false
+isExplInsertMode := false
 explorerToggleInsert() {
-  if (explorerInsertMode) {
+  if (isExplInsertMode) {
     ToolTip()
-    Global explorerInsertMode := false
+    Global isExplInsertMode := false
   } else {
     WinGetPos(&X, &Y, &Width, &Height)
     ToolTip("INSERT", 10, Height - 35)
-    Global explorerInsertMode := true
+    Global isExplInsertMode := true
   }
 }
-focusContent() {
-  ControlFocus("DirectUIHWND2", "A")
+focusFirstItem() {
   ; Show focus item
   Send("{Down}")
   Send("{Up}")
   Send("{Right}")
   Send("{Left}")
 }
-#HotIf WinActive("ahk_class CabinetWClass") && explorerInsertMode
+#HotIf WinActive("ahk_class CabinetWClass") && isExplInsertMode
   Esc::{
     if(ControlGetClassNN(ControlGetFocus("A")) == "Windows.UI.Core.CoreWindow1") {
       explorerToggleInsert()
-      focusContent()
+      ControlFocus(explorerCnn, "A")
     } else {
       explorerToggleInsert()
       Send("{Esc}")
@@ -34,13 +35,13 @@ focusContent() {
     if(ControlGetClassNN(ControlGetFocus("A")) == "Windows.UI.Core.CoreWindow1") {
       explorerToggleInsert()
       sleep(700)
-      focusContent()
+      ControlFocus(explorerCnn, "A")
     } else {
       explorerToggleInsert()
     }
   }
 #HotIf
-#HotIf WinActive("ahk_class CabinetWClass") && !explorerInsertMode
+#HotIf WinActive("ahk_class CabinetWClass") && !isExplInsertMode
   i::explorerToggleInsert()
 
   ; Navigation
@@ -52,15 +53,32 @@ focusContent() {
   +g::Send("{End}")
   +h::Send("!{Up}")
   +l::Send("!{Left}")
+  -::Send("!{Up}")
 
   ; Scroll
   ^u::
   !u::Send("{PgUp}")
   ^d::
+  !o::
   !d::Send("{PgDn}")
 
+  ; File management
+  d::Send("^x")
+  y::Send("^c")
+  p::Send("^v")
+  +d::Send("{Delete}")
+  r::{
+    Send("{F2}")
+    explorerToggleInsert()
+  }
+  ^+n::
+  +o::{
+    Send("^+n")
+    explorerToggleInsert()
+  }
+
+
   q::Send("!{F4}")
-  x::Send("{Delete}")
   u::Send("^z")
   ^r::Send("^y")
   ^k::{
@@ -74,39 +92,28 @@ focusContent() {
     Send("^f")
   }
   f::{
-    Global explorerInsertMode := true
+    Global isExplInsertMode := true
     ihfindChar := InputHook("T1 L1"), ihfindChar.Start(), ihfindChar.Wait(), findChar := ihfindChar.Input
     Send(findChar)
-    Global explorerInsertMode := false
-  }
-
-  r::
-  c::{
-    Send("{F2}")
-    explorerToggleInsert()
-  }
-
-  o::
-  ^+n::
-  +o::{
-    Send("^+n")
-    explorerToggleInsert()
+    Global isExplInsertMode := false
   }
 
   space::{
     focusedControl := ControlGetClassNN(ControlGetFocus())
-    if (focusedControl == "DirectUIHWND2") {
-      ControlFocus("SysTreeView321", "A")
+    if (focusedControl == explorerCnn) {
+      ControlFocus(sideBarCnn, "A")
     } else {
-      ControlFocus("DirectUIHWND2", "A")
+      ControlFocus(explorerCnn, "A")
     }
   }
 
+  o::Send("{Enter}")
   ~Enter::{ ; move cursor to content
     focusedControl := ControlGetClassNN(ControlGetFocus())
-    if (focusedControl == "SysTreeView321") {
+    if (focusedControl == sideBarCnn) {
       Sleep(100)
-      focusContent()
+      ControlFocus(explorerCnn, "A")
+      focusFirstItem()
     }
   }
 #HotIf
