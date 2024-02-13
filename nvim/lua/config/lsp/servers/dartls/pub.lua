@@ -88,9 +88,7 @@ M.pub_install = function()
 end
 
 M.setup = function()
-  command('PubInstall', function(_)
-    M.pub_install()
-  end)
+  command('PubInstall', M.pub_install)
 end
 
 return M

@@ -33,7 +33,7 @@ return {
         {
           'Pub install',
           function()
-            require('config.lsp.servers.flutter.pub').pub_install()
+            require('config.lsp.servers.dartls.pub').pub_install()
           end,
           description = 'Install packages in you prorject',
         },

@@ -4,6 +4,11 @@
     "body": ["grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));"],
     "description": "Create auto grid columns"
   },
+  "box-shadow inset": {
+    "prefix": "shadow:border",
+    "body": ["box-shadow:inset 0px 0px 0px 10px #f00;"],
+    "description": "box shadow"
+  },
   "auto grid2": {
     "prefix": "gacm",
     "body": [

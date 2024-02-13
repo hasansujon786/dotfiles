@@ -66,6 +66,7 @@ focusFirstItem() {
   d::Send("^x")
   y::Send("^c")
   p::Send("^v")
+  x::Send("{Delete}")
   +d::Send("{Delete}")
   r::{
     Send("{F2}")
