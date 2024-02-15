@@ -64,11 +64,12 @@ return {
     end,
   },
   {
-    'unblevable/quick-scope',
+    'jinh0/eyeliner.nvim',
     keys = { { 'f', mode = nxo }, { 'F', mode = nxo }, { 't', mode = nxo }, { 'T', mode = nxo } },
-    init = function()
-      vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
-    end,
+    opts = {
+      dim = false,
+      highlight_on_key = true,
+    },
   },
   {
     'Konfekt/vim-CtrlXA',

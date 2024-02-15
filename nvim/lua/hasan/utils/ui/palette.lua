@@ -234,8 +234,8 @@ local function set_custom_highlights()
     VM_Insert = { bg = c.bg3, fg = 'NONE' },
   -- Mix
     MarkSignHL          = { link = 'Comment' },
-    QuickScopePrimary   = { fg = 'tomato', underline = true },
-    QuickScopeSecondary = { fg = '#d78787', underline = true },
+    EyelinerPrimary     = { fg = 'tomato', underline = true },
+    EyelinerSecondary   = { fg = '#d78787', underline = true },
     TabBarInputBorder   = { fg = c.blue, bg = c.bg_d },
     WhichKeySeparator   = { fg = c.grey },
     WhichKeyFloat       = { fg = fg, bg = cursorling_bg },
