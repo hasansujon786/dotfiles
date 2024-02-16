@@ -27,3 +27,4 @@ pip install Pillow
 # choco install Xming -y
 #
 choco install golang -y
+winget install eza-community.eza

@@ -269,6 +269,26 @@ return {
   command_palette_rows = 24,
   color_scheme = 'OneHalfDark',
   colors = {
+    ansi = {
+      '#546178',
+      '#e06c75',
+      '#98c379',
+      '#e5c07b',
+      '#61afef',
+      '#c678dd',
+      '#56b6c2',
+      '#dcdfe4',
+    },
+    brights = {
+      '#546178', -- '#282c34',
+      '#e06c75',
+      '#98c379',
+      '#e5c07b',
+      '#61afef',
+      '#c678dd',
+      '#56b6c2',
+      '#dcdfe4',
+    },
     background = '#242B38',
     foreground = '#abb2bf',
     tab_bar = {

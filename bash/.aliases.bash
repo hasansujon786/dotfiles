@@ -164,10 +164,13 @@ alias tk='taskkill //F //IM'
 alias tkp='taskkill //PID'
 alias tkv='taskkill //F //IM "java.exe"'
 
-alias ls='ls --color=auto' # Colorize the ls output
-alias lsa='ls -a --color=auto' # Show all files
-alias ls.='ls -d .* --color=auto' # Show only hidden files
-alias ll='ls -la --color=auto' # Use a long listing format
+# alias ls='ls --color=auto' # Colorize the ls output
+# alias ll='ls -la --color=auto' # Use a long listing format
+# alias lsa='ls -a --color=auto' # Show all files
+# alias ls.='ls -d .* --color=auto' # Show only hidden files
+alias ls='eza' # Colorize the ls output
+alias ll='eza -lah --sort type --icons' # Use a long listing format
+alias tree='eza --tree' # Use a long listing format
 
 # handy date shortcuts #
 alias now='date +"%T"'
