@@ -52,7 +52,11 @@ M.my_nebulous_setup = function()
       -- neo-minimap
       if is_float then
         local win_conf = api.nvim_win_get_config(winid)
-        if win_conf.width == 44 and win_conf.height == 15 and win_conf.zindex == 1111 then
+        if
+          win_conf.width == state.neominimap.width
+          and win_conf.height == state.neominimap.height
+          and win_conf.zindex == 1111
+        then
           return true
         end
       end

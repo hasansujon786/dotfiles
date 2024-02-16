@@ -10,6 +10,10 @@ _G.state = {
   treesitter = {
     auto_conceal_html_class = true,
   },
+  neominimap = {
+    width = 90,
+    height = 15,
+  }
 }
 
 M.ui = {

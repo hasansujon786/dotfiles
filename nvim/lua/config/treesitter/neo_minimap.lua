@@ -3,8 +3,8 @@ local nm = require('neo-minimap')
 nm.setup_defaults({
   height_toggle = { 15, 36 },
   auto_jump = true,
-  width = 44,
-  height = 15,
+  width = state.neominimap.width,
+  height = state.neominimap.height,
   -- height_toggle_index = 1,
   -- query_index = 1,
   disable_indentation = false,
@@ -122,3 +122,5 @@ nm.set('zo', { 'dart' }, {
 --     print('minimap window opened')
 --   end,
 -- })
+
+vim.cmd([[doautocmd BufEnter]])
