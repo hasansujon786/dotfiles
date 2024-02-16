@@ -3,7 +3,7 @@ return {
     'nvim-treesitter/nvim-treesitter',
     lazy = true,
     event = { 'BufReadPre', 'BufNewFile' },
-    cmd = { 'TSUpdate', 'TSUpdateSync' },
+    cmd = { 'TSUpdate', 'TSUpdateSync', 'TSInstall', 'TSInstallSync' },
     keys = {
       { '<leader>vh', '<Cmd>TSCaptureUnderCursor<CR>', desc = 'Show ts highlight' },
       { '<leader>vi', '<cmd>lua require("noice").redirect("Inspect")<cr>', desc = 'Show ts highlight' },

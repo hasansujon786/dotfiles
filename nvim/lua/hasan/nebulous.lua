@@ -3,7 +3,7 @@ local utils = require('hasan.utils')
 local M = {
   alternate_winid_to_ignore = nil,
   skip_update_on_focus_ft = { 'neo-tree-popup' },
-  ignore_alt_win_ft = { 'noice', 'Outline', 'NvimTree', 'neo-tree', 'flutterToolsOutline', 'log' },
+  ignore_alt_win_ft = { 'noice', 'Outline', 'NvimTree', 'Glance', 'neo-tree', 'flutterToolsOutline', 'log' },
 }
 M.mark_as_alternate_win = function(winid)
   local win = winid or vim.api.nvim_get_current_win()

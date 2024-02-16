@@ -99,14 +99,14 @@ local function set_custom_highlights()
   -- /// glance.nvim ///
     GlancePreviewNormal       = { fg = c.fg, bg = c.bg_d },
     GlanceListNormal          = { fg = c.light_grey, bg = c.bg0 },
-    GlanceWinBarFilename      = { fg = c.white, bg = c.bg0 },
-    GlanceWinBarFilepath      = { fg = c.light_grey, bg = c.bg0 },
-    GlanceWinBarTitle         = { fg = c.orange, bg = c.bg1 }, -- reference count
-    GlanceFoldIcon            = { fg = c.light_grey },
+    GlanceWinBarFilename      = { fg = c.grey, bg = c.bg0, underline = true },
+    GlanceWinBarFilepath      = { fg = c.grey, bg = c.bg0, underline = true },
+    GlanceWinBarTitle         = { fg = c.grey, bg = c.bg0, underline = true }, -- reference count
+    GlanceFoldIcon            = { fg = c.fg },
     GlanceListFilename        = { fg = c.white },
     GlanceIndent              = { fg = c.bg1 },
     GlanceBorder              = { fg = c.dark_blue },
-    GlanceListCursorLine      = { link = 'Visual' },
+    GlanceListCursorLine      = { fg = c.fg, bg = '#204364' },
     GlancePreviewMatch        = { link = 'LspReferenceText' },
     GlanceListMatch           = { link = 'LspReferenceWrite' },
     GlanceBorderTop           = { link = 'GlanceBorder' },
