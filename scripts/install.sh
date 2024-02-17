@@ -291,6 +291,7 @@ install_various_apps() {
 
   if [[ "$os" == "windows" ]]; then
     setup_keypirinha
+    $getter install -y obsidian
     $getter install -y 7zip.install
     $getter install -y sharpkeys
     $getter install -y potplayer
@@ -300,6 +301,8 @@ install_various_apps() {
     $getter install -y ntop.portable
     $getter install -y riot
     $getter install -y googlechrome
+    setup_windowsTerminal
+    setup_sublime
   elif [[ "$os" == "linux" ]]; then
     install_and_setup_tmux
   fi
@@ -360,6 +363,16 @@ setup_windowsTerminal() {
   util_makeSymlinkPath $HOME/dotfiles/windows-terminal/settings.json  ${wtPath[$osIndex]}/settings.json
 }
 
+setup_pwsh() {
+  util_print Pwsh
+  pwshPath=($HOME/Documents/PowerShell)
+
+  $getter install pwsh -y
+
+  util_backUpConfig ${pwshPath[$osIndex]}
+  util_makeSymlinkPath $HOME/dotfiles/PowerShell  ${pwshPath[$osIndex]}
+}
+
 install_and_setup_tmux() {
   # L => ~/.tmux.conf
   util_print tmux
@@ -380,14 +393,11 @@ auto_install_everything() {
 
   if [[ "$os" == "windows" ]]; then
     start ms-settings:developers
-    $getter install pwsh -y
     $getter install -y brave
-    setup_windowsTerminal
-    setup_sublime
+    setup_pwsh
     # setup_ahk
     $getter install -y mingw
     $getter install -y make
-    $getter install -y obsidian
   elif [[ "$os" == "linux" ]]; then
     $getter install -y build-essential
     $getter install -y ninja-build
@@ -397,7 +407,7 @@ auto_install_everything() {
   setup_wezterm
   setup_nvim
   setup_node
-  setup_alacritty
+  # setup_alacritty
   setup_lazygit
   setup_lf
   # setup_tig

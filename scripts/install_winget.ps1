@@ -5,8 +5,8 @@ $URL = (Invoke-WebRequest -Uri $URL).Content | ConvertFrom-Json |
         Where-Object "browser_download_url" -Match '.msixbundle' |
         Select-Object -ExpandProperty "browser_download_url"
 # download
-Invoke-WebRequest -Uri $URL -OutFile "Setup.msix" -UseBasicParsing
+Invoke-WebRequest -Uri $URL -OutFile "Winget.msix" -UseBasicParsing
 # install
-Add-AppxPackage -Path "Setup.msix"
+Add-AppxPackage -Path "Winget.msix"
 # delete file
-Remove-Item "Setup.msix"
+Remove-Item "Winget.msix"

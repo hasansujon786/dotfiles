@@ -33,6 +33,9 @@ nm.set({ 'zo', 'zi', 'zu' }, '*.lua', {
     ;; query
     ((function_declaration) @cap) ;; matches function declarations
     ((assignment_statement(expression_list((function_definition) @cap))))
+    ;; ((function_declaration name: ((identifier) @name (#eq? @name "{cursorword}"))) @cap)
+    ;; ((function_call name: ((identifier) @name (#eq? @name "{cursorword}"))) @cap)
+    ;; ((dot_index_expression field: ((identifier) @name (#eq? @name "{cursorword}"))) @cap)
     ]],
     [[
     ;; query
@@ -55,6 +58,7 @@ nm.set({ 'zo', 'zi', 'zu' }, '*.lua', {
   regex = {
     -- {},
     -- { [[^\s*--\s\+\w\+]], [[--\s*=]] },
+    -- { [[^\s*---*\s\+\w\+]], [[--\s*=]] },
     -- {},
   },
 

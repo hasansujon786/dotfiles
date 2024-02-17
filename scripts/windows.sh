@@ -7,24 +7,9 @@
 # https://dl.google.com/android/repository/commandlinetools-win-8092744_latest.zip
 # sdkmanager.bat "platforms;android-29" "platform-tools" "build-tools;28.0.3"
 
-# choco install -y guidgen-console
 # choco install gimp -y
 # choco install vlc -y
 # choco install emacs -y
-pip install Pillow
 
-# choco install qbittorrent -y
-# choco install etcher -y
-# choco install javaruntime -y
-# choco install adobereader -y
-# choco install pdfcreator -y
-# choco install markdownpad2 -y
-# choco install conemu -y
-# choco install mobaxterm -y
-# choco install InkScape -y
-# choco install etcher -y
-# choco install slack -y
-# choco install Xming -y
-#
-choco install golang -y
+choco install qbittorrent -y
 winget install eza-community.eza
