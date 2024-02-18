@@ -13,7 +13,7 @@ return {
       untracked    = { text = '┆', hl = 'GitSignsAdd',    numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
     },
     preview_config = {
-      border = require('hasan.core.state').ui.border.style,
+      border = require('core.state').ui.border.style,
     },
     on_attach = function(bufnr)
       local gs = package.loaded.gitsigns

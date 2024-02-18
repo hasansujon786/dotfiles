@@ -168,7 +168,7 @@ return {
     }
 
     -- Alternate source_selector_style
-    if require('hasan.core.state').ui.neotree.source_selector_style == 'minimal' then
+    if require('core.state').ui.neotree.source_selector_style == 'minimal' then
       opts.source_selector.sources = {
         {
           source = 'filesystem', -- string
@@ -226,7 +226,7 @@ return {
       show_separator_on_edge = false, -- boolean
     },
     close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
-    popup_border_style = require('hasan.core.state').ui.hover.border,
+    popup_border_style = require('core.state').ui.hover.border,
     enable_git_status = true,
     enable_diagnostics = false,
     enable_normal_mode_for_inputs = false, -- Enable normal mode for input dialogs.

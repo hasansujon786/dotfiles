@@ -60,7 +60,7 @@ local function set_custom_highlights()
     active = { fg = '#ffffff', bg = '#2D3343' },
   }
 
-  if require('hasan.core.state').ui.neotree.source_selector_style == 'minimal' then
+  if require('core.state').ui.neotree.source_selector_style == 'minimal' then
     vim.api.nvim_set_hl(0, 'NeoTreeTabActive', { underline = true, fg = btn.active.fg, bg = sp })
     util.fg_bg('NeoTreeTabInactive', btn.muted.fg, sp)
     util.fg_bg('NeoTreeTabSeparatorActive', btn.active.fg, sp)

@@ -1,4 +1,4 @@
-local state = require('hasan.core.state')
+local state = require('core.state')
 local M = {}
 
 M.top_panel_default_opts = {
@@ -25,7 +25,7 @@ M.top_panel_default_opts = {
 
 M.center_layout_opts = {
   theme = 'dropdown',
-  borderchars = require('hasan.core.state').border_groups.edged_top,
+  borderchars = state.border_groups.edged_top,
 }
 
 M.get_top_panel = function(opts)

@@ -12,7 +12,7 @@ return {
   },
   config = function()
     require('flutter-tools').setup({
-      ui = { border = require('hasan.core.state').ui.border.style },
+      ui = { border = require('core.state').ui.border.style },
       widget_guides = { enabled = true },
       lsp = {
         color = { -- show the derived colours for dart variables
@@ -67,8 +67,8 @@ return {
     keymap('n', '<leader>dd', '<Cmd>FlutterLogOpen<CR>', { desc = 'Flutter: Open log' })
 
     command('FlutterLogToggleLayout', function(_)
-      local updated_layout = not require('hasan.core.state').ui.edgy.open_flutter_log_on_right
-      require('hasan.core.state').ui.edgy.open_flutter_log_on_right = updated_layout
+      local updated_layout = not require('core.state').ui.edgy.open_flutter_log_on_right
+      require('core.state').ui.edgy.open_flutter_log_on_right = updated_layout
       require('config.edgy').config()
     end)
     command('FlutterLogOpen', function(_)
@@ -77,7 +77,7 @@ return {
       if winFound then
         return
       end
-      local splitCmd = require('hasan.core.state').ui.edgy.open_flutter_log_on_right and '26vsplit' or '26split'
+      local splitCmd = require('core.state').ui.edgy.open_flutter_log_on_right and '26vsplit' or '26split'
 
       for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
         local bufname = vim.api.nvim_buf_get_name(bufnr)

@@ -122,7 +122,7 @@ return {
     }
 
     -- // dynamic config: flutter log
-    table.insert(require('hasan.core.state').ui.edgy.open_flutter_log_on_right and right or bottom, {
+    table.insert(require('core.state').ui.edgy.open_flutter_log_on_right and right or bottom, {
       ft = 'log',
       open = 'FlutterLogOpen',
       wo = { winbar = true, winhighlight = dark_bar },

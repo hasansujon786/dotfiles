@@ -7,7 +7,7 @@ return {
     local compare = require('cmp.config.compare')
     local kind_icons = require('hasan.utils.ui.icons').kind
     local luasnip = require('luasnip')
-    local hover = require('hasan.core.state').ui.hover
+    local hover = require('core.state').ui.hover
     local types = require('cmp.types')
 
     -- https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#completionItemKind

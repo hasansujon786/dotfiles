@@ -5,7 +5,7 @@ return {
     commit = '5550bbb', -- working
     event = 'VeryLazy',
     config = function()
-      local state = require('hasan.core.state')
+      local state = require('core.state')
       local actions = require('telescope.actions')
       local local_action = require('hasan.telescope.local_action')
       local fb_actions = require('telescope._extensions.file_browser.actions')

@@ -1,7 +1,7 @@
 local M = {}
 local diagnotic_icons = require('hasan.utils.ui.icons').Other.diagnostics
 
--- local borderOpts = { border = require('hasan.core.state').ui.border.style }
+-- local borderOpts = { border = require('core.state').ui.border.style }
 -- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, borderOpts)
 -- vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, borderOpts)
 
@@ -58,7 +58,7 @@ function M.setup()
     virtual_text = false,
     float = {
       focusable = true,
-      border = require('hasan.core.state').ui.border.style,
+      border = require('core.state').ui.border.style,
       source = false,
       header = { ' Diagnostics:', 'DiagnosticHint' },
       prefix = function(diagnostic, i, total)

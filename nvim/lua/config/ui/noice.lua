@@ -3,7 +3,7 @@ return {
   lazy = true,
   event = 'CursorHold',
   config = function()
-    local hover = require('hasan.core.state').ui.hover
+    local hover = require('core.state').ui.hover
 
     require('noice').setup({
       presets = {

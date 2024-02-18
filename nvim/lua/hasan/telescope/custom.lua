@@ -261,7 +261,7 @@ function M.search_project_todos()
   M.grep_string_list({
     prompt_title = 'Search Todos',
     path_display = { 'smart' },
-    search_list = require('hasan.core.state').telescope.todo_keyfaces,
+    search_list = require('core.state').telescope.todo_keyfaces,
     additional_args = function()
       return { '--glob', '!nvim/lua/hasan/core/state.lua', '--glob', '!nvim/legacy/*' }
     end,
