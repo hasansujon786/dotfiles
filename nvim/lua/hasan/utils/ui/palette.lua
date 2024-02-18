@@ -79,6 +79,8 @@ local function set_custom_highlights()
     NormalFloatFlat         = { fg = fg, bg = float_bg },
     FloatBorderFlat         = { fg = dark_border, bg = float_bg },
     FloatBorderHidden       = { fg = c.bg3, bg = normal_bg },
+    HeirlineTabActive       = { fg = c.green, bg = c.layer },
+    HeirlineTabInactive     = { fg = c.red, bg = c.layer },
 
   -- /// LSP ///
     LspReferenceText        = { bg = '#3B4048', },

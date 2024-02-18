@@ -14,6 +14,11 @@ end
 local modeBlockLayerAlt = function(self)
   return { bg = 'layer', fg = self.color }
 end
+local divider_right = { provider = '▕', hl = { fg = 'bg_d', bg = 'layer' } }
+local tabIcon = { active = '', inactive = '' }
+local function withHl(text, hl)
+  return string.format('%%#%s#%s', hl, text)
+end
 
 return {
   Fill = { provider = '%=' },
@@ -56,6 +61,54 @@ return {
       end,
       name = 'heirline_LSP',
     },
+  },
+  Tabs = {
+    condition = function()
+      return vim.fn.tabpagenr('$') > 1
+    end,
+    update = {
+      'TabEnter',
+      'TabLeave',
+      'TabNew',
+      'TabNewEntered',
+      'TabClosed',
+    },
+    hl = mutedText,
+    { provider = '█', hl = layerBlockAlt },
+    {
+      hl = layerBlock,
+      provider = function()
+        local last_tab_nr = vim.fn.tabpagenr('$')
+        if last_tab_nr == 1 then
+          return ''
+        end
+
+        local list = {}
+        local cur_tab_nr = vim.fn.tabpagenr()
+
+        for i = 1, last_tab_nr do
+          if i == cur_tab_nr then
+            -- table.insert(list, '-')
+            table.insert(list, withHl(tabIcon.active, 'HeirlineTabActive'))
+          else
+            table.insert(list, withHl(tabIcon.inactive, 'HeirlineTabInactive'))
+          end
+        end
+        return table.concat(list, ' ')
+      end,
+    },
+    divider_right,
+    -- { provider = '█', hl = layerBlockAlt },
+    -- on_click = {
+    --   callback = function()
+    --     vim.defer_fn(function()
+    --       vim.cmd('LspInfo')
+    --     end, 100)
+    --   end,
+    --   name = 'heirline_tab_indicator',
+    -- },
+    -- left_sep = { str = ' ', hl = { bg = 'bg_hidden' } },
+    -- right_sep = { str = '▕', hl = { fg = '#2c3545', bg = 'bg_hidden' } },
   },
   FileLastModified = {
     provider = function()
@@ -233,18 +286,17 @@ return {
     },
   },
   GitBranch = {
-    condition = conditions.is_git_repo,
+    condition = function()
+      return conditions.is_git_repo()
+    end,
     init = function(self)
       self.status_dict = vim.b['gitsigns_status_dict']
     end,
     update = { 'BufReadPost', 'BufEnter', 'BufWinEnter', 'BufWinLeave' },
-    {
-      provider = function(self)
-        return '  ' .. self.status_dict.head
-      end,
-      hl = layerBlock,
-    },
-    { provider = '█', hl = layerBlockAlt },
+    provider = function(self)
+      return '  ' .. self.status_dict.head
+    end,
+    hl = layerBlock,
     on_click = {
       callback = function()
         vim.defer_fn(function()
@@ -254,7 +306,15 @@ return {
       name = 'heirline_git_branches',
     },
   },
-  layerEndleft = { provider = ' ', hl = layerBlockAlt },
+  GitBranchAlt = {
+    condition = function()
+      return not conditions.is_git_repo()
+    end,
+    update = { 'BufReadPost', 'BufEnter', 'BufWinEnter', 'BufWinLeave' },
+    provider = '  Branch',
+    hl = layerBlock,
+  },
+  layerEndleft = { provider = '█ ', hl = layerBlockAlt },
   DAPMessages = {
     condition = function()
       local ok, dap = pcall(require, 'dap')

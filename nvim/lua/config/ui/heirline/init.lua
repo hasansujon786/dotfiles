@@ -36,7 +36,9 @@ return {
       },
       {
         sl.ViMode,
+        sl.Tabs,
         sl.GitBranch,
+        sl.GitBranchAlt,
         sl.layerEndleft,
         sl.MacroRec,
         {
