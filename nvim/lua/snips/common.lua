@@ -20,4 +20,9 @@ common.get_insert_node_and_upper_first_char = function(args)
   return args[1][1]:gsub('^%l', string.upper)
 end
 
+common.filename = function()
+  local fname = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':t:r')
+  return fname or 'FILENAME'
+end
+
 return common

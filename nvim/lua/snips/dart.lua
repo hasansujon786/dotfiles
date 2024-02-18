@@ -140,4 +140,31 @@ ls.add_snippets('dart', {
     '_outline:StadiumBorder',
     fmt([[const StadiumBorder()]], { })
   ),
+  s(
+    'freezedclass',
+    fmt(
+      [[
+      import 'package:freezed_annotation/freezed_annotation.dart';
+
+      part '{1}.freezed.dart';
+      part '{1}.g.dart';
+
+      @freezed
+      class {2} with _${3} {{
+        const factory {3}({{
+          required String id,
+          required String title,
+          required DateTime createdAt,
+        }}) = _{3};
+
+        factory {3}.fromJson(Map<String, Object?> json) => _${3}FromJson(json);
+      }}
+      ]],
+      {
+        f(common.filename),
+        i(1, 'DataClass'),
+        f(common.get_insert_node, { 1 }),
+      }
+    )
+  ),
 }, { key = 'my_dart_snips' })
