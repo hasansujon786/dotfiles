@@ -24,6 +24,16 @@ return {
         ['.'] = '•',
       },
       show_help = false,
+      plugins = {
+        marks = true, -- shows a list of your marks on ' and `
+        registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+        spelling = { enabled = true, suggestions = 12 }, -- z=
+        presets = {
+          operators = false, -- adds help for operators like d, y, ...
+          motions = true, -- adds help for motions
+          text_objects = true, -- help for text objects triggered after entering an operator
+        },
+      },
     })
 
     local common = {
@@ -138,7 +148,6 @@ return {
         F = { '<cmd>lua require("hasan.telescope.custom").my_find_files("cur_dir")<cr>', 'Find file from here' },
         p = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find project file' },
 
-        i = { '<cmd>lua require("hasan.widgets.file_info").show_file_info()<CR>', 'Show file info' },
         y = { '<cmd>call hasan#utils#CopyFileNameToClipBoard(1)<CR>', 'Yank path name' },
         Y = { '<cmd>call hasan#utils#CopyFileNameToClipBoard(0)<CR>', 'Yank file name' },
         R = { '<cmd>lua require("hasan.widgets.inputs").rename_current_file()<CR>', 'Rename file' },

@@ -39,7 +39,7 @@ return {
     },
     init = function()
       vim.g.VM_leader = '<leader>n'
-      vim.g.VM_theme_set_by_colorscheme = 0
+      vim.g.VM_theme = ''
       vim.g.VM_maps = {
         -- ['Slash Search'] = 'gM',
         ['I BS'] = '<C-h>',

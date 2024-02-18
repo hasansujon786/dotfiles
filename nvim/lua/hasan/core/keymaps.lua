@@ -203,3 +203,6 @@ keymap({ 'n', 'x' }, '<leader>l', '<cmd>lua handle_win_cmd("wincmd l")<CR>', { d
 keymap('n', '<leader>fC', ':w <C-R>=expand("%")<CR>', { silent = false, desc = 'Copy this file' })
 keymap('n', '<leader>fe', ":edit <C-R>=expand('%:p:h') . '\\'<CR>", { silent = false, desc = 'Edit in current dir' })
 keymap('n', '<leader>fM', ':Move <C-R>=expand("%")<CR>', { silent = false, desc = 'Move/rename file' })
+for _, key in pairs({ '<leader>fi', '<c-g>' }) do
+  keymap('n', key, '<cmd>lua require("hasan.widgets.file_info").show_file_info()<CR>', { desc = 'Show file info' })
+end

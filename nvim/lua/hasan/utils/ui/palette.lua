@@ -221,17 +221,18 @@ local function set_custom_highlights()
     FlashLabel = { fg = c.black, bg = c.green },
     NoiceMini    = { bg = '#000000' },
     NoiceFormatConfirmDefault  = { link = 'LazyButton' },
+    LazyNormal   = { link = 'NormalFloatFlat' },
     LazyButton   = { bg = '#3E425D', fg = c.fg },
     LazyButtonActive = { link = 'WildMenu' },
-    LazyNormal       = { link = 'NormalFloatFlat' },
   -- /// Mason ///
     MasonNormal             = { link = 'NormalFloatFlat' },
     MasonMutedBlock         = { link = 'LazyButton' },
     MasonHighlightBlockBold = { link = 'LazyButtonActive' },
   -- /// vim-visual-multi /// VM_Cursor
     VM_Extend = { bg = '#5C6370', fg = c.fg },
+    VM_Cursor = { bg = '#8a8a8a', fg = '#005f87' },
+    VM_Insert = { bg = '#4c4e50', fg = 'NONE' },
     VM_Mono   = { bg = '#00af87', fg = '#ffffff' },
-    VM_Insert = { bg = c.bg3, fg = 'NONE' },
   -- Mix
     MarkSignHL          = { link = 'Comment' },
     EyelinerPrimary     = { fg = 'tomato', underline = true },
