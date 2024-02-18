@@ -135,7 +135,7 @@ keymap('n', 'dM', ':%g/<c-r>//d<CR>', { desc = 'Delete all lines with matches' }
 keymap(
   { 'n', 'v' },
   '<leader>cw',
-  '<cmd>lua require("hasan.utils.ui").substitute_word()<CR>',
+  '<cmd>lua require("hasan.widgets.inputs").substitute_word()<CR>',
   { desc = 'Substitute word' }
 )
 

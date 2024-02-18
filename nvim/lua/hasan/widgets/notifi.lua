@@ -12,7 +12,7 @@ local function create_notify_win(callback, opts)
   if #notify_popups == 0 then
     last_notifyf = nil
   end
-  local pop = Widget.init_notify_popup(opts or {}, last_notifyf)
+  local pop = Widget.get_notify_popup(opts or {}, last_notifyf)
   last_notifyf = pop
   if callback ~= nil then
     callback(pop)

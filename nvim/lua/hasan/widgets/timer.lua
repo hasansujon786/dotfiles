@@ -82,10 +82,10 @@ end
 
 local M = {}
 
-function M.count_down(start_time)
+function M.count_down(seconds)
   local timer = Timer()
 
-  timer:countdown(start_time)
+  timer:countdown(seconds)
 
   return timer
 end

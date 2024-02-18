@@ -141,7 +141,7 @@ return {
         i = { '<cmd>lua require("hasan.widgets.file_info").show_file_info()<CR>', 'Show file info' },
         y = { '<cmd>call hasan#utils#CopyFileNameToClipBoard(1)<CR>', 'Yank path name' },
         Y = { '<cmd>call hasan#utils#CopyFileNameToClipBoard(0)<CR>', 'Yank file name' },
-        R = { '<cmd>lua require("hasan.utils.ui").rename_current_file()<CR>', 'Rename file' },
+        R = { '<cmd>lua require("hasan.widgets.inputs").rename_current_file()<CR>', 'Rename file' },
         x = {
           name = '+remove',
           ['/'] = { '<cmd>lua require("hasan.utils.file").delete_lines_with("comment")<CR>', 'Delete all comments' },
@@ -227,7 +227,7 @@ return {
         g = { '<cmd>lua require("hasan.telescope.custom").live_grep_in_folder()<cr>', 'Live grep in folder' },
       },
 
-      r = { '<cmd>lua require("hasan.utils.ui").cycle_numbering()<CR>', 'Cycle number' },
+      r = { '<cmd>lua require("hasan.utils.win").cycle_numbering()<CR>', 'Cycle number' },
       x = { '<cmd>call hasan#utils#buffer#_open_scratch_buffer()<CR>', 'Scratch buffer' },
 
       ['.'] = common.buffers_all,

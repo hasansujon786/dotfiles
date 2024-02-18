@@ -176,7 +176,7 @@ function M.lspRename()
   local currName = vim.fn.expand('<cword>')
 
   local opt = { prompt = 'Rename', default = currName }
-  require('hasan.utils.widgets').get_input(opt, function(newName)
+  require('hasan.widgets').get_input(opt, function(newName)
     if newName and newName ~= currName then
       _lspRename(newName)
     end

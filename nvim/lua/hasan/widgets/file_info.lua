@@ -24,7 +24,7 @@ M.show_file_info = function()
   local gap = NuiText(' ')
   local line = NuiLine({ fname, gap, file_status, line_count, gap, scroll })
 
-  local pop = Widget.init_notify_popup({
+  local pop = Widget.get_notify_popup({
     size = { width = line:width() },
     border = { style = 'rounded' },
   }, nil)
