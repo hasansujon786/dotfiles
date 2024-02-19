@@ -67,7 +67,11 @@
           "html",
           "javascript"
         ],
-        "path": "./dbgcss.json"
+        "path": "./dbug.css.js.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./dbug.css.ts.json"
       }
     ]
   }

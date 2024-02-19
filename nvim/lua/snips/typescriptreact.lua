@@ -1,5 +1,5 @@
 local ls = require('luasnip')
-local common = require('snips.common')
+local common = require('snips.utils')
 
 local s = ls.snippet
 local i = ls.insert_node

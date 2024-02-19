@@ -92,7 +92,7 @@ alias cs='cd'
 alias re='cd /e/repoes'
 alias to='touch'
 alias mk='mkdir -p'
-mkd() { mkdir -p "$@" && cd "$@"; }
+mm() { mkdir -p "$@" && cd "$@"; }
 alias x='exit'
 alias e='z'
 alias c='clear && pwd && ls'
