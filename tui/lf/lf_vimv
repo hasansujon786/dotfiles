@@ -3,5 +3,6 @@ set -e
 tmpfile=$1
 
 files=$(readarray -t ARRAY < $tmpfile; IFS=' '; echo "${ARRAY[*]}")
-vimv -e=nvim $files
 rm $tmpfile
+
+vimv $files
