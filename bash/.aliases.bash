@@ -1,3 +1,4 @@
+#!/bin/bash
 # Yarn
 alias yup='yarn upgrade-interactive --latest'
 alias ycc='yarn cache clean'
@@ -47,7 +48,7 @@ alias dx='pwsh -Command dxdiag'
 alias su='subl'
 alias sub='subl'
 subl() {
-  "C:\Program Files\Sublime Text\subl.exe" $@
+	"C:\Program Files\Sublime Text\subl.exe" "$@"
 }
 
 # Android
@@ -92,7 +93,7 @@ alias cs='cd'
 alias re='cd /e/repoes'
 alias to='touch'
 alias mk='mkdir -p'
-mm() { mkdir -p "$@" && cd "$@"; }
+mm() { mkdir -p "$@" && cd "$@" || exit; }
 alias x='exit'
 alias e='z'
 alias c='clear && pwd && ls'
@@ -110,10 +111,10 @@ alias cpd="pwd | tr -d '\n' | clip && echo 'pwd copied to clipboard'"
 
 # Better copy
 function cpy {
-  while read data; do     # reads data piped in to cpy
-    echo "$data" | cat > /dev/clipboard     # echos the data and writes that to /dev/clipboard
-  done
-  tr -d '\n' < /dev/clipboard > /dev/clipboard     # removes new lines from the clipboard
+	while read -r data; do              # reads data piped in to cpy
+		echo "$data" | cat >/dev/clipboard # echos the data and writes that to /dev/clipboard
+	done
+	tr -d '\n' </dev/clipboard >/dev/clipboard # removes new lines from the clipboard
 }
 
 # git
@@ -143,10 +144,10 @@ alias gupd='git update'
 alias gcl='git clone --recurse-submodules'
 alias gb='git branch --sort=-committerdate | fzf --border-label="Checkout Recent Branch" --preview "git diff {1} --color=always" | xargs git checkout'
 alias gbn='git checkout -b' # create & switch branch
-alias gck='git checkout' # switch brnch
+alias gck='git checkout'    # switch brnch
 # Use --soft if you want to keep your changes
 # Use --hard if you don't care about keeping the changes you made
-alias gr='git reset ' # unstage files (Use --hard/--soft)
+alias gr='git reset '        # unstage files (Use --hard/--soft)
 alias grh='git reset HEAD~1' # (Use --hard/--soft)
 alias grvh='git revert HEAD' # Undo a public commit
 alias gcrh='git clean --force && git reset --hard'
@@ -168,9 +169,9 @@ alias tkv='taskkill //F //IM "java.exe"'
 # alias ll='ls -la --color=auto' # Use a long listing format
 # alias lsa='ls -a --color=auto' # Show all files
 # alias ls.='ls -d .* --color=auto' # Show only hidden files
-alias ls='eza' # Colorize the ls output
+alias ls='eza'                          # Colorize the ls output
 alias ll='eza -lah --sort type --icons' # Use a long listing format
-alias tree='eza --tree' # Use a long listing format
+alias tree='eza --tree'                 # Use a long listing format
 
 # handy date shortcuts #
 alias now='date +"%T"'
@@ -203,70 +204,77 @@ alias k15='kill -s 15'
 alias w1='watch -n 1'
 
 jump-to-git-root() {
-  local _root_dir="$(git rev-parse --show-toplevel 2>/dev/null)"
-  if [[ $_root_dir == "" ]]; then
-    >&2 echo 'Not a Git repo!'
-    return 0
-  fi
-  local _pwd=$(pwd -W)
-  if [[ $_pwd = $_root_dir ]]; then
-    # Handle submodules:
-    # If parent dir is also managed under Git then we are in a submodule.
-    # If so, cd to nearest Git parent project.
-    _root_dir="$(git -C $(dirname $_pwd) rev-parse --show-toplevel 2>/dev/null)"
-    if [[ $? -gt 0 ]]; then
-      echo "Already at Git repo root."
-      return 0
-    fi
-  fi
-  # Make `cd -` work.
-  OLDPWD=$_pwd
-  echo "Git repo root: $_root_dir"
-  cd $_root_dir
+	local _root_dir _pwd
+
+	_root_dir="$(git rev-parse --show-toplevel 2>/dev/null)"
+	if [[ $_root_dir == "" ]]; then
+		>&2 echo 'Not a Git repo!'
+		return 0
+	fi
+	_pwd=$(pwd -W)
+	if [[ $_pwd = "$_root_dir" ]]; then
+		# Handle submodules:
+		# If parent dir is also managed under Git then we are in a submodule.
+		# If so, cd to nearest Git parent project.
+		if ! _root_dir="$(git -C "$(dirname "$_pwd")" rev-parse --show-toplevel 2>/dev/null)"; then
+			echo "Already at Git repo root."
+			return 0
+		fi
+	fi
+	# Make `cd -` work.
+	OLDPWD=$_pwd
+	echo "Git repo root: $_root_dir"
+	cd "$_root_dir" || exit
 }
-lfcd () {
-  tmp="$(mktemp)"
-  \lf -last-dir-path="$tmp" "$@"
-  if [ -f "$tmp" ]; then
-    dir="$(cat "$tmp")"
-    rm -f "$tmp"
-    if [ -d "$dir" ]; then
-      if [ "$dir" != "$(pwd)" ]; then
-        cd "$dir"
-      fi
-    fi
-  fi
+lfcd() {
+	tmp="$(mktemp)"
+	\lf -last-dir-path="$tmp" "$@"
+	if [ -f "$tmp" ]; then
+		dir="$(cat "$tmp")"
+		rm -f "$tmp"
+		if [ -d "$dir" ]; then
+			if [ "$dir" != "$(pwd)" ]; then
+				cd "$dir" || exit
+			fi
+		fi
+	fi
 }
 remove() {
-  while true; do
-    local count=$#
-    if [[ $count = 0 ]]; then
-      echo "rm: missing argument"
-      return
-    fi
-    local item='item'
-    [[  $count -gt 1  ]] && item="items"
+	while true; do
+		local count=$#
+		if [[ $count = 0 ]]; then
+			echo "rm: missing argument"
+			return
+		fi
+		local item='item'
+		[[ $count -gt 1 ]] && item="items"
 
-    read -p "trash: Do you wish to remove ${count} ${item} (y/n)? " yn
-    case $yn in
-      # [Yy]* ) rm -rf $@; break;;
-      [Yy]* ) trash $@; break;;
-      [Nn]* ) echo "rm: Canceled"; break;;
-      * ) echo "rm: Please answer yes or no.";;
-    esac
-  done
+		read -r -p "trash: Do you wish to remove ${count} ${item} (y/n)? " yn
+		case $yn in
+		# [Yy]* ) rm -rf $@; break;;
+		[Yy]*)
+			trash "$@"
+			break
+			;;
+		[Nn]*)
+			echo "rm: Canceled"
+			break
+			;;
+		*) echo "rm: Please answer yes or no." ;;
+		esac
+	done
 }
 _edit_wo_executing() {
-  local editor="${EDITOR:-vim}"
-  tmpf="$(mktemp)"
-  printf '%s\n' "$READLINE_LINE" > "$tmpf"
-  "$editor" "$tmpf"
-  READLINE_LINE="$(<"$tmpf")"
-  READLINE_POINT="${#READLINE_LINE}"
-  rm -f "$tmpf"  # -f for those who have alias rm='rm -i'
+	local editor="${EDITOR:-vim}"
+	tmpf="$(mktemp)"
+	printf '%s\n' "$READLINE_LINE" >"$tmpf"
+	"$editor" "$tmpf"
+	READLINE_LINE="$(<"$tmpf")"
+	READLINE_POINT="${#READLINE_LINE}"
+	rm -f "$tmpf" # -f for those who have alias rm='rm -i'
 }
-redrive() {
-  curl --silent -I -L $@ | grep -i location
+url-redrive() {
+	curl --silent -I -L "$@" | grep -i location
 }
 
 # auto-expand

@@ -50,6 +50,8 @@ local M = {
     -- eslint = { 'eslint-lsp' },
   },
   extra_tools = {
+    'shfmt',
+    'shellcheck',
     'stylua',
     'eslint_d',
     'prettierd',

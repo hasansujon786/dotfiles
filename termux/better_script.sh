@@ -48,10 +48,10 @@ function install_elixir() {
 	echo 'export PATH="$PATH:$HOME/.elixir/bin"' >>"$HOME/.profile"
 	cd "$HOME" || exit
 	if ask "\\e[32m[ yarn ]\\e[m install rebar? (recommended)" Y; then
-    curl -fsLo "$HOME/.local/bin/rebar" https://github.com/rebar/rebar/releases/download/2.6.2/rebar
-    curl -fsLo "$HOME/.local/bin/rebar3" https://github.com/erlang/rebar3/releases/download/3.6.2/rebar3
-    chmod +x $HOME/.local/bin/rebar && chmod +x $HOME/.local/bin/rebar3
-  fi
+		curl -fsLo "$HOME/.local/bin/rebar" https://github.com/rebar/rebar/releases/download/2.6.2/rebar
+		curl -fsLo "$HOME/.local/bin/rebar3" https://github.com/erlang/rebar3/releases/download/3.6.2/rebar3
+		chmod +x $HOME/.local/bin/rebar && chmod +x $HOME/.local/bin/rebar3
+	fi
 }
 
 function install_node() {
@@ -84,7 +84,7 @@ function install_requirements() {
 
 	if [ ! -d "$HOME/.local/bin" ]; then
 		mkdir -p "$HOME/.local/bin"
-		echo 'export PATH="$PATH:$HOME/.local/bin"' >> $HOME/.profile
+		echo 'export PATH="$PATH:$HOME/.local/bin"' >>$HOME/.profile
 	fi
 
 	if [ -d "$HOME/.termux" ]; then
@@ -126,12 +126,12 @@ function install_postgres() {
 function install_neovim() {
 	if ! [ -x "$(command -v nvim)" ]; then
 		echo -e "\\e[32m[ neovim ]\\e[m not found, installing"
-		apt-get install -y neovim>/dev/null 2>&1
+		apt-get install -y neovim >/dev/null 2>&1
 	fi
 	if ask "\\e[32m[ termux ]\\e[m install python module? (highly recommended)" Y; then
 		if ! [ -x "$(command -v clang)" ]; then
 			echo -e "\\e[32m[ neovim ]\\e[m clang not found, installing"
-			apt-get install -y clang libcrypt-dev>/dev/null 2>&1
+			apt-get install -y clang libcrypt-dev >/dev/null 2>&1
 		fi
 		if ! [ -x "$(command -v python)" ]; then
 			echo -e "\\e[32m[ neovim ]\\e[m python not found, installing"
@@ -146,7 +146,7 @@ function install_neovim() {
 		fi
 		if ! [ -x "$(command -v ruby)" ]; then
 			echo -e "\\e[32m[ neovim ]\\e[m ruby not found, installing"
-			apt-get install -y ruby ruby-dev make>/dev/null 2>&1
+			apt-get install -y ruby ruby-dev make >/dev/null 2>&1
 		fi
 		gem install neovim >/dev/null 2>&1
 	fi
@@ -186,11 +186,11 @@ function install_php() {
 }
 
 function install_golang() {
-  echo -e "\\e[32m[ go ]\\e[m not found, installing"
+	echo -e "\\e[32m[ go ]\\e[m not found, installing"
 	apt-get install -y golang >/dev/null 2>&1
-  mkdir $HOME/.go
-  echo 'export GOPATH="$PATH:$HOME/.go"' >> $HOME/.profile
-  echo 'export PATH="$PATH:$HOME/.go/bin"' >> $HOME/.profile
+	mkdir $HOME/.go
+	echo 'export GOPATH="$PATH:$HOME/.go"' >>$HOME/.profile
+	echo 'export PATH="$PATH:$HOME/.go/bin"' >>$HOME/.profile
 }
 
 function ask() {
@@ -245,7 +245,7 @@ function finish() {
 	fi
 
 	if ! grep -q "source ~/.profile" $HOME/.bash_profile >/dev/null 2>&1; then
-		echo -e "\nif [ -f ~/.profile ]; then\n  source ~/.profile\nfi" >> $HOME/.bash_profile
+		echo -e "\nif [ -f ~/.profile ]; then\n  source ~/.profile\nfi" >>$HOME/.bash_profile
 	fi
 
 	if ask "\\e[32m[ finished ]\\e[m close termux to apply settings?" Y; then
@@ -260,7 +260,7 @@ while [[ $# -gt 0 ]]; do
 	-e | --elixir)
 		elixir=true
 		;;
-  -g | --go | --golang)
+	-g | --go | --golang)
 		golang=true
 		;;
 	-p | --python)
@@ -324,7 +324,7 @@ if [ $ruby ]; then
 fi
 
 if [ $golang ]; then
-  install_golang
+	install_golang
 fi
 
 if [ $php ]; then

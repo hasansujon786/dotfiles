@@ -12,10 +12,15 @@ return {
       end,
     }
     local sources = {
+      --  lua & bash scripting
       b.formatting.stylua,
+      b.formatting.shfmt,
+      b.diagnostics.shellcheck,
+      b.code_actions.shellcheck,
 
       -- b.diagnostics.todo_comments
 
+      -- Front-end
       b.formatting.prettierd,
       b.diagnostics.eslint_d.with(eslint_d),
       b.code_actions.eslint_d.with(eslint_d),

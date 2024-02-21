@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # wt -p "Windows PowerShell" -d C:\Users\arianeb\backend --title backend-srv docker-compose up `; new-tab -p "Windows PowerShell" -d C:\Users\arianeb\frontend --title frontend-srv npm run dev `; new-tab -p "Windows PowerShell" -d C:\Users\arianeb\backend --title backend `; new-tab -p "Windows PowerShell" -d C:\Users\arianeb\frontend --title frontend
 
 # require('telescope').load_extension('project_commands')
@@ -28,4 +30,3 @@ wt -w 0 focus-tab -t 1 && cd E:/repoes/repay && nvim
 # selet or create a new window with name foo
 # wt -w foo nt
 #
-

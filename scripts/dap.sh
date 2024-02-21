@@ -1,16 +1,15 @@
-#!/bin/sh
+#!/bin/bash
 # C:\Users\hasan\AppData\Local\nvim-data\dap_adapters
-mkdir -p C:\\Users\\$USERNAME\\AppData\\Local\\nvim-data\\dap_adapters\\
+mkdir -p "C:\\Users\\$USERNAME\\AppData\\Local\\nvim-data\\dap_adapters\\"
 
 # vscode-js-debug
-cd C:\\Users\\$USERNAME\\AppData\\Local\\nvim-data\\dap_adapters\\
+cd "C:\\Users\\$USERNAME\\AppData\\Local\\nvim-data\\dap_adapters\\" || exit
 export VSCODE_JS_VER="1.85.0"
 rm -rf vscode-js-debug
 curl -O -J -L https://codeload.github.com/microsoft/vscode-js-debug/zip/refs/tags/v${VSCODE_JS_VER}
-unzip vscode-js-debug-${VSCODE_JS_VER}.zip && mv vscode-js-debug-${VSCODE_JS_VER} vscode-js-debug && cd vscode-js-debug
+unzip vscode-js-debug-${VSCODE_JS_VER}.zip && mv vscode-js-debug-${VSCODE_JS_VER} vscode-js-debug && cd vscode-js-debug || exit
 npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out
 cd .. && rm vscode-js-debug-${VSCODE_JS_VER}.zip
-
 
 # # dart
 # cd C:\\Users\\$USERNAME\\AppData\\Local\\nvim-data\\dap_adapters\\
@@ -19,4 +18,3 @@ cd .. && rm vscode-js-debug-${VSCODE_JS_VER}.zip
 # unzip Dart-Code-${DART_CODE_VER}.zip && mv Dart-Code-${DART_CODE_VER} Dart-Code && cd Dart-Code
 # npm install && npm run build
 # cd .. && rm Dart-Code-${DART_CODE_VER}.zip
-
