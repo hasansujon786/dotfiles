@@ -54,7 +54,7 @@ end
 -- vnoremap <silent> <A-k> :move '<-2<CR>gv=gv
 -- vnoremap <silent> <A-j> :move '>+1<CR>gv=gv
 
-keymap({ 'n', 'v' }, 'cd', '<Plug>(exchange-operator)', { desc = 'Exchange vnoremap' })
+keymap({ 'n', 'v' }, 'gx', '<Plug>(exchange-operator)', { desc = 'Exchange vnoremap' })
 
 keymap('n', 'z.', ':%foldclose<CR>') -- Fold
 keymap('n', '<tab>', 'za')

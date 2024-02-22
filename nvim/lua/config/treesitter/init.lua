@@ -165,7 +165,6 @@ return {
     end,
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
-      'michaeljsmith/vim-indent-object',
       'windwp/nvim-ts-autotag',
       {
         'NvChad/nvim-colorizer.lua',

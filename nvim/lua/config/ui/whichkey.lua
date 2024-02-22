@@ -29,7 +29,7 @@ return {
         registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
         spelling = { enabled = true, suggestions = 12 }, -- z=
         presets = {
-          operators = false, -- adds help for operators like d, y, ...
+          operators = true, -- adds help for operators like d, y, ...
           motions = true, -- adds help for motions
           text_objects = true, -- help for text objects triggered after entering an operator
         },

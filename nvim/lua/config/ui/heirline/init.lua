@@ -2,7 +2,7 @@ return {
   'rebelot/heirline.nvim',
   lazy = true,
   enabled = true,
-  event = { 'BufReadPost' },
+  event = { 'BufReadPost', 'BufNewFile' },
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
     vim.opt.showcmdloc = 'statusline'

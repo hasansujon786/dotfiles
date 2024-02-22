@@ -218,6 +218,7 @@ local function set_custom_highlights()
   -- /// indent-blankline.nvim ///
     IblIndent = { fg = c.bg3 },
     IblScope  = { fg = c.grey },
+    MiniIndentscopeSymbol = { link = 'IblScope' },
   -- /// Folke collection ///
     FlashMatch = { fg = c.fg, bg = c.bg3 },
     FlashLabel = { fg = c.black, bg = c.green },
