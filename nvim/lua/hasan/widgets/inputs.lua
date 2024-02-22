@@ -19,8 +19,7 @@ function M.rename_current_file()
   end)
 end
 
-function M.substitute_word()
-  local isVisual = require('hasan.utils').is_visual_mode()
+local _show_substitute_input = function(isVisual)
   local curWord = isVisual and require('hasan.utils').get_visual_selection() or vim.fn.expand('<cword>')
 
   local opts = { prompt = 'Substitute Word', default = curWord }
@@ -35,6 +34,18 @@ function M.substitute_word()
     feedkeys('<Cmd>' .. cmd .. '<CR>', 'n')
     vim.fn.setreg('z', cmd)
   end)
+end
+
+function M.substitute_word()
+  local isVisual = require('hasan.utils').is_visual_mode()
+  if isVisual then
+    feedkeys('<Esc>', '')
+    vim.defer_fn(function()
+      _show_substitute_input(isVisual)
+    end, 100)
+  else
+    _show_substitute_input(isVisual)
+  end
 end
 
 return M

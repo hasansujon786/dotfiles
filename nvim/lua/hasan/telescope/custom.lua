@@ -88,7 +88,8 @@ end
 
 function M.curbuf()
   local opts = my_theme.get_dropdown({ previewer = false, shorten_path = false })
-  if require('hasan.utils').is_visual_mode() then
+  local isVisualMode, mode = require('hasan.utils').is_visual_mode()
+  if isVisualMode and mode == 'v' then
     local word = require('hasan.utils').get_visual_selection()
     opts.default_text = word
     vim.fn.setreg('/', word)
@@ -201,10 +202,10 @@ M.commands = function()
 end
 
 function M.grep_string()
-  local isVisual = require('hasan.utils').is_visual_mode()
+  local isVisual, mode = require('hasan.utils').is_visual_mode()
   local word = nil
 
-  if isVisual then
+  if isVisual and mode == 'v' then
     word = require('hasan.utils').get_visual_selection()
   else
     word = vim.fn.input('Grep String: ')

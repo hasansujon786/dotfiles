@@ -1,8 +1,12 @@
-##!/bin/sh
+#!/bin/bash
 set -e
 tmpfile=$1
 
-files=$(readarray -t ARRAY < $tmpfile; IFS=' '; echo "${ARRAY[*]}")
-rm $tmpfile
+files=$(
+	readarray -t ARRAY <"$tmpfile"
+	IFS=' '
+	echo "${ARRAY[*]}"
+)
+rm "$tmpfile"
 
 vimv $files
