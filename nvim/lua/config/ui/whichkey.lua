@@ -202,6 +202,7 @@ return {
         B = 'Toggle Onedark',
 
         l = { '<cmd>lua require("hasan.utils.logger").toggle("cursorcolumn")<CR>', 'Toggle cursorcolumn' },
+        t = { '<cmd>lua require("hasan.utils.logger").toggle("concealcursor", { "nc", "" })<CR>', 'Toggle concealcursor' },
         L = { '<cmd>lua require("hasan.utils.logger").toggle("cursorline")<CR>', 'Toggle cursorline' },
         h = { '<cmd>call autohl#_AutoHighlightToggle()<CR>', 'Highlight same words' },
         s = { '<cmd>lua require("hasan.utils.logger").toggle("spell")<CR>', 'Toggle spell' },

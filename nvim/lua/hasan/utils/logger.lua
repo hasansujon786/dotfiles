@@ -34,15 +34,47 @@ function M.Logger:error(msg, opts)
   log(vim.log.levels.ERROR, msg, opts or {})
 end
 
-function M.toggle(option, silent)
+---Get index of given value
+---@param array table
+---@param value any
+---@return integer|nil
+local function indexOf(array, value)
+  for i, v in ipairs(array) do
+    if v == value then
+      return i
+    end
+  end
+  return nil
+end
+
+---Toggle vim option with ease
+---@param option string
+---@param given_states table
+---@param silent boolean
+function M.toggle(option, given_states, silent)
   local info = vim.api.nvim_get_option_info(option)
   local scopes = { buf = 'bo', win = 'wo', global = 'o' }
   local scope = scopes[info.scope]
   local options = vim[scope]
-  options[option] = not options[option]
+
+  if given_states ~= nil then
+    local foundIndex = indexOf(given_states, options[option])
+    if foundIndex == #given_states or foundIndex == nil then
+      options[option] = given_states[1]
+    else
+      options[option] = given_states[foundIndex + 1]
+    end
+  else
+    options[option] = not options[option]
+  end
+
   if silent ~= true then
-    if options[option] then
-      M.Logger:log('enabled vim.' .. scope .. '.' .. option)
+    if options[option] and options[option] ~= '' then
+      local msg = 'enabled vim.' .. scope .. '.' .. option
+      if given_states ~= nil then
+        msg = msg .. ' [' .. options[option] .. ']'
+      end
+      M.Logger:log(msg)
     else
       M.Logger:warn('disabled vim.' .. scope .. '.' .. option)
     end

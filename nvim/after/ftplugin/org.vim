@@ -1,5 +1,5 @@
 setl shiftwidth=2 tabstop=2 softtabstop=2
-setl conceallevel=2 concealcursor=n
+setl conceallevel=2 concealcursor=nc
 
 vnoremap <buffer> - <cmd>lua require('hasan.org').create_link()<CR>
 nnoremap <buffer> cic   <cmd>lua require('orgmode').action('org_mappings.toggle_checkbox')<CR>

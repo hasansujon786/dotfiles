@@ -227,6 +227,7 @@ return {
       M.setup_conceal(bufnr)
     end
 
+    -- Tip: make sure concealcursor is disabled by default
     keymap('n', 'gK', M.peekTwStyles, { desc = 'Peek tailwind styles', buffer = bufnr })
     keymap('n', 'to', M.toggle_conceallevel, { desc = 'Toggle conceallevel', buffer = bufnr })
   end,

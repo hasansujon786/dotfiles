@@ -65,7 +65,7 @@ local fn = {
           relativenumber = true,
           signcolumn = 'yes',
           numberwidth = 2,
-          concealcursor = 'n',
+          concealcursor = 'nc',
           conceallevel = 2,
           winhighlight = 'Normal:Normal,FloatBorder:ZenBorder,Folded:OrgHeadlineLevel1',
         },
