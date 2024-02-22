@@ -55,9 +55,11 @@ local function toggle_opacity(window, _)
   window:set_config_overrides(overrides)
 end
 
+local is_forced_fullscreen = false
 wezterm.on('user-var-changed', function(window, pane, name, value)
   local overrides = window:get_config_overrides() or {}
   if name == 'ZEN_MODE' then
+    local show_tab_bar = nil
     local incremental = value:find('+')
     local number_value = tonumber(value)
 
@@ -66,19 +68,24 @@ wezterm.on('user-var-changed', function(window, pane, name, value)
         window:perform_action(wezterm.action.IncreaseFontSize, pane)
         number_value = number_value - 1
       end
-      overrides.enable_tab_bar = false
+      show_tab_bar = false
     elseif number_value < 0 then
       window:perform_action(wezterm.action.ResetFontSize, pane)
       overrides.font_size = nil
-      overrides.enable_tab_bar = true
+      show_tab_bar = true
     else
       if number_value ~= 0 then
         overrides.font_size = number_value
       end
-      overrides.enable_tab_bar = false
+      show_tab_bar = false
+    end
+
+    if not is_forced_fullscreen then
+      overrides.enable_tab_bar = show_tab_bar
+      window:perform_action('ToggleFullScreen', pane)
     end
   end
-  -- window:perform_action('ToggleFullScreen', pane)
+
   window:set_config_overrides(overrides)
 end)
 
@@ -165,6 +172,7 @@ return {
       key = 'F11',
       action = wezterm.action_callback(function(window, pane)
         window:perform_action('ToggleFullScreen', pane)
+        is_forced_fullscreen = window:get_dimensions().is_full_screen
 
         if not is_tab_bar_forced_hidden then
           local overrides = window:get_config_overrides() or {}

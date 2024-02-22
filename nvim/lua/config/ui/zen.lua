@@ -26,7 +26,7 @@ return {
         laststatus = 0, -- turn off the statusline in zen mode : 0 / 3
       },
       wezterm = {
-        enabled = false,
+        enabled = true,
         font = 0, -- options: 0 18 +4 (10% increase per step)
       },
     },
