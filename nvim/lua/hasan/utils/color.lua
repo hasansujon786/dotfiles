@@ -16,7 +16,7 @@ M.toggle_bg_tranparent = function(followState)
   end
 
   if not followState then
-    local statePath = vim.fs.normalize(require('hasan.utils.file').config_root() .. '/lua/hasan/core/state.lua')
+    local statePath = vim.fs.normalize(require('hasan.utils.file').config_root() .. '/lua/core/state.lua')
     state.theme.bg_tranparent = not state.theme.bg_tranparent
     cmd(string.format("silent !sed -i '%s' %s", stateValue, statePath))
   end

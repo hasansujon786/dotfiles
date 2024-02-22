@@ -11,6 +11,8 @@ return {
       height = 1, -- 1 = 100%
       options = {
         signcolumn = 'no', -- disable signcolumn
+        scrolloff = 5,
+        winbar = '',
         -- number = false, -- disable number column
         -- relativenumber = false, -- disable relative numbers
       },
@@ -21,6 +23,11 @@ return {
         enabled = true,
         ruler = false, -- disables the ruler text in the cmd line area
         showcmd = false, -- disables the command in the last line of the screen
+        laststatus = 0, -- turn off the statusline in zen mode : 0 / 3
+      },
+      wezterm = {
+        enabled = false,
+        font = 0, -- options: 0 18 +4 (10% increase per step)
       },
     },
     -- on_open = function(win)
