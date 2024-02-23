@@ -60,8 +60,10 @@ local offset_encoding = 'utf-16'
 local glance_history = {}
 
 local function save_history_data(results, method)
-  local d = { results = results, method = method }
-  table.insert(glance_history, d)
+  table.insert(glance_history, {
+    results = results,
+    method = method,
+  })
 end
 
 local open_last_history = function()

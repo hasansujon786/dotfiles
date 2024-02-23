@@ -4,6 +4,7 @@ local M = {}
 local use_vivid_hl_ftype = { list = true, fern = true, qf = true }
 local force_persist_ft = {
   qf = true,
+  Glance = true,
   fern = true,
   NvimTree = true,
   DiffviewFiles = true,

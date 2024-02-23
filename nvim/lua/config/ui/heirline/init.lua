@@ -48,7 +48,7 @@ return {
           sl.Fill,
         },
         sl.ShowCmd,
-        sl.Harpoon,
+        -- sl.Harpoon,
         sl.LSPActive,
         sl.FileType,
         sl.SpaceInfo,
