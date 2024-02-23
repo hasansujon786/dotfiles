@@ -49,8 +49,13 @@ M.my_nebulous_setup = function()
         return true
       end
 
-      -- neo-minimap
       if is_float then
+        -- glance
+        if vim.w['glance_preview_window'] then
+          return true
+        end
+
+        -- neo-minimap
         local win_conf = api.nvim_win_get_config(winid)
         if
           win_conf.width == state.neominimap.width

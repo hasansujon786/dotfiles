@@ -3,27 +3,10 @@ return {
   cmd = 'Glance',
   config = function()
     local glance = require('glance')
+    local mod = require('hasan.widgets.glance_mod')
     local actions = glance.actions
-    local offset_encoding = 'utf-16'
-    local glance_history = {}
 
-    local function save_last_data(results, method)
-      local d = { results = results, method = method }
-      table.insert(glance_history, d)
-    end
-    local resume = function()
-      if #glance_history == 0 then
-        return vim.notify('No last data', vim.log.levels.INFO, { title = 'Glance' })
-      end
-      local last_history = glance_history[#glance_history]
-
-      local parent_bufnr = vim.api.nvim_get_current_buf()
-      local parent_winnr = vim.api.nvim_get_current_win()
-      local params = vim.lsp.util.make_position_params()
-
-      glance.open_history(last_history.results, parent_bufnr, parent_winnr, params, last_history.method, offset_encoding)
-    end
-    keymap('n', '<leader>og', resume, { desc = 'Lsp: Glance resume' })
+    keymap('n', '<leader>og', mod.open_last_history, { desc = 'Lsp: Glance resume' })
 
     glance.setup({
       height = 18, -- Height of the window
@@ -31,7 +14,7 @@ return {
       border = {
         enable = true, -- Show window borders. Only horizontal borders allowed
         top_char = '▁',
-        bottom_char = '▔',
+        bottom_char = '▁',
       },
       list = {
         position = 'right', -- Position of the list window 'left'|'right'
@@ -65,11 +48,15 @@ return {
           if #results == 1 then
             jump(results[1]) -- argument is optional
           else
+            mod.set_cursor_pointer()
             open(results) -- argument is optional
             vim.defer_fn(function()
-              save_last_data(results, method)
+              mod.save_history_data(results, method)
             end, 100)
           end
+        end,
+        after_close = function()
+          mod.remove_cursor_pointer()
         end,
       },
       folds = {

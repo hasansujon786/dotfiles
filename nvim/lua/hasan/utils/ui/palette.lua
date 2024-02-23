@@ -100,6 +100,7 @@ local function set_custom_highlights()
 
   -- /// glance.nvim ///
     GlancePreviewNormal       = { fg = c.fg, bg = c.bg_d },
+    GlancePreviewLineNr       = { fg = '#495162', bg = c.bg_d },
     GlanceListNormal          = { fg = c.light_grey, bg = c.bg0 },
     GlanceWinBarFilename      = { fg = c.grey, bg = c.bg0, underline = true },
     GlanceWinBarFilepath      = { fg = c.grey, bg = c.bg0, underline = true },
@@ -107,13 +108,13 @@ local function set_custom_highlights()
     GlanceFoldIcon            = { fg = c.fg },
     GlanceListFilename        = { fg = c.white },
     GlanceIndent              = { fg = c.bg1 },
-    GlanceBorder              = { fg = c.dark_blue },
     GlanceListCursorLine      = { fg = c.fg, bg = '#204364' },
     GlancePreviewMatch        = { link = 'LspReferenceText' },
     GlanceListMatch           = { link = 'LspReferenceWrite' },
-    GlanceBorderTop           = { link = 'GlanceBorder' },
-    GlanceListBorderBottom    = { link = 'GlanceBorder' },
-    GlancePreviewBorderBottom = { link = 'GlanceBorder' },
+    GlanceBorderTop           = { fg = c.dark_blue  },
+    GlanceBorderCursor        = { fg = c.dark_blue, underline = true },
+    GlanceListBorderBottom    = { fg = c.dark_blue, bg = c.bg0 },
+    GlancePreviewBorderBottom = { fg = c.dark_blue, bg = c.bg_d },
 
   -- /// DiffView ///
     DiffviewDiffDelete        = { bg='#3c2729', fg='#1c212c' },
