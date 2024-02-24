@@ -190,16 +190,23 @@ return {
     { provider = '█', hl = layerBlockAlt },
   },
   Harpoon = {
+    update = { 'WinEnter', 'WinLeave', 'BufReadPost', 'BufEnter', 'BufWinEnter' },
     condition = function()
-      local ok, harpoon_mark = pcall(require, 'harpoon.mark')
-      if ok then
-        return harpoon_mark.status() ~= ''
-      end
-      return false
+      return _G['harpoon_loaded']
     end,
-    provider = function()
-      local _, harpoon_mark = pcall(require, 'harpoon.mark')
-      return '  H:' .. harpoon_mark.status()
+    init = function(self)
+      local ok, harpoon = pcall(require, 'harpoon')
+      if ok then
+        local displayed = harpoon:list():display()
+        local name = require('hasan.utils.file').get_buf_name_relative(0)
+        self.index = require('hasan.utils').index_of(displayed, name)
+      end
+    end,
+    provider = function(self)
+      if self.index then
+        return '  H:' .. self.index
+      end
+      return ''
     end,
     hl = mutedText,
   },

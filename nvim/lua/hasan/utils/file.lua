@@ -1,6 +1,21 @@
 local Job = require('plenary.job')
 
+local Path = require('plenary.path')
+local function normalize_path(buf_name, root)
+  return Path:new(buf_name):make_relative(root)
+end
+
 local M = {}
+
+M.get_root_dir = function()
+  return vim.loop.cwd()
+end
+
+--- @param buffer buffer
+--- @return string
+M.get_buf_name_relative = function(buffer)
+  return normalize_path(vim.api.nvim_buf_get_name(buffer), M.get_root_dir())
+end
 
 M.config_root = function()
   local configDir = os.getenv('PVIM')

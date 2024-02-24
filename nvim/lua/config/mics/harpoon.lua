@@ -36,9 +36,13 @@ return {
     })
     local maps = {
       ['<leader>M'] = function()
-        harpoon:list():append()
-        local index = harpoon:list():append():length()
-        notify('File added at index ' .. index, vim.log.levels.INFO, { title = 'harpoon' })
+        local list = harpoon:list():append()
+
+        local displayed = list:display()
+        local name = require('hasan.utils.file').get_buf_name_relative(0)
+        local index = require('hasan.utils').index_of(displayed, name)
+
+        notify('File added at index ' .. index, vim.log.levels.TRACE, { title = 'harpoon' })
       end,
       ['<leader><tab>'] = function()
         harpoon.ui:toggle_quick_menu(harpoon:list())
@@ -54,5 +58,7 @@ return {
     for key, value in pairs(maps) do
       keymap('n', key, value)
     end
+
+    _G.harpoon_loaded = true
   end,
 }
