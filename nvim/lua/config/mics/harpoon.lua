@@ -37,6 +37,8 @@ return {
     local maps = {
       ['<leader>M'] = function()
         harpoon:list():append()
+        local index = harpoon:list():append():length()
+        notify('File added at index ' .. index, vim.log.levels.INFO, { title = 'harpoon' })
       end,
       ['<leader><tab>'] = function()
         harpoon.ui:toggle_quick_menu(harpoon:list())

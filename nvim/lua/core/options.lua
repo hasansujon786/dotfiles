@@ -160,5 +160,6 @@ o.textwidth = 80 --                              Hard-wrap text at nth column
 o.wrap = false --                                No wrap by default
 o.linebreak = true --                            Don't break words when wrapping lines
 o.breakindent = true --                          Every wrapped line will continue visually indented
-o.showbreak = '↪  ' --                           Make it so that long lines wrap smartly
+-- o.showbreak = '↪  ' --                           Make it so that long lines wrap smartly
+-- vim.wo.showbreak = '↪  ' --                           Make it so that long lines wrap smartly
 opt.cpoptions:append('n')

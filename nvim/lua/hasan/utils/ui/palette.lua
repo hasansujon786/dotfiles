@@ -1,6 +1,7 @@
 local util = require('hasan.utils.color')
 -- cool local palette = require('onedark.palette')
 local c = {
+  none = 'NONE',
   bg0 = '#242b38',
   bg1 = '#2d3343',
   bg2 = '#343e4f',
@@ -98,6 +99,12 @@ local function set_custom_highlights()
     DiagnosticUnderlineError= { fg = 'none', underline = true, sp = c.red },
     NullLsInfoBorder        = { link = 'FloatBorder' },
 
+  -- /// notify ///
+    NotifyTitle               = { fg = c.light_grey, bg = c.none },
+    NotifyTitleInfo           = { fg = c.green, bg = c.none },
+    NotifyBorder              = { fg = c.grey, bg = c.none },
+    NotifyBorderInfo          = { fg = c.green, bg = c.none  },
+
   -- /// glance.nvim ///
     GlancePreviewNormal       = { fg = c.fg, bg = c.bg_d },
     GlancePreviewLineNr       = { fg = '#495162', bg = c.bg_d },
@@ -117,7 +124,7 @@ local function set_custom_highlights()
     GlancePreviewBorderBottom = { fg = c.dark_blue, bg = c.bg_d },
 
   -- /// DiffView ///
-    DiffviewDiffDelete        = { bg='#3c2729', fg='#1c212c' },
+    DiffviewDiffDelete        = { bg = '#3c2729', fg = '#1c212c' },
     DiffviewNormal            = { link = 'SidebarDark' },
     DiffviewEndOfBuffer       = { link = 'DiffviewNormal' },
     DiffviewCursorLine        = { link = 'CursorLineFocus' },

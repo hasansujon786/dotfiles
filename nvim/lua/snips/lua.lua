@@ -47,7 +47,7 @@ ls.add_snippets('lua', {
     )
   ),
   s(
-    'schedule',
+    'schedule-timer',
     fmt(
       [[
       local timer = vim.loop.new_timer()

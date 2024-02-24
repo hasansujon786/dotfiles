@@ -203,7 +203,7 @@ M.get_notify_popup = function(opts, last_pop)
   opts = utils.merge({
     enter = false,
     focusable = false,
-    border = { style = 'single' },
+    border = { style = 'rounded' },
     anchor = anchor[3],
     relative = 'editor',
     -- zindex = 1000,

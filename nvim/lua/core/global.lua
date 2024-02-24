@@ -30,6 +30,14 @@ R = function(moduleName, message)
   end
 end
 
+---Show custom message popup
+---@param msg string Content of the notification to show to the user.
+---@param level integer|nil One of the values from |vim.log.levels|.
+---@param opts table|nil Optional parameters. Unused by default.
+function _G.notify(msg, level, opts)
+  require('hasan.widgets.notify').notify(msg, level, opts)
+end
+
 function _G.t(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
