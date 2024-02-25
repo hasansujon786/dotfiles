@@ -49,15 +49,6 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', ']w', require('config.lsp.util.diagnosgic').diagnostic_goto(true, 'WARN'), desc('Lsp: Next Warning'))
   keymap('n', '[w', require('config.lsp.util.diagnosgic').diagnostic_goto(false, 'WARN'), desc('Lsp: Prev Warning'))
 
-  -- Format
-  keymap({ 'n', 'x' }, '<leader>fs', '<cmd>lua vim.lsp.buf.format()<CR><cmd>w<CR>', desc('Lsp: format and save'))
-  command('Format', function(_)
-    vim.lsp.buf.format({ async = true })
-  end)
-  command('FormatSync', function()
-    vim.lsp.buf.format({ async = false })
-  end)
-
   keymap('n', '<leader>ar', '<cmd>Telescope lsp_references<CR>', desc('Lsp: Preview references'))
   keymap('n', '<leader>ak', vim.lsp.buf.signature_help, desc('Lsp: show signature help'))
   keymap('n', '<leader>aq', require('config.lsp.util.extras').showLspRenameChanges, desc('Lsp: show lsp rename'))

@@ -2,7 +2,7 @@ return {
   'nvimtools/none-ls.nvim',
   lazy = true,
   module = 'null-ls',
-  enabled = true,
+  enabled = false,
   config = function()
     local null_ls = require('null-ls')
     local b = null_ls.builtins -- https://github.com/nvimtools/none-ls.nvim/blob/main/doc/MAIN.md

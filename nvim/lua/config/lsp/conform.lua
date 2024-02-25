@@ -3,14 +3,28 @@ local prettier = { { 'prettierd', 'prettier' } } -- Use a sub-list to run only t
 return {
   'stevearc/conform.nvim',
   lazy = true,
-  enabled = false,
-  cmd = { 'ConformInfo', 'FormatBuf', 'FormatBufSync' },
+  enabled = true,
+  cmd = { 'ConformInfo', 'Format', 'FormatSync' },
   module = 'conform',
   event = 'BufWritePre',
+  keys = {
+    {
+      '<leader>fs',
+      function()
+        require('conform').format({ async = true, lsp_fallback = true })
+      end,
+      mode = '',
+      desc = 'Lsp: format and save',
+    },
+  },
   opts = {
     formatters_by_ft = {
+      -- Scripting
       lua = { 'stylua' },
+      bash = { 'shfmt' },
+      sh = { 'shfmt' },
 
+      -- Webdev
       javascript = prettier,
       typescript = prettier,
       javascriptreact = prettier,
@@ -20,7 +34,7 @@ return {
       json = prettier,
       jsonc = prettier,
 
-      ['_'] = { 'trim_whitespace' },
+      ['_'] = { 'trim_whitespace' }, -- "_" filetypes that don't have other formatters configured.
     },
     format_on_save = function(_) -- bufnr
       -- Disable with a global or buffer-local variable
@@ -28,15 +42,18 @@ return {
       if not state.file.auto_format then
         return
       end
-      return { timeout_ms = 500, lsp_fallback = true }
+      return { lsp_fallback = true }
     end,
+    -- formatters = {
+    --   shfmt = {
+    --     prepend_args = { '-i', '2' },
+    --   },
+    -- },
   },
   config = function(_, opts)
-    -- keymap('n', '<leader>fs', '<cmd>FormatBuf<CR>', desc('Lsp: format and save'))
-    -- keymap('x', '<leader>fs', 'gq<cmd>silent noa write<cr>', desc('Lsp: format current selection'))
-
     require('conform').setup(opts)
-    -- utils
+
+    -- Format command
     local function get_visulal_range(args)
       if args.count ~= -1 then
         local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
@@ -45,7 +62,6 @@ return {
           ['end'] = { args.line2, end_line:len() },
         }
       end
-
       return nil
     end
     local function save_cb(err)
@@ -55,23 +71,19 @@ return {
       vim.cmd.write()
     end
 
-    -- Format command
-    command('FormatBuf', function(args)
-      local opt = {
+    command('Format', function(args)
+      require('conform').format({
         async = true,
         lsp_fallback = true,
         range = get_visulal_range(args),
-      }
-      require('conform').format(opt, save_cb)
+      }, save_cb)
     end, { range = true })
-    command('FormatBufSync', function(args)
-      local opt = {
+    command('FormatSync', function(args)
+      require('conform').format({
         async = false,
-        timeout_ms = 500,
         lsp_fallback = true,
         range = get_visulal_range(args),
-      }
-      require('conform').format(opt, save_cb)
+      }, save_cb)
     end, { range = true })
 
     -- Format with gq key
