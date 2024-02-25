@@ -37,6 +37,7 @@ local M = {
     cssls = { 'css-lsp' },
     tsserver = { 'typescript-language-server' },
     jsonls = { 'json-lsp' },
+    eslint = { 'eslint-lsp' },
     -- Frameworks
     astro = { 'astro-language-server' },
     volar = { 'vue-language-server' }, -- vuels = { 'vetur-vls' },
@@ -46,14 +47,11 @@ local M = {
     lua_ls = { 'lua-language-server' },
     vimls = { 'vim-language-server' },
     gopls = { 'gopls' },
-    -- Tools
-    -- eslint = { 'eslint-lsp' },
   },
   extra_tools = {
     'shfmt',
     'shellcheck',
     'stylua',
-    'eslint_d',
     'prettierd',
     'dart-debug-adapter',
   },
