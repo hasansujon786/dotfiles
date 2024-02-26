@@ -2,6 +2,7 @@ return {
   'uga-rosa/ccc.nvim',
   lazy = true,
   cmd = 'CccPick',
+  commit = 'ec6e23f',
   keys = {
     { '<leader>cp', '<cmd>CccPick<cr>', desc = 'Open color picker' },
     { '<leader>cc', '<cmd>CccConvert<cr>', desc = 'Cycle color format' },
