@@ -1,4 +1,9 @@
-local prettier = { { 'prettierd', 'prettier' } } -- Use a sub-list to run only the first available formatter
+local function save_cb(err)
+  if err then
+    return
+  end
+  vim.cmd.write()
+end
 
 return {
   'stevearc/conform.nvim',
@@ -11,7 +16,7 @@ return {
     {
       '<leader>fs',
       function()
-        require('conform').format({ async = true, lsp_fallback = true })
+        require('conform').format({ async = true, lsp_fallback = true }, save_cb)
       end,
       mode = '',
       desc = 'Lsp: format and save',
@@ -19,22 +24,39 @@ return {
   },
   opts = {
     formatters_by_ft = {
-      -- Scripting
-      lua = { 'stylua' },
-      bash = { 'shfmt' },
-      sh = { 'shfmt' },
-
-      -- Webdev
-      javascript = prettier,
-      typescript = prettier,
-      javascriptreact = prettier,
-      typescriptreact = prettier,
-      html = prettier,
-      css = prettier,
-      json = prettier,
-      jsonc = prettier,
-
-      ['_'] = { 'trim_whitespace' }, -- "_" filetypes that don't have other formatters configured.
+      {
+        filetype = {
+          'javascript',
+          'javascriptreact',
+          'typescript',
+          'typescriptreact',
+          'vue',
+          'css',
+          'scss',
+          'less',
+          'html',
+          'json',
+          'jsonc',
+          'yaml',
+          'markdown',
+          'markdown.mdx',
+          'graphql',
+          'handlebars',
+        },
+        formatter = { { 'prettierd', 'prettier' } }, -- Use a sub-list to run only the first available formatter
+      },
+      {
+        filetype = 'lua',
+        formatter = { 'stylua' },
+      },
+      {
+        filetype = { 'bash', 'sh' },
+        formatter = { 'shfmt' },
+      },
+      {
+        filetype = '_', -- "_" filetypes that don't have other formatters configured.
+        formatter = { 'trim_whitespace' },
+      },
     },
     format_on_save = function(_) -- bufnr
       -- Disable with a global or buffer-local variable
@@ -51,10 +73,8 @@ return {
     -- },
   },
   config = function(_, opts)
-    require('conform').setup(opts)
-
     -- Format command
-    local function get_visulal_range(args)
+    local function get_visual_range(args)
       if args.count ~= -1 then
         local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
         return {
@@ -64,28 +84,37 @@ return {
       end
       return nil
     end
-    local function save_cb(err)
-      if err then
-        return
+    local function get_formatter_list(formatters_by_ft)
+      local formatters_by_ft_mod = {}
+      for _, item in ipairs(formatters_by_ft) do
+        if type(item.filetype) == 'string' then
+          formatters_by_ft_mod[item.filetype] = item.formatter
+        else
+          for _, ft in ipairs(item.filetype) do
+            formatters_by_ft_mod[ft] = item.formatter
+          end
+        end
       end
-      vim.cmd.write()
+      return formatters_by_ft_mod
     end
 
     command('Format', function(args)
       require('conform').format({
         async = true,
         lsp_fallback = true,
-        range = get_visulal_range(args),
+        range = get_visual_range(args),
       }, save_cb)
     end, { range = true })
     command('FormatSync', function(args)
       require('conform').format({
         async = false,
         lsp_fallback = true,
-        range = get_visulal_range(args),
+        range = get_visual_range(args),
       }, save_cb)
     end, { range = true })
 
+    opts.formatters_by_ft = get_formatter_list(opts.formatters_by_ft)
+    require('conform').setup(opts)
     -- Format with gq key
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
   end,

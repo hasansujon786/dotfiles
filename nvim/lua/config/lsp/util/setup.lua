@@ -10,7 +10,9 @@ local function load_specific_setup(client, bufnr)
   end
 
   -- Disable defalut formatter ---------------
-  if not vim.tbl_contains(g_conf.use_builtin_lsp_formatter, client.name) then
+  local should_disable_formatter = g_conf.use_builtin_lsp_formatter ~= nil
+    and not vim.tbl_contains(g_conf.use_builtin_lsp_formatter, client.name)
+  if should_disable_formatter then
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
   end
@@ -55,7 +57,7 @@ local M = {
     'prettierd',
     'dart-debug-adapter',
   },
-  use_builtin_lsp_formatter = { 'dartls', 'astro', 'null-ls' },
+  -- use_builtin_lsp_formatter = { 'dartls', 'astro', 'null-ls' },
   default_opts = {
     flags = { debounce_text_changes = 500 },
     capabilities = require('config.lsp.util.extras').update_capabilities('setup.lua'),
