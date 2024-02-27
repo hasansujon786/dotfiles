@@ -4,9 +4,11 @@ tmpfile=$1
 
 files=$(
 	readarray -t ARRAY <"$tmpfile"
-	IFS=' '
+	# IFS=' '
 	echo "${ARRAY[*]}"
 )
+
+files=${files//\"/}
 rm "$tmpfile"
 
-vimv $files
+echo "$files" | xargs vimv

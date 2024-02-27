@@ -149,9 +149,11 @@ cmd jump-to-git-root %{{
   lf -remote "send $id cd $_root_dir"
 }}
 cmd bulk-rename !{{
+  # format every file path
+  $selected_files=$env:fx.replace('\', '\\')
+  $selected_files=$selected_files.replace(' ', '\ ')
+
   $tmp_file=($env:HOME + "\dotfiles\tui\lf\tmp_vimv")
-  $selected_files=$env:fx.replace('\', '\\\')
-  $selected_files=$env:fx.replace('"', '')
   $selected_files | Set-Content $tmp_file
 
   $tmp_file=$tmp_file.replace('\', '\\\')
