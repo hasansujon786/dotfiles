@@ -206,7 +206,7 @@ M.get_notify_popup = function(opts, last_pop)
     border = { style = 'rounded' },
     anchor = anchor[3],
     relative = 'editor',
-    -- zindex = 1000,
+    zindex = 2000,
     position = { row = row, col = '100%' },
     -- position = '80%',
     size = {
