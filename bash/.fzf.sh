@@ -152,11 +152,9 @@ fo() {
 	if [[ "$shortcut" = alt-o ]]; then
 		if [[ "${#files[@]}" -gt 1 ]]; then
 			for file in "${files[@]}"; do
-				echo "multiple"
 				explorer "$file"
 			done
 		elif [[ "${#files[@]}" -eq 1 ]]; then
-			echo "only one"
 			explorer "${files[0]}"
 		fi
 	else
