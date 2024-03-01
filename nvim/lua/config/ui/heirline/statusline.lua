@@ -137,6 +137,19 @@ return {
       name = 'heirline_Filetype',
     },
   },
+  FileFormat = {
+    init = function(self)
+      self.fileformat = vim.bo.fileformat == 'dos' and 'CRLF' or 'LF'
+    end,
+    hl = mutedText,
+    update = { 'BufReadPost', 'BufEnter', 'BufLeave' },
+    { provider = '  ' },
+    {
+      provider = function(self)
+        return self.fileformat
+      end,
+    },
+  },
   ShowCmd = {
     condition = function()
       return vim.o.cmdheight == 0

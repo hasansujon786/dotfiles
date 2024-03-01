@@ -7,12 +7,13 @@ return {
     border = { '', '', '', '│', '', '', '', '│' },
     window = {
       backdrop = 1,
-      width = 0.75,
+      width = 120,
       height = 1, -- 1 = 100%
       options = {
         signcolumn = 'no', -- disable signcolumn
         scrolloff = 5,
         winbar = '',
+        -- statuscolumn = '',
         -- number = false, -- disable number column
         -- relativenumber = false, -- disable relative numbers
       },

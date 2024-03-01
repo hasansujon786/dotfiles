@@ -114,6 +114,7 @@ o.softtabstop = indent
 o.expandtab = true --                            Use spaces instead of tabs
 o.autoindent = true
 o.smartindent = true
+o.fileformat = 'unix'
 
 -- Searching
 o.magic = true --                                For regular expressions turn magic on
