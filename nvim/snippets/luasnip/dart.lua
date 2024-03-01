@@ -1,23 +1,26 @@
+local common = require('nvim.snippets.luasnip.utils')
 local ls = require('luasnip')
-local s = ls.snippet
-local sn = ls.snippet_node
-local t = ls.text_node
-local i = ls.insert_node
-local f = ls.function_node
-local c = ls.choice_node
-local d = ls.dynamic_node
-local r = ls.restore_node
-local l = require('luasnip.extras').lambda
-local rep = require('luasnip.extras').rep
-local p = require('luasnip.extras').partial
-local m = require('luasnip.extras').match
-local n = require('luasnip.extras').nonempty
-local dl = require('luasnip.extras').dynamic_lambda
+
+-- local l = require('luasnip.extras').lambda
+-- local p = require('luasnip.extras').partial
+-- local m = require('luasnip.extras').match
+-- local n = require('luasnip.extras').nonempty
+-- local dl = require('luasnip.extras').dynamic_lambda
+-- local types = require('luasnip.util.types')
+-- local conds = require('luasnip.extras.expand_conditions')
+
 local fmt = require('luasnip.extras.fmt').fmt
 local fmta = require('luasnip.extras.fmt').fmta
-local types = require('luasnip.util.types')
-local conds = require('luasnip.extras.expand_conditions')
-local common = require('snips.utils')
+local rep = require('luasnip.extras').rep
+
+local s = ls.snippet
+local c = ls.choice_node
+local d = ls.dynamic_node
+local i = ls.insert_node
+local t = ls.text_node
+local f = ls.function_node
+local r = ls.restore_node
+local sn = ls.snippet_node
 
 ls.add_snippets('dart', {
   s('s', fmt('String {1}{2}', { i(1), t(';') })),
@@ -132,38 +135,32 @@ ls.add_snippets('dart', {
       {}
     )
   ),
-  s(
-    '_outline:RoundedRectangleBorder',
-    fmt([[RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0))]], { })
-  ),
-  s(
-    '_outline:StadiumBorder',
-    fmt([[const StadiumBorder()]], { })
-  ),
+  s('_outline:RoundedRectangleBorder', fmt([[RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0))]], {})),
+  s('_outline:StadiumBorder', fmt([[const StadiumBorder()]], {})),
   s(
     'freezedclass',
-    fmt(
+    fmta(
       [[
       import 'package:freezed_annotation/freezed_annotation.dart';
 
-      part '{1}.freezed.dart';
-      part '{1}.g.dart';
+      part '<fname>.freezed.dart';
+      part '<fname>.g.dart';
 
       @freezed
-      class {2} with _${3} {{
-        const factory {3}({{
+      class <name> with _$<gen_class> {
+        const factory <gen_class>({
           required String id,
           required String title,
           required DateTime createdAt,
-        }}) = _{3};
+        }) = _<gen_class>;
 
-        factory {3}.fromJson(Map<String, Object?> json) => _${3}FromJson(json);
-      }}
+        factory <gen_class>.fromJson(Map<<String, Object?>> json) =>> _$<gen_class>FromJson(json);
+      }
       ]],
       {
-        f(common.filename),
-        i(1, 'DataClass'),
-        f(common.get_insert_node, { 1 }),
+        fname = f(common.filename),
+        name = i(1, 'DataClass'),
+        gen_class = rep(1),
       }
     )
   ),
