@@ -1,4 +1,4 @@
-local common = require('nvim.snippets.luasnip.utils')
+local common = require('hasan.utils.snip')
 local ls = require('luasnip')
 -- local l = require('luasnip.extras').lambda
 -- local p = require('luasnip.extras').partial

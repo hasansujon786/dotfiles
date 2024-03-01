@@ -173,6 +173,10 @@ return {
           require('nebulous').update_all_windows()
           -- win:hide()
         end,
+        ['<leader>q'] = function(win)
+          win:close()
+          require('nebulous').update_all_windows()
+        end,
         ['<c-q>'] = function(win)
           win:hide()
           require('nebulous').update_all_windows()
