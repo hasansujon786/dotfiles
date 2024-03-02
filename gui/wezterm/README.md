@@ -14,6 +14,7 @@ hi Normal guibg=#F2E9E0
 ## cli
 wezterm ls-fonts --text "✘"
 wezterm cli spawn nvim
+wezterm cli spawn --window-id=0 --cwd=E:/repoes/lua/peep.nvim nvim
 
 ## Custom keymap
 - https://www.reddit.com/r/neovim/comments/12hyi9t/make_scr_cscr_stab_ctab_work_in_neovim_kitty/

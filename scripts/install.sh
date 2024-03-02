@@ -150,12 +150,12 @@ setup_bash() {
 }
 
 setup_wezterm() {
-	weztermPath=("$HOME/.wezterm.lua" "$HOME/.config/wezterm/wezterm.lua" "$HOME/.config/wezterm/wezterm.lua")
+	weztermPath=("$HOME/.config/wezterm" "$HOME/.config/wezterm" "$HOME/.config/wezterm")
 	util_print wezterm
 	$getter install wezterm -y
 
 	util_backUpConfig "${weztermPath[$osIndex]}"
-	util_makeSymlinkPath "$HOME/dotfiles/gui/wezterm/.wezterm.lua" "${weztermPath[$osIndex]}"
+	util_makeSymlinkPath "$HOME/dotfiles/gui/wezterm" "${weztermPath[$osIndex]}"
 }
 
 setup_nvim() {
@@ -391,6 +391,7 @@ install_and_setup_tmux() {
 
 auto_install_everything() {
 	echo ' ** Auto Install ** '
+  mkdir -p ~/.config
 
 	if [[ "$os" == "windows" ]]; then
 		start ms-settings:developers
