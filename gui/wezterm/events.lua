@@ -1,5 +1,6 @@
 local wezterm = require('wezterm')
 local act = wezterm.action
+local scheme = require('colors')
 
 local key_stack_mode = nil
 local function exit_key_stack(window, pane)
@@ -7,30 +8,40 @@ local function exit_key_stack(window, pane)
   window:perform_action('PopKeyTable', pane)
 end
 
+local text_fg = scheme.colors.fg1
+local tab_bar_bg = scheme.window_frame.active_titlebar_bg
+local right_colors = { '#32354b', '#3E425D', '#4c5272' }
 wezterm.on('update-right-status', function(window, _)
-  local time = wezterm.strftime('       %I:%M %p')
-  local date = wezterm.strftime('       %a %b %-d')
+  local time = wezterm.strftime('  %I:%M %p')
+  local date = wezterm.strftime('  %a %b %-d    ')
   local workspace = wezterm.mux.get_active_workspace()
-  local cells = { '[ ' .. workspace .. ' ]', time, date }
+  local cells = { workspace, time, date }
 
-  -- Color palette for the backgrounds of each cell
-  local text_fg = '#c0c0c0' -- Foreground color for the text across the fade
   local elements = {} -- The elements to be formatted
   -- Translate a cell into elements
-  local function simple(text, _)
+  local function simple(text, idx, _)
+    local c = right_colors[idx]
+    if idx == 1 then
+      table.insert(elements, { Background = { Color = tab_bar_bg } })
+    end
+    table.insert(elements, { Foreground = { Color = c } })
+    table.insert(elements, { Text = '  ' })
     table.insert(elements, { Foreground = { Color = text_fg } })
+    table.insert(elements, { Background = { Color = c } })
+    table.insert(elements, { Text = '   ' })
     table.insert(elements, { Text = text })
   end
 
-  while #cells > 0 do
-    local cellText = table.remove(cells, 1)
-    simple(cellText, #cells == 0)
+  for i = 1, #cells, 1 do
+    simple(cells[i], i, #cells == 0)
   end
 
   if key_stack_mode then
-    table.insert(elements, 1, { Text = '    ' })
+    table.insert(elements, 1, { Text = ' ] ' })
     table.insert(elements, 1, { Text = key_stack_mode })
+    table.insert(elements, 1, { Text = '[ ' })
     table.insert(elements, 1, { Foreground = { Color = '#97CA72' } })
+    table.insert(elements, 1, { Background = { Color = tab_bar_bg } })
   end
   window:set_right_status(wezterm.format(elements))
 end)
@@ -94,6 +105,10 @@ local M = {
   },
   keys = {
     {
+      key = 'F1',
+      action = act.ShowLauncherArgs({ flags = 'WORKSPACES' }),
+    },
+    {
       key = 'f',
       mods = 'LEADER',
       action = wezterm.action_callback(function(window, pane)
@@ -152,6 +167,10 @@ local M = {
     { key = ']', mods = 'ALT', action = act({ ActivateTabRelative = 1 }) },
     { key = '{', mods = 'SHIFT|ALT', action = act({ MoveTabRelative = -1 }) },
     { key = '}', mods = 'SHIFT|ALT', action = act({ MoveTabRelative = 1 }) },
+    { key = '{', mods = 'SHIFT|CTRL', action = act({ SwitchWorkspaceRelative = -1 }) },
+    { key = '}', mods = 'SHIFT|CTRL', action = act({ SwitchWorkspaceRelative = 1 }) },
+    { key = '<', mods = 'SHIFT|CTRL', action = act({ SwitchWorkspaceRelative = -1 }) },
+    { key = '>', mods = 'SHIFT|CTRL', action = act({ SwitchWorkspaceRelative = 1 }) },
     -- tmux style key bindings
     { key = 'c', mods = 'LEADER', action = act({ SpawnTab = 'CurrentPaneDomain' }) },
     { key = 'x', mods = 'LEADER', action = act({ CloseCurrentPane = { confirm = false } }) },
@@ -175,12 +194,17 @@ local M = {
     { key = '8', mods = 'LEADER', action = act({ ActivateTab = 7 }) },
     { key = '9', mods = 'LEADER', action = act({ ActivateTab = 8 }) },
     { key = '&', mods = 'LEADER|SHIFT', action = act({ CloseCurrentTab = { confirm = true } }) },
-    -- tmux custom bindings
-    { key = 'b', mods = 'LEADER', action = 'ShowLauncher' },
+    { key = 'n', mods = 'LEADER', action = wezterm.action({ ActivateTabRelative = 1 }) },
+    { key = 'p', mods = 'LEADER', action = wezterm.action({ ActivateTabRelative = -1 }) },
+    { key = '[', mods = 'LEADER', action = 'ActivateCopyMode' },
+    { key = 'z', mods = 'LEADER', action = 'TogglePaneZoomState' },
+
+    -- Leader custom bindings
     { key = '.', mods = 'LEADER', action = 'TogglePaneZoomState' },
     { key = 'o', mods = 'LEADER', action = 'ActivateLastTab' },
     { key = 'v', mods = 'LEADER', action = act({ SplitHorizontal = {} }) },
     { key = 's', mods = 'LEADER', action = act({ SplitVertical = {} }) },
+    { key = 'b', mods = 'LEADER', action = act.ShowLauncherArgs({ flags = 'WORKSPACES' }) },
     { key = 'b', mods = 'LEADER|CTRL', action = wezterm.action_callback(toggle_opacity) },
 
     -- Custom inputs

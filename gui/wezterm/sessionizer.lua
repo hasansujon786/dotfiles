@@ -147,6 +147,7 @@ M.start = function(window, pane)
       fuzzy = true,
       title = 'Select project',
       choices = projects,
+      description = 'Select project or press / to search.',
     }),
     pane
   )

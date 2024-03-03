@@ -1,17 +1,15 @@
 local wezterm = require('wezterm')
 local events = require('events')
-
--- local SOLID_LEFT_ARROW = ''
--- local SOLID_RIGHT_ARROW = ''
+local colors = require('colors')
 
 return {
   keys = events.keys,
   mouse_bindings = events.mouse_bindings,
   key_tables = events.key_tables,
-  initial_rows = 29,
-  initial_cols = 120,
+  initial_rows = 35,
+  initial_cols = 138,
   hide_tab_bar_if_only_one_tab = false,
-  window_decorations = 'INTEGRATED_BUTTONS', -- NONE,RESIZE
+  window_decorations = 'RESIZE', -- NONE,INTEGRATED_BUTTONS
   check_for_updates = true,
   use_dead_keys = false,
   warn_about_missing_glyphs = false,
@@ -76,44 +74,15 @@ return {
     { label = 'PowerShell', args = { 'powershell.exe', '-NoLogo' } },
   },
   command_palette_bg_color = '#222222',
-  command_palette_fg_color = '#c0c0c0',
+  command_palette_fg_color = '#abb2bf',
   command_palette_font_size = 16.0,
   command_palette_rows = 24,
   color_scheme = 'OneHalfDark',
-  colors = {
-    ansi = {
-      '#546178',
-      '#e06c75',
-      '#98c379',
-      '#e5c07b',
-      '#61afef',
-      '#c678dd',
-      '#56b6c2',
-      '#dcdfe4',
-    },
-    brights = {
-      '#546178', -- '#282c34',
-      '#e06c75',
-      '#98c379',
-      '#e5c07b',
-      '#61afef',
-      '#c678dd',
-      '#56b6c2',
-      '#dcdfe4',
-    },
-    background = '#242B38',
-    foreground = '#abb2bf',
-    tab_bar = {
-      active_tab = {
-        bg_color = '#1E1C1C',
-        fg_color = '#c0c0c0',
-        intensity = 'Bold',
-        underline = 'None',
-      },
-    },
+  colors = colors.one_half,
+  window_frame = colors.window_frame,
+
+  unix_domains = {
+    { name = 'unix' },
   },
-  -- window_frame = {
-  --   inactive_titlebar_bg = 'none',
-  --   active_titlebar_bg = 'none',
-  -- },
+  default_gui_startup_args = { 'connect', 'unix' },
 }
