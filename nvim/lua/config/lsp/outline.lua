@@ -33,12 +33,14 @@ return {
         show_cursorline = true,
       },
       outline_items = {
+        auto_set_cursor = false,
         show_symbol_details = false,
         show_symbol_lineno = false,
         highlight_hovered_item = true, -- Show parents
       },
       symbol_folding = {
-        autofold_depth = 1,
+        -- Set to false to unfold all on open.
+        autofold_depth = false, -- number|boolean
         auto_unfold = { hovered = true, only = 1 },
         markers = { '', '' },
       },
@@ -49,20 +51,20 @@ return {
       },
       keymaps = {
         close = { '<Esc>', 'q' },
-        goto_location = { '<Cr>', 'o' },
+        goto_location = { '<2-LeftMouse>', '<Cr>', 'o' },
         peek_location = { 'i', 'e' },
         hover_symbol = 'K',
         toggle_preview = 'p',
         rename_symbol = 'r',
         code_actions = { 'a', '<C-q>' }, -- <C-space>
         fold_reset = { 'R', 'zr' },
-        down_and_jump = { '<C-j>', '<down>', '<tab>' },
-        up_and_jump = { '<C-k>', '<up>', '<s-tab>' },
+        down_and_jump = { '<C-j>', '<tab>' },
+        up_and_jump = { '<C-k>', '<s-tab>' },
         fold = { 'h', 'x' },
         unfold = { 'l', 'zo' },
         fold_all = { 'W', 'zm' },
         unfold_all = 'E',
-        fold_toggle = 'za',
+        fold_toggle = { 'za', '<RightMouse>' },
         fold_toggle_all = 'zA',
       },
       symbols = {

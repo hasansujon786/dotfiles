@@ -38,7 +38,6 @@ return {
         ['CursorLineFocus'] = { bg = '${bg3}' },
         ['Visual'] = { bg = '#204364' },
         ['DiagnosticSignInfo'] = { fg = '${cyan}' },
-        ['WinSeparator'] = { fg = '${bg1}' },
         ['StatusLine'] = { fg = '${fg}', bg = '${bg1}' },
         ['IncSearch'] = { fg = '${bg}', bg = '#e86671' },
         ['Search'] = { fg = '${bg}', bg = '${highlight}' },

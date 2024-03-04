@@ -83,6 +83,15 @@ local function set_custom_highlights()
     HeirlineTabActive       = { fg = c.green, bg = c.layer },
     HeirlineTabInactive     = { fg = c.red, bg = c.layer },
 
+    WinSeparator            = { fg = c.bg_d },
+    EdgyWinSeparator        = { link = 'WinSeparator' },
+    EdgyNormalDark          = { fg = c.fg, bg = c.bg_d },
+    EdgyTitle               = { fg = c.cyan, bg = c.bg0 },
+    -- EdgyWinSeparator        = { fg = c.bg1 , bg = c.bg_d },
+    -- EdgyTitleDark          = { fg = c.cyan, bg = c.bg1 },
+    -- EdgyTitleLight         = { fg = c.cyan, bg = c.bg1 },
+    -- EdgyNormalDark          = { fg = c.fg, bg = c.bg_d },
+
   -- /// LSP ///
     LspReferenceText        = { bg = '#3B4048', },
     LspReferenceWrite       = { bg = '#463b48', },

@@ -8,39 +8,28 @@ return {
     local color = require('hasan.utils.color')
     vim.opt.splitkeep = 'screen'
 
-    local fg = '#a5b0c5'
-    local cyan = '#56B6C2'
-    local bg_dark = '#1E242E'
-    local bg_gray = '#2D3343'
-
-    color.fg('EdgyTitle', cyan)
-    color.fg_bg('EdgyWinBarLight', cyan, bg_gray)
-
-    color.fg_bg('EdgyNormalDark', fg, bg_dark)
-    color.fg_bg('EdgyWinBarDark', cyan, bg_dark)
-    color.fg_bg('EdgyWinSeparator', bg_gray, bg_dark)
-
-    local left_chars = 'horiz:━,horizup:x,horizdown:x,vert:┃,vertleft:┃,vertright:x,verthoriz:x,eob: ,'
+    -- local left_chars = 'horiz: ,horizup:x,horizdown:x,vert:┃,vertleft:┃,vertright:x,verthoriz:x,eob: ,'
+    local left_chars = 'horiz:█,horizup:🭼,horizdown:x,vert:▏,vertleft:▏,vertright:🭼,verthoriz:🭼,eob: ,'
     -- left_chars =
     --   'stl: ,stlnc: ,wbr: ,horiz:─,horizup:x,horizdown:x,vert:┃,vertleft:┃,vertright:x,verthoriz:x,fold:1,foldopen:2,foldclose:3,foldsep:4,diff:5,msgsep:6,eob: ,lastline:8'
 
     local dark_bar = color.make_winhighlight({
-      Winbar = 'EdgyWinBarDark',
-      WinBarNC = 'EdgyWinBarDark',
-      EdgyIcon = 'EdgyWinBarDark',
-      EdgyTitle = 'EdgyWinBarDark',
-      EdgyIconActive = 'EdgyWinBarDark',
+      Winbar = 'EdgyTitle',
+      WinBarNC = 'EdgyTitle',
+      EdgyIcon = 'EdgyTitle',
+      EdgyTitle = 'EdgyTitle',
+      EdgyIconActive = 'EdgyTitle',
       Normal = 'EdgyNormalDark',
       WinSeparator = 'EdgyWinSeparator',
       -- CursorLine = 'CursorLineFocus',
     })
 
     local gray_bar = color.make_winhighlight({
-      Winbar = 'EdgyWinBarLight',
-      WinBarNC = 'EdgyWinBarLight',
-      EdgyIcon = 'EdgyWinBarLight',
-      EdgyTitle = 'EdgyWinBarLight',
-      EdgyIconActive = 'EdgyWinBarLight',
+      Winbar = 'EdgyTitle',
+      WinBarNC = 'EdgyTitle',
+      EdgyIcon = 'EdgyTitle',
+      EdgyTitle = 'EdgyTitle',
+      EdgyIconActive = 'EdgyTitle',
       Normal = 'EdgyNormal',
       -- WinSeparator = 'EdgyWinSeparator',
       -- CursorLine = 'CursorLineFocus',
@@ -98,6 +87,7 @@ return {
       },
       {
         ft = 'neo-tree',
+        title = 'NEO-TREE',
         pinned = false,
         open = 'Neotree filesystem left',
         filter = function(buf, _)
@@ -110,6 +100,7 @@ return {
         ft = 'Outline',
         pinned = false,
         open = 'Outline',
+        title = 'OUTLINE',
         size = { height = 0.4 },
         wo = { winbar = true, winhighlight = dark_bar, fillchars = left_chars },
       },
