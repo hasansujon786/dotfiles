@@ -4,7 +4,6 @@ command! -bang Quit call hasan#utils#confirmQuit(<q-bang>)
 command! ClearRegister call hasan#utils#clear_register()
 command! ProjectCommands lua require("telescope._extensions").manager.project_commands.commands()
 command! Messages NoiceHistory
-nmap <silent> <Plug>(fix-current-world) :call hasan#repeat#fix_word()<CR>
 " File
 command! ReloadConfig lua require('hasan.utils.file').reload()
 command! CodeOpenFile lua require('hasan.utils.file').openInCode(true)
@@ -16,3 +15,17 @@ command! LspLogPath lua vim.cmd.edit(vim.lsp.get_log_path())
 command! LspInstallEssentials lua require('config.lsp.util.extras').install_essential_servers()
 command! SkipAutoFormatSave silent noa write
 
+" fix-current-world
+nmap <silent> <Plug>(fix-current-world) :call hasan#repeat#fix_word()<CR>
+" exchange-operator
+nnoremap <silent><Plug>(exchange-operator)  :set opfunc=exchange_operator#_opfunc<CR>g@
+vnoremap <silent><Plug>(exchange-operator)  :<C-U>call exchange_operator#_opfunc(visualmode())<CR>
+" dial
+nmap  <C-a>  <Plug>(dial-increment)
+nmap  <C-x>  <Plug>(dial-decrement)
+nmap g<C-a> g<Plug>(dial-increment)
+nmap g<C-x> g<Plug>(dial-decrement)
+vmap  <C-a>  <Plug>(dial-increment)
+vmap  <C-x>  <Plug>(dial-decrement)
+vmap g<C-a> g<Plug>(dial-increment)
+vmap g<C-x> g<Plug>(dial-decrement)

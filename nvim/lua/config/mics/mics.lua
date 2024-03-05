@@ -72,17 +72,6 @@ return {
     },
   },
   {
-    'Konfekt/vim-CtrlXA',
-    lazy = true,
-    keys = {
-      { '<C-a>', desc = 'Increment number and more' },
-      { '<C-x>', desc = 'Decrement number and more' },
-    },
-    config = function()
-      vim.fn['hasan#CtrlXA#update']()
-    end,
-  },
-  {
     'Wansmer/treesj',
     opts = {
       use_default_keymaps = false,

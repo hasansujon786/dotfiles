@@ -198,12 +198,17 @@ M.merge = function(...)
   return vim.tbl_deep_extend('force', ...)
 end
 
-M.index_of = function(tbl, item)
-  for i, val in ipairs(tbl) do
-    if val == item then
+---Get index of given value
+---@param tbl table
+---@param value any
+---@return integer
+M.index_of = function(tbl, value)
+  for i, el in ipairs(tbl) do
+    if el == value then
       return i
     end
   end
+  return -1
 end
 
 function M.normalize_path(path_to_normalise)

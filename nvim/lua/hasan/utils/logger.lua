@@ -58,8 +58,8 @@ function M.toggle(option, given_states, silent)
   local options = vim[scope]
 
   if given_states ~= nil then
-    local foundIndex = indexOf(given_states, options[option])
-    if foundIndex == #given_states or foundIndex == nil then
+    local foundIndex = require('hasan.utils').index_of(given_states, options[option])
+    if foundIndex == #given_states or foundIndex == -1 then
       options[option] = given_states[1]
     else
       options[option] = given_states[foundIndex + 1]
