@@ -55,7 +55,7 @@ onoremap <silent> i? :<C-u>normal vi?V<CR>
 
 " last change pseudo-text objects
 " -------------------------------
-" ik ak
-xnoremap <silent> ik `]o`[
-onoremap <silent> ik :<C-u>normal vik<CR>
-onoremap <silent> ak :<C-u>normal vikV<CR>
+" ie ae
+xnoremap <silent> ie `]o`[
+onoremap <silent> ie :<C-u>normal vie<CR>
+onoremap <silent> ae :<C-u>normal vieV<CR>

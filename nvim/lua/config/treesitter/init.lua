@@ -78,16 +78,17 @@ return {
               ['if'] = '@function.inner',
               ['am'] = '@class.outer',
               ['im'] = '@class.inner',
-              ['aM'] = '@comment.outer',
-              ['ak'] = '@pair.outer',
+              ['ak'] = '@pair.outer', -- local object
               ['ik'] = '@pair.inner',
               ['ao'] = '@block.outer',
               ['io'] = '@block.inner',
+              ['a/'] = '@comment.outer',
+              ['i/'] = '@comment.inner',
               ['iC'] = '@conditional.inner',
               ['aC'] = '@conditional.outer',
               ['iP'] = '@parameter.inner',
               ['aP'] = '@parameter.outer',
-              ['a.'] = { query = '@scope', query_group = 'locals', desc = 'Select language scope' },
+              -- ['a.'] = { query = '@scope', query_group = 'locals', desc = 'Select language scope' },
               -- @loop.inner
               -- @loop.outer
             },

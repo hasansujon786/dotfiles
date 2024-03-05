@@ -18,7 +18,7 @@ augroup('MY_AUGROUP')(function(autocmd)
 
   autocmd('BufLeave', 'normal! mK', { pattern = '*.txt' })
   autocmd('TermOpen', 'setfiletype terminal | set bufhidden=hide')
-  autocmd('BufWritePre', vim.fn['hasan#autocmd#trimWhitespace'], { pattern = { '*.vim', '*.lua', '*.org', '*.ahk' } })
+  -- autocmd('BufWritePre', vim.fn['hasan#autocmd#trimWhitespace'], { pattern = { '*.vim', '*.lua', '*.org', '*.ahk' } })
   autocmd({ 'FocusGained', 'BufEnter', 'TermClose', 'TermLeave' }, ':silent! checktime')
   autocmd('BufReadPost', function()
     require('hasan.utils.win').restore_cussor_pos()

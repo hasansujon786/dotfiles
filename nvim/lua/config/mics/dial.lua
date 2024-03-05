@@ -28,11 +28,9 @@ return {
         }),
         -- augend.paren.alias.brackets,
         augend.user.new({
-          -- bg-red-300
-          -- text-red-500
-          -- sometext-red-50
-          -- sometext-red-50-some
-          find = require('dial.augend.common').find_pattern_regex([[\v((text|bg)-[a-z]+-[0-9]+)$]]),
+          -- text-red-300
+          -- bg-blue-800
+          find = require('dial.augend.common').find_pattern_regex([[\v(<(text|bg)-[a-z]+-[0-9]+)>]]),
           add = function(text, addend, cursor)
             local nums = { '50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950' }
             local inputs = vim.split(text, '-')
