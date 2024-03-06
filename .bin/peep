@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -eu
+
+wezterm cli spawn --cwd=C:/Users/hasan/AppData/Local/nvim-data/lazy/harpoon
+wezterm cli spawn --cwd=E:/repoes/lua/peep.nvim nvim
+# wezterm cli spawn --cwd=C:/Users/hasan/AppData/Local/nvim-data/lazy/glance.nvim

@@ -19,7 +19,12 @@ return {
         augend.semver.alias.semver,
         augend.constant.new({ elements = { 'and', 'or' } }),
         augend.constant.new({ elements = { '&&', '||' }, word = false }),
+        augend.constant.new({ elements = { '>', '<', '<=', '>=', '==', '===' }, word = false }),
         augend.hexcolor.new({ case = 'lower' }),
+        augend.constant.new({
+          elements = { 'number', 'string', 'boolean', 'unknown', 'any', 'void', 'null', 'undefined', 'never', 'bigint' },
+          word = false,
+        }),
         augend.date.new({
           pattern = '%Y/%m/%d',
           default_kind = 'day',

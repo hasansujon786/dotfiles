@@ -94,4 +94,22 @@ return {
       timeout = 350, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
     },
   },
+  {
+    'hasansujon786/peep.nvim',
+    dev = true,
+    config = function()
+      local peep = require('peep')
+      peep:setup()
+
+      keymap('n', '<leader>e', function()
+        peep:open()
+        -- vim.cmd.wa()
+        -- vim.defer_fn(function()
+        --   -- require('peep.lsp').resource_files()
+        --   -- require('peep.lsp').references()
+        -- end, 50)
+      end)
+    end,
+    -- dir = 'E:/repoes/lua/peep.nvim',
+  },
 }

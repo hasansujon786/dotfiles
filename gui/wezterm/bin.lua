@@ -79,3 +79,50 @@
 -- if tab_is_toolbox then
 --   title = "🔴 " .. title
 -- end
+
+local TAB_EDGE_LEFT = wezterm.nerdfonts.ple_left_half_circle_thick
+local TAB_EDGE_RIGHT = wezterm.nerdfonts.ple_right_half_circle_thick
+
+local function tab_title(tab_info)
+  local title = tab_info.tab_title
+
+  if title and #title > 0 then
+    return title
+  end
+
+  return tab_info.active_pane.title:gsub('%.exe', '')
+end
+
+wezterm.on('format-tab-title', function(tab, _, _, _, hover, max_width)
+  local edge_background = title_color_bg
+  local background = title_color_bg:lighten(0.05)
+  local foreground = title_color_fg
+
+  if tab.is_active then
+    background = background:lighten(0.1)
+    foreground = foreground:lighten(0.1)
+  elseif hover then
+    background = background:lighten(0.2)
+    foreground = foreground:lighten(0.2)
+  end
+
+  local edge_foreground = background
+
+  local title = tab_title(tab)
+
+  -- ensure that the titles fit in the available space,
+  -- and that we have room for the edges.
+  title = wezterm.truncate_right(title, max_width - 2)
+
+  return {
+    { Background = { Color = edge_background } },
+    { Foreground = { Color = edge_foreground } },
+    { Text = TAB_EDGE_LEFT },
+    { Background = { Color = background } },
+    { Foreground = { Color = foreground } },
+    { Text = title },
+    { Background = { Color = edge_background } },
+    { Foreground = { Color = edge_foreground } },
+    { Text = TAB_EDGE_RIGHT },
+  }
+end)

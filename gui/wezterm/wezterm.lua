@@ -81,8 +81,8 @@ return {
   colors = colors.one_half,
   window_frame = colors.window_frame,
 
-  unix_domains = {
-    { name = 'unix' },
-  },
-  default_gui_startup_args = { 'connect', 'unix' },
+  -- unix_domains = {
+  --   { name = 'unix' },
+  -- },
+  -- default_gui_startup_args = { 'connect', 'unix' },
 }

@@ -1,28 +1,4 @@
 " let g:dashboard_custom_header = [
-" \ '                  .                   ',
-" \ '  ##############..... ##############  ',
-" \ '  ##############......##############  ',
-" \ '    ##########..........##########    ',
-" \ '    ##########........##########      ',
-" \ '    ##########.......##########       ',
-" \ '    ##########.....##########..       ',
-" \ '    ##########....##########.....     ',
-" \ '  ..##########..##########.........   ',
-" \ '....##########.#########............. ',
-" \ '  ..################JJJ............   ',
-" \ '    ################.............     ',
-" \ '    ##############.JJJ.JJJJJJJJJJ     ',
-" \ '    ############...JJ...JJ..JJ  JJ    ',
-" \ '    ##########....JJ...JJ..JJ  JJ     ',
-" \ '    ########......JJJ..JJJ JJJ JJJ    ',
-" \ '    ######    .........               ',
-" \ '                .....                 ',
-" \ '                  .                   ',
-" \ ''
-" \ ]
-
-
-" let g:dashboard_custom_header = [
 "  \ '          //                 /*           ',
 "  \ '       ,(/(//,               *###         ',
 "  \ '     ((((((////.             /####%*      ',
@@ -64,24 +40,62 @@
 "   [[         ..                *           ]],
 "  }
 
-  [[       ,l;             c,       ]],
-  [[    .:ooool'           loo:.    ]],
-  [[  .,oooooooo:.         looooc,  ]],
-  [[ ll:,loooooool,        looooool ]],
-  [[ llll,;ooooooooc.      looooooo ]],
-  [[ lllllc,coooooooo;     looooooo ]],
-  [[ lllllll;,loooooool'   looooooo ]],
-  [[ lllllllc .:oooooooo:. looooooo ]],
-  [[ lllllllc   'loooooool,:ooooooo ]],
-  [[ lllllllc     ;ooooooooc,cooooo ]],
-  [[ lllllllc      .coooooooo;;looo ]],
-  [[ lllllllc        ,loooooool,:ol ]],
-  [[  'cllllc         .:oooooooo;.  ]],
-  [[    .;llc           .loooo:.    ]],
-  [[       ,;             ;l;       ]],
-  [[                                ]],
-  [[      Mike's NeoVim Config      ]],
+[[       ,               ,         ]],
+[[     ,//,              %#*,      ]],
+[[   ,((((//,            /###%*,   ]],
+[[ ,((((((////,          /######%. ]],
+[[ ///((((((((((,        *#######. ]],
+[[ //////(((((((((,      *#######. ]],
+[[ //////(/(((((((((,    *#######. ]],
+[[ //////(. /(((((((((,  *#######. ]],
+[[ //////(.   (((((((((*,*#######. ]],
+[[ //////(.    ,#((((((((########. ]],
+[[ /////((.      /#((((((##%%####. ]],
+[[ (((((((.        .(((((#####%%#. ]],
+[[  /(((((.          ((((#%#%%/*   ]],
+[[    ,(((.            /(%%#*      ]],
+[[       *               *         ]],
 
+[[       ,l;             c,       ]],
+[[    .:ooool'           loo:.    ]],
+[[  .,oooooooo:.         looooc,  ]],
+[[ ll:,loooooool,        looooool ]],
+[[ llll,;ooooooooc.      looooooo ]],
+[[ lllllc,coooooooo;     looooooo ]],
+[[ lllllll;,loooooool'   looooooo ]],
+[[ lllllllc .:oooooooo:. looooooo ]],
+[[ lllllllc   'loooooool,:ooooooo ]],
+[[ lllllllc     ;ooooooooc,cooooo ]],
+[[ lllllllc      .coooooooo;;looo ]],
+[[ lllllllc        ,loooooool,:ol ]],
+[[  'cllllc         .:oooooooo;.  ]],
+[[    .;llc           .loooo:.    ]],
+[[       ,;             ;l;       ]],
+[[                                ]],
+[[      Mike's NeoVim Config      ]],
+
+" let g:dashboard_custom_header = [
+" \ '                  .                   ',
+" \ '  ##############..... ##############  ',
+" \ '  ##############......##############  ',
+" \ '    ##########..........##########    ',
+" \ '    ##########........##########      ',
+" \ '    ##########.......##########       ',
+" \ '    ##########.....##########..       ',
+" \ '    ##########....##########.....     ',
+" \ '  ..##########..##########.........   ',
+" \ '....##########.#########............. ',
+" \ '  ..################JJJ............   ',
+" \ '    ################.............     ',
+" \ '    ##############.JJJ.JJJJJJJJJJ     ',
+" \ '    ############...JJ...JJ..JJ  JJ    ',
+" \ '    ##########....JJ...JJ..JJ  JJ     ',
+" \ '    ########......JJJ..JJJ JJJ JJJ    ',
+" \ '    ######    .........               ',
+" \ '                .....                 ',
+" \ '                  .                   ',
+" \ ''
+" \ ]
 
 " let g:dashboard_custom_header = [
 "  \ '                                                      ',
@@ -176,35 +190,6 @@
 -- [[ ███████████ ███    ███ █████████ █████ █████ ████ █████ ]],
 -- [[██████  █████████████████████ ████ █████ █████ ████ ██████]],
 
-" -- M.tabout = function()
-" --   local ok, tabout = om.safe_require("tabout")
-" --   if not ok then
-" --     return
-" --   end
-
-" --   tabout.setup({
-" --     tabkey = "<Tab>", -- key to trigger tabout, set to an empty string to disable
-" --     backwards_tabkey = "<S-Tab>", -- key to trigger backwards tabout, set to an empty string to disable
-" --     completion = true, -- We use tab for completion so set this to true
-" --   })
-" -- end
-" -- M.aerial = function()
-" --   local ok, aerial = om.safe_require("aerial")
-" --   if not ok then
-" --     return
-" --   end
-
-" --   aerial.setup({
-" --     backends = {
-" --       -- default to preferring LSP backend
-" --       ["_"] = { "lsp", "treesitter", "markdown" },
-" --       ruby = { "treesitter" },
-" --     },
-" --     close_on_select = true,
-" --     default_direction = "prefer_right",
-" --     min_width = 30,
-" --   })
-" -- end
                    /\
                   /  \
                  |  _ \                  _
@@ -235,4 +220,79 @@ _/                                          \
  █▀█ █▀█ ▄█ █▀█ █░▀█   █░▀░█ █▀█ █▀█ █░▀░█ █▄▀ █▄█
 
  █▄░█ █▀▀ █▀█ █░█ █ █▀▄▀█
- █░▀█ ██▄ █▄█ ▀▄▀ █ █░▀░█
+
+
+    local header = {
+      [[                                                                              ]],
+      [[                                    ██████                                    ]],
+      [[                                ████▒▒▒▒▒▒████                                ]],
+      [[                              ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                              ]],
+      [[                            ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                            ]],
+      [[                          ██▒▒▒▒▒▒▒▒    ▒▒▒▒▒▒▒▒                              ]],
+      [[                          ██▒▒▒▒▒▒  ▒▒▓▓▒▒▒▒▒▒  ▓▓▓▓                          ]],
+      [[                          ██▒▒▒▒▒▒  ▒▒▓▓▒▒▒▒▒▒  ▒▒▓▓                          ]],
+      [[                        ██▒▒▒▒▒▒▒▒▒▒    ▒▒▒▒▒▒▒▒    ██                        ]],
+      [[                        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                        ]],
+      [[                        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                        ]],
+      [[                        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                        ]],
+      [[                        ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                        ]],
+      [[                        ██▒▒██▒▒▒▒▒▒██▒▒▒▒▒▒▒▒██▒▒▒▒██                        ]],
+      [[                        ████  ██▒▒██  ██▒▒▒▒██  ██▒▒██                        ]],
+      [[                        ██      ██      ████      ████                        ]],
+      [[                                                                              ]],
+      [[                                                                              ]],
+    }
+
+    local make_header = function()
+      local lines = {}
+      for i, line_chars in pairs(header) do
+        -- local hi = i > 15 and 'Bulbasaur' .. (i - 15) or 'PokemonLogo' .. i
+        local line = {
+          type = 'text',
+          val = line_chars,
+          opts = {
+            hl = 'AlphaSpecialKey' .. i,
+            shrink_margin = false,
+            position = 'center',
+          },
+        }
+        table.insert(lines, line)
+      end
+
+      local output = {
+        type = 'group',
+        val = lines,
+        opts = { position = 'center' },
+      }
+
+      return output
+    end
+
+
+
+  local foo = {
+    -- AlphaButtonShortcut = {fg = colors.yellow["300"]},
+    -- AlphaButtonIcon = {fg = "#33394d"},
+    -- AlphaButton = {fg = colors.primary["300"]},
+    AlphaSpecialKey1 = { fg = '#33394d' },
+    AlphaSpecialKey2 = { fg = '#31374b' },
+    AlphaSpecialKey3 = { fg = '#30364a' },
+    AlphaSpecialKey4 = { fg = '#2e3448' },
+    AlphaSpecialKey5 = { fg = '#2d3247' },
+    AlphaSpecialKey6 = { fg = '#2b3045' },
+    AlphaSpecialKey7 = { fg = '#2a2f43' },
+    AlphaSpecialKey8 = { fg = '#282d42' },
+    AlphaSpecialKey9 = { fg = '#272b40' },
+    AlphaSpecialKey10 = { fg = '#262a3e' },
+    AlphaSpecialKey11 = { fg = '#24283d' },
+    AlphaSpecialKey12 = { fg = '#23263b' },
+    AlphaSpecialKey13 = { fg = '#21253a' },
+    AlphaSpecialKey14 = { fg = '#202338' },
+    AlphaSpecialKey15 = { fg = '#1e2237' },
+    AlphaSpecialKey16 = { fg = '#1d2035' },
+  }
+
+  for hlName, option in pairs(foo) do
+    vim.api.nvim_set_hl(0, hlName, option)
+  end
+

@@ -15,7 +15,7 @@ return {
   lazy = true,
   ft = { 'org' },
   keys = {
-    { '<leader>e', '<cmd>lua require("hasan.org").toggle_org_float()<CR>', desc = 'Toggle org float' },
+    -- { '<leader>e', '<cmd>lua require("hasan.org").toggle_org_float()<CR>', desc = 'Toggle org float' },
     { '<leader>oh', '<cmd>lua require("hasan.org").open_org_home("-tabedit")<CR>', desc = 'Open org home' },
 
     { '<leader>oa', loadOrgMode('<space>oa'), desc = 'org agenda' },
