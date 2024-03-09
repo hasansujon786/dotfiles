@@ -108,6 +108,8 @@ keymap('n', '<C-j>', '<C-i>')
 -- Jump between tabs
 keymap({ 'n', 'v' }, 'gl', 'gt')
 keymap({ 'n', 'v' }, 'gh', 'gT')
+keymap({ 'n', 'v' }, 'gl', '<cmd>!wezterm cli activate-tab --tab-relative 1<CR>')
+keymap({ 'n', 'v' }, 'gh', '<cmd>!wezterm cli activate-tab --tab-relative -1<CR>')
 
 keymap('n', 'gL', ':tabmove+<CR>') -- Move tabs
 keymap('n', 'gH', ':tabmove-<CR>')

@@ -65,6 +65,33 @@ ls.add_snippets('lua', {
     )
   ),
   s(
+    'metaclass',
+    fmta(
+      [[
+      local <name> = {}
+      <module_name>.__index = <module_name>
+
+      ---@param initial_opts table
+      function <module_name>:new(initial_opts)
+        return setmetatable({
+          opts = initial_opts,
+        }, self)
+      end
+
+      ---@param opts table
+      function <module_name>:configure(opts)
+        self.opts = opts
+      end
+
+      return <module_name>
+      ]],
+      {
+        name = i(1, 'Module'),
+        module_name = rep(1)
+      }
+    )
+  ),
+  s(
     'ei',
     fmt(
       [[

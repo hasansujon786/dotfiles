@@ -62,6 +62,8 @@ local M = {
     flags = { debounce_text_changes = 500 },
     capabilities = require('config.lsp.util.extras').update_capabilities('setup.lua'),
   },
+  ---@param client lsp.Client
+  ---@param bufnr number
   onLspAttach = function(client, bufnr)
     require('config.lsp.util.keymaps').lsp_buffer_keymaps(client, bufnr)
     lsp_autocmds(client)

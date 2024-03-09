@@ -95,19 +95,19 @@ return {
     },
   },
   {
-    'hasansujon786/peep.nvim',
+    'hasansujon786/peep.nvim_local',
     dev = true,
     config = function()
-      local peep = require('peep')
-      peep:setup()
-
       keymap('n', '<leader>e', function()
-        peep:open()
-        -- vim.cmd.wa()
-        -- vim.defer_fn(function()
-        --   -- require('peep.lsp').resource_files()
-        --   -- require('peep.lsp').references()
-        -- end, 50)
+        vim.cmd.wa()
+        vim.defer_fn(function()
+          R('peep.lsp')
+          R('peep.ui')
+          local peep = R('peep')
+          -- peep:setup()
+          peep:open()
+          -- require('peep.lsp').references()
+        end, 50)
       end)
     end,
     -- dir = 'E:/repoes/lua/peep.nvim',
