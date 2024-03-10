@@ -61,6 +61,8 @@ return {
             'android/.*',
             'ios/.*',
             'gui/sublime_text/.*',
+            'lua/_glance/.*',
+            'nvim/tmp/archive',
             'pubspec.lock',
           },
         },
