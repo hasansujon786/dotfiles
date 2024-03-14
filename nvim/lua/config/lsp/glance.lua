@@ -1,5 +1,6 @@
 return {
-  'hasansujon786/glance.nvim',
+  'hasansujon786/neo-glance.nvim',
+  commit =  'a68dbc52',
   cmd = 'Glance',
   config = function()
     local glance = require('glance')

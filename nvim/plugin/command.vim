@@ -15,6 +15,10 @@ command! LspLogPath lua vim.cmd.edit(vim.lsp.get_log_path())
 command! LspInstallEssentials lua require('config.lsp.util.extras').install_essential_servers()
 command! SkipAutoFormatSave silent noa write
 
+" Move VISUAL LINE selection within buffer.
+command! -range MoveUp call v:lua.require('hasan.utils.buffer').move_up(<line1>)
+command! -range MoveDown call v:lua.require('hasan.utils.buffer').move_down(<line2>)
+
 " fix-current-world
 nmap <silent> <Plug>(fix-current-world) :call hasan#repeat#fix_word()<CR>
 " exchange-operator

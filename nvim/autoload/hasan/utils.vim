@@ -82,48 +82,6 @@ function! hasan#utils#visualSelection(direction, extra_filter) range "{{{
   let @" = l:saved_reg
 endfunction "}}}
 
-" Move VISUAL LINE selection within buffer
-function! hasan#utils#visual_move_up() abort range "{{{
-  let l:count=v:count ? -v:count : -1
-  let l:max=(a:firstline - 1) * -1
-  let l:movement=max([l:count, l:max])
-  let l:address="'<" . (l:movement - 1)
-  let l:should_move=l:movement < 0
-  call s:Move(l:address, l:should_move)
-endfunction
-function! hasan#utils#visual_move_down() abort range
-  let l:count=v:count ? v:count : 1
-  let l:max=line('$') - a:lastline
-  let l:movement=min([l:count, l:max])
-  let l:address="'>+" . l:movement
-  let l:should_move=l:movement > 0
-  call s:Move(l:address, l:should_move)
-endfunction
-function! s:Visual()
-  return visualmode() == 'V'
-endfunction
-function! s:Move(address, should_move)
-  if s:Visual() && a:should_move
-    execute "'<,'>move " . a:address
-    call feedkeys('gv=', 'n')
-  endif
-  call feedkeys('gv', 'n')
-endfunction "}}}
-
-function! hasan#utils#CopyFileNameToClipBoard(bang) abort "{{{
-  if expand('%') == ''
-    call _#echoWarn('Couldn’t copy the filename')
-    return
-  endif
-
-  if a:bang ==# 0
-    let @+ = expand('%:t')
-  else
-    let @+ = expand('%:~')
-  endif
-  call _#Echo(['DiagnosticHint', 'Copied to clipboard:'], '“'.@+.'”')
-endfunction "}}}
-
 function! hasan#utils#file_info() "{{{
   let fname = ['', expand('%') == '' ? '“[No Name]“' : '“'.expand('%:.').'“']
   let lines = ['WarningMsg', line('$').' lines']

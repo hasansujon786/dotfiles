@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -eu
+
+# wezterm cli spawn --cwd=C:/Users/hasan/AppData/Local/nvim-data/lazy/harpoon
+wezterm cli spawn --cwd=E:/repoes/lua/neo-glance.nvim_local nvim -c "SessionLoad"
+# wezterm cli spawn --cwd=C:/Users/hasan/AppData/Local/nvim-data/lazy/glance.nvim
+# C:\tools\neovim\nvim-win64\share\nvim\runtime\lua\vim

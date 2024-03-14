@@ -95,20 +95,21 @@ return {
     },
   },
   {
-    'hasansujon786/peep.nvim_local',
+    'hasansujon786/neo-glance.nvim_local',
     dev = true,
     config = function()
       keymap('n', '<leader>e', function()
         vim.cmd.wa()
         vim.defer_fn(function()
-          R('peep.lsp')
-          R('peep.ui')
-          local peep = R('peep')
+          R('neo_glance.lsp')
+          R('neo_glance.ui')
+          R('neo_glance.ui.list')
+          local glance = R('neo_glance')
           -- peep:setup()
-          peep:open()
+          glance:open()
           -- require('peep.lsp').references()
         end, 50)
-      end)
+      end, { desc = 'Open neo-glance' })
     end,
     -- dir = 'E:/repoes/lua/peep.nvim',
   },

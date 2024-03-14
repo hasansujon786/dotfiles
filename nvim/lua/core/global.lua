@@ -43,7 +43,7 @@ function _G.t(str)
 end
 function _G.feedkeys(key, mode)
   mode = mode == nil and '' or mode
-  vim.api.nvim_feedkeys(t(key), mode, true)
+  vim.api.nvim_feedkeys(t(key), mode, false)
 end
 
 function _G.keymap(mode, lhs, rhs, opts)
