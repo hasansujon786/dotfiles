@@ -1,7 +1,7 @@
 # If not running interactively, don't do anything
 case $- in
-  *i*) ;;
-  *) return;;
+*i*) ;;
+*) return ;;
 esac
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -19,9 +19,12 @@ HISTFILESIZE=2000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-[ -f ~/dotfiles/bash/.fzf.sh ] && source ~/dotfiles/bash/.fzf.sh
-[ -f ~/dotfiles/bash/.aliases.bash ] && source ~/dotfiles/bash/.aliases.bash
-[ -f ~/dotfiles/bash/vim.bash ] && source ~/dotfiles/bash/vim.bash
-[ -f ~/dotfiles/bash/.env ] && source ~/dotfiles/bash/.env
-[ -f ~/dotfiles/bash/simple_bash_prompt.bash ] && source ~/dotfiles/bash/simple_bash_prompt.bash
-eval "$(zoxide init bash)"
+if [ -f ~/dotfiles/bash/.env ]; then
+	source ~/dotfiles/bash/.fzf.sh
+	source ~/dotfiles/bash/.aliases.bash
+	source ~/dotfiles/bash/vim.bash
+	source ~/dotfiles/bash/simple_prompt.bash
+	source ~/dotfiles/bash/.env
+	source ~/dotfiles/bash/simple_prompt.bash
+	source ~/dotfiles/bash/zoxide.bash
+fi
