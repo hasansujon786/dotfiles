@@ -6,7 +6,7 @@ vim.g.maplocalleader = ' '
 
 -- Files-backup-undo
 o.backup = false
-o.swapfile = true --                            Turn backup off, since most stuff is in SVN, git etc. anyway...
+o.swapfile = false --                            Turn backup off, since most stuff is in SVN, git etc. anyway...
 o.writebackup = false
 o.undofile = true
 o.undolevels = 1500 --                           persistent undo between file reloads
@@ -61,7 +61,6 @@ o.showmode = false --                            Don't show mode as lightline al
 o.modeline = false
 o.modelines = 0
 o.showtabline = 0
-o.winbar = ' '
 o.laststatus = 3
 o.statusline = ' '
 o.cmdheight = 0 --                               Height of the command bar

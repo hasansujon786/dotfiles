@@ -35,42 +35,42 @@ return {
       -- CursorLine = 'CursorLineFocus',
     })
 
-    local custom_color_ft = { 'floaterm' }
-    augroup('MY_EDGY_AUGROUP')(function(autocmd)
-      autocmd({ 'FileType' }, function(_)
-        local win = vim.api.nvim_get_current_win()
-        if vim.api.nvim_win_get_config(win).relative == '' then
-          reset_edgy_win_hl()
-          vim.cmd([[
-            augroup edgy_custom_hl
-              autocmd! * <buffer>
-              autocmd WinEnter,BufEnter <buffer> lua reset_edgy_win_hl()
-            augroup END
-          ]])
-        end
-      end, { pattern = custom_color_ft })
-    end)
+    -- local custom_color_ft = {}
+    -- augroup('MY_EDGY_AUGROUP')(function(autocmd)
+    --   autocmd({ 'FileType' }, function(_)
+    --     local win = vim.api.nvim_get_current_win()
+    --     if vim.api.nvim_win_get_config(win).relative == '' then
+    --       reset_edgy_win_hl()
+    --       vim.cmd([[
+    --         augroup edgy_custom_hl
+    --           autocmd! * <buffer>
+    --           autocmd WinEnter,BufEnter <buffer> lua reset_edgy_win_hl()
+    --         augroup END
+    --       ]])
+    --     end
+    --   end, { pattern = custom_color_ft })
+    -- end)
 
-    function _G.reset_edgy_win_hl()
-      vim.defer_fn(function()
-        if vim.tbl_contains(custom_color_ft, vim.bo.filetype) then
-          vim.wo.winhighlight = dark_bar
-        end
-      end, 10)
-    end
+    -- function _G.reset_edgy_win_hl()
+    --   vim.defer_fn(function()
+    --     if vim.tbl_contains(custom_color_ft, vim.bo.filetype) then
+    --       vim.wo.winhighlight = dark_bar
+    --     end
+    --   end, 10)
+    -- end
 
     -- // layout config:
     local bottom = {
       {
         ft = 'floaterm',
-        wo = { winbar = true, winhighlight = dark_bar },
+        wo = { winbar = false, winhighlight = '' },
         filter = function(_, win)
           return vim.api.nvim_win_get_config(win).relative == ''
         end,
       },
       {
         ft = 'scratchpad',
-        wo = { winbar = false },
+        wo = { winbar = false, winhighlight = '' },
       },
     }
     local left = {
@@ -132,7 +132,7 @@ return {
       left = left,
       options = {
         left = { size = 31 },
-        bottom = { size = 10 },
+        bottom = { size = 16 },
         right = { size = 40 },
         top = { size = 10 },
       },

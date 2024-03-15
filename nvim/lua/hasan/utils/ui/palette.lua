@@ -84,7 +84,7 @@ local function set_custom_highlights()
     HeirlineTabInactive     = { fg = c.red, bg = c.layer },
 
     WinSeparator            = { fg = c.bg_d },
-    EdgyWinSeparator        = { link = 'WinSeparator' },
+    EdgyWinSeparator        = { fg = c.bg_d, bg = c.none },
     EdgyNormalDark          = { fg = c.fg, bg = c.bg_d },
     EdgyTitle               = { fg = c.cyan, bg = c.bg0 },
     -- EdgyWinSeparator        = { fg = c.bg1 , bg = c.bg_d },
