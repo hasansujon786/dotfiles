@@ -95,7 +95,13 @@ o.guicursor =
   'n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175'
 o.title = true
 o.titlelen = 20
-o.titlestring = '%= %{fnamemodify(getcwd(), ":t")}%w%<%=' -- what the title of the window will be set to
+o.titlestring = '%= %{fnamemodify(getcwd(), ":t")}%<%=' -- what the title of the window will be set to
+function _G.set_titlestring()
+  o.titlestring = '%= Neovim%<%='
+  vim.defer_fn(function()
+    o.titlestring = '%= %{fnamemodify(getcwd(), ":t")}%<%=' -- what the title of the window will be set to
+  end, 0)
+end
 o.qftf = '{info -> v:lua.require("hasan.utils.ui.qf").qftf(info)}'
 
 -- Numbers

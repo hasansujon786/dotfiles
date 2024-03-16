@@ -36,7 +36,10 @@ augroup('MY_AUGROUP')(function(autocmd)
   autocmd('LspAttach', function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     require('config.lsp.util.extras').get_setup_opts().onLspAttach(client, args.buf)
+
+    vim.defer_fn(set_titlestring, 100)
   end)
+  autocmd('BufEnter', set_titlestring)
 
   -- autocmd('VimResized', 'wincmd =') -- Vim/tmux layout rebalancing
   -- {'FocusLost,WinLeave,BufLeave * :silent! noautocmd w'}, -- auto save
