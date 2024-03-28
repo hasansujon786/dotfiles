@@ -18,6 +18,16 @@ P = function(...)
   return ...
 end
 
+function _G.log(data)
+  if type(data) == 'number' then
+    data = tostring(data)
+  end
+  if type(data) == 'string' then
+    data = data .. ' ' .. math.random()
+  end
+  P(data)
+end
+
 R = function(moduleName, message)
   if pcall(require, 'plenary') then
     local plenary_reload = require('plenary.reload').reload_module

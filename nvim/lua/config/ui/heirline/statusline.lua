@@ -216,8 +216,8 @@ return {
       end
     end,
     provider = function(self)
-      if self.index then
-        return '  H:' .. self.index
+      if self.index and self.index > 0 then
+        return 'H:' .. self.index
       end
       return ''
     end,

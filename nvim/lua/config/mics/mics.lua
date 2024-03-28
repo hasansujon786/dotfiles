@@ -100,15 +100,28 @@ return {
     config = function()
       keymap('n', '<leader>e', function()
         vim.cmd.wa()
+        R('neo_glance.config')
+        R('neo_glance.lsp')
+        R('neo_glance.actions')
+        R('neo_glance.ui')
+        R('neo_glance.ui.list')
+        R('neo_glance.ui.preview')
+        local glance = R('neo_glance')
+        -- local glance = require('neo_glance')
+
         vim.defer_fn(function()
-          R('neo_glance.lsp')
-          R('neo_glance.ui')
-          R('neo_glance.ui.list')
-          local glance = R('neo_glance')
-          -- peep:setup()
+          glance.setup({
+            border = {
+              enable = true,
+            },
+            folds = {
+              fold_closed = '',
+              fold_open = '',
+            },
+          })
+
           glance:open()
-          -- require('peep.lsp').references()
-        end, 50)
+        end, 10)
       end, { desc = 'Open neo-glance' })
     end,
     -- dir = 'E:/repoes/lua/peep.nvim',

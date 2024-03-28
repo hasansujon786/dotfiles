@@ -20,7 +20,7 @@ return {
       Lua = {
         completion = { callSnippet = 'Replace' },
         runtime = { version = 'LuaJIT' },
-        diagnostics = { globals = { 'vim', 'jit', 'keymap', 'P' } },
+        diagnostics = { globals = { 'vim', 'jit', 'keymap', 'P', 'log' } },
         workspace = {
           library = {
             [vim.fn.expand('$VIMRUNTIME/lua')] = true,

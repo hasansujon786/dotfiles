@@ -124,7 +124,7 @@ local function set_custom_highlights()
     GlanceFoldIcon            = { fg = c.fg },
     GlanceListFilename        = { fg = c.white },
     GlanceIndent              = { fg = c.bg1 },
-    GlanceListCursorLine      = { fg = c.fg, bg = '#204364' },
+    GlanceListCursorLine      = { bg = '#204364' },
     GlancePreviewMatch        = { link = 'LspReferenceText' },
     GlanceListMatch           = { link = 'LspReferenceWrite' },
     GlanceBorderTop           = { fg = c.dark_blue  },
