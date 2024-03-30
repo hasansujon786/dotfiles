@@ -148,8 +148,6 @@ return {
         F = { '<cmd>lua require("hasan.telescope.custom").my_find_files("cur_dir")<cr>', 'Find file from here' },
         p = { '<cmd>lua require("hasan.telescope.custom").project_files()<cr>', 'Find project file' },
 
-        y = { '<cmd>call hasan#utils#CopyFileNameToClipBoard(1)<CR>', 'Yank path name' },
-        Y = { '<cmd>call hasan#utils#CopyFileNameToClipBoard(0)<CR>', 'Yank file name' },
         R = { '<cmd>lua require("hasan.widgets.inputs").rename_current_file()<CR>', 'Rename file' },
         x = {
           name = '+remove',

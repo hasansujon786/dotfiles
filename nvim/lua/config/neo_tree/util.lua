@@ -22,15 +22,15 @@ M.save_altfile = function()
   end
 end
 
-M.copy_path = function(state, is_absolute)
-  local os_sep = require('plenary.path').path.sep
+M.copy_path = function(state, modifire)
   local node = state.tree:get_node()
-  local f = is_absolute == true and node.path or vim.fn.fnamemodify(node.path, ':.')
-  if os_sep == '\\' then
-    f = f:gsub('\\', '/')
+  local path_name = node.path
+  if modifire ~= nil then
+    path_name = vim.fn.fnamemodify(node.path, modifire)
   end
-  vim.notify(f, vim.log.levels.INFO)
-  vim.cmd(string.format('let @%s="%s"', '+', f))
+  path_name = vim.fs.normalize(path_name)
+  vim.fn.setreg('+', path_name)
+  notify(path_name, vim.log.levels.TRACE, { title = 'Neotree' })
 end
 
 function M.vinegar_dir_up(state)

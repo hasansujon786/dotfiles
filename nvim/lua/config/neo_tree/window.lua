@@ -29,19 +29,19 @@ return {
     -- ['zc'] = 'close_all_subnodes',
 
     -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
+    ['c'] = 'none',
+    ['m'] = 'none',
     ['a'] = { 'add', config = { show_path = 'none' } }, -- "none", "relative", "absolute"
     ['A'] = 'add_directory', -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
+    ['<f2>'] = 'rename',
+    ['D'] = 'delete',
+    ['<delete>'] = 'delete',
     ['d'] = 'cut_to_clipboard',
     ['y'] = 'copy_to_clipboard',
     ['p'] = 'paste_from_clipboard',
-    ['D'] = 'delete',
-    ['<f2>'] = 'rename',
     ['<C-x>'] = 'cut_to_clipboard',
     ['<C-c>'] = 'copy_to_clipboard',
     ['<C-v>'] = 'paste_from_clipboard',
-    ['<delete>'] = 'delete',
-    ['c'] = 'none',
-    ['m'] = 'none',
     -- ['c'] = 'copy', -- takes text input for destination, also accepts the optional config.show_path option like "add":
     -- ['c'] = { 'copy', config = { show_path = 'none' } }, -- "none", "relative", "absolute"
     -- ['m'] = 'move', -- takes text input for destination, also accepts the optional config.show_path option like "add".
@@ -49,17 +49,23 @@ return {
     ['q'] = 'close_window',
     ['?'] = 'show_help',
     ['K'] = 'show_file_details',
+    ['Y'] = {
+      function(state)
+        util.copy_path(state, ':t')
+      end,
+      desc = 'Copy current node',
+    },
+    ['gf'] = {
+      function(state)
+        util.copy_path(state)
+      end,
+      desc = 'Copy absolute node',
+    },
     ['gy'] = {
       function(state)
-        util.copy_path(state, false)
+        util.copy_path(state, ':.')
       end,
-      desc = 'Copy current path',
-    },
-    ['gY'] = {
-      function(state)
-        util.copy_path(state, true)
-      end,
-      desc = 'Copy absolute path',
+      desc = 'Copy relative node',
     },
     ['b'] = 'prev_source',
     ['w'] = 'next_source',

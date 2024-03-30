@@ -3,7 +3,7 @@
 adb kill-server
 adb start-server
 adb tcpip 5555
-sleep 1
+sleep 3
 # adb shell ip addr show wlan0
 output=$(adb shell ip addr show wlan0)
 echo "$output"
