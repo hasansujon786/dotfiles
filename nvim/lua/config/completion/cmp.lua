@@ -67,7 +67,11 @@ return {
         end,
       },
       view = {
-        entries = { name = 'custom', selection_order = 'top_down' },
+        entries = {
+          name = 'custom',
+          selection_order = 'top_down',
+          follow_cursor = true,
+        },
       },
       mapping = cmp.mapping.preset.insert({
         ['<A-u>'] = cmp.mapping.scroll_docs(-4),
@@ -201,16 +205,16 @@ return {
         format = function(entry, item)
           -- NOTE: order matters
           item.menu = ({
-            nvim_lsp = 'ﲳ',
-            nvim_lua = '',
-            treesitter = '',
-            path = 'ﱮ',
-            buffer = '﬘',
-            zsh = '',
-            vsnip = '',
-            spell = '暈',
-            orgmode = '✿',
-            luasnip = '',
+            nvim_lsp = 'ﲳ ',
+            nvim_lua = ' ',
+            treesitter = ' ',
+            path = 'ﱮ ',
+            buffer = '﬘ ',
+            zsh = ' ',
+            vsnip = ' ',
+            spell = '暈 ',
+            orgmode = '✿ ',
+            luasnip = ' ',
           })[entry.source.name]
           item.menu = string.format('%s %s', string.sub(item.kind, 1, 3), item.menu)
 

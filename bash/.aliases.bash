@@ -52,12 +52,14 @@ subl() {
 }
 
 # Android
-alias grc="./gradlew clean"
+alias grc='./gradlew clean'
 alias bure='./gradlew bundleRelease'
 alias asre='./gradlew assembleRelease'
 alias asde='./gradlew assembleDebug'
-alias inre='react-native run-android --variant=release'
 alias emd='~/AppData/Local/Android/Sdk/emulator/emulator -avd default_device -netdelay none -netspeed full'
+
+# React native
+alias rndoc='npx @react-native-community/cli doctor'
 
 # Flutter
 alias flr='flutter run'
@@ -130,7 +132,7 @@ alias grget='git remote get-url origin'
 alias gpr='hub pull-request'
 alias gci='hub issue create'
 alias gm2m='git branch -m master main'
-alias gsup='git push --set-upstream origin main'
+alias gpup='git push --set-upstream origin main'
 
 alias -- --=jump-to-git-root
 alias g='git'
