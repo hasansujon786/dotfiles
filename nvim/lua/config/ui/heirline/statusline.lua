@@ -215,12 +215,15 @@ return {
         self.index = require('hasan.utils').index_of(displayed, name)
       end
     end,
-    provider = function(self)
-      if self.index and self.index > 0 then
-        return 'H:' .. self.index
-      end
-      return ''
-    end,
+    { provider = '  ' },
+    {
+      provider = function(self)
+        if self.index and self.index > 0 then
+          return 'H:' .. self.index
+        end
+        return ''
+      end,
+    },
     hl = mutedText,
   },
   ScrollPercentage = {

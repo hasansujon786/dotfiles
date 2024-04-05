@@ -77,7 +77,7 @@ return {
     })
     local maps = {
       ['<leader>M'] = function()
-        local list = harpoon:list():append()
+        local list = harpoon:list():add()
 
         local displayed = list:display()
         local name = require('hasan.utils.file').get_buf_name_relative(0)

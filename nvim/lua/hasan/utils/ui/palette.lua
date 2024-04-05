@@ -118,9 +118,9 @@ local function set_custom_highlights()
     GlancePreviewNormal       = { fg = c.fg, bg = c.bg_d },
     GlancePreviewLineNr       = { fg = '#495162', bg = c.bg_d },
     GlanceListNormal          = { fg = c.light_grey, bg = c.bg0 },
-    GlanceWinBarFilename      = { fg = c.grey, bg = c.bg0, underline = true },
-    GlanceWinBarFilepath      = { fg = c.grey, bg = c.bg0, underline = true },
-    GlanceWinBarTitle         = { fg = c.grey, bg = c.bg0, underline = true }, -- reference count
+    GlanceWinBarFilename      = { fg = c.muted, bg = c.bg0, underline = true },
+    GlanceWinBarFilepath      = { fg = c.muted, bg = c.bg0, underline = true },
+    GlanceWinBarTitle         = { fg = c.muted, bg = c.bg0, underline = true }, -- reference count
     GlanceFoldIcon            = { fg = c.fg },
     GlanceListFilename        = { fg = c.white },
     GlanceIndent              = { fg = c.bg1 },
