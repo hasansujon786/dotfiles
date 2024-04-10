@@ -110,7 +110,6 @@ return {
           muted = '#68707E',
           layer = '#3E425D',
           light_grey = '#8b95a7',
-          -- light_grey = '#7d899f',
 
           diff_add = '#303d27',
           diff_change = '#18344c',

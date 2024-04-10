@@ -108,19 +108,25 @@ return {
         R('neo_glance.ui.preview')
         local glance = R('neo_glance')
         -- local glance = require('neo_glance')
+        ---@type NeoGlanceUserConfig
+        local config = {
+          height = 18,
+          border = {
+            enable = true,
+            top_char = '▁',
+            bottom_char = '▁',
+          },
+          preview_win_opts = {
+            relativenumber = false,
+          },
+          folds = {
+            fold_closed = '',
+            fold_open = '',
+          },
+        }
 
         vim.defer_fn(function()
-          glance.setup({
-            border = {
-              enable = true,
-              top_char = '▁',
-              bottom_char = '▁',
-            },
-            folds = {
-              fold_closed = '',
-              fold_open = '',
-            },
-          })
+          glance.setup(config)
 
           glance:open()
         end, 10)

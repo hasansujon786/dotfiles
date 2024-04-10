@@ -89,6 +89,7 @@ alias sccl='scrcpy -s f8a8aa489804'
 
 # handy short cuts #
 alias bashrc="vim ~/dotfiles/bash/.bashrc"
+alias keyp='C:/Users/hasan/dotfiles/scripts/keypirinha.sh'
 alias -- -='cd -'
 alias ..='cd ..'
 alias cs='cd'

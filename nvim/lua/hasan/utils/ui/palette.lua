@@ -10,11 +10,11 @@ local c = {
   black = '#151820',
 
   fg = '#a5b0c5',
+  light_grey = '#8b95a7',
   grey = '#546178',
-  white = '#d5d5d5',
+  white = '#dfdfdf',
   muted = '#68707E',
   layer = '#3E425D',
-  light_grey = '#7d899f',
 
   diff_add = '#303d27',
   diff_change = '#18344c',
@@ -56,9 +56,9 @@ local function set_custom_highlights()
   -- neo-tree
   local sp = '#1E242E'
   local btn = {
-    normal = { fg = fg, bg = '#3E425D' },
-    muted = { fg = '#8b95a7', bg = '#3E425D' },
-    active = { fg = '#ffffff', bg = '#2D3343' },
+    normal = { fg = fg, bg = c.layer },
+    muted = { fg = c.light_grey, bg = c.layer },
+    active = { fg = c.white, bg = c.bg1 },
   }
 
   if require('core.state').ui.neotree.source_selector_style == 'minimal' then
@@ -86,7 +86,7 @@ local function set_custom_highlights()
     WinSeparator            = { fg = c.bg_d },
     EdgyWinSeparator        = { fg = c.bg_d, bg = c.none },
     EdgyNormalDark          = { fg = c.fg, bg = c.bg_d },
-    EdgyTitle               = { fg = c.cyan, bg = c.bg0 },
+    EdgyTitle               = { fg = c.light_grey, bg = c.bg1 },
     -- EdgyWinSeparator        = { fg = c.bg1 , bg = c.bg_d },
     -- EdgyTitleDark          = { fg = c.cyan, bg = c.bg1 },
     -- EdgyTitleLight         = { fg = c.cyan, bg = c.bg1 },
@@ -242,7 +242,7 @@ local function set_custom_highlights()
     NoiceMini    = { bg = '#000000' },
     NoiceFormatConfirmDefault  = { link = 'LazyButton' },
     LazyNormal   = { link = 'NormalFloatFlat' },
-    LazyButton   = { bg = '#3E425D', fg = c.fg },
+    LazyButton   = { bg = c.layer, fg = c.fg },
     LazyButtonActive = { link = 'WildMenu' },
   -- /// Mason ///
     MasonNormal             = { link = 'NormalFloatFlat' },
