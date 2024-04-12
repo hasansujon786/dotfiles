@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+tmpfile=$1
+
+files=$(
+	readarray -t ARRAY <"$tmpfile"
+	# IFS=' '
+	echo "${ARRAY[*]}"
+)
+
+files=${files//\"/}
+rm "$tmpfile"
+
+echo "$files" | xargs trash
+

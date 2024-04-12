@@ -12,6 +12,7 @@ log.log
 /tui/lf/history
 /tui/lf/files
 /tui/lf/tmp_vimv
+/tui/lf/extract.log
 
 # dependencies
 /node_modules

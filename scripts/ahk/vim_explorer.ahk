@@ -99,7 +99,7 @@ focusFirstItem() {
     Global isExplInsertMode := false
   }
 
-  space::{
+  '::{
     focusedControl := ControlGetClassNN(ControlGetFocus())
     if (focusedControl == explorerCnn) {
       ControlFocus(sideBarCnn, "A")

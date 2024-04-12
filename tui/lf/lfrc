@@ -29,7 +29,6 @@ map c reload
 map r reload
 
 ######## Basic Functions ########
-map I set hidden!
 map H top
 map L bottom
 map e $nvim $Env:f
@@ -40,12 +39,13 @@ map o open
 map O systemOpen
 map <enter> systemOpen
 map R &{{ explorer.exe /select,"$Env:f" }}
-map i quickLook
-map I $less $Env:f
+map i $less $Env:f
+map I set hidden!
 map U invert
 map v :toggle; down
 map V :toggle; up
 map <esc> :clear; setfilter
+map <space> quickLook
 map so :{{
   source C:/Users/hasan/dotfiles/tui/lf/lfrc
   echo 'Resouced lfrc'
@@ -60,8 +60,9 @@ map A push :mkdir<space>
 map <f-2> rename
 map <c-r> bulk-rename
 map <delete> delete
-map D delete
+map D trash
 map d cut
+map x cut
 map y copy
 map p paste
 map <c-x> cut
@@ -71,7 +72,7 @@ map <c-v> paste
 map <a-d> half-down
 map <a-u> half-up
 map <a-c> fzf_cd
-map <a-j> zi
+map <a-e> zi
 map <backspace> updir
 
 map <m-1> open  # primary
@@ -84,7 +85,8 @@ map zi adb_install
 map z. $du -h -d1 | less
 map zf filter
 # Archive bindings
-map Zu %{{ unzip $Env:f }}
+map zu extract
+# map zu %{{ unzip $Env:f }}
 # *.tar.gz) tar -xzvf "$f" ;;
 # *.tar.bz2) tar -xjvf "$f" ;;
 # *.tar) tar -xvf "$f" ;;
@@ -113,7 +115,8 @@ map gr cd E:\\repoes
 map ga. cd ~/AppData
 map gan cd ~/AppData/Local/nvim-data
 map gaN cd ~/AppData/Local/Temp/nvim
-map gas cd ~/AppData/Local/Packages/Microsoft.ScreenSketch_8wekyb3d8bbwe/TempState
+map gas cd ~/AppData/Local/Packages/MicrosoftWindows.Client.CBS_cw5n1h2txyewy/TempState/ScreenClip
+map gaS cd ~/AppData/Local/Packages/Microsoft.ScreenSketch_8wekyb3d8bbwe/TempState
 map gaM cd ~/AppData/Roaming/Microsoft/Windows/Start\ Menu/Programs/Startup
 
 # ---------------------------------------------------------------------------
@@ -125,6 +128,7 @@ cmd doc $lf -doc | less
 cmd quickLook &C:\\Users\\hasan\\AppData\\Local\\Programs\\QuickLook\\QuickLook.exe $Env:f
 cmd adb_install &{{ C:\\Users\\hasan\\dotfiles\\scripts\\adb_install.sh "$Env:f" }}
 cmd systemOpen &explorer $Env:f
+cmd extract %{{ C:\\Users\\hasan\\dotfiles\\tui\\lf\\extract.cmd "$Env:f" }}
 cmd fzf_cd ${{
   $res="$(fd --hidden --type directory --exclude '.git' | fzf --reverse --inline-info --preview 'ls {}')"
   if($res -ne "") {
@@ -158,4 +162,14 @@ cmd bulk-rename !{{
 
   $tmp_file=$tmp_file.replace('\', '\\\')
   Invoke-Expression $("bash -c '/c/Users/hasan/dotfiles/tui/lf/lf_vimv " + $tmp_file + "'")
+}}
+cmd trash %{{
+  $selected_files=$env:fx.replace('\', '\\')
+  $selected_files=$selected_files.replace(' ', '\ ')
+
+  $tmp_file=($env:HOME + "\dotfiles\tui\lf\tmp_vimv")
+  $selected_files | Set-Content $tmp_file
+
+  $tmp_file=$tmp_file.replace('\', '\\\')
+  Invoke-Expression $("bash -c '/c/Users/hasan/dotfiles/tui/lf/lf_trash " + $tmp_file + "'")
 }}
