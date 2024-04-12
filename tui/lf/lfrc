@@ -29,6 +29,8 @@ map c reload
 map r reload
 
 ######## Basic Functions ########
+map J :updir; down; open
+map K :updir; up; open
 map H top
 map L bottom
 map e $nvim $Env:f
@@ -70,6 +72,7 @@ map <c-c> copy
 map <c-v> paste
 
 map <a-d> half-down
+map <a-o> half-down
 map <a-u> half-up
 map <a-c> fzf_cd
 map <a-e> zi
@@ -84,6 +87,7 @@ map <m-down> down
 map zi adb_install
 map z. $du -h -d1 | less
 map zf filter
+map sx share_file_0x0
 # Archive bindings
 map zu extract
 # map zu %{{ unzip $Env:f }}
@@ -172,4 +176,8 @@ cmd trash %{{
 
   $tmp_file=$tmp_file.replace('\', '\\\')
   Invoke-Expression $("bash -c '/c/Users/hasan/dotfiles/tui/lf/lf_trash " + $tmp_file + "'")
+}}
+cmd share_file_0x0 !{{
+  $tmp_file=$env:fx.replace('\', '\\\\')
+  Invoke-Expression $("bash -c '/c/Users/hasan/dotfiles/tui/lf/lf_share " + $tmp_file + "'")
 }}

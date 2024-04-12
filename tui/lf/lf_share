@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+file=$1
+
+result=$(curl -F"file=@$file" -Fexpires=72 https://0x0.st)
+
+echo " "
+echo "${result}" | clip
+echo "${result}"
