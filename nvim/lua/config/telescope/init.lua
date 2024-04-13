@@ -43,6 +43,7 @@ return {
           preview_title = false,
           scroll_strategy = 'cycle',
           selection_strategy = 'reset',
+          multi_icon = '▸',
           prompt_prefix = '   ',
           selection_caret = '❯ ',
           -- sorting_strategy = "ascending",

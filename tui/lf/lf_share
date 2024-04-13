@@ -1,8 +1,17 @@
 #!/bin/bash
 set -e
-file=$1
+tmpfile=$1
 
-result=$(curl -F"file=@$file" -Fexpires=72 https://0x0.st)
+files=$(
+	readarray -t ARRAY <"$tmpfile"
+	# IFS=' '
+	echo "${ARRAY[*]}"
+)
+
+files=${files//\"/}
+rm "$tmpfile"
+
+result=$(curl -F"file=@$files" -Fexpires=72 https://0x0.st)
 
 echo " "
 echo "${result}" | clip

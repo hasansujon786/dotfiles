@@ -157,15 +157,14 @@ cmd jump-to-git-root %{{
   lf -remote "send $id cd $_root_dir"
 }}
 cmd bulk-rename !{{
-  # format every file path
   $selected_files=$env:fx.replace('\', '\\')
   $selected_files=$selected_files.replace(' ', '\ ')
 
   $tmp_file=($env:HOME + "\dotfiles\tui\lf\tmp_vimv")
   $selected_files | Set-Content $tmp_file
 
-  $tmp_file=$tmp_file.replace('\', '\\\')
-  Invoke-Expression $("bash -c '/c/Users/hasan/dotfiles/tui/lf/lf_vimv " + $tmp_file + "'")
+  $cmd=("bash -c '" + $env:HOME + "\dotfiles\tui\lf\lf_vimv " + $tmp_file + "'")
+  Invoke-Expression $cmd.replace('\', '\\\')
 }}
 cmd trash %{{
   $selected_files=$env:fx.replace('\', '\\')
@@ -174,10 +173,16 @@ cmd trash %{{
   $tmp_file=($env:HOME + "\dotfiles\tui\lf\tmp_vimv")
   $selected_files | Set-Content $tmp_file
 
-  $tmp_file=$tmp_file.replace('\', '\\\')
-  Invoke-Expression $("bash -c '/c/Users/hasan/dotfiles/tui/lf/lf_trash " + $tmp_file + "'")
+  $cmd=("bash -c '" + $env:HOME + "\dotfiles\tui\lf\lf_trash " + $tmp_file + "'")
+  Invoke-Expression $cmd.replace('\', '\\\')
 }}
 cmd share_file_0x0 !{{
-  $tmp_file=$env:fx.replace('\', '\\\\')
-  Invoke-Expression $("bash -c '/c/Users/hasan/dotfiles/tui/lf/lf_share " + $tmp_file + "'")
+  $selected_files=$env:f.replace('\', '\\')
+  $selected_files=$selected_files.replace(' ', '\ ')
+
+  $tmp_file=($env:HOME + "\dotfiles\tui\lf\tmp_vimv")
+  $selected_files | Set-Content $tmp_file
+
+  $cmd=("bash -c '" + $env:HOME + "\dotfiles\tui\lf\lf_share " + $tmp_file + "'")
+  Invoke-Expression $cmd.replace('\', '\\\')
 }}
