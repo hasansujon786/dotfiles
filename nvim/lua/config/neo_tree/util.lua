@@ -92,4 +92,20 @@ function M.edit_alternate_file()
   feedkeys('<c-^>')
 end
 
+function M.toggle_neotree()
+  vim.g.cwd = vim.loop.cwd()
+  require('hasan.nebulous').mark_as_alternate_win()
+  local readonly = vim.api.nvim_buf_get_option(0, 'readonly')
+  local modifiable = vim.api.nvim_buf_get_option(0, 'modifiable')
+  local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
+
+  if filetype == 'neo-tree' then
+    vim.cmd([[Neotree close]])
+  elseif readonly or not modifiable then
+    vim.cmd([[Neotree filesystem left]])
+  else
+    vim.cmd([[Neotree filesystem left reveal_file=%:p]])
+  end
+end
+
 return M

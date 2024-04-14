@@ -1,3 +1,11 @@
+local vinegar = require('config.neo_tree.util')
+
+local function focus_first_child(state, node)
+  if node:has_children() then
+    require('neo-tree.ui.renderer').focus_node(state, node:get_child_ids()[1])
+  end
+end
+
 return {
   -- bind_to_cwd = true, -- true creates a 2-way binding between vim's cwd and neo-tree's root
   -- cwd_target = {
@@ -42,34 +50,43 @@ return {
   -- instead of relying on nvim autocmd events.
   window = {
     mappings = {
-      ['<bs>'] = 'none',
       ['.'] = 'set_root',
+      ['I'] = 'toggle_hidden',
+      ['/'] = 'fuzzy_finder',
+      ['#'] = 'fuzzy_sorter', -- fuzzy sorting using the fzy algorithm
+      -- ['D'] = 'fuzzy_finder_directory',
+      -- ["D"] = "fuzzy_sorter_directory",
+      -- ['f'] = 'filter_on_submit',
+      -- ['<c-x>'] = 'clear_filter',
+
       ['-'] = function(state)
-        -- vinegar_dir_up(state)
+        vinegar.vinegar_dir_up(state)
       end,
       ['h'] = function(state)
-        -- vinegar_dir_up(state)
-
-        -- local node = state.tree:get_node()
-        -- if node.type == 'directory' and node:is_expanded() then
-        --   require('neo-tree.sources.filesystem').toggle_directory(state, node)
-        -- else
-        --   require('neo-tree.ui.renderer').focus_node(state, node:get_parent_id())
-        -- end
+        if vim.b['neo_tree_position'] == 'current' then
+          vinegar.vinegar_dir_up(state)
+        else
+          state.commands['close_node'](state)
+        end
       end,
       ['l'] = function(state)
         local node = state.tree:get_node()
         if node.type == 'directory' then
-          state.commands['set_root'](state)
-          vim.defer_fn(function()
-            feedkeys('j')
-          end, 80)
-
-          -- if not node:is_expanded() then
-          --   require('neo-tree.sources.filesystem').toggle_directory(state, node)
-          -- elseif node:has_children() then
-          --   require('neo-tree.ui.renderer').focus_node(state, node:get_child_ids()[1])
-          -- end
+          if vim.b['neo_tree_position'] == 'current' then
+            state.commands['set_root'](state)
+            vim.defer_fn(function()
+              pcall(vim.api.nvim_win_set_cursor, 0, { 2, 1 })
+            end, 100)
+          else
+            if not node:is_expanded() then
+              local file = require('neo-tree.sources.filesystem')
+              file.toggle_directory(state, node, node:get_child_ids()[1], nil, nil, function()
+                focus_first_child(state, node)
+              end)
+            else
+              focus_first_child(state, node)
+            end
+          end
         else
           state.commands['open'](state)
         end
@@ -93,13 +110,7 @@ return {
         local node = state.tree:get_node()
         vim.cmd('silent !explorer.exe "' .. node:get_id() .. '"')
       end,
-      ['H'] = 'toggle_hidden',
-      ['/'] = 'fuzzy_finder',
-      -- ['D'] = 'fuzzy_finder_directory',
-      ['#'] = 'fuzzy_sorter', -- fuzzy sorting using the fzy algorithm
-      -- ["D"] = "fuzzy_sorter_directory",
-      ['f'] = 'filter_on_submit',
-      -- ['<c-x>'] = 'clear_filter',
+
       ['[c'] = 'prev_git_modified',
       [']c'] = 'next_git_modified',
       -- ['o'] = { 'show_help', nowait = false, config = { title = 'Order by', prefix_key = 'o' } },

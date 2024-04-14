@@ -9,32 +9,8 @@ return {
   branch = 'v3.x',
   vinegar_helper = util,
   keys = {
-    {
-      '<leader>op',
-      function()
-        vim.g.cwd = vim.loop.cwd()
-        require('hasan.nebulous').mark_as_alternate_win()
-        local readonly = vim.api.nvim_buf_get_option(0, 'readonly')
-        local modifiable = vim.api.nvim_buf_get_option(0, 'modifiable')
-        local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
-
-        if filetype == 'neo-tree' then
-          vim.cmd([[Neotree close]])
-        elseif readonly or not modifiable then
-          vim.cmd([[Neotree filesystem left]])
-        else
-          vim.cmd([[Neotree filesystem left reveal_file=%:p]])
-        end
-      end,
-      desc = 'NeoTree: Toggle sidebar',
-    },
-    {
-      '-',
-      function()
-        util.open_vinegar()
-      end,
-      desc = 'NeoTree: Open vinegar',
-    },
+    { '<leader>op', util.toggle_neotree, desc = 'NeoTree: Toggle sidebar' },
+    { '-', util.open_vinegar, desc = 'NeoTree: Open vinegar' },
   },
   config = function()
     keymap('n', '<bs>', util.edit_alternate_file, { desc = 'Edit alternate file' })

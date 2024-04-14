@@ -8,9 +8,9 @@ return {
   show_unloaded = true,
   window = {
     mappings = {
-      ['bd'] = 'buffer_delete',
-      ['<bs>'] = 'navigate_up',
       ['.'] = 'set_root',
+      ['d'] = 'buffer_delete',
+      ['D'] = 'buffer_delete',
       -- ['o'] = { 'show_help', nowait = false, config = { title = 'Order by', prefix_key = 'o' } },
       -- ['oc'] = { 'order_by_created', nowait = false },
       -- ['od'] = { 'order_by_diagnostics', nowait = false },

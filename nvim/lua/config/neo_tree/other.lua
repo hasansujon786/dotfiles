@@ -4,18 +4,9 @@ local M = {
     statusline = false, -- toggle to show selector on statusline
     show_scrolled_off_parent_node = false, -- boolean
     sources = { -- table
-      {
-        source = 'filesystem', -- string
-        display_name = '  Files', -- string | nil
-      },
-      {
-        source = 'buffers', -- string
-        display_name = ' ﬘ Bufs ', -- string | nil
-      },
-      {
-        source = 'git_status', -- string
-        display_name = '  Git ', -- string | nil
-      },
+      { source = 'filesystem', display_name = '  Files' },
+      { source = 'buffers', display_name = ' ﬘ Bufs ' },
+      { source = 'git_status', display_name = '  Git ' },
     },
     content_layout = 'center', -- string
     tabs_layout = 'equal', -- string
@@ -32,8 +23,11 @@ local M = {
       event = 'neo_tree_popup_input_ready',
       -- ---@param input NuiInput
       handler = function(_)
-        vim.cmd.stopinsert()
-        vim.cmd.normal('F.a')
+        local cursor = vim.api.nvim_win_get_cursor(0)
+        if cursor[2] > 1 then
+          vim.cmd.stopinsert()
+          vim.cmd.normal('F.a')
+        end
       end,
     },
   },
@@ -42,18 +36,9 @@ local M = {
 -- Alternate source_selector_style
 if require('core.state').ui.neotree.source_selector_style == 'minimal' then
   M.source_selector.sources = {
-    {
-      source = 'filesystem', -- string
-      display_name = '  ', -- string | nil
-    },
-    {
-      source = 'buffers', -- string
-      display_name = ' ﬘ ', -- string | nil
-    },
-    {
-      source = 'git_status', -- string
-      display_name = '  ', -- string | nil
-    },
+    { source = 'filesystem', display_name = '  ' },
+    { source = 'buffers', display_name = ' ﬘ ' },
+    { source = 'git_status', display_name = '  ' },
   }
   M.source_selector.content_layout = 'start'
   M.source_selector.tabs_layout = false
