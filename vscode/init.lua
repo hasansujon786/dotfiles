@@ -97,10 +97,15 @@ keymap('n', '<leader>gs', '<Cmd>call VSCodeNotify("git.stageSelectedRanges")<CR>
 -- keymap('n', '<leader>gu', '<Cmd>call VSCodeNotify("git.unstageSelectedRanges")<CR>')
 
 -- => Navigation ------------------------------------
-keymap('n', '<A-k>', '<Cmd>lua MoveCurrentline("Up")<CR>')
-keymap('n', '<A-j>', '<Cmd>lua MoveCurrentline("Down")<CR>')
-keymap('v', '<A-k>', '<Cmd>lua MoveVisualSelection("Up")<CR>')
-keymap('v', '<A-j>', '<Cmd>lua MoveVisualSelection("Down")<CR>')
+keymap('n', '<A-d>', '<c-d>')
+keymap('n', '<A-u>', '<c-u>')
+
+-- keymap('n', '<A-k>', '<Cmd>lua MoveCurrentline("Up")<CR>')
+-- keymap('n', '<A-j>', '<Cmd>lua MoveCurrentline("Down")<CR>')
+-- keymap('v', '<A-k>', '<Cmd>lua MoveVisualSelection("Up")<CR>')
+-- keymap('v', '<A-j>', '<Cmd>lua MoveVisualSelection("Down")<CR>')
+keymap('v', '<A-k>', [[:<C-U>exec "'<,'>move '<-" . (1+v:count1)<CR>gv]])
+keymap('v', '<A-j>', [[:<C-U>exec "'<,'>move '>+" . (0+v:count1)<CR>gv]])
 -- Jump between tabs
 keymap('n', 'gl', '<Cmd>call VSCodeNotify("workbench.action.nextEditorInGroup")<CR>')
 keymap('n', 'gh', '<Cmd>call VSCodeNotify("workbench.action.previousEditorInGroup")<CR>')

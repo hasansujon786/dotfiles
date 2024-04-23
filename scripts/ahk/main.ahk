@@ -8,7 +8,7 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 
 ;Reload/Execute this script.ahk file
 ::rscript::
-f5:: {
+!f5:: {
   SplashTextGui := Gui("ToolWindow -Sysmenu Disabled", ), SplashTextGui.Add("Text",, "reloaded"), SplashTextGui.Show("w200 h60")
   Sleep(300)
   SplashTextGui.Destroy
@@ -34,15 +34,15 @@ PrintScreen::Send("#+{s}")
   ~LAlt & WheelDown::voldown()
   ~LAlt & RButton::openVolumeController()
 #HotIf
-; Global arrow controls
 !Backspace::Send("^{Backspace}")
 !SPACE::Send("^{SPACE}")
-!j::SendInput("{DOWN}")
-!k::SendInput("{UP}")
+; Global arrow controls
 #HotIf not WinActive("ahk_exe WindowsTerminal.exe")
   and not WinActive("ahk_exe alacritty.exe")
   and not WinActive("ahk_exe wezterm-gui.exe")
-  ; and not WinActive("ahk_exe Code.exe")
+  and not WinActive("ahk_exe Code.exe")
+  !j::SendInput("{DOWN}")
+  !k::SendInput("{UP}")
   !h::  SendInput("{LEFT}")
   !l::  SendInput("{RIGHT}")
 #HotIf
