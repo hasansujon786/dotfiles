@@ -7,7 +7,11 @@
 
 require('core.state')
 require('core.global')
-require('core.options')
-require('core.keymaps')
+if vim.g.vscode then
+  require('vscode.keymaps')
+else
+  require('core.options')
+  require('core.keymaps')
+  require('core.autocmds')
+end
 require('core.lazy')
-require('core.autocmds')

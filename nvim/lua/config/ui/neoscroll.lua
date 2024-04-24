@@ -1,6 +1,7 @@
 local nx = { 'n', 'x' }
 return {
   'karb94/neoscroll.nvim',
+  commit = "21d52973",
   lazy = true,
   event = 'WinScrolled',
   opts = {},

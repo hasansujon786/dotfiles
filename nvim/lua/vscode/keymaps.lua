@@ -3,11 +3,6 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 local noSilent = { silent = false }
-local keymap = function(mode, lhs, rhs, opts)
-  local def_opts = { silent = true, noremap = true }
-  opts = vim.tbl_deep_extend('force', def_opts, opts or {})
-  vim.keymap.set(mode, lhs, rhs, opts)
-end
 
 -- => Simple mappings -------------------------------
 keymap('n', 'Q', 'q') -- Use Q to record macros

@@ -5,16 +5,23 @@ if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({ 'git', 'clone', '--filter=blob:none', repo, '--branch=stable', lazypath })
 end
 vim.opt.runtimepath:prepend(lazypath)
+local spec = {
+  { import = 'config' },
+  { import = 'config.lsp' },
+  { import = 'config.git' },
+  { import = 'config.ui' },
+  { import = 'config.mics' },
+  { import = 'config.completion' },
+}
+
+if vim.g.vscode then
+  spec = {
+    { import = 'config.mics' },
+  }
+end
 
 require('lazy').setup({
-  spec = {
-    { import = 'config' },
-    { import = 'config.lsp' },
-    { import = 'config.git' },
-    { import = 'config.ui' },
-    { import = 'config.mics' },
-    { import = 'config.completion' },
-  },
+  spec = spec,
   concurrency = 5,
   git = {
     timeout = 120, -- kill processes that take more than 2 minutes
