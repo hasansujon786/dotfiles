@@ -254,6 +254,7 @@ local function set_custom_highlights()
     VM_Insert = { bg = '#4c4e50', fg = 'NONE' },
     VM_Mono   = { bg = '#00af87', fg = '#ffffff' },
   -- Mix
+    TwoslashQueries     = { fg = c.dark_green },
     MarkSignHL          = { link = 'Comment' },
     EyelinerPrimary     = { fg = 'tomato', underline = true },
     EyelinerSecondary   = { fg = '#d78787', underline = true },

@@ -162,6 +162,10 @@ local M = {
     { key = 'r', mods = 'CTRL|SHIFT', action = wezterm.action_callback(wezterm.reload_configuration) },
     { key = 't', mods = 'SHIFT|ALT', action = act({ EmitEvent = 'toggle-tab-bar' }) },
     { key = 'w', mods = 'SHIFT|CTRL', action = act({ CloseCurrentPane = { confirm = false } }) },
+    { key = 'k', mods = 'SHIFT|CTRL', action = act.ScrollByLine(-1) },
+    { key = 'j', mods = 'SHIFT|CTRL', action = act.ScrollByLine(1) },
+    { key = 'PageUp', mods = 'SHIFT', action = act.ScrollByPage(-1) },
+    { key = 'PageDown', mods = 'SHIFT', action = act.ScrollByPage(1) },
     -- tabs
     { key = '[', mods = 'ALT', action = act({ ActivateTabRelative = -1 }) },
     { key = ']', mods = 'ALT', action = act({ ActivateTabRelative = 1 }) },

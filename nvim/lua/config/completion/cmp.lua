@@ -166,6 +166,8 @@ return {
       sorting = {
         priority_weight = 2,
         comparators = {
+          -- defaults: https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/default.lua#L67-L78
+          -- compare function https://github.com/hrsh7th/nvim-cmp/blob/main/lua/cmp/config/compare.lua
           compare.offset,
           compare.exact,
           -- compare.scopes,

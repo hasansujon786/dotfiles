@@ -23,7 +23,12 @@ function M.ts_organize_imports_sync(bufnr)
 end
 
 return {
-  setup = function(_, bufnr)
+  setup = function(client, bufnr)
     keymap('n', '<leader>ai', M.ts_organize_imports_sync, { buffer = bufnr, desc = 'Lsp: organize imports' })
+
+    local ok, twoslashqueries = pcall(require, 'twoslash-queries')
+    if ok then
+      twoslashqueries.attach(client, bufnr)
+    end
   end,
 }

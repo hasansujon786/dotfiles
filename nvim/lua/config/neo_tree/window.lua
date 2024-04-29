@@ -49,23 +49,23 @@ return {
     -- ['c'] = { 'copy', config = { show_path = 'none' } }, -- "none", "relative", "absolute"
     -- ['m'] = 'move', -- takes text input for destination, also accepts the optional config.show_path option like "add".
 
-    ['Y'] = {
+    ['gy'] = {
       function(state)
         util.copy_path(state, ':t')
       end,
       desc = 'Copy current node',
+    },
+    ['Y'] = {
+      function(state)
+        util.copy_path(state, ':.')
+      end,
+      desc = 'Copy relative node',
     },
     ['gf'] = {
       function(state)
         util.copy_path(state)
       end,
       desc = 'Copy absolute node',
-    },
-    ['gy'] = {
-      function(state)
-        util.copy_path(state, ':.')
-      end,
-      desc = 'Copy relative node',
     },
 
     ['b'] = 'prev_source',
