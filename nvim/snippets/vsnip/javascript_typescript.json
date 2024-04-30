@@ -42,5 +42,10 @@
     "prefix": "cn",
     "body": "className='$0'",
     "description": "jsx className"
+  },
+  "numfromrange": {
+    "prefix": "numfromrange",
+    "body": "Math.floor(Math.random() * (max - min + 1) + min)",
+    "description": "get number from a range"
   }
 }

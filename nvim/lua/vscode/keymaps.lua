@@ -1,5 +1,3 @@
--- https://github.com/Axlefublr/dotfiles/blob/main/init.lua
--- https://github.com/microsoft/vscode-docs/blob/main/docs/getstarted/tips-and-tricks.md
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 local noSilent = { silent = false }
@@ -48,25 +46,36 @@ keymap('n', 'gV', '`[v`]')
 -- keymap({ 'i', 'c' }, '<A-p>', '<C-R>"', noSilent) -- Paste the last item from register
 
 -- Easier system clipboard usage
-keymap('v', '<Leader>y', '"+ygv<Esc>')
-keymap('v', '<Leader>d', '"+d')
-keymap({ 'n', 'v' }, '<Leader>p', '"+p')
-keymap({ 'n', 'v' }, '<Leader>P', '"+P')
+keymap('v', '<leader>y', '"+ygv<Esc>')
+keymap('v', '<leader>d', '"+d')
+keymap({ 'n', 'v' }, '<leader>ip', '"+p')
+keymap({ 'n', 'v' }, '<leader>iP', '"+P')
 
 -- => Search ----------------------------------------
 keymap('n', '<A-/>', "<Cmd>call VSCodeNotify('workbench.action.findInFiles', { 'query': expand('<cword>')})<CR>")
 
 -- => LSP -------------------------------------------
 keymap({ 'n', 'x' }, 'gd', '<Cmd>call VSCodeNotify("editor.action.revealDefinition")<CR>')
-keymap({ 'n', 'x' }, 'gD', '<Cmd>call VSCodeNotify("editor.action.revealDeclaration")<CR>')
 keymap({ 'n', 'x' }, 'gr', '<Cmd>call VSCodeNotify("editor.action.referenceSearch.trigger")<CR>')
+keymap({ 'n', 'x' }, 'gm', '<Cmd>call VSCodeNotify("editor.action.goToImplementation")<CR>')
+keymap({ 'n', 'x' }, 'gy', '<Cmd>call VSCodeNotify("editor.action.goToTypeDefinition")<CR>')
+keymap({ 'n', 'x' }, 'gD', '<Cmd>call VSCodeNotify("editor.action.revealDeclaration")<CR>')
 keymap({ 'n', 'x' }, 'gR', '<Cmd>call VSCodeNotify("references-view.findReferences")<CR>')
-keymap({ 'n', 'x' }, 'gp', '<Cmd>call VSCodeNotify("editor.action.peekDefinition")<CR>')
-keymap({ 'n', 'x' }, 'gP', '<Cmd>call VSCodeNotify("editor.action.peekDeclaration")<CR>')
+
+keymap({ 'n', 'x' }, 'gpd', '<Cmd>call VSCodeNotify("editor.action.peekDefinition")<CR>')
+keymap({ 'n', 'x' }, 'gpm', '<Cmd>call VSCodeNotify("editor.action.peekImplementation")<CR>')
+keymap({ 'n', 'x' }, 'gpy', '<Cmd>call VSCodeNotify("editor.action.peekTypeDefinition")<CR>')
+keymap({ 'n', 'x' }, 'gpD', '<Cmd>call VSCodeNotify("editor.action.peekDeclaration")<CR>')
+
 keymap({ 'n', 'x' }, 'go', '<Cmd>call VSCodeNotify("workbench.action.gotoSymbol")<CR>')
+keymap({ 'n', 'x' }, 'g.', '<Cmd>call VSCodeNotify("workbench.action.gotoSymbol")<CR>')
 
 keymap('n', '<C-space>', '<Cmd>call VSCodeNotify("editor.action.quickFix")<CR>')
 keymap('i', '<C-space>', '<Cmd>call VSCodeNotify("editor.action.triggerSuggest")<CR>')
+
+keymap('n', 'g<tab>', '<Cmd>call VSCodeNotify("editor.action.smartSelect.expand")<CR>')
+keymap('v', '<tab>', '<Cmd>call VSCodeNotify("editor.action.smartSelect.expand")<CR>')
+keymap('v', '<S-tab>', '<Cmd>call VSCodeNotify("editor.action.smartSelect.shrink")<CR>')
 
 -- => Leader commands -------------------------------
 keymap('n', '<leader><leader>', '<Cmd>call VSCodeNotify("workbench.action.quickOpen")<CR>')
@@ -79,6 +88,7 @@ keymap('n', '<leader>fX', '<Cmd>call VSCodeNotify("editor.action.trimTrailingWhi
 keymap('n', '<leader>0', '<Cmd>call VSCodeNotify("editor.action.formatDocument")<CR>')
 keymap('n', '<leader>ob', '<Cmd>call VSCodeNotify("workbench.action.toggleSidebarVisibility")<CR>')
 keymap('n', '<leader>op', '<Cmd>call VSCodeNotify("workbench.view.explorer")<CR>')
+-- keymap('n', '<leader>oi', '<Cmd>call VSCodeNotify("workbench.files.action.focusFilesExplorer")<CR>')
 --Toggles
 keymap('n', '<leader>tl', '<Cmd>setlocal cursorcolumn!<CR>') --
 keymap('n', '<leader>tK', '<Cmd>call VSCodeNotify("workbench.action.toggleStickyScroll")<CR>')
