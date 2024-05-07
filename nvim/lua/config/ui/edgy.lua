@@ -21,7 +21,7 @@ return {
       EdgyIconActive = 'EdgyTitle',
       Normal = 'EdgyNormalDark',
       WinSeparator = 'EdgyWinSeparator',
-      -- CursorLine = 'CursorLineFocus',
+      CursorLine = 'CursorLineFocus',
     })
 
     local gray_bar = color.make_winhighlight({
@@ -88,17 +88,17 @@ return {
       {
         ft = 'neo-tree',
         title = 'NEO-TREE',
-        pinned = false,
+        pinned = true,
         open = 'Neotree filesystem left',
         filter = function(buf, _)
           local ok, pos = pcall(vim.api.nvim_buf_get_var, buf, 'neo_tree_position')
           return ok and pos == 'left'
         end,
-        wo = { winbar = false, winhighlight = '', fillchars = left_chars },
+        wo = { winbar = true, winhighlight = dark_bar, fillchars = left_chars },
       },
       {
         ft = 'Outline',
-        pinned = false,
+        pinned = true,
         open = 'Outline',
         title = 'OUTLINE',
         size = { height = 0.4 },
@@ -125,7 +125,7 @@ return {
     })
 
     require('edgy').setup({
-      icons = { closed = '', open = '' },
+      icons = { closed = ' ', open = ' ' },
       exit_when_last = false,
       bottom = bottom,
       right = right,

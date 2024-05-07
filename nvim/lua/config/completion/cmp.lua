@@ -72,6 +72,11 @@ return {
           selection_order = 'top_down',
           follow_cursor = true,
         },
+        docs = { auto_open = true },
+      },
+      completion = {
+        completeopt = 'menu,menuone',
+        -- completeopt = 'menu,menuone,noselect',
       },
       mapping = cmp.mapping.preset.insert({
         ['<A-u>'] = cmp.mapping.scroll_docs(-4),
@@ -174,7 +179,7 @@ return {
           compare.score,
           compare.recently_used,
           -- compare.kind,
-          function(entry1, entry2)
+          function(entry1, entry2) -- custom kind_mapper
             local kind1 = entry1:get_kind()
             local kind2 = entry2:get_kind()
             -- my custom sort
