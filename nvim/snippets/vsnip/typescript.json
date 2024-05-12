@@ -1,7 +1,17 @@
 {
   "value as union type": {
-    "prefix": "typeofkeyof",
-    "body": "type Route = (typeof ${1:routes})[keyof typeof ${1:routes}]",
+    "prefix": "typeUnionValue",
+    "body": "type ${2:TypeName} = (typeof ${1:object})[keyof typeof ${1:object}]",
+    "description": "get object values as union type"
+  },
+  "key as union type": {
+    "prefix": "typeUnionKey",
+    "body": "type ${2:TypeName} = keyof typeof ${1:object}",
+    "description": "get object values as union type"
+  },
+  "list key as union type": {
+    "prefix": "typeUnionlistKey",
+    "body": "type ${2:TypeName} = (typeof ${1:object})[number][$0];",
     "description": "get object values as union type"
   },
   "typePrettify": {
@@ -10,4 +20,3 @@
     "description": "Prettify any nested type"
   }
 }
-

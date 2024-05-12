@@ -57,9 +57,9 @@ return {
           -- animation = require('mini.indentscope').gen_animation.exponential(),
           -- animation = require('mini.indentscope').gen_animation.quartic(),
           -- animation = require('mini.indentscope').gen_animation.cubic(),
-          animation = require('mini.indentscope').gen_animation.quadratic(),
+          -- animation = require('mini.indentscope').gen_animation.quadratic(),
           -- animation = require('mini.indentscope').gen_animation.linear(),
-          -- animation = require('mini.indentscope').gen_animation.none(),
+          animation = require('mini.indentscope').gen_animation.none(),
           priority = 2,
         },
       }

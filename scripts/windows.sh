@@ -13,3 +13,5 @@
 
 choco install qbittorrent -y
 winget install eza-community.eza
+winget install aristocratos.btop4win
+winget install GNU.Emacs

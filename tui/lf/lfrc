@@ -89,7 +89,7 @@ map z. $du -h -d1 | less
 map zf filter
 map sx share_file_0x0
 # Archive bindings
-map zu extract
+map zu unzip
 # map zu %{{ unzip $Env:f }}
 # *.tar.gz) tar -xzvf "$f" ;;
 # *.tar.bz2) tar -xjvf "$f" ;;
@@ -132,7 +132,7 @@ cmd doc $lf -doc | less
 cmd quickLook &C:\\Users\\hasan\\AppData\\Local\\Programs\\QuickLook\\QuickLook.exe $Env:f
 cmd adb_install &{{ C:\\Users\\hasan\\dotfiles\\scripts\\adb_install.sh "$Env:f" }}
 cmd systemOpen &explorer $Env:f
-cmd extract %{{ C:\\Users\\hasan\\dotfiles\\tui\\lf\\extract.cmd "$Env:f" }}
+cmd unzip %{{ C:\\Users\\hasan\\dotfiles\\tui\\lf\\extract.cmd "$Env:f" }}
 cmd fzf_cd ${{
   $res="$(fd --hidden --type directory --exclude '.git' | fzf --reverse --inline-info --preview 'ls {}')"
   if($res -ne "") {

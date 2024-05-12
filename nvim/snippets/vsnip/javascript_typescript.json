@@ -23,6 +23,11 @@
     "body": ["Array.from({ length: ${1:5} }, (_, i) => ${2:i + 1})"],
     "description": "create an array programmatically"
   },
+  "array from keys": {
+    "prefix": "fromCount",
+    "body": ["Array.from(Array(5).keys());"],
+    "description": "create an array programmatically"
+  },
   "log": {
     "prefix": "cl",
     "body": "console.log($0)",
@@ -44,7 +49,7 @@
     "description": "jsx className"
   },
   "numfromrange": {
-    "prefix": "numfromrange",
+    "prefix": "randomFromRange",
     "body": "Math.floor(Math.random() * (max - min + 1) + min)",
     "description": "get number from a range"
   }

@@ -88,17 +88,17 @@ return {
       {
         ft = 'neo-tree',
         title = 'NEO-TREE',
-        pinned = true,
+        pinned = false,
         open = 'Neotree filesystem left',
         filter = function(buf, _)
           local ok, pos = pcall(vim.api.nvim_buf_get_var, buf, 'neo_tree_position')
           return ok and pos == 'left'
         end,
-        wo = { winbar = true, winhighlight = dark_bar, fillchars = left_chars },
+        wo = { winbar = false, winhighlight = dark_bar, fillchars = left_chars },
       },
       {
         ft = 'Outline',
-        pinned = true,
+        pinned = false,
         open = 'Outline',
         title = 'OUTLINE',
         size = { height = 0.4 },

@@ -2,3 +2,5 @@
 <!-- https://marketplace.visualstudio.com/items?itemName=Nash.awesome-flutter-snippets -->
 <!-- https://marketplace.visualstudio.com/items?itemName=alexisvt.flutter-snippets -->
 <!-- TODO: update flutter snippets path -->
+
+https://dev.to/shakyshane/2-ways-to-create-a-union-from-an-array-in-typescript-1kd6
