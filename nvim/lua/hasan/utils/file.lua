@@ -32,6 +32,53 @@ M.open_settings = function()
   vim.cmd.edit(path)
 end
 
+M.path_exists = function(fname, cwd)
+  cwd = cwd and cwd or M.get_root_dir()
+  local fpath = Path:new(cwd, fname)
+  local exists = fpath:exists()
+  return exists, exists and fpath or nil
+end
+
+M.is_file_exist = function(path)
+  local f = io.open(path, 'r')
+  if f ~= nil then
+    io.close(f)
+    return true
+  else
+    return false
+  end
+end
+
+M.get_relative_fname = function()
+  local fname = vim.fn.expand('%:p')
+  return fname:gsub(vim.fn.getcwd() .. '/', '')
+end
+
+M.read_file = function(path)
+  local fd = vim.loop.fs_open(path, 'r', 438)
+  local stat = vim.loop.fs_fstat(fd)
+  local data = vim.loop.fs_read(fd, stat.size, 0)
+  vim.loop.fs_close(fd)
+
+  return data
+end
+
+-- write_file writes the given string into given file
+-- @tparam string path The path of the file
+-- @tparam string content The content to be written in the file
+-- @tparam string mode The mode for opening the file, e.g. 'w+'
+M.write_file = function(path, content, mode)
+  -- 644 sets read and write permissions for the owner, and it sets read-only
+  -- mode for the group and others.
+  vim.loop.fs_open(path, mode, tonumber('644', 8), function(err, fd)
+    if not err then
+      local fpipe = vim.loop.new_pipe(false)
+      vim.loop.pipe_open(fpipe, fd)
+      vim.loop.write(fpipe, content)
+    end
+  end)
+end
+
 function M.openInCode(only_file)
   local positin = vim.api.nvim_win_get_cursor(0)
   local buf = vim.api.nvim_buf_get_name(0)

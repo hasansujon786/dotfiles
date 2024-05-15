@@ -111,8 +111,51 @@ local fn = {
 }
 
 function M.open_org_home()
-  vim.cmd('edit ' .. org_home_path)
+  vim.cmd.edit(org_home_path)
 end
+
+function M.open_org_project()
+  local roam = require('org-roam')
+  local cwd = vim.loop.cwd()
+  local file_name = vim.fn.fnamemodify(cwd, ':t')
+  local title = 'Project-' .. file_name
+
+  roam.database:find_nodes_by_title(title):next(function(nodes)
+    local length = #nodes
+    if length == 0 then
+      roam.api.capture_node({
+        title = title,
+        -- immediate = {
+        --   template = '%?',
+        --   target = 'hasan-%<%Y%m%d>-' .. title .. '.org',
+        -- },
+        templates = {
+          p = {
+            description = 'Create project',
+            template = '%?',
+            target = '1_projects/%<%Y%m%d>-' .. file_name .. '.org',
+          },
+        },
+      })
+      -- :next(function(id)
+      --   if id then
+      --     roam.database:get(id):next(function(found_node)
+      --       if found_node then
+      --         vim.cmd.vsplit(found_node.file)
+      --       end
+      --     end)
+      --   else
+      --     print('Capture canceled')
+      --   end
+      -- end)
+    elseif length == 1 then
+      vim.cmd.vsplit(nodes[1].file)
+    else
+      P('last')
+    end
+  end)
+end
+-- require("hasan.org").open_org_project()
 
 function M.open_org_float()
   -- get the bufnr if the buffer was cleared from buflist

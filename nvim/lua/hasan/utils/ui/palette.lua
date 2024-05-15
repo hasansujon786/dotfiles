@@ -114,6 +114,9 @@ local function set_custom_highlights()
     NotifyBorder              = { fg = c.grey, bg = c.none },
     NotifyBorderInfo          = { fg = c.green, bg = c.none  },
 
+  -- /// org ///
+    CodeBlock                 = { bg = c.bg_d },
+
   -- /// glance.nvim ///
     GlancePreviewNormal       = { fg = c.fg, bg = c.bg_d },
     GlancePreviewLineNr       = { fg = '#495162', bg = c.bg_d },

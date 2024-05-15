@@ -1,0 +1,1193 @@
+https://www.youtube.com/watch?v=fQ5LJONrVnw | React Native Tinder Swipe UI 🔥 | In Hindi | Engineer Codewala - YouTube
+https://www.youtube.com/watch?v=D-C7lLQ1oAk&list=PLjHsmVtnAr9TWoMAh-3QMiP7bPUqPFuFZ&index=15 | Perspective Menu Animation in React Native with Reanimated 2 - YouTube
+https://www.youtube.com/watch?v=SqwpRr7kbnQ&list=PLjHsmVtnAr9TWoMAh-3QMiP7bPUqPFuFZ&index=6 | Interpolate with ScrollView like a pro (React Native Reanimated 2) - YouTube
+https://www.youtube.com/watch?v=yV-2HRzNX9o | Advanced React Native FlatList animations at 60fps with Animated API - YouTube
+https://www.youtube.com/watch?v=fSuYM86JXFo | Advanced React Native Parallax Carousel with FlatList and Animated API - YouTube
+https://www.youtube.com/watch?v=li-ylRo7VEc | Responsive Slider | Swiper Slider 3D-Coverflow Effect - YouTube
+https://www.youtube.com/watch?v=gOj4BlzYF4A | AWESOME React Native carousel animation 60fps - FlatList and Animated API - YouTube
+https://www.youtube.com/watch?v=g5rCMlPTgrM | Advanced React Native FlatList stack carousel animations at 60fps - YouTube
+https://www.youtube.com/watch?v=omNyqZKpDIw | #13 Swipe Animations — React Native Fashion - YouTube
+
+https://github.com/MunifTanjim/nui.nvim/blob/main/lua/nui/layout/README.md | nui.nvim/lua/nui/layout/README.md at main · MunifTanjim/nui.nvim
+https://www.youtube.com/watch?v=fw_Cel9IiMw&list=PLuoU5hc1bmnQ0FEul1_RicvLJAmslK8oI | Animating Carousel (Part 1) | Animations in React Native | Episode - 1 | GeekyAnts - YouTube
+https://www.youtube.com/results?search_query=react+native+animated+carousel | react native animated carousel - YouTube
+https://www.youtube.com/watch?v=bcrjTTYpXsE&t=27s | Animated Carousel - React Native Reanimated - YouTube
+https://www.youtube.com/watch?v=55pP37NDP4c | Smart Developers Write Simple Code! - YouTube
+https://www.youtube.com/watch?v=11QsBdvcMqA | Rudy Discovers That Bobby Lee's A Veteran! | Bad Friends Clips - YouTube
+https://www.youtube.com/watch?v=Wm97HuR9uqI | 🛑 React Native Flip Animation - Day 6 (Reanimated) | In Hindi | Engineer Codewala - YouTube
+https://github.com/Gauravbhadauria/rnanimatedapp/blob/main/class/FlipCardAnimation.js | rnanimatedapp/class/FlipCardAnimation.js at main · Gauravbhadauria/rnanimatedapp
+
+https://github.com/neovim/neovim/blob/master/runtime/doc/news.txt | neovim/runtime/doc/news.txt at master · neovim/neovim
+
+https://reactnavigation.org/docs/typescript/ | Type checking with TypeScript | React Navigation
+https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/context/ | Context | React TypeScript Cheatsheets
+https://stackoverflow.com/questions/47924501/add-strong-typing-for-react-navigation-props | typescript - Add strong typing for react navigation props - Stack Overflow
+
+https://github.com/juniorforlife/react-native-animations/blob/master/src/animations/MomoHeader/MomoHeader.tsx#L94 | react-native-animations/src/animations/MomoHeader/MomoHeader.tsx at master · juniorforlife/react-native-animations
+
+https://www.reddit.com/r/FlutterDev/comments/1bs6240/how_to_publish_for_ios_mac_without_mac/ | How to publish for iOS/ Mac without Mac : r/FlutterDev
+https://www.reddit.com/r/FlutterDev/comments/1bs50df/please_explain_free_legal_ways_to_compile_ios/ | Please explain free, legal ways to compile iOS flutter app on Windows : r/FlutterDev
+
+https://www.google.com/search?q=react+native+scroll+animation+throtles+if+I+put+finger+on+the+list&oq=react+native+scroll+animation+throtles+if+I+put+finger+on+the+list&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQLhhA0gEJNDEzNzNqMGoxqAIAsAIA&sourceid=chrome&ie=UTF-8 | react native scroll animation throtles if I put finger on the list - Google Search
+https://stackoverflow.com/questions/59816218/how-to-solve-react-native-scroll-animation-issue-during-slow-scroll | How to solve React Native Scroll Animation issue during slow scroll? - Stack Overflow
+https://github.com/facebook/react-native/issues/14037 | [FlatList] onScroll's event is "stuttering" · Issue #14037 · facebook/react-native
+https://github.com/facebook/react-native/issues/38470 | Scrolling a 'moving' FlatList causes it to stutter or block scrolling completely on Android · Issue #38470 · facebook/react-native
+
+https://github.com/Sosotess93/klark-app-rn | Sosotess93/klark-app-rn: Klark app in RN
+
+https://www.google.com/search?q=react+native+RNSModalScreen+was+not+found++&sca_esv=fd6552c9c3fda5e1&sxsrf=ACQVn0-40bLrQEeGvJzHRuUlZo9kbPkKmA%3A1711570558579&ei=fn4EZsKAI8fhseMPlbyIoAg&ved=0ahUKEwjCt5uZoZWFAxXHcGwGHRUeAoQQ4dUDCBA&uact=5&oq=react+native+RNSModalScreen+was+not+found++&gs_lp=Egxnd3Mtd2l6LXNlcnAiK3JlYWN0IG5hdGl2ZSBSTlNNb2RhbFNjcmVlbiB3YXMgbm90IGZvdW5kICAyBxAhGAoYoAEyBxAhGAoYoAFIhpwBUM0KWNeVAXABeAGQAQCYAb4BoAGFNKoBBDAuNDO4AQPIAQD4AQGYAh-gAuclqAIUwgIHECMY6gIYJ8ICFBAAGIAEGOMEGOkEGOoCGLQC2AEBwgIWEAAYAxiPARjlAhjqAhi0AhiMA9gBAsICBBAjGCfCAgoQIxiABBiKBRgnwgILEAAYgAQYigUYkQLCAgoQABiABBiKBRhDwgILEAAYgAQYsQMYgwHCAgUQABiABMICChAuGIAEGIoFGEPCAgsQLhiABBjHARivAcICCBAuGIAEGNQCwgINEC4YgAQYxwEYrwEYCsICBxAAGIAEGArCAg0QLhiABBgKGMcBGK8BwgINEC4YChivARjHARiABMICBxAAGIAEGA3CAggQABiABBiiBMICDRAuGIAEGA0YxwEYrwHCAgYQABgeGA3CAggQABgIGB4YDcICCRAhGAoYoAEYCsICBhAhGAoYCpgDD-IDBRIBMSBAugYGCAEQARgBugYGCAIQARgLkgcGMS4yOS4xoAeM1QE&sclient=gws-wiz-serp | react native RNSModalScreen was not found - Google Search
+
+https://teletalk.com.bd/internet-offers?type=regular&count=yes | Teletalk Bangladesh Ltd - Internet Offers
+https://www.robi.com.bd/en/personal/internet/internet-packs?packageCategories=unlimited-packs | Best Internet Package | Experience Exclusive Deals
+
+https://buildui.com/courses/framer-motion-recipes/multistep-wizard | Multistep wizard - Framer Motion Recipes
+
+https://www.youtube.com/watch?v=xPbRsca_l7c | React Native Gesture Handler and Reanimated Tutorial - YouTube
+
+https://www.google.com/search?q=react+native+stack+card+animation&sca_esv=88c9e92b2887a8ac&sxsrf=ACQVn0_MeUq0icM5aOeaq9Ypz7381G-6kg%3A1711208565640&ei=dfj-ZfXFJvKfseMPiouB0A0&ved=0ahUKEwi11MPV3IqFAxXyT2wGHYpFANoQ4dUDCBA&uact=5&oq=react+native+stack+card+animation&gs_lp=Egxnd3Mtd2l6LXNlcnAiIXJlYWN0IG5hdGl2ZSBzdGFjayBjYXJkIGFuaW1hdGlvbjIHECEYChigATIHECEYChigATIHECEYChigAUj2JVD9A1iJJHAAeAGQAQCYAZgDoAHEIaoBCjAuMTMuMi4zLjK4AQPIAQD4AQGYAhSgAs8iwgIHECMYrgIYJ8ICCxAAGIAEGIoFGJECwgIKEAAYgAQYFBiHAsICBRAAGIAEwgIGEAAYFhgewgIFECEYoAGYAwDiAwUSATEgQJIHCjAuMTMuMS40LjKgB4hb&sclient=gws-wiz-serp | react native stack card animation - Google Search
+https://github.com/ridgeO/react-native-card-stack | ridgeO/react-native-card-stack: A Card Stack Component for React Native using Animated, PanResponder, and FlatList components.
+https://blog.stackademic.com/creating-a-3d-animated-flip-card-component-in-react-native-with-reanimated-d67ba35193af | Creating a 3D Animated Flip Card Component in React Native with Reanimated | by Giulio Milani | Stackademic
+https://docs.swmansion.com/react-native-gesture-handler/docs/gestures/pan-gesture | Pan gesture | React Native Gesture Handler
+https://docs.expo.dev/versions/latest/sdk/reanimated/ | Reanimated - Expo Documentation
+https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/your-first-animation/ | Your First Animation | React Native Reanimated
+https://www.google.com/search?q=carosel+animation+javascript&oq=carosel+animation+javascript&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQLhhA0gEINzY5N2owajSoAgCwAgE&sourceid=chrome&ie=UTF-8 | carousel animation javascript - Google Search
+
+https://www.reddit.com/r/reactnative/comments/1beplo6/we_made_a_light_fast_imageloading_library_for_rn/ | We made a light & fast image-loading library for RN : r/reactnative
+
+https://github.com/wincent/wincent/blob/main/aspects/dotfiles/files/.config/lf/pv.sh | wincent/aspects/dotfiles/files/.config/lf/pv.sh at main · wincent/wincent
+
+https://github.com/MunifTanjim/nui.nvim/tree/main/lua/nui/tree | nui.nvim/lua/nui/tree at main · MunifTanjim/nui.nvim
+https://www.youtube.com/watch?v=3QK-w3WWb0I | (1) TCP Packets In Vim and Golang - YouTube
+https://github.com/hasansujon786/neo-glance.nvim?tab=readme-ov-file | hasansujon786/neo-glance.nvim: Peek, jump and edit across your code in one place powered by LSP. Enhanced & refactored fork of glance.nvim
+https://luals.github.io/wiki/annotations/ | Lua Language Server | Wiki
+https://github.com/MunifTanjim/nui.nvim/wiki/nui.tree | nui.tree · MunifTanjim/nui.nvim Wiki
+https://www.youtube.com/ | YouTube
+https://github.com/jmbuhr/quarto-nvim-kickstarter/ | jmbuhr/quarto-nvim-kickstarter: A neovim configuration to get you up to speed
+https://www.youtube.com/shorts/SvRv6nk3tPs | You need to realize this.. - YouTube
+https://www.youtube.com/watch?v=UmzFk68Bwdk | Incredible scroll-based animations with CSS-only - YouTube
+https://www.google.com/search?q=lua+for+in+do+loop&oq=lua+for+in+do+loop&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQLhhA0gEINDk3NGowajGoAgCwAgA&sourceid=chrome&ie=UTF-8 | lua for in do loop - Google Search
+https://www.tutorialspoint.com/lua/lua_for_loop.htm | Lua - for Loop
+https://www.messenger.com/t/100004706926855 | Messenger
+
+https://www.youtube.com/watch?v=cf-J4ffMBfo | (1) Probably the most underrated (and useful) CSS feature - YouTube
+
+https://www.youtube.com/watch?v=uX2I19r_6NY&t=65s | (1) Production grade Flutter Architecture with Riverpod - YouTube
+
+https://easyfrontend.com/ | EasyFrontend | UI Component
+
+https://vim.fandom.com/wiki/Simplifying_regular_expressions_using_magic_and_no-magic | Simplifying regular expressions using magic and no-magic | Vim Tips Wiki | Fandom
+
+https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/detaching-a-fork | Detaching a fork - GitHub Docs
+
+https://www.youtube.com/watch?v=RBSGKlAvoiM | Data Structures Easy to Advanced Course - Full Tutorial from a Google Engineer - YouTube
+
+https://www.youtube.com/watch?v=8hly31xKli0 | (1) Algorithms and Data Structures Tutorial - Full Course for Beginners - YouTube
+https://www.youtube.com/watch?v=oBt53YbR9Kk | (1) Dynamic Programming - Learn to Solve Algorithmic Problems & Coding Challenges - YouTube
+
+https://github.com/Konfekt/vim-CtrlXA/blob/master/plugin/CtrlXA/toggles.vim | vim-CtrlXA/plugin/CtrlXA/toggles.vim at master · Konfekt/vim-CtrlXA
+
+https://www.youtube.com/watch?v=TTofjZIAKrc | Dynamically Generate Any widgets Flutter | Advanced concepts - YouTube
+https://www.youtube.com/watch?v=U7hi0F-j5j8 | NEW MOVIE TRAILERS 2024 (Action) | 4K ULTRA HD - YouTube
+https://wezfurlong.org/wezterm/config/lua/keyassignment/SwitchWorkspaceRelative.html?h=workspace+relative | SwitchWorkspaceRelative - Wez's Terminal Emulator
+https://github.com/yutkat/dotfiles/blob/main/.config/wezterm/keybinds.lua | dotfiles/.config/wezterm/keybinds.lua at main · yutkat/dotfiles · GitHub
+https://gist.github.com/gsuuon/5511f0aa10c10c6cbd762e0b3e596b71 | My styled wezterm config - just the relevant bits
+https://www.youtube.com/watch?v=m8C0Cq9Uv9o | The Only Video You Need to Get Started with Neovim - YouTube
+https://www.youtube.com/watch?v=mtjCgqyZ5wk | METATABLES | What are they and how can we use them? - YouTube
+https://www.youtube.com/watch?v=4k6Xgjqkad4 | They made React great again? - YouTube
+https://www.youtube.com/watch?v=c4l8e7pJCsA | A Week of Indie App Development - Creating a new app | Moodmonk Devlog #1 - YouTube
+https://www.youtube.com/watch?v=Ix6JoarGYiA | SOLID principles - write clean code in React.js app - YouTube
+https://github.com/ | GitHub
+
+https://github.com/DNLHC/glance.nvim | DNLHC/glance.nvim: A pretty window for previewing, navigating and editing your LSP locations
+https://github.com/ray-x/navigator.lua | ray-x/navigator.lua: Code analysis & navigation plugin for Neovim. Navigate codes like a breeze🎐 Exploring LSP and 🌲Treesitter symbols a piece of 🍰 Take control like a boss 🦍
+https://github.com/folke/zen-mode.nvim | folke/zen-mode.nvim: 🧘 Distraction-free coding for Neovim
+https://github.com/MunifTanjim/nui.nvim/tree/main/lua/nui/tree | nui.nvim/lua/nui/tree at main · MunifTanjim/nui.nvim
+https://github.com/folke/lazy.nvim | folke/lazy.nvim: 💤 A modern plugin manager for Neovim
+
+https://github.com/jmoon018/PacVim | jmoon018/PacVim
+
+https://www.reddit.com/r/neovim/comments/1b2bu63/open_floating_windows_on_go_to_definiton/ | Open floating windows on “go to definiton” : r/neovim
+https://www.reddit.com/r/tailwindcss/comments/1b2206e/tailwind_tools/ | Tailwind Tools : r/tailwindcss
+https://www.youtube.com/watch?v=Xqa6RqhMnd8&t=35s | Adam Sandler Chickened Out Of Talking To Paul McCartney | Conan O'Brien Needs A Friend - YouTube
+https://www.youtube.com/watch?v=jTU7AvJI3xE | AutoHotkey - Live Updating Context Menus / No Need to Reload Scripts - YouTube
+https://www.youtube.com/watch?v=7u97_w1eN0o | Should You Listen To Music While Programming? - YouTube
+https://www.youtube.com/watch?v=nqqmwRXSvrw | How To Finish Programming Projects - YouTube
+https://www.youtube.com/watch?v=UiYXwUg23Yw | How To Think Like A Programmer - Learn To Solve Problems! - YouTube
+https://github.com/junegunn/fzf?tab=readme-ov-file#layout | junegunn/fzf: :cherry_blossom: A command-line fuzzy finder
+https://www.google.com/search?q=game+girl+anime&sca_esv=f5ffd29b8bf133f7&sxsrf=ACQVn0938hbGGEMXLyxTGu-1_svJ5hQJ3Q%3A1709147967967&ei=P4ffZZXgOtGNseMPxLC62As&ved=0ahUKEwjV-_6r4M6EAxXRRmwGHUSYDrsQ4dUDCBE&uact=5&oq=game+girl+anime&gs_lp=Egxnd3Mtd2l6LXNlcnAiD2dhbWUgZ2lybCBhbmltZTIFEAAYgAQyBhAAGBYYHjIGEAAYFhgeMgYQABgWGB4yBhAAGBYYHjIGEAAYFhgeMgYQABgWGB4yBhAAGBYYHjIGEAAYFhgeMgYQABgWGB5Ii0NQAFjtP3ABeAGQAQGYAa0CoAGQHaoBCDAuMi4xNC4xuAEDyAEA-AEBmAIQoAKUG6gCEsICBxAjGOoCGCfCAhQQABiABBjjBBjpBBjqAhi0AtgBAcICChAjGIAEGIoFGCfCAgQQIxgnwgIKEAAYgAQYigUYQ8ICEBAAGIAEGIoFGEMYsQMYgwHCAgsQLhiABBiKBRiRAsICDhAAGIAEGIoFGJECGLEDwgIQEC4YgAQYigUYQxjHARjRA8ICChAuGIAEGIoFGEPCAhAQLhiABBiKBRhDGLEDGIMBwgIaEC4YgAQYigUYkQIYlwUY3AQY3gQY4ATYAQLCAgsQABiABBiKBRiRAsICCBAAGIAEGLEDwgILEC4YgAQYxwEYrwHCAgoQABiABBgUGIcCwgIFEC4YgATCAggQABgWGB4YD5gDHLoGBggBEAEYAboGBggCEAEYFJIHCDEuMS4xMy4x&sclient=gws-wiz-serp#ip=1 | game girl anime - Google Search
+https://www.google.com/search?q=anime+similar+to+mysterious+girlfriend+x&sca_esv=f5ffd29b8bf133f7&biw=1694&bih=986&sxsrf=ACQVn0-NCuDP6PQWO1ceoPjws62h-bKd5Q%3A1709148105318&ei=yYffZcCNE8_gseMPzrq5-AE&oq=anime+similar+to+misterious+&gs_lp=Egxnd3Mtd2l6LXNlcnAiHGFuaW1lIHNpbWlsYXIgdG8gbWlzdGVyaW91cyAqAggAMgcQABiABBgNMgYQABgWGB4yBhAAGBYYHjIGEAAYFhgeMgYQABgWGB4yBhAAGBYYHjIGEAAYFhgeMgsQABiABBiKBRiGAzILEAAYgAQYigUYhgMyCxAAGIAEGIoFGIYDSJWiAVAAWLmQAXALeAGQAQCYAeABoAGXNKoBBzAuMjMuMTG4AQPIAQD4AQGYAi2gArA4wgIEECMYJ8ICChAjGIAEGIoFGCfCAgsQABiABBiKBRiRAsICFhAuGIAEGIoFGEMYsQMYgwEYxwEY0QPCAggQABiABBixA8ICCxAAGIAEGLEDGIMBwgIIEC4YgAQYsQPCAhEQABiABBiKBRiRAhixAxiDAcICChAAGIAEGIoFGEPCAgoQLhiABBiKBRhDwgINEAAYgAQYigUYQxixA8ICDhAAGIAEGIoFGJECGLEDwgIFEAAYgATCAgoQABiABBgUGIcCwgIKEAAYgAQYRhj7AcICFhAAGIAEGEYY-wEYlwUYjAUY3QTYAQHCAgwQABiABBgKGEYY-wHCAgcQABiABBgKwgIYEAAYgAQYChhGGPsBGJcFGIwFGN0E2AEBwgIFECEYoAGYAwC6BgYIARABGBOSBwcxMS45LjI1&sclient=gws-wiz-serp#ip=1&wxpd=browse:true | anime similar to mysterious girlfriend x - Google Search
+https://www.reddit.com/r/anime/comments/w23vw4/can_anyone_recommend_anime_like_mysterious/ | can anyone recommend anime like mysterious girlfriend x : r/anime
+https://www.anime-planet.com/anime/mysterious-girlfriend-x/recommendations | 10 Anime Like Mysterious Girlfriend X | Anime-Planet
+https://anibrain.ai/recommender/anime/12467 | Anime Like Mysterious Girlfriend X | AniBrain
+https://myanimelist.net/anime/12467/Nazo_no_Kanojo_X/userrecs | Nazo no Kanojo X (Mysterious Girlfriend X) - Recommendations - MyAnimeList.net
+https://www.anime-planet.com/manga/mysterious-girlfriend-x/recommendations | 10 Manga Like Mysterious Girlfriend X | Anime-Planet
+https://playerassist.com/similar-anime-like-mysterious-girlfriend-x-nazo-no-kanojo-x-recommendations/ | 7 Anime Like Mysterious Girlfriend X [Nazo no Kanojo X] [Recommendations] | Player Assist | Game Guides & Walkthroughs
+https://guessanime.com/anime-like-mysterious-girlfriend-x | Top 10 Anime Like Mysterious Girlfriend X [2024 List] | GuessAnime
+https://github.com/mjbrownie/swapit | mjbrownie/swapit: vim plugin: Extensible Keyword Swapper
+https://www.messenger.com/t/100004706926855 | Messenger
+
+https://github.com/mobily/.nvim/blob/main/lua/pickers/mind.lua | .nvim/lua/pickers/mind.lua at main · mobily/.nvim
+https://github.com/Zeioth/garbage-day.nvim | Zeioth/garbage-day.nvim: Garbage collector that stops inactive LSP clients to free RAM
+
+https://www.youtube.com/ | YouTube
+https://www.youtube.com/watch?v=XHSiMSEE2S8 | The Problem with Next.js - YouTube
+https://www.youtube.com/watch?v=kAtSWu9QOfo | People Really Like This New Component - YouTube
+https://www.youtube.com/watch?v=zFFuV_vXNhY | A simple mistake that can screw up your light/dark theme (and how to fix it) - YouTube
+https://www.youtube.com/watch?v=wIuVvCuiJhU | world's shortest UI/UX design course - YouTube
+https://www.youtube.com/watch?v=AK2JE2YsKto | YouTube
+https://www.youtube.com/watch?v=ayL4A9WHvgw | Moon King & Agent Orange w/ Yannis Pappas | Ep 177 | Bad Friends - YouTube
+https://www.youtube.com/watch?v=nCS4BtJ34-o&t=397s | 12 GREAT command line programs YOU recommended! - YouTube
+
+https://lasso.ink/pedro | Pedro Araujo | Portfolio
+
+https://www.reddit.com/r/vuejs/comments/1axwewn/feedback_is_welcomed/ | Reddit - Dive into anything
+https://dystroy.org/blog/from-terminator-to-wezterm/ | From Terminator To Wezterm
+https://www.reddit.com/r/neovim/comments/1axs71c/how_do_i_delete_a_file_entry_in_harpoon/ | Reddit - Dive into anything
+https://www.youtube.com/watch?v=1y0NGhe-vn8 | From Debate To Disrespect: The Evolution Of Podcast Culture - YouTube
+https://www.youtube.com/watch?v=RPa3_AD1_Vs | This UI component library is mind-blowing - YouTube
+
+https://pub.dev/publishers/wolt.com/packages | Packages of publisher wolt.com
+
+https://www.reddit.com/r/neovim/comments/1aupy8c/a_simple_journaling_system_built_with_mind_and/ | Reddit - Dive into anything
+https://www.youtube.com/watch?v=eArZbWLP90I | KILL TONY #553 - JESSIE JOHNSON - YouTube
+https://github.com/mobily/.nvim?tab=readme-ov-file | mobily/.nvim
+https://github.com/natecraddock/workspaces.nvim | natecraddock/workspaces.nvim: a simple plugin to manage workspace directories in neovim
+https://www.youtube.com/watch?v=s2ThIxm7FyA | Improve your form validation hints without JS! - YouTube
+
+https://tailwindcss.com/docs/hover-focus-and-other-states#indeterminate | Handling Hover, Focus, and Other States - Tailwind CSS
+https://www.youtube.com/results?search_query=5+ways+to+center+a+div | 5 ways to center a div - YouTube
+https://www.messenger.com/t/100004706926855 | Messenger
+https://www.reddit.com/r/neovim/comments/1aupy8c/a_simple_journaling_system_built_with_mind_and/ | (3) A simple journaling system built with Mind and Telescope : neovim
+https://www.google.com/search?q=vimv&oq=vimv&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQLhhA0gEIMTU3NWowajGoAgCwAgA&sourceid=chrome&ie=UTF-8 | vimv - Google Search
+https://github.com/thameera/vimv | thameera/vimv: Batch-rename files using Vim
+https://github.com/dmulholl/vimv | dmulholl/vimv: A command line utility for batch-renaming files.
+https://community.chocolatey.org/packages?q=vimv | Chocolatey Software | Packages matching vimv
+http://127.0.0.1:8080/array.html | 127.0.0.1:8080/array.html
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice | Array.prototype.splice() - JavaScript | MDN
+
+https://help.fiverr.com/hc/en-us/articles/4410883326481-Gig-image-guidelines-Making-the-most-of-your-Gig-image | Gig image guidelines: Making the most of your Gig image – Fiverr Help Center
+https://www.reddit.com/r/neovim/ | (2) Neovim
+https://github.com/2KAbhishek/termim.nvim | 2KAbhishek/termim.nvim: Neovim Terminal, Improved 🦾💻
+https://www.reddit.com/r/neovim/comments/1atjo16/cool_shortcuts_to_become_a_neovim_wizard/ | Reddit - Dive into anything
+https://github.com/folke/which-key.nvim | folke/which-key.nvim: 💥 Create key bindings that stick. WhichKey is a lua plugin for Neovim 0.5 that displays a popup with possible keybindings of the command you started typing.
+https://www.youtube.com/watch?v=irjZZtjF2pk | (2) my artsy & productive home office. - YouTube
+https://github.com/aaditeynair/termnames.nvim | aaditeynair/termnames.nvim: A simple plugin that adds names to terminals
+https://user-images.githubusercontent.com/85427178/224555211-99160423-dbd6-4df5-a8dd-7d3e8b1592c1.png | 224555211-99160423-dbd6-4df5-a8dd-7d3e8b1592c1.png (1920×1080)
+https://github.com/2KAbhishek/ | 2KAbhishek (Abhishek Keshri)
+https://www.youtube.com/watch?v=x-Zy1khsceY | Conan Delivers Matt Gourley’s Belated Birthday Gift | Conan O'Brien Needs A Friend - YouTube
+https://www.google.com/search?q=choco+install+anydesk&oq=choco+install+anydesk&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQLhhA0gEINDU1N2owajGoAgCwAgA&sourceid=chrome&ie=UTF-8 | choco install anydesk - Google Search
+
+https://www.startech.com.bd/vention-cqmhg-usb2-magnetic-cable | VENTION CQMHG USB2.0 Magnetic Cable Price In Bangladesh | Star Tech
+https://www.startech.com.bd/vention-cqmhh-usb2-2m-magnetic-cable | VENTION CQMHH USB2.0 2M Magnetic Cable Price In Bangladesh | Star Tech
+https://www.ryanscomputers.com/vention-usb-male-to-usb-type-c-micro-usb-male-1.5-meter-black-gray-cable | Vention USB Male to USB Type-C & Micro USB Male, 1.5 Meter USB Cable | RYANS
+https://www.ryanscomputers.com/baseus-usb-male-to-micro-usb-black-2-meter-magnetic-charging-and-data-cable | Baseus Zinc Magnetic Cable USB Cable Price in BD| RYANS
+
+https://www.hover.dev/ | Animated UI Components for React and TailwindCSS | Hover.dev
+https://www.reddit.com/r/reactjs/comments/1aqanoj/react_builder_pattern_what_am_i_missing/ | (3) React builder pattern - what am I missing? : reactjs
+
+https://www.google.com/search?q=is+it+good+to+name+a+movie+with+the+character+name&oq=is+it+good+to+name+a+movie+with+the+character+name&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQLhhA0gEJMzc1MzJqMGoxqAIAsAIA&sourceid=chrome&ie=UTF-8 | is it good to name a movie with the character name - Google Search
+https://notlefthandedfilmguide.co.uk/2014/08/02/when-is-it-actually-okay-to-name-your-film-after-the-main-character/ | When is it actually okay to name your film after the main character? – The Not Left Handed Film Guide
+https://www.youtube.com/ | YouTube
+https://www.youtube.com/watch?v=S37uRvBr65k | Oh, Auth Doesn't Have to Suck? - YouTube
+https://www.youtube.com/watch?v=qqrpMRDuPfc | Godzilla x Kong: The New Empire | Official Trailer 2 - YouTube
+https://www.youtube.com/watch?v=IeJJsvN7_cM | Dawson's Creek | Dawson's Creek Gets Steamy | Throwback TV - YouTube
+https://www.youtube.com/watch?v=6gwF8mG3UUY | Why I Use Golang In 2024 - YouTube
+https://www.youtube.com/watch?v=EQdeHNWf-0I | When Your Student Writes a Story About Having Sex with You - Amy Silverberg - Stand-Up Featuring - YouTube
+https://github.com/rebelot/heirline.nvim | rebelot/heirline.nvim: Heirline.nvim is a no-nonsense Neovim Statusline plugin designed around recursive inheritance to be exceptionally fast and versatile.
+https://github.com/rebelot/heirline.nvim/blob/master/cookbook.md | heirline.nvim/cookbook.md at master · rebelot/heirline.nvim
+https://github.com/rebelot/heirline.nvim/blob/master/cookbook.md#git | heirline.nvim/cookbook.md at master · rebelot/heirline.nvim
+
+http://10.16.100.244/player.php?play=34907 | ICC FTP SERVER
+
+https://www.autohotkey.com/docs/v2/scripts/index.htm#WinLIRC | Script Showcase | AutoHotkey v2
+https://www.reddit.com/r/neovim/comments/1alf2ua/help_me_recreate_a_workflow_from_vs_code_search/ | Reddit - Dive into anything
+https://www.reddit.com/r/neovim/comments/1alv3yl/the_order_of_autocompletion_menu_using_cmp/ | Reddit - Dive into anything
+https://www.youtube.com/watch?v=S0iFBfa1ggk | Stuck in a Death Bus Time Loop, They Did 3,705 Times to Save Every Passenger - YouTube
+https://www.youtube.com/watch?v=ANCm3oG7htM | 10 JavaScript changes you missed in 2023 - YouTube
+https://www.youtube.com/watch?v=mrFRvxFE0os | Function vs object constructor function in JavaScript #javascript #constructor #js - YouTube
+http://172.16.50.12/SAM-FTP-12/TV-WEB-Series/TV%20Series%20%E2%99%A5%20%20A%20%20%E2%80%94%20%20L/Full%20House%20%28TV%20Series%201987%E2%80%931995%29%20720p/Season%201/ | Season 1 - 172.16.50.12 > SAM-FTP-12 > TV-WEB-Series > TV Series ♥ A — L > Full House (TV Series 1987–1995) 720p > Season 1
+https://www.fluttericon.com/ | FlutterIcon - Flutter custom icons generator
+https://www.google.com/search?q=flutter+material+effect&oq=flutter+material++effect&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQLhhA0gEINzc5OWowajGoAgCwAgA&sourceid=chrome&ie=UTF-8 | flutter material effect - Google Search
+https://docs.flutter.dev/cookbook/gestures/ripples | Add Material touch ripples | Flutter
+https://www.youtube.com/watch?v=VBEyAppUCzc | Flutter ripple effect on Custom widget - YouTube
+https://www.youtube.com/watch?v=3nllrCss2CU | If Women Had "Hubby-Vision" - YouTube
+https://www.youtube.com/watch?v=zkFZWqB4zic | Anna Kendrick being a natural comedian for 3 minutes straight - YouTube
+https://www.youtube.com/watch?v=RBHjs84evZU | [ENG SUB] Reset 01 (Jingting Bai , Jinmai Zhao) | 开端 - YouTube
+
+https://github.com/NStefan002/2048.nvim | NStefan002/2048.nvim: Play 2048 inside your favourite editor
+
+http://172.16.50.12/SAM-FTP-12/TV-WEB-Series/TV%20Series%20%E2%99%A5%20%20A%20%20%E2%80%94%20%20L/Full%20House%20%28TV%20Series%201987%E2%80%931995%29%20720p/Season%201/ | Season 1 - 172.16.50.12 > SAM-FTP-12 > TV-WEB-Series > TV Series ♥ A — L > Full House (TV Series 1987–1995) 720p > Season 1
+
+https://www.youtube.com/watch?v=wFn-m-OgKPU&list=PL6yRaaP0WPkVtoeNIGqILtRAgd3h2CNpT&index=9 | (2) Chapter 8 - Project Setup - Free Flutter Course 💙 - YouTube
+https://www.youtube.com/watch?v=uXmOKTPsxOk&list=PL6yRaaP0WPkUf-ff1OX99DVSL1cynLHxO | (2) Intro - Flutter State Management Course 💙 - YouTube
+
+https://www.youtube.com/watch?v=1Z5CXLXQru0&list=PLbUhHAbyGhZjvbTKaaE-tcAjKQS6IcQba&index=2 | (2) ৯ম শ্রেণি গণিত | প্রাত্যহিক জীবনে সেট,পর্ব-২ | class 9 math solution 2024 | class 9 math page 6 & 7 - YouTube
+https://www.schoolmathbd.com/p/ssc-general-math-solution.html | নবম-দশম শ্রেণির সাধারন গনিত সমাধান-SSC/9-10 General Math Solution - School Math BD
+https://bn.quora.com/%E0%A6%AE%E0%A7%82%E0%A6%B2%E0%A6%A6-%E0%A6%B8%E0%A6%82%E0%A6%96%E0%A7%8D%E0%A6%AF%E0%A6%BE-%E0%A6%93-%E0%A6%85%E0%A6%AE%E0%A7%82%E0%A6%B2%E0%A6%A6-%E0%A6%B8%E0%A6%82%E0%A6%96%E0%A7%8D%E0%A6%AF%E0%A6%BE | মূলদ সংখ্যা ও অমূলদ সংখ্যা কাকে বলে? - Quora
+
+https://www.reddit.com/r/reactnative/comments/1afk9o3/im_ditching_my_react_native_ui_library_rn/ | (2) I'm ditching my React Native UI library (RN Elements) and switching to generic components using StyleSheet. I would love feedback on my Button component before moving onto others. : reactnative
+https://www.reddit.com/r/reactnative/comments/1afq9eg/infinite_swiping_weeks/ | (1) Infinite swiping weeks : reactnative
+https://www.reddit.com/r/learnprogramming/comments/1afgd2f/bottomup_vs_topdown_cs_education/ | (2) Bottom-up vs Top-down CS Education : learnprogramming
+https://github.com/mitchkoko/ModernLoginUI/blob/main/lib/components/square_tile.dart | ModernLoginUI/lib/components/square_tile.dart at main · mitchkoko/ModernLoginUI
+https://dev.to/leehack/build-a-flutter-theme-switch-with-riverpod-19k7 | Build a flutter theme switcher with riverpod - DEV Community
+https://dev.to/amatisse/explore-the-best-vscode-themes-for-a-stylish-coding-experience-5e0b? | Explore the Best VSCode Themes for a Stylish Coding Experience 🌈 - DEV Community
+
+https://medium.com/@andrei_diaconu/it-beginner-series-javascript-if-else-exercises-cfc5d65b6f94#id_token=eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg1ZTU1MTA3NDY2YjdlMjk4MzYxOTljNThjNzU4MWY1YjkyM2JlNDQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIyMTYyOTYwMzU4MzQtazFrNnFlMDYwczJ0cDJhMmphbTRsamRjbXMwMHN0dGcuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIyMTYyOTYwMzU4MzQtazFrNnFlMDYwczJ0cDJhMmphbTRsamRjbXMwMHN0dGcuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDE4MjQ0MTA4NzA3MDYzNDQ0MDIiLCJlbWFpbCI6Imhhc2Fuc3Vqb243ODZAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5iZiI6MTcwNjY4MTE5NiwibmFtZSI6Imhhc2FuIHN1am9uIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0ptQy1VNlFFS1FPSnRReFh1VmpkdDZwWVBha1BQTUxYLUpWWUFid3ZvcXRIeFA9czk2LWMiLCJnaXZlbl9uYW1lIjoiaGFzYW4iLCJmYW1pbHlfbmFtZSI6InN1am9uIiwibG9jYWxlIjoiZW4iLCJpYXQiOjE3MDY2ODE0OTYsImV4cCI6MTcwNjY4NTA5NiwianRpIjoiMmEwZTQ3NGJlODI1Yjk4ZjQyOWZmMWExODcwY2Y2MTAxMjExYTBhMiJ9.JoflYa60MqKWx0IbuRyoDUQW1uJpQEXFbc_ufnkaTGSrz0HZhAWbf24ifnbe7O-O_OkgbonKdPvVW0Hh9kceyjKGEa68Pu_X4jZw4Y_5hq4eCx3Vo8lGtGjPZL8e9ajvGqA4ptyUj-Oho0hjKWy4EeT1JKlzTr5JUK-8j7ro42ee6BT0KWJCYHhC0Kz_Y0xbLOSlPTpCykc5dHI3qzNeQGCB1nJT7UJkYWdvO_BO6lfE6GeWfyuVzPIsQ7Gjdn59ipMVpfS71GYDBbt0ikCdXWHwO445tzffhhwJ8h1bokmeQT3BeutCIUO44sggA6YA7xiKGO4kJ5vSCmrEUVCsXg | IT Beginner Series: JavaScript IF/ELSE Exercises (2) | by Andrei Diaconu | Medium
+
+https://github.com/Asabeneh/30-Days-Of-JavaScript/blob/master/04_Day_Conditionals/04_day_conditionals.md | 30-Days-Of-JavaScript/04_Day_Conditionals/04_day_conditionals.md at master · Asabeneh/30-Days-Of-JavaScript
+
+https://contactmentor.com/js-loop-exercises-solutions/ | 17 JavaScript for/while loop exercises with solutions – Contact Mentor
+
+https://www.youtube.com/results?search_query=how+to+pronounce+tour | (1) how to pronounce tour - YouTube
+https://www.youtube.com/watch?v=1OLSE6tX71Y | Understand Clean Architecture in 7 Minutes - YouTube
+https://www.youtube.com/watch?v=zCBYlnMMFLE | How to pronounce TOUR in British English - YouTube
+https://www.youtube.com/watch?v=i_Fukw-1qY0 | How to pronounce TOUR in American English - YouTube
+https://www.youtube.com/watch?v=XCeSg5H720s | How to Pronounce Tour? (CORRECTLY) - YouTube
+https://www.youtube.com/shorts/gUg26zFuF6o | How to pronounce: our, Hour, Four, Sour, Tour, Your, FLour - YouTube
+https://www.youtube.com/shorts/pPEkqn9ccjc | Most Commonly Mispronounced Words In India - YouTube
+https://www.youtube.com/shorts/bmlVrYQpkF0 | How to Pronounce SCHEDULE | American English pronunciation - YouTube
+https://www.youtube.com/watch?v=h9tcMFPT0zY | How to Pronounce Tour, Touring, Ruin and Ruining - YouTube
+
+http://172.16.50.12/SAM-FTP-12/TV-WEB-Series/TV%20Series%20%E2%99%A6%20%20S%20%20%E2%80%94%20%20Z/Stranger%20Things%20%28TV%20Series%202016%E2%80%93%20%29%201080p%20%5BDual%20Audio%5D/Season%2001/ | Season 01 - 172.16.50.12 > SAM-FTP-12 > TV-WEB-Series > TV Series ♦ S — Z > Stranger Things (TV Series 2016– ) 1080p [Dual Audio] > Season 01
+https://www.youtube.com/watch?v=Vl9BfkdFouo&list=WL&index=1 | (1) 5 Developer Essentials | Day in the Life of a Software Engineer - YouTube
+https://www.messenger.com/t/6313061672122858 | Messenger
+https://www.dbestech.com/tutorials/riverpod-clean-architecture-course-with-source-code | Flutter Riverpod Clean Architecture Course
+https://www.dbestech.com/tutorials/riverpod-folder-structure-clean-architecture | Riverpod Folder Structure | Clean Architecture
+https://www.dbestech.com/tutorials/flutter-multi-vendor-app-installation-guide | Flutter Multi Vendor App Installation Guide
+
+https://www.reddit.com/r/FlutterDev/comments/19b5dzi/seeking_insight_what_are_your_biggest_pain_points/ | (2) Seeking Insight: What are your biggest pain points in mobile dev? : FlutterDev
+https://www.reddit.com/r/reactnative/comments/19b3w3c/seeking_insight_what_are_your_biggest_pain_points/ | (2) Seeking Insight: What are your biggest pain points in mobile dev? : reactnative
+https://www.reddit.com/r/resumes/comments/19akpuh/25_internship_applications_no_response_yet_what/ | (2) 25+ internship applications no response yet, what can I change or does the market really hates me . : resumes
+
+https://www.reddit.com/r/reactjs/comments/19atftc/any_improvements_to_my_fe_tech_stack/ | Any improvements to my FE tech stack? : reactjs
+https://www.reddit.com/r/resumes/comments/19akpuh/25_internship_applications_no_response_yet_what/ | Reddit - Dive into anything
+https://www.reddit.com/r/FlutterDev/comments/19b5dzi/seeking_insight_what_are_your_biggest_pain_points/ | Seeking Insight: What are your biggest pain points in mobile dev? : FlutterDev
+https://www.reddit.com/r/reactnative/comments/19b3w3c/seeking_insight_what_are_your_biggest_pain_points/ | Seeking Insight: What are your biggest pain points in mobile dev? : reactnative
+
+https://github.com/jmbuhr/otter.nvim | jmbuhr/otter.nvim: Just ask an otter! 🦦
+
+https://www.youtube.com/watch?v=KGJV0n70Mxs | Ultimate Neovim Config | 2024 | Launch.nvim - YouTube
+https://github.com/HakonHarnes/img-clip.nvim | HakonHarnes/img-clip.nvim: Effortlessly embed images into any markup language, like LaTeX, Markdown or Typst.
+https://www.reddit.com/r/neovim/ | Neovim
+https://github.com/max397574/better-escape.nvim | max397574/better-escape.nvim: Escape from insert mode without delay when typing
+https://www.youtube.com/watch?v=MYxAA0C9RLQ | (1) Classroom of the Elite Season 3 - Episode 03 [English Sub] - YouTube
+https://www.youtube.com/ | YouTube
+https://www.youtube.com/watch?v=8STVRP_X0AY | (1) Why #Flutter uses Dart? - YouTube
+https://aniwave.to/watch/monogatari-series-second-season-bluray.y9m0/ep-1 | Watch Monogatari Series: Second Season Bluray Online in HD - Aniwave
+https://aniwave.to/watch/the-fruit-of-grisaia.0rv5/ep-1 | Watch The Fruit of Grisaia Anime Online | Aniwave
+https://aniwave.to/watch/xxxholic.9230/ep-1 | Watch xxxHOLiC in HD Online for Free - Aniwave
+
+https://www.youtube.com/watch?v=ob1jHhP7GS0 | This is What A Terrible Anime Looks Like - YouTube
+https://www.youtube.com/results?search_query=best+ecchi+anime | best ecchi anime - YouTube
+https://www.youtube.com/watch?v=5sK1v9ubff0 | Best Ecchi / Harem Anime of 2023 - YouTube
+https://www.youtube.com/watch?v=XPq7M3OBYUs | Top 10 Uncensored Ecchi Anime That You Should Watch Alone! - YouTube
+https://www.youtube.com/watch?v=PzK1jTnI0GI | Top 10 Ecchi Anime That You Need to Watch Alone - YouTube
+https://www.google.com/search?q=best+etchi+anime&oq=best+etchi+anime&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQLhhA0gEJMTAxMDBqMGoxqAIAsAIA&sourceid=chrome&ie=UTF-8 | best etchi anime - Google Search
+
+https://www.youtube.com/@JazlynShannon-tb7dx | Jazlyn Shannon - YouTube
+
+https://www.youtube.com/@vdqfutushxht-hp8dx | vdqfu tushxht - YouTube
+
+http://172.16.50.14/SAM-FTP-14/English%20Movies%20%281080p%29/ | English Movies (1080p) - 172.16.50.14 > SAM-FTP-14 > English Movies (1080p)
+https://aniwave.to/watch/relife.yk0/ep-9 | Anime ReLIFE Watch Online Free - Aniwave
+https://www.youtube.com/watch?v=gKMIwfpZ_Yo&list=WL&index=286&t=15s | Beautiful High School Girl REJECTS Boy And Immediately REGRETS It - YouTube
+https://www.youtube.com/watch?v=CBYhVcO4WgI&list=WL&index=80 | Lecture 1 - How to Start a Startup (Sam Altman, Dustin Moskovitz) - YouTube
+
+https://www.linkedin.com/jobs/view/3788294258/ | (6) Frontend Developer(Vue JS) | TechCare Inc. | LinkedIn
+
+https://99grid.com/products/grid-cable-tray-managment?utm_content=Facebook_UA&utm_source=facebook&variant=44456618787106 | GRID Cable Managment Tray – GRID Furniture
+
+https://www.facebook.com/events/1092885191714423/?ref=newsfeed | BDCyclists Bike Friday 466 | Facebook
+
+https://github.com/dart-lang/dart_style | dart-lang/dart_style: An opinionated formatter/linter for Dart code
+https://dart.dev/effective-dart/design#dont-annotate-inferred-parameter-types-on-function-expressions | Effective Dart: Design | Dart
+
+https://github.com/mskelton | mskelton (Mark Skelton)
+https://github.com/jose-elias-alvarez | jose-elias-alvarez (Jose Alvarez)
+
+https://www.google.com/search?q=%40react-navigation%2Fnative+deep+linking&oq=%40react-navigation%2Fnative+deep+linking&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRg6MgYIAhAuGEDSAQgzNDY2ajBqMagCALACAA&sourceid=chrome&ie=UTF-8#ip=1 | @react-navigation/native deep linking - Google Search
+https://reactnavigation.org/docs/deep-linking | Deep linking | React Navigation
+https://developer.android.com/training/app-links | Handling Android App Links  |  Android Developers
+https://docs.expo.dev/guides/deep-linking/ | Deep linking - Expo Documentation
+https://www.reddit.com/r/reactnative/comments/z74vud/how_to_do_deferred_deep_linking_in_react_native/ | (2) How to do Deferred Deep Linking in React Native ? : reactnative
+https://www.npmjs.com/package/@react-native-firebase/dynamic-links | @react-native-firebase/dynamic-links - npm
+https://help.branch.io/developers-hub/docs/android-sdk-overview | Android SDK
+
+https://get.freecoursesonline.me/code-with-andrea-flutter-foundations-course-complete-package/ | Download [Code With Andrea] Flutter Foundations Course - Complete Package Free Online Course Videos Torrent | [FCO] FreeCoursesOnline.Me
+https://get.freecoursesonline.me/fireship-firebase-security-course/ | Download [FireShip] Firebase Security Course Free Online Course Videos Torrent | [FCO] FreeCoursesOnline.Me
+
+https://courseclub.me/tutsplus-put-javascript-design-patterns-into-practice/ | [TutsPlus] Put JavaScript Design Patterns Into Practice Free Download
+
+https://berkeleygraphics.com/typefaces/berkeley-mono/ | Berkeley Graphics - Berkeley Mono Typeface
+
+https://www.movied.link/2023/08/poran-720px-hd-video.html | পরাণ সিনেমা ডাউনলোড লিংক - Poran Movie Download Link [720px] HD Video - movied.link
+
+https://www.dailymotion.com/video/x8pi7gb | Calling Bell (2023) | কলিংবেল (২০২৩) - video Dailymotion
+
+https://www.bioscopelive.com/ | BIOSCOPE | Bioscope Live TV - Watch LiveTV on Bioscope
+
+https://bdlan.net/ | BDLan
+
+https://github.com/danielcopper/wezterm-session-manager?tab=readme-ov-file | danielcopper/wezterm-session-manager
+
+https://www.joshmedeski.com/posts/more-fun-in-the-terminal-with-wezterm/ | More fun in the terminal with Wezterm! | Josh Medeski
+
+https://play.google.com/store/apps/details?id=com.fluttershark.fluttersharkapp&hl=en&gl=US | FlutterShark: Flutter App Info - Apps on Google Play
+
+https://pub.dev/packages/uni_links | uni_links | Flutter Package
+
+https://www.reddit.com/r/neovim/comments/18dj5xb/json_schemas_in_neovim/ | (2) JSON Schemas in Neovim : neovim
+https://www.arthurkoziel.com/json-schemas-in-neovim/ | JSON Schemas in Neovim
+
+https://www.reddit.com/r/dankrishu/comments/18dm3g0/it_is_what_it_is/ | (2) It is what it is .... : dankrishu
+
+https://www.pornhub.com/view_video.php?viewkey=ph58d29ad3ca89d | ❤️ExxxtraSmall - Teen Dominated by Tall Busty Redhead with Strapon - Pornhub.com
+
+https://cygwin.com/packages/summary/tmux.html | Cygwin Package Summary for tmux
+https://superuser.com/questions/713538/how-can-i-install-tmux-in-cygwin | windows 7 - How can I Install Tmux in Cygwin? - Super User
+
+https://www.youtube.com/watch?v=B8Sx7wGiY-s | Flutter, Firebase & Riverpod Master Class - Build a COMPLETE Reddit Clone App - YouTube
+https://github.com/theHamsta/nvim-dap-virtual-text | theHamsta/nvim-dap-virtual-text
+https://www.youtube.com/watch?v=ga3Cas7vNCk | Neovim Plugin: nvim-dap - YouTube
+https://www.youtube.com/watch?v=lEMZnrC-ST4 | [Neovim] Debugging with NVIM-DAP - YouTube
+https://www.youtube.com/watch?v=Ul_WPhS2bis | I FINALLY configured nvim-dap to debug Node.js apps!!! - YouTube
+https://github.com/nikolovlazar/dotfiles/blob/main/.config/nvim/lua/plugins/dap.lua | dotfiles/.config/nvim/lua/plugins/dap.lua at main · nikolovlazar/dotfiles
+https://github.com/Joakker/lua-json5 | Joakker/lua-json5: A json5 parser for luajit
+https://www.google.com/search?q=next+js+app+launch+json&oq=next+js+app+launch+json&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQLhhA0gEINzg5N2owajSoAgCwAgA&sourceid=chrome&ie=UTF-8 | next js app launch json - Google Search
+https://nextjs.org/docs/pages/building-your-application/configuring/debugging | Configuring: Debugging | Next.js
+https://www.google.com/search?q=NODE_OPTIONS%3D%27--inspect%27+tarting+inspector+on+127.0.0.1%3A9229+failed%3A+address+already+in+use&sca_esv=589042230&sxsrf=AM9HkKmTBFATh6OIl8gbqmbJfuCruYK1qQ%3A1702030484951&ei=lOxyZd_UOdWX4-EPie2HKA&ved=0ahUKEwjf7s7Tzf-CAxXVyzgGHYn2AQUQ4dUDCBA&uact=5&oq=NODE_OPTIONS%3D%27--inspect%27+tarting+inspector+on+127.0.0.1%3A9229+failed%3A+address+already+in+use&gs_lp=Egxnd3Mtd2l6LXNlcnAiW05PREVfT1BUSU9OUz0nLS1pbnNwZWN0JyB0YXJ0aW5nIGluc3BlY3RvciBvbiAxMjcuMC4wLjE6OTIyOSBmYWlsZWQ6IGFkZHJlc3MgYWxyZWFkeSBpbiB1c2UyBRAAGIAEMgQQABgeMgsQABiABBiKBRiGAzILEAAYgAQYigUYhgNImhNQkgFYvQ5wAXgBkAEAmAG9AaABvQGqAQMwLjG4AQPIAQD4AQH4AQLCAgoQABhHGNYEGLAD4gMEGAAgQYgGAZAGCA&sclient=gws-wiz-serp | NODE_OPTIONS='--inspect' tarting inspector on 127.0.0.1:9229 failed: address already in use - Google Search
+https://lightrun.com/answers/vercel-next-js-cannot-start-node-inspector-address-already-in-use | Cannot start node inspector: "address already in use"
+https://v2.nuxt.com/docs/get-started/installation/ | Nuxt 2 - Installation
+https://nextjs.org/docs/pages/building-your-application/routing/api-routes | Routing: API Routes | Next.js
+
+https://www.flutterlibrary.com/ | Flutter App Templates, components, and widgets
+
+https://gigacourse.com/15-basic-english-grammar-and-structures/ | Basic English Grammar And Structures Download Free
+https://gigacourse.com/complete-english-course-learn-english-language-beginners/ | Complete English Course: Learn English Language | Beginners Download Free
+https://gigacourse.com/real-life-english-fluency-plan-for-intermediate-to-advanced/ | Real-Life English Fluency Plan for Intermediate to Advanced Download Free
+
+https://www.youtube.com/watch?v=YMAwgRwjEOQ | (1) 5 Design Patterns That Are ACTUALLY Used By Developers - YouTube
+
+https://docs.flutter.dev/ui/layout | Layouts in Flutter | Flutter
+
+https://www.reddit.com/r/FlutterDev/comments/18ay65m/reclaimify_my_first_flutter_app/ | (1) Reclaimify - My First Flutter App : FlutterDev
+
+https://www.youtube.com/watch?v=B8Sx7wGiY-s | (1) Flutter, Firebase & Riverpod Master Class - Build a COMPLETE Reddit Clone App - YouTube
+
+https://www.edclub.com/sportal/ | Dashboard - EdClub
+https://m3.material.io/styles/motion/easing-and-duration/applying-easing-and-duration | Easing and duration – Material Design 3
+
+https://www.youtube.com/watch?v=B8Sx7wGiY-s | (1) Flutter, Firebase & Riverpod Master Class - Build a COMPLETE Reddit Clone App - YouTube
+https://www.youtube.com/watch?v=m1Uy0WQ2Xns&list=PL4cUxeGkcC9gC88BEo9czgyS72A3doDeM&index=4 | (1) Go (Golang) Tutorial #4 - Printing & Formatting Strings - YouTube
+
+https://github.com/epwalsh/pomo.nvim | epwalsh/pomo.nvim: :new: A simple, customizable pomodoro timer for Neovim, written in Lua, with nvim-notify and lualine integrations
+
+https://github.com/neovim/neovim/blob/master/runtime/lua/vim/lsp/buf.lua#L819 | neovim/runtime/lua/vim/lsp/buf.lua at master · neovim/neovim
+
+https://www.edclub.com/sportal/program-3.game | EdClub
+
+https://www.youtube.com/watch?v=XtA0CHkQIw8 | (1) LSP Features You Must Use - Neovim - YouTube
+https://www.youtube.com/watch?v=kbRIosrvof0 | Neovim: How to Use Java Debugging - YouTube
+
+https://www.reddit.com/r/neovim/comments/186ntnw/does_anyone_have_a_working_dap_for_js_please/ | (2) Does anyone have a working DAP for JS? Please share your config files! : neovim
+https://gist.github.com/AlanWarren/ac82901d9680eb5f5f7ddceecc307207 | dap_config.lua
+
+http://server1.ftpbd.net/FTP-1/PC%20Games/Batman%20Series/Batman-Arkham%20Asylum%20-%20Game%20of%20the%20Year%20Edition/ | Batman-Arkham Asylum - Game of the Year Edition - server1.ftpbd.net > FTP-1 > PC Games > Batman Series > Batman-Arkham Asylum - Game of the Year Edition
+http://server5.ftpbd.net/FTP-5/Anime%20%26%20Cartoon%20TV%20Series/Invincible%20%28Tv%20Series%202021%29/Season%2002%201080p%20Hindi%20-%20English/ | Season 02 1080p Hindi - English - server5.ftpbd.net > FTP-5 > Anime & Cartoon TV Series > Invincible (Tv Series 2021) > Season 02 1080p Hindi - English
+http://server5.ftpbd.net/FTP-5/Anime%20%26%20Cartoon%20TV%20Series/F%20is%20for%20Family%20%28%202015%20%29/ | F is for Family ( 2015 ) - server5.ftpbd.net > FTP-5 > Anime & Cartoon TV Series > F is for Family ( 2015 )
+http://172.16.50.9/SAM-FTP-1/Anime%20%26%20Cartoon%20TV%20Series/Anime-TV%20Series%20%E2%99%A6%20%20N%20%20%E2%80%94%20%20S/Steins-Gate%200%20%28TV%20Cartoon%202018%E2%80%93%20%29%201080p%20%5BDual%20Audio%5D/Season%201/ | Season 1 - 172.16.50.9 > SAM-FTP-1 > Anime & Cartoon TV Series > Anime-TV Series ♦ N — S > Steins-Gate 0 (TV Cartoon 2018– ) 1080p [Dual Audio] > Season 1
+http://ftpbd.net/ | Ftp BD
+https://www.broadbandathome.com/livetv.html | ftp server bd live tv
+
+https://www.youtube.com/watch?v=7jvbLhDxek4 | Transfer message between two applications without internet - Part1 | Flutter | Build Developers - YouTube
+
+https://www.youtube.com/watch?v=cDYCWdkbJI4&list=TLPQMjQxMTIwMjOuo-jiVvQpLQ&index=1 | (1) Connecting Flutter App To Localhost - YouTube
+https://www.youtube.com/watch?v=eYFhH7Gf5mI&list=PLFhJomvoCKC_mXNBDnpO46Hea_PkCiVWS | (1) Flutter Chat App - THE RIGHT WAY! (NO Firebase) - YouTube
+https://levelup.gitconnected.com/how-to-transfer-data-between-two-flutter-apps-without-any-type-of-connection-ae808e78a00a | How To Transfer Data Between Two Flutter Apps Without Any Type Of Connection | by Attila Vágó | Level Up Coding
+https://www.reddit.com/r/FlutterDev/comments/c9hg7n/is_there_a_way_to_communicate_over_wifi_p2p/ | (2) Is there a way to communicate over Wi-Fi P2P offline when two devices are on the same network? : FlutterDev
+https://pub.dev/packages/flutter_p2p_connection | flutter_p2p_connection | Flutter Package
+https://pub.dev/packages/flutter_gundb | flutter_gundb | Flutter Package
+https://github.com/adityapandey9/flutter-gun | adityapandey9/flutter-gun: This library is a port of GunDB js for the Dart and Flutter. P2P encrypted Communication between multiple users. GUN is an ecosystem of tools that let you build community run and encrypted applications - like an Open Source Firebase or a Decentralized Dropbox.
+https://github.com/itzmeanjan/transferZ | itzmeanjan/transferZ: A simple Android Application built with using Flutter, for transferring files between devices.
+https://fvm.app/docs/getting_started/installation | Installation | Flutter Version Management
+https://pub.dev/packages/p2plib | p2plib | Dart Package
+
+https://github.com/localsend/localsend/tree/main#how-it-works | localsend/localsend: An open source cross-platform alternative to AirDrop
+https://github.com/synw/airlink | synw/airlink: A mobile file explorer with peer to peer file transfer and remote file server connection
+
+https://twitter.com/mhadaily/status/1727255662466593215 | (1) Majid Hajian 💙 on X: "I know many companies and apps that are built with #Flutter. I want to create this thread as one of the sources to refer to those companies or teams using Flutter or Dart. Leave your app/company name below in the thread &amp; let's make a HUGE list together. Let's get started. 👇" / X
+
+http://172.16.50.9/SAM-FTP-1/Anime%20%26%20Cartoon%20TV%20Series/Anime-TV%20Series%20%E2%99%A6%20%20T%20%20%E2%80%94%20%20Z/The%20Boss%20Baby-Back%20in%20Business%20%28TV%20Cartoon%202018%E2%80%93%20%29%20720p/ | The Boss Baby-Back in Business (TV Cartoon 2018– ) 720p - 172.16.50.9 > SAM-FTP-1 > Anime & Cartoon TV Series > Anime-TV Series ♦ T — Z > The Boss Baby-Back in Business (TV Cartoon 2018– ) 720p
+http://172.16.50.9/SAM-FTP-1/Anime%20%26%20Cartoon%20TV%20Series/Anime-TV%20Series%20%E2%99%A6%20%20T%20%20%E2%80%94%20%20Z/The%20Boss%20Baby-Back%20in%20the%20Crib%20%28TV%20Cartoon%202022%E2%80%93%20%29%201080p/ | The Boss Baby-Back in the Crib (TV Cartoon 2022– ) 1080p - 172.16.50.9 > SAM-FTP-1 > Anime & Cartoon TV Series > Anime-TV Series ♦ T — Z > The Boss Baby-Back in the Crib (TV Cartoon 2022– ) 1080p
+
+https://medium.com/gitconnected/awesome-terminal-applications-e4a06022dffa | Awesome Terminal Applications. Sharpen the axe before you cut the… | by Mohammad Faisal | Nov, 2023 | Level Up Coding
+
+https://www.youtube.com/watch?v=ToVyRPawkRY | How to fail proof your code - YouTube
+https://drift.simonbinder.eu/web/ | Web
+https://drift.simonbinder.eu/docs/getting-started/ | Setup
+https://github.com/simolus3/drift/tree/develop/examples/app/lib | drift/examples/app/lib at develop · simolus3/drift
+https://www.youtube.com/watch?v=61kOwZeoa9I | Flutter : Drift easy to understand | Local Database | amplifyabhi - YouTube
+
+https://www.youtube.com/watch?v=FCyoHclCqc8 | Implementing complex UI with Flutter - Marcin Szałek | Flutter Europe - YouTube
+https://www.youtube.com/watch?v=KhYTFglbF2k&t=223s | Bringing pattern matching to Dart - YouTube
+https://www.youtube.com/watch?v=CeGb92Zxj7A | Improve your animations skills in Flutter | Dominik Roszkowski - FlutterVikings - YouTube
+https://www.youtube.com/watch?v=06vVccZvGuo&t=875s | Observable Flutter: Building with Stacked - YouTube
+https://www.youtube.com/shorts/EAr9aoYUmp4 | Animation 101 in FlutterFlow - YouTube
+https://www.youtube.com/watch?v=vCQQJ42zC58&list=PLxUBb2A_UUy9HKsPsmsWwgHRBC4XzFMu1 | Flutter Custom Animation - Grocery App - Speed Code - YouTube
+https://www.youtube.com/watch?v=8L4eL7t0Wg0 | List to Details Page Animation with Flutter Hero! - YouTube
+https://www.youtube.com/shorts/3QwVhxDIryk | Custom Animations in Flutter: Intermediate Guide - YouTube
+
+https://verygood.ventures/blog/very-good-plugins-very-good-flutter-styles | Very Good Plugins: Very Good Flutter Styles
+https://pub.dev/packages/flex_color_scheme | flex_color_scheme | Flutter Package
+https://www.widgetbook.io/ | Widgetbook - The Custom Widget Library for Flutter
+
+https://archive.ph/JENKy | Building Responsive UIs in Flutter: A Short Guide | by Dario Digregorio | Nov, 2023 | Medium
+https://erengun.medium.com/best-modern-template-for-riverpod-2-0-projects-in-flutter-2c56365df088 | Best Modern Template for Riverpod 2.0 Projects in Flutter | by Eren Gün | Medium
+https://github.com/Erengun/Flutter-Riverpod-2.0-Template?source=post_page-----2c56365df088-------------------------------- | Erengun/Flutter-Riverpod-2.0-Template: A flutter template with Riverpod 2.0, Freezed, Go Router, Hive, Easy Localization and more.
+
+https://www.youtube.com/watch?v=UyepBhIY5Bo&list=WL&index=8 | Flutter Riverpod State Management (With Remi Rousselet) - YouTube
+https://www.youtube.com/playlist?list=PLjcKnGTXcK-tw931FvNVQ_3iTS9r9af51 | [FULL COURSE] Learn Riverpod 2.x and Flutter by Building a Podcast App - YouTube
+https://drift.simonbinder.eu/docs/dart-api/writes/ | Writes (update, insert, delete)
+https://pub.dev/packages/drift | drift | Dart Package
+https://github.com/simolus3/drift/tree/develop/examples | drift/examples at develop · simolus3/drift
+
+https://www.youtube.com/watch?v=JoJ8Sw5Yb4c&list=PLRAV69dS1uWQGDQoBYMZWKjzuhCaOnBpa | Welcome to series on GO programming language - YouTube
+
+https://github.com/sindrets/diffview.nvim | sindrets/diffview.nvim: Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
+https://www.naseraleisa.com/posts/diff#file-1 | The diff cookbook - Naser Aleisa
+
+https://github.com/carbon-steel/detour.nvim/tree/main | carbon-steel/detour.nvim: Use popup windows to navigate files/buffer and to contain shells/TUIs
+
+http://172.16.50.8/SAM-FTP-8/Android%20Games/The%20Amazing%20Spider-Man%202%20v1.0.0i%28Android%29/ | The Amazing Spider-Man 2 v1.0.0i(Android) - 172.16.50.8 > SAM-FTP-8 > Android Games > The Amazing Spider-Man 2 v1.0.0i(Android)
+
+https://flutterawesome.com/tag/calculator/ | Calculator - Flutter Awesome
+https://flutterawesome.com/calculator-using-flutter/ | Calculator using Flutter
+https://flutterawesome.com/simple-calculator-app-with-beautiful-design/ | Simple Calculator App with beautiful design
+
+https://www.youtube.com/watch?v=_U4iCoYS8BI&list=PLztm2TugcV9Tn6J_H5mtxYIBN40uMAZgO&index=11 | Flutter | SQLite | Drift : 11. Insert Employee To Database - YouTube
+https://drift.simonbinder.eu/docs/getting-started/ | Setup
+https://riverpod.dev/docs/essentials/first_request | Make your first provider/network request | Riverpod
+https://pub.dev/packages/riverpod_annotation | riverpod_annotation | Dart Package
+https://codewithandrea.com/articles/flutter-riverpod-generator/ | How to Auto-Generate your Providers with Flutter Riverpod Generator
+https://pub.dev/packages/riverpod_generator | riverpod_generator | Dart Package
+https://dodi-repacks.site/ | DODI Repacks
+
+http://172.16.50.12/SAM-FTP-1/TV-WEB-Series/TV%20Series%20%E2%99%A5%20%20A%20%20%E2%80%94%20%20L/Heathers%20%28TV%20Series%202018%29%20720p/Season%201/ | Season 1 - 172.16.50.12 > SAM-FTP-1 > TV-WEB-Series > TV Series ♥ A — L > Heathers (TV Series 2018) 720p > Season 1
+
+https://www.youtube.com/watch?v=Yrq2llD2Ldw | Flutter Local Notifications - YouTube
+https://drift.simonbinder.eu/ | Drift
+https://pub.dev/packages/drift | drift | Dart Package
+https://pub.dev/packages?q=drift&page=3 | Search results for drift
+https://github.com/simolus3/drift/blob/develop/examples/app/lib/main.dart | drift/examples/app/lib/main.dart at develop · simolus3/drift
+https://pub.dev/packages/get_storage | get_storage | Flutter Package
+https://www.youtube.com/watch?v=MlVL1lHW9LI | Flutter : Drift database | Join Complete Tutorial | amplifyabhi - YouTube
+https://www.youtube.com/watch?v=8ESbEFC0z5Y&list=PLztm2TugcV9Tn6J_H5mtxYIBN40uMAZgO | Flutter | SQLite | Drift : 1. Setup Flutter Project - YouTube
+
+https://www.amazon.com/INVINCIBLE-SEASON-2/dp/B0C6X2CF21 | Watch INVINCIBLE – SEASON 2 | Prime Video
+
+https://muhammadraza.me/2023/shell-functions/ | My Useful Shell Functions | Muhammad
+
+https://aniwave.to/watch/k-on-season-2.wxo/ep-24 | Watch K-ON! Season 2 Anime English SUB/DUB - Aniwave
+
+https://www.autohotkey.com/docs/v2/lib/Gui.htm | Gui Object - Methods & Properties | AutoHotkey v2
+https://www.google.com/search?q=ahk+V2+Gui%28%29+center+font&sca_esv=578600870&sxsrf=AM9HkKnkrmsr1KeFJe2PqX6yJnPfdu9mjw%3A1698870700571&ei=rLVCZdnGIp3jseMPjMbUuA8&ved=0ahUKEwjZzIHF0qOCAxWdcWwGHQwjFfcQ4dUDCBA&uact=5&oq=ahk+V2+Gui%28%29+center+font&gs_lp=Egxnd3Mtd2l6LXNlcnAiGGFoayBWMiBHdWkoKSBjZW50ZXIgZm9udDIIECEYoAEYwwQyCBAhGKABGMMESJgSULMKWPUPcAF4AZABAJgBqAGgAeoDqgEDMC4zuAEDyAEA-AEBwgIKEAAYRxjWBBiwA8ICBBAjGCfiAwQYACBBiAYBkAYI&sclient=gws-wiz-serp | ahk V2 Gui() center font - Google Search
+https://www.autohotkey.com/boards/viewtopic.php?t=21027 | Gui Center Text Simple Question - AutoHotkey Community
+https://www.autohotkey.com/docs/v2/lib/Gui.htm#Maximize | Gui Object - Methods & Properties | AutoHotkey v2
+https://www.autohotkey.com/docs/v2/lib/Gui.htm#SetFont | Gui Object - Methods & Properties | AutoHotkey v2
+
+https://www.reddit.com/r/FlutterDev/comments/17ejtck/learn_in_this_article_how_to_use_the_devices/ | Learn in this article how to use the device's calendars 📅 on IOS and Android with Flutter and Dart 🎯 : FlutterDev
+https://www.reddit.com/r/FlutterDev/comments/17dsj86/riverpod_so_simple_and_elegant/ | Riverpod so simple and elegant : FlutterDev
+https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introduction/ | Flutter App Architecture with Riverpod: An Introduction
+https://www.reddit.com/r/FlutterDev/comments/1677nai/flutter_app_architecture_with_riverpod_an/ | (3) Flutter App Architecture with Riverpod: An Introduction (Updated) : FlutterDev
+https://www.youtube.com/watch?v=SxJPQ5qXisw | (130) 🚀 The Clean Architecture (Ian Cooper) - YouTube
+https://github.com/mahdinazmi/Flutter-News-App-Clean-Architecture/blob/main/lib/features/daily_news/presentation/pages/article_detail/article_detail.dart | Flutter-News-App-Clean-Architecture/lib/features/daily_news/presentation/pages/article_detail/article_detail.dart at main · mahdinazmi/Flutter-News-App-Clean-Architecture
+https://www.youtube.com/watch?v=7V_P6dovixg&list=WL&index=15&t=45s | (130) Flutter Clean Architecture - Learn By A Project | Full Beginner's Tutorial - YouTube
+https://www.milanjovanovic.tech/blog/why-clean-architecture-is-great-for-complex-projects | Why Clean Architecture Is Great For Complex Projects
+https://www.youtube.com/watch?v=v2qsVmODAiQ&t=622s | (130) TO DO App • Flutter & BLoC Tutorial for Beginners 🔥 - YouTube
+
+https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example | Typing Component Props | React TypeScript Cheatsheets
+https://www.totaltypescript.com/strongly-type-useref-with-elementref | Strongly Type useRef with ElementRef | Total TypeScript
+https://www.reddit.com/r/reactjs/comments/14zjw65/simple_react_typescript_cheatsheet_2023/ | (4) Simple React Typescript Cheatsheet (2023) : reactjs
+https://manuals.plus/akko/3068-bluetooth-5-0-mechanical-keyboard-manual | AKKO 3068 Bluetooth Keyboard Manual
+https://roadmap.sh/flutter | Learn to become a modern Flutter developer
+
+https://www.reddit.com/r/FlutterDev/comments/17jh9ds/rinf_rust_in_flutter_with_rust_as_your_flutter/ | (2) Rinf - Rust in Flutter, with Rust as your Flutter backend, and Flutter as your Rust frontend : FlutterDev
+
+https://www.reddit.com/r/neovim/comments/17kb3y4/introducing_sunglassesnvim/ | (2) Introducing Sunglasses.nvim : neovim
+
+https://www.google.com/search?q=lullizol&oq=lullizol&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBCDQwNjFqMGo0qAIAsAIA&sourceid=chrome&ie=UTF-8 | lulizol - Google Search
+http://172.16.50.5/SAM-FTP-2/PC%20Games/Marvel%27s%20Spider-Man%20Remastered-DODI%20%28PC%29/ | Marvel's Spider-Man Remastered-DODI (PC) - 172.16.50.5 > SAM-FTP-2 > PC Games > Marvel's Spider-Man Remastered-DODI (PC)
+http://172.16.50.5/SAM-FTP-2/PC%20Games/Batman-Arkham%20Knight%20-%20Premium%20Edition-DODI%20%28PC%29/ | Batman-Arkham Knight - Premium Edition-DODI (PC) - 172.16.50.5 > SAM-FTP-2 > PC Games > Batman-Arkham Knight - Premium Edition-DODI (PC)
+http://172.16.50.5/SAM-FTP-2/PC%20Games/Call%20of%20Duty-Modern%20Warfare%202%20-%20Campaign%20Remastered-DODI%20%28PC%29/ | Call of Duty-Modern Warfare 2 - Campaign Remastered-DODI (PC) - 172.16.50.5 > SAM-FTP-2 > PC Games > Call of Duty-Modern Warfare 2 - Campaign Remastered-DODI (PC)
+
+https://knowyourmeme.com/memes/forced-to-drink-milk | Forced to Drink Milk | Know Your Meme
+https://knowyourmeme.com/editorials/guides/what-is-the-forced-to-drink-milk-meme-heres-the-explanation-behind-that-image-elon-musk-tweeted | What Is The 'Forced To Drink Milk' Meme? Here's The Explanation Behind That Image Elon Musk Tweeted | Know Your Meme
+https://www.reddit.com/r/MemeTemplatesOfficial/comments/851rd4/forced_to_drink_the_milk/ | (3) Forced to drink the milk : MemeTemplatesOfficial
+https://www.instagram.com/soska_117/ | 🖤🕷🗝👼🏻 (@soska_117) • Instagram photos and videos
+https://www.instagram.com/eugeny_hramenkov/ | Eugeny Hramenkov (@eugeny_hramenkov) • Instagram photos and videos
+https://www.instagram.com/p/BcxriKhlSWs/ | Instagram photo by 🖤🕷🗝👼🏻 • Dec 17, 2017 at 2:18 AM
+
+https://www.instagram.com/eugeny_hramenkov/?hl=en | Eugeny Hramenkov (@eugeny_hramenkov) • Instagram photos and videos
+
+https://www.instagram.com/soska_117/ | 🖤🕷🗝👼🏻 (@soska_117) • Instagram photos and videos
+
+https://fast.com/ | Internet Speed Test | Fast.com
+https://pub.dev/packages?q=calculator | Search results for calculator
+https://pub.dev/packages/flutter_simple_calculator | flutter_simple_calculator | Flutter Package
+https://pub.dev/packages/flutter_awesome_calculator | flutter_awesome_calculator | Flutter Package
+https://www.google.com/search?q=dart+parse+string+to+double&sca_esv=577126810&sxsrf=AM9HkKnlPZNWWN6sDE53cIj1Cq2JSum44Q%3A1698400728274&ei=2Ik7ZdKoEObRseMPxtSt6A0&ved=0ahUKEwjS9ODg-5WCAxXmaGwGHUZqC90Q4dUDCBA&uact=5&oq=dart+parse+string+to+double&gs_lp=Egxnd3Mtd2l6LXNlcnAiG2RhcnQgcGFyc2Ugc3RyaW5nIHRvIGRvdWJsZTIFEAAYgAQyCBAAGIoFGIYDMggQABiKBRiGAzIIEAAYigUYhgMyCBAAGIoFGIYDSJBcUABYvlhwAngBkAEAmAHwBaABgjuqAQ4wLjYuMTEuMS4yLjMuMbgBA8gBAPgBAcICCBAAGIoFGJECwgIHEAAYgAQYCsICChAAGIAEGBQYhwLCAgYQABgWGB7CAgYQABgHGB7CAgUQABiiBOIDBBgAIEGIBgE&sclient=gws-wiz-serp | dart parse string to double - Google Search
+http://tendawifi.com/login.html | Tenda | LOGIN
+
+https://www.youtube.com/watch?v=HgvKWMrbBe4&list=WL&index=3&t=15s | I built a news app in Flutter with Riverpod - YouTube
+https://github.dev/hasansujon786/waleti/blob/main/lib/screens/home/view/home.view.dart | waleti - Visual Studio Code - github+7b2276223a312c22726566223a7b2274797065223a352c226964223a226d61696e227d7d
+https://www.youtube.com/watch?v=t67JRgaSjWI | Harry Potter Magic Boy and Rudy the Fairy Elf | Ep 170 | Bad Friends - YouTube
+https://www.youtube.com/results?search_query=flutter+Sliverlist | flutter Sliverlist - YouTube
+https://www.youtube.com/ | (1) YouTube
+https://www.youtube.com/watch?v=ORiTTaVY6mM | SliverList & SliverGrid (Flutter Widget of the Week) - YouTube
+https://www.youtube.com/watch?v=_1eTfv9-Vhc | (1) Flutter CustomScrollView and Slivers | SliverToBoxAdapterr - YouTube
+
+https://www.xvideos.com/video78623049/kira_came_to_visit_her_boyfriend_4_ | Kira came to visit her boyfriend 4К - XVIDEOS.COM
+https://yazi-rs.github.io/usage/installation/ | Installation | Yazi
+https://github.com/IlyasYOY/obs.nvim | IlyasYOY/obs.nvim: Obsidian-like NeoVim plugin.
+https://www.reddit.com/r/neovim/comments/16g6cei/neovim_biome_setup/ | Neovim Biome Setup : neovim
+https://github.com/epwalsh/obsidian.nvim | epwalsh/obsidian.nvim: Neovim plugin for Obsidian, written in Lua
+https://github.com/IlyasYOY/obs.nvim | IlyasYOY/obs.nvim: Obsidian-like NeoVim plugin.
+https://github.com/ada0l/obsidian | ada0l/obsidian: :book: Base Obsidian functionality in your Neovim
+https://www.youtube.com/watch?v=Yzi1o-BH6QQ | You all NEED these Obsidian community plugins - YouTube
+https://www.youtube.com/watch?v=WqKluXIra70&t=825s | Obsidian As A Second Brain: The ULTIMATE Tutorial - YouTube
+
+https://aniwave.to/watch/k-on-season-2.wxo/ep-13 | Watch K-ON! Season 2 Anime English SUB/DUB - Aniwave
+http://172.16.50.9/SAM-FTP-1/KOREAN%20TV%20%26%20WEB%20Series/All%20of%20Us%20Are%20Dead%20%28TV%20Series%202022%E2%80%93%20%29%201080p%20%5BMulti%20Audio%5D/Season%201/ | Season 1 - 172.16.50.9 > SAM-FTP-1 > KOREAN TV & WEB Series > All of Us Are Dead (TV Series 2022– ) 1080p [Multi Audio] > Season 1
+https://www.youtube.com/watch?v=H1Pl6J1A-hE | Cool Tech Under $50 For Your Setup - Episode 1 - YouTube
+
+https://github.com/jay-babu/mason-nvim-dap.nvim | jay-babu/mason-nvim-dap.nvim
+https://theosteiner.de/debugging-javascript-frameworks-in-neovim | Debugging JavaScript Frameworks in Neovim
+https://github.com/David-Kunz/jester | David-Kunz/jester: A Neovim plugin to easily run and debug Jest tests
+
+https://www.youtube.com/watch?v=tbt9oGgYwFc | Awesome Masonry Layouts with Colcade.js **REUPLOAD** - YouTube
+https://www.youtube.com/playlist?list=WL | Watch later - YouTube
+https://www.youtube.com/watch?v=W1Co2M-gsQE | 📱 Build a Coffee Shop App using React Native ☕| Beginner | 2023 - YouTube
+
+https://www.reddit.com/r/reactjs/comments/179t34i/cheat_sheet_for_not_using_useeffect/ | (2) Cheat Sheet for not using useEffect? : reactjs
+https://bloclibrary.dev/#/architecture | Architecture
+https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introduction/ | Flutter App Architecture with Riverpod: An Introduction
+https://www.reddit.com/r/FlutterDev/comments/17a1iqa/what_makes_you_a_senior_flutter_engineer/ | (2) What makes you a Senior Flutter Engineer? : FlutterDev
+
+https://grabber.lk/index.php | Grabber Book Taxi, Tuk Tuk, Delivery, Service in Sri Lanka
+https://play.google.com/store/apps/details?id=com.grabber.userapp | GRABBER - Apps on Google Play
+https://www.youtube.com/results?search_query=flutter+pageview+ | flutter pageview - YouTube
+https://www.youtube.com/watch?v=bA8jb1RmNVY | Flutter PageView Dot's Indicator Dynamically Update - YouTube
+https://www.youtube.com/watch?v=J2UaipfsR7Q | Roasting Chinese Gaming Setups - YouTube
+https://www.youtube.com/watch?v=Qx30mJ1OoV4&list=RDCMUCi7GJNg51C3jgmYTUwqoUXA&start_radio=1 | Sir Patrick Stewart & Conan Remember Their On-Screen Kiss | Conan O'Brien Needs A Friend - YouTube
+
+https://www.youtube.com/@BadFriends/videos | youtube.com/@BadFriends/videos
+https://www.youtube.com/watch?v=wOZVenU84d8 | Sleeping Away Your Sadness, Working Away My Pain w/ Dan Soder | Ep 182 | Bad Friends - YouTube
+https://www.youtube.com/playlist?list=WL | youtube.com/playlist?list=WL
+https://www.youtube.com/ | YouTube
+https://www.youtube.com/watch?v=-cn3MAovsN4 | From VSCode To Vim | Prime Reacts - YouTube
+https://www.youtube.com/watch?v=QZQZTKFKakU | LazyVim v10 Released - YouTube
+https://www.youtube.com/watch?v=Vl9BfkdFouo | 5 dev Essentials | Day in the Life of a Software Engineer - YouTube
+https://stackoverflow.com/questions/60027693/how-to-make-an-underlined-border-only-for-outlinebutton-in-flutter | android studio - How to make an underlined border only for OutlineButton in Flutter - Stack Overflow
+https://www.reddit.com/ | Reddit - Dive into anything
+https://www.reddit.com/r/typescript/comments/177d8y6/have_you_even_seen_a_typescript_project_written/ | Reddit - Dive into anything
+
+https://github.com/nyoom-engineering/nyoom.nvim | nyoom-engineering/nyoom.nvim: A Neovim framework and doom emacs alternative for the stubborn martian hacker. Powered by fennel and the oxocarbon theme
+https://github.com/biletskyy/flatwhite-syntax | biletskyy/flatwhite-syntax: A light syntax theme for Atom
+https://github.com/linguini1/pulse.nvim/blob/main/doc/pulse.txt | pulse.nvim/doc/pulse.txt at main · linguini1/pulse.nvim
+https://github.com/stevearc/overseer.nvim | stevearc/overseer.nvim: A task runner and job management plugin for Neovim
+
+https://www.techlandbd.com/msi-modern-md241pw-monitor | MSI Modern MD241P Gaming Monitor price in BD 2022 | Techland bd
+https://vibegaming.com.bd/product/msi-modern-md241p-23-8-inch-fhd-ips-type-c-monitor/ | MSI Modern MD241P 23.8 Inch FHD IPS Type-C Monitor - Vibe Gaming
+https://www.startech.com.bd/msi-modern-md241p-fhd-monitor | MSI Modern MD241P 23.8 Inch FHD IPS Type-C Monitor Price in Bangladesh
+https://vibegaming.com.bd/product/msi-modern-md241pw-23-8-inch-fhd-ips-type-c-monitor/ | MSI Modern MD241PW 23.8 Inch FHD IPS Type-C Monitor - Vibe Gaming
+https://www.startech.com.bd/msi-modern-md241pw-fhd-monitor | MSI Modern MD241PW 23.8 Inch FHD IPS Type-C Monitor Price in Bangladesh
+
+https://www.youtube.com/playlist?list=WL | Watch later - YouTube
+https://www.reddit.com/r/reactnative/comments/1750wth/senior_devs_how_do_you_handle_styles_and_how_do/ | Reddit - Dive into anything
+https://www.youtube.com/ | YouTube
+https://www.youtube.com/watch?v=liEGSeD3Zt8 | Stack (Flutter Widget of the Week) - YouTube
+https://www.google.com/search?q=flutter+stack+overflow&oq=flutter+stack+overflow&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRg8MgYIAhBFGDwyBggDEEUYPNIBCDc0MjRqMGoxqAIAsAIA&sourceid=chrome&ie=UTF-8 | flutter stack overflow - Google Search
+https://github.com/pacifio/rapid | pacifio/rapid: Flutter rapid ui is a library that allows you to build responsive widgets quickly like tailwindcss.
+https://rapidocs.vercel.app/prefix | Responsive prefix | Rapid
+https://www.google.com/search?q=tailwind+in+flutter&oq=tailwind+in+flutter&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBCTEwNTU2ajBqMagCALACAA&sourceid=chrome&ie=UTF-8#ip=1 | tailwind in flutter - Google Search
+https://egghead.io/q/flutter-and-tailwind | Learn Flutter and Tailwind | egghead.io
+https://fabianmendez.dev/projects/flutter-tailwindcss-defaults/ | Flutter Tailwind CSS Defaults
+https://morioh.com/a/d384c0247879/vue3-styled-like-flutter-with-tailwind-css | Vue3 Styled Like Flutter with Tailwind CSS
+https://medium.com/acadevmy/stilo-a-utility-first-flutter-framework-for-rapid-ui-development-35fedcd1853c | Stilo — A utility-first Flutter library for rapid UI development | by Mirko Rapisarda | Devmy | Medium
+https://dev.to/saltyaom/effortless-styling-in-flutter-3d33 | Effortless styling in Flutter - DEV Community
+https://www.reddit.com/r/FlutterDev/comments/sdigaz/tailwind_and_tailwind_ui_for_flutter/ | Tailwind and Tailwind UI for Flutter : FlutterDev
+
+https://www.soundguys.com/logitech-g435-lightspeed-review-63579/ | Logitech G435 Lightspeed review - SoundGuys
+https://www.headphonesty.com/2021/01/how-to-make-mic-sound-better/ | How to Make Your Headset Mic Sound Better on Any Platform - Headphonesty
+https://manuals.plus/logitech/mastering-the-logitech-g435-guide | Mastering the Logitech G435 Guide
+
+https://stgeapp.com/?utm_campaign=gm-stge-launch&utm_medium=display&utm_source=brave&utm_content=brave-hpto&utm_name=gm-stge-launch | STGE App
+https://github.com/avencera/easywind | avencera/easywind: A complete quickstart CLI for Tailwind with generator and livereload server
+
+https://flutterawesome.com/tag/templates/ | Templates - Flutter Awesome
+https://github.com/Uuttssaavv/flutter-clean-architecture-riverpod/blob/master/lib/features/splash/presentation/screens/splash_screen.dart | flutter-clean-architecture-riverpod/lib/features/splash/presentation/screens/splash_screen.dart at master · Uuttssaavv/flutter-clean-architecture-riverpod
+https://github.com/TheAlphaApp/flutter_riverpod_todo_app | TheAlphaApp/flutter_riverpod_todo_app: An elegant todo app with some advanced features.
+https://riverpod.dev/docs/getting_started | Getting started | Riverpod
+https://www.youtube.com/watch?v=7V_P6dovixg&list=WL&index=16&t=45s | Flutter Clean Architecture - Learn By A Project | Full Beginner's Tutorial - YouTube
+https://github.com/Uuttssaavv/flutter-clean-architecture-riverpod | Uuttssaavv/flutter-clean-architecture-riverpod: Clean architecture in Flutter using Riverpod.
+https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introduction/ | Flutter App Architecture with Riverpod: An Introduction
+https://codewithandrea.com/articles/flutter-presentation-layer/ | Flutter App Architecture: The Presentation Layer
+
+https://github.com/Grashjs/mobile | Grashjs/mobile: Grash CMMS Mobile App
+https://tympanus.net/codrops/2023/07/10/ui-interactions-animations-roundup-34/ | UI Interactions & Animations Roundup #34 | Codrops
+https://elazizi.com/posts/5-github-actions-to-automate-your-react-native-workflow/ | 5+ Github Actions to Automate Your React Native Workflow
+https://halgatewood.com/deeplink | Deep Link Testing Tool - Mobile App Development Tools – HalGatewood.com
+https://adsmanager.facebook.com/adsmanager/manage/campaigns?act=534132973740983&breakdown_regrouping=0 | Ads Manager - Manage ads - Campaigns
+https://chat.openai.com/c/5434f836-21b7-4dd1-8bb5-e8c96bc17b8f | Add Applink in React Native
+
+https://www.techlandbd.com/msi-modern-md241pw-monitor | MSI Modern MD241P Gaming Monitor price in BD 2022 | Techland bd
+https://www.techlandbd.com/msi-modern-md241p-monitor | MSI Modern MD241PW Gaming Monitor price in BD 2022 | Techland bd
+https://www.startech.com.bd/msi-g2412v-23-8-inch-100hz-ips-monitor | MSI G2412V 23.8" Esports Gaming Monitor Price in Bangladesh | Star Tech
+https://www.startech.com.bd/msi-modern-md241p-fhd-monitor | MSI Modern MD241P 23.8 Inch FHD IPS Type-C Monitor Price in Bangladesh
+https://www.startech.com.bd/msi-modern-md241pw-fhd-monitor | MSI Modern MD241PW 23.8 Inch FHD IPS Type-C Monitor Price in Bangladesh
+https://www.startech.com.bd/hp-m24f-24-inch-monitor | HP M24f 24" FHD IPS Monitor Price in Bangladesh | Star Tech
+https://www.startech.com.bd/huawei-mateview-se-23-8-inch-monitor | Huawei MateView SE SSN-24 23.8-inch FHD Monitor Price in Bangladesh
+https://www.startech.com.bd/hp-m24fwa-fhd-ips-monitor | HP M24fwa 23.8-Inch 75Hz FHD IPS Monitor Price in Bangladesh
+
+https://www.youtube.com/watch?v=Dupl0HOJxZ4 | Flutter Clean Architecture: Understanding Use Cases - YouTube
+https://www.youtube.com/watch?v=HYLF698CtM4 | Simple Flutter Tutorial - Sudoku Puzzle - YouTube
+https://www.youtube.com/watch?v=6jjaVWEC9Qw | Flutter Clean Architecture - Beginner's guide to clean code - YouTube
+https://github.com/kevinhwang91/nvim-bqf | kevinhwang91/nvim-bqf: Better quickfix window in Neovim, polish old quickfix window.
+
+https://docs.brickhub.dev/category/managing-bricks | Managing Bricks | BrickHub Docs
+https://brickhub.dev/bricks/clean_architecture_folders_lib/1.0.0+5 | clean_architecture_folders_lib | Brick Template
+https://medium.com/flutter-community/using-mason-and-bricks-in-your-flutter-app-beginners-guide-cbece7d1b831 | Using Mason and bricks in your Flutter app: Beginner’s guide | by Codemagic | Flutter Community | Medium
+
+https://www.google.com/imgres?imgurl=https%3A%2F%2Fpublish.purewow.net%2Fwp-content%2Fuploads%2Fsites%2F2%2F2019%2F11%2Ftimothee-chalamet-sag-2013.jpg%3Ffit%3D728%252C524&tbnid=yRGDtQbRSZcE4M&vet=12ahUKEwiH6srLuqiBAxXqmGMGHenCAAIQMygkegUIARCgAQ..i&imgrefurl=https%3A%2F%2Fwww.purewow.com%2Fnews%2Ftimothee-chalamet-hair-evolution&docid=jkG48LxfNAC_7M&w=728&h=524&q=timoth%C3%A9e%20chalamet%20hair%20style&ved=2ahUKEwiH6srLuqiBAxXqmGMGHenCAAIQMygkegUIARCgAQ | timothée chalamet hair style - Google Search
+https://www.google.com/imgres?imgurl=https%3A%2F%2Fs3.r29static.com%2Fbin%2Fentry%2F0c3%2F720x955%2C85%2F2079492%2Fimage.webp&tbnid=bC9DEfcPys8T_M&vet=12ahUKEwiH6srLuqiBAxXqmGMGHenCAAIQMyhXegUIARCVAg..i&imgrefurl=https%3A%2F%2Fwww.refinery29.com%2Fen-us%2Ftimothee-chalamet-hair-style-cut&docid=V2gN0xDNjFnHLM&w=720&h=955&q=timoth%C3%A9e%20chalamet%20hair%20style&ved=2ahUKEwiH6srLuqiBAxXqmGMGHenCAAIQMyhXegUIARCVAg | timothée chalamet hair style - Google Search
+https://www.google.com/imgres?imgurl=https%3A%2F%2Fassets.teenvogue.com%2Fphotos%2F5e971bc2102e3e00091265f4%2F4%3A3%2Fw_4304%2Ch_3228%2Cc_limit%2FGettyImages-1189041288.jpg&tbnid=DXo4H7_yjfsGbM&vet=12ahUKEwiH6srLuqiBAxXqmGMGHenCAAIQMyhbegUIARCeAg..i&imgrefurl=https%3A%2F%2Fwww.teenvogue.com%2Fstory%2Ftimothee-chalamet-hair-twin-twitter&docid=pK3LJ2lKgTOG8M&w=4304&h=3228&q=timoth%C3%A9e%20chalamet%20hair%20style&ved=2ahUKEwiH6srLuqiBAxXqmGMGHenCAAIQMyhbegUIARCeAg | timothée chalamet hair style - Google Search
+https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.goldenglobes.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Fhomepage_carousel%2Fpublic%2Factress_actors-5%2FTimothe%25CC%2581e-Chalamet-090817-Call-Me-By-Your-Name-C2.jpg%3Fitok%3DH2WxHZFP&tbnid=F2O8VTYP0fxNxM&vet=10CMUBEDMowAFqFwoTCNjNk8y6qIEDFQAAAAAdAAAAABAD..i&imgrefurl=https%3A%2F%2Fwww.goldenglobes.com%2Fperson%2Ftimothee-chalamet&docid=uaIYXM-oH2BwNM&w=866&h=580&q=timoth%C3%A9e%20chalamet%20hair%20style&ved=0CMUBEDMowAFqFwoTCNjNk8y6qIEDFQAAAAAdAAAAABAD | timothée chalamet hair style - Google Search
+https://www.goldenglobes.com/person/timothee-chalamet | Timothée Chalamet | Golden Globes
+https://www.google.com/imgres?imgurl=https%3A%2F%2Fi.insider.com%2F64f704737819260019113042%3Fwidth%3D1136%26format%3Djpeg&tbnid=eSnIB9P_lKj3eM&vet=10CMsBEDMowwFqFwoTCNjNk8y6qIEDFQAAAAAdAAAAABAD..i&imgrefurl=https%3A%2F%2Fwww.insider.com%2Ftimothe-chalamet-criticized-smoking-beyonce-renaissance-tour-2023-9&docid=BVFrtDVCFKlODM&w=1136&h=852&q=timoth%C3%A9e%20chalamet%20hair%20style&ved=0CMsBEDMowwFqFwoTCNjNk8y6qIEDFQAAAAAdAAAAABAD#imgrc=eSnIB9P_lKj3eM&imgdii=hYverLSQm7t1DM | timothée chalamet hair style - Google Search
+https://www.google.com/imgres?imgurl=https%3A%2F%2Fplayjunkie.com%2Fwp-content%2Fuploads%2F2019%2F02%2Fshutterstock_9124909y.jpg&tbnid=c829hD319zgFhM&vet=10CDoQMyjqAWoXChMI2M2TzLqogQMVAAAAAB0AAAAAEAQ..i&imgrefurl=https%3A%2F%2Fplayjunkie.com%2Fhilarious-tweets-of-a-passenger-sitting-next-to-timothee-chalamet%2F&docid=eWZHthikFAkzfM&w=4894&h=3263&q=timoth%C3%A9e%20chalamet%20hair%20style&ved=0CDoQMyjqAWoXChMI2M2TzLqogQMVAAAAAB0AAAAAEAQ | timothée chalamet hair style - Google Search
+
+http://172.16.50.10/SAM-FTP-3/Anime%20%26%20Cartoon%20TV%20Series/Anime-TV%20Series%20%E2%99%A5%20%20G%20%20%E2%80%94%20%20M/Love%2C%20Death%20%26%20Robots%20%28TV%20Cartoon%202019%E2%80%93%20%29%201080p%20%5BDual%20Audio%5D/Season%202/ | Season 2 - 172.16.50.10 > SAM-FTP-3 > Anime & Cartoon TV Series > Anime-TV Series ♥ G — M > Love, Death & Robots (TV Cartoon 2019– ) 1080p [Dual Audio] > Season 2
+
+https://www.youtube.com/watch?v=n0L6JPQm0G0 | (100) Good vs Bad FANTASY Dialogue (Writing Advice) - YouTube
+https://www.youtube.com/watch?v=H04P5YXVssE | Position absolute and responsive layouts - YouTube
+https://www.youtube.com/watch?v=oRt4QcV6Y7Q | Responsive Website With React JS - YouTube
+http://172.16.50.12/SAM-FTP-1/TV-WEB-Series/TV%20Series%20%E2%99%A5%20%20A%20%20%E2%80%94%20%20L/ | TV Series ♥ A — L - 172.16.50.12 > SAM-FTP-1 > TV-WEB-Series > TV Series ♥ A — L
+
+https://f1sty.github.io/neovim/nvim/lsp/language-server/config/dotfiles/completion/2023/09/10/simple-nvim-lsp-setup.html | Fast and simple neovim lsp setup | f1sty’s blog
+https://vonheikemen.github.io/devlog/tools/manage-neovim-lsp-client-without-plugins/ | Can we manage neovim's LSP client without plugins? | Devlog
+
+https://www.youtube.com/watch?v=V9uO3x5l-Dk | Prime Reacts: From C to C++ to Rust to Haskell - YouTube
+https://www.youtube.com/watch?v=y8CYSwHXVNE | 5+ CSS Features That Will Change How You Code - YouTube
+https://aniwave.to/watch/scums-wish.n83l/ep-12 | Watch Scum's Wish Anime Online | Aniwave
+https://github.com/nvim-neo-tree/neo-tree.nvim | nvim-neo-tree/neo-tree.nvim: Neovim plugin to manage the file system and other tree like structures.
+https://github.com/nvim-neo-tree/neo-tree.nvim/wiki/FAQ | FAQ · nvim-neo-tree/neo-tree.nvim Wiki
+https://aniwave.to/home | AniWave - Watch Anime Online, Free Anime Streaming
+https://www.youtube.com/watch?v=ZqNGCwHGY2c | Why I'll always use Typescript over Javascript - YouTube
+https://www.youtube.com/watch?v=XhZGeApsJpQ | QUIZ LADY Trailer (2023) Sandra Oh, Awkwafina, Will Ferrell, Comedy - YouTube
+https://www.youtube.com/watch?v=CzRQ9mnmh44 | The Complete Dart & Flutter Developer Course | Full Tutorial For Beginners to Advanced - YouTube
+
+https://github.com/fluttermapp/flutter_mapp_clean_architecture | fluttermapp/flutter_mapp_clean_architecture
+https://github.com/akinsho/dotfiles | akinsho/dotfiles: 🏡 dotfiles
+https://github.com/gorbit99/codewindow.nvim | gorbit99/codewindow.nvim
+
+https://github.com/stevearc/conform.nvim#requirements | stevearc/conform.nvim: Lightweight yet powerful formatter plugin for Neovim
+
+https://github.com/Jezda1337/nvim-html-css | Jezda1337/nvim-html-css: CSS Intellisense for HTML
+
+https://www.youtube.com/shorts/KQ712CebFDM | (8) Solving JavaScript's Most NOTORIOUS Interview Question - YouTube
+
+https://www.youtube.com/watch?v=XfeODgbsmvQ | (1) Flutter Riverpod 2.0 | Notification | Sqlite | Firebase | Task Management App Tutorial - YouTube
+https://www.youtube.com/watch?v=Vs8k0q9cANc | (1) Flutter Provider PageView and Detect Last View | ChangeNotifier - YouTube
+https://www.youtube.com/watch?v=3WI7FUwsua8 | (1) Flutter Video Call App | Part 3 - YouTube
+
+https://dribbble.com/shots/20166390--29-Mobile-App-Concept | #29 - Mobile App Concept by Matt Wojtaś on Dribbble
+https://dribbble.com/shots/21408556-UI-Exploration-App-interface | UI Exploration - App interface by Giga Tamarashvili for Slick on Dribbble
+https://dribbble.com/shots/17022467-Task-manager-Mobile-App | Task manager - Mobile App by Anastasia Golovko on Dribbble
+https://dribbble.com/shots/19665814-Task-management-app | Task management app by Yev Ledenov for Ledo on Dribbble
+https://dribbble.com/shots/20452255-Task-Project-Management-App | Task & Project Management App by Musemind Mobile for Musemind UI/UX Agency on Dribbble
+https://dribbble.com/shots/22341217-Task-Manager-App-Design | Task Manager App Design by Awe Mobile App for Awe Design Studio on Dribbble
+https://dribbble.com/shots/19437711-Do-it-To-Do-List-Mobile-App-Dark | Do it - To Do List Mobile App Dark by Rayfan Tio Saputro for Keitoto on Dribbble
+https://dribbble.com/shots/19369901-Do-it-To-Do-List-Mobile-App | Do it - To Do List Mobile App by Rayfan Tio Saputro for Keitoto on Dribbble
+https://dribbble.com/shots/21673507-Task-Management-Dashboard | Task Management Dashboard by Awsmd on Dribbble
+
+https://www.youtube.com/watch?v=vtGCteFYs4M&t=4029s | Riverpod 2.x Course for Flutter Developers - Go From Beginner to Advanced in 17 Hours - YouTube
+https://riverpod.dev/docs/providers/provider#using-provider-to-cache-computations | Provider | Riverpod
+https://www.fluttericon.com/ | FlutterIcon - Flutter custom icons generator
+https://api.flutter.dev/flutter/material/AlertDialog-class.html | AlertDialog class - material library - Dart API
+https://api.flutter.dev/flutter/material/showDialog.html | showDialog function - material library - Dart API
+https://www.google.com/search?q=dart+remove+item+form+imutable+list&oq=dart+remove+item+form+imutable+list&aqs=chrome..69i57.9934j0j4&sourceid=chrome&ie=UTF-8 | dart remove item from immutable list - Google Search
+https://dartpad.dev/? | DartPad
+
+https://www.workfromhut.com/ | Work From Hut | Remote Jobs for Developers
+
+https://www.youtube.com/watch?v=v1j5gi0SMbM&list=WL&index=6 | (10) Deep linking in React Native apps - a webinar by Jakub Adamczyk from Software Mansion - YouTube
+
+https://www.reddit.com/ | (3) Reddit - Dive into anything
+https://www.google.com/search?q=expo+deep+linking+redirect+to+google+play+store&sca_esv=559959589&sxsrf=AB5stBgMN5QPORSBLUjWq8w6M2LMo_FJng%3A1692987047001&ei=pu7oZN_iPLnhseMPs96wgAI&oq=expo+deep+linking+redi&gs_lp=Egxnd3Mtd2l6LXNlcnAiFmV4cG8gZGVlcCBsaW5raW5nIHJlZGkqAggAMgUQIRigATIFECEYoAFI0j5QrwVY8TFwAHgCkAEAmAHvAaABkAqqAQUwLjEuNbgBA8gBAPgBAcICBBAAGEfCAgQQIxgnwgIIEAAYigUYkQLCAgoQABiABBgUGIcCwgIFEAAYgATCAgYQABgWGB7CAggQABiKBRiGA8ICBBAhGBXiAwQYACBBiAYBkAYI&sclient=gws-wiz-serp | expo deep linking redirect to google play store - Google Search
+https://www.reddit.com/r/reactnative/comments/kx8295/deep_linking_with_expo_redirect_to_app_store_if/ | (3) deep linking with expo - redirect to app store if the app is not installed, is it not possible in expo? : reactnative
+https://medium.com/@muratcanbur/intro-to-deep-linking-on-android-1b9fe9e38abd | Intro to Deep Linking on Android. What is Deep linking? | by Murat Can Bur | Medium
+https://stackoverflow.com/questions/74797771/how-to-open-app-in-android-with-deeplinking-in-expo | how to open app in android with deeplinking in expo - Stack Overflow
+https://docs.expo.dev/guides/deep-linking/ | Deep linking - Expo Documentation
+https://docs.expo.dev/guides/deep-linking/#deep-links-on-android | Deep linking - Expo Documentation
+
+https://www.youtube.com/watch?v=cz01rOOaLmA | (5) Make your Neovim Registers More Useful! — Neovim & VsCode - YouTube
+https://riverpod.dev/docs/concepts/providers | Providers | Riverpod
+https://riverpod.dev/docs/providers/state_notifier_provider | StateNotifierProvider | Riverpod
+
+https://github.com/gbprod/yanky.nvim | gbprod/yanky.nvim: Improved Yank and Put functionalities for Neovim
+https://github.com/levouh/tint.nvim | levouh/tint.nvim: Dim inactive windows in Neovim using window-local highlight namespaces.
+
+https://www.freecodecamp.org/news/open-source-projects-every-dev-should-know/ | Open Source Projects Every Developer Should Know About
+https://www.smashingmagazine.com/2023/07/shines-perspective-rotations-css-3d-effects-images/ | Shines, Perspective, And Rotations: Fancy CSS 3D Effects For Images — Smashing Magazine
+https://semaphoreci.com/blog/svg-animations-tailwind-css | Creating SVG Animations Using Tailwind CSS - Semaphore
+https://dev.to/lovepreetsingh/reactjs-mongodb-js-css-in-one-shot-while-building-an-app-3f43 | ReactJS, MongoDB, JS, CSS in one shot while building an App - DEV Community
+https://www.freecodecamp.org/news/complete-guide-to-css-transform-functions-and-properties/ | CSS Transform Handbook – Complete Guide to CSS Transform Functions and Properties
+https://dribbble.com/shots/21887619-Fintech-App-UI | Fintech App UI by Ofspace UX/UI on Dribbble
+https://github.com/gennaro-tedesco/dotfiles/blob/7385fa7f2d28b9b3ac5f18f52894127e433ab81c/nvim/lua/plugins/lsp.lua#L46-L59 | dotfiles/nvim/lua/plugins/lsp.lua at 7385fa7f2d28b9b3ac5f18f52894127e433ab81c · gennaro-tedesco/dotfiles
+https://blog.bitsrc.io/getting-started-with-a-new-react-native-app-in-2023-67f3f1575829 | Getting Started with a New React Native App in 2023 | Bits and Pieces
+https://sirfitz.medium.com/qr-code-scanning-in-react-native-0-71-9e7568fad31a | QR Code Scanning in React-Native 0.71 | by Romario Fitzgerald | Medium
+https://speckyboy.com/8-css-javascript-snippets-for-creating-beautiful-bokeh-effects/ | 8 CSS & JavaScript Snippets for Creating Beautiful Bokeh Effects
+https://blog.logrocket.com/fluid-vs-responsive-typography-css-clamp/ | Fluid vs. responsive typography with CSS clamp - LogRocket Blog
+https://dev.to/ingosteinke/pure-css-parallax-perspective-beyond-landscape-images-24g2 | Pure CSS parallax perspective beyond landscape images - DEV Community
+https://dev.to/arjuncodess/top-14-game-changing-websites-every-developer-should-know-about-4dlc | Top 14 Game-Changing Websites Every Developer Should Know About 🚀🔥 - DEV Community
+
+http://172.16.50.12/SAM-FTP-1/TV-WEB-Series/TV%20Series%20%E2%99%A5%20%20A%20%20%E2%80%94%20%20L/Dexter%20%28TV%20Series%202006%E2%80%932021%29%201080p/Season%2006/ | Season 06 - 172.16.50.12 > SAM-FTP-1 > TV-WEB-Series > TV Series ♥ A — L > Dexter (TV Series 2006–2021) 1080p > Season 06
+https://www.youtube.com/watch?v=N0rSpuHp7B4 | (31) Why I Do NOT Use Flutter for Mobile App Development - YouTube
+https://docs.flutter.dev/tools/android-studio | Android Studio and IntelliJ | Flutter
+https://www.youtube.com/watch?v=R_agd5qZ26Y | Basic System Design for Uber or Lyft | System Design Interview Prep - YouTube
+https://www.youtube.com/watch?v=1_4Pzc7GSOc | Sacha Baron Cohen on the Dangers of Playing Ali G and Brüno | Late Night with Conan O’Brien - YouTube
+https://auberginesolutions.com/blog/upgrade-the-flutter-version/ | [Guide] Update Flutter Project to Version 3.0 (from 1.22 or 2.0)
+https://www.messenger.com/t/100005838588896 | Messenger
+
+https://www.comcitybd.com/product/value-top-238-inch-t24if-full-hd-75hz-frameless-ips-led-monitor-with-metal-stand | VALUE-TOP 23.8-INCH T24IF FULL HD 75Hz FRAMELESS IPS LED MONITOR WITH METAL STAND
+
+https://stackoverflow.com/questions/67901965/flutter-gradle-task-assembledebug-failed-with-exit-code-1-zip-end-header-not-fou | android studio - Flutter Gradle task assembleDebug failed with exit code 1 zip END header not found - Stack Overflow
+https://www.youtube.com/results?search_query=waz+bangla | (27) waz bangla - YouTube
+https://www.youtube.com/watch?v=I9zHX-jSKpA | A deep dive into CSS color-mix() - YouTube
+https://www.youtube.com/watch?v=Ay-nCWQxzNo | (27) Conan & Matt's New Podcast Idea | Conan O'Brien Needs A Friend - YouTube
+https://fvm.app/docs/getting_started/installation/ | Installation | Flutter Version Management
+
+https://github.com/Expensify/App | Expensify/App: Welcome to New Expensify: a complete re-imagination of financial collaboration, centered around chat. Help us build the next generation of Expensify by sharing feedback and contributing to the code.
+
+https://www.youtube.com/watch?v=w04F92u51dI | (6) React Native Deep Linking with Firebase & Navigation in One Video 🔥 | In Hindi | Engineer Codewala - YouTube
+https://docs.expo.dev/guides/linking/?redirected | Linking - Expo Documentation
+https://docs.expo.dev/guides/deep-linking/ | Deep linking - Expo Documentation
+https://reactnavigation.org/docs/deep-linking/ | Deep linking | React Navigation
+https://docs.expo.dev/guides/linking/ | Linking - Expo Documentation
+https://medium.com/@williamjonescodes/deep-links-ios-expo-react-navigation-and-firebase-905501afdaf5 | Deep Links — iOS, Expo, and Firebase 🔗📲 | by William Jones | Medium
+
+https://www.youtube.com/watch?v=CLkxRnRQtDE | (6) Tailwind Connect 2023 — Keynote - YouTube
+
+https://www.youtube.com/watch?v=kxENF3Rj__w | (6) How to Make Your First $1000 in Web Development - YouTube
+
+https://www.youtube.com/watch?v=y8-F5-2EIcg&t=153s | (5) 10 CSS animation tips and tricks - YouTube
+https://www.youtube.com/watch?v=P4PnCdyrKng | (5) 🚨 I Love Neovim, But I Would NEVER use it 🚨 - YouTube
+https://reactnavigation.org/docs/deep-linking/ | Deep linking | React Navigation
+
+https://aniwave.to/watch/k-on.v84/ep-6 | Aniwave - K-ON! Watch Anime Online
+http://circleftp.net/cn/cheer-up-tv-series-2022-hindi-dubbed/ | Cheer Up (TV Series 2022) Hindi Dubbed | Circle Network
+http://10.16.100.244/player.php?play=32942 | ICC FTP SERVER
+http://circleftp.net/cn/a-love-so-beautiful-tv-series-2020-hindi-dubbed/ | A Love So Beautiful (TV Series 2020-) Hindi Dubbed | Circle Network
+
+https://xd.adobe.com/view/b24c3f5c-a401-43a4-8620-2069ee475c83-e71f/screen/533c9c41-96de-45ed-9bb1-b1a508adf2c4/specs/ | V.0.0.1/F
+https://pub.dev/packages/flutter_svg/install | flutter_svg | Flutter Package
+https://www.youtube.com/watch?v=E3xVcQ0TAHg | (107) Flutter Tutorial - How To Add SVG Image File | Flutter SVG - YouTube
+https://www.youtube.com/watch?v=73a4VLyOq0s | (107) Blur Appbar in Flutter -Flutter tutorial - YouTube
+
+https://fontawesomeicons.com/flutter/icons | Flutter Icons, List- Get All latest Flutter icons- Use Easily- Fluttericons
+
+https://xd.adobe.com/view/b24c3f5c-a401-43a4-8620-2069ee475c83-e71f/flow/ | V.0.0.1/F
+
+https://www.facebook.com/photo/?fbid=249836758002547&set=a.106467219006169 | Facebook
+
+https://github.com/elentok/format-on-save.nvim | elentok/format-on-save.nvim: Automatically formats files when saving using either LSP or shell utilities like prettierd or shfmt
+
+https://www.reddit.com/r/neovim/comments/15oue2o/finally_a_robust_autoformatting_solution/ | (4) Finally, a robust auto-formatting solution. : neovim
+
+https://www.youtube.com/shorts/Tbejoe-N0Ss | REAL programmers do THIS 👩‍💻 #programmer #developer #programmerhumor #software #technology - YouTube
+https://www.youtube.com/watch?v=ecK3EnyGD8o | 13 Advanced (but useful) Git Techniques and Shortcuts - YouTube
+https://www.youtube.com/watch?v=pa_xqXxm6ok | Git Tutorial: Squashing Commits - YouTube
+https://www.facebook.com/ | (5) Facebook
+
+https://www.youtube.com/watch?v=G_h2pGZcOzc | (88) Create direction-aware effects using modern CSS - YouTube
+https://www.youtube.com/watch?v=abzMSYsnXV4 | (88) CSS Navbar: Create a Beautiful Navigation Bar From Scratch - YouTube
+https://www.youtube.com/watch?v=h2AOXBeVrgI | (88) Recreating YouTube’s tab animation - YouTube
+
+https://github.com/hrsh7th/nvim-cmp | hrsh7th/nvim-cmp: A completion plugin for neovim coded in Lua.
+https://github.com/folke/edgy.nvim | folke/edgy.nvim: Easily create and manage predefined window layouts, bringing a new edge to your workflow
+https://github.com/chaoren/vim-wordmotion | chaoren/vim-wordmotion: More useful word motions for Vim
+https://github.com/willothy/flatten.nvim | willothy/flatten.nvim: Open files and command output from neovim terminals in your current neovim instance
+
+https://www.reddit.com/r/FlutterDev/comments/15m0eez/picture_heavy_app_how_to_store_pictures_and_audio/ | (2) Picture heavy app - how to store pictures and audio files (jpgs,svgs) : FlutterDev
+https://www.fiverr.com/cp/product-release-2023 | Product Release 2023
+
+https://www.youtube.com/watch?v=2GeMknXoGaA | (57) 9 Resources to help you practice your front-end skills - YouTube
+https://www.youtube.com/watch?v=Idf0zh9f3qQ | Use Type, not Interface in TypeScript - YouTube
+https://www.youtube.com/watch?v=dxWrRuHbh6E | (52) Can Moti simplify React Native animations? - YouTube
+https://www.youtube.com/ | (52) YouTube
+https://www.youtube.com/watch?v=fF5nEVH86fg | (52) #CONAN: Joel McHale Full Interview - CONAN on TBS - YouTube
+https://www.youtube.com/watch?v=xNVM5UxlFSA | (52) How to resolve merge conflicts in Git - YouTube
+https://github.com/sindrets/diffview.nvim | sindrets/diffview.nvim: Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
+https://github.com/sindrets/diffview.nvim/blob/main/doc/diffview.txt | diffview.nvim/doc/diffview.txt at main · sindrets/diffview.nvim
+
+https://www.youtube.com/watch?v=PUdyuKaGQd4 | (14) Alice Merton - No Roots - YouTube
+https://www.youtube.com/watch?v=759Rj-iyA3Y | Samsung LF22T350FHW IPS Monitor Review | New Budget King ? NOO!!! - YouTube
+https://codepen.io/kevinpowell/full/ExbKBQa | Horizontal media scrolling - finished
+https://www.youtube.com/watch?v=3yfswsnD2sw | Create a horizontal media scroller with CSS - YouTube
+https://www.google.com/search?q=horizontal+media+scroller&oq=horizontal+media+scroller&aqs=chrome..69i57j69i61l2.9159j0j1&sourceid=chrome&ie=UTF-8 | horizontal media scroller - Google Search
+https://gui-challenges.web.app/media-scroller/dist/# | Media Scroller | GUI Challenges
+https://www.youtube.com/watch?v=jmLdZY_Lo1k | (14) Thinking on ways to solve a MEDIA SCROLLER - YouTube
+https://web.dev/building-a-media-scroller-component/ | Building a media scroller component
+https://codepen.io/argyleink/pen/bGgyOGP | GUI Challenges - Media Scroller
+http://localhost:3000/ | localhost:3000
+https://github.com/Dangoo/roving-ux-react | Dangoo/roving-ux-react: Stateful roving index for react web ui
+
+https://www.youtube.com/watch?v=JIIqrA93CW8 | Fred Armisen & Nick Kroll Saved Aubrey Plaza's "Border" Screening | CONAN on TBS - YouTube
+https://github.com/gabrielpoca/replacer.nvim | gabrielpoca/replacer.nvim: A powerful refactoring tool for nvim.
+
+http://circleftp.net/cn/loudermilk-tv-series-2017-2020/ | Loudermilk (TV Series 2017-2020) | Circle Network
+
+https://github.com/mrshmllow/open-handlers.nvim | mrshmllow/open-handlers.nvim: A very simple plugin that allows multiple custom vim.ui.open handlers to co-exist
+https://github.com/okuuva/auto-save.nvim | okuuva/auto-save.nvim: 🧶 Automatically save your changes in NeoVim
+https://github.com/niuiic/format.nvim | niuiic/format.nvim: An asynchronous, multitasking, and highly configurable formatting plugin.
+
+https://bikroy.com/en/ad/apple-ipad-mini-3mggq2ll-used-for-sale-dhaka | Apple Ipad-mini-3(MGGQ2LL (Used) in Mirpur | Bikroy
+
+https://www.youtube.com/@KevinPowell/videos | Kevin Powell - YouTube
+https://www.figma.com/file/OcuTTscUmsH9TyHG6VJAhP/Redesign-Ricky-(Copy)?node-id=20%3A127&mode=dev | Redesign Ricky (Copy) – Figma
+https://www.youtube.com/shorts/Ow27iGL5Jz0 | (5) Breaking Hydration Myths With @ZachBushMD NOW LIVE - YouTube
+https://www.youtube.com/results?search_query=css+full+width+image | (5) css full width image - YouTube
+https://www.youtube.com/watch?v=dpuKVjX6BJ8 | (5) HTML Page Width and Height Settings | CSS Full Screen Size - YouTube
+
+https://www.reddit.com/r/neovim/comments/11ls23z/what_is_your_nvim_workflow_for_reviewing_prs/ | (3) What is your nvim workflow for reviewing PRs? : neovim
+
+https://getcssscan.com/css-box-shadow-examples | 93 Beautiful CSS box-shadow examples - CSS Scan
+https://css-irl.info/drop-shadow-the-underrated-css-filter/ | CSS { In Real Life } | Drop-Shadow: The Underrated CSS Filter
+
+https://www.autohotkey.com/board/topic/4173-min2tray-v179-minimize-window-to-tray-much-more/ | Min2Tray v1.7.9 - minimize window to tray & much more! - Scripts and Functions - AutoHotkey Community
+https://github.com/JuanmaMenendez/AutoHotkey-script-Open-Show-Apps | JuanmaMenendez/AutoHotkey-script-Open-Show-Apps: AutoHotkey script to open, restore or minimize, Window's and Chrome's Apps using hotkeys
+
+https://www.youtube.com/watch?v=Hq7Wj6DshNs | (138) Flutter UI Tutorial | Login and Signup Page Design & Animation - day 23 - YouTube
+https://github.com/afgprogrammer/Flutter-login-page | afgprogrammer/Flutter-login-page: Flutter dark/light mode Login Page UI design - day 24
+https://www.youtube.com/watch?v=u6Cfzng3Gek | (138) Analog Clock Light & Dark Theme - Flutter UI - Speed Code - YouTube
+
+https://9anime.to/watch/tsukigakirei.lk0n/ep-1 | Watch Tsukigakirei Anime Online | 9Anime
+https://9anime.to/watch/tonikawa-over-the-moon-for-you-season-2.3rr92/ep-7 | Watch TONIKAWA: Over The Moon For You Season 2 Online with SUB/DUB - 9Anime
+
+http://172.16.50.12/SAM-FTP-1/TV-WEB-Series/TV%20Series%20%E2%99%A5%20%20A%20%20%E2%80%94%20%20L/Community%20%28TV%20Series%202009%E2%80%932015%29%201080p/Season%206/ | Season 6 - 172.16.50.12 > SAM-FTP-1 > TV-WEB-Series > TV Series ♥ A — L > Community (TV Series 2009–2015) 1080p > Season 6
+https://9anime.to/watch/tamako-market.j58/ep-2 | 9Anime - Tamako Market Watch Anime Online
+
+https://github.com/Everblush/nvim | Everblush/nvim: A port of everblush.vim but written in lua
+https://www.reddit.com/r/neovim/comments/14po02y/introducing_multicursorsnvim_plugin/ | (2) Introducing multicursors.nvim plugin : neovim
+https://www.reddit.com/r/neovim/comments/14rybi2/deliberatenvim_alternative_way_to_manipulate_html/ | (2) Deliberate.nvim - Alternative way to manipulate HTML + Tailwind CSS : neovim
+
+https://www.youtube.com/watch?v=JqPezeQiwxk | (70) Go Travel - Mobile App Dev | React Native Expo | TailwindCSS| Google Places & Rapid API's - YouTube
+https://www.youtube.com/watch?v=Pcil5sNJ8Y8 | REACT NATIVE + TAILWIND CSS = AMAZING! - YouTube
+https://www.youtube.com/watch?v=_Z33DTn0ZFo | Add Tailwind CSS In Your React Native App - YouTube
+https://www.youtube.com/watch?v=IIBtEamRbwA&t=288s | This BRAND NEW Tool Takes Tailwind CSS To a New Level! - YouTube
+https://www.nativewind.dev/quick-starts/expo | Expo | NativeWind
+
+https://9anime.to/watch/scums-wish.n83l/ep-1 | Watch Scum's Wish Anime Online | 9Anime
+https://9anime.to/watch/kimi-ni-todoke-from-me-to-you.ll0m/ep-1 | Anime Kimi ni Todoke: From Me to You Watch Online Free - 9Anime
+
+https://9anime.to/watch/tsuredure-children.8803/ep-1 | Watch Tsuredure Children in HD Online for Free - 9Anime
+https://9anime.to/watch/tsukigakirei.lk0n/ep-1 | Watch Tsukigakirei Anime Online | 9Anime
+https://9anime.to/watch/my-little-monster.0wr/ep-1 | Watch My Little Monster Anime English SUB/DUB - 9Anime
+https://9anime.to/watch/toradora.q9w/ep-1 | Watch Toradora! Anime English SUB/DUB - 9Anime
+https://9anime.to/watch/masamune-kun-no-revenge-r.7jwpy/ep-1 | Watch Masamune-kun's Revenge R Online in HD - 9Anime
+
+https://techdiversitybd.com/products/keyboard/ajazz/ajazz-ak992-rgb-mechanical-keyboard/ | Ajazz AK992 Tri-Mode RGB Mechanical keyboard - Tech Diversity
+https://techdiversitybd.com/products/keyboard/ajazz/ajazz-ak835i-rgb-mechanical-keyboard/ | Ajazz AK35I White Backlit Wired Mechanical Keyboard - Tech Diversity
+
+https://shift.infinite.red/flutter-is-better-than-react-native-fed10c92a768 | Is Flutter better than React Native? | Red Shift
+
+https://roadmap.sh/flutter | Learn to become a modern Flutter developer
+
+https://flowbite.com/docs/forms/search-input/ | Tailwind CSS Search Input - Flowbite
+
+https://www.reddit.com/r/neovim/comments/14icu1y/orgmodebabelnvim_an_experimental_plugin_that/ | orgmode-babel.nvim: An experimental plugin that evaluates and tangles code blocks in nvim-orgmode using babel itself. : neovim
+https://www.reddit.com/r/neovim/comments/14hpdsx/best_way_to_manipulate_files_inside_neovim/ | Best way to manipulate files inside neovim? : neovim
+https://www.reddit.com/r/neovim/comments/14gtjkh/flashnvim_navigate_your_code_with_search_labels/ | (1) flash.nvim: navigate your code with search labels, enhanced character motions and Treesitter integration : neovim
+
+https://www.youtube.com/shorts/Rf_k8kSAFU0 | (31) React.ComponentProps is such a lifesaver - YouTube
+https://github.com/folke/flash.nvim | folke/flash.nvim: Navigate your code with search labels, enhanced character motions and Treesitter integration
+https://github.com/jinh0/eyeliner.nvim | jinh0/eyeliner.nvim: 👀 Move faster with unique f/F indicators.
+
+https://9anime.to/watch/ranma.v5o6/ep-100 | Watch Ranma ½ in HD Online for Free - 9Anime
+https://9anime.to/watch/scums-wish.n83l/ep-1 | Watch Scum's Wish Anime Online | 9Anime
+
+http://circleftp.net/cn/udemy-fiverr-freelancing-sell-like-the-top-1/ | Udemy – Fiverr Freelancing 2023 – Sell Like The Top 1% | Circle Network
+http://circleftp.net/cn/udemy-the-ultimate-react-course-2023-react-redux-more/ | Udemy – The Ultimate React Course 2023 – React, Redux & More | Circle Network
+
+https://www.reddit.com/r/reactnative/comments/14biuow/rebuilt_my_react_native_app_with_shopifys_restyle/ | Rebuilt my React Native app with Shopify’s Restyle and Expo 48 : reactnative
+https://docs.expo.dev/versions/latest/sdk/blur-view/ | BlurView - Expo Documentation
+https://github.com/retyui/react-native-confirmation-code-field | retyui/react-native-confirmation-code-field: A react-native confirmation code field compatible with IOS, Android
+
+https://shopify.github.io/restyle/ | Getting started | Restyle
+
+http://172.16.50.12/SAM-FTP-1/TV-WEB-Series/TV%20Series%20%E2%99%A5%20%20A%20%20%E2%80%94%20%20L/Community%20%28TV%20Series%202009%E2%80%932015%29%201080p/Season%205/ | Season 5 - 172.16.50.12 > SAM-FTP-1 > TV-WEB-Series > TV Series ♥ A — L > Community (TV Series 2009–2015) 1080p > Season 5
+
+https://thoughtbot.com/blog/transitions-and-transforms#css-syntax-examples-for-transition-property | CSS Transitions and Transforms for Beginners
+
+https://www.reddit.com/r/RoyalKludge/comments/o9kg1d/rk_g68_fn_1_keys_not_wokring_in_wireless_mode/ | RK G68 Fn + 1-= keys not wokring in wireless mode : RoyalKludge
+
+http://172.16.50.12/SAM-FTP-1/TV-WEB-Series/TV%20Series%20%E2%99%A5%20%20A%20%20%E2%80%94%20%20L/Community%20%28TV%20Series%202009%E2%80%932015%29%201080p/Season%205/ | Season 5 - 172.16.50.12 > SAM-FTP-1 > TV-WEB-Series > TV Series ♥ A — L > Community (TV Series 2009–2015) 1080p > Season 5
+https://www.reddit.com/r/webdev/comments/146wvtj/created_website_for_new_flavours_of_prime_to_get/ | (1) Created Website For New Flavours Of Prime, To Get Prime Launch In India [WIP] : webdev
+https://www.reddit.com/r/web_design/comments/1479niu/how_can_i_create_a_swirly_line_like_on_the/ | Reddit - Dive into anything
+
+https://www.reddit.com/r/FlutterDev/comments/145yfwg/dont_write_themeofcontext_anymore/ | (2) Don’t write Theme.of(context) ANYMORE : FlutterDev
+
+https://markodenic.com/tools/buttons-generator/ | Buttons Generator - Marko Denic - Web Developer
+
+https://www.reddit.com/r/reactjs/comments/140gv5m/i_attempted_to_create_a_captivating_animation/ | (2) I attempted to create a captivating animation using Framer Motion and NextJS from Dribbble! : reactjs
+
+https://www.dbestech.com/tutorials/flutter-riverpod-new-version | Flutter Riverpod Latest Guide
+
+https://github.com/facebook/react-native/issues/36123 | App performance is degraded when react native version updated to 0.71.2 from 0.68.0 · Issue #36123 · facebook/react-native
+
+https://www.youtube.com/watch?v=3ox0R5jPb04 | (114) Animated FlatList in React Native (Reanimated) - YouTube
+https://www.youtube.com/watch?v=F8x-dyIsrJ8 | (114) React Native Scroll Item animation effect - FlatList and Animated API - YouTube
+
+https://tamagui.dev/docs/components/radio-group/1.3.0 | RadioGroup — Tamagui — React Native Universal UI
+https://www.reddit.com/r/neovim/comments/13vrn0g/first_pr_using_neovim_but_need_help_moving_forward/ | (2) First PR using NeoVim, but need help moving forward : neovim
+https://www.youtube.com/watch?v=bUTdUaVmj8o&list=RDGMEMCMFH2exzjBeE_zAHHJOdxg&index=27 | (114) Gulaabo - Full Video| Shaandaar | Alia Bhatt & Shahid Kapoor | Vishal Dadlani | Amit Trivedi - YouTube
+https://blog.theodo.com/2022/12/optimising-load-legacy-devices-rn/ | Optimising screen load times for legacy low-end devices in React Native | Theodo
+https://www.google.com/search?q=react+native+expo+components+render+slow&sxsrf=APwXEddXz5MALULgS3nmbR5v6j2qGf0Lhg%3A1685490400442&ei=4Ip2ZK_XGsCM4-EP87iAiA4&ved=0ahUKEwivx9yEnZ7_AhVAxjgGHXMcAOEQ4dUDCBA&uact=5&oq=react+native+expo+components+render+slow&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIFCCEQoAEyBQghEKABOgUIABCABDoECCEQFToICCEQFhAeEB06BAgjECc6BggAEBYQHjoICAAQigUQhgM6BwghEKABEApKBAhBGABQAFjRXmDOYWgAcAF4AIABzwGIAd4akgEGMC4yMi4xmAEAoAEBwAEB&sclient=gws-wiz-serp#ip=1 | react native expo components render slow - Google Search
+https://javascript.plainenglish.io/react-native-performance-dos-and-don-t-c3de8739e0a8 | 6 Reasons Why Your React Native Application is Slow | by shrey vijayvargiya | JavaScript in Plain English
+https://medium.com/@gauravsapiens/react-native-making-your-app-fast-again-d00d02ee2b2a | React Native — Making your app fast again | by Gaurav Arora | Medium
+https://www.bam.tech/en/article/debug-react-native-performance-issues | Debug your React Native app performance issues
+
+https://pub.dev/packages/fixle_feedback_flutter | fixle_feedback_flutter | Flutter Package
+
+https://www.reddit.com/r/neovim/comments/13tlakw/highlight_the_text_that_was_affected_by_u/ | Highlight the text that was affected by 'u' : neovim
+
+https://sort-spectra.netlify.app/ | Sorting Visualiser
+https://hinsxd.dev/blog/sorting-visualizer | Sorting Visualizer Tutorial with React, SVG, ES6 generator function
+https://github.com/Akshat-bhatia73/Sorting-Visualiser | Akshat-bhatia73/Sorting-Visualiser
+
+https://posthog.com/ | PostHog - The open source Product OS
+https://www.reddit.com/r/reactnative/comments/13rji7m/three_apps_one_codebase_power_of_react_native_is/ | Three apps one codebase. Power of React Native is immense! Source coming soon! : reactnative
+https://www.reddit.com/r/neovim/comments/13pms9k/wip_plugin_a_featurerich_polished_highly/ | (1) [WIP plugin] A feature-rich, polished, highly customizable winbar, with drop down menu support and multiple backends : neovim
+
+https://github.com/alan2207/bulletproof-react | alan2207/bulletproof-react: 🛡️ ⚛️ A simple, scalable, and powerful architecture for building production ready React applications.
+https://medium.com/@janelle.wg/atomic-design-pattern-how-to-structure-your-react-application-2bb4d9ca5f97 | Atomic Design Pattern: How to structure your React application | by Janelle Wong | Medium
+
+https://elazizi.com/posts/react-native--github-action--%EF%B8%8F/ | React Native + Github Action = ❤️
+
+http://172.16.50.7/SAM-FTP-2/English%20Movies/%282016%29/ | (2016) - 172.16.50.7 > SAM-FTP-2 > English Movies > (2016)
+https://github.com/Bur0/react-native-actions-sheet-picker | Bur0/react-native-actions-sheet-picker: A React Native component that provides a filterable select dropdown/picker.
+https://www.npmjs.com/package/react-native-actions-sheet-picker | react-native-actions-sheet-picker - npm
+https://github.com/tamagui/tamagui/issues?q=displayName | Issues · tamagui/tamagui
+
+https://www.happyhues.co/palettes/2 | Happy Hues - Curated colors in context.
+https://tamagui.dev/docs/components/select/1.19.0 | Select — Tamagui — React Native Universal UI
+https://github.com/rutvik110/Flutter-Animations/blob/nothing/lib/flutter_design_challenges/magic_grid/magic_grid.dart | Flutter-Animations/magic_grid.dart at nothing · rutvik110/Flutter-Animations · GitHub
+https://www.reddit.com/r/FlutterDev/comments/13jb1gc/diving_deep_into_render_objects_by_creating_a/ | (2) Diving deep into render objects by creating a custom ui interaction with them! You can check out the ongoing implementation which is open sourced🙌 : FlutterDev
+https://www.youtube.com/watch?v=677FAsjd8pk | Fast X - Movie Review - YouTube
+
+https://www.reddit.com/r/FlutterDev/comments/13g8p2w/reduce_size_of_apps/ | (2) Reduce size of apps : FlutterDev
+https://medium.com/flutter/whats-new-in-flutter-3-10-b21db2c38c73 | What’s new in Flutter 3.10. Seamless web and mobile integration… | by Kevin Chisholm | Flutter | May, 2023 | Medium
+
+https://reactnative.dev/blog/2022/07/08/hermes-as-the-default | Hermes as the Default · React Native
+https://tamagui.dev/blog/version-one | Tamagui 1.0 🎉 — Tamagui
+https://www.fiverr.com/kaamish/design-an-android-app-using-flutter-flow?context_referrer=logged_in_homepage&source=by_recently_viewed&ref_ctx_id=da1400d5bfb27e19cb1779020d15811f&context=recommendation&pckg_id=1&pos=1&context_alg=recently_viewed&imp_id=b95177c4-e8fe-41b6-b67d-08eb80340f16 | Develop your dream app using flutter and flutterflow by Kaamish | Fiverr
+https://gazijarin.com/ | Gazi
+https://blog.logrocket.com/optimize-react-native-performance/ | Optimizing React Native performance - LogRocket Blog
+
+https://brainhub.eu/library/react-native-performance | React Native Performance - Optimizing Tips
+https://lightrun.com/answers/software-mansion-react-native-screens-animation-duration-between-pages | Animation duration between pages
+https://www.clariontech.com/blog/how-to-improve-react-native-app-performance | How to Improve React Native App Performance
+https://www.quora.com/Is-slow-performance-the-only-disadvantage-of-React-Native-when-compared-to-apps-build-natively-using-Swift-or-Java | Is slow performance the only disadvantage of React Native when compared to apps build natively (using Swift or Java)? - Quora
+https://shopify.engineering/measuring-react-native-rendering-times | Our Solution for Measuring React Native Rendering Times (2023)
+https://binmile.com/blog/staying-ahead-with-react-native-app-for-optimized-performance/ | React Native App Optimization for Performance Improvement
+
+https://www.youtube.com/watch?v=t0qQSujSslQ | (39) How to use generics in TypeScript - YouTube
+https://www.youtube.com/watch?v=dLPgQRbVquo&list=WL&index=104 | (39) 10 Tips for Mastering TypeScript Generics - YouTube
+https://www.youtube.com/watch?v=gieEQFIfgYc&list=WL&index=76 | TypeScript Full Course for Beginners | Complete All-in-One Tutorial | 8 Hours - YouTube
+https://www.youtube.com/watch?v=YmxwicpROps&list=WL&index=105 | TypeScript Speedrun: Crash Course for Beginners - YouTube
+https://www.youtube.com/watch?v=ygdPRlSo3Qg&list=WL&index=15 | (39) Computer Science in TypeScript (NO DEGREE REQUIRED) - YouTube
+https://www.youtube.com/watch?v=Us2JP01aNFE&list=WL&index=20 | Polyglot Programming: TypeScript, Go, & Rust by ThePrimeagen | Preview - YouTube
+https://www.youtube.com/watch?v=kq6IhAZVNh8&list=WL&index=26&t=8s | Learn Typescript with React | Quick Crash Course - YouTube
+https://www.youtube.com/watch?v=6Hj56GdFpgs&list=WL&index=98 | TypeScript utility types you need to know - YouTube
+
+https://github.com/HasithaAthukorala/flutter-clean-architecture-sample | HasithaAthukorala/flutter-clean-architecture-sample: Sample for flutter clean architecture with blocs and test driven development
+http://172.16.50.10/SAM-FTP-3/Anime%20%26%20Cartoon%20TV%20Series/Arcane%20%28TV%20Cartoon%202021%E2%80%93%20%29%201080p/Season%201/ | Season 1 - 172.16.50.10 > SAM-FTP-3 > Anime & Cartoon TV Series > Arcane (TV Cartoon 2021– ) 1080p > Season 1
+https://github.com/harrisoncramer/nvim/blob/main/lua/plugins/diffview.lua | nvim/diffview.lua at main · harrisoncramer/nvim
+https://github.com/harrisoncramer/nvim/blob/main/lua/plugins/fterm.lua#L8 | nvim/fterm.lua at main · harrisoncramer/nvim
+
+https://lost-pixel.com/blog/post/pdf-visual-regression-testing | PDF visual regression testing with react-pdf and Lost Pixel Platform - Lost Pixel
+https://www.reddit.com/r/FlutterDev/comments/130nqt0/does_boilerplate_code_in_flutter_bother_you_and/ | (2) Does boilerplate code in Flutter bother you? And do you already use hooks? : FlutterDev
+https://ui.dev/why-react-renders | The Interactive Guide to Rendering in React
+
+https://www.reddit.com/r/webdev/comments/12uxxjn/my_friends_are_sick_of_me_having_to_review_my/ | (2) My friends are sick of me having to review my projects. In need for a review!😩 : webdev
+https://megglebande.netlify.app/# | Meggle Bande Portfolio Homepage
+https://www.reddit.com/r/neovim/comments/12rqyl8/5_smart_minisnippets_for_making_text_editing_more/ | 5 smart mini-snippets for making text editing more fun in Neovim : neovim
+https://github.com/ecthelionvi/NeoComposer.nvim | ecthelionvi/NeoComposer.nvim: Neovim plugin that simplifies macros, enhancing productivity with harmony.
+
+https://www.reddit.com/r/FlutterDev/comments/12varxe/qr_code_scanning_in_flutter_made_easier/ | (2) QR code scanning in Flutter made easier : FlutterDev
+https://rive.app/use-cases/rive-gamekit-for-flutter | Rive GameKit for Flutter
+
+https://github.com/jay-babu/mason-null-ls.nvim | jay-babu/mason-null-ls.nvim
+https://lagooncompany.fandom.com/wiki/Episode_List | Episode List | Black Lagoon Wiki | Fandom
+https://github.com/laytan/tailwind-sorter.nvim | laytan/tailwind-sorter.nvim: Easily sort Tailwind classes in Neovim.
+http://circleftp.net/cn/mob-psycho-100-tv-series-2016-anime-dual-audio-engjapanese/ | Mob Psycho 100 (TV Series 2016-) Anime [Dual Audio] [Eng+Japanese] | Circle Network
+http://circleftp.net/cn/a-love-so-beautiful-tv-series-2020-hindi-dubbed/ | A Love So Beautiful (TV Series 2020-) Hindi Dubbed | Circle Network
+http://circleftp.net/cn/shadow-and-bone-tv-series-2021-dual-audio-hindienglish/ | Shadow and Bone (TV Series 2021-) [Dual Audio] [Hindi+English] | Circle Network
+https://kissasian.pe/drama/cinderella-and-four-knights-episode-16 | Watch full Cinderella and Four Knights ep 16 english sub | Kissasian
+http://circleftp.net/cn/mischievous-kiss-tv-series-2010-hindi-dubbed/ | Mischievous Kiss (TV Series 2010) Hindi Dubbed | Circle Network
+http://circleftp.net/cn/alice-in-borderland-tv-series-2020-multi-audio-hinengjap/ | Alice in Borderland (TV Series 2020-) [Multi Audio] [Hin+Eng+Jap] | Circle Network
+http://circleftp.net/cn/the-good-doctor-tv-series-2017/ | The Good Doctor (TV Series 2017-) | Circle Network
+
+https://www.youtube.com/watch?v=mnmYwRoSisg | (224) 10 Must Know Git Commands That Almost Nobody Knows - YouTube
+https://www.youtube.com/watch?v=elvwguckWjQ | This Open-Source NextJS Project is a Game-Changer - YouTube
+https://www.reddit.com/ | (2) Reddit - Dive into anything
+https://www.reddit.com/r/FlutterDev/comments/12rpm5s/why_should_startups_choose_flutter_for_mobile_app/ | (2) Why Should Startups Choose Flutter for Mobile App Development? : FlutterDev
+
+https://blog.logrocket.com/managing-react-state-zustand/ | Managing React state with Zustand - LogRocket Blog
+
+https://stealthy-whiskers.webflow.io/ | Gear for Modern Feline Warriors | Stealthy Whiskers
+
+https://www.youtube.com/watch?v=WHGH83i_c-Q | Conan Goes Apple Picking With Mr. T | Late Night with Conan O’Brien - YouTube
+https://www.youtube.com/watch?v=bKmadR4Ye54 | Norm Macdonald & Courtney Thorne-Smith | Late Night with Conan O’Brien - YouTube
+https://www.youtube.com/watch?v=XZ-mHxtkNOo | Conan Travels - "Conan House-Hunts with Jordan Schlansky" - 7/29/09 - YouTube
+https://www.youtube.com/watch?v=eWhkoYS4xFc | Matt Damon & Conan Ran Into Each Other At A Boston Bar l Late Night With Conan O'Brien - YouTube
+https://www.youtube.com/watch?v=UDfEKebcM5w | Conan Demands An Apology From Sona | Conan O'Brien Needs A Friend - YouTube
+https://www.youtube.com/watch?v=Zh1XDXzCe-0 | Al Franken’s Parents Got Cut From An SNL Sketch | Conan O'Brien Needs A Friend - YouTube
+https://www.youtube.com/watch?v=scIizw2asro | (208) Bill Skarsgård's Demonic “IT" Smile | CONAN on TBS - YouTube
+
+https://marvelous-fox-8a655f.netlify.app/article/10 | Vite App
+https://dribbble.com/shots/7033826-Developer-s-blog/ | Developer’s blog by Denis Danilov on Dribbble
+
+https://www.atlassian.com/git/tutorials/using-branches/git-checkout#:~:text=The%20git%20branch%20command%20can,to%20switch%20to%20that%20branch. | Git Checkout | Atlassian Git Tutorial
+
+https://medium.com/@hariysu/simple-mvvm-architecture-in-flutter-94898f6929ce | Simple MVVM Architecture in Flutter | by Abdurahman Aydın | Apr, 2023 | Medium
+https://www.reddit.com/r/FlutterDev/comments/12klbiq/my_game_is_free_but_firebase_is_now_costing_me/ | (2) My game is free but Firebase is now costing me. Time to monetise? : FlutterDev
+https://link.chtbl.com/CONAFConanSoap | Conan O’Brien Needs A Friend
+https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5zaW1wbGVjYXN0LmNvbS9kSG9vaFZOSA | Conan O’Brien Needs A Friend
+https://lmssieh.com/# | lmssieh - portfolio
+
+http://172.16.50.12/SAM-FTP-1/TV-WEB-Series/TV%20Series%20%E2%99%A6%20%20S%20%20%E2%80%94%20%20Z/The%20Good%20Place%20%28TV%20Series%202016%E2%80%93%20%29%20720p/Season%2004/ | Season 04 - 172.16.50.12 > SAM-FTP-1 > TV-WEB-Series > TV Series ♦ S — Z > The Good Place (TV Series 2016– ) 720p > Season 04
+http://172.16.50.12/SAM-FTP-1/TV-WEB-Series/TV%20Series%20%E2%99%A6%20%20S%20%20%E2%80%94%20%20Z/The%20Last%20of%20Us%20%28TV%20Series%202023%E2%80%93%20%29%201080p/Season%201/ | Season 1 - 172.16.50.12 > SAM-FTP-1 > TV-WEB-Series > TV Series ♦ S — Z > The Last of Us (TV Series 2023– ) 1080p > Season 1
+https://github.com/luukvbaal/statuscol.nvim | luukvbaal/statuscol.nvim: Status column plugin that provides a configurable 'statuscolumn' and click handlers.
+
+https://github.com/folke/dot/blob/master/nvim/lua/plugins/dap.lua | dot/dap.lua at master · folke/dot
+https://github.com/gbprod/yanky.nvim | gbprod/yanky.nvim: Improved Yank and Put functionalities for Neovim
+https://github.com/jose-elias-alvarez/typescript.nvim | jose-elias-alvarez/typescript.nvim: A Lua plugin, written in TypeScript, to write TypeScript (Lua optional).
+
+https://gigacourse.com/3-javascript-the-complete-guide-2020-beginner-advanced/ | JavaScript - The Complete Guide 2022 (Beginner + Advanced) Free Download
+https://gigacourse.com/13-the-new-modern-javascript-bootcamp-course-2020/ | The New Modern Javascript Bootcamp Course (2022) Free Download
+
+https://gigacourse.com/design-patterns-in-javascript/ | Design Patterns in JavaScript Udemy Free Download
+https://gigacourse.com/crash-course-build-a-full-stack-web-app-in-a-weekend/ | Crash Course: Build a Full-Stack Web App in a Weekend! Download Free
+https://gigacourse.com/javascript-leetcode-the-ultimate-interview-bootcamp/ | JavaScript & LeetCode | The Ultimate Interview Bootcamp Download Free
+https://gigacourse.com/master-git-and-github-in-5-days-go-from-zero-to-hero/ | Master Git and GitHub in 5 Days: Go from Zero to Hero Udemy Free Download
+https://gigacourse.com/neetcode-algorithms-data-structures-for-beginners/ | [NeetCode] Algorithms & Data Structures For Beginners Free Download
+https://gigacourse.com/math-for-data-science-masterclass/ | Math for Data Science Masterclass Udemy Free Download
+https://gigacourse.com/6-typescript-the-complete-developers-guide/ | Typescript: The Complete Developer's Guide Udemy Free Download
+https://www.udemy.com/course/typescript-the-complete-developers-guide/ | Typescript: The Complete Developer's Guide | Udemy
+https://gigacourse.com/6-advanced-javascript-concepts/ | JavaScript: The Advanced Concepts (2023 Update) Udemy Free Download
+
+https://www.reddit.com/r/webdev/comments/127ooy9/how_large_software_teams_work/ | (3) How large software teams work : webdev
+https://apps.apple.com/us/app/magic-budget/id6447111418 | Magic Budget on the App Store
+
+https://console.firebase.google.com/u/0/project/repay-8a9c8/firestore/data/~2Fpayment_requests~2FlbKxTgxOxZNMOhd6hreF | RePay - Cloud Firestore - Firebase console
+https://www.youtube.com/watch?v=LkHjJlSgKZY | (76) Neovim Config Switcher - YouTube
+https://www.reddit.com/r/neovim/ | (2) vim out of the box — http://neovim.org/
+https://www.reddit.com/r/neovim/comments/122f5ro/announcing_nerdfix_a_checker_for_obsolete_nerd/ | (2) Announcing nerdfix: A checker for obsolete Nerd Fonts icons : neovim
+https://www.reddit.com/r/webdev/comments/122w5iv/peepslabcom_i_have_made_this_tiny_web_app_for/ | (2) PeepsLab.com - I have made this tiny web app for creating custom avatars with over 4,000,000 possible combinations. : webdev
+
+https://github.com/jpaulsanchez15/johnsanchez.dev | jpaulsanchez15/johnsanchez.dev
+
+https://github.com/desdic/agrolens.nvim/tree/main/queries | agrolens.nvim/queries at main · desdic/agrolens.nvim
+https://www.daraz.com.bd/products/-i190024971-s1137524893.html?spm=a2a0e.seller.list.9.3f4c62634KEg17&mp=1 | https://www.daraz.com.bd/products/-i190024971-s1137524893.html?spm=a2a0e.seller.list.9.3f4c62634KEg17&mp=1
+https://github.com/SpatiumPortae/portal | SpatiumPortae/portal: Portal is a quick and easy command-line file transfer utility from any computer to another 🌌 ✨
+https://www.youtube.com/watch?v=oJhKMi4v16w | IFIC Bank to Other Bank Fund Transfer || IFIC Bank Fund Transfer || IFIC Amar Bank Fund Transfer - YouTube
+https://www.reddit.com/r/FlutterDev/comments/11pzofq/flutter_roadmap_from_google_dev_library/ | Reddit - Dive into anything
+http://10.16.100.244/player.php?play=31043 | ICC FTP SERVER
+http://10.16.100.244/player.php?play=31031 | ICC FTP SERVER
+
+https://www.youtube.com/results?search_query=setup+react+native+firebase | (8) setup react native firebase - YouTube
+https://www.youtube.com/watch?v=QGDbZ9bqdR0&list=PLvN7nvnjkvpRNbWkVPLlXDYj08qP6cV_K&index=2 | (8) Create Database In Firebase & Fetch In App | React Native With Firebase Tutorial In Hindi #2 - YouTube
+https://github.com/code-diggers-369/metahub-firebase/tree/fee20fb4101e246079bd7a14253cd260084d8d03 | code-diggers-369/metahub-firebase at fee20fb4101e246079bd7a14253cd260084d8d03
+https://www.youtube.com/results?search_query=how+to+use+fcm+token | (8) how to use fcm token - YouTube
+https://www.youtube.com/results?search_query=FCM+device+token+management | (8) FCM device token management - YouTube
+https://rnfirebase.io/firestore/usage | Cloud Firestore | React Native Firebase
+https://rnfirebase.io/auth/usage | Authentication | React Native Firebase
+https://rnfirebase.io/ | React Native Firebase | React Native Firebase
+https://console.firebase.google.com/u/0/project/repay-8a9c8/notification/compose | RePay - Compose notification - Firebase console
+https://firebase.google.com/docs/cloud-messaging/manage-tokens | Best practices for FCM registration token management  |  Firebase Cloud Messaging
+
+https://github.com/codingki/react-native-expo-template/tree/master/template-with-firebase-auth-flow | react-native-expo-template/template-with-firebase-auth-flow at master · codingki/react-native-expo-template
+https://github.com/Dax89/automaton.nvim | Dax89/automaton.nvim: VSCode-Like Workspace Configuration Manager
+
+https://www.youtube.com/watch?v=EaVG6wVZPyY&t=6s | (5) Push Notification Using Firebase Cloud Messaging And React Native & Expo | Project And Tutorial | JS - YouTube
+https://console.firebase.google.com/u/0/project/repay-8a9c8/settings/cloudmessaging/android:com.project.repay | RePay - Project settings - Firebase console
+
+https://www.youtube.com/watch?v=EaVG6wVZPyY&t=6s | (5) Push Notification Using Firebase Cloud Messaging And React Native & Expo | Project And Tutorial | JS - YouTube
+https://www.google.com/search?q=firebase+get+messaging+tokens&oq=firebase+get+messaging+tokens&aqs=chrome..69i57.10166j0j1&sourceid=chrome&ie=UTF-8 | firebase get messaging tokens - Google Search
+https://firebase.google.com/docs/cloud-messaging/android/client | Set up a Firebase Cloud Messaging client app on Android
+https://rnfirebase.io/ | React Native Firebase | React Native Firebase
+https://docs.expo.dev/versions/latest/sdk/build-properties/#pluginconfigtypeios | BuildProperties - Expo Documentation
+https://docs.expo.dev/versions/latest/sdk/notifications/ | Notifications - Expo Documentation
+https://docs.expo.dev/push-notifications/overview/ | Push notifications overview - Expo Documentation
+https://github.com/expo/expo/issues/13920 | Error with `pod install` using Expo 42 & `use_frameworks!` · Issue #13920 · expo/expo
+https://expo.dev/accounts/hasanmahmud7152/projects/xapp/builds | Builds — @hasanmahmud7152/xapp — Expo
+https://docs.expo.dev/build/setup/ | Creating your first build - Expo Documentation
+
+https://www.theinsaneapp.com/2023/03/best-flutter-github-repositories.html | 30+ Best Flutter GitHub Repositories And Open Source Projects
+https://codewithandrea.com/articles/flutter-riverpod-lint/ | How to write Flutter apps faster with Riverpod Lint & Riverpod Snippets
+https://github.com/jakewvincent/mkdnflow.nvim | jakewvincent/mkdnflow.nvim: Fluent navigation and management of markdown notebooks
+
+https://www.youtube.com/watch?v=FsUNPSA6Ogg | (167) React Native Tutorial #29 (2021) - Push Notification with Firebase - Remote Notification - YouTube
+https://www.youtube.com/watch?v=EaVG6wVZPyY | (167) Push Notification Using Firebase Cloud Messaging And React Native & Expo | Project And Tutorial | JS - YouTube
+https://firebase.google.com/docs/firestore/query-data/listen | Get realtime updates with Cloud Firestore  |  Firebase
+https://www.youtube.com/watch?v=iuEmVbbr8yY | (167) Fighting With Your Partner? Save Your Relationship! 🙌 II Steve Harvey - YouTube
+https://www.youtube.com/results?search_query=how+to+become+web+developer | (167) how to become web developer - YouTube
+
+http://172.16.50.12/SAM-FTP-1/TV-WEB-Series/TV%20Series%20%E2%99%A6%20%20M%20%20%E2%80%94%20%20R/Malcolm%20in%20the%20Middle%20%28TV%20Series%202000%E2%80%932006%29%20720p/ | Malcolm in the Middle (TV Series 2000–2006) 720p - 172.16.50.12 > SAM-FTP-1 > TV-WEB-Series > TV Series ♦ M — R > Malcolm in the Middle (TV Series 2000–2006) 720p
+
+https://www.reddit.com/r/FlutterDev/comments/11lscc8/how_to_autogenerate_your_providers_with_flutter/ | (2) How to Auto-Generate your Providers with Flutter Riverpod Generator (updated to v2.0.0) : FlutterDev
+https://github.com/nvim-tree/nvim-tree.lua/wiki/Migrating-To-on_attach | Migrating To on_attach · nvim-tree/nvim-tree.lua Wiki
+https://www.reddit.com/r/neovim/comments/11bpzmk/lsp_typescript_and_tailwind_with_bun_major/ | (2) LSP typescript and tailwind with Bun - major performance boost : neovim
+
+https://www.youtube.com/ | (131) YouTube
+https://www.reddit.com/ | (2) Reddit - Dive into anything
+https://github.com/folke/noice.nvim
+https://stackoverflow.com/questions/7186880/using-normal-mode-motions-in-command-line-mode-in-vim/7189573#7189573
+https://github.com/gelguy/wilder.nvim
+https://www.reddit.com/r/neovim/comments/11azbrs/is_there_a_better_command_line_mode_plugin/ | (2) is there a "better command line mode" plugin? : neovim
+https://www.google.com/search?q=bye+matx+mother+board&oq=bye+matx+mother+board&aqs=chrome..69i57.10287j0j4&sourceid=chrome&ie=UTF-8 | bye matx mother board - Google Search
+https://www.startech.com.bd/component/motherboard | Motherboard Price in Bangladesh 2023 | Star Tech
+http://tendawifi.com/index.html | Tenda Wireless Router
+
+https://9anime.id/watch/mob-psycho-100-ii.26q0/ep-3 | Watch Mob Psycho 100 II Online in HD with English Subbed, Dubbed
+
+https://github.com/jrnxf/dot/blob/main/config/nvim/lua/plugins/colorscheme.lua | dot/colorscheme.lua at main · jrnxf/dot
+https://github.com/EdenEast/nightfox.nvim | EdenEast/nightfox.nvim: 🦊A highly customizable theme for vim and neovim with support for lsp, treesitter and a variety of plugins.
+https://github.com/altermo/ultimate-autopair.nvim | altermo/ultimate-autopair.nvim: A autopair plugin designed to have all the fetures that a autopair plugin needs.
+https://github.com/laytan/tailwind-sorter.nvim | laytan/tailwind-sorter.nvim: Easily sort Tailwind classes in Neovim.
+
+https://docs.page/invertase/react-native-google-mobile-ads/displaying-ads#interstitial-ads | React Native Google Mobile Ads
+https://expo.dev/accounts/hasanmahmud7152/settings/billing | Billing — Expo
+
+https://www.youtube.com/@NikhilPawarr/videos | (57) Nikhil Pawar - YouTube
+
+https://www.youtube.com/watch?v=IBOYRMT59qY | Ex IGN employee EXPOSES company review policies! Marvel and DC Comics PROTECTED by management! - YouTube
+https://www.youtube.com/watch?v=tT4HsSnpIt4 | TOOLS I'D RECOMMEND TO ALL PROGRAMMERS - YouTube
+https://www.youtube.com/watch?v=kcUwMBdIvFY | 【Antec】排熱重視のメッシュパネルPCケースVSもか太郎 - YouTube
+https://www.youtube.com/watch?v=Kxz6Tgl8q0o | Home office makeover on low budget with IKEA hacks! Office for 2 - YouTube
+https://www.youtube.com/watch?v=NMJmA_BEk2Y | Building my first PC - white aesthetic, mid-range pc, rtx 3060 ✨ - YouTube
+https://www.youtube.com/watch?v=OYlloiaBINo | DIY Smart Mirror - Full Tutorial - YouTube
+
+https://vikas-shrma.github.io/#/ | Vikas Sharma
+https://davidcobbina.com/home | David Legend Portfolio
+
+https://www.reddit.com/r/FlutterDev/comments/10wx4eb/good_flutter_ui_layoutdesign_tool/ | (2) Good Flutter UI layout/design tool? : FlutterDev
+
+https://www.youtube.com/shorts/kX7HOL6xfMU | (36) Bedside Table Ideas - YouTube
+
+https://resocoder.com/2019/08/27/flutter-tdd-clean-architecture-course-1-explanation-project-structure/ | Flutter TDD Clean Architecture Course [1] – Explanation & Project Structure - Reso Coder
+https://www.youtube.com/watch?v=lPkWX8xFthE&list=PLB6lc7nQ1n4iYGE_khpXRdJkJEp9WOech&index=2 | (30) Flutter TDD Clean Architecture Course [2] – Entities & Use Cases - YouTube
+https://resocoder.com/2019/08/29/flutter-tdd-clean-architecture-course-2-entities-use-cases/ | Flutter TDD Clean Architecture Course [2] – Entities & Use Cases - Reso Coder
+http://numbersapi.com/23?json | numbersapi.com/23?json
+https://pub.dev/packages/equatable | equatable | Dart Package
