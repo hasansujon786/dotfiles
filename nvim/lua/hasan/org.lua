@@ -1,4 +1,5 @@
 local utils = require('hasan.utils')
+local roam = require('org-roam')
 local Layout = require('nui.layout')
 local Popup = require('nui.popup')
 local event = require('nui.utils.autocmd').event
@@ -110,52 +111,74 @@ local fn = {
   -- end
 }
 
+local function capture_project_file(title, config_file_exists, config_file)
+  roam.api
+    .capture_node({
+      title = title,
+      -- immediate = {
+      --   template = '%?',
+      --   target = 'hasan-%<%Y%m%d>-' .. title .. '.org',
+      -- },
+      templates = {
+        p = {
+          description = 'Create project',
+          template = '#+category: project\n\n%?',
+          target = '1_projects/%<%Y%m%d%H%M%S>-%[slug].org',
+        },
+      },
+    })
+    :next(function(id)
+      if id then
+        roam.database:get(id):next(function(new_node)
+          if new_node then
+            vim.cmd.vsplit(new_node.file)
+            -- create config
+            if not config_file_exists then
+              config_file:touch()
+            end
+
+            local ok, result = pcall(vim.fn.writefile, { vim.json.encode({ id = id }) }, config_file.filename)
+            if ok then
+              vim.notify('Wrote ' .. config_file.filename, vim.log.levels.INFO, { title = 'org-roam' })
+            else
+              print(result)
+            end
+          end
+        end)
+      end
+    end)
+end
+
 function M.open_org_home()
   vim.cmd.edit(org_home_path)
 end
 
 function M.open_org_project()
-  local roam = require('org-roam')
+  local file_util = require('hasan.utils.file')
   local cwd = vim.loop.cwd()
-  local file_name = vim.fn.fnamemodify(cwd, ':t')
-  local title = 'Project-' .. file_name
+  local config_file_exists, config_file = file_util.path_exists('.project.json', cwd)
 
-  roam.database:find_nodes_by_title(title):next(function(nodes)
-    local length = #nodes
-    if length == 0 then
-      roam.api.capture_node({
-        title = title,
-        -- immediate = {
-        --   template = '%?',
-        --   target = 'hasan-%<%Y%m%d>-' .. title .. '.org',
-        -- },
-        templates = {
-          p = {
-            description = 'Create project',
-            template = '%?',
-            target = '1_projects/%<%Y%m%d>-' .. file_name .. '.org',
-          },
-        },
-      })
-      -- :next(function(id)
-      --   if id then
-      --     roam.database:get(id):next(function(found_node)
-      --       if found_node then
-      --         vim.cmd.vsplit(found_node.file)
-      --       end
-      --     end)
-      --   else
-      --     print('Capture canceled')
-      --   end
-      -- end)
-    elseif length == 1 then
-      vim.cmd.vsplit(nodes[1].file)
-    else
-      P('last')
+  if config_file_exists then
+    local data = vim.fn.readfile(config_file.filename)
+    local json = vim.json.decode(data[1])
+    if json and json.id then
+      roam.database:get(json.id):next(function(node)
+        if node then
+          vim.cmd.vsplit(node.file)
+        elseif not node then
+          vim.notify('No file found with follwing Id', vim.log.levels.ERROR, { title = 'org-roam' })
+          local title = vim.fn.fnamemodify(cwd, ':t')
+          capture_project_file(title, config_file_exists, config_file)
+        end
+      end)
     end
-  end)
+  end
+
+  if not config_file_exists then
+    local title = vim.fn.fnamemodify(cwd, ':t')
+    capture_project_file(title, config_file_exists, config_file)
+  end
 end
--- require("hasan.org").open_org_project()
 
 function M.open_org_float()
   -- get the bufnr if the buffer was cleared from buflist

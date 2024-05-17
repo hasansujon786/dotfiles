@@ -16,8 +16,10 @@ end
 return {
   {
     'chipsenkbeil/org-roam.nvim',
+    -- enabled = true,
     module = 'org-roam',
     keys = { { '<leader>nf' }, { '<leader>nc' } },
+    cmd = { 'RoamUpdate', 'RoamSave' },
     ft = { 'org' },
     lazy = true,
     dependencies = { 'nvim-orgmode/orgmode' },

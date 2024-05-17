@@ -35,8 +35,7 @@ end
 M.path_exists = function(fname, cwd)
   cwd = cwd and cwd or M.get_root_dir()
   local fpath = Path:new(cwd, fname)
-  local exists = fpath:exists()
-  return exists, exists and fpath or nil
+  return fpath:exists(), fpath
 end
 
 M.is_file_exist = function(path)

@@ -42,6 +42,8 @@ ls.add_snippets('all', {
       i(0),
     })
   ),
+  s('<f', fmt('[[file:' .. org_root_path .. '/{}]]', { i(0) })),
+  s('<.', fmt(org_root_path .. '/{}', { i(0) })),
   s(
     '<t',
     fmt(
