@@ -78,8 +78,11 @@ M.my_nebulous_setup = function()
       'Conceal:Nebulous',
       'NonText:NebulousInvisibe',
       -- Indent line
-      'IblIndent:NebulousDarker',
-      'FlutterWidgetGuides:NebulousDarker',
+      -- 'IblIndent:NebulousDarker',
+      'MiniIndentscopeSymbol:IblIndent',
+      'FlutterWidgetGuides:IblIndent',
+      -- lsp
+      'LspInlayHint:Nebulous',
       -- Git
       'GitSignsAdd:NebulousInvisibe',
       'GitSignsChange:NebulousInvisibe',

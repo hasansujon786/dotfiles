@@ -58,4 +58,3 @@ return {
     keymap('n', '<leader>am', '<Plug>FlutterPkgToRelative', desc('Lsp: organize imports'))
   end,
 }
-

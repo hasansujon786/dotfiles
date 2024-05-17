@@ -82,6 +82,7 @@ local function set_custom_highlights()
     FloatBorderHidden       = { fg = c.bg3, bg = normal_bg },
     HeirlineTabActive       = { fg = c.green, bg = c.layer },
     HeirlineTabInactive     = { fg = c.red, bg = c.layer },
+    LspInlayHint            = { fg = c.dark_cyan, bg = c.none },
 
     WinSeparator            = { fg = c.bg_d },
     EdgyWinSeparator        = { fg = c.bg_d, bg = c.none },
@@ -274,7 +275,6 @@ local function set_custom_highlights()
   local links = {
     CursorColumn = 'CursorLineFocus',
     CurSearch = 'IncSearch',
-    Folded = 'Comment',
     Conceal = 'String',
 
     -- https://github.com/folke/tokyonight.nvim/blob/main/lua/tokyonight/theme.lua#L255-L272

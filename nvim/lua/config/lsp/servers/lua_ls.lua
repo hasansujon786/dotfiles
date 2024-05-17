@@ -18,6 +18,7 @@ return {
     -- },
     settings = {
       Lua = {
+        hint = { enable = true },
         completion = { callSnippet = 'Replace' },
         runtime = { version = 'LuaJIT' },
         diagnostics = { globals = { 'vim', 'jit', 'keymap', 'P', 'log' } },
