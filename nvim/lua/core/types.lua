@@ -2,4 +2,4 @@
 
 ---@class ServerConfig
 ---@field setup? LspAttachCb
----@field opts? {}
+---@field opts? {settings:object}

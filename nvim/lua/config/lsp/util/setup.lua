@@ -17,6 +17,10 @@ local function load_specific_setup(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
   end
+
+  -- if client.server_capabilities.inlayHintProvider or client.server_capabilities.signatureHelpProvider then
+  --   vim.lsp.inlay_hint.enable(true)
+  -- end
 end
 
 ---@type LspAttachCb
@@ -37,7 +41,7 @@ local function lsp_autocmds(client, bufnr)
   --   callback = function()
   --     vim.notify('codelens active')
   --     -- lsp.CodeLens
-  --     vim.lsp.codelens.refresh({ bufnr = 0 })
+  --     vim.lsp.codelens.refresh({ bufnr = bufnr })
   --   end,
   -- })
   -- vim.api.nvim_create_autocmd('LspDetach', {

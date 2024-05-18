@@ -22,6 +22,16 @@ function M.ts_organize_imports_sync(bufnr)
   lsp.buf_request_sync(bufnr, METHOD, make_organize_imports_params(bufnr), 500)
 end
 
+local inlayHints = {
+  includeInlayEnumMemberValueHints = true,
+  includeInlayFunctionLikeReturnTypeHints = true,
+  includeInlayFunctionParameterTypeHints = true,
+  includeInlayParameterNameHints = 'all',
+  includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+  includeInlayPropertyDeclarationTypeHints = true,
+  includeInlayVariableTypeHints = true,
+}
+
 ---@type ServerConfig
 return {
   setup = function(client, bufnr)
@@ -32,4 +42,19 @@ return {
       twoslashqueries.attach(client, bufnr)
     end
   end,
+  opts = {
+    -- See: https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
+    settings = {
+      -- implicitProjectConfiguration = {
+      --   checkJs = true,
+      --   target = 'ES2022',
+      -- },
+      javascript = {
+        inlayHints = inlayHints,
+      },
+      typescript = {
+        inlayHints = inlayHints,
+      },
+    },
+  },
 }
