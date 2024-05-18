@@ -20,6 +20,15 @@ local function withHl(text, hl)
   return string.format('%%#%s#%s', hl, text)
 end
 
+-- vim.api.nvim_create_autocmd('LspProgress', {
+--   callback = function(args)
+--     if string.find(args.match, 'end') then
+--       vim.cmd('redrawstatus')
+--     end
+--     vim.cmd('redrawstatus')
+--   end,
+-- })
+
 return {
   Fill = { provider = '%=' },
   Space = { provider = ' ' },
@@ -35,19 +44,15 @@ return {
     { provider = '  ' },
     {
       provider = function()
-        -- -- lsp progress
-        -- local progress_message = vim.lsp.util.get_progress_messages()
+        -- lsp progress
+        -- local progress_message = vim.lsp.status()
         -- if #progress_message > 0 then
-        --   local status = {}
-        --   for _, msg in pairs(progress_message) do
-        --     table.insert(status, (msg.percentage or 0) .. '%% ' .. (msg.title or ''))
-        --   end
-        --   return status[#status]
+        --   return progress_message
         -- end
 
         -- lsp name
         local names = {}
-        for _, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+        for _, server in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
           table.insert(names, server.name)
         end
         return table.concat(names, ',')

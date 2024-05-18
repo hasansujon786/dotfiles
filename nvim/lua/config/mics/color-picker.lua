@@ -32,8 +32,8 @@ return {
         { ccc.picker.css_hsl, ccc.output.hex },
       },
       mappings = {
-        ['r'] = mapping.toggle_input_mode,
-        ['o'] = mapping.toggle_output_mode,
+        ['r'] = mapping.cycle_input_mode,
+        ['o'] = mapping.cycle_output_mode,
         ['$'] = mapping.set100,
         ['0'] = mapping.set0,
         ['b'] = mapping.decrease10,

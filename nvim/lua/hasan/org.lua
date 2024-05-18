@@ -231,7 +231,7 @@ end
 
 function M.onOrgWinEnter()
   if fn.is_cur_win_org_float() then
-    last_bufnr = api.nvim_buf_get_number(0)
+    last_bufnr = api.nvim_get_current_buf()
     fn.set_winbar()
     -- last_pop.border:set_text('top', get_title_text(last_bufnr), 'center')
 

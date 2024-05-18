@@ -48,7 +48,13 @@ augroup('MY_AUGROUP')(function(autocmd)
 
     vim.defer_fn(set_titlestring, 100)
   end)
+
   autocmd('BufEnter', set_titlestring)
+  autocmd('InsertEnter', function()
+    vim.schedule(function()
+      vim.cmd('nohlsearch')
+    end)
+  end)
 
   -- autocmd('VimResized', 'wincmd =') -- Vim/tmux layout rebalancing
   -- {'FocusLost,WinLeave,BufLeave * :silent! noautocmd w'}, -- auto save

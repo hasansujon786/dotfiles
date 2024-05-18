@@ -17,6 +17,8 @@ M.default = {
     'scratchpad',
     'NeogitStatus',
     'NeogitPopup',
+    'NeogitDiffView',
+    'NeogitCommitMessage',
     'log',
     'flutterToolsOutline',
     'packer',

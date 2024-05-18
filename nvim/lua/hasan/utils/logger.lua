@@ -9,7 +9,7 @@ local function log(type, msg, opts)
   if ok then
     notify(msg, type, require('hasan.utils').merge({ title = title }, opts))
   else
-    if vim.tbl_islist(msg) then
+    if vim.islist(msg) then
       -- regular vim.notify can't take tables of strings
       local tmp_list = msg
       msg = ''
