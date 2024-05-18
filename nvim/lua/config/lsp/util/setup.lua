@@ -1,5 +1,6 @@
 local lsp_extras = require('config.lsp.util.extras')
 
+---@type LspAttachCb
 local function load_specific_setup(client, bufnr)
   local g_conf = lsp_extras.get_setup_opts()
   local local_conf = lsp_extras.import_server_local_module(client.name)
@@ -18,7 +19,8 @@ local function load_specific_setup(client, bufnr)
   end
 end
 
-local function lsp_autocmds(client)
+---@type LspAttachCb
+local function lsp_autocmds(client, bufnr)
   if client.server_capabilities.documentHighlightProvider then
     vim.cmd([[
       augroup lsp_document_highlight
@@ -30,6 +32,21 @@ local function lsp_autocmds(client)
     --   vim.cmd[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
     --   autocmd BufWritePre *.js,*.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
   end
+  -- vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI', 'InsertLeave' }, {
+  --   pattern = '*',
+  --   callback = function()
+  --     vim.notify('codelens active')
+  --     -- lsp.CodeLens
+  --     vim.lsp.codelens.refresh({ bufnr = 0 })
+  --   end,
+  -- })
+  -- vim.api.nvim_create_autocmd('LspDetach', {
+  --   callback = function(opt)
+  --     vim.lsp.codelens.clear(opt.data.client_id, opt.buf)
+  --   end,
+  -- })
+  -- local bufopts = { noremap = true, silent = true, buffer = bufnr }
+  -- vim.keymap.set('n', '<leader>la', vim.lsp.codelens.run, bufopts)
 end
 
 local M = {
@@ -62,11 +79,10 @@ local M = {
     flags = { debounce_text_changes = 500 },
     capabilities = require('config.lsp.util.extras').update_capabilities('setup.lua'),
   },
-  ---@param client lsp.Client
-  ---@param bufnr number
+  ---@type LspAttachCb
   onLspAttach = function(client, bufnr)
     require('config.lsp.util.keymaps').lsp_buffer_keymaps(client, bufnr)
-    lsp_autocmds(client)
+    lsp_autocmds(client, bufnr)
     load_specific_setup(client, bufnr)
   end,
 }

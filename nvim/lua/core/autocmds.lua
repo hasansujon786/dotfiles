@@ -35,7 +35,16 @@ augroup('MY_AUGROUP')(function(autocmd)
 
   autocmd('LspAttach', function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
-    require('config.lsp.util.extras').get_setup_opts().onLspAttach(client, args.buf)
+    if client ~= nil then
+      require('config.lsp.util.extras').get_setup_opts().onLspAttach(client, args.buf)
+
+      -- if client.name == 'tsserver' then
+      --   P(client.capabilities.textDocument.inlayHint)
+      --   local method = vim.lsp.protocol.Methods.textDocument_codeLens
+      --   -- P(string.format('%s %s %s', client.name, method, client.supports_method(method)))
+      --   -- P(client.server_capabilities.codeLensProvider)
+      -- end
+    end
 
     vim.defer_fn(set_titlestring, 100)
   end)

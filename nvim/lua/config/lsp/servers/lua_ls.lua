@@ -1,9 +1,11 @@
 -- https://luals.github.io/wiki/settings/
 -- Wiki https://github.com/neovim/nvim-lspconfig/wiki/User-contributed-tips#range-formatting-with-a-motion
+
+---@type ServerConfig
 return {
-  -- setup = function()
-  --   P('I am from lua_ls')
-  -- end,
+  setup = function (client, bufnr)
+    
+  end,
   opts = {
     -- on_init = function()
     --   P('from on_init luals')
@@ -18,7 +20,11 @@ return {
     -- },
     settings = {
       Lua = {
-        hint = { enable = true },
+        hint = {
+          enable = true,
+          setType = true,
+          -- arrayIndex = "Disable",
+        },
         completion = { callSnippet = 'Replace' },
         runtime = { version = 'LuaJIT' },
         diagnostics = { globals = { 'vim', 'jit', 'keymap', 'P', 'log' } },

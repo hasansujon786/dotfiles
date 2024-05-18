@@ -45,6 +45,7 @@ local fix_all = function()
   })
 end
 
+---@type ServerConfig
 return {
   setup = function(_, buffer)
     local function desc(d)

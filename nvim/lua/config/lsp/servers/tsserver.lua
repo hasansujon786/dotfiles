@@ -22,6 +22,7 @@ function M.ts_organize_imports_sync(bufnr)
   lsp.buf_request_sync(bufnr, METHOD, make_organize_imports_params(bufnr), 500)
 end
 
+---@type ServerConfig
 return {
   setup = function(client, bufnr)
     keymap('n', '<leader>ai', M.ts_organize_imports_sync, { buffer = bufnr, desc = 'Lsp: organize imports' })

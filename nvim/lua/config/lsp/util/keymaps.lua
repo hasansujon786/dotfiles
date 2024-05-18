@@ -1,5 +1,6 @@
 local M = {}
 
+---@type LspAttachCb
 function M.lsp_buffer_keymaps(client, bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
   local function desc(str)

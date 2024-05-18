@@ -30,6 +30,18 @@ local M = {
         end
       end,
     },
+    -- {
+    --   event = 'file_open_requested',
+    --   -- ---@param input NuiInput
+    --   handler = function(info)
+    --     P(info)
+    --     -- local cursor = vim.api.nvim_win_get_cursor(0)
+    --     -- if cursor[2] > 1 then
+    --     --   vim.cmd.stopinsert()
+    --     --   vim.cmd.normal('F.a')
+    --     -- end
+    --   end,
+    -- },
   },
 }
 

@@ -2,7 +2,7 @@ return {
   'NeogitOrg/neogit',
   lazy = true,
   cmd = 'Neogit',
-  commit = '835ef4b', -- 4e54383
+  commit = '7bb9b89', -- <-- Old Ui , v0.9 '835ef4b',
   keys = {
     { '<leader>gg', '<cmd>Neogit<CR>', desc = 'Open Neogit' },
   },
@@ -29,15 +29,16 @@ return {
       diffview = true,
       telescope = true,
     },
-    -- mappings = {
-    --   -- modify status buffer mappings
-    --   status = {
-    --     -- Adds a mapping with "B" as key that does the "BranchPopup" command
-    --     ['B'] = 'BranchPopup',
-    --     -- Removes the default mapping of "s"
-    --     ['s'] = '',
-    --   },
-    -- },
+    mappings = {
+      -- modify status buffer mappings
+      status = {
+        -- Adds a mapping with "B" as key that does the "BranchPopup" command
+        -- ['B'] = 'BranchPopup',
+        -- Removes the default mapping of "s"
+        -- ['s'] = '',
+        ['<c-r>'] = 'RefreshBuffer',
+      },
+    },
   },
   dependencies = { 'sindrets/diffview.nvim' },
 }

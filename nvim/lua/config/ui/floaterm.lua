@@ -1,6 +1,5 @@
 return {
   'voldikss/vim-floaterm',
-  commit = 'bcaeabf',
   lazy = true,
   cmd = { 'FloatermNew', 'FloatermToggle' },
   keys = {

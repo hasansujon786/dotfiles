@@ -2,7 +2,6 @@ return {
   {
     'nvim-telescope/telescope.nvim',
     lazy = true,
-    commit = '5550bbb', -- working
     event = 'VeryLazy',
     config = function()
       local state = require('core.state')

@@ -2,7 +2,6 @@ return {
   'folke/edgy.nvim',
   event = 'WinNew', -- 'VeryLazy'
   enabled = true,
-  -- commit = '4ccc1c6',
   lazy = true, -- make sure we load this during startup if it is your main colorscheme
   config = function()
     local color = require('hasan.utils.color')
