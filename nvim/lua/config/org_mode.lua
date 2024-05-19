@@ -26,7 +26,7 @@ return {
     config = function()
       load_treesitter()
       require('org-roam').setup({
-        directory = org_root_path .. '/roam/',
+        directory = org_root_path,
         ui = {
           node_buffer = {
             show_keybindings = false,
@@ -81,15 +81,11 @@ return {
           concealcursor = true,
           indent = true,
           symbols = {
-            headlines = { '◉', '○', '✸', '✿', '', '♥' },
+            headlines = { '⦿', '◯', '✿', '✸', '', '♥' },
             checkboxes = {
-              cancelled = { '', 'OrgCancelled' },
-              -- half = { '', 'OrgTSCheckboxHalfChecked' },
-              half = { '', 'OrgTSCheckboxHalfChecked' },
-              done = { '', 'OrgDone' },
-              todo = { '', 'OrgTODO' },
-              -- done = { '', 'OrgDone' },
-              -- todo = { ' ', 'OrgTODO' },
+              half = { '-' },
+              done = { '✕', '@markup.list.checked' },
+              todo = { ' ' },
             },
           },
         },

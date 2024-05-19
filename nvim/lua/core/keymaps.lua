@@ -1,12 +1,13 @@
 local noSilent = { silent = false }
 local nvim_set_keymap = vim.api.nvim_set_keymap
+local nx, ic = { 'n', 'x' }, { 'i', 'c' }
 
 keymap('n', 'q', '<ESC><Cmd>nohlsearch<CR><C-l>')
 keymap('v', 'q', '<ESC>')
 keymap('n', 'ZZ', ':Quit!<CR>') -- Prompt before quitting
 keymap('n', 'Q', 'q') -- Use Q to record macros
 keymap('v', '@', ':norm @', noSilent) -- run macro on selection
-keymap({ 'n', 'x' }, '<CR>', ':<up>', noSilent) -- run last : command easily
+keymap(nx, '<CR>', ':<up>', noSilent) -- run last : command easily
 
 -- fix InsertEnter zz
 keymap('n', 'A', 'zzA')
@@ -19,15 +20,15 @@ keymap('v', 'p', 'pgvy') -- Prevent selecting and pasting from overwriting what 
 keymap('v', 'y', 'ygv<Esc>') -- Keep cursor at the bottom of the visual selection after you yank it.
 keymap('n', 'Y', 'y$') -- Ensure Y works similar to D,C.
 keymap('n', 'gV', '`[v`]', { desc = 'Select the last yanked text' })
-keymap({ 'n', 'x' }, 'x', '"_x') -- Prevent x from overriding the clipboard.
-keymap({ 'n', 'x' }, 'X', '"_X')
-keymap({ 'i', 'c' }, '<C-v>', '<C-R>+', noSilent) -- Paste from + register (system clipboard)
-keymap({ 'i', 'c' }, '<A-p>', '<C-R>"', noSilent) -- Paste the last item from register
+keymap(nx, 'x', '"_x') -- Prevent x from overriding the clipboard.
+keymap(nx, 'X', '"_X')
+keymap(ic, '<C-v>', '<C-R>+', noSilent) -- Paste from + register (system clipboard)
+keymap(ic, '<A-p>', '<C-R>"', noSilent) -- Paste the last item from register
 -- Easier system clipboard usage
 keymap('n', '<leader>y', '"+y', { desc = 'Yank to system' })
 keymap('v', '<leader>y', '"+ygv<Esc>', { desc = 'Yank to system' })
-keymap({ 'n', 'v' }, '<leader>ip', '"+p', { desc = 'Paste from system' })
-keymap({ 'n', 'v' }, '<leader>iP', '"+P', { desc = 'Paste from system' })
+keymap(nx, '<leader>ip', '"+p', { desc = 'Paste from system' })
+keymap(nx, '<leader>iP', '"+P', { desc = 'Paste from system' })
 
 -- Modify & rearange texts ----------------------
 -- maps.vnoremap('ao', '<ESC>va{%V%') -- Select a block {} of code
@@ -51,8 +52,6 @@ for _, action_key in ipairs(code_action_keys) do
   keymap('x', action_key[1], ':MoveUp<CR>')
   keymap('x', action_key[2], ':MoveDown<CR>')
 end
-
-keymap({ 'n', 'v' }, 'gx', '<Plug>(exchange-operator)', { desc = 'Exchange vnoremap' })
 
 keymap('n', 'z.', ':%foldclose<CR>') -- Fold
 keymap('n', '<tab>', 'za')
@@ -89,8 +88,8 @@ for _, value in pairs(scroll_maps) do
   nvim_set_keymap('x', value[1], value[2], { noremap = false })
 end
 
-keymap({ 'n', 'v' }, '<A-l>', '20zl') -- Horizontal scroll ---- <ScrollWheelRight> <ScrollWheelLeft>
-keymap({ 'n', 'v' }, '<A-h>', '20zh')
+keymap(nx, '<A-l>', '20zl') -- Horizontal scroll ---- <ScrollWheelRight> <ScrollWheelLeft>
+keymap(nx, '<A-h>', '20zh')
 
 keymap('n', '<A-=>', ':resize +3<CR>') -- Resize splits
 keymap('n', '<A-->', ':resize -3<CR>')
@@ -104,10 +103,10 @@ keymap('n', '<Bar>', ':wincmd =<cr>')
 keymap('n', '<C-i>', '<C-i>')
 keymap('n', '<C-j>', '<C-i>')
 -- Jump between tabs
-keymap({ 'n', 'v' }, 'gl', 'gt')
-keymap({ 'n', 'v' }, 'gh', 'gT')
-keymap({ 'n', 'v' }, 'gl', '<cmd>!wezterm cli activate-tab --tab-relative 1<CR>')
-keymap({ 'n', 'v' }, 'gh', '<cmd>!wezterm cli activate-tab --tab-relative -1<CR>')
+keymap(nx, 'gl', 'gt')
+keymap(nx, 'gh', 'gT')
+keymap(nx, 'gl', '<cmd>!wezterm cli activate-tab --tab-relative 1<CR>')
+keymap(nx, 'gh', '<cmd>!wezterm cli activate-tab --tab-relative -1<CR>')
 
 keymap('n', 'gL', ':tabmove+<CR>') -- Move tabs
 keymap('n', 'gH', ':tabmove-<CR>')
@@ -129,17 +128,14 @@ keymap('v', '#', '<Cmd>call hasan#utils#visualSelection("", "")<CR>?<C-R>=@/<CR>
 keymap('n', 'c*', ":let @/='\\<'.expand('<cword>').'\\>'<CR>cgn")
 keymap('x', 'C', '"cy:let @/=@c<CR>cgn')
 
+keymap(nx, 'co', '<Plug>(exchange-operator)', { desc = 'Exchange word' })
+
 keymap('n', 'cm', ':%s/<c-r>///g<Left><Left>', { desc = 'Change all matches with prompt', silent = false })
 keymap('n', 'dm', ':%s/<c-r>///g<CR>', { desc = 'Delete all matches' })
 keymap('n', 'dM', ':%g/<c-r>//d<CR>', { desc = 'Delete all lines with matches' })
-keymap(
-  { 'n', 'v' },
-  '<leader>cw',
-  '<cmd>lua require("hasan.widgets.inputs").substitute_word()<CR>',
-  { desc = 'Substitute word' }
-)
+keymap(nx, '<leader>cw', '<cmd>lua require("hasan.widgets.inputs").substitute_word()<CR>', { desc = 'Substitute word' })
 
-keymap({ 'n', 'v' }, 'z/', '<ESC>/\\%V', noSilent) -- search in visual selection
+keymap(nx, 'z/', '<ESC>/\\%V', noSilent) -- search in visual selection
 keymap('n', 'Z/', function() -- search in visible viewport
   local scrolloff = vim.wo.scrolloff
   vim.wo.scrolloff = 0
@@ -152,23 +148,23 @@ end, noSilent)
 -- keymap({ 'n', 'v' }, 'z/', '/\\%><C-r>=line("w0")-1<CR>l\\%<<C-r>=line("w$")+1<CR>l', { silent = false })
 
 -- Insert mode ----------------------------------
--- keymap({ 'i', 'c' }, 'jk', '<ESC>') -- Use jk to return to normal mode
+-- keymap(ic, 'jk', '<ESC>') -- Use jk to return to normal mode
 keymap('t', '<C-o>', '<C-\\><C-n>')
 
-keymap({ 'i', 'c' }, '<A-h>', '<left>', noSilent) -- Move cursor by character
-keymap({ 'i', 'c' }, '<A-l>', '<right>', noSilent)
-keymap({ 'i', 'c' }, '<A-j>', '<down>', noSilent)
-keymap({ 'i', 'c' }, '<A-k>', '<up>', noSilent)
+keymap(ic, '<A-h>', '<left>', noSilent) -- Move cursor by character
+keymap(ic, '<A-l>', '<right>', noSilent)
+keymap(ic, '<A-j>', '<down>', noSilent)
+keymap(ic, '<A-k>', '<up>', noSilent)
 
-keymap({ 'i', 'c' }, '<A-f>', '<S-right>', noSilent) -- Move cursor by words
-keymap({ 'i', 'c' }, '<A-b>', '<S-left>', noSilent)
+keymap(ic, '<A-f>', '<S-right>', noSilent) -- Move cursor by words
+keymap(ic, '<A-b>', '<S-left>', noSilent)
 
 keymap('i', '<C-a>', '<C-o>^<C-g>u') -- Jump cursor to start & end of a line
 keymap('c', '<C-a>', '<Home>', noSilent)
-keymap({ 'i', 'c' }, '<C-e>', '<End>')
-keymap({ 'i', 'c' }, '<C-d>', '<Delete>', noSilent)
+keymap(ic, '<C-e>', '<End>')
+keymap(ic, '<C-d>', '<Delete>', noSilent)
 
-keymap({ 'i', 'c' }, '<A-BS>', '<C-W>', noSilent) -- Delete by characters & words
+keymap(ic, '<A-BS>', '<C-W>', noSilent) -- Delete by characters & words
 keymap('i', '<A-d>', '<C-O>dw')
 keymap('c', '<A-d>', '<S-Right><C-W><Delete>', noSilent)
 
@@ -190,14 +186,14 @@ keymap('n', '<F5>', '<Esc>:syntax sync fromstart<CR>')
 keymap('i', '<F5>', '<C-o>:syntax sync fromstart<CR>')
 
 -- Leader keys ----------------------------------
-keymap({ 'n', 'x' }, '<leader>s', '<cmd>silent w<cr>', { desc = 'Save current file' })
+keymap(nx, '<leader>s', '<cmd>silent w<cr>', { desc = 'Save current file' })
 
 -- Window Management ----------------------------
-keymap({ 'n', 'x' }, '<leader>q', '<cmd>Quit<CR>', { desc = 'Close window' })
-keymap({ 'n', 'x' }, '<leader>h', '<cmd>lua handle_win_cmd("wincmd h")<CR>', { desc = 'which_key_ignore' })
-keymap({ 'n', 'x' }, '<leader>j', '<cmd>lua handle_win_cmd("wincmd j")<CR>', { desc = 'which_key_ignore' })
-keymap({ 'n', 'x' }, '<leader>k', '<cmd>lua handle_win_cmd("wincmd k")<CR>', { desc = 'which_key_ignore' })
-keymap({ 'n', 'x' }, '<leader>l', '<cmd>lua handle_win_cmd("wincmd l")<CR>', { desc = 'which_key_ignore' })
+keymap(nx, '<leader>q', '<cmd>Quit<CR>', { desc = 'Close window' })
+keymap(nx, '<leader>h', '<cmd>lua handle_win_cmd("wincmd h")<CR>', { desc = 'which_key_ignore' })
+keymap(nx, '<leader>j', '<cmd>lua handle_win_cmd("wincmd j")<CR>', { desc = 'which_key_ignore' })
+keymap(nx, '<leader>k', '<cmd>lua handle_win_cmd("wincmd k")<CR>', { desc = 'which_key_ignore' })
+keymap(nx, '<leader>l', '<cmd>lua handle_win_cmd("wincmd l")<CR>', { desc = 'which_key_ignore' })
 
 -- File commands
 keymap('n', '<leader>fC', ':w <C-R>=expand("%")<CR>', { silent = false, desc = 'Copy this file' })

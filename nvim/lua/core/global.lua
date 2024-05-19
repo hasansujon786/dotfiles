@@ -6,7 +6,7 @@ _G.dap_adapter_path = data_path .. '/dap_adapters' -- 'C:\\Users\\hasan\\AppData
 _G.plugin_path = data_path .. '/lazy'
 _G.path_mason = data_path .. '/mason'
 _G.org_root_path = '~/my_vault/orgfiles'
-_G.org_home_path = org_root_path .. '/roam/home.org'
+_G.org_home_path = org_root_path .. '/home.org'
 
 P = function(...)
   local hasNvim9 = vim.fn.has('nvim-0.9') == 1

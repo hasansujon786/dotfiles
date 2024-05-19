@@ -1,3 +1,7 @@
+local line = vim.fn.expand('<cfile>')
+local _lines = vim.fn.getregion(vim.fn.getpos('.'), vim.fn.getpos('v'), { type = vim.fn.mode() })
+local selection = table.concat(vim.iter(_lines):map(vim.trim):totable())
+
 local c = require('onedark.colors')
 local util = require('onedark.util')
 P(util.darken('#ca72e4', 0.2, c.bg0))

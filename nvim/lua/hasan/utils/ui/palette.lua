@@ -40,6 +40,8 @@ local c = {
   dark_blue = '#127ace',
   dark_green = '#5e9437',
   dark_cyan = '#25747d',
+
+  ligh_green = '#00a86d',
 }
 
 vim.g.onedark_theme_colors = {
@@ -117,6 +119,8 @@ local function set_custom_highlights()
 
   -- /// org ///
     CodeBlock                 = { bg = c.bg_d },
+    ['@markup.list.checked']  = { fg = c.ligh_green },
+    ['@org.verbatim']         = { bg = '#75662e' },
 
   -- /// glance.nvim ///
     GlancePreviewNormal       = { fg = c.fg, bg = c.bg_d },
@@ -128,7 +132,7 @@ local function set_custom_highlights()
     GlanceFoldIcon            = { fg = c.fg },
     GlanceListFilename        = { fg = c.white },
     GlanceIndent              = { fg = c.bg1 },
-    GlanceListCursorLine      = { bg = '#204364' },
+    GlanceListCursorLine      = { link = 'Visual' },
     GlancePreviewMatch        = { link = 'LspReferenceText' },
     GlanceListMatch           = { link = 'LspReferenceWrite' },
     GlanceBorderTop           = { fg = c.dark_blue  },
@@ -253,10 +257,10 @@ local function set_custom_highlights()
     MasonMutedBlock         = { link = 'LazyButton' },
     MasonHighlightBlockBold = { link = 'LazyButtonActive' },
   -- /// vim-visual-multi /// VM_Cursor
-    VM_Extend = { bg = '#5C6370', fg = c.fg },
-    VM_Cursor = { bg = '#8a8a8a', fg = '#005f87' },
+    VM_Extend = { link = 'Visual' },
+    VM_Cursor = { bg = '#8a8a8a', fg = '#204364' },
     VM_Insert = { bg = '#4c4e50', fg = 'NONE' },
-    VM_Mono   = { bg = '#00af87', fg = '#ffffff' },
+    VM_Mono   = { bg = c.ligh_green, fg = '#ffffff' },
   -- Mix
     TwoslashQueries     = { fg = c.dark_green },
     MarkSignHL          = { link = 'Comment' },

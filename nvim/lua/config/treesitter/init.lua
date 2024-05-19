@@ -5,8 +5,7 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     cmd = { 'TSUpdate', 'TSUpdateSync', 'TSInstall', 'TSInstallSync' },
     keys = {
-      { '<leader>vh', '<Cmd>TSCaptureUnderCursor<CR>', desc = 'Show ts highlight' },
-      { '<leader>vi', '<cmd>lua require("noice").redirect("Inspect")<cr>', desc = 'Show ts highlight' },
+      { '<leader>vh', '<Cmd>lua require("noice").redirect("Inspect")<CR>', desc = 'Show ts highlight' },
     },
     config = function()
       -- TSInstallSync javascript typescript tsx org
@@ -213,15 +212,5 @@ return {
     config = function()
       require('ts_context_commentstring').setup()
     end,
-  },
-  {
-    'nvim-treesitter/playground',
-    lazy = true,
-    cmd = {
-      'TSPlaygroundToggle',
-      'TSHighlightCapturesUnderCursor',
-      'TSCaptureUnderCursor',
-      'TSNodeUnderCursor',
-    },
   },
 }
