@@ -14,9 +14,6 @@ return {
     auto_refresh = true,
     disable_builtin_notifications = false,
     use_magit_keybindings = false,
-    commit_popup = {
-      kind = 'split',
-    },
     kind = 'tab',
     signs = {
       -- { CLOSED, OPENED }

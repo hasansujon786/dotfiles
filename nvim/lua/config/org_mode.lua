@@ -81,7 +81,7 @@ return {
           concealcursor = true,
           indent = true,
           symbols = {
-            headlines = { '⦿', '◯', '✿', '✸', '', '♥' },
+            headlines = { '◎', '◯', '', '', '✸', '', '♥', '✿' },
             checkboxes = {
               half = { '-' },
               done = { '✕', '@markup.list.checked' },

@@ -66,13 +66,33 @@ o.statusline = ' '
 o.cmdheight = 0 --                               Height of the command bar
 o.conceallevel = 2
 o.concealcursor = ''
+o.list = true
+opt.listchars = {
+  tab = '→ ',
+  nbsp = '␣',
+  trail = '•',
+  extends = '›',
+  precedes = '‹',
+  -- space = "•",
+  -- eol = "¬",
+}
+o.joinspaces = false --                          Two spaces and grade school, we're done
+-- opt.iskeyword:append('-') --                     Treat dash separated words as a word text object
+-- opt.matchpairs:append({'<:>','«:»','｢:｣'}) --    Match angle brackets...)
+opt.whichwrap:append('<,>,[,],h,l') --           Allow left/right & h/l key to move to the previous/next line
+-- code folding settings
+o.foldtext = '' -- 'hasan#utils#foldtext()'
+o.foldnestmax = 2 --                             Maximum nesting of folds
+o.foldlevelstart = 99 --                         Sets 'foldlevel' when starting to edit a buffer
+o.foldenable = true --                           Don't fold by default
+o.foldcolumn = '0'
 vim.opt.fillchars = {
   eob = ' ',
   diff = '╱',
-  fold = ' ',
-  foldclose = '',
+  fold = '┄',
   foldsep = '',
-  foldopen = '',
+  foldclose = '',
+  foldopen = '',
   vert = '▏',
   horiz = '▁',
   horizup = '🭼',
@@ -143,27 +163,6 @@ o.grepprg = [[rg --hidden --smart-case --vimgrep]]
 opt.path:append({ '**' })
 -- opt.grepformat = { '%f:%l:%c:%m' }
 
--- Text appearance
-o.list = true
-opt.listchars = {
-  tab = '→ ',
-  nbsp = '␣',
-  trail = '•',
-  extends = '›',
-  precedes = '‹',
-  -- space = "•",
-  -- eol = "¬",
-}
-o.joinspaces = false --                          Two spaces and grade school, we're done
--- opt.iskeyword:append('-') --                     Treat dash separated words as a word text object
--- opt.matchpairs:append({'<:>','«:»','｢:｣'}) --    Match angle brackets...)
-opt.whichwrap:append('<,>,[,],h,l') --           Allow left/right & h/l key to move to the previous/next line
--- code folding settings
--- o.foldtext = 'hasan#utils#foldtext()'
-o.foldnestmax = 2 --                             Maximum nesting of folds
-o.foldlevelstart = 99 --                         Sets 'foldlevel' when starting to edit a buffer
-o.foldenable = true --                           Don't fold by default
--- o.foldcolumn = 'auto:1'
 -- Scroll aside
 o.sidescroll = 1
 o.scrolloff = 1 --                               Set 1 lines to the cursor - when moving vertically using j/k
