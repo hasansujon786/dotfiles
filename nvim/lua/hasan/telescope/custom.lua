@@ -17,44 +17,66 @@ local local_action = require('hasan.telescope.local_action')
 local conf = require('telescope.config').values
 local os_sep = Path.path.sep
 
-local filter = vim.tbl_filter
-local flatten = vim.tbl_flatten
+---@return boolean
+local function buf_in_cwd(bufname, cwd)
+  if cwd:sub(-1) ~= Path.path.sep then
+    cwd = cwd .. Path.path.sep
+  end
+  local bufname_prefix = bufname:sub(1, #cwd)
+  return bufname_prefix == cwd
+end
 
 local git_and_buffer_files = function(opts)
-  local bufnrs = filter(function(b)
-    if 1 ~= vim.fn.buflisted(b) then
-      return false
-    end
-    if not opts.show_all_buffers and not vim.api.nvim_buf_is_loaded(b) then
-      return false
-    end
-    if not opts.show_current_buffer and b == vim.api.nvim_get_current_buf() then
-      return false
-    end
-    if opts.only_cwd and not string.find(vim.api.nvim_buf_get_name(b), vim.loop.cwd(), 1, true) then
-      return false
-    end
-    return true
-  end, vim.fn['hasan#utils#_buflisted_sorted']())
+  local cur_bufnr = vim.api.nvim_get_current_buf()
+  local _buffer_keys = {}
 
-  local bufer_files = {}
-  for _, bufnr in ipairs(bufnrs) do
-    local bufname = vim.api.nvim_buf_get_name(bufnr)
-    local file = vim.fn.fnamemodify(bufname, ':.'):gsub('\\', '/')
-    table.insert(bufer_files, file)
-  end
+  local buffer_files = vim
+    .iter(vim.fn['hasan#utils#_buflisted_sorted']())
+    :filter(function(b)
+      if 1 ~= vim.fn.buflisted(b) then
+        return false
+      end
+      if not opts.show_all_buffers and not vim.api.nvim_buf_is_loaded(b) then
+        return false
+      end
+      if not opts.show_current_buffer and b == cur_bufnr then
+        return false
+      end
+      return true
+    end)
+    :map(function(bufnr)
+      local buffer_name = vim.api.nvim_buf_get_name(bufnr)
+      if buffer_name == '' then
+        return false
+      end
+
+      if opts.only_cwd and not buf_in_cwd(buffer_name, vim.uv.cwd()) then
+        return false
+      end
+
+      local file = vim.fn.fnamemodify(buffer_name, ':.'):gsub('\\', '/')
+      _buffer_keys[file] = 1
+      return file
+    end)
+    :totable()
+
   local current_file = vim.fn.expand('%'):gsub('\\', '/')
-  local git_files = utils.get_os_command_output({ 'git', 'ls-files', '--exclude-standard', '--cached', '--others' })
-  git_files = filter(function(v)
-    return v ~= current_file
-  end, git_files)
-  local fusedArray = flatten({ bufer_files, git_files })
+  local git_results = utils.get_os_command_output({ 'git', 'ls-files', '--exclude-standard', '--cached', '--others' })
+  local git_files = vim
+    .iter(git_results)
+    :filter(function(v)
+      if _buffer_keys[v] == 1 then
+        return false
+      end
+      return v ~= current_file
+    end)
+    :totable()
 
   pickers
     .new(opts, {
       prompt_title = 'Project Files',
       finder = finders.new_table({
-        results = vim.fn['hasan#utils#_uniq'](fusedArray),
+        results = vim.iter({ buffer_files, git_files }):flatten():totable(),
         entry_maker = opts.entry_maker or make_entry.gen_from_file(opts),
       }),
       sorter = conf.file_sorter(opts),
@@ -72,7 +94,8 @@ M.project_files = function()
   local _, ret, _ = utils.get_os_command_output({ 'git', 'rev-parse', '--is-inside-work-tree' })
   if ret == 0 then
     git_and_buffer_files(my_theme.get_top_panel({
-      entry_maker = my_make_entry.gen_from_file({ dir_separator = '/' }),
+      -- only_cwd = true,
+      entry_maker = my_make_entry.gen_from_filename_first({ dir_separator = '/' }),
     }))
   else
     M.my_find_files()
@@ -80,10 +103,7 @@ M.project_files = function()
 end
 
 M.my_find_files = function(dir)
-  builtin.find_files(my_theme.get_top_panel({
-    entry_maker = my_make_entry.gen_from_file(),
-    cwd = dir == 'cur_dir' and vim.fn.expand('%:h') or nil,
-  }))
+  builtin.find_files(my_theme.get_top_panel({ cwd = dir == 'cur_dir' and vim.fn.expand('%:h') or nil }))
 end
 
 function M.curbuf()
@@ -120,7 +140,7 @@ function M.file_browser(dir)
     hide_parent_dir = true,
     files = dir == 'cur_dir', -- false: start with all dirs
     prompt_path = true,
-    previewer = false,
+    previewer = true,
   }))
 end
 
@@ -240,7 +260,7 @@ M.grep_string_list = function(opts)
     additional_args = opts.additional_args(opts)
   end
 
-  local args = flatten({ vimgrep_arguments, additional_args, search_list })
+  local args = vim.iter({ vimgrep_arguments, additional_args, search_list }):flatten():totable()
 
   if search_dirs then
     for _, path in ipairs(search_dirs) do
@@ -261,7 +281,6 @@ end
 function M.search_project_todos()
   M.grep_string_list({
     prompt_title = 'Search Todos',
-    path_display = { 'smart' },
     search_list = require('core.state').telescope.todo_keyfaces,
     additional_args = function()
       return { '--glob', '!nvim/lua/hasan/core/state.lua', '--glob', '!nvim/legacy/*' }
@@ -276,10 +295,6 @@ M.buffers = function(is_cwd_only)
     sort_mru = true,
     previewer = false,
     ignore_current_buffer = is_cwd_only,
-    entry_maker = my_make_entry.gen_from_buffer({
-      bufnr_width = 3,
-      sort_mru = true,
-    }),
   }
   builtin.buffers(my_theme.get_dropdown(opts))
 end
@@ -330,7 +345,7 @@ M.emojis = function()
     :find()
 end
 
-local function get_project_scripts()
+local function get_tw_colors()
   local data = vim.fn.readfile('C:\\Users\\hasan\\dotfiles\\.system\\src\\tailwind_colors.json')
   local sc = vim.fn.json_decode(data)
   if sc == nil then
@@ -351,7 +366,7 @@ M.colors = function()
   pickers
     .new(my_theme.get_top_panel(opts), {
       finder = finders.new_table({
-        results = get_project_scripts(),
+        results = get_tw_colors(),
         entry_maker = my_make_entry.gen_from_tailwindcolors(opts),
       }),
       sorter = conf.file_sorter(opts),

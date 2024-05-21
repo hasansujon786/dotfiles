@@ -41,7 +41,7 @@ M.get_path_and_tail = function(filename, sep)
   return bufname_tail, path_to_display
 end
 
-function M.gen_from_file(opts)
+function M.gen_from_filename_first(opts)
   opts = opts or {}
   local entry_make = make_entry.gen_from_file(opts)
   return function(line)
@@ -60,11 +60,7 @@ function M.gen_from_file(opts)
       local tail = tail_raw .. ' '
       local icon, iconhl = utils.get_devicons(tail_raw)
 
-      return displayer({
-        { icon, iconhl },
-        tail,
-        { path_to_display, 'TelescopeResultsComment' },
-      })
+      return displayer({ { icon, iconhl }, tail, { path_to_display, 'TelescopeResultsComment' } })
     end
     return entry
   end

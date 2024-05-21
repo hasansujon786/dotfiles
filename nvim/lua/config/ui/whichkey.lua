@@ -75,8 +75,8 @@ return {
 
       b = {
         name = '+buffer',
-        b = common.buffers_cwd,
-        B = common.buffers_all,
+        b = common.buffers_all,
+        ['.'] = common.buffers_cwd,
         f = { '<cmd>bfirst<CR>', 'First buffer' },
         l = { '<cmd>blast<CR>', 'Last buffer' },
         n = { '<cmd>bnext<CR>', 'Next buffer' },
@@ -239,7 +239,7 @@ return {
       r = { '<cmd>lua require("hasan.utils.win").cycle_numbering()<CR>', 'Cycle number' },
       x = { '<cmd>call hasan#utils#buffer#_open_scratch_buffer()<CR>', 'Scratch buffer' },
 
-      ['.'] = common.buffers_all,
+      ['.'] = common.browse_cur_dir,
       ['m'] = common.buffers_cwd,
     }
 

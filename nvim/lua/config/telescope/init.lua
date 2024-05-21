@@ -45,6 +45,7 @@ return {
           multi_icon = '▸',
           prompt_prefix = '   ',
           selection_caret = '❯ ',
+          path_display = { 'filename_first' },
           -- sorting_strategy = "ascending",
           layout_config = {
             height = 0.7,
@@ -67,7 +68,7 @@ return {
           },
         },
         pickers = {
-          -- find_files = { theme = 'ivy', layout_config = { height = 0.7 } },
+          find_files = { theme = 'ivy', layout_config = { height = 0.6 } },
           lsp_document_symbols = dropdown_opts,
           lsp_references = dropdown_opts,
           grep_string = dropdown_opts,
@@ -154,7 +155,9 @@ return {
       keymap('n', '//', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>', { desc = 'which_key_ignore' })
       keymap('v', '/', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>', { desc = 'which_key_ignore' })
       keymap({ 'n', 'v' }, '<A-/>', '<cmd>lua require("hasan.telescope.custom").grep_string()<CR>')
-      command('EmojiPicker', require('hasan.telescope.custom').emojis)
+      command('EmojiPicker', function()
+        require('hasan.telescope.custom').emojis()
+      end)
     end,
     dependencies = {
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },

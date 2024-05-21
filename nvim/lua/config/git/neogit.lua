@@ -14,6 +14,9 @@ return {
     auto_refresh = true,
     disable_builtin_notifications = false,
     use_magit_keybindings = false,
+    -- commit_editor = {
+    --   kind = 'vsplit',
+    -- },
     kind = 'tab',
     signs = {
       -- { CLOSED, OPENED }
