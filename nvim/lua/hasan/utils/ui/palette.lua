@@ -157,6 +157,7 @@ local function set_custom_highlights()
     NeogitHunkHeader           = { fg = c.bg_d, bg = c.muted },
     NeogitHunkHeaderHighlight  = { fg = c.bg0, bg = '#c3a7e5' },
     NeogitDiffContextHighlight = { bg = '#323945' },
+    NeogitWinSeparator         = { fg = c.bg3 },
 
   -- /// Telescope ///
     TelescopePromptPrefix   = { fg = c.green },

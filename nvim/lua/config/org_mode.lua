@@ -50,6 +50,7 @@ return {
       { '<leader>/o', '<cmd>Telescope live_grep cwd=~/my_vault/orgfiles<CR>', desc = 'Grep org text' },
       { '<leader>/w', '<cmd>Telescope find_files cwd=~/my_vault/orgfiles<CR>', desc = 'Search org files' },
       { '<leader>w/', '<cmd>Telescope find_files cwd=~/my_vault/orgfiles<CR>', desc = 'Search org files' },
+      { '<leader>w.', '<cmd>Telescope file_browser cwd=~/my_vault/orgfiles<CR>', desc = 'Browse org files' },
     },
     opts = {
       org_agenda_files = { '~/my_vault/orgfiles/**/*' },
