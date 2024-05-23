@@ -18,18 +18,21 @@ M.get_buf_name_relative = function(buffer)
 end
 
 M.config_root = function()
-  local configDir = os.getenv('PVIM')
-  if configDir then
-    configDir = configDir .. '/config'
-  else
-    configDir = vim.fn.stdpath('config')
+  local pvim_config = os.getenv('PVIM')
+  if pvim_config then
+    return pvim_config .. '/config'
   end
-  return configDir
+
+  local config = vim.fn.stdpath('config')
+  if type(config) == 'table' then
+    return config[1]
+  end
+  return config
 end
 
 M.open_settings = function()
-  local path = vim.fs.normalize(M.config_root() .. '\\lua\\hasan\\core\\state.lua')
-  vim.cmd.edit(path)
+  local path = vim.fs.normalize(M.config_root() .. '/lua/core/state.lua')
+  vim.cmd.split(path)
 end
 
 M.path_exists = function(fname, cwd)

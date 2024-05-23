@@ -26,7 +26,7 @@ nm.setup_defaults({
 -- nm.source_on_save('~\dotfiles\nvim\lua\config\neo_minimap.lua')
 
 -- Lua
-nm.set({ 'zo', 'zi', 'zu' }, '*.lua', {
+nm.set({ 'zo', 'zi', 'zI' }, '*.lua', {
   events = { 'BufEnter' },
   query = {
     [[

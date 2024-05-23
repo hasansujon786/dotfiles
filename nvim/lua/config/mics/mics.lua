@@ -47,9 +47,33 @@ return {
   },
   {
     'arthurxavierx/vim-caser',
-    keys = { { '<leader>cs', desc = 'vim-caser', mode = nx } },
-    init = function()
-      vim.g.caser_prefix = '<leader>cs'
+    event = 'VeryLazy',
+    config = function()
+      vim.g.caser_no_mappings = 1
+
+      local maps = {
+        c = { '<Plug>CaserCamelCase', '<Plug>CaserVCamelCase', 'Caser: Camel case' },
+        p = { '<Plug>CaserMixedCase', '<Plug>CaserVMixedCase', 'Caser: Pascal case' },
+
+        ['-'] = { '<Plug>CaserKebabCase', '<Plug>CaserVKebabCase', 'Caser: Kebab case' },
+        k = { '<Plug>CaserKebabCase', '<Plug>CaserVKebabCase', 'Caser: Kebab case' },
+        K = { '<Plug>CaserTitleKebabCase', '<Plug>CaserVTitleKebabCase', 'Caser: Title kebab case' },
+
+        s = { '<Plug>CaserSnakeCase', '<Plug>CaserVSnakeCase', 'Caser: Snake case' },
+        ['_'] = { '<Plug>CaserSnakeCase', '<Plug>CaserVSnakeCase', 'Caser: Snake case' },
+
+        U = { '<Plug>CaserUpperCase', '<Plug>CaserVUpperCase', 'Caser: Upper snake case' },
+
+        t = { '<Plug>CaserTitleCase', '<Plug>CaserVTitleCase', 'Caser: Title case' },
+        S = { '<Plug>CaserSentenceCase', '<Plug>CaserVSentenceCase', 'Caser: Title case' },
+
+        ['.'] = { '<Plug>CaserDotCase', '<Plug>CaserVDotCase', 'Caser: Dot case' },
+        ['<space>'] = { '<Plug>CaserSpaceCase', '<Plug>CaserVSpaceCase', 'Caser: Space case' },
+      }
+      for key, value in pairs(maps) do
+        keymap('n', 'ga' .. key, value[1], { desc = value[3] })
+        keymap('x', 'a' .. key, value[2], { desc = value[3] })
+      end
     end,
   },
   {
