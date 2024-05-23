@@ -46,35 +46,24 @@ return {
     end,
   },
   {
-    'arthurxavierx/vim-caser',
-    event = 'VeryLazy',
+    'johmsalas/text-case.nvim',
+    lazy = true,
+    dependencies = { 'nvim-telescope/telescope.nvim' },
     config = function()
-      vim.g.caser_no_mappings = 1
-
-      local maps = {
-        c = { '<Plug>CaserCamelCase', '<Plug>CaserVCamelCase', 'Caser: Camel case' },
-        p = { '<Plug>CaserMixedCase', '<Plug>CaserVMixedCase', 'Caser: Pascal case' },
-
-        ['-'] = { '<Plug>CaserKebabCase', '<Plug>CaserVKebabCase', 'Caser: Kebab case' },
-        k = { '<Plug>CaserKebabCase', '<Plug>CaserVKebabCase', 'Caser: Kebab case' },
-        K = { '<Plug>CaserTitleKebabCase', '<Plug>CaserVTitleKebabCase', 'Caser: Title kebab case' },
-
-        s = { '<Plug>CaserSnakeCase', '<Plug>CaserVSnakeCase', 'Caser: Snake case' },
-        ['_'] = { '<Plug>CaserSnakeCase', '<Plug>CaserVSnakeCase', 'Caser: Snake case' },
-
-        U = { '<Plug>CaserUpperCase', '<Plug>CaserVUpperCase', 'Caser: Upper snake case' },
-
-        t = { '<Plug>CaserTitleCase', '<Plug>CaserVTitleCase', 'Caser: Title case' },
-        S = { '<Plug>CaserSentenceCase', '<Plug>CaserVSentenceCase', 'Caser: Title case' },
-
-        ['.'] = { '<Plug>CaserDotCase', '<Plug>CaserVDotCase', 'Caser: Dot case' },
-        ['<space>'] = { '<Plug>CaserSpaceCase', '<Plug>CaserVSpaceCase', 'Caser: Space case' },
-      }
-      for key, value in pairs(maps) do
-        keymap('n', 'ga' .. key, value[1], { desc = value[3] })
-        keymap('x', 'a' .. key, value[2], { desc = value[3] })
-      end
+      require('textcase').setup({})
+      require('telescope').load_extension('textcase')
     end,
+    keys = {
+      'ga',
+      { 'ga.', '<cmd>TextCaseOpenTelescopeQuickChange<CR>', mode = { 'n', 'x' }, desc = 'Telescope Quick Change' },
+      { 'ga,', '<cmd>TextCaseOpenTelescopeLSPChange<CR>', mode = { 'n', 'x' }, desc = 'Telescope LSP Change' },
+    },
+    cmd = {
+      'TextCaseOpenTelescope',
+      'TextCaseOpenTelescopeQuickChange',
+      'TextCaseOpenTelescopeLSPChange',
+      'TextCaseStartReplacingCommand',
+    },
   },
   {
     'jinh0/eyeliner.nvim',
