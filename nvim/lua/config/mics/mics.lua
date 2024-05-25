@@ -19,15 +19,15 @@ return {
     keys = {
       { 'gb', '<Plug>(VM-Find-Under)', desc = 'VM: Select under cursor', mode = 'n' },
       { 'gb', '<Plug>(VM-Find-Subword-Under)', desc = 'VM: Select under cursor', mode = 'x' },
-      { 'gB', '<Plug>(VM-Select-All)', desc = 'VM: Select under cursor', mode = 'n' },
-      { 'gB', '<Plug>(VM-Visual-All)', desc = 'VM: Select under cursor', mode = 'x' },
-      { '<leader>n', mode = nx },
+      { 'gB', '<Plug>(VM-Select-All)', desc = 'VM: Select all occurrences', mode = 'n' },
+      { 'gB', '<Plug>(VM-Visual-All)', desc = 'VM: Select all occurrences', mode = 'x' },
+      { 'gA', mode = nx, desc = 'VM: More Actions' },
       { '<C-n>', mode = nx },
       { '<C-up>', mode = nx },
       { '<C-down>', mode = nx },
     },
     init = function()
-      vim.g.VM_leader = '<leader>n'
+      vim.g.VM_leader = 'gA'
       vim.g.VM_theme = ''
       vim.g.VM_maps = {
         -- ['Slash Search'] = 'gM',
@@ -48,22 +48,21 @@ return {
   {
     'johmsalas/text-case.nvim',
     lazy = true,
-    dependencies = { 'nvim-telescope/telescope.nvim' },
-    config = function()
-      require('textcase').setup({})
-      require('telescope').load_extension('textcase')
-    end,
-    keys = {
-      'ga',
-      { 'ga.', '<cmd>TextCaseOpenTelescopeQuickChange<CR>', mode = { 'n', 'x' }, desc = 'Telescope Quick Change' },
-      { 'ga,', '<cmd>TextCaseOpenTelescopeLSPChange<CR>', mode = { 'n', 'x' }, desc = 'Telescope LSP Change' },
-    },
+    keys = { { 'ga', mode = nx, desc = 'Text case' } },
     cmd = {
       'TextCaseOpenTelescope',
       'TextCaseOpenTelescopeQuickChange',
       'TextCaseOpenTelescopeLSPChange',
       'TextCaseStartReplacingCommand',
     },
+    config = function()
+      require('textcase').setup({})
+      require('telescope').load_extension('textcase')
+
+      keymap(nx, 'ga.', '<cmd>TextCaseOpenTelescopeQuickChange<CR>', { desc = 'Telescope Quick Change' })
+      keymap(nx, 'ga,', '<cmd>TextCaseOpenTelescopeLSPChange<CR>', { desc = 'Telescope LSP Change' })
+    end,
+    dependencies = { 'nvim-telescope/telescope.nvim' },
   },
   {
     'jinh0/eyeliner.nvim',

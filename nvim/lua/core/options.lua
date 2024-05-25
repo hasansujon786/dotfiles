@@ -5,6 +5,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Files-backup-undo
+vim.loader.enable()
 o.backup = false
 o.swapfile = false --                            Turn backup off, since most stuff is in SVN, git etc. anyway...
 o.writebackup = false
