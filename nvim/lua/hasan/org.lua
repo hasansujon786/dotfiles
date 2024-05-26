@@ -229,6 +229,12 @@ function M.toggle_org_float()
   end
 end
 
+-- autocmd({ 'BufWinEnter', 'WinEnter' }, function()
+--   vim.defer_fn(function()
+--     vim.wo.winhighlight = 'Normal:Normal,FloatBorder:ZenBorder,Folded:OrgHeadlineLevel1'
+--   end, 1)
+-- end, { pattern = '*.org' })
+
 function M.onOrgWinEnter()
   if fn.is_cur_win_org_float() then
     last_bufnr = api.nvim_get_current_buf()

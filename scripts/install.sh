@@ -391,7 +391,7 @@ install_and_setup_tmux() {
 
 auto_install_everything() {
 	echo ' ** Auto Install ** '
-  mkdir -p ~/.config
+	mkdir -p ~/.config
 
 	if [[ "$os" == "windows" ]]; then
 		start ms-settings:developers

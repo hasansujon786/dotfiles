@@ -78,7 +78,7 @@ local function set_custom_highlights()
   -- stylua: ignore
   local highlights = {
     NormalFloat             = { fg = fg, bg = normal_bg },
-    FloatBorder             = { fg = c.cyan, bg = normal_bg },
+    FloatBorder             = { fg = c.cyan, bg = c.none },
     NormalFloatFlat         = { fg = fg, bg = float_bg },
     FloatBorderFlat         = { fg = dark_border, bg = float_bg },
     FloatBorderHidden       = { fg = c.bg3, bg = normal_bg },
@@ -119,8 +119,11 @@ local function set_custom_highlights()
 
   -- /// org ///
     CodeBlock                 = { bg = c.bg_d },
-    ['@markup.list.checked']  = { fg = c.ligh_green },
     ['@org.verbatim']         = { bg = '#75662e' },
+    ['@org.block.org']        = { fg = c.diff_text },
+    ['@markup.list.checked']  = { fg = c.ligh_green },
+    ['@markup.link.url']      = { fg = '#8a5cf5', underline = true },
+    ['@markup.list']          = { fg = '#8a5cf5' },
 
   -- /// glance.nvim ///
     GlancePreviewNormal       = { fg = c.fg, bg = c.bg_d },

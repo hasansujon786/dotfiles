@@ -10,11 +10,6 @@ augroup('MY_AUGROUP')(function(autocmd)
   autocmd('FileType', 'setl foldmarker={,}', { pattern = { 'css', 'scss', 'json' } })
   autocmd('FileType', 'setl foldmarker={,}', { pattern = { 'css', 'scss', 'json' } })
   autocmd({ 'BufNewFile', 'BufRead' }, 'setl filetype=jsonc', { pattern = { '*.json', 'tsconfig.json' } })
-  autocmd({ 'BufWinEnter', 'WinEnter' }, function()
-    vim.defer_fn(function()
-      vim.wo.winhighlight = 'Normal:Normal,FloatBorder:ZenBorder,Folded:OrgHeadlineLevel1'
-    end, 1)
-  end, { pattern = '*.org' })
 
   autocmd('BufLeave', 'normal! mK', { pattern = '*.txt' })
   autocmd('TermOpen', 'setfiletype terminal | set bufhidden=hide')

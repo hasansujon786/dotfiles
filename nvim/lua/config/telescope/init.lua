@@ -4,10 +4,11 @@ return {
     lazy = true,
     event = 'VeryLazy',
     config = function()
-      local state = require('core.state')
       local actions = require('telescope.actions')
-      local local_action = require('hasan.telescope.local_action')
       local fb_actions = require('telescope._extensions.file_browser.actions')
+      local state = require('core.state')
+      local local_action = require('hasan.telescope.local_action')
+      local local_theme = require('hasan.telescope.theme')
 
       local custom_mappings = {
         ['<M-u>'] = actions.preview_scrolling_up,
@@ -35,7 +36,10 @@ return {
         ['<C-d>'] = false,
       }
 
-      local dropdown_opts = require('hasan.telescope.theme').center_layout_opts
+      local dropdown_opts = local_theme.center_layout_opts
+      local get_dropdown = local_theme.get_dropdown()
+      local get_cursor = local_theme.get_cursor()
+
       require('telescope').setup({
         defaults = {
           results_title = false,
@@ -81,13 +85,16 @@ return {
             override_file_sorter = true,
           },
           ['ui-select'] = {
-            require('hasan.telescope.theme').get_dropdown(),
-            kind = {
-              codeaction = require('hasan.telescope.theme').get_cursor(),
-              cursor = require('hasan.telescope.theme').get_cursor(),
+            get_dropdown,
+            specific_opts = {
+              -- ['codeaction'] = {},
+              picker_opts = {
+                codeaction = get_cursor,
+                cursor = get_cursor,
+              },
             },
           },
-          persisted = require('hasan.telescope.theme').get_dropdown(),
+          persisted = get_dropdown,
           project_commands = require('config.telescope.project_commands'),
           file_browser = {
             theme = 'ivy',
@@ -145,7 +152,7 @@ return {
       })
       require('telescope').load_extension('fzf')
       require('telescope').load_extension('ui-select')
-      require('hasan.telescope.theme').setup()
+      local_theme.setup()
 
       -- keymaps
       local pfiles_opt = { desc = 'Find project file' }
