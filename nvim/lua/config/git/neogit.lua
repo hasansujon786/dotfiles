@@ -1,5 +1,5 @@
 return {
-  'hasansujon786/neogit', -- 'NeogitOrg/neogit', -- commit = '7bb9b89', -- <-- Old Ui , v0.9 '835ef4b',
+  'NeogitOrg/neogit',
   lazy = true,
   cmd = 'Neogit',
   keys = {

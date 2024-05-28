@@ -11,6 +11,7 @@ alias sc='~/dotfiles/scripts/sc.sh'
 alias no="NODE_OPTIONS='--inspect'"
 alias nri='node --inspect '
 alias ns='npm start'
+alias nsc="npm start --reset-cache"
 alias nd='npm run dev'
 alias ncc='npm cache clean --force'
 alias esint='npm init @eslint/config'

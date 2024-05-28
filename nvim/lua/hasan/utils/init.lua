@@ -144,7 +144,7 @@ M.open_git_remote = function(open_root)
       full_remote_path = string.format('%s/blob/%s/%s', remote_root, branch, fpath)
     end
 
-    vim.cmd('OpenURL ' .. full_remote_path)
+    vim.ui.open(full_remote_path)
     vim.notify(full_remote_path, vim.log.levels.INFO)
   else
     return ''

@@ -50,7 +50,7 @@ return {
       },
     },
     follow_url_func = function(url)
-      vim.cmd('OpenURL ' .. url)
+      vim.ui.open(url)
     end,
     mappings = {},
 

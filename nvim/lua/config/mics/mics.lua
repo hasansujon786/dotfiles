@@ -96,6 +96,10 @@ return {
     },
   },
   {
+    'dhruvasagar/vim-table-mode',
+    cmd = { 'TableModeToggle', 'TableModeEnable', 'TableModeRealign' },
+  },
+  {
     'hasansujon786/neo-glance.nvim_local',
     dev = true,
     config = function()
