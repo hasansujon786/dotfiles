@@ -1,9 +1,5 @@
 local Job = require('plenary.job')
-
 local Path = require('plenary.path')
-local function normalize_path(buf_name, root)
-  return Path:new(buf_name):make_relative(root)
-end
 
 local M = {}
 
@@ -14,7 +10,7 @@ end
 --- @param buffer buffer
 --- @return string
 M.get_buf_name_relative = function(buffer)
-  return normalize_path(vim.api.nvim_buf_get_name(buffer), M.get_root_dir())
+  return Path:new(vim.api.nvim_buf_get_name(buffer)):make_relative(M.get_root_dir())
 end
 
 M.config_root = function()

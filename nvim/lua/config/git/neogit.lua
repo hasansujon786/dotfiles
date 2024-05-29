@@ -2,6 +2,8 @@ return {
   'NeogitOrg/neogit',
   lazy = true,
   cmd = 'Neogit',
+  -- commit = '37823b4dcf1955a4544ca4b3dfd8076e402a9562', -- normalize-cwd
+  commit = '9da48298a1c1e1ea52b4b9b9a4c2c4ded6ac422a',
   keys = {
     { '<leader>gg', '<cmd>Neogit<CR>', desc = 'Open Neogit' },
   },

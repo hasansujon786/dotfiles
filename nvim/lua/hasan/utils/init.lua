@@ -171,16 +171,6 @@ M.index_of = function(tbl, value)
   return -1
 end
 
-function M.normalize_path(path_to_normalise)
-  local normalized_path = path_to_normalise:gsub('\\', '/'):gsub('//', '/')
-
-  if M.is_windows() then
-    normalized_path = normalized_path:sub(1, 1):lower() .. normalized_path:sub(2)
-  end
-
-  return normalized_path
-end
-
 function M.is_visual_mode()
   local mode = vim.api.nvim_get_mode().mode
   return mode == 'v' or mode == 'V' or mode == '', mode
