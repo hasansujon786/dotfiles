@@ -48,11 +48,12 @@ function M.open_vinegar()
 
   local readonly = vim.api.nvim_buf_get_option(0, 'readonly')
   local modifiable = vim.api.nvim_buf_get_option(0, 'modifiable')
+  local filereadable = vim.fn.filereadable(vim.fn.expand('%'))
 
-  if readonly or not modifiable then
-    vim.cmd([[Neotree filesystem position=current]])
-  else
+  if not readonly and modifiable and filereadable == 1 then
     vim.cmd([[Neotree filesystem position=current dir=%:p:h reveal_file=%:p]])
+  else
+    vim.cmd([[Neotree filesystem position=current]])
   end
 end
 
