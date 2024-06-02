@@ -232,7 +232,7 @@ local function set_custom_highlights()
   -- /// nui.nvim ///
     NuiNormalFloat = { link = 'NormalFloat' },
     NuiFloatBorder = { link = 'FloatBorderHidden' },
-    NuiMenuItem    = { link = 'TelescopeSelectionCaret' },
+    NuiMenuItem    = { link = 'Visual' },
 
   -- /// Alpha ///
     AlphaTag       = { fg = '#4d5666' },

@@ -14,4 +14,4 @@ else
   require('core.keymaps')
   require('core.autocmds')
 end
-require('core.lazy')
+require('core.lazy_setup')

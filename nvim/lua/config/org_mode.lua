@@ -1,12 +1,12 @@
 local function load_treesitter()
   if package.loaded['nvim-treesitter'] == nil then
-    vim.cmd([[Lazy load nvim-treesitter]])
+    require('lazy').load({ plugins = { 'nvim-treesitter' } })
   end
 end
 local function loadOrgMode(key)
   return function()
     load_treesitter()
-    vim.cmd([[Lazy load orgmode]])
+    require('lazy').load({ plugins = { 'orgmode' } })
     vim.defer_fn(function()
       feedkeys(key)
     end, 0)
@@ -68,6 +68,43 @@ return {
           description = 'Task',
           headline = 'Quick Tasks',
           template = '** TODO %?\n  %u',
+        },
+      },
+      ui = {
+        menu = {
+          handler = function(data)
+            local options = {}
+            local data_by_key = {}
+
+            for _, item in ipairs(data.items) do
+              -- Only MenuOption has `key`
+              -- Also we don't need `Quit` option because we can close the menu with ESC
+              if item.key and item.key ~= 'q' then
+                table.insert(options, { label = item.label, key = item.key })
+                data_by_key[item.key] = item
+              end
+            end
+
+            local handler = function(choice)
+              if not choice then
+                return
+              end
+              local option = data_by_key[choice.key]
+              if option.action then
+                option.action()
+              end
+            end
+
+            require('hasan.widgets').get_select_menu(options, {
+              prompt = ' ' .. data.title .. ' ',
+              kind = 'get_char',
+              min_width = 40,
+              win_config = { win_options = { number = false } },
+              format_item = function(item)
+                return string.format('   %s - %s', item.key, item.label)
+              end,
+            }, handler)
+          end,
         },
       },
     },

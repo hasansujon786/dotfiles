@@ -10,6 +10,7 @@ local ui = require('core.state').ui
 
 local M = {}
 local anchor = { 'NW', 'NE', 'SW', 'SE' }
+local map_opt = { noremap = true, nowait = true }
 
 --------------------------------------------------
 -------- UIInput ---------------------------------
@@ -50,7 +51,6 @@ function UIInput:init(opts, on_confirm)
     on_confirm(nil)
   end, { once = true })
 
-  local map_opt = { noremap = true, nowait = true }
   local exit_win = function()
     on_confirm(nil)
   end
@@ -119,11 +119,11 @@ M.get_tabbar_input = function(opts, callback)
   M.get_input(opts, callback)
 end
 
--- Prompts the user to pick from a list of items
--- @param items {list}
--- @param opts {prompt,win_config}
--- @param on_confirm {function}
-M.get_select_menu = function(items, opts, callback)
+---Prompts the user to pick from a list of items
+---@param items table
+---@param opts SelectMenuOpts
+---@param on_choice fun(item: any|nil)
+M.get_select_menu = function(items, opts, on_choice)
   local right_pad = 6
   local width = opts.min_width or 20
   local max_width = opts.max_width or 60
@@ -154,7 +154,7 @@ M.get_select_menu = function(items, opts, callback)
       -- left = opts.number and 0 or 2, right = opts.number and 3 or 2,
       padding = { top = 1, bottom = 1, left = 0, right = 0 },
       style = ui.border.style,
-      highlight = ui.border.highlight,
+      highlight = 'Normal:Normal',
       text = { top = opts.prompt and Text(opts.prompt) or nil, top_align = opts.prompt_align },
     },
     win_options = {
@@ -179,7 +179,7 @@ M.get_select_menu = function(items, opts, callback)
       submit = { '<CR>', '<Space>' },
     },
     on_close = nil,
-    on_submit = opts.on_submit or callback,
+    on_submit = on_choice,
   }, opts or {})
   opts.lines = menu_items
 
@@ -188,12 +188,30 @@ M.get_select_menu = function(items, opts, callback)
   menu:mount()
   vim.cmd([[hi Cursor blend=100]])
 
+  -- set get_char keymaps
+  if opts.kind ~= nil and opts.kind == 'get_char' then
+    for index, item in ipairs(items) do
+      menu:map('n', item.key, function()
+        vim.api.nvim_win_set_cursor(0, { index, 0 })
+        menu.menu_props.on_submit()
+      end, map_opt)
+    end
+  end
+
   -- close menu when cursor leaves buffer
   menu:on(event.BufLeave, function()
     vim.cmd([[hi Cursor blend=0]])
     menu.menu_props.on_close()
   end, { once = true })
 end
+---@class SelectMenuOpts
+---@field prompt? string
+---@field kind? "get_char"|nil
+---@field min_width? number
+---@field max_width? number
+---@field prompt_align? string
+---@field format_item? function
+---@field win_config? nui_popup_options
 
 M.get_notify_popup = function(opts, last_pop)
   local row = vim.o.lines - 1

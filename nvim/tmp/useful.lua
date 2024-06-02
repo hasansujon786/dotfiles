@@ -420,21 +420,21 @@ function M.package_to_relative_importx(bufnr)
   end)
 end
 
-local init = function()
-  vim.notify = function(...)
-    if not require('lazy.core.config').plugins['nvim-notify']._.loaded then
-      require('lazy').load({ plugins = 'nvim-notify' })
-    end
-    require('notify')(...)
-  end
-end
-local initx = function()
-  vim.ui.select = function(...)
-    require('lazy').load({ plugins = { 'dressing.nvim' } })
-    return vim.ui.select(...)
-  end
-  vim.ui.input = function(...)
-    require('lazy').load({ plugins = { 'dressing.nvim' } })
-    return vim.ui.input(...)
-  end
-end
+-- local init = function()
+--   vim.notify = function(...)
+--     if not require('lazy.core.config').plugins['nvim-notify']._.loaded then
+--       require('lazy').load({ plugins = 'nvim-notify' })
+--     end
+--     require('notify')(...)
+--   end
+-- end
+-- local initx = function()
+--   vim.ui.select = function(...)
+--     require('lazy').load({ plugins = { 'dressing.nvim' } })
+--     return vim.ui.select(...)
+--   end
+--   vim.ui.input = function(...)
+--     require('lazy').load({ plugins = { 'dressing.nvim' } })
+--     return vim.ui.input(...)
+--   end
+-- end
