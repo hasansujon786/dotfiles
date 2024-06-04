@@ -3,7 +3,6 @@
   "workspace.library": [
     "E:\\repoes\\lua\\neo-glance.nvim_local",
     "C:\\Users\\hasan\\AppData\\Local\\nvim-data\\lazy\\nui.nvim",
-    "C:\\Users\\hasan\\AppData\\Local\\nvim-data\\lazy\\neodev.nvim\\types\\stable",
     "C:\\tools\\neovim\\nvim-win64\\share\\nvim\\runtime\\lua",
     "C:\\Users\\hasan\\dotfiles\\nvim\\lua",
     "${3rd}/luv/library",

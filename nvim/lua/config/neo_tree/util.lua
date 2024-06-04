@@ -45,12 +45,9 @@ end
 
 function M.open_vinegar()
   M.save_altfile()
-
-  local readonly = vim.api.nvim_buf_get_option(0, 'readonly')
-  local modifiable = vim.api.nvim_buf_get_option(0, 'modifiable')
   local filereadable = vim.fn.filereadable(vim.fn.expand('%'))
 
-  if not readonly and modifiable and filereadable == 1 then
+  if not vim.o.readonly and vim.o.modifiable and filereadable == 1 then
     vim.cmd([[Neotree filesystem position=current dir=%:p:h reveal_file=%:p]])
   else
     vim.cmd([[Neotree filesystem position=current]])
@@ -96,16 +93,14 @@ end
 function M.toggle_neotree()
   vim.g.cwd = vim.loop.cwd()
   require('hasan.nebulous').mark_as_alternate_win()
-  local readonly = vim.api.nvim_buf_get_option(0, 'readonly')
-  local modifiable = vim.api.nvim_buf_get_option(0, 'modifiable')
-  local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
+  local filereadable = vim.fn.filereadable(vim.fn.expand('%'))
 
-  if filetype == 'neo-tree' then
+  if vim.o.filetype == 'neo-tree' then
     vim.cmd([[Neotree close]])
-  elseif readonly or not modifiable then
-    vim.cmd([[Neotree filesystem left]])
-  else
+  elseif not vim.o.readonly and vim.o.modifiable and filereadable == 1 then
     vim.cmd([[Neotree filesystem left reveal_file=%:p]])
+  else
+    vim.cmd([[Neotree filesystem left]])
   end
 end
 

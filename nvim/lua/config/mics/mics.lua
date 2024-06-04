@@ -1,6 +1,6 @@
 local nx, nxo = { 'n', 'x' }, { 'n', 'x', 'o' }
+
 return {
-  { 'folke/neodev.nvim', lazy = true, ft = { 'lua' } },
   { 'nvim-lua/plenary.nvim', lazy = true, module = 'plenary' },
   { 'MunifTanjim/nui.nvim', lazy = true, module = 'nui' },
   { 'tpope/vim-eunuch', lazy = true, cmd = { 'Delete', 'Move', 'Rename', 'Mkdir', 'Chmod' } },

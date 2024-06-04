@@ -8,7 +8,7 @@ return {
       { '<leader>vh', '<Cmd>lua require("noice").redirect("Inspect")<CR>', desc = 'Show ts highlight' },
     },
     config = function()
-      -- TSInstallSync javascript typescript tsx org
+      -- TSInstallSync javascript typescript tsx
       local parsers = {
         'bash',
         'gitcommit',
@@ -31,7 +31,7 @@ return {
           enable = true, -- false will disable the whole extension
           use_languagetree = false,
           disable = { 'vim' },
-          additional_vim_regex_highlighting = { 'org', 'vim', 'markdown' }, -- Required since TS highlighter doesn't support all syntax features (conceal)
+          additional_vim_regex_highlighting = { 'vim', 'markdown' }, -- Required since TS highlighter doesn't support all syntax features (conceal)
         },
         incremental_selection = {
           enable = true,
@@ -135,7 +135,7 @@ return {
         end, 50)
       end
 
-      local treesitter_foldtext_filetypes = 'html,css,javascript,typescript,tsx,typescriptreact,json,lua,vue,dart,org'
+      local treesitter_foldtext_filetypes = 'html,css,javascript,typescript,tsx,typescriptreact,json,lua,vue,dart'
       local import_pattern = 'javascript,typescript,tsx,typescriptreact,vue,dart'
       augroup('MY_TREESITTER_AUGROUP')(function(autocmd)
         autocmd('FileType', 'lua my_treesitter_foldexpr()', { pattern = treesitter_foldtext_filetypes })
