@@ -56,6 +56,7 @@ return {
       org_agenda_files = { '~/my_vault/orgfiles/**/*' },
       org_default_notes_file = org_root_path .. '/refile.org',
       org_hide_leading_stars = true,
+      org_startup_indented = true,
       org_hide_emphasis_markers = true,
       org_todo_keywords = { 'TODO', 'NEXT', 'WORKING', 'WAITING', '|', 'DONE', 'CANCELED' },
       org_capture_templates = {

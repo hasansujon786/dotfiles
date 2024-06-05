@@ -18,6 +18,7 @@ local excluded_filetypes = {
   'NeogitPopup',
   'flutterToolsOutline',
   'neo-tree-popup',
+  'org',
 }
 
 return {

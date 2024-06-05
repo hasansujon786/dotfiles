@@ -118,6 +118,19 @@ nm.set('zo', { 'dart' }, {
   },
 })
 
+nm.set('zo', { 'org' }, {
+  query = {
+    [[
+    ;; query
+    ((headline) @cap)
+    ]],
+    [[
+    ;; query
+    ((comment) @cap)
+    ]],
+  },
+})
+
 -- local group = vim.api.nvim_create_augroup('TestGroup', { clear = true })
 -- vim.api.nvim_create_autocmd('User', {
 --   pattern = 'NeoMinimapEnter',

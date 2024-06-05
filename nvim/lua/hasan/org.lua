@@ -18,6 +18,11 @@ local last_bufnr = 0
 _G.org_onWinResized = nil
 
 local fn = {
+  ---@param file string
+  ---@param cmd? "split"|"vsplit"|"edit"
+  open_file = function(file, cmd)
+    vim.cmd({ cmd = cmd or 'edit', args = { file }, bang = true })
+  end,
   set_winbar = function()
     vim.wo.winbar = '%{%v:lua.require("hasan.org").winbar()%}'
   end,
@@ -131,7 +136,7 @@ local function capture_project_file(title, config_file_exists, config_file)
       if id then
         roam.database:get(id):next(function(new_node)
           if new_node then
-            vim.cmd.vsplit(new_node.file)
+            fn.open_file(new_node.file, 'vsplit')
             -- create config
             if not config_file_exists then
               config_file:touch()
@@ -150,12 +155,12 @@ local function capture_project_file(title, config_file_exists, config_file)
 end
 
 function M.open_org_home()
-  vim.cmd.edit(org_home_path)
+  fn.open_file(org_home_path)
 end
 
 function M.open_org_project()
   local file_util = require('hasan.utils.file')
-  local cwd = vim.loop.cwd()
+  local cwd = vim.uv.cwd()
   local config_file_exists, config_file = file_util.path_exists('.project.json', cwd)
 
   if config_file_exists then
@@ -164,7 +169,7 @@ function M.open_org_project()
     if json and json.id then
       roam.database:get(json.id):next(function(node)
         if node then
-          vim.cmd.vsplit(node.file)
+          fn.open_file(node.file, 'vsplit')
         elseif not node then
           vim.notify('No file found with follwing Id', vim.log.levels.ERROR, { title = 'org-roam' })
           local title = vim.fn.fnamemodify(cwd, ':t')
