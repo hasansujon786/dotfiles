@@ -113,9 +113,7 @@ end
 M.open_git_remote = function(open_root)
   local Job = require('plenary.job')
   local fpath = nil
-  local isReadonly = vim.api.nvim_buf_get_option(0, 'readonly')
-  local isModifiable = vim.api.nvim_buf_get_option(0, 'modifiable')
-  if not isReadonly and isModifiable then
+  if not vim.bo.readonly and vim.bo.modifiable then
     fpath = vim.fs.normalize(vim.fn.expand('%'))
   end
 

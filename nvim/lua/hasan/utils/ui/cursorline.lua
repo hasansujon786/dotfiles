@@ -25,9 +25,9 @@ local force_hide_ftype = {
 
 M.cursorline_show = function(winid)
   local default_vivid_cl = 'CursorLine:CursorLineFocus'
-  local bufnr = api.nvim_win_get_buf(winid)
-  local ftype = api.nvim_buf_get_option(bufnr, 'filetype')
-  local btype = api.nvim_buf_get_option(bufnr, 'buftype')
+  local buf = api.nvim_win_get_buf(winid)
+  local ftype = api.nvim_get_option_value('filetype', { buf = buf })
+  local btype = api.nvim_get_option_value('buftype', { buf = buf })
 
   if force_hide_ftype[ftype] or force_hide_btype[btype] then
     return
@@ -38,18 +38,18 @@ M.cursorline_show = function(winid)
     vim.wo.winhighlight = type(vivid_hl_value) == 'string' and vivid_hl_value or default_vivid_cl
   end
 
-  api.nvim_win_set_option(winid, 'cursorline', true)
+  api.nvim_set_option_value('cursorline', true, { win = winid })
 end
 
 M.cursorline_hide = function(winid)
-  local bufnr = api.nvim_win_get_buf(winid)
-  local ftype = api.nvim_buf_get_option(bufnr, 'filetype')
-  -- local btype = api.nvim_buf_get_option(bufnr, 'buftype')
+  local buf = api.nvim_win_get_buf(winid)
+  local ftype = api.nvim_get_option_value('filetype', { buf = buf })
+
   if force_persist_ft[ftype] then
     return
   end
 
-  api.nvim_win_set_option(winid, 'cursorline', false)
+  api.nvim_set_option_value('cursorline', false, { win = winid })
 end
 
 M.cur_pos = function()

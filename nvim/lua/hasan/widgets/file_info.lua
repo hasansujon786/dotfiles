@@ -10,19 +10,19 @@ M.show_file_info = function()
   end
 
   local fname = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':.') or '[No Name]'
-  fname = NuiText(string.format('"%s"', fname))
+  local fnameText = NuiText(string.format('"%s"', fname))
 
   local last_line = vim.fn.line('$')
   local line_count = NuiText(string.format('%d lines', last_line), 'WarningMsg')
   local scroll = math.floor((vim.fn.line('.') * 100) / last_line)
-  scroll = NuiText(string.format('--%d%%--', scroll), 'DiagnosticInfo')
+  local scrollText = NuiText(string.format('--%d%%--', scroll), 'DiagnosticInfo')
 
-  local readonly = vim.api.nvim_buf_get_option(0, 'readonly')
-  local modified = vim.api.nvim_buf_get_option(0, 'modified')
+  local readonly = vim.bo.readonly
+  local modified = vim.bo.modified
   local file_status = NuiText(readonly and '[Readonly] ' or modified and '[Modified] ' or '', 'ErrorMsg')
 
   local gap = NuiText(' ')
-  local line = NuiLine({ fname, gap, file_status, line_count, gap, scroll })
+  local line = NuiLine({ fnameText, gap, file_status, line_count, gap, scrollText })
 
   local pop = Widget.get_notify_popup({
     size = { width = line:width() },

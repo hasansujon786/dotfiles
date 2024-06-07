@@ -6,10 +6,6 @@ function M.lsp_buffer_keymaps(client, bufnr)
   local function desc(str)
     return require('hasan.utils').merge({ desc = str }, opts or {})
   end
-  -- local filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
-  -- local function buf_set_option(...)
-  --   vim.api.nvim_buf_set_option(bufnr, ...)
-  -- end
   --Enable completion triggered by <c-x><c-o>
   -- buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 

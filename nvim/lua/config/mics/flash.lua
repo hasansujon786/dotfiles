@@ -17,7 +17,7 @@ return {
         'cmp_docs',
         function(win)
           local conf, buf = vim.api.nvim_win_get_config(win), vim.api.nvim_win_get_buf(win)
-          local ft = vim.api.nvim_buf_get_option(buf, 'filetype')
+          local ft = vim.api.nvim_get_option_value('filetype', { buf = buf })
 
           -- filter cmp wildmenu
           if conf.height == 1 and ft == '' and conf.relative ~= '' then
