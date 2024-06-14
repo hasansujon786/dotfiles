@@ -42,6 +42,17 @@ return {
 
       require('telescope').setup({
         defaults = {
+          vimgrep_arguments = {
+            'rg',
+            '--color=never',
+            '--no-heading',
+            '--with-filename',
+            '--line-number',
+            '--column',
+            '--smart-case',
+            '-g',
+            '!/vendor',
+          },
           results_title = false,
           preview_title = false,
           scroll_strategy = 'cycle',
@@ -65,6 +76,7 @@ return {
             '%.system/.*',
             'android/.*',
             'ios/.*',
+            'vendor/.*',
             'gui/sublime_text/.*',
             'lua/_glance/.*',
             'nvim/tmp/archive',

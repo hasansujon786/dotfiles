@@ -2,6 +2,7 @@
 return {
   'lewis6991/gitsigns.nvim',
   lazy = true,
+  commit = 'de18f6b749f6129eb9042a2038590872df4c94a9',
   event = 'BufReadPost',
   opts = {
     signs = {
