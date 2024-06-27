@@ -13,17 +13,10 @@ return {
   module = 'conform',
   event = 'BufWritePre',
   keys = {
-    {
-      '<leader>fs',
-      function()
-        require('conform').format({ async = true, lsp_fallback = true }, save_cb)
-      end,
-      mode = '',
-      desc = 'Lsp: format and save',
-    },
+    { '<leader>fs', '<cmd>Format<CR>', mode = '', desc = 'Lsp: format and save' },
   },
   opts = {
-    formatters_by_ft = {
+    formatters_by_ft = { -- Custom model
       {
         filetype = {
           'javascript',
@@ -64,7 +57,7 @@ return {
       if not state.file.auto_format then
         return
       end
-      return { lsp_fallback = true }
+      return { lsp_format = 'fallback' }
     end,
     -- formatters = {
     --   shfmt = {
@@ -99,18 +92,10 @@ return {
     end
 
     command('Format', function(args)
-      require('conform').format({
-        async = true,
-        lsp_fallback = true,
-        range = get_visual_range(args),
-      }, save_cb)
+      require('conform').format({ async = true, lsp_format = 'fallback', range = get_visual_range(args) }, save_cb)
     end, { range = true })
     command('FormatSync', function(args)
-      require('conform').format({
-        async = false,
-        lsp_fallback = true,
-        range = get_visual_range(args),
-      }, save_cb)
+      require('conform').format({ async = false, lsp_format = 'fallback', range = get_visual_range(args) }, save_cb)
     end, { range = true })
 
     opts.formatters_by_ft = get_formatter_list(opts.formatters_by_ft)

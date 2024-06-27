@@ -8,7 +8,7 @@
 require('core.state')
 require('core.global')
 if vim.g.vscode then
-  require('vscode.keymaps')
+  require("vscode_nvim")
 else
   require('core.options')
   require('core.keymaps')

@@ -17,7 +17,7 @@ keymap({ 'n', 'x', 'o' }, 'gc', '<Plug>VSCodeCommentary')
 keymap('n', 'gcc', '<Plug>VSCodeCommentaryLine')
 
 -- G command
-keymap('n', 'gB', '<Cmd>call VSCodeNotify("editor.action.openLink")<CR>')
+keymap('n', 'gx', '<Cmd>call VSCodeNotify("editor.action.openLink")<CR>')
 
 -- Folding
 keymap('n', '<tab>', '<Cmd>call VSCodeNotify("editor.toggleFold")<CR>') -- Toggle folds
