@@ -112,6 +112,16 @@ alias lf='lfcd'
 # Copy the PWD to the Clipboard
 alias cpd="pwd | tr -d '\n' | clip && echo 'pwd copied to clipboard'"
 # alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard'"
+alias y='yazi_cd'
+alias yazi='yazi_cd'
+function yazi_cd() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	\yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
 
 # Better copy
 function cpy {
@@ -286,7 +296,7 @@ bind '"\e\ ":magic-space'
 bind '"\eq":alias-expand-line'
 bind '" ":"\eq\C-v "'
 
-bind '"\eo":"\C-ulfcd\C-m"'
+bind '"\eo":"\C-uyazi_cd\C-m"'
 # bind '"\el":clear-screen'
 # bind '"\C-x\C-x":edit-and-execute-command'
 # bind -x '"\C-x\C-e":_edit_wo_executing'

@@ -19,7 +19,7 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 #`::takeScreenshot()
 PrintScreen::Send("#+{s}")
 #q::toggleBluetooth()
-#+q::toggleBluetooth() toggleBluetooth()
+#+q::select_playback_device()
 #;::SendInput("{AppsKey}")
 ;Transparency toggle,
 #^/::toggleTransparency()
@@ -109,7 +109,9 @@ current_layout := 0
 ;******************************************************************************
 #/::SendInput("^!{Tab}")
 #HotIf WinActive("ahk_class MultitaskingViewFrame")
-  or MouseIsOver("ahk_class ApplicationFrameWindow") or MouseIsOver("ahk_class Shell_LightDismissOverlay")
+  or MouseIsOver("ahk_class ApplicationFrameWindow")
+  or MouseIsOver("ahk_class Shell_LightDismissOverlay")
+  or WinActive("ahk_exe ShellExperienceHost.exe")
   ; or WinActive("ahk_class Windows.UI.Core.CoreWindow")
 
   ; *WheelDown::Send {Blind}{Tab}
@@ -191,5 +193,18 @@ ytRemovetFromWL() {
   Send("{Enter}")
 }
 ~LAlt & LButton::ytRemovetFromWL()
+
+select_playback_device() {
+  Send("#b")
+  Send("{left}")
+  Send("{left}")
+  Send("{left}")
+  Send("{Space}")
+  sleep(100)
+  Send("{tab}")
+  Send("{Enter}")
+  sleep(100)
+  Send("{tab}")
+}
 
 #Include %A_ScriptDir%\vim_explorer.ahk

@@ -22,7 +22,7 @@ end
 
 require('lazy').setup({
   spec = spec,
-  concurrency = 5,
+  concurrency = 3,
   git = {
     timeout = 120, -- kill processes that take more than 2 minutes
   },

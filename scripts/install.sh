@@ -233,6 +233,20 @@ setup_lf() {
 	fi
 }
 
+setup_yazi() {
+	yaziPath=("$HOME/AppData/Roaming/yazi" "$HOME/.config/yazi" "$HOME/.config/yazi")
+	util_print yazi
+
+	util_backUpConfig "${yaziPath[$osIndex]}"
+	mkdir -p "${yaziPath[$osIndex]}"
+	util_makeSymlinkPath "$HOME/dotfiles/tui/yazi" "${yaziPath[$osIndex]}/config"
+
+	# if [[ "$os" == "windows" ]]; then
+	# 	$getter install -y lf
+	# else
+	# fi
+}
+
 setup_alacritty() {
 	alacrittyPath=("$HOME/AppData/Roaming/alacritty" "$HOME/.config/alacritty" "$HOME/.config/alacritty")
 	util_print alacritty
@@ -412,6 +426,7 @@ auto_install_everything() {
 	# setup_alacritty
 	setup_lazygit
 	setup_lf
+  setup_yazi
 	# setup_tig
 	# setup_git_defaults
 	install_various_apps
