@@ -10,7 +10,10 @@ linemode     = "size"
 
 [opener]
 edit = [
-  { run = 'nvim %*', block = true, desc = "nvim (block)", for = "windows" }
+  { run = 'nvim %*', block = true, desc = "nvim (block)", for = "windows" },
+]
+reveal = [
+  { run = 'C:/Users/hasan/dotfiles/tui/yazi/scripts/reveal.cmd %0', orphan = true, desc = "Reveal", for = "windows" },
 ]
 # extract = [
 #   { run = 'unar "$1"', desc = "Extract here", for = "unix" },
