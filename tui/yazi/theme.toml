@@ -17,17 +17,17 @@ use = ""
 cwd = { fg = "cyan" }
 
 # Hovered
-hovered         = { reversed = false, bg = "blue", fg = "#282c34" }
+hovered         = { reversed = false, bg = "#3E425D" }
 preview_hovered = { underline = true }
 
-# Find
+# Find & Search count
 find_keyword  = { fg = "yellow", bold = true, italic = true, underline = true }
-find_position = { fg = "magenta", bg = "reset", bold = true, italic = true }
+find_position = { fg = "#282c34", bg = "magenta", bold = true, italic = true }
 
 # Marker
-marker_copied   = { fg = "lightgreen",  bg = "lightgreen" }
-marker_cut      = { fg = "lightred",    bg = "lightred" }
-marker_marked   = { fg = "lightcyan",   bg = "lightcyan" }
+marker_copied   = { fg = "lightgreen", bg = "lightgreen" }
+marker_cut      = { fg = "lightred", bg = "lightred" }
+marker_marked   = { fg = "lightcyan", bg = "lightcyan" }
 marker_selected = { fg = "lightyellow", bg = "lightyellow" }
 
 # Tab
@@ -36,9 +36,9 @@ tab_inactive = {}
 tab_width    = 1
 
 # Count
-count_copied   = { fg = "white", bg = "green" }
-count_cut      = { fg = "white", bg = "red" }
-count_selected = { fg = "white", bg = "yellow" }
+count_copied   = { fg = "#282c34", bg = "green" }
+count_cut      = { fg = "#282c34", bg = "red" }
+count_selected = { fg = "#282c34", bg = "yellow" }
 
 # Border
 border_symbol = "│"
@@ -127,11 +127,11 @@ hovered = { fg = "magenta", underline = true }
 
 [which]
 cols            = 3
-mask            = { bg = "black" }
-cand            = { fg = "lightcyan" }
+mask            = { bg = "#2d3343" }
+cand            = { fg = "lightmagenta" }
 rest            = { fg = "darkgray" }
-desc            = { fg = "lightmagenta" }
-separator       = "  "
+desc            = { fg = "#a5b0c5" }
+separator       = " ➜ "
 separator_style = { fg = "darkgray" }
 
 # : }}}
@@ -140,10 +140,10 @@ separator_style = { fg = "darkgray" }
 # : Help {{{
 
 [help]
-on      = { fg = "cyan" }
-run     = { fg = "magenta" }
+on      = { fg = "magenta" }
+run     = { fg = "cyan" }
 desc    = {}
-hovered = { reversed = true, bold = true }
+hovered = { reversed = false, bg = "#3E425D" }
 footer  = { fg = "black", bg = "white" }
 
 # : }}}
@@ -169,29 +169,29 @@ icon_error = ""
 [filetype]
 
 rules = [
-	# Images
-	{ mime = "image/*", fg = "yellow" },
+  # # Images
+  # { mime = "image/*", fg = "yellow" },
 
-	# Media
-	{ mime = "{audio,video}/*", fg = "magenta" },
+  # # Media
+  # { mime = "{audio,video}/*", fg = "magenta" },
 
-	# Archives
-	{ mime = "application/{,g}zip", fg = "red" },
-	{ mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", fg = "red" },
+  # # Archives
+  # { mime = "application/{,g}zip", fg = "red" },
+  # { mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", fg = "red" },
 
-	# Documents
-	{ mime = "application/{pdf,doc,rtf,vnd.*}", fg = "cyan" },
+  # # Documents
+  # { mime = "application/{pdf,doc,rtf,vnd.*}", fg = "cyan" },
 
-	# Empty files
-	# { mime = "inode/x-empty", fg = "red" },
+  # # Empty files
+  # { mime = "inode/x-empty", fg = "red" },
 
-	# Special files
-	{ name = "*", is = "orphan", bg = "red" },
-	{ name = "*", is = "exec"  , fg = "green" },
+  # # Special files
+  # { name = "*", is = "orphan", bg = "red" },
+  # { name = "*", is = "exec", fg = "green" },
 
-	# Fallback
-	# { name = "*", fg = "white" },
-	{ name = "*/", fg = "blue" }
+  # Fallback
+  # { name = "*", fg = "white" },
+  { name = "*/", fg = "blue" }
 ]
 
 # : }}}

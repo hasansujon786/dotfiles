@@ -3,28 +3,62 @@
 "$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
 
 [manager]
-
 append_keymap = [
-	{ on = [ "g", "h" ],       run = "cd ~",             desc = "Home" },
-	{ on = [ "g", "c" ],       run = "cd ~/.config",     desc = ".config" },
-	{ on = [ "g", "d" ],       run = "cd ~/Downloads",   desc = "Downloads" },
-	{ on = [ "g", "<Space>" ], run = "cd --interactive", desc = "Go to a directory interactively" },
-	{ on = [ "g", "." ],       run = "cd ~/dotfiles",    desc = "dotfiles" },
-	{ on = [ "g", "p" ],       run = "cd ~/Pictures",    desc = "Pictures" },
-	{ on = [ "g", "V" ],       run = "cd ~/Videos",      desc = "Videos" },
-	{ on = [ "g", "v" ],       run = "cd D:/",           desc = "Disk: [D]" },
-	{ on = [ "g", "r" ],       run = "cd E:/repoes",     desc = "Videos" },
+  { on = ["<C-w>"], run = "close", desc = "Close the current tab, or quit if it is last tab" },
 
-	{ on = [ "g", "N"],       run = "cd ~/AppData/Local/nvim-data/",    desc = "Nvim data" },
-	{ on = [ "g", "s"],       run = "cd ~/AppData/Local/Packages/MicrosoftWindows.Client.CBS_cw5n1h2txyewy/TempState/ScreenClip",    desc = "ScreenClip" },
-	{ on = [ "g", "S"],       run = "cd ~/AppData/Roaming/Microsoft/Windows/Start\\ Menu/Programs/Startup",    desc = "Start Menu/Programs/Startup" },
+  # Goto
+  { on = ["g", "."], run = "cd ~/dotfiles", desc = "dotfiles" },
+  { on = ["g", "p"], run = "cd ~/Pictures", desc = "Pictures" },
+  { on = ["g", "v"], run = "cd ~/Videos", desc = "Videos" },
+  { on = ["g", "r"], run = "cd E:/repoes", desc = "Videos" },
+  { on = ["g", "N"], run = "cd ~/AppData/Local/nvim-data/", desc = "Nvim data" },
+  { on = ["g", "s"], run = "cd ~/AppData/Local/Packages/MicrosoftWindows.Client.CBS_cw5n1h2txyewy/TempState/ScreenClip", desc = "ScreenClip" },
+  { on = ["g", "S"], run = "cd ~/AppData/Roaming/Microsoft/Windows/Start\\ Menu/Programs/Startup", desc = "Start Menu/Programs/Startup" },
   # cd ~/AppData/Local/Packages/Microsoft.ScreenSketch_8wekyb3d8bbwe/TempState
+
+  # Navigation
+  { on = ["<A-u>"], run = "arrow -50%", desc = "Move cursor up half page" },
+  { on = ["<A-d>"], run = "arrow 50%", desc = "Move cursor down half page" },
+  { on = ["<A-o>"], run = "arrow 50%", desc = "Move cursor down half page" },
+  { on = ["<A-p>"], run = "seek -5", desc = "Seek up 5 units in the preview" },
+  { on = ["<A-n>"], run = "seek 5", desc = "Seek down 5 units in the preview" },
+
+  { on = ["<Backspace>"], run = "back", desc = "Go back to the previous directory" },
+  { on = ["<C-o>"], run = "back", desc = "Go back to the previous directory" },
+  { on = ["<C-j>"], run = "forward", desc = "Go forward to the next directory" },
+  { on = ["<C-i>"], run = "forward", desc = "Go forward to the next directory" },
 ]
 
+prepend_keymap = [
+  { on = ["<Space>"], run = "plugin --sync quicklook", desc = "Peek" },
+  { on = ["M"], run = "plugin --sync max-preview", desc = "Toggle Maximize" },
+  { on = ["f"], run = "plugin jump-to-char", desc = "Jump to char" },
+  { on = ["t"], run = "plugin fzf", desc = "Jump to a directory, or reveal a file using fzf" },
+  # { on = ["m", "p"], run = 'shell "C:/Users/hasan/AppData/Local/Programs/QuickLook/QuickLook.exe %0" --confirm', desc = "QuickLook" },
+
+  # Tabs
+  { on = ["T"], run = "tab_create --current", desc = "Create a new tab using the current path" },
+
+  # menu
+  { on = ["m", "u"], run = 'shell "C:/Users/hasan/dotfiles/tui/yazi/scripts/7z_yazi.cmd %0" --confirm --block', desc = "Extract with 7zip" },
+  { on = ["m", "h"], run = "Hidden toggle", desc = "Toggle the visibility of hidden files" },
+
+  # Goto drive
+  { on = [".", "c"], run = "cd C:/", desc = "windows (c:)" },
+  { on = [".", "d"], run = "cd D:/", desc = "videos (d:)" },
+  { on = [".", "e"], run = "cd E:/", desc = "hasan (e:)" },
+  { on = [".", "."], run = "cd ~/Desktop", desc = "Desktop" },
+
+  # Selection
+  { on = ["v"], run = ["select --state=none", "arrow 1"], desc = "Toggle the current selection state" },
+  { on = ["V"], run = "visual_mode", desc = "Enter visual mode (selection mode)" },
+  { on = ["u"], run = ["select --state=false"], desc = "Unset the current selection state" },
+  { on = ["U"], run = "visual_mode --unset", desc = "Enter visual mode (unset mode)" },
+  { on = ["<C-v>"], run = "select_all --state=none", desc = "Inverse selection of all files" },
+]
 
 [input]
 prepend_keymap = [
-  { on = [ "<Esc>" ], run = "close",     desc = "Cancel input" },
-  { on = [ "<C-o>" ], run = "escape",    desc = "Go back the normal mode, or cancel input" },
+  { on = ["<Esc>"], run = "close", desc = "Cancel input" },
+  { on = ["<C-o>"], run = "escape", desc = "Go back the normal mode, or cancel input" },
 ]
-
