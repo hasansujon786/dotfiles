@@ -14,6 +14,12 @@ return {
       end,
     },
     {
+      'yazi',
+      function(util)
+        util.open_tab(vim.fn.getcwd(), 'yazi')
+      end,
+    },
+    {
       'Open Cwd in VSCode',
       function(_)
         require('hasan.utils.file').openInCode(false)
