@@ -48,7 +48,8 @@ prepend_keymap = [
   { on = [".", "c"], run = "cd C:/", desc = "windows (c:)" },
   { on = [".", "d"], run = "cd D:/", desc = "videos (d:)" },
   { on = [".", "e"], run = "cd E:/", desc = "hasan (e:)" },
-  { on = [".", "."], run = "cd ~/Desktop", desc = "Desktop" },
+  { on = [".", "-"], run = "cd ~/Desktop", desc = "Desktop" },
+  { on = [".", "."], run = "plugin git-root", desc = "Jump to git root" },
 
   # Selection
   { on = ["v"], run = ["select --state=none", "arrow 1"], desc = "Toggle the current selection state" },
