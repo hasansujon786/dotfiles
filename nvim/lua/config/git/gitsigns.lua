@@ -1,17 +1,44 @@
 -- https://www.naseraleisa.com/posts/diff#file-1
+local function next_hunk()
+  if vim.wo.diff then
+    return ']c'
+  end
+  vim.schedule(function()
+    package.loaded.gitsigns.nav_hunk('next')
+  end)
+  return '<Ignore>'
+end
+local function prev_hunk()
+  if vim.wo.diff then
+    return '[c'
+  end
+  vim.schedule(function()
+    package.loaded.gitsigns.nav_hunk('prev')
+  end)
+  return '<Ignore>'
+end
+
 return {
   'lewis6991/gitsigns.nvim',
   lazy = true,
-  commit = 'de18f6b749f6129eb9042a2038590872df4c94a9',
+  -- commit = 'de18f6b749f6129eb9042a2038590872df4c94a9',
   event = 'BufReadPost',
   opts = {
+    signs_staged_enable = true,
     signs = {
-      add          = { text = '│', hl = 'GitSignsAdd',    numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
-      change       = { text = '┊', hl = 'GitSignsChange', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-      delete       = { text = '▸', hl = 'GitSignsDelete', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-      topdelete    = { text = '▹', hl = 'GitSignsDelete', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-      changedelete = { text = '┊', hl = 'GitSignsChange', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-      untracked    = { text = '┆', hl = 'GitSignsAdd',    numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+      add          = { text = '│', },
+      change       = { text = '┊', },
+      delete       = { text = '▸', },
+      topdelete    = { text = '▹', },
+      changedelete = { text = '┊', },
+      untracked    = { text = '┆', },
+    },
+    signs_staged = {
+      add          = { text = '│', },
+      change       = { text = '│', },
+      delete       = { text = '▸', },
+      topdelete    = { text = '▹', },
+      changedelete = { text = '│', },
     },
     preview_config = {
       border = require('core.state').ui.border.style,
@@ -27,22 +54,16 @@ return {
       end
 
       -- Navigation
-      map('n', ']c', function()
-        if vim.wo.diff then return ']c' end
-        vim.schedule(function() gs.next_hunk() end)
-        return '<Ignore>'
-      end, { expr = true, desc = 'Git: Jump to hunk' })
-      map('n', '[c', function()
-        if vim.wo.diff then return '[c' end
-        vim.schedule(function() gs.prev_hunk() end)
-        return '<Ignore>'
-      end, { expr = true, desc = 'Git: Jump to hunk' })
+      map('n', ']c', next_hunk, { expr = true, desc = 'Git: Jump to hunk' })
+      map('n', '[c', prev_hunk, { expr = true, desc = 'Git: Jump to hunk' })
+      map('n', ']x', '<cmd>Gitsigns nav_hunk next target=staged<cr>', { desc = 'Git: Jump to hunk' })
+      map('n', '[x', '<cmd>Gitsigns nav_hunk prev target=staged<cr>', { desc = 'Git: Jump to hunk' })
       -- Stage Actions
       map('n', '<leader>gp', gs.preview_hunk, { desc = 'Git: Preview hunk' })
       map('n', '<leader>gs', gs.stage_hunk, { desc = 'Git: Stage hunk' })
-      map('v', '<leader>gs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end, { desc = 'Git: Stage hunk' })
+      map('v', '<leader>gs', function() gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, { desc = 'Git: Stage hunk' })
       map('n', '<leader>gr', gs.reset_hunk, { desc = 'Git: Reset hunk' })
-      map('v', '<leader>gr', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end, { desc = 'Git: Reset hunk' })
+      map('v', '<leader>gr', function() gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, { desc = 'Git: Reset hunk' })
       map('n', '<leader>g.', gs.stage_buffer, { desc = 'Git: Stage buffer' })
       map('n', '<leader>gR', gs.reset_buffer, { desc = 'Git: Reset buffer' })
       map('n', '<leader>gu', gs.undo_stage_hunk, { desc = 'Git: Undo last stage' })

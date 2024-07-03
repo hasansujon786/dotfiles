@@ -43,7 +43,7 @@ prepend_keymap = [
   # menu
   { on = ["m", "h"], run = "Hidden toggle", desc = "Toggle the visibility of hidden files" },
   { on = ["m", "u"], run = 'shell "C:/Users/hasan/dotfiles/tui/yazi/scripts/7z_yazi.cmd %0" --confirm --block', desc = "Extract with 7zip" },
-  { on = ["m", "k"], run = 'shell "bash ~/dotfiles/tui/yazi/scripts/share-code-file.bash %0" --confirm --block', desc = "Share file with https://0x0.st" },
+  { on = ["m", "x"], run = 'shell "bash ~/dotfiles/tui/yazi/scripts/share-code-file.bash %0" --confirm --block', desc = "Share file with https://0x0.st" },
 
   # Goto drive
   { on = [".", "c"], run = "cd C:/", desc = "windows (c:)" },
