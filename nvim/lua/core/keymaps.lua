@@ -128,8 +128,7 @@ keymap('v', '#', '<Cmd>call hasan#utils#visualSelection("", "")<CR>?<C-R>=@/<CR>
 keymap('n', 'c*', ":let @/='\\<'.expand('<cword>').'\\>'<CR>cgn")
 keymap('x', 'C', '"cy:let @/=@c<CR>cgn')
 
-keymap(nx, 'cd', '<Plug>(exchange-operator)', { desc = 'Exchange word' })
-keymap(nx, 'co', '<Plug>(exchange-operator)', { desc = 'Exchange word' })
+keymap(nx, 'go', '<Plug>(exchange-operator)', { desc = 'Exchange word' })
 
 keymap('n', 'cm', ':%s/<c-r>///g<Left><Left>', { desc = 'Change all matches with prompt', silent = false })
 keymap('n', 'dm', ':%s/<c-r>///g<CR>', { desc = 'Delete all matches' })

@@ -67,7 +67,6 @@ keymap({ 'n', 'x' }, 'gpm', '<Cmd>call VSCodeNotify("editor.action.peekImplement
 keymap({ 'n', 'x' }, 'gpy', '<Cmd>call VSCodeNotify("editor.action.peekTypeDefinition")<CR>')
 keymap({ 'n', 'x' }, 'gpD', '<Cmd>call VSCodeNotify("editor.action.peekDeclaration")<CR>')
 
-keymap({ 'n', 'x' }, 'go', '<Cmd>call VSCodeNotify("workbench.action.gotoSymbol")<CR>')
 keymap({ 'n', 'x' }, 'g.', '<Cmd>call VSCodeNotify("workbench.action.gotoSymbol")<CR>')
 
 keymap('n', '<C-space>', '<Cmd>call VSCodeNotify("editor.action.quickFix")<CR>')

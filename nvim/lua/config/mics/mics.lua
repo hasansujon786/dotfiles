@@ -89,10 +89,16 @@ return {
   {
     'max397574/better-escape.nvim',
     lazy = true,
-    event = 'InsertEnter',
+    event = { 'InsertEnter', 'CmdlineEnter' },
     opts = {
-      mapping = { 'jk' }, -- a table with mappings to use
       timeout = 350, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
+      mappings = {
+        i = { j = { k = '<Esc>', j = '<Nop>' } },
+        c = { j = { k = '<Esc>' } },
+        t = { j = { k = '<Esc>' } },
+        v = nil,
+        s = nil,
+      },
     },
   },
   {
