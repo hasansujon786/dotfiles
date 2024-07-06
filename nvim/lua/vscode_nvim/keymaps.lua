@@ -17,17 +17,17 @@ keymap({ 'n', 'x', 'o' }, 'gc', '<Plug>VSCodeCommentary')
 keymap('n', 'gcc', '<Plug>VSCodeCommentaryLine')
 
 -- G command
-keymap('n', 'gx', '<Cmd>call VSCodeNotify("editor.action.openLink")<CR>')
+keymap('n', 'gx', '<cmd>lua require("vscode").action("editor.action.openLink")<CR>')
 
 -- Folding
-keymap('n', '<tab>', '<Cmd>call VSCodeNotify("editor.toggleFold")<CR>') -- Toggle folds
-keymap('n', 'za', '<Cmd>call VSCodeNotify("editor.toggleFold")<CR>')
-keymap('n', 'zc', '<Cmd>call VSCodeNotify("editor.foldRecursively")<CR>')
-keymap('n', 'zo', '<Cmd>call VSCodeNotify("editor.unfoldRecursively")<CR>')
-keymap('n', 'zC', '<Cmd>call VSCodeNotify("editor.foldAll")<CR>')
-keymap('n', 'zO', '<Cmd>call VSCodeNotify("editor.unfoldAll")<CR>')
-keymap('n', 'zR', '<Cmd>call VSCodeNotify("editor.unfoldAll")<CR>')
-keymap('n', 'zp', '<Cmd>call VSCodeNotify("editor.gotoParentFold")<CR>')
+keymap('n', '<tab>', '<cmd>lua require("vscode").action("editor.toggleFold")<CR>') -- Toggle folds
+keymap('n', 'za', '<cmd>lua require("vscode").action("editor.toggleFold")<CR>')
+keymap('n', 'zc', '<cmd>lua require("vscode").action("editor.foldRecursively")<CR>')
+keymap('n', 'zo', '<cmd>lua require("vscode").action("editor.unfoldRecursively")<CR>')
+keymap('n', 'zC', '<cmd>lua require("vscode").action("editor.foldAll")<CR>')
+keymap('n', 'zO', '<cmd>lua require("vscode").action("editor.unfoldAll")<CR>')
+keymap('n', 'zR', '<cmd>lua require("vscode").action("editor.unfoldAll")<CR>')
+keymap('n', 'zp', '<cmd>lua require("vscode").action("editor.gotoParentFold")<CR>')
 
 -- Custom pseudo-text object
 keymap('x', 'aa', 'GoggV') -- Make vaa select the entire file
@@ -51,88 +51,97 @@ keymap('v', '<leader>d', '"+d')
 keymap({ 'n', 'v' }, '<leader>ip', '"+p')
 keymap({ 'n', 'v' }, '<leader>iP', '"+P')
 
+-- => Navigation ------------------------------------
+keymap({ 'n', 'x' }, ']d', '<cmd>lua require("vscode").action("editor.action.marker.next")<CR>')
+keymap({ 'n', 'x' }, '[d', '<cmd>lua require("vscode").action("editor.action.marker.prev")<CR>')
+keymap({ 'n', 'x' }, '[c', '<cmd>lua require("vscode").action("workbench.action.editor.previousChange")<CR>')
+keymap({ 'n', 'x' }, ']c', '<cmd>lua require("vscode").action("workbench.action.editor.nextChange")<CR>')
+keymap({ 'n', 'x' }, '<C-j>', '<cmd>lua require("vscode").action("workbench.action.navigateForward")<CR>')
+-- Scroll
+keymap('n', '<A-d>', '<c-d>')
+keymap('n', '<A-u>', '<c-u>')
+
 -- => Search ----------------------------------------
 keymap('n', '<A-/>', "<Cmd>call VSCodeNotify('workbench.action.findInFiles', { 'query': expand('<cword>')})<CR>")
 
 -- => LSP -------------------------------------------
-keymap({ 'n', 'x' }, 'gd', '<Cmd>call VSCodeNotify("editor.action.revealDefinition")<CR>')
-keymap({ 'n', 'x' }, 'gr', '<Cmd>call VSCodeNotify("editor.action.referenceSearch.trigger")<CR>')
-keymap({ 'n', 'x' }, 'gm', '<Cmd>call VSCodeNotify("editor.action.goToImplementation")<CR>')
-keymap({ 'n', 'x' }, 'gy', '<Cmd>call VSCodeNotify("editor.action.goToTypeDefinition")<CR>')
-keymap({ 'n', 'x' }, 'gD', '<Cmd>call VSCodeNotify("editor.action.revealDeclaration")<CR>')
-keymap({ 'n', 'x' }, 'gR', '<Cmd>call VSCodeNotify("references-view.findReferences")<CR>')
+keymap({ 'n', 'x' }, 'gd', '<cmd>lua require("vscode").action("editor.action.revealDefinition")<CR>')
+keymap({ 'n', 'x' }, 'gr', '<cmd>lua require("vscode").action("editor.action.referenceSearch.trigger")<CR>')
+keymap({ 'n', 'x' }, 'gm', '<cmd>lua require("vscode").action("editor.action.goToImplementation")<CR>')
+keymap({ 'n', 'x' }, 'gy', '<cmd>lua require("vscode").action("editor.action.goToTypeDefinition")<CR>')
+keymap({ 'n', 'x' }, 'gD', '<cmd>lua require("vscode").action("editor.action.revealDeclaration")<CR>')
+keymap({ 'n', 'x' }, 'gR', '<cmd>lua require("vscode").action("references-view.findReferences")<CR>')
 
-keymap({ 'n', 'x' }, 'gpd', '<Cmd>call VSCodeNotify("editor.action.peekDefinition")<CR>')
-keymap({ 'n', 'x' }, 'gpm', '<Cmd>call VSCodeNotify("editor.action.peekImplementation")<CR>')
-keymap({ 'n', 'x' }, 'gpy', '<Cmd>call VSCodeNotify("editor.action.peekTypeDefinition")<CR>')
-keymap({ 'n', 'x' }, 'gpD', '<Cmd>call VSCodeNotify("editor.action.peekDeclaration")<CR>')
+keymap({ 'n', 'x' }, 'gpd', '<cmd>lua require("vscode").action("editor.action.peekDefinition")<CR>')
+keymap({ 'n', 'x' }, 'gpm', '<cmd>lua require("vscode").action("editor.action.peekImplementation")<CR>')
+keymap({ 'n', 'x' }, 'gpy', '<cmd>lua require("vscode").action("editor.action.peekTypeDefinition")<CR>')
+keymap({ 'n', 'x' }, 'gpD', '<cmd>lua require("vscode").action("editor.action.peekDeclaration")<CR>')
 
-keymap({ 'n', 'x' }, 'g.', '<Cmd>call VSCodeNotify("workbench.action.gotoSymbol")<CR>')
+keymap({ 'n', 'x' }, 'g.', '<cmd>lua require("vscode").action("workbench.action.gotoSymbol")<CR>')
 
-keymap('n', '<C-space>', '<Cmd>call VSCodeNotify("editor.action.quickFix")<CR>')
-keymap('i', '<C-space>', '<Cmd>call VSCodeNotify("editor.action.triggerSuggest")<CR>')
+keymap('n', '<C-space>', '<cmd>lua require("vscode").action("editor.action.quickFix")<CR>')
+keymap('i', '<C-space>', '<cmd>lua require("vscode").action("editor.action.triggerSuggest")<CR>')
+keymap({ 'n', 'x' }, '<leader>ad', '<cmd>lua require("vscode").action("workbench.actions.view.problems")<CR>')
 
-keymap('n', 'g<tab>', '<Cmd>call VSCodeNotify("editor.action.smartSelect.expand")<CR>')
-keymap('v', '<tab>', '<Cmd>call VSCodeNotify("editor.action.smartSelect.expand")<CR>')
-keymap('v', '<S-tab>', '<Cmd>call VSCodeNotify("editor.action.smartSelect.shrink")<CR>')
+keymap('n', 'g<tab>', '<cmd>lua require("vscode").action("editor.action.smartSelect.expand")<CR>')
+keymap('v', '<tab>', '<cmd>lua require("vscode").action("editor.action.smartSelect.expand")<CR>')
+keymap('v', '<S-tab>', '<cmd>lua require("vscode").action("editor.action.smartSelect.shrink")<CR>')
 
 -- => Leader commands -------------------------------
-keymap('n', '<leader><leader>', '<Cmd>call VSCodeNotify("workbench.action.quickOpen")<CR>')
-keymap('n', '<leader>pp', '<Cmd>call VSCodeNotify("workbench.action.openRecent")<CR>')
+keymap('n', '<leader><leader>', '<cmd>lua require("vscode").action("workbench.action.quickOpen")<CR>')
+keymap('n', '<leader>pp', '<cmd>lua require("vscode").action("workbench.action.openRecent")<CR>')
 -- Save file
-keymap('n', '<leader>s', '<Cmd>call VSCodeNotify("workbench.action.files.save")<CR>')
-keymap('n', '<leader>fs', '<Cmd>call VSCodeNotify("editor.action.formatDocument")<CR>')
-keymap('n', '<leader>fX', '<Cmd>call VSCodeNotify("editor.action.trimTrailingWhitespace")<CR>')
--- open Explorer
-keymap('n', '<leader>0', '<Cmd>call VSCodeNotify("editor.action.formatDocument")<CR>')
-keymap('n', '<leader>ob', '<Cmd>call VSCodeNotify("workbench.action.toggleSidebarVisibility")<CR>')
-keymap('n', '<leader>op', '<Cmd>call VSCodeNotify("workbench.view.explorer")<CR>')
--- keymap('n', '<leader>oi', '<Cmd>call VSCodeNotify("workbench.files.action.focusFilesExplorer")<CR>')
---Toggles
-keymap('n', '<leader>tl', '<Cmd>setlocal cursorcolumn!<CR>') --
-keymap('n', '<leader>tK', '<Cmd>call VSCodeNotify("workbench.action.toggleStickyScroll")<CR>')
-keymap('n', '<leader>u', '<Cmd>call VSCodeNotify("workbench.action.toggleZenMode")<CR>')
+keymap({ 'n', 'x' }, '<leader>s', '<cmd>lua require("vscode").action("workbench.action.files.save")<CR>')
+keymap({ 'n', 'x' }, '<leader>fxx', '<cmd>lua require("vscode").action("editor.action.trimTrailingWhitespace")<cr>')
+keymap('n', '<leader>fs', '<cmd>lua require("vscode").action("editor.action.formatDocument")<CR>')
+keymap('x', '<leader>fs', '<cmd>lua require("vscode").action("editor.action.formatSelection")<CR>')
+-- open explorer
+keymap('n', '<leader>ob', '<cmd>lua require("vscode").action("workbench.action.toggleSidebarVisibility")<CR>')
+keymap('n', '<leader>op', '<cmd>lua require("vscode").action("workbench.view.explorer")<CR>')
+-- keymap('n', '<leader>oi', '<cmd>lua require("vscode").action("workbench.files.action.focusFilesExplorer")<CR>')
+-- Toggles
+keymap('n', '<leader>u', '<cmd>lua require("vscode").action("workbench.action.toggleZenMode")<CR>')
+-- keymap('n', '<leader>tl', '<Cmd>setlocal cursorcolumn!<CR>') --
+-- keymap('n', '<leader>tK', '<cmd>lua require("vscode").action("workbench.action.toggleStickyScroll")<CR>')
 -- keymap('n', '<leader>r', ':set relativenumber!<CR>')
 -- Git
-keymap('n', '<leader>g.', '<Cmd>call VSCodeNotify("git.stageAll")<CR>')
-keymap('n', '<leader>gp', '<Cmd>call VSCodeNotify("editor.action.dirtydiff.next")<CR>')
-keymap('n', '<leader>gr', '<Cmd>call VSCodeNotify("git.revertSelectedRanges")<CR>')
-keymap('n', '<leader>gs', '<Cmd>call VSCodeNotify("git.stageSelectedRanges")<CR>')
--- keymap('n', '<leader>gu', '<Cmd>call VSCodeNotify("git.unstageSelectedRanges")<CR>')
-
--- => Navigation ------------------------------------
-keymap('n', '<A-d>', '<c-d>')
-keymap('n', '<A-u>', '<c-u>')
+keymap('n', '<leader>gg', '<cmd>lua require("vscode").action("workbench.view.scm")<CR>')
+keymap('n', '<leader>g.', '<cmd>lua require("vscode").action("git.stage")<CR>')
+keymap({ 'n', 'x' }, '<leader>gp', '<cmd>lua require("vscode").action("editor.action.dirtydiff.next")<CR>')
+keymap({ 'n', 'x' }, '<leader>gr', '<cmd>lua require("vscode").action("git.revertSelectedRanges")<CR>')
+keymap({ 'n', 'x' }, '<leader>gs', '<cmd>lua require("vscode").action("git.stageSelectedRanges")<CR>')
+keymap({ 'n', 'x' }, '<leader>gd', '<cmd>lua require("vscode").action("git.viewChanges")<CR>')
+-- keymap({ 'n', 'x' }, '<leader>gu', '<cmd>lua require("vscode").action("git.unstageSelectedRanges")<CR>')
+-- Debugger
+keymap({ 'n', 'x' }, '<leader>db', '<cmd>lua require("vscode").action("editor.debug.action.toggleBreakpoint")<CR>')
+-- Editor commands
+keymap({ 'n', 'v' }, '<leader>vc', '<cmd>lua require("vscode").action("notifications.clearAll")<CR>')
 
 -- keymap('n', '<A-k>', '<Cmd>lua MoveCurrentline("Up")<CR>')
 -- keymap('n', '<A-j>', '<Cmd>lua MoveCurrentline("Down")<CR>')
 -- keymap('v', '<A-k>', '<Cmd>lua MoveVisualSelection("Up")<CR>')
 -- keymap('v', '<A-j>', '<Cmd>lua MoveVisualSelection("Down")<CR>')
-keymap('v', '<A-k>', [[:<C-U>exec "'<,'>move '<-" . (1+v:count1)<CR>gv]])
-keymap('v', '<A-j>', [[:<C-U>exec "'<,'>move '>+" . (0+v:count1)<CR>gv]])
+keymap('x', '<A-k>', [[:<C-U>exec "'<,'>move '<-" . (1+v:count1)<CR>gv]])
+keymap('x', '<A-j>', [[:<C-U>exec "'<,'>move '>+" . (0+v:count1)<CR>gv]])
 -- Jump between tabs
-keymap('n', 'gl', '<Cmd>call VSCodeNotify("workbench.action.nextEditorInGroup")<CR>')
-keymap('n', 'gh', '<Cmd>call VSCodeNotify("workbench.action.previousEditorInGroup")<CR>')
-keymap('n', 'gL', '<Cmd>call VSCodeNotify("workbench.action.lastEditorInGroup")<CR>')
-keymap('n', 'gH', '<Cmd>call VSCodeNotify("workbench.action.firstEditorInGroup")<CR>')
+keymap('n', 'gl', '<cmd>lua require("vscode").action("workbench.action.nextEditorInGroup")<CR>')
+keymap('n', 'gh', '<cmd>lua require("vscode").action("workbench.action.previousEditorInGroup")<CR>')
+keymap('n', 'gL', '<cmd>lua require("vscode").action("workbench.action.lastEditorInGroup")<CR>')
+keymap('n', 'gH', '<cmd>lua require("vscode").action("workbench.action.firstEditorInGroup")<CR>')
 
 -- window management
-keymap('n', '<leader>j', '<Cmd>call VSCodeNotify("workbench.action.focusBelowGroup")<CR>')
-keymap('n', '<leader>k', '<Cmd>call VSCodeNotify("workbench.action.focusAboveGroup")<CR>')
-keymap('n', '<leader>h', '<Cmd>call VSCodeNotify("workbench.action.focusLeftGroup")<CR>')
-keymap('n', '<leader>l', '<Cmd>call VSCodeNotify("workbench.action.focusRightGroup")<CR>')
-keymap('n', '<leader>q', '<Cmd>call VSCodeNotify("workbench.action.closeActiveEditor")<CR>')
-keymap('n', '<leader>ws', '<Cmd>call VSCodeNotify("workbench.action.splitEditorDown")<CR>')
-keymap('n', '<leader>wv', '<Cmd>call VSCodeNotify("workbench.action.splitEditorRight")<CR>')
-keymap('n', '<leader>wo', '<Cmd>call VSCodeNotify("workbench.action.joinAllGroups")<CR>')
-keymap('n', '<leader>ww', '<Cmd>call VSCodeNotify("workbench.action.focusNextGroup")<CR>')
-keymap('n', '<leader>wW', '<Cmd>call VSCodeNotify("workbench.action.focusPreviousGroup")<CR>')
-keymap('n', '\\', '<Cmd>call VSCodeNotify("workbench.action.toggleEditorWidths")<CR>') -- zoom a vim pane
-keymap('n', '<Bar>', '<Cmd>call VSCodeNotify("workbench.action.evenEditorWidths")<CR>') -- even all windows
-
-keymap('n', '[c', '<Cmd>call VSCodeNotify("workbench.action.editor.previousChange")<CR>')
-keymap('n', ']c', '<Cmd>call VSCodeNotify("workbench.action.editor.nextChange")<CR>')
-keymap('n', '<C-j>', '<Cmd>call VSCodeNotify("workbench.action.navigateForward")<CR>')
+keymap('n', '<leader>j', '<cmd>lua require("vscode").action("workbench.action.focusBelowGroup")<CR>')
+keymap('n', '<leader>k', '<cmd>lua require("vscode").action("workbench.action.focusAboveGroup")<CR>')
+keymap('n', '<leader>h', '<cmd>lua require("vscode").action("workbench.action.focusLeftGroup")<CR>')
+keymap('n', '<leader>l', '<cmd>lua require("vscode").action("workbench.action.focusRightGroup")<CR>')
+keymap('n', '<leader>q', '<cmd>lua require("vscode").action("workbench.action.closeActiveEditor")<CR>')
+keymap('n', '<leader>ws', '<cmd>lua require("vscode").action("workbench.action.splitEditorDown")<CR>')
+keymap('n', '<leader>wv', '<cmd>lua require("vscode").action("workbench.action.splitEditorRight")<CR>')
+keymap('n', '<leader>wo', '<cmd>lua require("vscode").action("workbench.action.joinAllGroups")<CR>')
+keymap('n', '<leader>ww', '<cmd>lua require("vscode").action("workbench.action.focusNextGroup")<CR>')
+keymap('n', '<leader>wW', '<cmd>lua require("vscode").action("workbench.action.focusPreviousGroup")<CR>')
+keymap('n', '\\', '<cmd>lua require("vscode").action("workbench.action.toggleEditorWidths")<CR>') -- zoom a vim pane
+keymap('n', '<Bar>', '<cmd>lua require("vscode").action("workbench.action.evenEditorWidths")<CR>') -- even all windows
 
 -- editor.action.goToReferences
 -- editor.action.triggerSuggest
