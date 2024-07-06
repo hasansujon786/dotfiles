@@ -56,7 +56,7 @@ function UIInput:init(opts, on_confirm)
   end
   -- cancel operation if <Esc> is pressed
   self:map('n', '<Esc>', exit_win, map_opt)
-  self:map('i', '<Esc>', exit_win, map_opt)
+  self:map('i', '<Esc>', '<Esc>', map_opt)
   self:map('i', '<C-c>', '<Esc>', map_opt)
   -- self:map('i', '<A-BS>', '<C-o>ciw', { noremap = true })
 end

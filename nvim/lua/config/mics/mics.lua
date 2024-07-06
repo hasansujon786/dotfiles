@@ -93,11 +93,11 @@ return {
     opts = {
       timeout = 350, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
       mappings = {
-        i = { j = { k = '<Esc>', j = '<Nop>' } },
-        c = { j = { k = '<Esc>' } },
-        t = { j = { k = '<Esc>' } },
-        v = nil,
-        s = nil,
+        i = { j = { k = '<Esc>', j = false } },
+        c = { j = { k = '<Esc>', j = false } },
+        t = { j = { k = '<Esc>', j = false } },
+        v = { j = { k = false } },
+        s = { j = { k = '<Esc>' } },
       },
     },
   },

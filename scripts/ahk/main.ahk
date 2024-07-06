@@ -187,7 +187,7 @@ winMode := 0
 ytRemovetFromWL() {
   Send("{LButton}")
   sleep(100)
-  Send("{tab}")
+  ; Send("{tab}")
   Send("{tab}")
   Send("{tab}")
   Send("{Enter}")

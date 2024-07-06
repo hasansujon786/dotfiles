@@ -52,5 +52,14 @@
     "prefix": "randomFromRange",
     "body": "Math.floor(Math.random() * (max - min + 1) + min)",
     "description": "get number from a range"
+  },
+  "wait promise": {
+    "prefix": "waitpromise",
+    "body": [
+      "async function wait(time: number) {",
+      "  return await new Promise((resolve) => setTimeout(resolve, time));",
+      "}"
+    ],
+    "description": "await a promise for given time"
   }
 }
