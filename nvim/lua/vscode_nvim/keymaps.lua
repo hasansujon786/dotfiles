@@ -1,3 +1,5 @@
+local vscode = require('vscode')
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 local noSilent = { silent = false }
@@ -11,10 +13,6 @@ keymap('x', '$', 'g_') -- A fix to select end of line
 keymap('v', '.', ':norm.<cr>') -- map . in visual mode
 keymap('x', '>', '>gv') -- Keep selection when indenting/outdenting.
 keymap('x', '<', '<gv')
-
--- Comment or uncomment lines using Commentary
-keymap({ 'n', 'x', 'o' }, 'gc', '<Plug>VSCodeCommentary')
-keymap('n', 'gcc', '<Plug>VSCodeCommentaryLine')
 
 -- G command
 keymap('n', 'gx', '<cmd>lua require("vscode").action("editor.action.openLink")<CR>')
@@ -62,8 +60,15 @@ keymap('n', '<A-d>', '<c-d>')
 keymap('n', '<A-u>', '<c-u>')
 
 -- => Search ----------------------------------------
-keymap('n', '<A-/>', "<Cmd>call VSCodeNotify('workbench.action.findInFiles', { 'query': expand('<cword>')})<CR>")
+-- stylua: ignore
+keymap('n', '<A-/>', '<cmd>lua require("vscode").action("workbench.action.findInFiles",{args={query=vim.fn.expand("<cword>")}})<CR>')
+keymap('x', '<A-/>', '<cmd>lua require("vscode").action("workbench.action.findInFiles")<CR>')
 
+keymap({ 'n', 'x' }, '<C-l>', function()
+  vscode.with_insert(function()
+    vscode.action('editor.action.addSelectionToNextFindMatch')
+  end)
+end)
 -- => LSP -------------------------------------------
 keymap({ 'n', 'x' }, 'gd', '<cmd>lua require("vscode").action("editor.action.revealDefinition")<CR>')
 keymap({ 'n', 'x' }, 'gr', '<cmd>lua require("vscode").action("editor.action.referenceSearch.trigger")<CR>')
@@ -82,6 +87,7 @@ keymap({ 'n', 'x' }, 'g.', '<cmd>lua require("vscode").action("workbench.action.
 keymap('n', '<C-space>', '<cmd>lua require("vscode").action("editor.action.quickFix")<CR>')
 keymap('i', '<C-space>', '<cmd>lua require("vscode").action("editor.action.triggerSuggest")<CR>')
 keymap({ 'n', 'x' }, '<leader>ad', '<cmd>lua require("vscode").action("workbench.actions.view.problems")<CR>')
+keymap({ 'n', 'x' }, '<leader>aa', '<cmd>lua require("vscode").action("editor.action.sourceAction")<CR>')
 
 keymap('n', 'g<tab>', '<cmd>lua require("vscode").action("editor.action.smartSelect.expand")<CR>')
 keymap('v', '<tab>', '<cmd>lua require("vscode").action("editor.action.smartSelect.expand")<CR>')

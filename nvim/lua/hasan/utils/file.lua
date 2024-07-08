@@ -7,7 +7,7 @@ M.get_root_dir = function()
   return vim.loop.cwd()
 end
 
---- @param buffer buffer
+--- @param buffer number
 --- @return string
 M.get_buf_name_relative = function(buffer)
   return Path:new(vim.api.nvim_buf_get_name(buffer)):make_relative(M.get_root_dir())

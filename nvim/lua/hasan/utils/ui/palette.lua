@@ -249,8 +249,9 @@ local function set_custom_highlights()
     IblScope  = { fg = c.grey },
     MiniIndentscopeSymbol = { link = 'IblScope' },
   -- /// Folke collection ///
-    FlashMatch = { fg = c.fg, bg = c.bg3 },
-    FlashLabel = { fg = c.black, bg = c.green },
+    FlashMatch   = { fg = c.fg, bg = c.bg3 },
+    FlashLabel   = { fg = c.black, bg = c.green },
+    FlashCurrent = { fg = c.bg0, bg = '#e86671' },
     NoiceMini    = { bg = '#000000' },
     NoiceFormatConfirmDefault  = { link = 'LazyButton' },
     LazyNormal   = { link = 'NormalFloatFlat' },
@@ -261,7 +262,7 @@ local function set_custom_highlights()
     MasonMutedBlock         = { link = 'LazyButton' },
     MasonHighlightBlockBold = { link = 'LazyButtonActive' },
   -- /// vim-visual-multi /// VM_Cursor
-    VM_Extend = { link = 'Visual' },
+    VM_Extend = { bg = c.dark_red, fg = c.white },
     VM_Cursor = { bg = '#8a8a8a', fg = '#204364' },
     VM_Insert = { bg = '#4c4e50', fg = 'NONE' },
     VM_Mono   = { bg = c.ligh_green, fg = '#ffffff' },
