@@ -64,32 +64,6 @@ function! hasan#utils#delete_view(bang) abort "{{{
   endif
 endfunction "}}}
 
-" Pressing * or # searches for the current selection
-function! hasan#utils#visualSelection(direction, extra_filter) range "{{{
-  let l:saved_reg = @"
-  execute "normal! vgvy"
-
-  let l:pattern = escape(@", "\\/.*'$^~[]")
-  let l:pattern = substitute(l:pattern, "\n$", "", "")
-
-  if a:direction == 'gv'
-    call CmdLine("Ack '" . l:pattern . "' " )
-  elseif a:direction == 'replace'
-    call CmdLine("%s" . '/'. l:pattern . '/')
-  endif
-
-  let @/ = l:pattern
-  let @" = l:saved_reg
-endfunction "}}}
-
-function! hasan#utils#file_info() "{{{
-  let fname = ['', expand('%') == '' ? '“[No Name]“' : '“'.expand('%:.').'“']
-  let lines = ['WarningMsg', line('$').' lines']
-  let scroll = ['DiagnosticInfo', '--'.(line('.') * 100) / line('$').'%--']
-  let readAndMod = ['ErrorMsg', &readonly ? '[Readonly]' : &modified ? '[Modified]' : '']
-
-  call _#Echo(['DiagnosticHint','File Info:'], fname, lines, scroll, readAndMod)
-endfunction "}}}
 
 function! hasan#utils#_filereadable_and_create(file, create) abort "{{{
   let file_path = fnamemodify(a:file, ':p')

@@ -3,6 +3,10 @@ return {
   branch = 'win-border',
   lazy = true,
   cmd = 'ZenMode',
+  keys = {
+    { '\\', '<cmd>ZenMode<CR>', mode = { 'n', 'x' }, desc = 'ZenMode' },
+    { '<leader>u', '<cmd>ZenMode<CR>', mode = { 'n', 'x' }, desc = 'ZenMode' },
+  },
   opts = {
     border = { '', '', '', '│', '', '', '', '│' },
     window = {

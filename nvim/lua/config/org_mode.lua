@@ -122,9 +122,9 @@ return {
           symbols = {
             headlines = { '◎', '◯', '', '', '✸', '', '♥', '✿' },
             checkboxes = {
-              half = { '-' },
-              done = { '✕', '@markup.list.checked' },
-              todo = { ' ' },
+              half = { '-', '@org.checkbox.halfchecked' },
+              done = { '✓', '@org.keyword.done' },
+              todo = { ' ', '@org.keyword.todo' },
             },
           },
         },

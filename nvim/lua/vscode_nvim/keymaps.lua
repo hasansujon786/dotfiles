@@ -1,19 +1,7 @@
 local vscode = require('vscode')
-
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
 local noSilent = { silent = false }
 
 -- => Simple mappings -------------------------------
-keymap('n', 'Q', 'q') -- Use Q to record macros
-keymap({ 'n', 'v' }, 'q', '<ESC>:noh<CR>')
-keymap({ 'n', 'v' }, '<CR>', ':<up>', noSilent) -- run last : command easily
-
-keymap('x', '$', 'g_') -- A fix to select end of line
-keymap('v', '.', ':norm.<cr>') -- map . in visual mode
-keymap('x', '>', '>gv') -- Keep selection when indenting/outdenting.
-keymap('x', '<', '<gv')
-
 -- G command
 keymap('n', 'gx', '<cmd>lua require("vscode").action("editor.action.openLink")<CR>')
 
@@ -27,37 +15,22 @@ keymap('n', 'zO', '<cmd>lua require("vscode").action("editor.unfoldAll")<CR>')
 keymap('n', 'zR', '<cmd>lua require("vscode").action("editor.unfoldAll")<CR>')
 keymap('n', 'zp', '<cmd>lua require("vscode").action("editor.gotoParentFold")<CR>')
 
--- Custom pseudo-text object
-keymap('x', 'aa', 'GoggV') -- Make vaa select the entire file
-keymap('o', 'aa', ':<C-u>normal vaa<CR>') -- Make vaa select the entire file
-
--- => Yank and copy ---------------------------------
-keymap('v', 'p', 'pgvy') -- Prevent selecting and pasting from overwriting what you originally copied.
-keymap('v', 'y', 'ygv<Esc>') -- Keep cursor at the bottom of the visual selection after you yank it.
-keymap('n', 'Y', 'y$') -- Ensure Y works similar to D,C.
-keymap({ 'n', 'v' }, 'x', '"_x') -- Prevent x from overriding the clipboard.
-keymap({ 'n', 'v' }, 'X', '"_X')
-keymap('n', 'gV', '`[v`]')
--- Paste from current register/buffer in insert mode
--- imap <C-v> <C-R>*
--- cmap <C-v> <C-R>+
--- keymap({ 'i', 'c' }, '<A-p>', '<C-R>"', noSilent) -- Paste the last item from register
-
--- Easier system clipboard usage
-keymap('v', '<leader>y', '"+ygv<Esc>')
-keymap('v', '<leader>d', '"+d')
-keymap({ 'n', 'v' }, '<leader>ip', '"+p')
-keymap({ 'n', 'v' }, '<leader>iP', '"+P')
-
 -- => Navigation ------------------------------------
 keymap({ 'n', 'x' }, ']d', '<cmd>lua require("vscode").action("editor.action.marker.next")<CR>')
 keymap({ 'n', 'x' }, '[d', '<cmd>lua require("vscode").action("editor.action.marker.prev")<CR>')
 keymap({ 'n', 'x' }, '[c', '<cmd>lua require("vscode").action("workbench.action.editor.previousChange")<CR>')
 keymap({ 'n', 'x' }, ']c', '<cmd>lua require("vscode").action("workbench.action.editor.nextChange")<CR>')
 keymap({ 'n', 'x' }, '<C-j>', '<cmd>lua require("vscode").action("workbench.action.navigateForward")<CR>')
+keymap(
+  'n',
+  '<backspace>',
+  '<cmd>lua require("vscode").action("workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup")<CR>'
+)
 -- Scroll
 keymap('n', '<A-d>', '<c-d>')
 keymap('n', '<A-u>', '<c-u>')
+keymap('n', 'zh', '<cmd>lua require("vscode").action("scrollLeft")<CR>')
+keymap('n', 'zl', '<cmd>lua require("vscode").action("scrollRight")<CR>')
 
 -- => Search ----------------------------------------
 -- stylua: ignore
@@ -69,6 +42,7 @@ keymap({ 'n', 'x' }, '<C-l>', function()
     vscode.action('editor.action.addSelectionToNextFindMatch')
   end)
 end)
+
 -- => LSP -------------------------------------------
 keymap({ 'n', 'x' }, 'gd', '<cmd>lua require("vscode").action("editor.action.revealDefinition")<CR>')
 keymap({ 'n', 'x' }, 'gr', '<cmd>lua require("vscode").action("editor.action.referenceSearch.trigger")<CR>')
@@ -104,6 +78,7 @@ keymap('x', '<leader>fs', '<cmd>lua require("vscode").action("editor.action.form
 -- open explorer
 keymap('n', '<leader>ob', '<cmd>lua require("vscode").action("workbench.action.toggleSidebarVisibility")<CR>')
 keymap('n', '<leader>op', '<cmd>lua require("vscode").action("workbench.view.explorer")<CR>')
+keymap('n', '-', '<cmd>lua require("vscode").action("workbench.files.action.showActiveFileInExplorer")<CR>')
 -- keymap('n', '<leader>oi', '<cmd>lua require("vscode").action("workbench.files.action.focusFilesExplorer")<CR>')
 -- Toggles
 keymap('n', '<leader>u', '<cmd>lua require("vscode").action("workbench.action.toggleZenMode")<CR>')

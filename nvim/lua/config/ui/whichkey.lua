@@ -236,7 +236,6 @@ return {
         g = { '<cmd>lua require("hasan.telescope.custom").live_grep_in_folder()<cr>', 'Live grep in folder' },
       },
 
-      r = { '<cmd>lua require("hasan.utils.win").cycle_numbering()<CR>', 'Cycle number' },
       x = { '<cmd>call hasan#utils#buffer#_open_scratch_buffer()<CR>', 'Scratch buffer' },
 
       ['.'] = common.browse_cur_dir,

@@ -7,11 +7,11 @@
 
 require('core.state')
 require('core.global')
+require('core.options')
+require('core.keymaps')
 if vim.g.vscode then
-  require("vscode_nvim")
+  require('vscode_nvim')
 else
-  require('core.options')
-  require('core.keymaps')
   require('core.autocmds')
 end
 require('core.lazy_setup')

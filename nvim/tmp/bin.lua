@@ -292,3 +292,22 @@
 -- local tail, path = telescopePickers.getPathAndTail(entry.filename)
 -- local tailForDisplay = tail .. ' '
 -- local icon, iconHighlight = telescopeUtilities.get_devicons(tail)
+
+-- search in visible viewport
+keymap('n', 'Z/', function()
+  local scrolloff = vim.wo.scrolloff
+  vim.wo.scrolloff = 0
+  feedkeys('VHoLo0<Esc>/\\%V')
+
+  vim.defer_fn(function()
+    vim.wo.scrolloff = scrolloff
+  end, 10)
+end, { silent = false })
+
+-- Function keys --------------------------------
+keymap('n', '<F3>', ':set paste! paste?<CR>')
+
+keymap('n', '<F7>', ':setlocal spell! spell?<CR>') -- Toggle spelling and show it's status
+keymap('i', '<F7>', '<C-o>:setlocal spell! spell?<CR>')
+keymap('n', '<F5>', '<Esc>:syntax sync fromstart<CR>')
+keymap('i', '<F5>', '<C-o>:syntax sync fromstart<CR>')

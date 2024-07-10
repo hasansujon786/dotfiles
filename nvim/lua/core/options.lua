@@ -1,9 +1,6 @@
 local o = vim.o
 local opt = vim.opt
 
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 -- Files-backup-undo
 vim.loader.enable()
 o.backup = false
