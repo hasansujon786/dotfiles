@@ -32,7 +32,11 @@ superEscape() {
   if ErrorLevel { ; timeout, so key is still down...
     SoundPlay("*64") ; Play an asterisk (Doesn't work for me though!)
     X := WinGetProcessName("A")
-    SplashTextGui := Gui("ToolWindow -Sysmenu Disabled", ), SplashTextGui.Add("Text",, "`nRelease button to close " x "`n`nKeep pressing it to NOT close window..."), SplashTextGui.Show("w200 h150")
+    SplashTextGui := Gui("ToolWindow -Sysmenu Disabled", )
+    Text := SplashTextGui.Add("Text", "Center h120", "Release button to close " x "`n`nKeep pressing it to NOT close window...")
+    Text.SetFont("s12", "Segoe UI")
+    SplashTextGui.Show()
+
     ErrorLevel := !KeyWait("Escape", "T3") ; Wait no more than 3 more sec for key to be released
     SplashTextGui.Destroy
     If !ErrorLevel ; No timeout, so key was released
@@ -135,8 +139,8 @@ toggleCapsLosck() {
     msg := "Capslock On"
     SplashTextGui.BackColor := "Red"
   }
-  SplashTextGui.Add("Text" ,"x0 w220 Center " color, msg)
-  SplashTextGui.Show("w220 h70 NA")
+  SplashTextGui.Add("Text" ,"w300 y70 Center " color, msg)
+  SplashTextGui.Show("h200 NA")
   beep()
 
   Sleep(700)

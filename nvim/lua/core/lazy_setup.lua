@@ -27,6 +27,10 @@ require('lazy').setup({
     timeout = 120, -- kill processes that take more than 2 minutes
   },
   install = { colorscheme = { 'onedark', 'habamax' } },
+  change_detection = {
+    enabled = true,
+    notify = true, -- get a notification when changes are found
+  },
   dev = { path = 'E:/repoes/lua/' },
   performance = {
     cache = {

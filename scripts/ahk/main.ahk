@@ -9,7 +9,10 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 ;Reload/Execute this script.ahk file
 ::rscript::
 !f5:: {
-  SplashTextGui := Gui("ToolWindow -Sysmenu Disabled", ), SplashTextGui.Add("Text",, "reloaded"), SplashTextGui.Show("w200 h60")
+  SplashTextGui := Gui("ToolWindow -Sysmenu Disabled", ),
+  Text := SplashTextGui.Add("Text", "Center w200 h40", "Reloaded...")
+  Text.SetFont("s12", "Segoe UI")
+  SplashTextGui.Show()
   Sleep(300)
   SplashTextGui.Destroy
   Run("C:\Users\" A_UserName "\dotfiles\scripts\ahk\main.ahk")

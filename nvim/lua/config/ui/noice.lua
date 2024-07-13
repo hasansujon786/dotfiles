@@ -76,7 +76,14 @@ return {
         view_history = 'messages', -- view for :messages
         view_search = false, -- view for search count messages. Set to `false` to disable
       },
-      views = { mini = { win_options = { winblend = 0 } } },
+      views = {
+        ---@type nui_popup_options
+        mini = { win_options = { winblend = 0 } },
+        ---@type nui_popup_options
+        confirm = {
+          position = { row = '48%', col = '50%' },
+        },
+      },
     })
 
     -- Redirect cmdline result to a popup
