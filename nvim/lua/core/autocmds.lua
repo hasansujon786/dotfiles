@@ -44,6 +44,44 @@ augroup('MY_AUGROUP')(function(autocmd)
     vim.defer_fn(set_titlestring, 100)
   end)
 
+  -- local function reloadConfig(plugin)
+  --   local rootHasPlugin = type(plugin[1]) == 'string'
+  --   local rootHasConfig = type(plugin.config) == 'function'
+
+  --   if rootHasPlugin and rootHasConfig then
+  --     P(plugin[1] .. ' has config')
+  --     plugin.config()
+  --   else
+  --     P(plugin[1] .. ' noooo config')
+  --   end
+  -- end
+
+  -- autocmd('User', function(args)
+  --   -- { buf = 24, event = "User", file = "LazyReload", group = 7, id = 22, match = "LazyReload" }
+  --   local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(args.buf), ':p:~')
+  --   path = path:gsub('~\\dotfiles\\nvim\\lua\\', '')
+  --   -- file = file:gsub('~/dotfiles/nvim/lua/', '')
+  --   path = path:gsub('.lua', '')
+  --   path = path:gsub('\\', '.')
+
+  --   local module = require(path)
+  --   local rootHasListOfPlugin = vim.islist(module)
+
+  --   if rootHasListOfPlugin then
+  --     P('list ' .. #module .. ' of plugin')
+  --     vim.defer_fn(function()
+  --       for _, plugin in ipairs(module) do
+  --         reloadConfig(plugin)
+  --       end
+  --     end, 1000)
+  --   else
+  --     P('root plugin')
+  --     vim.defer_fn(function()
+  --       reloadConfig(module)
+  --     end, 1000)
+  --   end
+  -- end, { pattern = { 'LazyReload' } })
+
   autocmd('BufEnter', set_titlestring)
   autocmd('InsertEnter', function()
     vim.schedule(function()

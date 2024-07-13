@@ -23,6 +23,17 @@ return {
       '<cmd>lua require"dap".continue()<cr>',
       desc = 'Start',
     },
+    {
+      '<leader>db',
+      '<cmd>lua require"dap".toggle_breakpoint()<CR>',
+      desc = 'Start',
+    },
+    {
+      '<leader>d/',
+      '<cmd>lua require"telescope".extensions.dap.commands()<CR>',
+      desc = 'Start',
+    },
+
     -- {
     --   '<leader>da',
     --   function()

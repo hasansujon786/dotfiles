@@ -18,7 +18,10 @@ return {
     'chipsenkbeil/org-roam.nvim',
     -- enabled = true,
     module = 'org-roam',
-    keys = { { '<leader>nf' }, { '<leader>nc' } },
+    keys = {
+      { '<leader>nc', desc = 'Opens org-roam capture window' },
+      { '<leader>nf', desc = 'Finds org-roam node and moves to it, creating new one if missing' },
+    },
     cmd = { 'RoamUpdate', 'RoamSave' },
     ft = { 'org' },
     lazy = true,
