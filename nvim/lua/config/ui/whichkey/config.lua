@@ -34,60 +34,26 @@ return {
         },
       },
       show_help = false,
-      show_keys = true, -- show the currently pressed key and its label as a message in the command line
+      show_keys = false, -- show the currently pressed key and its label as a message in the command line
       win = {
         -- width = 1,
         -- height = { min = 4, max = 25 },
         -- col = 0,
         row = -1,
-        -- border = { ' ', ' ', ' ', ' ', '▁', '▁', '▁', ' ' },
-        -- border = { '▔', '▔', '▔', ' ', '▁', '▁', '▁', ' ' },
-        border = { '▁', '▁', '▁', ' ', '▁', '▁', '▁', ' ' },
-        padding = { 2, 8 }, -- extra window padding [top/bottom, right/left]
+        border = { ' ', ' ', ' ', ' ', '▁', '▁', '▁', ' ' },
+        padding = { 1, 8 }, -- extra window padding [top/bottom, right/left]
         title = false,
-        title_pos = 'center',
+        footer_pos = 'center',
+        footer = true,
         zindex = 1000,
-        -- Additional vim.wo and vim.bo options
-        bo = {},
-        wo = {
-          -- winblend = 10, -- value between 0-100 0 for fully opaque and 100 for fully transparent
-        },
+        -- bo = {},
+        -- wo = {},
       },
       layout = {
         width = { min = 20 }, -- min and max width of the columns
         spacing = 4, -- spacing between columns
         align = 'left', -- align columns left, center or right
       },
-
-      -- window = {
-      --   position = 'bottom', -- bottom, top
-      --   border = { ' ', ' ', ' ', '', '▁', '▁', '▁', '' },
-      --   margin = { 0, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-      --   padding = { 1, 0, 1, 0 }, -- extra window padding [top, right, bottom, left]
-      -- },
-      -- layout = {
-      --   height = { min = 4, max = 25 }, -- min and max height of the columns
-      --   width = { min = 20, max = 50 }, -- min and max width of the columns
-      --   spacing = 3, -- spacing between columns
-      --   align = 'left', -- align columns left, center or right
-      -- },
-      -- key_labels = {
-      --   ['<space>'] = '󱁐 ',
-      --   ['<CR>'] = '󰌑 ',
-      --   ['<Tab>'] = ' ',
-      --   ['.'] = '•',
-      -- },
-      -- show_help = false,
-      -- plugins = {
-      --   marks = true, -- shows a list of your marks on ' and `
-      --   registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
-      --   spelling = { enabled = true, suggestions = 12 }, -- z=
-      --   presets = {
-      --     operators = true, -- adds help for operators like d, y, ...
-      --     motions = true, -- adds help for motions
-      --     text_objects = true, -- help for text objects triggered after entering an operator
-      --   },
-      -- },
     })
 
     wk.add({

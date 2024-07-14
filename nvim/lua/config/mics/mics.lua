@@ -35,6 +35,7 @@ return {
   {
     'johmsalas/text-case.nvim',
     lazy = true,
+    commit = 'ec9925b27dd54809653cc766b8673acd979a888e',
     keys = { { 'ga', mode = nx, desc = 'Text case' } },
     cmd = {
       'TextCaseOpenTelescope',
@@ -43,8 +44,8 @@ return {
       'TextCaseStartReplacingCommand',
     },
     config = function()
-      require('textcase').setup({})
-      require('telescope').load_extension('textcase')
+      require('textcase').setup()
+      -- require('telescope').load_extension('textcase')
 
       keymap(nx, 'ga.', '<cmd>TextCaseOpenTelescopeQuickChange<CR>', { desc = 'Telescope Quick Change' })
       keymap(nx, 'ga,', '<cmd>TextCaseOpenTelescopeLSPChange<CR>', { desc = 'Telescope LSP Change' })
