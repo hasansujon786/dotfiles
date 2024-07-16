@@ -180,6 +180,29 @@ takeScreenshot() {
   Sleep(300)
   SplashTextGui.Destroy
 }
+select_playback_device() {
+  Send("#b")
+  Send("{left}")
+  Send("{left}")
+  Send("{left}")
+  Send("{Space}")
+  sleep(100)
+  Send("{tab}")
+  Send("{Enter}")
+  sleep(100)
+  Send("{tab}")
+}
+showCalendar() {
+  Send("#b")
+  Send("{left}")
+  Send("{left}")
+  Send("{Space}")
+  sleep(300)
+  Send("{tab}")
+  Send("{tab}")
+  Send("{tab}")
+  Send("{tab}")
+}
 volup() {
   SoundSetVolume("+8")
   SendInput("{Volume_Up}")

@@ -20,6 +20,7 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 ^f5::Suspend(-1)
 
 #`::takeScreenshot()
+^#b::showCalendar()
 PrintScreen::Send("#+{s}")
 #q::toggleBluetooth()
 #+q::select_playback_device()
@@ -196,18 +197,5 @@ ytRemovetFromWL() {
   Send("{Enter}")
 }
 ~LAlt & LButton::ytRemovetFromWL()
-
-select_playback_device() {
-  Send("#b")
-  Send("{left}")
-  Send("{left}")
-  Send("{left}")
-  Send("{Space}")
-  sleep(100)
-  Send("{tab}")
-  Send("{Enter}")
-  sleep(100)
-  Send("{tab}")
-}
 
 #Include %A_ScriptDir%\vim_explorer.ahk
