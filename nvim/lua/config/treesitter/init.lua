@@ -23,6 +23,9 @@ return {
         'vim',
         'vimdoc',
         'vue',
+        'javascript',
+        'typescript',
+        'tsx'
       }
 
       require('nvim-treesitter.configs').setup({
@@ -36,9 +39,9 @@ return {
         incremental_selection = {
           enable = true,
           keymaps = {
-            init_selection = 'g<tab>', -- maps in normal mode to init the node/scope selection
-            scope_incremental = 'O', -- increment to the upper scope (as defined in locals.scm)
-            node_incremental = '<tab>', -- increment to the upper named parent
+            init_selection = 'g<tab>',    -- maps in normal mode to init the node/scope selection
+            scope_incremental = 'O',      -- increment to the upper scope (as defined in locals.scm)
+            node_incremental = '<tab>',   -- increment to the upper named parent
             node_decremental = '<s-tab>', -- decrement to the previous node
           },
         },
@@ -145,8 +148,8 @@ return {
         'windwp/nvim-ts-autotag',
         opts = {
           opts = {
-            enable_close = true, -- Auto close tags
-            enable_rename = true, -- Auto rename pairs of tags
+            enable_close = true,           -- Auto close tags
+            enable_rename = true,          -- Auto rename pairs of tags
             enable_close_on_slash = false, -- Auto close on trailing </
           },
         },
@@ -160,18 +163,18 @@ return {
             css = { css = true },
           },
           user_default_options = {
-            RGB = true, -- #RGB hex codes
-            RRGGBB = true, -- #RRGGBB hex codes
-            rgb_fn = true, -- CSS rgb() and rgba() functions
-            hsl_fn = true, -- CSS hsl() and hsla() functions
-            names = false, -- "Name" codes like Blue or blue
-            RRGGBBAA = false, -- #RRGGBBAA hex codes
-            AARRGGBB = false, -- 0xAARRGGBB hex codes
-            css = false, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-            css_fn = false, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+            RGB = true,          -- #RGB hex codes
+            RRGGBB = true,       -- #RRGGBB hex codes
+            rgb_fn = true,       -- CSS rgb() and rgba() functions
+            hsl_fn = true,       -- CSS hsl() and hsla() functions
+            names = false,       -- "Name" codes like Blue or blue
+            RRGGBBAA = false,    -- #RRGGBBAA hex codes
+            AARRGGBB = false,    -- 0xAARRGGBB hex codes
+            css = false,         -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+            css_fn = false,      -- Enable all CSS *functions*: rgb_fn, hsl_fn
             mode = 'background', -- Set the display mode. 'foreground', 'background', 'virtualtext'
             virtualtext = '■',
-            tailwind = 'lsp', -- Available methods are false / true / "normal" / "lsp" / "both" | True is same as normal
+            tailwind = 'lsp',    -- Available methods are false / true / "normal" / "lsp" / "both" | True is same as normal
           },
           buftypes = { '!prompt', '!popup' },
         },
@@ -199,6 +202,7 @@ return {
     end,
     dependencies = {
       'nvim-treesitter/nvim-treesitter-context',
+      enabled = true,
       keys = {
         {
           'g[',
@@ -211,17 +215,17 @@ return {
       },
       config = function()
         require('treesitter-context').setup({
-          enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-          max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-          min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+          enable = true,            -- Enable this plugin (Can be enabled/disabled later via commands)
+          max_lines = 0,            -- How many lines the window should span. Values <= 0 mean no limit.
+          min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
           line_numbers = true,
           multiline_threshold = 20, -- Maximum number of lines to show for a single context
-          trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-          mode = 'cursor', -- Line used to calculate context. Choices: 'cursor', 'topline'
+          trim_scope = 'outer',     -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+          mode = 'cursor',          -- Line used to calculate context. Choices: 'cursor', 'topline'
           -- Separator between context and content. Should be a single character string, like '-'.
           -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
           separator = nil,
-          zindex = 20, -- The Z-index of the context window
+          zindex = 20,     -- The Z-index of the context window
           on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
         })
       end,

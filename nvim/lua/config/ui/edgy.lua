@@ -15,10 +15,8 @@ return {
     local dark_bar = color.make_winhighlight({
       Winbar = 'EdgyTitle',
       WinBarNC = 'EdgyTitle',
-      EdgyIcon = 'EdgyTitle',
-      EdgyTitle = 'EdgyTitle',
-      EdgyIconActive = 'EdgyTitle',
       Normal = 'EdgyNormalDark',
+      NormalNC = 'EdgyNormalDark',
       WinSeparator = 'EdgyWinSeparator',
       CursorLine = 'CursorLineFocus',
     })
@@ -26,37 +24,28 @@ return {
     local gray_bar = color.make_winhighlight({
       Winbar = 'EdgyTitle',
       WinBarNC = 'EdgyTitle',
-      EdgyIcon = 'EdgyTitle',
-      EdgyTitle = 'EdgyTitle',
-      EdgyIconActive = 'EdgyTitle',
       Normal = 'EdgyNormal',
       -- WinSeparator = 'EdgyWinSeparator',
       -- CursorLine = 'CursorLineFocus',
     })
 
-    -- local custom_color_ft = {}
-    -- augroup('MY_EDGY_AUGROUP')(function(autocmd)
-    --   autocmd({ 'FileType' }, function(_)
-    --     local win = vim.api.nvim_get_current_win()
-    --     if vim.api.nvim_win_get_config(win).relative == '' then
-    --       reset_edgy_win_hl()
-    --       vim.cmd([[
-    --         augroup edgy_custom_hl
-    --           autocmd! * <buffer>
-    --           autocmd WinEnter,BufEnter <buffer> lua reset_edgy_win_hl()
-    --         augroup END
-    --       ]])
-    --     end
-    --   end, { pattern = custom_color_ft })
-    -- end)
+    local custom_color_ft = { 'Outline' }
+    augroup('MY_EDGY_AUGROUP')(function(autocmd)
+      autocmd({ 'FileType' }, function(_)
+        local win = vim.api.nvim_get_current_win()
+        if vim.api.nvim_win_get_config(win).relative == 'editor' then
+          add_edgy_dark_hl()
+        end
+      end, { pattern = custom_color_ft })
+    end)
 
-    -- function _G.reset_edgy_win_hl()
-    --   vim.defer_fn(function()
-    --     if vim.tbl_contains(custom_color_ft, vim.bo.filetype) then
-    --       vim.wo.winhighlight = dark_bar
-    --     end
-    --   end, 10)
-    -- end
+    function _G.add_edgy_dark_hl()
+      vim.defer_fn(function()
+        if vim.tbl_contains(custom_color_ft, vim.bo.filetype) then
+          vim.wo.winhighlight = dark_bar
+        end
+      end, 10)
+    end
 
     -- // layout config:
     local bottom = {
@@ -73,17 +62,6 @@ return {
       },
     }
     local left = {
-      {
-        ft = 'NvimTree',
-        open = 'NvimTreeOpen',
-        filter = function(_, _)
-          if vim.b.vinegar then
-            return false
-          end
-          return true
-        end,
-        wo = { winbar = false },
-      },
       {
         ft = 'neo-tree',
         title = 'NEO-TREE',
