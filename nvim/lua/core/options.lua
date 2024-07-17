@@ -80,6 +80,8 @@ o.joinspaces = false --                          Two spaces and grade school, we
 opt.whichwrap:append('<,>,[,],h,l') --           Allow left/right & h/l key to move to the previous/next line
 -- code folding settings
 o.foldtext = '' -- 'hasan#utils#foldtext()'
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 o.foldnestmax = 2 --                             Maximum nesting of folds
 o.foldlevelstart = 99 --                         Sets 'foldlevel' when starting to edit a buffer
 o.foldenable = true --                           Don't fold by default

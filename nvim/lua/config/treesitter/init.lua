@@ -25,7 +25,7 @@ return {
         'vue',
         'javascript',
         'typescript',
-        'tsx'
+        'tsx',
       }
 
       require('nvim-treesitter.configs').setup({
@@ -123,24 +123,6 @@ return {
       keymap('n', ']]', '<Plug>(ts-jump-next-s-func)zz')
       keymap('n', '[m', '<Plug>(ts-jump-prev-s-class)zz')
       keymap('n', ']m', '<Plug>(ts-jump-next-s-class)zz')
-
-      _G.my_treesitter_foldexpr = function()
-        vim.defer_fn(function()
-          vim.wo.foldmethod = 'expr'
-          if vim.b.treesitter_import_syntax ~= nil then
-            vim.wo.foldexpr = string.format("v:lnum==1?'>1':getline(v:lnum)=~'%s'?1:nvim_treesitter#foldexpr()", vim.b.treesitter_import_syntax)
-          else
-            vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
-          end
-        end, 50)
-      end
-
-      local treesitter_foldtext_filetypes = 'html,css,javascript,typescript,tsx,typescriptreact,json,lua,vue,dart'
-      local import_pattern = 'javascript,typescript,tsx,typescriptreact,vue,dart'
-      augroup('MY_TREESITTER_AUGROUP')(function(autocmd)
-        autocmd('FileType', 'lua my_treesitter_foldexpr()', { pattern = treesitter_foldtext_filetypes })
-        autocmd('FileType', 'let b:treesitter_import_syntax = "import"', { pattern = import_pattern })
-      end)
     end,
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
