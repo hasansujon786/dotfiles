@@ -9,6 +9,7 @@ _G.state = {
   },
   treesitter = {
     auto_conceal_html_class = true,
+    enabled_context = true,
   },
   neominimap = {
     width = 90,

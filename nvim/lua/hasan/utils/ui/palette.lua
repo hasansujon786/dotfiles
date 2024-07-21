@@ -54,6 +54,8 @@ local function set_custom_highlights()
   local cursorling_bg = c.bg1
   local float_bg = '#21252B' -- '#1c212c' c.bg_d
   local dark_border = '#111925'
+  local context = '#2d324c'
+  -- context = '#2c2f42'
 
   -- neo-tree
   local sp = '#1E242E'
@@ -260,8 +262,8 @@ local function set_custom_highlights()
     WhichKeyNormal              = { fg = fg, bg = cursorling_bg },
     WhichKeyFloat               = { fg = fg, bg = cursorling_bg },
     WhichKeyTitle               = { fg = c.muted, bg = normal_bg },
-    TreesitterContext           = { bg = '#2c2f42' },
-    TreesitterContextLineNumber = { bg = '#2c2f42' , fg = c.grey },
+    TreesitterContext           = { bg = context },
+    TreesitterContextLineNumber = { bg = context, fg = c.grey },
   -- /// Mason ///
     MasonNormal                 = { link = 'NormalFloatFlat' },
     MasonMutedBlock             = { link = 'LazyButton' },
