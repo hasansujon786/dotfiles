@@ -16,6 +16,10 @@ wezterm ls-fonts --text "✘"
 wezterm cli spawn nvim
 wezterm cli spawn --window-id=0 --cwd=E:/repoes/lua/peep.nvim nvim
 
+## Log Files
+You can find log files in $XDG_RUNTIME_DIR/wezterm on unix systems,
+or $HOME/.local/share/wezterm on macOS and Windows systems.
+
 ## Custom keymap
 - https://www.reddit.com/r/neovim/comments/12hyi9t/make_scr_cscr_stab_ctab_work_in_neovim_kitty/
 - using: https://stackoverflow.com/questions/16359878/how-to-map-shift-enter

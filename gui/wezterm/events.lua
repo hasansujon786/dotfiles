@@ -98,23 +98,25 @@ wezterm.on('user-var-changed', function(window, pane, name, value)
   window:set_config_overrides(overrides)
 end)
 
+wezterm.on('save_session', function(...)
+  require('wezterm-session-manager/session-manager').save_state(...)
+end)
+wezterm.on('load_session', function(...)
+  require('wezterm-session-manager/session-manager').load_state(...)
+end)
+wezterm.on('restore_session', function(...)
+  require('wezterm-session-manager/session-manager').restore_state(...)
+end)
+wezterm.on('sessionizer_start', function(...)
+  require('sessionizer').start(...)
+end)
+
 local M = {
   mouse_bindings = {
     { event = { Up = { streak = 1, button = 'Left' } }, mods = 'CTRL', action = 'OpenLinkAtMouseCursor' },
     { event = { Drag = { streak = 1, button = 'Left' } }, mods = 'CTRL|SHIFT', action = 'StartWindowDrag' },
   },
   keys = {
-    {
-      key = 'F1',
-      action = act.ShowLauncherArgs({ flags = 'WORKSPACES' }),
-    },
-    {
-      key = 'f',
-      mods = 'LEADER',
-      action = wezterm.action_callback(function(window, pane)
-        require('sessionizer').start(window, pane)
-      end),
-    },
     {
       key = 'F2',
       mods = 'ALT',
@@ -208,8 +210,14 @@ local M = {
     { key = 'o', mods = 'LEADER', action = 'ActivateLastTab' },
     { key = 'v', mods = 'LEADER', action = act({ SplitHorizontal = {} }) },
     { key = 's', mods = 'LEADER', action = act({ SplitVertical = {} }) },
-    { key = 'b', mods = 'LEADER', action = act.ShowLauncherArgs({ flags = 'WORKSPACES' }) },
     { key = 'b', mods = 'LEADER|CTRL', action = wezterm.action_callback(toggle_opacity) },
+
+    -- Workspace
+    { key = 'S', mods = 'LEADER', action = wezterm.action({ EmitEvent = 'save_session' }) },
+    { key = 'R', mods = 'LEADER', action = wezterm.action({ EmitEvent = 'restore_session' }) },
+    { key = 'l', mods = 'LEADER|CTRL', action = wezterm.action({ EmitEvent = 'load_session' }) },
+    { key = 'f', mods = 'LEADER', action = wezterm.action({ EmitEvent = 'sessionizer_start' }) },
+    { key = 'b', mods = 'LEADER', action = act.ShowLauncherArgs({ flags = 'WORKSPACES' }) },
 
     -- Custom inputs
     { key = ' ', mods = 'CTRL', action = { SendString = '\x11' } },
