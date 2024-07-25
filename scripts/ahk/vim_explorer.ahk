@@ -63,10 +63,10 @@ focusFirstItem() {
   !d::Send("{PgDn}")
 
   ; File management
-  d::Send("^x")
   y::Send("^c")
   p::Send("^v")
-  x::Send("{Delete}")
+  x::Send("^x")
+  d::Send("{Delete}")
   +d::Send("{Delete}")
   r::{
     Send("{F2}")

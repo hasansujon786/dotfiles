@@ -4,8 +4,12 @@ return {
   event = 'CursorHold',
   config = function()
     local hover = require('core.state').ui.hover
+    local ok, noice = pcall(require, 'noice')
+    if not ok then
+      return
+    end
 
-    require('noice').setup({
+    noice.setup({
       presets = {
         command_palette = true, -- position the cmdline and popupmenu together
         lsp_doc_border = true, -- add a border to hover docs and signature help

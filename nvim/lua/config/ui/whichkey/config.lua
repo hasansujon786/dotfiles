@@ -176,7 +176,6 @@ return {
       { '<leader>to', '<cmd>lua require("hasan.utils.logger").toggle("conceallevel", { 0, 2 })<CR>', desc = 'Toggle conceallevel' },
       { '<leader>tc', '<cmd>lua require("hasan.utils.logger").toggle("concealcursor", { "nc", "" })<CR>', desc = 'Toggle concealcursor' },
       { '<leader>ts', '<cmd>lua require("hasan.utils.logger").toggle("spell")<CR>', desc = 'Toggle spell' },
-      { '<leader>tt', '<cmd>TSContextToggle<CR>', desc = 'Toggle TSContext' },
       { '<leader>tw', '<cmd>lua require("hasan.utils.logger").toggle("wrap")<CR>', desc = 'Toggle wrap' },
 
       -- VIM
