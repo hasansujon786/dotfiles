@@ -311,3 +311,29 @@ keymap('n', '<F7>', ':setlocal spell! spell?<CR>') -- Toggle spelling and show i
 keymap('i', '<F7>', '<C-o>:setlocal spell! spell?<CR>')
 keymap('n', '<F5>', '<Esc>:syntax sync fromstart<CR>')
 keymap('i', '<F5>', '<C-o>:syntax sync fromstart<CR>')
+
+-- lazy load plugin --------------------------------
+-- https://www.reddit.com/r/neovim/comments/1ebcmj0/wip_lazy_loading_trio/
+local function keymap_stub(mode, lhs, callback, opts)
+  vim.keymap.set(mode, lhs, function()
+    vim.keymap.del(mode, lhs)
+    callback()
+    vim.api.nvim_input(lhs) -- replay keybind
+  end, opts)
+end
+
+local function command_stub(c, callback)
+  vim.api.nvim_create_user_command(c, function()
+    vim.api.nvim_del_user_command(c) -- remove stub command
+    callback()
+    cmd(c)
+  end, {})
+end
+
+local function require_stub(mod, callback)
+  package.preload[mod] = function()
+    package.loaded[mod] = nil
+    package.preload[mod] = nil
+    return callback()
+  end
+end

@@ -179,9 +179,9 @@ return {
     'JoosepAlviste/nvim-ts-context-commentstring',
     lazy = true,
     event = 'BufReadPost',
-    config = function()
-      require('ts_context_commentstring').setup()
-    end,
+    -- config = function()
+    --   require('ts_context_commentstring').setup()
+    -- end,
     dependencies = {
       'nvim-treesitter/nvim-treesitter-context',
       enabled = true,

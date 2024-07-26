@@ -1,4 +1,4 @@
-vim.g.skip_ts_context_commentstring_module = true
+vim.g.skip_ts_context_commentstring_module = true -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring/issues/82
 
 local data_path = vim.fn.stdpath('data')
 _G.has_pvim = os.getenv('PVIM') and true or false
