@@ -60,9 +60,9 @@ return {
   -- window_background_image = 'C:\\Users\\hasan\\Pictures\\do-more-y3.jpg'
   -- tab_bar_at_bottom = true,
   unzoom_on_switch_pane = true,
-  exit_behavior = 'Close',
+  -- exit_behavior = 'Close',
+  -- window_close_confirmation = 'NeverPrompt',
   enable_tab_bar = true,
-  window_close_confirmation = 'NeverPrompt',
   leader = { key = 'b', mods = 'CTRL', timeout_milliseconds = 1000 },
   window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
   pane_focus_follows_mouse = false,

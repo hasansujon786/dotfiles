@@ -2,17 +2,18 @@
 
 # nvim
 tt.state
-/events.log
-/tui/lazygit/state.yml
+events.log
+tui/lazygit/state.yml
 log.log
-/gui/Keypirinha/User/Keypirinha-Notepad2.ini
-/gui/Keypirinha/User/Keypirinha.history
-/nvim/plugin/packer_compiled.lua
-/tui/lf/history
-/tui/lf/files
-/tui/lf/tmp_vimv
-/tui/lf/extract.log
-/tui/lf/marks
+gui/wezterm/wezterm-session-manager
+gui/Keypirinha/User/Keypirinha-Notepad2.ini
+gui/Keypirinha/User/Keypirinha.history
+nvim/plugin/packer_compiled.lua
+tui/lf/history
+tui/lf/files
+tui/lf/tmp_vimv
+tui/lf/extract.log
+tui/lf/marks
 
 # dependencies
 /node_modules
