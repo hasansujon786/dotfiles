@@ -1,4 +1,5 @@
-setlocal nonumber norelativenumber
+setlocal number relativenumber
+setlocal readonly nomodifiable
 setlocal nolist
 
 nnoremap <buffer>           <CR>    <C-]>

@@ -2,6 +2,12 @@ if vim.fn.exists('g:hasan_telescope_buffers') == 0 then
   vim.g.hasan_telescope_buffers = { ['0'] = 0 } -- used in hasan#utils#_buflisted_sorted()
 end
 
+---@param path string
+---@return boolean
+local function is_doc_file(path)
+  return (path:match('/nvim/') ~= nil or path:match('/nvim%-data/') ~= nil) and path:match('/doc/')
+end
+
 augroup('MY_AUGROUP')(function(autocmd)
   autocmd('CmdwinEnter', 'nnoremap <buffer><CR> <CR>')
 
@@ -10,8 +16,18 @@ augroup('MY_AUGROUP')(function(autocmd)
   autocmd('FileType', 'setl foldmarker={,}', { pattern = { 'css', 'scss', 'json' } })
   autocmd('FileType', 'setl foldmarker={,}', { pattern = { 'css', 'scss', 'json' } })
   autocmd({ 'BufNewFile', 'BufRead' }, 'setl filetype=jsonc', { pattern = { '*.json', 'tsconfig.json' } })
+  -- HELP_FILE
+  autocmd({ 'BufNewFile', 'BufRead' }, function(info)
+    if is_doc_file(info.match) then
+      vim.bo.filetype = 'help'
+    end
+  end, { pattern = { '*.txt' } })
+  autocmd('BufLeave', function(info)
+    if is_doc_file(info.match) then
+      vim.cmd([[normal! mK]])
+    end
+  end, { pattern = '*.txt' })
 
-  autocmd('BufLeave', 'normal! mK', { pattern = '*.txt' })
   autocmd('TermOpen', 'setfiletype terminal | set bufhidden=hide')
   -- autocmd('BufWritePre', vim.fn['hasan#autocmd#trimWhitespace'], { pattern = { '*.vim', '*.lua', '*.org', '*.ahk' } })
   autocmd({ 'FocusGained', 'BufEnter', 'TermClose', 'TermLeave' }, ':silent! checktime')

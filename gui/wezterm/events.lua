@@ -211,6 +211,25 @@ local M = {
     { key = 'v', mods = 'LEADER', action = act({ SplitHorizontal = {} }) },
     { key = 's', mods = 'LEADER', action = act({ SplitVertical = {} }) },
     { key = 'b', mods = 'LEADER|CTRL', action = wezterm.action_callback(toggle_opacity) },
+    {
+      key = 'X',
+      mods = 'LEADER',
+      action = wezterm.action_callback(function(win, _)
+        -- Close other tabs
+        local tab = win:active_tab()
+        local activeTabId = tab:tab_id()
+        local muxWin = win:mux_window()
+        local tabs = muxWin:tabs()
+        for _, t in ipairs(tabs) do
+          if t:tab_id() ~= activeTabId then
+            t:activate()
+            for _, p in ipairs(t:panes()) do
+              win:perform_action(wezterm.action.CloseCurrentTab({ confirm = false }), p)
+            end
+          end
+        end
+      end),
+    },
 
     -- Workspace
     { key = 'S', mods = 'LEADER', action = wezterm.action({ EmitEvent = 'save_session' }) },
