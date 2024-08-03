@@ -4,6 +4,29 @@ local function save_cb(err)
   end
   vim.cmd.write()
 end
+local function get_visual_range(args)
+  if args.count ~= -1 then
+    local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+    return {
+      start = { args.line1, 0 },
+      ['end'] = { args.line2, end_line:len() },
+    }
+  end
+  return nil
+end
+local function get_formatter_list(formatters_by_ft)
+  local formatters_by_ft_mod = {}
+  for _, item in ipairs(formatters_by_ft) do
+    if type(item.filetype) == 'string' then
+      formatters_by_ft_mod[item.filetype] = item.formatter
+    else
+      for _, ft in ipairs(item.filetype) do
+        formatters_by_ft_mod[ft] = item.formatter
+      end
+    end
+  end
+  return formatters_by_ft_mod
+end
 
 return {
   'stevearc/conform.nvim',
@@ -16,7 +39,11 @@ return {
     { '<leader>fs', '<cmd>Format<CR>', mode = '', desc = 'Lsp: format and save' },
   },
   opts = {
-    formatters_by_ft = { -- Custom model
+    default_format_opts = {
+      lsp_format = 'fallback',
+    },
+    -- My Custom formatters_by_ft api
+    formatters_by_ft = {
       {
         filetype = {
           'javascript',
@@ -36,7 +63,7 @@ return {
           'graphql',
           'handlebars',
         },
-        formatter = { { 'prettierd', 'prettier' } }, -- Use a sub-list to run only the first available formatter
+        formatter = { 'prettierd', 'prettier', stop_after_first = true },
       },
       {
         filetype = 'lua',
@@ -51,55 +78,26 @@ return {
         formatter = { 'trim_whitespace' },
       },
     },
-    format_on_save = function(_) -- bufnr
-      -- Disable with a global or buffer-local variable
-      -- if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-      if not state.file.auto_format then
-        return
-      end
-      return { lsp_format = 'fallback' }
-    end,
-    -- formatters = {
-    --   shfmt = {
-    --     prepend_args = { '-i', '2' },
-    --   },
-    -- },
+    -- format_on_save = function(_) -- bufnr
+    --   -- Disable with a global or buffer-local variable
+    --   -- if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+    --   if not state.file.auto_format then
+    --     return
+    --   end
+    --   return { lsp_format = 'fallback' }
+    -- end,
+    -- formatters = { shfmt = { prepend_args = { '-i', '2' } } },
   },
   config = function(_, opts)
-    -- Format command
-    local function get_visual_range(args)
-      if args.count ~= -1 then
-        local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
-        return {
-          start = { args.line1, 0 },
-          ['end'] = { args.line2, end_line:len() },
-        }
-      end
-      return nil
-    end
-    local function get_formatter_list(formatters_by_ft)
-      local formatters_by_ft_mod = {}
-      for _, item in ipairs(formatters_by_ft) do
-        if type(item.filetype) == 'string' then
-          formatters_by_ft_mod[item.filetype] = item.formatter
-        else
-          for _, ft in ipairs(item.filetype) do
-            formatters_by_ft_mod[ft] = item.formatter
-          end
-        end
-      end
-      return formatters_by_ft_mod
-    end
-
-    command('Format', function(args)
-      require('conform').format({ async = true, lsp_format = 'fallback', range = get_visual_range(args) }, save_cb)
-    end, { range = true })
-    command('FormatSync', function(args)
-      require('conform').format({ async = false, lsp_format = 'fallback', range = get_visual_range(args) }, save_cb)
-    end, { range = true })
-
     opts.formatters_by_ft = get_formatter_list(opts.formatters_by_ft)
     require('conform').setup(opts)
+
+    command('Format', function(args)
+      require('conform').format({ async = true, range = get_visual_range(args) }, save_cb)
+    end, { range = true })
+    command('FormatSync', function(args)
+      require('conform').format({ async = false, range = get_visual_range(args) }, save_cb)
+    end, { range = true })
     -- Format with gq key
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
   end,
