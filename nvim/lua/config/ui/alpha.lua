@@ -83,11 +83,12 @@ return {
       buttons = {
         type = 'group',
         val = {
-          button('r', ' R ', '  Recent File', '<cmd>lua require("telescope.builtin").oldfiles({cwd_only=true})<CR>'),
+          button('r', ' R ', '  Recent file', '<cmd>lua require("telescope.builtin").oldfiles({cwd_only=true})<CR>'),
           button('l', ' L ', '  Load session', '<cmd>SessionLoad<CR>'),
-          button('f', ' F ', '  Find Files', '<cmd>lua require("hasan.telescope.custom").my_find_files()<CR>'),
+          button('f', ' F ', '  Find files', '<cmd>lua require("hasan.telescope.custom").my_find_files()<CR>'),
           button('t', ' T ', '  Open terminal', '<cmd>FloatermNew --wintype=normal --height=10<CR>'),
-          button('s', ' S ', '  Settings', '<cmd>lua require("hasan.utils.file").open_settings()<CR>'),
+          button('s', ' S ', '  Open settings', '<cmd>lua require("hasan.utils.file").open_settings()<CR>'),
+          button('p', ' P ', '  Lazy dashboard', '<cmd>Lazy<CR>'),
         },
         opts = { spacing = 1 },
       },
