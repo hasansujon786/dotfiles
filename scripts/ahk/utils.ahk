@@ -317,7 +317,7 @@ switchBetweenSameApps() {
 ;******************************************************************************
 ; "wt.exe", "ahk_exe WindowsTerminal.exe" ; "Code.exe", "ahk_exe Code.exe"
 EDITOR_EXE := ["wezterm-gui.exe", "ahk_exe wezterm-gui.exe"]
-BROWSER_EXE := ["brave.exe", "ahk_exe brave.exe"] ; chrome.exe
+BROWSER_EXE := ["zen.exe", "ahk_class MozillaWindowClass"] ; chrome.exe brave.exe
 
 changeLayoutTo(layoutName) {
   Global layout_loading := 1
