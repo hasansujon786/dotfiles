@@ -1,6 +1,7 @@
 vim.g.skip_ts_context_commentstring_module = true -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring/issues/82
 
 local data_path = vim.fn.stdpath('data')
+vim.g.sqlite_clib_path = data_path .. '/sqlite-ddl-win/sqlite3.dll'
 _G.has_pvim = os.getenv('PVIM') and true or false
 _G.dap_adapter_path = data_path .. '/dap_adapters' -- 'C:\\Users\\hasan\\AppData\\Local\\nvim-data\\dap_adapters\\'
 _G.plugin_path = data_path .. '/lazy'

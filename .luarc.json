@@ -7,5 +7,6 @@
     "C:\\Users\\hasan\\dotfiles\\nvim\\lua",
     "${3rd}/luv/library",
     "${3rd}/luassert/library"
-  ]
+  ],
+  "diagnostics.globals": ["vim", "jit", "keymap", "P", "log"]
 }

@@ -1,5 +1,6 @@
 return {
   'hasansujon786/telescope-yanklist.nvim',
+  enabled = false,
   event = { 'CursorHold' },
   config = function()
     -- Yanklist

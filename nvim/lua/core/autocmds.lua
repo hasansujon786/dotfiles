@@ -28,6 +28,9 @@ augroup('MY_AUGROUP')(function(autocmd)
     end
   end, { pattern = '*.txt' })
 
+  autocmd('TextYankPost', function()
+    vim.highlight.on_yank({ on_visual = true, higroup = 'Search', timeout = 200 })
+  end)
   autocmd('TermOpen', 'setfiletype terminal | set bufhidden=hide')
   -- autocmd('BufWritePre', vim.fn['hasan#autocmd#trimWhitespace'], { pattern = { '*.vim', '*.lua', '*.org', '*.ahk' } })
   autocmd({ 'FocusGained', 'BufEnter', 'TermClose', 'TermLeave' }, ':silent! checktime')

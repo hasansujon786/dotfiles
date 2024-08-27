@@ -438,3 +438,9 @@ end
 --     return vim.ui.input(...)
 --   end
 -- end
+
+-- testing
+-- local start = vim.uv.hrtime()
+-- vim.cmd('edit new.ts')
+-- local cost = vim.uv.hrtime() - start
+-- vim.print(cost / 1000000 .. 'ms')
