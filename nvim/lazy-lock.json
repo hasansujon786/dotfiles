@@ -64,7 +64,6 @@
   "telescope-file-browser.nvim": { "branch": "master", "commit": "a46780830b576049c675680650f773bedfa8677a" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "cf48d4dfce44e0b9a2e19a008d6ec6ea6f01a83b" },
   "telescope-ui-select.nvim": { "branch": "master", "commit": "03db48fbabf82ea2932dcf2cc36714dbe5a665ad" },
-  "telescope-yanklist.nvim": { "branch": "main", "commit": "c7ff494d11779d377cfc4d417f3d1168e583bd77" },
   "telescope.nvim": { "branch": "master", "commit": "5972437de807c3bc101565175da66a1aa4f8707a" },
   "text-case.nvim": { "branch": "main", "commit": "e898cfd46fa6cde0e83abb624a16e67d2ffc6457" },
   "treesj": { "branch": "main", "commit": "0d81326b5afd36babe7dd480aabbb0b05f33e688" },
