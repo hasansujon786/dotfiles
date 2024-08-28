@@ -90,7 +90,7 @@ function M.count_down(seconds)
   return timer
 end
 
--- lua require('hasan.utils.timer').count_down(65)
+-- lua require('hasan.widgets.timer').count_down(65)
 
 -- local function foo(remaining_time)
 --   return vim.fn['hasan#tt#format_abbrev_duration'](remaining_time / 1000)

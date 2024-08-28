@@ -25,6 +25,7 @@ keymap('n', 'gV', '`[v`]', { desc = 'Select the last yanked text' })
 keymap(nx, 'x', '"_x') -- Prevent x from overriding the clipboard.
 keymap(nx, 'X', '"_X')
 keymap(ic, '<C-v>', '<C-R>+', noSilent) -- Paste from + register (system clipboard)
+keymap(ic, '<C-g><C-v>', '<C-v>', noSilent) -- Paste from + register (system clipboard)
 keymap(ic, '<A-p>', '<C-R>"', noSilent) -- Paste the last item from register TODO: vscode-neovim.send
 -- Easier system clipboard usage
 keymap('n', '<leader>y', '"+y', { desc = 'Yank to system' })
@@ -161,7 +162,7 @@ if not vim.g.vscode then
 
   keymap('i', '<C-u>', '<C-G>u<C-U>') -- CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo, so that you can undo CTRL-U after inserting a line break.
 
-  keymap('i', '<C-i>', '<c-g>u<Esc>BgUiwgi', { desc = 'Uppercase current word' })
+  keymap('i', '<C-i>', '<c-g>u<Esc>bgUiwgi', { desc = 'Uppercase current word' })
   keymap('i', '<C-g><C-g>', '<c-g>u<Esc>[s1z=`]a<c-g>u', { desc = 'Fix previous misspelled world' })
 
   -- Leader keys ----------------------------------

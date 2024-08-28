@@ -29,7 +29,7 @@ return {
   },
   dependencies = 'kkharji/sqlite.lua',
   opts = {
-    max_entries = 9,
+    max_entries = 20,
     sep = '------',
     persist_type = 'sqlite',
     num_behavior = 'jump',

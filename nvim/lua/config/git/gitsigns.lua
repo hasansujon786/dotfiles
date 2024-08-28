@@ -75,7 +75,7 @@ return {
       map('n', '<leader>gw', gs.toggle_word_diff, { desc = 'Git: Toggle word diff' })
       map('n', '<leader>gh', gs.preview_hunk_inline, { desc = 'Git: Preview hunk inline' })
       map('n', '<leader>gH', gs.toggle_deleted, { desc = 'Git: Highlight delete hunks' })
-      map('n', '<leader>gL', function()
+      map('n', '<leader>gW', function()
         gs.toggle_deleted()
         gs.toggle_word_diff()
       end, { desc = 'Git: Preview line diffs' })
