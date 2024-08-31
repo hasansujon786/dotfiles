@@ -68,7 +68,7 @@ return {
       { '<leader>/f', '<cmd>lua require("hasan.telescope.custom").my_find_files()<cr>', desc = 'Find file' },
       { '<leader>/g', '<cmd>lua require("hasan.telescope.custom").live_grep_in_folder()<cr>', desc = 'Live grep in folder' },
       { '<leader>/k', '<cmd>Telescope keymaps<CR>', desc = 'Look up keymaps' },
-      { '<leader>/r', '<cmd>Telescope oldfiles<CR>', desc = 'Recent files' },
+      -- { '<leader>/r', '<cmd>Telescope oldfiles<CR>', desc = 'Recent files' },
       { '<leader>/t', '<cmd>Telescope filetypes theme=get_dropdown<CR>', desc = 'Change filetypes' },
 
       -- LSP
@@ -189,6 +189,7 @@ return {
       { '<leader>vl', '<cmd>call logevents#LogEvents_Toggle()<CR>', desc = 'Toggle LogEvents' },
       { '<leader>vp', '<cmd>Lazy home<CR>', desc = 'Plugin status' },
       { '<leader>vs', '<cmd>lua require("hasan.utils.file").open_settings()<CR>', desc = 'Open settings' },
+      { '<leader>ve', '<cmd>lua require("hasan.widgets.register_editor").open()<CR>', desc = 'Open register editor' },
 
       -- WINDOW
       { '<leader>w', group = 'window' },

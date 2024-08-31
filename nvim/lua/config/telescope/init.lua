@@ -20,6 +20,7 @@ return {
         ['<M-k>'] = actions.move_selection_previous,
         ['<M-j>'] = actions.move_selection_next,
 
+        ['<C-e>'] = actions.to_fuzzy_refine,
         ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
         ['<C-s>'] = actions.file_split,
         ['<esc>'] = actions.close,

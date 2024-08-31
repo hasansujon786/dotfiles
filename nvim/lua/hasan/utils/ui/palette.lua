@@ -234,6 +234,19 @@ local function set_custom_highlights()
     NuiFloatBorder = { link = 'FloatBorderHidden' },
     NuiMenuItem    = { link = 'Visual' },
 
+    NuiComponentsCheckboxLabel             = { fg = c.light_grey },
+    NuiComponentsCheckboxIcon              = { fg = c.light_grey },
+    NuiComponentsCheckboxLabelChecked      = { fg = c.yellow },
+    NuiComponentsCheckboxIconChecked       = { fg =  c.yellow },
+
+    NuiComponentsTreeSpectreSearchValue    = { link = 'Search' },
+    NuiComponentsTreeSpectreSearchOldValue = { link = 'Search' },
+    NuiComponentsTreeSpectreSearchNewValue = { link = 'IncSearch' },
+    NuiComponentsTreeSpectreReplaceSuccess = { link = 'String' },
+    NuiComponentsTreeSpectreCodeLine       = { fg = c.none },
+    NuiComponentsTreeSpectreFileName       = { fg = c.purple },
+    NuiComponentsTreeSpectreIcon           = { fg = c.light_grey },
+
   -- /// Alpha ///
     AlphaTag       = { fg = '#4d5666' },
     AlphaHeader    = { fg = '#4d5666' },
