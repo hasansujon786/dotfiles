@@ -14,6 +14,27 @@ local function replace_handler(tree, node)
   }
 end
 
+local function run_replace(entries, tree, search_query, replace_query, replacer_creator, spectre_state_utils)
+  for _, text_node in ipairs(entries) do
+    local replacer =
+      replacer_creator:new(spectre_state_utils.get_replace_engine_config(), replace_handler(tree, text_node))
+
+    local entry = text_node.entry
+
+    replacer:replace({
+      lnum = entry.lnum,
+      col = entry.col,
+      cwd = vim.fn.getcwd(),
+      display_lnum = 0,
+      filename = entry.filename,
+      search_text = search_query,
+      replace_text = replace_query,
+    })
+  end
+end
+
+local is_running = false
+
 local function mappings(search_query, replace_query)
   local spectre_state_utils = require('spectre.state_utils')
 
@@ -23,31 +44,67 @@ local function mappings(search_query, replace_query)
         mode = { 'n' },
         key = 'r',
         handler = function()
+          if is_running == true then
+            print('it is already running')
+            return
+          end
+          is_running = true
+
           local tree = component:get_tree()
           local focused_node = component:get_focused_node()
-
           if not focused_node then
             return
           end
 
           local has_children = focused_node:has_children()
+          local entries = nil
 
-          if not has_children then
-            local replacer_creator = spectre_state_utils.get_replace_creator()
-            local replacer =
-              replacer_creator:new(spectre_state_utils.get_replace_engine_config(), replace_handler(tree, focused_node))
+          if has_children then
+            entries = tree:get_nodes(focused_node:get_id())
+          elseif not has_children then
+            entries = { focused_node }
+          end
+          if not entries then
+            return
+          end
 
-            local entry = focused_node.entry
+          local replacer_creator = spectre_state_utils.get_replace_creator()
+          run_replace(
+            entries,
+            tree,
+            search_query:get_value(),
+            replace_query:get_value(),
+            replacer_creator,
+            spectre_state_utils
+          )
+          is_running = false
+        end,
+      },
+      {
+        mode = { 'n' },
+        key = 'R',
+        handler = function()
+          if is_running == true then
+            print('it is already running')
+            return
+          end
+          is_running = true
 
-            replacer:replace({
-              lnum = entry.lnum,
-              col = entry.col,
-              cwd = vim.fn.getcwd(),
-              display_lnum = 0,
-              filename = entry.filename,
-              search_text = search_query:get_value(),
-              replace_text = replace_query:get_value(),
-            })
+          local tree = component:get_tree()
+          local replacer_creator = spectre_state_utils.get_replace_creator()
+
+          for _, file_node in ipairs(tree:get_nodes()) do
+            local text_nodes = tree:get_nodes(file_node:get_id())
+
+            run_replace(
+              text_nodes,
+              tree,
+              search_query:get_value(),
+              replace_query:get_value(),
+              replacer_creator,
+              spectre_state_utils
+            )
+            is_running = false
           end
         end,
       },
@@ -79,7 +136,7 @@ local function prepare_node(node, line, component)
   local ref = node.ref
 
   if ref then
-    line:append(Icons.Other.SquareCheck, component:hl_group('SpectreReplaceSuccess'))
+    line:append(Icons.Other.SquareCheck .. ' ', component:hl_group('SpectreReplaceSuccess'))
   end
 
   if #node.diff.search > 0 then

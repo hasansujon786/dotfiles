@@ -1,7 +1,7 @@
 return {
   'nvim-pack/nvim-spectre',
   keys = {
-    { '<leader>/r', '<cmd>lua require("hasan.widgets.spectre").toggle()<cr>', desc = 'Spectre Toggle' },
+    { '<leader>/r', '<cmd>lua require("hasan.widgets.spectre").open()<cr>', desc = 'Spectre Toggle' },
   },
   cmd = 'Spectre',
   config = function()

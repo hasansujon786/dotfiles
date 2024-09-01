@@ -6,12 +6,12 @@ local search_tree = require('hasan.widgets.spectre.components.search_tree')
 
 local M = {}
 
-function M.toggle()
+function M.open()
   if M.renderer then
     return M.renderer:focus()
   end
   local width = 46
-  local height = vim.api.nvim_list_uis()[1].height - 1
+  local height = vim.api.nvim_list_uis()[1].height - 2
 
   local renderer = n.create_renderer({
     width = width,
