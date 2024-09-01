@@ -14,6 +14,7 @@ end
 return {
   'ptdewey/yankbank-nvim',
   lazy = true,
+  enabled = false,
   event = 'CursorHold',
   keys = {
     { '<leader>oy', '<cmd>YankBank<CR>', mode = nx },
