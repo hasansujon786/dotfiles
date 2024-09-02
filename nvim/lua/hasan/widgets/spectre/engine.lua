@@ -90,7 +90,7 @@ function M.search(options, signal)
   M.stop()
 
   local search_engine = spectre_search['rg']
-  spectre_state.options['ignore-case'] = not options.is_case_insensitive_checked
+  spectre_state.options['ignore-case'] = not options.is_match_case_insensitive_checked
   spectre_state.finder_instance =
     search_engine:new(spectre_state_utils.get_search_engine_config(), search_handler(options, signal))
   spectre_state.regex = require('spectre.regex.vim')
@@ -100,7 +100,7 @@ function M.search(options, signal)
       cwd = vim.fn.getcwd(),
       search_text = options.search_query,
       replace_query = options.replace_query,
-      -- path = spectre_state.query.path,
+      path = #options.filter_path > 2 and options.filter_path or nil,
       search_paths = #options.search_paths > 0 and options.search_paths or nil,
     })
   end)

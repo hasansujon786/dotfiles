@@ -33,10 +33,9 @@ local function run_replace(entries, tree, search_query, replace_query, replacer_
   end
 end
 
-local is_running = false
-
 local function mappings(search_query, replace_query)
   local spectre_state_utils = require('spectre.state_utils')
+  local is_running = false
 
   return function(component)
     return {

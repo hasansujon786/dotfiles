@@ -51,7 +51,6 @@ return {
       { '<leader>oc', loadOrgMode('<space>oc'), desc = 'org capture' },
 
       { '<leader>/o', '<cmd>Telescope live_grep cwd=~/my_vault/orgfiles<CR>', desc = 'Grep org text' },
-      { '<leader>/w', '<cmd>Telescope find_files cwd=~/my_vault/orgfiles<CR>', desc = 'Search org files' },
       { '<leader>w/', '<cmd>Telescope find_files cwd=~/my_vault/orgfiles<CR>', desc = 'Search org files' },
       { '<leader>w.', '<cmd>Telescope file_browser cwd=~/my_vault/orgfiles<CR>', desc = 'Browse org files' },
     },

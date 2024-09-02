@@ -6,10 +6,47 @@ local search_tree = require('hasan.widgets.spectre.components.search_tree')
 
 local M = {}
 
-function M.open()
+M.open_visual = function(opts)
+  opts = opts or {}
+  if opts.select_word then
+    opts.search_text = vim.fn.expand('<cword>')
+  else
+    opts.search_text = require('hasan.utils').get_visual_selection()
+  end
+  M.open(opts)
+end
+
+M.open_file_search = function(opts)
+  opts = opts or {}
+  if opts.select_word then
+    opts.search_text = vim.fn.expand('<cword>')
+  else
+    opts.search_text = require('hasan.utils').get_visual_selection()
+  end
+
+  opts.path = vim.fn.fnameescape(vim.fn.expand('%:p:.'))
+  if vim.loop.os_uname().sysname == 'Windows_NT' then
+    opts.path = vim.fn.substitute(opts.path, '\\', '/', 'g')
+  end
+
+  M.open(opts)
+end
+
+function M.open(opts)
   if M.renderer then
     return M.renderer:focus()
   end
+
+  opts = vim.tbl_extend('force', {
+    cwd = nil,
+    search_text = '',
+    replace_text = '',
+    search_paths = {},
+  }, opts or {})
+  if type(opts.search_paths) == 'string' then
+    opts.search_paths = { opts.search_paths }
+  end
+
   local width = 46
   local height = vim.api.nvim_list_uis()[1].height - 2
 
@@ -21,19 +58,24 @@ function M.open()
   })
 
   local signal = n.create_signal({
-    search_query = '',
-    replace_query = '',
-    search_paths = {},
+    search_query = opts.search_text,
+    replace_query = opts.replace_text,
+    search_paths = opts.search_paths,
+    filter_path = '',
     is_replace_field_visible = false,
-    is_case_insensitive_checked = false,
+    is_filter_field_visible = false,
+    is_match_case_insensitive_checked = false,
     search_info = '',
     search_results = {},
   })
 
   local subscription = signal:observe(function(prev, curr)
-    local diff = fn.isome({ 'search_query', 'is_case_insensitive_checked', 'search_paths' }, function(key)
-      return not vim.deep_equal(prev[key], curr[key])
-    end)
+    local diff = fn.isome(
+      { 'search_query', 'is_match_case_insensitive_checked', 'search_paths', 'filter_path' },
+      function(key)
+        return not vim.deep_equal(prev[key], curr[key])
+      end
+    )
 
     if diff then
       if #curr.search_query > 2 then
@@ -58,14 +100,21 @@ function M.open()
     toggle_replace_input = function(is_checked)
       signal.is_replace_field_visible = is_checked
 
-      if is_checked then
-        local replace_component = renderer:get_component_by_id('replace_query')
+      local next_input = renderer:get_component_by_id(is_checked and 'replace_query' or 'search_query')
+      renderer:schedule(function()
+        next_input:focus()
+        move_cursor_to_eol()
+      end)
+    end,
+    toggle_filter_input = function()
+      local is_checked = not signal.is_filter_field_visible:get_value()
+      signal.is_filter_field_visible = is_checked
 
-        renderer:schedule(function()
-          replace_component:focus()
-          move_cursor_to_eol()
-        end)
-      end
+      local next_input = renderer:get_component_by_id(is_checked and 'filter_path' or 'search_query')
+      renderer:schedule(function()
+        next_input:focus()
+        move_cursor_to_eol()
+      end)
     end,
   }
 
@@ -79,22 +128,34 @@ function M.open()
     },
     {
       mode = { 'n', 'i' },
+      key = '<A-c>',
+      handler = function()
+        signal.is_match_case_insensitive_checked = not signal.is_match_case_insensitive_checked:get_value()
+      end,
+    },
+    {
+      mode = { 'n', 'i' },
+      key = '<A-r>',
+      handler = actions.toggle_filter_input,
+    },
+    {
+      mode = { 'n', 'i' },
       key = '<c-t>',
       handler = function()
         local is_visible = not signal.is_replace_field_visible:get_value()
         actions.toggle_replace_input(is_visible)
-        if not is_visible then
-          local search_component = renderer:get_component_by_id('search_query')
-
-          renderer:schedule(function()
-            search_component:focus()
-            move_cursor_to_eol()
-          end)
-        end
       end,
     },
   })
 
+  renderer:on_mount(function()
+    if opts.search_text == '' or #opts.search_text <= 2 then
+      return
+    end
+
+    local curr = signal:get_value()
+    engine.search(curr, signal)
+  end)
   renderer:on_unmount(function()
     subscription:unsubscribe()
     M.renderer = nil
@@ -131,6 +192,7 @@ function M.open()
           max_lines = 1,
           id = 'search_query',
           border_label = 'Search',
+          value = signal.search_query,
           on_change = fn.debounce(function(value)
             signal.search_query = value
           end, 400),
@@ -147,9 +209,9 @@ function M.open()
           default_sign = '',
           checked_sign = '',
           border_style = 'rounded',
-          value = signal.is_case_insensitive_checked,
+          value = signal.is_match_case_insensitive_checked,
           on_change = function(is_checked)
-            signal.is_case_insensitive_checked = is_checked
+            signal.is_match_case_insensitive_checked = is_checked
           end,
         })
       ),
@@ -162,6 +224,19 @@ function M.open()
           signal.replace_query = value
         end, 400),
         hidden = signal.is_replace_field_visible:map(function(value)
+          return not value
+        end),
+      }),
+      n.text_input({
+        size = 1,
+        id = 'filter_path',
+        max_lines = 1,
+        border_label = 'Filter path',
+        -- value = signal.filter_path,
+        on_change = fn.debounce(function(value)
+          signal.filter_path = value
+        end, 400),
+        hidden = signal.is_filter_field_visible:map(function(value)
           return not value
         end),
       }),
@@ -189,6 +264,7 @@ function M.open()
           is_focusable = false,
           lines = signal.search_info,
           padding = { left = 1, right = 1 },
+          window = { highlight = { NormalFloat = 'NuiComponentsInfo' } },
         })
       ),
       n.gap(1),

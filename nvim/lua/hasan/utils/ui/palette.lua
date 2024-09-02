@@ -239,13 +239,14 @@ local function set_custom_highlights()
     NuiComponentsCheckboxLabelChecked      = { fg = c.yellow },
     NuiComponentsCheckboxIconChecked       = { fg =  c.yellow },
 
+    NuiComponentsInfo                      = { fg = c.grey, bg = c.bg0 },
+    NuiComponentsTreeSpectreIcon           = { fg = c.grey },
     NuiComponentsTreeSpectreSearchValue    = { link = 'Search' },
     NuiComponentsTreeSpectreSearchOldValue = { link = 'Search' },
     NuiComponentsTreeSpectreSearchNewValue = { link = 'IncSearch' },
     NuiComponentsTreeSpectreReplaceSuccess = { link = 'String' },
     NuiComponentsTreeSpectreCodeLine       = { fg = c.none },
     NuiComponentsTreeSpectreFileName       = { fg = c.purple },
-    NuiComponentsTreeSpectreIcon           = { fg = c.light_grey },
 
   -- /// Alpha ///
     AlphaTag       = { fg = '#4d5666' },
