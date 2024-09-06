@@ -20,11 +20,11 @@ HISTFILESIZE=2000
 shopt -s checkwinsize
 
 if [ -f ~/dotfiles/bash/.env ]; then
-	source ~/dotfiles/bash/.fzf.sh
-	source ~/dotfiles/bash/.aliases.bash
-	source ~/dotfiles/bash/vim.bash
-	source ~/dotfiles/bash/simple_prompt.bash
-	source ~/dotfiles/bash/.env
-	source ~/dotfiles/bash/simple_prompt.bash
-	source ~/dotfiles/bash/zoxide.bash
+  source ~/dotfiles/bash/.fzf.sh
+  source ~/dotfiles/bash/.aliases.bash
+  source ~/dotfiles/bash/vim.bash
+  source ~/dotfiles/bash/simple_prompt.bash
+  source ~/dotfiles/bash/.env
+  source ~/dotfiles/bash/simple_prompt.bash
+  source ~/dotfiles/bash/zoxide.bash
 fi

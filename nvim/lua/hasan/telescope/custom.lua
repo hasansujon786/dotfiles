@@ -106,16 +106,14 @@ M.my_find_files = function(dir)
   builtin.find_files(my_theme.get_top_panel({ cwd = dir == 'cur_dir' and vim.fn.expand('%:h') or nil }))
 end
 
-function M.curbuf()
-  local opts = my_theme.get_dropdown({ previewer = false, shorten_path = false })
-  local isVisualMode, mode = require('hasan.utils').is_visual_mode()
-  if isVisualMode and mode == 'v' then
-    local word = require('hasan.utils').get_visual_selection()
-    opts.default_text = word
-    vim.fn.setreg('/', word)
-  end
+function M.curbuf(is_visual)
+  local word = is_visual and require('hasan.utils').get_visual_selection() or nil
 
-  builtin.current_buffer_fuzzy_find(opts)
+  builtin.current_buffer_fuzzy_find(my_theme.get_dropdown({
+    previewer = false,
+    shorten_path = false,
+    default_text = word,
+  }))
 end
 
 function M.search_plugins()
@@ -221,16 +219,8 @@ M.commands = function()
   builtin.commands(my_theme.get_top_panel())
 end
 
-function M.grep_string()
-  local isVisual, mode = require('hasan.utils').is_visual_mode()
-  local word = nil
-
-  if isVisual and mode == 'v' then
-    word = require('hasan.utils').get_visual_selection()
-  else
-    word = vim.fn.input('Grep String: ')
-  end
-
+function M.grep_string(is_visual)
+  local word = is_visual and require('hasan.utils').get_visual_selection() or vim.fn.input('Grep String: ')
   -- word = string.gsub(word, '%s+', '') -- remove spaces
   if word == '' then
     return

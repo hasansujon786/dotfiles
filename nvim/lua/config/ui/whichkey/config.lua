@@ -88,7 +88,8 @@ return {
       { '<leader>bo', '<cmd>call hasan#utils#buffer#_clear_other()<CR>', desc = 'Kill other buffers' },
       { '<leader>bp', '<cmd>bprevious<CR>', desc = 'Previous buffer' },
       { '<leader>bs', '<cmd>w<CR>', desc = 'Save buffer' },
-      { '<leader>b.', '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>', desc = 'Switch buffers', mode = { 'n', 'n' } },
+      { '<leader>b.', '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>', desc = 'Switch buffers' },
+      { '<leader>m', '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>', desc = 'Switch buffers' },
 
       -- CHANGE
       { '<leader>c', group = 'change' },
