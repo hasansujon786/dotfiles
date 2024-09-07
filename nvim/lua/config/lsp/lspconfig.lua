@@ -15,6 +15,9 @@ return {
           ensure_installed = { 'lua_ls', 'tsserver', 'vimls' },
           handlers = {
             function(server_name)
+              if server_name == 'tsserver' then
+                server_name = 'ts_ls'
+              end
               require('lspconfig')[server_name].setup(require('config.lsp.util.extras').get_lspconfig(server_name))
             end,
           },

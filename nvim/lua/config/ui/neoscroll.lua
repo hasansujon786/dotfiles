@@ -1,4 +1,4 @@
-local modes = { 'n', 'x', 'v' }
+local modes = { 'n', 'x' }
 return {
   'karb94/neoscroll.nvim',
   -- commit = 'e78657719485c5663b88e5d96ffcfb6a2fe3eec0',

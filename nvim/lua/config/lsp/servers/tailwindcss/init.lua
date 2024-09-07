@@ -1,3 +1,4 @@
+---@type ServerConfig
 return {
   setup = function(_, bufnr)
     local peekTw = require('config.lsp.servers.tailwindcss.peek_tw_styles')
