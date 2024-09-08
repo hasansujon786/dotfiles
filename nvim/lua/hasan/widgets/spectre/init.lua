@@ -16,22 +16,6 @@ M.open_visual = function(opts)
   M.open(opts)
 end
 
-M.open_file_search = function(opts)
-  opts = opts or {}
-  if opts.select_word then
-    opts.search_text = vim.fn.expand('<cword>')
-  else
-    opts.search_text = require('hasan.utils').get_visual_selection()
-  end
-
-  opts.path = vim.fn.fnameescape(vim.fn.expand('%:p:.'))
-  if vim.loop.os_uname().sysname == 'Windows_NT' then
-    opts.path = vim.fn.substitute(opts.path, '\\', '/', 'g')
-  end
-
-  M.open(opts)
-end
-
 function M.open(opts)
   if M.renderer then
     return M.renderer:focus()
@@ -43,6 +27,14 @@ function M.open(opts)
     replace_text = '',
     search_paths = {},
   }, opts or {})
+
+  if opts.current_file then
+    local file_path = vim.fn.fnameescape(vim.fn.expand('%:p:.'))
+    if vim.loop.os_uname().sysname == 'Windows_NT' then
+      file_path = vim.fn.substitute(file_path, '\\', '/', 'g')
+    end
+    opts.search_paths = { file_path }
+  end
   if type(opts.search_paths) == 'string' then
     opts.search_paths = { opts.search_paths }
   end

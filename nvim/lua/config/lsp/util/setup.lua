@@ -58,7 +58,7 @@ local M = {
     -- Frontend
     html = { 'html-lsp' },
     cssls = { 'css-lsp' },
-    tsserver = { 'typescript-language-server' },
+    ts_ls = { 'typescript-language-server' },
     jsonls = { 'json-lsp' },
     eslint = { 'eslint-lsp' },
     -- Frameworks

@@ -277,6 +277,7 @@ local function set_custom_highlights()
     WhichKeyFloat               = { fg = fg, bg = cursorling_bg },
     WhichKeyTitle               = { fg = c.muted, bg = normal_bg },
     TreesitterContext           = { bg = context },
+    TreesitterContextSeparator  = { bg = c.none, fg = c.grey },
     TreesitterContextLineNumber = { bg = context, fg = c.grey },
   -- /// Mason ///
     MasonNormal                 = { link = 'NormalFloatFlat' },
