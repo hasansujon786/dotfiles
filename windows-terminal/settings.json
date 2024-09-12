@@ -1,6 +1,40 @@
 {
   "$help": "https://aka.ms/terminal-documentation",
   "$schema": "https://aka.ms/terminal-profiles-schema",
+  "actions": [
+    { "command": { "action": "moveTab", "direction": "forward" }, "keys": "alt+shift+]" },
+    { "command": { "action": "copy", "singleLine": false }, "keys": "ctrl+shift+c" },
+    { "command": { "action": "splitPane", "split": "down" }, "keys": "alt+shift+s" },
+    { "command": "unbound", "keys": "alt+space" },
+    { "command": "paste", "keys": "ctrl+shift+v" },
+    { "command": "toggleFullscreen", "keys": "alt+enter" },
+    { "command": "toggleFocusMode", "keys": "alt+t" },
+    { "command": { "action": "resizePane", "direction": "left" }, "keys": "alt+shift+comma" },
+    { "command": "find", "keys": "ctrl+shift+f" },
+    { "command": { "action": "nextTab" }, "keys": "alt+`" },
+    { "command": { "action": "nextTab" }, "keys": "alt+]" },
+    { "command": { "action": "prevTab" }, "keys": "alt+shift+`" },
+    { "command": { "action": "prevTab" }, "keys": "alt+[" },
+    { "command": { "action": "moveFocus", "direction": "up" }, "keys": "alt+shift+k" },
+    { "command": "tabSearch", "keys": "alt+\\" },
+    { "command": { "action": "resizePane", "direction": "down" }, "keys": "alt+shift+minus" },
+    { "command": "openTabRenamer", "keys": "alt+f2" },
+    { "command": { "action": "moveTab", "direction": "backward" }, "keys": "alt+shift+[" },
+    { "command": { "action": "splitPane", "split": "right" }, "keys": "alt+shift+v" },
+    { "command": { "action": "scrollDown" }, "keys": "alt+pgdn" },
+    { "command": { "action": "splitPane", "split": "auto", "splitMode": "duplicate" }, "keys": "alt+shift+d" },
+    { "command": { "action": "sendInput", "input": "\u001b[13;5u" }, "keys": "ctrl+enter" },
+    { "command": { "action": "resizePane", "direction": "up" }, "keys": "alt+shift+plus" },
+    { "command": { "action": "resizePane", "direction": "right" }, "keys": "alt+shift+period" },
+    { "command": { "action": "moveFocus", "direction": "right" }, "keys": "alt+shift+l" },
+    { "command": { "action": "moveFocus", "direction": "left" }, "keys": "alt+shift+h" },
+    { "command": { "action": "moveFocus", "direction": "down" }, "keys": "alt+shift+j" },
+    { "command": { "action": "scrollUp" }, "keys": "alt+pgup" },
+    { "command": { "action": "sendInput", "input": "\u0011" }, "keys": "ctrl+space" },
+    { "command": { "action": "sendInput", "input": "\u0017" }, "keys": "ctrl+backspace" },
+    { "command": { "action": "sendInput", "input": "\u001b[105;5u" }, "keys": "ctrl+i" },
+    { "command": { "action": "sendInput", "input": "\u001b[109;5u" }, "keys": "ctrl+m" }
+  ],
   "copyFormatting": "none",
   "copyOnSelect": true,
   "defaultProfile": "{0caa0dad-35be-5f56-a8ff-afceeeaa6102}",
@@ -10,43 +44,10 @@
   "largePasteWarning": false,
   "launchMode": "default",
   "multiLinePasteWarning": false,
-  "snapToGridOnResize": true,
-  "theme": "system",
-  "useAcrylicInTabRow": true,
-  "actions": [
-    { "command": "unbound", "keys": "alt+space" },
-    { "command": { "action": "copy", "singleLine": false }, "keys": "ctrl+shift+c" },
-    { "command": "paste", "keys": "ctrl+shift+v" },
-    { "command": "toggleFocusMode", "keys": "alt+t" },
-    { "command": "toggleFullscreen", "keys": "alt+enter" },
-    { "command": "find", "keys": "ctrl+shift+f" },
-    { "command": { "action": "nextTab" }, "keys": "alt+`" },
-    { "command": { "action": "nextTab" }, "keys": "alt+]" },
-    { "command": { "action": "prevTab" }, "keys": "alt+shift+`" },
-    { "command": { "action": "prevTab" }, "keys": "alt+[" },
-    { "command": "tabSearch", "keys": "alt+\\" },
-    { "command": "openTabRenamer", "keys": "alt+f2" },
-    { "command": { "action": "moveTab", "direction": "backward" }, "keys": "alt+shift+[" },
-    { "command": { "action": "moveTab", "direction": "forward" }, "keys": "alt+shift+]" },
-    { "command": { "action": "splitPane", "split": "down" }, "keys": "alt+shift+s" },
-    { "command": { "action": "splitPane", "split": "right" }, "keys": "alt+shift+v" },
-    { "command": { "action": "splitPane", "split": "auto", "splitMode": "duplicate" }, "keys": "alt+shift+d" },
-    { "command": { "action": "resizePane", "direction": "left" }, "keys": "alt+shift+comma" },
-    { "command": { "action": "resizePane", "direction": "down" }, "keys": "alt+shift+minus" },
-    { "command": { "action": "resizePane", "direction": "up" }, "keys": "alt+shift+plus" },
-    { "command": { "action": "resizePane", "direction": "right" }, "keys": "alt+shift+period" },
-    { "command": { "action": "moveFocus", "direction": "right" }, "keys": "alt+shift+l" },
-    { "command": { "action": "moveFocus", "direction": "left" }, "keys": "alt+shift+h" },
-    { "command": { "action": "moveFocus", "direction": "down" }, "keys": "alt+shift+j" },
-    { "command": { "action": "moveFocus", "direction": "up" }, "keys": "alt+shift+k" },
-    { "command": "scrollUp", "keys": "alt+pageup" },
-    { "command": "scrollDown", "keys": "alt+pagedown" },
-
-    { "command": { "action": "sendInput", "input": "\u0011" }, "keys": "ctrl+space" },
-    { "command": { "action": "sendInput", "input": "\u0017" }, "keys": "ctrl+backspace" },
-    { "command": { "action": "sendInput", "input": "\u001b[105;5u" }, "keys": "ctrl+i" },
-    { "command": { "action": "sendInput", "input": "\u001b[109;5u" }, "keys": "ctrl+m" },
-    { "command": { "action": "sendInput", "input": "\u001b[13;5u" }, "keys": "ctrl+enter" }
+  "newTabMenu": [
+    {
+      "type": "remainingProfiles"
+    }
   ],
   "profiles": {
     "defaults": {
@@ -56,13 +57,13 @@
       "font": {
         // monalisa
         "face": "OperatorMonoLig Nerd Font",
-        "size": 14
+        "size": 14.0
       },
       "opacity": 96,
       "padding": "0, 0, 0, 0",
       "scrollbarState": "hidden",
       "startingDirectory": "E:\\repoes",
-      "tabColor": "#1e1c1c",
+      "tabColor": "#1E1C1C",
       "useAcrylic": false
     },
     "list": [
@@ -92,16 +93,22 @@
         "source": "Windows.Terminal.Azure"
       },
       {
-        "guid": "{f184b75f-6c82-5ea5-9b3e-3203d66c5f82}",
+        "guid": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
         "hidden": false,
-        "name": "Ubuntu20.04LTS",
+        "name": "Arch",
         "source": "Windows.Terminal.Wsl"
       },
       {
-        "guid": "{5a069d55-87bd-57cf-8a07-2726b203d3e5}",
+        "guid": "{963ff2f7-6aed-5ce3-9d91-90d99571f53a}",
+        "hidden": true,
+        "name": "Ubuntu-24.04",
+        "source": "Windows.Terminal.Wsl"
+      },
+      {
+        "guid": "{acbafd15-cbbb-5bb3-8a61-bed446ff4b83}",
         "hidden": false,
-        "name": "Ubuntu 20.04.4 LTS",
-        "source": "CanonicalGroupLimited.Ubuntu20.04LTS_79rhkp1fndgsc"
+        "name": "Ubuntu 24.04 LTS",
+        "source": "CanonicalGroupLimited.Ubuntu24.04LTS_79rhkp1fndgsc"
       }
     ]
   },
@@ -306,6 +313,29 @@
       "cyan": "#3A96DD",
       "foreground": "#FFFFFF",
       "green": "#26A269",
+      "name": "Ubuntu-24.04-ColorScheme",
+      "purple": "#881798",
+      "red": "#C21A23",
+      "selectionBackground": "#FFFFFF",
+      "white": "#CCCCCC",
+      "yellow": "#A2734C"
+    },
+    {
+      "background": "#300A24",
+      "black": "#171421",
+      "blue": "#0037DA",
+      "brightBlack": "#767676",
+      "brightBlue": "#08458F",
+      "brightCyan": "#2C9FB3",
+      "brightGreen": "#26A269",
+      "brightPurple": "#A347BA",
+      "brightRed": "#C01C28",
+      "brightWhite": "#F2F2F2",
+      "brightYellow": "#A2734C",
+      "cursorColor": "#FFFFFF",
+      "cyan": "#3A96DD",
+      "foreground": "#FFFFFF",
+      "green": "#26A269",
       "name": "Ubuntu20.04LTSColorScheme",
       "purple": "#881798",
       "red": "#C21A23",
@@ -336,5 +366,10 @@
       "white": "#C0C0C0",
       "yellow": "#808000"
     }
-  ]
+  ],
+  "snapToGridOnResize": true,
+  "theme": "system",
+  "themes": [],
+  "useAcrylicInTabRow": true
 }
+

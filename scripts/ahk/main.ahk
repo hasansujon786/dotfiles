@@ -83,7 +83,7 @@ PrintScreen::Send("#+{s}")
 !Enter::Send("{f11}")
 !Escape::resetWin()
 $Escape::superEscape()
-#SPACE::toggleAlwaysOnTop() ; TODO: fix
+; #SPACE::toggleAlwaysOnTop() ; TODO: fix
 ; Vertual Desktop
 #h::navToDesktop("left")
 #l::navToDesktop("right")
@@ -112,11 +112,12 @@ current_layout := 0
 ; AltTabMenu & TaskView Vim Mode
 ;******************************************************************************
 #/::SendInput("^!{Tab}")
-#HotIf WinActive("ahk_class MultitaskingViewFrame")
-  or MouseIsOver("ahk_class ApplicationFrameWindow")
-  or MouseIsOver("ahk_class Shell_LightDismissOverlay")
-  or WinActive("ahk_exe ShellExperienceHost.exe")
-  ; or WinActive("ahk_class Windows.UI.Core.CoreWindow")
+#HotIf WinActive("ahk_class MultitaskingViewFrame")     ; multitask view
+  or WinActive("ahk_class Windows.UI.Core.CoreWindow")  ; win+tab view
+  or MouseIsOver("ahk_class Shell_LightDismissOverlay") ; clipboard
+  ; or MouseIsOver("ahk_class ApplicationFrameWindow")
+  ; or WinActive("ahk_exe ShellExperienceHost.exe")
+  ; ahk_exe ApplicationFrameHost.exe
 
   ; *WheelDown::Send {Blind}{Tab}
   ; *WheelUp::Send {Blind}+{Tab}

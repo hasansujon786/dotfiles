@@ -196,13 +196,4 @@ return {
       },
     },
   },
-  {
-    'olimorris/persisted.nvim',
-    lazy = true,
-    module = 'persisted',
-    cmd = { 'SessionLoad', 'SessionLoadLast', 'SessionSave' },
-    config = function()
-      require('config.telescope.persisted').setup()
-    end,
-  },
 }

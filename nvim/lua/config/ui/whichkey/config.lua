@@ -159,13 +159,9 @@ return {
       { '<leader>pb', '<cmd>lua require("hasan.telescope.custom").project_browser()<CR>', desc = 'Browse other projects' },
       { '<leader>pc', '<cmd>lua require("telescope._extensions").manager.project_commands.commands()<CR>', desc = 'Run project commands' },
       { '<leader>pd', '<cmd>Alpha<CR>', desc = 'Open dashboard' },
-      { '<leader>pl', '<cmd>SessionLoad<CR>', desc = 'Load session' },
-      { '<leader>pm', '<cmd>lua require("telescope._extensions").manager.persisted.persisted()<CR>', desc = 'Show session menu' },
       { '<leader>pp', '<cmd>lua require("hasan.telescope.custom").projects()<CR>', desc = 'Switch project' },
       { '<leader>pr', '<cmd>lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>', desc = 'Find recent files' },
-      { '<leader>ps', '<cmd>SessionSave<CR>', desc = 'Save session' },
       { '<leader>pt', '<cmd>lua require("hasan.telescope.custom").search_project_todos()<CR>', desc = 'Search project todos' },
-      { '<leader>pz', '<cmd>lua require("config.telescope.persisted").save_and_exit()<CR>', desc = 'Save session and quit' },
 
       -- TOGGLE
       { '<leader>t', group = 'toggle' },
