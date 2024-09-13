@@ -187,9 +187,12 @@ return {
       {
         'ahmedkhalf/project.nvim',
         main = 'project_nvim',
+        keys = {
+          { '<leader>pm', '<cmd>lua require("hasan.telescope.custom").projects()<CR>', desc = 'Switch project' },
+        },
         opts = {
           detection_methods = { 'pattern' },
-          exclude_dirs = { 'c:', 'c:/Users/hasan/dotfiles/nvim/.vsnip' },
+          exclude_dirs = { 'c:/Users/hasan/dotfiles/nvim/.vsnip' },
           patterns = { '.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'pubspec.yaml' }, -- 'package.json'
           show_hidden = false,
         },

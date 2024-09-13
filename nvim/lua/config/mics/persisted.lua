@@ -10,7 +10,7 @@ return {
     { '<leader>pl', '<cmd>SessionLoad<CR>', desc = 'Load session' },
     { '<leader>pz', '<cmd>wall | qall<CR>', desc = 'Save session and quit' },
     {
-      '<leader>pm',
+      '<leader>pp',
       '<cmd>lua require("telescope._extensions").manager.persisted.persisted()<CR>',
       desc = 'Show session list',
     },
@@ -40,8 +40,13 @@ return {
         end
         return true
       end,
-      -----@type fun(): any
-      --on_autoload_no_session = function() end,
+      ---@type fun(): any
+      on_autoload_no_session = function()
+        local ok = pcall(require, 'alpha')
+        if ok then
+          vim.cmd([[Alpha]])
+        end
+      end,
 
       -- use_git_branch = false,
       -- allowed_dirs = {}, -- Table of dirs that the plugin will start and autoload from
@@ -58,6 +63,12 @@ return {
         if ok then
           edgy.close()
         end
+
+        -- for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        --   if vim.bo[buf].filetype == 'codecompanion' then
+        --     vim.api.nvim_buf_delete(buf, { force = true })
+        --   end
+        -- end
       end,
     })
     -- Save current layout before manually switching

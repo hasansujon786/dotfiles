@@ -151,11 +151,11 @@ function M.project_browser()
   })
 end
 
+local edit_projects_file = function(prompt_bufnr)
+  require('telescope.actions').close(prompt_bufnr)
+  vim.cmd.split(vim.fn.stdpath('data') .. '/project_nvim/project_history')
+end
 M.projects = function()
-  local edit_projects_file = function(prompt_bufnr)
-    require('telescope.actions').close(prompt_bufnr)
-    vim.cmd('split ' .. vim.fn.stdpath('data') .. '/project_nvim/project_history')
-  end
   require('telescope._extensions').manager.projects.projects(my_theme.get_dropdown({
     attach_mappings = function(_, map)
       map('i', '<C-e>', edit_projects_file)

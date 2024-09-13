@@ -1,7 +1,8 @@
 return {
   'goolord/alpha-nvim',
-  lazy = false, -- make sure we load this during startup if it is your main colorscheme
-  priority = 1000, -- make sure to load this before all the other start plugins
+  lazy = true, -- make sure we load this during startup if it is your main colorscheme
+  cmd = { 'Alpha' },
+  -- priority = 1000, -- make sure to load this before all the other start plugins
   config = function()
     local ok, alpha = pcall(require, 'alpha')
     if not ok then
