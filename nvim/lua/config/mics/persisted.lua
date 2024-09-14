@@ -3,8 +3,8 @@ local psessions_path = vim.fn.expand(vim.fn.stdpath('data') .. '/sessions/')
 return {
   'olimorris/persisted.nvim',
   lazy = false,
-  -- module = 'persisted',
-  -- cmd = { 'SessionLoad', 'SessionLoadLast', 'SessionSave' },
+  module = 'persisted',
+  cmd = { 'SessionLoad', 'SessionLoadLast', 'SessionSave' },
   keys = {
     { '<leader>ps', '<cmd>SessionSave<CR>', desc = 'Save session' },
     { '<leader>pl', '<cmd>SessionLoad<CR>', desc = 'Load session' },

@@ -10,6 +10,7 @@ command! CodeOpenFile lua require('hasan.utils.file').openInCode(true)
 command! CodeOpenCwd lua require('hasan.utils.file').openInCode(false)
 command! -bang -nargs=1 -complete=file Fedit lua require("hasan.float").fedit(<f-args>)
 command! LuaSnipEdit lua require("luasnip.loaders").edit_snippet_files()
+command! Log edit $NVIM_LOG_FILE
 " Lsp
 command! LspLogPath lua vim.cmd.edit(vim.lsp.get_log_path())
 command! LspInstallEssentials lua require('config.lsp.util.extras').install_essential_servers()

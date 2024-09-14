@@ -5,7 +5,6 @@ return {
   { 'MunifTanjim/nui.nvim', lazy = true, module = 'nui' },
   { 'tpope/vim-eunuch', lazy = true, cmd = { 'Delete', 'Move', 'Rename', 'Mkdir', 'Chmod' } },
   { 'tpope/vim-repeat', lazy = true, event = 'BufReadPost', dependencies = 'tpope/vim-surround' },
-  { 'tpope/vim-commentary', lazy = true, keys = { { 'gc', desc = 'Commentary', mode = nxo } } },
   {
     'max397574/better-escape.nvim',
     lazy = true,

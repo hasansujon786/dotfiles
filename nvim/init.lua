@@ -9,6 +9,7 @@ require('core.state')
 require('core.global')
 require('core.options')
 require('core.keymaps')
+require('core.commands')
 if vim.g.vscode then
   require('vscode_nvim')
 else
