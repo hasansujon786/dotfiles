@@ -18,7 +18,7 @@ return {
       Normal = 'EdgyNormalDark',
       NormalNC = 'EdgyNormalDark',
       WinSeparator = 'EdgyWinSeparator',
-      CursorLine = 'CursorLineFocus',
+      -- CursorLine = 'CursorLineFocus',
     })
 
     local gray_bar = color.make_winhighlight({
@@ -26,7 +26,6 @@ return {
       WinBarNC = 'EdgyTitle',
       Normal = 'EdgyNormal',
       -- WinSeparator = 'EdgyWinSeparator',
-      -- CursorLine = 'CursorLineFocus',
     })
 
     local custom_color_ft = { 'Outline' }
@@ -102,7 +101,7 @@ return {
     })
 
     require('edgy').setup({
-      icons = { closed = ' ', open = ' ' },
+      icons = { closed = ' ', open = ' ' },
       exit_when_last = false,
       bottom = bottom,
       right = right,

@@ -7,6 +7,7 @@ local c = {
   bg2 = '#343e4f',
   bg3 = '#363c51',
   bg_d = '#1e242e',
+  bg_d2 = '#1b222c',
   black = '#151820',
 
   fg = '#a5b0c5',
@@ -87,13 +88,15 @@ local function set_custom_highlights()
     HeirlineTabActive       = { fg = c.green, bg = c.layer },
     HeirlineTabInactive     = { fg = c.red, bg = c.layer },
     LspInlayHint            = { fg = c.dark_cyan, bg = c.none },
+    CursorLineFocus         = { bg = c.bg3 },
+    SidebarDark             = { fg = c.fg, bg = c.bg_d },
 
-    WinSeparator            = { fg = c.bg_d },
+    WinSeparator            = { fg = c.bg_d2, bg = c.none },
     EdgyWinSeparator        = { fg = c.bg_d, bg = c.none },
     EdgyNormalDark          = { fg = c.fg, bg = c.bg_d },
-    EdgyTitle               = { fg = c.cyan, bg = c.bg0 },
-    EdgyIcon                = { link = 'EdgyTitle' },
-    EdgyIconActive          = { link = 'EdgyTitle' },
+    EdgyTitle               = { fg = c.light_grey, bg = '#202a3c' },
+    EdgyIcon                = { fg = c.grey, bg = '#202a3c' },
+    EdgyIconActive          = { fg = c.dark_cyan, bg = '#202a3c' },
 
   -- /// LSP ///
     LspReferenceText        = { bg = '#3B4048', },
@@ -147,12 +150,12 @@ local function set_custom_highlights()
     DiffviewDiffDelete        = { bg = '#3c2729', fg = '#1c212c' },
     DiffviewNormal            = { link = 'SidebarDark' },
     DiffviewEndOfBuffer       = { link = 'DiffviewNormal' },
-    DiffviewCursorLine        = { link = 'CursorLineFocus' },
     DiffviewFolderSign        = { link = 'NeoTreeDirectoryIcon' },
     DiffviewFilePanelTitle    = { link = 'DiffviewFilePanelCounter' },
     DiffviewFilePanelRootPath = { link = 'NeoTreeRootName' },
     DiffviewStatusUntracked   = { link = 'DiffviewFilePanelDeletions' },
     DiffviewStatusModified    = { link = 'NeoTreeGitModified' },
+    -- DiffviewCursorLine        = { link = 'CursorLineFocus' },
 
   -- /// Neogit ///
     NeogitDiffContext          = { link = 'Normal' },
@@ -182,12 +185,12 @@ local function set_custom_highlights()
     NeoTreeMessage       = { link = 'Comment' },
     NeoTreeDimText       = { link = 'Comment' },
     NeoTreeIndentMarker  = { link = 'IblIndent' },
-    NeoTreeCursorLine    = { link = 'CursorLineFocus' },
     NeoTreeNormal        = { link = 'SidebarDark' },
     NeoTreeNormalNC      = { link = 'SidebarDark' },
     NeoTreeVertSplit     = { link = 'EdgyWinSeparator' },
     NeoTreeWinSeparator  = { link = 'EdgyWinSeparator' },
     NeoTreeFloatNormal   = { link = 'TelescopeNormal' },
+    -- NeoTreeCursorLine    = { link = 'CursorLineFocus' },
     -- hi! NeoTreeGitUntracked       gui=NONE
 
   -- /// nvim-cmp ///

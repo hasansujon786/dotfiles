@@ -1,5 +1,4 @@
 local util = require('config.neo_tree.util')
--- lua require("neo-tree").paste_default_config()
 
 return {
   'nvim-neo-tree/neo-tree.nvim',
@@ -9,11 +8,20 @@ return {
   branch = 'v3.x',
   vinegar_helper = util,
   keys = {
-    { '<leader>op', util.toggle_neotree, desc = 'NeoTree: Toggle sidebar' },
-    { '-', util.open_vinegar, desc = 'NeoTree: Open vinegar' },
+    {
+      '<leader>op',
+      '<cmd>lua require("config.neo_tree.util").toggle_neotree()<CR><C-l>',
+      desc = 'NeoTree: Toggle sidebar',
+    },
+    { '-', '<cmd>lua require("config.neo_tree.util").open_vinegar()<CR>', desc = 'NeoTree: Open vinegar' },
   },
   config = function()
-    keymap('n', '<bs>', util.edit_alternate_file, { desc = 'Edit alternate file' })
+    keymap(
+      'n',
+      '<bs>',
+      '<cmd>lua require("config.neo_tree.util").edit_alternate_file()<CR>',
+      { desc = 'Edit alternate file' }
+    )
 
     local opts = {
       -- see `:h neo-tree-custom-commands-global`

@@ -25,23 +25,17 @@ return {
         -- custom colors
         light_grey = '#7d899f',
         bg1        = '#2d3343',
-        -- bg2        = '#343e4f',
-        bg3        = '#363c51',
-        bg_d       = '#1e242e',
-        -- black      = '#151820',
       },
       highlights = {
         -- "/// Neovim Builin ///"
         ['Cursor'] = { bg = '${blue}' },
         ['CursorLineNr'] = { fg = '${fg}' },
         ['Cursorline'] = { bg = '${bg1}' },
-        ['CursorLineFocus'] = { bg = '${bg3}' },
         ['Visual'] = { bg = '#204364' },
         ['DiagnosticSignInfo'] = { fg = '${cyan}' },
         ['StatusLine'] = { fg = '${fg}', bg = '${bg1}' },
         ['IncSearch'] = { fg = '${bg}', bg = '#e86671' },
         ['Search'] = { fg = '${bg}', bg = '${highlight}' },
-        ['SidebarDark'] = { fg = '${fg}', bg = '${bg_d}' },
         ['RedText'] = { fg = '#ff0000' },
         ['ZenBorder'] = { fg = '#1c212c' },
         ['MutedText'] = { fg = '${light_grey}' },

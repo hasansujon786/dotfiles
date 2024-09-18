@@ -37,6 +37,10 @@ return {
         show_symbol_details = false,
         show_symbol_lineno = false,
         highlight_hovered_item = true, -- Show parents
+        auto_update_events = {
+          follow = nil,
+          items = { 'InsertLeave', 'WinEnter', 'BufEnter', 'BufWinEnter', 'TabEnter', 'BufWritePost' },
+        },
       },
       symbol_folding = {
         -- Set to false to unfold all on open.
