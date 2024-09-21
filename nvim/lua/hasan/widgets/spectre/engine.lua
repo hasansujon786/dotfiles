@@ -97,10 +97,13 @@ function M.search(options, signal)
 
   pcall(function()
     spectre_state.finder_instance:search({
+      -- the directory where the search tool will be started in
       cwd = vim.fn.getcwd(),
       search_text = options.search_query,
       replace_query = options.replace_query,
+      -- the pattern of files to consider for searching
       path = #options.filter_path > 2 and options.filter_path or nil,
+      -- the directories or files to search in
       search_paths = #options.search_paths > 0 and options.search_paths or nil,
     })
   end)

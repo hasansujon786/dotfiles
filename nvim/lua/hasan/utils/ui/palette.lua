@@ -235,14 +235,15 @@ local function set_custom_highlights()
   -- /// nui.nvim ///
     NuiNormalFloat = { link = 'NormalFloat' },
     NuiFloatBorder = { link = 'FloatBorderHidden' },
-    NuiMenuItem    = { link = 'Visual' },
+    NuiMenuItem    = { bg = '#204364', fg = c.orange },
 
     NuiComponentsCheckboxLabel             = { fg = c.light_grey },
     NuiComponentsCheckboxIcon              = { fg = c.light_grey },
     NuiComponentsCheckboxLabelChecked      = { fg = c.yellow },
     NuiComponentsCheckboxIconChecked       = { fg =  c.yellow },
 
-    NuiComponentsInfo                      = { fg = c.grey, bg = c.bg0 },
+    NuiComponentsTreeNodeFocused           = { link = 'Visual' },
+    NuiComponentsInfo                      = { fg = c.grey, bg = c.bg_d2 },
     NuiComponentsTreeSpectreIcon           = { fg = c.grey },
     NuiComponentsTreeSpectreSearchValue    = { link = 'Search' },
     NuiComponentsTreeSpectreSearchOldValue = { link = 'Search' },

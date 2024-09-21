@@ -198,7 +198,7 @@ local function on_select(origin_winid)
 end
 
 local function search_tree(props)
-  return n.tree({
+  local tree = n.tree({
     border_style = 'none',
     flex = 1,
     padding = { left = 1, right = 1 },
@@ -207,7 +207,10 @@ local function search_tree(props)
     mappings = mappings(props.search_query, props.replace_query),
     prepare_node = prepare_node,
     on_select = on_select(props.origin_winid),
+    window = { highlight = { NormalFloat = 'SidebarDark', Cursorline = 'None' } },
   })
+  vim.api.nvim_set_hl(tree._private.namespace, 'NormalFloat', { link = 'SidebarDark' })
+  return tree
 end
 
 return search_tree

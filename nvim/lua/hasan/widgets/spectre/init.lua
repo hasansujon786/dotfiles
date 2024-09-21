@@ -4,6 +4,15 @@ local n = require('nui-components')
 local Icons = require('hasan.utils.ui.icons')
 local search_tree = require('hasan.widgets.spectre.components.search_tree')
 
+local window = {
+  -- blend = 0,
+  highlight = {
+    -- FloatBorder = 'Normal',
+    NormalFloat = 'SidebarDark',
+    Cursorline = 'None',
+  },
+}
+
 local M = {}
 
 M.open_visual = function(opts)
@@ -39,12 +48,11 @@ function M.open(opts)
     opts.search_paths = { opts.search_paths }
   end
 
-  local width = 46
-  local height = vim.api.nvim_list_uis()[1].height - 2
+  local ui_info = vim.api.nvim_list_uis()[1]
 
   local renderer = n.create_renderer({
-    width = width,
-    height = height,
+    width = math.min(100, ui_info.width),
+    height = ui_info.height - 2,
     relative = 'editor',
     position = { row = 0, col = '100%' },
   })
@@ -84,18 +92,18 @@ function M.open(opts)
   end)
 
   local function move_cursor_to_eol()
-    if vim.api.nvim_get_mode().mode == 'i' then
+    if vim.api.nvim_get_mode().mode == 'n' then
       feedkeys('A')
     end
   end
   local actions = {
-    toggle_replace_input = function(is_checked)
-      signal.is_replace_field_visible = is_checked
+    toggle_replace_input = function(is_replace_focus)
+      signal.is_replace_field_visible = is_replace_focus
 
-      local next_input = renderer:get_component_by_id(is_checked and 'replace_query' or 'search_query')
+      local next_input = renderer:get_component_by_id(is_replace_focus and 'replace_query' or 'search_query')
       renderer:schedule(function()
         next_input:focus()
-        move_cursor_to_eol()
+        vim.defer_fn(move_cursor_to_eol, 120)
       end)
     end,
     toggle_filter_input = function()
@@ -105,7 +113,7 @@ function M.open(opts)
       local next_input = renderer:get_component_by_id(is_checked and 'filter_path' or 'search_query')
       renderer:schedule(function()
         next_input:focus()
-        move_cursor_to_eol()
+        vim.defer_fn(move_cursor_to_eol, 120)
       end)
     end,
   }
@@ -119,6 +127,18 @@ function M.open(opts)
       end,
     },
     {
+      mode = { 'n' },
+      key = '|',
+      handler = function()
+        local width = renderer:get_size().width
+        if ui_info.width > width then
+          renderer:set_size({ width = ui_info.width })
+        else
+          renderer:set_size({ width = math.min(100, ui_info.width) })
+        end
+      end,
+    },
+    {
       mode = { 'n', 'i' },
       key = '<A-c>',
       handler = function()
@@ -127,12 +147,12 @@ function M.open(opts)
     },
     {
       mode = { 'n', 'i' },
-      key = '<A-r>',
+      key = '<C-f>',
       handler = actions.toggle_filter_input,
     },
     {
       mode = { 'n', 'i' },
-      key = '<c-t>',
+      key = '<C-t>',
       handler = function()
         local is_visible = not signal.is_replace_field_visible:get_value()
         actions.toggle_replace_input(is_visible)
@@ -155,10 +175,16 @@ function M.open(opts)
 
   M.renderer = renderer
 
-  local body = n.columns(
-    n.rows(
-      1,
+  local left_gap = function()
+    return n.gap({ size = 3, window = window })
+  end
+
+  local body = n.rows(
+    -- Row 1
+    n.columns(
+      { size = 3 },
       n.checkbox({
+        window = window,
         border_style = 'none',
         default_sign = Icons.ui.ChevronRight,
         checked_sign = Icons.ui.ChevronDown,
@@ -167,75 +193,88 @@ function M.open(opts)
         on_change = function(is_checked)
           actions.toggle_replace_input(is_checked)
         end,
-        window = {
-          highlight = {
-            NormalFloat = 'Normal',
-          },
-        },
+      }),
+      n.text_input({
+        window = window,
+        autofocus = true,
+        flex = 1,
+        max_lines = 1,
+        id = 'search_query',
+        border_label = 'Search',
+        value = signal.search_query,
+        on_change = fn.debounce(function(value)
+          signal.search_query = value
+        end, 400),
+        -- window = {
+        --   blend = 0,
+        --   highlight = {
+        --     FloatBorder = 'Normal',
+        --     NormalFloat = 'String',
+        --   },
+        -- },
+      }),
+      n.checkbox({
+        window = window,
+        label = 'Aa',
+        default_sign = '',
+        checked_sign = '',
+        border_style = 'rounded',
+        is_focusable = false,
+        value = signal.is_match_case_insensitive_checked,
+        on_change = function(is_checked)
+          signal.is_match_case_insensitive_checked = is_checked
+        end,
       })
     ),
-    n.rows(
-      10,
-      n.columns(
-        { size = 3 },
-        n.text_input({
-          autofocus = true,
-          flex = 1,
-          max_lines = 1,
-          id = 'search_query',
-          border_label = 'Search',
-          value = signal.search_query,
-          on_change = fn.debounce(function(value)
-            signal.search_query = value
-          end, 400),
-          -- window = {
-          --   blend = 0,
-          --   highlight = {
-          --     FloatBorder = 'Normal',
-          --     NormalFloat = 'String',
-          --   },
-          -- },
-        }),
-        n.checkbox({
-          label = 'Aa',
-          default_sign = '',
-          checked_sign = '',
-          border_style = 'rounded',
-          value = signal.is_match_case_insensitive_checked,
-          on_change = function(is_checked)
-            signal.is_match_case_insensitive_checked = is_checked
-          end,
-        })
-      ),
+    -- Row 2
+    n.columns(
+      {
+        size = 3,
+        hidden = signal.is_replace_field_visible:map(function(value)
+          return not value
+        end),
+      },
+      left_gap(),
       n.text_input({
-        size = 1,
+        window = window,
         max_lines = 1,
+        flex = 1,
         id = 'replace_query',
         border_label = 'Replace',
         on_change = fn.debounce(function(value)
           signal.replace_query = value
         end, 400),
-        hidden = signal.is_replace_field_visible:map(function(value)
+      })
+    ),
+    -- Row 3
+    n.columns(
+      {
+        size = 3,
+        hidden = signal.is_filter_field_visible:map(function(value)
           return not value
         end),
-      }),
+      },
+      left_gap(),
       n.text_input({
+        window = window,
+        flex = 1,
         size = 1,
         id = 'filter_path',
         max_lines = 1,
-        border_label = 'Filter path',
+        border_label = 'Pattern to filter',
+        -- placeholder = 'lua/**/*.lua',
         -- value = signal.filter_path,
         on_change = fn.debounce(function(value)
           signal.filter_path = value
         end, 400),
-        hidden = signal.is_filter_field_visible:map(function(value)
-          return not value
-        end),
       }),
       n.text_input({
+        window = window,
         size = 1,
+        flex = 1,
         max_lines = 1,
-        border_label = 'Files to include',
+        border_label = 'Directories to include',
+        -- placeholder = 'lua/, plugin/',
         value = signal.search_paths:map(function(paths)
           return table.concat(paths, ',')
         end),
@@ -244,63 +283,79 @@ function M.open(opts)
             return path == ''
           end)
         end, 400),
-      }),
-      n.rows(
-        {
-          flex = 0,
-          hidden = signal.search_info:map(function(value)
-            return value == ''
-          end),
-        },
-        n.paragraph({
-          is_focusable = false,
-          lines = signal.search_info,
-          padding = { left = 1, right = 1 },
-          window = { highlight = { NormalFloat = 'NuiComponentsInfo' } },
-        })
-      ),
-      n.gap(1),
-      search_tree({
-        search_query = signal.search_query,
-        replace_query = signal.replace_query,
-        data = signal.search_results,
-        origin_winid = renderer:get_origin_winid(),
-        hidden = signal.search_results:map(function(value)
-          return #value == 0
-        end),
       })
-      -- n.gap(1),
-      -- n.columns(
-      --   {
-      --     size = 1,
-      --     on_state_change = function(state)
-      --       return {
-      --         hidden = not (state.search_results and #state.replace_value > 0)
-      --       }
-      --     end
-      --   },
-      --   n.gap({flex = 1}),
-      --   n.button(
-      --     {
-      --       label = "Replace All",
-      --       on_press = function()
-      --       end
-      --     }
-      --   ),
-      --   n.gap(1),
-      --   n.button(
-      --     {
-      --       label = "Clear",
-      --       on_press = function()
-      --       end
-      --     }
-      --   )
-      -- )
-    )
+    ),
+    -- Row 4
+    -- n.columns(
+    --   { size = 3 },
+    --   left_gap(),
+    --   n.text_input({
+    --     window = window,
+    --     size = 1,
+    --     flex = 1,
+    --     max_lines = 1,
+    --     border_label = 'Files to include',
+    --     value = signal.search_paths:map(function(paths)
+    --       return table.concat(paths, ',')
+    --     end),
+    --     on_change = fn.debounce(function(value)
+    --       signal.search_paths = fn.ireject(fn.imap(vim.split(value, ','), fn.trim), function(path)
+    --         return path == ''
+    --       end)
+    --     end, 400),
+    --   })
+    -- ),
+    -- Row 5
+    n.paragraph({
+      is_focusable = false,
+      lines = signal.search_info,
+      padding = { left = 4, right = 1, bottom = 1 },
+      window = { highlight = { NormalFloat = 'NuiComponentsInfo', Cursorline = 'None' } },
+      hidden = signal.search_info:map(function(value)
+        return value == ''
+      end),
+    }),
+    -- Row 6
+    search_tree({
+      search_query = signal.search_query,
+      replace_query = signal.replace_query,
+      data = signal.search_results,
+      origin_winid = renderer:get_origin_winid(),
+      hidden = signal.search_results:map(function(value)
+        return #value == 0
+      end),
+    })
+    -- n.gap(1),
+    -- n.columns(
+    --   {
+    --     size = 1,
+    --     on_state_change = function(state)
+    --       return {
+    --         hidden = not (state.search_results and #state.replace_value > 0)
+    --       }
+    --     end
+    --   },
+    --   n.gap({flex = 1}),
+    --   n.button(
+    --     {
+    --       label = "Replace All",
+    --       on_press = function()
+    --       end
+    --     }
+    --   ),
+    --   n.gap(1),
+    --   n.button(
+    --     {
+    --       label = "Clear",
+    --       on_press = function()
+    --       end
+    --     }
+    --   )
+    -- )
   )
 
   renderer:render(body)
-  renderer.layout._.float.win_options = { winblend = 0, winhighlight = 'Normal:Normal' }
+  renderer.layout._.float.win_options = { winblend = 0, winhighlight = 'Normal:None' }
 end
 
 return M
