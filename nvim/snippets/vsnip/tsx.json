@@ -33,5 +33,16 @@
       "};"
     ],
     "description": "Render list component with generic"
+  },
+  "forwardRefComp": {
+    "prefix": "forwardRefComp",
+    "body": [
+      "const RefComp = React.forwardRef<RefType, PropsType>(",
+      "  function _RefComp(props, ref) {",
+      "    return <Input ref={ref}/>",
+      "  },",
+      ");"
+    ],
+    "description": "forward ref snippet"
   }
 }

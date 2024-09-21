@@ -85,8 +85,8 @@ alias adi='~/dotfiles/scripts/adb_install.sh'
 alias acc='~/dotfiles/scripts/ld.sh "adb connect"'
 alias acd='~/dotfiles/scripts/ld.sh "adb disconnect"'
 alias arr='~/dotfiles/scripts/adb_wifi.sh'
-alias scr='scrcpy'
-alias scc='~/dotfiles/scripts/ld.sh "scrcpy -s"'
+alias scc='~/dotfiles/scripts/ld.sh "scrcpy -b 2M -s"'
+alias scr='scrcpy -d'
 
 # handy short cuts #
 alias bashrc="vim ~/dotfiles/bash/.bashrc"

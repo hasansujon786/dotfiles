@@ -36,10 +36,10 @@ return {
         auto_set_cursor = false,
         show_symbol_details = false,
         show_symbol_lineno = false,
-        highlight_hovered_item = true, -- Show parents
+        highlight_hovered_item = false, -- Show parents
         auto_update_events = {
-          follow = nil,
-          items = { 'InsertLeave', 'WinEnter', 'BufEnter', 'BufWinEnter', 'TabEnter', 'BufWritePost' },
+          follow = {},
+          items = { 'InsertLeave', 'WinEnter', 'BufEnter', 'BufWinEnter', 'BufWritePost' },
         },
       },
       symbol_folding = {
