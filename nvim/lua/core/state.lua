@@ -11,16 +11,20 @@ _G.state = {
     auto_conceal_html_class = true,
     enabled_context = true,
   },
-  neominimap = {
-    width = 90,
-    height = 15,
-  }
 }
 
 M.ui = {
   border = {
     style = 'rounded',
     highlight = 'DiagnosticHint',
+  },
+  session_autoload = true,
+  fold = {
+    persists = false,
+  },
+  neominimap = {
+    width = 90,
+    height = 15,
   },
   telescope_border_style = 'edged',
   hover = {

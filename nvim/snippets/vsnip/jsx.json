@@ -57,5 +57,16 @@
       "</${1:Component}>"
     ],
     "description": "Provide props from parent componet"
+  },
+  "useRenders": {
+    "prefix": "useRenders",
+    "body": [
+      "export default function useRenders() {",
+      "  let rendersRef = useRef();",
+      "  rendersRef.current++;",
+      "  return rendersRef.current;",
+      "}"
+    ],
+    "description": "useRenders hook"
   }
 }

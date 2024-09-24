@@ -1,5 +1,6 @@
 local api = vim.api
 local utils = require('hasan.utils')
+local state = require("core.state").ui
 local M = {
   alternate_winid_to_ignore = nil,
   skip_update_on_focus_ft = { 'neo-tree-popup' },

@@ -8,6 +8,7 @@ o.swapfile = false --                            Turn backup off, since most stu
 o.writebackup = false
 o.undofile = true
 o.undolevels = 1500 --                           persistent undo between file reloads
+o.sessionoptions = 'buffers,curdir,folds,globals,tabpages,winpos,winsize'
 opt.viewoptions:remove({ 'folds', 'curdir' }) -- see: https://vi.stackexchange.com/questions/11903/working-directory-different-than-current-file-directory
 -- Spell
 opt.complete:append({ 'kspell' })

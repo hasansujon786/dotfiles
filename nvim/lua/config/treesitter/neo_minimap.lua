@@ -1,4 +1,5 @@
 local nm = require('neo-minimap')
+local state = require("core.state").ui
 
 nm.setup_defaults({
   height_toggle = { 15, 36 },

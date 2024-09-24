@@ -51,17 +51,42 @@ augroup('MY_AUGROUP')(function(autocmd)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if client ~= nil then
       require('config.lsp.util.extras').get_setup_opts().onLspAttach(client, args.buf)
-
-      -- if client.name == 'tsserver' then
-      --   P(client.capabilities.textDocument.inlayHint)
-      --   local method = vim.lsp.protocol.Methods.textDocument_codeLens
-      --   -- P(string.format('%s %s %s', client.name, method, client.supports_method(method)))
-      --   -- P(client.server_capabilities.codeLensProvider)
-      -- end
     end
 
+    -- if client.name == 'tsserver' then
+    -- P(client.capabilities.textDocument.inlayHint)
+    -- local method = vim.lsp.protocol.Methods.textDocument_codeLens
+    -- P(string.format('%s %s %s', client.name, method, client.supports_method(method)))
+    -- P(client.server_capabilities.codeLensProvider)
+    -- end
     vim.defer_fn(set_titlestring, 100)
   end)
+  autocmd('BufEnter', set_titlestring)
+  autocmd('InsertEnter', function()
+    vim.schedule(function()
+      vim.cmd('nohlsearch')
+    end)
+  end)
+
+  -- Persist fold
+  if require('core.state').ui.fold.persists then
+    autocmd({ 'BufWinLeave', 'BufWritePost', 'WinLeave' }, function(args)
+      if vim.b[args.buf].view_activated then
+        vim.cmd.mkview({ mods = { emsg_silent = true } })
+      end
+    end, { desc = 'Save view with mkview for real files' })
+    autocmd('BufWinEnter', function(args)
+      if not vim.b[args.buf].view_activated then
+        local filetype = vim.api.nvim_get_option_value('filetype', { buf = args.buf })
+        local buftype = vim.api.nvim_get_option_value('buftype', { buf = args.buf })
+        local ignore_filetypes = { 'gitcommit', 'gitrebase', 'svg', 'hgcommit' }
+        if buftype == '' and filetype and filetype ~= '' and not vim.tbl_contains(ignore_filetypes, filetype) then
+          vim.b[args.buf].view_activated = true
+          vim.cmd.loadview({ mods = { emsg_silent = true } })
+        end
+      end
+    end, { desc = 'Try to load file view if available and enable view saving for real files' })
+  end
 
   -- local function reloadConfig(plugin)
   --   local rootHasPlugin = type(plugin[1]) == 'string'
@@ -101,38 +126,8 @@ augroup('MY_AUGROUP')(function(autocmd)
   --   end
   -- end, { pattern = { 'LazyReload' } })
 
-  autocmd('BufEnter', set_titlestring)
-  autocmd('InsertEnter', function()
-    vim.schedule(function()
-      vim.cmd('nohlsearch')
-    end)
-  end)
-
   -- autocmd('VimResized', 'wincmd =') -- Vim/tmux layout rebalancing
   -- {'FocusLost,WinLeave,BufLeave * :silent! noautocmd w'}, -- auto save
   -- {'WinEnter,BufWinEnter *.vim,*.js,*.lua call hasan#boot#highligt_ruler(1)'},
   -- autocmd('VimEnter', 'runtime! autoload/netrw.vim', { once = true })
 end)
--- local view_group = augroup("auto_view", { clear = true })
--- autocmd({ "BufWinLeave", "BufWritePost", "WinLeave" }, {
---   desc = "Save view with mkview for real files",
---   group = view_group,
---   callback = function(args)
---     if vim.b[args.buf].view_activated then vim.cmd.mkview { mods = { emsg_silent = true } } end
---   end,
--- })
--- autocmd("BufWinEnter", {
---   desc = "Try to load file view if available and enable view saving for real files",
---   group = view_group,
---   callback = function(args)
---     if not vim.b[args.buf].view_activated then
---       local filetype = vim.api.nvim_get_option_value("filetype", { buf = args.buf })
---       local buftype = vim.api.nvim_get_option_value("buftype", { buf = args.buf })
---       local ignore_filetypes = { "gitcommit", "gitrebase", "svg", "hgcommit" }
---       if buftype == "" and filetype and filetype ~= "" and not vim.tbl_contains(ignore_filetypes, filetype) then
---         vim.b[args.buf].view_activated = true
---         vim.cmd.loadview { mods = { emsg_silent = true } }
---       end
---     end
---   end,
--- })

@@ -1,7 +1,10 @@
 return {
   'goolord/alpha-nvim',
-  lazy = true, -- make sure we load this during startup if it is your main colorscheme
+  lazy = require('core.state').ui.session_autoload, -- make sure we load this during startup if it is your main colorscheme
   cmd = { 'Alpha' },
+  keys = {
+    { '<leader>pd', '<cmd>Alpha<CR>', desc = 'Open dashboard' },
+  },
   -- priority = 1000, -- make sure to load this before all the other start plugins
   config = function()
     local ok, alpha = pcall(require, 'alpha')

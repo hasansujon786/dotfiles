@@ -200,7 +200,6 @@ return {
         '<cmd>lua require("telescope._extensions").manager.project_commands.commands()<CR>',
         desc = 'Run project commands',
       },
-      { '<leader>pd', '<cmd>Alpha<CR>', desc = 'Open dashboard' },
       {
         '<leader>pr',
         '<cmd>lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>',

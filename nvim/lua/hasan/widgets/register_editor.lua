@@ -14,7 +14,7 @@ M.open = function()
   local msg_pop = Popup({
     enter = false,
     focusable = true,
-    border = { style = 'rounded', text = { top = NuiLine({ NuiText(' Register ') }) } },
+    border = { style = 'rounded', text = { top = ' Register ' } },
     win_options = { winhighlight = 'Normal:Normal' },
     position = '50%',
     size = { width = msg:width(), height = 1 },
@@ -35,6 +35,8 @@ M.open = function()
       style = 'rounded',
       text = {
         top = NuiLine({ NuiText(' Register: '), NuiText(char), NuiText(' ') }),
+        bottom = NuiText(' Save: <leader>s ──', 'FloatBorder'),
+        bottom_align = 'right',
       },
     },
     position = '50%',
