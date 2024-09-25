@@ -1,6 +1,13 @@
 {
   "auto grid": {
-    "prefix": "gac",
+    "prefix": "auto-grid",
+    "body": [
+      "grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));"
+    ],
+    "description": "Create auto grid columns witn min()"
+  },
+  "auto grid basic": {
+    "prefix": "auto-grid-basic",
     "body": ["grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));"],
     "description": "Create auto grid columns"
   },
@@ -9,11 +16,39 @@
     "body": ["box-shadow:inset 0px 0px 0px 10px #f00;"],
     "description": "box shadow"
   },
-  "auto grid2": {
-    "prefix": "gacm",
+  "container-basic": {
+    "prefix": "container-basic",
     "body": [
-      "grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));"
+      ".container-basic {",
+      "  width: min(100% - 40px, 80rem); /* 1280 */",
+      "}"
     ],
-    "description": "Create auto grid columns witn min()"
+    "description": "Create a basic container"
+  },
+  "full-bleed": {
+    "prefix": "full-bleed",
+    "body": [
+      ".container-bleed {",
+      "  --padding: 40px;",
+      "  --max-w: 80rem; /* 1280 */",
+      "",
+      "  display: grid;",
+      "  grid-template-columns: 1fr min(100% - var(--padding), var(--max-w)) 1fr; /* 1280 */",
+      "",
+      "  & > * {",
+      "    grid-column: 2/-2;",
+      "  }",
+      "",
+      "  & > .full-bleed {",
+      "    grid-column: 1/-1;",
+      "  }",
+      "}"
+    ],
+    "description": "Create a full-bleed container"
+  },
+  "med-mobile-first": {
+    "prefix": "med-mobile-first",
+    "body": ["@media screen and (min-width: ${1:600px}) {", "  ${0}", "}"],
+    "description": "Create a full-bleed container"
   }
 }
