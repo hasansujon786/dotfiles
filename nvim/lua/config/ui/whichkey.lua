@@ -276,23 +276,4 @@ return {
       { '<leader>ww', '<cmd>lua handle_win_cmd("wincmd w")<CR>', desc = 'Window next' },
     })
   end,
-  dependencies = {
-    'johmsalas/text-case.nvim',
-    lazy = true,
-    module = 'textcase',
-    config = function()
-      require('textcase').setup({ default_keymappings_enabled = true })
-    end,
-    -- commit = 'ec9925b27dd54809653cc766b8673acd979a888e',
-    keys = {
-      { 'ga.', '<cmd>TextCaseOpenTelescopeQuickChange<CR>', mode = nx, desc = 'Telescope Quick Change' },
-      { 'ga,', '<cmd>TextCaseOpenTelescopeLSPChange<CR>', mode = nx, desc = 'Telescope LSP Change' },
-    },
-    cmd = {
-      'TextCaseOpenTelescope',
-      'TextCaseOpenTelescopeQuickChange',
-      'TextCaseOpenTelescopeLSPChange',
-      'TextCaseStartReplacingCommand',
-    },
-  },
 }
