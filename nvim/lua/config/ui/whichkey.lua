@@ -156,15 +156,11 @@ return {
       { '<leader>g', group = 'git' },
       { '<leader>g.', '<cmd>silent !git add %<CR>', desc = 'Git: Stage file' },
       { '<leader>g/', '<cmd>Telescope git_status<CR>', desc = 'Find git files*' },
-      { '<leader>gC', '<cmd>Telescope git_bcommits<CR>', desc = 'Look up buffer commits' },
-      {
-        '<leader>gO',
-        '<cmd>lua require("hasan.utils.init").open_git_remote(false)<CR>',
-        desc = 'Open git repo with file',
-      },
       { '<leader>gb', '<cmd>Telescope git_branches<CR>', desc = 'Checkout git branch' },
       { '<leader>gc', '<cmd>Telescope git_commits<CR>', desc = 'Look up commits' },
+      { '<leader>gC', '<cmd>Telescope git_bcommits<CR>', desc = 'Look up buffer commits' },
       { '<leader>go', '<cmd>lua require("hasan.utils.init").open_git_remote(true)<CR>', desc = 'Open git repo' },
+      { '<leader>gO', '<cmd>lua require("hasan.utils.init").open_git_remote(false)<CR>', desc = 'Open git repo file' },
 
       -- INSERT
       { '<leader>i', group = 'insert' },

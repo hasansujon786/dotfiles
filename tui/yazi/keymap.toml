@@ -11,7 +11,7 @@ append_keymap = [
   { on = ["g", "."], run = "cd ~/dotfiles", desc = "dotfiles" },
   { on = ["g", "p"], run = "cd ~/Pictures", desc = "Pictures" },
   { on = ["g", "v"], run = "cd ~/Videos", desc = "Videos" },
-  { on = ["g", "r"], run = "cd E:/repoes", desc = "Videos" },
+  { on = ["g", "r"], run = "cd E:/repoes", desc = "repoes" },
   { on = ["g", "N"], run = "cd ~/AppData/Local/nvim-data/", desc = "Nvim data" },
   { on = ["g", "s"], run = "cd ~/AppData/Local/Packages/MicrosoftWindows.Client.CBS_cw5n1h2txyewy/TempState/ScreenClip", desc = "ScreenClip" },
   { on = ["g", "S"], run = "cd ~/AppData/Roaming/Microsoft/Windows/Start\\ Menu/Programs/Startup", desc = "Start Menu/Programs/Startup" },
@@ -59,11 +59,11 @@ prepend_keymap = [
   { on = ["m", "x"], run = 'shell "bash ~/dotfiles/tui/yazi/scripts/share-code-file.bash %0" --confirm --block', desc = "Share file with https://0x0.st" },
 
   # Goto drive
+  { on = ["-"], run = "plugin git-root", desc = "Jump to git root" },
   { on = [".", "c"], run = "cd C:/", desc = "windows (c:)" },
   { on = [".", "d"], run = "cd D:/", desc = "videos (d:)" },
   { on = [".", "e"], run = "cd E:/", desc = "hasan (e:)" },
-  { on = [".", "-"], run = "cd ~/Desktop", desc = "Desktop" },
-  { on = [".", "."], run = "plugin git-root", desc = "Jump to git root" },
+  { on = [".", "."], run = "cd ~/Desktop", desc = "Desktop" },
 
   # Selection
   { on = ["v"], run = ["select --state=none", "arrow 1"], desc = "Toggle the current selection state" },

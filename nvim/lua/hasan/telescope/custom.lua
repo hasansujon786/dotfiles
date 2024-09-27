@@ -283,8 +283,23 @@ M.buffers = function(is_cwd_only)
     prompt_title = is_cwd_only and 'Search buffers' or 'Search all buffers',
     cwd_only = is_cwd_only,
     sort_mru = true,
+    sort_lastused = true,
+    -- initial_mode = 'normal',
     previewer = false,
     ignore_current_buffer = is_cwd_only,
+    attach_mappings = function(_, map)
+      map({ 'n' }, 'dd', actions.delete_buffer)
+      map({ 'n' }, 'd', actions.delete_buffer)
+      map({ 'n' }, 'D', actions.delete_buffer)
+      map({ 'n' }, 'h', actions.delete_buffer)
+
+      map({ 'n' }, 'l', actions.select_default)
+      map({ 'n' }, 'o', actions.select_default)
+      map({ 'n' }, 'v', actions.select_vertical)
+      map({ 'n' }, 's', actions.select_horizontal)
+      map({ 'n' }, 't', actions.select_tab)
+      return true
+    end,
   }
   builtin.buffers(my_theme.get_dropdown(opts))
 end

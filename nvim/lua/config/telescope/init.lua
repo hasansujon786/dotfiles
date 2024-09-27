@@ -20,6 +20,7 @@ return {
         ['<M-k>'] = actions.move_selection_previous,
         ['<M-j>'] = actions.move_selection_next,
 
+        ['<C-a>'] = actions.select_all,
         ['<C-e>'] = actions.to_fuzzy_refine,
         ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
         ['<C-s>'] = actions.file_split,
@@ -28,7 +29,9 @@ return {
           require('telescope.actions.layout').toggle_preview(...)
         end,
 
-        ['<C-f>'] = local_action.fedit,
+        ['<CR>'] = actions.select_drop,
+        ['<S-CR>'] = actions.select_default,
+        ['<M-f>'] = local_action.fedit,
         ['<M-o>'] = local_action.quicklook,
         ['<M-t>'] = local_action.focus_file_tree,
 

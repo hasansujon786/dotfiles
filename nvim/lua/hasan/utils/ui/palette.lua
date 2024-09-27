@@ -172,6 +172,7 @@ local function set_custom_highlights()
     TelescopePreviewTitle   = { fg = c.bg3, bg = dark_border },
     TelescopeResultsTitle   = { fg = c.bg3, bg = dark_border },
     TelescopeMatching       = { fg = c.orange },
+    TelescopeMultiSelection = { fg = c.purple },
     TelescopeTitle          = { link = 'Comment' },
     TelescopeBorder         = { link = 'FloatBorderFlat' },
     TelescopeNormal         = { link = 'NormalFloatFlat' },
