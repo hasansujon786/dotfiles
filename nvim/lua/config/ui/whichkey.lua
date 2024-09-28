@@ -163,19 +163,19 @@ return {
       { '<leader>gO', '<cmd>lua require("hasan.utils.init").open_git_remote(false)<CR>', desc = 'Open git repo file' },
 
       -- INSERT
-      { '<leader>i', group = 'insert' },
-      { '<leader>iF', '<cmd>call _#Insertion(expand("%:t"))<CR>', desc = 'Current file name' },
-      { '<leader>ic', '<cmd>lua require("hasan.telescope.custom").colors()<CR>', desc = 'Insert colors' },
-      { '<leader>id', '<cmd>call _#Insertion(strftime("%e %B %Y"))<CR>', desc = 'Current date' },
+      { '<leader>i', group = '' },
+      { '<leader>if', '<cmd>lua insert(vim.fn.expand("%:~"))<CR>', desc = 'Current full path' },
+      { '<leader>iF', '<cmd>lua insert(vim.fn.expand("%:t"))<CR>', desc = 'Current file name' },
+
+      { '<leader>id', '<cmd>lua insert(vim.fn.strftime("%e %B %Y"))<CR>', desc = 'Current date' },
+      { '<leader>it', '<cmd>lua insert(vim.fn.strftime("%H:%M"))<CR>', desc = 'Current time' },
+
       { '<leader>ie', '<cmd>lua require("hasan.telescope.custom").emojis()<CR>', desc = 'Insert emoji' },
-      { '<leader>if', '<cmd>call _#Insertion(expand("%:~"))<CR>', desc = 'Current file path' },
-      { '<leader>it', '<cmd>call _#Insertion(strftime("%H:%M"))<CR>', desc = 'Current time' },
-      { '<leader>ilk', '<cmd>call _#Insertion("https://placekitten.com/g/50/50")<CR>', desc = 'Sample image link' },
-      {
-        '<leader>ilt',
-        '<cmd>call _#Insertion(hasan#utils#placeholderImgTag("300x200"))<CR>',
-        desc = 'Placeholder image tag',
-      },
+      { '<leader>ic', '<cmd>lua require("hasan.telescope.custom").colors()<CR>', desc = 'Insert colors' },
+
+      { '<leader>il', group = 'link' },
+      { '<leader>ill', '<cmd>lua insert("https://picsum.photos/seed/picsum/300/200")<CR>', desc = 'Image link' },
+      { '<leader>ild', '<cmd>lua insert("http://dummyimage.com/300x200/000000/555555")<CR>', desc = 'dummy image' },
 
       { '<leader>n', group = 'org-roam' },
 

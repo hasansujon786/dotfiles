@@ -62,13 +62,3 @@ endfu
 fu! _#echoSuccess (...)
   call _#Echo(['DiagnosticInfo', join(a:000, ' ')])
 endfu
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" mics                                                                    "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! _#Insertion(cmd)
-  let g:last_insertion = a:cmd
-  put =g:last_insertion
-endfunc
-

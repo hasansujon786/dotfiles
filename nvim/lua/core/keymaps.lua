@@ -52,6 +52,9 @@ keymap('x', 'C', '"cy:let @/=@c<CR>cgn')
 
 keymap(nx, 'go', '<Plug>(exchange-operator)', { desc = 'Exchange word' })
 
+keymap('n', 'gG', '<cmd>lua require("hasan.utils").google_search()<CR>', { desc = 'Search on google' })
+keymap('x', 'gG', '<Esc><cmd>lua require("hasan.utils").google_search(true)<CR>', { desc = 'Search on google' })
+
 keymap('n', 'cm', ':%s/<c-r>///g<Left><Left>', { desc = 'Change all matches with prompt', silent = false })
 keymap('n', 'dm', ':%s/<c-r>///g<CR>', { desc = 'Delete all matches' })
 keymap('n', 'dM', ':%g/<c-r>//d<CR>', { desc = 'Delete all lines with matches' })

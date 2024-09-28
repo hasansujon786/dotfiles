@@ -2,6 +2,7 @@ local nebulous = '<cmd>lua require("nebulous.init").pause(2000)<CR>'
 return {
   'sindrets/diffview.nvim',
   lazy = true,
+  cmd = { 'DiffviewOpen' },
   keys = {
     {
       '<leader>gd',

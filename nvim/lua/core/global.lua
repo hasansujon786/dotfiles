@@ -41,6 +41,10 @@ R = function(moduleName, message)
   end
 end
 
+_G.insert = function(str)
+  vim.api.nvim_put({ str }, 'v', true, true)
+end
+
 ---Show custom message popup
 ---@param msg string Content of the notification to show to the user.
 ---@param level integer|nil One of the values from |vim.log.levels|.

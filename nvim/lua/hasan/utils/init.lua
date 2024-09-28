@@ -149,6 +149,26 @@ M.open_git_remote = function(open_root)
   end
 end
 
+local function _google_search(query)
+  if not query or query == '' then
+    return
+  end
+
+  local search_query = query:gsub(' ', '+')
+  local url = 'https://www.google.com/search?q=' .. search_query
+  vim.ui.open(url)
+end
+M.google_search = function(is_visual)
+  if is_visual then
+    local query = require('hasan.utils').get_visual_selection()
+    return _google_search(query)
+  end
+
+  vim.ui.input({ prompt = 'Search on Google' }, function(text)
+    _google_search(text)
+  end)
+end
+
 -- opts = utils.merge({
 --   timeout = 2000,
 -- }, opts or {})
