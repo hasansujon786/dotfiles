@@ -1,11 +1,39 @@
+local nx = { 'n', 'x' }
+local pos = nil
+
 return {
-  'hasansujon786/zen-mode.nvim', -- FORK: feat(border): add border to main window
-  branch = 'win-border',
+  'folke/zen-mode.nvim',
   lazy = true,
   cmd = 'ZenMode',
   keys = {
-    { '\\', '<cmd>ZenMode<CR>', mode = { 'n', 'x' }, desc = 'ZenMode' },
-    { '<leader>u', '<cmd>ZenMode<CR>', mode = { 'n', 'x' }, desc = 'ZenMode' },
+    {
+      '<leader>z',
+      function()
+        if require('zen-mode.view').is_open() then
+          pos = vim.api.nvim_win_get_cursor(require('zen-mode.view').win)
+        end
+        require('zen-mode').toggle()
+      end,
+      mode = nx,
+      desc = 'ZenMode',
+    },
+    {
+      '<leader>u',
+      function()
+        if require('zen-mode.view').is_open() then
+          pos = vim.api.nvim_win_get_cursor(require('zen-mode.view').win)
+        end
+
+        require('zen-mode').toggle({
+          window = { width = 0.6 },
+          plugins = {
+            wezterm = { enabled = true, font = '6_minimap' },
+          },
+        })
+      end,
+      mode = nx,
+      desc = 'ZenMode Minimap',
+    },
   },
   opts = {
     border = { '', '', '', '│', '', '', '', '│' },
@@ -39,8 +67,20 @@ return {
     --   vim.o.cmdheight = 0
     -- end,
     -- -- callback where you can add custom code when the Zen window closes
-    -- on_close = function()
-    --   vim.o.cmdheight = 1
-    -- end,
+    on_close = function()
+      if pos == nil then
+        return
+      end
+
+      vim.defer_fn(function()
+        local parent = require('zen-mode.view').parent
+
+        if parent and vim.api.nvim_win_is_valid(parent) then
+          vim.api.nvim_set_current_win(parent)
+          pcall(vim.api.nvim_win_set_cursor, parent, pos)
+          pos = nil
+        end
+      end, 200)
+    end,
   },
 }

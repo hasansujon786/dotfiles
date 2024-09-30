@@ -9,12 +9,16 @@ append_keymap = [
 
   # Goto
   { on = ["g", "."], run = "cd ~/dotfiles", desc = "dotfiles" },
+  { on = ["g", "d"], run = "cd ~/Downloads", desc = "Downloads" },
   { on = ["g", "p"], run = "cd ~/Pictures", desc = "Pictures" },
   { on = ["g", "v"], run = "cd ~/Videos", desc = "Videos" },
+  { on = ["g", "m"], run = "cd ~/Music", desc = "Music" },
+  { on = ["g", "c"], run = "cd ~/Documents", desc = "Documents" },
   { on = ["g", "r"], run = "cd E:/repoes", desc = "repoes" },
-  { on = ["g", "N"], run = "cd ~/AppData/Local/nvim-data/", desc = "Nvim data" },
-  { on = ["g", "s"], run = "cd ~/AppData/Local/Packages/MicrosoftWindows.Client.CBS_cw5n1h2txyewy/TempState/ScreenClip", desc = "ScreenClip" },
-  { on = ["g", "S"], run = "cd ~/AppData/Roaming/Microsoft/Windows/Start\\ Menu/Programs/Startup", desc = "Start Menu/Programs/Startup" },
+
+  { on = ["g", "a", "n"], run = "cd ~/AppData/Local/nvim-data/", desc = "Nvim data" },
+  { on = ["g", "a", "s"], run = "cd ~/AppData/Local/Packages/MicrosoftWindows.Client.CBS_cw5n1h2txyewy/TempState/ScreenClip", desc = "ScreenClip" },
+  { on = ["g", "a", "S"], run = "cd ~/AppData/Roaming/Microsoft/Windows/Start\\ Menu/Programs/Startup", desc = "Start Menu/Programs/Startup" },
   # cd ~/AppData/Local/Packages/Microsoft.ScreenSketch_8wekyb3d8bbwe/TempState
 
   # Navigation

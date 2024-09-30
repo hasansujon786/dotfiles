@@ -29,7 +29,6 @@ return {
           require('telescope.actions.layout').toggle_preview(...)
         end,
 
-        ['<CR>'] = actions.select_drop,
         ['<S-CR>'] = actions.select_default,
         ['<M-f>'] = local_action.fedit,
         ['<M-o>'] = local_action.quicklook,

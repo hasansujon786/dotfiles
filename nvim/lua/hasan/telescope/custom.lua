@@ -96,6 +96,10 @@ M.project_files = function()
     git_and_buffer_files(my_theme.get_top_panel({
       -- only_cwd = true,
       entry_maker = my_make_entry.gen_from_filename_first({ dir_separator = '/' }),
+      attach_mappings = function(_, map)
+        map({ 'n', 'i' }, '<CR>', actions.select_drop)
+        return true
+      end,
     }))
   else
     M.my_find_files()
@@ -284,20 +288,20 @@ M.buffers = function(is_cwd_only)
     cwd_only = is_cwd_only,
     sort_mru = true,
     sort_lastused = true,
-    -- initial_mode = 'normal',
+    initial_mode = 'normal',
     previewer = false,
     ignore_current_buffer = is_cwd_only,
     attach_mappings = function(_, map)
-      map({ 'n' }, 'dd', actions.delete_buffer)
-      map({ 'n' }, 'd', actions.delete_buffer)
-      map({ 'n' }, 'D', actions.delete_buffer)
       map({ 'n' }, 'h', actions.delete_buffer)
+      map({ 'n' }, 'x', actions.delete_buffer)
 
       map({ 'n' }, 'l', actions.select_default)
       map({ 'n' }, 'o', actions.select_default)
       map({ 'n' }, 'v', actions.select_vertical)
       map({ 'n' }, 's', actions.select_horizontal)
       map({ 'n' }, 't', actions.select_tab)
+
+      map({ 'n', 'i' }, '<CR>', actions.select_drop)
       return true
     end,
   }
