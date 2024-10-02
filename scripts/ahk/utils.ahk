@@ -192,6 +192,12 @@ select_playback_device() {
   sleep(100)
   Send("{tab}")
 }
+open_mic_panel() {
+  Run("control mmsys.cpl,,1")
+  beep()
+  WinWait("Sound")
+  WinActivate("Sound")
+}
 showCalendar() {
   Send("#b")
   Send("{left}")

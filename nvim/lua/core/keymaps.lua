@@ -9,7 +9,8 @@ keymap(nx, 'q', '<esc><cmd>noh<CR><C-l>')
 keymap('n', 'Q', 'q') -- Use Q to record macros
 keymap('v', '@', ':norm @', noSilent) -- run macro on selection
 keymap(nx, '<CR>', ':<up>', noSilent) -- run last : command easily
-keymap({ 'n', 'x' }, "'", '`') -- Character wise jumps always
+keymap(nx, '<leader>I', 'q:', noSilent) -- run last : command easily
+keymap(nx, "'", '`') -- Character wise jumps always
 
 -- fix InsertEnter zz
 keymap('n', 'A', 'zzA')

@@ -1,12 +1,27 @@
 {
-  "useState": {
-    "prefix": "us",
-    "body": "const [${1:val}, set${2:setterName}] = useState(${0:defVal})",
-    "description": "use state hook"
+  "jsxClassName": {
+    "prefix": "cn",
+    "body": "className='$0'",
+    "description": "jsx className"
   },
   "reactFunctionComponentBasic": {
     "prefix": "rff",
-    "body": "export const ${1:${TM_FILENAME_BASE}} = () => {\n\treturn (\n\t\t<div>\n\t\t\t$0\n\t\t</div>\n\t)\n}",
+    "body": "export const ${1:${TM_FILENAME_BASE}} = (props: {}) => {\n\treturn (\n\t\t<div>\n\t\t\t$0\n\t\t</div>\n\t)\n}",
+    "description": "Creates only a React function component without PropTypes and import"
+  },
+  "reactFunctionComponentExportDefault": {
+    "prefix": "rfe",
+    "body": [
+      "import React from 'react'",
+      "",
+      "const ${1:${TM_FILENAME_BASE}} = (props: {}) => {",
+      "  return (",
+      "    <div>${1:${TM_FILENAME_BASE}}</div>",
+      "  )",
+      "}",
+      "",
+      "export default ${1:${TM_FILENAME_BASE}}"
+    ],
     "description": "Creates only a React function component without PropTypes and import"
   },
   "createContext": {

@@ -420,6 +420,16 @@ function M.package_to_relative_importx(bufnr)
   end)
 end
 
+local up = [[]] -- in insert mode `<C-v><C-y>`
+local down = [[]] -- in insert mode `<C-v><C-e>`
+local target_win = vim.api.nvim_get_current_win() -- adapt this to the target winnr
+Scroll_target_win = function(winnr, direction, count)
+  vim.api.nvim_win_call(winnr, function()
+    vim.cmd([[normal! ]] .. count .. direction)
+  end)
+end
+Scroll_target_win(target_win, down, 10)
+
 -- local init = function()
 --   vim.notify = function(...)
 --     if not require('lazy.core.config').plugins['nvim-notify']._.loaded then

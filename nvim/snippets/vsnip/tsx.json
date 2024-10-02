@@ -1,21 +1,16 @@
 {
-  "interfactProps": {
-    "prefix": "propsic",
-    "body": "interface Props extends React.ComponentPropsWithoutRef<'div'>  { }",
-    "description": "Props with html element ref"
-  },
-  "typeProps": {
-    "prefix": "propstype",
-    "body": "type Props = React.ComponentPropsWithoutRef<'button'> & {}",
-    "description": "Props with html element ref"
+  "ComponentPropsWithoutRef": {
+    "prefix": "propsComponentPropsWithoutRef",
+    "body": "React.ComponentPropsWithoutRef<'button'>",
+    "description": "Props with html element"
   },
   "ComponentProps": {
     "prefix": "propsComponent",
     "body": "React.ComponentProps<typeof MyComponent>",
     "description": "Props from a component"
   },
-  "listcomp": {
-    "prefix": "listcomp",
+  "listComponent": {
+    "prefix": "listComponent",
     "body": [
       "interface ListProps<T> {",
       "  data: T[];",
@@ -34,14 +29,17 @@
     ],
     "description": "Render list component with generic"
   },
-  "forwardRefComp": {
-    "prefix": "forwardRefComp",
+  "forwardRefComponent": {
+    "prefix": "refComponent",
     "body": [
-      "const RefComp = React.forwardRef<RefType, PropsType>(",
-      "  function _RefComp(props, ref) {",
-      "    return <Input ref={ref}/>",
-      "  },",
-      ");"
+      "export const ${1:${TM_FILENAME_BASE}} = React.forwardRef<",
+      "  RefType,",
+      "  PropsType",
+      ">((props, ref) => {",
+      "  return <Input ref={ref} />",
+      "})",
+      "",
+      "${1:${TM_FILENAME_BASE}}.displayName = '${1:${TM_FILENAME_BASE}}'"
     ],
     "description": "forward ref snippet"
   }

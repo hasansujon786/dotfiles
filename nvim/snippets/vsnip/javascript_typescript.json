@@ -2,7 +2,7 @@
   "twMerge": {
     "prefix": "twMerge",
     "body": [
-      "// yarn add tailwind-merge class-variance-authority clsx",
+      "/* yarn add tailwind-merge class-variance-authority clsx */",
       "import { clsx, type ClassValue } from 'clsx'",
       "import { twMerge } from 'tailwind-merge'\n",
       "export function cn(...inputs: ClassValue[]) {",
@@ -34,19 +34,14 @@
     "description": "get console log"
   },
   "export all": {
-    "prefix": "exfrom",
+    "prefix": "exFrom",
     "body": "export * from './$0'",
     "description": "export all"
   },
   "export default": {
-    "prefix": "exasdefault",
+    "prefix": "exFromDefault",
     "body": "export { default as ${2:modulename} } from './$1'",
     "description": "export as default"
-  },
-  "jsxClassName": {
-    "prefix": "cn",
-    "body": "className='$0'",
-    "description": "jsx className"
   },
   "numfromrange": {
     "prefix": "randomFromRange",
