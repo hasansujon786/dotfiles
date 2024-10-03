@@ -61,44 +61,43 @@ function UIInput:init(opts, on_confirm)
   -- self:map('i', '<A-BS>', '<C-o>ciw', { noremap = true })
 end
 
-M.get_confirmation = function(opts, callback)
+---@param opts {use_ui_input:boolean,prompt:string}
+---@param on_confirm fun(input)
+M.get_confirmation = function(opts, on_confirm)
   if opts.use_ui_input then
-    opts.prompt = opts.prompt .. ' [y/N]'
+    opts.prompt = opts.prompt .. ' [Y/N]'
     vim.ui.input(opts, function(input)
-      callback(input and input:lower() == 'y')
+      on_confirm(input and input:lower() == 'y')
     end)
   else
     async.run(function()
       return vim.fn.confirm(opts.prompt, table.concat({ '&Yes', '&No' }, '\n'), 2) == 1
-    end, callback)
+    end, on_confirm)
   end
 end
 
-local input_ui
+local _input_ui
 -- Prompts the user for input
--- @param opts {prompt,default,prefix,win_config}
--- @param on_confirm {function}
-M.get_input = function(opts, callback)
-  assert(type(callback) == 'function', 'missing on_confirm function')
+---@param opts {prompt:string,default:string,prefix:string,win_config:table}
+---@param on_confirm fun(input)
+M.get_input = function(opts, on_confirm)
+  assert(type(on_confirm) == 'function', 'missing on_confirm function')
 
-  if input_ui then
+  if _input_ui then
     -- ensure single ui.input operation
     vim.api.nvim_err_writeln('busy: another input is pending!')
     return
   end
 
-  input_ui = UIInput(opts, function(value)
-    if input_ui then
-      -- if it's still mounted, unmount it
-      input_ui:unmount()
+  _input_ui = UIInput(opts, function(value)
+    if _input_ui then
+      _input_ui:unmount()
     end
-    -- pass the input value
-    callback(value)
-    -- indicate the operation is done
-    input_ui = nil
+    on_confirm(value)
+    _input_ui = nil -- indicate the operation is done
   end)
 
-  input_ui:mount()
+  _input_ui:mount()
 end
 
 M.get_tabbar_input = function(opts, callback)
@@ -123,7 +122,7 @@ end
 ---@param items table
 ---@param opts SelectMenuOpts
 ---@param on_choice fun(item: any|nil)
-M.get_select_menu = function(items, opts, on_choice)
+M.get_select = function(items, opts, on_choice)
   local right_pad = 6
   local width = opts.min_width or 20
   local max_width = opts.max_width or 60
@@ -154,13 +153,13 @@ M.get_select_menu = function(items, opts, on_choice)
       -- left = opts.number and 0 or 2, right = opts.number and 3 or 2,
       padding = { top = 1, bottom = 1, left = 0, right = 0 },
       style = ui.border.style,
-      highlight = 'Normal:Normal',
-      text = { top = opts.prompt and Text(opts.prompt) or nil, top_align = opts.prompt_align },
+      highlight = 'Normal:NuiNormalFloat,FloatBorder:NuiFloatBorder',
+      text = { top = opts.prompt and Text(opts.prompt, 'NuiBorderTitle') or nil, top_align = opts.prompt_align },
     },
     win_options = {
       numberwidth = 4,
       number = true,
-      winhighlight = 'Normal:Normal,CursorLine:NuiMenuItem,CursorLineNr:NuiMenuItem',
+      winhighlight = 'Normal:NuiNormalFloat,CursorLine:NuiMenuItem,CursorLineNr:NuiMenuItem',
     },
   }, opts.win_config or {})
   opts.prompt = nil

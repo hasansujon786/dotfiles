@@ -39,7 +39,9 @@ return {
     end,
   },
   {
-    'nvim-orgmode/orgmode',
+    -- 'nvim-orgmode/orgmode',
+    'hasansujon786/orgmode',
+    branch = 'fix-autocomplete/tags-search-prompt',
     lazy = true,
     ft = { 'org' },
     keys = {
@@ -98,7 +100,7 @@ return {
               end
             end
 
-            require('hasan.widgets').get_select_menu(options, {
+            require('hasan.widgets').get_select(options, {
               prompt = ' ' .. data.title .. ' ',
               kind = 'get_char',
               min_width = 40,
