@@ -92,7 +92,7 @@ local function set_custom_highlights()
     LspInlayHint            = { fg = c.dark_cyan, bg = c.none },
     HeirlineTabActive       = { fg = c.green, bg = c.layer },
     HeirlineTabInactive     = { fg = c.red, bg = c.layer },
-    WinSeparator            = { fg = c.bg3, bg = c.none },
+    WinSeparator            = { fg = c.bg_d2, bg = c.none },
     TabBarInputBorder       = { fg = c.blue, bg = c.bg_d },
 
     -- /// LSP ///

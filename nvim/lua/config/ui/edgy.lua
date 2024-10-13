@@ -24,7 +24,7 @@ return {
     local gray_bar = color.make_winhighlight({
       Winbar = 'EdgyTitle',
       WinBarNC = 'EdgyTitle',
-      Normal = 'EdgyNormal',
+      -- Normal = 'EdgyNormal',
       -- WinSeparator = 'EdgyWinSeparator',
     })
 
@@ -85,6 +85,13 @@ return {
       {
         ft = 'flutterToolsOutline',
         open = 'FlutterOutlineOpen',
+        wo = { winbar = true, winhighlight = gray_bar },
+      },
+      {
+        ft = 'dbui',
+        title = 'DBUI',
+        pinned = false,
+        open = 'DBUI',
         wo = { winbar = true, winhighlight = gray_bar },
       },
     }

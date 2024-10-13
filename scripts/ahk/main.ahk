@@ -199,6 +199,22 @@ ytRemovetFromWL() {
   Send("{tab}")
   Send("{Enter}")
 }
-~LAlt & LButton::ytRemovetFromWL()
+
+firebaseRemoveAuthUser() {
+  beep()
+  Send("{LButton}")
+  sleep(100)
+  Send("{Down}")
+  Send("{Down}")
+  Send("{Enter}")
+  sleep(400)
+  Send("{tab}")
+  Send("{tab}")
+  Send("{tab}")
+  sleep(100)
+  Send("{Enter}")
+}
+; ~LAlt & LButton::ytRemovetFromWL()
+; ~LAlt & LButton::firebaseRemoveAuthUser()
 
 #Include %A_ScriptDir%\vim_explorer.ahk
