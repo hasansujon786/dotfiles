@@ -1,3 +1,13 @@
+#!/bin/bash
+
+# Better copy
+function cpy {
+  while read -r data; do               # reads data piped in to cpy
+    echo "$data" | cat >/dev/clipboard # echos the data and writes that to /dev/clipboard
+  done
+  tr -d '\n' </dev/clipboard >/dev/clipboard # removes new lines from the clipboard
+}
+
 # system
 # alias tmz='sudo timedatectl set-timezone'
 
@@ -200,7 +210,6 @@
 # alias -g jj='java -jar'
 # alias -g jp='javap -v -l -p -c -s'
 
-
 # suffix
 # alias -s {pdf,PDF}='background mupdf'
 # alias -s {jpg,JPG,png,PNG}='background gpicview'
@@ -211,4 +220,3 @@
 # alias -s {jar,JAR}="java -jar"
 # alias -s gz="tar -tf"
 # alias -s {tgz,TGZ}="tar -tf"
-

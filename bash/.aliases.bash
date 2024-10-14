@@ -49,7 +49,7 @@ alias dx='pwsh -Command dxdiag'
 alias su='subl'
 alias sub='subl'
 subl() {
-	"C:\Program Files\Sublime Text\subl.exe" "$@"
+  "C:\Program Files\Sublime Text\subl.exe" "$@"
 }
 
 # Android
@@ -104,6 +104,7 @@ alias c='clear && pwd && ls'
 # alias c='clear'
 alias live='live-server'
 alias h='history'
+alias wh='which'
 alias o='explorer'
 alias open='explorer'
 alias dus='du -h --max-depth=1 --exclude=node_modules* | sort -rh'
@@ -114,22 +115,6 @@ alias cpd="pwd | tr -d '\n' | clip && echo 'pwd copied to clipboard'"
 # alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard'"
 alias y='yazi_cd'
 alias yazi='yazi_cd'
-function yazi_cd() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-	\yazi "$@" --cwd-file="$tmp"
-	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
-}
-
-# Better copy
-function cpy {
-	while read -r data; do              # reads data piped in to cpy
-		echo "$data" | cat >/dev/clipboard # echos the data and writes that to /dev/clipboard
-	done
-	tr -d '\n' </dev/clipboard >/dev/clipboard # removes new lines from the clipboard
-}
 
 # git
 alias ggpusht='git push origin $(git_current_branch) --tags'
@@ -146,7 +131,7 @@ alias gci='hub issue create'
 alias gm2m='git branch -m master main'
 alias gpup='git push --set-upstream origin main'
 
-alias -- --=jump-to-git-root
+alias -- --=jump_to_git_root
 alias g='git'
 alias gcm='git commit -m'
 alias gcam='git commit -am'
@@ -217,80 +202,83 @@ alias k9='kill -9'
 alias k15='kill -s 15'
 alias w1='watch -n 1'
 
-jump-to-git-root() {
-	local _root_dir _pwd
+jump_to_git_root() {
+  local _root_dir _pwd
 
-	_root_dir="$(git rev-parse --show-toplevel 2>/dev/null)"
-	if [[ $_root_dir == "" ]]; then
-		>&2 echo 'Not a Git repo!'
-		return 0
-	fi
-	_pwd=$(pwd -W)
-	if [[ $_pwd = "$_root_dir" ]]; then
-		# Handle submodules:
-		# If parent dir is also managed under Git then we are in a submodule.
-		# If so, cd to nearest Git parent project.
-		if ! _root_dir="$(git -C "$(dirname "$_pwd")" rev-parse --show-toplevel 2>/dev/null)"; then
-			echo "Already at Git repo root."
-			return 0
-		fi
-	fi
-	# Make `cd -` work.
-	OLDPWD=$_pwd
-	echo "Git repo root: $_root_dir"
-	cd "$_root_dir" || exit
+  _root_dir="$(git rev-parse --show-toplevel 2>/dev/null)"
+  if [[ $_root_dir == "" ]]; then
+    >&2 echo 'Not a Git repo!'
+    return 0
+  fi
+  _pwd=$(pwd -W)
+  if [[ $_pwd = "$_root_dir" ]]; then
+    # Handle submodules:
+    # If parent dir is also managed under Git then we are in a submodule.
+    # If so, cd to nearest Git parent project.
+    if ! _root_dir="$(git -C "$(dirname "$_pwd")" rev-parse --show-toplevel 2>/dev/null)"; then
+      echo "Already at Git repo root."
+      return 0
+    fi
+  fi
+  # Make `cd -` work.
+  OLDPWD=$_pwd
+  echo "Git repo root: $_root_dir"
+  cd "$_root_dir" || exit
+}
+function yazi_cd() {
+  local tmp
+  tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+  \yazi "$@" --cwd-file="$tmp"
+  if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    builtin cd -- "$cwd" || return
+  fi
+  rm -f -- "$tmp"
 }
 lfcd() {
-	tmp="$(mktemp)"
-	\lf -last-dir-path="$tmp" "$@"
-	if [ -f "$tmp" ]; then
-		dir="$(cat "$tmp")"
-		rm -f "$tmp"
-		if [ -d "$dir" ]; then
-			if [ "$dir" != "$(pwd)" ]; then
-				cd "$dir" || exit
-			fi
-		fi
-	fi
+  tmp="$(mktemp)"
+  \lf -last-dir-path="$tmp" "$@"
+  if [ -f "$tmp" ]; then
+    dir="$(cat "$tmp")"
+    rm -f "$tmp"
+    if [ -d "$dir" ]; then
+      if [ "$dir" != "$(pwd)" ]; then
+        cd "$dir" || exit
+      fi
+    fi
+  fi
 }
 remove() {
-	while true; do
-		local count=$#
-		if [[ $count = 0 ]]; then
-			echo "rm: missing argument"
-			return
-		fi
-		local item='item'
-		[[ $count -gt 1 ]] && item="items"
+  while true; do
+    local count=$#
+    if [[ $count = 0 ]]; then
+      echo "rm: missing argument"
+      return
+    fi
+    local item='item'
+    [[ $count -gt 1 ]] && item="items"
 
-		read -r -p "trash: Do you wish to remove ${count} ${item} (y/n)? " yn
-		case $yn in
-		# [Yy]* ) rm -rf $@; break;;
-		[Yy]*)
-			trash "$@"
-			break
-			;;
-		[Nn]*)
-			echo "rm: Canceled"
-			break
-			;;
-		*) echo "rm: Please answer yes or no." ;;
-		esac
-	done
+    read -r -p "trash: Do you wish to remove ${count} ${item} (y/n)? " yn
+    case $yn in
+    # [Yy]* ) rm -rf $@; break;;
+    [Yy]*)
+      trash "$@"
+      break
+      ;;
+    [Nn]*)
+      echo "rm: Canceled"
+      break
+      ;;
+    *) echo "rm: Please answer yes or no." ;;
+    esac
+  done
 }
-_edit_wo_executing() {
-	local editor="${EDITOR:-vim}"
-	tmpf="$(mktemp)"
-	printf '%s\n' "$READLINE_LINE" >"$tmpf"
-	"$editor" "$tmpf"
-	READLINE_LINE="$(<"$tmpf")"
-	READLINE_POINT="${#READLINE_LINE}"
-	rm -f "$tmpf" # -f for those who have alias rm='rm -i'
-}
+
 url-redrive() {
-	curl --silent -I -L "$@" | grep -i location
+  curl --silent -I -L "$@" | grep -i location
 }
 
+### Keybinds
+##################################################
 # auto-expand
 bind '"\e\ ":magic-space'
 bind '"\eq":alias-expand-line'
@@ -299,4 +287,3 @@ bind '" ":"\eq\C-v "'
 bind '"\eo":"\C-uyazi_cd\C-m"'
 # bind '"\el":clear-screen'
 # bind '"\C-x\C-x":edit-and-execute-command'
-# bind -x '"\C-x\C-e":_edit_wo_executing'

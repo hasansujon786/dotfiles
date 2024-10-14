@@ -214,7 +214,7 @@ firebaseRemoveAuthUser() {
   sleep(100)
   Send("{Enter}")
 }
-; ~LAlt & LButton::ytRemovetFromWL()
+~LAlt & LButton::ytRemovetFromWL()
 ; ~LAlt & LButton::firebaseRemoveAuthUser()
 
 #Include %A_ScriptDir%\vim_explorer.ahk
