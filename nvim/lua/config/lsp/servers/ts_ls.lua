@@ -34,13 +34,8 @@ local inlayHints = {
 
 ---@type ServerConfig
 return {
-  setup = function(client, bufnr)
+  setup = function(_, bufnr)
     keymap('n', '<leader>ai', M.ts_organize_imports_sync, { buffer = bufnr, desc = 'Lsp: organize imports' })
-
-    local ok, twoslashqueries = pcall(require, 'twoslash-queries')
-    if ok then
-      twoslashqueries.attach(client, bufnr)
-    end
   end,
   opts = {
     -- See: https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
