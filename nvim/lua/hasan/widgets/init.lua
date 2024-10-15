@@ -120,15 +120,25 @@ end
 
 ---Prompts the user to pick from a list of items
 ---@param items table
----@param opts SelectMenuOpts
 ---@param on_choice fun(item: any|nil)
-M.get_select = function(items, opts, on_choice)
+---@param opts? SelectMenuOpts
+M.get_select = function(items, on_choice, opts)
+  opts = opts and opts or {}
+
   local right_pad = 6
-  local width = opts.min_width or 20
+  local min_width = opts.min_width or 20
   local max_width = opts.max_width or 60
-  local format_item = opts.format_item or function(item)
-    return tostring(item.__raw_item or item)
-  end
+
+  local format_item = opts.format_item
+    or function(item)
+      if opts.kind == 'get_char' and item.key ~= nil and type(item.label) == 'string' then
+        return string.format('   %s - %s', tostring(item.key), item.label)
+      end
+      if type(item.label) == 'string' then
+        return item.label
+      end
+      return tostring(item.__raw_item or item)
+    end
 
   local menu_items = {}
   for index, item in ipairs(items) do
@@ -141,8 +151,8 @@ M.get_select = function(items, opts, on_choice)
 
     -- Update width
     local len = string.len(item_text)
-    if len > width then
-      width = len
+    if len > min_width then
+      min_width = len
     end
   end
 
@@ -158,7 +168,7 @@ M.get_select = function(items, opts, on_choice)
     },
     win_options = {
       numberwidth = 4,
-      number = true,
+      number = opts.kind ~= 'get_char',
       winhighlight = 'Normal:NuiNormalFloat,CursorLine:NuiMenuItem,CursorLineNr:NuiMenuItem',
     },
   }, opts.win_config or {})
@@ -169,7 +179,7 @@ M.get_select = function(items, opts, on_choice)
 
   opts = utils.merge({
     max_width = max_width,
-    min_width = math.min(width, max_width) + right_pad,
+    min_width = math.min(min_width, max_width) + right_pad,
     max_height = 8,
     keymap = {
       focus_next = { 'j', '<Down>', '<Tab>' },
@@ -209,7 +219,7 @@ end
 ---@field min_width? number
 ---@field max_width? number
 ---@field prompt_align? string
----@field format_item? function
+---@field format_item? fun(item: string|table)
 ---@field win_config? nui_popup_options
 
 M.get_notify_popup = function(opts, last_pop)

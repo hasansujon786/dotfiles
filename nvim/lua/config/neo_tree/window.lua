@@ -1,4 +1,44 @@
-local util = require('config.neo_tree.util')
+local tree_util = require('config.neo_tree.util')
+
+local function show_more_options(state)
+  local options = {
+    {
+      label = 'Copy current node',
+      key = 'y',
+      action = function()
+        tree_util.copy_path(state, ':t')
+      end,
+    },
+    {
+      label = 'Copy absolute node',
+      key = 'Y',
+      action = function()
+        tree_util.copy_path(state)
+      end,
+    },
+    {
+      label = 'Copy relative node',
+      key = 'r',
+      action = function()
+        tree_util.copy_path(state, ':.')
+      end,
+    },
+  }
+
+  require('hasan.widgets').get_select(options, function(item)
+    if item.action then
+      item.action()
+    end
+  end, {
+    prompt = 'Neotree menu',
+    kind = 'get_char',
+    min_width = 30,
+    win_config = {
+      relative = 'cursor',
+      position = { row = 3, col = 1 },
+    },
+  })
+end
 
 return {
   position = 'left',
@@ -30,6 +70,8 @@ return {
     ['zR'] = 'expand_all_nodes',
     ['zc'] = 'close_all_nodes',
     ['zC'] = 'close_all_nodes',
+    ['zm'] = 'close_all_nodes',
+    ['zM'] = 'close_all_nodes',
     ['Z'] = 'close_all_subnodes',
     -- ['zc'] = 'close_all_subnodes',
 
@@ -49,36 +91,22 @@ return {
     -- ['c'] = { 'copy', config = { show_path = 'none' } }, -- "none", "relative", "absolute"
     -- ['m'] = 'move', -- takes text input for destination, also accepts the optional config.show_path option like "add".
 
-    ['gy'] = {
+    ['m'] = { show_more_options, desc = 'Show more options' },
+    ['Y'] = {
       function(state)
-        util.copy_path(state, ':t')
+        tree_util.copy_path(state)
       end,
       desc = 'Copy current node',
     },
-    ['Y'] = {
-      function(state)
-        util.copy_path(state, ':.')
-      end,
-      desc = 'Copy relative node',
-    },
-    ['gf'] = {
-      function(state)
-        util.copy_path(state)
-      end,
-      desc = 'Copy absolute node',
-    },
 
-    ['b'] = 'prev_source',
-    ['w'] = 'next_source',
-    ['e'] = 'next_source',
-    ['{'] = 'prev_source',
-    ['}'] = 'next_source',
+    ['<s-tab>'] = 'prev_source',
+    ['<tab>'] = 'next_source',
     ['[['] = 'prev_source',
     [']]'] = 'next_source',
 
     ['<space>'] = 'none',
+    ['<bs>'] = 'none',
     ['z'] = 'none',
     ['c'] = 'none',
-    ['m'] = 'none',
   },
 }

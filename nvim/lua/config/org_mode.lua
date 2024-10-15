@@ -100,7 +100,7 @@ return {
               end
             end
 
-            require('hasan.widgets').get_select(options, {
+            require('hasan.widgets').get_select(options, handler, {
               prompt = ' ' .. data.title .. ' ',
               kind = 'get_char',
               min_width = 40,
@@ -108,7 +108,7 @@ return {
               format_item = function(item)
                 return string.format('   %s - %s', item.key, item.label)
               end,
-            }, handler)
+            })
           end,
         },
       },

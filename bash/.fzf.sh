@@ -148,7 +148,7 @@ fk() {
 }
 
 f() {
-  readarray -t out <<<"$(fzf --tac --query="$1" --expect=alt-o)"
+  readarray -t out <<<"$(fzf --tac --query="$1" --expect=alt-o,alt-c)"
   shortcut=${out[0]}
   files=("${out[@]:1}")
 
@@ -157,19 +157,29 @@ f() {
     return
   fi
 
+  # Open text files with nvim if no kemaps are pressed
   if [ -z "$shortcut" ]; then
     local mime_type
+    local text_mime_types=("application/json" "application/javascript" "inode/x-empty" "application/xml" "application/x-sql" "application/octet-stream")
+
     mime_type=$(file --mime-type -b "${files[0]}")
     echo "$mime_type"
 
-    if [[ $mime_type == text/* ]] || [[ $mime_type == application/json ]] || [[ $mime_type == inode/x-empty ]]; then
+    if [[ $mime_type == text/* ]] || [[ " ${text_mime_types[*]} " == *" $mime_type "* ]]; then
       ${EDITOR:-nvim} "${files[@]}"
       return
     fi
   fi
 
+  # Cd into selected file directory
+  if [[ "$shortcut" = alt-c ]]; then
+    dir=$(dirname "${files[0]}")
+    cd "$dir" || exit && printf 'cd -- %q' "$dir"
+    return
+  fi
+
+  # Open each file with default app
   if [[ "$shortcut" = alt-o ]] || [ -z "$shortcut" ]; then
-    # Open each file with default app
     if [[ "${#files[@]}" -gt 1 ]]; then
       for file in "${files[@]}"; do
         explorer "$file"

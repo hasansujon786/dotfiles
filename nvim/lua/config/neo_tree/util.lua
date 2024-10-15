@@ -22,13 +22,19 @@ M.save_altfile = function()
   end
 end
 
-M.copy_path = function(state, modifire)
-  local node = state.tree:get_node()
-  local path_name = node.path
+M.copy_path = function(path_or_state, modifire)
+  local path_name
+  if type(path_or_state) == 'string' then
+    path_name = path_or_state
+  else
+    local node = path_or_state.tree:get_node()
+    path_name = node.path
+  end
   if modifire ~= nil then
-    path_name = vim.fn.fnamemodify(node.path, modifire)
+    path_name = vim.fn.fnamemodify(path_name, modifire)
   end
   path_name = vim.fs.normalize(path_name)
+
   vim.fn.setreg('+', path_name)
   notify(path_name, vim.log.levels.TRACE, { title = 'Neotree' })
 end
