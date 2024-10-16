@@ -1,9 +1,9 @@
 local api = vim.api
 local utils = require('hasan.utils')
-local state = require("core.state").ui
+local state = require('core.state').ui
 local M = {
   alternate_winid_to_ignore = nil,
-  skip_update_on_focus_ft = { 'neo-tree-popup' },
+  skip_update_on_focus_ft = { 'neo-tree-popup', 'nui-select-cursor' },
   ignore_alt_win_ft = {
     'noice',
     'Outline',
@@ -12,7 +12,7 @@ local M = {
     'neo-tree',
     'flutterToolsOutline',
     'log',
-    'dbui'
+    'dbui',
   },
 }
 M.mark_as_alternate_win = function(winid)

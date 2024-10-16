@@ -31,12 +31,9 @@ local function show_more_options(state)
     end
   end, {
     prompt = 'Neotree menu',
+    relative = 'cursor',
     kind = 'get_char',
     min_width = 30,
-    win_config = {
-      relative = 'cursor',
-      position = { row = 3, col = 1 },
-    },
   })
 end
 

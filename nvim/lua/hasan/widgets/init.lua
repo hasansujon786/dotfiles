@@ -118,12 +118,19 @@ M.get_tabbar_input = function(opts, callback)
   M.get_input(opts, callback)
 end
 
+local select_defaults = {
+  position = {
+    editor = { row = '50%', col = '50%' },
+    cursor = { row = 3, col = 1 },
+  },
+}
 ---Prompts the user to pick from a list of items
 ---@param items table
 ---@param on_choice fun(item: any|nil)
 ---@param opts? SelectMenuOpts
 M.get_select = function(items, on_choice, opts)
   opts = opts and opts or {}
+  opts.relative = utils.get_default(opts.relative, 'editor')
 
   local right_pad = 6
   local min_width = opts.min_width or 20
@@ -157,8 +164,8 @@ M.get_select = function(items, on_choice, opts)
   end
 
   local win_config = utils.merge({
-    relative = 'editor',
-    position = { row = '50%', col = '50%' },
+    relative = opts.relative,
+    position = select_defaults.position[opts.relative],
     border = {
       -- left = opts.number and 0 or 2, right = opts.number and 3 or 2,
       padding = { top = 1, bottom = 1, left = 0, right = 0 },
@@ -171,7 +178,11 @@ M.get_select = function(items, on_choice, opts)
       number = opts.kind ~= 'get_char',
       winhighlight = 'Normal:NuiNormalFloat,CursorLine:NuiMenuItem,CursorLineNr:NuiMenuItem',
     },
+    buf_options = {
+      filetype = opts.relative == 'cursor' and 'nui-select-cursor' or 'nui-select',
+    },
   }, opts.win_config or {})
+  opts.relative = nil
   opts.prompt = nil
   opts.prompt_align = nil
   opts.win_config = nil
@@ -219,8 +230,9 @@ end
 ---@field min_width? number
 ---@field max_width? number
 ---@field prompt_align? string
----@field format_item? fun(item: string|table)
+---@field format_item? fun(item: string|table): string
 ---@field win_config? nui_popup_options
+---@field relative? "'cursor'"|"'editor'"|"'win'"
 
 M.get_notify_popup = function(opts, last_pop)
   local row = vim.o.lines - 1

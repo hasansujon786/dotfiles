@@ -65,7 +65,7 @@ function M.edit_alternate_file()
     if vim.b['neo_tree_position'] == 'current' then
       return feedkeys('<c-^>')
     end
-    return feedkeys('q')
+    return feedkeys('<C-w>p')
   end
 
   local alt_file = vim.w.alt_file
