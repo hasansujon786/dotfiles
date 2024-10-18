@@ -73,11 +73,12 @@ return {
         function()
           vim.cmd('Lazy load text-case.nvim')
           vim.defer_fn(function()
-            vim.keymap.del('n', 'ga')
+            vim.keymap.del(nx, 'ga')
             feedkeys('ga')
           end, 10)
         end,
         desc = 'TextCase',
+        mode = nx,
       },
     },
     cmd = {

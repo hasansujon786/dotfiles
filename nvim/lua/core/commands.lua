@@ -19,3 +19,16 @@ vim.api.nvim_create_user_command('ClearShada', function()
     vim.print('Successfully deleted all temporary shada files')
   end
 end, { desc = 'Clears all the .tmp shada files' })
+
+vim.api.nvim_create_user_command('ParseTiemISO', function(ctx)
+  local str = nil
+  if ctx.range == 2 then
+    str = require('hasan.utils').get_visual_selection()
+  elseif require('hasan.utils').is_visual_mode() then
+    local r = require('hasan.utils.visual').get_visual_region(0, true)
+    str = require('hasan.utils.visual').nvim_buf_get_text(0, r.start_row, r.start_col, r.end_row, r.end_col)[1]
+  else
+    str = vim.fn.expand('<cWORD>')
+  end
+  require('hasan.utils.time').parse_time(str)
+end, { desc = 'Parse ISO time', range = true })

@@ -8,9 +8,9 @@ local nx, ic = { 'n', 'x' }, { 'i', 'c' }
 keymap(nx, 'q', '<esc><cmd>noh<CR><C-l>')
 keymap('n', 'Q', 'q') -- Use Q to record macros
 keymap('v', '@', ':norm @', noSilent) -- run macro on selection
-keymap(nx, '<CR>', ':<up>', noSilent) -- run last : command easily
-keymap(nx, '<leader>I', 'q:', noSilent) -- run last : command easily
 keymap(nx, "'", '`') -- Character wise jumps always
+keymap(nx, '<CR>', ':<up>', { silent = false, desc = 'Run last command easily' })
+keymap(nx, '<leader><cr>', 'q:', { silent = false, desc = 'Open command history' })
 
 -- fix InsertEnter zz
 keymap('n', 'A', 'zzA')
@@ -61,8 +61,9 @@ keymap('n', 'dm', ':%s/<c-r>///g<CR>', { desc = 'Delete all matches' })
 keymap('n', 'dM', ':%g/<c-r>//d<CR>', { desc = 'Delete all lines with matches' })
 keymap(nx, '<leader>cw', '<cmd>lua require("hasan.widgets.inputs").substitute_word()<CR>', { desc = 'Substitute word' })
 
-keymap('n', 'z/', '/\\%><C-r>=line("w0")-1<CR>l\\%<<C-r>=line("w$")+1<CR>l', { silent = false }) -- search in visible viewport
-keymap('x', 'z/', '<ESC>/\\%V', noSilent) -- search in visual selection
+local search_viewport = '/\\%><C-r>=line("w0")-1<CR>l\\%<<C-r>=line("w$")+1<CR>l'
+keymap('n', 'z/', search_viewport, { silent = false, desc = 'Search in viewport' })
+keymap('x', 'z/', '<ESC>/\\%V', { silent = false, desc = 'Search in visual selection' })
 
 keymap('n', '<leader>r', '<cmd>lua require("hasan.utils.win").cycle_numbering()<CR>', { desc = 'Cycle number' })
 
