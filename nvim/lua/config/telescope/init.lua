@@ -27,6 +27,9 @@ return {
         ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
         ['<C-s>'] = actions.file_split,
         ['<esc>'] = actions.close,
+        ['jk'] = function()
+          vim.cmd('stopinsert')
+        end,
         ['<M-q>'] = function(...)
           require('telescope.actions.layout').toggle_preview(...)
         end,

@@ -15,8 +15,21 @@ return {
     -- Cycle through Yanklist items
     keymap('n', '[r', '<Plug>(yanklist-cycle-forward)', { desc = 'Yanklist forward' })
     keymap('n', ']r', '<Plug>(yanklist-cycle-backward)', { desc = 'Yanklist backward' })
+
+    local opt = {
+      attach_mappings = function(_, map)
+        map({ 'n', 'i' }, '<tab>', require('telescope.actions').move_selection_previous)
+        map({ 'n', 'i' }, '<s-tab>', require('telescope.actions').move_selection_next)
+        return true
+      end,
+    }
+
     -- Show Yanklist
-    keymap('n', '<leader>oy', '<cmd>lua require("yanklist").yanklist()<CR>', { desc = 'Show Yanklist' })
-    keymap('x', '<leader>oy', '<Esc><cmd>lua require("yanklist").yanklist_visual()<CR>', { desc = 'Show Yanklist' })
+    keymap('n', '<leader>oy', function()
+      require('yanklist').yanklist(opt)
+    end, { desc = 'Show Yanklist' })
+    keymap('x', '<leader>oy', function()
+      require('yanklist').yanklist_visual(opt)
+    end, { desc = 'Show Yanklist' })
   end,
 }

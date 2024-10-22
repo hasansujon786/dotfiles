@@ -3,7 +3,7 @@ local noSilent = { silent = false }
 
 -- => Simple mappings -------------------------------
 -- G command
-keymap('n', 'gx', '<cmd>lua require("vscode").action("editor.action.openLink")<CR>')
+keymap('n', 'go', '<cmd>lua require("vscode").action("editor.action.openLink")<CR>')
 
 -- Folding
 keymap('n', '<tab>', '<cmd>lua require("vscode").action("editor.toggleFold")<CR>') -- Toggle folds

@@ -1,14 +1,12 @@
 local state = require('core.state')
 local M = {}
 
-local borderchars = state.border_groups[state.ui.telescope_border_style]
-
 M.top_panel_default_opts = {
   -- entry_maker = M.gen_from_file({}),
   sorting_strategy = 'ascending',
   layout_strategy = 'top_panel',
   border = true,
-  borderchars = borderchars,
+  borderchars = state.border_groups.edged_top,
   layout_config = {
     anchor = 'N',
     width = function(_, max_columns, _, _)
@@ -68,10 +66,8 @@ M.setup = function()
     local layout = layout_strategies.center(self, max_columns, max_lines, layout_config)
     layout.prompt.line = layout.prompt.line - 1
     layout.results.line = layout.results.line - 1
-    layout.results.borderchars = { '▁', '▕', '▁', '▏', '🭼', '🭿', '🭿', '🭼' }
     if layout.preview then
-      layout.preview.line = layout.preview.line - 1
-      layout.preview.borderchars = { ' ', '▕', '▁', '▏', '▏', '▕', '🭿', '🭼' }
+      layout.preview.line = layout.preview.line - 2
     end
     return layout
   end
