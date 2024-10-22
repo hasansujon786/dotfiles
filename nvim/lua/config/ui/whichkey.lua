@@ -92,7 +92,6 @@ return {
       { '<leader>b', group = 'buffer' },
       { '<leader>bK', '<cmd>call hasan#utils#buffer#_clear_all()<CR>', desc = 'Kill all buffers' },
       { '<leader>bM', '<cmd>call hasan#fzf#edit_bookmark()<CR>', desc = 'Delete bookmark' },
-      { '<leader>bS', '<cmd>wa<CR>', desc = 'Save all buffer' },
       { '<leader>bb', '<cmd>lua require("hasan.telescope.custom").buffers(false)<CR>', desc = 'Switch all buffers' },
       { '<leader>bf', '<cmd>bfirst<CR>', desc = 'First buffer' },
       { '<leader>bk', '<cmd>call hasan#utils#buffer#_clear()<CR>', desc = 'Kill this buffer' },
@@ -101,7 +100,7 @@ return {
       { '<leader>bn', '<cmd>bnext<CR>', desc = 'Next buffer' },
       { '<leader>bo', '<cmd>call hasan#utils#buffer#_clear_other()<CR>', desc = 'Kill other buffers' },
       { '<leader>bp', '<cmd>bprevious<CR>', desc = 'Previous buffer' },
-      { '<leader>bs', '<cmd>w<CR>', desc = 'Save buffer' },
+      { '<leader>bs', '<cmd>wa<CR>', desc = 'Save all buffer' },
       { '<leader>b.', '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>', desc = 'Switch buffers' },
       { '<leader>m', '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>', desc = 'Switch buffers' },
 
@@ -173,7 +172,7 @@ return {
       { '<leader>gO', '<cmd>lua require("hasan.utils.init").open_git_remote(false)<CR>', desc = 'Open git repo file' },
 
       -- INSERT
-      { '<leader>i', group = '' },
+      { '<leader>i', group = 'insert' },
       { '<leader>if', '<cmd>lua insert(vim.fn.expand("%:~"))<CR>', desc = 'Current full path' },
       { '<leader>iF', '<cmd>lua insert(vim.fn.expand("%:t"))<CR>', desc = 'Current file name' },
 

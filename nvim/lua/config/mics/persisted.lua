@@ -3,6 +3,7 @@ local psessions_path = vim.fn.expand(vim.fn.stdpath('data') .. '/sessions/')
 return {
   'olimorris/persisted.nvim',
   lazy = not require('core.state').ui.session_autoload, -- make sure we load this during startup if it is your main colorscheme
+  enabled = not vim.g.vscode,
   module = 'persisted',
   cmd = { 'SessionLoad', 'SessionLoadLast', 'SessionSave' },
   keys = {

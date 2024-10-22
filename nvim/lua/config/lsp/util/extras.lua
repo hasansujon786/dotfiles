@@ -185,7 +185,7 @@ function M.lspRename()
 end
 
 ---Open quickfix with current ref focused
-function M.references_and_focus_cur_ref()
+function M.references_ref()
   local qf_line_left_fmt = '%s │%5d:%-3d│'
   local search_cmd_fmt = "call search('%s')"
   vim.fn['hasan#utils#feedkeys']('viwo<ESC>', 'n')

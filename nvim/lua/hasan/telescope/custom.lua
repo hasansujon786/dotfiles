@@ -110,6 +110,10 @@ M.my_find_files = function(dir)
   builtin.find_files(my_theme.get_top_panel({ cwd = dir == 'cur_dir' and vim.fn.expand('%:h') or nil }))
 end
 
+M.references = function()
+  builtin.lsp_references(my_theme.get_cursor_vertical())
+end
+
 function M.curbuf(is_visual)
   local word = is_visual and require('hasan.utils').get_visual_selection() or nil
 
@@ -288,7 +292,6 @@ M.buffers = function(is_cwd_only)
     cwd_only = is_cwd_only,
     sort_mru = true,
     sort_lastused = true,
-    initial_mode = 'normal',
     previewer = false,
     ignore_current_buffer = is_cwd_only,
     attach_mappings = function(_, map)

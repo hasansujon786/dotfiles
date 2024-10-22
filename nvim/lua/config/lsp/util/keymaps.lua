@@ -16,10 +16,11 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', '<C-LeftMouse>', '<LeftMouse><cmd>lua vim.lsp.buf.definition()<CR>', desc('which_key_ignore'))
   keymap('n', 'gd', '<cmd>Glance definitions<CR>', desc('Lsp: go to definition'))
   keymap('n', 'gr', '<cmd>Glance references<CR>', desc('Lsp: go to references'))
-  keymap('n', 'gm', '<cmd>Glance implementations<CR>', desc('Lsp: type implementation'))
+  keymap('n', 'gI', '<cmd>Glance implementations<CR>', desc('Lsp: type implementation'))
   keymap('n', 'gy', '<cmd>Glance type_definitions<CR>', desc('Lsp: type definition'))
   keymap('n', 'gD', vim.lsp.buf.declaration, desc('Lsp: go to declaration'))
-  keymap('n', 'gR', require('config.lsp.util.extras').references_and_focus_cur_ref, desc('Lsp: go to references'))
+  keymap('n', 'gR', '<cmd>lua require("config.lsp.util.extras").references_ref()<cr>', desc('Lsp: go to references'))
+  keymap('n', 'g.', '<cmd>lua require("hasan.telescope.custom").references()<cr>', desc('Lsp: go to references'))
 
   keymap('n', 'gpd', require('config.lsp.util.peek').PeekDefinition, desc('Lsp: peek definition'))
   keymap('n', 'gpm', require('config.lsp.util.peek').PeekImplementation, desc('Lsp: peek implementation'))
@@ -29,7 +30,7 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', 'K', vim.lsp.buf.hover, desc('Lsp: hover under cursor'))
   keymap('n', '<F2>', require('config.lsp.util.extras').lspRename, desc('Lsp: rename under cursor'))
   if client.server_capabilities.documentSymbolProvider then
-    keymap('n', 'g.', require('hasan.telescope.lsp').prettyDocumentSymbols, desc('Lsp: document symbols'))
+    keymap('n', 'gm', require('hasan.telescope.lsp').prettyDocumentSymbols, desc('Lsp: document symbols'))
   end
   for _, action_key in ipairs({ '<C-q>', '<C-space>', '<A-space>' }) do
     keymap({ 'n', 'x' }, action_key, vim.lsp.buf.code_action, desc('Lsp: code action'))

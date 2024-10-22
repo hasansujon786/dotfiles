@@ -54,6 +54,7 @@ return {
     'nvim-telescope/telescope-dap.nvim',
     'mxsdev/nvim-dap-vscode-js',
     'theHamsta/nvim-dap-virtual-text',
+    'nvim-neotest/nvim-nio',
     -- 'jbyuki/one-small-step-for-vimkind',
     {
       'rcarriga/nvim-dap-ui',

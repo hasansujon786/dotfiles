@@ -50,6 +50,7 @@ M.setup = function(dap)
         protocol = 'inspector',
         sourceMaps = true,
         userDataDir = false,
+        skipFiles = { '<node_internals>/**', 'node_modules/**' },
         -- runtimeArgs = { '--restore-last-session', '--remote-debugging-port=9222' },
         -- userDataDir = false,
         -- userDataDir = '${workspaceFolder}/.vscode/vscode-chrome-debug-userdatadir',
@@ -65,6 +66,7 @@ M.setup = function(dap)
         port = 9222,
         -- port = function() return vim.fn.input('Select port: ', 9222) end,
         webRoot = '${workspaceFolder}',
+        skipFiles = { '<node_internals>/**', 'node_modules/**' },
       },
       -- Debug express.js applications (run node with --inspect)
       {
@@ -74,7 +76,7 @@ M.setup = function(dap)
         cwd = vim.fn.getcwd(),
         sourceMaps = true,
         protocol = 'inspector',
-        skipFiles = { '<node_internals>/**' },
+        skipFiles = { '<node_internals>/**', 'node_modules/**' },
       },
     }
   end

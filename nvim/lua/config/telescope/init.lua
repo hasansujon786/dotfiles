@@ -19,6 +19,8 @@ return {
         ['<M-n>'] = actions.move_selection_next,
         ['<M-k>'] = actions.move_selection_previous,
         ['<M-j>'] = actions.move_selection_next,
+        ['<s-tab>'] = actions.move_selection_previous,
+        ['<tab>'] = actions.move_selection_next,
 
         ['<C-a>'] = actions.select_all,
         ['<C-e>'] = actions.to_fuzzy_refine,
@@ -39,9 +41,9 @@ return {
         ['<C-d>'] = false,
       }
 
-      local dropdown_opts = local_theme.center_layout_opts
-      local get_dropdown = local_theme.get_dropdown()
-      local get_cursor = local_theme.get_cursor()
+      local bordercharsOpt = { borderchars = state.border_groups.edged_top }
+      local get_dropdown = require('telescope.themes').get_dropdown(bordercharsOpt)
+      local get_cursor = require('telescope.themes').get_cursor(bordercharsOpt)
 
       require('telescope').setup({
         defaults = {
@@ -88,10 +90,10 @@ return {
         },
         pickers = {
           find_files = { theme = 'ivy', layout_config = { height = 0.6 } },
-          lsp_document_symbols = dropdown_opts,
-          lsp_references = dropdown_opts,
-          grep_string = dropdown_opts,
-          live_grep = dropdown_opts,
+          -- lsp_references = dropdown_opts,
+          lsp_document_symbols = get_dropdown,
+          grep_string = get_dropdown,
+          live_grep = get_dropdown,
         },
         extensions = {
           fzf = {
