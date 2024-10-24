@@ -196,6 +196,7 @@ if not vim.g.vscode then
 
   -- Leader keys ----------------------------------
   keymap(nx, '<leader>s', '<cmd>silent w<cr>', { desc = 'Save current file' })
+  keymap(nx, '<C-s>', '<cmd>silent w<cr>', { desc = 'Save current file' })
 
   -- Window Management ----------------------------
   keymap('n', 'ZZ', ':Quit!<CR>') -- Prompt before quitting
