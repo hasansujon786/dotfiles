@@ -117,6 +117,11 @@ autoExitFullScreen() {
 ;******************************************************************************
 ; Different Actions
 ;******************************************************************************
+closeWindowByTitle(title) {
+  if WinExist(title) {
+    WinClose(title)
+  }
+}
 toggleWinRestore() {
   ; WinGet WindowID, ID, A
   ; WinGet WindowSize, MinMax, ahk_id %WindowID%

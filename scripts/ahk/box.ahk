@@ -1,3 +1,10 @@
+#Requires AutoHotkey v2.0
+#Warn ; Enable warnings to assist with detecting common errors.
+; SendMode Input ; Recommended for new scripts due to its superior speed and reliability.
+SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
+#SingleInstance Force ; C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\
+#Include %A_ScriptDir%\utils.ahk
+
 ; f1::{
 ;   height := 80
 ;   width := 200
@@ -12,50 +19,44 @@
 ; }
 
 f1::{
-  height := 80
-  width := 800
-  xPos := PosX("center", 0, width)
-  yPos := PosY("center", 0, height)
-
-  MyGui := Gui(, "Title of Window"), MyGui.BackColor := "White", MyGui.Opt("+AlwaysOnTop -Caption +ToolWindow")
-  ; MyGui.Add("Text",, "reloaded"),
-  ; MyGui.Show("x" xPos " y" ypos "w" width " h" height " NA")
-
-  ; MyGui.SetFont(, "Arial")
-  ; MyGui.AddEdit("vName")
-
-
-  ; MyGui.Add("Edit",)  ; Add a fairly wide edit control at the top of the window.
-  ; ; MyGui.Add("Text", "Section", "First Name:")  ; Save this control's position and start a new section.
-  ; ; MyGui.Add("Text",, "Last Name:")
-  ; MyGui.Add("Edit", "ys")  ; Start a new column within this section.
-  ; MyGui.Add("Edit")
-
-  ; MyGui.MarginX := "200"
-  ; FileMenu := Menu()
-  ; FileMenu.Add "&Open`tCtrl+O", (*) => FileSelect()  ; See remarks below about Ctrl+O.
-  ; FileMenu.Add "E&xit", (*) => ExitApp()
-  ; HelpMenu := Menu()
-  ; HelpMenu.Add "&About", (*) => MsgBox("Not implemented")
-  ; Menus := MenuBar()
-  ; Menus.Add "&File", FileMenu  ; Attach the two submenus that were created above.
-  ; Menus.Add "&Help", HelpMenu
-  ; MyGui := Gui()
-  ; MyGui.MenuBar := Menus
-  ; MyGui.Show "w300 h200"
-
-  ; MyGui.SetFont("s18", "Arial")  ; Set a large font size (32-point).
-  ; MyGui.Add("Text",, "reloaded"),
-  MyGui.Add("Text", "cRed", "XXXXX YYYYY")  ; XX & YY serve to auto-size the window.
-
-  MyGui.Show("x" xPos " y" ypos "w" width " h" height " NA")
-  Sleep(1000)
-  ; MyGui.Maximize()
-  Sleep(5000)
-  MyGui.Destroy
+  Run("C:\Users\" A_UserName "\dotfiles\scripts\ahk\box.ahk")
 }
 
+
+
 f2::{
+  closeWindowByTitle("autoclick_status_line")
+
+  height := 30
+  width := 200
+  xPos := PosX("center", 0, width)
+  yPos := PosY("top", 0, height)
+  SLine := Gui(, "autoclick_status_line"), SLine.BackColor := 0xff5ab0f6, SLine.Opt("+AlwaysOnTop -Caption +ToolWindow")
+
+  title := SLine.AddText("cBlack w185 h30 Center", "Automation")  ; XX & YY serve to auto-size the window.
+  title.SetFont("s12 Bold", "Arial")
+
+  SLine.Show("x" xPos " y" ypos "w" width " h" height " NA")
+  ; Sleep(3000)
+  ; SLine.Maximize()
+  ; Sleep(5000)
+  ; SLine.Destroy
+}
+
+f8::{
+  color := "cBlack"
+  msg := "Capslock Off"
+  MyGui := Gui("ToolWindow +AlwaysOnTop -Sysmenu Disabled -Caption"), MyGui.Title := "CapsLosckStatus", MyGui.SetFont("s20", "Arial")
+  ; if (isCapsOn) {
+  ;   color := "cWhite"
+  ;   msg := "Capslock On"
+  ;   MyGui.BackColor := "Red"
+  ; }
+  MyGui.Add("Text" ,"w300 y70 Center " color, msg)
+  MyGui.Show("h200 NA")
+}
+
+f4::{
   ; MyGui := Gui()
   ; MyGui.Opt("+AlwaysOnTop -Caption +ToolWindow")  ; +ToolWindow avoids a taskbar button and an alt-tab menu item.
   ; MyGui.BackColor := "EEAA99"  ; Can be any RGB color (it will be made transparent below).

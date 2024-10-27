@@ -139,3 +139,18 @@ scroll_right() {
   Loop 8 ; <-- Increase for faster scrolling
     ErrorLevel := SendMessage(0x114, 1, 0, fcontrol, "ahk_id " id) ;  0x114 is WM_HSCROLL and the 1 after it is SB_LINELEFT.
 }
+
+GetFirefoxURL() {
+  if (WinExist("ahk_class MozillaWindowClass")) {
+    ; Activate the Firefox window
+      WinActivate()
+      ; Focus the address bar and copy URL
+      Send("^l")
+      Sleep(100)
+      Send("^c")
+      ClipWait(100)
+      Sleep(100)
+      return A_Clipboard
+  }
+  return "Firefox window not found"
+}

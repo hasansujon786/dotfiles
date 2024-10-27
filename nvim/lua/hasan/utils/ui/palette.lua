@@ -94,6 +94,7 @@ local function set_custom_highlights()
     HeirlineTabInactive     = { fg = c.red, bg = c.layer },
     WinSeparator            = { fg = c.bg_d2, bg = c.none },
     TabBarInputBorder       = { fg = c.blue, bg = c.bg_d },
+    MatchParen              = { link = 'DiagnosticLineNrInfo' },
 
     -- /// LSP ///
     LspReferenceText        = { bg = '#3B4048', },

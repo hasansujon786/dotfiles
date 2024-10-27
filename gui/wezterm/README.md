@@ -3,8 +3,11 @@ https://github.com/yutkat/dotfiles/blob/main/.config/wezterm/wezterm.lua
 https://gist.github.com/gsuuon/5511f0aa10c10c6cbd762e0b3e596b71
 
 ## plugins
-https://github.com/sei40kr/wez-status-generator
-https://github.com/sei40kr/wez-per-project-workspace
+- https://github.com/sei40kr/wez-status-generator
+- https://github.com/sei40kr/wez-per-project-workspace
+- https://github.com/MLFlexer/resurrect.wezterm
+- https://github.com/danielcopper/wezterm-session-manager
+- https://github.com/MLFlexer/smart_workspace_switcher.wezterm
 
 ## Theme
 https://github.com/neapsix/wezterm

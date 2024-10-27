@@ -191,30 +191,5 @@ winMode := 0
   }
 #HotIf
 
-ytRemovetFromWL() {
-  Send("{LButton}")
-  sleep(100)
-  ; Send("{tab}")
-  Send("{tab}")
-  Send("{tab}")
-  Send("{Enter}")
-}
-
-firebaseRemoveAuthUser() {
-  beep()
-  Send("{LButton}")
-  sleep(100)
-  Send("{Down}")
-  Send("{Down}")
-  Send("{Enter}")
-  sleep(400)
-  Send("{tab}")
-  Send("{tab}")
-  Send("{tab}")
-  sleep(100)
-  Send("{Enter}")
-}
-~LAlt & LButton::ytRemovetFromWL()
-; ~LAlt & LButton::firebaseRemoveAuthUser()
-
 #Include %A_ScriptDir%\vim_explorer.ahk
+#Include %A_ScriptDir%\automation_mode.ahk
