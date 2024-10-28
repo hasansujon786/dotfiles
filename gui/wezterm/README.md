@@ -182,6 +182,10 @@ wezterm.format({
   { Foreground = { AnsiColor = 'Fuchsia' } },
   { Text = 'Enter name for tab' },
 })
+
+local type = string.match(id, '^([^/]+)') -- match before '/'
+id = string.match(id, '(.+)%..+$') -- remove file extention
+id = string.match(id, '([^/]+)$') -- match after '/'
 ```
 ## theme onedarkhalf
                         light     dark

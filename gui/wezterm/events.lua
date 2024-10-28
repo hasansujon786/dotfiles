@@ -141,6 +141,22 @@ local M = {
       }),
     },
     {
+      key = 'F2',
+      mods = 'ALT|CTRL',
+      action = act.PromptInputLine({
+        description = wezterm.format({
+          { Attribute = { Intensity = 'Bold' } },
+          { Foreground = { AnsiColor = 'Fuchsia' } },
+          { Text = 'Enter name for workspace' },
+        }),
+        action = wezterm.action_callback(function(_, _, line)
+          if line then
+            wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line)
+          end
+        end),
+      }),
+    },
+    {
       key = 'F11',
       action = wezterm.action_callback(function(window, pane)
         window:perform_action('ToggleFullScreen', pane)
