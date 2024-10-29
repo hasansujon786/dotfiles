@@ -19,9 +19,9 @@ return {
     },
   },
   config = function()
-    local icon = require('hasan.utils.ui.icons')
-    local k = icon.kind
-    local t = icon.type
+    local Icons = require('hasan.utils.ui.icons')
+    local k = Icons.kind
+    local t = Icons.type
 
     require('outline').setup({
       outline_window = {
@@ -46,7 +46,7 @@ return {
         -- Set to false to unfold all on open.
         autofold_depth = false, -- number|boolean
         auto_unfold = { hovered = true, only = 1 },
-        markers = { '', '' },
+        markers = { Icons.Other.ChevronSlimRight, Icons.Other.ChevronSlimDown },
       },
       preview_window = {
         border = 'rounded',
@@ -79,7 +79,7 @@ return {
           File = { icon = k.File, hl = '@text.uri' },
           Module = { icon = k.Module, hl = '@namespace' },
           Namespace = { icon = t.Array, hl = '@namespace' },
-          Package = { icon = icon.ui.Package, hl = '@namespace' },
+          Package = { icon = Icons.ui.Package, hl = '@namespace' },
           Class = { icon = k.Class, hl = '@type' },
           -- Method = { icon = '', hl = '@method' },
           Method = { icon = k.Method, hl = '@method' },

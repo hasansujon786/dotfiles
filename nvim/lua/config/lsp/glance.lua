@@ -2,6 +2,7 @@ return {
   'DNLHC/glance.nvim',
   cmd = 'Glance',
   config = function()
+    local Icons = require('hasan.utils.ui.icons').Other
     local glance = require('glance')
     local mod = require('hasan.widgets.glance_mod')
     local actions = glance.actions
@@ -60,8 +61,8 @@ return {
         end,
       },
       folds = {
-        fold_closed = '',
-        fold_open = '',
+        fold_closed = Icons.ChevronSlimRight,
+        fold_open = Icons.ChevronSlimDown,
         folded = true, -- Automatically fold list on startup
       },
       indent_lines = {

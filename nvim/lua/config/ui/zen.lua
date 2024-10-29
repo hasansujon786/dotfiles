@@ -7,7 +7,7 @@ return {
   cmd = 'ZenMode',
   keys = {
     {
-      '<leader>z',
+      '<leader>u',
       function()
         if require('zen-mode.view').is_open() then
           pos = vim.api.nvim_win_get_cursor(require('zen-mode.view').win)
@@ -18,7 +18,7 @@ return {
       desc = 'ZenMode',
     },
     {
-      '<leader>u',
+      '<leader>z',
       function()
         if require('zen-mode.view').is_open() then
           pos = vim.api.nvim_win_get_cursor(require('zen-mode.view').win)

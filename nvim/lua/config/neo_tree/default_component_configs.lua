@@ -1,3 +1,4 @@
+local Icons = require('hasan.utils.ui.icons')
 return {
   container = {
     enable_character_fade = true,
@@ -12,17 +13,17 @@ return {
     highlight = 'NeoTreeIndentMarker',
     -- expander config, needed for nesting files
     with_expanders = nil, -- if nil and file nesting is enabled, will enable expanders
-    expander_collapsed = '',
-    expander_expanded = '',
+    expander_collapsed = Icons.Other.ChevronSlimRight,
+    expander_expanded = Icons.Other.ChevronSlimDown,
     expander_highlight = 'NeoTreeExpander',
   },
   icon = {
-    folder_closed = '',
-    folder_open = '',
-    folder_empty = '',
+    folder_closed = Icons.documents.FolderClosed,
+    folder_open = Icons.documents.FolderOpen,
+    folder_empty = Icons.documents.FolderEmpty,
     -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
     -- then these will never be used.
-    default = '',
+    default = Icons.documents.File,
     highlight = 'NeoTreeFileIcon',
   },
   modified = {
@@ -36,13 +37,14 @@ return {
   },
   git_status = {
     symbols = {
+      -- Using Latin Letter Small Capital unicode
       -- Change type
-      added = 'A', -- or "✚", but this is redundant info if you use git_status_colors on the name
-      modified = 'M', -- or "", but this is redundant info if you use git_status_colors on the name
-      deleted = 'D', -- this can only be used in the git_status source
-      renamed = 'R', -- this can only be used in the git_status source
+      added = 'ᴀ', -- U+1D00 -- or "✚", but this is redundant info if you use git_status_colors on the name
+      modified = 'ᴍ', -- or "", but this is redundant info if you use git_status_colors on the name
+      deleted = 'ᴅ', -- this can only be used in the git_status source
+      renamed = 'ʀ', -- this can only be used in the git_status source
       -- Status type
-      untracked = 'U',
+      untracked = 'ᴜ',
       conflict = '',
       ignored = '◌',
       unstaged = '',

@@ -212,22 +212,21 @@ return {
         format = function(entry, item)
           -- NOTE: order matters
           item.menu = ({
-            nvim_lsp = 'ﲳ ',
+            nvim_lsp = ' ',
             nvim_lua = ' ',
             treesitter = ' ',
-            path = 'ﱮ ',
-            buffer = '﬘ ',
+            path = ' ',
+            buffer = ' ',
             zsh = ' ',
             vsnip = ' ',
-            spell = '暈 ',
+            spell = ' ',
             orgmode = '✿ ',
             luasnip = ' ',
           })[entry.source.name]
-          item.menu = string.format('%s %s', string.sub(item.kind, 1, 3), item.menu)
+          -- item.menu = string.format('%s %s', string.sub(item.kind, 1, 3), item.menu)
 
           -- Kind icons
-          -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
-          item.kind = string.format('%s', kind_icons[item.kind])
+          item.kind = string.format('%s ', kind_icons[item.kind])
 
           -- Turncate label
           local content = item.abbr

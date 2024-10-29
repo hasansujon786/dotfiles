@@ -1,6 +1,8 @@
 -- Dap configs:
 -- https://github.com/dreamsofcode-io/neovim-nodejs/blob/main/configs/dap.lua
 
+local Icons = require('hasan.utils.ui.icons').Other
+
 local function configure_debuggers()
   local dap = require('dap')
   require('config.dap.typescript').setup(dap)
@@ -59,7 +61,7 @@ return {
     {
       'rcarriga/nvim-dap-ui',
       opts = {
-        icons = { expanded = '', collapsed = '', current_frame = '' },
+        icons = { expanded = Icons.ChevronSlimDown, collapsed = Icons.ChevronSlimRight, current_frame = '' },
         floating = {
           max_height = 0.9, -- These can be integers or a float between 0 and 1.
           max_width = 0.8, -- Floats will be treated as percentage of your screen.

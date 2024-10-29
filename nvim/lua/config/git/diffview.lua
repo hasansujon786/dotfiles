@@ -1,4 +1,6 @@
+local Icons = require('hasan.utils.ui.icons')
 local nebulous = '<cmd>lua require("nebulous.init").pause(2000)<CR>'
+
 return {
   'sindrets/diffview.nvim',
   lazy = true,
@@ -31,8 +33,15 @@ return {
       use_icons = true, -- Requires nvim-web-devicons
       show_help_hints = true, -- Show hints for how to open the help panel
       watch_index = true, -- Update views and index buffers when the git index changes.
-      icons = { folder_closed = '', folder_open = '' },
-      signs = { fold_closed = '', fold_open = '', done = '✓' },
+      icons = {
+        folder_closed = Icons.documents.FolderClosed,
+        folder_open = Icons.documents.FolderOpen,
+      },
+      signs = {
+        fold_closed = Icons.Other.ChevronSlimRight,
+        fold_open = Icons.Other.ChevronSlimDown,
+        done = Icons.ui.Check,
+      },
       view = {
         default = {
           layout = 'diff2_horizontal',

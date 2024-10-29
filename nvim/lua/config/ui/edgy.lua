@@ -4,6 +4,7 @@ return {
   enabled = true,
   lazy = true, -- make sure we load this during startup if it is your main colorscheme
   config = function()
+    local Icons = require('hasan.utils.ui.icons').Other
     local color = require('hasan.utils.color')
     vim.opt.splitkeep = 'screen'
 
@@ -108,7 +109,7 @@ return {
     })
 
     require('edgy').setup({
-      icons = { closed = ' ', open = ' ' },
+      icons = { closed = Icons.ChevronSolidRight, open = Icons.ChevronSolidDown },
       exit_when_last = false,
       bottom = bottom,
       right = right,

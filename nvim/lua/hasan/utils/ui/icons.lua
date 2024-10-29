@@ -1,7 +1,8 @@
--- require('hasan.utils.ui.icons')
+-- local Icons = require('hasan.utils.ui.icons')
+
 local useCodicons = true
 
--- https://github.com/ecosse3/nvim
+-- stylua: ignore
 local other = {
   abc                 = '',
   arrowReturn         = '',
@@ -103,11 +104,29 @@ local other = {
   BoldArrowLeft       = '',
   BoldArrowRight      = '',
   BoldArrowUp         = '',
+  SlimArrowDown       = '↓',
+  SlimArrowLeft       = '←',
+  SlimArrowRight      = '→',
+  SlimArrowUp         = '↑',
+  SlimArrowUpRight    = '↗',
+  SlimArrowUpLeft     = '↖',
+  SlimArrowDownRight  = '↘',
+  SlimArrowDownLeft   = '↙',
+  SlimArrowUpDown     = '↕',
+  SlimArrowLeftRight  = '↔',
   BoxChecked          = '',
-  ChevronShortUp      = '',
-  ChevronShortDown    = '',
-  ChevronShortLeft    = '',
-  ChevronShortRight   = '',
+  GreaterThan         = '›',
+  LessThan            = '‹',
+  GreaterThanDouble   = '»',
+  LessThanDouble      = '«',
+  ChevronSlimUp       = '',
+  ChevronSlimDown     = '',
+  ChevronSlimLeft     = '',
+  ChevronSlimRight    = '',
+  ChevronSolidUp      = '',
+  ChevronSolidDown    = '',
+  ChevronSolidLeft    = '',
+  ChevronSolidRight   = '',
   DoubleChevronRight  = '',
   DoubleChevronLeft   = '«',
   DoubleChevronUp     = '',
@@ -135,12 +154,13 @@ local other = {
     Warn  = '',
     Info  = '',
     Ques  = '', -- 
-    Hint  = '',
+    Hint  = '󰌵',
     Ok    = '',
   },
 }
 
 -- nerdicons
+-- stylua: ignore
 local nerdicons =  {
   kind = {
     Function      = '',
@@ -201,7 +221,6 @@ local nerdicons =  {
     Close     = '',
     NewFile   = '',
     Search    = '',
-    Lightbulb = '',
     Project   = '',
     Dashboard = '',
     History   = '',
@@ -237,7 +256,7 @@ local nerdicons =  {
     Warn  = '',
     Info  = '',
     Ques  = '',
-    Hint  = '',
+    Hint  = '󰌵',
     -- hint = '󱤅 ',
     -- other = '󰠠 ',
   },
@@ -251,6 +270,7 @@ local nerdicons =  {
 }
 
 -- codicons
+-- stylua: ignore
 local codicons = {
   kind = {
     Function      = '',
@@ -291,10 +311,14 @@ local codicons = {
    Table          = '',
   },
   documents = {
-    File       = '',
-    Files      = '',
-    Folder     = '',
-    OpenFolder = '',
+    File               = '',
+    FileEmpty          = '',
+    Files              = '',
+    FolderOpen         = '󰝰',
+    FolderClosed       = '󰉋',
+    FolderEmpty        = '',
+    FolderClosedBorder = '',
+    FolderOpenBorder   = '',
   },
   git = {
     Add      = '',
@@ -312,7 +336,6 @@ local codicons = {
     Close     = '',
     NewFile   = '',
     Search    = '',
-    Lightbulb = '',
     Project   = '',
     Dashboard = '',
     History   = '',
@@ -344,11 +367,11 @@ local codicons = {
     ChevronDown   = '',
   },
   diagnostics = {
-    Error = '',-- 
+    Error = '',
     Warn  = '',
-    Info  = '',-- 
+    Info  = '',
     Ques  = '',
-    Hint  = '', --  ,
+    Hint  = '',-- ,
   },
   misc = {
     Robot    = '',

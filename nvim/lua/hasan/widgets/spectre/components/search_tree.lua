@@ -120,7 +120,7 @@ local function prepare_node(node, line, component)
   if has_children then
     local icon, icon_highlight = devicons.get_icon(node.text, string.match(node.text, '%a+$'), { default = true })
 
-    line:append(node:is_expanded() and ' ' or ' ', component:hl_group('SpectreIcon'))
+    line:append(node:is_expanded() and Icons.Other.ChevronSlimDown or Icons.Other.ChevronSlimRight, component:hl_group('SpectreIcon'))
     line:append(icon .. ' ', icon_highlight)
     line:append(node.text, component:hl_group('SpectreFileName'))
 

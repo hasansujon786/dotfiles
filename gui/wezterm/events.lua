@@ -94,12 +94,12 @@ wezterm.on('user-var-changed', function(window, pane, name, value)
       show_tab_bar = false
     end
 
-    if not is_forced_fullscreen then
-      overrides.enable_tab_bar = show_tab_bar
-      if window:get_dimensions().is_full_screen or (not map_start and number_value == 0) then
-        window:perform_action('ToggleFullScreen', pane)
-      end
-    end
+    -- if not is_forced_fullscreen then
+    --   overrides.enable_tab_bar = show_tab_bar
+    --   if window:get_dimensions().is_full_screen or (not map_start and number_value == 0) then
+    --     window:perform_action('ToggleFullScreen', pane)
+    --   end
+    -- end
   end
 
   window:set_config_overrides(overrides)

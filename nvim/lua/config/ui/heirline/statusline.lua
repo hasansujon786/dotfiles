@@ -1,6 +1,6 @@
 local conditions = require('heirline.conditions')
 local utils = require('heirline.utils')
-local icons = require('hasan.utils.ui.icons')
+local Icons = require('hasan.utils.ui.icons')
 
 local mutedText = { fg = 'muted', bg = 'bg1' }
 local layerBlock = { fg = 'light_grey', bg = 'layer' }
@@ -15,7 +15,7 @@ local modeBlockLayerAlt = function(self)
   return { bg = 'layer', fg = self.color }
 end
 local divider_right = { provider = '▕', hl = { fg = 'bg_d', bg = 'layer' } }
-local tabIcon = { active = '', inactive = '' }
+local tabIcon = { active = Icons.Other.circleBg, inactive = Icons.Other.circleOutline }
 local function withHl(text, hl)
   return string.format('%%#%s#%s', hl, text)
 end
@@ -365,7 +365,7 @@ return {
       end
       return conditions.has_diagnostics()
     end,
-    static = icons.diagnostics,
+    static = Icons.diagnostics,
     init = function(self)
       self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
       self.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })

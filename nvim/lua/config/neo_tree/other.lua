@@ -5,7 +5,7 @@ local M = {
     show_scrolled_off_parent_node = false, -- boolean
     sources = { -- table
       { source = 'filesystem', display_name = '  Files' },
-      { source = 'buffers', display_name = ' ﬘ Bufs ' },
+      { source = 'buffers', display_name = '  Bufs ' },
       { source = 'git_status', display_name = '  Git ' },
     },
     content_layout = 'center', -- string
@@ -48,9 +48,9 @@ local M = {
 -- Alternate source_selector_style
 if require('core.state').ui.neotree.source_selector_style == 'minimal' then
   M.source_selector.sources = {
-    { source = 'filesystem', display_name = '  ' },
-    { source = 'buffers', display_name = ' ﬘ ' },
-    { source = 'git_status', display_name = '  ' },
+    { source = 'filesystem', display_name = '   ' },
+    { source = 'buffers', display_name = '   ' },
+    { source = 'git_status', display_name = '   ' },
   }
   M.source_selector.content_layout = 'start'
   M.source_selector.tabs_layout = false

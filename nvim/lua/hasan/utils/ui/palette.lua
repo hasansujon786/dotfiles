@@ -186,6 +186,7 @@ local function set_custom_highlights()
 
     -- /// neo-tree.nvim ///
     NeoTreeDirectoryIcon = { fg = '#8094B4' },
+    NeoTreeFileIcon      = { fg = '#6d8086' },
     NeoTreeFloatBorder   = { bg = float_bg, fg = c.cyan },
     NeoTreeFloatTitle    = { bg = c.cyan, fg = float_bg},
     NeoTreeModified      = { link = 'String' },

@@ -25,6 +25,8 @@ return {
     'hasansujon786/neo-glance.nvim_local',
     dev = true,
     config = function()
+      local Icons = require('hasan.utils.ui.icons').Other
+
       keymap('n', '<leader>e', function()
         vim.cmd.wa()
         R('neo_glance.config')
@@ -47,8 +49,8 @@ return {
             relativenumber = false,
           },
           folds = {
-            fold_closed = '',
-            fold_open = '',
+            fold_closed = Icons.ChevronSlimRight,
+            fold_open = Icons.ChevronSlimDown,
           },
         }
 

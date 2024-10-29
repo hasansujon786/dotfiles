@@ -1,5 +1,6 @@
 local utils = require('heirline.utils')
 local tab_max_length = 22 -- +6
+local Icon = require('hasan.utils.ui.icons')
 
 local FnameProvider = {
   init = function(self)
@@ -94,14 +95,14 @@ local CloseButton = {
     condition = function()
       return vim.bo.modified
     end,
-    provider = ' ●',
+    provider = ' ' .. Icon.Other.circleBg,
     hl = { fg = 'green' },
   },
   {
     condition = function()
       return not vim.bo.modified
     end,
-    provider = ' ',
+    provider = ' ' .. Icon.ui.Close,
     hl = { fg = 'gray' },
   },
 }

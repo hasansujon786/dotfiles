@@ -2,24 +2,12 @@ return {
   'nvim-tree/nvim-web-devicons',
   lazy = true,
   config = function()
-    require('nvim-web-devicons').set_default_icon('◎', '#6d8086', 65)
     require('nvim-web-devicons').set_icon({
       astro = {
         icon = '',
-        color = '#FD971F',
-        cterm_color = '208',
+        color = '#e23f67',
+        cterm_color = '197',
         name = 'Astro',
-      },
-      org = {
-        icon = '',
-        color = '#75A899',
-        name = 'Org',
-      },
-      css = {
-        icon = '',
-        color = '#42a5f5',
-        cterm_color = '75',
-        name = 'Css',
       },
       dart = {
         icon = '',
@@ -27,21 +15,11 @@ return {
         cterm_color = '25',
         name = 'Dart',
       },
-      -- deb = {
-      --   icon = '',
-      --   name = 'deb',
-      -- },
       Dockerfile = {
         icon = '',
         color = '#458ee6',
         cterm_color = '68',
         name = 'Dockerfile',
-      },
-      html = {
-        icon = '',
-        color = '#e44d26',
-        cterm_color = '196',
-        name = 'Html',
       },
       js = {
         icon = '󰌞',
@@ -66,12 +44,6 @@ return {
         color = '#F1F134',
         cterm_color = '185',
         name = 'Jsonc',
-      },
-      kt = {
-        icon = '󱈙',
-        color = '#7F52FF',
-        cterm_color = '99',
-        name = 'Kotlin',
       },
       lock = {
         icon = '󰌾',
@@ -109,23 +81,7 @@ return {
         icon = '󰛦',
         color = '#519aba',
         cterm_color = '74',
-        name = 'Ts',
-      },
-      -- rb = {
-      --   icon = '',
-      --   color = '#701516',
-      --   cterm_color = '52',
-      --   name = 'Rb',
-      -- },
-      -- rpm = {
-      --   icon = '',
-      --   name = 'rpm',
-      -- },
-      vue = {
-        icon = '󰡄',
-        color = '#8dc149',
-        cterm_color = '113',
-        name = 'Vue',
+        name = 'TypeScript',
       },
       xz = {
         icon = '',
@@ -165,42 +121,90 @@ return {
       },
 
       -- Config files
-      ['.prettierignore'] = {
-        icon = '',
-        color = '#41535b',
-        cterm_color = '239',
-        name = 'Prettierrc',
-      },
       ['.prettierrc'] = {
-        icon = '',
-        color = '#41535b',
-        cterm_color = '239',
-        name = 'Prettierrc',
+        icon = 'P', -- '',
+        color = '#4285F4',
+        cterm_color = '33',
+        name = 'PrettierConfig',
       },
-      ['.prettierrc.json'] = {
-        icon = '',
-        color = '#41535b',
-        cterm_color = '239',
-        name = 'Prettierrc',
+      ['.prettierrc.cjs'] = {
+        icon = 'P',
+        color = '#4285F4',
+        cterm_color = '33',
+        name = 'PrettierConfig',
       },
       ['.prettierrc.js'] = {
-        icon = '',
-        color = '#41535b',
-        cterm_color = '239',
-        name = 'Prettierrc',
+        icon = 'P',
+        color = '#4285F4',
+        cterm_color = '33',
+        name = 'PrettierConfig',
+      },
+      ['.prettierrc.json'] = {
+        icon = 'P',
+        color = '#4285F4',
+        cterm_color = '33',
+        name = 'PrettierConfig',
+      },
+      ['.prettierrc.json5'] = {
+        icon = 'P',
+        color = '#4285F4',
+        cterm_color = '33',
+        name = 'PrettierConfig',
+      },
+      ['.prettierrc.mjs'] = {
+        icon = 'P',
+        color = '#4285F4',
+        cterm_color = '33',
+        name = 'PrettierConfig',
+      },
+      ['.prettierrc.toml'] = {
+        icon = 'P',
+        color = '#4285F4',
+        cterm_color = '33',
+        name = 'PrettierConfig',
+      },
+      ['.prettierrc.yaml'] = {
+        icon = 'P',
+        color = '#4285F4',
+        cterm_color = '33',
+        name = 'PrettierConfig',
+      },
+      ['.prettierrc.yml'] = {
+        icon = 'P',
+        color = '#4285F4',
+        cterm_color = '33',
+        name = 'PrettierConfig',
+      },
+      ['.prettierignore'] = {
+        icon = 'P',
+        color = '#4285F4',
+        cterm_color = '33',
+        name = 'PrettierIgnore',
       },
       ['prettier.config.js'] = {
-        icon = '',
-        color = '#41535b',
-        cterm_color = '239',
-        name = 'Prettierrc',
+        icon = 'P',
+        color = '#4285F4',
+        cterm_color = '33',
+        name = 'PrettierConfig',
       },
-      -- ['.prettier.yaml'] = {
-      --   icon = '',
-      --   color = '#41535b',
-      --   cterm_color = '239',
-      --   name = 'Prettierrc',
-      -- },
+      ['prettier.config.cjs'] = {
+        icon = 'P',
+        color = '#4285F4',
+        cterm_color = '33',
+        name = 'PrettierConfig',
+      },
+      ['prettier.config.mjs'] = {
+        icon = 'P',
+        color = '#4285F4',
+        cterm_color = '33',
+        name = 'PrettierConfig',
+      },
+      ['prettier.config.ts'] = {
+        icon = 'P',
+        color = '#4285F4',
+        cterm_color = '33',
+        name = 'PrettierConfig',
+      },
       ['yarn-error.log'] = {
         icon = '',
         color = '#458ee6',
@@ -215,15 +219,14 @@ return {
       },
       ['.yarnrc'] = {
         icon = '',
-        -- icon = '',
         color = '#458ee6',
         cterm_color = '68',
         name = 'Yarnconfig',
       },
       ['pnpm-lock.yaml'] = {
-        icon = '',
-        color = '#F1F134',
-        cterm_color = '185',
+        icon = '󰀻',
+        color = '#FFB300',
+        cterm_color = '208',
         name = 'Pnpmlock',
       },
       ['package.json'] = {
@@ -244,75 +247,35 @@ return {
         cterm_color = '28',
         name = 'Npm_packagejson',
       },
-      ['.eslintrc.js'] = {
-        icon = '',
-        color = '#4b32c3',
-        cterm_color = '56',
-        name = 'Eslintrc',
-      },
-      ['.eslintrc.json'] = {
-        icon = '',
-        color = '#4b32c3',
-        cterm_color = '56',
-        name = 'Eslintrc',
-      },
-      ['.babelrc'] = {
-        icon = '',
-        color = '#F1F134',
-        cterm_color = '185',
-        name = 'Babelrc',
-      },
       ['babel.config.js'] = {
-        icon = '',
-        color = '#F1F134',
+        icon = '',
+        color = '#cbcb41',
         cterm_color = '185',
         name = 'Babelrc',
       },
       ['vite.config.js'] = {
-        icon = '',
+        icon = '', -- '',
         color = '#FD971F',
         cterm_color = '208',
-        name = 'viteconfigjs',
+        name = 'ViteConfigFile',
       },
       ['vite.config.ts'] = {
-        icon = '',
+        icon = '',
         color = '#FD971F',
         cterm_color = '208',
-        name = 'viteconfigts',
-      },
-      ['git'] = {
-        icon = '',
-        color = '#F14C28',
-        cterm_color = '196',
-        name = 'GitLogo',
+        name = 'ViteConfigFile',
       },
       ['.gitattributes'] = {
         icon = '',
-        color = '#F14C28',
+        color = '#f54d27',
         cterm_color = '196',
-        name = 'GitLogo',
+        name = 'GitAttributes',
       },
       ['.gitconfig'] = {
         icon = '',
-        color = '#F14C28',
+        color = '#f54d27',
         cterm_color = '196',
-        name = 'GitLogo',
-      },
-      ['.gitignore'] = {
-        icon = '',
-        color = '#F14C28',
-        cterm_color = '196',
-        name = 'GitLogo',
-      },
-      NeogitStatus = {
-        icon = '',
-        color = '#F14C28',
-        name = 'GitBranchStatus',
-      },
-      DiffviewFiles = {
-        icon = '',
-        color = '#F14C28',
-        name = 'GitBranchStatus',
+        name = 'GitConfig',
       },
 
       -- Media
@@ -369,6 +332,18 @@ return {
         color = '#89e051',
         cterm_color = '113',
         name = 'Webp',
+      },
+
+      -- Custom filetypes
+      NeogitStatus = {
+        icon = '',
+        color = '#f54d27',
+        name = 'GitBranchStatus',
+      },
+      DiffviewFiles = {
+        icon = '',
+        color = '#f54d27',
+        name = 'GitBranchStatus',
       },
     })
   end,

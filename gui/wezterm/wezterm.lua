@@ -26,9 +26,12 @@ return {
   freetype_load_flags = 'NO_HINTING',
   font_size = 13.4,
   font = wezterm.font_with_fallback({
-    { family = 'OperatorMonoLig Nerd Font', weight = 700 }, -- Medium|Bold
+    -- { family = 'OperatorMonoLig Nerd Font', weight = 700 }, -- Medium|Bold
+    { family = 'Operator Mono Lig', weight = 700 }, -- Medium|Bold
     'Cascadia Code',
+    -- 'CaskaydiaMono NF',
     'Consolas',
+    'Flog Symbols',
   }),
   font_rules = {
     { -- Bold
