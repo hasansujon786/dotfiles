@@ -162,7 +162,7 @@ function M.gen_from_tailwindcolors(opts)
   return function(et)
     return make_entry.set_default_entry_mt({
       value = et.hex,
-      ordinal = et.groupName .. '-' .. et.scale,
+      ordinal = et.group_name .. '-' .. et.scale,
       display = make_display,
     }, opts)
   end

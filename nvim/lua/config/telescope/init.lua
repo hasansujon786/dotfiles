@@ -13,19 +13,25 @@ return {
       local custom_mappings = {
         ['<M-u>'] = actions.preview_scrolling_up,
         ['<M-d>'] = actions.preview_scrolling_down,
-        ['<C-p>'] = actions.move_selection_previous,
-        ['<C-n>'] = actions.move_selection_next,
+
         ['<M-p>'] = actions.move_selection_previous,
         ['<M-n>'] = actions.move_selection_next,
-        ['<M-k>'] = actions.move_selection_previous,
-        ['<M-j>'] = actions.move_selection_next,
-        ['<s-tab>'] = actions.move_selection_previous,
         ['<tab>'] = actions.move_selection_next,
+        ['<s-tab>'] = actions.move_selection_previous,
 
+        ['<M-k>'] = actions.cycle_history_prev,
+        ['<M-j>'] = actions.cycle_history_next,
+
+        ['<S-CR>'] = local_action.fedit,
+        ['<M-o>'] = local_action.quicklook,
+        ['<M-t>'] = local_action.focus_file_tree,
+        ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+        ['<C-s>'] = actions.select_horizontal,
+
+        ['<C-y>'] = actions.toggle_selection + actions.move_selection_worse,
+        -- ['<M-y>'] = actions.toggle_selection + actions.move_selection_better,
         ['<C-a>'] = actions.select_all,
         ['<C-e>'] = actions.to_fuzzy_refine,
-        ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
-        ['<C-s>'] = actions.file_split,
         ['<esc>'] = actions.close,
         ['jk'] = function()
           vim.cmd('stopinsert')
@@ -33,11 +39,6 @@ return {
         ['<M-q>'] = function(...)
           require('telescope.actions.layout').toggle_preview(...)
         end,
-
-        ['<S-CR>'] = actions.select_default,
-        ['<M-f>'] = local_action.fedit,
-        ['<M-o>'] = local_action.quicklook,
-        ['<M-t>'] = local_action.focus_file_tree,
 
         ['<C-x>'] = false,
         ['<C-u>'] = false,

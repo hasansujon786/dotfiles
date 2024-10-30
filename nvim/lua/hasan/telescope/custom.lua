@@ -320,18 +320,11 @@ local function put_mappings(get_entry_value)
   end
 
   return function(_, map)
-    map('n', '<cr>', function(prompt_bufnr)
-      local_action.put_emoji(prompt_bufnr, get_entry_value(), 'p')
+    map({ 'n', 'i' }, '<cr>', function(prompt_bufnr)
+      local_action.put_emoji(prompt_bufnr, get_entry_value(), true)
     end)
-    map('n', '<C-t>', function(prompt_bufnr)
-      local_action.put_emoji(prompt_bufnr, get_entry_value(), 'P')
-    end)
-
-    map('i', '<cr>', function(prompt_bufnr)
-      local_action.put_emoji(prompt_bufnr, get_entry_value(), 'p')
-    end)
-    map('i', '<C-t>', function(prompt_bufnr)
-      local_action.put_emoji(prompt_bufnr, get_entry_value(), 'P')
+    map({ 'n', 'i' }, '<C-t>', function(prompt_bufnr)
+      local_action.put_emoji(prompt_bufnr, get_entry_value(), false)
     end)
 
     map('i', '<C-v>', nil)
@@ -365,9 +358,9 @@ local function get_tw_colors()
   end
 
   local list = {}
-  for group, colorScales in pairs(sc) do
-    for scale, hex in pairs(colorScales) do
-      table.insert(list, { groupName = group:lower(), scale = scale, hex = hex })
+  for group, scale_colors in pairs(sc) do
+    for scale, hex in pairs(scale_colors) do
+      table.insert(list, { group_name = group:lower(), scale = scale, hex = hex })
     end
   end
   return list
