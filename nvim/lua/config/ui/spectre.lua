@@ -2,6 +2,7 @@ return {
   'nvim-pack/nvim-spectre',
   keys = {
     { '<leader>/r', '<cmd>lua require("hasan.widgets.spectre").open()<cr>', desc = 'Toggle Spectre' },
+    { '<leader>/R', '<cmd>lua require("hasan.widgets.spectre").open({current_file=true})<cr>', desc = 'Toggle Spectre' },
     { '<leader>/w', '<cmd>lua require("hasan.widgets.spectre").open_visual({select_word=true})<cr>', desc = 'Search current word' },
     { '<leader>/w', '<esc><cmd>lua require("hasan.widgets.spectre").open_visual()<cr>', desc = 'Search current word', mode = 'x' },
     { '<leader>/W', '<cmd>lua require("hasan.widgets.spectre").open_visual({select_word=true,current_file=true})<cr>', desc = 'Search current word' },

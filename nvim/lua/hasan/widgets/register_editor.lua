@@ -28,6 +28,11 @@ M.open = function()
     return
   end
 
+  local regtype = vim.fn.getregtype(char)
+  if regtype == '' or regtype == nil then
+    return notify(string.format('"%s" reg is empty', char), vim.log.levels.WARN, { title = 'Register Editor' })
+  end
+
   local pop = Popup({
     enter = true,
     focusable = true,
@@ -45,25 +50,28 @@ M.open = function()
 
   last_popup_window = pop
   vim.b[pop.bufnr].reg = char
-  vim.b[pop.bufnr].regtype = vim.fn.getregtype(char)
-
-  pop:map('n', '<leader>s', function()
-    local regtype = vim.b[pop.bufnr].regtype
-    if regtype == 'V' then
-      feedkeys('ggVG"' .. char .. 'y')
-    elseif regtype == 'v' then
-      feedkeys('0ggvG$"' .. char .. 'y')
-    end
-  end)
-  pop:map('n', 'q', function()
-    pop:unmount()
-  end)
+  vim.b[pop.bufnr].regtype = regtype
 
   pop:on(event.WinClosed, function()
     last_popup_window = nil
   end)
+
+  pop:map('n', '<leader>s', function()
+    if regtype == 'V' then
+      feedkeys(string.format('ggVG"%sy', char))
+    elseif regtype == 'v' then
+      feedkeys(string.format('0ggvG$"%sy', char))
+    end
+  end, { desc = 'Save to register' })
+  pop:map('n', 'q', function()
+    pop:unmount()
+  end, { desc = 'Quit from Register Editor' })
+
   pop:mount()
-  feedkeys('"' .. char .. 'P')
+
+  vim.schedule(function()
+    feedkeys(string.format('"%sP', char))
+  end)
 end
 
 -- lua require("hasan.widgets.register_editor").open()

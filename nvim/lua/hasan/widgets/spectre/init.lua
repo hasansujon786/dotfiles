@@ -12,6 +12,12 @@ local window = {
     Cursorline = 'None',
   },
 }
+local info_window = {
+  highlight = {
+    NormalFloat = 'NuiComponentsInfo',
+    Cursorline = 'None',
+  },
+}
 
 local M = {}
 
@@ -52,7 +58,7 @@ function M.open(opts)
 
   local renderer = n.create_renderer({
     width = math.min(100, ui_info.width),
-    height = ui_info.height - 2,
+    height = ui_info.height - 1,
     relative = 'editor',
     position = { row = 0, col = '100%' },
   })
@@ -63,7 +69,7 @@ function M.open(opts)
     search_paths = opts.search_paths,
     filter_path = '',
     is_replace_field_visible = false,
-    is_filter_field_visible = false,
+    is_filter_field_visible = #opts.search_paths > 0,
     is_match_case_insensitive_checked = false,
     search_info = '',
     search_results = {},
@@ -186,8 +192,8 @@ function M.open(opts)
       n.checkbox({
         window = window,
         border_style = 'none',
-        default_sign = Icons.ui.ChevronRight,
-        checked_sign = Icons.ui.ChevronDown,
+        default_sign = Icons.Other.ChevronSlimRight,
+        checked_sign = Icons.Other.ChevronSlimDown,
         padding = { top = 1, left = 1, bottom = 1 },
         value = signal.is_replace_field_visible,
         on_change = function(is_checked)
@@ -263,7 +269,7 @@ function M.open(opts)
         max_lines = 1,
         border_label = 'Pattern to filter',
         -- placeholder = 'lua/**/*.lua',
-        -- value = signal.filter_path,
+        value = signal.filter_path,
         on_change = fn.debounce(function(value)
           signal.filter_path = value
         end, 400),
@@ -286,36 +292,28 @@ function M.open(opts)
       })
     ),
     -- Row 4
-    -- n.columns(
-    --   { size = 3 },
-    --   left_gap(),
-    --   n.text_input({
-    --     window = window,
-    --     size = 1,
-    --     flex = 1,
-    --     max_lines = 1,
-    --     border_label = 'Files to include',
-    --     value = signal.search_paths:map(function(paths)
-    --       return table.concat(paths, ',')
-    --     end),
-    --     on_change = fn.debounce(function(value)
-    --       signal.search_paths = fn.ireject(fn.imap(vim.split(value, ','), fn.trim), function(path)
-    --         return path == ''
-    --       end)
-    --     end, 400),
-    --   })
-    -- ),
+    n.columns(
+      {
+        size = 2,
+        hidden = signal.search_info:map(function(value)
+          return value == ''
+        end),
+      },
+      n.paragraph({
+        is_focusable = false,
+        lines = signal.search_info,
+        padding = { left = 3 },
+        window = info_window,
+      }),
+      n.gap({ flex = 1, window = window }),
+      n.paragraph({
+        is_focusable = false,
+        lines = 'Toggle Case:<A-c>, Replace:<C-t>, Filter:<C-f>',
+        padding = { right = 1 },
+        window = info_window,
+      })
+    ),
     -- Row 5
-    n.paragraph({
-      is_focusable = false,
-      lines = signal.search_info,
-      padding = { left = 4, right = 1, bottom = 1 },
-      window = { highlight = { NormalFloat = 'NuiComponentsInfo', Cursorline = 'None' } },
-      hidden = signal.search_info:map(function(value)
-        return value == ''
-      end),
-    }),
-    -- Row 6
     search_tree({
       search_query = signal.search_query,
       replace_query = signal.replace_query,
