@@ -54,7 +54,10 @@ function M.open(opts)
     opts.search_paths = { opts.search_paths }
   end
 
-  local ui_info = vim.api.nvim_list_uis()[1]
+  local ui_info = {
+    width = vim.o.columns,
+    height = vim.o.lines,
+  }
 
   local renderer = n.create_renderer({
     width = math.min(100, ui_info.width),

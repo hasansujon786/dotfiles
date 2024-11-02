@@ -19,25 +19,6 @@ return {
         -- use the highlights from mini.icons
         -- When `false`, it will use `WhichKeyIcon` instead
         colors = true,
-        -- used by key format
-        keys = {
-          Up = '',
-          Down = '',
-          Left = '',
-          Right = '',
-          C = '󰘴 ',
-          M = '󰘵 ',
-          S = '󰘶 ',
-          CR = '󰌑 ',
-          Esc = '󱊷 ',
-          ScrollWheelDown = '󱕐 ',
-          ScrollWheelUp = '󱕑 ',
-          NL = '󰌑 ',
-          BS = '⌫',
-          Space = '󱁐 ',
-          Tab = ' ',
-          -- ['.'] = '•',
-        },
       },
       show_help = false,
       show_keys = false, -- show the currently pressed key and its label as a message in the command line

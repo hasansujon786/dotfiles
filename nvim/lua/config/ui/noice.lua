@@ -59,9 +59,10 @@ return {
             win_options = { winhighlight = hover.winhighlight, showbreak = 'NONE' },
           },
           auto_open = {
-            enabled = false,
+            enabled = true,
             trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
             luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
+            snipppets = true, -- Will open when jumping to placeholders in snippets (Neovim builtin snippets)
             throttle = 50, -- Debounce lsp signature help request by 50ms
           },
         },

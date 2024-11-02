@@ -210,7 +210,7 @@ return {
   Harpoon = {
     update = { 'WinEnter', 'WinLeave', 'BufReadPost', 'BufEnter', 'BufWinEnter' },
     condition = function()
-      return _G['harpoon_loaded']
+      return vim.g.harpoon_loaded
     end,
     init = function(self)
       local ok, harpoon = pcall(require, 'harpoon')

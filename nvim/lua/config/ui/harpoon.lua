@@ -1,14 +1,16 @@
+local keys = {
+  { '<leader>M', desc = 'Harpoon: Add file' },
+  { '<leader><tab>', desc = 'Harpoon: Toggle menu' },
+  { '[<tab>', desc = 'Harpoon: Prev item' },
+  { ']<tab>', desc = 'Harpoon: Next item' },
+}
+
 return {
   'ThePrimeagen/harpoon',
   branch = 'harpoon2',
   lazy = true,
   module = 'harpoon',
-  keys = {
-    { '<leader>M', desc = 'Harpoon: Add file' },
-    { '<leader><tab>', desc = 'Harpoon: Toggle menu' },
-    { '[<tab>', desc = 'Harpoon: Prev item' },
-    { ']<tab>', desc = 'Harpoon: Next item' },
-  },
+  keys = keys,
   init = function()
     local harpoon_ls, win_ls, win_rs = '<leader>%s', '<leader>w%s', '%s<C-w>w'
     local opts = { desc = 'which_key_ignore' }
@@ -96,10 +98,11 @@ return {
       end,
     }
 
-    for key, value in pairs(maps) do
-      keymap('n', key, value)
+    for _, item in ipairs(keys) do
+      local key = item[1]
+      keymap('n', key, maps[key], { desc = item.desc })
     end
 
-    _G.harpoon_loaded = true
+    vim.g.harpoon_loaded = true
   end,
 }

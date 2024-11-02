@@ -11,9 +11,13 @@ return {
       --   return '%=' .. M.signfunc(args, fa)
       -- end
       if not args.rnu and not args.nu then
-        return ''
+        return '%='
       end
-      if args.virtnum ~= 0 then
+
+      -- virtnum setup: https://www.reddit.com/r/neovim/comments/1ggwaho/multiline_showbreaklike_wrapping_symbols_in/
+      if vim.v.virtnum < 0 then
+        return '%=-'
+      elseif vim.v.virtnum > 0 then
         return '%='
       end
 
