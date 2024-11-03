@@ -3,8 +3,8 @@ setlocal iskeyword+=-
 iabbrev <buffer> dib display: inline-block
 
 nnoremap <buffer> <F4> :e %<.js<CR>
-inoremap <expr><buffer>: <SID>insert_colon()
-inoremap <expr><buffer>; <SID>insert_semicolon()
+" inoremap <expr><buffer>: <SID>insert_colon()
+" inoremap <expr><buffer>; <SID>insert_semicolon()
 
 function! s:insert_colon()
   if col(".") == col("$")

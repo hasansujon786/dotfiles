@@ -10,6 +10,10 @@ return {
   },
   config = function()
     local augend = require('dial.augend')
+    local toggle = function(...)
+      return require('dial.augend').constant.new(...)
+    end
+
     require('dial.config').augends:register_group({
       -- default augends used when no group name is specified
       default = {
@@ -17,11 +21,15 @@ return {
         augend.integer.alias.hex, -- nonnegative hex number  (0x01, 0x1a1f, etc.)
         augend.constant.alias.bool,
         augend.semver.alias.semver,
-        augend.constant.new({ elements = { 'and', 'or' } }),
-        augend.constant.new({ elements = { '&&', '||' }, word = false }),
-        augend.constant.new({ elements = { '>', '<', '<=', '>=', '==', '===' }, word = false }),
+        toggle({ elements = { 'let', 'const' } }),
+        toggle({ elements = { 'and', 'or' } }),
+        toggle({ elements = { '&&', '||' }, word = false }),
+        toggle({ elements = { '>', '<' }, word = false }),
+        toggle({ elements = { '~=', '==' }, word = false }),
+        toggle({ elements = { '!==', '===' }, word = false }),
+        toggle({ elements = { '&&', '||' }, word = false }),
         augend.hexcolor.new({ case = 'lower' }),
-        augend.constant.new({
+        toggle({
           elements = { 'number', 'string', 'boolean', 'unknown', 'any', 'void', 'null', 'undefined', 'never', 'bigint' },
           word = false,
         }),
@@ -54,7 +62,7 @@ return {
             return { text = text, cursor = cursor }
           end,
         }),
-        augend.constant.new({
+        toggle({
           word = true,
           elements = {
             'text-xs',

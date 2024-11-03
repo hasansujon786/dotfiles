@@ -12,11 +12,15 @@ keymap(nx, "'", '`') -- Character wise jumps always
 keymap(nx, '<CR>', ':<up>', { silent = false, desc = 'Run last command easily' })
 keymap(nx, '<leader><cr>', 'q:', { silent = false, desc = 'Open command history' })
 
--- fix InsertEnter zz
+-- Center window
 keymap('n', 'A', 'zzA')
 keymap('n', 'I', 'zzI')
 keymap('n', 'i', 'zzi')
 keymap('n', 'a', 'zza')
+for _, mode in ipairs(nx) do
+  nvim_set_keymap(mode, 'n', 'nzz', noSilent)
+  nvim_set_keymap(mode, 'N', 'Nzz', noSilent)
+end
 
 -- Copy Paste -----------------------------------
 keymap('v', 'p', 'pgvy') -- Prevent selecting and pasting from overwriting what you originally copied.

@@ -63,6 +63,7 @@ return {
         { 'ga', group = 'TextCase' },
         { 'ga.', '<cmd>TextCaseOpenTelescopeQuickChange<CR>', mode = nx, desc = 'Telescope Quick Change' },
         { 'ga,', '<cmd>TextCaseOpenTelescopeLSPChange<CR>', mode = nx, desc = 'Telescope LSP Change' },
+        { 'ga,', '<cmd>TextCaseOpenTelescopeLSPChange<CR>', mode = nx, desc = 'Telescope LSP Change' },
       })
       require('textcase').setup({ default_keymappings_enabled = true })
     end,
@@ -79,6 +80,18 @@ return {
         end,
         desc = 'TextCase',
         mode = nx,
+      },
+      {
+        'gak',
+        '<cmd>lua require("textcase").quick_replace("to_dash_case")<CR>',
+        mode = nx,
+        desc = 'Convert to-kabab-case',
+      },
+      {
+        'gaK',
+        '<cmd>lua require("textcase").lsp_rename("to_dash_case")<CR>',
+        mode = nx,
+        desc = 'LSP rename to-kabab-case',
       },
     },
     cmd = {
