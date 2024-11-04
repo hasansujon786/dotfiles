@@ -102,7 +102,7 @@ return {
     augroup('THEME_AUGROUP')(function(autocmd)
       autocmd('ColorScheme', function()
         require('hasan.utils.ui.palette').set_custom_highlights()
-        vim.defer_fn(require('hasan.nebulous').my_nebulous_setup, 300)
+        -- vim.defer_fn(require('hasan.nebulous').my_nebulous_setup, 300)
       end)
 
       autocmd('BufWritePost', function()

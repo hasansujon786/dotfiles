@@ -1,5 +1,5 @@
 local nm = require('neo-minimap')
-local state = require("core.state").ui
+local state = require('core.state').ui
 
 nm.setup_defaults({
   height_toggle = { 15, 36 },
@@ -132,13 +132,17 @@ nm.set('zo', { 'org' }, {
   },
 })
 
--- local group = vim.api.nvim_create_augroup('TestGroup', { clear = true })
--- vim.api.nvim_create_autocmd('User', {
---   pattern = 'NeoMinimapEnter',
---   group = group,
---   callback = function(info)
---     print('minimap window opened')
---   end,
--- })
+nm.set('zo', { 'markdown' }, {
+  query = {
+    [[
+    ;; query
+    ((atx_heading) @cap)
+    ]],
+    [[
+    ;; query
+    ((html_block) @cap)
+    ]],
+  },
+})
 
 vim.cmd([[doautocmd BufEnter]])

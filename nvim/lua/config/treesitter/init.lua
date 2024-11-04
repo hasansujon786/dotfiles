@@ -177,11 +177,7 @@ return {
   {
     'ziontee113/neo-minimap',
     lazy = true,
-    keys = {
-      { 'zo', desc = 'Open minimap' },
-      { 'zi', desc = 'Open minimap' },
-      { 'zu', desc = 'Open minimap' },
-    },
+    event = 'CursorHold',
     config = function()
       require('config.treesitter.neo_minimap')
     end,

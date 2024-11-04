@@ -81,6 +81,14 @@ return {
         size = { height = 0.4 },
         wo = { winbar = true, winhighlight = dark_bar, fillchars = left_chars },
       },
+      {
+        ft = 'aerial',
+        pinned = false,
+        open = 'AerialOpen',
+        title = 'Symbols',
+        size = { height = 0.4 },
+        wo = { winbar = true, winhighlight = dark_bar, fillchars = left_chars },
+      },
     }
     local right = {
       {
