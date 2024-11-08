@@ -71,19 +71,15 @@ return {
 
       -- BUFFER
       { '<leader>b', group = 'buffer' },
-      { '<leader>bK', '<cmd>call hasan#utils#buffer#_clear_all()<CR>', desc = 'Kill all buffers' },
-      { '<leader>bM', '<cmd>call hasan#fzf#edit_bookmark()<CR>', desc = 'Delete bookmark' },
       { '<leader>bb', '<cmd>lua require("hasan.telescope.custom").buffers(false)<CR>', desc = 'Switch all buffers' },
-      { '<leader>bf', '<cmd>bfirst<CR>', desc = 'First buffer' },
-      { '<leader>bk', '<cmd>call hasan#utils#buffer#_clear()<CR>', desc = 'Kill this buffer' },
-      { '<leader>bl', '<cmd>blast<CR>', desc = 'Last buffer' },
-      { '<leader>bm', '<cmd>call hasan#fzf#set_bookmark()<CR>', desc = 'Set bookmark' },
-      { '<leader>bn', '<cmd>bnext<CR>', desc = 'Next buffer' },
+      { '<leader>bK', '<cmd>call hasan#utils#buffer#_clear_all()<CR>', desc = 'Kill all buffers' },
       { '<leader>bo', '<cmd>call hasan#utils#buffer#_clear_other()<CR>', desc = 'Kill other buffers' },
-      { '<leader>bp', '<cmd>bprevious<CR>', desc = 'Previous buffer' },
       { '<leader>bs', '<cmd>wa<CR>', desc = 'Save all buffer' },
       { '<leader>b.', '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>', desc = 'Switch buffers' },
       { '<leader>m', '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>', desc = 'Switch buffers' },
+
+      { '<leader>bM', '<cmd>call hasan#fzf#edit_bookmark()<CR>', desc = 'Delete bookmark' },
+      { '<leader>bm', '<cmd>call hasan#fzf#set_bookmark()<CR>', desc = 'Set bookmark' },
 
       -- CHANGE
       { '<leader>c', group = 'change' },
@@ -149,8 +145,7 @@ return {
       { '<leader>gb', '<cmd>Telescope git_branches<CR>', desc = 'Checkout git branch' },
       { '<leader>gc', '<cmd>Telescope git_commits<CR>', desc = 'Look up commits' },
       { '<leader>gC', '<cmd>Telescope git_bcommits<CR>', desc = 'Look up buffer commits' },
-      { '<leader>go', '<cmd>lua require("hasan.utils.init").open_git_remote(true)<CR>', desc = 'Open git repo' },
-      { '<leader>gO', '<cmd>lua require("hasan.utils.init").open_git_remote(false)<CR>', desc = 'Open git repo file' },
+      { '<leader>gO', '<cmd>lua require("hasan.utils.init").open_git_remote(true)<CR>', desc = 'Open git repo file' },
 
       -- INSERT
       { '<leader>i', group = 'insert' },
@@ -199,31 +194,30 @@ return {
 
       -- TOGGLE
       { '<leader>t', group = 'toggle' },
-      { '<leader>tB', desc = 'Toggle Onedark' },
-      { '<leader>tL', '<cmd>lua require("hasan.utils.logger").toggle("cursorline")<CR>', desc = 'Toggle cursorline' },
       { '<leader>tW', '<cmd>call autohl#_AutoHighlightToggle()<CR>', desc = 'Highlight same words' },
       {
         '<leader>tb',
         '<cmd>lua require("hasan.utils.color").toggle_bg_tranparent(false)<CR>',
         desc = 'Toggle transparency',
       },
-      {
-        '<leader>tl',
-        '<cmd>lua require("hasan.utils.logger").toggle("cursorcolumn")<CR>',
-        desc = 'Toggle cursorcolumn',
-      },
-      {
-        '<leader>to',
-        '<cmd>lua require("hasan.utils.logger").toggle("conceallevel", { 0, 2 })<CR>',
-        desc = 'Toggle conceallevel',
-      },
-      {
-        '<leader>tc',
-        '<cmd>lua require("hasan.utils.logger").toggle("concealcursor", { "nc", "" })<CR>',
-        desc = 'Toggle concealcursor',
-      },
-      { '<leader>ts', '<cmd>lua require("hasan.utils.logger").toggle("spell")<CR>', desc = 'Toggle spell' },
-      { '<leader>tw', '<cmd>lua require("hasan.utils.logger").toggle("wrap")<CR>', desc = 'Toggle wrap' },
+      -- { '<leader>tL', '<cmd>lua require("hasan.utils.logger").toggle("cursorline")<CR>', desc = 'Toggle cursorline' },
+      -- {
+      --   '<leader>tl',
+      --   '<cmd>lua require("hasan.utils.logger").toggle("cursorcolumn")<CR>',
+      --   desc = 'Toggle cursorcolumn',
+      -- },
+      -- {
+      --   '<leader>to',
+      --   '<cmd>lua require("hasan.utils.logger").toggle("conceallevel", { 0, 2 })<CR>',
+      --   desc = 'Toggle conceallevel',
+      -- },
+      -- {
+      --   '<leader>tc',
+      --   '<cmd>lua require("hasan.utils.logger").toggle("concealcursor", { "nc", "" })<CR>',
+      --   desc = 'Toggle concealcursor',
+      -- },
+      -- { '<leader>ts', '<cmd>lua require("hasan.utils.logger").toggle("spell")<CR>', desc = 'Toggle spell' },
+      -- { '<leader>tw', '<cmd>lua require("hasan.utils.logger").toggle("wrap")<CR>', desc = 'Toggle wrap' },
 
       -- VIM
       { '<leader>v', group = 'vim' },

@@ -1,6 +1,7 @@
 return {
   'luukvbaal/statuscol.nvim',
   event = 'BufReadPost',
+  enabled = false,
   lazy = true,
   config = function()
     local relculright = false

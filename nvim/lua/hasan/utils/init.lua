@@ -110,7 +110,7 @@ M.map = function(mode, lhs, rhs, opts)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-M.open_git_remote = function(open_root)
+M.open_git_remote = function(open_with_file)
   local Job = require('plenary.job')
   local fpath = nil
   if not vim.bo.readonly and vim.bo.modifiable then
@@ -138,7 +138,7 @@ M.open_git_remote = function(open_root)
 
   if ok_remote and ok_branch then
     local full_remote_path = remote_root
-    if fpath and not open_root then
+    if fpath and open_with_file then
       full_remote_path = string.format('%s/blob/%s/%s', remote_root, branch, fpath)
     end
 

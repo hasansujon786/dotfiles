@@ -109,6 +109,7 @@ alias o='explorer'
 alias open='explorer'
 alias dus='du -h --max-depth=1 --exclude=node_modules* | sort -rh'
 alias dua='du -s * --exclude=node_modules* | sort -rn | cut -f2- | xargs -d "\n" du -sh'
+alias df='df -h'
 alias lf='lfcd'
 # Copy the PWD to the Clipboard
 alias cpd="pwd | tr -d '\n' | clip && echo 'pwd copied to clipboard'"
@@ -151,12 +152,12 @@ alias grh='git reset HEAD~1' # (Use --hard/--soft)
 alias grvh='git revert HEAD' # Undo a public commit
 alias gcrh='git clean --force && git reset --hard'
 alias grlc='git reset --soft HEAD^'
-alias glo='git log --oneline --decorate'
+alias glg='git log --oneline --decorate --graph'
 alias gme='git merge'
 alias gms='git merge --squash'
 alias grbi='git rebase --interactive main'
 alias lg='lazygit'
-alias gsd='pwd | xargs git config --global --add safe.directory'
+alias gdsafe='pwd | xargs git config --global --add safe.directory'
 
 # kill port
 alias fp='tasklist | findstr' # search string
@@ -275,6 +276,10 @@ remove() {
 
 url-redrive() {
   curl --silent -I -L "$@" | grep -i location
+}
+
+qrcode() {
+  echo "$@" | curl -F-=\<- qrenco.de
 }
 
 ### Keybinds

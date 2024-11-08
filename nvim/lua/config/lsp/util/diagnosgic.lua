@@ -39,7 +39,7 @@ end
 function M.setup()
   for icon_type, _ in pairs(diagnotic_icons) do
     local hl = 'DiagnosticSign' .. icon_type
-    vim.fn.sign_define(hl, { numhl = 'DiagnosticLineNr' .. icon_type })
+    vim.fn.sign_define(hl, { numhl = 'DiagnosticLineNr' .. icon_type, text = '' })
     -- vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
   vim.diagnostic.config({

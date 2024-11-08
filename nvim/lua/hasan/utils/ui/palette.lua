@@ -81,12 +81,13 @@ local function set_custom_highlights()
   -- stylua: ignore
   local highlights = {
     -- /// backgrounds ///
-    NormalFloat             = { fg = fg, bg = normal_bg },
+    NormalFloat             = { fg = fg, bg = 'none' },
     FloatBorder             = { fg = c.cyan, bg = c.none },
     NormalFloatFlat         = { fg = fg, bg = float_bg },
     FloatBorderFlat         = { fg = dark_border, bg = float_bg },
     FloatBorderFlatHidden   = { fg = float_bg, bg = float_bg },
     SidebarDark             = { fg = c.fg, bg = c.bg_d },
+    Folded                  = { fg = c.grey, bg = 'none' },
 
     CursorLineFocus         = { bg = c.bg3 },
     LspInlayHint            = { fg = c.dark_cyan, bg = c.none },
@@ -124,6 +125,8 @@ local function set_custom_highlights()
     EdgyTitle               = { fg = c.light_grey, bg = '#202a3c' },
     EdgyIcon                = { fg = c.grey, bg = '#202a3c' },
     EdgyIconActive          = { fg = c.dark_cyan, bg = '#202a3c' },
+    -- /// snacks ///
+    SnacksNormal            = { fg = fg, bg = float_bg },
 
 
     -- /// org ///
@@ -279,7 +282,7 @@ local function set_custom_highlights()
     FlashMatch                  = { fg = c.fg, bg = c.bg3 },
     FlashLabel                  = { fg = c.black, bg = c.green },
     FlashCurrent                = { fg = c.bg0, bg = '#e86671' },
-    NoiceMini                   = { bg = '#000000' },
+    NoiceMini                   = { bg = 'none' },
     NoiceFormatConfirmDefault   = { link = 'LazyButton' },
     LazyNormal                  = { link = 'NormalFloatFlat' },
     LazyButton                  = { bg = c.layer, fg = c.fg },

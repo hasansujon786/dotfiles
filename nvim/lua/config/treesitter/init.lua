@@ -189,14 +189,14 @@ return {
     event = 'CursorHold',
     keys = {
       {
-        'g[',
+        '[u',
         function()
           require('treesitter-context').go_to_context(vim.v.count1)
         end,
         mode = '',
         desc = 'Move cursor to context',
       },
-      { '<leader>tt', '<cmd>TSContextToggle<CR>', desc = 'Toggle TSContext' },
+      { '<leader>tc', '<cmd>TSContextToggle<CR>', desc = 'Toggle TSContext' },
     },
     opts = {
       enable = state.treesitter.enabled_context, -- Enable this plugin (Can be enabled/disabled later via commands)
