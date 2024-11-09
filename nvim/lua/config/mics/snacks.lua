@@ -1,5 +1,5 @@
 return {
-  'folke/snacks.nvim',
+  'hasansujon786/snacks.nvim',
   priority = 1000,
   enabled = true,
   lazy = false,
@@ -27,7 +27,7 @@ return {
     },
     statuscolumn = {
       enabled = true,
-      left = { 'sign', 'mark' }, -- priority of signs on the left (high to low)
+      left = { 'mark', 'sign' }, -- priority of signs on the left (high to low)
       right = { 'fold', 'git' }, -- priority of signs on the right (high to low)
       folds = { open = false, git_hl = false },
       git = { patterns = { 'GitSign', 'MiniDiffSign' } },
@@ -41,8 +41,8 @@ return {
   },
   -- stylua: ignore
   keys = {
-    { "]g",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference" },
-    { "[g",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference" },
+    { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference" },
+    { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference" },
     { "<leader>tn", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
     { "<leader>bk", function() Snacks.bufdelete() end, desc = "Kill this buffer" },
     { "<leader>go", function() Snacks.gitbrowse() end, desc = "Open git repo" },
@@ -69,17 +69,6 @@ return {
     }
   },
   init = function()
-    ---@param sign? snacks.statuscolumn.Sign
-    ---@param len? number
-    local function custom_icon(sign, len)
-      sign = sign or {}
-      len = len or 1
-      local text = vim.fn.strcharpart(sign.text or '', 0, len) ---@type string
-      text = text .. string.rep(' ', len - vim.fn.strchars(text))
-      return sign.texthl and ('%#' .. sign.texthl .. '#' .. text .. '%*') or text
-    end
-    require('snacks.statuscolumn').icon = custom_icon
-
     vim.api.nvim_create_autocmd('User', {
       pattern = 'VeryLazy',
       callback = function()

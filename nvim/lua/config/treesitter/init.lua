@@ -124,8 +124,6 @@ return {
 
       keymap('n', '[f', '<Plug>(ts-jump-prev-s-func)zz')
       keymap('n', ']f', '<Plug>(ts-jump-next-s-func)zz')
-      keymap('n', '[[', '<Plug>(ts-jump-prev-s-func)zz')
-      keymap('n', ']]', '<Plug>(ts-jump-next-s-func)zz')
       keymap('n', '[m', '<Plug>(ts-jump-prev-s-class)zz')
       keymap('n', ']m', '<Plug>(ts-jump-next-s-class)zz')
     end,
