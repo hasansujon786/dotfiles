@@ -182,6 +182,7 @@ return {
   },
   {
     'nvim-treesitter/nvim-treesitter-context',
+    commit = 'a2a3349',
     enabled = true,
     lazy = true,
     event = 'CursorHold',
@@ -194,7 +195,7 @@ return {
         mode = '',
         desc = 'Move cursor to context',
       },
-      { '<leader>tc', '<cmd>TSContextToggle<CR>', desc = 'Toggle TSContext' },
+      { '<leader>t.', '<cmd>TSContextToggle<CR>', desc = 'Toggle TSContext' },
     },
     opts = {
       enable = state.treesitter.enabled_context, -- Enable this plugin (Can be enabled/disabled later via commands)

@@ -23,7 +23,7 @@ return {
       },
       ---@type snacks.notifier.style
       style = 'compact', -- "compact"|"fancy"|"minimal"
-      top_down = true, -- place notifications from top to bottom
+      top_down = false, -- place notifications from top to bottom
     },
     statuscolumn = {
       enabled = true,

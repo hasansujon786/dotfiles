@@ -81,7 +81,7 @@ local function set_custom_highlights()
   -- stylua: ignore
   local highlights = {
     -- /// backgrounds ///
-    NormalFloat             = { fg = fg, bg = 'none' },
+    NormalFloat             = { fg = fg, bg = c.none },
     FloatBorder             = { fg = c.cyan, bg = c.none },
     NormalFloatFlat         = { fg = fg, bg = float_bg },
     FloatBorderFlat         = { fg = dark_border, bg = float_bg },
@@ -282,8 +282,10 @@ local function set_custom_highlights()
     FlashMatch                  = { fg = c.fg, bg = c.bg3 },
     FlashLabel                  = { fg = c.black, bg = c.green },
     FlashCurrent                = { fg = c.bg0, bg = '#e86671' },
-    NoiceMini                   = { bg = 'none' },
+    NoiceMini                   = { bg = '#000000' },
     NoiceFormatConfirmDefault   = { link = 'LazyButton' },
+    NoiceVirtualText            = { link = 'DiagnosticLineNrWarn' },
+    NoiceVirtualTextAlt         = { fg = '#4C4944' },
     LazyNormal                  = { link = 'NormalFloatFlat' },
     LazyButton                  = { bg = c.layer, fg = c.fg },
     LazyButtonActive            = { link = 'WildMenu' },

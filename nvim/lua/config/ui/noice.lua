@@ -53,7 +53,7 @@ return {
           opts = {
             anchor = 'SW',
             zindex = 1010,
-            -- size = { width = 50 },
+            size = { height = 5 },
             position = { row = 1, col = 3 },
             border = { style = hover.border, padding = { 0, 1 } },
             win_options = { winhighlight = hover.winhighlight, showbreak = 'NONE' },
@@ -79,7 +79,7 @@ return {
         view_error = 'notify', -- view for errors
         view_warn = 'notify', -- view for warnings
         view_history = 'messages', -- view for :messages
-        view_search = false, -- view for search count messages. Set to `false` to disable
+        view_search = 'virtualtext', -- view for search count messages. Set to `false` to disable
       },
       views = {
         ---@type nui_popup_options

@@ -43,7 +43,7 @@ return {
         sl.MacroRec,
         {
           sl.Fill,
-          sl.SearchCount,
+          -- sl.SearchCount,
           sl.Diagnostics,
           sl.Fill,
         },

@@ -360,9 +360,9 @@ return {
   },
   Diagnostics = {
     condition = function()
-      if vim.v.hlsearch ~= 0 then
-        return false
-      end
+      -- if vim.v.hlsearch ~= 0 then
+      --   return false
+      -- end
       return conditions.has_diagnostics()
     end,
     static = Icons.diagnostics,
@@ -383,25 +383,25 @@ return {
       provider = function(self)
         return self.errors > 0 and (self.Error .. ' ' .. self.errors .. ' ')
       end,
-      hl = { fg = 'dark_red', bg = 'bg1' },
+      hl = { fg = 'red', bg = 'bg1' },
     },
     {
       provider = function(self)
         return self.warnings > 0 and (self.Warn .. ' ' .. self.warnings .. ' ')
       end,
-      hl = { fg = 'dark_yellow', bg = 'bg1' },
+      hl = { fg = 'yellow', bg = 'bg1' },
     },
     {
       provider = function(self)
         return self.info > 0 and (self.Info .. ' ' .. self.info .. ' ')
       end,
-      hl = { fg = 'dark_cyan', bg = 'bg1' },
+      hl = { fg = 'cyan', bg = 'bg1' },
     },
     {
       provider = function(self)
         return self.hints > 0 and (self.Hint .. ' ' .. self.hints)
       end,
-      hl = { fg = 'dark_cyan', bg = 'bg1' },
+      hl = { fg = 'cyan', bg = 'bg1' },
     },
   },
   SearchCount = {
