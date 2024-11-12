@@ -3,6 +3,7 @@ local events = require('events')
 local colors = require('colors')
 
 return {
+  max_fps = 120,
   keys = events.keys,
   mouse_bindings = events.mouse_bindings,
   key_tables = events.key_tables,

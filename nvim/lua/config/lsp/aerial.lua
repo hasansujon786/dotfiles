@@ -1,5 +1,6 @@
 return {
   'stevearc/aerial.nvim',
+  enabled = false,
   keys = {
     { '<leader>oo', '<cmd>AerialOpen<CR>' },
     -- { 'zo', '<cmd>AerialNavOpen<CR>' },

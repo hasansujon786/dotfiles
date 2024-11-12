@@ -96,8 +96,9 @@ return {
       desc = 'Copy current node',
     },
 
-    ['<s-tab>'] = 'prev_source',
-    ['<tab>'] = 'next_source',
+    ['b'] = 'prev_source',
+    ['w'] = 'next_source',
+    ['e'] = 'next_source',
     ['[['] = 'prev_source',
     [']]'] = 'next_source',
 

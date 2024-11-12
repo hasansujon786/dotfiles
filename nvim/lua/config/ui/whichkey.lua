@@ -76,7 +76,7 @@ return {
       { '<leader>bo', '<cmd>call hasan#utils#buffer#_clear_other()<CR>', desc = 'Kill other buffers' },
       { '<leader>bs', '<cmd>wa<CR>', desc = 'Save all buffer' },
       { '<leader>b.', '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>', desc = 'Switch buffers' },
-      { '<leader>m', '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>', desc = 'Switch buffers' },
+      { 'g\'', '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>', desc = 'Switch buffers' },
 
       { '<leader>bM', '<cmd>call hasan#fzf#edit_bookmark()<CR>', desc = 'Delete bookmark' },
       { '<leader>bm', '<cmd>call hasan#fzf#set_bookmark()<CR>', desc = 'Set bookmark' },

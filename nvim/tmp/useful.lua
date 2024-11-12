@@ -454,3 +454,20 @@ Scroll_target_win(target_win, down, 10)
 -- vim.cmd('edit new.ts')
 -- local cost = vim.uv.hrtime() - start
 -- vim.print(cost / 1000000 .. 'ms')
+
+-- Get the current window and cursor position
+local win = vim.api.nvim_get_current_win()
+local cursor_pos = vim.api.nvim_win_get_cursor(win)
+-- cursor_pos is a table with two values: {row, col}
+local cursor_row = cursor_pos[1]
+local cursor_col = cursor_pos[2]
+-- Get the window's top line and height
+local top_line = vim.fn.line('w0')
+local bottom_line = vim.fn.line('w$')
+local window_height = vim.api.nvim_win_get_height(win)
+-- Calculate relative cursor position within the visible window area
+local relative_row = cursor_row - top_line + 1
+local relative_col = cursor_col + 1 -- Neovim's column is zero-based, so add 1 to make it 1-based
+print('Cursor position relative to viewable area:')
+print('Row:', relative_row, 'Column:', relative_col)
+print('Window height:', window_height)

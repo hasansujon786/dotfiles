@@ -4,6 +4,7 @@ return {
     lazy = true,
     event = 'VeryLazy',
     config = function()
+      local Icons = require('hasan.utils.ui.icons')
       local actions = require('telescope.actions')
       local fb_actions = require('telescope._extensions.file_browser.actions')
       local state = require('core.state')
@@ -126,7 +127,7 @@ return {
             hide_parent_dir = true,
             prompt_path = true,
             quiet = false,
-            dir_icon = '',
+            dir_icon = Icons.documents.FolderOpen,
             dir_icon_hl = 'Default',
             display_stat = { date = true, size = true },
             git_status = true,

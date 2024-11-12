@@ -89,6 +89,14 @@ return {
         size = { height = 0.4 },
         wo = { winbar = true, winhighlight = dark_bar, fillchars = left_chars },
       },
+      {
+        ft = 'SymbolsSidebar',
+        pinned = false,
+        open = 'SymbolsOpen',
+        title = 'Symbols',
+        size = { height = 0.4 },
+        wo = { winbar = true, winhighlight = dark_bar, fillchars = left_chars },
+      },
     }
     local right = {
       {

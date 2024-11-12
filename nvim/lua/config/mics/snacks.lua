@@ -43,7 +43,8 @@ return {
   keys = {
     { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference" },
     { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference" },
-    { "<leader>tn", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
+    { "<leader>vv", function() Snacks.notifier.hide() end, desc = "which_key_ignore" },
+    { "<leader>vo", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
     { "<leader>bk", function() Snacks.bufdelete() end, desc = "Kill this buffer" },
     { "<leader>go", function() Snacks.gitbrowse() end, desc = "Open git repo" },
     { "<leader>aR", function() Snacks.rename.rename_file() end, desc = "Lsp: Rename file" },
