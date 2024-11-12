@@ -26,10 +26,10 @@ return {
     local function tab_out_available()
       return vim.fn.search('\\%#[]>)}\'"`,;]', 'n') ~= 0
     end
-    -- local function has_words_before()
-    --   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    --   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
-    -- end
+    local function has_words_before()
+      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+    end
 
     local function mapping_open_suggetions()
       return cmp.mapping({
@@ -100,14 +100,20 @@ return {
           end
         end, { 'i', 'c', 's' }),
         ['<C-l>'] = cmp.mapping(function(_)
-          if luasnip.choice_active() then
-            luasnip.change_choice(1)
-          else
-            cmp.complete({ config = { sources = { { name = 'luasnip' } } } })
-          end
+          cmp.complete({ config = { sources = { { name = 'luasnip' } } } })
         end, { 'i', 's' }),
         ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-        ['<C-e>'] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
+        ['<C-e>'] = cmp.mapping({
+          i = cmp.mapping.abort(),
+          c = cmp.mapping.close(),
+          s = function(fallback)
+            if luasnip.choice_active() then
+              luasnip.change_choice(1)
+            else
+              fallback()
+            end
+          end,
+        }),
         ['<C-q>'] = mapping_open_suggetions(),
         ['<c-space>'] = mapping_open_suggetions(),
         ['<M-space>'] = mapping_open_suggetions(),
@@ -124,12 +130,12 @@ return {
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.confirm({ select = true })
-          elseif luasnip.expand_or_locally_jumpable() then
-            luasnip.expand_or_jump()
-          -- elseif has_words_before() then
-          --   cmp.complete()
           elseif tab_out_available() then
             feedkeys('<Right>', 'n')
+          elseif luasnip.expand_or_locally_jumpable() then
+            luasnip.expand_or_jump()
+          elseif has_words_before() then
+            cmp.complete()
           elseif vim.api.nvim_get_mode().mode == 's' then
             feedkeys('<C-o>e<Esc>a')
           else
@@ -287,6 +293,7 @@ return {
     'f3fora/cmp-spell',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-nvim-lsp',
     'saadparwaiz1/cmp_luasnip',
   },
 }

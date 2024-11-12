@@ -8,18 +8,17 @@ local nx, ic = { 'n', 'x' }, { 'i', 'c' }
 keymap(nx, 'q', '<esc><cmd>noh<CR><C-l>')
 keymap('n', 'Q', 'q') -- Use Q to record macros
 keymap('v', '@', ':norm @', noSilent) -- run macro on selection
-keymap(nx, "'", '`') -- Character wise jumps always
 keymap(nx, '<CR>', ':<up>', { silent = false, desc = 'Run last command easily' })
 keymap(nx, '<leader><cr>', 'q:', { silent = false, desc = 'Open command history' })
 
--- Center window
-keymap('n', 'A', 'zzA')
-keymap('n', 'I', 'zzI')
-keymap('n', 'i', 'zzi')
-keymap('n', 'a', 'zza')
+-- Center window on insert
+require('hasan.utils.ui.center_cursor').attach_mappings()
+
 for _, mode in ipairs(nx) do
   nvim_set_keymap(mode, 'n', 'nzz', noSilent)
   nvim_set_keymap(mode, 'N', 'Nzz', noSilent)
+
+  nvim_set_keymap(mode, "'", '`', noSilent)
 end
 
 -- Copy Paste -----------------------------------

@@ -60,7 +60,7 @@
   "plenary.nvim": { "branch": "master", "commit": "2d9b06177a975543726ce5c73fca176cedbffe9d" },
   "project.nvim": { "branch": "main", "commit": "8c6bad7d22eef1b71144b401c9f74ed01526a4fb" },
   "quickfix-reflector.vim": { "branch": "master", "commit": "6a6a9e28e1713b9e9db99eec1e6672e5666c01b9" },
-  "snacks.nvim": { "branch": "main", "commit": "9bf21871c5f3472ad91003ef23a94ecc4429717c" },
+  "snacks.nvim": { "branch": "main", "commit": "6336799223289f8838eadc1f3de49be8ef2183f6" },
   "statuscol.nvim": { "branch": "main", "commit": "8822f76e105549620ef9c0d96e7b95aedf14c490" },
   "symbols.nvim": { "branch": "main", "commit": "8f387c7f744e8a363b5beac3dcb6e56dbdeefb55" },
   "telescope-dap.nvim": { "branch": "master", "commit": "783366bd6c1e7fa0a5c59c07db37f49c805a28df" },

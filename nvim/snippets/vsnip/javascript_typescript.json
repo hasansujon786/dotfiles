@@ -56,5 +56,15 @@
       "}"
     ],
     "description": "await a promise for given time"
+  },
+  "basic function": {
+    "prefix": "fn",
+    "body": ["const ${1:fn_name} = () => {\n  ${0}\n}"],
+    "description": "Prettify any nested type"
+  },
+  "async function": {
+    "prefix": "fna",
+    "body": ["const ${1:fn_name} = async () => {\n  ${0}\n}"],
+    "description": "Prettify any nested type"
   }
 }
