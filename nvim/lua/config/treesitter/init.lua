@@ -53,7 +53,7 @@ return {
             lookahead = true,
             keymaps = {
               -- You can use the capture groups defined in textobjects.scm
-              ['i-'] = '@assignment.lhs',
+              ['iH'] = '@assignment.lhs',
               ['i='] = '@assignment.rhs',
               ['a='] = '@assignment.outer',
               ['ic'] = '@call.inner',
@@ -62,12 +62,12 @@ return {
               ['if'] = '@function.inner',
               ['am'] = '@class.outer',
               ['im'] = '@class.inner',
-              ['ak'] = '@pair.outer', -- local object
+              ['ak'] = '@pair.outer', -- object's { key: value }
               ['ik'] = '@pair.inner',
               ['ao'] = '@block.outer',
               ['io'] = '@block.inner',
-              ['a/'] = '@comment.outer',
-              ['i/'] = '@comment.inner',
+              ['aN'] = '@comment.outer',
+              ['iN'] = '@comment.inner',
               ['iC'] = '@conditional.inner',
               ['aC'] = '@conditional.outer',
               ['iP'] = '@parameter.inner',
@@ -188,7 +188,7 @@ return {
     event = 'CursorHold',
     keys = {
       {
-        '[u',
+        'g[',
         function()
           require('treesitter-context').go_to_context(vim.v.count1)
         end,

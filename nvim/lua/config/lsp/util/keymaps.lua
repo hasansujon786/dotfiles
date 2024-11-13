@@ -20,7 +20,7 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', 'gy', '<cmd>Glance type_definitions<CR>', desc('Lsp: type definition'))
   keymap('n', 'gD', vim.lsp.buf.declaration, desc('Lsp: go to declaration'))
   keymap('n', 'gR', '<cmd>lua require("config.lsp.util.extras").references_ref()<cr>', desc('Lsp: go to references'))
-  keymap('n', 'g.', '<cmd>lua require("hasan.telescope.custom").references()<cr>', desc('Lsp: go to references'))
+  -- keymap('n', 'g.', '<cmd>lua require("hasan.telescope.custom").references()<cr>', desc('Lsp: go to references'))
 
   keymap('n', 'gpd', require('config.lsp.util.peek').PeekDefinition, desc('Lsp: peek definition'))
   keymap('n', 'gpm', require('config.lsp.util.peek').PeekImplementation, desc('Lsp: peek implementation'))

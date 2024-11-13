@@ -44,6 +44,7 @@ return {
     })
 
     wk.add({
+      { 'gA', group = 'visual-multi' },
       {
         '<leader>.',
         '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>',
@@ -77,6 +78,7 @@ return {
       { '<leader>bs', '<cmd>wa<CR>', desc = 'Save all buffer' },
       { '<leader>b.', '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>', desc = 'Switch buffers' },
       { 'g\'', '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>', desc = 'Switch buffers' },
+      { 'g.', '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>', desc = 'Switch buffers' },
 
       { '<leader>bM', '<cmd>call hasan#fzf#edit_bookmark()<CR>', desc = 'Delete bookmark' },
       { '<leader>bm', '<cmd>call hasan#fzf#set_bookmark()<CR>', desc = 'Set bookmark' },
