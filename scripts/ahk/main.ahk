@@ -48,8 +48,8 @@ PrintScreen::Send("#+{s}")
   and not WinActive("ahk_exe Code.exe")
   !j::SendInput("{DOWN}")
   !k::SendInput("{UP}")
-  !h::  SendInput("{LEFT}")
-  !l::  SendInput("{RIGHT}")
+  !h::SendInput("{LEFT}")
+  !l::SendInput("{RIGHT}")
 #HotIf
 
 ;******************************************************************************
@@ -77,8 +77,16 @@ PrintScreen::Send("#+{s}")
 ^#m::Send("#{m}")
 #m::WinMinimize("a")
 !x::toggleWinRestore()
-![::SendInput("^+{tab}")
-!]::SendInput("^{tab}")
+^[::{
+  SendInput("^+{tab}")
+  Send("{ctrl down}")
+}
+^]::{
+  SendInput("^{tab}")
+  Send("{ctrl down}")
+}
+; ![::SendInput("^+{tab}")
+; !]::SendInput("^{tab}")
 +![::SendInput("^+{PgUp}")
 +!]::SendInput("^+{PgDn}")
 !Enter::Send("{f11}")

@@ -116,6 +116,7 @@ alias cpd="pwd | tr -d '\n' | clip && echo 'pwd copied to clipboard'"
 # alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard'"
 alias y='yazi_cd'
 alias yazi='yazi_cd'
+alias kan='~/dotfiles/scripts/restart-kanata.sh'
 
 # git
 alias ggpusht='git push origin $(git_current_branch) --tags'

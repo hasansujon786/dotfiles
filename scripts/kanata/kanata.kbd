@@ -2,32 +2,48 @@
   process-unmapped-keys yes
 )
 
+(defvar
+  tap-time 200
+  hold-time 250
+)
+
 (defsrc
   grv   1     2     3     4      5      6     7     8     9     0       -       =     bspc
   tab   q     w     e     r      t      y     u     i     o     p       [       ]     \
   caps  a     s     d     f      g      h     j     k     l     ;       '       ret
   lsft  z     x     c     v      b      n     m     ,     .     /       rsft
-  lctl  lmet  lalt            spc                   ralt  rmet  rctl
+  lctl  lmet  lalt              spc                 ralt  rmet  rctl
 )
 
 (deflayer base
-  _     _     _     _     _      _      _     _     _     _     _       _        _    _
-  _     _     _     _     _      _      _     _     _     _     _       _        _    _
-  _     _     _     _     _      _      _     _     _     _     _       _        _
+  _     _     _     _     _      _      _     _     _     _     _       _       _     _
+  _     _     _     _     _      _      _     _     _     _     _       _       _     _
+  _     @a    @s    @d    @f     _      _     @j    @k    @l    @;      _       _
   _     _     _     _     _      _      _     _     _     _     _       _
-  _     _     _              @spc                   _     _     _
+  _     _     _                  _                  _     _     _
 )
+
+;; (deflayer base @escctrl @a @s @d @f @j @k @l @;)
+
 
 (deflayer spc-layer
  grv    M-1   M-2   M-3   M-4    M-5    M-6   M-7   M-8   M-9   M-0     -       =     C-bspc
 C-A-tab C-q   w     end   r      t      C-y   C-u   i     C-d   A-p     C-S-tab C-tab \
  XX     home  C-s   C-d   C-rght g      left  down  up    rght  ;       '       C-ret
  lsft   z     x     c     v      C-left A-n   🔇    🔉    🔊    C-A-tab rsft
- lctl   lmet  lalt            spc                   ralt  rmet  rctl
+ lctl   lmet  lalt              spc                 ralt  rmet  rctl
 )
 
 (defalias
   ;; mod (tap-hold-press 200 200 ralt (layer-toggle spc-layer))
   spc (tap-hold-release 2000 400 spc (layer-toggle spc-layer))
+  ;; escctrl (tap-hold 100 100 esc lctl)
+  a (tap-hold-release $tap-time $hold-time a lmet)
+  s (tap-hold-release $tap-time $hold-time s lalt)
+  d (tap-hold-release $tap-time $hold-time d lsft)
+  f (tap-hold-release $tap-time $hold-time f lctl)
+  j (tap-hold-release $tap-time $hold-time j rctl)
+  k (tap-hold-release $tap-time $hold-time k rsft)
+  l (tap-hold-release $tap-time $hold-time l ralt)
+  ; (tap-hold-release $tap-time $hold-time ; rmet)
 )
-
