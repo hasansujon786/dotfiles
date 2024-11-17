@@ -5,6 +5,7 @@ https://github.com/jtroo/kanata/blob/main/cfg_samples/all_keys_in_defsrc.kbd
 https://github.com/ChuufMaster/kanata-kbd
 https://github.com/postsolar/tree-sitter-kanata
 https://github.com/emdashii/kanata/blob/main/kanata.kbd
+Home row mode => https://github.com/dreamsofcode-io/home-row-mods
 
 # Advance conf
 https://github.com/ogeesan/george-keeb/
