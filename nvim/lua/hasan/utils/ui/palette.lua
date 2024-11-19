@@ -114,10 +114,10 @@ local function set_custom_highlights()
     NullLsInfoBorder        = { link = 'FloatBorder' },
 
     -- /// notify ///
-    NotifyTitle               = { fg = c.light_grey, bg = c.none },
-    NotifyTitleInfo           = { fg = c.green, bg = c.none },
-    NotifyBorder              = { fg = c.grey, bg = c.none },
-    NotifyBorderInfo          = { fg = c.green, bg = c.none  },
+    NotifyTitle             = { fg = c.light_grey, bg = c.none },
+    NotifyTitleInfo         = { fg = c.green, bg = c.none },
+    NotifyBorder            = { fg = c.grey, bg = c.none },
+    NotifyBorderInfo        = { fg = c.green, bg = c.none  },
 
     -- /// edgy ///
     EdgyWinSeparator        = { fg = c.bg_d, bg = c.none },
@@ -127,7 +127,11 @@ local function set_custom_highlights()
     EdgyIconActive          = { fg = c.dark_cyan, bg = '#202a3c' },
     -- /// snacks ///
     SnacksNormal            = { fg = fg, bg = float_bg },
-
+    SnacksDashboardHeader   = { fg = c.grey },
+    SnacksDashboardDesc     = { fg = '#7386a5' },
+    SnacksDashboardKey      = { fg = '#7386a5', bg = c.bg2 },
+    SnacksDashboardKeyAlt   = { fg = c.bg2 },
+    SnacksDashboardNormal   = { fg = fg, bg = c.none },
 
     -- /// org ///
     CodeBlock                 = { bg = c.bg_d },

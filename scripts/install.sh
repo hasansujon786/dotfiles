@@ -294,6 +294,7 @@ install_various_apps() {
   #
   $getter install -y eget
   $getter install -y onefetch
+  $getter install -y tokei
   $getter install -y scrcpy
   $getter install -y jq
   $getter install -y tldr

@@ -17,11 +17,8 @@ return {
     },
   },
   config = function()
-    local load_alpha_dashboard = function()
-      local ok = pcall(require, 'alpha')
-      if ok then
-        vim.cmd([[Alpha]])
-      end
+    local load_dashboard = function()
+      Snacks.dashboard.open()
     end
 
     local group = vim.api.nvim_create_augroup('PersistedHooks', { clear = true })
@@ -60,7 +57,7 @@ return {
       group = group,
       callback = function()
         if vim.bo.filetype == '' then
-          load_alpha_dashboard()
+          pcall(load_dashboard)
         end
       end,
     })
@@ -91,7 +88,7 @@ return {
       -- end,
       ---@type fun(): any
       on_autoload_no_session = function()
-        load_alpha_dashboard()
+        pcall(load_dashboard)
       end,
 
       -- use_git_branch = false,

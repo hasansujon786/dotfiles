@@ -25,9 +25,8 @@ return {
         toggle({ elements = { 'and', 'or' } }),
         toggle({ elements = { '&&', '||' }, word = false }),
         toggle({ elements = { '>', '<' }, word = false }),
-        toggle({ elements = { '~=', '==' }, word = false }),
         toggle({ elements = { '!==', '===' }, word = false }),
-        toggle({ elements = { '&&', '||' }, word = false }),
+        toggle({ elements = { '!=', '==' }, word = false }),
         augend.hexcolor.new({ case = 'lower' }),
         toggle({
           elements = { 'number', 'string', 'boolean', 'unknown', 'any', 'void', 'null', 'undefined', 'never', 'bigint' },

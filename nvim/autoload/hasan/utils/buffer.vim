@@ -44,7 +44,7 @@ function! hasan#utils#buffer#_clear() abort "{{{
 
   " Show dashboard if there is no other buffer
   if bufnr('%') == cur_buf || bufname('%') == ''
-    execute('Alpha')
+    execute('Dashboard')
   endif
 
   if buflisted(cur_buf)
@@ -77,7 +77,7 @@ function! hasan#utils#buffer#_clear_all() abort "{{{
       catch
       endtry
     endfor
-    execute('Alpha')
+    execute('Dashboard')
   endif
 endfunction "}}}
 

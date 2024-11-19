@@ -2,6 +2,7 @@ return {
   'goolord/alpha-nvim',
   lazy = require('core.state').ui.session_autoload, -- make sure we load this during startup if it is your main colorscheme
   cmd = { 'Alpha' },
+  enabled = false,
   keys = {
     { '<leader>pd', '<cmd>Alpha<CR>', desc = 'Open dashboard' },
   },

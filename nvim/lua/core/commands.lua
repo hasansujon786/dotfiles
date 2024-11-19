@@ -1,4 +1,4 @@
-vim.api.nvim_create_user_command('ClearShada', function()
+command('ClearShada', function()
   local shada_path = vim.fn.expand(vim.fn.stdpath('data') .. '/shada')
   local files = vim.fn.glob(shada_path .. '/*', false, true)
   local all_success = 0
@@ -20,7 +20,7 @@ vim.api.nvim_create_user_command('ClearShada', function()
   end
 end, { desc = 'Clears all the .tmp shada files' })
 
-vim.api.nvim_create_user_command('ParseTiemISO', function(ctx)
+command('ParseTiemISO', function(ctx)
   local str = nil
   if ctx.range == 2 then
     str = require('hasan.utils').get_visual_selection()
@@ -32,3 +32,7 @@ vim.api.nvim_create_user_command('ParseTiemISO', function(ctx)
   end
   require('hasan.utils.time').parse_time(str)
 end, { desc = 'Parse ISO time', range = true })
+
+command('Dashboard', function()
+  Snacks.dashboard.open()
+end, { desc = 'Open dashboard' })

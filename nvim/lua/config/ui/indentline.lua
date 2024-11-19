@@ -11,6 +11,7 @@ local excluded_filetypes = {
   'mason',
   'Outline',
   'alpha',
+  'snacks_dashboard',
   'ccc-ui',
   '2048',
   'lazy',

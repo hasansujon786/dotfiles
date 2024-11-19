@@ -1,3 +1,18 @@
+local function button(key, label, desc, cmd)
+  return {
+    text = {
+      { desc, hl = 'SnacksDashboardDesc', width = 36 },
+      { '', hl = 'SnacksDashboardKeyAlt' },
+      { label, hl = 'SnacksDashboardKey' },
+      { '', hl = 'SnacksDashboardKeyAlt' },
+      -- { label, hl = 'SnacksDashboardKey' },
+    },
+    action = cmd,
+    key = key,
+    align = 'center',
+  }
+end
+
 return {
   'hasansujon786/snacks.nvim',
   priority = 1000,
@@ -33,9 +48,66 @@ return {
       git = { patterns = { 'GitSign', 'MiniDiffSign' } },
       refresh = 50, -- refresh at most every 50ms
     },
+    dashboard = {
+      enabled = true,
+      -- These settings are used by some built-in sections
+      preset = {
+        -- Defaults to a picker that supports `fzf-lua`, `telescope.nvim` and `mini.pick`
+        ---@type fun(cmd:string, opts:table)|nil
+        pick = nil,
+        -- Used by the `keys` section to show keymaps
+        ---@type snacks.dashboard.Item[]
+        -- stylua: ignore
+        keys = {
+          button('r', 'R', '  Recent file', ':lua require("telescope.builtin").oldfiles({cwd_only=true})'),
+          button('l', 'L', '  Load session', ':SessionLoad'),
+          button('f', 'F', '  Find files', ':lua require("hasan.telescope.custom").my_find_files()'),
+          -- { icon = ' ', label = ' n ', key = 'n', desc = 'New File', action = ':ene | startinsert' },
+          -- button('t', ' T ', '  Open terminal', ':FloatermNew --wintype=normal --height=10'),
+          button('s', 'S', '  Open settings', ':lua Snacks.dashboard.pick("files", {cwd = vim.fn.stdpath("config")})'),
+          button('p', 'P', '  Lazy dashboard', ':Lazy'),
+          -- { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
+        },
+        -- Used by the `header` section
+        header = [[
+      ,               ,        
+    ,//,              %#*,     
+  ,((((//,            /###%*,  
+,((((((////,          /######%.
+///((((((((((,        *#######.
+//////(((((((((,      *#######.
+//////(/(((((((((,    *#######.
+//////(. /(((((((((,  *#######.
+//////(.   (((((((((*,*#######.
+//////(.    ,#((((((((########.
+/////((.      /#((((((##%%####.
+(((((((.        .(((((#####%%#.
+ /(((((.          ((((#%#%%/*  
+   ,(((.            /(%%#*     
+      *               *        ]],
+      },
+      sections = {
+        { section = 'header' },
+        { section = 'keys', gap = 1, padding = 2 },
+        { section = 'startup' },
+        -- { pane = 2, section = 'recent_files', padding = { 2, 10 }, title = 'Recent files' },
+        -- { pane = 2, section = 'projects', title = 'Projects' },
+        -- projects = <function 8>,
+        -- recent_files = <function 9>,
+        -- session = <function 10>,
+        -- startup = <function 11>,
+        -- terminal = <function 12>
+      },
+    },
     styles = {
       notification = {
         wo = { wrap = true, winblend = 0 }, -- Wrap notifications
+      },
+      dashboard = {
+        zindex = 10,
+        height = vim.o.lines,
+        width = vim.o.columns,
+        -- wo = { winhighlight = 'Normal:SidebarDark,NormalFloat:SidebarDark' },
       },
     },
   },
@@ -48,6 +120,7 @@ return {
     { "<leader>bk", function() Snacks.bufdelete() end, desc = "Kill this buffer" },
     { "<leader>go", function() Snacks.gitbrowse() end, desc = "Open git repo" },
     { "<leader>aR", function() Snacks.rename.rename_file() end, desc = "Lsp: Rename file" },
+    { "<leader>pd", function () Snacks.dashboard.open() end, desc = 'Open dashboard' },
 
     -- { "<A-m>",      function() Snacks.terminal() end, desc = "Toggle Terminal", mode = {'n', 'i', 't'} },
     {
