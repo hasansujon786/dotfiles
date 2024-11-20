@@ -2,8 +2,7 @@ return {
   'oskarrrrrrr/symbols.nvim',
   enabled = true,
   keys = {
-    { '<leader>oo', '<cmd>Symbols<CR>' },
-    -- { 'zo', '<cmd>AerialNavOpen<CR>' },
+    { '<leader>om', '<cmd>Symbols<CR>', desc = 'Open Symbols' },
   },
   dependencies = { 'folke/edgy.nvim' },
   config = function()

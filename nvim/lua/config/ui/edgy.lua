@@ -159,18 +159,21 @@ return {
         },
       },
       keys = {
+        ['<BS>'] = function(_)
+          feedkeys('<C-w>p')
+        end,
         ['q'] = function(win)
           win:close()
-          require('nebulous').update_all_windows()
+          -- require('nebulous').update_all_windows()
           -- win:hide()
         end,
         ['<leader>q'] = function(win)
           win:close()
-          require('nebulous').update_all_windows()
+          -- require('nebulous').update_all_windows()
         end,
         ['<c-q>'] = function(win)
           win:hide()
-          require('nebulous').update_all_windows()
+          -- require('nebulous').update_all_windows()
         end,
         [']w'] = function(win)
           win:next({ visible = true, focus = true })

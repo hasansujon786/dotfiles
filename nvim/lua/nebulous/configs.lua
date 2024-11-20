@@ -13,6 +13,7 @@ M.default = {
     'fzf',
     'floating',
     'edgy',
+    'SymbolsSidebar',
     'qf',
     'scratchpad',
     'NeogitStatus',

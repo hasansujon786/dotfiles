@@ -59,13 +59,13 @@ return {
         ---@type snacks.dashboard.Item[]
         -- stylua: ignore
         keys = {
-          button('r', 'R', '  Recent file', ':lua require("telescope.builtin").oldfiles({cwd_only=true})'),
-          button('l', 'L', '  Load session', ':SessionLoad'),
-          button('f', 'F', '  Find files', ':lua require("hasan.telescope.custom").my_find_files()'),
+          button('r', 'R', '  Recent file', '<cmd>lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>'),
+          button('l', 'L', '  Load session', '<cmd>lua require("persisted").load()<CR>'),
+          button('f', 'F', '  Find files', '<cmd>lua require("hasan.telescope.custom").my_find_files()<CR>'),
+          button('s', 'S', '  Open settings', '<cmd>lua Snacks.dashboard.pick("files", {cwd = vim.fn.stdpath("config")})<CR>'),
+          button('p', 'P', '  Lazy dashboard', '<cmd>Lazy<CR>'),
           -- { icon = ' ', label = ' n ', key = 'n', desc = 'New File', action = ':ene | startinsert' },
           -- button('t', ' T ', '  Open terminal', ':FloatermNew --wintype=normal --height=10'),
-          button('s', 'S', '  Open settings', ':lua Snacks.dashboard.pick("files", {cwd = vim.fn.stdpath("config")})'),
-          button('p', 'P', '  Lazy dashboard', ':Lazy'),
           -- { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
         },
         -- Used by the `header` section
@@ -105,8 +105,8 @@ return {
       },
       dashboard = {
         zindex = 10,
-        height = vim.o.lines,
-        width = vim.o.columns,
+        height = 0,
+        width = 0,
         -- wo = { winhighlight = 'Normal:SidebarDark,NormalFloat:SidebarDark' },
       },
     },

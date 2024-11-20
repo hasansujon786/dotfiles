@@ -39,9 +39,7 @@ return {
     end,
   },
   {
-    -- 'nvim-orgmode/orgmode',
-    'hasansujon786/orgmode',
-    branch = 'fix-autocomplete/tags-search-prompt',
+    'nvim-orgmode/orgmode',
     lazy = true,
     ft = { 'org' },
     keys = {
