@@ -210,6 +210,11 @@ local function set_custom_highlights()
     -- NeoTreeCursorLine    = { link = 'CursorLineFocus' },
     -- hi! NeoTreeGitUntracked       gui=NONE
 
+    qfLineNr             = { fg = c.light_grey },
+    qfSeparator          = { link = 'Comment' },
+    QuickFixHeaderHard   = { link = 'qfSeparator' },
+    QuickFixHeaderSoft   = { link = 'qfSeparator' },
+
     -- /// nvim-cmp ///
     Pmenu                 = { link = 'NormalFloatFlat' },
     PmenuSel              = { bg = c.blue, fg = c.bg0 },

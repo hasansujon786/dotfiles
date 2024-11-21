@@ -12,12 +12,12 @@ syn match qfInfo / I .*$/ contained
 syn match qfNote / [NH] .*$/ contained
 
 hi def link qfFileName Directory
-hi def link qfSeparatorLeft Delimiter
-hi def link qfSeparatorRight Delimiter
+hi def link qfSeparatorLeft qfSeparator
+hi def link qfSeparatorRight qfSeparator
 hi def link qfLineNr LineNr
-hi def link qfError DiagnosticError
-hi def link qfWarning DiagnosticWarn
+hi def link qfError DiagnosticSignError
+hi def link qfWarning DiagnosticSignWarn
 hi def link qfInfo DiagnosticSignInfo
-hi def link qfNote DiagnosticHint
+hi def link qfNote DiagnosticSignHint
 
 let b:current_syntax = 'qf'
