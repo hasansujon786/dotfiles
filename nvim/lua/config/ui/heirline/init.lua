@@ -5,6 +5,7 @@ return {
   event = { 'BufReadPost', 'BufNewFile' },
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
+    vim.o.laststatus = 3
     vim.opt.showcmdloc = 'statusline'
     local conditions = require('heirline.conditions')
     -- local utils = require('heirline.utils')

@@ -191,7 +191,7 @@ select_playback_device() {
   Send("{left}")
   Send("{left}")
   Send("{Space}")
-  sleep(100)
+  sleep(300)
   Send("{tab}")
   Send("{Enter}")
   sleep(100)

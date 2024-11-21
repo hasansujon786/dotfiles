@@ -1,7 +1,10 @@
+local btn_width = 36
 local function button(key, label, desc, cmd)
+  local pad = btn_width - #label
+
   return {
     text = {
-      { desc, hl = 'SnacksDashboardDesc', width = 36 },
+      { desc, hl = 'SnacksDashboardDesc', width = pad },
       { '', hl = 'SnacksDashboardKeyAlt' },
       { label, hl = 'SnacksDashboardKey' },
       { '', hl = 'SnacksDashboardKeyAlt' },
@@ -12,6 +15,15 @@ local function button(key, label, desc, cmd)
     align = 'center',
   }
 end
+
+-- local group = vim.api.nvim_create_augroup('SnackHooks', { clear = true })
+-- vim.api.nvim_create_autocmd({ 'User' }, {
+--   pattern = 'SnacksDashboardOpened',
+--   group = group,
+--   callback = function()
+--     vim.o.laststatus = 3
+--   end,
+-- })
 
 return {
   'hasansujon786/snacks.nvim',
@@ -64,6 +76,7 @@ return {
           button('f', 'F', '  Find files', '<cmd>lua require("hasan.telescope.custom").my_find_files()<CR>'),
           button('s', 'S', '  Open settings', '<cmd>lua Snacks.dashboard.pick("files", {cwd = vim.fn.stdpath("config")})<CR>'),
           button('p', 'P', '  Lazy dashboard', '<cmd>Lazy<CR>'),
+          button('a', 'A', '  Open org agenda', '<cmd>lua require("orgmode").action("agenda.prompt")<CR>'),
           -- { icon = ' ', label = ' n ', key = 'n', desc = 'New File', action = ':ene | startinsert' },
           -- button('t', ' T ', '  Open terminal', ':FloatermNew --wintype=normal --height=10'),
           -- { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
@@ -89,7 +102,25 @@ return {
       sections = {
         { section = 'header' },
         { section = 'keys', gap = 1, padding = 2 },
-        { section = 'startup' },
+        -- { section = 'startup' },
+        {
+          function()
+            local v = vim.version()
+            local patch = v.patch
+            if v.prerelease then
+              patch = patch .. '-' .. v.prerelease
+            end
+            return {
+              align = 'center',
+              width = 30,
+              text = {
+                { '██', hl = 'SnacksDashboardFooterAlt' },
+                { string.format([[v%s.%s.%s]], v.major, v.minor, patch), hl = 'SnacksDashboardFooter' },
+                { '██', hl = 'SnacksDashboardFooterAlt' },
+              },
+            }
+          end,
+        },
         -- { pane = 2, section = 'recent_files', padding = { 2, 10 }, title = 'Recent files' },
         -- { pane = 2, section = 'projects', title = 'Projects' },
         -- projects = <function 8>,

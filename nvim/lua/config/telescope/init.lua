@@ -22,7 +22,7 @@ return {
       ['<s-tab>'] = actions.move_selection_previous,
 
       ['<M-i>'] = actions.toggle_selection + actions.move_selection_worse,
-      ['<C-y>'] = actions.toggle_selection + actions.move_selection_better,
+      ['<M-y>'] = actions.toggle_selection + actions.move_selection_better,
 
       ['<S-CR>'] = local_action.fedit,
       ['<M-o>'] = local_action.quicklook,
@@ -30,7 +30,7 @@ return {
       ['<M-t>'] = local_action.focus_file_tree,
       ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
 
-      ['<C-a>'] = actions.select_all,
+      ['<M-a>'] = actions.select_all,
       ['<C-e>'] = actions.to_fuzzy_refine,
       ['<esc>'] = actions.close,
       ['jk'] = function()

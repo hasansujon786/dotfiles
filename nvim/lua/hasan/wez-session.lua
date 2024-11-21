@@ -82,11 +82,11 @@ M.create_tabs = function()
 end
 -- M.create_tabs()
 
-_G.foo = function()
-  for _, id in ipairs(wins_ids) do
-    vim.api.nvim_win_close(id, true)
-  end
-end
+-- _G.foo = function()
+--   for _, id in ipairs(wins_ids) do
+--     vim.api.nvim_win_close(id, true)
+--   end
+-- end
 -- M.get_project_scripts('C:\\Users\\hasan\\dotfiles\\gui\\wezterm\\wezterm-session-manager\\klark-app-rn.json')
 
 function M.browse_sessions()

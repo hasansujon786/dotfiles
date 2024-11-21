@@ -17,9 +17,9 @@ return {
     },
   },
   config = function()
-    local load_dashboard = function()
-      Snacks.dashboard.open()
-    end
+    -- local load_dashboard = function()
+    --   Snacks.dashboard.open()
+    -- end
 
     local group = vim.api.nvim_create_augroup('PersistedHooks', { clear = true })
 
@@ -52,15 +52,15 @@ return {
       end,
     })
 
-    vim.api.nvim_create_autocmd({ 'User' }, {
-      pattern = 'PersistedLoadPost',
-      group = group,
-      callback = function()
-        if vim.bo.filetype == '' then
-          pcall(load_dashboard)
-        end
-      end,
-    })
+    -- vim.api.nvim_create_autocmd({ 'User' }, {
+    --   pattern = 'PersistedLoadPost',
+    --   group = group,
+    --   callback = function()
+    --     if vim.bo.filetype == '' then
+    --       pcall(load_dashboard)
+    --     end
+    --   end,
+    -- })
 
     require('persisted').setup({
       autostart = true, -- Start recording
@@ -86,10 +86,10 @@ return {
       --   end
       --   return true
       -- end,
-      ---@type fun(): any
-      on_autoload_no_session = function()
-        pcall(load_dashboard)
-      end,
+      -----@type fun(): any
+      --on_autoload_no_session = function()
+      --  pcall(load_dashboard)
+      --end,
 
       -- use_git_branch = false,
       -- allowed_dirs = {}, -- Table of dirs that the plugin will start and autoload from

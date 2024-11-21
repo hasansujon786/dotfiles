@@ -18,7 +18,7 @@ M.ui = {
     style = 'rounded',
     highlight = 'DiagnosticHint',
   },
-  session_autoload = true,
+  session_autoload = false,
   fold = {
     persists = true,
   },

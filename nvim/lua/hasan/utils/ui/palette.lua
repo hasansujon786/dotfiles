@@ -132,6 +132,8 @@ local function set_custom_highlights()
     SnacksDashboardKey      = { fg = '#7386a5', bg = c.bg2 },
     SnacksDashboardKeyAlt   = { fg = c.bg2 },
     SnacksDashboardNormal   = { fg = fg, bg = c.none },
+    SnacksDashboardFooter   = { fg = c.dark_blue, bg = c.bg_d },
+    SnacksDashboardFooterAlt= { fg = c.bg_d, bg = c.none },
 
     -- /// org ///
     CodeBlock                 = { bg = c.bg_d },

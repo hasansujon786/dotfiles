@@ -1,18 +1,3 @@
-local function load_treesitter()
-  if package.loaded['nvim-treesitter'] == nil then
-    require('lazy').load({ plugins = { 'nvim-treesitter' } })
-  end
-end
-local function loadOrgMode(key)
-  return function()
-    load_treesitter()
-    require('lazy').load({ plugins = { 'orgmode' } })
-    vim.defer_fn(function()
-      feedkeys(key)
-    end, 0)
-  end
-end
-
 return {
   {
     'chipsenkbeil/org-roam.nvim',
@@ -26,29 +11,27 @@ return {
     ft = { 'org' },
     lazy = true,
     dependencies = { 'nvim-orgmode/orgmode' },
-    config = function()
-      load_treesitter()
-      require('org-roam').setup({
-        directory = org_root_path,
-        ui = {
-          node_buffer = {
-            show_keybindings = false,
-          },
+    opts = {
+      directory = org_root_path,
+      ui = {
+        node_buffer = {
+          show_keybindings = false,
         },
-      })
-    end,
+      },
+    },
   },
   {
     'nvim-orgmode/orgmode',
     lazy = true,
     ft = { 'org' },
+    module = 'orgmode',
     keys = {
       -- { '<leader>e', '<cmd>lua require("hasan.org").toggle_org_float()<CR>', desc = 'Toggle org float' },
       { '<leader>oh', '<cmd>lua require("hasan.org").open_org_home("-tabedit")<CR>', desc = 'Open org home' },
       { '<leader>oH', '<cmd>lua require("hasan.org").open_org_project()<CR>', desc = 'Open current project' },
 
-      { '<leader>oa', loadOrgMode('<space>oa'), desc = 'org agenda' },
-      { '<leader>oc', loadOrgMode('<space>oc'), desc = 'org capture' },
+      { '<leader>oa', '<cmd>lua require("orgmode").action("agenda.prompt")<CR>', desc = 'Org agenda' },
+      { '<leader>oc', '<cmd>lua require("orgmode").action("capture.prompt")<CR>', desc = 'Org capture' },
 
       { '<leader>/o', '<cmd>Telescope live_grep cwd=~/my_vault/orgfiles<CR>', desc = 'Grep org text' },
       { '<leader>w/', '<cmd>Telescope find_files cwd=~/my_vault/orgfiles<CR>', desc = 'Search org files' },
@@ -115,6 +98,7 @@ return {
     --   require('orgmode').setup(opts)
     -- end,
     dependencies = {
+      'nvim-treesitter/nvim-treesitter',
       {
         'akinsho/org-bullets.nvim',
         opts = {
