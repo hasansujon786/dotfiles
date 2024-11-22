@@ -173,14 +173,6 @@ return {
     dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
   },
   {
-    'ziontee113/neo-minimap',
-    lazy = true,
-    event = 'CursorHold',
-    config = function()
-      require('config.treesitter.neo_minimap')
-    end,
-  },
-  {
     'nvim-treesitter/nvim-treesitter-context',
     commit = 'a2a3349',
     enabled = true,

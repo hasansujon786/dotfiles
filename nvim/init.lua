@@ -15,4 +15,4 @@ if vim.g.vscode then
 else
   require('core.autocmds')
 end
-require('core.lazy_setup')
+require('core.lazy')

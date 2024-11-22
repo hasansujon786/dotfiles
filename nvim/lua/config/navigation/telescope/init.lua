@@ -116,7 +116,7 @@ return {
           },
         },
         persisted = get_dropdown,
-        project_commands = require('config.telescope.project_commands'),
+        project_commands = require('config.navigation.telescope.project_commands'),
         file_browser = {
           theme = 'ivy',
           cwd_to_path = false,

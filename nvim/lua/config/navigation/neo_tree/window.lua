@@ -1,4 +1,4 @@
-local tree_util = require('config.neo_tree.util')
+local tree_util = require('config.navigation.neo_tree.util')
 
 local function show_more_options(state)
   local options = {

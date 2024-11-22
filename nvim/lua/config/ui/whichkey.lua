@@ -122,12 +122,12 @@ return {
       { '<leader>fw', '<Plug>(fix-current-world)', desc = 'Fix current world' },
       {
         '<leader>fy',
-        "<cmd>lua require('config.neo_tree.util').copy_path(vim.fn.expand('%:t'))<CR>",
+        "<cmd>lua require('config.navigation.neo_tree.util').copy_path(vim.fn.expand('%:t'))<CR>",
         desc = 'Copy current node',
       },
       {
         '<leader>fY',
-        "<cmd>lua require('config.neo_tree.util').copy_path(vim.fn.expand('%:p'))<CR>",
+        "<cmd>lua require('config.navigation.neo_tree.util').copy_path(vim.fn.expand('%:p'))<CR>",
         desc = 'Copy absolute node',
       },
 

@@ -1,4 +1,4 @@
-local vinegar = require('config.neo_tree.util')
+local vinegar = require('config.navigation.neo_tree.util')
 
 local function focus_first_child(state, node)
   if node:has_children() then

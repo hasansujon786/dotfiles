@@ -21,12 +21,14 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local spec = {
-  { import = 'config' },
-  { import = 'config.lsp' },
-  { import = 'config.git' },
-  { import = 'config.ui' },
-  { import = 'config.mics' },
   { import = 'config.completion' },
+  { import = 'config.git' },
+  { import = 'config.lsp' },
+  { import = 'config.mics' },
+  { import = 'config.navigation' },
+  { import = 'config.testing' },
+  { import = 'config.ui' },
+  { import = 'config' },
 }
 
 if vim.g.vscode then

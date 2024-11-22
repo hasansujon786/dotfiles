@@ -120,7 +120,7 @@ end
 augroup('MY_NEBULOUS_SETUP')(function(autocmd)
   autocmd('FileType', function(info)
     -- If noice or vinegar win then skip
-    if info.file == 'noice' or require('config.neo_tree').vinegar_helper.isNeoTreeWindow(info.file) then
+    if info.file == 'noice' or require('config.navigation.neo_tree').vinegar_helper.isNeoTreeWindow(info.file) then
       return
     end
 
