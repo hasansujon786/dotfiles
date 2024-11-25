@@ -4,10 +4,14 @@ return {
   config = function()
     local Icons = require('hasan.utils.ui.icons').Other
     local glance = require('glance')
-    local mod = require('hasan.widgets.glance_mod')
     local actions = glance.actions
 
-    keymap('n', '<leader>og', mod.open_last_history, { desc = 'Lsp: Glance resume' })
+    keymap('n', '<leader>og', '<cmd>Glance resume<CR>', { desc = 'Lsp: Glance resume' })
+
+    local function filterReactDTS(value)
+      return string.match(value.targetUri, 'index.d.ts') == nil
+      -- return string.match(value.uri, '%.d.ts') == nil
+    end
 
     glance.setup({
       height = 18, -- Height of the window
@@ -48,16 +52,21 @@ return {
         before_open = function(results, open, jump, method)
           if #results == 1 then
             jump(results[1]) -- argument is optional
+          elseif #results > 1 and method == 'definitions' then
+            local filtered_result = vim.tbl_filter(filterReactDTS, results)
+            if #filtered_result == 1 then
+              return jump(filtered_result[1])
+            end
+
+            require('hasan.widgets.glance_mod').set_cursor_pointer()
+            open(filtered_result)
           else
-            mod.set_cursor_pointer()
+            require('hasan.widgets.glance_mod').set_cursor_pointer()
             open(results) -- argument is optional
-            vim.defer_fn(function()
-              mod.save_history_data(results, method)
-            end, 100)
           end
         end,
         after_close = function()
-          mod.remove_cursor_pointer()
+          require('hasan.widgets.glance_mod').remove_cursor_pointer()
         end,
       },
       folds = {

@@ -233,7 +233,7 @@ local M = {
     { key = 'o', mods = 'LEADER', action = 'ActivateLastTab' },
     { key = 'v', mods = 'LEADER', action = act({ SplitHorizontal = {} }) },
     { key = 's', mods = 'LEADER', action = act({ SplitVertical = {} }) },
-    { key = 'b', mods = 'LEADER|CTRL', action = wezterm.action_callback(toggle_opacity) },
+    { key = 'b', mods = 'LEADER', action = wezterm.action_callback(toggle_opacity) },
     {
       key = 'X',
       mods = 'LEADER',
@@ -259,7 +259,7 @@ local M = {
     { key = 'R', mods = 'LEADER', action = wezterm.action({ EmitEvent = 'restore_session' }) },
     { key = 'l', mods = 'LEADER|CTRL', action = wezterm.action({ EmitEvent = 'load_session' }) },
     { key = 'f', mods = 'LEADER', action = wezterm.action({ EmitEvent = 'sessionizer_start' }) },
-    { key = 'b', mods = 'LEADER', action = act.ShowLauncherArgs({ flags = 'WORKSPACES' }) },
+    { key = 'b', mods = 'LEADER|CTRL', action = act.ShowLauncherArgs({ flags = 'WORKSPACES' }) },
 
     -- Custom inputs
     { key = ' ', mods = 'CTRL', action = { SendString = '\x11' } },

@@ -94,7 +94,7 @@ alias keyp='C:/Users/hasan/dotfiles/scripts/keypirinha.sh'
 alias -- -='cd -'
 alias ..='cd ..'
 alias cs='cd'
-alias re='cd /e/repoes'
+# alias re='cd /e/repoes'
 alias to='touch'
 alias mk='mkdir -p'
 mm() { mkdir -p "$@" && cd "$@" || exit; }

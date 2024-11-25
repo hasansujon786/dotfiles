@@ -32,12 +32,27 @@ local inlayHints = {
   includeInlayVariableTypeHints = true,
 }
 
+local function filterReactDTS(value)
+  return string.match(value.targetUri, 'index.d.ts') == nil
+  -- return string.match(value.uri, '%.d.ts') == nil
+end
+
 ---@type ServerConfig
 return {
   setup = function(_, bufnr)
     keymap('n', '<leader>ai', M.ts_organize_imports_sync, { buffer = bufnr, desc = 'Lsp: organize imports' })
   end,
   opts = {
+    handlers = {
+      ['textDocument/definition'] = function(err, results, method, ...)
+        if vim.islist(results) and #results > 1 then
+          local filtered_result = vim.tbl_filter(filterReactDTS, results)
+          return vim.lsp.handlers['textDocument/definition'](err, filtered_result, method, ...)
+        end
+
+        vim.lsp.handlers['textDocument/definition'](err, results, method, ...)
+      end,
+    },
     -- See: https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
     settings = {
       -- implicitProjectConfiguration = {

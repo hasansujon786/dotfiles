@@ -1,7 +1,6 @@
 local NuiLine = require('nui.line')
 local NuiText = require('nui.text')
 local Popup = require('nui.popup')
-local glance = require('glance')
 
 --------------------------------------------------
 -- cursor_pointer --------------------------------
@@ -35,7 +34,8 @@ local function create_pointer_pop()
   return Popup(opts)
 end
 
-local function set_cursor_pointer()
+local M = {}
+function M.set_cursor_pointer()
   local line = NuiLine({ NuiText('', 'GlanceBorderCursor') })
   local pop = create_pointer_pop()
 
@@ -47,41 +47,10 @@ local function set_cursor_pointer()
   return pop
 end
 
-local function remove_cursor_pointer()
+function M.remove_cursor_pointer()
   if cursor_pointer_pop ~= nil then
     cursor_pointer_pop:unmount()
   end
 end
 
---------------------------------------------------
--- glance_history --------------------------------
---------------------------------------------------
-local offset_encoding = 'utf-16'
-local glance_history = {}
-
-local function save_history_data(results, method)
-  table.insert(glance_history, {
-    results = results,
-    method = method,
-  })
-end
-
-local open_last_history = function()
-  if #glance_history == 0 then
-    return vim.notify('No last data', vim.log.levels.INFO, { title = 'Glance' })
-  end
-  local last_history = glance_history[#glance_history]
-
-  local parent_bufnr = vim.api.nvim_get_current_buf()
-  local parent_winnr = vim.api.nvim_get_current_win()
-  local params = vim.lsp.util.make_position_params()
-
-  glance.open_history(last_history.results, parent_bufnr, parent_winnr, params, last_history.method, offset_encoding)
-end
-
-return {
-  set_cursor_pointer = set_cursor_pointer,
-  remove_cursor_pointer = remove_cursor_pointer,
-  save_history_data = save_history_data,
-  open_last_history = open_last_history,
-}
+return M

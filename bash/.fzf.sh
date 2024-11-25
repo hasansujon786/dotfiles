@@ -228,3 +228,8 @@ eml() {
     fzf --height=10 |
     xargs emulator -netdelay none -netspeed full -avd
 }
+
+re() {
+  dir=$(fd --max-depth 2 --search-path /e/repoes | fzf)
+  cd "$dir" || exit
+}
