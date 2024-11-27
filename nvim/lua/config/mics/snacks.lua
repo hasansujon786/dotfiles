@@ -54,8 +54,8 @@ return {
     },
     statuscolumn = {
       enabled = true,
-      left = { 'mark', 'sign' }, -- priority of signs on the left (high to low)
-      right = { 'fold', 'git' }, -- priority of signs on the right (high to low)
+      left = { 'sign', 'git' }, -- priority of signs on the right (high to low)
+      right = { 'fold', 'mark' }, -- priority of signs on the left (high to low)
       folds = { open = false, git_hl = false },
       git = { patterns = { 'GitSign', 'MiniDiffSign' } },
       refresh = 50, -- refresh at most every 50ms
