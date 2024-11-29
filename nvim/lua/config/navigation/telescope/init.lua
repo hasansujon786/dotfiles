@@ -48,6 +48,7 @@ return {
     local bordercharsOpt = { borderchars = state.border_groups.edged_top }
     local get_dropdown = require('telescope.themes').get_dropdown(bordercharsOpt)
     local get_cursor = require('telescope.themes').get_cursor(bordercharsOpt)
+    local get_ivy = require('telescope.themes').get_ivy({ borderchars = state.border_groups.edged_ivy })
 
     require('telescope').setup({
       defaults = {
@@ -93,8 +94,8 @@ return {
         },
       },
       pickers = {
-        find_files = { theme = 'ivy', layout_config = { height = 0.6 } },
         -- lsp_references = dropdown_opts,
+        find_files = get_ivy,
         lsp_document_symbols = get_dropdown,
         grep_string = get_dropdown,
         live_grep = get_dropdown,

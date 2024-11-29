@@ -1,6 +1,5 @@
 local Path = require('plenary.path')
 local utils = require('telescope.utils')
-local themes = require('telescope.themes')
 local finders = require('telescope.finders')
 local pickers = require('telescope.pickers')
 local builtin = require('telescope.builtin')
@@ -10,7 +9,6 @@ local my_make_entry = require('hasan.telescope.make_entry_custom')
 local my_theme = require('hasan.telescope.theme')
 local action_set = require('telescope.actions.set')
 local action_state = require('telescope.actions.state')
-local extensions = require('telescope').extensions
 local local_action = require('hasan.telescope.local_action')
 -- local sorters = require 'telescope/sorters'
 
@@ -124,34 +122,25 @@ function M.curbuf(is_visual)
   }))
 end
 
-function M.search_plugins()
-  extensions.file_browser.file_browser(themes.get_ivy({
-    previewer = false,
-    prompt_title = 'Plugins',
-    cwd = vim.fn.glob(_G.plugin_path),
-  }))
-end
-
 function M.search_nvim_data()
-  extensions.file_browser.file_browser(themes.get_ivy({
-    previewer = true,
+  my_theme.get_file_browser({
     prompt_title = 'Nvim user data',
     cwd = vim.fn.stdpath('data'),
-  }))
+  })
 end
 
 function M.file_browser(dir)
-  extensions.file_browser.file_browser(themes.get_ivy({
+  my_theme.get_file_browser({
     path = dir == 'cur_dir' and vim.fn.expand('%:h') or nil,
     hide_parent_dir = true,
     files = dir == 'cur_dir', -- false: start with all dirs
     prompt_path = true,
     previewer = true,
-  }))
+  })
 end
 
 function M.project_browser()
-  extensions.file_browser.file_browser({
+  my_theme.get_file_browser({
     cwd = 'E:\\repoes',
     hide_parent_dir = true,
     prompt_path = true,

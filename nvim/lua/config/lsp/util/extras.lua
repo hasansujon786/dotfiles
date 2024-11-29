@@ -184,25 +184,4 @@ function M.lspRename()
   end)
 end
 
----Open quickfix with current ref focused
-function M.references_ref()
-  local qf_line_left_fmt = '%s │%5d:%-3d│'
-  local search_cmd_fmt = "call search('%s')"
-  vim.fn['hasan#utils#feedkeys']('viwo<ESC>', 'n')
-
-  vim.defer_fn(function()
-    local cursor = api.nvim_win_get_cursor(0)
-    local line_nr = cursor[1]
-    local col_nr = cursor[2] + 1
-    local fname = require('hasan.utils.ui.qf').valid_qf_fname(api.nvim_get_current_buf())
-    fname = fname:gsub('\\', '\\\\')
-
-    vim.lsp.buf.references()
-    vim.defer_fn(function()
-      local search_current_ref_cmd = search_cmd_fmt:format(qf_line_left_fmt:format(fname, line_nr, col_nr))
-      vim.cmd(search_current_ref_cmd)
-    end, 200)
-  end, 20)
-end
-
 return M

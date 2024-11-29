@@ -25,6 +25,7 @@ return {
       cursor_scrolls_alone = true,
       easing = 'circular',
     })
+    -- stylua: ignore
     local keymap = {
       ['<C-u>'] = function() neoscroll.ctrl_u({ duration = 250 }) end,
       ['<C-d>'] = function() neoscroll.ctrl_d({ duration = 250 }) end,
@@ -40,4 +41,16 @@ return {
       vim.keymap.set(modes, key, func)
     end
   end,
+  dependencies = {
+    {
+      'sphamba/smear-cursor.nvim',
+      event = 'CursorMoved',
+      enabled = true,
+      opts = {
+        -- cursor_color = '#d3cdc3',
+        normal_bg = '#242B38',
+        smear_between_buffers = true,
+      },
+    },
+  },
 }

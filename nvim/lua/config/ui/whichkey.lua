@@ -225,7 +225,6 @@ return {
       { '<leader>v.', '<cmd>echo "Not a Vim file"<CR>', desc = 'Source this file' },
       { '<leader>v/', '<cmd>Telescope help_tags<CR>', desc = 'Search Vim help' },
       { '<leader>vH', '<cmd>silent write | edit | TSBufEnable highlight<CR>', desc = 'Reload hightlight' },
-      { '<leader>vP', '<cmd>lua require("hasan.telescope.custom").search_plugins()<CR>', desc = 'Search plugin files' },
       { '<leader>vR', '<cmd>ReloadConfig<CR>', desc = 'Reload neovim' },
       { '<leader>vd', '<cmd>lua require("hasan.telescope.custom").search_nvim_data()<CR>', desc = 'Search nvim data' },
       { '<leader>vl', '<cmd>call logevents#LogEvents_Toggle()<CR>', desc = 'Toggle LogEvents' },
