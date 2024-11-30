@@ -36,6 +36,18 @@ M.one_half = {
   },
   background = M.colors.bg,
   foreground = M.colors.fg,
+  cursor_bg = '#5ab0f6',
+  cursor_fg = '#5ab0f6',
+  cursor_border = M.colors.fg,
+  split = '#3E425D',
+  selection_fg = 'none',
+  selection_bg = 'rgb(171 178 191 / 20%)',
+
+  quick_select_label_bg = { Color = '#0000ff' },
+  quick_select_label_fg = { Color = '#ffffff' },
+  quick_select_match_bg = { Color = '#4C4944' },
+  quick_select_match_fg = { Color = '#ebc275' },
+
   tab_bar = {
     active_tab = {
       -- bg_color = '#1E1C1C',

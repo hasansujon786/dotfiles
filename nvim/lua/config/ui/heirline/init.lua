@@ -95,7 +95,7 @@ return {
           end
           return conditions.buffer_matches({
             buftype = { 'nofile', 'prompt', 'help', 'quickfix' },
-            filetype = { '^git.*', 'fugitive', 'Trouble', 'dashboard', 'harpoon', 'floaterm' },
+            filetype = { '^git.*', 'fugitive', 'Trouble', 'dashboard', 'harpoon', 'floaterm', 'terminal' },
           }, args.buf)
         end,
         colors = {

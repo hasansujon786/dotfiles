@@ -36,7 +36,7 @@ end
 M.get_file_browser = function(opts)
   opts = opts or {}
   opts.borderchars = require('core.state').border_groups.edged_ivy
-  opts.layout_config = { height = 0.8 }
+  opts.layout_config = { height = 0.6 }
   extensions.file_browser.file_browser(opts)
 end
 

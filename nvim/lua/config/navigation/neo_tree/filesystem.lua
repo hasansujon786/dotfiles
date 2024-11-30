@@ -106,11 +106,16 @@ return {
       end,
       ['R'] = function(state)
         local node = state.tree:get_node()
-        vim.cmd('silent !explorer.exe /select,"' .. node:get_id() .. '"')
+        local args = { '/select,', node:get_id() }
+        if node.type == 'directory' then
+          args = { node:get_id() }
+        end
+
+        require('plenary.job'):new({ command = 'explorer.exe', args = args }):start()
       end,
       ['O'] = function(state)
         local node = state.tree:get_node()
-        vim.cmd('silent !explorer.exe "' .. node:get_id() .. '"')
+        require('plenary.job'):new({ command = 'explorer.exe', args = { node:get_id() } }):start()
       end,
 
       ['[c'] = 'prev_git_modified',

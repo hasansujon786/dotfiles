@@ -1,4 +1,3 @@
-local Job = require('plenary.job')
 local Path = require('plenary.path')
 
 local M = {}
@@ -152,7 +151,7 @@ end
 
 function M.quickLook(args)
   local bg_job = nil
-  bg_job = Job:new({
+  bg_job = require('plenary.job'):new({
     command = 'C:\\Users\\hasan\\AppData\\Local\\Programs\\QuickLook\\QuickLook.exe',
     args = args,
     -- cwd = vim.loop.cwd(),
