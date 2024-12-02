@@ -1,5 +1,10 @@
 local Path = require('plenary.path')
 
+-- local on_windows = vim.loop.os_uname().version:match('Windows')
+local sysname = vim.uv.os_uname().sysname:lower()
+local iswin = not not (sysname:find('windows') or sysname:find('mingw'))
+local os_sep = iswin and '\\' or '/'
+
 local M = {}
 
 M.get_root_dir = function()
@@ -53,7 +58,15 @@ end
 
 M.read_file = function(path)
   local fd = vim.loop.fs_open(path, 'r', 438)
+  if fd == nil then
+    return
+  end
+
   local stat = vim.loop.fs_fstat(fd)
+  if stat == nil then
+    return
+  end
+
   local data = vim.loop.fs_read(fd, stat.size, 0)
   vim.loop.fs_close(fd)
 
@@ -70,6 +83,10 @@ M.write_file = function(path, content, mode)
   vim.loop.fs_open(path, mode, tonumber('644', 8), function(err, fd)
     if not err then
       local fpipe = vim.loop.new_pipe(false)
+      if fpipe == nil then
+        return
+      end
+
       vim.loop.pipe_open(fpipe, fd)
       vim.loop.write(fpipe, content)
     end
@@ -140,13 +157,6 @@ function M.reload()
     end
     P('Neovim reloaded')
   end
-end
-
-local on_windows = vim.loop.os_uname().version:match('Windows')
-function M.join_paths(...) -- Function from nvim-lspconfig
-  local path_sep = on_windows and '\\' or '/'
-  local result = table.concat({ ... }, path_sep)
-  return result
 end
 
 function M.quickLook(args)

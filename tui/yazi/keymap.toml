@@ -49,6 +49,7 @@ append_keymap = [
 
 prepend_keymap = [
   { on = ["<Space>"], run = "plugin --sync quicklook", desc = "Peek" },
+  { on = ["i"], run = "plugin --sync quicklook", desc = "Peek" },
   { on = ["M"], run = "plugin --sync max-preview", desc = "Toggle Maximize" },
   { on = ["f"], run = "plugin jump-to-char", desc = "Jump to char" },
   { on = ["t"], run = "plugin fzf", desc = "Jump to a directory, or reveal a file using fzf" },

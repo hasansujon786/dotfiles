@@ -24,8 +24,9 @@ return {
       ['<M-i>'] = actions.toggle_selection + actions.move_selection_worse,
       ['<M-y>'] = actions.toggle_selection + actions.move_selection_better,
 
+      ['<C-o>'] = local_action.system_open,
       ['<S-CR>'] = local_action.fedit,
-      ['<M-o>'] = local_action.quicklook,
+      ['<M-o>'] = local_action.quicklook(),
       ['<C-s>'] = actions.select_horizontal,
       ['<M-t>'] = local_action.focus_file_tree,
       ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
@@ -140,25 +141,26 @@ return {
               -- ['<A-d>'] = fb_actions.remove,
               -- ['<S-CR>'] = fb_actions.create_from_prompt,
 
-              ['<C-o>'] = local_action.fb_actions_open,
+              ['<C-o>'] = local_action.fb_system_open,
+              ['<M-o>'] = local_action.quicklook(true),
               ['<C-i>'] = fb_actions.toggle_hidden,
               ['<C-f>'] = fb_actions.toggle_browser, -- Search for all folders
 
               ['<bs>'] = fb_actions.backspace,
               ['<A-h>'] = fb_actions.goto_home_dir,
-              ['<C-u>'] = local_action.clear_prompt_or_goto_cwd,
-              ['<C-w>'] = local_action.clear_prompt_or_goto_parent_dir,
+              ['<C-u>'] = local_action.fb_clear_prompt_or_goto_cwd,
+              ['<C-w>'] = local_action.fb_clear_prompt_or_goto_parent_dir,
 
               ['<C-h>'] = false,
             },
             ['n'] = {
-              ['o'] = local_action.fb_actions_open,
+              ['o'] = local_action.fb_system_open,
               ['I'] = fb_actions.toggle_hidden,
 
+              ['-'] = fb_actions.goto_parent_dir,
               ['<bs>'] = fb_actions.goto_parent_dir,
               ['H'] = fb_actions.goto_home_dir,
               ['W'] = fb_actions.goto_cwd,
-              ['-'] = fb_actions.goto_parent_dir,
 
               ['f'] = false,
               ['s'] = false,

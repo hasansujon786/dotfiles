@@ -148,7 +148,7 @@ fk() {
 }
 
 f() {
-  readarray -t out <<<"$(fzf --tac --query="$1" --expect=alt-o,alt-c)"
+  readarray -t out <<<"$(fzf --tac --query="$1" --expect=alt-o,ctrl-t)"
   shortcut=${out[0]}
   files=("${out[@]:1}")
 
@@ -172,7 +172,7 @@ f() {
   fi
 
   # Cd into selected file directory
-  if [[ "$shortcut" = alt-c ]]; then
+  if [[ "$shortcut" = ctrl-t ]]; then
     dir=$(dirname "${files[0]}")
     cd "$dir" || exit && printf 'cd -- %q' "$dir"
     return
