@@ -48,7 +48,7 @@ return {
       italic = true,
       font = wezterm.font({
         family = 'Monaspace Radon',
-        weight = 500,
+        weight = 700,
         -- style = 'Italic',
       }),
     },

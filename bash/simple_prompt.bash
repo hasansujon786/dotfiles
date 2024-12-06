@@ -10,3 +10,4 @@ git-branch() {
 }
 
 export PS1="\n\`if [ \$? = 0 ];then echo \[\e[35m\]; else echo \[\e[31m\];fi\`[\t∣\d] \[\e[36m\]\w \`git-branch\` \[\e[0m\]\n>> "
+# export PS1="\n\`if [ \$? = 0 ];then echo \[\e[35m\]; else echo \[\e[31m\];fi\`[\t∣\d] \[\e[36m\]\w \[\e[0m\]\n>> "

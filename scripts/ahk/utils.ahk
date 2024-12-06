@@ -1,5 +1,7 @@
 #Requires AutoHotkey v2.0
 
+Global taskbar_height := 40
+
 PosX(place, offset, itemWidth) {
   screenWidth := A_ScreenWidth
   if (place == "right") {
@@ -392,7 +394,7 @@ runLayoutAction(EXE_FULL, EXE, side) {
       WinMaximize("A")
     } else if (side == "maximized_custom") {
       ;           ↓ here 0 hides the video behind the window
-      WinMove(-8, 1, A_ScreenWidth + 16, A_ScreenHeight - 30, "A")
+      WinMove(-8, 1, A_ScreenWidth + 16, A_ScreenHeight - taskbar_height, "A")
       ; WinMove(, , A_ScreenWidth + 8, A_ScreenHeight - 36, "A")
       ; centerCurrentWindow()
     } else {
