@@ -79,6 +79,8 @@ else
   echo \ OS Index: ${osIndex}
 fi
 
+STARTUP_PATH="C:\\Users\\${USERNAME}\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"
+
 ###### utils ######
 util_print() {
   echo ' '
@@ -109,6 +111,17 @@ util_makeSymlinkPath() {
   else
     ln -s "$1" "$2"
   fi
+}
+
+update_path() {
+  # Check if a path argument is provided
+  if [ -z "$1" ]; then
+    echo "Usage: $0 <path-to-add>"
+    return
+  fi
+  NEW_PATH="$1"
+
+  powershell.exe -File "C:\\Users\\$USERNAME\\dotfiles\\scripts\\update_path.ps1" -newPath "$NEW_PATH"
 }
 
 ###### setup functions ######
@@ -205,6 +218,24 @@ setup_lazygit() {
 
 }
 
+setup_kanata() {
+  kanata_tray=("$HOME/AppData/Roaming/kanata-tray" "$HOME/.config/kanata-tray" "$HOME/.config/kanata-tray")
+  util_print kanata
+
+  util_backUpConfig "${kanata_tray[$osIndex]}"
+  util_makeSymlinkPath "$HOME/dotfiles/scripts/kanata/kanata-tray" "${kanata_tray[$osIndex]}"
+
+  if [[ "$os" == "windows" ]]; then
+    export KANATA_TRAY_VER="0.5.2"
+    rm "${STARTUP_PATH}\\kanata-tray.exe"
+
+    wget https://github.com/rszyma/kanata-tray/releases/download/v${KANATA_TRAY_VER}/kanata-tray.exe
+    mv kanata-tray.exe "${HOME}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/"
+    sleep 0.5
+    explorer "${STARTUP_PATH}\\kanata-tray.exe"
+  fi
+}
+
 setup_tig() {
   util_print tig
   if [[ "$os" == "windows" ]]; then
@@ -242,10 +273,8 @@ setup_yazi() {
   mkdir -p "${yaziPath[$osIndex]}"
   util_makeSymlinkPath "$HOME/dotfiles/tui/yazi" "${yaziPath[$osIndex]}/config"
 
-  # if [[ "$os" == "windows" ]]; then
-  # 	$getter install -y lf
-  # else
-  # fi
+  winget install sxyazi.yazi
+  $getter install -y ffmpeg imagemagick
 }
 
 setup_alacritty() {
@@ -270,6 +299,7 @@ setup_node() {
     # $getter install -y nodejs
     # choco install nvm
     $getter install -y nodejs-lts
+    "C:\\Program Files\\nodejs\\npm" install -g yarn trash-cli live-server
   elif [[ "$os" == "linux" ]]; then
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
     export NVM_DIR="$HOME/.config/nvm"
@@ -279,22 +309,32 @@ setup_node() {
   fi
 }
 
-install_various_apps() {
-  util_print python
-  $getter install -y python
-  # c:\python39\python.exe -m pip install --upgrade pip
-  # pip install --user --upgrade pynvim
-  python -m pip install --upgrade Pillow
-  # python -m pip install --upgrade mupdf
-
+setup_rust() {
   util_print rust
-  $getter install -y rust
-  # cargo install --list
-  # cargo install vimv
-  #
+  # cargo_bin=("C:\\ProgramData\\chocolatey\\bin\\cargo.exe" "C:\\ProgramData\\chocolatey\\bin\\cargo.exe" "C:\\ProgramData\\chocolatey\\bin\\cargo.exe")
+
+  if [[ "$os" == "windows" ]]; then
+    $getter install -y rust
+    # "${cargo_bin[$osIndex]}" install  --list
+  fi
+}
+
+setup_python() {
+  util_print python
+
+  if [[ "$os" == "windows" ]]; then
+    $getter install -y python
+    python_cmd=$(which python)
+    $python_cmd -m pip install --upgrade pip
+    $python_cmd -m pip install --upgrade Pillow
+    # python -m pip install --upgrade mupdf
+  fi
+}
+
+install_various_apps() {
   $getter install -y eget
   $getter install -y onefetch
-  $getter install -y tokei
+  # $getter install -y tokei # FIXME: install error
   $getter install -y scrcpy
   $getter install -y jq
   $getter install -y tldr
@@ -309,17 +349,13 @@ install_various_apps() {
 
   if [[ "$os" == "windows" ]]; then
     setup_keypirinha
-    $getter install -y obsidian
-    $getter install -y 7zip.install
-    $getter install -y sharpkeys
-    $getter install -y potplayer
-    $getter install -y quicklook
+    # $getter install -y sharpkeys
+    $getter install -y obsidian potplayer 7zip.install quicklook riot googlechrome qbittorrent
     $getter install -y delta # git highlighter
-    # $getter install -y instanteyedropper.app
     $getter install -y ntop.portable
-    $getter install -y riot
-    $getter install -y googlechrome
-    setup_windowsTerminal
+
+    # INFO: dosen't work with choco # $getter install -y instanteyedropper.app
+    # FIXME: update config # setup_windowsTerminal
     setup_sublime
   elif [[ "$os" == "linux" ]]; then
     install_and_setup_tmux
@@ -349,7 +385,10 @@ setup_ahk() {
   util_print main.ahk
   ahkPath="C:\\Users\\$USERNAME\\AppData\\Roaming\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\main.ahk"
 
-  choco install autohotkey -y
+  # FIXME: Find a way to install v2 without winget
+  # choco install autohotkey -y
+  winget install AutoHotkey.AutoHotkey
+
   rm -rf "$ahkPath"
   util_makeSymlinkPath "$HOME/dotfiles/scripts/ahk/main.ahk" "'$ahkPath'"
   explorer "$ahkPath"
@@ -374,7 +413,7 @@ setup_windowsTerminal() {
   wtPath=("$HOME/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState")
   # wtPathBeta=($HOME/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState/settings.json)
 
-  $getter install -y microsoft-windows-terminal # --pre
+  # $getter install -y microsoft-windows-terminal # --pre
 
   mkdir -p "${wtPath[$osIndex]}"
   util_backUpConfig "${wtPath[$osIndex]}/settings.json"
@@ -411,6 +450,7 @@ auto_install_everything() {
   mkdir -p ~/.config
 
   if [[ "$os" == "windows" ]]; then
+    update_path "C:\\Users\\$USERNAME\\dotfiles\\.bin"
     start ms-settings:developers
     $getter install -y brave
     setup_pwsh
@@ -426,6 +466,9 @@ auto_install_everything() {
   setup_wezterm
   setup_nvim
   setup_node
+  setup_rust
+  setup_python
+  setup_kanata
   # setup_alacritty
   setup_lazygit
   setup_lf
@@ -435,11 +478,12 @@ auto_install_everything() {
   install_various_apps
 }
 
-prompt_and_get_answers() {
+main() {
   util_setup_figlet
   auto_install_everything
 
   util_print done.
 }
 
-prompt_and_get_answers
+# Run installer
+main

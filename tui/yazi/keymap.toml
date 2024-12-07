@@ -17,6 +17,8 @@ append_keymap = [
   { on = ["g", "r"], run = "cd E:/repoes", desc = "repoes" },
 
   { on = ["g", "a", "n"], run = "cd ~/AppData/Local/nvim-data/", desc = "Nvim data" },
+  { on = ["g", "a", "l"], run = "cd ~/AppData/Local", desc = "AppData/Local" },
+  { on = ["g", "a", "r"], run = "cd ~/AppData/Roaming", desc = "AppData/Roaming" },
   { on = ["g", "a", "s"], run = "cd ~/AppData/Local/Packages/MicrosoftWindows.Client.CBS_cw5n1h2txyewy/TempState/ScreenClip", desc = "ScreenClip" },
   { on = ["g", "a", "S"], run = "cd ~/AppData/Roaming/Microsoft/Windows/Start\\ Menu/Programs/Startup", desc = "Start Menu/Programs/Startup" },
   # cd ~/AppData/Local/Packages/Microsoft.ScreenSketch_8wekyb3d8bbwe/TempState
