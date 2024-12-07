@@ -121,11 +121,12 @@ current_layout := 0
 ; AltTabMenu & TaskView Vim Mode
 ;******************************************************************************
 #/::SendInput("^!{Tab}")
-#HotIf WinActive("ahk_class MultitaskingViewFrame")     ; ctrl+alt+tab
-  or MouseIsOver("ahk_class Shell_LightDismissOverlay") ; clipboard backdrop
-  or WinActive("Volume Control")
-  ; or WinActive("ahk_class Windows.UI.Core.CoreWindow")  ; win+tab/StartScreen
-  ; or MouseIsOver("ahk_class ApplicationFrameWindow")
+#HotIf WinActive("Volume Control")
+  or (MouseIsOver("ahk_class ApplicationFrameWindow") or MouseIsOver("ahk_class Shell_LightDismissOverlay") and MouseIsOver("ahk_exe explorer.exe")) ; clipboard & backdrop
+  or WinActive("Task View") ; win+tab
+  or WinActive("Task Switching") ; ctrl+alt+tab
+  ; or WinActive("ahk_class MultitaskingViewFrame")  ; ctrl+alt+tab
+  ; or WinActive("ahk_class Windows.UI.Core.CoreWindow") ; win+tab/StartScreen
   ; or WinActive("ahk_exe ShellExperienceHost.exe")
   ; ahk_exe ApplicationFrameHost.exe
 

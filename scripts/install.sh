@@ -124,6 +124,19 @@ update_path() {
   powershell.exe -File "C:\\Users\\$USERNAME\\dotfiles\\scripts\\update_path.ps1" -newPath "$NEW_PATH"
 }
 
+update_user_var() {
+  # Check if variable name and value are provided
+  if [ -z "$1" ] || [ -z "$2" ]; then
+    echo "Usage: $0 <variable-name> <variable-value>"
+    return
+  fi
+
+  VAR_NAME="$1"
+  VAR_VALUE="$2"
+
+  powershell.exe -File "C:\\Users\\$USERNAME\\dotfiles\\scripts\\update_variable.ps1" -varName "$VAR_NAME" -varValue "$VAR_VALUE"
+}
+
 ###### setup functions ######
 setup_git_defaults() {
   gitconfigPath=("$HOME/.gitconfig" "$HOME/.gitconfig" "$HOME/.gitconfig")
@@ -153,12 +166,8 @@ setup_bash() {
   util_makeSymlinkPath "$HOME/dotfiles/bash/.bashrc" "${bashPath[$osIndex]}"
 
   util_print bash-utils
-  $getter install -y fzf
-  $getter install -y zoxide
-  $getter install -y ripgrep
-  $getter install -y fd
-  $getter install -y wget
-  $getter install -y curl
+  $getter install -y wget curl fd ripgrep zoxide fzf
+  winget install eza-community.eza
   # $getter install -y starship
 }
 
@@ -451,6 +460,9 @@ auto_install_everything() {
 
   if [[ "$os" == "windows" ]]; then
     update_path "C:\\Users\\$USERNAME\\dotfiles\\.bin"
+    update_path "%LOCALAPPDATA%\Android\Sdk\platform-tools"
+    update_user_var ANDROID_HOME "${LOCALAPPDATA}\Android\Sdk"
+
     start ms-settings:developers
     $getter install -y brave
     setup_pwsh

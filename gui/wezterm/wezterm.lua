@@ -39,7 +39,7 @@ return {
       intensity = 'Bold',
       italic = false,
       font = wezterm.font({
-        family = 'OperatorMonoLig Nerd Font',
+        family = 'Operator Mono Lig',
         weight = 700, -- Medium|Bold
       }),
     },
