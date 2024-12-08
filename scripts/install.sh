@@ -176,9 +176,9 @@ setup_wezterm() {
   util_print wezterm
   $getter install wezterm -y
 
-  git clone https://github.com/hasansujon786/wezterm-session-manager.git ~/.config/wezterm/wezterm-session-manager
   util_backUpConfig "${weztermPath[$osIndex]}"
   util_makeSymlinkPath "$HOME/dotfiles/gui/wezterm" "${weztermPath[$osIndex]}"
+  git clone https://github.com/hasansujon786/wezterm-session-manager.git ~/.config/wezterm/wezterm-session-manager
 }
 
 setup_nvim() {

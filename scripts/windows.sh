@@ -11,7 +11,8 @@
 # choco install vlc -y
 # choco install emacs -y
 
-choco install qbittorrent -y
-winget install eza-community.eza
+# choco install qbittorrent -y
+# winget install eza-community.eza
+choco install -y microsoft-openjdk17
 winget install aristocratos.btop4win
 winget install GNU.Emacs

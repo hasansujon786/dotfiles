@@ -234,6 +234,8 @@ local M = {
     { key = 'v', mods = 'LEADER', action = act({ SplitHorizontal = {} }) },
     { key = 's', mods = 'LEADER', action = act({ SplitVertical = {} }) },
     { key = 'b', mods = 'LEADER', action = wezterm.action_callback(toggle_opacity) },
+    { key = 'r', mods = 'LEADER', action = act.RotatePanes('Clockwise') },
+    { key = 'R', mods = 'LEADER', action = act.RotatePanes('CounterClockwise') },
     {
       key = 'X',
       mods = 'LEADER',
@@ -255,10 +257,10 @@ local M = {
     },
 
     -- Workspace
-    { key = 'S', mods = 'LEADER', action = wezterm.action({ EmitEvent = 'save_session' }) },
-    { key = 'R', mods = 'LEADER', action = wezterm.action({ EmitEvent = 'restore_session' }) },
+    { key = 's', mods = 'LEADER|CTRL', action = wezterm.action({ EmitEvent = 'save_session' }) },
+    { key = 'r', mods = 'LEADER|CTRL', action = wezterm.action({ EmitEvent = 'restore_session' }) },
     { key = 'l', mods = 'LEADER|CTRL', action = wezterm.action({ EmitEvent = 'load_session' }) },
-    { key = 'f', mods = 'LEADER', action = wezterm.action({ EmitEvent = 'sessionizer_start' }) },
+    { key = 'f', mods = 'LEADER|CTRL', action = wezterm.action({ EmitEvent = 'sessionizer_start' }) },
     { key = 'b', mods = 'LEADER|CTRL', action = act.ShowLauncherArgs({ flags = 'WORKSPACES' }) },
 
     -- Custom inputs

@@ -24,7 +24,7 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 PrintScreen::Send("#+{s}")
 #+q::toggleBluetooth()
 #q::select_playback_device()
-!#q::open_mic_panel()
+#^+v::open_mic_panel()
 #;::SendInput("{AppsKey}")
 ;Transparency toggle,
 #^/::toggleTransparency()
@@ -122,7 +122,7 @@ current_layout := 0
 ;******************************************************************************
 #/::SendInput("^!{Tab}")
 #HotIf WinActive("Volume Control")
-  or (MouseIsOver("ahk_class ApplicationFrameWindow") or MouseIsOver("ahk_class Shell_LightDismissOverlay") and MouseIsOver("ahk_exe explorer.exe")) ; clipboard & backdrop
+  or (MouseIsOver("ahk_class ApplicationFrameWindow") or MouseIsOver("ahk_class Shell_LightDismissOverlay")) and MouseIsOver("ahk_exe explorer.exe") and MouseIsOver("") ; clipboard & backdrop
   or WinActive("Task View") ; win+tab
   or WinActive("Task Switching") ; ctrl+alt+tab
   ; or WinActive("ahk_class MultitaskingViewFrame")  ; ctrl+alt+tab
