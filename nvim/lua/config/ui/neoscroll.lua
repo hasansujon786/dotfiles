@@ -3,6 +3,7 @@ return {
   'karb94/neoscroll.nvim',
   -- commit = 'e78657719485c5663b88e5d96ffcfb6a2fe3eec0',
   lazy = true,
+  enabled = true,
   event = 'WinScrolled',
   keys = {
     { '<C-u>', mode = modes },
@@ -41,19 +42,4 @@ return {
       vim.keymap.set(modes, key, func)
     end
   end,
-  dependencies = {
-    {
-      'sphamba/smear-cursor.nvim',
-      event = 'CursorMoved',
-      enabled = true,
-      -- stylua: ignore
-      opts = {
-        normal_bg = '#242B38',
-        smear_between_buffers = true,
-                                       -- Default  Range
-        stiffness = 0.8,               -- 0.6      [0, 1]
-        trailing_stiffness = 0.4,      -- 0.3      [0, 1]
-      },
-    },
-  },
 }

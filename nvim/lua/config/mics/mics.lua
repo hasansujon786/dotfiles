@@ -26,6 +26,19 @@ return {
     },
   },
   {
+    'sphamba/smear-cursor.nvim',
+    event = 'CursorMoved',
+    enabled = true,
+      -- stylua: ignore
+      opts = {
+        normal_bg = '#242B38',
+        smear_between_buffers = true,
+        --                                Default  Range
+        stiffness = 0.8,               -- 0.6      [0, 1]
+        trailing_stiffness = 0.4,      -- 0.3      [0, 1]
+      },
+  },
+  {
     'Wansmer/treesj',
     opts = {
       use_default_keymaps = false,

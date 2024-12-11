@@ -174,11 +174,14 @@ function M.lspRename()
   --   local ind = tshl[#tshl]:match('^.*()%*%*.*%*%*')
   --   tshl = tshl[#tshl]:sub(ind + 2, -3)
   -- end
-  local currName = vim.fn.expand('<cword>')
+  local currNamehasan = vim.fn.expand('<cword>')
 
-  local opt = { prompt = 'Rename', default = currName }
-  require('hasan.widgets').get_input(opt, function(newName)
-    if newName and newName ~= currName then
+  vim.ui.input({
+    prompt = 'Rename',
+    default = currNamehasan,
+    win = require('core.state').ui.snack_input_cursor(#currNamehasan),
+  }, function(newName)
+    if newName and newName ~= currNamehasan then
       _lspRename(newName)
     end
   end)

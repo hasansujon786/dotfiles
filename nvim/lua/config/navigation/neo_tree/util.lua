@@ -36,7 +36,7 @@ M.copy_path = function(path_or_state, modifire)
   path_name = vim.fs.normalize(path_name)
 
   vim.fn.setreg('+', path_name)
-  notify(path_name, vim.log.levels.TRACE, { title = 'Neotree' })
+  vim.notify('Coppied ' .. path_name .. ' to clipboard', vim.log.levels.INFO, { title = 'Neotree' })
 end
 
 function M.vinegar_dir_up(state)

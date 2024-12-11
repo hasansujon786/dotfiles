@@ -30,7 +30,7 @@ local function show_more_options(state)
       item.action()
     end
   end, {
-    prompt = 'Neotree menu',
+    prompt = ' Neotree menu ',
     relative = 'cursor',
     kind = 'get_char',
     min_width = 30,

@@ -10,6 +10,7 @@ M.open = function()
     last_popup_window:unmount()
   end
 
+  -- FIXME: text not showing
   local msg = NuiLine({ NuiText(' >>> Press any key to edit <<< ', { hl_group = 'String' }) })
   local msg_pop = Popup({
     enter = false,
@@ -30,7 +31,7 @@ M.open = function()
 
   local regtype = vim.fn.getregtype(char)
   if regtype == '' or regtype == nil then
-    return notify(string.format('"%s" reg is empty', char), vim.log.levels.WARN, { title = 'Register Editor' })
+    return vim.notify(string.format('"%s" reg is empty', char), vim.log.levels.WARN, { title = 'Register Editor' })
   end
 
   local pop = Popup({

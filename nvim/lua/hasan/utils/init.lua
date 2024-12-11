@@ -164,7 +164,7 @@ M.google_search = function(is_visual)
     return _google_search(query)
   end
 
-  vim.ui.input({ prompt = 'Search on Google' }, function(text)
+  vim.ui.input({ prompt = 'Search on Google', icon = ' ' }, function(text)
     _google_search(text)
   end)
 end

@@ -74,7 +74,9 @@ return {
               ['aP'] = '@parameter.outer',
               ['iR'] = '@return.inner',
               ['aR'] = '@return.outer',
-              -- ['a.'] = { query = '@scope', query_group = 'locals', desc = 'Select language scope' },
+              -- ['ii'] = { query = '@indent.begin', query_group = 'indents', desc = 'inner indent begin' },
+              -- ['ai'] = { query = '@fold', query_group = 'folds', desc = 'fold' },
+              -- ['ii'] = { query = '@local.scope', desc = 'Select language scope' },
               -- @loop.inner
               -- @loop.outer
             },

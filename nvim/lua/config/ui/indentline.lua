@@ -22,10 +22,15 @@ local excluded_filetypes = {
   'org',
 }
 
+-- -- /// indent-blankline.nvim ///
+-- IblIndent             = { fg = c.bg3 },
+-- IblScope              = { fg = c.grey },
+-- MiniIndentscopeSymbol = { link = 'IblScope' },
+
 return {
   'lukas-reineke/indent-blankline.nvim',
   lazy = true,
-  enabled = true,
+  enabled = false,
   event = 'BufReadPost', -- V2: 9637670896b68805430e2f72cf5d16be5b97a22a
   main = 'ibl',
   opts = {

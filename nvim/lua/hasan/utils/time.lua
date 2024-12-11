@@ -38,7 +38,7 @@ function M.parse_time(date_str)
 
   -- Print the relative time
   local formatted_time = os.date('%A,%B %d,%Y %I:%M:%S %p', target_timestamp)
-  notify('[' .. formatted_time .. ']', vim.log.levels.INFO, { title = relative_time(diff_seconds) })
+  vim.notify(formatted_time, vim.log.levels.WARN, { title = relative_time(diff_seconds) })
 end
 
 return M

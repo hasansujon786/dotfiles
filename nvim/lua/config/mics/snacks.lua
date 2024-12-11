@@ -35,6 +35,33 @@ return {
     bigfile = { enabled = false },
     quickfile = { enabled = true },
     words = { enabled = true },
+    input = {},
+    indent = {
+      indent = {
+        char = '│',
+        -- blank = '·',
+      },
+      ---@class snacks.indent.Scope.Config: snacks.scope.Config
+      scope = {
+        enabled = true,
+        ---@type snacks.animate.Config|{enabled?: boolean}
+        animate = { enabled = false },
+        char = '│',
+        underline = false, -- underline the start of the scope
+        only_current = true, -- only show scope in the current window
+      },
+      -- filter for buffers to enable indent guides
+      filter = function(buf)
+        return vim.g.snacks_indent ~= false and vim.b[buf].snacks_indent ~= false and vim.bo[buf].buftype == ''
+      end,
+      priority = 200,
+    },
+    scope = {
+      filter = function(buf)
+        return vim.b[buf].snacks_indent_scope ~= false and vim.bo[buf].buftype == ''
+      end,
+      treesitter = { enabled = false },
+    },
     notifier = {
       enabled = true,
       timeout = 3000, -- default timeout in ms
@@ -140,6 +167,25 @@ return {
         width = 0,
         -- wo = { winhighlight = 'Normal:SidebarDark,NormalFloat:SidebarDark' },
       },
+      input = {
+        backdrop = false,
+        position = 'float',
+        border = 'rounded',
+        title_pos = 'center',
+        height = 1,
+        width = 60,
+        relative = 'editor',
+        row = 2,
+        wo = {
+          winhighlight = 'Normal:SidebarDark,NormalFloat:SnacksInputNormal,FloatBorder:SnacksInputBorder,FloatTitle:SnacksInputTitle',
+        },
+        keys = {
+          i_esc = { '<esc>', { 'cmp_close', 'cancel' }, mode = { 'i', 'n' } },
+          i_cr = { '<cr>', { 'cmp_accept', 'confirm' }, mode = { 'i', 'n' } },
+          i_tab = { '<tab>', { 'cmp_select_next', 'cmp' }, mode = 'i' },
+          q = 'cancel',
+        },
+      },
     },
   },
   -- stylua: ignore
@@ -201,6 +247,14 @@ return {
         Snacks.toggle.treesitter({ name = 'Treesitter' }):map('<leader>tT')
 
         -- Snacks.toggle.optio('background', { off = 'light', on = 'dark', name = 'Dark Background' }):map('<leader>ub')
+
+        vim.api.nvim_create_autocmd('FileType', {
+          pattern = { 'org' },
+          callback = function(info)
+            -- vim.b[info.buf]['snacks_indent'] = false
+            vim.b[info.buf]['snacks_indent_scope'] = false
+          end,
+        })
       end,
     })
   end,

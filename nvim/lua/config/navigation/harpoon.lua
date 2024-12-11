@@ -85,7 +85,7 @@ return {
         local name = require('hasan.utils.file').get_buf_name_relative(0)
         local index = require('hasan.utils').index_of(displayed, name)
 
-        notify('File added at index ' .. index, vim.log.levels.TRACE, { title = 'harpoon' })
+        vim.notify('File added at index ' .. index, vim.log.levels.INFO, { title = 'harpoon' })
       end,
       ['<leader><tab>'] = function()
         harpoon.ui:toggle_quick_menu(harpoon:list())

@@ -22,8 +22,11 @@ end
 local _show_substitute_input = function(isVisual)
   local curWord = isVisual and require('hasan.utils').get_visual_selection() or vim.fn.expand('<cword>')
 
-  local opts = { prompt = 'Substitute Word', default = curWord }
-  Widgets.get_input(opts, function(newWord)
+  vim.ui.input({
+    prompt = 'Substitute Word',
+    default = curWord,
+    win = require('core.state').ui.snack_input_cursor(#curWord),
+  }, function(newWord)
     if not newWord then
       return
     end

@@ -134,6 +134,8 @@ local function set_custom_highlights()
     SnacksDashboardNormal   = { fg = fg, bg = c.none },
     SnacksDashboardFooter   = { fg = c.dark_blue, bg = c.bg_d },
     SnacksDashboardFooterAlt= { fg = c.bg_d, bg = c.none },
+    SnacksIndentScope       = { fg = c.grey },
+    SnacksIndent            = { fg = c.bg3 },
 
     -- /// org ///
     CodeBlock                 = { bg = c.bg_d },
@@ -201,7 +203,7 @@ local function set_custom_highlights()
     NeoTreeModified      = { link = 'String' },
     NeoTreeMessage       = { link = 'Comment' },
     NeoTreeDimText       = { link = 'Comment' },
-    NeoTreeIndentMarker  = { link = 'IblIndent' },
+    NeoTreeIndentMarker  = { link = 'SnacksIndent' },
     NeoTreeNormal        = { link = 'SidebarDark' },
     NeoTreeNormalNC      = { link = 'SidebarDark' },
     NeoTreeVertSplit     = { link = 'EdgyWinSeparator' },
@@ -283,12 +285,8 @@ local function set_custom_highlights()
     -- /// Floaterm ///
     FloatermBorder = { link = 'Comment' },
     -- /// outline.nvim ///
-    OutlineGuides = { link = 'IblIndent' },
+    OutlineGuides  = { link = 'SnacksIndent' },
     OutlineCurrent = { fg = c.yellow, underline = true },
-    -- /// indent-blankline.nvim ///
-    IblIndent             = { fg = c.bg3 },
-    IblScope              = { fg = c.grey },
-    MiniIndentscopeSymbol = { link = 'IblScope' },
     -- /// Folke collection ///
     FlashMatch                  = { fg = c.fg, bg = c.bg3 },
     FlashLabel                  = { fg = c.black, bg = c.green },
