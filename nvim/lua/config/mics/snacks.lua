@@ -32,20 +32,17 @@ return {
   lazy = false,
   ---@type snacks.Config
   opts = {
-    bigfile = { enabled = false },
+    bigfile = { enabled = true },
     quickfile = { enabled = true },
     words = { enabled = true },
     input = {},
     indent = {
-      indent = {
-        char = '│',
-        -- blank = '·',
-      },
+      ---@class snacks.indent.animate: snacks.animate.Config
+      animate = { enabled = false },
+      indent = { char = '│' }, -- blank = '·'
       ---@class snacks.indent.Scope.Config: snacks.scope.Config
       scope = {
         enabled = true,
-        ---@type snacks.animate.Config|{enabled?: boolean}
-        animate = { enabled = false },
         char = '│',
         underline = false, -- underline the start of the scope
         only_current = true, -- only show scope in the current window
@@ -57,10 +54,10 @@ return {
       priority = 200,
     },
     scope = {
+      treesitter = { enabled = false },
       filter = function(buf)
         return vim.b[buf].snacks_indent_scope ~= false and vim.bo[buf].buftype == ''
       end,
-      treesitter = { enabled = false },
     },
     notifier = {
       enabled = true,
@@ -68,15 +65,9 @@ return {
       margin = { top = 1, right = 0, bottom = 0 },
       padding = true, -- add 1 cell of left/right padding to the notification window
       -- sort = { 'level', 'added' }, -- sort by level and time
-      icons = {
-        error = ' ',
-        warn = ' ',
-        info = ' ',
-        debug = ' ',
-        trace = '󰠠 ',
-      },
+      icons = { error = ' ', warn = ' ', info = ' ', debug = ' ', trace = '󰠠 ' },
       ---@type snacks.notifier.style
-      style = 'compact', -- "compact"|"fancy"|"minimal"
+      style = 'compact', -- 'compact'|'fancy'|'minimal'
       top_down = false, -- place notifications from top to bottom
     },
     statuscolumn = {
@@ -86,6 +77,24 @@ return {
       folds = { open = false, git_hl = false },
       git = { patterns = { 'GitSign', 'MiniDiffSign' } },
       refresh = 50, -- refresh at most every 50ms
+    },
+    scratch = {
+      ---@type table<string, snacks.win.Config>
+      win_by_ft = {
+        lua = {
+          keys = {
+            ['source'] = {
+              '<cr>',
+              function(self)
+                local name = 'scratch.' .. vim.fn.fnamemodify(vim.api.nvim_buf_get_name(self.buf), ':e')
+                Snacks.debug.run({ buf = self.buf, name = name })
+              end,
+              desc = 'Source buffer',
+              mode = { 'n', 'x' },
+            },
+          },
+        },
+      },
     },
     dashboard = {
       enabled = true,
@@ -186,33 +195,60 @@ return {
           q = 'cancel',
         },
       },
+      input_cursor = { relative = 'cursor', row = -3, col = 0, width = 30 },
+      scratch = {
+        width = 100,
+        height = 30,
+        bo = { buftype = '', buflisted = false, bufhidden = 'hide', swapfile = false },
+        minimal = false,
+        noautocmd = false,
+        zindex = 20,
+        wo = { winhighlight = 'NormalFloat:Normal', winbar = '' },
+        border = 'rounded',
+        title_pos = 'center',
+        footer_pos = 'center',
+      },
+      zen = {
+        enter = true,
+        fixbuf = false,
+        minimal = false,
+        width = 120,
+        height = 0,
+        backdrop = { transparent = false, blend = 96 },
+        keys = { q = false },
+        wo = { winhighlight = 'NormalFloat:Normal', winbar = '' },
+      },
     },
   },
   -- stylua: ignore
   keys = {
-    { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference" },
-    { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference" },
-    { "<leader>vv", function() Snacks.notifier.hide() end, desc = "which_key_ignore" },
-    { "<leader>vo", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
-    { "<leader>bk", function() Snacks.bufdelete() end, desc = "Kill this buffer" },
-    { "<leader>go", function() Snacks.gitbrowse() end, desc = "Open git repo" },
-    { "<leader>aR", function() Snacks.rename.rename_file() end, desc = "Lsp: Rename file" },
-    { "<leader>pd", function () Snacks.dashboard.open() end, desc = 'Open dashboard' },
+    { ']]',         function() Snacks.words.jump(vim.v.count1) end, desc = 'Next Reference', mode = { 'n', 't' } },
+    { '[[',         function() Snacks.words.jump(-vim.v.count1) end, desc = 'Prev Reference', mode = { 'n', 't' } },
+    { '<leader>vv', function() Snacks.notifier.hide() end, desc = 'which_key_ignore' },
+    { '<leader>vo', function() Snacks.notifier.hide() end, desc = 'Dismiss All Notifications' },
+    { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Kill this buffer' },
+    { '<leader>go', function() Snacks.gitbrowse() end, desc = 'Open git repo' },
+    { '<leader>aR', function() Snacks.rename.rename_file() end, desc = 'Lsp: Rename file' },
+    { '<leader>pd', function () Snacks.dashboard.open() end, desc = 'Open dashboard' },
 
-    -- { "<A-m>",      function() Snacks.terminal() end, desc = "Toggle Terminal", mode = {'n', 'i', 't'} },
+    { '<leader>z',  function() Snacks.zen() end, desc = 'Toggle Zen Mode' },
+    { '<leader>u',  function() Snacks.zen.zoom() end, desc = 'Toggle Zoom' },
+    { '<leader>vn', function() Snacks.notifier.show_history() end, desc = 'Notification History' },
+    { '<leader>x', function() Snacks.scratch() end, desc = 'Toggle Scratch Buffer' },
+    { '<leader>/e', function() Snacks.scratch.select() end, desc = 'Select Scratch Buffer' },
     {
-      "<leader>N",
-      desc = "Neovim News",
+      '<leader>N',
+      desc = 'Neovim News',
       function()
         Snacks.win({
-          file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
+          file = vim.api.nvim_get_runtime_file('doc/news.txt', false)[1],
           width = 0.6,
           height = 0.6,
           wo = {
             spell = false,
             wrap = false,
-            signcolumn = "yes",
-            statuscolumn = " ",
+            signcolumn = 'yes',
+            statuscolumn = ' ',
             conceallevel = 3,
           },
         })
@@ -255,7 +291,7 @@ return {
             vim.b[info.buf]['snacks_indent_scope'] = false
           end,
         })
-      end,
+      end, -- VeryLazy Callback
     })
   end,
 }

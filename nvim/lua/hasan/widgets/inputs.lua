@@ -25,7 +25,7 @@ local _show_substitute_input = function(isVisual)
   vim.ui.input({
     prompt = 'Substitute Word',
     default = curWord,
-    win = require('core.state').ui.snack_input_cursor(#curWord),
+    win = { style = 'input_cursor', width = math.max(#curWord + 6, 30), },
   }, function(newWord)
     if not newWord then
       return

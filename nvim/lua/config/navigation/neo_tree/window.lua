@@ -1,23 +1,22 @@
-local tree_util = require('config.navigation.neo_tree.util')
-
-local function show_more_options(state)
+local function show_copy_options(state)
+  local tree_util = require('config.navigation.neo_tree.util')
   local options = {
     {
-      label = 'Copy current node',
-      key = 'y',
-      action = function()
-        tree_util.copy_path(state, ':t')
-      end,
-    },
-    {
-      label = 'Copy absolute node',
-      key = 'Y',
+      label = 'Copy the file path',
+      key = 'c',
       action = function()
         tree_util.copy_path(state)
       end,
     },
     {
-      label = 'Copy relative node',
+      label = 'Copy the filename',
+      key = 'f',
+      action = function()
+        tree_util.copy_path(state, ':t')
+      end,
+    },
+    {
+      label = 'Copy the relative path',
       key = 'r',
       action = function()
         tree_util.copy_path(state, ':.')
@@ -52,13 +51,10 @@ return {
     ['o'] = 'open', -- open_drop
     ['<cr>'] = 'open',
     ['<2-LeftMouse>'] = 'open',
-    ['S'] = 'open_split',
-    ['v'] = 'open_vsplit',
     ['t'] = 'open_tabnew', -- open_tab_drop
+    ['v'] = 'open_vsplit',
+    ['S'] = 'open_split',
     -- ['w'] = 'open_with_window_picker', 'split_with_window_picker', 'vsplit_with_window_picker',
-    ['s'] = function()
-      require('flash').jump()
-    end,
     ['P'] = { 'toggle_preview', config = { use_float = true } },
     ['x'] = 'close_node',
     ['X'] = 'close_all_nodes',
@@ -75,25 +71,23 @@ return {
     -- File Management
     ['a'] = { 'add', config = { show_path = 'none' } }, -- "none", "relative", "absolute"
     ['A'] = 'add_directory', -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
-    ['D'] = 'delete',
     ['<f2>'] = 'rename',
-    ['<delete>'] = 'delete',
     ['<C-x>'] = 'cut_to_clipboard',
     ['<C-c>'] = 'copy_to_clipboard',
     ['<C-v>'] = 'paste_from_clipboard',
     ['d'] = 'cut_to_clipboard',
     ['y'] = 'copy_to_clipboard',
     ['p'] = 'paste_from_clipboard',
-    -- ['c'] = 'copy', -- takes text input for destination, also accepts the optional config.show_path option like "add":
+    ['D'] = 'delete',
+    ['<delete>'] = 'delete',
     -- ['c'] = { 'copy', config = { show_path = 'none' } }, -- "none", "relative", "absolute"
     -- ['m'] = 'move', -- takes text input for destination, also accepts the optional config.show_path option like "add".
-
-    ['m'] = { show_more_options, desc = 'Show more options' },
+    ['c'] = { show_copy_options, desc = 'Copy filepath to clipboard' },
     ['Y'] = {
       function(state)
-        tree_util.copy_path(state)
+        require('config.navigation.neo_tree.util').copy_path(state, ':t')
       end,
-      desc = 'Copy current node',
+      desc = 'Copy the filename',
     },
 
     ['b'] = 'prev_source',
@@ -105,6 +99,7 @@ return {
     ['<space>'] = 'none',
     ['<bs>'] = 'none',
     ['z'] = 'none',
-    ['c'] = 'none',
+    ['C'] = 'none',
+    ['s'] = 'none',
   },
 }

@@ -127,12 +127,12 @@ local function _lspRename(value)
       vim.notify(('Error running lsp query "%s": %s'):format('textDocument/rename', err), vim.log.levels.ERROR)
       return
     end
-    if not res then
+    local client = vim.lsp.get_client_by_id(ctx.client_id)
+    if not res or client == nil then
       return
     end
 
     -- apply renames
-    local client = vim.lsp.get_client_by_id(ctx.client_id)
     vim.lsp.util.apply_workspace_edit(res, client.offset_encoding)
 
     -- print renames
@@ -174,14 +174,14 @@ function M.lspRename()
   --   local ind = tshl[#tshl]:match('^.*()%*%*.*%*%*')
   --   tshl = tshl[#tshl]:sub(ind + 2, -3)
   -- end
-  local currNamehasan = vim.fn.expand('<cword>')
+  local currName = vim.fn.expand('<cword>')
 
   vim.ui.input({
     prompt = 'Rename',
-    default = currNamehasan,
-    win = require('core.state').ui.snack_input_cursor(#currNamehasan),
+    default = currName,
+    win = { style = 'input_cursor', width = math.max(#currName + 6, 30) },
   }, function(newName)
-    if newName and newName ~= currNamehasan then
+    if newName and newName ~= currName then
       _lspRename(newName)
     end
   end)

@@ -38,17 +38,6 @@ M.ui = {
   neotree = {
     source_selector_style = 'minimal', -- defalut | minimal
   },
-  --- get snack_input_cursor config
-  ---@param max_len number
-  snack_input_cursor = function(max_len)
-    ---@type snacks.win.Config
-    return {
-      width = math.max(max_len, 30),
-      relative = 'cursor',
-      row = -3,
-      col = 0,
-    }
-  end,
 }
 
 M.telescope = {

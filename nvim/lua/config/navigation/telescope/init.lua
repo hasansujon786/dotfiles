@@ -100,6 +100,7 @@ return {
         lsp_document_symbols = get_dropdown,
         grep_string = get_dropdown,
         live_grep = get_dropdown,
+        filetypes = get_dropdown
       },
       extensions = {
         fzf = {
@@ -141,6 +142,7 @@ return {
               -- ['<A-d>'] = fb_actions.remove,
               -- ['<S-CR>'] = fb_actions.create_from_prompt,
 
+              ['<tab>'] = actions.select_default,
               ['<C-o>'] = local_action.fb_system_open,
               ['<M-o>'] = local_action.quicklook(true),
               ['<C-i>'] = fb_actions.toggle_hidden,
@@ -154,6 +156,7 @@ return {
               ['<C-h>'] = false,
             },
             ['n'] = {
+              ['<tab>'] = actions.select_default,
               ['o'] = local_action.fb_system_open,
               ['I'] = fb_actions.toggle_hidden,
 

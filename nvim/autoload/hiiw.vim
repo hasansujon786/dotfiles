@@ -1,3 +1,11 @@
+" -- { '<leader>cm', group = 'hightlight-hints' },
+" -- { '<leader>cmb', '<cmd>call hiiw#HiInterestingWord(3)<cr>', desc = 'Mark hint 3' },
+" -- { '<leader>cmg', '<cmd>call hiiw#HiInterestingWord(2)<cr>', desc = 'Mark hint 2' },
+" -- { '<leader>cmp', '<cmd>call hiiw#HiInterestingWord(5)<cr>', desc = 'Mark hint 5' },
+" -- { '<leader>cmr', '<cmd>call hiiw#HiInterestingWord(6)<cr>', desc = 'Mark hint 6' },
+" -- { '<leader>cmw', '<cmd>call hiiw#HiInterestingWord(4)<cr>', desc = 'Mark hint 4' },
+" -- { '<leader>cmx', '<cmd>call hiiw#ClearInterestingWord()<cr>', desc = 'Clear hints' },
+" -- { '<leader>cmy', '<cmd>call hiiw#HiInterestingWord(1)<cr>', desc = 'Mark hint 1' },
 
 " Highlight Word
 "

@@ -136,6 +136,7 @@ local function set_custom_highlights()
     SnacksDashboardFooterAlt= { fg = c.bg_d, bg = c.none },
     SnacksIndentScope       = { fg = c.grey },
     SnacksIndent            = { fg = c.bg3 },
+    SnacksDim               = { fg = c.bg3 },
 
     -- /// org ///
     CodeBlock                 = { bg = c.bg_d },
