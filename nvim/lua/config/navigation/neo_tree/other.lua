@@ -1,3 +1,8 @@
+local events = require('neo-tree.events')
+local function on_move(data)
+  Snacks.rename.on_rename_file(data.source, data.destination)
+end
+
 local M = {
   source_selector = {
     winbar = true, -- toggle to show selector on winbar
@@ -20,7 +25,7 @@ local M = {
   },
   event_handlers = {
     {
-      event = 'neo_tree_popup_input_ready',
+      event = events.NEO_TREE_POPUP_INPUT_READY,
       -- ---@param input NuiInput
       handler = function(_)
         local cursor = vim.api.nvim_win_get_cursor(0)
@@ -30,18 +35,8 @@ local M = {
         end
       end,
     },
-    -- {
-    --   event = 'file_open_requested',
-    --   -- ---@param input NuiInput
-    --   handler = function(info)
-    --     P(info)
-    --     -- local cursor = vim.api.nvim_win_get_cursor(0)
-    --     -- if cursor[2] > 1 then
-    --     --   vim.cmd.stopinsert()
-    --     --   vim.cmd.normal('F.a')
-    --     -- end
-    --   end,
-    -- },
+    { event = events.FILE_MOVED, handler = on_move },
+    { event = events.FILE_RENAMED, handler = on_move },
   },
 }
 

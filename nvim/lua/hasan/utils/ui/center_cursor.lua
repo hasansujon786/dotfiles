@@ -1,18 +1,21 @@
 local M = {}
 
-local modes = { 'i', 'a', 'o', 'I', 'A', 'O' }
-local active = false
+local is_active = false
+local center_threshold = 0.3
+local center_insert_keys = { 'i', 'a', 'o', 'I', 'A', 'O', 'cw', 'ciw' }
 
 M.center_cursor = function(key)
   return function()
     local win = vim.api.nvim_get_current_win()
-    local cursor_row = vim.api.nvim_win_get_cursor(win)[1]
     local top_line = vim.fn.line('w0')
-    local relative_row = cursor_row - top_line -- + 1
-    local middle_height = vim.api.nvim_win_get_height(win) / 2
+    local cursor_row = vim.api.nvim_win_get_cursor(win)[1]
 
-    -- 4 line under from center
-    if relative_row - 2 > middle_height then
+    local center_line = vim.api.nvim_win_get_height(win) / 2
+    local vp_cursor_line = cursor_row - top_line + 1
+
+    local should_center = vp_cursor_line >= center_line + math.floor(center_line * center_threshold)
+
+    if should_center then
       vim.api.nvim_feedkeys('zz' .. key, 'n', false)
     else
       vim.api.nvim_feedkeys(key, 'n', false)
@@ -21,22 +24,22 @@ M.center_cursor = function(key)
 end
 
 M.remove_mappings = function()
-  active = false
-  for _, key in ipairs(modes) do
+  is_active = false
+  for _, key in ipairs(center_insert_keys) do
     vim.keymap.del('n', key)
   end
 end
 
 ---Attach mappings for center window on insert
 M.attach_mappings = function()
-  active = true
-  for _, key in ipairs(modes) do
+  is_active = true
+  for _, key in ipairs(center_insert_keys) do
     keymap('n', key, M.center_cursor(key))
   end
 end
 
 M.toggle = function()
-  if active then
+  if is_active then
     M.remove_mappings()
   else
     M.attach_mappings()

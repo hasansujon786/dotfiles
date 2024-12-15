@@ -167,9 +167,7 @@ return {
       },
     },
     styles = {
-      notification = {
-        wo = { wrap = true, winblend = 0 }, -- Wrap notifications
-      },
+      notification = { wo = { wrap = true, winblend = 0 } },
       dashboard = {
         zindex = 10,
         height = 0,
@@ -244,13 +242,7 @@ return {
           file = vim.api.nvim_get_runtime_file('doc/news.txt', false)[1],
           width = 0.6,
           height = 0.6,
-          wo = {
-            spell = false,
-            wrap = false,
-            signcolumn = 'yes',
-            statuscolumn = ' ',
-            conceallevel = 3,
-          },
+          wo = { spell = false, wrap = false, signcolumn = 'yes', statuscolumn = ' ', conceallevel = 3 },
         })
       end,
     }
@@ -269,20 +261,21 @@ return {
         vim.print = _G.dd -- Override print to use snacks for `:=` command
 
         -- Create some toggle mappings
+        Snacks.toggle.line_number():map('<leader>tn')
+        Snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map('<leader>tt')
+        Snacks.toggle.option('cursorcolumn', { name = 'Cursorcolumn' }):map('<leader>tl')
+        Snacks.toggle.option('cursorline', { name = 'Cursorline' }):map('<leader>tL')
         Snacks.toggle.option('spell', { name = 'Spelling' }):map('<leader>ts')
         Snacks.toggle.option('wrap', { name = 'Wrap' }):map('<leader>tw')
-        Snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map('<leader>tt')
-        Snacks.toggle.line_number():map('<leader>tl')
-        Snacks.toggle.option('cursorcolumn', { name = 'Cursorcolumn' }):map('<leader>tC')
-        Snacks.toggle.option('cursorline', { name = 'Cursorline' }):map('<leader>tL')
         Snacks.toggle
           .option('conceallevel', { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
           :map('<leader>to')
         Snacks.toggle.diagnostics():map('<leader>td')
         Snacks.toggle.inlay_hints():map('<leader>th')
         Snacks.toggle.treesitter({ name = 'Treesitter' }):map('<leader>tT')
-
-        -- Snacks.toggle.optio('background', { off = 'light', on = 'dark', name = 'Dark Background' }):map('<leader>ub')
+        Snacks.toggle.indent():map('<leader>ti')
+        Snacks.toggle.dim():map('<leader>tD')
+        Snacks.toggle.option('background', { off = 'light', on = 'dark', name = 'Dark Background' }):map('<leader>tB')
 
         vim.api.nvim_create_autocmd('FileType', {
           pattern = { 'org' },

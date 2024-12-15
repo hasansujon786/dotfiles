@@ -81,16 +81,19 @@ return {
         winblend = 0,
         mappings = { n = custom_mappings, i = custom_mappings },
         file_ignore_patterns = {
+          -- dotfiles
+          '%.system/.*',
+          '%.bin/.*',
+          'gui/sublime_text/.*',
+          'nvim/tmp/archive',
+          '4_archive/.*',
+          -- git
           '%.gitignore',
           '%.git/.*',
-          '4_archive/.*',
-          '%.system/.*',
+          -- projects
           'android/.*',
           'ios/.*',
           'vendor/.*',
-          'gui/sublime_text/.*',
-          'lua/_glance/.*',
-          'nvim/tmp/archive',
           'pubspec.lock',
         },
       },
@@ -100,7 +103,7 @@ return {
         lsp_document_symbols = get_dropdown,
         grep_string = get_dropdown,
         live_grep = get_dropdown,
-        filetypes = get_dropdown
+        filetypes = get_dropdown,
       },
       extensions = {
         fzf = {

@@ -53,7 +53,7 @@ return {
           opts = {
             anchor = 'SW',
             zindex = 1010,
-            size = { height = 5 },
+            size = { height = 5, width = 70 },
             position = { row = 1, col = 3 },
             border = { style = hover.border, padding = { 0, 1 } },
             win_options = { winhighlight = hover.winhighlight, showbreak = 'NONE' },

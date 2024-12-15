@@ -77,6 +77,7 @@ return {
       completion = {
         completeopt = 'menu,menuone',
         -- completeopt = 'menu,menuone,noselect',
+        -- autocomplete = false,
       },
       mapping = cmp.mapping.preset.insert({
         ['<A-u>'] = cmp.mapping.scroll_docs(-4),

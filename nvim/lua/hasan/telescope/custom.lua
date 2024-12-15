@@ -284,15 +284,14 @@ M.buffers = function(is_cwd_only)
     previewer = false,
     ignore_current_buffer = is_cwd_only,
     attach_mappings = function(_, map)
-      map({ 'n' }, 'h', actions.delete_buffer)
-      map({ 'n' }, 'x', actions.delete_buffer)
+      map({ 'n', 'i' }, '<C-d>', actions.delete_buffer)
+      map({ 'n' }, 'd', actions.delete_buffer)
 
       map({ 'n' }, 'l', actions.select_default)
       map({ 'n' }, 'o', actions.select_default)
       map({ 'n' }, 'v', actions.select_vertical)
       map({ 'n' }, 's', actions.select_horizontal)
       map({ 'n' }, 't', actions.select_tab)
-
       map({ 'n', 'i' }, '<CR>', actions.select_drop)
       return true
     end,
