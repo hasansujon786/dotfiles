@@ -12,7 +12,6 @@ command! -bang -nargs=1 -complete=file Fedit lua require("hasan.float").fedit(<f
 command! LuaSnipEdit lua require("luasnip.loaders").edit_snippet_files()
 command! Log edit $NVIM_LOG_FILE
 " Lsp
-command! LspLogPath lua vim.cmd.edit(vim.lsp.get_log_path())
 command! LspInstallEssentials lua require('config.lsp.util.extras').install_essential_servers()
 command! SkipAutoFormatSave silent noa write
 
@@ -28,9 +27,9 @@ vnoremap <silent><Plug>(exchange-operator)  :<C-U>call exchange_operator#_opfunc
 " dial
 nmap  <C-a>  <Plug>(dial-increment)
 nmap  <C-x>  <Plug>(dial-decrement)
-nmap g<C-a> g<Plug>(dial-increment)
-nmap g<C-x> g<Plug>(dial-decrement)
 vmap  <C-a>  <Plug>(dial-increment)
 vmap  <C-x>  <Plug>(dial-decrement)
+nmap g<C-a> g<Plug>(dial-increment)
+nmap g<C-x> g<Plug>(dial-decrement)
 vmap g<C-a> g<Plug>(dial-increment)
 vmap g<C-x> g<Plug>(dial-decrement)

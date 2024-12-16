@@ -20,8 +20,9 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', 'gy', '<cmd>Glance type_definitions<CR>', desc('Lsp: Type definition'))
   keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', desc('Lsp: Go to declaration'))
 
+  keymap('n', 'gpp', '<cmd>Glance resume<CR>', desc('Lsp: Glance resume'))
   keymap('n', 'gpd', require('config.lsp.util.peek').PeekDefinition, desc('Lsp: Peek definition'))
-  keymap('n', 'gpm', require('config.lsp.util.peek').PeekImplementation, desc('Lsp: Peek implementation'))
+  keymap('n', 'gpI', require('config.lsp.util.peek').PeekImplementation, desc('Lsp: Peek implementation'))
   keymap('n', 'gpy', require('config.lsp.util.peek').PeekTypeDefinition, desc('Lsp: Peek type definition'))
 
   -- Action, Prompt, Search

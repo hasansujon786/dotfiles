@@ -53,27 +53,28 @@ return {
             lookahead = true,
             keymaps = {
               -- You can use the capture groups defined in textobjects.scm
-              ['iH'] = '@assignment.lhs',
-              ['i='] = '@assignment.rhs',
-              ['a='] = '@assignment.outer',
-              ['ic'] = '@call.inner',
-              ['ac'] = '@call.outer',
-              ['af'] = '@function.outer',
-              ['if'] = '@function.inner',
-              ['am'] = '@class.outer',
-              ['im'] = '@class.inner',
-              ['ak'] = '@pair.outer', -- object's { key: value }
-              ['ik'] = '@pair.inner',
-              ['ao'] = '@block.outer',
-              ['io'] = '@block.inner',
-              ['aN'] = '@comment.outer',
-              ['iN'] = '@comment.inner',
-              ['iC'] = '@conditional.inner',
-              ['aC'] = '@conditional.outer',
-              ['iP'] = '@parameter.inner',
-              ['aP'] = '@parameter.outer',
-              ['iR'] = '@return.inner',
-              ['aR'] = '@return.outer',
+              ['i='] = { query = '@assignment.rhs', desc = 'assignment rhs' },
+              ['a='] = { query = '@assignment.outer', desc = 'assignment' },
+              ['iv'] = { query = '@assignment.lhs', desc = 'assignment lhs' },
+              ['av'] = { query = '@assignment.outer', desc = 'assignment' },
+              ['if'] = { query = '@function.inner', desc = 'inner function' },
+              ['af'] = { query = '@function.outer', desc = 'function' },
+              ['ic'] = { query = '@call.inner', desc = 'inner function call' },
+              ['ac'] = { query = '@call.outer', desc = 'function call' },
+              ['im'] = { query = '@class.inner', desc = 'inner class' },
+              ['am'] = { query = '@class.outer', desc = 'class' },
+              ['ik'] = { query = '@pair.inner', desc = 'inner pair' },
+              ['ak'] = { query = '@pair.outer', desc = 'pair' }, -- object's { key: value }
+              ['io'] = { query = '@block.inner', desc = 'inner block' },
+              ['ao'] = { query = '@block.outer', desc = 'block' },
+              ['i/'] = { query = '@comment.inner', desc = 'inner comment' },
+              ['a/'] = { query = '@comment.outer', desc = 'comment' },
+              ['iC'] = { query = '@conditional.inner', desc = 'inner conditional' },
+              ['aC'] = { query = '@conditional.outer', desc = 'conditional' },
+              ['iP'] = { query = '@parameter.inner', desc = 'inner parameter' },
+              ['aP'] = { query = '@parameter.outer', desc = 'parameter' },
+              ['iR'] = { query = '@return.inner', desc = 'inner return' },
+              ['aR'] = { query = '@return.outer', desc = 'return' },
               -- ['ii'] = { query = '@indent.begin', query_group = 'indents', desc = 'inner indent begin' },
               -- ['ai'] = { query = '@fold', query_group = 'folds', desc = 'fold' },
               -- ['ii'] = { query = '@local.scope', desc = 'Select language scope' },
@@ -102,11 +103,11 @@ return {
               ['<Plug>(ts-jump-prev-s-class)'] = '@class.outer',
             },
             goto_next_end = {
-              [']['] = '@function.outer',
+              [']F'] = '@function.outer',
               [']M'] = '@class.outer',
             },
             goto_previous_end = {
-              ['[]'] = '@function.outer',
+              ['[F'] = '@function.outer',
               ['[M'] = '@class.outer',
             },
           },
@@ -121,13 +122,14 @@ return {
         },
       })
 
-      keymap('n', '<P', '<Plug>(ts-swap-parameter-prev):call repeat#set("\\<Plug>(ts-swap-parameter-prev)")<CR>')
-      keymap('n', '>P', '<Plug>(ts-swap-parameter-next):call repeat#set("\\<Plug>(ts-swap-parameter-next)")<CR>')
-
-      keymap('n', '[f', '<Plug>(ts-jump-prev-s-func)zz')
-      keymap('n', ']f', '<Plug>(ts-jump-next-s-func)zz')
-      keymap('n', '[m', '<Plug>(ts-jump-prev-s-class)zz')
-      keymap('n', ']m', '<Plug>(ts-jump-next-s-class)zz')
+      -- stylua: ignore start
+      keymap('n', '<P', '<Plug>(ts-swap-parameter-prev):call repeat#set("\\<Plug>(ts-swap-parameter-prev)")<CR>', { desc = 'Swap parameter prev' })
+      keymap('n', '>P', '<Plug>(ts-swap-parameter-next):call repeat#set("\\<Plug>(ts-swap-parameter-next)")<CR>', { desc = 'Swap parameter next' })
+      -- stylua: ignore end
+      keymap('n', '[f', '<Plug>(ts-jump-prev-s-func)zz', { desc = 'Jump prev func' })
+      keymap('n', ']f', '<Plug>(ts-jump-next-s-func)zz', { desc = 'Jump next func' })
+      keymap('n', '[m', '<Plug>(ts-jump-prev-s-class)zz', { desc = 'Jump prev class' })
+      keymap('n', ']m', '<Plug>(ts-jump-next-s-class)zz', { desc = 'Jump next class' })
     end,
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
@@ -176,7 +178,7 @@ return {
   },
   {
     'nvim-treesitter/nvim-treesitter-context',
-    commit = 'a2a3349',
+    commit = '8fd989b', -- a2a3349,
     enabled = true,
     lazy = true,
     event = 'CursorHold',

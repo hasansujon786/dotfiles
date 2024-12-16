@@ -105,7 +105,10 @@ M.project_files = function()
 end
 
 M.my_find_files = function(dir)
-  builtin.find_files(my_theme.get_top_panel({ cwd = dir == 'cur_dir' and vim.fn.expand('%:h') or nil }))
+  builtin.find_files(my_theme.get_top_panel({
+    cwd = dir == 'cur_dir' and vim.fn.expand('%:h') or nil,
+    find_command = { 'rg', '--files', '--color', 'never', '--no-config', '--sortr=modified' },
+  }))
 end
 
 M.references = function()

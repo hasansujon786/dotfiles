@@ -312,7 +312,7 @@ local function set_custom_highlights()
     MasonMutedBlock             = { link = 'LazyButton' },
     MasonHighlightBlockBold     = { link = 'LazyButtonActive' },
     -- /// vim-visual-multi /// VM_Cursor
-    VM_Extend = { bg = c.dark_red, fg = c.white },
+    VM_Extend = { bg = '#8c5e31', fg =  c.bg0 },
     VM_Cursor = { bg = '#8a8a8a', fg = '#204364' },
     VM_Insert = { bg = '#4c4e50', fg = 'NONE' },
     VM_Mono   = { bg = c.ligh_green, fg = '#ffffff' },

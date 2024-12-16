@@ -168,6 +168,16 @@ return {
     },
     styles = {
       notification = { wo = { wrap = true, winblend = 0 } },
+      notification_history = {
+        keys = { q = 'close' },
+        zindex = 100,
+        wo = {
+          number = false,
+          relativenumber = false,
+          signcolumn = 'no',
+          winhighlight = 'Normal:SnacksNotifierHistory',
+        },
+      },
       dashboard = {
         zindex = 10,
         height = 0,

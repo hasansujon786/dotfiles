@@ -2,7 +2,7 @@ local M = {}
 
 local is_active = false
 local center_threshold = 0.3
-local center_insert_keys = { 'i', 'a', 'o', 'I', 'A', 'O', 'cw', 'ciw' }
+local center_insert_keys = { 'i', 'a', 'o', 'I', 'A', 'O' }
 
 M.center_cursor = function(key)
   return function()

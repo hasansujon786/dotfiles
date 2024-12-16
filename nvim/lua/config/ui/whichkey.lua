@@ -46,6 +46,7 @@ return {
     -- stylua: ignore
     wk.add({
       { 'gm', group = 'visual-multi' },
+      { 'gp', group = 'peek' },
       { '<leader>.', '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', desc = 'Browse cur directory' },
 
       -- SEARCH

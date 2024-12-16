@@ -6,8 +6,6 @@ return {
     local glance = require('glance')
     local actions = glance.actions
 
-    keymap('n', '<leader>og', '<cmd>Glance resume<CR>', { desc = 'Lsp: Glance resume' })
-
     local function filterReactDTS(value)
       return string.match(value.targetUri, 'index.d.ts') == nil
       -- return string.match(value.uri, '%.d.ts') == nil
