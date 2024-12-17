@@ -179,7 +179,7 @@ return {
       local fg = 'purple'
 
       if position <= 5 then
-        fg = 'aqua'
+        fg = 'bg_blue'
       elseif position >= 95 then
         fg = 'red'
       end
@@ -188,8 +188,8 @@ return {
     { provider = ' █', hl = layerBlockAlt },
     {
       provider = function()
-      -- stylua: ignore
-      local chars = setmetatable({ ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', }, { __index = function() return ' ' end, })
+        -- stylua: ignore
+        local chars = setmetatable({ ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', }, { __index = function() return ' ' end, })
         local lines = vim.api.nvim_buf_line_count(0)
         local curr_line = vim.api.nvim_win_get_cursor(0)[1]
         local line_ratio = curr_line / lines

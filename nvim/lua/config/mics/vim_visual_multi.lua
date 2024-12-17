@@ -19,16 +19,38 @@ return {
       -- ['Slash Search'] = 'gM',
       ['Find Under'] = 0,
       ['Find Subword Under'] = 0,
-      ['I BS'] = '<C-h>',
+      ['gc'] = 'gC',
+      -- ['I BS'] = '<C-h>',
     }
   end,
   config = function()
     augroup('MY_VM')(function(autocmd)
       autocmd('User', function()
-        vim.api.nvim_set_hl(0, 'CurSearch', { link = 'None' })
+        local none = { link = 'None' }
+        local highlights = {
+          CurSearch = none,
+          LspReferenceText = none,
+          LspReferenceRead = none,
+          LspReferenceWrite = none,
+        }
+
+        for hlName, option in pairs(highlights) do
+          vim.api.nvim_set_hl(0, hlName, option)
+        end
       end, { pattern = 'visual_multi_start' })
+
       autocmd('User', function()
-        vim.api.nvim_set_hl(0, 'CurSearch', { link = 'IncSearch' })
+        local c = require('hasan.utils.ui.palette').colors
+        local highlights = {
+          CurSearch = { link = 'IncSearch' },
+          LspReferenceText = { bg = c.dim_green },
+          LspReferenceRead = { bg = c.dim_green },
+          LspReferenceWrite = { bg = c.dim_red },
+        }
+
+        for hlName, option in pairs(highlights) do
+          vim.api.nvim_set_hl(0, hlName, option)
+        end
       end, { pattern = 'visual_multi_exit' })
     end)
   end,

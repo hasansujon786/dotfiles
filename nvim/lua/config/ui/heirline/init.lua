@@ -98,46 +98,7 @@ return {
             filetype = { '^git.*', 'fugitive', 'Trouble', 'dashboard', 'harpoon', 'floaterm', 'terminal' },
           }, args.buf)
         end,
-        colors = {
-          bg0 = '#242b38',
-          bg1 = '#2d3343',
-          bg2 = '#343e4f',
-          bg3 = '#363c51',
-          bg_d = '#1e242e',
-          black = '#151820',
-
-          fg = '#a5b0c5',
-          grey = '#546178',
-          muted = '#68707E',
-          layer = '#3E425D',
-          white = '#dfdfdf',
-          light_grey = '#8b95a7',
-
-          diff_add = '#303d27',
-          diff_change = '#18344c',
-          diff_delete = '#3c2729',
-          diff_text = '#265478',
-
-          aqua = '#6db9f7',
-          yellow = '#ebc275',
-          bg_yellow = '#f0d197',
-          bg_blue = '#6db9f7',
-          dark_yellow = '#9a6b16',
-
-          red = '#ef5f6b',
-          green = '#97ca72',
-          orange = '#d99a5e',
-          blue = '#5ab0f6',
-          purple = '#ca72e4',
-          cyan = '#4dbdcb',
-
-          dark_purple = '#8f36a9',
-          dark_red = '#a13131',
-          dark_orange = '#9a6b16',
-          dark_blue = '#127ace',
-          dark_green = '#5e9437',
-          dark_cyan = '#25747d',
-        },
+        colors = require('hasan.utils.ui.palette').colors,
       },
     })
   end,

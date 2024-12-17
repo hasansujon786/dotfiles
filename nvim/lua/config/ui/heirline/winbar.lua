@@ -110,7 +110,7 @@ local CloseButton = {
 return {
   FileNameBlock = FileNameBlock,
   WinBarFileName = { FileNameBlock(true), CloseButton },
-  BarStart = { provider = '▎', hl = { fg = 'aqua' } },
+  BarStart = { provider = '▎', hl = { fg = 'bg_blue' } },
   BarEnd = { provider = '▕', hl = { fg = 'black' } },
   Rest = { hl = { bg = 'bg_d', fg = 'light_grey' }, provider = '%=' },
 }

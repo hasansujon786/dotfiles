@@ -8,6 +8,13 @@ local function is_doc_file(path)
   return (path:match('/nvim/') ~= nil or path:match('/nvim%-data/') ~= nil) and path:match('/doc/')
 end
 
+local function set_titlestring()
+  -- vim.o.titlestring = '%= Neovim%<%='
+  vim.schedule(function()
+    vim.o.titlestring = '%= %{fnamemodify(getcwd(), ":t")}%<%=' -- what the title of the window will be set to
+  end)
+end
+
 augroup('MY_AUGROUP')(function(autocmd)
   autocmd('CmdwinEnter', 'nnoremap <buffer><CR> <CR>')
 
@@ -59,9 +66,9 @@ augroup('MY_AUGROUP')(function(autocmd)
     -- P(string.format('%s %s %s', client.name, method, client.supports_method(method)))
     -- P(client.server_capabilities.codeLensProvider)
     -- end
-    vim.defer_fn(set_titlestring, 100)
+    vim.defer_fn(set_titlestring, 10)
   end)
-  autocmd('BufEnter', set_titlestring)
+  -- autocmd('BufEnter', set_titlestring)
   autocmd('InsertEnter', function()
     vim.schedule(function()
       vim.cmd('nohlsearch')

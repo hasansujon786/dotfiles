@@ -90,11 +90,10 @@ return {
       desc = 'Copy the filename',
     },
 
-    ['b'] = 'prev_source',
-    ['w'] = 'next_source',
-    ['e'] = 'next_source',
     ['[['] = 'prev_source',
     [']]'] = 'next_source',
+    ['<s-tab>'] = 'prev_source',
+    ['<tab>'] = 'next_source',
 
     ['<space>'] = 'none',
     ['<bs>'] = 'none',

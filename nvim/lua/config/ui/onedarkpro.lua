@@ -7,6 +7,8 @@ return {
       -- stylua: ignore
       colors = {
         onedark_vivid = {
+          bg        = '#242b38', -- '#282c34'
+          fg        = '#abb2bf', --
           red       = '#ef5f6b',
           green     = '#97ca72',
           orange    = '#d99a5e',
@@ -14,12 +16,11 @@ return {
           blue      = '#5ab0f6',
           purple    = '#ca72e4',
           yellow    = '#ebc275',
-          bg        = '#242b38', -- '#282c34'
-          fg        = '#abb2bf', --
           gray      = '#546178', --
           highlight = '#f0d197',
-          black     = '#282c34', --
           comment   = '#546178',  -- #7f848e
+          black     = '#282c34',
+          white     = "#abb2bf",
           none      = 'NONE',
         },
         -- custom colors
@@ -29,15 +30,13 @@ return {
       highlights = {
         -- "/// Neovim Builin ///"
         ['Cursor'] = { bg = '${blue}' },
-        ['CursorLineNr'] = { fg = '${fg}' },
         ['Cursorline'] = { bg = '${bg1}' },
-        ['Visual'] = { bg = '#204364' },
+        ['CursorLineNr'] = { fg = '${fg}' },
         ['DiagnosticSignInfo'] = { fg = '${cyan}' },
         ['StatusLine'] = { fg = '${fg}', bg = '${bg1}' },
-        ['IncSearch'] = { fg = '${bg}', bg = '#e86671' },
+        ['IncSearch'] = { fg = '${bg}', bg = '${red}' },
         ['Search'] = { fg = '${bg}', bg = '${highlight}' },
         ['RedText'] = { fg = '#ff0000' },
-        ['ZenBorder'] = { fg = '#1c212c' },
         ['MutedText'] = { fg = '${light_grey}' },
         ['DapCursorLine'] = { bg = '#173F1E', underline = false },
 

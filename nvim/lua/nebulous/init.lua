@@ -2,6 +2,11 @@ local _utils = require('hasan.utils')
 local utils = require('nebulous.utils')
 local view = require('nebulous.view')
 local config = require('nebulous.configs')
+-- /// Nebulous ///
+-- Nebulous         = { fg = '#323c4e' },
+-- NebulousItalic   = { fg = '#323c4e', italic = true },
+-- NebulousDarker   = { fg = '#2a303c' },
+-- NebulousInvisibe = { fg = c.bg0 },
 
 local M = {}
 

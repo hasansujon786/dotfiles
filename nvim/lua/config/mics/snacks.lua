@@ -235,7 +235,7 @@ return {
     { '<leader>vv', function() Snacks.notifier.hide() end, desc = 'which_key_ignore' },
     { '<leader>vo', function() Snacks.notifier.hide() end, desc = 'Dismiss All Notifications' },
     { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Kill this buffer' },
-    { '<leader>go', function() Snacks.gitbrowse() end, desc = 'Open git repo' },
+    { '<leader>go', function() Snacks.gitbrowse() end, desc = 'Open git repo' , mode = { 'n', 'v' } },
     { '<leader>aR', function() Snacks.rename.rename_file() end, desc = 'Lsp: Rename file' },
     { '<leader>pd', function () Snacks.dashboard.open() end, desc = 'Open dashboard' },
 

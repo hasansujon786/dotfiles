@@ -1,5 +1,3 @@
-local util = require('hasan.utils.color')
--- cool local palette = require('onedark.palette')
 local c = {
   none = 'NONE',
   bg0 = '#242b38',
@@ -10,30 +8,35 @@ local c = {
   bg_d2 = '#1b222c',
   black = '#151820',
 
-  fg = '#a5b0c5',
+  fg = '#abb2bf',
   light_grey = '#8b95a7',
   grey = '#546178',
   white = '#dfdfdf',
   muted = '#68707E',
   layer = '#3E425D',
 
+  red = '#ef5f6b',
+  green = '#97ca72',
+  orange = '#d99a5e',
+  yellow = '#ebc275',
+  blue = '#5ab0f6',
+  purple = '#ca72e4',
+  cyan = '#4dbdcb',
+
   diff_add = '#303d27',
   diff_change = '#18344c',
   diff_delete = '#3c2729',
   diff_text = '#265478',
 
-  aqua = '#6db9f7',
-  yellow = '#ebc275',
   bg_yellow = '#f0d197',
   bg_blue = '#6db9f7',
-  dark_yellow = '#9a6b16',
 
-  red = '#ef5f6b',
-  green = '#97ca72',
-  orange = '#d99a5e',
-  blue = '#5ab0f6',
-  purple = '#ca72e4',
-  cyan = '#4dbdcb',
+  dim_red = '#4D3542',
+  dim_green = '#3B4048',
+  dim_yellow = '#4C4944',
+  dim_blue = '#204364',
+  dim_purple = '#45395A',
+  dim_cyan = '#2C4855',
 
   dark_purple = '#8f36a9',
   dark_red = '#a13131',
@@ -50,44 +53,44 @@ vim.g.onedark_theme_colors = {
 }
 
 local function set_custom_highlights()
+  local hl = vim.api.nvim_set_hl
   local normal_bg = c.bg0
-  local fg = c.fg
   local cursorling_bg = c.bg1
   local float_bg = '#21252B' -- '#1c212c' c.bg_d
   local dark_border = '#111925'
-  local context = '#2d324c'
-  -- context = '#2c2f42'
+  local context = '#2d324c' -- #2c2f42
 
   -- neo-tree
-  local sp = '#1E242E'
-  local btn = {
-    normal = { fg = fg, bg = c.layer },
-    muted = { fg = c.light_grey, bg = c.layer },
+  local neo_tree = {
+    sp_bg = c.bg_d,
+    normal = { fg = c.fg, bg = c.layer },
     active = { fg = c.white, bg = c.bg1 },
+    inactive = { fg = c.light_grey, bg = c.layer },
   }
 
   if require('core.state').ui.neotree.source_selector_style == 'minimal' then
-    vim.api.nvim_set_hl(0, 'NeoTreeTabActive', { underline = true, fg = btn.active.fg, bg = sp })
-    util.fg_bg('NeoTreeTabInactive', btn.muted.fg, sp)
-    util.fg_bg('NeoTreeTabSeparatorActive', btn.active.fg, sp)
-    util.fg_bg('NeoTreeTabSeparatorInactive', btn.muted.fg, sp)
+    hl(0, 'NeoTreeTabActive', { underline = true, fg = neo_tree.active.fg, bg = neo_tree.sp_bg })
+    hl(0, 'NeoTreeTabInactive', { fg = neo_tree.inactive.fg, bg = neo_tree.sp_bg })
+    hl(0, 'NeoTreeTabSeparatorActive', { fg = neo_tree.active.fg, bg = neo_tree.sp_bg })
+    hl(0, 'NeoTreeTabSeparatorInactive', { fg = neo_tree.inactive.fg, bg = neo_tree.sp_bg })
   else
-    util.fg_bg('NeoTreeTabActive', btn.active.fg, btn.active.bg)
-    util.fg_bg('NeoTreeTabInactive', btn.muted.fg, btn.muted.bg)
-    util.fg_bg('NeoTreeTabSeparatorActive', sp, btn.active.bg)
-    util.fg_bg('NeoTreeTabSeparatorInactive', sp, btn.muted.bg)
+    hl(0, 'NeoTreeTabActive', { fg = neo_tree.active.fg, bg = neo_tree.active.bg })
+    hl(0, 'NeoTreeTabInactive', { fg = neo_tree.inactive.fg, bg = neo_tree.inactive.bg })
+    hl(0, 'NeoTreeTabSeparatorActive', { fg = neo_tree.sp_bg, bg = neo_tree.active.bg })
+    hl(0, 'NeoTreeTabSeparatorInactive', { fg = neo_tree.sp_bg, bg = neo_tree.inactive.bg })
   end
 
   -- stylua: ignore
   local highlights = {
     -- /// backgrounds ///
-    NormalFloat             = { fg = fg, bg = c.none },
+    NormalFloat             = { fg = c.fg, bg = c.none },
     FloatBorder             = { fg = c.cyan, bg = c.none },
-    NormalFloatFlat         = { fg = fg, bg = float_bg },
+    NormalFloatFlat         = { fg = c.fg, bg = float_bg },
     FloatBorderFlat         = { fg = dark_border, bg = float_bg },
     FloatBorderFlatHidden   = { fg = float_bg, bg = float_bg },
     SidebarDark             = { fg = c.fg, bg = c.bg_d },
     Folded                  = { fg = c.grey, bg = 'none' },
+    Visual                  = { bg = c.dim_blue },
 
     CursorLineFocus         = { bg = c.bg3 },
     LspInlayHint            = { fg = c.dark_cyan, bg = c.none },
@@ -96,16 +99,19 @@ local function set_custom_highlights()
     WinSeparator            = { fg = c.bg_d2, bg = c.none },
     TabBarInputBorder       = { fg = c.blue, bg = c.bg_d },
     MatchParen              = { link = 'DiagnosticLineNrInfo' },
+    CursorColumn            = { link = 'CursorLineFocus' },
+    CurSearch               = { link =  'IncSearch' },
+    Conceal                 = { link =  'String' },
 
     -- /// LSP ///
-    LspReferenceText        = { bg = '#3B4048', },
-    LspReferenceWrite       = { bg = '#463b48', },
-    LspReferenceRead        = { bg = '#3B4048', },
+    LspReferenceText        = { bg = c.dim_green },
+    LspReferenceRead        = { bg = c.dim_green },
+    LspReferenceWrite       = { bg = c.dim_red },
     LspInfoBorder           = { link = 'FloatBorder' },
-    DiagnosticLineNrWarn    = { fg = '#ebc275', bg = '#4C4944' },
-    DiagnosticLineNrError   = { fg = '#ef5f6b', bg = '#4D3542' },
-    DiagnosticLineNrInfo    = { fg = '#4dbdcb', bg = '#2C4855' },
-    DiagnosticLineNrHint    = { fg = '#ca72e4', bg = '#45395A' },
+    DiagnosticLineNrWarn    = { fg = c.yellow, bg = c.dim_yellow },
+    DiagnosticLineNrError   = { fg = c.red, bg = c.dim_red },
+    DiagnosticLineNrInfo    = { fg = c.cyan, bg = c.dim_cyan },
+    DiagnosticLineNrHint    = { fg = c.purple, bg = c.dim_purple },
     DiagnosticUnnecessary   = { link = 'DiagnosticUnderlineError' },
     DiagnosticUnderlineInfo = { link = 'DiagnosticUnderlineError' },
     DiagnosticUnderlineWarn = { link = 'DiagnosticUnderlineError' },
@@ -122,16 +128,16 @@ local function set_custom_highlights()
     -- /// edgy ///
     EdgyWinSeparator        = { fg = c.bg_d, bg = c.none },
     EdgyNormalDark          = { fg = c.fg, bg = c.bg_d },
-    EdgyTitle               = { fg = c.light_grey, bg = '#202a3c' },
-    EdgyIcon                = { fg = c.grey, bg = '#202a3c' },
-    EdgyIconActive          = { fg = c.dark_cyan, bg = '#202a3c' },
+    EdgyTitle               = { fg = c.light_grey, bg = c.bg0 },
+    EdgyIcon                = { fg = c.grey, bg = c.bg0 },
+    EdgyIconActive          = { fg = c.dark_cyan, bg = c.bg0 },
     -- /// snacks ///
-    SnacksNormal            = { fg = fg, bg = float_bg },
+    SnacksNormal            = { fg = c.fg, bg = float_bg },
     SnacksDashboardHeader   = { fg = c.grey },
-    SnacksDashboardDesc     = { fg = '#7386a5' },
-    SnacksDashboardKey      = { fg = '#7386a5', bg = c.bg2 },
-    SnacksDashboardKeyAlt   = { fg = c.bg2 },
-    SnacksDashboardNormal   = { fg = fg, bg = c.none },
+    SnacksDashboardDesc     = { fg = c.light_grey },
+    SnacksDashboardKey      = { bg = c.bg3, fg = c.light_grey },
+    SnacksDashboardKeyAlt   = { fg = c.bg3 },
+    SnacksDashboardNormal   = { fg = c.fg, bg = c.none },
     SnacksDashboardFooter   = { fg = c.dark_blue, bg = c.bg_d },
     SnacksDashboardFooterAlt= { fg = c.bg_d, bg = c.none },
     SnacksIndentScope       = { fg = c.grey },
@@ -140,7 +146,7 @@ local function set_custom_highlights()
 
     -- /// org ///
     CodeBlock                 = { bg = c.bg_d },
-    ['@org.verbatim']         = { bg = '#75662e' },
+    ['@org.verbatim']         = { link = 'DiagnosticLineNrWarn' },
     ['@org.block.org']        = { fg = c.diff_text },
     ['@markup.list.checked']  = { fg = c.ligh_green },
     ['@markup.link.url']      = { fg = '#8a5cf5', underline = true },
@@ -148,7 +154,7 @@ local function set_custom_highlights()
 
     -- /// glance.nvim ///
     GlancePreviewNormal       = { fg = c.fg, bg = c.bg_d },
-    GlancePreviewLineNr       = { fg = '#495162', bg = c.bg_d },
+    GlancePreviewLineNr       = { link = 'LineNr' },
     GlanceListNormal          = { fg = c.light_grey, bg = c.bg0 },
     GlanceWinBarFilename      = { fg = c.muted, bg = c.bg0, underline = true },
     GlanceWinBarFilepath      = { fg = c.muted, bg = c.bg0, underline = true },
@@ -165,7 +171,7 @@ local function set_custom_highlights()
     GlancePreviewBorderBottom = { fg = c.dark_blue, bg = c.bg_d },
 
     -- /// DiffView ///
-    DiffviewDiffDelete        = { bg = '#3c2729', fg = '#1c212c' },
+    DiffviewDiffDelete        = { bg = c.diff_delete, fg = c.bg_d2 },
     DiffviewNormal            = { link = 'SidebarDark' },
     DiffviewEndOfBuffer       = { link = 'DiffviewNormal' },
     DiffviewFolderSign        = { link = 'NeoTreeDirectoryIcon' },
@@ -178,9 +184,9 @@ local function set_custom_highlights()
     -- /// Neogit ///
     NeogitDiffContext          = { link = 'Normal' },
     NeogitCursorLine           = { link = 'CursorLine' },
-    NeogitHunkHeader           = { fg = c.bg_d, bg = c.muted },
+    NeogitHunkHeader           = { fg = c.black, bg = c.layer },
     NeogitHunkHeaderHighlight  = { fg = c.bg0, bg = '#c3a7e5' },
-    NeogitDiffContextHighlight = { bg = '#323945' },
+    NeogitDiffContextHighlight = { bg = cursorling_bg },
     NeogitWinSeparator         = { fg = c.bg3 },
 
     -- /// Telescope ///
@@ -198,7 +204,7 @@ local function set_custom_highlights()
 
     -- /// neo-tree.nvim ///
     NeoTreeDirectoryIcon = { fg = '#8094B4' },
-    NeoTreeFileIcon      = { fg = '#6d8086' },
+    NeoTreeFileIcon      = { fg = c.muted },
     NeoTreeFloatBorder   = { bg = float_bg, fg = c.cyan },
     NeoTreeFloatTitle    = { bg = c.cyan, fg = float_bg },
     NeoTreeModified      = { link = 'String' },
@@ -225,37 +231,30 @@ local function set_custom_highlights()
     PmenuThumb            = { bg = '#404959' },
     CmpBorder             = { fg = dark_border, bg = float_bg },
     CmpItemMenu           = { fg = c.grey },
-    CmpItemAbbrMatchFuzzy = { fg = '#d99a5e', underline = true },
-    CmpItemAbbrMatch      = { fg = '#d99a5e' },
-    CmpItemAbbrDeprecated = { fg = '#808080', strikethrough = true },
-    CmpItemKindFunction   = { fg = '#ca72e4' },
+    CmpItemAbbrMatchFuzzy = { fg = c.orange, underline = true },
+    CmpItemAbbrMatch      = { fg = c.orange },
+    CmpItemAbbrDeprecated = { fg = c.muted, strikethrough = true },
+    CmpItemKindFunction   = { fg = c.purple },
     CmpItemKindMethod     = { link = 'CmpItemKindFunction' },
     CmpItemKindModule     = { link = 'CmpItemKindFunction' },
     CmpItemKindKeyword    = { link = 'CmpItemKindFunction' },
-    CmpItemKindVariable   = { fg = '#5ab0f6' },
+    CmpItemKindVariable   = { fg = c.blue },
     CmpItemKindFile       = { link = 'CmpItemKindVariable' },
     CmpItemKindField      = { link = 'CmpItemKindVariable' },
     CmpItemKindInterface  = { link = 'CmpItemKindVariable' },
-    CmpItemKindClass      = { fg = '#ebc275' },
+    CmpItemKindClass      = { fg = c.yellow },
     CmpItemKindEvent      = { link = 'CmpItemKindClass' },
     CmpItemKindStruct     = { link = 'CmpItemKindClass' },
     CmpItemKindEnum       = { link = 'CmpItemKindClass' },
     CmpItemKindValue      = { link = 'CmpItemKindClass' },
     CmpItemKindEnumMember = { link = 'CmpItemKindClass' },
     CmpItemKindConstructor= { link = 'CmpItemKindClass' },
-    CmpItemKindProperty   = { fg = '#D4D4D4' },
+    CmpItemKindProperty   = { fg = c.light_grey },
     CmpItemKindConstant   = { link = 'CmpItemKindProperty' },
     CmpItemKindTypeParamet= { link = 'CmpItemKindProperty' },
     CmpItemKindUnit       = { link = 'CmpItemKindProperty' },
-    CmpItemKindText       = { fg = '#9CDCFE' },
-    CmpItemKindSnippet    = { fg = '#9CDCFE' },
-
-    -- /// Nebulous ///
-    Nebulous         = { fg = '#323c4e' },
-    NebulousItalic   = { fg = '#323c4e', italic = true },
-    NebulousDarker   = { fg = '#2a303c' },
-    NebulousInvisibe = { fg = c.bg0 },
-    EndOfBuffer      = { bg = 'NONE' },
+    CmpItemKindText       = { fg = c.bg_blue },
+    CmpItemKindSnippet    = { fg = c.bg_blue },
 
     -- /// nui.nvim ///
     NuiNormalFloat = { link = 'Normal' },
@@ -278,11 +277,6 @@ local function set_custom_highlights()
     NuiComponentsTreeSpectreCodeLine       = { fg = c.none },
     NuiComponentsTreeSpectreFileName       = { fg = c.purple },
 
-    -- /// Alpha ///
-    AlphaTag       = { fg = '#4d5666' },
-    AlphaHeader    = { fg = '#4d5666' },
-    AlphaButtons   = { fg = c.grey },
-    AlphaShourtCut = {  fg = '#7386a5', bg = c.bg1 },
     -- /// Floaterm ///
     FloatermBorder = { link = 'Comment' },
     -- /// outline.nvim ///
@@ -291,18 +285,17 @@ local function set_custom_highlights()
     -- /// Folke collection ///
     FlashMatch                  = { fg = c.fg, bg = c.bg3 },
     FlashLabel                  = { fg = c.black, bg = c.green },
-    FlashCurrent                = { fg = c.bg0, bg = '#e86671' },
     NoiceMini                   = { bg = '#000000' },
     NoiceFormatConfirmDefault   = { link = 'LazyButton' },
     NoiceVirtualText            = { link = 'DiagnosticLineNrWarn' },
-    NoiceVirtualTextAlt         = { fg = '#4C4944' },
+    NoiceVirtualTextAlt         = { fg = c.dim_yellow },
     LazyNormal                  = { link = 'NormalFloatFlat' },
     LazyButton                  = { bg = c.layer, fg = c.fg },
     LazyButtonActive            = { link = 'WildMenu' },
     WhichKeySeparator           = { fg = c.grey },
     WhichKeyBorder              = { fg = normal_bg, bg = cursorling_bg },
-    WhichKeyNormal              = { fg = fg, bg = cursorling_bg },
-    WhichKeyFloat               = { fg = fg, bg = cursorling_bg },
+    WhichKeyNormal              = { fg = c.fg, bg = cursorling_bg },
+    WhichKeyFloat               = { fg = c.fg, bg = cursorling_bg },
     WhichKeyTitle               = { fg = c.muted, bg = normal_bg },
     TreesitterContext           = { bg = context },
     TreesitterContextSeparator  = { bg = c.none, fg = c.grey },
@@ -311,26 +304,21 @@ local function set_custom_highlights()
     MasonNormal                 = { link = 'NormalFloatFlat' },
     MasonMutedBlock             = { link = 'LazyButton' },
     MasonHighlightBlockBold     = { link = 'LazyButtonActive' },
-    -- /// vim-visual-multi /// VM_Cursor
-    VM_Extend = { bg = '#8c5e31', fg =  c.bg0 },
-    VM_Cursor = { bg = '#8a8a8a', fg = '#204364' },
-    VM_Insert = { bg = '#4c4e50', fg = 'NONE' },
-    VM_Mono   = { bg = c.ligh_green, fg = '#ffffff' },
-    -- Mix
-    MarkSignHL          = { link = 'Comment' },
+    -- /// vim-visual-multi ///
+    VM_Extend = { bg =  c.layer, fg =  c.none  },
+    VM_Cursor = { bg = '#8a8a8a', fg = c.dim_blue },
+    VM_Insert = { bg = '#4c4e50', fg = c.none },
+    VM_Mono   = { bg = c.ligh_green, fg = c.white },
+    -- /// eyeliner ///
     EyelinerPrimary     = { fg = 'tomato', underline = true },
     EyelinerSecondary   = { fg = '#d78787', underline = true },
   }
-  -- { underline = true, fg = btn.active.fg, bg = sp }
+
   for hlName, option in pairs(highlights) do
-    vim.api.nvim_set_hl(0, hlName, option)
+    hl(0, hlName, option)
   end
 
   local links = {
-    CursorColumn = 'CursorLineFocus',
-    CurSearch = 'IncSearch',
-    Conceal = 'String',
-
     -- https://github.com/folke/tokyonight.nvim/blob/main/lua/tokyonight/theme.lua#L255-L272
     -- ['@lsp.type.comment'] = '@comment',
     -- ['@lsp.type.namespace'] = '@namespace',
@@ -362,10 +350,11 @@ local function set_custom_highlights()
     ['@lsp.typemod.function.readonly'] = '@function',
   }
   for newgroup, oldgroup in pairs(links) do
-    vim.api.nvim_set_hl(0, newgroup, { link = oldgroup, default = false })
+    hl(0, newgroup, { link = oldgroup, default = false })
   end
 end
 
 return {
+  colors = c,
   set_custom_highlights = set_custom_highlights,
 }
