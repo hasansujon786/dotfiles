@@ -1,25 +1,31 @@
 local cmd = vim.cmd
 local M = {}
 
-M.toggle_bg_tranparent = function(followState)
+M.toggle_bg_tranparent = function()
   local hl_normal = vim.g.onedark_theme_colors.dark_vivid.normal
-  local stateValue = nil
+  -- Transparent values
+  local sed_cmd_val = '5s/false/true/'
+  local highlights = {
+    Normal = { bg = 'none', fg = hl_normal.fg },
+  }
 
-  if state.theme.bg_tranparent and not followState or not state.theme.bg_tranparent and followState then
-    -- remove transparent
-    cmd(string.format('hi Normal guibg=%s guifg=%s', hl_normal.bg, hl_normal.fg))
-    stateValue = '5s/true/false/'
-  else
-    -- make transparent
-    cmd(string.format('hi Normal guibg=%s guifg=%s', 'None', hl_normal.fg))
-    stateValue = '5s/false/true/'
+  if state.theme.bg_tranparent then
+    -- Non-transparent values
+    sed_cmd_val = '5s/true/false/'
+    highlights = {
+      Normal = { bg = hl_normal.bg, fg = hl_normal.fg },
+    }
   end
 
-  if not followState then
-    local statePath = vim.fs.normalize(require('hasan.utils.file').config_root() .. '/lua/core/state.lua')
-    state.theme.bg_tranparent = not state.theme.bg_tranparent
-    cmd(string.format("silent !sed -i '%s' %s", stateValue, statePath))
+  -- Update highlights
+  for name, val in pairs(highlights) do
+    vim.api.nvim_set_hl(0, name, val)
   end
+
+  -- Update sate file with sed
+  local statePath = vim.fs.normalize(require('hasan.utils.file').config_root() .. '/lua/core/state.lua')
+  state.theme.bg_tranparent = not state.theme.bg_tranparent
+  cmd(string.format("silent !sed -i '%s' %s", sed_cmd_val, statePath))
   require('hasan.utils.ui.palette').set_custom_highlights()
 end
 
@@ -37,28 +43,6 @@ M.get_hl = function(name, opts)
     end
   end
   return hl
-end
-
--- Define bg color
--- @param group Group
--- @param color Color
-M.bg = function(group, col)
-  cmd('hi ' .. group .. ' guibg=' .. col)
-end
-
--- Define fg color
--- @param group Group
--- @param color Color
-M.fg = function(group, col)
-  cmd('hi ' .. group .. ' guifg=' .. col)
-end
-
--- Define bg and fg color
--- @param group Group
--- @param fgcol Fg Color
--- @param bgcol Bg Color
-M.fg_bg = function(group, fgcol, bgcol)
-  cmd('hi ' .. group .. ' guifg=' .. fgcol .. ' guibg=' .. bgcol)
 end
 
 M.make_winhighlight = function(highlight)

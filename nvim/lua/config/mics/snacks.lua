@@ -287,6 +287,26 @@ return {
         Snacks.toggle.dim():map('<leader>tD')
         Snacks.toggle.option('background', { off = 'light', on = 'dark', name = 'Dark Background' }):map('<leader>tB')
 
+        Snacks.toggle({
+          name = 'Transparency',
+          get = function()
+            return state.theme.bg_tranparent
+          end,
+          set = function(state)
+            require('hasan.utils.color').toggle_bg_tranparent()
+          end,
+        }):map('<leader>tb')
+
+        Snacks.toggle({
+          name = 'Highlight same words',
+          get = function()
+            return type(vim.w.auto_highlight_id) == 'number'
+          end,
+          set = function(state)
+            vim.fn['autohl#_AutoHighlightToggle']()
+          end,
+        }):map('<leader>tW')
+
         vim.api.nvim_create_autocmd('FileType', {
           pattern = { 'org' },
           callback = function(info)
