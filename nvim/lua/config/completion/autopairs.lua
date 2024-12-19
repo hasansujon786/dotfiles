@@ -4,8 +4,11 @@ return {
   config = function()
     require('nvim-autopairs').setup()
 
-    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-    require('cmp').event:on('confirm_done', cmp_autopairs.on_confirm_done())
+    local cmp_ok, cmp = pcall(require, 'cmp')
+    if cmp_ok then
+      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+      cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+    end
 
     vim.defer_fn(function()
       keymap({ 's' }, '<BS>', '<C-r>_<BS>i')

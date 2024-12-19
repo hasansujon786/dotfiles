@@ -1,6 +1,7 @@
 return {
   'hrsh7th/nvim-cmp',
   lazy = true,
+  enabled = true,
   event = { 'InsertEnter', 'CmdlineEnter' },
   config = function()
     local cmp = require('cmp')
@@ -296,5 +297,6 @@ return {
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-nvim-lsp',
     'saadparwaiz1/cmp_luasnip',
+    -- { 'hrsh7th/cmp-nvim-lsp', lazy = true, module = 'cmp_nvim_lsp' },
   },
 }

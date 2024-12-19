@@ -24,11 +24,18 @@ end
 
 function M.update_capabilities(fname)
   local capabilities = vim.lsp.protocol.make_client_capabilities()
+  local blink_ok, blink_cmp = pcall(require, 'blink.cmp')
+  if blink_ok then
+    return blink_cmp.get_lsp_capabilities(capabilities)
+  end
+
   local cmp_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
   if cmp_ok then
     return vim.tbl_deep_extend('force', capabilities, cmp_nvim_lsp.default_capabilities())
   end
-  vim.notify(fname .. ': cmp_nvim_lsp not loaded with lsp-config', vim.log.levels.WARN)
+
+  vim.notify('Capabilities not updated with ' .. fname, vim.log.levels.WARN, { title = 'lsp-config' })
+  return capabilities
 end
 
 function M.execute(action, bufnr, on_complete)
