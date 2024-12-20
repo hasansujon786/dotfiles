@@ -29,8 +29,7 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', 'K', vim.lsp.buf.hover, desc('Lsp: Hover under cursor'))
   keymap('n', '<F2>', require('config.lsp.util.extras').lspRename, desc('Lsp: Rename under cursor'))
   for _, action_key in ipairs({ '<C-q>', '<C-space>', '<A-space>' }) do
-    -- keymap({ 'n', 'x' }, action_key, vim.lsp.buf.code_action, desc('Lsp: Code action'))
-    keymap({ 'n', 'x' }, action_key, '<cmd>FzfLua lsp_code_actions<CR>', desc('Lsp: Code action'))
+    keymap({ 'n', 'x' }, action_key, vim.lsp.buf.code_action, desc('Lsp: Code action'))
   end
 
   -- Diagnostics

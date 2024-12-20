@@ -33,9 +33,9 @@ return {
       { '<leader>oa', '<cmd>lua require("orgmode").action("agenda.prompt")<CR>', desc = 'Org agenda' },
       { '<leader>oc', '<cmd>lua require("orgmode").action("capture.prompt")<CR>', desc = 'Org capture' },
 
-      { '<leader>/o', '<cmd>Telescope live_grep cwd=~/my_vault/orgfiles<CR>', desc = 'Grep org text' },
-      { '<leader>w/', '<cmd>Telescope find_files cwd=~/my_vault/orgfiles<CR>', desc = 'Search org files' },
-      { '<leader>w.', '<cmd>Telescope file_browser cwd=~/my_vault/orgfiles<CR>', desc = 'Browse org files' },
+      { '<leader>/o', '<cmd>FzfLua live_grep cwd=~/my_vault/orgfiles<CR>', desc = 'Grep org text' },
+      { '<leader>w/', '<cmd>FzfLua files cwd=~/my_vault/orgfiles<CR>', desc = 'Search org files' },
+      -- { '<leader>w.', '<cmd>FzfLua file_browser cwd=~/my_vault/orgfiles<CR>', desc = 'Browse org files' },
     },
     opts = {
       org_agenda_files = { '~/my_vault/orgfiles/**/*' },

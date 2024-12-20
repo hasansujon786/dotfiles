@@ -203,7 +203,7 @@ return {
           q = 'cancel',
         },
       },
-      input_cursor = { relative = 'cursor', row = -3, col = 0, width = 30 },
+      input_cursor = { relative = 'cursor', row = 1, col = 0, width = 30 },
       scratch = {
         width = 100,
         height = 30,
