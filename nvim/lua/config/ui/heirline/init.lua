@@ -95,7 +95,7 @@ return {
           end
           return conditions.buffer_matches({
             buftype = { 'nofile', 'prompt', 'help', 'quickfix' },
-            filetype = { '^git.*', 'fugitive', 'Trouble', 'dashboard', 'harpoon', 'floaterm', 'terminal' },
+            filetype = { '^git.*', 'fugitive', 'Trouble', 'dashboard', 'harpoon', 'floaterm', 'terminal', 'fzf' },
           }, args.buf)
         end,
         colors = require('hasan.utils.ui.palette').colors,

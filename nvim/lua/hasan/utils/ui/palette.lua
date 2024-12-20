@@ -202,6 +202,10 @@ local function set_custom_highlights()
     TelescopeNormal         = { link = 'NormalFloatFlat' },
     TelescopeSelection      = { link = 'Cursorline' },
 
+    -- /// FzfLua ///
+    FzfLuaBorder            = { fg = c.grey },
+    FzfLuaNormal            = { bg = c.none },
+
     -- /// neo-tree.nvim ///
     NeoTreeDirectoryIcon = { fg = '#8094B4' },
     NeoTreeFileIcon      = { fg = c.muted },

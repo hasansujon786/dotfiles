@@ -47,25 +47,15 @@ return {
     wk.add({
       { 'gm', group = 'visual-multi' },
       { 'gp', group = 'peek' },
-      { '<leader>.', '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', desc = 'Browse cur directory' },
 
       -- SEARCH
       { '<leader>/', group = 'search' },
-      { '<leader>/.', '<cmd>Telescope resume<cr>', desc = 'Telescope resume' },
-      { '<leader>//', '<cmd>Telescope live_grep<CR>', desc = 'Live grep' },
-      { '<leader>/f', '<cmd>lua require("hasan.telescope.custom").my_find_files()<cr>', desc = 'Find file' },
-      { '<leader>/g', '<cmd>lua require("hasan.telescope.custom").live_grep_in_folder()<cr>', desc = 'Live grep in folder' },
-      { '<leader>/k', '<cmd>Telescope keymaps<CR>', desc = 'Look up keymaps' },
-      { '<leader>/t', '<cmd>Telescope filetypes<CR>', desc = 'Change filetypes' },
 
       -- LSP
       { '<leader>a', group = 'lsp' },
 
       -- BUFFER
       { '<leader>b', group = 'buffer' },
-      { "g'", '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>', desc = 'Switch buffers' },
-      { '<leader>bb', '<cmd>lua require("hasan.telescope.custom").buffers(false)<CR>', desc = 'Switch all buffers' },
-      { '<leader>bs', '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>', desc = 'Switch buffers' },
       { '<leader>bo', '<cmd>call hasan#utils#buffer#_clear_other()<CR>', desc = 'Kill other buffers' },
       { '<leader>bK', '<cmd>call hasan#utils#buffer#_clear_all()<CR>', desc = 'Kill all buffers' },
       { '<leader>bw', '<cmd>wa<CR>', desc = 'Write all buffer' },
@@ -79,10 +69,7 @@ return {
 
       -- FILE
       { '<leader>f', group = 'file' },
-      { '<leader>f.', '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', desc = 'Browse cur directory' },
       { '<leader>fR', '<cmd>lua require("hasan.widgets.inputs").rename_current_file()<CR>', desc = 'Rename file' },
-      { '<leader>fb', '<cmd>lua require("hasan.telescope.custom").file_browser()<cr>', desc = 'Browser project files' },
-      { '<leader>ff', '<cmd>lua require("hasan.telescope.custom").my_find_files()<cr>', desc = 'Find file' },
 
       { '<leader>fw', '<Plug>(fix-current-world)', desc = 'Fix current world' },
       { '<leader>fy', "<cmd>lua require('config.navigation.neo_tree.util').copy_path(vim.fn.expand('%:t'))<CR>", desc = 'Copy current node' },
@@ -95,10 +82,7 @@ return {
       -- GIT
       { '<leader>g', group = 'git' },
       { '<leader>g.', '<cmd>silent !git add %<CR>', desc = 'Git: Stage file' },
-      { '<leader>g/', '<cmd>Telescope git_status<CR>', desc = 'Find git files*' },
-      { '<leader>gb', '<cmd>Telescope git_branches<CR>', desc = 'Checkout git branch' },
-      { '<leader>gc', '<cmd>Telescope git_commits<CR>', desc = 'Look up commits' },
-      { '<leader>gC', '<cmd>Telescope git_bcommits<CR>', desc = 'Look up buffer commits' },
+
       -- INSERT
       { '<leader>i', group = 'insert' },
       { '<leader>if', '<cmd>lua insert(vim.fn.expand("%:t:r"))<CR>', desc = 'Current file name' },
@@ -106,8 +90,6 @@ return {
 
       { '<leader>id', '<cmd>lua insert(vim.fn.strftime("%e %B, %Y"))<CR>', desc = 'Current date' },
       { '<leader>it', '<cmd>lua insert(vim.fn.strftime("%H:%M"))<CR>', desc = 'Current time' },
-
-      { '<leader>ic', '<cmd>lua require("hasan.telescope.custom").colors()<CR>', desc = 'Insert colors' },
 
       { '<leader>il', group = 'link' },
       { '<leader>ill', '<cmd>lua insert("https://picsum.photos/seed/picsum/300/200")<CR>', desc = 'Image link' },
@@ -122,10 +104,6 @@ return {
 
       -- PROJECT
       { '<leader>p', group = 'project' },
-      { '<leader>pb', '<cmd>lua require("hasan.telescope.custom").project_browser()<CR>', desc = 'Browse other projects' },
-      { '<leader>pc', '<cmd>lua require("telescope._extensions").manager.project_commands.commands()<CR>', desc = 'Run project commands' },
-      { '<leader>pr', '<cmd>lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>', desc = 'Find recent files' },
-      { '<leader>pt', '<cmd>lua require("hasan.telescope.custom").search_project_todos()<CR>', desc = 'Search project todos' },
 
       -- TOGGLE
       { '<leader>t', group = 'toggle' },
@@ -133,8 +111,6 @@ return {
       -- VIM
       { '<leader>v', group = 'vim' },
       { '<leader>v.', '<cmd>echo "Not a Vim file"<CR>', desc = 'Source this file' },
-      { '<leader>v/', '<cmd>Telescope help_tags<CR>', desc = 'Search Vim help' },
-      { '<leader>vd', '<cmd>lua require("hasan.telescope.custom").search_nvim_data()<CR>', desc = 'Search nvim data' },
       { '<leader>vp', '<cmd>Lazy home<CR>', desc = 'Plugin status' },
       { '<leader>vs', '<cmd>lua require("hasan.utils.file").open_settings()<CR>', desc = 'Open settings' },
       { '<leader>ve', '<cmd>lua require("hasan.widgets.register_editor").open()<CR>', desc = 'Open register editor' },

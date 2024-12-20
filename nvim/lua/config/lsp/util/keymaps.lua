@@ -28,16 +28,14 @@ function M.lsp_buffer_keymaps(client, bufnr)
   -- Action, Prompt, Search
   keymap('n', 'K', vim.lsp.buf.hover, desc('Lsp: Hover under cursor'))
   keymap('n', '<F2>', require('config.lsp.util.extras').lspRename, desc('Lsp: Rename under cursor'))
-  if client.server_capabilities.documentSymbolProvider then
-    keymap('n', 'g.', require('hasan.telescope.lsp').prettyDocumentSymbols, desc('Lsp: Document symbols'))
-  end
   for _, action_key in ipairs({ '<C-q>', '<C-space>', '<A-space>' }) do
-    keymap({ 'n', 'x' }, action_key, vim.lsp.buf.code_action, desc('Lsp: Code action'))
+    -- keymap({ 'n', 'x' }, action_key, vim.lsp.buf.code_action, desc('Lsp: Code action'))
+    keymap({ 'n', 'x' }, action_key, '<cmd>FzfLua lsp_code_actions<CR>', desc('Lsp: Code action'))
   end
 
   -- Diagnostics
-  keymap('n', '<leader>ad', vim.diagnostic.setqflist, desc('Lsp: Show global diagnostics'))
-  keymap('n', '<leader>aD', vim.diagnostic.setloclist, desc('Lsp: Show local diagnostics'))
+  keymap('n', '<leader>ad', vim.diagnostic.setloclist, desc('Lsp: Show local diagnostics'))
+  keymap('n', '<leader>aD', vim.diagnostic.setqflist, desc('Lsp: Show global diagnostics'))
   keymap('n', '<leader>al', vim.diagnostic.open_float, desc('Lsp: Show line diagnostics'))
   keymap('n', ']d', require('config.lsp.util.diagnosgic').diagnostic_goto(true), desc('Lsp: Next diagnosgic'))
   keymap('n', '[d', require('config.lsp.util.diagnosgic').diagnostic_goto(false), desc('Lsp: Prev diagnosgic'))
@@ -46,7 +44,6 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', ']w', require('config.lsp.util.diagnosgic').diagnostic_goto(true, 'WARN'), desc('Lsp: Next Warning'))
   keymap('n', '[w', require('config.lsp.util.diagnosgic').diagnostic_goto(false, 'WARN'), desc('Lsp: Prev Warning'))
 
-  keymap('n', '<leader>ar', '<cmd>lua require("hasan.telescope.custom").references()<cr>', desc('Lsp: Preview references'))
   keymap('n', '<leader>ak', vim.lsp.buf.signature_help, desc('Lsp: show signature help'))
   keymap('n', '<leader>aq', require('config.lsp.util.extras').showLspRenameChanges, desc('Lsp: Show lsp rename'))
   -- keymap('n', '<leader>th', function()

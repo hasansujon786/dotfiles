@@ -16,7 +16,7 @@ return {
     keymap('n', '[r', '<Plug>(yanklist-cycle-forward)', { desc = 'Yanklist forward' })
     keymap('n', ']r', '<Plug>(yanklist-cycle-backward)', { desc = 'Yanklist backward' })
     -- Show Yanklist
-    keymap('n', '<leader>oy', '<cmd>lua require("yanklist").yanklist()<cr>', { desc = 'Show Yanklist' })
-    keymap('x', '<leader>oy', '<Esc><cmd>lua require("yanklist").yanklist_visual()<cr>', { desc = 'Show Yanklist' })
+    -- keymap('n', '<leader>oy', '<cmd>lua require("yanklist").yanklist()<cr>', { desc = 'Show Yanklist' })
+    -- keymap('x', '<leader>oy', '<Esc><cmd>lua require("yanklist").yanklist_visual()<cr>', { desc = 'Show Yanklist' })
   end,
 }

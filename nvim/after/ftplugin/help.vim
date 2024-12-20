@@ -1,6 +1,5 @@
-setlocal number relativenumber
-setlocal readonly nomodifiable
-setlocal nolist
+setlocal nonumber norelativenumber
+setlocal readonly nomodifiable nolist
 
 nnoremap <buffer>           <CR>    <C-]>
 " Go to new curret word

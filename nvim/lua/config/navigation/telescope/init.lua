@@ -1,6 +1,7 @@
 return {
   'nvim-telescope/telescope.nvim',
   lazy = true,
+  enabled = false,
   event = 'VeryLazy',
   config = function()
     local Icons = require('hasan.utils.ui.icons')
@@ -197,23 +198,49 @@ return {
     command('EmojiPicker', function()
       require('hasan.telescope.custom').emojis()
     end)
+
+    -- FIND FILES
+    -- { '<leader>.', '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', desc = 'Browse cur directory' },
+    -- { '<leader>f.', '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', desc = 'Browse cur directory' },
+    -- { '<leader>fb', '<cmd>lua require("hasan.telescope.custom").file_browser()<cr>', desc = 'Browser project files' },
+    -- { '<leader>ff', '<cmd>lua require("hasan.telescope.custom").my_find_files()<cr>', desc = 'Find file' },
+
+    -- GIT
+    -- { '<leader>g/', '<cmd>Telescope git_status<CR>', desc = 'Find git files*' },
+    -- { '<leader>gb', '<cmd>Telescope git_branches<CR>', desc = 'Checkout git branch' },
+    -- { '<leader>gc', '<cmd>Telescope git_commits<CR>', desc = 'Look up commits' },
+    -- { '<leader>gC', '<cmd>Telescope git_bcommits<CR>', desc = 'Look up buffer commits' },
+
+    -- BUFFER
+    -- { "g'", '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>', desc = 'Switch buffers' },
+    -- { '<leader>bb', '<cmd>lua require("hasan.telescope.custom").buffers(false)<CR>', desc = 'Switch all buffers' },
+    -- { '<leader>bs', '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>', desc = 'Switch buffers' },
+
+    -- SEARCH
+    -- { '<leader>/.', '<cmd>Telescope resume<cr>', desc = 'Telescope resume' },
+    -- { '<leader>//', '<cmd>Telescope live_grep<CR>', desc = 'Live grep' },
+    -- { '<leader>/f', '<cmd>lua require("hasan.telescope.custom").my_find_files()<cr>', desc = 'Find file' },
+    -- { '<leader>/g', '<cmd>lua require("hasan.telescope.custom").live_grep_in_folder()<cr>', desc = 'Live grep in folder' },
+    -- { '<leader>/k', '<cmd>Telescope keymaps<CR>', desc = 'Look up keymaps' },
+    -- { '<leader>/t', '<cmd>Telescope filetypes<CR>', desc = 'Change filetypes' },
+
+    -- PROJECT
+    -- { '<leader>pb', '<cmd>lua require("hasan.telescope.custom").project_browser()<CR>', desc = 'Browse other projects' },
+    -- { '<leader>pc', '<cmd>lua require("telescope._extensions").manager.project_commands.commands()<CR>', desc = 'Run project commands' },
+    -- { '<leader>pr', '<cmd>lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>', desc = 'Find recent files' },
+    -- { '<leader>pt', '<cmd>lua require("hasan.telescope.custom").search_project_todos()<CR>', desc = 'Search project todos' },
+
+    -- VIM
+    -- { '<leader>v/', '<cmd>Telescope help_tags<CR>', desc = 'Search Vim help' },
+    -- { '<leader>vd', '<cmd>lua require("hasan.telescope.custom").search_nvim_data()<CR>', desc = 'Search nvim data' },
+
+    -- LSP
+    -- keymap('n', 'g.', require('hasan.telescope.lsp').prettyDocumentSymbols, desc('Lsp: Document symbols'))
+    -- keymap('n', '<leader>ar', '<cmd>lua require("hasan.telescope.custom").references()<cr>', desc('Lsp: Preview references'))
   end,
   dependencies = {
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     { 'nvim-telescope/telescope-file-browser.nvim' },
     { 'hasansujon786/telescope-ui-select.nvim' },
-    {
-      'ahmedkhalf/project.nvim',
-      main = 'project_nvim',
-      keys = {
-        { '<leader>pm', '<cmd>lua require("hasan.telescope.custom").projects()<CR>', desc = 'Switch project' },
-      },
-      opts = {
-        detection_methods = { 'pattern' },
-        exclude_dirs = { 'c:/Users/hasan/dotfiles/nvim/.vsnip' },
-        patterns = { '.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'pubspec.yaml' }, -- 'package.json'
-        show_hidden = false,
-      },
-    },
   },
 }

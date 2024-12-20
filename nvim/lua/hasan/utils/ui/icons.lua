@@ -308,7 +308,7 @@ local codicons = {
     Namespace     = '',
     Copilot       = '',
     Package       = '',
-   Table          = '',
+    Table         = '',
   },
   documents = {
     File               = '',
