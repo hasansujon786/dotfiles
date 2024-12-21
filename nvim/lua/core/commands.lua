@@ -36,3 +36,9 @@ end, { desc = 'Parse ISO time', range = true })
 command('Dashboard', function()
   Snacks.dashboard.open()
 end, { desc = 'Open dashboard' })
+
+command('CheckWinConfig', function()
+  local opts = vim.api.nvim_win_get_config(0)
+  dd(opts)
+end, { desc = 'Check win config' })
+

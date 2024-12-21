@@ -25,11 +25,11 @@ return {
       { '<leader>ps', '<cmd>SessionSave<CR>', desc = 'Save session' },
       { '<leader>pl', '<cmd>SessionLoad<CR>', desc = 'Load session' },
       { '<leader>pz', '<cmd>wall | qall<CR>', desc = 'Save session and quit' },
-      {
-        '<leader>pp',
-        '<cmd>lua require("telescope._extensions").manager.persisted.persisted()<CR>',
-        desc = 'Show session list',
-      },
+      -- {
+      --   '<leader>pp',
+      --   '<cmd>lua require("telescope._extensions").manager.persisted.persisted()<CR>',
+      --   desc = 'Show session list',
+      -- },
     },
     config = function()
       -- local load_dashboard = function()

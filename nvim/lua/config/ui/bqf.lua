@@ -16,11 +16,11 @@ return {
       soft_end = '┤',
     },
     type_icons = {
-      E = 'E',
-      W = 'W',
-      I = 'I',
-      N = 'N',
-      H = 'H',
+      E = ' ',
+      W = ' ',
+      I = ' ',
+      N = '󰌵 ',
+      H = '󰌵 ',
     },
     highlight = {
       treesitter = true,

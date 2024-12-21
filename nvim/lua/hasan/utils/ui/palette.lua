@@ -205,6 +205,9 @@ local function set_custom_highlights()
     -- /// FzfLua ///
     FzfLuaBorder            = { fg = c.grey },
     FzfLuaNormal            = { bg = c.none },
+    FzfLuaSearch            = { bg = c.red },
+    FzfLuaCursor            = { bg = c.blue },
+    FzfLuaFzfMatch          = { bg = 'red' },
 
     -- /// neo-tree.nvim ///
     NeoTreeDirectoryIcon = { fg = '#8094B4' },

@@ -1,103 +1,6 @@
--- `lgrep_curbuf` `grep_curbuf`
+local themes = require('config.navigation.fzf.themes')
+
 local default_prompt_icon = '   '
-
-local function merge_conf(default_opts, opts)
-  if not opts then
-    return default_opts
-  end
-  return require('hasan.utils').merge(default_opts, opts or {})
-end
-
-local function get_title(opts)
-  return opts and opts.title and string.format(' %s ', opts.title) or nil
-end
-
-local function register_dropdown(preview)
-  return function(opts)
-    local default_opts = {
-      winopts = {
-        height = preview and 0.75 or 20,
-        width = 0.6,
-        row = 0.5,
-        col = 0.5,
-        title = get_title(opts),
-        preview = {
-          vertical = 'up:45%',
-          layout = 'vertical',
-          hidden = preview and 'nohidden' or 'hidden',
-        },
-      },
-    }
-
-    return merge_conf(default_opts, opts)
-  end
-end
-
-local THEME = {
-  default = function(opts)
-    local default_opts = {
-      winopts = {
-        title = get_title(opts),
-      },
-    }
-    return merge_conf(default_opts, opts)
-  end,
-  cursor = function(opts)
-    local default_opts = {
-      winopts = {
-        title = get_title(opts),
-        relative = 'cursor',
-        row = 1,
-        col = 1,
-        height = 8,
-        width = 90,
-        preview = {
-          hidden = 'hidden',
-          layout = 'horizontal',
-        },
-      },
-    }
-
-    return merge_conf(default_opts, opts)
-  end,
-  top_panel = function(opts)
-    local default_opts = {
-      winopts = {
-        height = 0.75,
-        width = 0.6,
-        row = 0,
-        col = 0.5,
-        title = get_title(opts),
-        preview = {
-          layout = 'vertical',
-          vertical = 'down:45%',
-          hidden = 'hidden', -- hidden|nohidden
-        },
-      },
-    }
-
-    return merge_conf(default_opts, opts)
-  end,
-  ivy = function(opts)
-    local default_opts = {
-      winopts = {
-        height = 0.75,
-        width = 1,
-        row = 1,
-        col = 0.5,
-        title = get_title(opts),
-        preview = {
-          layout = 'flex',
-          hidden = 'nohidden',
-        },
-      },
-    }
-
-    return merge_conf(default_opts, opts)
-  end,
-  dropdown = register_dropdown(true),
-  dropdown_no_preview = register_dropdown(false),
-}
 
 ---@param ui_opt {kind?:string,prompt?:string}
 ---@param items {}
@@ -107,7 +10,7 @@ local get_ui_select_opt = function(ui_opt, items)
     return {}
   end
 
-  return THEME.dropdown_no_preview({
+  return themes.dropdown_no_preview({
     title = ui_opt.prompt or 'Select',
     winopts = { width = 70 },
   })
@@ -124,6 +27,7 @@ return {
       file_icon_padding = ' ',
       winopts = {
         height = 0.75, -- window height
+        zindex = 100,
         width = 1, -- window width
         row = 1, -- window row position (0=top, 1=bottom)
         border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
@@ -252,7 +156,7 @@ return {
         prompt = default_prompt_icon,
         copen = 'topleft copen',
       },
-      files = THEME.top_panel({
+      files = themes.ivy({
         git_icons = false, -- show git icons?
         file_icons = true, -- show file icons (true|"devicons"|"mini")?
         -- e.g. "fzf-lua/previewer/fzf.lua" => "fzf.lua previewer/fzf-lua"
@@ -270,7 +174,7 @@ return {
         -- },
       }),
       git = {
-        files = THEME.top_panel({
+        files = themes.top_panel({
           cmd = 'git ls-files --exclude-standard --cached --others',
           formatter = 'path.filename_first',
         }),
@@ -284,7 +188,7 @@ return {
           ['?'] = { icon = 'ᴜ', color = 'magenta' },
         },
       },
-      grep = THEME.ivy({
+      grep = themes.ivy({
         input_prompt = 'Grep String',
         prompt = default_prompt_icon,
         winopts = { preview = { hidden = 'hidden' } },
@@ -295,7 +199,7 @@ return {
           -- ["ctrl-r"]   = { actions.toggle_ignore }
         },
       }),
-      buffers = THEME.dropdown_no_preview({
+      buffers = themes.dropdown_no_preview({
         formatter = 'path.filename_first',
         sort_lastused = true, -- sort buffers() by last used
         show_unloaded = true, -- show unloaded buffers
@@ -305,14 +209,14 @@ return {
           ['ctrl-x'] = { fn = actions.buf_del, reload = true },
         },
       }),
-      keymaps = THEME.dropdown(),
-      filetypes = THEME.dropdown_no_preview(),
+      keymaps = themes.dropdown(),
+      filetypes = themes.dropdown_no_preview(),
       lsp = {
         prompt_postfix = '❯ ', -- will be appended to the LSP label to override use 'prompt' instead
-        cwd_only = false, -- LSP/diagnostics for cwd only?
+        cwd_only = true, -- LSP/diagnostics for cwd only?
         includeDeclaration = true, -- include current declaration in LSP context
         -- settings for 'lsp_{document|workspace|lsp_live_workspace}_symbols'
-        symbols = THEME.dropdown_no_preview({
+        symbols = themes.dropdown_no_preview({
           title = 'Symbols',
           prompt = default_prompt_icon,
           child_prefix = true,
@@ -359,7 +263,7 @@ return {
             return s .. ' -'
           end,
         }),
-        code_actions = THEME.cursor({
+        code_actions = themes.cursor({
           async_or_timeout = 5000,
           previewer = 'codeaction_native',
         }),
@@ -379,32 +283,37 @@ return {
   keys = {
     { '<c-j>', '<c-j>', ft = 'fzf', mode = 't', nowait = true },
     { '<c-k>', '<c-k>', ft = 'fzf', mode = 't', nowait = true },
+    { '//', '<cmd>cclose | FzfLua quickfix<cr>', ft = 'qf', desc = 'which_key_ignore' },
+
     { '<leader>:', '<cmd>FzfLua command_history<cr>', desc = 'Command History' },
     { '<A-x>', '<cmd>FzfLua commands<cr>', desc = 'Commands' },
 
     -- FIND FILES
     { '<C-p>', '<cmd>FzfLua oldfiles<cr>', desc = 'Recent files' },
-    { '<leader><space>', '<cmd>FzfLua files<cr>', desc = 'Find Files' },
+    {
+      '<leader><space>',
+      function()
+        require('fzf-lua').files(themes.top_panel())
+      end,
+      desc = 'Find Files',
+    },
     {
       '<leader>.',
       function()
-        require('fzf-lua').files(THEME.ivy({
-          -- 'Files Current Dir'
+        require('fzf-lua').files(themes.ivy({
+          title = 'Files Current Dir',
           cwd = vim.fn.expand('%:p:h'),
           fd_opts = [[--color=never -d 1 --type f --hidden --follow --exclude .git]],
         }))
       end,
       desc = 'Browse cur directory',
     },
-    -- { '<leader>.', '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', desc = 'Browse cur directory' },
-    -- { '<leader>f.', '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', desc = 'Browse cur directory' },
-    -- { '<leader>fb', '<cmd>lua require("hasan.telescope.custom").file_browser()<cr>', desc = 'Browser project files' },
-    -- { '<leader>ff', '<cmd>lua require("hasan.telescope.custom").my_find_files()<cr>', desc = 'Find file' },
-
-    { '<leader>pr', '<cmd>FzfLua oldfiles<cr>', desc = 'Find recent files' },
     { '<leader>ff', '<cmd>FzfLua files<cr>', desc = 'Find files' },
     { '<leader>fg', '<cmd>FzfLua git_files<cr>', desc = 'Find git files' },
     { '<leader>fr', '<cmd>FzfLua oldfiles<cr>', desc = 'Recent files' },
+    -- { '<leader>.', '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', desc = 'Browse cur directory' },
+    -- { '<leader>f.', '<cmd>lua require("hasan.telescope.custom").file_browser("cur_dir")<cr>', desc = 'Browse cur directory' },
+    -- { '<leader>fb', '<cmd>lua require("hasan.telescope.custom").file_browser()<cr>', desc = 'Browser project files' },
 
     -- FIND BUFFERS
     { 'g.', '<cmd>FzfLua buffers cwd_only=true sort_mru=true sort_lastused=true<cr>', desc = 'Switch Buffer' },
@@ -445,10 +354,17 @@ return {
     { '<leader>vm', '<cmd>FzfLua marks<cr>', desc = 'Jump to Mark' },
 
     -- PROJECT
+    { '<leader>pr', '<cmd>FzfLua oldfiles cwd_only=true<cr>', desc = 'Project recent files' },
+    {
+      '<leader>pt',
+      function()
+        require('config.navigation.fzf.finders').search_todos_to_quickfix()
+      end,
+      desc = 'Show project todos',
+    },
     -- { '<leader>pp', '<cmd>lua require("telescope._extensions").manager.persisted.persisted()<CR>', desc = 'Show session list' },
     -- { '<leader>pb', '<cmd>lua require("hasan.telescope.custom").project_browser()<CR>', desc = 'Browse other projects' },
     -- { '<leader>pc', '<cmd>lua require("telescope._extensions").manager.project_commands.commands()<CR>', desc = 'Run project commands' },
-    -- { '<leader>pr', '<cmd>lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>', desc = 'Find recent files' },
     -- { '<leader>pt', '<cmd>lua require("hasan.telescope.custom").search_project_todos()<CR>', desc = 'Search project todos' },
     -- { '<leader>pm', '<cmd>lua require("hasan.telescope.custom").projects()<CR>', desc = 'Switch project' },
   },
