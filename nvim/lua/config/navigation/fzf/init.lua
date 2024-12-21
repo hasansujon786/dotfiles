@@ -317,6 +317,7 @@ return {
 
     -- FIND BUFFERS
     { 'g.', '<cmd>FzfLua buffers cwd_only=true sort_mru=true sort_lastused=true<cr>', desc = 'Switch Buffer' },
+    { "g'", '<cmd>FzfLua buffers cwd_only=true sort_mru=true sort_lastused=true<cr>', desc = 'which_key_ignore' },
     { '<leader>bb', '<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>', desc = 'Switch All Buffer' },
 
     -- LSP
@@ -358,11 +359,17 @@ return {
     {
       '<leader>pt',
       function()
-        require('config.navigation.fzf.finders').search_todos_to_quickfix()
+        require('config.navigation.fzf.providers').search_todos_to_quickfix()
       end,
       desc = 'Show project todos',
     },
-    -- { '<leader>pp', '<cmd>lua require("telescope._extensions").manager.persisted.persisted()<CR>', desc = 'Show session list' },
+    {
+      '<leader>pp',
+      function()
+        require('config.navigation.fzf.providers.persisted').persisted()
+      end,
+      desc = 'Show session list',
+    },
     -- { '<leader>pb', '<cmd>lua require("hasan.telescope.custom").project_browser()<CR>', desc = 'Browse other projects' },
     -- { '<leader>pc', '<cmd>lua require("telescope._extensions").manager.project_commands.commands()<CR>', desc = 'Run project commands' },
     -- { '<leader>pt', '<cmd>lua require("hasan.telescope.custom").search_project_todos()<CR>', desc = 'Search project todos' },

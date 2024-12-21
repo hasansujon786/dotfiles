@@ -85,10 +85,10 @@ return {
           mappings = {
             copy_session = '<C-c>',
             change_branch = '<C-b>',
-            delete_session = '<C-d>',
+            delete_session = '<C-x>',
           },
           icons = {
-            selected = ' ',
+            selected = '➤  ',
             dir = '  ',
             branch = ' ',
           },

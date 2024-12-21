@@ -1,23 +1,5 @@
 local M = {}
 
-function M.search_project_todos()
-  local actions = require('fzf-lua.actions')
-
-  local cmd = 'rg --line-number --column --color=always -g "!.git" -e "%s"'
-
-  require('fzf-lua').fzf_exec(cmd:format(get_todo_pattern()), {
-    prompt = 'Todos> ',
-    actions = {
-      ['default'] = actions.file_edit,
-      ['alt-q'] = actions.file_sel_to_qf,
-      ['ctrl-v'] = function(selected, o)
-        -- list_files_from_branch_action('Gvsplit', selected, o)
-      end,
-    },
-  })
-end
--- vim.keymap.set('n', '<leader>pt', M.search_project_todos, { desc = 'Search TODOs with fzf-lua' })
-
 local todo_keyfaces = require('core.state').project.todo_keyfaces
 local function get_todo_pattern()
   return table.concat(todo_keyfaces, ':|') .. ':' -- Creates "TODO :|DONE :|INFO :|..."
