@@ -27,7 +27,7 @@ return {
       file_icon_padding = ' ',
       winopts = {
         height = 0.75, -- window height
-        zindex = 100,
+        zindex = 60,
         width = 1, -- window width
         row = 1, -- window row position (0=top, 1=bottom)
         border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
@@ -340,7 +340,6 @@ return {
     { '//', '<cmd>FzfLua blines previewer=false<cr>', desc = 'which_key_ignore' },
     { '<A-/>', '<cmd>FzfLua grep<cr>', desc = 'Grep' },
     { '<A-/>', '<cmd>FzfLua grep_visual<cr>', mode = 'v', desc = 'Grep' },
-    { '<leader>oy', '<cmd>FzfLua registers<cr>', desc = 'Registers' },
 
     { '<leader>/.', '<cmd>FzfLua resume<cr>', desc = 'Fzf Resume' },
     { '<leader>//', '<cmd>FzfLua live_grep<CR>', desc = 'Live grep' },

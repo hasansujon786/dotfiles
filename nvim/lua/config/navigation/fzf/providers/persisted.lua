@@ -1,7 +1,11 @@
+local fzf_lua = require('fzf-lua')
 local themes = require('config.navigation.fzf.themes')
+
 local persisted = require('persisted')
 local p_config = require('persisted.config')
-local p_utils = require('persisted.utils')
+
+local sep = require('persisted.utils').dir_pattern()
+local icons = p_config.telescope.icons
 
 ---Fire an event
 ---@param event string
@@ -32,8 +36,6 @@ local function escape_pattern(str, pattern, replace, n)
 end
 
 local function list_sessions()
-  local sep = p_utils.dir_pattern()
-
   local sessions, sessions_names = {}, {}
 
   for _, session in pairs(persisted.list()) do
@@ -66,21 +68,13 @@ local function list_sessions()
     }
 
     if vim.g.persisted_loaded_session and vim.g.persisted_loaded_session == session then
-      local prefix = require('fzf-lua').utils.ansi_codes.blue(p_config.telescope.icons.selected)
-      session_name = prefix .. require('fzf-lua').utils.ansi_codes.blue(session_name)
+      session_name = fzf_lua.utils.ansi_codes.blue(icons.selected .. session_name)
     else
-      local prefix = require('fzf-lua').utils.ansi_codes.grey(p_config.telescope.icons.dir)
-      session_name = prefix .. session_name
+      session_name = fzf_lua.utils.ansi_codes.grey(icons.dir) .. session_name
     end
     table.insert(sessions_names, session_name)
-
-    -- table.insert(sessions, {
-    --   ['name'] = session_name,
-    --   ['file_path'] = session,
-    --   ['branch'] = branch,
-    --   ['dir_path'] = dir_path,
-    -- })
   end
+
   return sessions, sessions_names
 end
 
@@ -95,10 +89,10 @@ local M = {}
 function M.persisted()
   local sessions, sessions_names = list_sessions()
 
-  require('fzf-lua').fzf_exec(
+  fzf_lua.fzf_exec(
     sessions_names,
     themes.dropdown_no_preview({
-      title = ' Sessions ',
+      title = 'Sessions',
       actions = {
         ['default'] = function(selected)
           load_session(sessions[parse_selection(selected[1])])

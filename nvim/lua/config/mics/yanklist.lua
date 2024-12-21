@@ -18,5 +18,8 @@ return {
     -- Show Yanklist
     -- keymap('n', '<leader>oy', '<cmd>lua require("yanklist").yanklist()<cr>', { desc = 'Show Yanklist' })
     -- keymap('x', '<leader>oy', '<Esc><cmd>lua require("yanklist").yanklist_visual()<cr>', { desc = 'Show Yanklist' })
+
+    keymap('n', '<leader>oy', '<cmd>lua require("config.navigation.fzf.providers.yanklist").yanklist()<cr>', { desc = 'Show Yanklist' })
+    keymap('x', '<leader>oy', '<Esc><cmd>lua require("config.navigation.fzf.providers.yanklist").yanklist_visual()<cr>', { desc = 'Show Yanklist' })
   end,
 }
