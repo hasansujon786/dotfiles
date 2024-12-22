@@ -1,6 +1,9 @@
 return {
-  'hasansujon786/telescope-yanklist.nvim',
+  'hasansujon786/yanklist.nvim',
   event = { 'CursorHold' },
+  init = function()
+    vim.g.yanklist_finder = 'fzf-lua'
+  end,
   config = function()
     -- Put mappings
     keymap('n', 'p', '<Plug>(yanklist-auto-put)', { desc = 'Put the text' })
@@ -16,10 +19,7 @@ return {
     keymap('n', '[r', '<Plug>(yanklist-cycle-forward)', { desc = 'Yanklist forward' })
     keymap('n', ']r', '<Plug>(yanklist-cycle-backward)', { desc = 'Yanklist backward' })
     -- Show Yanklist
-    -- keymap('n', '<leader>oy', '<cmd>lua require("yanklist").yanklist()<cr>', { desc = 'Show Yanklist' })
-    -- keymap('x', '<leader>oy', '<Esc><cmd>lua require("yanklist").yanklist_visual()<cr>', { desc = 'Show Yanklist' })
-
-    keymap('n', '<leader>oy', '<cmd>lua require("config.navigation.fzf.providers.yanklist").yanklist()<cr>', { desc = 'Show Yanklist' })
-    keymap('x', '<leader>oy', '<Esc><cmd>lua require("config.navigation.fzf.providers.yanklist").yanklist_visual()<cr>', { desc = 'Show Yanklist' })
+    keymap('n', '<leader>oy', '<cmd>lua require("yanklist").yanklist()<cr>', { desc = 'Show Yanklist' })
+    keymap('x', '<leader>oy', '<Esc><cmd>lua require("yanklist").yanklist_visual()<cr>', { desc = 'Show Yanklist' })
   end,
 }

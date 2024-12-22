@@ -62,7 +62,6 @@
   "snacks.nvim": { "branch": "main", "commit": "6d86bf18ce55fd26730a181fb8129388e706d9a3" },
   "symbols.nvim": { "branch": "main", "commit": "a005cfcc0224ac6047a0c79651f56a70f6a4f2e7" },
   "telescope-dap.nvim": { "branch": "master", "commit": "783366bd6c1e7fa0a5c59c07db37f49c805a28df" },
-  "telescope-yanklist.nvim": { "branch": "main", "commit": "44316432729f7946f9a5c3dfd76bbe2f0f12a89b" },
   "telescope.nvim": { "branch": "master", "commit": "2eca9ba22002184ac05eddbe47a7fe2d5a384dfc" },
   "text-case.nvim": { "branch": "main", "commit": "e898cfd46fa6cde0e83abb624a16e67d2ffc6457" },
   "treesj": { "branch": "main", "commit": "94f6df623f2d15630b1b617abff39962024cb501" },
@@ -75,5 +74,6 @@
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
   "vim-table-mode": { "branch": "master", "commit": "e4365bde024f73e205eefa2fb78e3029ddb92ea9" },
   "vim-visual-multi": { "branch": "master", "commit": "a6975e7c1ee157615bbc80fc25e4392f71c344d4" },
-  "which-key.nvim": { "branch": "main", "commit": "8ab96b38a2530eacba5be717f52e04601eb59326" }
+  "which-key.nvim": { "branch": "main", "commit": "8ab96b38a2530eacba5be717f52e04601eb59326" },
+  "yanklist.nvim": { "branch": "main", "commit": "75d05b7be03f2b76a57948e1eb02c863ebb119fc" }
 }

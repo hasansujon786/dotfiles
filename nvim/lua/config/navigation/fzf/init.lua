@@ -18,6 +18,7 @@ end
 
 return {
   'ibhagwan/fzf-lua',
+  enabled = true,
   cmd = 'FzfLua',
   config = function(_, opts)
     local actions = require('fzf-lua.actions')
