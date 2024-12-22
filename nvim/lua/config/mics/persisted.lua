@@ -5,9 +5,9 @@ return {
     'ahmedkhalf/project.nvim',
     event = 'VeryLazy',
     main = 'project_nvim',
-    keys = {
-      { '<leader>pm', '<cmd>lua require("hasan.telescope.custom").projects()<CR>', desc = 'Switch project' },
-    },
+    -- keys = {
+    --   -- { '<leader>pm', '<cmd>lua require("hasan.telescope.custom").projects()<CR>', desc = 'Switch project' },
+    -- },
     opts = {
       detection_methods = { 'pattern' },
       exclude_dirs = { 'c:/Users/hasan/dotfiles/nvim/.vsnip' },

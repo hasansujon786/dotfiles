@@ -97,7 +97,7 @@ return {
       },
     },
     dashboard = {
-      enabled = true,
+      enabled = not require('core.state').ui.session_autoload,
       -- These settings are used by some built-in sections
       preset = {
         -- Defaults to a picker that supports `fzf-lua`, `telescope.nvim` and `mini.pick`

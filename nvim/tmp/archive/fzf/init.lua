@@ -18,7 +18,7 @@ end
 
 return {
   'ibhagwan/fzf-lua',
-  enabled = true,
+  enabled = false,
   cmd = 'FzfLua',
   config = function(_, opts)
     local actions = require('fzf-lua.actions')
@@ -282,15 +282,7 @@ return {
     })
   end,
   keys = {
-    { '<c-j>', '<c-j>', ft = 'fzf', mode = 't', nowait = true },
-    { '<c-k>', '<c-k>', ft = 'fzf', mode = 't', nowait = true },
-    { '//', '<cmd>cclose | FzfLua quickfix<cr>', ft = 'qf', desc = 'which_key_ignore' },
-
-    { '<leader>:', '<cmd>FzfLua command_history<cr>', desc = 'Command History' },
-    { '<A-x>', '<cmd>FzfLua commands<cr>', desc = 'Commands' },
-
     -- FIND FILES
-    { '<C-p>', '<cmd>FzfLua oldfiles<cr>', desc = 'Recent files' },
     {
       '<leader><space>',
       function()
@@ -338,42 +330,38 @@ return {
     { '<leader>gC', '<cmd>FzfLua git_bcommits<CR>', desc = 'Look up buffer commits' },
 
     -- SEARCH
-    { '//', '<cmd>FzfLua blines previewer=false<cr>', desc = 'which_key_ignore' },
-    { '<A-/>', '<cmd>FzfLua grep<cr>', desc = 'Grep' },
-    { '<A-/>', '<cmd>FzfLua grep_visual<cr>', mode = 'v', desc = 'Grep' },
-
     { '<leader>/.', '<cmd>FzfLua resume<cr>', desc = 'Fzf Resume' },
     { '<leader>//', '<cmd>FzfLua live_grep<CR>', desc = 'Live grep' },
-    -- { '<leader>/g', '<cmd>lua require("hasan.telescope.custom").live_grep_in_folder()<cr>', desc = 'Live grep in folder' },
     { '<leader>/f', '<cmd>FzfLua files<cr>', desc = 'Find file' },
+    -- { '<leader>/g', '<cmd>lua require("hasan.telescope.custom").live_grep_in_folder()<cr>', desc = 'Live grep in folder' },
     { '<leader>/k', '<cmd>FzfLua keymaps<CR>', desc = 'Look up keymaps' },
     { '<leader>/t', '<cmd>FzfLua filetypes<CR>', desc = 'Change filetypes' },
     { '<leader>/q', '<cmd>FzfLua quickfix<cr>', desc = 'Quickfix List' },
 
+    { '//', '<cmd>cclose | FzfLua quickfix<cr>', ft = 'qf', desc = 'which_key_ignore' },
+    { '//', '<cmd>FzfLua blines previewer=false<cr>', desc = 'which_key_ignore' },
+
+    { '<A-/>', '<cmd>FzfLua grep<cr>', desc = 'Grep' },
+    { '<A-/>', '<cmd>FzfLua grep_visual<cr>', mode = 'v', desc = 'Grep' },
+    { '<C-p>', '<cmd>FzfLua oldfiles<cr>', desc = 'Recent files' },
+    { '<A-c>', '<cmd>FzfLua commands<cr>', desc = 'Nvim commands' },
+
+    -- PROJECT
+    -- { '<leader>pc', '<cmd>lua require("telescope._extensions").manager.project_commands.commands()<CR>', desc = 'Run project commands' },
+    { '<leader>pr', '<cmd>FzfLua oldfiles cwd_only=true<cr>', desc = 'Project recent files' },
+    { '<leader>pt', '<cmd>lua require("config.navigation.fzf.providers").search_todos_to_quickfix()<CR>', desc = 'Show project todos' },
+
+    -- { '<leader>pb', '<cmd>lua require("hasan.telescope.custom").project_browser()<CR>', desc = 'Browse other projects' },
+    -- { '<leader>pm', '<cmd>lua require("hasan.telescope.custom").projects()<CR>', desc = 'Switch project' },
+    { '<leader>pp', '<cmd>lua require("config.navigation.fzf.providers.persisted").persisted()<CR>', desc = 'Show session list', },
+
+    -- VIM
     { '<leader>v/', '<cmd>FzfLua help_tags<cr>', desc = 'Search Vim help' },
     { '<leader>vj', '<cmd>FzfLua jumps<cr>', desc = 'Search jumplist' },
     { '<leader>vm', '<cmd>FzfLua marks<cr>', desc = 'Jump to Mark' },
 
-    -- PROJECT
-    { '<leader>pr', '<cmd>FzfLua oldfiles cwd_only=true<cr>', desc = 'Project recent files' },
-    {
-      '<leader>pt',
-      function()
-        require('config.navigation.fzf.providers').search_todos_to_quickfix()
-      end,
-      desc = 'Show project todos',
-    },
-    {
-      '<leader>pp',
-      function()
-        require('config.navigation.fzf.providers.persisted').persisted()
-      end,
-      desc = 'Show session list',
-    },
-    -- { '<leader>pb', '<cmd>lua require("hasan.telescope.custom").project_browser()<CR>', desc = 'Browse other projects' },
-    -- { '<leader>pc', '<cmd>lua require("telescope._extensions").manager.project_commands.commands()<CR>', desc = 'Run project commands' },
-    -- { '<leader>pt', '<cmd>lua require("hasan.telescope.custom").search_project_todos()<CR>', desc = 'Search project todos' },
-    -- { '<leader>pm', '<cmd>lua require("hasan.telescope.custom").projects()<CR>', desc = 'Switch project' },
+    { '<c-j>', '<c-j>', ft = 'fzf', mode = 't', nowait = true },
+    { '<c-k>', '<c-k>', ft = 'fzf', mode = 't', nowait = true },
   },
   init = function()
     vim.ui.select = function(...)
