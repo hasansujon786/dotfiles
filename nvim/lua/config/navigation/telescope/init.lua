@@ -238,13 +238,19 @@ return {
       },
     })
     require('telescope').load_extension('fzf')
-    require('telescope').load_extension('ui-select')
     local_theme.setup()
 
     -- keymaps
     command('EmojiPicker', function()
       require('hasan.telescope.custom').emojis()
     end)
+  end,
+  init = function()
+    vim.ui.select = function(...)
+      require('lazy').load({ plugins = { 'telescope.nvim' } })
+      require('telescope').load_extension('ui-select')
+      return vim.ui.select(...)
+    end
   end,
   dependencies = {
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },

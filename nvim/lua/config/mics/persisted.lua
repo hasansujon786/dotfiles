@@ -88,7 +88,7 @@ return {
             delete_session = '<C-x>',
           },
           icons = {
-            selected = '➤  ',
+            selected = '➤ ',
             dir = '  ',
             branch = ' ',
           },
