@@ -1,7 +1,7 @@
 return {
   'hrsh7th/nvim-cmp',
   lazy = true,
-  enabled = true,
+  enabled = false,
   event = { 'InsertEnter', 'CmdlineEnter' },
   config = function()
     local cmp = require('cmp')
@@ -253,6 +253,38 @@ return {
       autocmd('FileType', 'lua CmpOrgmodeSetup()', { pattern = { 'org' } })
       autocmd('FileType', 'lua CmpNeogitCommitMessageSetup()', { pattern = { 'NeogitCommitMessage' } })
     end)
+
+    -- function CmpNeogitCommitMessageSetup()
+    --   require('cmp').setup.buffer {
+    --     enabled = true,
+    --     sources = {
+    --       { name = 'luasnip' },
+    --       { name = 'spell' },
+    --       { name = 'buffer',
+    --         option = {
+    --           get_bufnrs = function()
+    --             return vim.api.nvim_list_bufs()
+    --           end,
+    --         },
+    --       },
+    --     },
+    --   }
+    -- end
+
+    -- lua << EOF
+    -- function CmpOrgmodeSetup()
+    --   require('cmp').setup.buffer {
+    --     enabled = true,
+    --     sources = {
+    --       { name = 'orgmode' },
+    --       { name = 'luasnip' },
+    --       { name = 'spell' },
+    --       { name = 'buffer'},
+    --       { name = 'path' },
+    --     },
+    --   }
+    -- end
+    -- EOF
 
     -- hot fix: after using / <tab> completion stops working
     keymap('c', '<tab>', '<C-z>', { silent = false })

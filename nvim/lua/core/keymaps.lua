@@ -194,7 +194,7 @@ if not vim.g.vscode then
 
   keymap('i', '<C-u>', '<C-G>u<C-U>') -- CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo, so that you can undo CTRL-U after inserting a line break.
 
-  keymap('i', '<C-i>', '<c-g>u<Esc>bgUiwgi', { desc = 'Uppercase current word' })
+  keymap('i', '<C-g><C-e>', '<c-g>u<Esc>bgUiwgi', { desc = 'Uppercase current word' })
   keymap('i', '<C-g><C-g>', '<c-g>u<Esc>[s1z=`]a<c-g>u', { desc = 'Fix previous misspelled world' })
 
   -- Leader keys ----------------------------------

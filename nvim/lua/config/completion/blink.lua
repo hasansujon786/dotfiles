@@ -1,76 +1,71 @@
 local hover = require('core.state').ui.hover
+local function tab_out_available()
+  return vim.fn.search('\\%#[]>)}\'"`,;]', 'n') ~= 0
+end
+
 return {
   'saghen/blink.cmp',
-  enabled = false,
-  event = { 'InsertEnter' }, -- 'CmdlineEnter'
+  version = 'v0.*',
+  enabled = true,
+  event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
     'rafamadriz/friendly-snippets',
     'windwp/nvim-autopairs',
     'mattn/emmet-vim',
-    'L3MON4D3/LuaSnip',
-  },
-  version = 'v0.*',
-  -- version = '*',
-  -- build = 'cargo build --release',
-  opts_extend = {
-    'sources.completion.enabled_providers',
-    'sources.compat',
-    'sources.default',
+    -- 'L3MON4D3/LuaSnip',
   },
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
-    -- "super-tab" keymap
-    --   you may want to set `completion.trigger.show_in_snippet = false`
-    --   or use `completion.list.selection = "manual" | "auto_insert"`
+
     keymap = {
       preset = 'super-tab',
-      ['<C-y>'] = { 'select_and_accept' },
       ['<C-q>'] = { 'show', 'show_documentation', 'hide_documentation' },
-      ['<A-p>'] = { 'select_prev', 'fallback' },
-      ['<A-n>'] = { 'select_next', 'fallback' },
       ['<CR>'] = { 'accept', 'fallback' },
+      ['<C-y>'] = { 'select_and_accept' },
+
       ['<Tab>'] = {
         function(cmp)
           if cmp.snippet_active() then
             return cmp.accept()
-          else
+          elseif cmp.is_visible() then
             return cmp.select_and_accept()
+          elseif tab_out_available() then
+            feedkeys('<Right>', 'n')
+            return true
           end
         end,
         'snippet_forward',
         'fallback',
       },
       ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
+      ['<A-p>'] = { 'select_prev', 'fallback' },
+      ['<A-n>'] = { 'select_next', 'fallback' },
       ['<C-k>'] = { 'snippet_backward', 'fallback' },
       ['<C-j>'] = { 'snippet_forward', 'fallback' },
+
       ['<A-u>'] = { 'scroll_documentation_up', 'fallback' },
       ['<A-d>'] = { 'scroll_documentation_down', 'fallback' },
     },
-    -- snippets = {
-    --   expand = function(snippet)
-    --     require('luasnip').lsp_expand(snippet)
-    --   end,
-    --   active = function(filter)
-    --     if filter and filter.direction then
-    --       return require('luasnip').jumpable(filter.direction)
-    --     end
-    --     return require('luasnip').in_snippet()
-    --   end,
-    --   jump = function(direction)
-    --     require('luasnip').jump(direction)
-    --   end,
-    -- },
+
+    sources = {
+      default = { 'lsp', 'path', 'snippets', 'buffer' }, -- 'luasnip'
+      cmdline = {},
+      providers = {
+        path = { name = ' ', score_offset = 110 },
+        lsp = { name = ' ', score_offset = 100 },
+        luasnip = { name = ' ', score_offset = 90 },
+        snippets = { name = ' ', score_offset = 80 },
+        buffer = { name = ' ', score_offset = 70, min_keyword_length = 2 },
+      },
+    },
 
     completion = {
       accept = {
-        auto_brackets = {
-          enabled = true, -- experimental auto-brackets support
-        },
+        auto_brackets = { enabled = true }, -- experimental auto-brackets support
       },
-      trigger = {
-        show_in_snippet = true,
-      },
+      trigger = { show_in_snippet = true },
+
       menu = {
         enabled = true,
         min_width = 52,
@@ -81,19 +76,13 @@ return {
           align_to_component = 'none',
           padding = 1,
           gap = 1,
-          treesitter = false, -- { 'lsp' },
-          columns = {
-            { 'kind_icon' },
-            { 'label', 'label_description', gap = 1, fill = true },
-            { 'source_name' },
-          },
+          columns = { { 'kind_icon' }, { 'label', 'label_description', gap = 1, fill = true }, { 'source_name' } },
           components = {
-            label = {
-              width = { fill = true, max = 48, min = 48 }, -- {fixed?, fill?, min?, max?, }
-            },
+            label = { width = { fill = true, max = 48, min = 48 } }, -- {fixed?, fill?, min?, max? }
           },
         },
       },
+
       documentation = {
         auto_show = true,
         auto_show_delay_ms = 200,
@@ -103,62 +92,19 @@ return {
           max_width = 70,
           max_height = 20,
           border = hover.border,
-          winhighlight = hover.winhighlight,
-          -- winhighlight = 'Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,CursorLine:BlinkCmpDocCursorLine,Search:None',
+          winhighlight = hover.winhighlight, -- 'Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,CursorLine:BlinkCmpDocCursorLine,Search:None',
           scrollbar = true,
-          direction_priority = {
-            menu_north = { 'w', 'e' },
-            menu_south = { 'w', 'e' },
-          },
+          direction_priority = { menu_north = { 'w', 'e' }, menu_south = { 'w', 'e' } },
         },
       },
     },
 
+    -- signature = { enabled = true, window = { border = 'single' } },
     appearance = {
       use_nvim_cmp_as_default = true, -- use cmp's highlights
       nerd_font_variant = 'normal',
       kind_icons = require('hasan.utils.ui.icons').kind,
     },
-
-    -- experimental signature help support
-    -- signature = { enabled = true }
-    sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer' }, -- 'luasnip'
-      compat = {},
-      cmdline = {},
-      completion = {
-        enabled_providers = { 'lsp', 'path', 'luasnip', 'buffer', 'snippets' },
-      },
-      providers = {
-        lsp = {
-          name = ' ',
-          module = 'blink.cmp.sources.lsp',
-          -- score_offset = 10,
-        },
-        path = {
-          name = ' ',
-          module = 'blink.cmp.sources.path',
-          score_offset = 3,
-        },
-        snippets = {
-          name = ' ',
-          module = 'blink.cmp.sources.snippets',
-          score_offset = -3,
-        },
-        luasnip = {
-          name = ' ',
-          module = 'blink.cmp.sources.luasnip',
-          -- score_offset = 3,
-        },
-        buffer = {
-          name = ' ',
-          module = 'blink.cmp.sources.buffer',
-          fallbacks = { 'lsp' },
-          -- fallback_for = { 'lsp' },
-          -- score_offset = -3,
-          min_keyword_length = 3,
-        },
-      },
-    },
   },
+  opts_extend = { 'sources.default' },
 }
