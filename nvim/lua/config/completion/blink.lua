@@ -1,11 +1,12 @@
 local hover = require('core.state').ui.hover
 local function tab_out_available()
-  return vim.fn.search('\\%#[]>)}\'"`,;]', 'n') ~= 0
+  local tab_out_chars = '>)}\'"`,;]'
+  return vim.fn.search('\\%#[]' .. tab_out_chars, 'n') ~= 0
 end
 
 return {
   'saghen/blink.cmp',
-  version = 'v0.*',
+  version = '*',
   enabled = true,
   event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
@@ -22,7 +23,12 @@ return {
       preset = 'super-tab',
       ['<C-q>'] = { 'show', 'show_documentation', 'hide_documentation' },
       ['<CR>'] = { 'accept', 'fallback' },
-      ['<C-y>'] = { 'select_and_accept' },
+      ['<C-y>'] = { 'select_and_accept', 'fallback' },
+      ['<C-l>'] = {
+        function(cmp)
+          cmp.show({ providers = { 'snippets' } })
+        end,
+      },
 
       ['<Tab>'] = {
         function(cmp)

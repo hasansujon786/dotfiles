@@ -72,6 +72,10 @@
       {
         "language": "typescript",
         "path": "./dbug.css.ts.json"
+      },
+      {
+        "language": "lua",
+        "path": "./lua.json"
       }
     ]
   }

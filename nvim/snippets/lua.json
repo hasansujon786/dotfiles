@@ -1,0 +1,12 @@
+{
+  "vim.noitfy": {
+    "prefix": "notify",
+    "body": "vim.notify(${1:'message'}, vim.log.levels.${0:WARN})",
+    "description": "Show notificaions with vim.notify"
+  },
+  "defer": {
+    "prefix": "defer",
+    "body": "vim.defer_fn(function()\n  ${1:-- Do something here}${0}\nend, ${1:1000})",
+    "description": "Defers calling {fn} until {timeout} ms passes"
+  }
+}
