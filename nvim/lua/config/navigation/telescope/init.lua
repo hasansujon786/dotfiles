@@ -21,7 +21,7 @@ return {
     { '<leader>bb', '<cmd>lua require("hasan.telescope.custom").buffers(false)<CR>', desc = 'Switch all buffers' },
 
     -- LSP
-    { 'go', '<cmd>lua require("hasan.telescope.lsp").prettyDocumentSymbols()<CR>', desc = 'Lsp: Document symbols' },
+    { 'go', '<cmd>lua require("hasan.telescope.lsp").prettyTreesitter({ show_line = true })<CR>', desc = 'Lsp: Document symbols' },
     { '<leader>ar', '<cmd>lua require("hasan.telescope.custom").references()<cr>', desc = 'Lsp: Preview references' },
 
     -- GIT
@@ -165,6 +165,7 @@ return {
         grep_string = get_dropdown,
         live_grep = get_dropdown,
         filetypes = get_dropdown,
+        treesitter = get_dropdown,
       },
       extensions = {
         fzf = {

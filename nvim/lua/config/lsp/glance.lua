@@ -48,6 +48,7 @@ return {
       },
       hooks = {
         before_open = function(results, open, jump, method)
+          require('hasan.widgets.glance_mod').initialize_before_open()
           if #results == 1 then
             jump(results[1]) -- argument is optional
           elseif #results > 1 and method == 'definitions' then
@@ -55,16 +56,13 @@ return {
             if #filtered_result == 1 then
               return jump(filtered_result[1])
             end
-
-            require('hasan.widgets.glance_mod').set_cursor_pointer()
             open(filtered_result)
           else
-            require('hasan.widgets.glance_mod').set_cursor_pointer()
             open(results) -- argument is optional
           end
         end,
         after_close = function()
-          require('hasan.widgets.glance_mod').remove_cursor_pointer()
+          require('hasan.widgets.glance_mod').detatch_cursor_pointer()
         end,
       },
       folds = {
