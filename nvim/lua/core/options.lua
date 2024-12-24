@@ -117,7 +117,7 @@ o.guicursor =
 o.title = true
 o.titlelen = 20
 o.titlestring = '%= %{fnamemodify(getcwd(), ":t")}%<%=' -- what the title of the window will be set to
-o.qftf = '{info -> v:lua.require("hasan.utils.ui.qf").qftf(info)}'
+-- o.quickfixtextfunc = '{info -> v:lua.require("hasan.utils.ui.qf").qftf(info)}'
 
 -- Numbers
 o.number = true

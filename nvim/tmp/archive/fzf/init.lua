@@ -309,7 +309,6 @@ return {
     -- { '<leader>fb', '<cmd>lua require("hasan.telescope.custom").file_browser()<cr>', desc = 'Browser project files' },
 
     -- FIND BUFFERS
-    { 'g.', '<cmd>FzfLua buffers cwd_only=true sort_mru=true sort_lastused=true<cr>', desc = 'Switch Buffer' },
     { "g'", '<cmd>FzfLua buffers cwd_only=true sort_mru=true sort_lastused=true<cr>', desc = 'which_key_ignore' },
     { '<leader>bb', '<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>', desc = 'Switch All Buffer' },
 

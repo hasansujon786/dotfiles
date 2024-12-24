@@ -1,55 +1,64 @@
 return {
-  'stevearc/quicker.nvim',
-  enabled = true,
-  event = 'FileType qf',
-  ---@module "quicker"
+  'kevinhwang91/nvim-bqf',
+  lazy = true,
+  module = 'bqf',
+  ft = { 'qf' }, -- event = 'FileType qf',
   opts = {
-    ---@type quicker.SetupOptions
-    -- Border characters
-    borders = {
-      vert = '│',
-      strong_header = '─',
-      strong_cross = '┼',
-      strong_end = '┤',
-      soft_header = '╌',
-      soft_cross = '┼',
-      soft_end = '┤',
-    },
-    type_icons = {
-      E = ' ',
-      W = ' ',
-      I = ' ',
-      N = '󰌵 ',
-      H = '󰌵 ',
-    },
-    highlight = {
-      treesitter = true,
-      lsp = true, -- Use LSP semantic token highlighting
-      load_buffers = false, -- Load the referenced buffers to apply more accurate highlights (may be slow)
-    },
-    keys = {
-      {
-        '>',
-        function()
-          require('quicker').expand({ before = 2, after = 2, add_to_existing = true })
-        end,
-        desc = 'Expand quickfix context',
-      },
-      {
-        '<',
-        function()
-          require('quicker').collapse()
-        end,
-        desc = 'Collapse quickfix context',
-      },
+    preview = { winblend = 0 },
+  },
+  keys = {
+    {
+      'g.',
+      function ()
+        require("hasan.utils.ui.qf").showLspReferencesInLocList()
+      end,
+      desc = 'Show LSP references in loclist',
     },
   },
   dependencies = {
-    {
-      'kevinhwang91/nvim-bqf',
-      lazy = true,
-      module = 'bqf',
-      opts = { preview = { winblend = 0 } },
+    'stevearc/quicker.nvim',
+    enabled = true,
+    ---@module "quicker"
+    ---@type quicker.SetupOptions
+    opts = {
+      -- Border characters
+      borders = {
+        vert = '│',
+        strong_header = '─',
+        strong_cross = '┼',
+        strong_end = '┤',
+        soft_header = '╌',
+        soft_cross = '┼',
+        soft_end = '┤',
+      },
+      type_icons = {
+        E = ' ',
+        W = ' ',
+        I = ' ',
+        N = '󰌵 ',
+        H = '󰌵 ',
+      },
+      highlight = {
+        treesitter = true,
+        lsp = true, -- Use LSP semantic token highlighting
+        load_buffers = false, -- Load the referenced buffers to apply more accurate highlights (may be slow)
+      },
+      keys = {
+        {
+          '>',
+          function()
+            require('quicker').expand({ before = 2, after = 2, add_to_existing = true })
+          end,
+          desc = 'Expand quickfix context',
+        },
+        {
+          '<',
+          function()
+            require('quicker').collapse()
+          end,
+          desc = 'Collapse quickfix context',
+        },
+      },
     },
   },
 }

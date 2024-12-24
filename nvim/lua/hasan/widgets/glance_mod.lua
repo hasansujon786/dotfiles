@@ -21,7 +21,6 @@ function M.initialize_before_open()
 end
 
 function M.attach_cursor_pointer(glance_row)
-  dd('asdf')
   local line = NuiLine({ NuiText('', 'GlanceBorderCursor') })
   local opts = {
     enter = false,
@@ -36,7 +35,6 @@ function M.attach_cursor_pointer(glance_row)
     position = { row = glance_row, col = parent_col },
     size = { width = 2, height = 1 },
   }
-  dd('asdfsadf')
 
   local pop = Popup(opts)
 

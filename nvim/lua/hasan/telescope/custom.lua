@@ -371,4 +371,16 @@ M.colors = function()
     :find()
 end
 
+M.auto_open_qflistt_or_loclist = function()
+  local wininfo = vim.fn.getwininfo(vim.api.nvim_get_current_win())
+  if #wininfo == 0 then
+    return
+  end
+
+  local win = wininfo[1]
+  vim.cmd([[cclose|lclose]])
+  local list_type = win.loclist == 1 and 'loclist' or 'quickfix'
+  require('telescope.builtin')[list_type]()
+end
+
 return M

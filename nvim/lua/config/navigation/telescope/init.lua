@@ -16,7 +16,6 @@ return {
     { '<leader>fr', '<cmd>Telescope oldfiles<cr>', desc = 'Recent files' },
 
     -- FIND BUFFERS
-    { 'g.', '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>', desc = 'Switch buffers' },
     { "g'", '<cmd>lua require("hasan.telescope.custom").buffers(true)<CR>', desc = 'Switch buffers' },
     { '<leader>bb', '<cmd>lua require("hasan.telescope.custom").buffers(false)<CR>', desc = 'Switch all buffers' },
 
@@ -39,7 +38,7 @@ return {
     { '<leader>/t', '<cmd>Telescope filetypes<CR>', desc = 'Change filetypes' },
     { '<leader>/q', '<cmd>Telescope quickfix<cr>', desc = 'Quickfix List' },
 
-    { '//', '<cmd>cclose | Telescope quickfix<cr>', ft = 'qf', desc = 'which_key_ignore' },
+    { '//', '<cmd>lua require("hasan.telescope.custom").auto_open_qflistt_or_loclist()<cr>', ft = 'qf', desc = 'which_key_ignore' },
     { '//', '<cmd>lua require("hasan.telescope.custom").curbuf()<cr>', desc = 'which_key_ignore' },
     { '/', '<Esc><cmd>lua require("hasan.telescope.custom").curbuf(true)<cr>', desc = 'which_key_ignore', mode = 'v' },
 

@@ -48,4 +48,37 @@ M.valid_qf_fname = function(bufnr)
   return fname
 end
 
+-- Show LSP references in loclist
+local function create_quickfix_list(positions, filename)
+  local qf_list = {}
+  local buf = vim.api.nvim_get_current_buf() -- Current buffer
+  filename = filename or vim.api.nvim_buf_get_name(buf)
+
+  for _, pos in ipairs(positions) do
+    -- Extract text from the buffer
+    local line = vim.api.nvim_buf_get_lines(buf, pos.from[1] - 1, pos.from[1], false)[1] or ''
+
+    -- Add entry to quickfix list
+    table.insert(qf_list, { filename = filename, lnum = pos.from[1], col = pos.from[2] + 1, text = line })
+  end
+  return qf_list
+end
+
+function M.showLspReferencesInLocList()
+  local words, idx = Snacks.words.get()
+  if #words <= 1 then
+    vim.notify('No reference found', vim.log.levels.WARN, { title = 'Words' })
+    return
+  end
+
+  local quickfix_list = create_quickfix_list(words, vim.api.nvim_buf_get_name(0))
+  if #quickfix_list <= 1 then
+    return
+  end
+
+  vim.fn.setloclist(0, quickfix_list, 'r') -- Replace the current quickfix list
+  vim.cmd(string.format('ll %d', idx)) -- Jump to the location list entry at `idx`
+  vim.cmd('lopen')
+end
+
 return M
