@@ -51,15 +51,25 @@ end
 -- Show LSP references in loclist
 local function create_quickfix_list(positions, filename)
   local qf_list = {}
-  local buf = vim.api.nvim_get_current_buf() -- Current buffer
+  local unique_key_store = {}
+
+  local buf = vim.api.nvim_get_current_buf()
   filename = filename or vim.api.nvim_buf_get_name(buf)
 
   for _, pos in ipairs(positions) do
+    local lnum, col = pos.from[1], pos.from[2] + 1
+
+    local key = lnum .. ':' .. col -- Combine `col` and `lnum` to create a unique key
+    if unique_key_store[key] then
+      break
+    end
+    unique_key_store[key] = true
+
     -- Extract text from the buffer
-    local line = vim.api.nvim_buf_get_lines(buf, pos.from[1] - 1, pos.from[1], false)[1] or ''
+    local line = vim.api.nvim_buf_get_lines(buf, lnum - 1, lnum, false)[1] or ''
 
     -- Add entry to quickfix list
-    table.insert(qf_list, { filename = filename, lnum = pos.from[1], col = pos.from[2] + 1, text = line })
+    table.insert(qf_list, { filename = filename, lnum = lnum, col = col, text = line })
   end
   return qf_list
 end
@@ -80,5 +90,7 @@ function M.showLspReferencesInLocList()
   vim.cmd(string.format('ll %d', idx)) -- Jump to the location list entry at `idx`
   vim.cmd('lopen')
 end
+
+-- require("hasan.utils.ui.qf").showLspReferencesInLocList()
 
 return M

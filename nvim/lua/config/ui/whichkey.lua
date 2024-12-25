@@ -59,6 +59,7 @@ return {
       { '<leader>bo', '<cmd>call hasan#utils#buffer#_clear_other()<CR>', desc = 'Kill other buffers' },
       { '<leader>bK', '<cmd>call hasan#utils#buffer#_clear_all()<CR>', desc = 'Kill all buffers' },
       { '<leader>bw', '<cmd>wa<CR>', desc = 'Write all buffer' },
+      { '<leader>X', '<cmd>call hasan#utils#buffer#_open_scratch_buffer()<CR>', desc = 'Open scratch buffer' },
 
       -- CHANGE
       { '<leader>c', group = 'change' },

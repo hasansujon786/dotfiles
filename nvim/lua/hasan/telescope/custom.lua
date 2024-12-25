@@ -232,25 +232,27 @@ end
 
 M.grep_string_list = function(opts)
   opts = opts and opts or {}
+  local search_pattern = opts.search_list
+
+  if not search_pattern or search_pattern == '' or type(search_pattern) == 'table' and #search_pattern == 0 then
+    vim.notify('Search list is required', vim.log.levels.WARN, { title = 'Telescope' })
+    return
+  end
+
+  if type(search_pattern) == 'table' then
+    search_pattern = table.concat(search_pattern, '|')
+  end
 
   local vimgrep_arguments = opts.vimgrep_arguments or conf.vimgrep_arguments
   local search_dirs = opts.search_dirs
   opts.entry_maker = opts.entry_maker or make_entry.gen_from_vimgrep(opts)
-
-  local search_list = {}
-  if opts.search_list and #opts.search_list > 0 then
-    for _, value in ipairs(opts.search_list) do
-      table.insert(search_list, '-e')
-      table.insert(search_list, value)
-    end
-  end
 
   local additional_args = {}
   if opts.additional_args ~= nil and type(opts.additional_args) == 'function' then
     additional_args = opts.additional_args(opts)
   end
 
-  local args = vim.iter({ vimgrep_arguments, additional_args, search_list }):flatten():totable()
+  local args = vim.iter({ vimgrep_arguments, additional_args, { '-e', search_pattern } }):flatten():totable()
 
   if search_dirs then
     for _, path in ipairs(search_dirs) do
@@ -269,12 +271,13 @@ M.grep_string_list = function(opts)
 end
 
 function M.search_project_todos()
+  local todo_patern = table.concat(require('core.state').project.todo_keyfaces, ':|') .. ':' -- Creates "TODO :|DONE :|INFO :|..."
   M.grep_string_list({
     prompt_title = 'Search Todos',
-    search_list = require('core.state').telescope.todo_keyfaces,
-    additional_args = function()
-      return { '--glob', '!nvim/lua/hasan/core/state.lua', '--glob', '!nvim/legacy/*' }
-    end,
+    search_list = todo_patern,
+    -- additional_args = function()
+    --   return { '--glob', '!nvim/lua/hasan/core/state.lua', '--glob', '!nvim/legacy/*' }
+    -- end,
   })
 end
 
