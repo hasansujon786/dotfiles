@@ -1,4 +1,3 @@
-local extensions = require('telescope').extensions
 local state = require('core.state')
 local M = {}
 
@@ -24,24 +23,14 @@ M.top_panel_default_opts = {
   previewer = false,
 }
 
-M.center_layout_opts = {
-  theme = 'dropdown',
-  borderchars = state.border_groups.edged_top,
-}
-
 M.get_top_panel = function(opts)
   return not opts and M.top_panel_default_opts or vim.tbl_deep_extend('force', M.top_panel_default_opts, opts)
 end
 
-M.get_file_browser = function(opts)
-  opts = opts or {}
-  opts.borderchars = require('core.state').border_groups.edged_ivy
-  opts.layout_config = { height = 0.6 }
-  extensions.file_browser.file_browser(opts)
-end
-
 M.get_dropdown = function(opts)
-  opts = vim.tbl_deep_extend('force', M.center_layout_opts, opts or {})
+  opts = opts or {}
+  opts.borderchars = state.border_groups.edged_top
+
   return require('telescope.themes').get_dropdown(opts)
 end
 

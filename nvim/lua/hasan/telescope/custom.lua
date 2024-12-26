@@ -10,6 +10,7 @@ local my_theme = require('hasan.telescope.theme')
 local action_set = require('telescope.actions.set')
 local action_state = require('telescope.actions.state')
 local local_action = require('hasan.telescope.local_action')
+local extensions = require('telescope').extensions
 -- local sorters = require 'telescope/sorters'
 
 local conf = require('telescope.config').values
@@ -126,26 +127,17 @@ function M.curbuf(is_visual)
 end
 
 function M.search_nvim_data()
-  my_theme.get_file_browser({
+  extensions.file_browser.file_browser({
     prompt_title = 'Nvim user data',
     cwd = vim.fn.stdpath('data'),
   })
 end
 
 function M.file_browser(dir)
-  my_theme.get_file_browser({
+  extensions.file_browser.file_browser({
     path = dir == 'cur_dir' and vim.fn.expand('%:h') or nil,
     hide_parent_dir = true,
     files = dir == 'cur_dir', -- false: start with all dirs
-    prompt_path = true,
-    previewer = true,
-  })
-end
-
-function M.project_browser()
-  my_theme.get_file_browser({
-    cwd = 'E:\\repoes',
-    hide_parent_dir = true,
     prompt_path = true,
     previewer = true,
   })
@@ -156,7 +148,7 @@ local edit_projects_file = function(prompt_bufnr)
   vim.cmd.split(vim.fn.stdpath('data') .. '/project_nvim/project_history')
 end
 M.projects = function()
-  require('telescope._extensions').manager.projects.projects(my_theme.get_dropdown({
+  extensions.projects.projects(my_theme.get_dropdown({
     attach_mappings = function(_, map)
       map('i', '<C-e>', edit_projects_file)
       map('n', '<C-e>', edit_projects_file)
@@ -191,7 +183,6 @@ M.live_grep_in_folder = function(opts)
         prompt_position = 'top',
         anchor = 'N',
         width = 0.7,
-        -- height = 0.6,
       },
       attach_mappings = function(prompt_bufnr)
         action_set.select:replace(function()
@@ -384,6 +375,24 @@ M.auto_open_qflistt_or_loclist = function()
   vim.cmd([[cclose|lclose]])
   local list_type = win.loclist == 1 and 'loclist' or 'quickfix'
   require('telescope.builtin')[list_type]()
+end
+
+M.find_harpoon_file = function(harpoon_files)
+  local file_paths = {}
+  for _, item in ipairs(harpoon_files.items) do
+    table.insert(file_paths, item.value)
+  end
+
+  require('telescope.pickers')
+    .new(my_theme.get_dropdown({}), {
+      prompt_title = 'Harpoon',
+      finder = require('telescope.finders').new_table({
+        results = file_paths,
+      }),
+      previewer = conf.file_previewer({}),
+      sorter = conf.generic_sorter({}),
+    })
+    :find()
 end
 
 return M

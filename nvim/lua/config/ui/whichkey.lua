@@ -138,7 +138,7 @@ return {
       { '<leader>wO', '<cmd>tabonly<CR><C-l>',  desc = 'Keep only tab' },
 
       { '<leader>wH', '<cmd>wincmd H<CR>', desc = 'Move window far left' },
-      { '<leader>wJ', '<cmd>wincmd J<CR>', desc = 'Move window far fottom' },
+      { '<leader>wJ', '<cmd>wincmd J<CR>', desc = 'Move window far bottom' },
       { '<leader>wK', '<cmd>wincmd K<CR>', desc = 'Move window far top' },
       { '<leader>wL', '<cmd>wincmd L<CR>', desc = 'Move window far right' },
       { '<leader>wr', '<cmd>wincmd r<CR>', desc = 'Rotate window cw' },

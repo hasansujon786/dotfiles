@@ -243,7 +243,7 @@ return {
     { '<leader>u',  function() Snacks.zen.zoom() end, desc = 'Toggle Zoom' },
     { '<leader>vn', function() Snacks.notifier.show_history() end, desc = 'Notification History' },
     { '<leader>x', function() Snacks.scratch() end, desc = 'Toggle Scratch Buffer' },
-    { '<leader>/e', function() Snacks.scratch.select() end, desc = 'Select Scratch Buffer' },
+    { '<leader>/x', function() Snacks.scratch.select() end, desc = 'Select Scratch Buffer' },
     {
       '<leader>N',
       desc = 'Neovim News',

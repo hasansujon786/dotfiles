@@ -178,7 +178,7 @@ return {
   },
   {
     'nvim-treesitter/nvim-treesitter-context',
-    commit = '8fd989b', -- a2a3349,
+    commit = '2bcf700', -- 8fd989b
     enabled = true,
     lazy = true,
     event = 'CursorHold',

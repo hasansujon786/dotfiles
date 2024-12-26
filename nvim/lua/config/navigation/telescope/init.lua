@@ -52,15 +52,20 @@ return {
     { '<leader>pr', '<cmd>lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>', desc = 'Find recent files' },
     { '<leader>pt', '<cmd>lua require("hasan.telescope.custom").search_project_todos()<CR>', desc = 'Search project todos' },
 
-    { '<leader>pb', '<cmd>lua require("hasan.telescope.custom").project_browser()<CR>', desc = 'Browse other projects' },
+    { '<leader>pb', '<cmd>Telescope file_browser cwd=E:\\repoes<CR>', desc = 'Browse other projects' },
     { '<leader>pm', '<cmd>lua require("hasan.telescope.custom").projects()<CR>', desc = 'Switch project' },
-    { '<leader>pp', '<cmd>lua require("telescope._extensions").manager.persisted.persisted()<CR>', desc = 'Show session list' },
+    { '<leader>pp', '<cmd>Telescope persisted<CR>', desc = 'Show session list' },
 
     -- VIM
     { '<leader>v/', '<cmd>Telescope help_tags<CR>', desc = 'Search Vim help' },
     { '<leader>vd', '<cmd>lua require("hasan.telescope.custom").search_nvim_data()<CR>', desc = 'Search nvim data' },
     { '<leader>vj', '<cmd>Telescope jumplist<cr>', desc = 'Search jumplist' },
     { '<leader>vm', '<cmd>Telescope marks<cr>', desc = 'Jump to Marks' },
+
+    -- ORGMODE
+    { '<leader>ng', '<cmd>Telescope live_grep cwd=~/my_vault/orgfiles<CR>', desc = 'Grep org text' },
+    { '<leader>w/', '<cmd>Telescope find_files cwd=~/my_vault/orgfiles<CR>', desc = 'Search org files' },
+    { '<leader>nw', '<cmd>Telescope file_browser cwd=~/my_vault/orgfiles<CR>', desc = 'Browse org files' },
   },
   config = function()
     local Icons = require('hasan.utils.ui.icons')
@@ -68,7 +73,7 @@ return {
     local fb_actions = require('telescope._extensions.file_browser.actions')
     local state = require('core.state')
     local local_action = require('hasan.telescope.local_action')
-    local local_theme = require('hasan.telescope.theme')
+    local my_theme = require('hasan.telescope.theme')
 
     local custom_mappings = {
       ['<M-u>'] = actions.preview_scrolling_up,
@@ -106,9 +111,8 @@ return {
       ['<C-d>'] = false,
     }
 
-    local bordercharsOpt = { borderchars = state.border_groups.edged_top }
-    local get_dropdown = require('telescope.themes').get_dropdown(bordercharsOpt)
-    local get_cursor = require('telescope.themes').get_cursor(bordercharsOpt)
+    local get_dropdown = my_theme.get_dropdown()
+    local get_cursor = require('telescope.themes').get_cursor({ borderchars = state.border_groups.edged_top })
     local get_ivy = require('telescope.themes').get_ivy({ borderchars = state.border_groups.edged_ivy })
 
     require('telescope').setup({
@@ -186,6 +190,8 @@ return {
         project_commands = require('config.navigation.telescope.project_commands'),
         file_browser = {
           theme = 'ivy',
+          borderchars = require('core.state').border_groups.edged_ivy,
+          layout_config = { height = 0.7 },
           cwd_to_path = false,
           grouped = true,
           files = true, -- false: start with all dirs
@@ -238,7 +244,7 @@ return {
       },
     })
     require('telescope').load_extension('fzf')
-    local_theme.setup()
+    my_theme.setup()
 
     -- keymaps
     command('EmojiPicker', function()

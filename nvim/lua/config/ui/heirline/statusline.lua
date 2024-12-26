@@ -134,9 +134,7 @@ return {
     },
     on_click = {
       callback = function()
-        vim.defer_fn(function()
-          vim.cmd('Telescope filetypes theme=get_dropdown')
-        end, 100)
+        vim.cmd('Telescope filetypes')
       end,
       name = 'heirline_Filetype',
     },

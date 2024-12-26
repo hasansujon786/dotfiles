@@ -3,6 +3,7 @@ local keys = {
   { '<leader><tab>', desc = 'Harpoon: Toggle menu' },
   { '[<tab>', desc = 'Harpoon: Prev item' },
   { ']<tab>', desc = 'Harpoon: Next item' },
+  { '<leader>/e', desc = 'Find harpoon files' },
 }
 
 return {
@@ -77,6 +78,7 @@ return {
         end,
       },
     })
+
     local maps = {
       ['<leader>M'] = function()
         local list = harpoon:list():add()
@@ -88,13 +90,22 @@ return {
         vim.notify('File added at index ' .. index, vim.log.levels.INFO, { title = 'harpoon' })
       end,
       ['<leader><tab>'] = function()
-        harpoon.ui:toggle_quick_menu(harpoon:list())
+        harpoon.ui:toggle_quick_menu(harpoon:list(), {
+          title = ' Harpoon ',
+          border = 'rounded',
+          title_pos = 'center',
+          height_in_lines = 12,
+          ui_max_width = 90,
+        })
       end,
       ['[<tab>'] = function()
         harpoon:list():prev()
       end,
       [']<tab>'] = function()
         harpoon:list():next()
+      end,
+      ['<leader>/e'] = function()
+        require('hasan.telescope.custom').find_harpoon_file(harpoon:list())
       end,
     }
 
