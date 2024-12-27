@@ -11,6 +11,7 @@ local action_set = require('telescope.actions.set')
 local action_state = require('telescope.actions.state')
 local local_action = require('hasan.telescope.local_action')
 local extensions = require('telescope').extensions
+local entry_display = require('telescope.pickers.entry_display')
 -- local sorters = require 'telescope/sorters'
 
 local conf = require('telescope.config').values
@@ -378,19 +379,62 @@ M.auto_open_qflistt_or_loclist = function()
 end
 
 M.find_harpoon_file = function(harpoon_files)
-  local file_paths = {}
-  for _, item in ipairs(harpoon_files.items) do
-    table.insert(file_paths, item.value)
+  if type(harpoon_files.items) ~= 'table' or #harpoon_files.items == 0 then
+    vim.notify('No harpoon files found', vim.log.levels.WARN, { title = 'Telescope' })
+  end
+
+  local harpoon_items = {}
+  for index, item in ipairs(harpoon_files.items) do
+    item.index_at = index
+    table.insert(harpoon_items, item)
+  end
+
+  local opts = {}
+  local disable_devicons = opts.disable_devicons
+
+  local original_entry_maker = make_entry.gen_from_string(opts)
+
+  local displayer = entry_display.create({
+    separator = ' ',
+    items = {
+      { width = 2 },
+      { width = 2 },
+      { remaining = true },
+    },
+  })
+
+  local entry_maker = function(item)
+    local original_entry = original_entry_maker(item.value)
+
+    original_entry.display = function(entry)
+      local display_filename, path_style = utils.transform_path(opts, entry.value)
+
+      local icon, hl_group = utils.get_devicons(entry.value, disable_devicons)
+
+      return displayer({
+        { item.index_at, 'TelescopeResultsNumber' },
+        { icon, hl_group },
+        {
+          display_filename,
+          function()
+            return path_style
+          end,
+        },
+      })
+    end
+
+    return original_entry
   end
 
   require('telescope.pickers')
-    .new(my_theme.get_dropdown({}), {
+    .new(my_theme.get_dropdown(opts), {
       prompt_title = 'Harpoon',
       finder = require('telescope.finders').new_table({
-        results = file_paths,
+        results = harpoon_items,
+        entry_maker = entry_maker,
       }),
-      previewer = conf.file_previewer({}),
-      sorter = conf.generic_sorter({}),
+      previewer = conf.file_previewer(opts),
+      sorter = conf.generic_sorter(opts),
     })
     :find()
 end

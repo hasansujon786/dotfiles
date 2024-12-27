@@ -89,7 +89,7 @@ return {
           },
           icons = {
             selected = '➤ ',
-            dir = '  ',
+            dir = '󰝰  ',
             branch = ' ',
           },
         },

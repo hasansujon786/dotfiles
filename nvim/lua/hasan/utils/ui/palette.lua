@@ -92,6 +92,7 @@ local function set_custom_highlights()
     Folded                  = { fg = c.grey, bg = 'none' },
     Visual                  = { bg = c.dim_blue },
 
+    Directory               = { fg = '#8094B4' },
     CursorLineFocus         = { bg = c.bg3 },
     LspInlayHint            = { fg = c.dark_cyan, bg = c.none },
     HeirlineTabActive       = { fg = c.green, bg = c.layer },
@@ -143,6 +144,7 @@ local function set_custom_highlights()
     SnacksIndentScope       = { fg = c.grey },
     SnacksIndent            = { fg = c.bg3 },
     SnacksDim               = { fg = c.bg3 },
+    SnacksNotifierHistoryTitle = { fg = c.grey },
 
     -- /// org ///
     CodeBlock                 = { bg = c.bg_d },
@@ -210,13 +212,13 @@ local function set_custom_highlights()
     FzfLuaFzfMatch          = { bg = 'red' },
 
     -- /// neo-tree.nvim ///
-    NeoTreeDirectoryIcon = { fg = '#8094B4' },
     NeoTreeFileIcon      = { fg = c.muted },
     NeoTreeFloatBorder   = { bg = float_bg, fg = c.cyan },
     NeoTreeFloatTitle    = { bg = c.cyan, fg = float_bg },
     NeoTreeModified      = { link = 'String' },
     NeoTreeMessage       = { link = 'Comment' },
     NeoTreeDimText       = { link = 'Comment' },
+    NeoTreeDirectoryIcon = { link = 'Directory' },
     NeoTreeIndentMarker  = { link = 'SnacksIndent' },
     NeoTreeNormal        = { link = 'SidebarDark' },
     NeoTreeNormalNC      = { link = 'SidebarDark' },
