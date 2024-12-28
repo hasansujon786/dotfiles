@@ -1,12 +1,13 @@
 local wezterm = require('wezterm')
-local events = require('events')
 local colors = require('colors')
+local constants = require('constants')
+local keysmaps = require('keys')
 
 return {
   max_fps = 120,
-  keys = events.keys,
-  mouse_bindings = events.mouse_bindings,
-  key_tables = events.key_tables,
+  keys = keysmaps.keys,
+  mouse_bindings = keysmaps.mouse_bindings,
+  key_tables = keysmaps.key_tables,
   initial_rows = 35,
   initial_cols = 138,
   hide_tab_bar_if_only_one_tab = false,
@@ -57,8 +58,8 @@ return {
   underline_position = '-2pt',
   adjust_window_size_when_changing_font_size = false,
   -- harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }, -- Disable ligatures
-  default_prog = { 'C:\\Program Files\\Git\\bin\\bash.exe' },
-  default_cwd = 'E:\\repoes',
+  default_prog = { constants.bash_path },
+  default_cwd = constants.default_cwd,
   -- default_gui_startup_args = {'start'}
   window_background_opacity = 0.96,
   -- window_background_image = 'C:\\Users\\hasan\\Pictures\\do-more-y3.jpg'
@@ -72,7 +73,7 @@ return {
   pane_focus_follows_mouse = false,
   inactive_pane_hsb = { saturation = 0.9, brightness = 0.8 },
   launch_menu = {
-    { label = 'Git Bash', args = { 'C:\\Program Files\\Git\\bin\\bash.exe' } },
+    { label = 'Git Bash', args = { constants.bash_path } },
     { label = 'PowerShell Core', args = { 'pwsh' } },
     { label = 'Command Prompt', args = { 'cmd' } },
     { label = 'PowerShell', args = { 'powershell.exe', '-NoLogo' } },

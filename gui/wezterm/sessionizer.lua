@@ -69,16 +69,6 @@ err_if_not(fd, 'fd not found')
 
 local git = (file_exists('/Program Files/Git/cmd/git.exe') or file_exists('/usr/bin/git'))
 err_if_not(git, 'git not found')
-
-local srcPath = 'E:/repoes'
--- local srcPath = home .. '/repoes'
-err_if_not(srcPath, srcPath .. ' not found')
-
-local search_folders = {
-  srcPath,
-  -- srcPath .. '/work',
-  -- srcPath .. '/other',
-}
 -------------------------------------------------------
 
 --- Merge numeric tables
@@ -86,33 +76,41 @@ local search_folders = {
 ---@param t2 table
 ---@return table
 local function merge_tables(t1, t2)
-  local result = {}
-  for index, value in ipairs(t1) do
-    result[index] = value
-  end
+  local result = t1
   for index, value in ipairs(t2) do
-    result[#t1 + index] = value
+    result[#result + index] = value
   end
   return result
 end
 
-M.start = function(window, pane)
+M.find_repoes = function(project_dirs, window, pane)
   local projects = {
     { label = 'default', id = 'default' },
   }
 
+  if type(project_dirs) ~= 'table' or #project_dirs == 0 then
+    w.log_error('No projects found')
+    return
+  end
+
+  -- local project_dirs = {
+  --   srcPath,
+  --   -- srcPath .. '/work',
+  --   -- srcPath .. '/other',
+  -- }
+
   -- assumes  ~/src/www, ~/src/work to exist
   -- ~/src
-  --  ├──nushell-config       # toplevel config stuff
+  --  ├──nushell-config        # toplevel config stuff
   --  ├──wezterm-config
-  --  ├──work                    # work stuff
-  --    ├──work/project.git      # git bare clones marked with .git at the end
-  --    ├──work/project-bugfix   # worktree of project.git
-  --    ├──work/project-feature  # worktree of project.git
-  --  │ └───31 unlisted
-  --  └──other                # 3rd party project
+  --  ├──work                  # work stuff
+  --  ├──work/project.git      # git bare clones marked with .git at the end
+  --  ├──work/project-bugfix   # worktree of project.git
+  --  ├──work/project-feature  # worktree of project.git
+  --  └──other                 # 3rd party project
   --     └──103 unlisted
-  local cmd = merge_tables({ fd, '-HI', '-td', '--max-depth=2', '.' }, search_folders)
+
+  local cmd = merge_tables({ fd, '-HI', '-td', '--max-depth=2', '.' }, project_dirs)
   w.log_info('fd cmd: ' .. table.concat(cmd, ' '))
 
   local success, stdout, stderr = w.run_child_process(cmd)
