@@ -1,6 +1,7 @@
 ## dotfiles
 https://github.com/yutkat/dotfiles/blob/main/.config/wezterm/wezterm.lua
 https://gist.github.com/gsuuon/5511f0aa10c10c6cbd762e0b3e596b71
+https://dev.to/lovelindhoni/make-wezterm-mimic-tmux-5893
 
 ## plugins
 - https://github.com/sei40kr/wez-status-generator

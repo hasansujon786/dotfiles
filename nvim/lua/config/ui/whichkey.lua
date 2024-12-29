@@ -45,6 +45,7 @@ return {
 
     -- stylua: ignore
     wk.add({
+      { 'ga', group = 'text-case' },
       { 'gm', group = 'visual-multi' },
       { 'gp', group = 'peek' },
 

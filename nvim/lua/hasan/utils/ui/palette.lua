@@ -103,6 +103,7 @@ local function set_custom_highlights()
     CursorColumn            = { link = 'CursorLineFocus' },
     CurSearch               = { link =  'IncSearch' },
     Conceal                 = { link =  'String' },
+    ['@keyword.function']   = { fg = c.purple, italic = true },
 
     -- /// LSP ///
     LspReferenceText        = { bg = c.dim_green },
@@ -349,7 +350,7 @@ local function set_custom_highlights()
     -- ['@lsp.type.method'] = '@method',
     -- ['@lsp.type.macro'] = '@macro',
     -- ['@lsp.type.decorator'] = '@function',
-    -- ['@lsp.type.keyword'] = '@keyword',
+    ['@keyword.function.lua'] = '@keyword.function',
 
     ['@lsp.mod.readonly'] = '@Constant',
     -- ['@lsp.typemod.variable.readonly'] = '@constant',
