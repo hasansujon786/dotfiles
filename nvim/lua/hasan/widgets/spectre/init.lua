@@ -3,21 +3,12 @@ local n = require('nui-components')
 local Icons = require('hasan.utils.ui.icons')
 local engine = require('hasan.widgets.spectre.engine')
 local search_tree = require('hasan.widgets.spectre.components.search_tree')
+local gap = require('hasan.widgets.spectre.components.gap')
+local constants = require('hasan.widgets.spectre.constants')
 
-local window = {
-  -- blend = 0,
-  highlight = {
-    -- FloatBorder = 'Normal',
-    NormalFloat = 'NuiComponentsNormal',
-    Cursorline = 'None',
-  },
-}
-local info_text_window = {
-  highlight = {
-    NormalFloat = 'NuiComponentsInfo',
-    Cursorline = 'None',
-  },
-}
+local window = constants.hls.window
+local info_text_window = constants.hls.info_text_window
+local popup_options = constants.popup_options
 
 local M = {}
 
@@ -63,7 +54,6 @@ function M.open(opts)
     width = ui_info.width,
     height = ui_info.max_height - 1,
     relative = 'editor',
-    zindex = 10,
     position = { row = 0, col = '100%' },
   })
 
@@ -211,11 +201,11 @@ function M.open(opts)
   M.renderer = renderer
 
   local left_gap = function()
-    return n.gap({ size = 3, window = window })
+    return gap({ size = 3, window = window })
   end
 
   local body = n.rows(
-    n.gap({ size = 1, window = window }),
+    gap({ size = 1, window = window }),
     -- Row 1
     n.columns(
       { size = 3 },
@@ -229,7 +219,7 @@ function M.open(opts)
         on_change = function(is_checked)
           actions.toggle_replace_input(is_checked)
         end,
-      }),
+      }, popup_options),
       n.text_input({
         window = window,
         autofocus = true,
@@ -241,7 +231,7 @@ function M.open(opts)
         on_change = fn.debounce(function(value)
           signal.search_query = value
         end, 400),
-      }),
+      }, popup_options),
       n.checkbox({
         window = window,
         label = 'Aa',
@@ -253,7 +243,7 @@ function M.open(opts)
         on_change = function(is_checked)
           signal.is_match_case_insensitive_checked = is_checked
         end,
-      })
+      }, popup_options)
     ),
     -- Row 2
     n.columns(
@@ -273,7 +263,7 @@ function M.open(opts)
         on_change = fn.debounce(function(value)
           signal.replace_query = value
         end, 400),
-      })
+      }, popup_options)
     ),
     -- Row 3
     n.columns(
@@ -296,13 +286,13 @@ function M.open(opts)
         on_change = fn.debounce(function(value)
           signal.filter_path = value
         end, 400),
-      }),
+      }, popup_options),
       n.text_input({
         window = window,
         size = 1,
         flex = 1,
         max_lines = 1,
-        border_label = 'Directories to include',
+        border_label = 'Files to include',
         -- placeholder = 'lua/, plugin/',
         value = signal.search_paths:map(function(paths)
           return table.concat(paths, ',')
@@ -312,7 +302,7 @@ function M.open(opts)
             return path == ''
           end)
         end, 400),
-      })
+      }, popup_options)
     ),
     -- Row 4
     n.columns(
@@ -327,14 +317,14 @@ function M.open(opts)
         lines = signal.search_info,
         padding = { left = 3 },
         window = info_text_window,
-      }),
-      n.gap({ flex = 1, window = window }),
+      }, popup_options),
+      gap({ flex = 1, window = window }),
       n.paragraph({
         is_focusable = false,
         lines = 'Toggle Case:<A-c>, Replace:<C-t>, Filter:<C-f>',
         padding = { right = 1 },
         window = info_text_window,
-      })
+      }, popup_options)
     ),
     -- Row 5
     search_tree({
@@ -348,7 +338,7 @@ function M.open(opts)
       exit_zoom = actions.exit_zoom,
       insert_search_input = actions.insert_search_input,
     })
-    -- n.gap(1),
+    -- gap(1),
     -- n.columns(
     --   {
     --     size = 1,
@@ -358,7 +348,7 @@ function M.open(opts)
     --       }
     --     end
     --   },
-    --   n.gap({flex = 1}),
+    --  gap({flex = 1}),
     --   n.button(
     --     {
     --       label = "Replace All",
@@ -366,7 +356,7 @@ function M.open(opts)
     --       end
     --     }
     --   ),
-    --   n.gap(1),
+    --   gap(1),
     --   n.button(
     --     {
     --       label = "Clear",

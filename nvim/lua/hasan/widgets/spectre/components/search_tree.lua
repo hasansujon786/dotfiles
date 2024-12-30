@@ -2,6 +2,10 @@ local fn = require('utils.fn')
 local n = require('nui-components')
 local Icons = require('hasan.utils.ui.icons')
 local engine = require('hasan.widgets.spectre.engine')
+local constants = require('hasan.widgets.spectre.constants')
+
+local popup_options = constants.popup_options
+local window = constants.hls.window
 
 local function mappings(search_query, replace_query, insert_search_input)
   local is_replace_processing = false
@@ -149,10 +153,10 @@ local function search_tree(props)
     mappings = mappings(props.search_query, props.replace_query, props.insert_search_input),
     prepare_node = prepare_node,
     on_select = on_select(props.origin_winid, props.exit_zoom),
-    window = { highlight = { NormalFloat = 'NuiComponentsNormal', Cursorline = 'None' } },
-  })
+    window = window,
+  }, popup_options)
   -- This hl appear on tree focus
-  vim.api.nvim_set_hl(tree._private.namespace, 'NormalFloat', { link = 'NuiComponentsNormal' })
+  vim.api.nvim_set_hl(tree._private.namespace, 'NormalFloat', { link = window.highlight.NormalFloat })
   return tree
 end
 
