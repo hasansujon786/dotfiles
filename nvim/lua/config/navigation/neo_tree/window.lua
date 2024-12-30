@@ -2,22 +2,22 @@ local function show_copy_options(state)
   local tree_util = require('config.navigation.neo_tree.util')
   local options = {
     {
-      label = 'Copy the file path',
       key = 'c',
+      label = 'Copy file path',
       action = function()
         tree_util.copy_path(state)
       end,
     },
     {
-      label = 'Copy the filename',
       key = 'f',
+      label = 'Copy filename',
       action = function()
         tree_util.copy_path(state, ':t')
       end,
     },
     {
-      label = 'Copy the relative path',
       key = 'r',
+      label = 'Copy relative path',
       action = function()
         tree_util.copy_path(state, ':.')
       end,
@@ -56,8 +56,8 @@ return {
     ['S'] = 'open_split',
     -- ['w'] = 'open_with_window_picker', 'split_with_window_picker', 'vsplit_with_window_picker',
     ['P'] = { 'toggle_preview', config = { use_float = true } },
-    ['x'] = 'close_node',
-    ['X'] = 'close_all_nodes',
+    ['h'] = 'close_node',
+    ['H'] = 'close_all_nodes',
     ['W'] = 'close_all_nodes',
     ['zr'] = 'expand_all_nodes',
     ['zR'] = 'expand_all_nodes',
@@ -75,9 +75,10 @@ return {
     ['<C-x>'] = 'cut_to_clipboard',
     ['<C-c>'] = 'copy_to_clipboard',
     ['<C-v>'] = 'paste_from_clipboard',
-    ['d'] = 'cut_to_clipboard',
+    ['x'] = 'cut_to_clipboard',
     ['y'] = 'copy_to_clipboard',
     ['p'] = 'paste_from_clipboard',
+    ['d'] = 'delete',
     ['D'] = 'delete',
     ['<delete>'] = 'delete',
     -- ['c'] = { 'copy', config = { show_path = 'none' } }, -- "none", "relative", "absolute"
@@ -87,7 +88,7 @@ return {
       function(state)
         require('config.navigation.neo_tree.util').copy_path(state, ':t')
       end,
-      desc = 'Copy the filename',
+      desc = 'Copy filename',
     },
 
     ['[['] = 'prev_source',

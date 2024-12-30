@@ -1,18 +1,18 @@
-local engine = require('hasan.widgets.spectre.engine')
 local fn = require('utils.fn')
 local n = require('nui-components')
 local Icons = require('hasan.utils.ui.icons')
+local engine = require('hasan.widgets.spectre.engine')
 local search_tree = require('hasan.widgets.spectre.components.search_tree')
 
 local window = {
   -- blend = 0,
   highlight = {
     -- FloatBorder = 'Normal',
-    NormalFloat = 'SidebarDark',
+    NormalFloat = 'NuiComponentsNormal',
     Cursorline = 'None',
   },
 }
-local info_window = {
+local info_text_window = {
   highlight = {
     NormalFloat = 'NuiComponentsInfo',
     Cursorline = 'None',
@@ -55,17 +55,19 @@ function M.open(opts)
   end
 
   local ui_info = {
-    width = vim.o.columns,
-    height = vim.o.lines,
+    max_width = vim.o.columns,
+    max_height = vim.o.lines,
+    width = math.floor(vim.o.columns / 2),
   }
-
   local renderer = n.create_renderer({
-    width = math.min(100, ui_info.width),
-    height = ui_info.height - 1,
+    width = ui_info.width,
+    height = ui_info.max_height - 1,
     relative = 'editor',
+    zindex = 10,
     position = { row = 0, col = '100%' },
   })
 
+  local is_replace_processing = false
   local signal = n.create_signal({
     search_query = opts.search_text,
     replace_query = opts.replace_text,
@@ -101,18 +103,21 @@ function M.open(opts)
   end)
 
   local function move_cursor_to_eol()
-    if vim.api.nvim_get_mode().mode == 'n' then
-      feedkeys('A')
-    end
+    vim.cmd('startinsert!')
   end
+
   local actions = {
+    insert_search_input = function()
+      renderer:get_component_by_id('search_query'):focus()
+    end,
     toggle_replace_input = function(is_replace_focus)
+      is_replace_focus = is_replace_focus or not signal.is_replace_field_visible:get_value()
       signal.is_replace_field_visible = is_replace_focus
 
       local next_input = renderer:get_component_by_id(is_replace_focus and 'replace_query' or 'search_query')
       renderer:schedule(function()
         next_input:focus()
-        vim.defer_fn(move_cursor_to_eol, 120)
+        vim.defer_fn(move_cursor_to_eol, 300)
       end)
     end,
     toggle_filter_input = function()
@@ -122,54 +127,74 @@ function M.open(opts)
       local next_input = renderer:get_component_by_id(is_checked and 'filter_path' or 'search_query')
       renderer:schedule(function()
         next_input:focus()
-        vim.defer_fn(move_cursor_to_eol, 120)
+        vim.defer_fn(move_cursor_to_eol, 300)
       end)
+    end,
+    close = function()
+      renderer:close()
+    end,
+    replace_all = function()
+      if is_replace_processing then
+        vim.notify('Spectre is already running', vim.log.levels.WARN, { title = 'Spectre' })
+        return
+      end
+
+      local search_query = signal.search_query:get_value()
+      local replace_query = signal.replace_query:get_value()
+      if not search_query or search_query == '' then
+        return
+      end
+
+      local tree = renderer:get_component_by_id('search_tree'):get_tree()
+      if not tree then
+        vim.notify('There is no item to replace', vim.log.levels.INFO, { title = 'Spectre' })
+        return
+      end
+      local tree_nodes = tree:get_nodes()
+      if not tree_nodes or #tree_nodes == 0 then
+        vim.notify('There is no item to replace', vim.log.levels.INFO, { title = 'Spectre' })
+        return
+      end
+      is_replace_processing = true
+
+      for _, file_node in ipairs(tree_nodes) do
+        local text_nodes = tree:get_nodes(file_node:get_id())
+        engine.run_replace(text_nodes, tree, search_query, replace_query)
+      end
+      vim.schedule(vim.cmd.checktime)
+      is_replace_processing = false
+    end,
+    toggle_zoom = function()
+      local cur_width = renderer:get_size().width
+      if ui_info.max_width > cur_width then
+        renderer:set_size({ width = ui_info.max_width })
+      else
+        renderer:set_size({ width = ui_info.width })
+      end
+    end,
+    exit_zoom = function()
+      local cur_width = renderer:get_size().width
+      if cur_width ~= ui_info.width then
+        renderer:set_size({ width = ui_info.width })
+      end
+    end,
+    toggle_case = function()
+      signal.is_match_case_insensitive_checked = not signal.is_match_case_insensitive_checked:get_value()
     end,
   }
 
   renderer:add_mappings({
-    {
-      mode = { 'n' },
-      key = '<leader>q',
-      handler = function()
-        renderer:close()
-      end,
-    },
-    {
-      mode = { 'n' },
-      key = '|',
-      handler = function()
-        local width = renderer:get_size().width
-        if ui_info.width > width then
-          renderer:set_size({ width = ui_info.width })
-        else
-          renderer:set_size({ width = math.min(100, ui_info.width) })
-        end
-      end,
-    },
-    {
-      mode = { 'n', 'i' },
-      key = '<A-c>',
-      handler = function()
-        signal.is_match_case_insensitive_checked = not signal.is_match_case_insensitive_checked:get_value()
-      end,
-    },
-    {
-      mode = { 'n', 'i' },
-      key = '<C-f>',
-      handler = actions.toggle_filter_input,
-    },
-    {
-      mode = { 'n', 'i' },
-      key = '<C-t>',
-      handler = function()
-        local is_visible = not signal.is_replace_field_visible:get_value()
-        actions.toggle_replace_input(is_visible)
-      end,
-    },
+    { key = 'q', handler = actions.close, mode = { 'n' } },
+    { key = '<leader>q', handler = actions.close, mode = { 'n' } },
+    { key = 'R', handler = actions.replace_all, mode = { 'n' } },
+    { key = '|', handler = actions.toggle_zoom, mode = { 'n' } },
+    { key = '<A-c>', handler = actions.toggle_case, mode = { 'n', 'i' } },
+    { key = '<C-f>', handler = actions.toggle_filter_input, mode = { 'n', 'i' } },
+    { key = '<C-t>', handler = actions.toggle_replace_input, mode = { 'n', 'i' } },
   })
 
   renderer:on_mount(function()
+    -- Initialise search only if char length is greater than 2
     if opts.search_text == '' or #opts.search_text <= 2 then
       return
     end
@@ -178,6 +203,7 @@ function M.open(opts)
     engine.search(curr, signal)
   end)
   renderer:on_unmount(function()
+    vim.api.nvim_set_current_win(renderer:get_origin_winid())
     subscription:unsubscribe()
     M.renderer = nil
   end)
@@ -189,6 +215,7 @@ function M.open(opts)
   end
 
   local body = n.rows(
+    n.gap({ size = 1, window = window }),
     -- Row 1
     n.columns(
       { size = 3 },
@@ -214,13 +241,6 @@ function M.open(opts)
         on_change = fn.debounce(function(value)
           signal.search_query = value
         end, 400),
-        -- window = {
-        --   blend = 0,
-        --   highlight = {
-        --     FloatBorder = 'Normal',
-        --     NormalFloat = 'String',
-        --   },
-        -- },
       }),
       n.checkbox({
         window = window,
@@ -306,14 +326,14 @@ function M.open(opts)
         is_focusable = false,
         lines = signal.search_info,
         padding = { left = 3 },
-        window = info_window,
+        window = info_text_window,
       }),
       n.gap({ flex = 1, window = window }),
       n.paragraph({
         is_focusable = false,
         lines = 'Toggle Case:<A-c>, Replace:<C-t>, Filter:<C-f>',
         padding = { right = 1 },
-        window = info_window,
+        window = info_text_window,
       })
     ),
     -- Row 5
@@ -325,6 +345,8 @@ function M.open(opts)
       hidden = signal.search_results:map(function(value)
         return #value == 0
       end),
+      exit_zoom = actions.exit_zoom,
+      insert_search_input = actions.insert_search_input,
     })
     -- n.gap(1),
     -- n.columns(
@@ -356,7 +378,11 @@ function M.open(opts)
   )
 
   renderer:render(body)
-  renderer.layout._.float.win_options = { winblend = 0, winhighlight = 'Normal:None' }
+  -- change canvas transparent
+  renderer.layout._.float.win_options = {
+    winblend = 0,
+    winhighlight = 'Normal:NuiComponentsNormal',
+  }
 end
 
 return M

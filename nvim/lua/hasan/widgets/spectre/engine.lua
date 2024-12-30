@@ -4,7 +4,6 @@ local spectre_state_utils = require('spectre.state_utils')
 local spectre_utils = require('spectre.utils')
 
 local Tree = require('nui.tree')
-
 local fn = require('utils.fn')
 
 local M = {}
@@ -107,6 +106,39 @@ function M.search(options, signal)
       search_paths = #options.search_paths > 0 and options.search_paths or nil,
     })
   end)
+end
+
+local function replace_handler(tree, node)
+  return {
+    on_done = function(result)
+      if result.ref then
+        node.ref = result.ref
+        tree:render()
+      end
+    end,
+    on_error = function(_) end,
+  }
+end
+
+M.run_replace = function(entries, tree, search_query, replace_query)
+  local replacer_creator = spectre_state_utils.get_replace_creator()
+
+  for _, text_node in ipairs(entries) do
+    local replacer =
+      replacer_creator:new(spectre_state_utils.get_replace_engine_config(), replace_handler(tree, text_node))
+
+    local entry = text_node.entry
+
+    replacer:replace({
+      lnum = entry.lnum,
+      col = entry.col,
+      cwd = vim.fn.getcwd(),
+      display_lnum = 0,
+      filename = entry.filename,
+      search_text = search_query,
+      replace_text = replace_query,
+    })
+  end
 end
 
 return M

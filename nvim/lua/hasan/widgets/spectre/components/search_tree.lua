@@ -1,57 +1,28 @@
 local fn = require('utils.fn')
 local n = require('nui-components')
 local Icons = require('hasan.utils.ui.icons')
+local engine = require('hasan.widgets.spectre.engine')
 
-local function replace_handler(tree, node)
-  return {
-    on_done = function(result)
-      if result.ref then
-        node.ref = result.ref
-        tree:render()
-      end
-    end,
-    on_error = function(_) end,
-  }
-end
-
-local function run_replace(entries, tree, search_query, replace_query, replacer_creator, spectre_state_utils)
-  for _, text_node in ipairs(entries) do
-    local replacer =
-      replacer_creator:new(spectre_state_utils.get_replace_engine_config(), replace_handler(tree, text_node))
-
-    local entry = text_node.entry
-
-    replacer:replace({
-      lnum = entry.lnum,
-      col = entry.col,
-      cwd = vim.fn.getcwd(),
-      display_lnum = 0,
-      filename = entry.filename,
-      search_text = search_query,
-      replace_text = replace_query,
-    })
-  end
-end
-
-local function mappings(search_query, replace_query)
-  local spectre_state_utils = require('spectre.state_utils')
-  local is_running = false
+local function mappings(search_query, replace_query, insert_search_input)
+  local is_replace_processing = false
 
   return function(component)
     return {
+      { key = 'i', handler = insert_search_input, mode = { 'n' } },
       {
         mode = { 'n' },
         key = 'r',
         handler = function()
-          if is_running == true then
+          if is_replace_processing then
             print('it is already running')
             return
           end
-          is_running = true
+          is_replace_processing = true
 
           local tree = component:get_tree()
           local focused_node = component:get_focused_node()
           if not focused_node then
+            is_replace_processing = false
             return
           end
 
@@ -64,47 +35,13 @@ local function mappings(search_query, replace_query)
             entries = { focused_node }
           end
           if not entries then
+            is_replace_processing = false
             return
           end
 
-          local replacer_creator = spectre_state_utils.get_replace_creator()
-          run_replace(
-            entries,
-            tree,
-            search_query:get_value(),
-            replace_query:get_value(),
-            replacer_creator,
-            spectre_state_utils
-          )
-          is_running = false
-        end,
-      },
-      {
-        mode = { 'n' },
-        key = 'R',
-        handler = function()
-          if is_running == true then
-            print('it is already running')
-            return
-          end
-          is_running = true
-
-          local tree = component:get_tree()
-          local replacer_creator = spectre_state_utils.get_replace_creator()
-
-          for _, file_node in ipairs(tree:get_nodes()) do
-            local text_nodes = tree:get_nodes(file_node:get_id())
-
-            run_replace(
-              text_nodes,
-              tree,
-              search_query:get_value(),
-              replace_query:get_value(),
-              replacer_creator,
-              spectre_state_utils
-            )
-            is_running = false
-          end
+          engine.run_replace(entries, tree, search_query:get_value(), replace_query:get_value())
+          vim.schedule(vim.cmd.checktime)
+          is_replace_processing = false
         end,
       },
     }
@@ -171,7 +108,7 @@ local function prepare_node(node, line, component)
   return line
 end
 
-local function on_select(origin_winid)
+local function on_select(origin_winid, exit_zoom)
   return function(node, component)
     local tree = component:get_tree()
 
@@ -189,28 +126,33 @@ local function on_select(origin_winid)
 
     if vim.api.nvim_win_is_valid(origin_winid) then
       local escaped_filename = vim.fn.fnameescape(entry.filename)
-
       vim.api.nvim_set_current_win(origin_winid)
       vim.api.nvim_command([[execute "normal! m` "]])
-      vim.cmd('e ' .. escaped_filename)
+      vim.cmd.edit(escaped_filename)
       vim.api.nvim_win_set_cursor(0, { entry.lnum, entry.col - 1 })
+
+      if type(exit_zoom) == 'function' then
+        vim.schedule(exit_zoom)
+      end
     end
   end
 end
 
 local function search_tree(props)
   local tree = n.tree({
+    id = 'search_tree',
     border_style = 'none',
     flex = 1,
     padding = { left = 1, right = 1 },
     hidden = props.hidden,
     data = props.data,
-    mappings = mappings(props.search_query, props.replace_query),
+    mappings = mappings(props.search_query, props.replace_query, props.insert_search_input),
     prepare_node = prepare_node,
-    on_select = on_select(props.origin_winid),
-    window = { highlight = { NormalFloat = 'SidebarDark', Cursorline = 'None' } },
+    on_select = on_select(props.origin_winid, props.exit_zoom),
+    window = { highlight = { NormalFloat = 'NuiComponentsNormal', Cursorline = 'None' } },
   })
-  vim.api.nvim_set_hl(tree._private.namespace, 'NormalFloat', { link = 'SidebarDark' })
+  -- This hl appear on tree focus
+  vim.api.nvim_set_hl(tree._private.namespace, 'NormalFloat', { link = 'NuiComponentsNormal' })
   return tree
 end
 

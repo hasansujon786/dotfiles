@@ -281,15 +281,16 @@ local function set_custom_highlights()
     NuiComponentsCheckboxLabelChecked      = { fg = c.yellow },
     NuiComponentsCheckboxIconChecked       = { fg =  c.yellow },
 
-    NuiComponentsTreeNodeFocused           = { link = 'Visual' },
-    NuiComponentsInfo                      = { fg = c.grey, bg = c.bg_d2 },
+    NuiComponentsNormal                    = { link = 'SidebarDark' },
+    NuiComponentsInfo                      = { fg = c.grey, bg = c.bg_d },
     NuiComponentsTreeSpectreIcon           = { fg = c.grey },
-    NuiComponentsTreeSpectreSearchValue    = { link = 'Search' },
-    NuiComponentsTreeSpectreSearchOldValue = { link = 'Search' },
-    NuiComponentsTreeSpectreSearchNewValue = { link = 'IncSearch' },
+    NuiComponentsTreeSpectreSearchValue    = { bg =  c.layer  },
+    NuiComponentsTreeSpectreSearchOldValue = { fg = c.fg, bg = '#501b20', strikethrough = true },
+    NuiComponentsTreeSpectreSearchNewValue = { fg = c.fg, bg = '#003e4a' },
     NuiComponentsTreeSpectreReplaceSuccess = { link = 'String' },
     NuiComponentsTreeSpectreCodeLine       = { fg = c.none },
     NuiComponentsTreeSpectreFileName       = { fg = c.purple },
+    NuiComponentsTreeNodeFocused           = { link = 'CursorLine' },
 
     -- /// Floaterm ///
     FloatermBorder = { link = 'Comment' },
