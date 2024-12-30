@@ -209,6 +209,10 @@ function M.get_visual_selection()
   end
   lines[#lines] = string.sub(lines[#lines], 0, end_pos[2] + plusEnd)
   lines[1] = string.sub(lines[1], start_pos[2] + plusStart, string.len(lines[1]))
+
+  if type(lines) == 'string' then
+    return lines
+  end
   return table.concat(lines, '')
 end
 

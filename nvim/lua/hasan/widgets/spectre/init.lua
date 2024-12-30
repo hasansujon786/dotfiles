@@ -14,11 +14,7 @@ local M = {}
 
 M.open_visual = function(opts)
   opts = opts or {}
-  if opts.select_word then
-    opts.search_text = vim.fn.expand('<cword>')
-  else
-    opts.search_text = require('hasan.utils').get_visual_selection()
-  end
+  opts.search_text = require('hasan.utils').get_visual_selection()
   M.open(opts)
 end
 
@@ -34,6 +30,9 @@ function M.open(opts)
     search_paths = {},
   }, opts or {})
 
+  if opts.select_word then
+    opts.search_text = vim.fn.expand('<cword>')
+  end
   if opts.current_file then
     local file_path = vim.fn.fnameescape(vim.fn.expand('%:p:.'))
     if vim.loop.os_uname().sysname == 'Windows_NT' then
