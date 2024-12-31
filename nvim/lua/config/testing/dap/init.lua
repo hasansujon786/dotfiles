@@ -5,9 +5,9 @@ local Icons = require('hasan.utils.ui.icons').Other
 
 local function configure_debuggers()
   local dap = require('dap')
-  require('config.dap.typescript').setup(dap)
-  -- require('config.dap.node').setup(dap)
-  -- require('config.dap.lua').setup()
+  require('config.testing.dap.typescript').setup(dap)
+  -- require('config.testing.dap.node').setup(dap)
+  -- require('config.testing.dap.lua').setup()
 end
 
 return {
@@ -15,7 +15,7 @@ return {
   lazy = true,
   module = 'dap',
   config = function()
-    require('config.dap.keymaps').setup()
+    require('config.testing.dap.keymaps').setup()
     require('dap').set_log_level('TRACE') --TRACE DEBUG INFO WARN ERROR
     configure_debuggers()
   end,
@@ -97,9 +97,9 @@ return {
         -- Dap sign icons
         local dap_sign = {
           stopped = { text = '', texthl = 'Number', numhl = 'Number', linehl = 'DapCursorLine' },
-          breakpoint = { text = '', texthl = 'RedText', numhl = '', linehl = '' },
-          bcondition = { text = '', texthl = 'RedText', numhl = '', linehl = '' },
-          rejected = { text = '', texthl = 'MutedText', numhl = '', linehl = '' },
+          breakpoint = { text = '●', texthl = 'RedText', numhl = '', linehl = '' },
+          bcondition = { text = '◉', texthl = 'RedText', numhl = '', linehl = '' },
+          rejected = { text = '○', texthl = 'MutedText', numhl = '', linehl = '' },
         }
         vim.fn.sign_define('DapStopped', dap_sign.stopped)
         vim.fn.sign_define('DapBreakpoint', dap_sign.breakpoint)

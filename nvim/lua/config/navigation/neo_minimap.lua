@@ -153,4 +153,3 @@ return {
     vim.cmd([[doautocmd BufEnter]])
   end,
 }
-

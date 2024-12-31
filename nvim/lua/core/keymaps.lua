@@ -12,7 +12,8 @@ keymap(nx, '<CR>', ':<up>', { silent = false, desc = 'Run last command easily' }
 keymap(nx, '<leader><cr>', 'q:', { silent = false, desc = 'Open command history' })
 
 -- Center window on insert
-require('hasan.utils.ui.center_cursor').attach_mappings()
+require('hasan.center_cursor').attach_mappings()
+require('hasan.pseudo-text-objects')
 
 for _, mode in ipairs(nx) do
   nvim_set_keymap(mode, 'n', 'nzz', noSilent)
@@ -108,7 +109,8 @@ if not vim.g.vscode then
   end
 
   -- Fold
-  keymap('n', 'z.', ':%foldclose<CR>')
+  nvim_set_keymap('n', 'zuu', 'vai:foldclose!<CR>zazz', { silent = true, desc = 'Fold under cursor' })
+  keymap('n', 'z.', ':%foldclose<CR>', { desc = 'Fold all buf' })
   keymap('n', '<tab>', 'za')
   keymap('n', '<s-tab>', 'zA')
 

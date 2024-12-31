@@ -89,7 +89,7 @@ local function set_custom_highlights()
     FloatBorderFlat         = { fg = dark_border, bg = float_bg },
     FloatBorderFlatHidden   = { fg = float_bg, bg = float_bg },
     SidebarDark             = { fg = c.fg, bg = c.bg_d },
-    Folded                  = { fg = c.grey, bg = 'none' },
+    Folded                  = { fg = c.fg, bg = 'none' },
     Visual                  = { bg = c.dim_blue },
 
     Directory               = { fg = '#8094B4' },

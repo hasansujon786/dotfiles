@@ -21,6 +21,7 @@ return {
 
     -- LSP
     { 'go', '<cmd>lua require("hasan.telescope.lsp").prettyTreesitter({ show_line = true })<CR>', desc = 'Lsp: Document symbols' },
+    { 'gO', '<cmd>lua require("hasan.telescope.lsp").prettyDocumentSymbols({ symbols={"function"} })<CR>', desc = 'Lsp: Document symbols' },
     { '<leader>ar', '<cmd>lua require("hasan.telescope.custom").references()<cr>', desc = 'Lsp: Preview references' },
 
     -- GIT
