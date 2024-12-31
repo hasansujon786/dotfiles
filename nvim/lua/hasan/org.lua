@@ -2,9 +2,9 @@ local utils = require('hasan.utils')
 local roam = require('org-roam')
 local Layout = require('nui.layout')
 local Popup = require('nui.popup')
-local event = require('nui.utils.autocmd').event
+-- local event = require('nui.utils.autocmd').event
+
 local api = vim.api
-local opt = vim.opt
 if package.loaded['nvim-treesitter'] == nil then
   vim.cmd([[Lazy load nvim-treesitter]])
 end
@@ -12,16 +12,46 @@ end
 local M = {}
 
 ---------------- Org float state --------------------
-local last_layout = nil
-local last_main_pop = nil
-local last_bufnr = 0
-_G.org_onWinResized = nil
+local org_win_options = {
+  winbar = '',
+  number = true,
+  relativenumber = true,
+  numberwidth = 3,
+  signcolumn = 'yes',
+  statuscolumn = "%!v:lua.require'snacks.statuscolumn'.get()",
+  winhighlight = 'Normal:Normal,FloatBorder:WinSeparator',
+  winblend = 0,
+  -- winhighlight = 'Normal:Normal,FloatBorder:WinSeparator,Folded:OrgHeadlineLevel1',
+}
+local org_home_path = org_root_path .. '/home.org'
 
-local fn = {
+_G.org_on_VimResized = nil
+local state = {
+  layout = nil,
+  win_pop = nil,
+  win_bufnr = nil,
+}
+
+local org_utils = {
   ---@param file string
   ---@param cmd? "split"|"vsplit"|"edit"
   open_file = function(file, cmd)
     vim.cmd({ cmd = cmd or 'edit', args = { file }, bang = true })
+  end,
+  add_file_to_buflist = function(filename)
+    local set_position = false
+    filename = vim.fn.fnameescape(filename)
+    local bufnr = vim.fn.bufnr(filename)
+
+    if bufnr == -1 then
+      set_position = true
+      bufnr = vim.fn.bufnr(filename, true)
+    end
+    if not api.nvim_buf_is_loaded(bufnr) then
+      vim.fn.bufload(bufnr)
+      api.nvim_set_option_value('buflisted', true, { buf = bufnr })
+    end
+    return bufnr, set_position
   end,
   set_winbar = function()
     vim.wo.winbar = '%{%v:lua.require("hasan.org").winbar()%}'
@@ -29,19 +59,20 @@ local fn = {
   is_cur_win_org_float = function()
     return utils.is_floating_win(0) and vim.bo.filetype == 'org'
   end,
-  remove_autocmds = function()
-    if last_layout then
-      last_layout:unmount()
+  unmount_win = function()
+    if state.layout then
+      state.layout:unmount()
     end
-    last_layout = nil
-    _G.org_onWinResized = nil
+    state.win_pop = nil
+    state.layout = nil
+    _G.org_on_VimResized = nil
     vim.cmd([[
       augroup OrgFloatWin
         au!
       augroup END
       ]])
   end,
-  get_popup = function(fullscreen)
+  create_popup = function(bufnr, title)
     local pop_config = {
       side = {
         border = 'none',
@@ -50,13 +81,16 @@ local fn = {
         win_options = { winhighlight = 'Normal:Normal' },
       },
       main = {
-        -- bufnr = vim.api.nvim_get_current_buf(),
-        bufnr = last_bufnr,
+        bufnr = bufnr,
         zindex = 49,
         relative = 'editor',
         enter = true,
         focusable = true,
-        border = { style = { '│', ' ', '│', '│', '│', ' ', '│', '│' } },
+        border = {
+          text = { top = title },
+          style = { '│', ' ', '│', '│', '│', ' ', '│', '│' },
+        },
+        win_options = org_win_options,
         -- position = {
         --   row = '40%',
         --   col = '50%',
@@ -66,15 +100,6 @@ local fn = {
         --   height = '70%',
         -- },
         -- buf_options = { modifiable = true, readonly = false, },
-        win_options = {
-          number = true,
-          relativenumber = true,
-          signcolumn = 'yes',
-          numberwidth = 2,
-          concealcursor = 'nc',
-          conceallevel = 2,
-          winhighlight = 'Normal:Normal,FloatBorder:ZenBorder,Folded:OrgHeadlineLevel1',
-        },
       },
     }
 
@@ -84,11 +109,12 @@ local fn = {
     -- end
 
     local pop_left, pop_right = Popup(pop_config.side), Popup(pop_config.side)
-    local panes = {
-      Layout.Box(pop_left, { size = '14%' }),
-      Layout.Box(pop_main, { size = '74%' }),
-      Layout.Box(pop_right, { size = '13%' }),
-    }
+    local panes = Layout.Box({
+      Layout.Box(pop_left, { size = '15%' }),
+      Layout.Box(pop_main, { size = '70%' }),
+      Layout.Box(pop_right, { size = '16%' }),
+    }, { dir = 'row' })
+
     local layout = Layout({
       relative = 'editor',
       position = {
@@ -97,23 +123,19 @@ local fn = {
       },
       size = {
         width = '100%',
-        height = vim.o.cmdheight == 0 and '98%' or '96%',
+        height = vim.o.lines - 1,
       },
-    }, Layout.Box(panes, { dir = 'row' }))
+    }, panes)
 
-    _G.org_onWinResized = function()
+    _G.org_on_VimResized = function()
       layout:update(Layout.Box(panes, { dir = 'row' }))
-      vim.defer_fn(function()
-        M.onOrgWinEnter()
-      end, 50)
     end
 
     return layout, pop_main
   end,
-  -- get_title_text = function(bufnr)
-  --   local text = vim.fn.fnamemodify(api.nvim_buf_get_name(bufnr), ':t')
-  --   return Text(text, 'DiagnosticHint')
-  -- end
+  get_title_text = function(bufnr)
+    return vim.fn.fnamemodify(api.nvim_buf_get_name(bufnr), ':t')
+  end,
 }
 
 local function capture_project_file(title, config_file_exists, config_file)
@@ -136,7 +158,7 @@ local function capture_project_file(title, config_file_exists, config_file)
       if id then
         roam.database:get(id):next(function(new_node)
           if new_node then
-            fn.open_file(new_node.file, 'vsplit')
+            org_utils.open_file(new_node.file, 'vsplit')
             -- create config
             if not config_file_exists then
               config_file:touch()
@@ -155,7 +177,7 @@ local function capture_project_file(title, config_file_exists, config_file)
 end
 
 function M.open_org_home()
-  fn.open_file(org_home_path)
+  org_utils.open_file(org_home_path)
 end
 
 function M.open_org_project()
@@ -169,7 +191,7 @@ function M.open_org_project()
     if json and json.id then
       roam.database:get(json.id):next(function(node)
         if node then
-          fn.open_file(node.file, 'vsplit')
+          org_utils.open_file(node.file, 'vsplit')
         elseif not node then
           vim.notify('No file found with follwing Id', vim.log.levels.ERROR, { title = 'org-roam' })
           local title = vim.fn.fnamemodify(cwd, ':t')
@@ -185,81 +207,66 @@ function M.open_org_project()
   end
 end
 
-function M.open_org_float()
-  -- get the bufnr if the buffer was cleared from buflist
-  if last_bufnr == 0 or vim.fn.bufexists(last_bufnr) == 0 then
-    last_bufnr = vim.fn.bufadd(_G.org_home_path)
-  end
-  fn.remove_autocmds()
-  local layout, pop_main = fn.get_popup(false)
+function M.open_org_float(filename)
+  org_utils.unmount_win()
 
+  local bufnr
+  if state.win_bufnr == nil then
+    bufnr = require('hasan.utils.buffer').add_file_to_buflist(filename or org_home_path)
+  else
+    bufnr = state.win_bufnr
+  end
+
+  local layout, pop_main = org_utils.create_popup(bufnr, org_utils.get_title_text(bufnr))
+  -- pop_main:map('n', '<leader>q', org_utils.unmount_win, {})
+
+  layout._.float.win_options = { winblend = 0, winhighlight = 'Normal:Normal' }
   layout:mount()
+
   require('hasan.utils.win').restore_cussor_pos()
-  fn.set_winbar()
-  if vim.bo.filetype == '' then
-    vim.bo.filetype = 'org'
-  end
-
-  pop_main:on({ event.WinLeave }, function()
-    vim.schedule(function()
-      if utils.is_floating_win(0) then
-        return
-      end
-
-      fn.remove_autocmds()
-    end)
-  end)
-  -- end, { once = true })
 
   vim.cmd([[
     augroup OrgFloatWin
       au!
-      au WinEnter,BufWinEnter,BufEnter *.org lua require('hasan.org').onOrgWinEnter()
-      au VimResized * lua _G.org_onWinResized()
+      au WinEnter,BufWinEnter,BufEnter *.org lua require('hasan.org').org_on_WinEnter()
+      au WinLeave *.org lua require('hasan.org').org_on_WinLeave()
+      au VimResized * lua _G.org_on_VimResized()
     augroup END
     ]])
 
-  pop_main:map('n', '<leader>u', fn.remove_autocmds, {})
-  pop_main:map('n', '<leader>q', fn.remove_autocmds, {})
-
-  -- vim.api.nvim_buf_set_lines(popup.bufnr, 0, 1, false, { 'Hello World' })
-  return layout, pop_main
+  state = { layout = layout, win_pop = pop_main, win_bufnr = bufnr }
 end
 
 function M.toggle_org_float()
-  if fn.is_cur_win_org_float() or last_layout ~= nil then
-    fn.remove_autocmds()
+  if org_utils.is_cur_win_org_float() or state.layout ~= nil then
+    org_utils.unmount_win()
   else
-    last_layout, last_main_pop = M.open_org_float()
+    M.open_org_float()
   end
 end
 
--- autocmd({ 'BufWinEnter', 'WinEnter' }, function()
---   vim.defer_fn(function()
---     vim.wo.winhighlight = 'Normal:Normal,FloatBorder:ZenBorder,Folded:OrgHeadlineLevel1'
---   end, 1)
--- end, { pattern = '*.org' })
+-- keymap('n', '<leader>e', M.toggle_org_float)
 
-function M.onOrgWinEnter()
-  if fn.is_cur_win_org_float() then
-    last_bufnr = api.nvim_get_current_buf()
-    fn.set_winbar()
-    -- last_pop.border:set_text('top', get_title_text(last_bufnr), 'center')
+function M.org_on_WinEnter()
+  if org_utils.is_cur_win_org_float() and state.win_pop ~= nil then
+    local bufnr = api.nvim_get_current_buf()
+    state.win_pop.border:set_text('top', org_utils.get_title_text(bufnr), 'center')
 
-    opt.number = true
-    opt.relativenumber = true
-    opt.signcolumn = 'yes'
-    opt.numberwidth = 2
+    for key, value in pairs(org_win_options) do
+      vim.wo[key] = value
+    end
+    state.win_bufnr = bufnr
   end
 end
 
-function M.winbar()
-  local title = vim.fn.fnamemodify(api.nvim_buf_get_name(0), ':t')
-  local width = vim.api.nvim_win_get_width(0)
-  local pad = (width / 2) - (string.len(title) / 2)
-  local color = vim.bo.modified and '%#TSRed#' or '%#DiagnosticHint#'
-
-  return string.format('%s%s%s', string.rep(' ', pad), color, title)
+function M.org_on_WinLeave()
+  vim.schedule(function()
+    -- don't close for float win like Telescope, Diagnostic etc.
+    if utils.is_floating_win(0) then
+      return
+    end
+    org_utils.unmount_win()
+  end)
 end
 
 -- ------------------------------------------------
@@ -271,7 +278,7 @@ function M.create_link()
 
   vim.schedule(function()
     local line = string.format('[[%s][]]', link)
-    vim.api.nvim_put({ line }, 'v', true, true)
+    api.nvim_put({ line }, 'v', true, true)
 
     local pos = api.nvim_win_get_cursor(0)
     pos[2] = pos[2] - 1
@@ -287,7 +294,7 @@ function M.create_link_visual()
 
   vim.schedule(function()
     local line = string.format('[[%s][%s]]', full_link, partial_link)
-    vim.api.nvim_put({ line }, 'v', true, true)
+    api.nvim_put({ line }, 'v', true, true)
   end)
 end
 

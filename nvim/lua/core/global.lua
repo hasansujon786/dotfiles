@@ -6,8 +6,7 @@ _G.has_pvim = os.getenv('PVIM') and true or false
 _G.dap_adapter_path = data_path .. '/dap_adapters' -- 'C:\\Users\\hasan\\AppData\\Local\\nvim-data\\dap_adapters\\'
 _G.plugin_path = data_path .. '/lazy'
 _G.path_mason = data_path .. '/mason'
-_G.org_root_path = '~/my_vault/orgfiles'
-_G.org_home_path = org_root_path .. '/home.org'
+_G.org_root_path = vim.fn.expand('~/my_vault/orgfiles')
 
 P = function(...)
   local hasNvim9 = vim.fn.has('nvim-0.9') == 1

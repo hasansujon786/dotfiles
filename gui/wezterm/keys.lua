@@ -42,7 +42,7 @@ return {
     },
     { key = 'F11', action = wezterm.action_callback(events.toggle_full_screen) },
     { key = 'l', mods = 'SHIFT|CTRL', action = wezterm.action_callback(events.toggle_quick_pane) },
-    { key = ',', mods = 'ALT', action = 'ShowTabNavigator' },
+    -- { key = ',', mods = 'ALT', action = 'ShowTabNavigator' },
     { key = 'r', mods = 'CTRL|SHIFT', action = wezterm.action_callback(wezterm.reload_configuration) },
     { key = 't', mods = 'SHIFT|ALT', action = act({ EmitEvent = 'toggle-tab-bar' }) },
     { key = 'w', mods = 'SHIFT|CTRL', action = act({ CloseCurrentPane = { confirm = false } }) },

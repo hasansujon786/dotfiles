@@ -26,7 +26,7 @@ return {
     ft = { 'org' },
     module = 'orgmode',
     keys = {
-      -- { '<leader>e', '<cmd>lua require("hasan.org").toggle_org_float()<CR>', desc = 'Toggle org float' },
+      { '<leader>e', '<cmd>lua require("hasan.org").toggle_org_float()<CR>', desc = 'Toggle org float' },
       { '<leader>oh', '<cmd>lua require("hasan.org").open_org_home("-tabedit")<CR>', desc = 'Open org home' },
       { '<leader>oH', '<cmd>lua require("hasan.org").open_org_project()<CR>', desc = 'Open current project' },
 

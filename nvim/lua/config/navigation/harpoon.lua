@@ -46,18 +46,7 @@ return {
             return
           end
 
-          local bufnr = vim.fn.bufnr(list_item.value)
-          local set_position = false
-          if bufnr == -1 then
-            set_position = true
-            bufnr = vim.fn.bufnr(list_item.value, true)
-          end
-          if not vim.api.nvim_buf_is_loaded(bufnr) then
-            vim.fn.bufload(bufnr)
-            vim.api.nvim_set_option_value('buflisted', true, {
-              buf = bufnr,
-            })
-          end
+          local bufnr, set_position = require('hasan.utils.buffer').add_file_to_buflist(list_item.value)
 
           if options.vsplit then
             vim.cmd('vsplit')
