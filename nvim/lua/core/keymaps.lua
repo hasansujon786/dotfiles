@@ -110,6 +110,7 @@ if not vim.g.vscode then
 
   -- Fold
   nvim_set_keymap('n', 'zuu', 'vai:foldclose!<CR>zazz', { silent = true, desc = 'Fold under cursor' })
+  nvim_set_keymap('x', 'zu', ':foldclose!<CR>zazz', { silent = true, desc = 'Fold under cursor' })
   keymap('n', 'z.', ':%foldclose<CR>', { desc = 'Fold all buf' })
   keymap('n', '<tab>', 'za')
   keymap('n', '<s-tab>', 'zA')
@@ -163,12 +164,12 @@ if not vim.g.vscode then
   -- keymap(nx, 'gh', '<cmd>!wezterm cli activate-tab --tab-relative -1<CR>')
 
   -- Quickfix list
-  keymap('n', ']a', ':lnext<CR>')
-  keymap('n', '[a', ':lprev<CR>')
-  keymap('n', ']q', ':cnext<CR>')
-  keymap('n', '[q', ':cprev<CR>')
-  keymap('n', ']Q', ':clast<CR>')
-  keymap('n', '[Q', ':cfirst<CR>')
+  -- keymap('n', ']l', ':lnext<CR>')
+  -- keymap('n', '[l', ':lprev<CR>')
+  -- keymap('n', ']q', ':cnext<CR>')
+  -- keymap('n', '[q', ':cprev<CR>')
+  -- keymap('n', ']Q', ':clast<CR>')
+  -- keymap('n', '[Q', ':cfirst<CR>')
 
   -- Insert mode ----------------------------------
   -- keymap(ic, 'jk', '<ESC>') -- Use jk to return to normal mode

@@ -3,14 +3,6 @@ local nx, nxo = { 'n', 'x' }, { 'n', 'x', 'o' }
 return {
   -- require("hasan.neo_glance")
   {
-    'jinh0/eyeliner.nvim',
-    keys = { { 'f', mode = nxo }, { 'F', mode = nxo }, { 't', mode = nxo }, { 'T', mode = nxo } },
-    opts = {
-      dim = false,
-      highlight_on_key = true,
-    },
-  },
-  {
     'max397574/better-escape.nvim',
     lazy = true,
     event = { 'InsertEnter', 'CmdlineEnter' },

@@ -35,6 +35,12 @@ M.diagnostic_goto = function(next, severity)
     go({ severity = severity, float = { prefix = diagnostic_prefix } })
   end
 end
+-- keymap('n', ']d', require('config.lsp.util.diagnosgic').diagnostic_goto(true), desc('Lsp: Next diagnosgic'))
+-- keymap('n', '[d', require('config.lsp.util.diagnosgic').diagnostic_goto(false), desc('Lsp: Prev diagnosgic'))
+-- keymap('n', ']E', require('config.lsp.util.diagnosgic').diagnostic_goto(true, 'ERROR'), desc('Lsp: Next Error'))
+-- keymap('n', '[E', require('config.lsp.util.diagnosgic').diagnostic_goto(false, 'ERROR'), desc('Lsp: Prev Error'))
+-- keymap('n', ']w', require('config.lsp.util.diagnosgic').diagnostic_goto(true, 'WARN'), desc('Lsp: Next Warning'))
+-- keymap('n', '[w', require('config.lsp.util.diagnosgic').diagnostic_goto(false, 'WARN'), desc('Lsp: Prev Warning'))
 
 function M.setup()
   for icon_type, _ in pairs(diagnotic_icons) do
