@@ -92,7 +92,7 @@ local function set_custom_highlights()
     Folded                  = { fg = c.fg, bg = 'none' },
     Visual                  = { bg = c.dim_blue },
 
-    Directory               = { fg = '#8094B4' },
+    DirectoryIcon           = { fg = '#8094B4' },
     CursorLineFocus         = { bg = c.bg3 },
     LspInlayHint            = { fg = c.dark_cyan, bg = c.none },
     HeirlineTabActive       = { fg = c.green, bg = c.layer },
@@ -204,6 +204,7 @@ local function set_custom_highlights()
     TelescopeBorder         = { link = 'FloatBorderFlat' },
     TelescopeNormal         = { link = 'NormalFloatFlat' },
     TelescopeSelection      = { link = 'Cursorline' },
+    PersistedTelescopeDir   = { link = 'DirectoryIcon' },
 
     -- /// FzfLua ///
     FzfLuaBorder            = { fg = c.grey },
@@ -219,7 +220,7 @@ local function set_custom_highlights()
     NeoTreeModified      = { link = 'String' },
     NeoTreeMessage       = { link = 'Comment' },
     NeoTreeDimText       = { link = 'Comment' },
-    NeoTreeDirectoryIcon = { link = 'Directory' },
+    NeoTreeDirectoryIcon = { link = 'DirectoryIcon' },
     NeoTreeIndentMarker  = { link = 'SnacksIndent' },
     NeoTreeNormal        = { link = 'SidebarDark' },
     NeoTreeNormalNC      = { link = 'SidebarDark' },

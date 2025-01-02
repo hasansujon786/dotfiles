@@ -6,7 +6,7 @@
   },
   "defer": {
     "prefix": "defer",
-    "body": "vim.defer_fn(function()\n  ${1:-- Do something here}${0}\nend, ${1:1000})",
+    "body": "vim.defer_fn(function()\n  ${0}\nend, ${1:1000})",
     "description": "Defers calling {fn} until {timeout} ms passes"
   }
 }

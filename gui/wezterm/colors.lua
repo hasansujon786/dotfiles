@@ -11,6 +11,7 @@ M.window_frame = {
   -- inactive_titlebar_bg = '#1E1C1C',
   inactive_titlebar_bg = '#242A37',
   active_titlebar_bg = '#242A37',
+  font_size = 12,
 }
 
 M.one_half = {
