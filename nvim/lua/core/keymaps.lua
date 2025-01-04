@@ -126,7 +126,8 @@ if not vim.g.vscode then
   keymap('n', 'H', 'H:exec "norm! ". &scrolloff . "k"<cr>') -- jump in file
   keymap('n', 'L', 'L:exec "norm! ". &scrolloff . "j"<cr>')
 
-  keymap('n', '<BS>', '<c-^>')
+  keymap(nx, '<BS>', '<c-^>')
+  keymap(nx, 'g<BS>', '<c-w><c-p>')
 
   -- Vertical scrolling
   local scroll_maps = {

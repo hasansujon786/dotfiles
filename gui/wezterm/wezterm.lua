@@ -71,7 +71,7 @@ return {
   leader = { key = 'b', mods = 'CTRL', timeout_milliseconds = 1000 },
   window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
   pane_focus_follows_mouse = false,
-  inactive_pane_hsb = { saturation = 0.9, brightness = 0.8 },
+  inactive_pane_hsb = { brightness = 0.8 },
   launch_menu = {
     { label = 'Git Bash', args = { constants.bash_path } },
     { label = 'PowerShell Core', args = { 'pwsh' } },
