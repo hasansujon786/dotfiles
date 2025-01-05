@@ -81,6 +81,9 @@ local executors = {
     return results
   end,
   javascript = M.create_system_executor('node'),
+  js = 'javascript',
+  typescript = M.create_system_executor('node'),
+  ts = 'typescript',
 }
 
 local float_win = nil
@@ -177,7 +180,8 @@ local show_result = function(result, language, parent)
 end
 
 local function get_executor(language)
-  return executors[language]
+  local found_exct = executors[language]
+  return type(found_exct) == 'string' and executors[found_exct] or found_exct
 end
 
 M.execute = function()

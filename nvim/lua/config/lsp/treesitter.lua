@@ -184,7 +184,7 @@ return {
     event = 'CursorHold',
     keys = {
       {
-        'gG',
+        'g{',
         function()
           require('treesitter-context').go_to_context(vim.v.count1)
         end,

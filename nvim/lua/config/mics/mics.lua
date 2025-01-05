@@ -11,8 +11,8 @@ return {
       mappings = {
         i = { j = { k = '<Esc>', j = false } },
         c = { j = { k = '<Esc>', j = false } },
-        t = { j = { k = '<Esc>', j = false } },
         s = { j = { k = '<Esc>' } },
+        t = { j = { k = false } },
         v = { j = { k = false } },
       },
     },
