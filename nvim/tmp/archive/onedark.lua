@@ -6,7 +6,7 @@ return {
   config = function()
     require('onedark').setup({
       style = 'cool',
-      transparent = state.theme.bg_tranparent,
+      transparent = require('core.state').theme.transparency,
       term_colors = false,
       toggle_style_key = '<leader>tB',
       toggle_style_list = { 'light', 'cool', 'deep', 'dark', 'darker' },

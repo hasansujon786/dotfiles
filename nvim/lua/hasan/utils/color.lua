@@ -1,20 +1,26 @@
 local cmd = vim.cmd
 local M = {}
 
-M.toggle_bg_tranparent = function()
-  local hl_normal = vim.g.onedark_theme_colors.dark_vivid.normal
-  -- Transparent values
-  local sed_cmd_val = '5s/false/true/'
-  local highlights = {
-    Normal = { bg = 'none', fg = hl_normal.fg },
-  }
+---Toggle background transparency
+---@param auto_follow_state boolean
+M.toggle_transparency = function(auto_follow_state)
+  local theme = require('core.state').theme
+  local is_transparent = not theme.transparency
+  if auto_follow_state then
+    is_transparent = theme.transparency
+  end
 
-  if state.theme.bg_tranparent then
+  local hl_normal = vim.g.onedark_theme_colors.dark_vivid.normal
+
+  local sed_cmd_val, highlights
+  if is_transparent then
+    -- Transparent values
+    sed_cmd_val = '4s/false/true/'
+    highlights = { Normal = { bg = 'none', fg = hl_normal.fg } }
+  else
     -- Non-transparent values
-    sed_cmd_val = '5s/true/false/'
-    highlights = {
-      Normal = { bg = hl_normal.bg, fg = hl_normal.fg },
-    }
+    sed_cmd_val = '4s/true/false/'
+    highlights = { Normal = { bg = hl_normal.bg, fg = hl_normal.fg } }
   end
 
   -- Update highlights
@@ -22,9 +28,13 @@ M.toggle_bg_tranparent = function()
     vim.api.nvim_set_hl(0, name, val)
   end
 
+  -- Don't update state.lua
+  if auto_follow_state then
+    return
+  end
   -- Update sate file with sed
   local statePath = vim.fs.normalize(require('hasan.utils.file').config_root() .. '/lua/core/state.lua')
-  state.theme.bg_tranparent = not state.theme.bg_tranparent
+  require('core.state').theme.transparency = is_transparent
   cmd(string.format("silent !sed -i '%s' %s", sed_cmd_val, statePath))
   require('hasan.utils.ui.palette').set_custom_highlights()
 end

@@ -47,7 +47,8 @@ end
 return {
   reload_lua_modules = reload_lua_modules,
   reload_app_state = function()
-    require('hasan.utils.color').toggle_bg_tranparent()
+    require('hasan.utils.color').toggle_transparency(true)
     require('hasan.utils.ui.palette').set_custom_highlights()
+    vim.notify('Config reloaded', vim.log.levels.INFO)
   end,
 }

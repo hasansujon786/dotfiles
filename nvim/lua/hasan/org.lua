@@ -223,7 +223,7 @@ function M.open_org_float(filename)
   layout._.float.win_options = { winblend = 0, winhighlight = 'Normal:Normal' }
   layout:mount()
 
-  require('hasan.utils.win').restore_cussor_pos()
+  require('hasan.utils.win').restore_cussor_pos({ buf = bufnr })
 
   vim.cmd([[
     augroup OrgFloatWin

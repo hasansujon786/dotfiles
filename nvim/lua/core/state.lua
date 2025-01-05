@@ -1,16 +1,12 @@
 local M = {}
 
-_G.state = {
-  theme = {
-    bg_tranparent = true,
-  },
-  file = {
-    auto_format = false, -- Auto format with null-ls
-  },
-  treesitter = {
-    auto_conceal_html_class = true,
-    enabled_context = true,
-  },
+M.theme = {
+  transparency = true,
+}
+
+M.treesitter = {
+  auto_conceal_html_class = true,
+  enabled_context = true,
 }
 
 M.ui = {

@@ -60,7 +60,7 @@ return {
 
           if set_position then
             -- vim.api.nvim_win_set_cursor(0, { list_item.context.row or 1, list_item.context.col or 0, })
-            require('hasan.utils.win').restore_cussor_pos()
+            require('hasan.utils.win').restore_cussor_pos({ buf = bufnr })
           end
 
           Extensions.extensions:emit(Extensions.event_names.NAVIGATE, { buffer = bufnr })

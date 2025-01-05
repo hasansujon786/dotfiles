@@ -290,10 +290,10 @@ return {
         Snacks.toggle({
           name = 'Transparency',
           get = function()
-            return state.theme.bg_tranparent
+            return require('core.state').theme.transparency
           end,
-          set = function(state)
-            require('hasan.utils.color').toggle_bg_tranparent()
+          set = function(_)
+            require('hasan.utils.color').toggle_transparency(false)
           end,
         }):map('<leader>tb')
 

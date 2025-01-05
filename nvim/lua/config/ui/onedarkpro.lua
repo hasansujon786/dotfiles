@@ -92,8 +92,8 @@ return {
       },
       options = {
         cursorline = true,
-        transparency = state.theme.bg_tranparent,
-        terminal_colors = true,
+        transparency = require('core.state').theme.transparency,
+        terminal_colors = false,
         highlight_inactive_windows = false,
       },
     })

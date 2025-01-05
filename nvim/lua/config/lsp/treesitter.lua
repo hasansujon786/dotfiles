@@ -207,7 +207,7 @@ return {
       }):map('<leader>t.')
 
       return {
-        enable = state.treesitter.enabled_context, -- Enable this plugin (Can be enabled/disabled later via commands)
+        enable = require('core.state').treesitter.enabled_context, -- Enable this plugin (Can be enabled/disabled later via commands)
         max_lines = 5, -- How many lines the window should span. Values <= 0 mean no limit.
         min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
         line_numbers = true,
