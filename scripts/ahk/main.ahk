@@ -26,7 +26,26 @@ PrintScreen::Send("#+{s}")
 #q::select_playback_device()
 #^+v::open_mic_panel()
 #;::SendInput("{AppsKey}")
-;Transparency toggle,
+#k::toggleKanata()
+ih := InputHook("B L1 T1", "{Esc}")
+*CapsLock::{
+	ih.Start()
+	reason := ih.Wait()
+	if (reason = "Stopped") {
+		; Send "{Esc}"
+    alternateTab()
+	} else if (reason = "Max") {
+		Send "{Blind}{Ctrl down}" ih.Input
+	}
+}
+*CapsLock up::{
+	if (ih.InProgress) {
+		ih.Stop()
+	} else {
+		Send "{Ctrl up}"
+	}
+}
+; Transparency toggle,
 #^/::toggleTransparency()
 #^.::increaseTransparency()
 #^,::decreaseTransparency()
