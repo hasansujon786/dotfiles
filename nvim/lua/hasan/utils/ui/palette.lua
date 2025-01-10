@@ -268,8 +268,9 @@ local function set_custom_highlights()
     CmpItemKindSnippet    = { fg = c.bg_blue },
 
     -- /// blink.cmp ///
-    BlinkCmpMenuSelection = { bg = c.bg3 },
+    BlinkCmpMenuSelection   = { bg = c.bg3 },
     BlinkCmpLabelDeprecated = { link = 'CmpItemAbbrDeprecated' },
+    BlinkCmpGhostText       = { fg = c.muted },
 
     -- /// nui.nvim ///
     NuiNormalFloat = { link = 'Normal' },

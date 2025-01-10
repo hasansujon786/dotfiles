@@ -1,8 +1,21 @@
 return {
   'hrsh7th/nvim-cmp',
   lazy = true,
-  enabled = false,
+  enabled = require('core.state').completion.module == 'cmp',
   event = { 'InsertEnter', 'CmdlineEnter' },
+  dependencies = {
+    'rafamadriz/friendly-snippets',
+    'windwp/nvim-autopairs',
+    'L3MON4D3/LuaSnip',
+    'mattn/emmet-vim',
+    -- completion sources
+    'f3fora/cmp-spell',
+    'hrsh7th/cmp-path',
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-nvim-lsp',
+    'saadparwaiz1/cmp_luasnip',
+    -- { 'hrsh7th/cmp-nvim-lsp', lazy = true, module = 'cmp_nvim_lsp' },
+  },
   config = function()
     local cmp = require('cmp')
     local compare = require('cmp.config.compare')
@@ -249,43 +262,6 @@ return {
       },
     })
 
-    augroup('CMP_AUGROUP')(function(autocmd)
-      autocmd('FileType', 'lua CmpOrgmodeSetup()', { pattern = { 'org' } })
-      autocmd('FileType', 'lua CmpNeogitCommitMessageSetup()', { pattern = { 'NeogitCommitMessage' } })
-    end)
-
-    -- function CmpNeogitCommitMessageSetup()
-    --   require('cmp').setup.buffer {
-    --     enabled = true,
-    --     sources = {
-    --       { name = 'luasnip' },
-    --       { name = 'spell' },
-    --       { name = 'buffer',
-    --         option = {
-    --           get_bufnrs = function()
-    --             return vim.api.nvim_list_bufs()
-    --           end,
-    --         },
-    --       },
-    --     },
-    --   }
-    -- end
-
-    -- lua << EOF
-    -- function CmpOrgmodeSetup()
-    --   require('cmp').setup.buffer {
-    --     enabled = true,
-    --     sources = {
-    --       { name = 'orgmode' },
-    --       { name = 'luasnip' },
-    --       { name = 'spell' },
-    --       { name = 'buffer'},
-    --       { name = 'path' },
-    --     },
-    --   }
-    -- end
-    -- EOF
-
     -- hot fix: after using / <tab> completion stops working
     keymap('c', '<tab>', '<C-z>', { silent = false })
     cmp.setup.cmdline({ '/', '?' }, {
@@ -318,17 +294,41 @@ return {
         end,
       },
     })
+
+    function CmpNeogitCommitMessageSetup()
+      require('cmp').setup.buffer({
+        enabled = true,
+        sources = {
+          { name = 'luasnip' },
+          { name = 'spell' },
+          {
+            name = 'buffer',
+            option = {
+              get_bufnrs = function()
+                return vim.api.nvim_list_bufs()
+              end,
+            },
+          },
+        },
+      })
+    end
+
+    function CmpOrgmodeSetup()
+      require('cmp').setup.buffer({
+        enabled = true,
+        sources = {
+          { name = 'orgmode' },
+          { name = 'luasnip' },
+          { name = 'spell' },
+          { name = 'buffer' },
+          { name = 'path' },
+        },
+      })
+    end
+
+    augroup('CMP_AUGROUP')(function(autocmd)
+      autocmd('FileType', 'lua CmpOrgmodeSetup()', { pattern = { 'org' } })
+      autocmd('FileType', 'lua CmpNeogitCommitMessageSetup()', { pattern = { 'NeogitCommitMessage' } })
+    end)
   end,
-  dependencies = {
-    'windwp/nvim-autopairs',
-    'mattn/emmet-vim',
-    'L3MON4D3/LuaSnip',
-    -- completion sources
-    'f3fora/cmp-spell',
-    'hrsh7th/cmp-path',
-    'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-nvim-lsp',
-    'saadparwaiz1/cmp_luasnip',
-    -- { 'hrsh7th/cmp-nvim-lsp', lazy = true, module = 'cmp_nvim_lsp' },
-  },
 }

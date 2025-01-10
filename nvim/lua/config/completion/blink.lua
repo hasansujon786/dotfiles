@@ -13,13 +13,13 @@ end
 return {
   'saghen/blink.cmp',
   version = '*',
-  enabled = true,
+  enabled = require('core.state').completion.module == 'blink',
   event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
     'rafamadriz/friendly-snippets',
     'windwp/nvim-autopairs',
-    'mattn/emmet-vim',
     -- 'L3MON4D3/LuaSnip',
+    'mattn/emmet-vim',
   },
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
@@ -85,7 +85,7 @@ return {
     },
 
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer' }, -- 'luasnip'
+      default = { 'lsp', 'path', 'snippets', 'buffer' },
       -- per_filetype = {},
       cmdline = function()
         local type = vim.fn.getcmdtype()
@@ -102,7 +102,7 @@ return {
       providers = {
         path = { name = ' ', score_offset = 110 },
         lsp = { name = ' ', score_offset = 100 },
-        luasnip = { name = ' ', score_offset = 90 },
+        -- luasnip = { name = ' ', score_offset = 90 },
         snippets = { name = ' ', score_offset = 80 },
         buffer = { name = ' ', score_offset = 70, min_keyword_length = 2 },
         -- cmdline = { name = ' ' },
@@ -110,14 +110,20 @@ return {
     },
 
     completion = {
+      ghost_text = { enabled = true },
       accept = {
         auto_brackets = { enabled = true }, -- experimental auto-brackets support
       },
       trigger = { show_in_snippet = true },
       list = {
-        selection = function(ctx)
-          return ctx.mode == 'cmdline' and 'auto_insert' or 'preselect'
-        end,
+        selection = {
+          auto_insert = function(ctx)
+            return ctx.mode == 'cmdline'
+          end,
+          preselect = function(ctx)
+            return ctx.mode ~= 'cmdline'
+          end,
+        },
       },
       menu = {
         enabled = true,

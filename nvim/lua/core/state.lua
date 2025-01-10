@@ -9,6 +9,10 @@ M.treesitter = {
   enabled_context = true,
 }
 
+M.completion = {
+  module = 'blink',
+}
+
 M.ui = {
   border = {
     style = 'rounded',

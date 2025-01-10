@@ -59,7 +59,7 @@ return {
   adjust_window_size_when_changing_font_size = false,
   -- harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }, -- Disable ligatures
   default_prog = { constants.bash_path },
-  default_cwd = constants.default_cwd,
+  -- default_cwd = constants.default_cwd,
   -- default_gui_startup_args = {'start'}
   window_background_opacity = 0.96,
   -- window_background_image = 'C:\\Users\\hasan\\Pictures\\do-more-y3.jpg'
