@@ -133,7 +133,6 @@ return {
         min_width = 52,
         max_height = vim.o.pumheight,
         border = 'none',
-        winhighlight = 'Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None',
         draw = {
           align_to = 'cursor',
           padding = 1,
@@ -163,16 +162,15 @@ return {
           max_width = 70,
           max_height = 20,
           border = hover.border,
-          winhighlight = hover.winhighlight, -- 'Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,CursorLine:BlinkCmpDocCursorLine,Search:None',
           scrollbar = true,
-          direction_priority = { menu_north = { 'w', 'e' }, menu_south = { 'w', 'e' } },
+          direction_priority = { menu_north = { 'e', 'w' }, menu_south = { 'e', 'w' } },
         },
       },
     },
 
     -- signature = { enabled = true, window = { border = 'single' } },
     appearance = {
-      use_nvim_cmp_as_default = true, -- use cmp's highlights
+      use_nvim_cmp_as_default = false, -- use cmp's highlights
       nerd_font_variant = 'normal',
       kind_icons = require('hasan.utils.ui.icons').kind,
     },

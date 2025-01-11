@@ -105,6 +105,11 @@ local function set_custom_highlights()
     Conceal                 = { link =  'String' },
     ['@keyword.function']   = { fg = c.purple, italic = true },
 
+    PmenuSel              = { bg = c.bg3 },
+    PmenuSbar             = { bg = c.bg1 },
+    PmenuThumb            = { bg = '#404959' },
+    Pmenu                 = { link = 'NormalFloatFlat' },
+
     -- /// LSP ///
     LspReferenceText        = { bg = c.dim_green },
     LspReferenceRead        = { bg = c.dim_green },
@@ -236,10 +241,6 @@ local function set_custom_highlights()
     QuickFixHeaderSoft   = { link = 'qfSeparator' },
 
     -- /// nvim-cmp ///
-    Pmenu                 = { link = 'NormalFloatFlat' },
-    PmenuSel              = { bg = c.blue, fg = c.bg0 },
-    PmenuSbar             = { bg = c.bg1 },
-    PmenuThumb            = { bg = '#404959' },
     CmpBorder             = { fg = dark_border, bg = float_bg },
     CmpItemMenu           = { fg = c.grey },
     CmpItemAbbrMatchFuzzy = { fg = c.orange, underline = true },
@@ -268,9 +269,37 @@ local function set_custom_highlights()
     CmpItemKindSnippet    = { fg = c.bg_blue },
 
     -- /// blink.cmp ///
-    BlinkCmpMenuSelection   = { bg = c.bg3 },
-    BlinkCmpLabelDeprecated = { link = 'CmpItemAbbrDeprecated' },
-    BlinkCmpGhostText       = { fg = c.muted },
+    BlinkCmpGhostText         = { fg = c.muted },
+    BlinkCmpLabel             = { fg = c.fg },
+    BlinkCmpLabelMatch        = { fg = c.orange },
+    BlinkCmpLabelDeprecated   = { fg = c.muted, strikethrough = true },
+    BlinkCmpSource            = { fg = c.grey },
+    BlinkCmpMenuBorder        = { link = 'FloatBorderFlat' },
+    BlinkCmpDoc               = { link = 'BlinkCmpMenu' },
+    BlinkCmpDocBorder         = { link = 'BlinkCmpMenuBorder' },
+
+    BlinkCmpKindFunction      = { fg = c.purple },
+    BlinkCmpKindVariable      = { fg = c.blue },
+    BlinkCmpKindConstructor   = { fg = c.yellow },
+    BlinkCmpKindText          = { fg = c.bg_blue },
+    BlinkCmpKindProperty      = { fg = c.light_grey },
+    BlinkCmpKindMethod        = { link = 'BlinkCmpKindFunction' },
+    BlinkCmpKindModule        = { link = 'BlinkCmpKindFunction' },
+    BlinkCmpKindKeyword       = { link = 'BlinkCmpKindFunction' },
+    BlinkCmpKindField         = { link = 'BlinkCmpKindVariable' },
+    BlinkCmpKindFile          = { link = 'BlinkCmpKindVariable' },
+    BlinkCmpKindInterface     = { link = 'BlinkCmpKindVariable' },
+    BlinkCmpKindClass         = { link = 'BlinkCmpKindConstructor' },
+    BlinkCmpKindEvent         = { link = 'BlinkCmpKindConstructor' },
+    BlinkCmpKindStruct        = { link = 'BlinkCmpKindConstructor' },
+    BlinkCmpKindEnum          = { link = 'BlinkCmpKindConstructor' },
+    BlinkCmpKindEnumMember    = { link = 'BlinkCmpKindConstructor' },
+    BlinkCmpKindValue         = { link = 'BlinkCmpKindConstructor' },
+    BlinkCmpKindConstant      = { link = 'BlinkCmpKindProperty' },
+    BlinkCmpKindTypeParameter = { link = 'BlinkCmpKindProperty' },
+    BlinkCmpKindUnit          = { link = 'BlinkCmpKindProperty' },
+    BlinkCmpKindOperator      = { link = 'BlinkCmpKindProperty' },
+    BlinkCmpKindSnippet       = { link = 'BlinkCmpKindText' },
 
     -- /// nui.nvim ///
     NuiNormalFloat = { link = 'Normal' },
