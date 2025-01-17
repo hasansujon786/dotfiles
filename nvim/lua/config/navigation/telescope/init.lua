@@ -1,7 +1,7 @@
 return {
   'nvim-telescope/telescope.nvim',
   lazy = true,
-  enablea = true,
+  enabled = false,
   cmd = 'Telescope',
   -- event = 'VeryLazy',
   -- stylua: ignore

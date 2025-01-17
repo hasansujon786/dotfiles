@@ -39,7 +39,7 @@ ls.add_snippets('javascript', {
         rep(1),
         c(2, { i(1, 'num'), sn(1, { i(1, 'arr'), t('.length') }) }),
         rep(1),
-        i(3, '// TODO:'),
+        i(3, '// TODO'),
         i(4),
       }
     )

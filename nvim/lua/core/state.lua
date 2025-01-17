@@ -10,7 +10,7 @@ M.treesitter = {
 }
 
 M.completion = {
-  module = 'blink',
+  module = 'cmp',
 }
 
 M.ui = {

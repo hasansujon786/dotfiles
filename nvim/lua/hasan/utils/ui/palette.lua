@@ -150,7 +150,7 @@ local function set_custom_highlights()
     SnacksIndentScope       = { fg = c.grey },
     SnacksIndent            = { fg = c.bg3 },
     SnacksDim               = { fg = c.bg3 },
-    SnacksNotifierHistoryTitle = { fg = c.grey },
+    SnacksNotifierHistoryTitle = { fg = c.orange, underline = true },
 
     -- /// org ///
     CodeBlock                 = { bg = c.bg_d },
@@ -210,6 +210,13 @@ local function set_custom_highlights()
     TelescopeNormal         = { link = 'NormalFloatFlat' },
     TelescopeSelection      = { link = 'Cursorline' },
     PersistedTelescopeDir   = { link = 'DirectoryIcon' },
+
+    SnacksPicker            = { link = 'NormalFloatFlat' },
+    SnacksPickerBorder      = { link = 'FloatBorderFlat' },
+    SnacksPickerTitle       = { fg = c.dark_orange, bg = dark_border },
+    SnacksPickerPrompt      = { fg = c.green },
+    SnacksPickerMatch       = { fg = c.orange },
+    SnacksPickerListCursorLine  = { link = 'CursorLine' },
 
     -- /// FzfLua ///
     FzfLuaBorder            = { fg = c.grey },
