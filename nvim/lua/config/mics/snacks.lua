@@ -310,9 +310,47 @@ return {
           filename_first = true, -- display filename before the file path
         },
       },
+      actions = {
+        fedit = function(picker, item)
+          picker:close()
+          if not item or item.file == nil then
+            return
+          end
+
+          -- FIXME: do not kill buffer if it is opend before
+          require('hasan.float').fedit(item.file)
+        end,
+        quicklook = function(_, item)
+          if not item or item._path == nil then
+            return
+          end
+
+          require('hasan.utils.file').quickLook({ item._path })
+        end,
+        system_open = function(picker, item)
+          picker:close()
+          if not item or item._path == nil then
+            return
+          end
+
+          require('hasan.utils.file').system_open(item._path, { reveal = true })
+        end,
+        focus_file_tree = function(picker, item)
+          picker:close()
+          if not item or item._path == nil then
+            return
+          end
+
+          require('neo-tree.command').execute({
+            action = 'focus', -- OPTIONAL, this is the default value
+            source = 'filesystem', -- OPTIONAL, this is the default value
+            reveal_file = item._path, -- path to file or folder to reveal
+            reveal_force_cwd = true, -- change cwd without asking if needed
+          })
+        end,
+      },
 
       icons = {
-        ui = { selected = '▸' },
         kinds = require('hasan.utils.ui.icons').kind,
       },
 
@@ -321,9 +359,14 @@ return {
           keys = {
             ['<a-q>'] = { 'toggle_preview', mode = { 'i', 'n' } },
             ['<Esc>'] = { 'close', mode = { 'n', 'i' } },
-            ['<A-n>'] = { 'list_down', mode = { 'i', 'n' } },
-            ['<A-p>'] = { 'list_up', mode = { 'i', 'n' } },
+            ['<a-n>'] = { 'list_down', mode = { 'i', 'n' } },
+            ['<a-p>'] = { 'list_up', mode = { 'i', 'n' } },
             ['<c-u>'] = false,
+
+            ['<c-t>'] = { 'focus_file_tree', mode = { 'i', 'n' } },
+            ['<a-i>'] = { 'quicklook', mode = { 'i', 'n' } },
+            ['<a-o>'] = { 'system_open', mode = { 'i', 'n' } },
+            ['<S-CR>'] = { 'fedit', mode = { 'i', 'n' } },
           },
         },
       },

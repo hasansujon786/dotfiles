@@ -106,16 +106,13 @@ return {
       end,
       ['R'] = function(state)
         local node = state.tree:get_node()
-        local args = { '/select,', node:get_id() }
-        if node.type == 'directory' then
-          args = { node:get_id() }
-        end
-
-        require('plenary.job'):new({ command = 'explorer.exe', args = args }):start()
+        local file = node:get_id()
+        require('hasan.utils.file').system_open(file, { reveal = true })
       end,
       ['O'] = function(state)
         local node = state.tree:get_node()
-        require('plenary.job'):new({ command = 'explorer.exe', args = { node:get_id() } }):start()
+        local file = node:get_id()
+        require('hasan.utils.file').system_open(file, { reveal = false })
       end,
 
       ['[c'] = 'prev_git_modified',

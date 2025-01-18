@@ -3,9 +3,7 @@
 
 ---@type ServerConfig
 return {
-  setup = function (client, bufnr)
-    
-  end,
+  -- setup = function(client, bufnr) end,
   opts = {
     -- on_init = function()
     --   P('from on_init luals')
@@ -27,11 +25,13 @@ return {
         },
         completion = { callSnippet = 'Replace' },
         runtime = { version = 'LuaJIT' },
-        diagnostics = { globals = { 'vim', 'jit', 'keymap', 'P', 'log' } },
+        diagnostics = { globals = { 'vim', 'jit', 'keymap', 'P', 'log', 'Snacks' } },
         workspace = {
           library = {
             [vim.fn.expand('$VIMRUNTIME/lua')] = true,
             [vim.fn.stdpath('config') .. '/lua'] = true,
+            [plugin_path .. '/nui.nvim'] = true,
+            [plugin_path .. '/snacks.nvim'] = true,
           },
         },
         telemetry = { enable = false },

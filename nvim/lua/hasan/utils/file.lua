@@ -180,6 +180,24 @@ function M.quickLook(args)
   end))
 end
 
+M.system_open_cmd = vim.fn.has('win32') == 1 and 'explorer.exe' or vim.fn.has('mac') == 1 and 'open' or 'xdg-open'
+
+function M.system_open(file, opts)
+  opts = opts or {}
+  local args = opts.args or {}
+
+  if M.system_open_cmd == 'explorer.exe' then
+    file = file:gsub('/', '\\')
+  end
+
+  if opts.reveal == true then
+    table.insert(args, '/select,')
+  end
+
+  table.insert(args, file)
+  require('plenary.job'):new({ command = M.system_open_cmd, args = args }):start()
+end
+
 return M
 
 -- del lines            %s/\v(print).*/

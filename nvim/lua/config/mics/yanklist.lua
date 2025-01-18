@@ -1,9 +1,9 @@
 return {
   'hasansujon786/yanklist.nvim',
   event = { 'CursorHold' },
-  -- init = function()
-  --   vim.g.yanklist_finder = 'fzf-lua'
-  -- end,
+  init = function()
+    vim.g.yanklist_finder = 'snacks'
+  end,
   config = function()
     -- Put mappings
     keymap('n', 'p', '<Plug>(yanklist-auto-put)', { desc = 'Put the text' })
