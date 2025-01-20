@@ -13,6 +13,39 @@ M.completion = {
   module = 'cmp',
 }
 
+M.lsp = {
+  ---lspconfig_name = {'mason_package_name'}
+  essential_servers = {
+    -- Frontend
+    html = { 'html-lsp' },
+    cssls = { 'css-lsp' },
+    ts_ls = { 'typescript-language-server' },
+    jsonls = { 'json-lsp' },
+    eslint = { 'eslint-lsp' },
+    -- Frameworks
+    astro = { 'astro-language-server' },
+    volar = { 'vue-language-server' }, -- vuels = { 'vetur-vls' },
+    tailwindcss = { 'tailwindcss-language-server' },
+    -- Lsps
+    bashls = { 'bash-language-server' },
+    lua_ls = { 'lua-language-server' },
+    vimls = { 'vim-language-server' },
+    gopls = { 'gopls' },
+  },
+  extra_tools = {
+    'shfmt',
+    'shellcheck',
+    'stylua',
+    'prettierd',
+    'dart-debug-adapter',
+  },
+  -- use_builtin_lsp_formatter = { 'dartls', 'astro', 'null-ls' },
+  default_opts = {
+    flags = { debounce_text_changes = 500 },
+    -- capabilities = {},
+  },
+}
+
 M.ui = {
   border = {
     style = 'rounded',

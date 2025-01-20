@@ -1,41 +1,15 @@
 local M = {}
 local api = vim.api
 
-function M.get_lspconfig(lsp_name)
-  local local_conf = M.import_server_local_module(lsp_name)
-  if local_conf ~= nil and local_conf.opts ~= nil then
-    return require('hasan.utils').merge(M.get_setup_opts().default_opts, local_conf.opts)
-  end
-
-  return M.get_setup_opts().default_opts
-end
-
-function M.get_setup_opts()
-  return require('config.lsp.util.setup')
-end
-
-function M.import_server_local_module(lsp_name)
+---Get lsp server config
+---@param lsp_name string
+---@return ServerConfig|nil
+function M.import_lspconfig_by_name(lsp_name)
   local ok, module = pcall(require, 'config.lsp.servers.' .. lsp_name)
   if ok then
     return module
   end
   return nil
-end
-
-function M.update_capabilities(fname)
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  local blink_ok, blink_cmp = pcall(require, 'blink.cmp')
-  if blink_ok then
-    return blink_cmp.get_lsp_capabilities(capabilities)
-  end
-
-  local cmp_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-  if cmp_ok then
-    return vim.tbl_deep_extend('force', capabilities, cmp_nvim_lsp.default_capabilities())
-  end
-
-  vim.notify('Capabilities not updated with ' .. fname, vim.log.levels.WARN, { title = 'lsp-config' })
-  return capabilities
 end
 
 function M.execute(action, bufnr, on_complete)
@@ -63,11 +37,12 @@ function M.install_essential_servers()
   if not ok then
     print('[Mason] Please install mason and try again')
   end
-  local g_conf = M.get_setup_opts()
+
+  local lsp_state = require('core.state').lsp
 
   -- Get mason server names to install
-  local masaon_pkgs = g_conf.extra_tools
-  for _, s_value in pairs(g_conf.essential_servers) do
+  local masaon_pkgs = lsp_state.extra_tools
+  for _, s_value in pairs(lsp_state.essential_servers) do
     table.insert(masaon_pkgs, s_value[1])
   end
 

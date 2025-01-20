@@ -3,7 +3,9 @@
 
 ---@type ServerConfig
 return {
-  -- setup = function(client, bufnr) end,
+  -- lsp_attach = function()
+  --   dd('lua_ls attach for this buf')
+  -- end,
   opts = {
     -- on_init = function()
     --   P('from on_init luals')

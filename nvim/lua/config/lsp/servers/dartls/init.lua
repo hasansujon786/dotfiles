@@ -47,7 +47,7 @@ end
 
 ---@type ServerConfig
 return {
-  setup = function(_, buffer)
+  lsp_attach = function(_, buffer)
     local function desc(d)
       return { desc = d, buffer = buffer }
     end

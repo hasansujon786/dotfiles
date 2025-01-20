@@ -50,17 +50,8 @@ augroup('MY_AUGROUP')(function(autocmd)
   autocmd({ 'BufWinEnter', 'WinEnter' }, 'let g:hasan_telescope_buffers[bufnr()] = reltimefloat(reltime())')
 
   autocmd('LspAttach', function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client ~= nil then
-      require('config.lsp.util.extras').get_setup_opts().onLspAttach(client, args.buf)
-    end
+    require('config.lsp.util.setup').lsp_attach(args)
 
-    -- if client.name == 'tsserver' then
-    -- P(client.capabilities.textDocument.inlayHint)
-    -- local method = vim.lsp.protocol.Methods.textDocument_codeLens
-    -- P(string.format('%s %s %s', client.name, method, client.supports_method(method)))
-    -- P(client.server_capabilities.codeLensProvider)
-    -- end
     vim.defer_fn(set_titlestring, 10)
   end)
   -- autocmd('BufEnter', set_titlestring)

@@ -36,11 +36,12 @@ return {
     update = {
       'LspAttach',
       'LspDetach',
+      'BufWinEnter',
       -- 'User',
       -- pattern = { 'LspProgressUpdate', 'LspRequest' }, -- 'LspProgress'
     },
     hl = mutedText,
-    { provider = '  ' },
+    { provider = '   ' },
     {
       provider = function()
         -- lsp progress
@@ -428,9 +429,9 @@ return {
       provider = function()
         return vim.fn.reg_recording()
       end,
-      hl = { fg = 'bg_blue', bg = 'layer' },
+      hl = { fg = 'red', bg = 'layer' },
     },
-    { provider = '', hl = { fg = 'layer', bg = 'bg1' } },
+    { provider = ' ', hl = { fg = 'layer', bg = 'bg1' } },
     update = { 'RecordingEnter', 'RecordingLeave' },
   },
 }

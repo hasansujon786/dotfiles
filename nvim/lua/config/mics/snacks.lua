@@ -361,6 +361,8 @@ return {
             ['<Esc>'] = { 'close', mode = { 'n', 'i' } },
             ['<a-n>'] = { 'list_down', mode = { 'i', 'n' } },
             ['<a-p>'] = { 'list_up', mode = { 'i', 'n' } },
+            ['<tab>'] = { 'list_down', mode = { 'i', 'n' } },
+            ['<s-tab>'] = { 'list_up', mode = { 'i', 'n' } },
             ['<c-u>'] = false,
 
             ['<c-t>'] = { 'focus_file_tree', mode = { 'i', 'n' } },
@@ -389,11 +391,7 @@ return {
             title_pos = 'center',
             { win = 'input', height = 1, border = 'bottom' },
             { win = 'list', border = 'none' },
-            {
-              win = 'preview',
-              height = 0.4,
-              border = { '', '▔', '', '', '', '', '', '' },
-            },
+            { win = 'preview', height = 0.4, border = { '', '▔', '', '', '', '', '', '' } },
           },
         },
 
@@ -433,12 +431,7 @@ return {
         wo = {
           winhighlight = 'Normal:SidebarDark,NormalFloat:SnacksInputNormal,FloatBorder:SnacksInputBorder,FloatTitle:SnacksInputTitle',
         },
-        keys = {
-          i_esc = { '<esc>', { 'cmp_close', 'cancel' }, mode = { 'i', 'n' } },
-          i_cr = { '<cr>', { 'cmp_accept', 'confirm' }, mode = { 'i', 'n' } },
-          i_tab = { '<tab>', { 'cmp_select_next', 'cmp' }, mode = 'i' },
-          q = 'cancel',
-        },
+        -- keys = { },
       },
       input_cursor = { relative = 'cursor', row = 1, col = 0, width = 30 },
       scratch = {
@@ -549,7 +542,7 @@ return {
 
     -- ORGMODE
     { '<leader>ng', function() Snacks.picker.grep({layout={preset='dropdown_preview'}, cwd=org_root_path}) end, desc = 'Grep org text' },
-    { '<leader>fo', function() Snacks.picker.files({layout={preset='ivy'}, cwd=org_root_path}) end, desc = 'Find org files' },
+    { '<leader>w/', function() Snacks.picker.files({layout={preset='ivy'}, cwd=org_root_path}) end, desc = 'Find org files' },
   },
   init = function()
     vim.api.nvim_create_autocmd('User', {

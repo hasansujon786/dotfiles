@@ -39,7 +39,7 @@ end
 
 ---@type ServerConfig
 return {
-  setup = function(_, bufnr)
+  lsp_attach = function(_, bufnr)
     keymap('n', '<leader>ai', M.ts_organize_imports_sync, { buffer = bufnr, desc = 'Lsp: organize imports' })
   end,
   opts = {
