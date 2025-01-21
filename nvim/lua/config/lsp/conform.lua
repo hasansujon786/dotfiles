@@ -14,6 +14,10 @@ local function get_visual_range(args)
   end
   return nil
 end
+
+---My Custom formatters_by_ft api
+---@param formatters_by_ft table
+---@return table
 local function get_formatter_list(formatters_by_ft)
   local formatters_by_ft_mod = {}
   for _, item in ipairs(formatters_by_ft) do
@@ -42,42 +46,7 @@ return {
     default_format_opts = {
       lsp_format = 'fallback',
     },
-    -- My Custom formatters_by_ft api
-    formatters_by_ft = {
-      {
-        filetype = {
-          'javascript',
-          'javascriptreact',
-          'typescript',
-          'typescriptreact',
-          'vue',
-          'css',
-          'scss',
-          'less',
-          'html',
-          'json',
-          'jsonc',
-          'yaml',
-          'markdown',
-          'markdown.mdx',
-          'graphql',
-          'handlebars',
-        },
-        formatter = { 'prettierd', 'prettier', stop_after_first = true },
-      },
-      {
-        filetype = 'lua',
-        formatter = { 'stylua' },
-      },
-      {
-        filetype = { 'bash', 'sh' },
-        formatter = { 'shfmt' },
-      },
-      {
-        filetype = '_', -- "_" filetypes that don't have other formatters configured.
-        formatter = { 'trim_whitespace' },
-      },
-    },
+    -- formatters_by_ft = {},
     -- format_on_save = function(_) -- bufnr
     --   -- Disable with a global or buffer-local variable
     --   -- if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
@@ -89,7 +58,7 @@ return {
     -- formatters = { shfmt = { prepend_args = { '-i', '2' } } },
   },
   config = function(_, opts)
-    opts.formatters_by_ft = get_formatter_list(opts.formatters_by_ft)
+    opts.formatters_by_ft = get_formatter_list(require('core.state').lsp.formatters_by_ft)
     require('conform').setup(opts)
 
     command('Format', function(args)

@@ -2,21 +2,8 @@ return {
   'mfussenegger/nvim-lint',
   lazy = true,
   module = 'lint',
-  event = 'BufWritePost',
+  -- event = 'BufWritePost',
   config = function()
-    require('lint').linters_by_ft = {
-      -- markdown = { 'vale' },
-      sh = { 'shellcheck' },
-      -- text = { 'vale' },
-      -- json = { 'jsonlint' },
-      -- markdown = { 'vale' },
-    }
-
-    vim.schedule(require('lint').try_lint)
-    vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
-      callback = function()
-        require('lint').try_lint()
-      end,
-    })
+    require('lint').linters_by_ft = require('core.state').lsp.linters_by_ft
   end,
 }

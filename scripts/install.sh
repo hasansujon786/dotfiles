@@ -347,6 +347,7 @@ install_various_apps() {
   $getter install -y scrcpy
   $getter install -y jq
   $getter install -y tldr
+  $getter install -y fastfetch
 
   # util_print taskwarrior
   # apt install taskwarrior

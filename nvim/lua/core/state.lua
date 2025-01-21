@@ -44,6 +44,44 @@ M.lsp = {
     flags = { debounce_text_changes = 500 },
     -- capabilities = {},
   },
+  linters_by_ft = {
+    sh = { 'shellcheck' },
+  },
+  formatters_by_ft = {
+    {
+      filetype = {
+        'javascript',
+        'javascriptreact',
+        'typescript',
+        'typescriptreact',
+        'vue',
+        'css',
+        'scss',
+        'less',
+        'html',
+        'json',
+        'jsonc',
+        'yaml',
+        'markdown',
+        'markdown.mdx',
+        'graphql',
+        'handlebars',
+      },
+      formatter = { 'prettierd', 'prettier', stop_after_first = true },
+    },
+    {
+      filetype = 'lua',
+      formatter = { 'stylua' },
+    },
+    {
+      filetype = { 'bash', 'sh' },
+      formatter = { 'shfmt' },
+    },
+    {
+      filetype = '_', -- "_" filetypes that don't have other formatters configured.
+      formatter = { 'trim_whitespace' },
+    },
+  },
 }
 
 M.ui = {
