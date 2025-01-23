@@ -16,9 +16,9 @@ M.center_cursor = function(key)
     local should_center = vp_cursor_line >= center_line + math.floor(center_line * center_threshold)
 
     if should_center then
-      vim.api.nvim_feedkeys('zz' .. key, 'n', false)
+      return 'zz' .. key
     else
-      vim.api.nvim_feedkeys(key, 'n', false)
+      return key
     end
   end
 end
@@ -34,7 +34,7 @@ end
 M.attach_mappings = function()
   is_active = true
   for _, key in ipairs(center_insert_keys) do
-    keymap('n', key, M.center_cursor(key))
+    keymap('n', key, M.center_cursor(key), { expr = true })
   end
 end
 

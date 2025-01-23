@@ -22,7 +22,8 @@ return {
     event = 'CursorMoved',
     enabled = true,
     opts = {
-      smear_to_cmd = false,
+      smear_insert_mode = false,
+      smear_to_cmd = true,
       normal_bg = '#242B38',
       smear_between_buffers = true,
       --                                 Default  Range

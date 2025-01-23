@@ -2,30 +2,37 @@ local NuiLine = require('nui.line')
 local NuiText = require('nui.text')
 local Popup = require('nui.popup')
 local event = require('nui.utils.autocmd').event
+
 local M = {}
 
+local feedk = vim.fn.feedkeys
+
 local last_popup_window = nil
-M.open = function()
+function M.open_editor(default_char)
   if last_popup_window ~= nil then
     last_popup_window:unmount()
   end
 
-  -- FIXME: text not showing
-  local msg = NuiLine({ NuiText(' >>> Press any key to edit <<< ', { hl_group = 'String' }) })
-  local msg_pop = Popup({
-    enter = false,
-    focusable = true,
-    border = { style = 'rounded', text = { top = ' Register ' } },
-    win_options = { winhighlight = 'Normal:Normal' },
-    position = '50%',
-    size = { width = msg:width(), height = 1 },
-  })
-  msg:render(msg_pop.bufnr, -1, 1) -- bufnr, ns_id, linenr_start
-  msg_pop:mount()
+  local msg_pop = nil
+  if not default_char then
+    local msg = NuiLine({ NuiText(' >>> Press a register key to edit <<< ', { hl_group = 'String' }) })
+    msg_pop = Popup({
+      enter = false,
+      focusable = true,
+      border = { style = 'rounded', text = { top = ' Register ' } },
+      win_options = { winhighlight = 'Normal:Normal' },
+      position = '50%',
+      size = { width = msg:width(), height = 1 },
+    })
+    msg:render(msg_pop.bufnr, -1, 1) -- bufnr, ns_id, linenr_start
+    msg_pop:mount()
+  end
 
   vim.schedule(function()
-    local char = vim.fn.getcharstr()
-    msg_pop:unmount()
+    local char = default_char and default_char or vim.fn.getcharstr()
+    if msg_pop then
+      msg_pop:unmount()
+    end
 
     if char == '' or char == '' or char == nil or char == '' or char:len() ~= 1 then
       return
@@ -43,7 +50,7 @@ M.open = function()
         style = 'rounded',
         text = {
           top = NuiLine({ NuiText(' Register: '), NuiText(char), NuiText(' ') }),
-          bottom = NuiText(' Save: <CR> ', 'FloatBorder'),
+          bottom = NuiText(' <CR> Save ', 'FloatBorder'),
           bottom_align = 'center',
         },
       },
@@ -61,9 +68,9 @@ M.open = function()
 
     pop:map('n', '<CR>', function()
       if regtype == 'V' then
-        feedkeys(string.format('ggVG"%sy', char))
+        feedk(string.format('ggVG"%sy', char), 'n')
       elseif regtype == 'v' then
-        feedkeys(string.format('0ggvG$"%sy', char))
+        feedk(string.format('0ggvG$"%sy', char), 'n')
       end
     end, { desc = 'Save to register' })
     pop:map('n', 'q', function()
@@ -73,12 +80,38 @@ M.open = function()
     pop:mount()
 
     vim.schedule(function()
-      feedkeys(string.format('"%sP', char))
+      feedk(string.format('"%sP', char), 'n')
     end)
   end)
 end
 
--- lua require("hasan.widgets.register_editor").open()
 -- vim.fn.setreg('r', "jci'hasan mahmud")
+
+function M.start_recording()
+  if vim.fn.reg_recording() ~= '' then
+    return 'q'
+  end
+
+  vim.schedule(function()
+    local char = vim.fn.getcharstr()
+    if char == '' or char == '' or char == nil or char == '' or char:len() ~= 1 then
+      return
+    end
+
+    local reg_text = vim.fn.getreg(char)
+    if reg_text == '' or reg_text == nil then
+      feedk('q' .. char, 'n')
+      return
+    end
+
+    local confirm_msg = '>>> Record macro & override `%s` register? <<<'
+    local choice = vim.fn.confirm(confirm_msg:format(char), table.concat({ '&Yes', '&Edit', '&No' }, '\n'), 3)
+    if choice == 1 then
+      feedk('q' .. char, 'n')
+    elseif choice == 2 then
+      M.open_editor(char)
+    end
+  end)
+end
 
 return M

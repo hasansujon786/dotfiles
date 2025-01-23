@@ -115,7 +115,7 @@ return {
       { '<leader>v.', '<cmd>echo "Not a Vim file"<CR>', desc = 'Source this file' },
       { '<leader>vp', '<cmd>Lazy home<CR>', desc = 'Plugin status' },
       { '<leader>vs', '<cmd>lua require("hasan.utils.file").open_settings()<CR>', desc = 'Open settings' },
-      { '<leader>vr', '<cmd>lua require("hasan.widgets.register_editor").open()<CR>', desc = 'Open register editor' },
+      { '<leader>vr', '<cmd>lua require("hasan.widgets.register_editor").open_editor()<CR>', desc = 'Open register editor' },
       { '<leader>vR', '<cmd>silent write | edit | TSBufEnable highlight<CR>', desc = 'Reload hightlight' },
       { '<leader>vL', '<cmd>call logevents#LogEvents_Toggle()<CR>', desc = 'Toggle LogEvents' },
 

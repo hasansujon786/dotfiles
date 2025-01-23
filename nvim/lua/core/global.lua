@@ -61,11 +61,7 @@ function _G.feedkeys(key, mode)
   vim.api.nvim_feedkeys(t(key), mode, false)
 end
 
-function _G.keymap(mode, lhs, rhs, opts)
-  local def_opts = { silent = true, noremap = true }
-  opts = vim.tbl_deep_extend('force', def_opts, opts or {})
-  vim.keymap.set(mode, lhs, rhs, opts)
-end
+_G.keymap = vim.keymap.set
 
 function _G.handle_win_cmd(wincmd, lazySave)
   if lazySave then

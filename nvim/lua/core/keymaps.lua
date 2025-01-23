@@ -6,7 +6,9 @@ local nvim_set_keymap = vim.api.nvim_set_keymap
 local nx, ic = { 'n', 'x' }, { 'i', 'c' }
 
 keymap(nx, 'q', '<esc><cmd>noh<CR><C-l>')
-keymap('n', 'Q', 'q') -- Use Q to record macros
+keymap(nx, 'Q', function()
+  return require('hasan.widgets.register_editor').start_recording()
+end, { expr = true, desc = 'Record a macro' })
 keymap('v', '@', ':norm @', noSilent) -- run macro on selection
 keymap(nx, '<CR>', ':<up>', { silent = false, desc = 'Run last command easily' })
 keymap(nx, '<leader><cr>', 'q:', { silent = false, desc = 'Open command history' })
