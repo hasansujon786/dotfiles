@@ -5,10 +5,7 @@ return {
   keys = {
     { 'gb', '<Plug>(VM-Find-Under)', desc = 'VM: Select under cursor', mode = 'n' },
     { 'gb', '<Plug>(VM-Find-Subword-Under)', desc = 'VM: Select under cursor', mode = 'x' },
-    { 'gB', '<Plug>(VM-Select-All)', desc = 'VM: Select all occurrences', mode = 'n' },
-    { 'gB', '<Plug>(VM-Visual-All)', desc = 'VM: Select all occurrences', mode = 'x' },
-    { 'gmA', '<Plug>(VM-Select-All)', desc = 'VM: Select all occurrences', mode = 'n' },
-    { 'gmA', '<Plug>(VM-Visual-All)', desc = 'VM: Select all occurrences', mode = 'x' },
+    { 'gmb', desc = 'VM-Select-All)', mode = nx },
     { '<C-up>', mode = nx },
     { '<C-down>', mode = nx },
   },
@@ -16,11 +13,11 @@ return {
     vim.g.VM_leader = 'gm'
     vim.g.VM_theme = ''
     vim.g.VM_maps = {
-      -- ['Slash Search'] = 'gM',
+      ['Select All'] = 'gmb',
       ['Find Under'] = 0,
       ['Find Subword Under'] = 0,
       ['gc'] = 'gC',
-      -- ['I BS'] = '<C-h>',
+      ['I BS'] = '<C-h>',
     }
   end,
   config = function()

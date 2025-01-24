@@ -74,10 +74,10 @@ local function do_open(uri)
   end
 end
 local gx_desc = 'Opens filepath or URI under cursor'
-keymap('n', 'gO', function()
+keymap('n', 'gB', function()
   do_open(vim.fn.expand('<cfile>'))
 end, { desc = gx_desc })
-keymap('x', 'gO', function()
+keymap('x', 'gB', function()
   local lines = vim.fn.getregion(vim.fn.getpos('.'), vim.fn.getpos('v'), { type = vim.fn.mode() })
   -- Trim whitespace on each line and concatenate.
   do_open(table.concat(vim.iter(lines):map(vim.trim):totable()))

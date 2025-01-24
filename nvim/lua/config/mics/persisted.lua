@@ -58,7 +58,7 @@ return {
 
       -- Save current layout before manually switching with Telescope
       vim.api.nvim_create_autocmd({ 'User' }, {
-        pattern = 'PersistedTelescopeLoadPre',
+        pattern = { 'PersistedTelescopeLoadPre', 'PersistedPickerLoadPre' },
         group = group,
         callback = function()
           -- Save the currently loaded session
