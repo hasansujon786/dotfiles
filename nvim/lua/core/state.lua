@@ -1,3 +1,4 @@
+
 local M = {}
 
 M.theme = {
@@ -9,6 +10,7 @@ M.treesitter = {
   enabled_context = true,
 }
 
+---@type StateCompletion
 M.completion = {
   module = 'cmp',
 }

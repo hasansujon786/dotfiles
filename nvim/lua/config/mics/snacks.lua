@@ -61,7 +61,7 @@ local function get_ivy(mini)
       backdrop = false,
       row = -1,
       width = 0,
-      height = mini and 0.4 or 0.7,
+      height = mini and 0.5 or 0.7,
       border = 'none',
       {
         win = 'input',
@@ -79,18 +79,11 @@ local function get_ivy(mini)
   }
 end
 
-local vscode = { layout = { preset = 'vscode' } }
-local ivy = { layout = { preset = 'ivy' } }
-local ivy_mini = { layout = { preset = 'ivy_mini' } }
-local dropdown = { layout = { preset = 'dropdown' } }
-local dropdown_preview = { layout = { preset = 'dropdown_preview' } }
-
 local search_project_todos = function()
   Snacks.picker.grep_word({
     search = function()
       return table.concat(require('core.state').project.todo_keyfaces, ':|') .. ':' -- Creates "TODO :|DONE :|INFO :|..."
     end,
-    layout = { preset = 'dropdown_preview' },
     finder = 'grep',
     format = 'file',
     live = false,
@@ -107,7 +100,7 @@ local auto_open_qflistt_or_loclist = function()
   local win = wininfo[1]
   vim.cmd([[cclose|lclose]])
   local list_type = win.loclist == 1 and 'loclist' or 'qflist'
-  Snacks.picker[list_type](dropdown_preview)
+  Snacks.picker[list_type]()
 end
 
 return {
@@ -115,6 +108,9 @@ return {
   priority = 1000,
   enabled = true,
   lazy = false,
+  dependencies = {
+    { 'hasansujon786/snacks-file-browser.nvim', dev = true },
+  },
   ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
@@ -304,11 +300,60 @@ return {
     },
     picker = {
       prompt = '   ',
-
+      exclude = {
+        -- dotfiles
+        'gui/sublime_text/',
+        'nvim/tmp/archive',
+        '4_archive/.*',
+        -- projects
+        'android/.*',
+        'ios/.*',
+        'vendor/.*',
+        'pubspec.lock',
+      },
       sources = {
-        buffers = { current = true },
+        buffers = { layout = 'dropdown', current = false },
+        files = { layout = 'ivy' },
+        git_files = { layout = 'vscode' },
+        recent = { layout = 'ivy' },
+        lsp_symbols = { layout = 'dropdown' },
+
+        grep = { layout = 'dropdown_preview' },
+        grep_word = { layout = 'dropdown_preview' },
+        grep_buffers = { layout = 'dropdown_preview' },
+        lines = { layout = { preset = 'ivy_mini', preview = 'main' } },
+
+        zoxide = { layout = 'dropdown' },
+        marks = { layout = 'dropdown_preview' },
+        colorschemes = { layout = 'dropdown_preview' },
+        highlights = { layout = 'dropdown_preview' },
+
+        qflist = { layout = 'dropdown_preview' },
+        loclist = { layout = 'dropdown_preview' },
+
+        ---@type snacks.picker.file_browser.Config
+        file_browser = {
+          -- prompt_prefix = false,
+          -- title = 'asdfasdfsd',
+        },
+
+        explorer = {
+          win = {
+            input = {
+              keys = {
+                ['<tab>'] = { 'toggle_focus', mode = { 'i', 'n' } },
+              },
+            },
+            list = {
+              keys = {
+                ['<tab>'] = { 'toggle_focus', mode = { 'i', 'n' } },
+              },
+            },
+          },
+        },
 
         project_files = { -- https://github.com/folke/snacks.nvim/issues/532#issuecomment-2609303872
+          layout = 'vscode',
           multi = { 'files', 'lsp_symbols' },
           matcher = {
             cwd_bonus = true, -- boost cwd matches
@@ -389,7 +434,9 @@ return {
         },
 
         buffers_with_symbols = {
+          title = 'Buffers',
           multi = { 'buffers', 'lsp_symbols' },
+          layout = 'dropdown',
           filter = {
             ---@param p snacks.Picker
             ---@param filter snacks.picker.Filter
@@ -470,6 +517,8 @@ return {
         input = {
           keys = {
             ['<a-q>'] = { 'toggle_preview', mode = { 'i', 'n' } },
+            ['<a-u>'] = { 'preview_scroll_up', mode = { 'i', 'n' } },
+            ['<a-d>'] = { 'preview_scroll_down', mode = { 'i', 'n' } },
             ['<Esc>'] = { 'close', mode = { 'n', 'i' } },
             ['<a-n>'] = { 'list_down', mode = { 'i', 'n' } },
             ['<a-p>'] = { 'list_up', mode = { 'i', 'n' } },
@@ -477,10 +526,14 @@ return {
             ['<s-tab>'] = { 'list_up', mode = { 'i', 'n' } },
             ['<c-u>'] = false,
 
+            -- ['<a-i>'] = { 'toggle_ignored', mode = { 'i', 'n' } },
+            -- ['<a-h>'] = { 'toggle_hidden', mode = { 'i', 'n' } },
+            -- ['<a-f>'] = { 'toggle_follow', mode = { 'i', 'n' } },
+
             ['<c-t>'] = { 'focus_file_tree', mode = { 'i', 'n' } },
             ['<a-i>'] = { 'quicklook', mode = { 'i', 'n' } },
             ['<a-o>'] = { 'system_open', mode = { 'i', 'n' } },
-            ['<S-CR>'] = { 'fedit', mode = { 'i', 'n' } },
+            -- ['<S-CR>'] = { 'fedit', mode = { 'i', 'n' } },
           },
         },
       },
@@ -602,59 +655,60 @@ return {
     },
     -- FIND FILES
     -- { '<leader><space>', function() Snacks.picker.smart(vscode) end, desc = 'Find Git Files' },
-    { '<leader><space>', function() Snacks.picker.project_files(vscode) end, desc = 'Find project files' },
     -- { '<leader><space>', function() Snacks.picker.git_files(vscode) end, desc = 'Find Git Files' },
-    { '<leader>.', function() Snacks.picker.files({layout='ivy', cwd=vim.fn.expand('%:h')}) end, desc = 'Browse cur directory' },
-    { '<leader>f.', function() Snacks.picker.files({layout='ivy', cwd=vim.fn.expand('%:h')}) end, desc = 'Browse cur directory' },
-    { '<leader>ff', function() Snacks.picker.files(ivy) end, desc = 'Find Files' },
-    { '<leader>fb', function() Snacks.picker.files(ivy) end, desc = 'Find Files' },
-    { '<leader>fg', function() Snacks.picker.git_files(vscode) end, desc = 'Find Git Files' },
-    { '<leader>fr', function() Snacks.picker.recent(ivy) end, desc = 'Recent' },
-    { '<leader>fc', function() Snacks.picker.files({layout='ivy', cwd=vim.fn.stdpath('config')}) end, desc = 'Find Config File' },
+    { '<leader><space>', function() Snacks.picker.project_files() end, desc = 'Find project files' },
+    -- { '<leader>.', function() Snacks.picker.files({layout='ivy', cwd=vim.fn.expand('%:h')}) end, desc = 'Browse cur directory' },
+    { '<leader>.', function() require('snacks-file-browser').browse({ cwd = vim.fn.expand('%:h') }) end, desc = 'Browse cur directory' },
+    { '<leader>f.', function() Snacks.picker.files({cwd=vim.fn.expand('%:h')}) end, desc = 'Browse cur directory' },
+    { '<leader>ff', function() Snacks.picker.files() end, desc = 'Find Files' },
+    { '<leader>fb', function() require('snacks-file-browser').browse() end, desc = 'Browser Project' },
+    { '<leader>fg', function() Snacks.picker.git_files() end, desc = 'Find Git Files' },
+    { '<leader>fr', function() Snacks.picker.recent() end, desc = 'Recent' },
+    { '<leader>fc', function() Snacks.picker.files({cwd=vim.fn.stdpath('config')}) end, desc = 'Find Config File' },
+    { '<leader>fe', function() Snacks.picker.explorer() end, desc = 'Find Config File' },
 
     -- FIND BUFFERS
-    { "g'", function() Snacks.picker.buffers_with_symbols(dropdown) end, desc = 'which_key_ignore' },
-    { '<leader>bb', function() Snacks.picker.buffers(dropdown) end, desc = 'Buffers' },
+    { "g'", function() Snacks.picker.buffers_with_symbols() end, desc = 'which_key_ignore' },
+    { '<leader>bb', function() Snacks.picker.buffers_with_symbols() end, desc = 'Buffers' },
 
     -- LSP
-    { 'go', function() Snacks.picker.lsp_symbols(dropdown) end, desc = 'LSP Symbols' },
+    { 'go', function() Snacks.picker.lsp_symbols() end, desc = 'LSP Symbols' },
 
     -- GIT
     { '<leader>g/', function() Snacks.picker.git_status() end, desc = 'Git Status' },
     { '<leader>gc', function() Snacks.picker.git_log() end, desc = 'Git Log' },
 
     -- GREP
-    { '<leader>//', function() Snacks.picker.grep(dropdown_preview) end, desc = 'Grep' },
-    { '<leader>/B', function() Snacks.picker.grep_buffers(dropdown_preview) end, desc = 'Grep Open Buffers' },
-    { '//', function() Snacks.picker.lines(ivy_mini) end, desc = 'which_key_ignore' },
-    { '<A-/>', function() Snacks.picker.grep_word(dropdown_preview) end, desc = 'Visual selection or word', mode = { "n", "x" } },
+    { '<leader>//', function() Snacks.picker.grep() end, desc = 'Grep' },
+    { '<leader>/b', function() Snacks.picker.grep_buffers() end, desc = 'Grep Open Buffers' },
+    { '//', function() Snacks.picker.lines() end, desc = 'which_key_ignore' },
+    { '<A-/>', function() Snacks.picker.grep_word() end, desc = 'Visual selection or word', mode = { "n", "x" } },
 
     -- SEARCH
     { '<leader>/.', function() Snacks.picker.resume() end, desc = 'Resume' },
-    { '<leader>/f', function() Snacks.picker.files(ivy) end, desc = 'Find Files' },
-    { '<leader>/k', function() Snacks.picker.keymaps(dropdown_preview) end, desc = 'Keymaps' },
-    { '<leader>/q', function() Snacks.picker.qflist(dropdown_preview) end, desc = 'Quickfix List' },
-    { '<leader>/l', function() Snacks.picker.loclist(dropdown_preview) end, desc = 'Location List' },
-    -- { '<leader>/c', function() Snacks.picker.commands() end, desc = 'Commands' },
+    { '<leader>/f', function() Snacks.picker.files() end, desc = 'Find Files' },
+    { '<leader>/k', function() Snacks.picker.keymaps() end, desc = 'Keymaps' },
+    { '<leader>/q', function() Snacks.picker.qflist() end, desc = 'Quickfix List' },
+    { '<leader>/l', function() Snacks.picker.loclist() end, desc = 'Location List' },
+    -- { '<leader>/c', function() Sdropdown_previewnacks.picker.commands() end, desc = 'Commands' },
     -- { '<leader>/C', function() Snacks.picker.command_history() end, desc = 'Command History' },
     { '//', auto_open_qflistt_or_loclist, ft = 'qf', desc = 'which_key_ignore' },
 
     -- PROJECT
-    { '<leader>pr', function() Snacks.picker.recent(ivy) end, desc = 'Find recent files' },
+    { '<leader>pr', function() Snacks.picker.recent() end, desc = 'Find recent files' },
     { '<leader>pt', search_project_todos, desc = 'Search project todos', mode = { "n", "x" } },
-    { '<leader>pe', function() Snacks.picker.zoxide(dropdown_preview) end, desc = 'Find zoxide list' },
-    { '<leader>pp', function() require('hasan.picker.persidted').persisted() end, desc = 'Switch project' },
+    { '<leader>pe', function() Snacks.picker.zoxide() end, desc = 'Find zoxide list' },
+    { '<leader>pp', function() require('hasan.picker.persisted').persisted() end, desc = 'Switch project' },
 
     -- VIM Builtins
     { '<leader>v/', function() Snacks.picker.help() end, desc = 'Help Pages' },
-    { '<leader>vj', function() Snacks.picker.jumps(dropdown_preview) end, desc = 'Jumps' },
-    { '<leader>vm', function() Snacks.picker.marks(dropdown_preview) end, desc = 'Marks' },
-    { '<leader>vc', function() Snacks.picker.colorschemes(dropdown_preview) end, desc = 'Colorschemes' },
-    { '<leader>vH', function() Snacks.picker.highlights(dropdown_preview) end, desc = 'Highlights' },
+    { '<leader>vm', function() Snacks.picker.marks() end, desc = 'Marks' },
+    { '<leader>vc', function() Snacks.picker.colorschemes() end, desc = 'Colorschemes' },
+    { '<leader>vH', function() Snacks.picker.highlights() end, desc = 'Highlights' },
 
     -- ORGMODE
-    { '<leader>ng', function() Snacks.picker.grep({layout='dropdown_preview', cwd=org_root_path}) end, desc = 'Grep org text' },
-    { '<leader>w/', function() Snacks.picker.files({layout='ivy', cwd=org_root_path}) end, desc = 'Find org files' },
+    { '<leader>ng', function() Snacks.picker.grep({cwd=org_root_path}) end, desc = 'Grep org text' },
+    { '<leader>w/', function() Snacks.picker.files({cwd=org_root_path}) end, desc = 'Find org files' },
   },
   init = function()
     vim.api.nvim_create_autocmd('User', {

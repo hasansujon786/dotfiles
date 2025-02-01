@@ -2,7 +2,9 @@ return {
   'windwp/nvim-autopairs',
   lazy = true,
   config = function()
-    require('nvim-autopairs').setup()
+    require('nvim-autopairs').setup({
+      disable_filetype = { 'TelescopePrompt', 'spectre_panel', 'snacks_picker_input' },
+    })
 
     local cmp_ok, cmp = pcall(require, 'cmp')
     if cmp_ok then
