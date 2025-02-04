@@ -81,6 +81,7 @@ end
 
 local search_project_todos = function()
   Snacks.picker.grep_word({
+    show_empty = true,
     search = function()
       return table.concat(require('core.state').project.todo_keyfaces, ':|') .. ':' -- Creates "TODO :|DONE :|INFO :|..."
     end,
@@ -103,6 +104,44 @@ local auto_open_qflistt_or_loclist = function()
   Snacks.picker[list_type]()
 end
 
+local flash_on_picker = function(picker)
+  require('flash').jump({
+    pattern = '^',
+    label = {
+      after = { 0, 0 },
+      current = false,
+    },
+    highlight = {
+      -- show a backdrop with hl FlashBackdrop
+      backdrop = false,
+      -- Highlight the search matches
+      matches = true,
+      -- extmark priority
+      priority = 5000,
+      groups = {
+        match = 'FlashMatch',
+        current = 'FlashCurrent',
+        backdrop = 'FlashBackdrop',
+        label = 'FlashLabel',
+      },
+    },
+    search = {
+      mode = 'search',
+      exclude = {
+        function(win)
+          return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= 'snacks_picker_list'
+        end,
+      },
+    },
+    action = function(match)
+      local idx = picker.list:row2idx(match.pos[1])
+      picker.list:_move(idx, true, true)
+      picker:action('confirm')
+      -- you can also add auto confirm here
+    end,
+  })
+end
+
 return {
   'hasansujon786/snacks.nvim',
   priority = 1000,
@@ -113,6 +152,11 @@ return {
   },
   ---@type snacks.Config
   opts = {
+    -- scroll = {
+    --   animate = {
+    --     easing = 'outCirc',
+    --   },
+    -- },
     bigfile = { enabled = true },
     quickfile = { enabled = true },
     words = { enabled = true },
@@ -436,7 +480,15 @@ return {
         buffers_with_symbols = {
           title = 'Buffers',
           multi = { 'buffers', 'lsp_symbols' },
-          layout = 'dropdown',
+          layout = { preset = 'dropdown', preview = 'main' } ,
+          -- on_show = function(picker)
+          --   vim.cmd.stopinsert()
+
+          --   -- you can auto enable it if you want
+          --   vim.schedule(function()
+          --     flash_on_picker(picker)
+          --   end)
+          -- end,
           filter = {
             ---@param p snacks.Picker
             ---@param filter snacks.picker.Filter
@@ -470,6 +522,7 @@ return {
       },
 
       actions = {
+        flash = flash_on_picker,
         fedit = function(picker, item)
           picker:close()
           if not item or item.file == nil then
@@ -530,6 +583,8 @@ return {
             -- ['<a-h>'] = { 'toggle_hidden', mode = { 'i', 'n' } },
             -- ['<a-f>'] = { 'toggle_follow', mode = { 'i', 'n' } },
 
+            ['<a-s>'] = { 'flash', mode = { 'n', 'i' } },
+            ['s'] = { 'flash' },
             ['<c-t>'] = { 'focus_file_tree', mode = { 'i', 'n' } },
             ['<a-i>'] = { 'quicklook', mode = { 'i', 'n' } },
             ['<a-o>'] = { 'system_open', mode = { 'i', 'n' } },
@@ -668,7 +723,7 @@ return {
     { '<leader>fe', function() Snacks.picker.explorer() end, desc = 'Find Config File' },
 
     -- FIND BUFFERS
-    { "g'", function() Snacks.picker.buffers_with_symbols() end, desc = 'which_key_ignore' },
+    { "g.", function() Snacks.picker.buffers_with_symbols() end, desc = 'which_key_ignore' },
     { '<leader>bb', function() Snacks.picker.buffers_with_symbols() end, desc = 'Buffers' },
 
     -- LSP

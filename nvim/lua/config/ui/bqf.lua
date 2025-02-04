@@ -8,9 +8,9 @@ return {
   },
   keys = {
     {
-      'g.',
-      function ()
-        require("hasan.utils.ui.qf").showLspReferencesInLocList()
+      'gq',
+      function()
+        require('hasan.utils.ui.qf').showLspReferencesInLocList()
       end,
       desc = 'Show LSP references in loclist',
     },
