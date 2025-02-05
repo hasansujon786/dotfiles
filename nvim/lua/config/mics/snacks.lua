@@ -361,11 +361,20 @@ return {
         git_files = { layout = 'vscode' },
         recent = { layout = 'ivy' },
         lsp_symbols = { layout = 'dropdown' },
+        smart = { preset = 'vscode', preview = 'main' },
 
         grep = { layout = 'dropdown_preview' },
         grep_word = { layout = 'dropdown_preview' },
         grep_buffers = { layout = 'dropdown_preview' },
-        lines = { layout = { preset = 'ivy_mini', preview = 'main' } },
+        lines = {
+          layout = { preset = 'ivy_mini', preview = 'main' },
+          win = {
+            preview = {
+              max_height = vim.o.lines - 2,
+              wo = { winbar = '' },
+            },
+          },
+        },
 
         zoxide = { layout = 'dropdown' },
         marks = { layout = 'dropdown_preview' },
@@ -397,7 +406,7 @@ return {
         },
 
         project_files = { -- https://github.com/folke/snacks.nvim/issues/532#issuecomment-2609303872
-          layout = 'vscode',
+          layout = { preset = 'vscode' },
           multi = { 'files', 'lsp_symbols' },
           matcher = {
             cwd_bonus = true, -- boost cwd matches
@@ -480,8 +489,8 @@ return {
         buffers_with_symbols = {
           title = 'Buffers',
           multi = { 'buffers', 'lsp_symbols' },
-          layout = { preset = 'dropdown', preview = 'main' } ,
-          -- on_show = function(picker)
+          layout = { preset = 'dropdown', preview = 'main' },
+          win = { preview = { wo = { winbar = '' } } }, -- on_show = function(picker)
           --   vim.cmd.stopinsert()
 
           --   -- you can auto enable it if you want

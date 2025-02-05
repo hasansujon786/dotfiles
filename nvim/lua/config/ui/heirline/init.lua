@@ -77,7 +77,7 @@ return {
         fallthrough = false,
         { -- Default inactive winbar for regular files
           condition = function()
-            return not conditions.is_active()
+            return conditions.is_not_active()
           end,
           { sl.Space, { hl = { fg = 'muted', force = true }, wb.WinBarFileName }, wb.BarEnd, wb.Rest },
         },

@@ -216,6 +216,7 @@ local function set_custom_highlights()
     SnacksPickerTitle       = { fg = c.dark_orange, bg = dark_border },
     SnacksPickerPrompt      = { fg = c.green },
     SnacksPickerMatch       = { fg = c.orange },
+    SnacksPickerDir         = { fg = c.grey, italic = true },
     SnacksPickerListCursorLine  = { link = 'CursorLine' },
 
     -- /// FzfLua ///
