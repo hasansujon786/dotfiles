@@ -42,12 +42,32 @@ end
 
 local M = {}
 
-function M.create_system_executor(program)
+---Create executor for src_block
+---@param program string -- cli program to run code
+---@param config? {ext?:string, args?: table}
+---@return fun(block: {body:string}): table
+function M.create_system_executor(program, config)
   return function(block)
     local tempfile = vim.fn.tempname()
+    if config and type(config.ext) == 'string' and config.ext ~= 'string' then
+      tempfile = tempfile .. config.ext
+    end
+
+    local cmd = { program }
+    if config and type(config.args) == 'table' and #config.args > 0 then
+      cmd = require('hasan.utils').tbl_concat(cmd, config.args)
+    end
+    table.insert(cmd, tempfile)
+
     vim.fn.writefile(vim.split(block.body, '\n'), tempfile)
-    local result = vim.system({ program, tempfile }, { text = true }):wait()
-    return vim.split(result.stdout, '\n')
+    local result = vim.system(cmd, { text = true }):wait()
+
+    local output = result.stdout or ''
+
+    if result.stderr and result.stderr ~= '' then
+      output = output .. '\n' .. result.stderr
+    end
+    return vim.split(output, '\n')
   end
 end
 
@@ -82,7 +102,10 @@ local executors = {
   end,
   javascript = M.create_system_executor('node'),
   js = 'javascript',
-  typescript = M.create_system_executor('node'),
+  typescript = M.create_system_executor('node', {
+    -- args = { '--no-warnings' },
+    ext = '.ts',
+  }),
   ts = 'typescript',
 }
 

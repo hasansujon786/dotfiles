@@ -15,6 +15,9 @@ alias nsc="npm start --reset-cache"
 alias nd='npm run dev'
 alias ncc='npm cache clean --force'
 alias esint='npm init @eslint/config'
+# fnm
+alias nm='fnm'
+alias nmll='fnm use lts-latest'
 # expo
 alias esc='npx expo start --clear'
 # tsc

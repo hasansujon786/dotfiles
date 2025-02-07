@@ -306,9 +306,12 @@ setup_node() {
 
   if [[ "$os" == "windows" ]]; then
     # $getter install -y nodejs
-    # choco install nvm
-    $getter install -y nodejs-lts
-    "C:\\Program Files\\nodejs\\npm" install -g yarn trash-cli live-server
+    # $getter install -y nodejs-lts
+
+    $getter install -y fnm
+    fnm install lts-latest
+    fnm use lts-latest
+    npm install -g yarn trash-cli live-server
   elif [[ "$os" == "linux" ]]; then
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
     export NVM_DIR="$HOME/.config/nvm"
