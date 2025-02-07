@@ -151,20 +151,20 @@ if not vim.g.vscode then
   keymap(nx, '<A-l>', '20zl')
   keymap(nx, '<A-h>', '20zh')
   -- Resize splits
-  keymap('n', '<A-=>', ':resize +3<CR>')
-  keymap('n', '<A-->', ':resize -3<CR>')
-  keymap('n', '<A-.>', ':vertical resize +5<CR>')
-  keymap('n', '<A-,>', ':vertical resize -5<CR>')
+  keymap('n', '<A-=>', '<cmd>resize +3<CR>')
+  keymap('n', '<A-->', '<cmd>resize -3<CR>')
+  keymap('n', '<A-.>', '<cmd>vertical resize +5<CR>')
+  keymap('n', '<A-,>', '<cmd>vertical resize -5<CR>')
   -- Jumplist
   keymap('n', '<C-i>', '<C-i>')
   keymap('n', '<C-j>', '<C-i>')
   -- Jump between tabs
   keymap(nx, 'gl', 'gt')
   keymap(nx, 'gh', 'gT')
-  keymap('n', 'gL', ':tabmove+<CR>') -- Move tabs
-  keymap('n', 'gH', ':tabmove-<CR>')
-  -- keymap(nx, 'gl', '<cmd>!wezterm cli activate-tab --tab-relative 1<CR>')
-  -- keymap(nx, 'gh', '<cmd>!wezterm cli activate-tab --tab-relative -1<CR>')
+  keymap('n', 'gL', '<cmd>tabmove+<CR>') -- Move tabs
+  keymap('n', 'gH', '<cmd>tabmove-<CR>')
+  -- keymap(nx, 'gl',<cmd>'<cmd>!wezterm cli activate-tab --tab-relative 1<CR>')
+  -- keymap(nx, 'gh',<cmd>'<cmd>!wezterm cli activate-tab --tab-relative -1<CR>')
 
   -- Quickfix list
   -- keymap('n', ']l', ':lnext<CR>')
@@ -208,8 +208,8 @@ if not vim.g.vscode then
   keymap(nx, '<C-s>', '<cmd>silent w<cr>', { desc = 'Save current file' })
 
   -- Window Management ----------------------------
-  keymap('n', 'ZZ', ':Quit!<CR>') -- Prompt before quitting
-  keymap('n', '<Bar>', ':wincmd =<cr>') -- Event all windows
+  keymap('n', 'ZZ', '<cmd>Quit!<CR>') -- Prompt before quitting
+  keymap('n', '<Bar>', '<cmd>wincmd =<cr>') -- Event all windows
   keymap(nx, '<leader>q', '<cmd>Quit<CR>', { desc = 'Close window' })
   keymap(nx, '<leader>h', '<cmd>lua handle_win_cmd("wincmd h")<CR>', { desc = 'which_key_ignore' })
   keymap(nx, '<leader>j', '<cmd>lua handle_win_cmd("wincmd j")<CR>', { desc = 'which_key_ignore' })

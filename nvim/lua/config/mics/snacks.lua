@@ -160,6 +160,7 @@ return {
     bigfile = { enabled = true },
     quickfile = { enabled = true },
     words = { enabled = true },
+    explorer = { enabled = true },
     input = {},
     indent = {
       ---@class snacks.indent.animate: snacks.animate.Config
@@ -729,7 +730,7 @@ return {
     { '<leader>fg', function() Snacks.picker.git_files() end, desc = 'Find Git Files' },
     { '<leader>fr', function() Snacks.picker.recent() end, desc = 'Recent' },
     { '<leader>fc', function() Snacks.picker.files({cwd=vim.fn.stdpath('config')}) end, desc = 'Find Config File' },
-    { '<leader>fe', function() Snacks.picker.explorer() end, desc = 'Find Config File' },
+    { '<leader>fe', function() Snacks.explorer() end, desc = 'File Explorer' },
 
     -- FIND BUFFERS
     { "g.", function() Snacks.picker.buffers_with_symbols() end, desc = 'which_key_ignore' },
