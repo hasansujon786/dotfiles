@@ -5,7 +5,7 @@ return {
   keys = {
     { 'gb', '<Plug>(VM-Find-Under)', desc = 'VM: Select under cursor', mode = 'n' },
     { 'gb', '<Plug>(VM-Find-Subword-Under)', desc = 'VM: Select under cursor', mode = 'x' },
-    { 'gmb', desc = 'VM-Select-All)', mode = nx },
+    { 'gmA', desc = 'VM-Select-All)', mode = nx },
     { '<C-up>', mode = nx },
     { '<C-down>', mode = nx },
   },
@@ -13,7 +13,6 @@ return {
     vim.g.VM_leader = 'gm'
     vim.g.VM_theme = ''
     vim.g.VM_maps = {
-      ['Select All'] = 'gmb',
       ['Find Under'] = 0,
       ['Find Subword Under'] = 0,
       ['gc'] = 'gC',

@@ -61,7 +61,7 @@ local function get_ivy(mini)
       backdrop = false,
       row = -1,
       width = 0,
-      height = mini and 0.5 or 0.7,
+      height = mini and 0.4 or 0.7,
       border = 'none',
       {
         win = 'input',
@@ -141,6 +141,13 @@ local flash_on_picker = function(picker)
     end,
   })
 end
+
+local preview_main_win = {
+  preview = {
+    row = -1,
+    -- wo = { winbar = '' },
+  },
+}
 
 return {
   'hasansujon786/snacks.nvim',
@@ -369,12 +376,7 @@ return {
         grep_buffers = { layout = 'dropdown_preview' },
         lines = {
           layout = { preset = 'ivy_mini', preview = 'main' },
-          win = {
-            preview = {
-              max_height = vim.o.lines - 2,
-              wo = { winbar = '' },
-            },
-          },
+          win = { preview = { row = -1 } },
         },
 
         zoxide = { layout = 'dropdown' },
@@ -491,7 +493,8 @@ return {
           title = 'Buffers',
           multi = { 'buffers', 'lsp_symbols' },
           layout = { preset = 'dropdown', preview = 'main' },
-          win = { preview = { wo = { winbar = '' } } }, -- on_show = function(picker)
+          win = preview_main_win,
+          -- on_show = function(picker)
           --   vim.cmd.stopinsert()
 
           --   -- you can auto enable it if you want
