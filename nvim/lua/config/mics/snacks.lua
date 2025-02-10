@@ -168,6 +168,7 @@ return {
     quickfile = { enabled = true },
     words = { enabled = true },
     explorer = { enabled = true },
+    -- image = { enabled = false },
     input = {},
     indent = {
       ---@class snacks.indent.animate: snacks.animate.Config
@@ -368,7 +369,37 @@ return {
         files = { layout = 'ivy' },
         git_files = { layout = 'vscode' },
         recent = { layout = 'ivy' },
-        lsp_symbols = { layout = 'dropdown' },
+        treesitter = {
+          layout = { preset = 'dropdown', preview = 'main' },
+          win = preview_main_win,
+          filter = {
+            default = {
+              'Class',
+              'Enum',
+              'Field',
+              'Function',
+              'Method',
+              'Module',
+              'Namespace',
+              'Struct',
+              'Trait',
+              'identifier',
+
+              'Variable',
+              'Field',
+              'TypeParameter',
+              'Constant',
+              'Interface',
+              'Property',
+            },
+            markdown = true,
+            help = true,
+          },
+        },
+        lsp_symbols = {
+          layout = { preset = 'dropdown', preview = { enabled = false, main = true } },
+          win = preview_main_win,
+        },
         smart = { preset = 'vscode', preview = 'main' },
 
         grep = { layout = 'dropdown_preview' },
@@ -409,15 +440,54 @@ return {
         },
 
         project_files = { -- https://github.com/folke/snacks.nvim/issues/532#issuecomment-2609303872
-          layout = { preset = 'vscode' },
+          layout = { preset = 'vscode', preview = { main = true, enabled = false } },
           multi = { 'files', 'lsp_symbols' },
           matcher = {
             cwd_bonus = true, -- boost cwd matches
             frecency = true, -- use frecency boosting
             sort_empty = true, -- sort even when the filter is empty
           },
+          win = {
+            input = {
+              keys = {
+                ['<c-n>'] = { 'next_result', mode = { 'i', 'n' } },
+                ['<esc>'] = { 'close', mode = { 'i', 'n' } },
+              },
+            },
+          },
+          actions = {
+            close = function(p, _)
+              vim.cmd('noh')
+              p:close()
+            end,
+            next_result = function(p, _)
+              if p.preview.win.buf == nil then
+                return
+              end
+
+              local filter = p:filter()
+              local pattern = filter.pattern
+              local search_pattern = pattern:match('^.-#(.*)$')
+
+              if search_pattern and search_pattern ~= '' then
+                local item = p:current()
+
+                vim.api.nvim_buf_call(p.preview.win.buf, function()
+                  vim.api.nvim_win_set_cursor(0, item and item.pos)
+                  local search = vim.fn.searchpos(search_pattern, 'cw')
+                  if search[1] > 0 then
+                    vim.cmd('/' .. search_pattern)
+
+                    vim.api.nvim_win_set_cursor(0, { search[1], search[2] })
+                    item.pos = { search[1], search[2] }
+                  end
+                end)
+                return
+              end
+            end,
+          },
           filter = {
-            ---@param p snacks.Picker
+            ---@param p snacks.picker
             ---@param filter snacks.picker.Filter
             transform = function(p, filter)
               local symbol_pattern = filter.pattern:match('^.-@(.*)$')
@@ -470,14 +540,11 @@ return {
                 if p.preview.win.buf ~= nil then
                   vim.api.nvim_buf_call(p.preview.win.buf, function()
                     vim.api.nvim_win_set_cursor(0, { 1, 0 })
-                    local search = vim.fn.search(search_pattern, 'ncW')
-                    if search > 0 then
+                    local search = vim.fn.searchpos(search_pattern, 'cw')
+                    if search[1] > 0 then
                       vim.cmd('/' .. search_pattern)
-                      -- if vim.fn.line('w$') < search then
-                      --   vim.api.nvim_win_set_cursor(0, { math.max(1, search - 8), 0 })
-                      -- end
-                      item.pos = { search, 0 }
-                      p.preview:loc()
+                      vim.api.nvim_win_set_cursor(0, { search[1], search[2] })
+                      item.pos = { search[1], search[2] }
                     end
                   end)
                 end
@@ -614,6 +681,7 @@ return {
           preview = false,
           layout = {
             backdrop = false,
+            zindex = 100,
             row = 0,
             width = 0.4,
             min_width = 80,
@@ -736,11 +804,12 @@ return {
     { '<leader>fe', function() Snacks.explorer() end, desc = 'File Explorer' },
 
     -- FIND BUFFERS
-    { "g.", function() Snacks.picker.buffers_with_symbols() end, desc = 'which_key_ignore' },
+    { 'g.', function() Snacks.picker.buffers_with_symbols() end, desc = 'which_key_ignore' },
     { '<leader>bb', function() Snacks.picker.buffers_with_symbols() end, desc = 'Buffers' },
 
     -- LSP
     { 'go', function() Snacks.picker.lsp_symbols() end, desc = 'LSP Symbols' },
+    { 'g/', function() Snacks.picker.treesitter() end, desc = 'Treesitter Symbols' },
 
     -- GIT
     { '<leader>g/', function() Snacks.picker.git_status() end, desc = 'Git Status' },

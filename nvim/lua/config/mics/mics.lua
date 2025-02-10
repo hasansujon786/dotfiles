@@ -52,4 +52,18 @@ return {
   { 'tpope/vim-repeat', lazy = true, event = 'BufReadPost', dependencies = 'tpope/vim-surround' },
   { 'dhruvasagar/vim-table-mode', cmd = { 'TableModeToggle', 'TableModeEnable', 'TableModeRealign' } },
   -- { 'tpope/vim-eunuch', lazy = true, cmd = { 'Delete', 'Move', 'Rename', 'Mkdir', 'Chmod' } },
+  -- {
+  --   'skardyy/neo-img',
+  --   lazy = true,
+  --   cmd = { 'NeoImgShow' },
+  --   -- build = 'cd ttyimg && go build', -- build ttyimg
+  --   opts = {
+  --     auto_open = false,
+  --     oil_preview = false,
+  --     backend = 'auto', -- auto detect: kitty / iterm / sixel
+  --     size = { main = { x = 800, y = 800 } },
+  --     offset = { main = { x = 10, y = 3 } },
+  --     resizeMode = 'Fit', -- Fit / Strech / Crop
+  --   },
+  -- },
 }
