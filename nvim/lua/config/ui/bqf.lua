@@ -8,7 +8,7 @@ return {
   },
   keys = {
     {
-      'gq',
+      'gw',
       function()
         require('hasan.utils.ui.qf').showLspReferencesInLocList()
       end,

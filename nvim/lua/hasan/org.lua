@@ -183,6 +183,9 @@ end
 function M.open_org_project()
   local file_util = require('hasan.utils.file')
   local cwd = vim.uv.cwd()
+  if cwd == nil or cwd == '' then
+    return
+  end
   local config_file_exists, config_file = file_util.path_exists('.project.json', cwd)
 
   if config_file_exists then

@@ -169,4 +169,22 @@ function M.lspRename()
   end)
 end
 
+function M.hover()
+  local text = require('hasan.utils.buffer').parse_cursor_text(0)
+  if type(text) ~= 'string' or text == '' then
+    vim.lsp.buf.hover()
+    return
+  end
+
+  local cwd = vim.fn.expand('%:p:h')
+  local absolute_path = require('hasan.utils.file').resolve_relative_path(cwd, text)
+  local is_readable = vim.fn.filereadable(absolute_path) == 1
+
+  if not is_readable then
+    vim.lsp.buf.hover()
+    return
+  end
+  require('hasan.utils.file').quickLook({ absolute_path })
+end
+
 return M

@@ -69,4 +69,31 @@ M.add_file_to_buflist = function(filename)
   return bufnr, set_position
 end
 
+function M.parse_cursor_text(bufnr)
+  local root = vim.treesitter.get_node({ bufnr = bufnr })
+  if not root then
+    return
+  end
+
+  local root_type = root:type()
+  if root_type == 'string_fragment' or root_type == 'string' or root_type == 'string_content' then
+    return vim.treesitter.get_node_text(root, bufnr)
+  end
+
+  local function find_node(node)
+    for child in node:iter_children() do
+      local type = child:type()
+      if type == 'string_fragment' or type == 'string' or type == 'string_content' then
+        return vim.treesitter.get_node_text(child, bufnr)
+      end
+      local found = find_node(child)
+      if found then
+        return found
+      end
+    end
+  end
+
+  return find_node(root)
+end
+
 return M

@@ -17,6 +17,21 @@ M.get_buf_name_relative = function(buffer)
   return Path:new(vim.api.nvim_buf_get_name(buffer)):make_relative(M.get_root_dir())
 end
 
+function M.resolve_relative_path(base, relative)
+  base = vim.fs.normalize(base)
+  relative = vim.fs.normalize(relative)
+  local base_parts = vim.split(base, '/', { plain = true })
+
+  for part in relative:gmatch('[^/]+') do
+    if part == '..' then
+      table.remove(base_parts)
+    elseif part ~= '.' then
+      table.insert(base_parts, part)
+    end
+  end
+  return table.concat(base_parts, '/')
+end
+
 M.config_root = function()
   local pvim_config = os.getenv('PVIM')
   if pvim_config then
