@@ -29,12 +29,12 @@ M.lsp_attach = function(args)
 end
 
 function M.update_capabilities(fname)
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
   local blink_ok, blink_cmp = pcall(require, 'blink.cmp')
   if blink_ok then
-    return blink_cmp.get_lsp_capabilities(capabilities)
+    return blink_cmp.get_lsp_capabilities(nil, true)
   end
 
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
   local cmp_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
   if cmp_ok then
     return vim.tbl_deep_extend('force', capabilities, cmp_nvim_lsp.default_capabilities())

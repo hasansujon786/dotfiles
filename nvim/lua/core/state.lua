@@ -11,7 +11,7 @@ M.treesitter = {
 
 ---@type StateCompletion
 M.completion = {
-  module = 'cmp',
+  module = 'blink',
 }
 
 M.lsp = {

@@ -83,8 +83,11 @@ return {
         ['<A-p>'] = { 'select_prev', 'fallback' },
       },
     },
-
+    -- snippets = {
+    --   preset = 'luasnip',
+    -- },
     sources = {
+      -- https://github.com/Saghen/blink.cmp/blob/main/docs/configuration/sources.md#community-sources
       default = { 'lsp', 'path', 'snippets', 'buffer' },
       -- per_filetype = {},
       cmdline = function()
@@ -127,13 +130,14 @@ return {
       },
       menu = {
         enabled = true,
-        auto_show = function(ctx)
-          return ctx.mode ~= 'cmdline'
-        end,
+        -- auto_show = function(ctx)
+        --   return ctx.mode ~= 'cmdline'
+        -- end,
         min_width = 52,
         max_height = vim.o.pumheight,
         border = 'none',
         draw = {
+          -- treesitter = { 'lsp' },
           align_to = 'cursor',
           padding = 1,
           gap = 1,
