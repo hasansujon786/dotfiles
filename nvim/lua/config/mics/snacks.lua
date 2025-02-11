@@ -168,7 +168,6 @@ return {
     quickfile = { enabled = true },
     words = { enabled = true },
     explorer = { enabled = true },
-    -- image = {},
     input = {},
     indent = {
       ---@class snacks.indent.animate: snacks.animate.Config

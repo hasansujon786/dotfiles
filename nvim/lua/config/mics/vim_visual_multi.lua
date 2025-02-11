@@ -5,6 +5,7 @@ return {
   keys = {
     { 'gb', '<Plug>(VM-Find-Under)', desc = 'VM: Select under cursor', mode = 'n' },
     { 'gb', '<Plug>(VM-Find-Subword-Under)', desc = 'VM: Select under cursor', mode = 'x' },
+    { 'gA', '<Plug>(VM-Select-All)', desc = 'VM-Select-All)', mode = nx },
     { 'gmA', desc = 'VM-Select-All)', mode = nx },
     { '<C-up>', mode = nx },
     { '<C-down>', mode = nx },
@@ -17,6 +18,7 @@ return {
       ['Find Subword Under'] = 0,
       ['gc'] = 'gC',
       ['I BS'] = '<C-h>',
+      ['Reselect Last'] = 'gmG',
     }
   end,
   config = function()

@@ -360,7 +360,7 @@ local function set_custom_highlights()
     MasonHighlightBlockBold     = { link = 'LazyButtonActive' },
     -- /// vim-visual-multi ///
     VM_Extend = { bg = '#363f7d', fg =  c.none  },
-    VM_Cursor = { bg = '#5962a1', fg = c.bg_d },
+    VM_Cursor = { bg = '#5962a1', fg = c.none },
     VM_Insert = { bg = '#4c4e50', fg = c.none },
     VM_Mono   = { bg = c.ligh_green, fg = c.white },
     -- /// eyeliner ///
