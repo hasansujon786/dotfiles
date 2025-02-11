@@ -32,6 +32,29 @@ function M.resolve_relative_path(base, relative)
   return table.concat(base_parts, '/')
 end
 
+function M.get_relative_path(current_path, asset_path)
+  local type = require('hasan.utils.file').get_path_type(current_path)
+
+  local from_parts = vim.split(current_path, '/', { plain = true })
+  local to_parts = vim.split(asset_path, '/', { plain = true })
+
+  if type == 'file' then
+    table.remove(from_parts) -- Remove filename
+  end
+
+  -- Find common ancestor
+  local common_idx = 1
+  while from_parts[common_idx] and to_parts[common_idx] and from_parts[common_idx] == to_parts[common_idx] do
+    common_idx = common_idx + 1
+  end
+
+  -- Construct relative path
+  local up_moves = #from_parts - (common_idx - 1)
+  local prefix = up_moves == 0 and './' or ('../'):rep(up_moves)
+
+  return prefix .. table.concat(vim.list_slice(to_parts, common_idx), '/')
+end
+
 M.config_root = function()
   local pvim_config = os.getenv('PVIM')
   if pvim_config then
@@ -211,6 +234,21 @@ function M.system_open(file, opts)
 
   table.insert(args, file)
   require('plenary.job'):new({ command = M.system_open_cmd, args = args }):start()
+end
+
+---Check if path is file or directory
+---@param path any
+---@return "file"|"directory"|nil
+function M.get_path_type(path)
+  local stat = vim.uv.fs_stat(path)
+  if stat then
+    if stat.type == 'file' then
+      return 'file'
+    elseif stat.type == 'directory' then
+      return 'directory'
+    end
+  end
+  return nil
 end
 
 return M

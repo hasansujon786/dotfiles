@@ -168,7 +168,7 @@ return {
     quickfile = { enabled = true },
     words = { enabled = true },
     explorer = { enabled = true },
-    -- image = { enabled = false },
+    -- image = {},
     input = {},
     indent = {
       ---@class snacks.indent.animate: snacks.animate.Config
@@ -640,6 +640,16 @@ return {
             reveal_force_cwd = true, -- change cwd without asking if needed
           })
         end,
+        insert_relative_path = function(p, item, action)
+          local buf_name = vim.api.nvim_buf_get_name(p.finder.filter['current_buf'])
+          buf_name = vim.fs.normalize(buf_name)
+          local text = require('hasan.utils.file').get_relative_path(buf_name, item._path)
+
+          p:close()
+          if text then
+            vim.api.nvim_put({ text }, 'c', true, true)
+          end
+        end,
       },
 
       icons = {
@@ -649,23 +659,27 @@ return {
       win = {
         input = {
           keys = {
+            ['<Esc>'] = { 'close', mode = { 'n', 'i' } },
+            ['<c-u>'] = false,
+
             ['<a-q>'] = { 'toggle_preview', mode = { 'i', 'n' } },
             ['<a-u>'] = { 'preview_scroll_up', mode = { 'i', 'n' } },
             ['<a-d>'] = { 'preview_scroll_down', mode = { 'i', 'n' } },
-            ['<Esc>'] = { 'close', mode = { 'n', 'i' } },
             ['<a-n>'] = { 'list_down', mode = { 'i', 'n' } },
             ['<a-p>'] = { 'list_up', mode = { 'i', 'n' } },
             ['<tab>'] = { 'list_down', mode = { 'i', 'n' } },
             ['<s-tab>'] = { 'list_up', mode = { 'i', 'n' } },
-            ['<c-u>'] = false,
 
             -- ['<a-i>'] = { 'toggle_ignored', mode = { 'i', 'n' } },
             -- ['<a-h>'] = { 'toggle_hidden', mode = { 'i', 'n' } },
             -- ['<a-f>'] = { 'toggle_follow', mode = { 'i', 'n' } },
 
+            ['<a-r>'] = { 'insert_relative_path', mode = { 'i', 'n' } },
+            ['<a-l>'] = { 'inspect', mode = { 'i', 'n' } },
+
             ['<a-s>'] = { 'flash', mode = { 'n', 'i' } },
             ['s'] = { 'flash' },
-            ['<c-t>'] = { 'focus_file_tree', mode = { 'i', 'n' } },
+            ['<a-t>'] = { 'focus_file_tree', mode = { 'i', 'n' } },
             ['<a-i>'] = { 'quicklook', mode = { 'i', 'n' } },
             ['<a-o>'] = { 'system_open', mode = { 'i', 'n' } },
             -- ['<S-CR>'] = { 'fedit', mode = { 'i', 'n' } },
