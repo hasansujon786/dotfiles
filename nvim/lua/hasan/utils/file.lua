@@ -197,8 +197,15 @@ function M.reload()
   end
 end
 
+local qlook = {
+  args = nil,
+  map_added = false,
+}
+
 function M.quickLook(args)
   local bg_job = nil
+  qlook.args = args
+
   bg_job = require('plenary.job'):new({
     command = 'C:\\Users\\hasan\\AppData\\Local\\Programs\\QuickLook\\QuickLook.exe',
     args = args,
@@ -206,16 +213,25 @@ function M.quickLook(args)
   })
   bg_job:start()
 
-  -- bg_job:after_success(vim.schedule_wrap(function(_)
-  --   -- on_pub_get(j:result())
-  --   bg_job = nil
-  --   P('after_success')
-  -- end))
   bg_job:after_failure(vim.schedule_wrap(function(_)
-    -- on_pub_get(j:stderr_result(), true)
     bg_job = nil
     vim.notify('There someting went wrong while opening QuickLook', vim.log.levels.WARN)
   end))
+
+  bg_job:after_success(vim.schedule_wrap(function(_)
+    bg_job = nil
+  end))
+
+  if not qlook.map_added then
+    keymap('n', '<leader>vo', function()
+      M.quickLook_close()
+    end, { desc = 'Toggle quickLook' })
+    qlook.map_added = true
+  end
+end
+
+function M.quickLook_close()
+  M.quickLook(qlook.args)
 end
 
 M.system_open_cmd = vim.fn.has('win32') == 1 and 'explorer.exe' or vim.fn.has('mac') == 1 and 'open' or 'xdg-open'

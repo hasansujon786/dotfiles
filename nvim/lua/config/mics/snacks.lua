@@ -206,7 +206,7 @@ return {
     quickfile = { enabled = true },
     words = { enabled = true },
     explorer = { enabled = true },
-    -- image = {},
+    image = {},
     input = {},
     indent = {
       ---@class snacks.indent.animate: snacks.animate.Config
@@ -405,7 +405,7 @@ return {
       sources = {
         buffers = { layout = 'dropdown', current = false },
         files = { layout = 'ivy' },
-        git_files = { layout = 'vscode' },
+        git_files = { layout = 'dropdown' },
         recent = { layout = 'ivy' },
         treesitter = {
           layout = { preset = 'dropdown', preview = 'main' },
@@ -438,7 +438,7 @@ return {
           layout = { preset = 'dropdown', preview = { enabled = false, main = true } },
           win = preview_main_win,
         },
-        smart = { preset = 'vscode', preview = 'main' },
+        smart = { preset = 'dropdown', preview = 'main' },
 
         grep = { layout = 'dropdown_preview' },
         grep_word = { layout = 'dropdown_preview' },
@@ -463,6 +463,13 @@ return {
         },
 
         explorer = {
+          tree = true,
+          watch = false,
+          diagnostics = false,
+          diagnostics_open = false,
+          follow_file = true,
+          focus = 'list',
+          auto_close = false,
           win = {
             input = {
               keys = {
@@ -472,13 +479,16 @@ return {
             list = {
               keys = {
                 ['<tab>'] = { 'toggle_focus', mode = { 'i', 'n' } },
+                ['o'] = 'confirm',
+                ['O'] = 'explorer_open', -- open with system application
+                ['x'] = 'explorer_close', -- close directory
               },
             },
           },
         },
 
         project_files = { -- https://github.com/folke/snacks.nvim/issues/532#issuecomment-2609303872
-          layout = { preset = 'vscode', preview = { main = true, enabled = false } },
+          layout = { preset = 'dropdown', preview = { main = true, enabled = false } },
           multi = { 'files', 'lsp_symbols' },
           matcher = {
             cwd_bonus = true, -- boost cwd matches
@@ -818,7 +828,7 @@ return {
     { 'g]',         function() Snacks.words.jump(vim.v.count1) end, desc = 'Next Reference', mode = { 'n', 't' } },
     { 'g[',         function() Snacks.words.jump(-vim.v.count1) end, desc = 'Prev Reference', mode = { 'n', 't' } },
     { '<leader>vv', function() Snacks.notifier.hide() end, desc = 'which_key_ignore' },
-    { '<leader>vo', function() Snacks.notifier.hide() end, desc = 'Dismiss All Notifications' },
+    { '<leader>vn', function() Snacks.notifier.hide() end, desc = 'Dismiss All Notifications' },
     { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Kill this buffer' },
     { '<leader>go', function() Snacks.gitbrowse() end, desc = 'Open git repo' , mode = { 'n', 'v' } },
     { '<leader>aR', function() Snacks.rename.rename_file() end, desc = 'Lsp: Rename file' },
@@ -826,7 +836,7 @@ return {
 
     { '<leader>z',  function() Snacks.zen() end, desc = 'Toggle Zen Mode' },
     { '<leader>u',  function() Snacks.zen.zoom() end, desc = 'Toggle Zoom' },
-    { '<leader>vn', function() Snacks.notifier.show_history() end, desc = 'Notification History' },
+    { '<leader>vh', function() Snacks.notifier.show_history() end, desc = 'Notification History' },
     { '<leader>x', function() Snacks.scratch() end, desc = 'Toggle Scratch Buffer' },
     { '<leader>/x', function() Snacks.scratch.select() end, desc = 'Select Scratch Buffer' },
     {
@@ -842,8 +852,8 @@ return {
       end,
     },
     -- FIND FILES
-    -- { '<leader><space>', function() Snacks.picker.smart(vscode) end, desc = 'Find Git Files' },
-    -- { '<leader><space>', function() Snacks.picker.git_files(vscode) end, desc = 'Find Git Files' },
+    -- { '<leader><space>', function() Snacks.picker.smart() end, desc = 'Find Git Files' },
+    -- { '<leader><space>', function() Snacks.picker.git_files() end, desc = 'Find Git Files' },
     { '<leader><space>', function() Snacks.picker.project_files() end, desc = 'Find project files' },
     -- { '<leader>.', function() Snacks.picker.files({layout='ivy', cwd=vim.fn.expand('%:h')}) end, desc = 'Browse cur directory' },
     { '<leader>.', function() require('snacks-file-browser').browse({ cwd = vim.fn.expand('%:h') }) end, desc = 'Browse cur directory' },
@@ -879,6 +889,7 @@ return {
     { '<leader>/k', function() Snacks.picker.keymaps() end, desc = 'Keymaps' },
     { '<leader>/q', function() Snacks.picker.qflist() end, desc = 'Quickfix List' },
     { '<leader>/l', function() Snacks.picker.loclist() end, desc = 'Location List' },
+    { '<leader>/H', function() Snacks.picker.highlights() end, desc = 'Highlights' },
     -- { '<leader>/c', function() Sdropdown_previewnacks.picker.commands() end, desc = 'Commands' },
     -- { '<leader>/C', function() Snacks.picker.command_history() end, desc = 'Command History' },
     { '//', auto_open_qflistt_or_loclist, ft = 'qf', desc = 'which_key_ignore' },
@@ -893,7 +904,6 @@ return {
     { '<leader>v/', function() Snacks.picker.help() end, desc = 'Help Pages' },
     { '<leader>vm', function() Snacks.picker.marks() end, desc = 'Marks' },
     { '<leader>vc', function() Snacks.picker.colorschemes() end, desc = 'Colorschemes' },
-    { '<leader>vH', function() Snacks.picker.highlights() end, desc = 'Highlights' },
 
     -- ORGMODE
     { '<leader>ng', function() Snacks.picker.grep({cwd=org_root_path}) end, desc = 'Grep org text' },

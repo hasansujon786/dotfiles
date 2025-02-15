@@ -176,14 +176,17 @@ function M.hover()
     return
   end
 
-  local cwd = vim.fn.expand('%:p:h')
-  local absolute_path = require('hasan.utils.file').resolve_relative_path(cwd, text)
+  local buf = vim.api.nvim_get_current_buf()
+  local file = vim.fs.normalize(vim.api.nvim_buf_get_name(buf))
+  local dir = vim.fs.dirname(file)
+  local absolute_path = require('hasan.utils.file').resolve_relative_path(dir, text)
   local is_readable = vim.fn.filereadable(absolute_path) == 1
 
   if not is_readable then
     vim.lsp.buf.hover()
     return
   end
+
   require('hasan.utils.file').quickLook({ absolute_path })
 end
 
