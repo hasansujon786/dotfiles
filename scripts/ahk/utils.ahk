@@ -60,7 +60,7 @@ getMousePos() {
   A_Clipboard := xy
   SetTimer(toolTipClear,-1000)
 }
-P(msg) {
+dd(msg) {
   MsgBox(msg, "", "T1")
 }
 tooltipClear() {
@@ -201,7 +201,7 @@ takeScreenshot() {
   Sleep(300)
   SplashTextGui.Destroy
 }
-select_playback_device() {
+select_playback_device_w10() {
   Send("#b")
   Send("{left}")
   Send("{left}")
@@ -212,6 +212,12 @@ select_playback_device() {
   Send("{Enter}")
   sleep(100)
   Send("{tab}")
+}
+select_volume_mixer() {
+  Send("^#v")
+  sleep(500)
+  Send("{tab}{tab}{tab}")
+  Send("+{end}")
 }
 open_mic_panel() {
   Run("control mmsys.cpl,,1")
@@ -477,7 +483,7 @@ centerCurrentWindow() {
     targetY := ((A_ScreenHeight - 30)/2) - (win_height/2)
     WinMove(targetX, targetY, , , win_title)
   } catch Error as err {
-    P("Error found, could not center the window")
+    dd("Error found, could not center the window")
   }
 }
 winPinToSide(side, checkFullscreen) {

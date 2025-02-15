@@ -23,7 +23,7 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 ^#b::showCalendar()
 PrintScreen::Send("#+{s}")
 #+q::toggleBluetooth()
-#q::select_playback_device()
+#q::select_volume_mixer()
 #^+v::open_mic_panel()
 #;::SendInput("{AppsKey}")
 #k::toggleKanata()

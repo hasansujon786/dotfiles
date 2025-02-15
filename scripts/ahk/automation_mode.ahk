@@ -70,7 +70,7 @@ selectAutoClikMode() {
 
   submit(selected) {
     if (selected = 0) {
-      return P("not selected")
+      return dd("not selected")
     }
 
     Global autoClikMode := selected
