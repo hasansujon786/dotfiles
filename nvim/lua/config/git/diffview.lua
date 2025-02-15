@@ -1,5 +1,4 @@
 local Icons = require('hasan.utils.ui.icons')
-local nebulous = '<cmd>lua require("nebulous.init").pause(2000)<CR>'
 
 return {
   'sindrets/diffview.nvim',
@@ -18,10 +17,10 @@ return {
       end,
       desc = 'Open Diffview',
     },
-    { '<leader>gD', nebulous .. '<cmd>DiffviewFileHistory<CR>', desc = 'Open Repo History' },
-    { '<leader>gf', nebulous .. '<cmd>DiffviewFileHistory --follow %<cr>', desc = 'Open File history' },
-    { '<leader>gf', nebulous .. "<Esc><Cmd>'<,'>DiffviewFileHistory --follow<CR>", desc = 'Range history', mode = 'v' },
-    { '<leader>gF', nebulous .. '<Cmd>.DiffviewFileHistory --follow<CR>', desc = 'Line history' },
+    { '<leader>gD', '<cmd>DiffviewFileHistory<CR>', desc = 'Open Repo History' },
+    { '<leader>gf', '<cmd>DiffviewFileHistory --follow %<cr>', desc = 'Open File history' },
+    { '<leader>gf', "<Esc><Cmd>'<,'>DiffviewFileHistory --follow<CR>", desc = 'Range history', mode = 'x' },
+    { '<leader>gF', '<Cmd>.DiffviewFileHistory --follow<CR>', desc = 'Line history' },
   },
   config = function()
     local actions = require('diffview.actions')

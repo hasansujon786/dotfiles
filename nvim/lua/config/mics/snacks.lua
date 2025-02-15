@@ -16,6 +16,44 @@ local function button(key, label, desc, cmd)
   }
 end
 
+---Check if cursor is in range
+---@param cursor integer[] cursor position (line, character); (1, 0)-based
+---@param range lsp_range_t 0-based range
+---@return boolean
+local function cursor_in_range(cursor, range)
+  local cursor0 = { cursor[1] - 1, cursor[2] }
+  -- stylua: ignore start
+  return (
+    cursor0[1] > range.start.line
+    or (cursor0[1] == range.start.line
+        and cursor0[2] >= range.start.character)
+  )
+    and (
+      cursor0[1] < range['end'].line
+      or (cursor0[1] == range['end'].line
+          and cursor0[2] <= range['end'].character)
+    )
+  -- stylua: ignore end
+end
+local lsp_symbols = function()
+  -- see: https://github.com/folke/snacks.nvim/issues/1057#issuecomment-2652052218
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local picker = Snacks.picker.lsp_symbols()
+  -- focus the symbol at the cursor position
+  picker.matcher.task:on(
+    'done',
+    vim.schedule_wrap(function()
+      local symbols = picker:items()
+      for i = #symbols, 1, -1 do
+        if cursor_in_range(cursor, symbols[i].range) then
+          picker.list:move(symbols[i].idx, true)
+          return
+        end
+      end
+    end)
+  )
+end
+
 -- local group = vim.api.nvim_create_augroup('SnackHooks', { clear = true })
 -- vim.api.nvim_create_autocmd({ 'User' }, {
 --   pattern = 'SnacksDashboardOpened',
@@ -155,7 +193,7 @@ return {
   enabled = true,
   lazy = false,
   dependencies = {
-    { 'hasansujon786/snacks-file-browser.nvim', dev = true },
+    { 'hasansujon786/snacks-file-browser.nvim', dev = false },
   },
   ---@type snacks.Config
   opts = {
@@ -168,6 +206,7 @@ return {
     quickfile = { enabled = true },
     words = { enabled = true },
     explorer = { enabled = true },
+    -- image = {},
     input = {},
     indent = {
       ---@class snacks.indent.animate: snacks.animate.Config
@@ -356,11 +395,11 @@ return {
         -- dotfiles
         'gui/sublime_text/',
         'nvim/tmp/archive',
-        '4_archive/.*',
+        '4_archive/',
         -- projects
-        'android/.*',
-        'ios/.*',
-        'vendor/.*',
+        'android/',
+        'ios/',
+        'vendor/',
         'pubspec.lock',
       },
       sources = {
@@ -821,7 +860,7 @@ return {
     { '<leader>bb', function() Snacks.picker.buffers_with_symbols() end, desc = 'Buffers' },
 
     -- LSP
-    { 'go', function() Snacks.picker.lsp_symbols() end, desc = 'LSP Symbols' },
+    { 'go', lsp_symbols, desc = 'LSP Symbols' },
     { 'g/', function() Snacks.picker.treesitter() end, desc = 'Treesitter Symbols' },
 
     -- GIT
