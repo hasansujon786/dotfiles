@@ -61,27 +61,6 @@ return {
 
       ['<A-u>'] = { 'scroll_documentation_up', 'fallback' },
       ['<A-d>'] = { 'scroll_documentation_down', 'fallback' },
-
-      cmdline = {
-        ['<C-y>'] = { 'select_and_accept', 'fallback' },
-        ['<C-e>'] = { 'cancel', 'fallback' },
-
-        ['<Tab>'] = {
-          function(cmp)
-            if not cmp.is_visible() then
-              return cmp.show({ callback = cmp.select_next })
-            end
-          end,
-          'select_next',
-          'fallback',
-        },
-        ['<S-Tab>'] = { 'select_prev', 'fallback' },
-
-        ['<C-n>'] = { 'select_next', 'fallback' },
-        ['<C-p>'] = { 'select_prev', 'fallback' },
-        ['<A-n>'] = { 'select_next', 'fallback' },
-        ['<A-p>'] = { 'select_prev', 'fallback' },
-      },
     },
     -- snippets = {
     --   preset = 'luasnip',
@@ -90,18 +69,6 @@ return {
       -- https://github.com/Saghen/blink.cmp/blob/main/docs/configuration/sources.md#community-sources
       default = { 'lsp', 'path', 'snippets', 'buffer' },
       -- per_filetype = {},
-      cmdline = function()
-        local type = vim.fn.getcmdtype()
-        -- Search forward and backward
-        if type == '/' or type == '?' or type == '@' then
-          return { 'buffer' }
-        end
-        -- Commands
-        if type == ':' then
-          return { 'cmdline' }
-        end
-        return {}
-      end,
       providers = {
         path = { name = ' ', score_offset = 110 },
         lsp = { name = ' ', score_offset = 100 },
@@ -150,7 +117,7 @@ return {
         cmdline_position = function()
           if vim.g.ui_cmdline_pos ~= nil then
             local pos = vim.g.ui_cmdline_pos -- (1, 0)-indexed
-            return { pos[1], pos[2] - 3 }
+            return { pos[1], pos[2] }
           end
           local height = (vim.o.cmdheight == 0) and 1 or vim.o.cmdheight
           return { vim.o.lines - height, 0 }
@@ -177,6 +144,36 @@ return {
       use_nvim_cmp_as_default = false, -- use cmp's highlights
       nerd_font_variant = 'normal',
       kind_icons = require('hasan.utils.ui.icons').kind,
+    },
+
+    cmdline = {
+      keymap = {
+        ['<C-y>'] = { 'select_and_accept', 'fallback' },
+        ['<C-e>'] = { 'cancel', 'fallback' },
+
+        ['<Tab>'] = {
+          function(cmp)
+            if not cmp.is_visible() then
+              return cmp.show({ callback = cmp.select_next })
+            end
+          end,
+          'select_next',
+          'fallback',
+        },
+        ['<S-Tab>'] = { 'select_prev', 'fallback' },
+
+        ['<C-n>'] = { 'select_next', 'fallback' },
+        ['<C-p>'] = { 'select_prev', 'fallback' },
+        ['<A-n>'] = { 'select_next', 'fallback' },
+        ['<A-p>'] = { 'select_prev', 'fallback' },
+      },
+      completion = {
+        menu = {
+          draw = {
+            columns = { { 'kind_icon' }, { 'label', 'label_description', gap = 1, fill = true } },
+          },
+        },
+      },
     },
   },
   opts_extend = { 'sources.default' },
