@@ -206,7 +206,7 @@ return {
     quickfile = { enabled = true },
     words = { enabled = true },
     explorer = { enabled = true },
-    image = {},
+    image = { enabled = false },
     input = {},
     indent = {
       ---@class snacks.indent.animate: snacks.animate.Config
@@ -760,6 +760,23 @@ return {
 
         ivy = get_ivy(false),
         ivy_mini = get_ivy(true),
+        select = {
+          preview = false,
+          layout = {
+            backdrop = false,
+            width = 0.5,
+            min_width = 80,
+            height = 0.4,
+            min_height = 3,
+            box = 'vertical',
+            border = { '🭽', '▔', '🭾', '▕', '🭿', '▁', '🭼', '▏' },
+            title = '{title}',
+            title_pos = 'center',
+            { win = 'input', height = 1, border = 'bottom' },
+            { win = 'list', border = 'none' },
+            { win = 'preview', title = '{preview}', height = 0.4, border = { '', '▔', '', '', '', '', '', '' } },
+          },
+        },
       },
     },
     styles = {

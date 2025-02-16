@@ -96,4 +96,20 @@ function M.parse_cursor_text(bufnr)
   return find_node(root)
 end
 
+function M.parse_img_str_at_cursor()
+  local buf = vim.api.nvim_get_current_buf()
+  local text = require('hasan.utils.buffer').parse_cursor_text(buf)
+  if type(text) ~= 'string' or text == '' then
+    return nil
+  end
+
+  local file = vim.fs.normalize(vim.api.nvim_buf_get_name(buf))
+  local dir = vim.fs.dirname(file)
+  local absolute_path = require('hasan.utils.file').resolve_relative_path(dir, text)
+
+  if vim.fn.filereadable(absolute_path) then
+    return absolute_path
+  end
+end
+
 return M

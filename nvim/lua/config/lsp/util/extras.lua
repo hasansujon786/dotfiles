@@ -170,24 +170,17 @@ function M.lspRename()
 end
 
 function M.hover()
-  local text = require('hasan.utils.buffer').parse_cursor_text(0)
-  if type(text) ~= 'string' or text == '' then
-    vim.lsp.buf.hover()
+  local img_src = Snacks.image.doc.at_cursor()
+  if not img_src then
+    img_src = require('hasan.utils.buffer').parse_img_str_at_cursor()
+  end
+
+  if img_src then
+    require('hasan.utils.file').quickLook({ img_src })
     return
   end
 
-  local buf = vim.api.nvim_get_current_buf()
-  local file = vim.fs.normalize(vim.api.nvim_buf_get_name(buf))
-  local dir = vim.fs.dirname(file)
-  local absolute_path = require('hasan.utils.file').resolve_relative_path(dir, text)
-  local is_readable = vim.fn.filereadable(absolute_path) == 1
-
-  if not is_readable then
-    vim.lsp.buf.hover()
-    return
-  end
-
-  require('hasan.utils.file').quickLook({ absolute_path })
+  vim.lsp.buf.hover()
 end
 
 return M
