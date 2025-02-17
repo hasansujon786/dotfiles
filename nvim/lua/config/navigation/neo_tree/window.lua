@@ -37,6 +37,9 @@ local function show_copy_options(state)
 end
 
 local function show_more(state)
+  local bloc = require('config.lsp.servers.dartls.bloc')
+  local fs = require('neo-tree.sources.filesystem')
+
   -- local tree_util = require('config.navigation.neo_tree.util')
   local options = {
     {
@@ -44,7 +47,21 @@ local function show_more(state)
       label = 'New Block',
       action = function()
         local node = state.tree:get_node()
-        require('config.lsp.servers.dartls.bloc').create_new_bloc(node.path, node.type)
+        local destination = bloc.create_new_bloc(node.path, node.type)
+        if destination then
+          fs.show_new_children(state, destination)
+        end
+      end,
+    },
+    {
+      key = 'f',
+      label = 'New Feature',
+      action = function()
+        local node = state.tree:get_node()
+        local destination = bloc.create_new_feature(node.path, node.type)
+        if destination then
+          fs.show_new_children(state, destination)
+        end
       end,
     },
   }
