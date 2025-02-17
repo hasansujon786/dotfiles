@@ -36,6 +36,31 @@ local function show_copy_options(state)
   })
 end
 
+local function show_more(state)
+  -- local tree_util = require('config.navigation.neo_tree.util')
+  local options = {
+    {
+      key = 'b',
+      label = 'New Block',
+      action = function()
+        local node = state.tree:get_node()
+        require('config.lsp.servers.dartls.bloc').create_new_bloc(node.path, node.type)
+      end,
+    },
+  }
+
+  require('hasan.widgets').get_select(options, function(item)
+    if item.action then
+      item.action()
+    end
+  end, {
+    prompt = ' Neotree menu ',
+    relative = 'cursor',
+    kind = 'get_char',
+    min_width = 30,
+  })
+end
+
 return {
   position = 'left',
   width = 30,
@@ -84,6 +109,7 @@ return {
     -- ['c'] = { 'copy', config = { show_path = 'none' } }, -- "none", "relative", "absolute"
     -- ['m'] = 'move', -- takes text input for destination, also accepts the optional config.show_path option like "add".
     ['c'] = { show_copy_options, desc = 'Copy filepath to clipboard' },
+    ['m'] = { show_more, desc = 'Show more options' },
     ['Y'] = {
       function(state)
         require('config.navigation.neo_tree.util').copy_path(state, ':t')

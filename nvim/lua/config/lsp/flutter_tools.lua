@@ -1,5 +1,8 @@
 return {
   'nvim-flutter/flutter-tools.nvim',
+  dependencies = {
+    'nvim-telescope/telescope.nvim',
+  },
   lazy = true,
   ft = { 'dart' },
   keys = {
@@ -89,7 +92,7 @@ return {
       vim.notify('No window found', vim.log.levels.WARN)
     end)
 
-    require('config.lsp.servers.dartls.pub').setup()
+    -- require('config.lsp.servers.dartls.pub').setup()
     augroup('MY_FLUTTER_AUGROUP')(function(autocmd)
       autocmd({ 'FileType' }, 'setlocal nonumber norelativenumber signcolumn=no', { pattern = 'log' })
       autocmd({ 'BufWinEnter', 'WinEnter' }, 'normal Gzt', { pattern = '__FLUTTER_DEV_LOG__' })
