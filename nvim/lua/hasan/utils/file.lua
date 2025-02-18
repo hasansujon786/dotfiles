@@ -17,6 +17,10 @@ M.get_buf_name_relative = function(buffer)
   return Path:new(vim.api.nvim_buf_get_name(buffer)):make_relative(M.get_root_dir())
 end
 
+function M.convert_path_to_windows(path)
+  return path:gsub('/', '\\')
+end
+
 function M.resolve_relative_path(base, relative)
   base = vim.fs.normalize(base)
   relative = vim.fs.normalize(relative)
@@ -265,6 +269,50 @@ function M.get_path_type(path)
     end
   end
   return nil
+end
+
+---Crate file
+---@param file_path string
+---@param default_text string|nil
+M.create_file = function(file_path, default_text)
+  local fd = vim.uv.fs_open(file_path, 'w', 438) -- 438 = 0o666 permission
+  if not fd then
+    vim.notify('Error: Could not create ' .. file_path, 'error')
+    return
+  end
+
+  if default_text then
+    vim.uv.fs_write(fd, default_text)
+  end
+  vim.uv.fs_close(fd)
+end
+
+function M.create_from_tree(base_path, tree, callback)
+  local function create_node(path, node)
+    if node.type == 'file' then
+      M.create_file(path, node.content)
+    else
+      -- Create directory
+      vim.uv.fs_mkdir(path, 511) -- 511 = 0o777 permissions
+
+      -- Recursively create children
+      if node.children then
+        for _, child in ipairs(node.children) do
+          create_node(path .. '/' .. child.name, child)
+        end
+      end
+    end
+  end
+
+  -- Start processing the tree
+  for _, node in ipairs(tree) do
+    create_node(base_path .. '/' .. node.name, node)
+  end
+
+  -- Call the callback function if provided
+  if callback then
+    callback()
+  end
 end
 
 return M

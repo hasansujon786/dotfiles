@@ -36,21 +36,33 @@ local function show_copy_options(state)
   })
 end
 
-local function show_more(state)
+local function show_more_options(state)
   local bloc = require('config.lsp.servers.dartls.bloc')
   local fs = require('neo-tree.sources.filesystem')
 
-  -- local tree_util = require('config.navigation.neo_tree.util')
   local options = {
     {
       key = 'b',
       label = 'New Block',
       action = function()
         local node = state.tree:get_node()
-        local destination = bloc.create_new_bloc(node.path, node.type)
-        if destination then
-          fs.show_new_children(state, destination)
-        end
+        bloc.create_new_bloc(node.path, node.type, function(destination)
+          if destination then
+            fs.show_new_children(state, destination)
+          end
+        end)
+      end,
+    },
+    {
+      key = 'c',
+      label = 'New Cubit',
+      action = function()
+        local node = state.tree:get_node()
+        bloc.create_new_bloc(node.path, node.type, function(destination)
+          if destination then
+            fs.show_new_children(state, destination)
+          end
+        end, true)
       end,
     },
     {
@@ -58,10 +70,12 @@ local function show_more(state)
       label = 'New Feature',
       action = function()
         local node = state.tree:get_node()
-        local destination = bloc.create_new_feature(node.path, node.type)
-        if destination then
-          fs.show_new_children(state, destination)
-        end
+        bloc.create_new_feature(node.path, node.type, function(destination)
+          if destination then
+            -- dd(destination)
+            fs.show_new_children(state, destination)
+          end
+        end)
       end,
     },
   }
@@ -126,7 +140,7 @@ return {
     -- ['c'] = { 'copy', config = { show_path = 'none' } }, -- "none", "relative", "absolute"
     -- ['m'] = 'move', -- takes text input for destination, also accepts the optional config.show_path option like "add".
     ['c'] = { show_copy_options, desc = 'Copy filepath to clipboard' },
-    ['m'] = { show_more, desc = 'Show more options' },
+    ['m'] = { show_more_options, desc = 'Show more options' },
     ['Y'] = {
       function(state)
         require('config.navigation.neo_tree.util').copy_path(state, ':t')
