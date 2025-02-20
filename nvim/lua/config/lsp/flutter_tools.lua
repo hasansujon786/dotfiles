@@ -1,14 +1,13 @@
 return {
   'nvim-flutter/flutter-tools.nvim',
-  dependencies = {
-    'nvim-telescope/telescope.nvim',
-  },
   lazy = true,
   ft = { 'dart' },
   keys = {
     {
       '<leader>fc',
-      '<Cmd>lua require("telescope").extensions.flutter.commands()<CR>',
+      function ()
+        require('config.lsp.servers.dartls.run_commmands').commands()
+      end,
       ft = { 'yaml', 'dart', 'log' },
       desc = 'Flutter: Show commands',
     },
