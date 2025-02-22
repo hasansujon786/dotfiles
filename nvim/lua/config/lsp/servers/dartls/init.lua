@@ -13,37 +13,21 @@
 -- "dart.refactor.move_top_level_to_file"
 -- },
 
-local function lsp_command(buffer, cmd)
+local run_code_action = function(cmds)
   return function()
-    local arg1 = { path = vim.api.nvim_buf_get_name(buffer) }
-    local action = { command = cmd, arguments = { arg1 } }
-    require('config.lsp.util.extras').execute(action, buffer, function(err)
-      if err then
-        require('hasan.utils.logger').Logger:error(err)
-      end
-    end)
+    vim.lsp.buf.code_action({
+      apply = true,
+      context = { only = cmds, diagnostics = {} },
+    })
   end
 end
 keymap('n', '<Plug>FlutterPkgToRelative', function()
-  vim.lsp.buf.code_action({
-    apply = true,
-    context = {
-      only = {
-        'refactor.convert.packageToRelativeImport',
-        'quickfix.convert.toRelativeImport.multi',
-        -- 'quickfix.convert.toRelativeImport',
-      },
-      diagnostics = {},
-    },
-  })
+  run_code_action({
+    'refactor.convert.packageToRelativeImport',
+    'refactor.convert.relativeToPackageImport',
+  })()
   vim.fn['repeat#set'](t('<Plug>FlutterPkgToRelative'))
 end)
-local fix_all = function()
-  vim.lsp.buf.code_action({
-    apply = true,
-    context = { only = { 'source.fixAll' }, diagnostics = {} },
-  })
-end
 
 ---@type ServerConfig
 return {
@@ -54,8 +38,8 @@ return {
     -- lua require('project_run.utils').open_tab(vim.fn.getcwd(), 'adb connect 192.168.31.252 && flutter run')
 
     -- Custom code actions
-    keymap('n', '<leader>a.', fix_all, desc('Lsp: fix all'))
-    keymap('n', '<leader>ai', lsp_command(buffer, 'edit.organizeImports'), desc('Lsp: organize imports'))
-    keymap('n', '<leader>am', '<Plug>FlutterPkgToRelative', desc('Lsp: organize imports'))
+    keymap('n', '<leader>a.', run_code_action({ 'source.fixAll' }), desc('Lsp: Fix all'))
+    keymap('n', '<leader>ai', run_code_action({ 'source.organizeImports' }), desc('Lsp: Organize imports'))
+    keymap('n', '<leader>am', '<Plug>FlutterPkgToRelative', desc('Lsp: Convert to a relative import'))
   end,
 }

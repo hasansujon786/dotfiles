@@ -4,3 +4,4 @@ xnoremap <buffer> at abob
 onoremap <buffer> at :normal vat<CR>
 xnoremap <buffer> it iwl%o
 onoremap <buffer> it :normal vit<CR>
+nnoremap <buffer> <leader>v. <cmd>FlutterLogOpen<CR>

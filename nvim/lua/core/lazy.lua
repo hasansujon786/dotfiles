@@ -49,7 +49,7 @@ require('lazy').setup({
     enabled = true,
     notify = true, -- get a notification when changes are found
   },
-  dev = { path = 'E:/repoes/lua/' },
+  dev = { path = '~/Documents/lua' },
   performance = {
     cache = {
       enabled = true,

@@ -59,7 +59,6 @@ return {
   end,
   dependencies = {
     'nvim-treesitter/nvim-treesitter',
-    'nvim-treesitter/nvim-treesitter-textobjects',
     {
       'jinh0/eyeliner.nvim',
       lazy = true,

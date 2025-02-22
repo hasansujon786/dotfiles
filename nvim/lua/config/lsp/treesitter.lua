@@ -132,7 +132,8 @@ return {
       keymap('n', ']m', '<Plug>(ts-jump-next-s-class)zz', { desc = 'Jump next class' })
     end,
     dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
+      -- 'nvim-treesitter/nvim-treesitter-textobjects',
+      { 'hasansujon786/nvim-treesitter-textobjects', dev = false },
       {
         'windwp/nvim-ts-autotag',
         opts = {
