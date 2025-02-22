@@ -3,8 +3,7 @@ Global isClikModeActive := 0
 Global optionsList := ["Youtube Playlist", "Youtube queue", "Firebase Remove User"]
 
 
-~LWin & LButton::selectAutoClikMode()
-~LAlt & LButton::enterAutoClikMode()
++^#LButton::selectAutoClikMode()
 #HotIf isClikModeActive
   Esc::{
     beep()

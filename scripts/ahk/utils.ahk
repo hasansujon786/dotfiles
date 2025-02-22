@@ -152,20 +152,30 @@ toggleCapsLosck() {
   isCapsOn := !GetKeyState("CapsLock", "T")
   SetCapsLockState(isCapsOn)
 
-  color := "cBlack"
-  msg := "Capslock Off"
-  SplashTextGui := Gui("ToolWindow +AlwaysOnTop -Sysmenu Disabled -Caption"), SplashTextGui.Title := "CapsLosckStatus", SplashTextGui.SetFont("s20", "Arial")
-  if (isCapsOn) {
-    color := "cWhite"
-    msg := "Capslock On"
-    SplashTextGui.BackColor := "Red"
-  }
-  SplashTextGui.Add("Text" ,"w300 y70 Center " color, msg)
-  SplashTextGui.Show("h200 NA")
   beep()
+  closeWindowByTitle("caps_losck_status_border")
+  closeWindowByTitle("caps_losck_status")
 
-  Sleep(700)
-  SplashTextGui.Destroy
+  if (isCapsOn) {
+    height := 24
+    width := 100
+    x := PosX("center", 0, width)
+    y := PosY("bottom", 54, height)
+    currentWinID := WinExist("A") ; Get the current active window
+
+    Border := Gui("ToolWindow +AlwaysOnTop -Sysmenu Disabled -Caption -Owner",  "caps_losck_status_border") ; Border GUI
+    Border.BackColor := 0xff4DB434
+
+    SLine := Gui("ToolWindow +AlwaysOnTop -Sysmenu Disabled -Caption -Owner", "caps_losck_status")
+    SLine.BackColor := 0xff424242
+    title := SLine.AddText("cWhite y4 x0 w100 h24 Center", "Caps Lock ON")
+    title.SetFont("s10", "Arial")
+
+    Border.Show("x" (x-2) " y" (y-2) " w" (width+4) " h" (height+4)) ; Slightly larger
+    SLine.Show("x" x " y" y "w" width " h" height " NA")
+
+    WinActivate(currentWinID) ; Refocus the current active window
+  }
 }
 toggleBluetooth(onOff := "On") {
   mWidth := SysGet(78)
@@ -214,10 +224,19 @@ select_playback_device_w10() {
   Send("{tab}")
 }
 select_volume_mixer() {
-  Send("^#v")
-  sleep(500)
-  Send("{tab}{tab}{tab}")
-  Send("+{end}")
+  Send("{ctrl down}")
+  Send("{lwin down}")
+  Send("{v down}")
+
+  Send("{ctrl up}")
+  Send("{lwin up}")
+  Send("{v up}")
+  sleep(300)
+
+  if WinActive("ahk_class ControlCenterWindow") {
+    Send("{tab}{tab}{tab}")
+    Send("+{end}")
+  }
 }
 open_mic_panel() {
   Run("control mmsys.cpl,,1")
