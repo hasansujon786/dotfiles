@@ -123,8 +123,8 @@ return {
       })
 
       -- stylua: ignore start
-      keymap('n', '<P', '<Plug>(ts-swap-parameter-prev):call repeat#set("\\<Plug>(ts-swap-parameter-prev)")<CR>', { desc = 'Swap parameter prev' })
-      keymap('n', '>P', '<Plug>(ts-swap-parameter-next):call repeat#set("\\<Plug>(ts-swap-parameter-next)")<CR>', { desc = 'Swap parameter next' })
+      keymap('n', '<P', '<Plug>(ts-swap-parameter-prev)<cmd>call repeat#set("\\<Plug>(ts-swap-parameter-prev)")<CR>', { desc = 'Swap parameter prev' })
+      keymap('n', '>P', '<Plug>(ts-swap-parameter-next)<cmd>call repeat#set("\\<Plug>(ts-swap-parameter-next)")<CR>', { desc = 'Swap parameter next' })
       -- stylua: ignore end
       keymap('n', '[f', '<Plug>(ts-jump-prev-s-func)zz', { desc = 'Jump prev func' })
       keymap('n', ']f', '<Plug>(ts-jump-next-s-func)zz', { desc = 'Jump next func' })

@@ -12,6 +12,11 @@ end, { expr = true, desc = 'Record a macro' })
 keymap('v', '@', ':norm @', noSilent) -- run macro on selection
 keymap(nx, '<CR>', ':<up>', { silent = false, desc = 'Run last command easily' })
 keymap(nx, '<leader><cr>', 'q:', { silent = false, desc = 'Open command history' })
+keymap({ 'i', 'n', 's' }, '<esc>', function()
+  vim.cmd('noh')
+  vim.snippet.stop()
+  return '<esc>'
+end, { expr = true, desc = 'Escape and Clear hlsearch' })
 
 -- Center window on insert
 require('hasan.center_cursor').attach_mappings()
@@ -54,8 +59,8 @@ nvim_set_keymap('v', '<C-g>', '*<C-O>:%s///gn<CR>', noSilent) -- Print the numbe
 -- Search ---------------------------------------
 -- Type a replacement term and press . to repeat the replacement again. Useful
 -- for replacing a few instances of the term (alternative to multiple cursors).
-keymap('n', 'c*', ":let @/='\\<'.expand('<cword>').'\\>'<CR>cgn")
-keymap('x', 'C', '"cy:let @/=@c<CR>cgn')
+keymap('n', 'c*', "<cmd>let @/='\\<'.expand('<cword>').'\\>'<CR>cgn")
+keymap('x', 'C', '"cy<cmd>let @/=@c<CR>cgn')
 keymap(nx, 'gx', '<Plug>(exchange-operator)', { desc = 'Exchange word' })
 
 local function do_open(uri)
@@ -102,12 +107,13 @@ if not vim.g.vscode then
   nvim_set_keymap('i', '<C-_>', '<ESC>_gccgi', {})
   nvim_set_keymap('v', '<C-_>', 'mz_gcgv`z', {})
 
-  local code_action_keys = { { '<A-k>', '<A-j>' }, { '<up>', '<down>' } }
-  for _, action_key in ipairs(code_action_keys) do
-    keymap('n', action_key[1], '<cmd>lua require("hasan.utils.buffer").norm_move_up()<cr>')
-    keymap('n', action_key[2], '<cmd>lua require("hasan.utils.buffer").norm_move_down()<cr>')
-    keymap('x', action_key[1], ':MoveUp<CR>')
-    keymap('x', action_key[2], ':MoveDown<CR>')
+  for _, keys in ipairs({ { '<A-k>', '<A-j>' } }) do
+    keymap('i', keys[1], '<esc><cmd>m .-2<cr>==gi', { desc = 'Move Up' })
+    keymap('i', keys[2], '<esc><cmd>m .+1<cr>==gi', { desc = 'Move Down' })
+    -- keymap('n', keys[1], '<cmd>lua require("hasan.utils.buffer").norm_move_up()<cr>')
+    -- keymap('n', keys[2], '<cmd>lua require("hasan.utils.buffer").norm_move_down()<cr>')
+    -- keymap('x', keys[1], ':MoveUp<CR>')
+    -- keymap('x', keys[2], ':MoveDown<CR>')
   end
 
   -- Fold
@@ -125,8 +131,8 @@ if not vim.g.vscode then
     vim.fn['reljump#jump']('k')
   end)
 
-  keymap('n', 'H', 'H:exec "norm! ". &scrolloff . "k"<cr>') -- jump in file
-  keymap('n', 'L', 'L:exec "norm! ". &scrolloff . "j"<cr>')
+  keymap('n', 'H', 'H<cmd>exec "norm! ".&scrolloff."k"<cr>') -- jump in file
+  keymap('n', 'L', 'L<cmd>exec "norm! ".&scrolloff."j"<cr>')
 
   keymap(nx, '<BS>', '<c-^>')
   keymap(nx, 'g<BS>', '<c-w><c-p>')
@@ -143,28 +149,16 @@ if not vim.g.vscode then
     { '<A-y>', '<C-y>' },
     { '<A-e>', '<C-e>' },
   }
-  for _, value in pairs(scroll_maps) do
-    nvim_set_keymap('n', value[1], value[2], { noremap = false })
-    nvim_set_keymap('x', value[1], value[2], { noremap = false })
+  for _, k in pairs(scroll_maps) do
+    nvim_set_keymap('n', k[1], k[2], { noremap = false })
+    nvim_set_keymap('x', k[1], k[2], { noremap = false })
   end
   -- Horizontal scroll
   keymap(nx, '<A-l>', '20zl')
   keymap(nx, '<A-h>', '20zh')
-  -- Resize splits
-  keymap('n', '<A-=>', '<cmd>resize +3<CR>')
-  keymap('n', '<A-->', '<cmd>resize -3<CR>')
-  keymap('n', '<A-.>', '<cmd>vertical resize +5<CR>')
-  keymap('n', '<A-,>', '<cmd>vertical resize -5<CR>')
   -- Jumplist
   keymap('n', '<C-i>', '<C-i>')
   keymap('n', '<C-j>', '<C-i>')
-  -- Jump between tabs
-  keymap(nx, 'gl', 'gt')
-  keymap(nx, 'gh', 'gT')
-  keymap('n', 'gL', '<cmd>tabmove+<CR>') -- Move tabs
-  keymap('n', 'gH', '<cmd>tabmove-<CR>')
-  -- keymap(nx, 'gl',<cmd>'<cmd>!wezterm cli activate-tab --tab-relative 1<CR>')
-  -- keymap(nx, 'gh',<cmd>'<cmd>!wezterm cli activate-tab --tab-relative -1<CR>')
 
   -- Quickfix list
   -- keymap('n', ']l', ':lnext<CR>')
@@ -177,11 +171,21 @@ if not vim.g.vscode then
   -- Insert mode ----------------------------------
   -- keymap(ic, 'jk', '<ESC>') -- Use jk to return to normal mode
   keymap('t', '<C-o>', '<C-\\><C-n>')
+  -- Add undo break-points
+  keymap('i', ',', ',<c-g>u')
+  keymap('i', '.', '.<c-g>u')
+  keymap('i', ';', ';<c-g>u')
+
+  -- commenting
+  keymap('n', 'gco', 'o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>', { desc = 'Add Comment Below' })
+  keymap('n', 'gcO', 'O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>', { desc = 'Add Comment Above' })
 
   keymap(ic, '<A-h>', '<left>', noSilent) -- Move cursor by character
   keymap(ic, '<A-l>', '<right>', noSilent)
-  keymap(ic, '<A-j>', '<down>', noSilent)
-  keymap(ic, '<A-k>', '<up>', noSilent)
+  keymap(ic, '<C-n>', '<down>', noSilent)
+  keymap(ic, '<C-p>', '<up>', noSilent)
+  -- keymap(ic, '<A-j>', '<down>', noSilent)
+  -- keymap(ic, '<A-k>', '<up>', noSilent)
 
   keymap(ic, '<A-f>', '<S-right>', noSilent) -- Move cursor by words
   keymap(ic, '<A-b>', '<S-left>', noSilent)
@@ -204,8 +208,8 @@ if not vim.g.vscode then
   keymap('i', '<C-g><C-g>', '<c-g>u<Esc>[s1z=`]a<c-g>u', { desc = 'Fix previous misspelled world' })
 
   -- Leader keys ----------------------------------
-  keymap(nx, '<leader>s', '<cmd>silent w<cr>', { desc = 'Save current file' })
-  keymap(nx, '<C-s>', '<cmd>silent w<cr>', { desc = 'Save current file' })
+  keymap(nx, '<leader>s', '<cmd>w<cr>', { desc = 'Save current file' })
+  keymap({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save File' })
 
   -- Window Management ----------------------------
   keymap('n', 'ZZ', '<cmd>Quit!<CR>') -- Prompt before quitting
@@ -215,6 +219,18 @@ if not vim.g.vscode then
   keymap(nx, '<leader>j', '<cmd>lua handle_win_cmd("wincmd j")<CR>', { desc = 'which_key_ignore' })
   keymap(nx, '<leader>k', '<cmd>lua handle_win_cmd("wincmd k")<CR>', { desc = 'which_key_ignore' })
   keymap(nx, '<leader>l', '<cmd>lua handle_win_cmd("wincmd l")<CR>', { desc = 'which_key_ignore' })
+  -- Resize splits
+  keymap('n', '<A-=>', '<cmd>resize +3<CR>')
+  keymap('n', '<A-->', '<cmd>resize -3<CR>')
+  keymap('n', '<A-.>', '<cmd>vertical resize +5<CR>')
+  keymap('n', '<A-,>', '<cmd>vertical resize -5<CR>')
+  -- Jump between tabs
+  keymap(nx, 'gl', 'gt')
+  keymap(nx, 'gh', 'gT')
+  keymap('n', 'gL', '<cmd>tabmove+<CR>') -- Move tabs
+  keymap('n', 'gH', '<cmd>tabmove-<CR>')
+  -- keymap(nx, 'gl',<cmd>'<cmd>!wezterm cli activate-tab --tab-relative 1<CR>')
+  -- keymap(nx, 'gh',<cmd>'<cmd>!wezterm cli activate-tab --tab-relative -1<CR>')
 
   -- File commands
   keymap('n', '<leader>fC', ':w <C-R>=expand("%")<CR>', { silent = false, desc = 'Copy this file' })
