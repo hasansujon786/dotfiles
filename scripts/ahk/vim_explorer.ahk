@@ -1,5 +1,6 @@
 sideBarCnn :=  "SysTreeView321"
-explorerCnn := "DirectUIHWND3" ; DirectUIHWND2
+explorerCnn := ["DirectUIHWND2", "DirectUIHWND3", "Microsoft.UI.Content.DesktopChildSiteBridge1"]
+
 ;******************************************************************************
 ; Explorer Vim Mode
 ;******************************************************************************
@@ -14,34 +15,55 @@ explorerToggleInsert() {
     Global isExplInsertMode := true
   }
 }
-focusFirstItem() {
-  ; Show focus item
-  Send("{Down}")
-  Send("{Up}")
-  Send("{Right}")
-  Send("{Left}")
+; Show focus item
+focusFirstItem(using := "") {
+  if (using == "tab" or WinActive("This PC - File Explorer")) {
+    Send("{Tab}")
+    Send("+{Tab}")
+  } else {
+    Send("{Down}{Up}{Right}{Left}")
+  }
 }
-#HotIf WinActive("ahk_class CabinetWClass") && isExplInsertMode
+focusExplorer(index := 1, action := "") {
+  global explorerCnn
+  if (index > explorerCnn.Length)  ; Stop recursion if all options fail
+    return
+
+  try {
+    local cnn := explorerCnn[index]
+    ControlFocus(cnn, "A") ; Attempt to focus
+    if (action == "focus") {
+      local isHomeOrGalleryTab := cnn == explorerCnn[3]
+      Sleep(isHomeOrGalleryTab ? 500 : 100)
+      focusFirstItem(isHomeOrGalleryTab ? "tab" : "")
+    }
+    return true
+  } catch {
+    focusExplorer(index + 1, action)  ; Recursively call next option on error
+  }
+}
+#HotIf (WinActive("ahk_class CabinetWClass") or WinActive("Save As")) && isExplInsertMode
   Esc::{
     if(ControlGetClassNN(ControlGetFocus("A")) == "Windows.UI.Core.CoreWindow1") {
       explorerToggleInsert()
-      ControlFocus(explorerCnn, "A")
+      focusExplorer()
     } else {
       explorerToggleInsert()
       Send("{Esc}")
     }
   }
   ~Enter::{
-    if(ControlGetClassNN(ControlGetFocus("A")) == "Windows.UI.Core.CoreWindow1") {
-      explorerToggleInsert()
-      sleep(700)
-      ControlFocus(explorerCnn, "A")
-    } else {
-      explorerToggleInsert()
-    }
+    explorerToggleInsert()
+    ; if(ControlGetClassNN(ControlGetFocus("A")) == "Windows.UI.Core.CoreWindow1") {
+    ;   explorerToggleInsert()
+    ;   sleep(700)
+    ;   focusExplorer()
+    ; } else {
+    ;   explorerToggleInsert()
+    ; }
   }
 #HotIf
-#HotIf WinActive("ahk_class CabinetWClass") && !isExplInsertMode
+#HotIf (WinActive("ahk_class CabinetWClass") or WinActive("Save As")) && !isExplInsertMode
   i::explorerToggleInsert()
 
   ; Navigation
@@ -79,6 +101,7 @@ focusFirstItem() {
   }
 
 
+  m::Send("{AppsKey}")
   q::Send("!{F4}")
   u::Send("^z")
   ^r::Send("^y")
@@ -100,11 +123,11 @@ focusFirstItem() {
   }
 
   '::{
-    focusedControl := ControlGetClassNN(ControlGetFocus())
-    if (focusedControl == explorerCnn) {
-      ControlFocus(sideBarCnn, "A")
+    local focusedControl := ControlGetClassNN(ControlGetFocus())
+    if (focusedControl == sideBarCnn) {
+      focusExplorer()
     } else {
-      ControlFocus(explorerCnn, "A")
+      ControlFocus(sideBarCnn, "A")
     }
   }
 
@@ -113,10 +136,11 @@ focusFirstItem() {
     focusedControl := ControlGetClassNN(ControlGetFocus())
     if (focusedControl == sideBarCnn) {
       Sleep(100)
-      ControlFocus(explorerCnn, "A")
-      focusFirstItem()
+      focusExplorer(1, "focus")
+    } else {
+      Sleep(100)
+      focusFirstItem("tab")
     }
   }
 #HotIf
-
 
