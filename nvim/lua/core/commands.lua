@@ -1,3 +1,8 @@
+keymap('n', '<Plug>(inspect-pos)', function()
+  require('noice').redirect(vim.show_pos)
+  vim.fn['repeat#set'](t('<Plug>(inspect-pos)'))
+end, { desc = 'Inspect Pos' })
+
 command('ClearShada', function()
   local shada_path = vim.fn.expand(vim.fn.stdpath('data') .. '/shada')
   local files = vim.fn.glob(shada_path .. '/*', false, true)
@@ -41,4 +46,3 @@ command('CheckWinConfig', function()
   local opts = vim.api.nvim_win_get_config(0)
   dd(opts)
 end, { desc = 'Check win config' })
-

@@ -16,6 +16,9 @@ local function button(key, label, desc, cmd)
   }
 end
 
+local termWinbar = ''
+-- termWinbar=%{%v:lua.require'heirline'.eval_winbar()%}
+
 ---Check if cursor is in range
 ---@param cursor integer[] cursor position (line, character); (1, 0)-based
 ---@param range lsp_range_t 0-based range
@@ -330,9 +333,9 @@ return {
         ---@type snacks.dashboard.Item[]
         -- stylua: ignore
         keys = {
-          button('r', 'R', '  Recent file', '<cmd>lua require("telescope.builtin").oldfiles({cwd_only = true})<CR>'),
+          button('r', 'R', '  Recent file', '<cmd>lua Snacks.picker.recent()<CR>'),
           button('l', 'L', '  Load session', '<cmd>lua require("persisted").load()<CR>'),
-          button('f', 'F', '  Find files', '<cmd>lua require("hasan.telescope.custom").my_find_files()<CR>'),
+          button('f', 'F', '  Find files', '<cmd>lua Snacks.picker.files()<CR>'),
           button('s', 'S', '  Open settings', '<cmd>lua Snacks.dashboard.pick("files", {cwd = vim.fn.stdpath("config")})<CR>'),
           button('p', 'P', '  Lazy dashboard', '<cmd>Lazy<CR>'),
           button('a', 'A', '  Open org agenda', '<cmd>lua require("orgmode").action("agenda.prompt")<CR>'),
@@ -781,6 +784,7 @@ return {
     },
     styles = {
       notification = { relative = 'editor', wo = { wrap = true, winblend = 0 } },
+      terminal = { relative = 'editor', border = 'rounded', wo = { winhighlight = '' } },
       notification_history = {
         relative = 'editor',
         keys = { q = 'close' },
@@ -844,18 +848,16 @@ return {
   keys = {
     { 'g]',         function() Snacks.words.jump(vim.v.count1) end, desc = 'Next Reference', mode = { 'n', 't' } },
     { 'g[',         function() Snacks.words.jump(-vim.v.count1) end, desc = 'Prev Reference', mode = { 'n', 't' } },
-    { '<leader>vv', function() Snacks.notifier.hide() end, desc = 'which_key_ignore' },
-    { '<leader>vn', function() Snacks.notifier.hide() end, desc = 'Dismiss All Notifications' },
+    { '<leader>vh', function() Snacks.notifier.hide() end, desc = 'Dismiss All Notifications' },
+    { '<leader>vn', function() Snacks.notifier.show_history() end, desc = 'Notification History' },
     { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Kill this buffer' },
     { '<leader>bo', function() Snacks.bufdelete.other() end, desc = 'Kill this buffer' },
     { '<leader>go', function() Snacks.gitbrowse() end, desc = 'Open git repo' , mode = { 'n', 'v' } },
     { '<leader>gO', function() Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end, notify = false }) end,  desc = "Git Browse (copy)", mode = {"n", "x" } },
     { '<leader>aR', function() Snacks.rename.rename_file() end, desc = 'Lsp: Rename file' },
     { '<leader>pd', function () Snacks.dashboard.open() end, desc = 'Open dashboard' },
-
     { '<leader>z',  function() Snacks.zen() end, desc = 'Toggle Zen Mode' },
     { '<leader>w.',  function() Snacks.zen.zoom() end, desc = 'Toggle Zoom' },
-    { '<leader>vh', function() Snacks.notifier.show_history() end, desc = 'Notification History' },
     { '<leader>x', function() Snacks.scratch() end, desc = 'Toggle Scratch Buffer' },
     { '<leader>/x', function() Snacks.scratch.select() end, desc = 'Select Scratch Buffer' },
     {
@@ -870,6 +872,12 @@ return {
         })
       end,
     },
+    -- Terminal
+    { '<M-m>', function() Snacks.terminal(nil, { shell = 'bash', win = { position = 'float' } }) end, { desc = 'Terminal' } },
+    { '<leader>ot', function() Snacks.terminal(nil, { shell = 'bash', win = { wo = { winbar = termWinbar } } }) end, { desc = 'Terminal' } },
+    { '<leader>of', function() Snacks.terminal('yazi', { shell = 'bash' }) end, desc = 'Open File Manager' },
+    { '<leader>gl', function() Snacks.lazygit() end, desc = 'Open lazygit' },
+
     -- FIND FILES
     -- { '<leader><space>', function() Snacks.picker.smart() end, desc = 'Find Git Files' },
     -- { '<leader><space>', function() Snacks.picker.git_files() end, desc = 'Find Git Files' },

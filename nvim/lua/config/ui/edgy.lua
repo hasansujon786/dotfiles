@@ -9,7 +9,9 @@ return {
     vim.opt.splitkeep = 'screen'
 
     -- local left_chars = 'horiz: ,horizup:x,horizdown:x,vert:┃,vertleft:┃,vertright:x,verthoriz:x,eob: ,'
-    local left_chars = 'horiz:█,horizup:🭼,horizdown:x,vert:▏,vertleft:▏,vertright:🭼,verthoriz:🭼,eob: ,'
+    local left_chars = 'horiz:█,horizup:🭼,horizdown:▁,vert:▏,vertleft:▏,vertright:🭼,verthoriz:🭼,eob: ,'
+    local bottom_chars =
+      'horiz:█,horizup:🭼,horizdown:▁,vert:▏,vertleft:▏,vertright:🭼,verthoriz:🭼,eob: ,'
     -- left_chars =
     --   'stl: ,stlnc: ,wbr: ,horiz:─,horizup:x,horizdown:x,vert:┃,vertleft:┃,vertright:x,verthoriz:x,fold:1,foldopen:2,foldclose:3,foldsep:4,diff:5,msgsep:6,eob: ,lastline:8'
 
@@ -47,18 +49,30 @@ return {
       end, 10)
     end
 
+    local function is_split_win(_, win)
+      return vim.api.nvim_win_get_config(win).relative == ''
+    end
+
     -- // layout config:
     local bottom = {
       {
         ft = 'floaterm',
-        wo = { winbar = false, winhighlight = '' },
-        filter = function(_, win)
-          return vim.api.nvim_win_get_config(win).relative == ''
-        end,
+        wo = { winbar = false, winhighlight = '', fillchars = bottom_chars },
+        filter = is_split_win,
       },
       {
         ft = 'scratchpad',
-        wo = { winbar = false, winhighlight = '' },
+        wo = { winbar = false, winhighlight = '', fillchars = bottom_chars },
+      },
+      {
+        ft = 'terminal',
+        wo = { winbar = false, winhighlight = '', fillchars = bottom_chars },
+        filter = is_split_win,
+      },
+      {
+        ft = 'snacks_terminal',
+        wo = { winbar = false, winhighlight = '', fillchars = bottom_chars },
+        filter = is_split_win,
       },
     }
     local left = {
@@ -132,7 +146,7 @@ return {
       left = left,
       options = {
         left = { size = 31 },
-        bottom = { size = 12 },
+        bottom = { size = 0.4 },
         right = { size = 40 },
         top = { size = 10 },
       },

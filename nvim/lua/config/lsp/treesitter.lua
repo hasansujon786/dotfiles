@@ -4,9 +4,6 @@ return {
     lazy = true,
     event = { 'BufReadPre', 'BufNewFile' },
     cmd = { 'TSUpdate', 'TSUpdateSync', 'TSInstall', 'TSInstallSync' },
-    keys = {
-      { '<leader>vI', '<Cmd>lua require("noice").redirect("Inspect")<CR>', desc = 'Show ts highlight' },
-    },
     config = function()
       -- TSInstallSync javascript typescript tsx
       local parsers = {

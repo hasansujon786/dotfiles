@@ -170,7 +170,8 @@ if not vim.g.vscode then
 
   -- Insert mode ----------------------------------
   -- keymap(ic, 'jk', '<ESC>') -- Use jk to return to normal mode
-  keymap('t', '<C-o>', '<C-\\><C-n>')
+  keymap('t', '<C-o>', '<C-\\><C-n>', { desc = 'Exit Term mode' })
+  keymap('t', '<M-m>', '<cmd>close<cr>', { desc = 'Hide Terminal' })
   -- Add undo break-points
   keymap('i', ',', ',<c-g>u')
   keymap('i', '.', '.<c-g>u')
@@ -239,4 +240,10 @@ if not vim.g.vscode then
   for _, key in pairs({ '<leader>fi', '<c-g>' }) do
     keymap('n', key, '<cmd>lua require("hasan.widgets.file_info").show_file_info()<CR>', { desc = 'Show file info' })
   end
+
+  keymap('n', '<leader>vi', '<Plug>(inspect-pos)', { desc = 'Inspect TS highlight' })
+  keymap('n', '<leader>vI', function()
+    vim.treesitter.inspect_tree()
+    vim.api.nvim_input('I')
+  end, { desc = 'Inspect Tree' })
 end

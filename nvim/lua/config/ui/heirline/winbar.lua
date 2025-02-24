@@ -113,4 +113,7 @@ return {
   BarStart = { provider = '▎', hl = { fg = 'bg_blue' } },
   BarEnd = { provider = '▕', hl = { fg = 'black' } },
   Rest = { hl = { bg = 'bg_d', fg = 'light_grey' }, provider = '%=' },
+  terminal = function ()
+    return 'testing'
+  end
 }
