@@ -71,8 +71,6 @@ return {
 
       -- FILE
       { '<leader>f', group = 'file' },
-      { '<leader>fR', '<cmd>lua require("hasan.widgets.inputs").rename_current_file()<CR>', desc = 'Rename file' },
-
       { '<leader>fw', '<Plug>(fix-current-world)', desc = 'Fix current world' },
       { '<leader>fy', "<cmd>lua require('config.navigation.neo_tree.util').copy_path(vim.fn.expand('%:t'))<CR>", desc = 'Copy current node' },
       { '<leader>fY', "<cmd>lua require('config.navigation.neo_tree.util').copy_path(vim.fn.expand('%:p'))<CR>", desc = 'Copy absolute node' },

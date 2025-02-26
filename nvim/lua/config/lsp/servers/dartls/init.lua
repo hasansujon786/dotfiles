@@ -29,8 +29,8 @@ keymap('n', '<Plug>FlutterPkgToRelative', function()
   vim.fn['repeat#set'](t('<Plug>FlutterPkgToRelative'))
 end)
 
----@type ServerConfig
-return {
+---@class ServerConfig
+local M = {
   lsp_attach = function(_, buffer)
     local function desc(d)
       return { desc = d, buffer = buffer }
@@ -42,4 +42,18 @@ return {
     keymap('n', '<leader>ai', run_code_action({ 'source.organizeImports' }), desc('Lsp: Organize imports'))
     keymap('n', '<leader>am', '<Plug>FlutterPkgToRelative', desc('Lsp: Convert to a relative import'))
   end,
+  opts = {
+    settings = {
+      dart = {
+        showTodos = true,
+        completeFunctionCalls = true,
+        -- lineLength = 120,
+        enableSnippets = false,
+        -- analysisExcludedFolders = { '' },
+        -- enableSdkFormatter = false,
+      },
+    },
+  },
 }
+
+return M

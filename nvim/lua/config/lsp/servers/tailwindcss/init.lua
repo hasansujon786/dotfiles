@@ -1,5 +1,5 @@
----@type ServerConfig
-return {
+---@class ServerConfig
+local M = {
   lsp_attach = function(_, bufnr)
     local peekTw = require('config.lsp.servers.tailwindcss.peek_tw_styles')
     keymap('n', 'gK', peekTw.peekTwStyles, { desc = 'Peek tailwind styles', buffer = bufnr })
@@ -18,3 +18,5 @@ return {
     ),
   },
 }
+
+return M

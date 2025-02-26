@@ -2,7 +2,7 @@
 
 ---@class ServerConfig
 ---@field lsp_attach? LspAttachCb
----@field opts? {settings:object}
+---@field opts? {settings:table}
 
 ---@class StateCompletion
 ---@field module "cmp"|"blink"

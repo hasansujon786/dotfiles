@@ -1,25 +1,23 @@
-local lsp = vim.lsp
-local api = vim.api
-local M = {}
+local utils = {}
 
 --------------------------------------------------
 -------- Organize Imports ------------------------
 --------------------------------------------------
 local METHOD = 'workspace/executeCommand'
 local function make_organize_imports_params(bufnr)
-  return { command = '_typescript.organizeImports', arguments = { api.nvim_buf_get_name(bufnr) } }
+  return { command = '_typescript.organizeImports', arguments = { vim.api.nvim_buf_get_name(bufnr) } }
 end
-function M.ts_organize_imports_async(bufnr, post)
-  bufnr = bufnr or api.nvim_get_current_buf()
-  lsp.buf_request(bufnr, METHOD, make_organize_imports_params(bufnr), function(err)
+function utils.ts_organize_imports_async(bufnr, post)
+  bufnr = bufnr or vim.api.nvim_get_current_buf()
+  vim.lsp.buf_request(bufnr, METHOD, make_organize_imports_params(bufnr), function(err)
     if not err and post then
       post()
     end
   end)
 end
-function M.ts_organize_imports_sync(bufnr)
-  bufnr = bufnr or api.nvim_get_current_buf()
-  lsp.buf_request_sync(bufnr, METHOD, make_organize_imports_params(bufnr), 500)
+function utils.ts_organize_imports_sync(bufnr)
+  bufnr = bufnr or vim.api.nvim_get_current_buf()
+  vim.lsp.buf_request_sync(bufnr, METHOD, make_organize_imports_params(bufnr), 500)
 end
 
 local inlayHints = {
@@ -37,10 +35,10 @@ local function filterReactDTS(value)
   -- return string.match(value.uri, '%.d.ts') == nil
 end
 
----@type ServerConfig
-return {
+---@class ServerConfig
+local M = {
   lsp_attach = function(_, bufnr)
-    keymap('n', '<leader>ai', M.ts_organize_imports_sync, { buffer = bufnr, desc = 'Lsp: organize imports' })
+    keymap('n', '<leader>ai', utils.ts_organize_imports_sync, { buffer = bufnr, desc = 'Lsp: organize imports' })
   end,
   opts = {
     handlers = {
@@ -68,3 +66,5 @@ return {
     },
   },
 }
+
+return M

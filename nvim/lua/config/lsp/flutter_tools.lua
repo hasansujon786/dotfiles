@@ -5,7 +5,7 @@ return {
   keys = {
     {
       '<leader>fc',
-      function ()
+      function()
         require('config.lsp.servers.dartls.run_commmands').commands()
       end,
       ft = { 'yaml', 'dart', 'log' },
@@ -27,14 +27,7 @@ return {
         capabilities = require('config.lsp.util.setup').update_capabilities('flutter_tools'),
         -- see the link below for details on each option:
         -- https://github.com/dart-lang/sdk/blob/master/pkg/analysis_server/tool/lsp_spec/README.md#client-workspace-configuration
-        settings = {
-          showTodos = true,
-          completeFunctionCalls = true,
-          lineLength = 120,
-          enableSnippets = false,
-          -- analysisExcludedFolders = { '' },
-          -- enableSdkFormatter = false,
-        },
+        settings = require('config.lsp.servers.dartls').opts.settings.dart,
       },
       debugger = {
         enabled = false,
@@ -64,9 +57,6 @@ return {
         end,
       },
     })
-
-    keymap('n', '<leader>fr', '<Cmd>FlutterRestart<CR>', { desc = 'Flutter: Lsp restart' })
-    keymap('n', '<leader>dd', '<Cmd>FlutterLogOpen<CR>', { desc = 'Flutter: Open log' })
 
     command('FlutterLogToggleLayout', function(_)
       local updated_layout = not require('core.state').ui.edgy.open_flutter_log_on_right
