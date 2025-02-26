@@ -227,7 +227,7 @@ function M.quickLook(args)
   end))
 
   if not qlook.map_added then
-    keymap('n', '<leader>vo', function()
+    keymap('n', '<leader>vh', function()
       M.quickLook_close()
     end, { desc = 'Toggle quickLook' })
     qlook.map_added = true

@@ -140,9 +140,9 @@ local function set_custom_highlights()
     EdgyIconActive          = { fg = c.dark_cyan, bg = c.bg0 },
     -- /// snacks ///
     SnacksNormal            = { fg = c.fg, bg = float_bg },
-    SnacksDashboardHeader   = { fg = c.grey },
-    SnacksDashboardDesc     = { fg = c.light_grey },
-    SnacksDashboardKey      = { bg = c.bg3, fg = c.light_grey },
+    SnacksDashboardHeader   = { fg = c.blue },
+    SnacksDashboardDesc     = { fg = c.light_grey, italic = true },
+    SnacksDashboardKey      = { bg = c.bg3, fg = c.light_grey, italic = false },
     SnacksDashboardKeyAlt   = { fg = c.bg3 },
     SnacksDashboardNormal   = { fg = c.fg, bg = c.none },
     SnacksDashboardFooter   = { fg = c.dark_blue, bg = c.bg_d },

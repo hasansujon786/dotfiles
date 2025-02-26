@@ -1,9 +1,10 @@
-local btn_width = 36
-local function button(key, label, desc, cmd)
+local btn_width = 32
+local function button(key, label, icon, desc, cmd)
   local pad = btn_width - #label
 
   return {
     text = {
+      { icon, hl = 'SnacksDashboardDesc', width = 3 },
       { desc, hl = 'SnacksDashboardDesc', width = pad },
       { '', hl = 'SnacksDashboardKeyAlt' },
       { label, hl = 'SnacksDashboardKey' },
@@ -295,10 +296,15 @@ return {
       style = 'compact', -- 'compact'|'fancy'|'minimal'
       top_down = false, -- place notifications from top to bottom
     },
+    lazygit = {
+      theme = {
+        inactiveBorderColor = { fg = 'NotifyBorder' },
+      },
+    },
     statuscolumn = {
       enabled = true,
       left = { 'sign', 'mark' }, -- priority of signs on the right (high to low)
-      right = { 'git' }, -- priority of signs on the left (high to low)
+      right = { 'fold', 'git' }, -- priority of signs on the left (high to low)
       folds = { open = false, git_hl = false },
       git = { patterns = { 'GitSign', 'MiniDiffSign' } },
       refresh = 50, -- refresh at most every 50ms
@@ -333,33 +339,34 @@ return {
         ---@type snacks.dashboard.Item[]
         -- stylua: ignore
         keys = {
-          button('r', 'R', '  Recent file', '<cmd>lua Snacks.picker.recent()<CR>'),
-          button('l', 'L', '  Load session', '<cmd>lua require("persisted").load()<CR>'),
-          button('f', 'F', '  Find files', '<cmd>lua Snacks.picker.files()<CR>'),
-          button('s', 'S', '  Open settings', '<cmd>lua Snacks.dashboard.pick("files", {cwd = vim.fn.stdpath("config")})<CR>'),
-          button('p', 'P', '  Lazy dashboard', '<cmd>Lazy<CR>'),
-          button('a', 'A', '  Open org agenda', '<cmd>lua require("orgmode").action("agenda.prompt")<CR>'),
+          button('r', 'R', ' ', 'Recent file', '<cmd>lua Snacks.dashboard.pick("recent")<CR>'),
+          button('l', 'L', ' ', 'Load session', '<cmd>lua require("persisted").load()<CR>'),
+          button('f', 'F', ' ', 'Search files', '<cmd>lua Snacks.dashboard.pick("files")<CR>'),
+          button('s', 'S', ' ', 'Open settings', '<cmd>lua Snacks.dashboard.pick("files", {cwd = vim.fn.stdpath("config")})<CR>'),
+          button('p', 'P', ' ', 'Lazy dashboard', '<cmd>Lazy<CR>'),
+          button('a', 'A', ' ', 'Open org agenda', '<cmd>lua require("orgmode").action("agenda.prompt")<CR>'),
           -- { icon = ' ', label = ' n ', key = 'n', desc = 'New File', action = ':ene | startinsert' },
           -- button('t', ' T ', '  Open terminal', ':FloatermNew --wintype=normal --height=10'),
           -- { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
         },
         -- Used by the `header` section
         header = [[
-      ,               ,        
-    ,//,              %#*,     
-  ,((((//,            /###%*,  
-,((((((////,          /######%.
-///((((((((((,        *#######.
-//////(((((((((,      *#######.
-//////(/(((((((((,    *#######.
-//////(. /(((((((((,  *#######.
-//////(.   (((((((((*,*#######.
-//////(.    ,#((((((((########.
-/////((.      /#((((((##%%####.
-(((((((.        .(((((#####%%#.
- /(((((.          ((((#%#%%/*  
-   ,(((.            /(%%#*     
-      *               *        ]],
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣤⡼⠀⢀⡀⣀⢱⡄⡀⠀⠀⠀⢲⣤⣤⣤⣤⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣴⣾⣿⣿⣿⣿⣿⡿⠛⠋⠁⣤⣿⣿⣿⣧⣷⠀⠀⠘⠉⠛⢻⣷⣿⣽⣿⣿⣷⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢀⣴⣞⣽⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠠⣿⣿⡟⢻⣿⣿⣇⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣟⢦⡀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣠⣿⡾⣿⣿⣿⣿⣿⠿⣻⣿⣿⡀⠀⠀⠀⢻⣿⣷⡀⠻⣧⣿⠆⠀⠀⠀⠀⣿⣿⣿⡻⣿⣿⣿⣿⣿⠿⣽⣦⡀⠀⠀⠀⠀
+⠀⠀⠀⠀⣼⠟⣩⣾⣿⣿⣿⢟⣵⣾⣿⣿⣿⣧⠀⠀⠀⠈⠿⣿⣿⣷⣈⠁⠀⠀⠀⠀⣰⣿⣿⣿⣿⣮⣟⢯⣿⣿⣷⣬⡻⣷⡄⠀⠀⠀
+⠀⠀⢀⡜⣡⣾⣿⢿⣿⣿⣿⣿⣿⢟⣵⣿⣿⣿⣷⣄⠀⣰⣿⣿⣿⣿⣿⣷⣄⠀⢀⣼⣿⣿⣿⣷⡹⣿⣿⣿⣿⣿⣿⢿⣿⣮⡳⡄⠀⠀
+⠀⢠⢟⣿⡿⠋⣠⣾⢿⣿⣿⠟⢃⣾⢟⣿⢿⣿⣿⣿⣾⡿⠟⠻⣿⣻⣿⣏⠻⣿⣾⣿⣿⣿⣿⡛⣿⡌⠻⣿⣿⡿⣿⣦⡙⢿⣿⡝⣆⠀
+⠀⢯⣿⠏⣠⠞⠋⠀⣠⡿⠋⢀⣿⠁⢸⡏⣿⠿⣿⣿⠃⢠⣴⣾⣿⣿⣿⡟⠀⠘⢹⣿⠟⣿⣾⣷⠈⣿⡄⠘⢿⣦⠀⠈⠻⣆⠙⣿⣜⠆
+⢀⣿⠃⡴⠃⢀⡠⠞⠋⠀⠀⠼⠋⠀⠸⡇⠻⠀⠈⠃⠀⣧⢋⣼⣿⣿⣿⣷⣆⠀⠈⠁⠀⠟⠁⡟⠀⠈⠻⠀⠀⠉⠳⢦⡀⠈⢣⠈⢿⡄
+⣸⠇⢠⣷⠞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻⠿⠿⠋⠀⢻⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⢾⣆⠈⣷
+⡟⠀⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣶⣤⡀⢸⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡄⢹
+⡇⠀⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀⠈⣿⣼⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠃⢸
+⢡⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⠶⣶⡟⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡼
+⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡾⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡁⢠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⣿⣼⣀⣠⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
       },
       sections = {
         { section = 'header' },
@@ -437,12 +444,8 @@ return {
             help = true,
           },
         },
-        lsp_symbols = {
-          layout = { preset = 'dropdown', preview = { enabled = false, main = true } },
-          win = preview_main_win,
-        },
-        smart = { preset = 'dropdown', preview = 'main' },
-
+        lsp_symbols = { layout = 'dropdown' },
+        smart = { layout = 'dropdown' },
         grep = { layout = 'dropdown_preview' },
         grep_word = { layout = 'dropdown_preview' },
         grep_buffers = { layout = 'dropdown_preview' },
@@ -803,6 +806,12 @@ return {
         width = 0,
         -- wo = { winhighlight = 'Normal:SidebarDark,NormalFloat:SidebarDark' },
       },
+      lazygit = {
+        relative = 'editor',
+        height = 0,
+        width = 0,
+        border = 'none',
+      },
       input = {
         backdrop = false,
         position = 'float',
@@ -848,13 +857,13 @@ return {
   keys = {
     { 'g]',         function() Snacks.words.jump(vim.v.count1) end, desc = 'Next Reference', mode = { 'n', 't' } },
     { 'g[',         function() Snacks.words.jump(-vim.v.count1) end, desc = 'Prev Reference', mode = { 'n', 't' } },
-    { '<leader>vh', function() Snacks.notifier.hide() end, desc = 'Dismiss All Notifications' },
+    { '<leader>vo', function() Snacks.notifier.hide() end, desc = 'Dismiss All Notifications' },
     { '<leader>vn', function() Snacks.notifier.show_history() end, desc = 'Notification History' },
     { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Kill this buffer' },
     { '<leader>bo', function() Snacks.bufdelete.other() end, desc = 'Kill this buffer' },
     { '<leader>go', function() Snacks.gitbrowse() end, desc = 'Open git repo' , mode = { 'n', 'v' } },
     { '<leader>gO', function() Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end, notify = false }) end,  desc = "Git Browse (copy)", mode = {"n", "x" } },
-    { '<leader>aR', function() Snacks.rename.rename_file() end, desc = 'Lsp: Rename file' },
+    { '<leader>fr', function() Snacks.rename.rename_file() end, desc = 'Lsp: Rename file' },
     { '<leader>pd', function () Snacks.dashboard.open() end, desc = 'Open dashboard' },
     { '<leader>z',  function() Snacks.zen() end, desc = 'Toggle Zen Mode' },
     { '<leader>w.',  function() Snacks.zen.zoom() end, desc = 'Toggle Zoom' },
@@ -875,13 +884,13 @@ return {
     -- Terminal
     { '<M-m>', function() Snacks.terminal(nil, { shell = 'bash', win = { position = 'float' } }) end, { desc = 'Terminal' } },
     { '<leader>ot', function() Snacks.terminal(nil, { shell = 'bash', win = { wo = { winbar = termWinbar } } }) end, { desc = 'Terminal' } },
-    { '<leader>of', function() Snacks.terminal('yazi', { shell = 'bash' }) end, desc = 'Open File Manager' },
+    { '<leader>of', function() Snacks.terminal('yazi', { shell = 'bash', win = { style = 'lazygit' } }) end, desc = 'Open File Manager' },
     { '<leader>gl', function() Snacks.lazygit() end, desc = 'Open lazygit' },
 
     -- FIND FILES
-    -- { '<leader><space>', function() Snacks.picker.smart() end, desc = 'Find Git Files' },
+    { '<leader><space>', function() Snacks.picker.smart() end, desc = 'Find project files' },
     -- { '<leader><space>', function() Snacks.picker.git_files() end, desc = 'Find Git Files' },
-    { '<leader><space>', function() Snacks.picker.project_files() end, desc = 'Find project files' },
+    -- { '<leader><space>', function() Snacks.picker.project_files() end, desc = 'Find project files' },
     -- { '<leader>.', function() Snacks.picker.files({layout='ivy', cwd=vim.fn.expand('%:h')}) end, desc = 'Browse cur directory' },
     { '<leader>.', function() require('snacks-file-browser').browse({ cwd = vim.fn.expand('%:h') }) end, desc = 'Browse cur directory' },
     { '<leader>f.', function() Snacks.picker.files({cwd=vim.fn.expand('%:h')}) end, desc = 'Browse cur directory' },
@@ -922,7 +931,7 @@ return {
     { '//', auto_open_qflistt_or_loclist, ft = 'qf', desc = 'which_key_ignore' },
 
     -- PROJECT
-    { '<leader>pr', function() Snacks.picker.recent() end, desc = 'Find recent files' },
+    { '<leader>pr', function() Snacks.picker.recent({cwd = vim.uv.cwd()}) end, desc = 'Find recent files' },
     { '<leader>pt', search_project_todos, desc = 'Search project todos', mode = { "n", "x" } },
     { '<leader>pe', function() Snacks.picker.zoxide() end, desc = 'Find zoxide list' },
     { '<leader>pp', function() require('hasan.picker.persisted').persisted() end, desc = 'Switch project' },

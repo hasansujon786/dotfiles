@@ -1,3 +1,8 @@
+https://patorjk.com/software/taag/ → Best for text-based ASCII banners.
+https://emojicombos.com/ascii-art → Huge collection of ASCII designs.
+https://www.asciiart.eu/ → Categorized ASCII art for different themes.
+https://ascii.co.uk/ → Simple black-and-white ASCII designs.
+
 " let g:dashboard_custom_header = [
 "  \ '          //                 /*           ',
 "  \ '       ,(/(//,               *###         ',
