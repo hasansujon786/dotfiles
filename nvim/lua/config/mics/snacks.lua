@@ -415,6 +415,7 @@ return {
       sources = {
         buffers = { layout = 'dropdown', current = false },
         files = { layout = 'ivy' },
+        commands = { layout = 'vscode' },
         git_files = { layout = 'dropdown' },
         recent = { layout = 'ivy' },
         treesitter = {
@@ -926,8 +927,8 @@ return {
     { '<leader>/q', function() Snacks.picker.qflist() end, desc = 'Quickfix List' },
     { '<leader>/l', function() Snacks.picker.loclist() end, desc = 'Location List' },
     { '<leader>/H', function() Snacks.picker.highlights() end, desc = 'Highlights' },
-    -- { '<leader>/c', function() Sdropdown_previewnacks.picker.commands() end, desc = 'Commands' },
-    -- { '<leader>/C', function() Snacks.picker.command_history() end, desc = 'Command History' },
+    { '<leader>/c', function() Snacks.picker.commands() end, desc = 'Commands' },
+    { '<leader>/C', function() Snacks.picker.command_history() end, desc = 'Command History' },
     { '//', auto_open_qflistt_or_loclist, ft = 'qf', desc = 'which_key_ignore' },
 
     -- PROJECT

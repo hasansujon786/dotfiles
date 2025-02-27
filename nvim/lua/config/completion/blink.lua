@@ -75,7 +75,16 @@ return {
         -- luasnip = { name = ' ', score_offset = 90 },
         snippets = { name = ' ', score_offset = 80 },
         buffer = { name = ' ', score_offset = 70, min_keyword_length = 2 },
-        -- cmdline = { name = ' ' },
+        cmdline = {
+          name = ' ',
+          min_keyword_length = function(ctx)
+            -- when typing a command, only show when the keyword is 3 characters or longer
+            if ctx.mode == 'cmdline' and string.find(ctx.line, ' ') == nil then
+              return 3
+            end
+            return 0
+          end,
+        },
       },
     },
 
@@ -153,22 +162,24 @@ return {
 
         ['<Tab>'] = {
           function(cmp)
-            if not cmp.is_visible() then
-              return cmp.show({ callback = cmp.select_next })
+            if cmp.get_selected_item_idx() == 1 and not require('blink.cmp.completion.list').is_explicitly_selected then
+              require('blink.cmp.completion.list').select(1, {})
+              return true
             end
           end,
+          'show_and_insert',
           'select_next',
-          'fallback',
         },
-        ['<S-Tab>'] = { 'select_prev', 'fallback' },
+        ['<S-Tab>'] = { 'show_and_insert', 'select_prev' },
 
         ['<C-n>'] = { 'select_next', 'fallback' },
         ['<C-p>'] = { 'select_prev', 'fallback' },
         ['<A-n>'] = { 'select_next', 'fallback' },
-        ['<A-p>'] = { 'select_prev', 'fallback' },
+        -- ['<A-p>'] = { 'select_prev', 'fallback' },
       },
       completion = {
         menu = {
+          auto_show = true,
           draw = {
             columns = { { 'kind_icon' }, { 'label', 'label_description', gap = 1, fill = true } },
           },
