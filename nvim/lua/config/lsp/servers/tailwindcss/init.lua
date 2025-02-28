@@ -1,4 +1,4 @@
----@class ServerConfig
+---@class lsp.ServerConfig
 local M = {
   lsp_attach = function(_, bufnr)
     local peekTw = require('config.lsp.servers.tailwindcss.peek_tw_styles')

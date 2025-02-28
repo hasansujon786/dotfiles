@@ -1,3 +1,6 @@
+---@class state
+---@field lsp state.Lsp
+---@field completion state.Completion
 local M = {}
 
 M.theme = {
@@ -9,7 +12,6 @@ M.treesitter = {
   enabled_context = true,
 }
 
----@type StateCompletion
 M.completion = {
   module = 'blink',
 }
@@ -68,11 +70,11 @@ M.lsp = {
         'graphql',
         'handlebars',
       },
-      formatter = { 'prettierd', 'prettier', stop_after_first = true },
+      formatter = { 'prettier', 'prettierd', stop_after_first = true },
     },
     {
       filetype = 'lua',
-      formatter = { 'stylua' },
+      formatter = { 'stylua', },
     },
     {
       filetype = { 'bash', 'sh' },

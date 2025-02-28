@@ -35,7 +35,7 @@ local function filterReactDTS(value)
   -- return string.match(value.uri, '%.d.ts') == nil
 end
 
----@class ServerConfig
+---@class lsp.ServerConfig
 local M = {
   lsp_attach = function(_, bufnr)
     keymap('n', '<leader>ai', utils.ts_organize_imports_sync, { buffer = bufnr, desc = 'Lsp: organize imports' })

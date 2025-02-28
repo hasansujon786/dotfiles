@@ -24,7 +24,6 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
-
     keymap = {
       preset = 'super-tab',
       ['<C-q>'] = { 'show', 'show_documentation', 'hide_documentation' },
@@ -62,6 +61,7 @@ return {
       ['<A-u>'] = { 'scroll_documentation_up', 'fallback' },
       ['<A-d>'] = { 'scroll_documentation_down', 'fallback' },
     },
+    fuzzy = { implementation = 'prefer_rust' },
     -- snippets = {
     --   preset = 'luasnip',
     -- },

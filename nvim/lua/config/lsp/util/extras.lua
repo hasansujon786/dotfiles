@@ -3,7 +3,7 @@ local api = vim.api
 
 ---Get lsp server config
 ---@param lsp_name string
----@return ServerConfig|nil
+---@return lsp.ServerConfig|nil
 function M.import_lspconfig_by_name(lsp_name)
   local ok, module = pcall(require, 'config.lsp.servers.' .. lsp_name)
   if ok then

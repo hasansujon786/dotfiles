@@ -29,7 +29,7 @@ keymap('n', '<Plug>FlutterPkgToRelative', function()
   vim.fn['repeat#set'](t('<Plug>FlutterPkgToRelative'))
 end)
 
----@class ServerConfig
+---@class lsp.ServerConfig
 local M = {
   lsp_attach = function(_, buffer)
     local function desc(d)

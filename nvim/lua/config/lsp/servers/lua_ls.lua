@@ -1,7 +1,7 @@
 -- https://luals.github.io/wiki/settings/
 -- Wiki https://github.com/neovim/nvim-lspconfig/wiki/User-contributed-tips#range-formatting-with-a-motion
 
----@class ServerConfig
+---@class lsp.ServerConfig
 local M = {
   -- lsp_attach = function()
   --   dd('lua_ls attach for this buf')
