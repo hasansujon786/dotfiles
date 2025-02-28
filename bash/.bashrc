@@ -27,3 +27,6 @@ if [ -f ~/dotfiles/bash/.env ]; then
   source ~/dotfiles/bash/simple_prompt.bash
   source ~/dotfiles/bash/zoxide.bash
 fi
+if [ -f ~/.env ]; then
+  source ~/.env
+fi
