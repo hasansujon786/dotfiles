@@ -191,6 +191,24 @@ local preview_main_win = {
   },
 }
 
+---try_change_quicklook
+---@param p snacks.Picker
+local function try_change_quicklook(p)
+  if vim.b.qlook then
+    vim.schedule(function()
+      local cur_item = p.list:current()
+      if not cur_item or cur_item._path == nil then
+        return
+      end
+
+      local ok = pcall(require('hasan.utils.file').quickLook, { cur_item._path })
+      if ok then
+        vim.b.qlook = cur_item._path
+      end
+    end)
+  end
+end
+
 return {
   'hasansujon786/snacks.nvim',
   priority = 1000,
@@ -667,12 +685,28 @@ return {
           -- FIXME: do not kill buffer if it is opend before
           require('hasan.float').fedit(item.file)
         end,
+        my_list_up = function(p)
+          p:action('list_up')
+          try_change_quicklook(p)
+        end,
+        my_list_down = function(p)
+          p:action('list_down')
+          try_change_quicklook(p)
+        end,
         quicklook = function(_, item)
           if not item or item._path == nil then
             return
           end
+          local ok = pcall(require('hasan.utils.file').quickLook, { item._path })
+          if not ok then
+            return
+          end
 
-          require('hasan.utils.file').quickLook({ item._path })
+          if vim.b.qlook and vim.b.qlook == item._path then
+            vim.b.qlook = nil
+          else
+            vim.b.qlook = item._path
+          end
         end,
         system_open = function(picker, item)
           picker:close()
@@ -722,8 +756,8 @@ return {
             ['<a-d>'] = { 'preview_scroll_down', mode = { 'i', 'n' } },
             ['<a-n>'] = { 'list_down', mode = { 'i', 'n' } },
             ['<a-p>'] = { 'list_up', mode = { 'i', 'n' } },
-            ['<tab>'] = { 'list_down', mode = { 'i', 'n' } },
-            ['<s-tab>'] = { 'list_up', mode = { 'i', 'n' } },
+            ['<tab>'] = { 'my_list_down', mode = { 'i', 'n' } },
+            ['<s-tab>'] = { 'my_list_up', mode = { 'i', 'n' } },
 
             -- ['<a-i>'] = { 'toggle_ignored', mode = { 'i', 'n' } },
             -- ['<a-h>'] = { 'toggle_hidden', mode = { 'i', 'n' } },

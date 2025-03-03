@@ -170,7 +170,10 @@ function M.lspRename()
 end
 
 function M.hover()
-  local img_src = Snacks.image.doc.at_cursor()
+  local img_src = nil
+  Snacks.image.doc.at_cursor(function(src, _)
+    img_src = src
+  end)
   if not img_src then
     img_src = require('hasan.utils.buffer').parse_img_str_at_cursor()
   end

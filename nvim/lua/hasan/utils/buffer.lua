@@ -107,7 +107,7 @@ function M.parse_img_str_at_cursor()
   local dir = vim.fs.dirname(file)
   local absolute_path = require('hasan.utils.file').resolve_relative_path(dir, text)
 
-  if vim.fn.filereadable(absolute_path) then
+  if vim.fn.filereadable(absolute_path) == 1 then
     return absolute_path
   end
 end

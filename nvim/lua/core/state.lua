@@ -70,7 +70,7 @@ M.lsp = {
         'graphql',
         'handlebars',
       },
-      formatter = { 'prettier', 'prettierd', stop_after_first = true },
+      formatter = { 'prettierd', 'prettier', stop_after_first = true },
     },
     {
       filetype = 'lua',
