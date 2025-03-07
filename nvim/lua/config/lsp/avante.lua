@@ -1,7 +1,7 @@
 return {
   'yetone/avante.nvim',
   lazy = true,
-  version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
+  version = "*", -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
   ft = { 'Avante' },
   cmd = {
     'AvanteAsk',

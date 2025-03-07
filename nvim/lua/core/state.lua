@@ -16,6 +16,20 @@ M.completion = {
   module = 'blink',
 }
 
+M.picker = {
+  exclude = {
+    -- dotfiles
+    'gui/sublime_text/',
+    'nvim/tmp/archive',
+    '4_archive/',
+    -- projects
+    'android/',
+    'ios/',
+    'vendor/',
+    'pubspec.lock',
+  },
+}
+
 M.lsp = {
   ---lspconfig_name = {'mason_package_name'}
   essential_servers = {
@@ -74,7 +88,7 @@ M.lsp = {
     },
     {
       filetype = 'lua',
-      formatter = { 'stylua', },
+      formatter = { 'stylua' },
     },
     {
       filetype = { 'bash', 'sh' },

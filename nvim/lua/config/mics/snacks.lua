@@ -1,3 +1,4 @@
+local state = require('core.state')
 local btn_width = 32
 local function button(key, label, icon, desc, cmd)
   local pad = btn_width - #label
@@ -419,17 +420,7 @@ return {
     },
     picker = {
       prompt = '   ',
-      exclude = {
-        -- dotfiles
-        'gui/sublime_text/',
-        'nvim/tmp/archive',
-        '4_archive/',
-        -- projects
-        'android/',
-        'ios/',
-        'vendor/',
-        'pubspec.lock',
-      },
+      exclude = state.picker.exclude,
       sources = {
         buffers = { layout = 'dropdown', current = false },
         files = { layout = 'ivy' },
@@ -513,8 +504,9 @@ return {
         },
 
         project_files = { -- https://github.com/folke/snacks.nvim/issues/532#issuecomment-2609303872
-          layout = { preset = 'dropdown', preview = { main = true, enabled = false } },
-          multi = { 'files', 'lsp_symbols' },
+          layout = { preset = 'dropdown' },
+          -- multi = { 'files', 'lsp_symbols' },
+          finder = 'files',
           matcher = {
             cwd_bonus = true, -- boost cwd matches
             frecency = true, -- use frecency boosting
@@ -923,9 +915,9 @@ return {
     { '<leader>gl', function() Snacks.lazygit() end, desc = 'Open lazygit' },
 
     -- FIND FILES
-    { '<leader><space>', function() Snacks.picker.smart() end, desc = 'Find project files' },
+    { '<leader><space>', function() Snacks.picker.project_files() end, desc = 'Find project files' },
+    -- { '<leader><space>', function() Snacks.picker.smart() end, desc = 'Find project files' },
     -- { '<leader><space>', function() Snacks.picker.git_files() end, desc = 'Find Git Files' },
-    -- { '<leader><space>', function() Snacks.picker.project_files() end, desc = 'Find project files' },
     -- { '<leader>.', function() Snacks.picker.files({layout='ivy', cwd=vim.fn.expand('%:h')}) end, desc = 'Browse cur directory' },
     { '<leader>.', function() require('snacks-file-browser').browse({ cwd = vim.fn.expand('%:h') }) end, desc = 'Browse cur directory' },
     { '<leader>f.', function() Snacks.picker.files({cwd=vim.fn.expand('%:h')}) end, desc = 'Browse cur directory' },
