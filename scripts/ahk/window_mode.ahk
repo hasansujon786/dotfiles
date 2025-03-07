@@ -11,7 +11,7 @@ winMode := 0
   }
 #HotIf
 #HotIf winMode
-  r::resetWin()
+  r::winRestoreAndCenter()
   c::centerCurrentWindow()
 
   l::moveWinRight(25)

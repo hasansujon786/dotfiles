@@ -64,23 +64,6 @@ sortExplorerByDate(){
   }
 }
 
-; http://msdn.microsoft.com/en-us/library/bb774094
-GetActiveExplorer() {
-  static objShell := ComObject("Shell.Application")
-  WinHWND := WinActive("A") ; Active window
-  for Item in objShell.Windows
-    if (Item.HWND = WinHWND)
-      return Item ; Return active window object
-  return -1 ; No explorer windows match active window
-}
-
-NavRun(Path) {
-  if (-1 != objIE := GetActiveExplorer())
-    objIE.Navigate(Path)
-  else
-    Run(Path)
-}
-
 
 #y::quake_nvim(true) ; edit from current input field
 #+y::quake_nvim(false) ; edit from last clipboard text

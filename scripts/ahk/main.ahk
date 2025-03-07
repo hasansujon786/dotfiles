@@ -4,7 +4,12 @@
 SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 #SingleInstance Force ; C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\
 
-#Include %A_ScriptDir%\utils.ahk
+#Include %A_ScriptDir%\core\utils.ahk
+#Include %A_ScriptDir%\core\win_layout.ahk
+#Include %A_ScriptDir%\core\win_control.ahk
+#Include %A_ScriptDir%\core\vert_desktop.ahk
+#Include %A_ScriptDir%\core\vim_explorer.ahk
+#Include %A_ScriptDir%\core\automation_mode.ahk
 
 ;Reload/Execute this script.ahk file
 ::rscript::
@@ -24,8 +29,8 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 ^#b::showCalendar()
 PrintScreen::Send("#+{s}")
 #+q::toggleBluetooth()
-#q::select_volume_mixer()
-#^+v::open_mic_panel()
+#q::showVolMixerTabbar()
+#^+v::showMicPanel()
 #;::SendInput("{AppsKey}")
 #k::toggleKanata()
 ih := InputHook("B L1 T1", "{Esc}")
@@ -54,10 +59,10 @@ ih := InputHook("B L1 T1", "{Esc}")
 !Del::Volume_Mute
 !PgUp::volup()
 !PgDn::voldown()
-#HotIf MouseIsOver("ahk_class Shell_TrayWnd")
+#HotIf winIsMouseOver("ahk_class Shell_TrayWnd")
   ~LAlt & WheelUP::volup()
   ~LAlt & WheelDown::voldown()
-  ~LAlt & RButton::openVolumeController()
+  ~LAlt & RButton::showVolMixer()
 #HotIf
 !Backspace::Send("^{Backspace}")
 !SPACE::Send("^{SPACE}")
@@ -96,7 +101,7 @@ ih := InputHook("B L1 T1", "{Esc}")
 
 ^#m::Send("#{m}")
 #m::WinMinimize("a")
-!x::toggleWinRestore()
+!x::winToggleRestore()
 ^[::{
   SendInput("^+{tab}")
   Send("{ctrl down}")
@@ -110,7 +115,7 @@ ih := InputHook("B L1 T1", "{Esc}")
 +![::SendInput("^+{PgUp}")
 +!]::SendInput("^+{PgDn}")
 !Enter::Send("{f11}")
-!Escape::resetWin()
+!Escape::winRestoreAndCenter()
 $Escape::superEscape()
 #SPACE::toggleAlwaysOnTop()
 ; Vertual Desktop
@@ -142,7 +147,7 @@ current_layout := 0
 ;******************************************************************************
 #/::SendInput("^!{Tab}")
 #HotIf WinActive("Volume Control")
-  or (MouseIsOver("ahk_class ApplicationFrameWindow") or MouseIsOver("ahk_class Shell_LightDismissOverlay")) and MouseIsOver("ahk_exe explorer.exe") and MouseIsOver("") ; clipboard & backdrop
+  or (winIsMouseOver("ahk_class ApplicationFrameWindow") or winIsMouseOver("ahk_class Shell_LightDismissOverlay")) and winIsMouseOver("ahk_exe explorer.exe") and winIsMouseOver("") ; clipboard & backdrop
   or WinActive("Task View") ; win+tab
   or WinActive("Task Switching") ; ctrl+alt+tab
   ; or WinActive("ahk_class MultitaskingViewFrame")  ; ctrl+alt+tab
@@ -168,5 +173,3 @@ current_layout := 0
   ]::navToDesktop("right")
 #HotIf
 
-#Include %A_ScriptDir%\vim_explorer.ahk
-#Include %A_ScriptDir%\automation_mode.ahk

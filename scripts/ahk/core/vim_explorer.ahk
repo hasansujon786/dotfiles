@@ -42,6 +42,22 @@ focusExplorer(index := 1, action := "") {
     focusExplorer(index + 1, action)  ; Recursively call next option on error
   }
 }
+; http://msdn.microsoft.com/en-us/library/bb774094
+GetActiveExplorer() {
+  static objShell := ComObject("Shell.Application")
+  WinHWND := WinActive("A") ; Active window
+  for Item in objShell.Windows
+    if (Item.HWND = WinHWND)
+      return Item ; Return active window object
+  return -1 ; No explorer windows match active window
+}
+; 2::NavRun(A_MyDocuments)
+NavRun(Path) {
+  if (-1 != objIE := GetActiveExplorer())
+    objIE.Navigate(Path)
+  else
+    Run(Path)
+}
 #HotIf (WinActive("ahk_class CabinetWClass") or WinActive("Save As")) && isExplInsertMode
   Esc::{
     if(ControlGetClassNN(ControlGetFocus("A")) == "Windows.UI.Core.CoreWindow1") {

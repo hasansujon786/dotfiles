@@ -3,8 +3,9 @@ Global isClikModeActive := 0
 Global optionsList := ["Youtube Playlist", "Youtube queue", "Firebase Remove User"]
 
 
-+^#LButton::selectAutoClikMode()
++^#RButton::selectAutoClikMode()
 #HotIf isClikModeActive
+  ; TODO: fix esc keymap
   Esc::{
     beep()
     exitAutoClikMode()
@@ -18,7 +19,7 @@ Global optionsList := ["Youtube Playlist", "Youtube queue", "Firebase Remove Use
 #HotIf
 
 createStatusLine(title, submode) {
-  closeWindowByTitle("status_line")
+  winCloseByTitle("status_line")
 
   height := 30
   width := 320
@@ -47,7 +48,7 @@ enterAutoClikMode() {
 }
 exitAutoClikMode() {
   Global isClikModeActive := 0
-  closeWindowByTitle("status_line")
+  winCloseByTitle("status_line")
 }
 
 selectAutoClikMode() {
