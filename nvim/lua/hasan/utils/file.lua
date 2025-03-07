@@ -98,6 +98,10 @@ M.get_relative_fname = function()
   return fname:gsub(vim.fn.getcwd() .. '/', '')
 end
 
+M.reload_ahk = function()
+  vim.system({ 'explorer', 'C:\\Users\\hasan\\dotfiles\\scripts\\ahk\\reload.ahk' }, { text = true }):wait()
+end
+
 M.read_file = function(path)
   local fd = vim.loop.fs_open(path, 'r', 438)
   if fd == nil then

@@ -23,6 +23,9 @@ augroup('MY_AUGROUP')(function(autocmd)
   autocmd('FileType', 'setl foldmarker={,}', { pattern = { 'css', 'scss', 'json' } })
   autocmd('FileType', 'setl foldmarker={,}', { pattern = { 'css', 'scss', 'json' } })
   autocmd({ 'BufNewFile', 'BufRead' }, 'setl filetype=jsonc', { pattern = { '*.json', 'tsconfig.json' } })
+  autocmd('BufWritePost', function()
+    require("hasan.utils.file").reload_ahk()
+  end, { pattern = '*.ahk' })
   -- HELP_FILE
   autocmd({ 'BufNewFile', 'BufRead' }, function(info)
     if is_doc_file(info.match) then

@@ -228,3 +228,8 @@ $RAlt::
     KeyWait, RAlt
     Click, Up
 return
+
+
+; Round window corners on win11
+; DllCall("dwmapi\DwmSetWindowAttribute", "Ptr", SLine.Hwnd, "Int", 33, "Int*", 3, "Int", 4)
+

@@ -33,12 +33,8 @@ superEscape() {
   ErrorLevel := !KeyWait("Escape", "T0.5") ; Wait no more than 0.5 sec for key release (also suppress auto-repeat)
   if ErrorLevel { ; timeout, so key is still down...
     SoundPlay("*64") ; Play an asterisk (Doesn't work for me though!)
-    X := WinGetProcessName("A")
-    SplashTextGui := Gui("ToolWindow -Sysmenu Disabled", )
-    Text := SplashTextGui.Add("Text", "Center h120", "Release button to close " x "`n`nKeep pressing it to NOT close window...")
-    Text.SetFont("s12", "Segoe UI")
-    SplashTextGui.Show()
-
+    appName := StrUpper(StrReplace(WinGetProcessName("A"), ".exe"))
+    SplashTextGui := splashMessage("Release button to close`n" appName "`n`n    Keep pressing it to NOT    `nclose window...")
     ErrorLevel := !KeyWait("Escape", "T3") ; Wait no more than 3 more sec for key to be released
     SplashTextGui.Destroy
     If !ErrorLevel ; No timeout, so key was released
@@ -62,6 +58,13 @@ getMousePos() {
 }
 dd(msg) {
   MsgBox(msg, "", "T1")
+}
+splashMessage(msg:="") {
+  spGui := Gui("+ToolWindow +AlwaysOnTop -Sysmenu Disabled", "")
+  spGui.SetFont("s10", "Segoe UI")
+  spGui.Add("Text", "Center", msg "`n`n")
+  spGui.Show("NoActivate AutoSize")
+  return spGui
 }
 tooltipClear() {
   ToolTip()
@@ -203,13 +206,29 @@ toggleBluetooth(onOff := "On") {
   Sleep(600)
   ProgressGui.Destroy
 }
+getNewestFile(folderPath) {
+  newestFile := ""
+  newestTime := 0
+  Loop Files folderPath {
+    fileTime := FileGetTime(A_LoopFileFullPath, "M")  ; Get file modification time
+    if (fileTime > newestTime) {  ; Compare timestamps
+      newestTime := fileTime
+      newestFile := A_LoopFileFullPath
+    }
+  }
+  return newestFile
+}
+openNewestFile(path) {
+  newestFile := getNewestFile(path)
+  Run(newestFile)
+  ; Run('C:\Users\hasan\AppData\Local\Programs\QuickLook\QuickLook.exe "' screenshotPath '"')
+}
 takeScreenshot() {
   SendInput("#{PrintScreen}")
   beep()
-  SplashTextGui := Gui("ToolWindow -Sysmenu Disabled +AlwaysOnTop -Caption", ), SplashTextGui.SetFont("s14", "Arial"), SplashTextGui.Add("Text", "x0 Center w200", "Your screenshort has saved")
-  SplashTextGui.Show("w200 h80 NA")
+  spGui := splashMessage("  Your screenshort has saved  ")
   Sleep(300)
-  SplashTextGui.Destroy
+  spGui.Destroy
 }
 select_playback_device_w10() {
   Send("#b")
@@ -245,15 +264,16 @@ open_mic_panel() {
   WinActivate("Sound")
 }
 showCalendar() {
-  Send("#b")
-  Send("{left}")
-  Send("{left}")
-  Send("{Space}")
-  sleep(300)
-  Send("{tab}")
-  Send("{tab}")
-  Send("{tab}")
-  Send("{tab}")
+  ; Send("#b")
+  ; Send("{left}")
+  ; Send("{left}")
+  ; Send("{Space}")
+  Send("#n")
+  sleep(600)
+  Send("+{tab}")
+  Send("+{tab}")
+  Send("+{tab}")
+  Send("+{tab}")
 }
 volup() {
   SoundSetVolume("+8")
@@ -308,20 +328,31 @@ increaseTransparency() {
   WinSetTransparent(TN, Title)
 }
 toggleAlwaysOnTop() {
-  WinSetAlwaysontop(, "A")
-  title := WinGetProcessName("A")
-  win_id := WinGetID("A")
-  beep()
+  active := WinGetTitle("A")
+  appName := StrUpper(StrReplace(WinGetProcessName("A"), ".exe"))
+  status := ""
+  If !(WinGetMinMax(active)) {
+    WinSetAlwaysOnTop -1, active
+    ExStyle := WinGetExStyle(active)
+    If (ExStyle & 0x8) {
+      status := "Activated"
+    } else {
+      status := "Deactivated"
+    }
+  } else {
+    status := "Window is Maximized"
+  }
 
-  ExStyle := WinGetExStyle("ahk_id " win_id)
-  If (ExStyle & 0x8)
-    ExStyle := "AlwaysOnTop"
-  Else
-    ExStyle := "Not AlwaysOnTop"
-
-  SplashTextGui := Gui("ToolWindow -Sysmenu Disabled", ), SplashTextGui.Add("Text",, "`n" exstyle "`n------------`n" title), SplashTextGui.Show("w200 h100")
-  Sleep(300)
-  SplashTextGui.Destroy
+  spGui := Gui("+ToolWindow +AlwaysOnTop -Sysmenu Disabled", "")
+  ;; Add title
+  spGui.SetFont("s10", "Segoe UI")
+  spGui.Add("Text", "Center w180 c222222", "Always On Top`n------------")
+  ;; Add Status
+  spGui.SetFont("s12 w700", "Segoe UI")    ; Size 16, Bold
+  spGui.Add("Text", "Center y+-4 c222222 w180", status "`n")
+ 
+  spGui.Show("NoActivate AutoSize")
+  SetTimer () => spGui.Destroy(), -1000
 }
 
 ;******************************************************************************

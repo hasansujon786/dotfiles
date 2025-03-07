@@ -9,17 +9,18 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 ;Reload/Execute this script.ahk file
 ::rscript::
 !f5:: {
-  SplashTextGui := Gui("ToolWindow -Sysmenu Disabled", ),
-  Text := SplashTextGui.Add("Text", "Center w200 h40", "Reloaded...")
-  Text.SetFont("s12", "Segoe UI")
-  SplashTextGui.Show()
+  spGui := Gui("+ToolWindow +AlwaysOnTop -Sysmenu Disabled", "")
+  spGui.SetFont("s10", "Segoe UI")
+  spGui.Add("Text", "Center", "    AHK Reloaded...    `n`n")
+  spGui.Show("NoActivate AutoSize")
   Sleep(300)
-  SplashTextGui.Destroy
+  spGui.Destroy
   Run("C:\Users\" A_UserName "\dotfiles\scripts\ahk\main.ahk")
 }
 ^f5::Suspend(-1)
 
 #`::takeScreenshot()
+^#`::openNewestFile("C:\Users\hasan\Pictures\Screenshots\*.*")
 ^#b::showCalendar()
 PrintScreen::Send("#+{s}")
 #+q::toggleBluetooth()
@@ -111,7 +112,7 @@ ih := InputHook("B L1 T1", "{Esc}")
 !Enter::Send("{f11}")
 !Escape::resetWin()
 $Escape::superEscape()
-; #SPACE::toggleAlwaysOnTop() ; TODO: fix
+#SPACE::toggleAlwaysOnTop()
 ; Vertual Desktop
 #h::navToDesktop("left")
 #l::navToDesktop("right")
