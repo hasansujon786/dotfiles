@@ -117,10 +117,6 @@ wezterm.on('sessionizer-find-repoes', function(...)
   require('sessionizer').find_repoes(constants.project_dirs, ...)
 end)
 
-wezterm.on('save-session', function(...)
-  require('wezterm-session-manager/session-manager').save_state(...)
-end)
-
 local bg_opacity = 0.96
 M.toggle_opacity = function(win, _)
   local overrides = win:get_config_overrides() or {}

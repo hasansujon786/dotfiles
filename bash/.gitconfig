@@ -10,3 +10,7 @@
 	clean = git-lfs clean -- %f
 [safe]
 	directory = *
+[alias]
+	br = branch
+  dt = "! args=$@; shift $#; nvim -c \"DiffviewOpen $args\""
+	ck = checkout

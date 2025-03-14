@@ -42,6 +42,10 @@ command('Dashboard', function()
   Snacks.dashboard.open()
 end, { desc = 'Open dashboard' })
 
+command('WezSession', function()
+  require('hasan.wez-session').select_file()
+end, { desc = 'Edit wez-sessions' })
+
 command('CheckWinConfig', function()
   local opts = vim.api.nvim_win_get_config(0)
   dd(opts)

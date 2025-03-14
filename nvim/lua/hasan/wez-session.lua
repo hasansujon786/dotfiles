@@ -1,139 +1,249 @@
-local action_state = require('telescope.actions.state')
-local Path = require('plenary.path')
-local Popup = require('nui.popup')
-local Layout = require('nui.layout')
-local popup = require('plenary.popup')
+local state_path = vim.fs.normalize(vim.fn.expand('~')) .. '/dotfiles/gui/wezterm/wezterm-session-manager/state'
+-- local path = 'C:/Users/hasan/dotfiles/gui/wezterm/wezterm-session-manager/state/klark-app.json'
+
 local M = {}
 
-M.root_has = function(fname)
-  local fpath = Path:new(vim.fn.getcwd(), fname)
-  local exists = fpath:exists()
-  return exists, exists and fpath or nil
-end
-
-M.get_project_scripts = function(fpath)
-  local data = vim.fn.readfile(fpath)
-  ---@type WezWorkSpace
-  local sc = vim.fn.json_decode(data)
-
-  return sc.tabs[3]
-end
-
-local wins_ids = {}
-
-M.create_tabs = function()
-  local wez_height = 46
-  local wez_width = 192
-
-  local start_col = 30
-  local start_row = 8
-
-  local max_height = 30
-  local max_width = 100
-
-  local data =
-    M.get_project_scripts('C:\\Users\\hasan\\dotfiles\\gui\\wezterm\\wezterm-session-manager\\klark-app-rn.json')
-  local boxes = {}
-
-  local pos = {
-    {
-      line = start_row,
-      col = start_col,
-      minwidth = 50,
-      minheight = 30,
-    },
-    {
-      line = start_row,
-      col = start_col + 54,
-      minwidth = 50,
-      minheight = 15 - 1,
-    },
-    {
-      line = start_row + 14 + 2,
-      col = start_col + 54,
-      minwidth = 50,
-      minheight = 15 - 1,
-    },
-  }
-
-  for pan_nr, pane in pairs(data.panes) do
-    local bufnr = vim.api.nvim_create_buf(false, true)
-    keymap('n', 'x', function()
-      foo()
-    end, { buffer = bufnr })
-
-    local p = pos[pan_nr]
-    local main_win_id, win = popup.create(bufnr, {
-      relative = 'editor',
-      highlight = 'Float',
-      -- line = 10,
-      -- col = 10,
-      line = p.line,
-      col = p.col,
-      minwidth = p.minwidth,
-      minheight = p.minheight,
-      -- borderchars = borderchars,
-      border = true,
-      focusable = false,
-    })
-
-    table.insert(wins_ids, main_win_id)
+local function write_state(file_path, data)
+  -- Write JSON string to a file
+  local file = io.open(file_path, 'w') -- Open file in write mode
+  if file then
+    local json_string = vim.fn.json_encode(data)
+    file:write(json_string) -- Write the JSON string to the file
+    file:close() -- Close the file
   end
 end
--- M.create_tabs()
 
--- _G.foo = function()
---   for _, id in ipairs(wins_ids) do
---     vim.api.nvim_win_close(id, true)
---   end
--- end
--- M.get_project_scripts('C:\\Users\\hasan\\dotfiles\\gui\\wezterm\\wezterm-session-manager\\klark-app-rn.json')
-
-function M.browse_sessions()
-  require('telescope').extensions.file_browser.file_browser({
-    cwd = '~/dotfiles/gui/wezterm/wezterm-session-manager',
-    hide_parent_dir = true,
-    prompt_path = true,
-    previewer = true,
-    hidden = true,
-    respect_gitignore = false,
-    -- attach_mappings = function(_, map)
-    --   map({ 'n', 'i' }, '<CR>', function(prompt_bufnr)
-    --     require('telescope.actions').close(prompt_bufnr)
-    --     P(action_state.get_selected_entry().value)
-    --   end)
-    --   return true
-    -- end,
-  })
+local function list_files(directory)
+  local files = {}
+  local handle = vim.uv.fs_scandir(directory)
+  if handle then
+    while true do
+      local name, type = vim.uv.fs_scandir_next(handle)
+      if not name then
+        break
+      end
+      if type == 'file' then
+        table.insert(files, name)
+      end
+    end
+  end
+  return files
 end
 
-M.browse_sessions()
+local function parse_pane_data()
+  local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false) -- Read all buffer lines
 
--- Define Pane type for individual pane objects
----@class Pane
----@field cwd string -- The current working directory
----@field action string -- Action command to execute in pane
----@field height number -- Pane height
----@field index number -- Pane index in tab
----@field is_active boolean -- Whether the pane is active
----@field is_zoomed boolean -- Whether the pane is zoomed
----@field left number -- Pane's left position
----@field pane_id string -- Unique pane identifier
----@field pixel_height number -- Pane pixel height
----@field pixel_width number -- Pane pixel width
----@field top number -- Pane's top position
----@field tty string -- Terminal type
----@field width number -- Pane width
+  ---@type WezTermAppStateParsed
+  local wezterm_form_state = { tabs = {} }
+  ---@type TabParsed
+  local current_tab = nil
 
--- Define Tab type for individual tab objects containing multiple panes
----@class Tab
----@field panes Pane[] -- Array of Pane objects
----@field tab_id string -- Unique tab identifier
+  for line_index, line in ipairs(lines) do
+    -- Tab: 4 (Active:6)
+    local tab_index = line:match('Tab:%s+(%d+)')
 
--- Define KlarkAppRn type for the root JSON object
----@class WezWorkSpace
----@field size { dpi:number,pixel_height:number,pixel_width:number,cols:number,rows:number }
----@field name string -- Name of the configuration
----@field tabs Tab[] -- Array of Tab objects
+    if tab_index then
+      local is_active = line:find('%(Active:') ~= nil
+      local tab_id = line:match(':(%d+)%)')
+      current_tab = {
+        tab_id = tab_id,
+        is_active = is_active,
+        panes = {},
+      }
+      table.insert(wezterm_form_state.tabs, current_tab)
+      goto continue -- Skip
+    end
+
+    -- Match "Id:" pane lines
+    local pane_id = line:match('ID:%s*(%d+)')
+    if pane_id and current_tab then
+      local has_asterisk = lines[line_index - 1]:match('%[.-%]%*') ~= nil -- [1]*
+      table.insert(current_tab.panes, { pane_id = pane_id, is_active = has_asterisk })
+      goto continue -- Skip
+    end
+
+    -- Match "Dir:" pane lines
+    local cwd = line:match('Dir:%s*(.-)%s*$')
+    if cwd and current_tab then
+      cwd = 'file:///' .. vim.fs.normalize(cwd) -- Convert Windows path to file URI format
+      current_tab.panes[#current_tab.panes].cwd = cwd
+      goto continue -- Skip
+    end
+
+    -- -- Match "Size:" lines
+    -- local width, height = line:match('Size:%s*(%d+)x(%d+)')
+    -- if width and height and current_tab then
+    --   current_tab.panes[#current_tab.panes].width = tonumber(width)
+    --   current_tab.panes[#current_tab.panes].height = tonumber(height)
+    -- end
+
+    -- Match "Action:" lines
+    local action = line:match('Action:%s*(.-)%s*$')
+    if action and current_tab then
+      current_tab.panes[#current_tab.panes].action = action
+      goto continue -- Skip
+    end
+
+    ::continue:: -- Label to jump here
+  end
+
+  return wezterm_form_state
+end
+
+---@param wezterm_state WezTermAppState
+---@return WezTermAppState
+local function update_state(wezterm_state)
+  local parsed_data = parse_pane_data()
+
+  ---@type WezTermAppState
+  local new_state = {
+    name = wezterm_state.name,
+    size = wezterm_state.size,
+    tabs = {},
+  }
+
+  for tab_index, tab_parsed in ipairs(parsed_data.tabs) do
+    if tab_parsed.tab_id == wezterm_state.tabs[tab_index].tab_id then
+      local updated_tab = wezterm_state.tabs[tab_index]
+      updated_tab.is_active = tab_parsed.is_active
+
+      for pane_index, pane_parsed in ipairs(tab_parsed.panes) do
+        if vim.trim(pane_parsed.action) ~= '' then
+          -- update pane action,cwd
+          updated_tab.panes[pane_index].action = pane_parsed.action
+          updated_tab.panes[pane_index].cwd = pane_parsed.cwd
+          updated_tab.panes[pane_index].is_active = pane_parsed.is_active
+        end
+      end
+      new_state.tabs[tab_index] = updated_tab
+    end
+  end
+
+  return new_state
+end
+
+local function create_floating_win(state_file)
+  ---@type WezTermAppState
+  local wezterm_state = vim.fn.json_decode(vim.fn.readfile(state_file))
+  local buf = vim.api.nvim_create_buf(false, true) -- Create a new scratch buffer
+
+  local width = 80
+  local height = math.min(#wezterm_state.tabs * 6, 20) -- Adjust height dynamically
+
+  local opts = {
+    relative = 'editor',
+    width = width,
+    height = height,
+    row = math.floor((vim.o.lines - height) / 2),
+    col = math.floor((vim.o.columns - width) / 2),
+    style = 'minimal',
+    border = 'rounded',
+  }
+
+  local win = vim.api.nvim_open_win(buf, true, opts)
+
+  keymap('n', '<leader>s', function()
+    write_state(state_file, update_state(wezterm_state))
+  end, { noremap = true, silent = true, buffer = buf })
+  keymap('n', 'q', function()
+    vim.api.nvim_win_close(win, true)
+  end, { noremap = true, silent = true, buffer = buf })
+
+  -- Build content
+  local lines = {}
+
+  for tab_index, tab in ipairs(wezterm_state.tabs) do
+    local tab_label = string.format('Tab: %s (%s:%d)', tab_index, tab.is_active and 'Active' or '', tab.tab_id)
+    table.insert(lines, tab_label)
+    table.insert(lines, string.rep('-', width))
+
+    for pane_index, pane in ipairs(tab.panes) do
+      table.insert(lines, string.format('  [%s]%s', pane_index, pane.is_active and '*' or ''))
+      table.insert(lines, string.format('   ID: %s', pane.pane_id))
+      table.insert(lines, string.format('   Dir: %s', pane.cwd:gsub('file:///', '')))
+      table.insert(lines, string.format('   Size: %dx%d', pane.width, pane.height))
+      table.insert(lines, string.format('   Action: %s', pane.action))
+      table.insert(lines, '')
+    end
+  end
+
+  -- Set text in buffer
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+
+  return win
+end
+
+function M.select_file()
+  local files = list_files(state_path)
+  if #files == 0 then
+    vim.notify('No files found in ' .. state_path, vim.log.levels.WARN)
+    return
+  end
+
+  vim.ui.select(files, { prompt = 'Select a file:' }, function(choice)
+    if choice then
+      -- dd(state_path .. '/' .. choice)
+      create_floating_win(state_path .. '/' .. choice)
+    end
+  end)
+end
+
+-- M.select_file()
+-- create_floating_win('C:/Users/hasan/dotfiles/gui/wezterm/wezterm-session-manager/state/klark-app.json')
+
+--- @class Size
+--- @field cols number
+--- @field dpi number
+--- @field pixel_height number
+--- @field pixel_width number
+--- @field rows number
+
+--- @class Pane
+--- @field action string
+--- @field cwd string
+--- @field height number
+--- @field index number
+--- @field is_active boolean
+--- @field is_zoomed boolean
+--- @field left number
+--- @field pane_id string
+--- @field pixel_height number
+--- @field pixel_width number
+--- @field top number
+--- @field tty string
+--- @field width number
+
+--- @class Tab
+--- @field is_active boolean
+--- @field panes Pane[]
+--- @field tab_id string
+
+--- @class WezTermAppState
+--- @field name string
+--- @field size Size
+--- @field tabs Tab[]
+
+--- @class WezTermAppStateParsed
+--- @field tabs TabParsed[]
+
+--- @class TabParsed
+--- @field is_active boolean
+--- @field panes PaneParsed[]
+--- @field tab_id string
+
+--- @class PaneParsed
+--- @field action string
+--- @field cwd string
+--- @field pane_id string
+--- @field is_active boolean
+-- --- @field height number
+-- --- @field index number
+-- --- @field is_zoomed boolean
+-- --- @field left number
+-- --- @field pixel_height number
+-- --- @field pixel_width number
+-- --- @field top number
+-- --- @field tty string
+-- --- @field width number
 
 return M

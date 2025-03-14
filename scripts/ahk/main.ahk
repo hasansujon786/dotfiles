@@ -24,6 +24,13 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 }
 ^f5::Suspend(-1)
 
+PgUp::Home
+PgDn::End
++PgUp::PgUp
++PgDn::PgDn
+!Backspace::Send("^{Backspace}")
+!SPACE::Send("^{SPACE}")
+
 #`::takeScreenshot()
 ^#`::openNewestFile("C:\Users\hasan\Pictures\Screenshots\*.*")
 ^#b::showCalendar()
@@ -64,8 +71,6 @@ ih := InputHook("B L1 T1", "{Esc}")
   ~LAlt & WheelDown::voldown()
   ~LAlt & RButton::showVolMixer()
 #HotIf
-!Backspace::Send("^{Backspace}")
-!SPACE::Send("^{SPACE}")
 ; Global arrow controls
 #HotIf not WinActive("ahk_exe WindowsTerminal.exe")
   and not WinActive("ahk_exe alacritty.exe")
