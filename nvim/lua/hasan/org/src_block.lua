@@ -152,7 +152,7 @@ local show_result = function(result, language, parent)
         wrap = true,
         number = true,
         signcolumn = 'no',
-        winhighlight = 'FloatTitle:NeoTreeFloatTitle,Normal:Normal',
+        winhighlight = 'FloatTitle:FloatBorderTitle,Normal:Normal',
       },
       bo = { modifiable = true },
     }, win_conf)

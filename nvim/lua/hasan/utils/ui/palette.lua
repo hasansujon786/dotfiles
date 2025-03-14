@@ -85,6 +85,7 @@ local function set_custom_highlights()
     -- /// backgrounds ///
     NormalFloat             = { fg = c.fg, bg = c.none },
     FloatBorder             = { fg = c.cyan, bg = c.none },
+    FloatBorderTitle        = { bg = c.cyan, fg = float_bg },
     NormalFloatFlat         = { fg = c.fg, bg = float_bg },
     FloatBorderFlat         = { fg = dark_border, bg = float_bg },
     FloatBorderFlatHidden   = { fg = float_bg, bg = float_bg },
@@ -229,7 +230,7 @@ local function set_custom_highlights()
     -- /// neo-tree.nvim ///
     NeoTreeFileIcon      = { fg = c.muted },
     NeoTreeFloatBorder   = { bg = float_bg, fg = c.cyan },
-    NeoTreeFloatTitle    = { bg = c.cyan, fg = float_bg },
+    NeoTreeFloatTitle    = { link = 'FloatBorderTitle' },
     NeoTreeModified      = { link = 'String' },
     NeoTreeMessage       = { link = 'Comment' },
     NeoTreeDimText       = { link = 'Comment' },

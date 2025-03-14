@@ -1,3 +1,6 @@
+local Popup = require('nui.popup')
+local NuiLine = require('nui.line')
+local NuiText = require('nui.text')
 local state_path = vim.fs.normalize(vim.fn.expand('~')) .. '/dotfiles/gui/wezterm/wezterm-session-manager/state'
 -- local path = 'C:/Users/hasan/dotfiles/gui/wezterm/wezterm-session-manager/state/klark-app.json'
 
@@ -122,55 +125,63 @@ local function update_state(wezterm_state)
   return new_state
 end
 
+---comment
+---@param texts NuiText[]
+---@param bufnr number
+---@param ns_id number
+---@param line_start number
+---@return number
+local render_line = function(texts, bufnr, ns_id, line_start)
+  local line = NuiLine(texts)
+  line:render(bufnr, ns_id, line_start)
+  return line_start + 1
+end
+
 local function create_floating_win(state_file)
   ---@type WezTermAppState
   local wezterm_state = vim.fn.json_decode(vim.fn.readfile(state_file))
-  local buf = vim.api.nvim_create_buf(false, true) -- Create a new scratch buffer
 
-  local width = 80
-  local height = math.min(#wezterm_state.tabs * 6, 20) -- Adjust height dynamically
+  local float = Popup({
+    enter = true,
+    focusable = true,
+    border = {
+      style = 'rounded',
+      text = { top = NuiText(string.format(' %s ', wezterm_state.name), 'FloatBorderTitle') },
+    },
+    position = '50%',
+    size = { width = 0.6, height = 0.6 },
+  })
 
-  local opts = {
-    relative = 'editor',
-    width = width,
-    height = height,
-    row = math.floor((vim.o.lines - height) / 2),
-    col = math.floor((vim.o.columns - width) / 2),
-    style = 'minimal',
-    border = 'rounded',
-  }
-
-  local win = vim.api.nvim_open_win(buf, true, opts)
-
-  keymap('n', '<leader>s', function()
-    write_state(state_file, update_state(wezterm_state))
-  end, { noremap = true, silent = true, buffer = buf })
-  keymap('n', 'q', function()
-    vim.api.nvim_win_close(win, true)
-  end, { noremap = true, silent = true, buffer = buf })
-
-  -- Build content
-  local lines = {}
+  local width = float.win_config.width
+  local bufnr, ns_id, linenr_start = float.bufnr, -1, 1
 
   for tab_index, tab in ipairs(wezterm_state.tabs) do
     local tab_label = string.format('Tab: %s (%s:%d)', tab_index, tab.is_active and 'Active' or '', tab.tab_id)
-    table.insert(lines, tab_label)
-    table.insert(lines, string.rep('-', width))
+    linenr_start = render_line({ NuiText(tab_label, 'Constant') }, bufnr, ns_id, linenr_start)
+    linenr_start = render_line({ NuiText(string.rep('─', width), 'NotifyBorder') }, bufnr, ns_id, linenr_start)
 
+    -- stylua: ignore
     for pane_index, pane in ipairs(tab.panes) do
-      table.insert(lines, string.format('  [%s]%s', pane_index, pane.is_active and '*' or ''))
-      table.insert(lines, string.format('   ID: %s', pane.pane_id))
-      table.insert(lines, string.format('   Dir: %s', pane.cwd:gsub('file:///', '')))
-      table.insert(lines, string.format('   Size: %dx%d', pane.width, pane.height))
-      table.insert(lines, string.format('   Action: %s', pane.action))
-      table.insert(lines, '')
+      linenr_start = render_line({ NuiText(string.format(' [%s]', pane_index)), NuiText(pane.is_active and '*' or '', 'Constant'), }, bufnr, ns_id, linenr_start)
+      linenr_start = render_line({ NuiText(string.format('   ID: %s', pane.pane_id)) }, bufnr, ns_id, linenr_start)
+      linenr_start = render_line({ NuiText(string.format('   Dir: %s', pane.cwd:gsub('file:///', ''))) }, bufnr, ns_id, linenr_start)
+      linenr_start = render_line({ NuiText(string.format('   Size: %dx%d', pane.width, pane.height)) }, bufnr, ns_id, linenr_start)
+      linenr_start = render_line({ NuiText(string.format('   Action: %s', pane.action)) }, bufnr, ns_id, linenr_start)
+
+      linenr_start = render_line({ NuiText('') }, bufnr, ns_id, linenr_start)
     end
   end
 
-  -- Set text in buffer
-  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+  float:show()
 
-  return win
+  keymap('n', '<leader>s', function()
+    write_state(state_file, update_state(wezterm_state))
+  end, { noremap = true, silent = true, buffer = bufnr })
+  keymap('n', 'q', function()
+    vim.api.nvim_win_close(float.winid, true)
+  end, { noremap = true, silent = true, buffer = bufnr })
+
+  return float
 end
 
 function M.select_file()

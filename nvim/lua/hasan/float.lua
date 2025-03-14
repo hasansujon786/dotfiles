@@ -14,7 +14,7 @@ M.fedit = function(fname)
     wo = {
       wrap = true,
       signcolumn = 'yes',
-      winhighlight = 'FloatTitle:NeoTreeFloatTitle,Normal:SnacksNormal,NormalNC:SnacksNormalNC,WinBar:SnacksWinBar,WinBarNC:SnacksWinBarNC',
+      winhighlight = 'FloatTitle:FloatBorderTitle,Normal:SnacksNormal,NormalNC:SnacksNormalNC,WinBar:SnacksWinBar,WinBarNC:SnacksWinBarNC',
     },
     footer = string.format(' %s ', vim.fn.fnamemodify(fname, ':t')),
     footer_pos = 'center',
