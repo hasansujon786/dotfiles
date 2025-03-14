@@ -4,33 +4,22 @@ local NuiText = require('nui.text')
 local state_path = vim.fs.normalize(vim.fn.expand('~')) .. '/dotfiles/gui/wezterm/wezterm-session-manager/state'
 -- local path = 'C:/Users/hasan/dotfiles/gui/wezterm/wezterm-session-manager/state/klark-app.json'
 
-local M = {}
+---@class lsp.ServerConfig
+---@field float? NuiPopup
+---@field render_positons? Render_positons[]
+local M = {
+  render_positons = {},
+}
 
-local function write_state(file_path, data)
-  -- Write JSON string to a file
-  local file = io.open(file_path, 'w') -- Open file in write mode
-  if file then
-    local json_string = vim.fn.json_encode(data)
-    file:write(json_string) -- Write the JSON string to the file
-    file:close() -- Close the file
-  end
-end
-
-local function list_files(directory)
-  local files = {}
-  local handle = vim.uv.fs_scandir(directory)
-  if handle then
-    while true do
-      local name, type = vim.uv.fs_scandir_next(handle)
-      if not name then
-        break
-      end
-      if type == 'file' then
-        table.insert(files, name)
-      end
-    end
-  end
-  return files
+---@param texts NuiText[]
+---@param bufnr number
+---@param ns_id number
+---@param line_start number
+---@return number
+local render_line = function(texts, bufnr, ns_id, line_start)
+  local line = NuiLine(texts)
+  line:render(bufnr, ns_id, line_start)
+  return line_start + 1
 end
 
 local function parse_pane_data()
@@ -93,49 +82,150 @@ local function parse_pane_data()
   return wezterm_form_state
 end
 
----@param wezterm_state WezTermAppState
----@return WezTermAppState
-local function update_state(wezterm_state)
-  local parsed_data = parse_pane_data()
+local utils = {
+  ---@param line string
+  ---@return boolean
+  is_cursor_on_tab = function(line)
+    return line:match('Tab:') == 'Tab:'
+  end,
+  ---@return number
+  get_current_tab_index = function()
+    local cursor_line = vim.api.nvim_win_get_cursor(M.float.winid)[1]
+    if M.render_positons == nil then
+      return 0
+    end
 
-  ---@type WezTermAppState
-  local new_state = {
-    name = wezterm_state.name,
-    size = wezterm_state.size,
-    tabs = {},
-  }
+    local current_tab_idx = 1
+    for view_idx, view in ipairs(M.render_positons) do
+      if cursor_line >= view.tab then
+        current_tab_idx = view_idx
+      end
+    end
 
-  for tab_index, tab_parsed in ipairs(parsed_data.tabs) do
-    if tab_parsed.tab_id == wezterm_state.tabs[tab_index].tab_id then
-      local updated_tab = wezterm_state.tabs[tab_index]
-      updated_tab.is_active = tab_parsed.is_active
+    return current_tab_idx
+  end,
+  toggle_tab_active = function(text, line_nr)
+    local is_active = text:find('%(Active:')
+    local new_status = is_active and text:gsub('%(Active:', '(:') or text:gsub('%(:', '(Active:')
 
-      for pane_index, pane_parsed in ipairs(tab_parsed.panes) do
-        if vim.trim(pane_parsed.action) ~= '' then
-          -- update pane action,cwd
-          updated_tab.panes[pane_index].action = pane_parsed.action
-          updated_tab.panes[pane_index].cwd = pane_parsed.cwd
-          updated_tab.panes[pane_index].is_active = pane_parsed.is_active
+    render_line({ NuiText(new_status, 'WezTab') }, 0, -1, line_nr)
+  end,
+  toggle_pane_active = function(line, line_nr)
+    local is_active = line:match('%[%d+%]%*') ~= nil
+    local updated_line = is_active and line:gsub('%]%*', ']') or line:gsub('%]', ']*')
+
+    render_line({ NuiText(updated_line) }, 0, -1, line_nr)
+  end,
+  list_files = function(directory)
+    local files = {}
+    local handle = vim.uv.fs_scandir(directory)
+    if handle then
+      while true do
+        local name, type = vim.uv.fs_scandir_next(handle)
+        if not name then
+          break
+        end
+        if type == 'file' then
+          table.insert(files, name)
         end
       end
-      new_state.tabs[tab_index] = updated_tab
     end
-  end
+    return files
+  end,
 
-  return new_state
-end
+  ---@param wezterm_state WezTermAppState
+  ---@return WezTermAppState
+  update_state = function(wezterm_state)
+    local parsed_data = parse_pane_data()
 
----comment
----@param texts NuiText[]
----@param bufnr number
----@param ns_id number
----@param line_start number
----@return number
-local render_line = function(texts, bufnr, ns_id, line_start)
-  local line = NuiLine(texts)
-  line:render(bufnr, ns_id, line_start)
-  return line_start + 1
-end
+    ---@type WezTermAppState
+    local new_state = {
+      name = wezterm_state.name,
+      size = wezterm_state.size,
+      tabs = {},
+    }
+
+    for tab_index, tab_parsed in ipairs(parsed_data.tabs) do
+      if tab_parsed.tab_id == wezterm_state.tabs[tab_index].tab_id then
+        local updated_tab = wezterm_state.tabs[tab_index]
+        updated_tab.is_active = tab_parsed.is_active
+
+        for pane_index, pane_parsed in ipairs(tab_parsed.panes) do
+          if vim.trim(pane_parsed.action) ~= '' then
+            -- update pane action,cwd
+            updated_tab.panes[pane_index].action = pane_parsed.action
+            updated_tab.panes[pane_index].cwd = pane_parsed.cwd
+            updated_tab.panes[pane_index].is_active = pane_parsed.is_active
+          end
+        end
+        new_state.tabs[tab_index] = updated_tab
+      end
+    end
+
+    return new_state
+  end,
+}
+
+local actions = {
+  write_state = function(file_path, data)
+    -- Write JSON string to a file
+    local file = io.open(file_path, 'w') -- Open file in write mode
+    if file then
+      local json_string = vim.fn.json_encode(data)
+      file:write(json_string) -- Write the JSON string to the file
+      file:close() -- Close the file
+    end
+  end,
+  close_win = function()
+    M.float:unmount()
+    M.render_positons = {}
+  end,
+  jump_next_tab = function()
+    local positions = M.render_positons
+    if positions == nil then
+      return
+    end
+
+    local current_tab_idx = utils.get_current_tab_index()
+
+    local next_tab = positions[current_tab_idx + 1] and positions[current_tab_idx + 1] or positions[1]
+    vim.api.nvim_win_set_cursor(M.float.winid, { next_tab.tab, 0 })
+    feedkeys('zt', 'n')
+  end,
+  jump_prev_tab = function()
+    local positions = M.render_positons
+    if positions == nil then
+      return
+    end
+
+    local current_tab_idx = utils.get_current_tab_index()
+
+    local next_tab = positions[current_tab_idx - 1] and positions[current_tab_idx - 1] or positions[#positions]
+    vim.api.nvim_win_set_cursor(M.float.winid, { next_tab.tab, 0 })
+    feedkeys('zt', 'n')
+  end,
+  jump_to_pane = function(pane_idx)
+    local current_tab_idx = utils.get_current_tab_index()
+    local pane_line_nr = M.render_positons[current_tab_idx].panes[pane_idx]
+    if type(pane_line_nr) == 'number' then
+      vim.api.nvim_win_set_cursor(M.float.winid, { pane_line_nr, 0 })
+    end
+  end,
+  toggle_action_status = function()
+    local line = vim.api.nvim_get_current_line()
+    local cursor = vim.api.nvim_win_get_cursor(0)
+
+    local cursor_on_tab = utils.is_cursor_on_tab(line)
+    if cursor_on_tab then
+      return utils.toggle_tab_active(line, cursor[1])
+    end
+
+    local cursor_on_pane = line:match('%[%d+%]') ~= nil
+    if cursor_on_pane then
+      return utils.toggle_pane_active(line, cursor[1])
+    end
+  end,
+}
 
 local function create_floating_win(state_file)
   ---@type WezTermAppState
@@ -144,10 +234,8 @@ local function create_floating_win(state_file)
   local float = Popup({
     enter = true,
     focusable = true,
-    border = {
-      style = 'rounded',
-      text = { top = NuiText(string.format(' %s ', wezterm_state.name), 'FloatBorderTitle') },
-    },
+    border = { padding = { 0, 2 } },
+    win_options = { winhighlight = 'Normal:LazyNormal' },
     position = '50%',
     size = { width = 0.6, height = 0.6 },
   })
@@ -156,13 +244,22 @@ local function create_floating_win(state_file)
   local bufnr, ns_id, linenr_start = float.bufnr, -1, 1
 
   for tab_index, tab in ipairs(wezterm_state.tabs) do
-    local tab_label = string.format('Tab: %s (%s:%d)', tab_index, tab.is_active and 'Active' or '', tab.tab_id)
-    linenr_start = render_line({ NuiText(tab_label, 'Constant') }, bufnr, ns_id, linenr_start)
-    linenr_start = render_line({ NuiText(string.rep('─', width), 'NotifyBorder') }, bufnr, ns_id, linenr_start)
+    local tab_label = string.format(' Tab: %s (%s:%d)', tab_index, tab.is_active and 'Active' or '', tab.tab_id)
+
+    ---@type Render_positons
+    local record_position = { tab = 0, panes = {} }
+
+    linenr_start = render_line({ NuiText(string.rep('▁', width), 'WezTabBorder') }, bufnr, ns_id, linenr_start)
+    local tab_sp = NuiText(string.rep(' ', width), 'WezTab')
+    linenr_start = render_line({ NuiText(tab_label, 'WezTab'), tab_sp }, bufnr, ns_id, linenr_start)
+    record_position.tab = linenr_start - 1
+    linenr_start = render_line({ NuiText(string.rep('▔', width), 'WezTabBorder') }, bufnr, ns_id, linenr_start)
+
 
     -- stylua: ignore
     for pane_index, pane in ipairs(tab.panes) do
       linenr_start = render_line({ NuiText(string.format(' [%s]', pane_index)), NuiText(pane.is_active and '*' or '', 'Constant'), }, bufnr, ns_id, linenr_start)
+      record_position.panes[pane_index] = linenr_start - 1
       linenr_start = render_line({ NuiText(string.format('   ID: %s', pane.pane_id)) }, bufnr, ns_id, linenr_start)
       linenr_start = render_line({ NuiText(string.format('   Dir: %s', pane.cwd:gsub('file:///', ''))) }, bufnr, ns_id, linenr_start)
       linenr_start = render_line({ NuiText(string.format('   Size: %dx%d', pane.width, pane.height)) }, bufnr, ns_id, linenr_start)
@@ -170,22 +267,33 @@ local function create_floating_win(state_file)
 
       linenr_start = render_line({ NuiText('') }, bufnr, ns_id, linenr_start)
     end
+
+    M.render_positons[tab_index] = record_position
   end
 
   float:show()
+  vim.api.nvim_win_set_cursor(float.winid, { 2, 0 })
 
+  local kopt = { noremap = true, silent = true, buffer = bufnr }
+  keymap('n', 'q', actions.close_win, kopt)
+  keymap('n', 't', actions.toggle_action_status, kopt)
+  keymap('n', '<tab>', actions.jump_next_tab, kopt)
+  keymap('n', '<s-tab>', actions.jump_prev_tab, kopt)
   keymap('n', '<leader>s', function()
-    write_state(state_file, update_state(wezterm_state))
-  end, { noremap = true, silent = true, buffer = bufnr })
-  keymap('n', 'q', function()
-    vim.api.nvim_win_close(float.winid, true)
-  end, { noremap = true, silent = true, buffer = bufnr })
+    actions.write_state(state_file, utils.update_state(wezterm_state))
+  end, kopt)
 
-  return float
+  for key_num = 1, 4, 1 do
+    keymap('n', tostring(key_num), function()
+      actions.jump_to_pane(key_num)
+    end, kopt)
+  end
+
+  M.float = float
 end
 
 function M.select_file()
-  local files = list_files(state_path)
+  local files = utils.list_files(state_path)
   if #files == 0 then
     vim.notify('No files found in ' .. state_path, vim.log.levels.WARN)
     return
@@ -200,53 +308,53 @@ function M.select_file()
 end
 
 -- M.select_file()
--- create_floating_win('C:/Users/hasan/dotfiles/gui/wezterm/wezterm-session-manager/state/klark-app.json')
+create_floating_win('C:/Users/hasan/dotfiles/gui/wezterm/wezterm-session-manager/state/klark-app.json')
 
---- @class Size
---- @field cols number
---- @field dpi number
---- @field pixel_height number
---- @field pixel_width number
---- @field rows number
+---@class Size
+---@field cols number
+---@field dpi number
+---@field pixel_height number
+---@field pixel_width number
+---@field rows number
 
---- @class Pane
---- @field action string
---- @field cwd string
---- @field height number
---- @field index number
---- @field is_active boolean
---- @field is_zoomed boolean
---- @field left number
---- @field pane_id string
---- @field pixel_height number
---- @field pixel_width number
---- @field top number
---- @field tty string
---- @field width number
+---@class Pane
+---@field action string
+---@field cwd string
+---@field height number
+---@field index number
+---@field is_active boolean
+---@field is_zoomed boolean
+---@field left number
+---@field pane_id string
+---@field pixel_height number
+---@field pixel_width number
+---@field top number
+---@field tty string
+---@field width number
 
---- @class Tab
---- @field is_active boolean
---- @field panes Pane[]
---- @field tab_id string
+---@class Tab
+---@field is_active boolean
+---@field panes Pane[]
+---@field tab_id string
 
---- @class WezTermAppState
---- @field name string
---- @field size Size
---- @field tabs Tab[]
+---@class WezTermAppState
+---@field name string
+---@field size Size
+---@field tabs Tab[]
 
---- @class WezTermAppStateParsed
---- @field tabs TabParsed[]
+---@class WezTermAppStateParsed
+---@field tabs TabParsed[]
 
---- @class TabParsed
---- @field is_active boolean
---- @field panes PaneParsed[]
---- @field tab_id string
+---@class TabParsed
+---@field is_active boolean
+---@field panes PaneParsed[]
+---@field tab_id string
 
---- @class PaneParsed
---- @field action string
---- @field cwd string
---- @field pane_id string
---- @field is_active boolean
+---@class PaneParsed
+---@field action string
+---@field cwd string
+---@field pane_id string
+---@field is_active boolean
 -- --- @field height number
 -- --- @field index number
 -- --- @field is_zoomed boolean
@@ -256,5 +364,9 @@ end
 -- --- @field top number
 -- --- @field tty string
 -- --- @field width number
+
+---@class Render_positons
+---@field tab number
+---@field panes number[]
 
 return M
