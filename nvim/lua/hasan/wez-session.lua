@@ -96,9 +96,9 @@ local utils = {
     end
 
     local current_tab_idx = 1
-    for view_idx, view in ipairs(M.render_positons) do
-      if cursor_line >= view.tab then
-        current_tab_idx = view_idx
+    for tab_idx, tab in ipairs(M.render_positons) do
+      if cursor_line >= tab.line_nr then
+        current_tab_idx = tab_idx
       end
     end
 
@@ -189,7 +189,7 @@ local actions = {
     local current_tab_idx = utils.get_current_tab_index()
 
     local next_tab = positions[current_tab_idx + 1] and positions[current_tab_idx + 1] or positions[1]
-    vim.api.nvim_win_set_cursor(M.float.winid, { next_tab.tab, 0 })
+    vim.api.nvim_win_set_cursor(M.float.winid, { next_tab.line_nr, 0 })
     feedkeys('zt', 'n')
   end,
   jump_prev_tab = function()
@@ -201,14 +201,14 @@ local actions = {
     local current_tab_idx = utils.get_current_tab_index()
 
     local next_tab = positions[current_tab_idx - 1] and positions[current_tab_idx - 1] or positions[#positions]
-    vim.api.nvim_win_set_cursor(M.float.winid, { next_tab.tab, 0 })
+    vim.api.nvim_win_set_cursor(M.float.winid, { next_tab.line_nr, 0 })
     feedkeys('zt', 'n')
   end,
   jump_to_pane = function(pane_idx)
     local current_tab_idx = utils.get_current_tab_index()
-    local pane_line_nr = M.render_positons[current_tab_idx].panes[pane_idx]
-    if type(pane_line_nr) == 'number' then
-      vim.api.nvim_win_set_cursor(M.float.winid, { pane_line_nr, 0 })
+    local pane = M.render_positons[current_tab_idx].panes[pane_idx]
+    if pane and type(pane.line_nr) == 'number' then
+      vim.api.nvim_win_set_cursor(M.float.winid, { pane.line_nr, 0 })
     end
   end,
   toggle_action_status = function()
@@ -247,19 +247,20 @@ local function create_floating_win(state_file)
     local tab_label = string.format(' Tab: %s (%s:%d)', tab_index, tab.is_active and 'Active' or '', tab.tab_id)
 
     ---@type Render_positons
-    local record_position = { tab = 0, panes = {} }
+    local record_position = { is_active = false, line_nr = 0, panes = {} }
 
     linenr_start = render_line({ NuiText(string.rep('▁', width), 'WezTabBorder') }, bufnr, ns_id, linenr_start)
     local tab_sp = NuiText(string.rep(' ', width), 'WezTab')
     linenr_start = render_line({ NuiText(tab_label, 'WezTab'), tab_sp }, bufnr, ns_id, linenr_start)
-    record_position.tab = linenr_start - 1
+    record_position.line_nr = linenr_start - 1
+    record_position.is_active = tab.is_active
     linenr_start = render_line({ NuiText(string.rep('▔', width), 'WezTabBorder') }, bufnr, ns_id, linenr_start)
 
 
     -- stylua: ignore
     for pane_index, pane in ipairs(tab.panes) do
       linenr_start = render_line({ NuiText(string.format(' [%s]', pane_index)), NuiText(pane.is_active and '*' or '', 'Constant'), }, bufnr, ns_id, linenr_start)
-      record_position.panes[pane_index] = linenr_start - 1
+      record_position.panes[pane_index] = { line_nr = linenr_start - 1, is_active =pane.is_active }
       linenr_start = render_line({ NuiText(string.format('   ID: %s', pane.pane_id)) }, bufnr, ns_id, linenr_start)
       linenr_start = render_line({ NuiText(string.format('   Dir: %s', pane.cwd:gsub('file:///', ''))) }, bufnr, ns_id, linenr_start)
       linenr_start = render_line({ NuiText(string.format('   Size: %dx%d', pane.width, pane.height)) }, bufnr, ns_id, linenr_start)
@@ -308,7 +309,7 @@ function M.select_file()
 end
 
 -- M.select_file()
-create_floating_win('C:/Users/hasan/dotfiles/gui/wezterm/wezterm-session-manager/state/klark-app.json')
+-- create_floating_win('C:/Users/hasan/dotfiles/gui/wezterm/wezterm-session-manager/state/klark-app.json')
 
 ---@class Size
 ---@field cols number
@@ -366,7 +367,8 @@ create_floating_win('C:/Users/hasan/dotfiles/gui/wezterm/wezterm-session-manager
 -- --- @field width number
 
 ---@class Render_positons
----@field tab number
----@field panes number[]
+---@field line_nr number
+---@field is_active boolean
+---@field panes {line_nr:number,is_active:boolean}[]
 
 return M
