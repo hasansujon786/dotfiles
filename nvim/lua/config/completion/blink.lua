@@ -18,6 +18,9 @@ local function has_words_before()
   local text = vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
   return text:sub(col, col):match('%s') == nil
 end
+-- Hack to tab makes work
+keymap('i', '<tab>', '<space><space>')
+keymap('i', '<s-tab>', '<BS>')
 
 return {
   'saghen/blink.cmp',
@@ -59,6 +62,7 @@ return {
         end,
         'snippet_forward',
         'fallback',
+        -- 'fallback_to_mappings',
       },
       ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
 
