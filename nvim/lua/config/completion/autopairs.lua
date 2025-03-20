@@ -3,7 +3,13 @@ return {
   lazy = true,
   config = function()
     require('nvim-autopairs').setup({
-      disable_filetype = { 'TelescopePrompt', 'spectre_panel', 'snacks_picker_input' },
+      disable_filetype = {
+        'TelescopePrompt',
+        'snacks_picker_input',
+        'spectre_panel',
+        'spectre_input',
+        'spectre_file_input',
+      },
     })
 
     local cmp_ok, cmp = pcall(require, 'cmp')

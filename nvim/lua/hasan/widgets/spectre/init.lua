@@ -220,12 +220,13 @@ function M.open(opts)
         end,
       }, popup_options),
       n.text_input({
+        id = 'search_query',
+        filetype = 'spectre_input',
+        border_label = 'Search',
         window = window,
         autofocus = true,
         flex = 1,
         max_lines = 1,
-        id = 'search_query',
-        border_label = 'Search',
         value = signal.search_query,
         on_change = fn.debounce(function(value)
           signal.search_query = value
@@ -254,11 +255,12 @@ function M.open(opts)
       },
       left_gap(),
       n.text_input({
+        id = 'replace_query',
+        filetype = 'spectre_input',
+        border_label = 'Replace',
         window = window,
         max_lines = 1,
         flex = 1,
-        id = 'replace_query',
-        border_label = 'Replace',
         on_change = fn.debounce(function(value)
           signal.replace_query = value
         end, 400),
@@ -274,25 +276,27 @@ function M.open(opts)
       },
       left_gap(),
       n.text_input({
+        id = 'filter_path',
+        filetype = 'spectre_file_input',
+        border_label = 'Pattern to filter',
+        -- placeholder = 'lua/**/*.lua',
         window = window,
         flex = 1,
         size = 1,
-        id = 'filter_path',
         max_lines = 1,
-        border_label = 'Pattern to filter',
-        -- placeholder = 'lua/**/*.lua',
         value = signal.filter_path,
         on_change = fn.debounce(function(value)
           signal.filter_path = value
         end, 400),
       }, popup_options),
       n.text_input({
+        filetype = 'spectre_file_input',
+        border_label = 'Files to include',
+        -- placeholder = 'lua/, plugin/',
         window = window,
         size = 1,
         flex = 1,
         max_lines = 1,
-        border_label = 'Files to include',
-        -- placeholder = 'lua/, plugin/',
         value = signal.search_paths:map(function(paths)
           return table.concat(paths, ',')
         end),

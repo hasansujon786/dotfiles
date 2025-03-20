@@ -6,8 +6,17 @@ local function tab_out_available()
   return vim.fn.search('\\%#[]' .. tab_out_chars, 'n') ~= 0
 end
 local function has_words_before()
+  local skip_ft = vim.tbl_contains({ 'spectre_input', 'spectre_file_input' }, vim.bo.filetype)
+  if skip_ft then
+    return false
+  end
+
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+  if col == 0 then
+    return false
+  end
+  local text = vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
+  return text:sub(col, col):match('%s') == nil
 end
 
 return {
@@ -68,7 +77,10 @@ return {
     sources = {
       -- https://github.com/Saghen/blink.cmp/blob/main/docs/configuration/sources.md#community-sources
       default = { 'lsp', 'path', 'snippets', 'buffer' },
-      -- per_filetype = {},
+      per_filetype = {
+        spectre_input = { 'buffer' },
+        spectre_file_input = { 'path' },
+      },
       providers = {
         path = { name = ' ', score_offset = 110 },
         lsp = { name = ' ', score_offset = 100 },
