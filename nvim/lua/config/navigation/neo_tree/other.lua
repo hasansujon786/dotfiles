@@ -4,6 +4,7 @@ local function on_move(data)
 end
 
 local M = {
+  ---@type neotree.Config.SourceSelector
   source_selector = {
     winbar = true, -- toggle to show selector on winbar
     statusline = false, -- toggle to show selector on statusline
@@ -13,8 +14,8 @@ local M = {
       { source = 'buffers', display_name = '  Bufs ' },
       { source = 'git_status', display_name = '  Git ' },
     },
-    content_layout = 'center', -- string
-    tabs_layout = 'equal', -- string
+    content_layout = 'center', -- "start"|"end"|"center"
+    tabs_layout = 'equal', -- "equal"|"start"|"end"|"center"|"focus"
     truncation_character = '…', -- string
     tabs_min_width = nil, -- int | nil
     tabs_max_width = nil, -- int | nil
@@ -23,6 +24,7 @@ local M = {
     separator_active = nil, -- string | { left: string, right: string, override: string | nil } | nil
     show_separator_on_edge = false, -- boolean
   },
+  ---@type neotree.Event.Handler[]
   event_handlers = {
     {
       event = events.NEO_TREE_POPUP_INPUT_READY,
@@ -47,10 +49,10 @@ if require('core.state').ui.neotree.source_selector_style == 'minimal' then
     { source = 'buffers', display_name = '   ' },
     { source = 'git_status', display_name = '   ' },
   }
-  M.source_selector.content_layout = 'start'
-  M.source_selector.tabs_layout = false
   M.source_selector.separator = { left = '', right = ' ' }
-  M.source_selector.padding = 1
+
+  M.source_selector.tabs_layout = 'start'
+  M.source_selector.padding = { left = 1, right = 16 }
 end
 
 return M

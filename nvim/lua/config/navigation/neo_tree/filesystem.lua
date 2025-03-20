@@ -50,16 +50,14 @@ return {
   -- instead of relying on nvim autocmd events.
   window = {
     mappings = {
-      ['/'] = 'none',
-      ['f'] = 'none',
       ['.'] = 'set_root',
       ['I'] = 'toggle_hidden',
-      -- ['/'] = 'fuzzy_finder',
-      ['#'] = 'fuzzy_sorter', -- fuzzy sorting using the fzy algorithm
-      -- ['D'] = 'fuzzy_finder_directory',
-      -- ["D"] = "fuzzy_sorter_directory",
-      -- ['f'] = 'filter_on_submit',
-      -- ['<c-x>'] = 'clear_filter',
+      ['f'] = 'filter_on_submit',
+      ['F'] = 'fuzzy_finder',
+      ['/'] = 'none',
+      ['<Esc>'] = 'clear_filter',
+      -- ['#'] = 'fuzzy_sorter', -- fuzzy sorting using the fzy algorithm
+      -- ['D'] = 'fuzzy_sorter_directory',
 
       ['-'] = function(state)
         vinegar.vinegar_dir_up(state)
