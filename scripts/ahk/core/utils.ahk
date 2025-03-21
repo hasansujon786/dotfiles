@@ -22,6 +22,30 @@ PosY(place, offset, itemWidth) {
 ;******************************************************************************
 ; Utils
 ;******************************************************************************
+RunPowerShellScript(filePath) {
+  if !FileExist(filePath) {
+    MsgBox "PowerShell script not found: " filePath
+    return
+  }
+
+  tempOutput := A_Temp "\ps_output.txt"
+  if FileExist(tempOutput)
+    FileDelete tempOutput
+
+  cmd := Format(
+    "powershell -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -Command `"& { & '{1}' | Out-File -FilePath '{2}' -Encoding utf8 }`"",
+    filePath, tempOutput
+  )
+
+  RunWait(cmd, , "Hide")
+
+  try output := FileRead(tempOutput)
+  catch {
+    MsgBox "Output file not found or could not be read."
+    output := ""
+  }
+  return output
+}
 getMousePos() {
   MouseGetPos(&xpos, &ypos)
   xy := "x" xpos " y" ypos
@@ -122,7 +146,6 @@ toggleCapsLosck() {
     width := 100
     x := PosX("center", 0, width)
     y := PosY("bottom", 54, height)
-    currentWinID := WinExist("A") ; Get the current active window
 
     Border := Gui("ToolWindow +AlwaysOnTop -Sysmenu Disabled -Caption -Owner",  "caps_losck_status_border") ; Border GUI
     Border.BackColor := 0xff4DB434
@@ -132,37 +155,39 @@ toggleCapsLosck() {
     title := SLine.AddText("cWhite y4 x0 w100 h24 Center", "Caps Lock ON")
     title.SetFont("s10", "Arial")
 
-    Border.Show("x" (x-2) " y" (y-2) " w" (width+4) " h" (height+4)) ; Slightly larger
-    SLine.Show("x" x " y" y "w" width " h" height " NA")
-
-    WinActivate(currentWinID) ; Refocus the current active window
+    Border.Show("NoActivate x" (x-2) " y" (y-2) " w" (width+4) " h" (height+4)) ; Slightly larger
+    SLine.Show("NoActivate x" x " y" y "w" width " h" height " NA")
   }
 }
 toggleBluetooth(onOff := "On") {
-  mWidth := SysGet(78)
-  mHeight := SysGet(79)
-  ProgressGui := Gui("-Caption +AlwaysOnTop"), ProgressGui.Title := "BluetoothStatus"
-  ProgressGui.SetFont("Bold s10", "Arial"), ProgressGui.AddText("x0 w200 Center", "Toggling Bluetooth")
-  gocProgress := ProgressGui.AddProgress("x10 w180 h20")
-  ProgressGui.Show("W200 NA")
-  WinMove(mWidth - 210, mHeight - 100, , , "BluetoothStatus")
-  gocProgress.Value := 70
-  Static ps := "C:\\Users\\hasan\\dotfiles\\scripts\\ahk\\deps\\toggle_bluetooth.ps1"
+  winCloseByTitle("bt_status_border")
+  winCloseByTitle("bt_status")
 
-  if !FileExist(ps) {
-    ProgressGui.Destroy
-    MsgBox("File not found.`n" ps, "Error", 48)
-    Return
-  } else   {
-    SoundBeep(1500 - 500 * (onOff = "On"))
-    ; RunWait, powershell -command %ps% -BluetoothStatus %onOff%,, Hide
-    RunWait("powershell -command " ps, , "Hide")
-    SoundBeep(1000 + 500 * (onOff = "On"))
-  }
+  height := 58
+  width := 200
+  x := PosX("right", 8, width)
+  y := PosY("top", 8, height)
 
-  gocProgress.Value := 100
-  Sleep(600)
-  ProgressGui.Destroy
+  Border := Gui("ToolWindow +AlwaysOnTop -Sysmenu Disabled -Caption -Owner",  "bt_status_border") ; Border GUI
+  Border.BackColor := 0xff151515
+  Border.Show("NoActivate x" (x-2) " y" (y-2) " w" (width+4) " h" (height+4)) ; Slightly larger
+
+  SLine := Gui("ToolWindow +AlwaysOnTop -Sysmenu Disabled -Caption -Owner", "bt_status")
+  SLine.BackColor := 0xff2C2C2C
+  title := SLine.AddText("cWhite y4 x0 w210 h24 Center", "Toggling Bluetooth")
+  title.SetFont("s11 cDFDFDF", "Segoe UI")
+
+  SoundBeep(300)
+  curProgress := SLine.AddProgress("x10 w180 h15", 70)
+  SLine.Show("NoActivate  x" x " y" y "w" width " h" height " NA")
+
+  onOff := RunPowerShellScript("C:\\Users\\hasan\\dotfiles\\scripts\\ahk\\deps\\toggle_bluetooth.ps1")
+  title.Text := "Bluetooth " onOff
+  SoundBeep(1000)
+  curProgress.Value := 100
+  Sleep(800)
+  SLine.Destroy()
+  Border.Destroy()
 }
 getNewestFilePath(folderPath) {
   newestFile := ""

@@ -15,3 +15,4 @@ $bluetooth = $radios | ? { $_.Kind -eq 'Bluetooth' }
 [Windows.Devices.Radios.RadioState,Windows.System.Devices,ContentType=WindowsRuntime] | Out-Null
 if ($bluetooth.state -eq 'On') {$BluetoothStatus = 'Off'} else {$BluetoothStatus = 'On'}
 Await ($bluetooth.SetStateAsync($BluetoothStatus)) ([Windows.Devices.Radios.RadioAccessStatus]) | Out-Null
+Write-Output $BluetoothStatus
