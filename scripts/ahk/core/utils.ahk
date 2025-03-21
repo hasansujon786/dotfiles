@@ -46,6 +46,12 @@ RunPowerShellScript(filePath) {
   }
   return output
 }
+RunInlinePowerShell(cmd) {
+  shell := ComObject("WScript.Shell")
+  exec := shell.Exec('powershell -NoProfile -WindowStyle Hidden -Command "' cmd '"')
+  output := exec.StdOut.ReadAll()
+  return output
+}
 getMousePos() {
   MouseGetPos(&xpos, &ypos)
   xy := "x" xpos " y" ypos
@@ -160,35 +166,33 @@ toggleCapsLosck() {
   }
 }
 toggleBluetooth(onOff := "On") {
-  winCloseByTitle("bt_status_border")
   winCloseByTitle("bt_status")
 
-  height := 58
+  height := 64
   width := 200
   x := PosX("right", 8, width)
   y := PosY("top", 8, height)
 
-  Border := Gui("ToolWindow +AlwaysOnTop -Sysmenu Disabled -Caption -Owner",  "bt_status_border") ; Border GUI
-  Border.BackColor := 0xff151515
-  Border.Show("NoActivate x" (x-2) " y" (y-2) " w" (width+4) " h" (height+4)) ; Slightly larger
+  ui := Gui("ToolWindow +AlwaysOnTop -Sysmenu Disabled -Caption -Owner", "bt_status")
+  ui.BackColor := '2C2C2C'
+  ui.SetWindowAttribute(33, 2)
+  ui.SetWindowColor(,, 0xff151820)
 
-  SLine := Gui("ToolWindow +AlwaysOnTop -Sysmenu Disabled -Caption -Owner", "bt_status")
-  SLine.BackColor := 0xff2C2C2C
-  title := SLine.AddText("cWhite y4 x0 w210 h24 Center", "Toggling Bluetooth")
+  title := ui.AddText("cWhite y6 x0 w210 h24 Center", "Toggling Bluetooth")
   title.SetFont("s11 cDFDFDF", "Segoe UI")
 
   SoundBeep(300)
-  curProgress := SLine.AddProgress("x10 w180 h15", 70)
-  SLine.Show("NoActivate  x" x " y" y "w" width " h" height " NA")
+  curProgress := ui.AddProgress("x15 w170 h15", 70)
+  ui.Show("NoActivate  x" x " y" y "w" width " h" height " NA")
 
   onOff := RunPowerShellScript("C:\\Users\\hasan\\dotfiles\\scripts\\ahk\\deps\\toggle_bluetooth.ps1")
   title.Text := "Bluetooth " onOff
   SoundBeep(1000)
   curProgress.Value := 100
   Sleep(800)
-  SLine.Destroy()
-  Border.Destroy()
+  ui.Destroy()
 }
+
 getNewestFilePath(folderPath) {
   newestFile := ""
   newestTime := 0

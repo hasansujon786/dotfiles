@@ -4,6 +4,7 @@
 SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 #SingleInstance Force ; C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\
 
+#Include %A_ScriptDir%\core\GuiEnhancerKit.ahk
 #Include %A_ScriptDir%\core\utils.ahk
 #Include %A_ScriptDir%\core\win_layout.ahk
 #Include %A_ScriptDir%\core\win_control.ahk

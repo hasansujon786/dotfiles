@@ -75,14 +75,18 @@ increaseTransparency() {
   WinSetTransparent(TN, Title)
 }
 toggleAlwaysOnTop() {
+  winCloseByTitle("always_on_top_status")
+
   active := WinGetTitle("A")
   appName := StrUpper(StrReplace(WinGetProcessName("A"), ".exe"))
   status := ""
+  color := "DFDFDF"
   If !(WinGetMinMax(active)) {
     WinSetAlwaysOnTop -1, active
     ExStyle := WinGetExStyle(active)
     If (ExStyle & 0x8) {
       status := "Activated"
+      color := "0C8CE9"
     } else {
       status := "Deactivated"
     }
@@ -90,14 +94,17 @@ toggleAlwaysOnTop() {
     status := "Window is Maximized"
   }
 
-  spGui := Gui("+ToolWindow +AlwaysOnTop -Sysmenu Disabled", "")
+  spGui := Gui("+ToolWindow +AlwaysOnTop -Sysmenu Disabled -Caption", "always_on_top_status")
+  spGui.BackColor := '2C2C2C'
+  spGui.SetWindowAttribute(33, 2)
+  spGui.SetWindowColor(, spGui.BackColor, 0xff1b222c)
   ;; Add title
   spGui.SetFont("s10", "Segoe UI")
-  spGui.Add("Text", "Center w180 c222222", "Always On Top`n------------")
+  spGui.AddText("Center y24 w150 cDFDFDF", "Always On Top`n--------")
   ;; Add Status
-  spGui.SetFont("s12 w700", "Segoe UI")    ; Size 16, Bold
-  spGui.Add("Text", "Center y+-4 c222222 w180", status "`n")
- 
+  spGui.SetFont("s12 Bold", "Segoe UI")    ; Size 16, Bold
+  spGui.Add("Text", "Center y+-2 w150 h40 c" color, status)
+
   spGui.Show("NoActivate AutoSize")
   SetTimer () => spGui.Destroy(), -1000
 }
