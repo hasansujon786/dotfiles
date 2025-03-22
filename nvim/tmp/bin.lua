@@ -346,3 +346,15 @@ end
 -- { '<leader>tc', '<cmd>lua require("hasan.utils.logger").toggle("concealcursor", { "nc", "" })<CR>', desc = 'Toggle concealcursor' },
 -- { '<leader>ts', '<cmd>lua require("hasan.utils.logger").toggle("spell")<CR>', desc = 'Toggle spell' },
 -- { '<leader>tw', '<cmd>lua require("hasan.utils.logger").toggle("wrap")<CR>', desc = 'Toggle wrap' },
+
+-- snacks format
+-- format = function(item, _)
+--   local file = item.file
+--   local ret = {}
+--   local a = Snacks.picker.util.align
+--   local icon, icon_hl = Snacks.util.icon(file.ft, 'directory')
+--   ret[#ret + 1] = { a(icon, 3), icon_hl }
+--   ret[#ret + 1] = { ' ' }
+--   ret[#ret + 1] = { a(file, 20) }
+--   return ret
+-- end,
