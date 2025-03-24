@@ -11,6 +11,7 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 #Include %A_ScriptDir%\core\vert_desktop.ahk
 #Include %A_ScriptDir%\core\vim_explorer.ahk
 #Include %A_ScriptDir%\core\automation_mode.ahk
+#Include %A_ScriptDir%\leader.ahk
 
 ;Reload/Execute this script.ahk file
 ::rscript::
@@ -131,6 +132,19 @@ $Escape::superEscape()
 #]::navToDesktop("right")
 
 ;******************************************************************************
+; Leader
+;******************************************************************************
+#a::ActiveLeaderMode()
+#HotIf leaderPressed
+  b::leader("b", () => toggleBluetooth())
+  p::leader("p", () => toggleAlwaysOnTop())
+  a::leader("a", () => send("#{a}"))
+  s::leader("s", () => send("+#{s}"))
+  LButton::leader("🖱️", () => send("+#{s}"))
+  LWin::return
+#HotIf
+
+;******************************************************************************
 ; Layout
 ;******************************************************************************
 layout_loading := 0
@@ -153,9 +167,10 @@ current_layout := 0
 ;******************************************************************************
 #/::SendInput("^!{Tab}")
 #HotIf WinActive("Volume Control")
-  or (winIsMouseOver("ahk_class ApplicationFrameWindow") or winIsMouseOver("ahk_class Shell_LightDismissOverlay")) and winIsMouseOver("ahk_exe explorer.exe") and winIsMouseOver("") ; clipboard & backdrop
+  or WinActive("Quick settings")
   or WinActive("Task View") ; win+tab
   or WinActive("Task Switching") ; ctrl+alt+tab
+  ; or (winIsMouseOver("ahk_class ApplicationFrameWindow") or winIsMouseOver("ahk_class Shell_LightDismissOverlay")) and winIsMouseOver("ahk_exe explorer.exe") and winIsMouseOver("") ; clipboard & backdrop
   ; or WinActive("ahk_class MultitaskingViewFrame")  ; ctrl+alt+tab
   ; or WinActive("ahk_class Windows.UI.Core.CoreWindow") ; win+tab/StartScreen
   ; or WinActive("ahk_exe ShellExperienceHost.exe")

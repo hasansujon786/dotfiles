@@ -31,6 +31,7 @@ return {
     'rafamadriz/friendly-snippets',
     'windwp/nvim-autopairs',
     -- 'L3MON4D3/LuaSnip',
+    'echasnovski/mini.snippets',
     'mattn/emmet-vim',
   },
   ---@module 'blink.cmp'
@@ -75,9 +76,10 @@ return {
       ['<A-d>'] = { 'scroll_documentation_down', 'fallback' },
     },
     fuzzy = { implementation = 'prefer_rust' },
-    -- snippets = {
-    --   preset = 'luasnip',
-    -- },
+    snippets = {
+      -- preset = 'luasnip',
+      preset = 'mini_snippets',
+    },
     sources = {
       -- https://github.com/Saghen/blink.cmp/blob/main/docs/configuration/sources.md#community-sources
       default = { 'lsp', 'path', 'snippets', 'buffer' },
@@ -89,7 +91,13 @@ return {
         path = { name = ' ', score_offset = 110 },
         lsp = { name = ' ', score_offset = 100 },
         -- luasnip = { name = ' ', score_offset = 90 },
-        snippets = { name = ' ', score_offset = 80 },
+        snippets = {
+          name = ' ',
+          score_offset = 10,
+          should_show_items = function(ctx)
+            return ctx.trigger.initial_kind ~= 'trigger_character'
+          end,
+        },
         buffer = { name = ' ', score_offset = 70, min_keyword_length = 2 },
         cmdline = {
           name = ' ',
