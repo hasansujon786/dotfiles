@@ -1,6 +1,18 @@
 {
   "filename": {
-    "prefix": ["fname"],
+    "prefix": "fname",
     "body": "$TM_FILENAME_BASE"
+  },
+  "TODO": {
+    "prefix": "todo",
+    "body": "$LINE_COMMENT ${2|TODO,FIXME,DONE,INFO|}: ${1:Write something}"
+  },
+  "Dash header": {
+    "prefix": "dashheader",
+    "body": [
+      "$LINE_COMMENT ------------------------------------------------",
+      "$LINE_COMMENT -- $1 ------------------------------------------",
+      "$LINE_COMMENT ------------------------------------------------"
+    ]
   }
 }

@@ -42,5 +42,46 @@
       "${1:${TM_FILENAME_BASE}}.displayName = '${1:${TM_FILENAME_BASE}}'"
     ],
     "description": "forward ref snippet"
+  },
+  "context counter": {
+    "prefix": "usecc",
+    "body": [
+      "import { PropsWithChildren, createContext, useContext, useState } from 'react'\n",
+
+      "type ${1:Counter}ContextState = {",
+      "  ${2:$1}: number",
+      "  set${3:$1}: React.Dispatch<React.SetStateAction<number>>",
+      "}\n",
+
+      "const ${1:Counter}Context = createContext<${1:Counter}ContextState | null>(null)\n",
+
+      "export const ${1:Counter}ContextProvider = (props: PropsWithChildren) => {{",
+      "  const [${2:$1}, set${3:$1}] = useState<number>(0)\n",
+
+      "  return (",
+      "    <${1:Counter}Context.Provider",
+      "      value={{",
+      "        ${2:$1},",
+      "        set${3:$1},",
+      "      }}",
+      "    >",
+      "      {props.children}",
+      "    </${1:Counter}Context.Provider>",
+      "  )",
+      "}\n",
+
+      "export function use${1:Counter}Context() {",
+      "  const context = useContext(${1:Counter}Context)\n",
+
+      "  if (!context) {",
+      "    throw new Error(",
+      "      'use${1:Counter}Context must be used within a ${1:Counter}ContextProvider'",
+      "    )",
+      "  }\n",
+
+      "  return context",
+      "}"
+    ],
+    "description": "Context templete with hook"
   }
 }

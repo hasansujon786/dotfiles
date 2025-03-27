@@ -18,6 +18,10 @@ local function has_words_before()
   local text = vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
   return text:sub(col, col):match('%s') == nil
 end
+local minisnippet_expand = function()
+  feedkeys('<C-c><C-j>')
+  return true
+end
 -- Hack to tab makes work
 keymap('i', '<tab>', '<space><space>')
 keymap('i', '<s-tab>', '<BS>')
@@ -42,11 +46,6 @@ return {
       ['<C-q>'] = { 'show', 'show_documentation', 'hide_documentation' },
       ['<CR>'] = { 'accept', 'fallback' },
       ['<C-y>'] = { 'select_and_accept', 'fallback' },
-      ['<C-l>'] = {
-        function(cmp)
-          return cmp.show({ providers = { 'snippets' } })
-        end,
-      },
 
       ['<Tab>'] = {
         function(cmp)
@@ -67,10 +66,30 @@ return {
       },
       ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
 
+      ['<C-l>'] = {
+        function(cmp)
+          if cmp.snippet_active() then
+            return cmp.snippet_forward()
+          end
+          return cmp.show({ providers = { 'snippets' } })
+        end,
+      },
+      ['<C-j>'] = {
+        function(cmp)
+          if cmp.snippet_active() then
+            return cmp.snippet_backward()
+          end
+
+          if cmp.is_visible() then
+            return cmp.hide({ callback = minisnippet_expand })
+          end
+
+          return minisnippet_expand()
+        end,
+      },
+
       ['<A-n>'] = { 'select_next', 'fallback' },
       ['<A-p>'] = { 'select_prev', 'fallback' },
-      ['<C-j>'] = { 'snippet_forward', 'fallback' },
-      ['<C-k>'] = { 'snippet_backward', 'fallback' },
 
       ['<A-u>'] = { 'scroll_documentation_up', 'fallback' },
       ['<A-d>'] = { 'scroll_documentation_down', 'fallback' },
@@ -88,17 +107,26 @@ return {
         spectre_file_input = { 'path' },
       },
       providers = {
-        path = { name = ' ', score_offset = 110 },
-        lsp = { name = ' ', score_offset = 100 },
-        -- luasnip = { name = ' ', score_offset = 90 },
+        path = {
+          name = ' ',
+          -- score_offset = 110,
+        },
+        lsp = {
+          name = ' ',
+          -- score_offset = 100,
+        },
         snippets = {
           name = ' ',
-          score_offset = 10,
+          -- score_offset = -100,
           should_show_items = function(ctx)
             return ctx.trigger.initial_kind ~= 'trigger_character'
           end,
         },
-        buffer = { name = ' ', score_offset = 70, min_keyword_length = 2 },
+        buffer = {
+          name = ' ',
+          -- score_offset = 70,
+          min_keyword_length = 2,
+        },
         cmdline = {
           name = ' ',
           min_keyword_length = function(ctx)
