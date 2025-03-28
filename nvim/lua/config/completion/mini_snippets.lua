@@ -26,22 +26,19 @@ return {
         '**/javascript/react-es7.json',
         '**/javascript/react-native-ts.json',
         '**/javascript/typescript.json',
-        '**/javascript/javascript_typescript.json',
+        '**/javascript/javascript.json',
         -- '**/next-ts.json',
-        -- '**/tsdoc.json',
       },
       typescript = {
-        '**/javascript_typescript.json',
+        '**/javascript/typescript.json',
+        '**/javascript/javascript.json',
+        -- '**/javascript/tsdoc.json',
       },
       javascript = {
-        '**/javascript_typescript.json',
+        '**/javascript/typescript.json',
+        '**/javascript/javascript.json',
+        -- '**/javascript/jsdoc.json',
       },
-      -- typescript = {
-      --   '**/javascript_typescript.json',
-      -- },
-      -- javascript = {
-      --   '**/javascript_typescript.json',
-      -- },
       dart = {
         '**/flutter.json',
       },
@@ -54,8 +51,8 @@ return {
         gen_loader.from_file(config_path .. '/snippets/global.json'),
       },
       mappings = {
-        expand = '<C-c><C-j>',
-        stop = '<C-c><C-e>',
+        expand = '<C-k><C-j>',
+        stop = '<C-k><C-k>',
         jump_next = '',
         jump_prev = '',
       },

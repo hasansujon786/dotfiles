@@ -2,9 +2,9 @@ local M = {}
 
 ---@type lsp.AttachCb
 function M.lsp_buffer_keymaps(client, bufnr)
-  local opts = { noremap = true, silent = true, buffer = bufnr }
+  local opts = { noremap = true, silent = true, buffer = bufnr, nowait = true }
   local function desc(str)
-    return require('hasan.utils').merge({ desc = str }, opts or {})
+    return require('hasan.utils').merge({ desc = str }, opts)
   end
   --Enable completion triggered by <c-x><c-o>
   -- buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')

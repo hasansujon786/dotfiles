@@ -19,7 +19,7 @@ local function has_words_before()
   return text:sub(col, col):match('%s') == nil
 end
 local minisnippet_expand = function()
-  feedkeys('<C-c><C-j>')
+  feedkeys('<C-k><C-j>')
   return true
 end
 -- Hack to tab makes work

@@ -209,8 +209,8 @@ if not vim.g.vscode then
   keymap('i', '<C-g><C-g>', '<c-g>u<Esc>[s1z=`]a<c-g>u', { desc = 'Fix previous misspelled world' })
 
   -- Leader keys ----------------------------------
-  keymap(nx, '<leader>s', '<cmd>w<cr>', { desc = 'Save current file' })
-  keymap({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save File' })
+  keymap(nx, '<leader>s', '<cmd>w<cr>', { desc = 'Save File' })
+  keymap({ 'i', 'x', 'n' }, '<C-s>', '<cmd>w<cr>', { desc = 'Save File' })
 
   -- Window Management ----------------------------
   keymap('n', 'ZZ', '<cmd>Quit!<CR>') -- Prompt before quitting
