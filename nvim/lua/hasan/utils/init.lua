@@ -189,6 +189,18 @@ M.index_of = function(tbl, value)
   return -1
 end
 
+M.flatten = (function()
+  if vim.fn.has('nvim-0.11') == 1 then
+    return function(t)
+      return vim.iter(t):flatten():totable()
+    end
+  else
+    return function(t)
+      return vim.tbl_flatten(t)
+    end
+  end
+end)()
+
 function M.is_visual_mode()
   local mode = vim.api.nvim_get_mode().mode
   return mode == 'v' or mode == 'V' or mode == '', mode

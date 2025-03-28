@@ -23,9 +23,14 @@
 ---@field name? string Passed to |vim.lsp.buf.format| when using LSP formatting
 ---@field filter? fun(client: table): boolean Passed to |vim.lsp.buf.format| when using LSP formatting
 
----@class state.FormatterConfig
+---@class state.Lsp.FormatterConfig
 ---@field filetype string|string[]
 ---@field formatter conform.FormatOpts
 
+---@alias state.Lsp.Linter { [string]: string[] }
+
 ---@class state.Lsp
----@field formatters_by_ft state.FormatterConfig[]
+---@field formatters_by_ft state.Lsp.FormatterConfig[]
+---@field essential_servers {lsp_name: string[]}
+---@field extra_tools string[]
+---@field linters_by_ft state.Lsp.Linter

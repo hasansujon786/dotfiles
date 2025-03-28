@@ -123,10 +123,10 @@ local function get_ivy(mini)
 end
 
 local search_project_todos = function()
-  Snacks.picker.grep_word({
+  Snacks.picker.grep({
     show_empty = true,
     search = function()
-      return table.concat(require('core.state').project.todo_keyfaces, ':|') .. ':' -- Creates "TODO :|DONE :|INFO :|..."
+      return table.concat(require('core.state').project.todo_keyfaces, ':|') .. ':' -- Creates "TODO\:|DONE\:|INFO\:|..."
     end,
     finder = 'grep',
     format = 'file',

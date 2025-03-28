@@ -2,7 +2,7 @@ local M = {}
 
 ---@type lsp.AttachCb
 function M.lsp_buffer_keymaps(client, bufnr)
-  local opts = { noremap = true, silent = true, buffer = bufnr, nowait = true }
+  local opts = { noremap = true, silent = true, buffer = bufnr }
   local function desc(str)
     return require('hasan.utils').merge({ desc = str }, opts)
   end
@@ -37,7 +37,7 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', '<leader>aD', vim.diagnostic.setqflist, desc('Lsp: Show global diagnostics'))
   keymap('n', '<leader>al', vim.diagnostic.open_float, desc('Lsp: Show line diagnostics'))
 
-  keymap('n', '<leader>ak', vim.lsp.buf.signature_help, desc('Lsp: show signature help'))
+  keymap({ 'n', 'i' }, '<C-c><C-s>', vim.lsp.buf.signature_help, desc('Lsp: show signature help'))
   keymap('n', '<leader>aq', require('config.lsp.util.extras').showLspRenameChanges, desc('Lsp: Show lsp rename'))
   -- keymap('n', '<leader>th', function()
   --   local is_enabled = vim.lsp.inlay_hint.is_enabled({})

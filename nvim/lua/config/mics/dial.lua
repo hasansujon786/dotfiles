@@ -21,6 +21,7 @@ return {
         augend.integer.alias.hex, -- nonnegative hex number  (0x01, 0x1a1f, etc.)
         augend.constant.alias.bool,
         augend.semver.alias.semver,
+        augend.constant.alias.en_weekday_full,
         toggle({ elements = { 'let', 'const' } }),
         toggle({ elements = { 'and', 'or' } }),
         toggle({ elements = { '&&', '||' }, word = false }),

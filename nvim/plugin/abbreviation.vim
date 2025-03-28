@@ -7,7 +7,5 @@ iab reutrn return
 iab lenght length
 iab re return
 iab widht width
-iab todo; TODO:
-iab td; TODO:
 iab Sting String
 iab sp; &nbsp;

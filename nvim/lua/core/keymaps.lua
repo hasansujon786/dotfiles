@@ -5,6 +5,7 @@ local noSilent = { silent = false }
 local nvim_set_keymap = vim.api.nvim_set_keymap
 local nx, ic = { 'n', 'x' }, { 'i', 'c' }
 
+keymap({ 'n', 'x', 'i' }, '<C-c>', '<nop>')
 keymap(nx, 'q', '<esc><cmd>noh<CR><C-l>')
 keymap(nx, 'Q', function()
   return require('hasan.widgets.register_editor').start_recording()
@@ -27,6 +28,17 @@ for _, mode in ipairs(nx) do
   nvim_set_keymap(mode, 'N', 'Nzz', noSilent)
 
   nvim_set_keymap(mode, "'", '`', noSilent)
+end
+
+if vim.fn.has('nvim-0.11') == 1 then
+  local keys_to_del = { 'grn', 'grr', 'gri', 'gra' }
+  for _, key in ipairs(keys_to_del) do
+    if type(key) == 'string' then
+      pcall(vim.keymap.del, 'n', key)
+    else
+      pcall(vim.keymap.del, key.mode or 'n', key[1])
+    end
+  end
 end
 
 -- Copy Paste -----------------------------------
@@ -117,9 +129,9 @@ if not vim.g.vscode then
   end
 
   -- Fold
-  nvim_set_keymap('n', 'zuu', 'vai:foldclose!<CR>zazz', { silent = true, desc = 'Fold under cursor' })
-  nvim_set_keymap('x', 'zu', ':foldclose!<CR>zazz', { silent = true, desc = 'Fold under cursor' })
-  keymap('n', 'z.', ':%foldclose<CR>', { desc = 'Fold all buf' })
+  nvim_set_keymap('n', 'zuu', '0vai:foldclose!<CR>zazt', { silent = true, desc = 'Fold current context' })
+  nvim_set_keymap('x', 'zu', ':foldclose!<CR>zazt', { silent = true, desc = 'Fold current context' })
+  keymap('n', 'z.', '<cmd>%foldclose<CR>zb', { desc = 'Fold all buf' })
   keymap('n', '<tab>', 'za')
   keymap('n', '<s-tab>', 'zA')
 
