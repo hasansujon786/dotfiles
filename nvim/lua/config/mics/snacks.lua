@@ -212,7 +212,7 @@ end
 
 return {
   {
-    'hasansujon786/snacks.nvim',
+    'folke/snacks.nvim',
     priority = 1000,
     enabled = true,
     lazy = false,
@@ -892,6 +892,7 @@ return {
     { '<leader>fr', function() Snacks.rename.rename_file() end, desc = 'Lsp: Rename file' },
     { '<leader>pd', function () Snacks.dashboard.open() end, desc = 'Open dashboard' },
     { '<leader>z',  function() Snacks.zen() end, desc = 'Toggle Zen Mode' },
+    { '<leader>u',  function() Snacks.zen() end, desc = 'Toggle Zen Mode' },
     { '<leader>w.',  function() Snacks.zen.zoom() end, desc = 'Toggle Zoom' },
     { '<leader>x', function() Snacks.scratch() end, desc = 'Toggle Scratch Buffer' },
     { '<leader>/x', function() Snacks.scratch.select() end, desc = 'Select Scratch Buffer' },
@@ -983,20 +984,29 @@ return {
 
           -- Create some toggle mappings
           Snacks.toggle.line_number():map('<leader>tn')
-          Snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map('<leader>tt')
-          Snacks.toggle.option('cursorcolumn', { name = 'Cursorcolumn' }):map('<leader>tl')
+          Snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map('<leader>r')
+          Snacks.toggle.option('cursorcolumn', { name = 'Cursorcolumn' }):map('<leader>tC')
           Snacks.toggle.option('cursorline', { name = 'Cursorline' }):map('<leader>tL')
           Snacks.toggle.option('spell', { name = 'Spelling' }):map('<leader>ts')
           Snacks.toggle.option('wrap', { name = 'Wrap' }):map('<leader>tw')
           Snacks.toggle
             .option('conceallevel', { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
             :map('<leader>to')
-          Snacks.toggle.diagnostics():map('<leader>td')
           Snacks.toggle.inlay_hints():map('<leader>th')
           Snacks.toggle.treesitter({ name = 'Treesitter' }):map('<leader>tT')
           Snacks.toggle.indent():map('<leader>ti')
-          Snacks.toggle.dim():map('<leader>tD')
+          Snacks.toggle.dim():map('<leader>tm')
           Snacks.toggle.option('background', { off = 'light', on = 'dark', name = 'Dark Background' }):map('<leader>tB')
+          Snacks.toggle.diagnostics():map('<leader>td')
+          Snacks.toggle({
+            name = 'Diagnostic Lines',
+            get = function()
+              return vim.diagnostic.config().virtual_text
+            end,
+            set = function(st)
+              return vim.diagnostic.config({ virtual_text = st })
+            end,
+          }):map('<leader>tl')
 
           Snacks.toggle({
             name = 'Transparency',

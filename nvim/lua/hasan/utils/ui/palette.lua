@@ -52,6 +52,8 @@ vim.g.onedark_theme_colors = {
   dark_vivid = { normal = { bg = c.bg0, fg = c.fg } },
 }
 
+local use_dim_bg = require('core.state').lsp.diagnosgic.sign.use_dim_bg
+
 local function set_custom_highlights()
   local hl = vim.api.nvim_set_hl
   local normal_bg = c.bg0
@@ -116,10 +118,10 @@ local function set_custom_highlights()
     LspReferenceRead        = { bg = c.dim_green },
     LspReferenceWrite       = { bg = c.dim_red },
     LspInfoBorder           = { link = 'FloatBorder' },
-    DiagnosticLineNrWarn    = { fg = c.yellow, bg = c.dim_yellow },
-    DiagnosticLineNrError   = { fg = c.red, bg = c.dim_red },
-    DiagnosticLineNrInfo    = { fg = c.cyan, bg = c.dim_cyan },
-    DiagnosticLineNrHint    = { fg = c.purple, bg = c.dim_purple },
+    DiagnosticLineNrWarn    = { fg = c.yellow, bg = use_dim_bg and c.dim_yellow or c.none },
+    DiagnosticLineNrError   = { fg = c.red, bg = use_dim_bg and c.dim_red or c.none },
+    DiagnosticLineNrInfo    = { fg = c.cyan, bg = use_dim_bg and c.dim_cyan or c.none },
+    DiagnosticLineNrHint    = { fg = c.purple, bg = use_dim_bg and c.dim_purple or c.none },
     DiagnosticUnnecessary   = { link = 'DiagnosticUnderlineError' },
     DiagnosticUnderlineInfo = { link = 'DiagnosticUnderlineError' },
     DiagnosticUnderlineWarn = { link = 'DiagnosticUnderlineError' },

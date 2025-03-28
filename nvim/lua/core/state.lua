@@ -99,6 +99,11 @@ M.lsp = {
       formatter = { 'trim_whitespace' },
     },
   },
+  diagnosgic = {
+    sign = {
+      use_dim_bg = false,
+    },
+  },
 }
 
 M.ui = {

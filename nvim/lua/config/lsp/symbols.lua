@@ -9,7 +9,7 @@ return {
     local r = require('symbols.recipes')
     require('symbols').setup(r.DefaultFilters, r.AsciiSymbols, {
       sidebar = {
-        hide_cursor = true, -- Hide the cursor when in sidebar.
+        hide_cursor = false, -- Hide the cursor when in sidebar.
         open_direction = 'try-left',
         on_open_make_windows_equal = false, -- Whether to run `wincmd =` after opening a sidebar.
         cursor_follow = true,
