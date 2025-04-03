@@ -312,6 +312,12 @@ local function set_custom_highlights()
     BlinkCmpKindOperator      = { link = 'BlinkCmpKindProperty' },
     BlinkCmpKindSnippet       = { link = 'BlinkCmpKindText' },
 
+    MiniSnippetsFinal         = { fg = c.dark_green, bg = c.none },
+    MiniSnippetsCurrentReplace= { fg = c.none, bg = c.dim_blue },
+    MiniSnippetsCurrent       = { fg = c.none, bg = c.none },
+    MiniSnippetsUnvisited     = { fg = c.none, bg = c.none, underline = true },
+    MiniSnippetsVisited       = { fg = c.none, bg = c.none, underline = false },
+
     -- /// nui.nvim ///
     NuiNormalFloat = { link = 'Normal' },
     NuiFloatBorder = { link = 'FloatBorder' },

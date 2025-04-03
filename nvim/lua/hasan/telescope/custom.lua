@@ -26,6 +26,11 @@ local function buf_in_cwd(bufname, cwd)
   return bufname_prefix == cwd
 end
 
+-- if vim.fn.exists('g:hasan_telescope_buffers') == 0 then
+--   vim.g.hasan_telescope_buffers = { ['0'] = 0 } -- used in hasan#utils#_buflisted_sorted()
+-- end
+-- autocmd('BufDelete', 'silent! call remove(g:hasan_telescope_buffers, expand("<abuf>"))')
+-- autocmd({ 'BufWinEnter', 'WinEnter' }, 'let g:hasan_telescope_buffers[bufnr()] = reltimefloat(reltime())')
 local git_and_buffer_files = function(opts)
   local cur_bufnr = vim.api.nvim_get_current_buf()
   local _buffer_keys = {}

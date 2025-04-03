@@ -49,9 +49,6 @@ __fzf_z_plus__() {
   fi
 }
 
-# ALT-e - cd into the selected directory
-bind -m emacs-standard '"\ee": " \C-b\C-k \C-u`__fzf_z_plus__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d\C-h"'
-
 __fzf_select__() {
   local cmd="${FZF_CTRL_T_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
     -o -type f -print \
@@ -105,6 +102,9 @@ if [[ $- =~ i ]]; then
   bind -m vi-command '"\C-z": emacs-editing-mode'
   bind -m vi-insert '"\C-z": emacs-editing-mode'
   bind -m emacs-standard '"\C-z": vi-editing-mode'
+
+  # ALT-e - cd into the selected directory
+  bind -m emacs-standard '"\ee": " \C-b\C-k \C-u`__fzf_z_plus__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d\C-h"'
 
   if ((BASH_VERSINFO[0] < 4)); then
     # CTRL-T - Paste the selected file path into the command line

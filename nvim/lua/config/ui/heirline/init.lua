@@ -32,7 +32,7 @@ return {
         },
         mode_color = function(self)
           local mode = vim.fn.mode() or 'n'
-          return self.mode_colors_map[mode] or self.mode_colors_map['n']
+          return self.mode_colors_map[mode]
         end,
       },
       {
@@ -96,7 +96,19 @@ return {
           end
           return conditions.buffer_matches({
             buftype = { 'nofile', 'prompt', 'help', 'quickfix' },
-            filetype = { '^git.*', 'fugitive', 'Trouble', 'dashboard', 'harpoon', 'floaterm', 'terminal', 'fzf' },
+            filetype = {
+              '^git.*',
+              'fzf',
+              'fugitive',
+              'Trouble',
+              'dashboard',
+              'harpoon',
+              'floaterm',
+              'terminal',
+              'blink-cmp-menu',
+              'blink-cmp-signature',
+              'blink-cmp-documentation',
+            },
           }, args.buf)
         end,
         colors = require('hasan.utils.ui.palette').colors,

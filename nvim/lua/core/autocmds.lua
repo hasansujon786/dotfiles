@@ -1,7 +1,3 @@
-if vim.fn.exists('g:hasan_telescope_buffers') == 0 then
-  vim.g.hasan_telescope_buffers = { ['0'] = 0 } -- used in hasan#utils#_buflisted_sorted()
-end
-
 ---@param path string
 ---@return boolean
 local function is_doc_file(path)
@@ -48,9 +44,6 @@ augroup('MY_AUGROUP')(function(autocmd)
     R('core.state')
     require('hasan.utils.reload').reload_app_state()
   end, { pattern = 'state.lua' })
-
-  autocmd('BufDelete', 'silent! call remove(g:hasan_telescope_buffers, expand("<abuf>"))')
-  autocmd({ 'BufWinEnter', 'WinEnter' }, 'let g:hasan_telescope_buffers[bufnr()] = reltimefloat(reltime())')
 
   autocmd('LspAttach', function(args)
     require('config.lsp.util.setup').lsp_attach(args)
