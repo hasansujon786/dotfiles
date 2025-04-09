@@ -4,6 +4,19 @@ local act = w.action
 
 local M = {}
 
+local function workspace_exists(target_name)
+  -- Retrieve the list of existing workspace names
+  local workspace_names = w.mux.get_workspace_names()
+
+  -- Iterate through the list to check for the target workspace
+  for _, name in ipairs(workspace_names) do
+    if name == target_name then
+      return true
+    end
+  end
+  return false
+end
+
 --- Converts Windows backslash to forwardslash
 ---@param path string
 local function normalize_path(path)
@@ -16,6 +29,10 @@ local function get_file_name(file, sep)
 end
 
 local function get_path_name(str)
+  if str == 'default' then
+    return str
+  end
+
   local pattern1 = '^(.+)/'
   local pattern2 = '^(.+)\\'
   local sep = '/'
@@ -121,9 +138,9 @@ M.find_repoes = function(project_dirs, window, pane)
   end
 
   for line in stdout:gmatch('([^\n]*)\n?') do
-    local project = normalize_path(line)
-    local label = project
-    local id = project
+    local path = normalize_path(line)
+    local label = path
+    local id = path
     table.insert(projects, { label = tostring(label), id = tostring(id) })
   end
 
@@ -133,13 +150,16 @@ M.find_repoes = function(project_dirs, window, pane)
         if not id and not label then
           w.log_info('Cancelled')
         else
-          if id == 'default' then
-            w.log_info('Workspace Selected: ' .. label .. ' Id: ' .. id)
-            return win:perform_action(act.SwitchToWorkspace({ name = id }), pane)
+          local workspace_name = get_path_name(id)
+          local ws_exists = workspace_exists(workspace_name)
+
+          w.log_info('Workspace Selected: ' .. label .. ' Id: ' .. workspace_name)
+          win:perform_action(act.SwitchToWorkspace({ name = workspace_name, spawn = { cwd = label } }), pane)
+
+          if not ws_exists then
+            w.log_info('Workspace does not exist: ' .. workspace_name)
+            win:perform_action(act({ EmitEvent = 'restore-session' }), pane)
           end
-          id = get_path_name(id)
-          w.log_info('Workspace Selected: ' .. label .. ' Id: ' .. id)
-          win:perform_action(act.SwitchToWorkspace({ name = id, spawn = { cwd = label } }), pane)
         end
       end),
       fuzzy = true,
