@@ -471,3 +471,35 @@ local relative_col = cursor_col + 1 -- Neovim's column is zero-based, so add 1 t
 print('Cursor position relative to viewable area:')
 print('Row:', relative_row, 'Column:', relative_col)
 print('Window height:', window_height)
+
+
+-- ------------------------------------------------
+-- -- highlight_word ------------------------------
+-- ------------------------------------------------
+-- local ns_id = vim.api.nvim_create_namespace('highlight_word')
+-- local function highlight_current_word()
+--   local bufnr = vim.api.nvim_get_current_buf()
+--   local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+--   row = row - 1 -- Convert to zero-based index
+
+--   -- Get the line content
+--   local line = vim.api.nvim_buf_get_lines(bufnr, row, row + 1, false)[1]
+--   if not line then
+--     return
+--   end
+
+--   -- Match the word at cursor position
+--   local word_start, word_end = line:find('%w+', col + 1)
+--   if not word_start or not word_end then
+--     return
+--   end
+
+--   -- Set highlight using extmark
+--   vim.api.nvim_buf_clear_namespace(bufnr, ns_id, 0, -1) -- Clear previous highlights
+--   vim.api.nvim_buf_set_extmark(bufnr, ns_id, row, word_start - 1, {
+--     end_col = word_end,
+--     hl_group = 'Search', -- Change highlight group if needed
+--   })
+-- end
+-- -- Run the function on CursorMoved event
+-- vim.api.nvim_create_autocmd('CursorMoved', { callback = highlight_current_word })

@@ -909,8 +909,8 @@ return {
       end,
     },
     -- Terminal
-    { '<M-m>', function() Snacks.terminal(nil, { shell = 'bash', win = { position = 'float' } }) end, { desc = 'Terminal' } },
-    { '<leader>ot', function() Snacks.terminal(nil, { shell = 'bash', win = { wo = { winbar = termWinbar } } }) end, { desc = 'Terminal' } },
+    { '<M-m>', function() Snacks.terminal(nil, { shell = 'bash', win = { position = 'float' } }) end, desc = 'Terminal'  },
+    { '<leader>ot', function() Snacks.terminal(nil, { shell = 'bash', win = { wo = { winbar = termWinbar } } }) end, desc = 'Terminal'  },
     { '<leader>of', function() Snacks.terminal('yazi', { shell = 'bash', win = { style = 'lazygit' } }) end, desc = 'Open File Manager' },
     { '<leader>gl', function() Snacks.lazygit() end, desc = 'Open lazygit' },
 

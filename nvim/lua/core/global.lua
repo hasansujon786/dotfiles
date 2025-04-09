@@ -20,14 +20,8 @@ P = function(...)
   return ...
 end
 
-function _G.log(data)
-  if type(data) == 'number' then
-    data = tostring(data)
-  end
-  if type(data) == 'string' then
-    data = data .. ' ' .. math.random()
-  end
-  P(data)
+_G.log = function(...)
+  return require('hasan.utils.logger')(...)
 end
 
 R = function(moduleName, message)

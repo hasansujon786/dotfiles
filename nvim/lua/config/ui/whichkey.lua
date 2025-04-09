@@ -116,6 +116,7 @@ return {
       { '<leader>ve', '<cmd>lua require("hasan.widgets.register_editor").open_editor()<CR>', desc = 'Open register editor' },
       { '<leader>vR', '<cmd>silent write | edit | TSBufEnable highlight<CR>', desc = 'Reload hightlight' },
       { '<leader>vL', '<cmd>call logevents#LogEvents_Toggle()<CR>', desc = 'Toggle LogEvents' },
+      { '<leader>vl', '<cmd>lua require("hasan.utils.logger").view()<CR>', desc = 'Plugin status' },
 
       -- WINDOW
       { '<leader>w', group = 'window' },

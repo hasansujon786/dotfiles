@@ -1,84 +1,81 @@
-local M = {}
+---@class Logger
+---@overload fun(...: any): Logger
+local M = setmetatable({}, {
+  __call = function(t, ...)
+    return t.info(...)
+  end,
+})
+M.__index = M
 
-M.Logger = {}
-M.Logger.__index = M.Logger
+M.log_file = vim.fn.stdpath('data') .. '/nvim.log'
 
-local function log(type, msg, opts)
-  local title = 'msg title'
-  local ok, notify = pcall(require, 'notify')
-  if ok then
-    notify(msg, type, require('hasan.utils').merge({ title = title }, opts))
-  else
-    if vim.islist(msg) then
-      -- regular vim.notify can't take tables of strings
-      local tmp_list = msg
-      msg = ''
-      for _, v in pairs(tmp_list) do
-        msg = msg .. v
-      end
-    end
-
-    vim.notify(msg, type)
+-- Function to convert a table to a readable string
+local function table_to_string(tbl, indent)
+  if type(tbl) ~= 'table' then
+    return tostring(tbl)
   end
-end
-
-function M.Logger:log(msg, opts)
-  log(vim.log.levels.INFO, msg, opts or {})
-end
-
-function M.Logger:warn(msg, opts)
-  log(vim.log.levels.WARN, msg, opts or {})
-end
-
-function M.Logger:error(msg, opts)
-  log(vim.log.levels.ERROR, msg, opts or {})
-end
-
----Get index of given value
----@param array table
----@param value any
----@return integer|nil
-local function indexOf(array, value)
-  for i, v in ipairs(array) do
-    if v == value then
-      return i
-    end
+  indent = indent or 0
+  local to_return = '{\n'
+  for k, v in pairs(tbl) do
+    local key = tostring(k)
+    local value = (type(v) == 'table') and table_to_string(v, indent + 2) or tostring(v)
+    to_return = to_return .. string.rep(' ', indent + 2) .. '[' .. key .. '] = ' .. value .. ',\n'
   end
-  return nil
+  return to_return .. string.rep(' ', indent) .. '}'
 end
 
----Toggle vim option with ease
----@param option string
----@param given_states table
----@param silent boolean
-function M.toggle(option, given_states, silent)
-  local info = vim.api.nvim_get_option_info(option)
-  local scopes = { buf = 'bo', win = 'wo', global = 'o' }
-  local scope = scopes[info.scope]
-  local options = vim[scope]
+-- Function to join multiple arguments into a single string
+local function format_message(...)
+  local args = { ... }
+  local parts = {}
 
-  if given_states ~= nil then
-    local foundIndex = require('hasan.utils').index_of(given_states, options[option])
-    if foundIndex == #given_states or foundIndex == -1 then
-      options[option] = given_states[1]
+  for _, v in ipairs(args) do
+    if type(v) == 'table' then
+      table.insert(parts, table_to_string(v))
     else
-      options[option] = given_states[foundIndex + 1]
+      table.insert(parts, tostring(v))
     end
-  else
-    options[option] = not options[option]
   end
 
-  if silent ~= true then
-    if options[option] and options[option] ~= '' then
-      local msg = 'enabled vim.' .. scope .. '.' .. option
-      if given_states ~= nil then
-        msg = msg .. ' [' .. options[option] .. ']'
-      end
-      M.Logger:log(msg)
-    else
-      M.Logger:warn('disabled vim.' .. scope .. '.' .. option)
-    end
+  return table.concat(parts, ' ') -- Join all parts with spaces
+end
+
+-- Function to write logs
+local function write_log(level, ...)
+  local file = io.open(M.log_file, 'a')
+  if not file then
+    return
   end
+
+  local timestamp = os.date('%Y-%m-%d %H:%M:%S')
+  local message = format_message(...)
+
+  local log_entry = string.format('[%s] [%s] %s\n', timestamp, level, message)
+
+  file:write(log_entry)
+  file:close()
+end
+
+-- Log levels
+function M.info(...)
+  write_log('INFO', ...)
+end
+
+function M.warn(...)
+  write_log('WARN', ...)
+end
+
+function M.error(...)
+  write_log('ERROR', ...)
+end
+
+function M.debug(...)
+  write_log('DEBUG', ...)
+end
+
+-- Function to view logs inside Neovim
+function M.view()
+  vim.cmd('edit ' .. M.log_file)
 end
 
 return M

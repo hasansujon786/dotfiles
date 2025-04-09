@@ -21,6 +21,11 @@
     "body": "console.log($0)",
     "description": "get console log"
   },
+  "log with JSON.stringify": {
+    "prefix": "clj",
+    "body": "console.log(JSON.stringify($0, null, 2));",
+    "description": "get console log with JSON.stringify"
+  },
   "export all": {
     "prefix": "exFrom",
     "body": "export * from './$0'",
