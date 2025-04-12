@@ -14,7 +14,7 @@ append_keymap = [
   { on = ["g", "v"], run = "cd ~/Videos", desc = "Videos" },
   { on = ["g", "m"], run = "cd ~/Music", desc = "Music" },
   { on = ["g", "c"], run = "cd ~/Documents", desc = "Documents" },
-  { on = ["g", "r"], run = "cd E:/repoes", desc = "repoes" },
+  { on = ["g", "r"], run = "cd D:/repoes", desc = "repoes" },
 
   { on = ["g", "a", "n"], run = "cd ~/AppData/Local/nvim-data/", desc = "Nvim data" },
   { on = ["g", "a", "l"], run = "cd ~/AppData/Local", desc = "AppData/Local" },

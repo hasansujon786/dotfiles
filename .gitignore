@@ -5,7 +5,7 @@ tt.state
 events.log
 tui/lazygit/state.yml
 log.log
-gui/wezterm/wezterm-session-manager
+# gui/wezterm/wezterm-session-manager
 gui/Keypirinha/User/Keypirinha-Notepad2.ini
 gui/Keypirinha/User/Keypirinha.history
 nvim/plugin/packer_compiled.lua

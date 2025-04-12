@@ -167,7 +167,7 @@ setup_bash() {
 
   util_print bash-utils
   $getter install -y wget curl fd ripgrep zoxide fzf
-  winget install eza-community.eza
+  winget install eza-community.eza --source winget
   # $getter install -y starship
 }
 
@@ -178,7 +178,7 @@ setup_wezterm() {
 
   util_backUpConfig "${weztermPath[$osIndex]}"
   util_makeSymlinkPath "$HOME/dotfiles/gui/wezterm" "${weztermPath[$osIndex]}"
-  git clone https://github.com/hasansujon786/wezterm-session-manager.git ~/.config/wezterm/wezterm-session-manager
+  # git clone https://github.com/hasansujon786/wezterm-session-manager.git ~/.config/wezterm/wezterm-session-manager
 }
 
 setup_nvim() {
@@ -282,7 +282,7 @@ setup_yazi() {
   mkdir -p "${yaziPath[$osIndex]}"
   util_makeSymlinkPath "$HOME/dotfiles/tui/yazi" "${yaziPath[$osIndex]}/config"
 
-  winget install sxyazi.yazi
+  winget install sxyazi.yazi --source winget
   $getter install -y ffmpeg imagemagick
 }
 
@@ -400,7 +400,7 @@ setup_ahk() {
 
   # FIXME: Find a way to install v2 without winget
   # choco install autohotkey -y
-  winget install AutoHotkey.AutoHotkey
+  winget install AutoHotkey.AutoHotkey --source winget
 
   rm -rf "$ahkPath"
   util_makeSymlinkPath "$HOME/dotfiles/scripts/ahk/main.ahk" "'$ahkPath'"

@@ -4,8 +4,8 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
   local out = vim.fn.system({ 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath })
 
-  vim.api.nvim_echo({ { 'Installing sqlite-lua...', 'ErrorMsg' } }, true, {})
-  vim.fn.system({ 'bash', '~/dotfiles/scripts/sqlite-lua.sh' })
+  -- vim.api.nvim_echo({ { 'Installing sqlite-lua...', 'ErrorMsg' } }, true, {})
+  -- vim.fn.system({ 'bash', '~/dotfiles/scripts/sqlite-lua.sh' })
 
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
@@ -49,7 +49,7 @@ require('lazy').setup({
     enabled = true,
     notify = true, -- get a notification when changes are found
   },
-  dev = { path = 'E:/repoes/lua' },
+  dev = { path = 'D:/repoes/lua' },
   performance = {
     cache = {
       enabled = true,

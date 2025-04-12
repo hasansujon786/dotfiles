@@ -1,6 +1,6 @@
 local M = {}
 
-M.default_cwd = 'E:/repoes'
+M.default_cwd = 'D:/repoes'
 
 M.project_dirs = {
   M.default_cwd,
