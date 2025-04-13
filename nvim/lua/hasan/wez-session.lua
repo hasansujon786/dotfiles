@@ -125,7 +125,7 @@ local utils = {
         if not name then
           break
         end
-        if type == 'file' then
+        if type == 'file' and name ~= '.gitkeep' then
           table.insert(files, name)
         end
       end

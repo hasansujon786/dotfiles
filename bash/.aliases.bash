@@ -56,10 +56,10 @@ subl() {
 }
 
 # Android
-alias grc='./gradlew clean'
-alias bure='./gradlew bundleRelease'
-alias asre='./gradlew assembleRelease'
-alias asde='./gradlew assembleDebug'
+alias gdc='./gradlew clean'
+alias gdbr='./gradlew bundleRelease'
+alias gdar='./gradlew assembleRelease'
+alias gdad='./gradlew assembleDebug'
 alias emd='~/AppData/Local/Android/Sdk/emulator/emulator -avd default_device -netdelay none -netspeed full'
 
 # React native
