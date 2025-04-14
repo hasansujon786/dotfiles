@@ -20,9 +20,7 @@ return {
         vim.cmd([[wa]])
         local kanban = R('super-kanban')
 
-        vim.defer_fn(function()
-          kanban.open('todo.md')
-        end, 100)
+        kanban.open('test.md')
       end,
     },
   },

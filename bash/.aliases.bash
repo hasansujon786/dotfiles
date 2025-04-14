@@ -5,7 +5,7 @@ alias ycc='yarn cache clean'
 alias ya='yarn android'
 alias ys='yarn start'
 alias yd='yarn dev'
-alias si='zi && sc'
+alias zo='zi && sc'
 alias sc='~/dotfiles/scripts/sc.sh'
 # npm
 alias no="NODE_OPTIONS='--inspect'"
@@ -206,6 +206,8 @@ alias hx='hexdump -C'
 alias k9='kill -9'
 alias k15='kill -s 15'
 alias w1='watch -n 1'
+alias sci='scoop install'
+alias scu='scoop-uninstall'
 
 jump_to_git_root() {
   local _root_dir _pwd
@@ -284,6 +286,41 @@ url-redrive() {
 
 qrcode() {
   echo "$@" | curl -F-=\<- qrenco.de
+}
+
+scoop-uninstall() {
+  local pkg
+  pkg="$(scoop list | tail -n +5 | fzf --border-label="Scoop Uninstall" | awk '{print $1}')"
+
+  if [[ -z "$pkg" ]]; then
+    echo "No package selected. Aborting."
+    return 1
+  fi
+
+  read -r -p "Scoop: Uninstall \`${pkg}\` (y/n)? " yn
+  case $yn in
+  [Yy]*)
+    echo "Uninstalling $pkg..."
+    scoop uninstall "$pkg"
+    ;;
+  [Nn]*) echo "Canceled." ;;
+  *) echo "Please answer yes or no." ;;
+  esac
+}
+
+run() {
+  local selected
+  selected=$(alias | sed -E "s/^alias ([^=]+)='(.*)'$/\1  =  \2/" | fzf --border-label="Run alias")
+
+  if [[ -n "$selected" ]]; then
+    local name
+    name=$(echo "$selected" | cut -d'=' -f1 | xargs)
+
+    echo "Running alias: $name"
+    eval "$name"
+  else
+    echo "No alias selected."
+  fi
 }
 
 ### Keybinds
