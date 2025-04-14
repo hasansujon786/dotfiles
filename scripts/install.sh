@@ -1,505 +1,399 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-export CLR_RESET='\033[1;0m'
-export STL_BOLD='\033[1;1m'
-export CLR_RED='\033[0;31m'
-export CLR_GREEN='\033[0;32m'
-export CLR_BLUE='\033[0;34m'
-msg() {
-  printf "${CLR_BLUE}${STL_BOLD}::${CLR_RESET} ${STL_BOLD}%s${CLR_RESET}\n" "$1"
-  shift
-  for i in "$@"; do
-    printf " ${CLR_BLUE}${STL_BOLD}|${CLR_RESET} ${STL_BOLD}%s${CLR_RESET}\n" "$i"
+# Exit immediately if a command fails
+set -euo pipefail
+
+# ------------------------------------------------
+# -- Config paths --------------------------------
+# ------------------------------------------------
+DOTFILES="$HOME/dotfiles"
+WINDOWS_STARTUP_PATH="C:\\Users\\${USERNAME}\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"
+NVIM_CONFIG="$HOME/AppData/Local/nvim"
+
+# ------------------------------------------------
+# -- Utils fucntios ------------------------------
+# ------------------------------------------------
+# Colored output for readability
+info() { echo -e "\033[1;34m[INFO]\033[0m $*"; }
+success() { echo -e "\033[1;32m[SUCCESS]\033[0m $*"; }
+error() { echo -e "\033[1;31m[ERROR]\033[0m $*" >&2; }
+# Output big title
+heading() {
+  echo " "
+  figlet \ "$1"
+}
+archive_config() {
+  info "Backing up... $1"
+  if [ -d "$1" ]; then
+    mv "$1" "$1.bak.$(date +%Y.%m.%d-%H.%M.%S)"
+  elif [ -f "$1" ]; then
+    mv "$1" "$1.bak.$(date +%Y.%m.%d-%H.%M.%S)"
+  fi
+}
+create_symlink() {
+  info "Creating symlink: $1 -> $2"
+  # $1 = symlink path (to)
+  # $2 = actual path (from)
+  if [[ "$OS" == "win" ]]; then
+    powershell New-Item -ItemType SymbolicLink -Path "$1" -Target "$2"
+  else
+    ln -s "$1" "$2"
+  fi
+}
+update_path_var() {
+  # Safely check if argument is provided using ${1:-}
+  if [ -z "${1:-}" ]; then
+    error "Missing argument. Usage: update_path_var <path-to-add>"
+    return 1
+  fi
+
+  local NEW_PATH="$1"
+  local SCRIPT="C:\\Users\\$USERNAME\\dotfiles\\scripts\\variable_update_path.ps1"
+
+  info "Updating PATH with: $NEW_PATH"
+
+  powershell.exe -File "$SCRIPT" -newPath "$NEW_PATH"
+  local status=$?
+
+  if [ $status -ne 0 ]; then
+    error "Failed to update PATH. PowerShell exited with status $status."
+    return $status
+  fi
+}
+create_user_var() {
+  # Safely check if both arguments are provided
+  if [ -z "${1:-}" ] || [ -z "${2:-}" ]; then
+    error "Missing arguments. Usage: create_user_var <variable-name> <variable-value>"
+    return 1
+  fi
+
+  local VAR_NAME="$1"
+  local VAR_VALUE="$2"
+  local SCRIPT="C:\\Users\\$USERNAME\\dotfiles\\scripts\\variable_create.ps1"
+
+  info "Creating user environment variable: $VAR_NAME=$VAR_VALUE"
+
+  powershell.exe -File "$SCRIPT" -varName "$VAR_NAME" -varValue "$VAR_VALUE"
+  local status=$?
+
+  if [ $status -ne 0 ]; then
+    error "Failed to create environment variable. PowerShell exited with status $status."
+    return $status
+  fi
+}
+get() {
+  for pkg in "$@"; do
+    info "Installing $pkg..."
+
+    if scoop install "$pkg"; then
+      success "$pkg installed successfully."
+    else
+      error "Failed to install $pkg."
+      return 1
+    fi
   done
 }
-compl() {
-  printf "${CLR_GREEN}${STL_BOLD}>>>${CLR_RESET} ${STL_BOLD}%s${CLR_RESET}\n" "$1"
-  shift
-  for i in "$@"; do
-    printf "  ${CLR_GREEN}${STL_BOLD}|${CLR_RESET} ${STL_BOLD}%s${CLR_RESET}\n" "$i"
-  done
+ensure_scoop_bucket() {
+  local bucket_name="${1:-}"
+
+  if [ -z "$bucket_name" ]; then
+    error "Missing argument. Usage: ensure_scoop_bucket <bucket-name>"
+    return 1
+  fi
+
+  if scoop bucket list | awk '{print $1}' | grep -q "^$bucket_name$"; then
+    info "Found Scoop bucket: '$bucket_name'"
+  else
+    info "Adding Scoop bucket: $bucket_name..."
+    scoop bucket add "$bucket_name"
+    local status=$?
+    if [ $status -ne 0 ]; then
+      error "Failed to add bucket: $bucket_name"
+      return $status
+    fi
+  fi
 }
-die() {
-  printf "${CLR_RED}${STL_BOLD}error:${CLR_RESET} ${STL_BOLD}%s${CLR_RESET}\n" "$1"
-  shift
-  for i in "$@"; do
-    printf "     ${CLR_RED}${STL_BOLD}|${CLR_RESET} ${STL_BOLD}%s${CLR_RESET}\n" "$i"
-  done
-  exit 1
-}
-has() {
-  _cmd=$(command -v "$1") 2>/dev/null || return 1
-  [ -x "$_cmd" ] || return 1
-}
 
-set -e
+trap 'error "Something went wrong. Exiting."' ERR
 
-inputOsName=${1}
-case "${inputOsName}" in
-win) osIndex=0 ;;
-lin) osIndex=1 ;;
-ter) osIndex=2 ;;
-*) osIndex=3 ;;
-esac
+detect_os() {
+  case "$(uname -s)" in
+  MINGW* | MSYS* | CYGWIN*)
+    OS="win"
+    SYSTEM="Windows"
+    PACKAGE_MANAGER="scoop"
+    ;;
+  # Linux*)
+  #   OS="lin"
+  #   SYSTEM="Linux"
+  #   PACKAGE_MANAGER="apt"
+  #   ;;
+  # Darwin*)
+  #   OS="mac"
+  #   SYSTEM="macOS"
+  #   PACKAGE_MANAGER="brew"
+  #   ;;
+  *)
+    OS="Unknown"
+    SYSTEM="Unknown"
+    PACKAGE_MANAGER="none"
+    ;;
+  esac
 
-case "${inputOsName}" in
-win) os=windows ;;
-lin) os=linux ;;
-ter) os=termux ;;
-*) os=linux ;;
-esac
-
-case "${inputOsName}" in
-win) getter=choco ;;
-lin) getter='sudo apt' ;;
-ter) getter=apt ;;
-*) getter=apt ;;
-esac
-
-if [[ $osIndex -eq 3 ]]; then
-  echo "error: The following required arguments were not provided:"
-  echo "USAGE:
-
-  ./install [OS Name] (win/lin/ter)
-
-    win: windows
-    lin: linux
-    ter: termux"
-  exit 1
-else
   echo "      _       _         __ _ _"
   echo "   __| | ___ | |_      / _(_) | ___  ___"
   echo "  / _\` |/ _ \| __|____| |_| | |/ _ \/ __|"
   echo " | (_| | (_) | ||_____|  _| | |  __/\__ \\"
   echo "  \__,_|\___/ \__|    |_| |_|_|\___||___/"
   echo ""
+  echo -e "  \033[1;34mSystem:\033[0m ${SYSTEM} (${OS})"
+  echo -e "  \033[1;34mPackage manager:\033[0m ${PACKAGE_MANAGER}"
+  echo ""
+}
+detect_os
 
-  echo \ System: ${os}
-  echo \ Package manager: "$getter"
-  echo \ OS Index: ${osIndex}
+# Exit if it isn't one of the supported system
+if [[ "$OS" == 'Unknown' ]]; then
+  error "System $(uname -s) is not supported"
+  exit 1
 fi
 
-STARTUP_PATH="C:\\Users\\${USERNAME}\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"
+# Install scoop with powershell => Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force; iwr -useb get.scoop.sh | iex
+# Check if Scoop is installed
+HAS_SCOOP=false
+if [[ "$PACKAGE_MANAGER" == 'scoop' ]] && command -v scoop &>/dev/null; then
+  HAS_SCOOP=true
+  ensure_scoop_bucket extras
+else
+  error "Scoop is not installed. Please install Scoop first."
+  exit 1
+fi
 
-###### utils ######
-util_print() {
-  echo ' '
-  figlet \ "$1"
-}
-util_setup_figlet() {
-  if [[ "$os" == "windows" ]]; then
-    $getter install -y figlet-go
-  else
-    sudo apt update -y && sudo apt upgrade -y
-    $getter install -y figlet
-  fi
-}
-util_backUpConfig() {
-  if [ -d "$1" ]; then
-    echo 'Backeduped old directory.'
-    mv "$1" "$1.bak.$(date +%Y.%m.%d-%H.%M.%S)"
-  elif [ -f "$1" ]; then
-    echo 'Backeduped old file.'
-    mv "$1" "$1.bak.$(date +%Y.%m.%d-%H.%M.%S)"
-  fi
-}
-util_makeSymlinkPath() {
-  # $1 = actual path (from)
-  # $2 = symlink path (to)
-  if [[ "$os" == "windows" ]]; then
-    powershell New-Item -ItemType SymbolicLink -Path "$2" -Target "$1"
-  else
-    ln -s "$1" "$2"
-  fi
-}
+# Check if dotfiles config exists
+if [ ! -d "$DOTFILES" ]; then
+  error "Config directory $DOTFILES does not exist."
+  exit 1
+fi
 
-update_path() {
-  # Check if a path argument is provided
-  if [ -z "$1" ]; then
-    echo "Usage: $0 <path-to-add>"
-    return
-  fi
-  NEW_PATH="$1"
-
-  powershell.exe -File "C:\\Users\\$USERNAME\\dotfiles\\scripts\\update_path.ps1" -newPath "$NEW_PATH"
-}
-
-update_user_var() {
-  # Check if variable name and value are provided
-  if [ -z "$1" ] || [ -z "$2" ]; then
-    echo "Usage: $0 <variable-name> <variable-value>"
-    return
+init_setup() {
+  if ! command -v figlet &>/dev/null; then
+    get figlet
   fi
 
-  VAR_NAME="$1"
-  VAR_VALUE="$2"
-
-  powershell.exe -File "C:\\Users\\$USERNAME\\dotfiles\\scripts\\update_variable.ps1" -varName "$VAR_NAME" -varValue "$VAR_VALUE"
-}
-
-###### setup functions ######
-setup_git_defaults() {
-  gitconfigPath=("$HOME/.gitconfig" "$HOME/.gitconfig" "$HOME/.gitconfig")
-  util_print git
-
-  util_backUpConfig "${gitconfigPath[$osIndex]}"
-  util_makeSymlinkPath "$HOME/dotfiles/bash/.gitconfig" "${gitconfigPath[$osIndex]}"
-
-  # echo ">> Type your github username."
-  # read git_user_name
-  # echo ">> Type your github email."
-  # read git_user_email
-
-  # git config --global user.email $git_user_email
-  # git config --global user.name "$git_user_name"
-  # git config --global credential.helper store
-
-  # git config --global credential.helper 'cache --timeout=86400'
-  # git credential-cache exit
-}
-
-setup_bash() {
-  bashPath=("$HOME/.bashrc" "$HOME/.bashrc" "$HOME/.bashrc")
-  util_print bash
-
-  util_backUpConfig "${bashPath[$osIndex]}"
-  util_makeSymlinkPath "$HOME/dotfiles/bash/.bashrc" "${bashPath[$osIndex]}"
-
-  util_print bash-utils
-  $getter install -y wget curl fd ripgrep zoxide fzf
-  winget install eza-community.eza --source winget
-  # $getter install -y starship
-}
-
-setup_wezterm() {
-  weztermPath=("$HOME/.config/wezterm" "$HOME/.config/wezterm" "$HOME/.config/wezterm")
-  util_print wezterm
-  $getter install wezterm -y
-
-  util_backUpConfig "${weztermPath[$osIndex]}"
-  util_makeSymlinkPath "$HOME/dotfiles/gui/wezterm" "${weztermPath[$osIndex]}"
-  # git clone https://github.com/hasansujon786/wezterm-session-manager.git ~/.config/wezterm/wezterm-session-manager
-}
-
-setup_nvim() {
-  nvimPath=("$HOME/AppData/Local/nvim" "$HOME/.config/nvim" "$HOME/.config/nvim")
-  util_print nvim
-
-  util_backUpConfig "${nvimPath[$osIndex]}"
-  util_makeSymlinkPath "$HOME/dotfiles/nvim" "${nvimPath[$osIndex]}"
-
-  if [[ "$os" == "windows" ]]; then
-    $getter install -y neovim
-  else
-    # wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
-    # chmod u+x nvim.appimage
-    # sudo mv nvim.appimage ~/dotfiles/bin/nvim
-    $getter install -y xclip
-  fi
-}
-
-setup_lazygit() {
-  lazygitPath=("$HOME/AppData/Roaming/lazygit" "$HOME/.config/lazygit" "$HOME/.config/lazygit")
-  util_print lazygit
-
-  util_backUpConfig "${lazygitPath[$osIndex]}"
-  util_makeSymlinkPath "$HOME/dotfiles/tui/lazygit" "${lazygitPath[$osIndex]}"
-
-  if [[ "$os" == "windows" ]]; then
-    $getter install -y lazygit
-  elif [[ "$os" == "ter" ]]; then
-    # install manually for termux
-    mkdir -p ./lazy
-    export LAZYGIT_VER="0.30.1"
-    wget -O ./lazy/lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_arm64.tar.gz
-    tar xvf ./lazy/lazygit.tgz -C ./lazy/
-    mv ./lazy/lazygit /data/data/com.termux/files/usr/bin/lazygit
-    rm -rf ./lazy
-  else
-    # install manually for linux
-    mkdir -p ./lazy
-    export LAZYGIT_VER="0.30.1"
-    wget -O ./lazy/lazygit.tgz https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VER}/lazygit_${LAZYGIT_VER}_Linux_x86_64.tar.gz
-    tar xvf ./lazy/lazygit.tgz -C ./lazy/
-    sudo mv ./lazy/lazygit /usr/local/bin/
-    rm -rf ./lazy
-  fi
-
-}
-
-setup_kanata() {
-  kanata_tray=("$HOME/AppData/Roaming/kanata-tray" "$HOME/.config/kanata-tray" "$HOME/.config/kanata-tray")
-  util_print kanata
-
-  util_backUpConfig "${kanata_tray[$osIndex]}"
-  util_makeSymlinkPath "$HOME/dotfiles/scripts/kanata/kanata-tray" "${kanata_tray[$osIndex]}"
-
-  if [[ "$os" == "windows" ]]; then
-    export KANATA_TRAY_VER="0.5.2"
-    rm "${STARTUP_PATH}\\kanata-tray.exe"
-
-    wget https://github.com/rszyma/kanata-tray/releases/download/v${KANATA_TRAY_VER}/kanata-tray.exe
-    mv kanata-tray.exe "${HOME}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/"
-    sleep 0.5
-    explorer "${STARTUP_PATH}\\kanata-tray.exe"
-  fi
-}
-
-setup_tig() {
-  util_print tig
-  if [[ "$os" == "windows" ]]; then
-    $getter install -y tig
-  fi
-  ln -s ~/dotfiles/tui/tig/.tigrc ~/.tigrc
-}
-
-setup_lf() {
-  # https://linoxide.com/lf-terminal-manager-linux/
-  lfPath=("$HOME/AppData/Local/lf" "$HOME/.config/lf" "$HOME/.config/lf")
-  util_print lf
-
-  util_backUpConfig "${lfPath[$osIndex]}"
-  util_makeSymlinkPath "$HOME/dotfiles/tui/lf" "${lfPath[$osIndex]}"
-  if [[ "$os" == "windows" ]]; then
-    $getter install -y lf
-  else
-    wget https://github.com/gokcehan/lf/releases/download/r24/lf-linux-amd64.tar.gz -O lf-linux-amd64.tar.gz
-    tar xvf lf-linux-amd64.tar.gz
-    chmod +x lf
-    sudo mv lf /usr/local/bin
-    rm -rf lf-linux-amd64.tar.gz
-    curl https://raw.githubusercontent.com/thameera/vimv/master/vimv >~/usr/local/bin/vimv && chmod +755 ~/usr/local/bin/vimv
-    # install vimv
-    sudo cp ~/dotfiles/tui/lf/vimv /usr/local/bin/
-  fi
-}
-
-setup_yazi() {
-  yaziPath=("$HOME/AppData/Roaming/yazi" "$HOME/.config/yazi" "$HOME/.config/yazi")
-  util_print yazi
-
-  util_backUpConfig "${yaziPath[$osIndex]}"
-  mkdir -p "${yaziPath[$osIndex]}"
-  util_makeSymlinkPath "$HOME/dotfiles/tui/yazi" "${yaziPath[$osIndex]}/config"
-
-  winget install sxyazi.yazi --source winget
-  $getter install -y ffmpeg imagemagick
-}
-
-setup_alacritty() {
-  alacrittyPath=("$HOME/AppData/Roaming/alacritty" "$HOME/.config/alacritty" "$HOME/.config/alacritty")
-  util_print alacritty
-  if [[ "$os" == "windows" ]]; then
-    $getter install -y alacritty
-  fi
-
-  util_backUpConfig "${alacrittyPath[$osIndex]}"
-  mkdir -p "${alacrittyPath[$osIndex]}"
-  # util_makeSymlinkPath $HOME/dotfiles/alacritty ${alacrittyPath[$osIndex]}
-  util_makeSymlinkPath "$HOME/dotfiles/alacritty/alacritty.$os.yml" "${alacrittyPath[$osIndex]}/alacritty.yml"
-}
-
-setup_node() {
-  util_print nodejs
-  # shellcheck source=/dev/null
-  # curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-
-  if [[ "$os" == "windows" ]]; then
-    # $getter install -y nodejs
-    # $getter install -y nodejs-lts
-
-    $getter install -y fnm
-    fnm install lts-latest
-    fnm use lts-latest
-    npm install -g yarn trash-cli live-server
-  elif [[ "$os" == "linux" ]]; then
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-    export NVM_DIR="$HOME/.config/nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-    nvm install 14
-  fi
-}
-
-setup_rust() {
-  util_print rust
-  # cargo_bin=("C:\\ProgramData\\chocolatey\\bin\\cargo.exe" "C:\\ProgramData\\chocolatey\\bin\\cargo.exe" "C:\\ProgramData\\chocolatey\\bin\\cargo.exe")
-
-  if [[ "$os" == "windows" ]]; then
-    $getter install -y rust
-    # "${cargo_bin[$osIndex]}" install  --list
-  fi
-}
-
-setup_python() {
-  util_print python
-
-  if [[ "$os" == "windows" ]]; then
-    $getter install -y python
-    python_cmd=$(which python)
-    $python_cmd -m pip install --upgrade pip
-    $python_cmd -m pip install --upgrade Pillow
-    # python -m pip install --upgrade mupdf
-  fi
-}
-
-install_various_apps() {
-  $getter install -y eget
-  $getter install -y onefetch
-  # $getter install -y tokei # FIXME: install error
-  $getter install -y scrcpy
-  $getter install -y jq
-  $getter install -y tldr
-  $getter install -y fastfetch
-
-  # util_print taskwarrior
-  # apt install taskwarrior
-  # pip3 install tasklib
-  # pip3 install six
-
-  # util_print vit
-  # pip3 install vit
-
-  if [[ "$os" == "windows" ]]; then
-    setup_keypirinha
-    # $getter install -y sharpkeys
-    $getter install -y obsidian potplayer 7zip.install quicklook riot googlechrome qbittorrent
-    $getter install -y delta # git highlighter
-    $getter install -y ntop.portable
-
-    # INFO: dosen't work with choco # $getter install -y instanteyedropper.app
-    # FIXME: update config # setup_windowsTerminal
-    setup_sublime
-  elif [[ "$os" == "linux" ]]; then
-    install_and_setup_tmux
-  fi
-}
-
-setup_keypirinha() {
-  # install path C:\ProgramData\chocolatey\lib\keypirinha\tools\Keypirinha
-  keypirinhaPath=("$HOME/AppData/Roaming/Keypirinha")
-  util_print keypirinha
-
-  util_backUpConfig "${keypirinhaPath[$osIndex]}"
-  util_makeSymlinkPath "$HOME/dotfiles/gui/Keypirinha" "${keypirinhaPath[$osIndex]}"
-  $getter install -y keypirinha
-  C:\\ProgramData\\chocolatey\\lib\\keypirinha\\tools\\Keypirinha\\keypirinha.exe
-}
-
-setup_bugn() {
-  bugnPath=("$HOME/AppData/Roaming/bug.n/Config.ini")
-  util_print bug.n
-
-  util_backUpConfig "${bugnPath[$osIndex]}"
-  util_makeSymlinkPath "$HOME/dotfiles/gui/bugn/Config.ini" "${bugnPath[$osIndex]}"
-}
-
-setup_ahk() {
-  util_print main.ahk
-  ahkPath="C:\\Users\\$USERNAME\\AppData\\Roaming\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\main.ahk"
-
-  # FIXME: Find a way to install v2 without winget
-  # choco install autohotkey -y
-  winget install AutoHotkey.AutoHotkey --source winget
-
-  rm -rf "$ahkPath"
-  util_makeSymlinkPath "$HOME/dotfiles/scripts/ahk/main.ahk" "'$ahkPath'"
-  explorer "$ahkPath"
-}
-
-setup_sublime() {
-  util_print sublime
-  sublimePath="C:\\Users\\$USERNAME\\AppData\\Roaming\\Sublime Text\\Packages"
-
-  $getter install -y sublimetext4
-  mkdir -p "$sublimePath"
-  rm -rf "$sublimePath\\User"
-  rm -rf "$sublimePath\\Theme - One Dark"
-
-  util_makeSymlinkPath "$HOME/dotfiles/gui/sublime_text/User" "'$sublimePath\\User'"
-  util_makeSymlinkPath "$HOME/dotfiles/gui/sublime_text/theme" "'$sublimePath\\Theme - One Dark'"
-}
-
-# C:\Users\hasan\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState
-setup_windowsTerminal() {
-  util_print WinTerminal
-  wtPath=("$HOME/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState")
-  # wtPathBeta=($HOME/AppData/Local/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState/settings.json)
-
-  # $getter install -y microsoft-windows-terminal # --pre
-
-  mkdir -p "${wtPath[$osIndex]}"
-  util_backUpConfig "${wtPath[$osIndex]}/settings.json"
-  util_makeSymlinkPath "$HOME/dotfiles/windows-terminal/settings.json" "${wtPath[$osIndex]}/settings.json"
-}
-
-setup_pwsh() {
-  util_print Pwsh
-  pwshPath=("$HOME/Documents/PowerShell")
-
-  $getter install pwsh -y
-
-  util_backUpConfig "${pwshPath[$osIndex]}"
-  util_makeSymlinkPath "$HOME/dotfiles/PowerShell" "${pwshPath[$osIndex]}"
-}
-
-install_and_setup_tmux() {
-  # L => ~/.tmux.conf
-  util_print tmux
-  echo 'Instlling tmux...'
-  $getter install -y tmux
-
-  if [ -f ~/.tmux.conf ]; then
-    echo 'Removing old .tmux.conf'
-    rm ~/.tmux.conf
-  fi
-
-  echo 'Creating .tmux.conf'
-  printf 'source-file ~/dotfiles/tmux/.tmux.conf' >>~/.tmux.conf
-}
-
-auto_install_everything() {
-  echo ' ** Auto Install ** '
-  mkdir -p ~/.config
-
-  if [[ "$os" == "windows" ]]; then
-    update_path "C:\\Users\\$USERNAME\\dotfiles\\.bin"
-    update_path "%LOCALAPPDATA%\Android\Sdk\platform-tools"
-    update_user_var ANDROID_HOME "${LOCALAPPDATA}\Android\Sdk"
-
+  if [[ "$OS" == "win" ]]; then
     start ms-settings:developers
-    $getter install -y brave
-    setup_pwsh
-    # setup_ahk
-    $getter install -y mingw
-    $getter install -y make
-  elif [[ "$os" == "linux" ]]; then
-    $getter install -y build-essential
-    $getter install -y ninja-build
+    mkdir -p ~/.config
+
+    update_path_var "C:\Users\\$USERNAME\dotfiles\.bin"
+    create_user_var ANDROID_HOME "$LOCALAPPDATA\Android\Sdk"
+  fi
+}
+
+# ------------------------------------------------
+# -- Setup TUI & CLI Apps ------------------------
+# ------------------------------------------------
+setup_git() {
+  declare -A conf_path
+  conf_path[win]="$HOME/.gitconfig"
+  conf_path[lin]="$HOME/.gitconfig"
+
+  heading git
+
+  archive_config "${conf_path[$OS]}"
+  create_symlink "${conf_path[$OS]}" "$HOME/dotfiles/bash/.gitconfig"
+}
+setup_bash() {
+  declare -A conf_path
+  conf_path[win]="$HOME/.bashrc"
+  conf_path[lin]="$HOME/.bashrc"
+
+  heading bash
+
+  archive_config "${conf_path[$OS]}"
+  create_symlink "${conf_path[$OS]}" "$HOME/dotfiles/bash/.bashrc"
+}
+setup_pwsh() {
+  declare -A conf_path
+  conf_path[win]="$HOME/Documents/PowerShell"
+
+  heading pwsh
+  get pwsh
+
+  archive_config "${conf_path[$OS]}"
+  create_symlink "${conf_path[$OS]}" "$HOME/dotfiles/PowerShell"
+}
+setup_nvim() {
+  declare -A conf_path
+  conf_path[win]="$HOME/AppData/Local/nvim"
+  conf_path[lin]="$HOME/.config/nvim"
+
+  heading nvim
+  get neovim
+
+  archive_config "${conf_path[$OS]}"
+  create_symlink "${conf_path[$OS]}" "$HOME/dotfiles/nvim"
+}
+setup_lazygit() {
+  declare -A conf_path
+  conf_path[win]="$HOME/AppData/Local/lazygit"
+  conf_path[lin]="$HOME/.config/lazygit"
+
+  heading lazygit
+  get lazygit
+
+  archive_config "${conf_path[$OS]}"
+  create_symlink "${conf_path[$OS]}" "$HOME/dotfiles/tui/lazygit"
+}
+setup_yazi() {
+  # TODO: Get a bookmar manager
+  declare -A conf_path
+  conf_path[win]="$HOME/AppData/Roaming/yazi"
+  conf_path[lin]="$HOME/.config/yazi"
+
+  heading yazi
+  get yazi
+
+  mkdir -p "${conf_path[$OS]}"
+  archive_config "${conf_path[$OS]}/config"
+  create_symlink "${conf_path[$OS]}/config" "$HOME/dotfiles/tui/yazi"
+}
+install_various_cli_apps() {
+  heading "Usefull CLI Apps"
+  get wget curl fd ripgrep zoxide fzf delta jq eza
+
+  if [[ "$OS" == "win" ]]; then
+    get mingw make
+
+    # htop-like system-monitor
+    get ntop btop
   fi
 
+  # Easily install prebuilt binaries from GitHub. Ex: eget junegunn/fzf
+  get eget
+
+  # Git repository summary on terminal
+  get onefetch
+  get tokei
+
+  # Display and control your Android device => https://github.com/Genymobile/scrcpy
+  # check QtScrcpy a gui for scrcpy
+  get scrcpy
+
+  # Some necessary tools
+  get tldr fastfetch
+}
+
+# ------------------------------------------------
+# -- Setup GUI Apps ------------------------------
+# ------------------------------------------------
+setup_wezterm() {
+  declare -A conf_path
+  conf_path[win]="$HOME/.config/wezterm"
+  conf_path[lin]="$HOME/.config/wezterm"
+
+  heading wezterm
+  get wezterm
+
+  archive_config "${conf_path[$OS]}"
+  create_symlink "${conf_path[$OS]}" "$HOME/dotfiles/gui/wezterm"
+}
+setup_autohotkey() {
+  if [[ "$OS" == "win" ]]; then
+    heading autohotkey
+    get autohotkey
+
+    rm -rf "$WINDOWS_STARTUP_PATH\\main.ahk"
+    create_symlink "'$WINDOWS_STARTUP_PATH\\main.ahk'" "$HOME/dotfiles/scripts/ahk/main.ahk"
+    explorer "$WINDOWS_STARTUP_PATH\\main.ahk"
+  fi
+}
+setup_sublime() {
+  declare -A conf_path
+  conf_path[win]="C:\\Users\\$USERNAME\\AppData\\Roaming\\Sublime Text\\Packages"
+  conf_path[win_scoop]="C:\\Users\\$USERNAME\\scoop\\persist\\sublime-text\\Data\\Packages"
+  # C:/Users/hasan/scoop/persist/sublime-text/Data/Packages
+
+  heading sublime
+  get sublime-text
+
+  if [[ "$HAS_SCOOP" == "true" && "$OS" == "win" ]]; then
+    mkdir -p "${conf_path[win_scoop]}"
+    rm -rf "${conf_path[win_scoop]}/User"
+    rm -rf "${conf_path[win_scoop]}/Theme - One Dark"
+
+    create_symlink "${conf_path[win_scoop]}\\User" "$HOME/dotfiles/gui/sublime_text/User"
+    create_symlink "'${conf_path[win_scoop]}\\Theme - One Dark'" "$HOME/dotfiles/gui/sublime_text/theme"
+  # elif [[ "$OS" == "win" ]]; then
+  #   mkdir -p "${conf_path[$OS]}"
+  #   rm -rf "${conf_path[$OS]}/User"
+  #   rm -rf "${conf_path[$OS]}/Theme - One Dark"
+
+  #   create_symlink "'${conf_path[$OS]}/User'" "$HOME/dotfiles/gui/sublime_text/User"
+  #   create_symlink "'${conf_path[$OS]}/Theme - One Dark'" "$HOME/dotfiles/gui/sublime_text/theme"
+  fi
+
+  info "ctrl+shift+p => And install package controll"
+}
+install_various_gui_apps() {
+  heading "Usefull GUI Apps"
+
+  if [[ "$OS" == "win" ]]; then
+    # A utility that manages a Registry key that allows Windows to remap one key to any other key.
+    # get sharpkeys
+
+    # FIXME: riot
+    get obsidian potplayer quicklook googlechrome qbittorrent instant-eyedropper brave
+  fi
+}
+
+# ------------------------------------------------
+# -- Language setups -----------------------------
+# ------------------------------------------------
+setup_node() {
+  heading nodejs
+
+  # fnm a Cross-platform Node.js version switcher
+  get fnm
+  fnm install lts-latest
+  fnm use lts-latest
+
+  info "Installing useful global npm packages..."
+  npm install -g yarn trash-cli live-server
+  # To auto channge node env use "fnm env --use-on-cd | Out-String | Invoke-Expression" to your powershell profile.
+  # For example, if a project has .nvmrc or .node-version, fnm will detect and activate that version.
+}
+setup_rust() {
+  heading rust
+  get rust
+}
+setup_python() {
+  heading python
+  get python
+}
+
+# kanata tig lf alacritty windowsTerminal keypirinha
+main() {
+  init_setup
+
+  # CLI & TUI Apps
+  setup_git
   setup_bash
-  setup_wezterm
+  install_various_cli_apps
   setup_nvim
+  setup_yazi
+  setup_lazygit
+  setup_pwsh
+
+  # GUI Apps
+  setup_wezterm
+  setup_autohotkey
+  setup_sublime
+  install_various_gui_apps
+
+  # Language
   setup_node
   setup_rust
   setup_python
-  setup_kanata
-  # setup_alacritty
-  setup_lazygit
-  setup_lf
-  setup_yazi
-  # setup_tig
-  # setup_git_defaults
-  install_various_apps
 }
 
-main() {
-  util_setup_figlet
-  auto_install_everything
-
-  util_print done.
-}
-
-# Run installer
 main

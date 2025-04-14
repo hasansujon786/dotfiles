@@ -23,6 +23,7 @@ return {
         'javascript',
         'typescript',
         'tsx',
+        'powershell'
       }
 
       require('nvim-treesitter.configs').setup({
