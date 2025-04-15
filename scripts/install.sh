@@ -339,7 +339,7 @@ install_various_gui_apps() {
 
   if [[ "$OS" == "win" ]]; then
     # A utility that manages a Registry key that allows Windows to remap one key to any other key.
-    # get sharpkeys
+    get sharpkeys
 
     # FIXME: riot
     get obsidian potplayer quicklook instant-eyedropper

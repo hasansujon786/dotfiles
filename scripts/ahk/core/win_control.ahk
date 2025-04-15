@@ -117,6 +117,24 @@ alternateTab() {
   Send("{tab}")
   Send("{alt up}")
 }
+ih := InputHook("B L1 T1", "{Esc}")
+ctrlAndAltTab() {
+	ih.Start()
+	reason := ih.Wait()
+	if (reason = "Stopped") {
+		; Send "{Esc}"
+    alternateTab()
+	} else if (reason = "Max") {
+		Send "{Blind}{Ctrl down}" ih.Input
+	}
+}
+ctrlAndAltTabStop() {
+	if (ih.InProgress) {
+		ih.Stop()
+	} else {
+		Send "{Ctrl up}"
+	}
+}
 ; Extracts the application title from the window's full title
 ExtractAppTitle(FullTitle) {
   return SubStr(FullTitle, (InStr(FullTitle, " ", false, -2) + 1)<1 ? (InStr(FullTitle, " ", false, -2) + 1)-1 : (InStr(FullTitle, " ", false, -2) + 1))

@@ -40,26 +40,8 @@ PrintScreen::Send("#+{s}")
 #q::toggleBluetooth()
 #s::showVolMixerTabbar()
 #^+v::showMicPanel()
-#;::SendInput("{AppsKey}")
+!;::SendInput("{AppsKey}")
 #k::toggleKanata()
-ih := InputHook("B L1 T1", "{Esc}")
-*CapsLock::{
-	ih.Start()
-	reason := ih.Wait()
-	if (reason = "Stopped") {
-		; Send "{Esc}"
-    alternateTab()
-	} else if (reason = "Max") {
-		Send "{Blind}{Ctrl down}" ih.Input
-	}
-}
-*CapsLock up::{
-	if (ih.InProgress) {
-		ih.Stop()
-	} else {
-		Send "{Ctrl up}"
-	}
-}
 ; Transparency toggle,
 #^/::toggleTransparency()
 #^.::increaseTransparency()
@@ -100,11 +82,16 @@ ih := InputHook("B L1 T1", "{Esc}")
 
 #InputLevel 1
 !\::Send("\")
-\::alternateTab()
++\::Send("|")
+; \::alternateTab()
 ; *Capslock::alternateTab()
 !`::switchBetweenSameApps()
 #\::toggleCapsLosck()
 #Capslock::toggleCapsLosck()
+*\::ctrlAndAltTab()
+*\ up::ctrlAndAltTabStop()
+*Capslock::ctrlAndAltTab()
+*Capslock up::ctrlAndAltTabStop()
 
 ^#m::Send("#{m}")
 #m::WinMinimize("a")
