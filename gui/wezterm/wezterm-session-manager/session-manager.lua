@@ -323,8 +323,6 @@ function session_manager.load_state(window, pane)
           wezterm.log_info('Cancelled')
           return
         end
-
-        -- TODO: create a new workspace
         local workspace_name = label
         local file_path = id
 

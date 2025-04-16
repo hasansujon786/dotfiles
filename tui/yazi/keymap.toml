@@ -15,6 +15,7 @@ append_keymap = [
   { on = ["g", "m"], run = "cd ~/Music", desc = "Music" },
   { on = ["g", "c"], run = "cd ~/Documents", desc = "Documents" },
   { on = ["g", "r"], run = "cd D:/repoes", desc = "repoes" },
+  { on = ["g", "-"], run = "plugin git-root", desc = "Jump to git root" },
 
   { on = ["g", "a", "n"], run = "cd ~/AppData/Local/nvim-data/", desc = "Nvim data" },
   { on = ["g", "a", "l"], run = "cd ~/AppData/Local", desc = "AppData/Local" },
@@ -50,9 +51,8 @@ append_keymap = [
 ]
 
 prepend_keymap = [
-  { on = ["<Space>"], run = "plugin --sync quicklook", desc = "Peek" },
-  { on = ["i"], run = "plugin --sync quicklook", desc = "Peek" },
-  { on = ["M"], run = "plugin --sync max-preview", desc = "Toggle Maximize" },
+  { on = ["<Space>"], run = "plugin quicklook", desc = "Peek" },
+  { on = ["i"], run = "plugin quicklook", desc = "Peek" },
   { on = ["f"], run = "plugin jump-to-char", desc = "Jump to char" },
   { on = ["t"], run = "plugin fzf", desc = "Jump to a directory, or reveal a file using fzf" },
   # { on = ["m", "p"], run = 'shell "C:/Users/hasan/AppData/Local/Programs/QuickLook/QuickLook.exe %0" --confirm', desc = "QuickLook" },
@@ -66,7 +66,6 @@ prepend_keymap = [
   { on = ["m", "x"], run = 'shell "bash ~/dotfiles/tui/yazi/scripts/share-code-file.bash %0" --confirm --block', desc = "Share file with https://0x0.st" },
 
   # Goto drive
-  { on = ["-"], run = "plugin git-root", desc = "Jump to git root" },
   { on = [".", "c"], run = "cd C:/", desc = "windows (c:)" },
   { on = [".", "d"], run = "cd D:/", desc = "videos (d:)" },
   { on = [".", "e"], run = "cd E:/", desc = "hasan (e:)" },
