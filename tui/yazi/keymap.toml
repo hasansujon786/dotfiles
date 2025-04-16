@@ -51,8 +51,8 @@ append_keymap = [
 ]
 
 prepend_keymap = [
-  { on = ["<Space>"], run = "plugin quicklook", desc = "Peek" },
-  { on = ["i"], run = "plugin quicklook", desc = "Peek" },
+  { on = ["<Space>"], run = """shell 'C:/Users/hasan/dotfiles/tui/yazi/scripts/quicklook.cmd "%0"' --confirm --orphan""", desc = "Peek" },
+  { on = ["i"], run = """shell 'C:/Users/hasan/dotfiles/tui/yazi/scripts/quicklook.cmd "%0"' --confirm --orphan""", desc = "Peek" },
   { on = ["f"], run = "plugin jump-to-char", desc = "Jump to char" },
   { on = ["t"], run = "plugin fzf", desc = "Jump to a directory, or reveal a file using fzf" },
   # { on = ["m", "p"], run = 'shell "C:/Users/hasan/AppData/Local/Programs/QuickLook/QuickLook.exe %0" --confirm', desc = "QuickLook" },
