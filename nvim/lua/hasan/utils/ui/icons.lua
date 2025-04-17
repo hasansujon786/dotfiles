@@ -327,7 +327,8 @@ local codicons = {
     Table         = '',
   },
   documents = {
-    File               = '',
+    File               = '',
+    FileText           = '',
     FileEmpty          = '',
     Files              = '',
     FolderOpen         = '󰝰',

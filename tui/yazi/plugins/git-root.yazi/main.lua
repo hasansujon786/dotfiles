@@ -16,7 +16,7 @@ local M = {
     if target == '' or target == nil then
       return fail('`git` has not found any target')
     end
-    ya.manager_emit('cd', { target })
+    ya.mgr_emit('cd', { target })
   end,
 }
 
