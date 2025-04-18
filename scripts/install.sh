@@ -257,6 +257,38 @@ setup_yazi() {
   archive_config "${conf_path[$OS]}/config"
   create_symlink "${conf_path[$OS]}/config" "$HOME/dotfiles/tui/yazi"
 }
+setup_autohotkey() {
+  if [[ "$OS" == "win" ]]; then
+    heading autohotkey
+    get autohotkey
+
+    rm -rf "$WINDOWS_STARTUP_PATH\\main.ahk"
+    create_symlink "'$WINDOWS_STARTUP_PATH\\main.ahk'" "$HOME/dotfiles/scripts/ahk/main.ahk"
+    explorer "$WINDOWS_STARTUP_PATH\\main.ahk"
+  fi
+}
+setup_kanata() {
+  if [[ "$OS" == "win" ]]; then
+    declare -A conf_path
+    conf_path[win]="$HOME/AppData/Roaming/kanata-tray"
+    conf_path[lin]="$HOME/.config/kanata-tray"
+
+    heading kanata
+    get kanata
+
+    archive_config "${conf_path[$OS]}"
+    create_symlink "${conf_path[$OS]}" "$HOME/dotfiles/scripts/kanata/kanata-tray"
+
+    rm -rf "$WINDOWS_STARTUP_PATH\\kanata-tray.exe"
+
+    local KANATA_TRAY_VER="0.6.0"
+    wget https://github.com/rszyma/kanata-tray/releases/download/v${KANATA_TRAY_VER}/kanata-tray.exe
+    mv kanata-tray.exe "$WINDOWS_STARTUP_PATH"
+
+    sleep 0.5
+    explorer "${WINDOWS_STARTUP_PATH}\\kanata-tray.exe"
+  fi
+}
 install_various_cli_apps() {
   heading "Usefull CLI Apps"
   get wget curl fd ripgrep zoxide fzf delta jq eza
@@ -297,16 +329,6 @@ setup_wezterm() {
   archive_config "${conf_path[$OS]}"
   create_symlink "${conf_path[$OS]}" "$HOME/dotfiles/gui/wezterm"
 }
-setup_autohotkey() {
-  if [[ "$OS" == "win" ]]; then
-    heading autohotkey
-    get autohotkey
-
-    rm -rf "$WINDOWS_STARTUP_PATH\\main.ahk"
-    create_symlink "'$WINDOWS_STARTUP_PATH\\main.ahk'" "$HOME/dotfiles/scripts/ahk/main.ahk"
-    explorer "$WINDOWS_STARTUP_PATH\\main.ahk"
-  fi
-}
 setup_sublime() {
   declare -A conf_path
   conf_path[win]="C:\\Users\\$USERNAME\\AppData\\Roaming\\Sublime Text\\Packages"
@@ -332,7 +354,7 @@ setup_sublime() {
   #   create_symlink "'${conf_path[$OS]}/Theme - One Dark'" "$HOME/dotfiles/gui/sublime_text/theme"
   fi
 
-  info "ctrl+shift+p => And install package controll"
+  info "Tip: Press ctrl+shift+p => And install package controll"
 }
 install_various_gui_apps() {
   heading "Usefull GUI Apps"
@@ -381,13 +403,14 @@ main() {
   setup_bash
   install_various_cli_apps
   setup_nvim
+  setup_autohotkey
   setup_yazi
   setup_lazygit
   setup_pwsh
+  setup_kanata
 
   # GUI Apps
   setup_wezterm
-  setup_autohotkey
   setup_sublime
   install_various_gui_apps
 
