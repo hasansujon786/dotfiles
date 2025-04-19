@@ -2,6 +2,9 @@ return {
   'neovim/nvim-lspconfig',
   lazy = true,
   event = { 'BufReadPre', 'BufNewFile' },
+  config = function()
+    require('lspconfig').autohotkey_lsp.setup(require('config.lsp.util.setup').get_setup_opts('autohotkey_lsp'))
+  end,
   dependencies = {
     { 'williamboman/mason-lspconfig.nvim', lazy = true, module = 'mason-lspconfig' },
     {

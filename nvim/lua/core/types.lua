@@ -30,7 +30,9 @@
 ---@alias state.Lsp.Linter { [string]: string[] }
 
 ---@class state.Lsp
----@field formatters_by_ft state.Lsp.FormatterConfig[]
 ---@field essential_servers {lsp_name: string[]}
 ---@field extra_tools string[]
+---@field default_opts table
 ---@field linters_by_ft state.Lsp.Linter
+---@field formatters_by_ft state.Lsp.FormatterConfig[]
+---@field diagnosgic table

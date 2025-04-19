@@ -8,7 +8,7 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 #Include %A_ScriptDir%\core\utils.ahk
 #Include %A_ScriptDir%\core\win_layout.ahk
 #Include %A_ScriptDir%\core\win_control.ahk
-#Include %A_ScriptDir%\core\vert_desktop.ahk
+; #Include %A_ScriptDir%\core\vert_desktop.ahk
 #Include %A_ScriptDir%\core\vim_explorer.ahk
 #Include %A_ScriptDir%\core\automation_mode.ahk
 #Include %A_ScriptDir%\leader.ahk
