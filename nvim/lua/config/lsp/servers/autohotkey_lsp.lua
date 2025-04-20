@@ -6,7 +6,7 @@ return {
   opts = {
     cmd = {
       'node',
-      vim.fn.expand(vim.fn.stdpath('data') .. '/vscode-autohotkey2-lsp/server/dist/server.js'),
+      vim.fn.expand(vim.fn.stdpath('data') .. '/packages/vscode-autohotkey2-lsp/server/dist/server.js'),
       '--stdio',
     },
     filetypes = { 'ahk', 'autohotkey', 'ah2' },

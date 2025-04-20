@@ -4,13 +4,6 @@
 set -euo pipefail
 
 # ------------------------------------------------
-# -- Config paths --------------------------------
-# ------------------------------------------------
-DOTFILES="$HOME/dotfiles"
-WINDOWS_STARTUP_PATH="C:\\Users\\${USERNAME}\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"
-NVIM_CONFIG="$HOME/AppData/Local/nvim"
-
-# ------------------------------------------------
 # -- Utils fucntios ------------------------------
 # ------------------------------------------------
 # Colored output for readability
@@ -158,6 +151,14 @@ if [[ "$OS" == 'Unknown' ]]; then
   exit 1
 fi
 
+# ------------------------------------------------
+# -- Config paths --------------------------------
+# ------------------------------------------------
+DOTFILES="$HOME/dotfiles"
+WINDOWS_STARTUP_DIR="C:\\Users\\${USERNAME}\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"
+NVIM_CONFIG_DIR="$HOME/AppData/Local/nvim"
+NVIM_PACKAGES_DIR="$HOME/AppData/Local/nvim-data/packages"
+
 # Install scoop with powershell => Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force; iwr -useb get.scoop.sh | iex
 # Check if Scoop is installed
 HAS_SCOOP=false
@@ -262,9 +263,9 @@ setup_autohotkey() {
     heading autohotkey
     get autohotkey
 
-    rm -rf "$WINDOWS_STARTUP_PATH\\main.ahk"
-    create_symlink "'$WINDOWS_STARTUP_PATH\\main.ahk'" "$HOME/dotfiles/scripts/ahk/main.ahk"
-    explorer "$WINDOWS_STARTUP_PATH\\main.ahk"
+    rm -rf "$WINDOWS_STARTUP_DIR\\main.ahk"
+    create_symlink "'$WINDOWS_STARTUP_DIR\\main.ahk'" "$HOME/dotfiles/scripts/ahk/main.ahk"
+    explorer "$WINDOWS_STARTUP_DIR\\main.ahk"
   fi
 }
 setup_kanata() {
@@ -279,14 +280,14 @@ setup_kanata() {
     archive_config "${conf_path[$OS]}"
     create_symlink "${conf_path[$OS]}" "$HOME/dotfiles/scripts/kanata/kanata-tray"
 
-    rm -rf "$WINDOWS_STARTUP_PATH\\kanata-tray.exe"
+    rm -rf "$WINDOWS_STARTUP_DIR\\kanata-tray.exe"
 
     local KANATA_TRAY_VER="0.6.0"
     wget https://github.com/rszyma/kanata-tray/releases/download/v${KANATA_TRAY_VER}/kanata-tray.exe
-    mv kanata-tray.exe "$WINDOWS_STARTUP_PATH"
+    mv kanata-tray.exe "$WINDOWS_STARTUP_DIR"
 
     sleep 0.5
-    explorer "${WINDOWS_STARTUP_PATH}\\kanata-tray.exe"
+    explorer "${WINDOWS_STARTUP_DIR}\\kanata-tray.exe"
   fi
 }
 install_various_cli_apps() {
@@ -401,6 +402,7 @@ main() {
   # CLI & TUI Apps
   setup_git
   setup_bash
+  setup_node # install before cause some installation can be depend on node
   install_various_cli_apps
   setup_nvim
   setup_autohotkey
@@ -415,7 +417,6 @@ main() {
   install_various_gui_apps
 
   # Language
-  setup_node
   setup_rust
   setup_python
 }

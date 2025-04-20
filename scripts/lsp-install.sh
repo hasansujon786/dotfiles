@@ -1,112 +1,116 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -e
+# Exit immediately if a command fails
+set -euo pipefail
 
-input=$1
-case "${input}" in
-  win)     machineCode=0;;
-  lin)     machineCode=1;;
-  ter)     machineCode=2;;
-    *)     machineCode=3
-esac
+# ------------------------------------------------
+# -- Utils fucntios ------------------------------
+# ------------------------------------------------
+# Colored output for readability
+info() { echo -e "\033[1;34m[INFO]\033[0m $*"; }
+success() { echo -e "\033[1;32m[SUCCESS]\033[0m $*"; }
+error() { echo -e "\033[1;31m[ERROR]\033[0m $*" >&2; }
 
-if [[ $machineCode -eq 3 ]]; then
-  echo "error: The following required arguments were not provided:"
-  echo "USAGE:
+trap 'error "Something went wrong. Exiting."' ERR
 
-  ./lsp-install [OS Name] (win/lin/ter)
+detect_os() {
+  case "$(uname -s)" in
+  MINGW* | MSYS* | CYGWIN*)
+    OS="win"
+    SYSTEM="Windows"
+    PACKAGE_MANAGER="scoop"
+    ;;
+  # Linux*)
+  #   OS="lin"
+  #   SYSTEM="Linux"
+  #   PACKAGE_MANAGER="apt"
+  #   ;;
+  # Darwin*)
+  #   OS="mac"
+  #   SYSTEM="macOS"
+  #   PACKAGE_MANAGER="brew"
+  #   ;;
+  *)
+    OS="Unknown"
+    SYSTEM="Unknown"
+    PACKAGE_MANAGER="none"
+    ;;
+  esac
 
-    win: windows
-    lin: linux
-    ter: termux"
+  echo "      _       _         __ _ _"
+  echo "   __| | ___ | |_      / _(_) | ___  ___"
+  echo "  / _\` |/ _ \| __|____| |_| | |/ _ \/ __|"
+  echo " | (_| | (_) | ||_____|  _| | |  __/\__ \\"
+  echo "  \__,_|\___/ \__|    |_| |_|_|\___||___/"
+  echo ""
+  echo -e "  \033[1;34mSystem:\033[0m ${SYSTEM} (${OS})"
+  echo -e "  \033[1;34mPackage manager:\033[0m ${PACKAGE_MANAGER}"
+  echo ""
+}
+detect_os
+
+# Exit if it isn't one of the supported system
+if [[ "$OS" == 'Unknown' ]]; then
+  error "System $(uname -s) is not supported"
   exit 1
-else
-  case "${input}" in
-    win)  machine=windows;;
-    lin)  machine=linux;;
-    ter)  machine=termux;;
-    *)    machine=linux
-  esac
-
-  case "${input}" in
-    win)  getter=choco;;
-    lin)  getter='sudo apt';;
-    ter)  getter=apt;;
-    *)    getter=apt
-  esac
-
-  echo \ System: ${machine}
-  echo \ Package manager: ${getter}
-  echo \ code: ${machineCode}
 fi
 
-###### utils ######
-util_backUpConfig() {
-  if [ -d $1 ]; then
-    echo 'Removing old directory.'
-    mv $1 "$1.bak.$(date +%Y.%m.%d-%H.%M.%S)"
-  elif [ -f $1 ]; then
-    echo 'Removing old file.'
-    mv $1 "$1.bak.$(date +%Y.%m.%d-%H.%M.%S)"
-  fi
-}
-util_makeSymlinkPath() {
-  # $1 = actual path (from)
-  # $2 = symlink path (to)
-  if [[ "$machine" == "windows" ]]; then
-    powershell New-Item -ItemType SymbolicLink -Path "$2" -Target "$1"
-  else
-    ln -s $1 $2
-  fi
-}
+# ------------------------------------------------
+# -- Config paths --------------------------------
+# ------------------------------------------------
+DOTFILES="$HOME/dotfiles"
+NVIM_CONFIG_DIR="$HOME/AppData/Local/nvim"
+NVIM_PACKAGES_DIR="$HOME/AppData/Local/nvim-data/packages"
 
-if [[ "$machine" == "windows" ]]; then
-  localServerPath=~/AppData/**
-else
-  localServerPath=/home/hasan/.local/share/nvim/lsp-servers
+# Check if dotfiles config exists
+if [ ! -d "$DOTFILES" ]; then
+  error "Config directory $DOTFILES does not exist."
+  exit 1
 fi
-mkdir -p $localServerPath
 
-###### setup functions ######
-setup_tsserver() {
-  if [[ "$machine" == "windows" ]]; then
-    npm install -g typescript typescript-language-server
-  else
-    sudo npm install -g typescript typescript-language-server
-  fi
+mkdir -p "$NVIM_PACKAGES_DIR"
+
+# # dart
+# cd C:\\Users\\$USERNAME\\AppData\\Local\\nvim-data\\dap_adapters\\
+# export DART_CODE_VER="3.56.0"
+# curl -O -J -L https://codeload.github.com/Dart-Code/Dart-Code/zip/refs/tags/v${DART_CODE_VER}
+# unzip Dart-Code-${DART_CODE_VER}.zip && mv Dart-Code-${DART_CODE_VER} Dart-Code && cd Dart-Code
+# npm install && npm run build
+# cd .. && rm Dart-Code-${DART_CODE_VER}.zip
+#
+
+vscode-js-debug() {
+  info "Installing vscode-js-debug..."
+  export VSCODE_JS_VER="1.85.0"
+
+  cd "$NVIM_PACKAGES_DIR" || exit
+  rm -rf vscode-js-debug
+
+  curl -O -J -L https://codeload.github.com/microsoft/vscode-js-debug/zip/refs/tags/v${VSCODE_JS_VER}
+  unzip vscode-js-debug-${VSCODE_JS_VER}.zip && mv vscode-js-debug-${VSCODE_JS_VER} vscode-js-debug && cd vscode-js-debug || exit
+  npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out
+  cd .. && rm vscode-js-debug-${VSCODE_JS_VER}.zip
+
+  success "vscode-js-debug installed successfully"
 }
 
-setup_tailwindcss-ls() {
-  tw_path=$localServerPath/tailwindcss-ls
-  mkdir -p $tw_path
-  cd $tw_path
-  curl -L -o tailwindcss-intellisense.vsix https://github.com/tailwindlabs/tailwindcss-intellisense/releases/download/v0.6.13/vscode-tailwindcss-0.6.13.vsix
-  unzip tailwindcss-intellisense.vsix -d tailwindcss-intellisense
-  echo "#\!/usr/bin/env node\n$(cat tailwindcss-intellisense/extension/dist/server/tailwindServer.js)" > tailwindcss-language-server
-  chmod +x tailwindcss-language-server
+autohotkey2() {
+  info "Installing vscode-autohotkey2-lsp..."
+
+  cd "$NVIM_PACKAGES_DIR" || exit
+  rm -rf vscode-autohotkey2-lsp
+  mkdir -p vscode-autohotkey2-lsp
+
+  cd vscode-autohotkey2-lsp || exit
+  curl -fsLo install.js https://raw.githubusercontent.com/thqby/vscode-autohotkey2-lsp/main/tools/install.js
+  node install.js
+
+  success "vscode-autohotkey2-lsp installed successfully"
 }
 
-# sudo apt install ninja-build
-setup_sumneko_lua() {
-  lua_path=$localServerPath/sumneko_lua
-  mkdir -p $lua_path
-  cd $lua_path
-
-  # clone project
-  git clone https://github.com/sumneko/lua-language-server
-  cd lua-language-server
-  git submodule update --init --recursive
-  cd 3rd/luamake
-  compile/install.sh
-  cd ../..
-  ./3rd/luamake/luamake rebuild
+main() {
+  # autohotkey2
+  vscode-js-debug
 }
 
-$getter install build-essential
-$getter install ninja-build
-
-setup_tsserver
-setup_tailwindcss-ls
-setup_sumneko_lua
-
-
+main
