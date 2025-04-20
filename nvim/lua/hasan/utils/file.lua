@@ -214,16 +214,18 @@ function M.quickLook(args)
   local bg_job = nil
   qlook.args = args
 
-  bg_job = require('plenary.job'):new({
-    command = 'C:\\Users\\hasan\\AppData\\Local\\Programs\\QuickLook\\QuickLook.exe',
-    args = args,
-    -- cwd = vim.loop.cwd(),
-  })
+  local quicklook_path = vim.fn.exepath('quicklook.exe')
+  if quicklook_path == '' then
+    vim.notify('QuickLook is not found in the system', 'error', { title = 'QuickLook' })
+    return
+  end
+
+  bg_job = require('plenary.job'):new({ command = quicklook_path, args = args })
   bg_job:start()
 
   bg_job:after_failure(vim.schedule_wrap(function(_)
     bg_job = nil
-    vim.notify('There someting went wrong while opening QuickLook', vim.log.levels.WARN)
+    vim.notify('There someting went wrong while opening QuickLook', vim.log.levels.WARN, { title = 'QuickLook' })
   end))
 
   bg_job:after_success(vim.schedule_wrap(function(_)
@@ -232,13 +234,13 @@ function M.quickLook(args)
 
   if not qlook.map_added then
     keymap('n', '<leader>vh', function()
-      M.quickLook_close()
+      M.quickLook_toggle()
     end, { desc = 'Toggle quickLook' })
     qlook.map_added = true
   end
 end
 
-function M.quickLook_close()
+function M.quickLook_toggle()
   M.quickLook(qlook.args)
 end
 

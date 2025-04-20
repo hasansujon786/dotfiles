@@ -2,7 +2,7 @@
 ; Custom layout
 ;******************************************************************************
 
-Global TASKBAR_HEIGHT := 40
+Global TASKBAR_HEIGHT := 0 ;; 40
 
 ; "wt.exe", "ahk_exe WindowsTerminal.exe" ; "Code.exe", "ahk_exe Code.exe"
 EDITOR_EXE := ["wezterm-gui.exe", "ahk_exe wezterm-gui.exe"]
@@ -70,7 +70,7 @@ runLayoutAction(EXE_FULL, EXE, side) {
       WinMaximize("A")
     } else if (side == "maximized_custom") {
       ;           ↓ here 0 hides the video behind the window
-      WinMove(-8, 1, A_ScreenWidth + 16, A_ScreenHeight - TASKBAR_HEIGHT, "A")
+      WinMove(-8, 1, A_ScreenWidth + 16, A_ScreenHeight + 8 - TASKBAR_HEIGHT, "A")
       ; WinMove(, , A_ScreenWidth + 8, A_ScreenHeight - 36, "A")
       ; centerCurrentWindow()
     } else {
