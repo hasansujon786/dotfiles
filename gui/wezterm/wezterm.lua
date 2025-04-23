@@ -67,7 +67,7 @@ return {
   -- exit_behavior = 'Close',
   -- window_close_confirmation = 'NeverPrompt',
   enable_tab_bar = true,
-  leader = { key = 'b', mods = 'CTRL', timeout_milliseconds = 1000 },
+  leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 },
   window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
   pane_focus_follows_mouse = false,
   inactive_pane_hsb = { brightness = 0.8 },

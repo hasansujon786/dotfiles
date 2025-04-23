@@ -55,10 +55,8 @@ return {
     { key = ']', mods = 'ALT', action = act({ ActivateTabRelative = 1 }) },
     { key = '{', mods = 'SHIFT|ALT', action = act({ MoveTabRelative = -1 }) },
     { key = '}', mods = 'SHIFT|ALT', action = act({ MoveTabRelative = 1 }) },
-    { key = '{', mods = 'SHIFT|CTRL', action = act({ SwitchWorkspaceRelative = -1 }) },
-    { key = '}', mods = 'SHIFT|CTRL', action = act({ SwitchWorkspaceRelative = 1 }) },
-    { key = '<', mods = 'SHIFT|CTRL', action = act({ SwitchWorkspaceRelative = -1 }) },
-    { key = '>', mods = 'SHIFT|CTRL', action = act({ SwitchWorkspaceRelative = 1 }) },
+    { key = 'Tab', mods = 'SHIFT|CTRL', action = act({ SwitchWorkspaceRelative = -1 }) },
+    { key = 'Tab', mods = 'CTRL', action = act({ SwitchWorkspaceRelative = 1 }) },
     -- tmux style key bindings
     { key = 'c', mods = 'LEADER', action = act({ SpawnTab = 'CurrentPaneDomain' }) },
     { key = 'x', mods = 'LEADER', action = act({ CloseCurrentPane = { confirm = false } }) },
@@ -120,7 +118,7 @@ return {
     { key = 'r', mods = 'LEADER|CTRL', action = act({ EmitEvent = 'restore-session' }) },
     { key = 'l', mods = 'LEADER|CTRL', action = act({ EmitEvent = 'load-session' }) },
     { key = 'f', mods = 'LEADER|CTRL', action = act({ EmitEvent = 'sessionizer-find-repoes' }) },
-    { key = 'b', mods = 'LEADER|CTRL', action = act.ShowLauncherArgs({ flags = 'WORKSPACES' }) },
+    { key = 'a', mods = 'LEADER|CTRL', action = act.ShowLauncherArgs({ flags = 'WORKSPACES' }) },
 
     -- Custom inputs
     { key = ' ', mods = 'CTRL', action = { SendString = '\x11' } },

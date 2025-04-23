@@ -233,6 +233,7 @@ local function set_custom_highlights()
     NeoTreeFileIcon      = { fg = c.muted },
     NeoTreeFloatBorder   = { bg = float_bg, fg = c.cyan },
     NeoTreeFloatTitle    = { link = 'FloatBorderTitle' },
+    NeoTreeTitleBar      = { link = 'FloatBorderTitle' },
     NeoTreeModified      = { link = 'String' },
     NeoTreeMessage       = { link = 'Comment' },
     NeoTreeDimText       = { link = 'Comment' },

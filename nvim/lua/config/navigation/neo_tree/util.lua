@@ -58,6 +58,11 @@ function M.open_vinegar()
   else
     vim.cmd([[Neotree filesystem position=current]])
   end
+
+  -- if vim.o.filetype == 'neo-tree' then
+  --   vim.o.relativenumber = true
+  --   vim.o.number = true
+  -- end
 end
 
 function M.edit_alternate_file()

@@ -14,15 +14,13 @@ return {
       desc = 'NeoTree: Toggle sidebar',
     },
     { '-', '<cmd>lua require("config.navigation.neo_tree.util").open_vinegar()<CR>', desc = 'NeoTree: Open vinegar' },
+    { '<leader>oj', '<cmd>lua require("config.navigation.neo_tree.util").open_vinegar()<CR>', desc = 'NeoTree: Open vinegar' },
   },
   config = function()
-    keymap(
-      'n',
-      '<bs>',
-      '<cmd>lua require("config.navigation.neo_tree.util").edit_alternate_file()<CR>',
-      { desc = 'Edit alternate file' }
-    )
+    keymap('n', '<bs>', '<cmd>lua require("config.navigation.neo_tree.util").edit_alternate_file()<CR>', { desc = 'Edit alternate file' })
 
+    ---@module "neo-tree"
+    ---@type neotree.Config
     local opts = {
       -- see `:h neo-tree-custom-commands-global`
       -- A list of functions, each representing a global custom command
@@ -32,7 +30,7 @@ return {
       source_selector = require('config.navigation.neo_tree.other').source_selector,
       event_handlers = require('config.navigation.neo_tree.other').event_handlers,
       close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
-      popup_border_style = require('core.state').ui.hover.border,
+      popup_border_style = { '', '█', '', '▕', '', '▔', '', '▏' },
       enable_git_status = true,
       enable_diagnostics = false,
       open_files_do_not_replace_types = { 'terminal', 'trouble', 'qf' }, -- when opening files, do not use windows containing these filetypes or buftypes

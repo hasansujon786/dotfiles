@@ -37,6 +37,15 @@ local M = {
         end
       end,
     },
+    {
+      event = events.NEO_TREE_POPUP_BUFFER_ENTER,
+      handler = function()
+        local buffer = vim.api.nvim_get_current_buf()
+        vim.keymap.set('i', '<Esc>', function()
+          return '<C-u><Cr>'
+        end, { buffer = buffer, expr = true, noremap = true, desc = 'Close popup' })
+      end,
+    },
     { event = events.FILE_MOVED, handler = on_move },
     { event = events.FILE_RENAMED, handler = on_move },
   },
