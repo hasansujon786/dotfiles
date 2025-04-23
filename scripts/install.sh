@@ -365,7 +365,7 @@ install_various_gui_apps() {
     get sharpkeys
 
     # FIXME: riot
-    get obsidian potplayer quicklook instant-eyedropper
+    get obsidian potplayer quicklook instant-eyedropper localsend
     get googlechrome brave abdownloadmanager qbittorrent
   fi
 }

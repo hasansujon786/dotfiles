@@ -27,7 +27,7 @@ winCloseByTitle(title) {
     WinClose(title)
   }
 }
-winToggleRestore() {
+toggleWinMaximize() {
   ; WinGet WindowID, ID, A
   ; WinGet WindowSize, MinMax, ahk_id %WindowID%
   MX := WinGetMinMax("A")
@@ -35,6 +35,15 @@ winToggleRestore() {
     WinRestore("A")
   } else {
     WinMaximize("A")
+  }
+}
+toggleWinMinimize() {
+  hwnd := WinExist("A") ; Get the handle of the active window
+  if (WinGetMinMax(hwnd) == -1) {
+    ; -1 means the window is minimized
+    WinRestore(hwnd)
+  } else {
+    WinMinimize(hwnd)
   }
 }
 toggleTransparency() {
@@ -223,9 +232,8 @@ moveWindowX_and_Y(x, y){
   WinMove(x, y, , , "A")
   ; mousemove, %mx%, %my%, 0
 }
-centerCurrentWindow() {
+centerCurrentWindow(win_title := WinGetTitle("A")) {
   try {
-    win_title := WinGetTitle("A")
     WinGetPos(, , &win_width, &win_height, win_title)
 
     targetX := (A_ScreenWidth/2) - (win_width/2)

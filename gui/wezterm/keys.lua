@@ -55,8 +55,8 @@ return {
     { key = ']', mods = 'ALT', action = act({ ActivateTabRelative = 1 }) },
     { key = '{', mods = 'SHIFT|ALT', action = act({ MoveTabRelative = -1 }) },
     { key = '}', mods = 'SHIFT|ALT', action = act({ MoveTabRelative = 1 }) },
-    { key = 'Tab', mods = 'SHIFT|CTRL', action = act({ SwitchWorkspaceRelative = -1 }) },
-    { key = 'Tab', mods = 'CTRL', action = act({ SwitchWorkspaceRelative = 1 }) },
+    { key = '[', mods = 'CTRL', action = act({ SwitchWorkspaceRelative = -1 }) },
+    { key = ']', mods = 'CTRL', action = act({ SwitchWorkspaceRelative = 1 }) },
     -- tmux style key bindings
     { key = 'c', mods = 'LEADER', action = act({ SpawnTab = 'CurrentPaneDomain' }) },
     { key = 'x', mods = 'LEADER', action = act({ CloseCurrentPane = { confirm = false } }) },

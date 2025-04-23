@@ -26,35 +26,44 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 }
 ^f5::Suspend(-1)
 
+;******************************************************************************
+; Keymaps
+;******************************************************************************
 PgUp::Home
 PgDn::End
 +PgUp::PgUp
 +PgDn::PgDn
-!Backspace::Send("^{Backspace}")
 !SPACE::Send("^{SPACE}")
 
-#`::takeScreenshot()
-^#`::openNewestFile("C:\Users\hasan\Pictures\Screenshots\*.*")
-^#b::showCalendar()
-PrintScreen::Send("#+{s}")
-#q::toggleBluetooth()
-#s::showVolMixerTabbar()
-#^+v::showMicPanel()
+; Show menu
+!.::SendInput("{AppsKey}")
 !;::SendInput("{AppsKey}")
-#k::toggleKanata()
-; Transparency toggle,
-#^/::toggleTransparency()
-#^.::increaseTransparency()
-#^,::decreaseTransparency()
-; Change Volume:
-!Del::Volume_Mute
-!PgUp::volup()
-!PgDn::voldown()
+; Screenshot
+#`::takeScreenshot()
+^#`::openNewestFile("C:\Users\" A_UserName "\Pictures\Screenshots\*.*")
+PrintScreen::Send("#+{s}")
+; Window Transparency
+^#/::toggleTransparency()
+^#.::increaseTransparency()
+^#,::decreaseTransparency()
+; Volume Control
+#Del::Volume_Mute
+#Esc::Volume_Mute
+#PgUp::volup()
+#PgDn::voldown()
+#^+v::showMicPanel()
+#s::showSoundOutput()
 #HotIf winIsMouseOver("ahk_class Shell_TrayWnd")
   ~LAlt & WheelUP::volup()
   ~LAlt & WheelDown::voldown()
   ~LAlt & RButton::showVolMixer()
 #HotIf
+; emacs-standard
+!f::Send("^{Right}")
+!b::Send("^{Left}")
+!+f::Send("^+{Right}")
+!+b::Send("^+{Left}")
+!Backspace::Send("^{Backspace}")
 ; Global arrow controls
 #HotIf not WinActive("ahk_exe WindowsTerminal.exe")
   and not WinActive("ahk_exe alacritty.exe")
@@ -65,6 +74,10 @@ PrintScreen::Send("#+{s}")
   !h::SendInput("{LEFT}")
   !l::SendInput("{RIGHT}")
 #HotIf
+; Other
+^#b::showCalendar()
+#q::toggleBluetooth()
+#k::toggleKanata()
 
 ;******************************************************************************
 ; Window manazement
@@ -94,20 +107,16 @@ PrintScreen::Send("#+{s}")
 *Capslock up::ctrlAndAltTabStop()
 
 ^#m::Send("#{m}")
-#m::WinMinimize("a")
-!x::winToggleRestore()
-^[::{
-  SendInput("^+{tab}")
-  Send("{ctrl down}")
-}
-^]::{
-  SendInput("^{tab}")
-  Send("{ctrl down}")
-}
-![::SendInput("^+{tab}")
-!]::SendInput("^{tab}")
-+![::SendInput("^+{PgUp}")
-+!]::SendInput("^+{PgDn}")
+#m::toggleWinMinimize()
+!x::toggleWinMaximize()
+#HotIf not WinActive("ahk_exe wezterm-gui.exe")
+  ; Nav through tabs
+  ![::SendInput("^+{tab}")
+  !]::SendInput("^{tab}")
+  ; Move tabs
+  +![::SendInput("^+{PgUp}")
+  +!]::SendInput("^+{PgDn}")
+#HotIf
 !Enter::Send("{f11}")
 !Escape::winRestoreAndCenter()
 $Escape::superEscape()
@@ -126,7 +135,7 @@ $Escape::superEscape()
   b::leader("b", () => toggleBluetooth())
   p::leader("p", () => toggleAlwaysOnTop())
   a::leader("a", () => send("#{a}"))
-  s::leader("s", () => send("+#{s}"))
+  s::leader("s", () => showVolMixer())
   LButton::leader("🖱️", () => send("+#{s}"))
   LWin::return
 #HotIf
@@ -157,6 +166,7 @@ current_layout := 0
   or WinActive("Quick settings")
   or WinActive("Task View") ; win+tab
   or WinActive("Task Switching") ; ctrl+alt+tab
+  or WinActive("Notification Center")
   ; or (winIsMouseOver("ahk_class ApplicationFrameWindow") or winIsMouseOver("ahk_class Shell_LightDismissOverlay")) and winIsMouseOver("ahk_exe explorer.exe") and winIsMouseOver("") ; clipboard & backdrop
   ; or WinActive("ahk_class MultitaskingViewFrame")  ; ctrl+alt+tab
   ; or WinActive("ahk_class Windows.UI.Core.CoreWindow") ; win+tab/StartScreen

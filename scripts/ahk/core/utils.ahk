@@ -242,9 +242,9 @@ showVolMixer() {
   ErrorLevel := !WinWait("ahk_exe SndVol.exe")
   If WinExist("ahk_exe SndVol.exe")
   WinActivate("ahk_exe SndVol.exe")
-  WinMove(880, 400, , , "ahk_exe SndVol.exe")
+  centerCurrentWindow("ahk_exe SndVol.exe")
 }
-showVolMixerTabbar() {
+showSoundOutput() {
   Send("{ctrl down}")
   Send("{lwin down}")
   Send("{v down}")
@@ -252,12 +252,6 @@ showVolMixerTabbar() {
   Send("{ctrl up}")
   Send("{lwin up}")
   Send("{v up}")
-  sleep(300)
-
-  if WinActive("ahk_class ControlCenterWindow") {
-    Send("{tab}{tab}{tab}")
-    Send("+{end}")
-  }
 }
 selectPlaybackDeviceWin10() {
   Send("#b")
