@@ -1,5 +1,4 @@
 #!/bin/bash
-# fd --type f --hidden --exclude .git | fzf | xargs nvim
 #     ____      ____
 #    / __/___  / __/
 #   / /_/_  / / /_
@@ -13,88 +12,96 @@
 # - $FZF_ALT_C_COMMAND
 # - $FZF_ALT_C_OPTS
 
-# Key bindings
-# ------------
-__fzf_z__() {
-  [ $# -gt 0 ] && z "$*" && return
-  local cmd dir
-  cmd="zoxide query -i -- $1"
-  dir=$(eval "$cmd") && printf 'cd -- %q' "$dir"
-}
-
-__fzf_z_plus__() {
-  [ $# -gt 0 ] && z "$*" && return
-  local out key dir
-  IFS=$'\n' out=("$(zoxide query -l | fzf --query="$1" --exit-0 --expect=alt-o,ctrl-e,alt-e --border-label='Zoxide')")
-  key=$(head -1 <<<"$out")
-  dir=$(head -2 <<<"$out" | tail -1)
-
-  if [ -n "$dir" ]; then
-    if [[ "$key" = alt-o ]]; then
-      if [ -f "$dir/package.json" ]; then
-        term_cmd="wezterm cli spawn --cwd \"$dir\""
-        id=$(eval "$term_cmd")
-        echo "yarn dev" | wezterm cli send-text --pane-id "$id"
-      fi
-      printf 'cd -- %q && nvim' "$dir"
-      # wt -w 0 nt -d $dir -p "Bash" C:\\Program Files\\Git\\bin\\bash -c "yarn start"
-      # cd $dir && nvim
-    elif [[ "$key" = ctrl-e ]]; then
-      printf 'explorer %q' "$dir"
-    elif [[ "$key" = alt-e ]]; then
-      printf 'cd -- %q && lfcd' "$dir"
-    else
-      printf 'cd -- %q' "$dir"
-    fi
-  fi
-}
-
-__fzf_select__() {
-  local cmd="${FZF_CTRL_T_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
-    -o -type f -print \
-    -o -type d -print \
-    -o -type l -print 2> /dev/null | cut -b3-"}"
-  eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse --bind=ctrl-z:ignore $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" $(__fzfcmd) -m "$@" | while read -r item; do
-    printf '%q ' "$item"
-  done
-  echo
-}
-
 if [[ $- =~ i ]]; then
 
+  # Key bindings
+  # ------------
+
+  __fzf_defaults() {
+    # $1: Prepend to FZF_DEFAULT_OPTS_FILE and FZF_DEFAULT_OPTS
+    # $2: Append to FZF_DEFAULT_OPTS_FILE and FZF_DEFAULT_OPTS
+    echo "--height ${FZF_TMUX_HEIGHT:-40%} --min-height 20+ --bind=ctrl-z:ignore $1"
+    command cat "${FZF_DEFAULT_OPTS_FILE-}" 2>/dev/null
+    echo "${FZF_DEFAULT_OPTS-} $2"
+  }
+
+  __fzf_select__() {
+    FZF_DEFAULT_COMMAND=${FZF_CTRL_T_COMMAND:-} \
+      FZF_DEFAULT_OPTS=$(__fzf_defaults "--reverse --walker=file,dir,follow,hidden --scheme=path" "${FZF_CTRL_T_OPTS-} -m") \
+      FZF_DEFAULT_OPTS_FILE='' $(__fzfcmd) "$@" |
+      while read -r item; do
+        printf '%q ' "$item" # escape special chars
+      done
+  }
+
   __fzfcmd() {
-    [[ -n "$TMUX_PANE" ]] && { [[ "${FZF_TMUX:-0}" != 0 ]] || [[ -n "$FZF_TMUX_OPTS" ]]; } &&
+    [[ -n "${TMUX_PANE-}" ]] && { [[ "${FZF_TMUX:-0}" != 0 ]] || [[ -n "${FZF_TMUX_OPTS-}" ]]; } &&
       echo "fzf-tmux ${FZF_TMUX_OPTS:--d${FZF_TMUX_HEIGHT:-40%}} -- " || echo "fzf"
   }
 
   fzf-file-widget() {
-    local selected
-    selected="$(__fzf_select__)"
+    local selected="$(__fzf_select__ "$@")"
     READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$selected${READLINE_LINE:$READLINE_POINT}"
     READLINE_POINT=$((READLINE_POINT + ${#selected}))
   }
 
   __fzf_cd__() {
-    local cmd dir
-    cmd="${FZF_ALT_C_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
-    -o -type d -print 2> /dev/null | cut -b3-"}"
-    dir=$(eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse --bind=ctrl-z:ignore $FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS" $(__fzfcmd) +m) && printf 'cd -- %q' "$dir"
+    local dir
+    dir=$(
+      FZF_DEFAULT_COMMAND=${FZF_ALT_C_COMMAND:-} \
+        FZF_DEFAULT_OPTS=$(__fzf_defaults "--reverse --walker=dir,follow,hidden --scheme=path" "${FZF_ALT_C_OPTS-} +m") \
+        FZF_DEFAULT_OPTS_FILE='' $(__fzfcmd)
+    ) && printf 'builtin cd -- %q' "$(builtin unset CDPATH && builtin cd -- "$dir" && builtin pwd)"
   }
 
-  __fzf_history__() {
-    local output
-    output=$(
-      builtin fc -lnr -2147483648 |
-        last_hist=$(HISTTIMEFORMAT='' builtin history 1) perl -n -l0 -e 'BEGIN { getc; $/ = "\n\t"; $HISTCMD = $ENV{last_hist} + 1 } s/^[ *]//; print $HISTCMD - $. . "\t$_" if !$seen{$_}++' |
-        FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort,ctrl-z:ignore $FZF_CTRL_R_OPTS +m --read0" $(__fzfcmd) --query "$READLINE_LINE"
-    ) || return
-    READLINE_LINE=${output#*$'\t'}
-    if [[ -z "$READLINE_POINT" ]]; then
-      echo "$READLINE_LINE"
-    else
-      READLINE_POINT=0x7fffffff
-    fi
-  }
+  if command -v perl >/dev/null; then
+    __fzf_history__() {
+      local output script
+      script='BEGIN { getc; $/ = "\n\t"; $HISTCOUNT = $ENV{last_hist} + 1 } s/^[ *]//; s/\n/\n\t/gm; print $HISTCOUNT - $. . "\t$_" if !$seen{$_}++'
+      output=$(
+        set +o pipefail
+        builtin fc -lnr -2147483648 |
+          last_hist=$(HISTTIMEFORMAT='' builtin history 1) command perl -n -l0 -e "$script" |
+          FZF_DEFAULT_OPTS=$(__fzf_defaults "" "-n2..,.. --scheme=history --bind=ctrl-r:toggle-sort --wrap-sign '"$'\t'"↳ ' --highlight-line ${FZF_CTRL_R_OPTS-} +m --read0") \
+          FZF_DEFAULT_OPTS_FILE='' $(__fzfcmd) --query "$READLINE_LINE"
+      ) || return
+      READLINE_LINE=$(command perl -pe 's/^\d*\t//' <<<"$output")
+      if [[ -z "$READLINE_POINT" ]]; then
+        echo "$READLINE_LINE"
+      else
+        READLINE_POINT=0x7fffffff
+      fi
+    }
+  else # awk - fallback for POSIX systems
+    __fzf_history__() {
+      local output script n x y z d
+      if [[ -z $__fzf_awk ]]; then
+        __fzf_awk=awk
+        # choose the faster mawk if: it's installed && build date >= 20230322 && version >= 1.3.4
+        IFS=' .' read n x y z d <<<$(command mawk -W version 2>/dev/null)
+        [[ $n == mawk ]] && ((d >= 20230302 && (x * 1000 + y) * 1000 + z >= 1003004)) && __fzf_awk=mawk
+      fi
+      [[ $(HISTTIMEFORMAT='' builtin history 1) =~ [[:digit:]]+ ]] # how many history entries
+      script='function P(b) { ++n; sub(/^[ *]/, "", b); if (!seen[b]++) { printf "%d\t%s%c", '$((BASH_REMATCH + 1))' - n, b, 0 } }
+    NR==1 { b = substr($0, 2); next }
+    /^\t/ { P(b); b = substr($0, 2); next }
+    { b = b RS $0 }
+    END { if (NR) P(b) }'
+      output=$(
+        set +o pipefail
+        builtin fc -lnr -2147483648 2>/dev/null | # ( $'\t '<lines>$'\n' )* ; <lines> ::= [^\n]* ( $'\n'<lines> )*
+          command $__fzf_awk "$script" |          # ( <counter>$'\t'<lines>$'\000' )*
+          FZF_DEFAULT_OPTS=$(__fzf_defaults "" "-n2..,.. --scheme=history --bind=ctrl-r:toggle-sort --wrap-sign '"$'\t'"↳ ' --highlight-line ${FZF_CTRL_R_OPTS-} +m --read0") \
+          FZF_DEFAULT_OPTS_FILE='' $(__fzfcmd) --query "$READLINE_LINE"
+      ) || return
+      READLINE_LINE=${output#*$'\t'}
+      if [[ -z "$READLINE_POINT" ]]; then
+        echo "$READLINE_LINE"
+      else
+        READLINE_POINT=0x7fffffff
+      fi
+    }
+  fi
 
   # Required to refresh the prompt after fzf
   bind -m emacs-standard '"\er": redraw-current-line'
@@ -103,24 +110,25 @@ if [[ $- =~ i ]]; then
   bind -m vi-insert '"\C-z": emacs-editing-mode'
   bind -m emacs-standard '"\C-z": vi-editing-mode'
 
-  # ALT-e - cd into the selected directory
-  bind -m emacs-standard '"\ee": " \C-b\C-k \C-u`__fzf_z_plus__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d\C-h"'
-
   if ((BASH_VERSINFO[0] < 4)); then
     # CTRL-T - Paste the selected file path into the command line
-    bind -m emacs-standard '"\C-t": " \C-b\C-k \C-u`__fzf_select__`\e\C-e\er\C-a\C-y\C-h\C-e\e \C-y\ey\C-x\C-x\C-f"'
-    bind -m vi-command '"\C-t": "\C-z\C-t\C-z"'
-    bind -m vi-insert '"\C-t": "\C-z\C-t\C-z"'
+    if [[ "${FZF_CTRL_T_COMMAND-x}" != "" ]]; then
+      bind -m emacs-standard '"\C-t": " \C-b\C-k \C-u`__fzf_select__`\e\C-e\er\C-a\C-y\C-h\C-e\e \C-y\ey\C-x\C-x\C-f"'
+      bind -m vi-command '"\C-t": "\C-z\C-t\C-z"'
+      bind -m vi-insert '"\C-t": "\C-z\C-t\C-z"'
+    fi
 
     # CTRL-R - Paste the selected command from history into the command line
-    bind -m emacs-standard '"\C-r": "\C-e \C-u\C-y\ey\C-u"$(__fzf_history__)"\e\C-e\er"'
+    bind -m emacs-standard '"\C-r": "\C-e \C-u\C-y\ey\C-u`__fzf_history__`\e\C-e\er"'
     bind -m vi-command '"\C-r": "\C-z\C-r\C-z"'
     bind -m vi-insert '"\C-r": "\C-z\C-r\C-z"'
   else
     # CTRL-T - Paste the selected file path into the command line
-    bind -m emacs-standard -x '"\C-t": fzf-file-widget'
-    bind -m vi-command -x '"\C-t": fzf-file-widget'
-    bind -m vi-insert -x '"\C-t": fzf-file-widget'
+    if [[ "${FZF_CTRL_T_COMMAND-x}" != "" ]]; then
+      bind -m emacs-standard -x '"\C-t": fzf-file-widget'
+      bind -m vi-command -x '"\C-t": fzf-file-widget'
+      bind -m vi-insert -x '"\C-t": fzf-file-widget'
+    fi
 
     # CTRL-R - Paste the selected command from history into the command line
     bind -m emacs-standard -x '"\C-r": __fzf_history__'
@@ -129,14 +137,57 @@ if [[ $- =~ i ]]; then
   fi
 
   # ALT-C - cd into the selected directory
-  bind -m emacs-standard '"\ec": " \C-l\C-b\C-k \C-u`__fzf_cd__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d"'
-  bind -m vi-command '"\ec": "\C-l\C-z\ec\C-z"'
-  bind -m vi-insert '"\ec": "\C-l\C-z\ec\C-z"'
-
+  if [[ "${FZF_ALT_C_COMMAND-x}" != "" ]]; then
+    bind -m emacs-standard '"\ec": " \C-b\C-k \C-u`__fzf_cd__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d"'
+    bind -m vi-command '"\ec": "\C-z\ec\C-z"'
+    bind -m vi-insert '"\ec": "\C-z\ec\C-z"'
+  fi
 fi
+### end: key-bindings.bash ###
 
-### Custom fzf funtions
-##################################################
+# ------------------------------------------------
+# -- Custom fzf funtions -------------------------
+# ------------------------------------------------
+# fd --type f --hidden --exclude .git | fzf | xargs nvim
+
+__fzf_z__() {
+  [ $# -gt 0 ] && z "$*" && return
+  local cmd dir
+  cmd="zoxide query -i -- $1"
+  dir=$(eval "$cmd") && printf 'cd -- %q' "$dir"
+}
+
+__fzf_z_plus__() {
+  readarray -t out <<<"$(zoxide query -l | fzf --query="$1" --exit-0 --expect=ctrl-o,ctrl-y,ctrl-e --border-label='Zoxide')"
+  keybind=${out[0]}
+  files=("${out[@]:1}")
+
+  # Exit if no files are selected
+  if [[ "${#files[@]}" -lt 1 ]]; then
+    return
+  fi
+  local dir="${out[1]}"
+
+  if [[ "$keybind" == "ctrl-o" ]]; then
+    printf 'nvim %q' "$dir"
+  elif [[ "$keybind" == "ctrl-y" ]]; then
+    printf 'cd -- %q && yazi' "$dir"
+  elif [[ "$keybind" == "ctrl-e" ]]; then
+    printf 'explorer %q' "$dir"
+  # elif [[ "$keybind" == "alt-o" ]]; then
+  #   if [ -f "$dir/package.json" ]; then
+  #     term_cmd="wezterm cli spawn --cwd \"$dir\""
+  #     id=$(eval "$term_cmd")
+  #     echo "yarn dev" | wezterm cli send-text --pane-id "$id"
+  #   fi
+  #   printf 'cd -- %q && nvim' "$dir"
+  #   # wt -w 0 nt -d $dir -p "Bash" C:\\Program Files\\Git\\bin\\bash -c "yarn start"
+  #   # cd $dir && nvim
+  else
+    printf 'cd -- %q' "$dir"
+  fi
+}
+bind -m emacs-standard '"\C-o": " \C-b\C-k \C-u`__fzf_z_plus__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d\C-h"'
 
 fk() {
   local pid
@@ -148,22 +199,21 @@ fk() {
 }
 
 f() {
-  readarray -t out <<<"$(fzf --tac --query="$1" --expect=alt-o,ctrl-t)"
-  shortcut=${out[0]}
+  readarray -t out <<<"$(fzf --tac --query="$1" --expect=ctrl-o,ctrl-t,ctrl-y,ctrl-e)"
+  keybind=${out[0]}
   files=("${out[@]:1}")
 
   # Exit if no files are selected
   if [[ "${#files[@]}" -lt 1 ]]; then
     return
   fi
+  local first_file="${files[0]}"
 
   # Open text files with nvim if no kemaps are pressed
-  if [ -z "$shortcut" ]; then
+  if [[ "$keybind" == "ctrl-o" ]] || [ -z "$keybind" ]; then
     local mime_type
     local text_mime_types=("application/json" "application/javascript" "inode/x-empty" "application/xml" "application/x-sql" "application/octet-stream")
-
-    mime_type=$(file --mime-type -b "${files[0]}")
-    echo "$mime_type"
+    mime_type=$(file --mime-type -b "$first_file")
 
     if [[ $mime_type == text/* ]] || [[ " ${text_mime_types[*]} " == *" $mime_type "* ]]; then
       ${EDITOR:-nvim} "${files[@]}"
@@ -172,22 +222,25 @@ f() {
   fi
 
   # Cd into selected file directory
-  if [[ "$shortcut" = ctrl-t ]]; then
-    dir=$(dirname "${files[0]}")
+  if [[ "$keybind" == "ctrl-t" ]]; then
+    dir=$(dirname "$first_file")
     cd "$dir" || exit && printf 'cd -- %q' "$dir"
-    return
-  fi
-
-  # Open each file with default app
-  if [[ "$shortcut" = alt-o ]] || [ -z "$shortcut" ]; then
+  elif [[ "$keybind" == "ctrl-y" ]]; then
+    yazi "$first_file"
+  elif [[ "$keybind" == "ctrl-e" ]]; then
+    local cwd filepath
+    cwd=$(pwd -W | tr '/' '\\ ')
+    filepath="${cwd}\\${first_file}"
+    explorer /select,"$filepath"
+  elif [[ "$keybind" == "ctrl-o" ]] || [ -z "$keybind" ]; then
+    # Open each file with default app
     if [[ "${#files[@]}" -gt 1 ]]; then
-      for file in "${files[@]}"; do
-        explorer "$file"
+      for cur_file in "${files[@]}"; do
+        explorer "$cur_file"
       done
-    elif [[ "${#files[@]}" -eq 1 ]]; then
-      explorer "${files[0]}"
+    else
+      explorer "$first_file"
     fi
-    return
   fi
 }
 
@@ -230,6 +283,7 @@ eml() {
 }
 
 re() {
-  dir=$(fd --max-depth 2 --search-path /e/repoes | fzf)
+  # TODO: use repo variable
+  dir=$(fd --max-depth 2 --search-path /d/repoes | fzf)
   cd "$dir" || exit
 }
