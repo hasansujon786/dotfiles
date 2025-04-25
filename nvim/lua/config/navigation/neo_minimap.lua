@@ -32,7 +32,7 @@ return {
     -- nm.source_on_save('~\dotfiles\nvim\lua\config\neo_minimap.lua')
 
     -- Lua
-    nm.set({ 'zo', 'zi', 'zI' }, '*.lua', {
+    nm.set({ 'zo', 'zO', 'zI' }, '*.lua', {
       events = { 'BufEnter' },
       query = {
         [[
@@ -85,7 +85,7 @@ return {
     -- })
 
     -- Typescript React
-    nm.set({ 'zo', 'zi' }, { 'typescriptreact', 'javascriptreact', 'javascript' }, {
+    nm.set({ 'zo', 'zO' }, { 'typescriptreact', 'javascriptreact', 'javascript' }, {
       query = {
         [[
     ;; query

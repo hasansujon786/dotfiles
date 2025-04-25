@@ -881,8 +881,8 @@ return {
     },
   -- stylua: ignore
   keys = {
-    { 'g]',         function() Snacks.words.jump(vim.v.count1) end, desc = 'Next Reference', mode = { 'n', 't' } },
-    { 'g[',         function() Snacks.words.jump(-vim.v.count1) end, desc = 'Prev Reference', mode = { 'n', 't' } },
+    -- { 'g]',         function() Snacks.words.jump(vim.v.count1) end, desc = 'Next Reference', mode = { 'n', 't' } },
+    -- { 'g[',         function() Snacks.words.jump(-vim.v.count1) end, desc = 'Prev Reference', mode = { 'n', 't' } },
     { '<leader>vo', function() Snacks.notifier.hide() end, desc = 'Dismiss All Notifications' },
     { '<leader>vn', function() Snacks.notifier.show_history() end, desc = 'Notification History' },
     { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Kill this buffer' },

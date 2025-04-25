@@ -178,10 +178,10 @@ if not vim.g.vscode then
       vim.diagnostic.jump({ count = count, severity = severity, float = true })
     end
   end
-  keymap(nxo, ']e', diagnostic_jump(1, vim.diagnostic.severity.ERROR), { desc = 'Next error' })
   keymap(nxo, '[e', diagnostic_jump(-1, vim.diagnostic.severity.ERROR), { desc = 'Previous error' })
-  keymap(nxo, ']d', diagnostic_jump(1), { desc = 'Next diagnostic' })
+  keymap(nxo, ']e', diagnostic_jump(1, vim.diagnostic.severity.ERROR), { desc = 'Next error' })
   keymap(nxo, '[d', diagnostic_jump(-1), { desc = 'Previous diagnostic' })
+  keymap(nxo, ']d', diagnostic_jump(1), { desc = 'Next diagnostic' })
 
   -- Quickfix list
   -- keymap('n', ']l', ':lnext<CR>')
