@@ -3,7 +3,7 @@ Global isClikModeActive := 0
 Global optionsList := ["Youtube Playlist", "Youtube queue", "Firebase Remove User"]
 
 
-+^#RButton::selectAutoClikMode()
+; +^#RButton::selectAutoClikMode()
 #HotIf isClikModeActive
   ; TODO: fix esc keymap
   Esc::{

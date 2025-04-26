@@ -284,7 +284,7 @@ return {
           },
           ---@type table<string, snacks.scope.Jump|{desc?:string}>
           jump = {
-            ['[i'] = {
+            ['[t'] = {
               min_size = 1, -- allow single line scopes
               bottom = false,
               cursor = false,
@@ -292,7 +292,7 @@ return {
               treesitter = { blocks = { enabled = false } },
               desc = 'jump to top edge of scope',
             },
-            [']i'] = {
+            [']t'] = {
               min_size = 1, -- allow single line scopes
               bottom = true,
               cursor = false,

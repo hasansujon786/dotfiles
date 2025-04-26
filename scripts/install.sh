@@ -367,6 +367,10 @@ install_various_gui_apps() {
     # FIXME: riot
     get obsidian potplayer quicklook instant-eyedropper localsend
     get googlechrome brave abdownloadmanager qbittorrent
+
+    # Potplayer
+    get potplayer
+    reg.exe import "C:\\Users\\$USERNAME\\dotfiles\\scripts\\PotPlayerMini64.reg"
   fi
 }
 
