@@ -7,7 +7,7 @@ local M = setmetatable({}, {
 })
 M.__index = M
 
-M.log_file = vim.fn.stdpath('data') .. '/nvim.log'
+M.log_file = vim.fn.stdpath('data') .. '/log'
 
 -- Function to convert a table to a readable string
 local function table_to_string(tbl, indent)
@@ -48,9 +48,7 @@ local function write_log(level, ...)
   end
 
   local timestamp = os.date('%Y-%m-%d %H:%M:%S')
-  local message = format_message(...)
-
-  local log_entry = string.format('[%s] [%s] %s\n', timestamp, level, message)
+  local log_entry = string.format('[%s][%s] %s\n', level, timestamp, format_message(...))
 
   file:write(log_entry)
   file:close()

@@ -950,8 +950,10 @@ return {
     { '<leader>/q', function() Snacks.picker.qflist() end, desc = 'Quickfix List' },
     { '<leader>/l', function() Snacks.picker.loclist() end, desc = 'Location List' },
     { '<leader>/H', function() Snacks.picker.highlights() end, desc = 'Highlights' },
-    { '<leader>/c', function() Snacks.picker.commands() end, desc = 'Commands' },
-    { '<leader>/C', function() Snacks.picker.command_history() end, desc = 'Command History' },
+    { '<leader>/c', function() Snacks.picker.command_history() end, desc = 'Command History' },
+    { 'co', function() Snacks.picker.commands({ layout = 'dropdown' }) end, desc = 'Commands' },
+    { 'cy', function() require('config.navigation.snacks.custom').keymaps() end, desc = 'Commands' },
+    { '<A-x>', function() Snacks.picker.commands({ layout = 'dropdown' }) end, desc = 'Commands' },
     { '//', auto_open_qflistt_or_loclist, ft = 'qf', desc = 'which_key_ignore' },
 
     -- PROJECT

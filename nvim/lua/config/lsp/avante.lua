@@ -16,6 +16,7 @@ return {
     'AvanteSwitchProvider',
   },
   opts = {
+    ----@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
     provider = 'gemini',
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`

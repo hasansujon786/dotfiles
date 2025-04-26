@@ -127,6 +127,7 @@ return {
     { key = 'Enter', mods = 'SHIFT', action = { SendString = '\x1b[13;2u' } },
     { key = 'Enter', mods = 'CTRL', action = { SendString = '\x1b[13;5u' } },
     { key = 'Backspace', mods = 'CTRL', action = { SendKey = { key = 'w', mods = 'CTRL' } } },
+    { key = 'p', mods = 'SHIFT|CTRL', action = { SendKey = { key = 'x', mods = 'ALT' } } },
 
     -- stacks
     { key = 'w', mods = 'LEADER', action = wezterm.action_callback(events.activate_win_stack) },
