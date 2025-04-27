@@ -352,7 +352,6 @@ setup_python() {
 install_various_apps() {
   $getter install -y eget
   $getter install -y onefetch
-  # $getter install -y tokei # FIXME: install error
   $getter install -y scrcpy
   $getter install -y jq
   $getter install -y tldr
@@ -373,8 +372,8 @@ install_various_apps() {
     $getter install -y delta # git highlighter
     $getter install -y ntop.portable
 
-    # INFO: dosen't work with choco # $getter install -y instanteyedropper.app
-    # FIXME: update config # setup_windowsTerminal
+    # dosen't work with choco # $getter install -y instanteyedropper.app
+    # update config # setup_windowsTerminal
     setup_sublime
   elif [[ "$os" == "linux" ]]; then
     install_and_setup_tmux
@@ -404,8 +403,6 @@ setup_ahk() {
   util_print main.ahk
   ahkPath="C:\\Users\\$USERNAME\\AppData\\Roaming\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\main.ahk"
 
-  # FIXME: Find a way to install v2 without winget
-  # choco install autohotkey -y
   winget install AutoHotkey.AutoHotkey --source winget
 
   rm -rf "$ahkPath"

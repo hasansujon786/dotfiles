@@ -134,7 +134,12 @@ M.ui = {
 }
 
 M.project = {
-  todo_keyfaces = { 'TODO', 'DONE', 'INFO', 'FIXME', 'BUG', 'FIXIT', 'ISSUE', 'OPTIM', 'OPTIMIZE' },
+  todo = {
+    keyfaces = { 'TODO', 'DONE', 'INFO', 'FIXME', 'BUG', 'FIXIT', 'ISSUE', 'OPTIM', 'OPTIMIZE' },
+    exclude = {
+      'nvim/lua/config/lsp/servers/dartls/bloc.lua',
+    },
+  },
 }
 
 M.border_groups = {

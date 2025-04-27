@@ -136,7 +136,7 @@ $Escape::superEscape()
   p::leader("p", () => toggleAlwaysOnTop())
   a::leader("a", () => send("#{a}"))
   s::leader("s", () => showVolMixer())
-  MButton::leader("🖱️", () => selectAutoClikMode())
+  MButton::leader("🖱️", () => chooseAutoClikMode())
   LWin::return
 #HotIf
 

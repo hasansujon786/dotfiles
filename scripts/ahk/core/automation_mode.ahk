@@ -1,25 +1,16 @@
-Global autoClikMode := 0
 Global isClikModeActive := 0
+Global currentClikMode := 0
 Global optionsList := ["Youtube Playlist", "Youtube queue", "Firebase Remove User"]
 
 
-; +^#RButton::selectAutoClikMode()
 #HotIf isClikModeActive
-  ; TODO: fix esc keymap
-  Esc::{
-    beep()
-    exitAutoClikMode()
-  }
-
+  #Esc::exitAutoClikMode()
   LButton::tryAutoClick()
-  x::selectAutoClikMode()
-  ; RButton::deleteFbaseCollection()
-  ; x::deleteFbaseUser()
-  ; #z::rebootMiWiFi()
+  x::chooseAutoClikMode()
 #HotIf
 
 createStatusLine(title, submode) {
-  winCloseByTitle("status_line")
+  winCloseByTitle("autoclick_status_line")
 
   height := 30
   width := 320
@@ -38,24 +29,24 @@ enterAutoClikMode() {
     return
   }
 
-  if (autoClikMode = 0) {
-    return selectAutoClikMode()
+  if (currentClikMode = 0) {
+    return chooseAutoClikMode()
   }
 
   beep()
   Global isClikModeActive := 1
-  createStatusLine("Autoclick", optionsList[autoClikMode])
+  createStatusLine("Autoclick", optionsList[currentClikMode])
 }
 exitAutoClikMode() {
   Global isClikModeActive := 0
-  winCloseByTitle("status_line")
+  winCloseByTitle("autoclick_status_line")
+  beep()
 }
 
-selectAutoClikMode() {
-  beep()
+chooseAutoClikMode() {
   exitAutoClikMode()
 
-  defaultItemIndex := autoClikMode = 0 ? 1 : autoClikMode
+  defaultItemIndex := currentClikMode = 0 ? 1 : currentClikMode
   optionWin := Gui(), optionWin.SetFont("s12 Bold", "Arial"), optionWin.Title := "Auto Click Mode"
 
   for index, opt in optionsList {
@@ -73,11 +64,11 @@ selectAutoClikMode() {
       return dd("not selected")
     }
 
-    Global autoClikMode := selected
+    Global currentClikMode := selected
     optionWin.Destroy()
 
     Global isClikModeActive := 1
-    createStatusLine("Autoclick", optionsList[autoClikMode])
+    createStatusLine("Autoclick", optionsList[currentClikMode])
   }
   cancel() {
     optionWin.Destroy()
@@ -89,24 +80,26 @@ selectAutoClikMode() {
 }
 
 tryAutoClick() {
-  if (autoClikMode = 0) {
-    selectAutoClikMode()
+  if (currentClikMode = 0) {
+    chooseAutoClikMode()
     return
   }
 
-  if(autoClikMode = 1 || autoClikMode = 2) {
+  Switch currentClikMode {
+  Case 1:
     ytRemovetFromWL()
-  }
-
-  if(autoClikMode = 3) {
+  Case 2:
+    ytRemovetFromWL()
+  Case 3:
     firebaseRemoveAuthUser()
+  ; Default:
   }
 }
 
 ytRemovetFromWL() {
   Send("{LButton}")
   sleep(100)
-  if(autoClikMode = 1) {
+  if(currentClikMode = 1) {
     Send("{tab}{tab}{tab}")
   } else {
     Send("{tab}{tab}")

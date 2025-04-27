@@ -246,7 +246,6 @@ setup_lazygit() {
   create_symlink "${conf_path[$OS]}" "$HOME/dotfiles/tui/lazygit"
 }
 setup_yazi() {
-  # TODO: Get a bookmar manager
   declare -A conf_path
   conf_path[win]="$HOME/AppData/Roaming/yazi"
   conf_path[lin]="$HOME/.config/yazi"

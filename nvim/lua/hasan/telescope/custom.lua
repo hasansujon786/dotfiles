@@ -268,7 +268,7 @@ M.grep_string_list = function(opts)
 end
 
 function M.search_project_todos()
-  local todo_patern = table.concat(require('core.state').project.todo_keyfaces, ':|') .. ':' -- Creates "TODO :|DONE :|INFO :|..."
+  local todo_patern = table.concat(require('core.state').project.todo.keyfaces, ':|') .. ':' -- Creates "TODO :|DONE :|INFO :|..."
   M.grep_string_list({
     prompt_title = 'Search Todos',
     search_list = todo_patern,

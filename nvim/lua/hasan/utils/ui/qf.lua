@@ -93,4 +93,35 @@ end
 
 -- require("hasan.utils.ui.qf").showLspReferencesInLocList()
 
+---@param exclude_paths string[]
+---@return string
+function M.get_rg_exclude_pattern(exclude_paths)
+  local template = '-g "%s" '
+  local full_pattern = ''
+  for _, path in ipairs(exclude_paths) do
+    local exclude_pattern = '!' .. path
+    full_pattern = full_pattern .. template:format(exclude_pattern)
+  end
+  return full_pattern
+end
+
+function M.get_todo_pattern()
+  return table.concat(require('core.state').project.todo.keyfaces, ':|') .. ':' -- Creates "TODO\:|DONE\:|INFO\:|..."
+end
+
+function M.search_todos_to_quickfix()
+  local command_template = 'rg --line-number --column --color=never -g "!.git" -e "%s" %s'
+  local exclude_pattern = M.get_rg_exclude_pattern(require('core.state').project.todo.exclude or {})
+  local output = vim.fn.systemlist(command_template:format(M.get_todo_pattern(), exclude_pattern))
+
+  -- Check if the command failed
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_err_writeln('Error running rg: ' .. table.concat(output, '\n'))
+    return
+  end
+
+  vim.fn.setqflist({}, 'r', { title = 'TODO Search', lines = output })
+  vim.cmd.copen()
+end
+
 return M

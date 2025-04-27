@@ -48,4 +48,16 @@ function M.keymaps()
   })
 end
 
+function M.search_project_todos()
+  Snacks.picker.grep({
+    exclude = require('core.state').project.todo.exclude or {},
+    show_empty = true,
+    search = require('hasan.utils.ui.qf').get_todo_pattern,
+    finder = 'grep',
+    format = 'file',
+    live = false,
+    supports_live = true,
+  })
+end
+
 return M

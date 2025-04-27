@@ -122,19 +122,6 @@ local function get_ivy(mini)
   }
 end
 
-local search_project_todos = function()
-  Snacks.picker.grep({
-    show_empty = true,
-    search = function()
-      return table.concat(require('core.state').project.todo_keyfaces, ':|') .. ':' -- Creates "TODO\:|DONE\:|INFO\:|..."
-    end,
-    finder = 'grep',
-    format = 'file',
-    live = false,
-    supports_live = true,
-  })
-end
-
 local auto_open_qflistt_or_loclist = function()
   local wininfo = vim.fn.getwininfo(vim.api.nvim_get_current_win())
   if #wininfo == 0 then
@@ -958,9 +945,9 @@ return {
 
     -- PROJECT
     { '<leader>pr', function() Snacks.picker.recent({cwd = vim.uv.cwd()}) end, desc = 'Find recent files' },
-    { '<leader>pt', search_project_todos, desc = 'Search project todos', mode = { "n", "x" } },
     { '<leader>pe', function() Snacks.picker.zoxide() end, desc = 'Find zoxide list' },
     { '<leader>pp', function() require('hasan.picker.persisted').persisted() end, desc = 'Switch project' },
+    { '<leader>/t', function() require('config.navigation.snacks.custom').search_project_todos() end, desc = 'Search project todos' },
 
     -- VIM Builtins
     { '<leader>v/', function() Snacks.picker.help() end, desc = 'Help Pages' },

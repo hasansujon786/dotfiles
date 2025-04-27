@@ -104,6 +104,7 @@ return {
 
       -- PROJECT
       { '<leader>p', group = 'project' },
+      { '<leader>pt', '<cmd>lua require("hasan.utils.ui.qf").search_todos_to_quickfix()<CR>', desc = 'Search project todos (quickfix)' },
 
       -- TOGGLE
       { '<leader>t', group = 'toggle' },
