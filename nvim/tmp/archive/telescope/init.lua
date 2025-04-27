@@ -113,8 +113,8 @@ return {
     }
 
     local get_dropdown = my_theme.get_dropdown()
-    local get_cursor = require('telescope.themes').get_cursor({ borderchars = state.border_groups.edged_top })
-    local get_ivy = require('telescope.themes').get_ivy({ borderchars = state.border_groups.edged_ivy })
+    local get_cursor = require('telescope.themes').get_cursor({ borderchars = my_theme.border_groups.edged_top })
+    local get_ivy = require('telescope.themes').get_ivy({ borderchars = my_theme.border_groups.edged_ivy })
 
     require('telescope').setup({
       defaults = {
@@ -142,7 +142,7 @@ return {
           height = 0.7,
           width = 0.8,
         },
-        borderchars = state.border_groups[state.ui.telescope_border_style],
+        borderchars = my_theme.border_groups.edged,
         winblend = 0,
         mappings = { n = custom_mappings, i = custom_mappings },
         file_ignore_patterns = {
@@ -191,7 +191,7 @@ return {
         project_commands = require('config.navigation.telescope.project_commands'),
         file_browser = {
           theme = 'ivy',
-          borderchars = require('core.state').border_groups.edged_ivy,
+          borderchars = my_theme.border_groups.edged_ivy,
           layout_config = { height = 0.7 },
           cwd_to_path = false,
           grouped = true,

@@ -1,12 +1,41 @@
 local state = require('core.state')
 local M = {}
 
+M.border_groups = {
+  rounded = {
+    prompt = { '─', '│', ' ', '│', '╭', '╮', '│', '│' },
+    results = { '─', '│', '─', '│', '├', '┤', '╯', '╰' },
+    preview = { '─', '│', '─', '│', '├', '┤', '╯', '╰' },
+  },
+  edged = {
+    prompt = { '▔', '▕', '▁', '▏', '🭽', '🭾', '🭿', '🭼' },
+    results = { '▔', '▕', '▁', '▏', '🭽', '🭾', '🭿', '🭼' },
+    preview = { '▔', '▕', '▁', '▏', '🭽', '🭾', '🭿', '🭼' },
+    -- results = { '▁', '▕', '▁', '▏', '🭼', '🭿', '🭿', '🭼' },
+  },
+  edged_top = {
+    prompt = { '▔', '▕', '▁', '▏', '🭽', '🭾', '🭿', '🭼' },
+    preview = { '▔', '▕', ' ', '▏', '🭽', '🭾', '▕', '▏' },
+    results = { '▁', '▕', '▁', '▏', '🭼', '🭿', '🭿', '🭼' },
+  },
+  edged_ivy = {
+    prompt = { '▔', ' ', ' ', ' ', '▔', '▔', ' ', ' ' },
+    results = { ' ', '▕', ' ', ' ', ' ', '▕', '▕', ' ' },
+    preview = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+  },
+  empty = {
+    preview = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+    prompt = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+    results = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+  },
+}
+
 M.top_panel_default_opts = {
   -- entry_maker = M.gen_from_file({}),
   sorting_strategy = 'ascending',
   layout_strategy = 'top_panel',
   border = true,
-  borderchars = state.border_groups.edged_top,
+  borderchars = M.border_groups.edged_top,
   layout_config = {
     anchor = 'N',
     width = function(_, max_columns, _, _)
@@ -29,7 +58,7 @@ end
 
 M.get_dropdown = function(opts)
   opts = opts or {}
-  opts.borderchars = state.border_groups.edged_top
+  opts.borderchars = M.border_groups.edged_top
 
   return require('telescope.themes').get_dropdown(opts)
 end
@@ -41,7 +70,7 @@ M.get_cursor_vertical = function(opts)
     layout_strategy = 'cursor_vertical',
     -- initial_mode = 'normal',
     border = true,
-    borderchars = state.border_groups.edged_top,
+    borderchars = M.border_groups.edged_top,
     layout_config = {
       width = 80,
       height = 20,

@@ -119,7 +119,6 @@ M.ui = {
     width = 90,
     height = 15,
   },
-  telescope_border_style = 'edged',
   hover = {
     -- winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
     winhighlight = 'Normal:Pmenu,FloatBorder:CmpBorder,CursorLine:CursorLineFocus,Search:None',
@@ -139,35 +138,6 @@ M.project = {
     exclude = {
       'nvim/lua/config/lsp/servers/dartls/bloc.lua',
     },
-  },
-}
-
-M.border_groups = {
-  rounded = {
-    prompt = { '─', '│', ' ', '│', '╭', '╮', '│', '│' },
-    results = { '─', '│', '─', '│', '├', '┤', '╯', '╰' },
-    preview = { '─', '│', '─', '│', '├', '┤', '╯', '╰' },
-  },
-  edged = {
-    prompt = { '▔', '▕', '▁', '▏', '🭽', '🭾', '🭿', '🭼' },
-    results = { '▔', '▕', '▁', '▏', '🭽', '🭾', '🭿', '🭼' },
-    preview = { '▔', '▕', '▁', '▏', '🭽', '🭾', '🭿', '🭼' },
-    -- results = { '▁', '▕', '▁', '▏', '🭼', '🭿', '🭿', '🭼' },
-  },
-  edged_top = {
-    prompt = { '▔', '▕', '▁', '▏', '🭽', '🭾', '🭿', '🭼' },
-    preview = { '▔', '▕', ' ', '▏', '🭽', '🭾', '▕', '▏' },
-    results = { '▁', '▕', '▁', '▏', '🭼', '🭿', '🭿', '🭼' },
-  },
-  edged_ivy = {
-    prompt = { '▔', ' ', ' ', ' ', '▔', '▔', ' ', ' ' },
-    results = { ' ', '▕', ' ', ' ', ' ', '▕', '▕', ' ' },
-    preview = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-  },
-  empty = {
-    preview = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-    prompt = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
-    results = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
   },
 }
 
