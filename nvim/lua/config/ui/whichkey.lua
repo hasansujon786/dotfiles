@@ -82,6 +82,7 @@ return {
       -- GIT
       { '<leader>g', group = 'git' },
       { '<leader>g.', '<cmd>silent !git add %<CR>', desc = 'Git: Stage file' },
+      { '<leader>gw', '<cmd>lua require("hasan.utils.git").auto_commit("~/my_vault")<CR>', desc = 'Git: Auto valut commit & push' },
 
       -- INSERT
       { '<leader>i', group = 'insert' },

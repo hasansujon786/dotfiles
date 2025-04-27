@@ -72,13 +72,10 @@ return {
       map('n', '<leader>gm', function() gs.blame_line{full=true} end, { desc = 'Git: Preview blame' })
       map('n', '<leader>gM', gs.toggle_current_line_blame, { desc = 'Git: Toggle blame line' })
       -- Diff Actions
-      map('n', '<leader>gw', gs.toggle_word_diff, { desc = 'Git: Toggle word diff' })
       map('n', '<leader>gh', gs.preview_hunk_inline, { desc = 'Git: Preview hunk inline' })
       map('n', '<leader>gH', gs.toggle_deleted, { desc = 'Git: Highlight delete hunks' })
-      map('n', '<leader>gW', function()
-        gs.toggle_deleted()
-        gs.toggle_word_diff()
-      end, { desc = 'Git: Preview line diffs' })
+      map('n', '<leader>gW', gs.toggle_word_diff, { desc = 'Git: Toggle word diff' })
+      -- end, { desc = 'Git: Preview line diffs' })
       -- map('n', '<leader>gd', gs.diffthis)
       -- map('n', '<leader>gD', function() gs.diffthis('~') end)
 

@@ -57,7 +57,7 @@ local function try_git_commit(cwd)
   git_commit:after_success(vim.schedule_wrap(function(_)
     git_commit = nil
 
-    if has_local_commits_to_push() then
+    if has_local_commits_to_push(cwd) then
       try_git_push(cwd)
       return
     end
@@ -82,7 +82,7 @@ function M.auto_commit(cwd)
 
     local status_output = job:result()
     if status_output == false or #status_output == 0 then
-      if has_local_commits_to_push() then
+      if has_local_commits_to_push(cwd) then
         try_git_push(cwd)
         return
       end
@@ -95,9 +95,5 @@ function M.auto_commit(cwd)
   end))
   git_status:start()
 end
-
-local cwd = '~/my_vault/'
-cwd = '~/dotfiles/'
-M.auto_commit(cwd)
 
 return M
