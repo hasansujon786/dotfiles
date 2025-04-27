@@ -60,7 +60,7 @@ keymap('n', '<leader>n', function()
   end, 500)
 end)
 
---- Get date as YY/MM/DD HH:MM:SS
+--- Get date as YY/MM/DD HH:MM:SSxx
 ---@return string|osdate
 local function get_formatted_time()
   return os.date('%y/%m/%d %H:%M:%S')
