@@ -95,15 +95,15 @@ local function git_vault()
   end
 
   local git_push = require('plenary.job'):new({ command = 'git', args = { 'push' }, cwd = cwd })
-  local ok_push = pcall(function()
-    return git_push:sync()
-  end)
-
-  if ok_push then
-    vim.notify('Successfully pushed to repo', 'info', { title = 'Vault' })
-  else
+  git_push:after_failure(vim.schedule_wrap(function(_)
+    git_push = nil
     vim.notify('Someting went wrong while git push', 'info', { title = 'Vault' })
-  end
+  end))
+  git_push:after_success(vim.schedule_wrap(function(_)
+    git_push = nil
+    vim.notify('Successfully pushed to repo', 'info', { title = 'Vault' })
+  end))
+  git_push:start()
 end
 
 git_vault()
