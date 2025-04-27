@@ -66,31 +66,7 @@ local function get_formatted_time()
   return os.date('%y/%m/%d %H:%M:%S')
 end
 
-local function git_vault()
-  local cwd = '~/my_vault/'
-  cwd = '~/dotfiles/'
-
-  local git_status = require('plenary.job'):new({ command = 'git', args = { 'status', '--porcelain' }, cwd = cwd })
-  local ok_status, status_output = pcall(function()
-    return git_status:sync()
-  end)
-  log(status_output)
-  if not ok_status or #status_output == 0 then
-    vim.notify('Nothing to commit', 'info', { title = 'Vault' })
-    return
-  end
-
-  local date = get_formatted_time()
-  local git_commit = require('plenary.job'):new({ command = 'git', args = { 'commit', '-am', date }, cwd = cwd })
-  local ok_commit = pcall(function()
-    return git_commit:sync()
-  end)
-
-  if not ok_commit then
-    vim.notify('Someting went wrong while git commit', 'info', { title = 'Vault' })
-    return
-  end
-
+local function try_git_push(cwd)
   local git_push = require('plenary.job'):new({ command = 'git', args = { 'push' }, cwd = cwd })
   git_push:after_failure(vim.schedule_wrap(function(_)
     git_push = nil
@@ -101,6 +77,36 @@ local function git_vault()
     vim.notify('Successfully pushed to repo', 'info', { title = 'Vault' })
   end))
   git_push:start()
+end
+
+local function try_git_commit(cwd)
+  local date = get_formatted_time()
+  local git_commit = require('plenary.job'):new({ command = 'git', args = { 'commit', '-am', date }, cwd = cwd })
+  git_commit:after_failure(vim.schedule_wrap(function(_)
+    git_commit = nil
+    vim.notify('Someting went wrong while git commit', 'info', { title = 'Vault' })
+  end))
+  git_commit:after_success(vim.schedule_wrap(function(_)
+    git_commit = nil
+    try_git_push(cwd)
+  end))
+  git_commit:start()
+end
+
+local function git_vault()
+  local cwd = '~/my_vault/'
+  cwd = '~/dotfiles/'
+
+  local git_status = require('plenary.job'):new({ command = 'git', args = { 'status', '--porcelain' }, cwd = cwd })
+  git_status:after_failure(vim.schedule_wrap(function(_)
+    git_status = nil
+    vim.notify('Nothing to commit', 'info', { title = 'Vault' })
+  end))
+  git_status:after_success(vim.schedule_wrap(function(_)
+    git_status = nil
+    try_git_commit(cwd)
+  end))
+  git_status:start()
 end
 
 git_vault()
