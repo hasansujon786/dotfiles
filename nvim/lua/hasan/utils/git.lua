@@ -34,11 +34,11 @@ local function try_git_commit(cwd)
 end
 
 function M.auto_commit(cwd)
-  -- local exists = require('hasan.utils.file').dir_exists(cwd)
-  -- if not exists then
-  --   vim.notify(string.format('Could not found given directory `%s`', cwd), 'error', { title = 'Vault' })
-  --   return
-  -- end
+  local exists = require('hasan.utils.file').dir_exists(cwd)
+  if not exists then
+    vim.notify(string.format('Could not found given directory `%s`', cwd), 'error', { title = 'Vault' })
+    return
+  end
 
   local git_status = require('plenary.job'):new({ command = 'git', args = { 'status', '--porcelain' }, cwd = cwd })
   git_status:after_failure(vim.schedule_wrap(function(_)
