@@ -83,7 +83,6 @@ function M.auto_commit(cwd)
     local status_output = job:result()
     if status_output == false or #status_output == 0 then
       if has_local_commits_to_push() then
-        vim.notify('pushing from status', 'info', { title = 'Vault' })
         try_git_push(cwd)
         return
       end
