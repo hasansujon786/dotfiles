@@ -77,6 +77,13 @@ M.open_settings = function()
   vim.cmd.split(path)
 end
 
+function M.dir_exists(cwd)
+  -- Expand ~ to the home directory
+  local expanded_path = cwd:gsub('^~', vim.fn.expand('$HOME'))
+  local stat = vim.uv.fs_stat(expanded_path)
+  return stat and stat.type == 'directory' or false
+end
+
 M.path_exists = function(fname, cwd)
   cwd = cwd and cwd or M.get_root_dir()
   local fpath = Path:new(cwd, fname)
