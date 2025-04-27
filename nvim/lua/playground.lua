@@ -59,3 +59,51 @@ keymap('n', '<leader>n', function()
     require('2048').startGame()
   end, 500)
 end)
+--- Get date as YY/MM/DD HH:MM:SS
+---@return string
+local function get_formatted_time()
+  return os.date('%y/%m/%d %H:%M:%S')
+end
+
+local function git_vault()
+  -- local quicklook_path = vim.fn.exepath('quicklook.exe')
+  -- if quicklook_path == '' then
+  --   vim.notify('QuickLook is not found in the system', 'error', { title = 'QuickLook' })
+  --   return
+  -- end
+  local cwd = '~/my_vault/'
+  cwd = '~/dotfiles/'
+
+  local git_status = require('plenary.job'):new({ command = 'git', args = { 'status', '--porcelain' }, cwd = cwd })
+  local ok_status, status_output = pcall(function()
+    return git_status:sync()
+  end)
+  if not ok_status or #status_output == 0 then
+    vim.notify('Nothing to commit', 'info', { title = 'Vault' })
+    return
+  end
+
+  local date = get_formatted_time()
+  local git_commit = require('plenary.job'):new({ command = 'git', args = { 'commit', '-am', date }, cwd = cwd })
+  local ok_commit = pcall(function()
+    return git_commit:sync()
+  end)
+
+  if not ok_commit then
+    vim.notify('Someting went wrong while git commit', 'info', { title = 'Vault' })
+    return
+  end
+
+  local git_push = require('plenary.job'):new({ command = 'git', args = { 'push' }, cwd = cwd })
+  local ok_push = pcall(function()
+    return git_push:sync()
+  end)
+
+  if ok_push then
+    vim.notify('Successfully pushed to repo', 'info', { title = 'Vault' })
+  else
+    vim.notify('Someting went wrong while git push', 'info', { title = 'Vault' })
+  end
+end
+
+git_vault()
