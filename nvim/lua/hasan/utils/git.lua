@@ -21,7 +21,7 @@ end
 
 local function try_git_commit(cwd)
   local date = get_formatted_time()
-  local git_commit = require('plenary.job'):new({ command = 'git', args = { 'commit', '-am', date }, cwd = cwd })
+  local git_commit = require('plenary.job'):new({ command = 'git', args = { 'acm', date }, cwd = cwd })
   git_commit:after_failure(vim.schedule_wrap(function(_)
     git_commit = nil
     vim.notify('Someting went wrong while git commit', 'error', { title = 'Vault' })
@@ -47,9 +47,11 @@ function M.auto_commit(cwd)
   end))
   git_status:after_success(vim.schedule_wrap(function(job)
     git_status = nil
+
     local status_output = job:result()
-    if #status_output == 0 then
+    if status_output == false or #status_output == 0 then
       vim.notify('Nothing to commit', 'info', { title = 'Vault' })
+      try_git_push(cwd)
       return
     end
 

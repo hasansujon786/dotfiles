@@ -60,3 +60,54 @@ keymap('n', '<leader>n', function()
   end, 500)
 end)
 
+--- Get date as YY/MM/DD HH:MM:SSxx
+---@return string|osdate
+local function get_formatted_time()
+  return os.date('%y/%m/%d %H:%M:%S')
+end
+
+local function try_git_push(cwd)
+  local git_push = require('plenary.job'):new({ command = 'git', args = { 'push' }, cwd = cwd })
+  git_push:after_failure(vim.schedule_wrap(function(_)
+    git_push = nil
+    vim.notify('Someting went wrong while git push', 'info', { title = 'Vault' })
+  end))
+  git_push:after_success(vim.schedule_wrap(function(_)
+    git_push = nil
+    vim.notify('Successfully pushed to repo', 'info', { title = 'Vault' })
+  end))
+  git_push:start()
+end
+
+local function try_git_commit(cwd)
+  local date = get_formatted_time()
+  local git_commit = require('plenary.job'):new({ command = 'git', args = { 'commit', '-am', date }, cwd = cwd })
+  git_commit:after_failure(vim.schedule_wrap(function(_)
+    git_commit = nil
+    vim.notify('Someting went wrong while git commit', 'info', { title = 'Vault' })
+  end))
+  git_commit:after_success(vim.schedule_wrap(function(_)
+    git_commit = nil
+    try_git_push(cwd)
+  end))
+  git_commit:start()
+end
+
+local function git_vault()
+  local cwd = '~/my_vault/'
+  cwd = '~/dotfiles/'
+
+  -- local git_status = require('plenary.job'):new({ command = 'git', args = { 'status', '--porcelain' }, cwd = cwd })
+  -- local ok_status, status_output = pcall(function()
+  --   return git_status:sync()
+  -- end)
+  -- log(status_output)
+  -- if not ok_status or #status_output == 0 then
+  --   vim.notify('Nothing to commit', 'info', { title = 'Vault' })
+  --   return
+  -- end
+
+  try_git_commit()
+end
+
+git_vault()
