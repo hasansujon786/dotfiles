@@ -14,7 +14,7 @@ local M = {
 
     local target = output:gsub('\n$', '')
     if target == '' or target == nil then
-      return fail('`git` has not found any target')
+      return fail('`git` could not find cwd')
     end
     ya.mgr_emit('cd', { target })
   end,

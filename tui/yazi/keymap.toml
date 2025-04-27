@@ -17,7 +17,6 @@ append_keymap = [
   { on = ["<Backspace>"], run = "back", desc = "Go back to the previous directory" },
   { on = ["<C-o>"], run = "back", desc = "Go back to the previous directory" },
   { on = ["<C-j>"], run = "forward", desc = "Go forward to the next directory" },
-  { on = ["<C-i>"], run = "forward", desc = "Go forward to the next directory" },
 
   # { on = [ ",", "m" ], run = "sort modified --reverse=no",     desc = "Sort by modified time" },
   # { on = [ ",", "M" ], run = "sort modified --reverse",        desc = "Sort by modified time (reverse)" },
@@ -52,26 +51,23 @@ prepend_keymap = [
   { on = ["g", "a", "s"], run = "cd ~/AppData/Local/Packages/MicrosoftWindows.Client.CBS_cw5n1h2txyewy/TempState/ScreenClip", desc = "ScreenClip" },
   { on = ["g", "a", "S"], run = "cd ~/AppData/Roaming/Microsoft/Windows/Start\\ Menu/Programs/Startup", desc = "Start Menu/Programs/Startup" },
   # cd ~/AppData/Local/Packages/Microsoft.ScreenSketch_8wekyb3d8bbwe/TempState
-  { on = ["<Space>"], run = """shell 'C:/Users/hasan/dotfiles/tui/yazi/scripts/quicklook.cmd "%0"' --confirm --orphan""", desc = "Peek" },
-  { on = ["i"], run = """shell 'C:/Users/hasan/dotfiles/tui/yazi/scripts/quicklook.cmd "%0"' --confirm --orphan""", desc = "Peek" },
-  { on = ["f"], run = "plugin jump-to-char", desc = "Jump to char" },
-  # { on = ["t"], run = "plugin fzf", desc = "Jump to a directory, or reveal a file using fzf" },
-  # { on = ["m", "p"], run = 'shell "C:/Users/hasan/AppData/Local/Programs/QuickLook/QuickLook.exe %0" --confirm', desc = "QuickLook" },
 
   # Actions
+  { on = "<Space>", run = "plugin quicklook", desc = "Peek" },
+  { on = "i", run = "plugin quicklook", desc = "Peek" },
+  { on = "f", run = "plugin jump-to-char", desc = "Jump to char" },
   { on = ".", run = "plugin git-root", desc = "Jump to git root" },
   { on = "I", run = "Hidden toggle", desc = "Toggle the visibility of hidden files" },
   { on = "X", run = 'shell "C:/Users/hasan/dotfiles/tui/yazi/scripts/7z_yazi.cmd %0" --confirm --block', desc = "Extract with 7zip" },
+  { on = ["g", "?"], run = "help", desc = "Help" },
   # { on = ["m", "x"], run = 'shell "bash ~/dotfiles/tui/yazi/scripts/share-code-file.bash %0" --confirm --block', desc = "Share file with https://0x0.st" },
 
   # Tabs
   { on = ["T"], run = "tab_create --current", desc = "Create a new tab using the current path" },
-  { on = ["H"], run = "help", desc = "Help" },
 
   # Selection
   { on = ["v"], run = ["toggle", "arrow next"], desc = "Toggle the current selection state" },
   { on = ["V"], run = "visual_mode", desc = "Enter visual mode (selection mode)" },
-  { on = ["u"], run = "toggle", desc = "Unset the current selection state" },
   { on = ["U"], run = "visual_mode --unset", desc = "Enter visual mode (unset mode)" },
   # { on = ["<C-v>"], run = "select_all --state=none", desc = "Inverse selection of all files" },
 ]

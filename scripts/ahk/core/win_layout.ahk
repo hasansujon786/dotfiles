@@ -5,8 +5,8 @@
 Global TASKBAR_HEIGHT := 0 ;; 40
 
 ; "wt.exe", "ahk_exe WindowsTerminal.exe" ; "Code.exe", "ahk_exe Code.exe"
-EDITOR_EXE := ["wezterm-gui.exe", "ahk_exe wezterm-gui.exe"]
-BROWSER_EXE := ["zen.exe", "ahk_class MozillaWindowClass"] ; chrome.exe brave.exe
+Global EDITOR_EXE := ["wezterm-gui.exe", "ahk_exe wezterm-gui.exe"]
+Global BROWSER_EXE := ["zen.exe", "ahk_class MozillaWindowClass"] ; chrome.exe brave.exe
 
 changeLayoutTo(layoutName) {
   Global layout_loading := 1
@@ -45,38 +45,61 @@ toggleLayout() {
   }
 }
 layoutAction(EXE_FULL, EXE, side) {
-  winExitIfFullScreen()
-
-  if (not WinExist(EXE_FULL)) {
-    if (EXE == "Code.exe") {
-      Run("C:\Users\" A_UserName "\AppData\Local\Programs\Microsoft VS Code\Code.exe")
-    } else {
-      Run(EXE)
-    }
-    ErrorLevel := !WinWait(EXE_FULL)
+  ; winExitIfFullScreen()
+  if (WinExist(EXE_FULL)) {
     runLayoutAction(EXE_FULL, EXE, side)
     return
   }
 
+  if (EXE == "Code.exe") {
+    ; Run("C:\Users\" A_UserName "\AppData\Local\Programs\Microsoft VS Code\Code.exe")
+    Run("C:\Users\" A_UserName "\scoop\apps\vscode\current\Code.exe")
+  } else {
+    Run(EXE)
+  }
+  ErrorLevel := !WinWait(EXE_FULL)
   runLayoutAction(EXE_FULL, EXE, side)
 }
 runLayoutAction(EXE_FULL, EXE, side) {
-  if (WinExist(EXE_FULL)) {
-    WinActivate(EXE_FULL)
+  if (!WinExist(EXE_FULL)) {
+    return
+  }
 
-    if(side == "center") {
-      winRestoreAndCenter()
-    } else if (side == "maximized") {
-      WinMaximize("A")
-    } else if (side == "maximized_custom") {
-      ;           ↓ here 0 hides the video behind the window
-      WinMove(-8, 1, A_ScreenWidth + 16, A_ScreenHeight + 8 - TASKBAR_HEIGHT, "A")
-      ; WinMove(, , A_ScreenWidth + 8, A_ScreenHeight - 36, "A")
-      ; centerCurrentWindow()
-    } else {
-      ; winPinToSide(side, false)
-      winPinToSide_custom(side)
-    }
+  if (EXE_FULL == BROWSER_EXE[2]) {
+    activateNonPrivateBrowserWindow(EXE_FULL)
+  } else {
+    WinActivate(EXE_FULL)
+  }
+
+  if(side == "center") {
+    winRestoreAndCenter()
+  } else if (side == "maximized") {
+    WinMaximize("A")
+  } else if (side == "maximized_custom") {
+    ;           ↓ here 0 hides the video behind the window
+    WinMove(-8, 1, A_ScreenWidth + 16, A_ScreenHeight + 8 - TASKBAR_HEIGHT, "A")
+    ; WinMove(, , A_ScreenWidth + 8, A_ScreenHeight - 36, "A")
+    ; centerCurrentWindow()
+  } else {
+    ; winPinToSide(side, false)
+    winPinToSide_custom(side)
   }
 }
 
+activateNonPrivateBrowserWindow(EXE_FULL) {
+  ; Get all windows with zen.exe
+  windows := WinGetList(EXE_FULL)
+
+  ; Loop through each window
+  for hwnd in windows {
+    title := WinGetTitle(hwnd)
+    ; Check if the title does NOT contain "Private Browsing"
+    if !InStr(title, "Private Browsing") {
+      ; Activate the non-private window
+      WinActivate(hwnd)
+      return hwnd
+    }
+  }
+  ; No non-private window found
+  return false
+}

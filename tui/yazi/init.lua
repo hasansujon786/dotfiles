@@ -1,12 +1,12 @@
 function Status:name()
-  --------------------------------------------------
-  ---- Show symlink location -----------------------
-  --------------------------------------------------
   local h = cx.active.current.hovered
   if not h then
     return ui.Span('')
   end
 
+  --------------------------------------------------
+  ---- Show symlink location -----------------------
+  --------------------------------------------------
   -- return ui.Span(" " .. h.name)
   local linked = ''
   if h.link_to ~= nil then
@@ -14,3 +14,6 @@ function Status:name()
   end
   return ui.Span(' ' .. h.name .. linked)
 end
+
+require('git'):setup({ show_branch = false })
+
