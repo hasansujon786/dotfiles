@@ -82,11 +82,10 @@ local function git_vault()
 
   local date = get_formatted_time()
   local git_commit = require('plenary.job'):new({ command = 'git', args = { 'commit', '-am', date }, cwd = cwd })
-  local ok_commit, commit_output = pcall(function()
+  local ok_commit = pcall(function()
     return git_commit:sync()
   end)
 
-  log(commit_output)
   if not ok_commit then
     vim.notify('Someting went wrong while git commit', 'info', { title = 'Vault' })
     return
