@@ -17,7 +17,7 @@ local function try_git_push(cwd)
     vim.notify('Successfully pushed to repo', 'info', { title = 'Vault' })
   end))
 
-  vim.notify('Git pushing...', 'error', { title = 'Vault' })
+  vim.notify('Git pushing...', 'info', { title = 'Vault' })
   git_push:start()
 end
 
