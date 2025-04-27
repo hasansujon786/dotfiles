@@ -15,5 +15,13 @@ function Status:name()
   return ui.Span(' ' .. h.name .. linked)
 end
 
-require('git'):setup({ show_branch = false })
-
+local bookmarks = {}
+local is_windows = ya.target_family() == 'windows'
+local path_sep = package.config:sub(1, 1)
+local home_path = is_windows and os.getenv('USERPROFILE') or os.getenv('HOME')
+table.insert(bookmarks, {
+  tag = 'Desktop',
+  path = home_path .. path_sep .. 'Desktop' .. path_sep,
+  key = 'd',
+})
+require('yamb'):setup({ bookmarks = bookmarks })

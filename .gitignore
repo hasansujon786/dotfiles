@@ -37,3 +37,7 @@ tui/lf/marks
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Yazi
+tui/yazi/bookmark
+tui/yazi/plugins/git.yazi/

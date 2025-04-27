@@ -39,7 +39,7 @@ prepend_keymap = [
   { on = ["g", "D"], run = "cd ~/Documents", desc = "Documents" },
   { on = ["g", "p"], run = "cd ~/Pictures", desc = "Pictures" },
   { on = ["g", "v"], run = "cd ~/Videos", desc = "Videos" },
-  { on = ["g", "m"], run = "cd ~/Music", desc = "Music" },
+  { on = ["g", "M"], run = "cd ~/Music", desc = "Music" },
   { on = ["g", "r"], run = "cd D:/repoes", desc = "repoes" },
   { on = ["g", "."], run = "cd ~/dotfiles", desc = "dotfiles" },
   { on = ["g", "1"], run = "cd C:/", desc = "windows (c:)" },
@@ -70,6 +70,15 @@ prepend_keymap = [
   { on = ["V"], run = "visual_mode", desc = "Enter visual mode (selection mode)" },
   { on = ["U"], run = "visual_mode --unset", desc = "Enter visual mode (unset mode)" },
   # { on = ["<C-v>"], run = "select_all --state=none", desc = "Inverse selection of all files" },
+
+  { on = [ "m" ], run = "plugin yamb save_by_key", desc = "Add bookmark" },
+  { on = [ "'" ], run = "plugin yamb jump_by_key", desc = "Jump bookmark by key" },
+  { on = [ "g", "'" ], run = "plugin yamb jump_by_fzf", desc = "Jump bookmark by fzf" },
+  { on = [ "g", "m" ], run = "plugin yamb delete_by_fzf", desc = "Delete bookmark by fzf" },
+  # { on = [ "u", "d" ], run = "plugin yamb delete_by_key", desc = "Delete bookmark by key" },
+  # { on = [ "u", "A" ], run = "plugin yamb delete_all", desc = "Delete all bookmarks" },
+  # { on = [ "u", "r" ], run = "plugin yamb rename_by_key", desc = "Rename bookmark by key" },
+  # { on = [ "u", "R" ], run = "plugin yamb rename_by_fzf", desc = "Rename bookmark by fzf" },
 ]
 
 [input]
