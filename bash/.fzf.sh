@@ -287,3 +287,40 @@ re() {
   dir=$(fd --max-depth 2 --search-path /d/repoes | fzf)
   cd "$dir" || exit
 }
+
+__find_alias__() {
+  local selected
+  selected=$(alias | sed -E "s/^alias ([^=]+)='(.*)'$/\1  =  \2/" | fzf --border-label="Run alias")
+
+  if [[ -z "$selected" ]]; then
+    return
+  fi
+
+  local command
+  command=$(echo "$selected" | cut -d'=' -f2 | xargs)
+  command="$command "
+
+  READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$command${READLINE_LINE:$READLINE_POINT}"
+  READLINE_POINT=$((READLINE_POINT + ${#command}))
+}
+bind -m emacs-standard -x '"\C-j":__find_alias__'
+
+scoop-uninstall() {
+  local pkg
+  pkg="$(scoop list | tail -n +5 | fzf --border-label="Scoop Uninstall" | awk '{print $1}')"
+
+  if [[ -z "$pkg" ]]; then
+    echo "No package selected. Aborting."
+    return 1
+  fi
+
+  read -r -p "Scoop: Uninstall \`${pkg}\` (y/n)? " yn
+  case $yn in
+  [Yy]*)
+    echo "Uninstalling $pkg..."
+    scoop uninstall "$pkg"
+    ;;
+  [Nn]*) echo "Canceled." ;;
+  *) echo "Please answer yes or no." ;;
+  esac
+}

@@ -289,41 +289,6 @@ qrcode() {
   echo "$@" | curl -F-=\<- qrenco.de
 }
 
-scoop-uninstall() {
-  local pkg
-  pkg="$(scoop list | tail -n +5 | fzf --border-label="Scoop Uninstall" | awk '{print $1}')"
-
-  if [[ -z "$pkg" ]]; then
-    echo "No package selected. Aborting."
-    return 1
-  fi
-
-  read -r -p "Scoop: Uninstall \`${pkg}\` (y/n)? " yn
-  case $yn in
-  [Yy]*)
-    echo "Uninstalling $pkg..."
-    scoop uninstall "$pkg"
-    ;;
-  [Nn]*) echo "Canceled." ;;
-  *) echo "Please answer yes or no." ;;
-  esac
-}
-
-run() {
-  local selected
-  selected=$(alias | sed -E "s/^alias ([^=]+)='(.*)'$/\1  =  \2/" | fzf --border-label="Run alias")
-
-  if [[ -n "$selected" ]]; then
-    local name
-    name=$(echo "$selected" | cut -d'=' -f1 | xargs)
-
-    echo "Running alias: $name"
-    eval "$name"
-  else
-    echo "No alias selected."
-  fi
-}
-
 ### Keybinds
 ##################################################
 # auto-expand
