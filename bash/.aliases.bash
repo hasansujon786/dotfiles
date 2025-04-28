@@ -314,24 +314,26 @@ expand-aliases() {
 
   # Get the last word (or empty if none)
   local last_word="${words[-1]:-}"
-
-  # Insert space if last_word is empty or filter values
+  # Exit if last_word is empty or matched with exclude values
   if [[ -z $last_word || -n "${EXCLUDE_EXPAND_ALIASES[$last_word]}" ]]; then
     insert_space
     return
   fi
 
-  # Check if the input matches an alias
   if [[ $last_word =~ ^[[:space:]]*([a-zA-Z0-9_-]+)(.*)$ ]]; then
-    # Look up the alias definition
-    local found_alias=$(alias ${BASH_REMATCH[1]} 2>/dev/null)
+    local cmd=${BASH_REMATCH[1]}
 
-    if [[ -n $found_alias && $found_alias =~ =\'(.*)\' ]]; then
-      alias_def="${BASH_REMATCH[1]}" # alias_def=$(echo "$found_alias" | cut -d"'" -f2)
-      # replace the alias with its definition
-      READLINE_LINE="$alias_def "
-      READLINE_POINT=${#READLINE_LINE}
-      return
+    # Look up the alias definition
+    if builtin alias $cmd >/dev/null 2>&1; then
+      local found_alias=$(builtin alias $cmd 2>/dev/null)
+
+      if [[ -n $found_alias && $found_alias =~ =\'(.*)\' ]]; then
+        cmd="${BASH_REMATCH[1]}"
+        # replace the alias with its definition
+        READLINE_LINE="$cmd "
+        READLINE_POINT=${#READLINE_LINE}
+        return
+      fi
     fi
   fi
 
