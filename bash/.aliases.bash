@@ -94,7 +94,7 @@ alias scr='scrcpy -d'
 # handy short cuts #
 alias bashrc="vim ~/dotfiles/bash/.bashrc"
 alias keyp='C:/Users/hasan/dotfiles/scripts/keypirinha.sh'
-alias -- -='cd -'
+alias -- -='cd -' # map -
 alias ..='cd ..'
 alias cs='cd'
 # alias re='cd /e/repoes'
@@ -137,7 +137,7 @@ alias gci='hub issue create'
 alias gm2m='git branch -m master main'
 alias gpup='git push --set-upstream origin main'
 
-alias -- --=jump_to_git_root
+alias -- --=jump_to_git_root # map --
 alias g='git'
 alias gcm='git commit -m'
 alias gcam='git commit -am'
@@ -152,7 +152,7 @@ alias gbn='git checkout -b' # create & switch branch
 alias gck='git checkout'    # switch brnch
 # Use --soft if you want to keep your changes
 # Use --hard if you don't care about keeping the changes you made
-alias gr='git reset '        # unstage files (Use --hard/--soft)
+alias gr='git reset'         # unstage files (Use --hard/--soft)
 alias grh='git reset HEAD~1' # (Use --hard/--soft)
 alias grvh='git revert HEAD' # Undo a public commit
 alias gcrh='git clean --force && git reset --hard'
@@ -289,13 +289,62 @@ qrcode() {
   echo "$@" | curl -F-=\<- qrenco.de
 }
 
+declare -A EXCLUDE_EXPAND_ALIASES=(
+  ["ls"]=1
+  ["cd"]=1
+  ["git"]=1
+  ["e"]=1
+  ["z"]=1
+  ["--"]=1
+)
+insert_space() {
+  READLINE_LINE="$READLINE_LINE "
+  READLINE_POINT=${#READLINE_LINE}
+}
+expand-aliases() {
+  local input="$READLINE_LINE"
+  local -a words=($input) # Split into words (using whitespace as delimiter)
+  local word_count=${#words[@]}
+
+  # Exit if input is empty or has space at the end or word_count isn't 1
+  if [[ -z $input || $input =~ [[:space:]]$ || $word_count -eq 0 || $word_count -gt 1 ]]; then
+    insert_space
+    return
+  fi
+
+  # Get the last word (or empty if none)
+  local last_word="${words[-1]:-}"
+
+  # Insert space if last_word is empty or filter values
+  if [[ -z $last_word || -n "${EXCLUDE_EXPAND_ALIASES[$last_word]}" ]]; then
+    insert_space
+    return
+  fi
+
+  # Check if the input matches an alias
+  if [[ $last_word =~ ^[[:space:]]*([a-zA-Z0-9_-]+)(.*)$ ]]; then
+    # Look up the alias definition
+    local found_alias=$(alias ${BASH_REMATCH[1]} 2>/dev/null)
+
+    if [[ -n $found_alias && $found_alias =~ =\'(.*)\' ]]; then
+      alias_def="${BASH_REMATCH[1]}" # alias_def=$(echo "$found_alias" | cut -d"'" -f2)
+      # replace the alias with its definition
+      READLINE_LINE="$alias_def "
+      READLINE_POINT=${#READLINE_LINE}
+      return
+    fi
+  fi
+
+  insert_space
+}
+
 ### Keybinds
 ##################################################
 # auto-expand
-bind '"\e\ ":magic-space'
-bind '"\eq":alias-expand-line'
-bind '" ":"\eq\C-v "'
+bind -m emacs-standard -x '" ":expand-aliases'
+# bind '"\e\ ":magic-space'
+# bind '"\eq":alias-expand-line'
+# bind '" ":"\eq\C-v "'
 
 bind '"\eo":"\C-uyazi_cd\C-m"'
-# bind '"\el":clear-screen'
 # bind '"\C-x\C-x":edit-and-execute-command'
