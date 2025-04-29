@@ -205,13 +205,22 @@ setup_git() {
 }
 setup_bash() {
   declare -A conf_path
-  conf_path[win]="$HOME/.bashrc"
-  conf_path[lin]="$HOME/.bashrc"
+  conf_path[win]="$HOME"
+  conf_path[lin]="$HOME"
+  bash_file_names=(".bashrc" ".inputrc" ".bash_profile")
 
   heading bash
 
-  archive_config "${conf_path[$OS]}"
-  create_symlink "${conf_path[$OS]}" "$HOME/dotfiles/bash/.bashrc"
+  for file_name in "${bash_file_names[@]}"; do
+    local source_file="${DOTFILES}/bashd/${file_name}"
+    local symlink_file="${conf_path[$OS]}/${file_name}"
+
+    if [[ -f "${source_file}" ]]; then
+      archive_config "${symlink_file}"
+      create_symlink "${symlink_file}" "${source_file}"
+    fi
+  done
+
 }
 setup_pwsh() {
   declare -A conf_path

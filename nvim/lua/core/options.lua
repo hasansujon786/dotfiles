@@ -19,6 +19,7 @@ opt.backspace = { 'eol', 'start', 'indent' } --  Configure backspace so it acts 
 -- o.clipboard = "unnamedplus"
 
 -- o.lazyredraw = true --                           Don't redraw while executing macros (good performance config)
+-- o.shell="cmd.exe"
 o.updatetime = 100
 o.timeout = true
 o.ttimeout = true

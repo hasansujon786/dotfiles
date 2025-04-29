@@ -11,7 +11,6 @@ set scrolloff 5
 # set info size
 # set filesep " "
 set hidden true
-set icons true
 set mouse true
 #set color256 true
 #set number true

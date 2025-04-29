@@ -51,9 +51,6 @@ alias wtt='wt -w 0 nt -d .'
 alias dx='pwsh -Command dxdiag'
 alias su='subl'
 alias sub='subl'
-subl() {
-  "C:\Program Files\Sublime Text\subl.exe" "$@"
-}
 
 # Android
 alias gdc='./gradlew clean'
@@ -112,6 +109,7 @@ alias o='explorer'
 alias open='explorer'
 alias dus='du -h --max-depth=1 --exclude=node_modules* | sort -rh'
 alias dua='du -s * --exclude=node_modules* | sort -rn | cut -f2- | xargs -d "\n" du -sh'
+alias dul='du -h -x --exclude=node_modules* -s -- *  | sort -r -h | head -20'
 alias df='df -h'
 alias lf='lfcd'
 # Copy the PWD to the Clipboard
@@ -344,6 +342,9 @@ expand-aliases() {
 ##################################################
 # auto-expand
 bind -m emacs-standard -x '" ":expand-aliases'
+bind -m vi-command -x '" ":expand-aliases'
+bind -m vi-insert -x '" ":expand-aliases'
+bind '"\C-@":magic-space'
 # bind '"\e\ ":magic-space'
 # bind '"\eq":alias-expand-line'
 # bind '" ":"\eq\C-v "'

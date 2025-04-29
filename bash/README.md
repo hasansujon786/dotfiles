@@ -1,14 +1,54 @@
+# Usefull links
 https://phoenixnap.com/kb/change-bash-prompt-linux
 
+# Coor Codes
+```bash
+blk='\[\033[01;30m\]'   # Black
+red='\[\033[01;31m\]'   # Red
+grn='\[\033[01;32m\]'   # Green
+ylw='\[\033[01;33m\]'   # Yellow
+blu='\[\033[01;34m\]'   # Blue
+pur='\[\033[01;35m\]'   # Purple
+cyn='\[\033[01;36m\]'   # Cyan
+wht='\[\033[01;37m\]'   # White
+clr='\[\033[00m\]'      # Reset
+```
+
+# Poor man fetch
+```bash
+printf "\n"
+printf "   %s\n" "IP ADDR: $(curl ifconfig.me)"
+printf "   %s\n" "USER: $(echo $USER)"
+printf "   %s\n" "DATE: $(date)"
+printf "   %s\n" "UPTIME: $(uptime -p)"
+printf "   %s\n" "HOSTNAME: $(hostname -f)"
+printf "   %s\n" "CPU: $(awk -F: '/model name/{print $2}' | head -1)"
+printf "   %s\n" "KERNEL: $(uname -rms)"
+printf "   %s\n" "PACKAGES: $(dpkg --get-selections | wc -l)"
+printf "   %s\n" "RESOLUTION: $(xrandr | awk '/\*/{printf $1" "}')"
+printf "   %s\n" "MEMORY: $(free -m -h | awk '/Mem/{print $3"/"$2}')"
+printf "\n"
+```
+
+
 # vim mode in bash
+```bash
 set -o vi
 bind '"jk":vi-movement-mode'
+```
 
-# bind '\C-o:clear-screen'
-# bind '"\eh":"foobar"'
-# bind '"\e[24~":"foobar"'
-# bind '"\ed":kill-word'
+# Keymap syntax
+```bash
+bind '\C-o:clear-screen'
+bind '"\eh":"foobar"'
+bind '"\e[24~":"foobar"'
+bind '"\ed":kill-word'
+```
 
+# Usefull functions
+```bash
+
+echo "$SECONDS"
 git-branch-name() {
   git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3-
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
@@ -54,41 +94,6 @@ git_status() {
 }
 
 
-globalias() {
-  echo "foo"
-   # Get last word to the left of the cursor:
-   # (z) splits into words using shell parsing
-   # (A) makes it an array even if there's only one element
-   # local word=${${(Az)LBUFFER}[-1]}
-   # if [[ $GLOBALIAS_FILTER_VALUES[(Ie)$word] -eq 0 ]]; then
-      # zle _expand_alias
-      # zle expand-word
-   # fi
-   # zle self-insert
-}
-# zle -N globalias
-bind '"\001":"echo command"'
-# bind '"\002":"echo command"'
-bind '\C-\ :clear-screen'
-bind -x '"\el":globalias'
-# space expands all aliases, including global
-# bindkey -M emacs " " globalias
-# bindkey -M viins " " globalias
 
-# # control-space to make a normal space
-# bindkey -M emacs "^ " magic-space
-# bindkey -M viins "^ " magic-space
 
-# # normal space during searches
-# bindkey -M isearch " " magic-space
-
-open_alacritty() {
-  start alacritty --working-directory $(pwd)
-  # nohup alacritty --working-directory $(pwd) </dev/null &>/dev/null &
-}
-
-open_bash() {
-  start bash
-}
-
--- "$SECONDS"
+# ```

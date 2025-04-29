@@ -1,0 +1,17 @@
+set editing-mode vi
+# set keymap vi # ensure vi key bindings are fully applied
+set bell-style none
+
+$if mode=vi
+  set keymap vi-insert
+  "jk": vi-movement-mode
+  "\C-e": end-of-line
+  "\C-a": beginning-of-line
+  "\C-f": forward-char
+  "\C-b": backward-char
+  "\C-d": delete-char
+  "\C-k": kill-line
+  "\C-l": clear-screen
+  "\C-n": next-history
+  "\C-p": previous-history
+$endif

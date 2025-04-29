@@ -1,4 +1,5 @@
 #!/bin/bash
+set -o vi # Enable Vi mode in Bash
 
 ### Neovim Quick Edit & Execute
 ##################################################
@@ -12,7 +13,6 @@ _edit_wo_executing() {
   READLINE_POINT="$(printf '%s' "$READLINE_LINE" | wc -c)" # READLINE_POINT="${#READLINE_LINE}"
   rm -f "$tmpf"                                            # -f for those who have alias rm='rm -i'
 }
-# bind -x '"\C-x\C-e":_edit_wo_executing'
 # bind to "C-x e" in all modes
 bind -m vi -x '"\C-x\C-e":_edit_wo_executing'
 bind -m vi-insert -x '"\C-x\C-e":_edit_wo_executing'
@@ -21,15 +21,13 @@ bind -m emacs -x '"\C-x\C-e":_edit_wo_executing'
 ### Neovim Config Swithcer
 ##################################################
 alias lz="NVIM_APPNAME=LazyVim nvim"
-alias vi="NVIM_APPNAME=LazyVim nvim"
+alias vi="NVIM_APPNAME=nvim nvim"
 alias miv="NVIM_APPNAME=mini_nvim nvim"
 # alias nvim-kick="NVIM_APPNAME=kickstart nvim"
 # alias nvim-chad="NVIM_APPNAME=NvChad nvim"
-# alias nvim-astro="NVIM_APPNAME=AstroNvim nvim"
-bind -x '"\C-a": nvims'
 
 function nvims() {
-  items=("default" "kickstart" "LazyVim" "NvChad" "AstroNvim")
+  items=("default" "kickstart" "LazyVim" "NvChad")
   config=$(printf "%s\n" "${items[@]}" | fzf --border-label=' Neovim Config' --height=~50% --layout=reverse --border --exit-0)
   if [[ -z $config ]]; then
     echo "Nothing selected"

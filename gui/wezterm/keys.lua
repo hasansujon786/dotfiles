@@ -121,12 +121,12 @@ return {
     { key = 'a', mods = 'LEADER|CTRL', action = act.ShowLauncherArgs({ flags = 'WORKSPACES' }) },
 
     -- Custom inputs
-    { key = ' ', mods = 'CTRL', action = { SendString = '\x11' } },
     { key = 'i', mods = 'CTRL', action = { SendString = '\x1b[105;5u' } },
     { key = 'm', mods = 'CTRL', action = { SendString = '\x1b[109;5u' } },
     { key = 'Enter', mods = 'SHIFT', action = { SendString = '\x1b[13;2u' } },
     { key = 'Enter', mods = 'CTRL', action = { SendString = '\x1b[13;5u' } },
-    { key = 'Backspace', mods = 'CTRL', action = { SendKey = { key = 'w', mods = 'CTRL' } } },
+    { key = 'Space', mods = 'CTRL', action = { SendKey = { key = 'Space', mods = 'CTRL' } } },
+    { key = 'Backspace', mods = 'CTRL', action = { SendKey = { key = 'Space', mods = 'CTRL' } } },
     { key = 'p', mods = 'SHIFT|CTRL', action = { SendKey = { key = 'x', mods = 'ALT' } } },
 
     -- stacks

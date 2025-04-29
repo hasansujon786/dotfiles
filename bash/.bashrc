@@ -19,14 +19,15 @@ HISTFILESIZE=2000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-if [ -f ~/dotfiles/bash/.env ]; then
+if [ -f ~/dotfiles/bash/.aliases ]; then
+  source ~/dotfiles/bash/.aliases
   source ~/dotfiles/bash/.fzf.sh
-  source ~/dotfiles/bash/.aliases.bash
   source ~/dotfiles/bash/vim.bash
   source ~/dotfiles/bash/.env
   source ~/dotfiles/bash/simple_prompt.bash
   source ~/dotfiles/bash/zoxide.bash
 fi
-if [ -f ~/.env ]; then
-  source ~/.env
+
+if [ -f ~/.env_local ]; then
+  . ~/.env_local
 fi
