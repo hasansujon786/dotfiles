@@ -245,15 +245,14 @@ f() {
 }
 
 fn() {
-  local files
-  if [ ! "$#" -gt 0 ]; then
-    echo "Need a string to search for!"
-    return 1
+  local search=""
+  if [[ $# -gt 0 ]]; then
+    search="$1"
+    shift
   fi
-  files=$(rg --no-messages --smart-case "$1" | fzf --reverse --multi --preview "cat {}")
-  if [ -n "$files" ]; then
-    nvim "$files"
-  fi
+  command rg --color=always --line-number --no-heading --smart-case "$@" "$search" |
+    command fzf -d':' --ansi --preview "bat -p --color=always {1} --highlight-line {2}" --preview-window "~8,+{2}-5" |
+    awk -F':' '{gsub(/\\/, "\\\\", $1); print $1 " +:" $2}' | xargs nvim
 }
 
 b() {
@@ -287,23 +286,6 @@ re() {
   dir=$(fd --max-depth 2 --search-path /d/repoes | fzf)
   cd "$dir" || exit
 }
-
-__find_alias__() {
-  local selected
-  selected=$(alias | sed -E "s/^alias ([^=]+)='(.*)'$/\1  =  \2/" | fzf --border-label="Run alias")
-
-  if [[ -z "$selected" ]]; then
-    return
-  fi
-
-  local command
-  command=$(echo "$selected" | cut -d'=' -f2 | xargs)
-  command="$command "
-
-  READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$command${READLINE_LINE:$READLINE_POINT}"
-  READLINE_POINT=$((READLINE_POINT + ${#command}))
-}
-bind -m emacs-standard -x '"\C-j":__find_alias__'
 
 scoop-uninstall() {
   local pkg

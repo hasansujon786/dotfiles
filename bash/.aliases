@@ -299,7 +299,7 @@ insert_space() {
   READLINE_LINE="$READLINE_LINE "
   READLINE_POINT=${#READLINE_LINE}
 }
-expand-aliases() {
+expand_aliases() {
   local input="$READLINE_LINE"
   local -a words=($input) # Split into words (using whitespace as delimiter)
   local word_count=${#words[@]}
@@ -337,17 +337,36 @@ expand-aliases() {
 
   insert_space
 }
+find_alias() {
+  local selected
+  selected=$(alias | sed -E "s/^alias ([^=]+)='(.*)'$/\1  =  \2/" | fzf --border-label="Run alias")
+
+  if [[ -z "$selected" ]]; then
+    return
+  fi
+
+  local command
+  command=$(echo "$selected" | cut -d'=' -f2 | xargs)
+  command="$command "
+
+  READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$command${READLINE_LINE:$READLINE_POINT}"
+  READLINE_POINT=$((READLINE_POINT + ${#command}))
+}
 
 ### Keybinds
 ##################################################
 # auto-expand
-bind -m emacs-standard -x '" ":expand-aliases'
-bind -m vi-command -x '" ":expand-aliases'
-bind -m vi-insert -x '" ":expand-aliases'
+bind -m emacs-standard -x '" ":expand_aliases'
+bind -m vi-command -x '" ":expand_aliases'
+bind -m vi-insert -x '" ":expand_aliases'
 bind '"\C-@":magic-space'
 # bind '"\e\ ":magic-space'
 # bind '"\eq":alias-expand-line'
 # bind '" ":"\eq\C-v "'
+
+bind -m emacs-standard -x '"\C-j":find_alias'
+bind -m vi-command -x '"\C-j":find_alias'
+bind -m vi-insert -x '"\C-j":find_alias'
 
 bind '"\eo":"\C-uyazi_cd\C-m"'
 # bind '"\C-x\C-x":edit-and-execute-command'
