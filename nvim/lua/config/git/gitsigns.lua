@@ -21,7 +21,6 @@ end
 return {
   'lewis6991/gitsigns.nvim',
   lazy = true,
-  -- commit = 'de18f6b749f6129eb9042a2038590872df4c94a9',
   event = 'BufReadPost',
   opts = {
     signs_staged_enable = true,
@@ -84,4 +83,7 @@ return {
       map({ 'o', 'x' }, 'ah', '<cmd>Gitsigns select_hunk<CR>')
     end,
   },
+  config_path = function (_, opts)
+    require('gitsigns').setup(opts)
+  end
 }

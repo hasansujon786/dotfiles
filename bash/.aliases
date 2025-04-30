@@ -296,10 +296,17 @@ declare -A EXCLUDE_EXPAND_ALIASES=(
   ["--"]=1
 )
 insert_space() {
-  READLINE_LINE="$READLINE_LINE "
-  READLINE_POINT=${#READLINE_LINE}
+  # Simulate pressing Space by inserting a space at the current cursor position
+  READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT} ${READLINE_LINE:$READLINE_POINT}"
+  ((READLINE_POINT++))
 }
 expand_aliases() {
+  # Exit if cursor is not at the end
+  if [ "$READLINE_POINT" -ne "${#READLINE_LINE}" ]; then
+    insert_space
+    return
+  fi
+
   local input="$READLINE_LINE"
   local -a words=($input) # Split into words (using whitespace as delimiter)
   local word_count=${#words[@]}

@@ -188,6 +188,8 @@ __fzf_z_plus__() {
   fi
 }
 bind -m emacs-standard '"\C-o": " \C-b\C-k \C-u`__fzf_z_plus__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d\C-h"'
+bind -m vi-command '"\C-o": "\C-z\C-o\C-z"'
+bind -m vi-insert '"\C-o": "\C-z\C-o\C-z"'
 
 fk() {
   local pid
@@ -250,9 +252,38 @@ fn() {
     search="$1"
     shift
   fi
-  command rg --color=always --line-number --no-heading --smart-case "$@" "$search" |
-    command fzf -d':' --ansi --preview "bat -p --color=always {1} --highlight-line {2}" --preview-window "~8,+{2}-5" |
-    awk -F':' '{gsub(/\\/, "\\\\", $1); print $1 " +:" $2}' | xargs nvim
+  local files
+  files=$(command rg --color=always --line-number --no-heading --smart-case "$@" "$search" |
+    command fzf -d':' --ansi --preview "bat -p --color=always {1} --highlight-line {2}" --preview-window "~8,+{2}-5")
+
+  if [ -n "$files" ]; then
+
+    open_vertical=true # or false if you don't want vertical split
+    local args=()
+
+    while IFS= read -r line; do
+      IFS=':' read -r filepath lineno _ <<<"${line//\\//}"
+      if [[ "${#args[@]}" -eq 0 ]]; then
+        # Open first file normally
+        args+=("$filepath" "-c" "$lineno")
+      else
+        if [[ $open_vertical == true ]]; then
+          args+=("-c" "vsplit $filepath" "-c" "$lineno")
+        else
+          args+=("-c" "e $filepath" "-c" "$lineno")
+        fi
+      fi
+    done <<<"$files"
+
+    # Optionally equalize window sizes and go to first split
+    if [[ $open_vertical == true ]]; then
+      args+=("-c" "wincmd =" "-c" "wincmd t")
+    fi
+
+    nvim "${args[@]}"
+  else
+    echo "No file selected"
+  fi
 }
 
 b() {
