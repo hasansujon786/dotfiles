@@ -93,6 +93,13 @@ git_status() {
   if [ $git_modified_symbol ]; then printf "%s " $git_modified_symbol; fi
 }
 
+sourceIfExists() {
+  if [ -e $1 ]; then
+    source $1;
+  fi
+}
+sourceIfExists ~/dotfiles/bash/.aliases
+
 
 
 

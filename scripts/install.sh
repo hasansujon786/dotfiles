@@ -201,7 +201,7 @@ setup_git() {
   heading git
 
   archive_config "${conf_path[$OS]}"
-  create_symlink "${conf_path[$OS]}" "$HOME/dotfiles/bash/.gitconfig"
+  create_symlink "${conf_path[$OS]}" "$DOTFILES/scripts/bash/.gitconfig"
 }
 setup_bash() {
   declare -A conf_path
@@ -212,7 +212,7 @@ setup_bash() {
   heading bash
 
   for file_name in "${bash_file_names[@]}"; do
-    local source_file="${DOTFILES}/bashd/${file_name}"
+    local source_file="$DOTFILES/scripts/bash/${file_name}"
     local symlink_file="${conf_path[$OS]}/${file_name}"
 
     if [[ -f "${source_file}" ]]; then
@@ -300,7 +300,7 @@ setup_kanata() {
 }
 install_various_cli_apps() {
   heading "Usefull CLI Apps"
-  get wget curl fd ripgrep zoxide fzf delta jq eza bat
+  get wget curl fd ripgrep zoxide fzf delta jq eza bat bc
 
   if [[ "$OS" == "win" ]]; then
     get mingw make
