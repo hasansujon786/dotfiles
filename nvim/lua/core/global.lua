@@ -20,10 +20,6 @@ P = function(...)
   return ...
 end
 
-_G.log = function(...)
-  return require('hasan.utils.logger')(...)
-end
-
 R = function(moduleName, message)
   if pcall(require, 'plenary') then
     local plenary_reload = require('plenary.reload').reload_module

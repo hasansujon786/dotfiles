@@ -29,7 +29,8 @@ return {
     },
     integrations = {
       diffview = true,
-      telescope = true,
+      telescope = false,
+      snacks = true,
     },
     mappings = {
       status = {

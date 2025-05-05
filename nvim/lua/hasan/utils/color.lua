@@ -15,11 +15,11 @@ M.toggle_transparency = function(auto_follow_state)
   local sed_cmd_val, highlights
   if is_transparent then
     -- Transparent values
-    sed_cmd_val = '4s/false/true/'
+    sed_cmd_val = '1s/false/true/'
     highlights = { Normal = { bg = 'none', fg = hl_normal.fg } }
   else
     -- Non-transparent values
-    sed_cmd_val = '4s/true/false/'
+    sed_cmd_val = '1s/true/false/'
     highlights = { Normal = { bg = hl_normal.bg, fg = hl_normal.fg } }
   end
 

@@ -1,10 +1,12 @@
+local transparency = true
+
 ---@class state
 ---@field lsp state.Lsp
 ---@field completion state.Completion
 local M = {}
 
 M.theme = {
-  transparency = true,
+  transparency = transparency,
 }
 
 M.treesitter = {

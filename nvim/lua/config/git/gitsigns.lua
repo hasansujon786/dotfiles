@@ -21,6 +21,7 @@ end
 return {
   'lewis6991/gitsigns.nvim',
   lazy = true,
+  commit = '140ac646db125904e456e42ab8b538d28f9607d7',
   event = 'BufReadPost',
   opts = {
     signs_staged_enable = true,
@@ -64,7 +65,7 @@ return {
       map('v', '<leader>gs', function() gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, { desc = 'Git: Stage hunk' })
       map('n', '<leader>gr', gs.reset_hunk, { desc = 'Git: Reset hunk' })
       map('v', '<leader>gr', function() gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, { desc = 'Git: Reset hunk' })
-      map('n', '<leader>g.', gs.stage_buffer, { desc = 'Git: Stage buffer' })
+      map('n', '<leader>g.', '<cmd>w<cr><cmd>lua require("gitsigns").stage_buffer()<cr>', { desc = 'Git: Stage buffer' })
       map('n', '<leader>gR', gs.reset_buffer, { desc = 'Git: Reset buffer' })
       map('n', '<leader>gu', gs.undo_stage_hunk, { desc = 'Git: Undo last stage' })
       -- Blame Actions
