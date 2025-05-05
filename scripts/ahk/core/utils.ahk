@@ -113,6 +113,11 @@ superEscape() {
   }
   Send("{Esc}")
 }
+; *Capslock::alternateTab()
+; *\::ctrlAndAltTab()
+; *\ up::ctrlAndAltTabStop()
+; *Capslock::ctrlAndAltTab()
+; *Capslock up::ctrlAndAltTabStop()
 toggleCapsLosck() {
   isCapsOn := !GetKeyState("CapsLock", "T")
   SetCapsLockState(isCapsOn)

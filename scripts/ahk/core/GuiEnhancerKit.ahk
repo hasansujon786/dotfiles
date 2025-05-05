@@ -212,7 +212,8 @@ class GuiExt extends Gui
                  , HTTOPRIGHT   := 14, HTBOTTOM      := 15
                  , HTBOTTOMLEFT := 16, HTBOTTOMRIGHT := 17
                  , TCAPTION     := 2
-            
+            local _
+
             if !(g is Gui)
                 return
 

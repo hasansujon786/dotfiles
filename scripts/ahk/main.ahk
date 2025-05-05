@@ -12,6 +12,7 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 #Include %A_ScriptDir%\core\vim_explorer.ahk
 #Include %A_ScriptDir%\core\automation_mode.ahk
 #Include %A_ScriptDir%\leader.ahk
+#Include %A_ScriptDir%\grid.ahk
 
 ;Reload/Execute this script.ahk file
 ::rscript::
@@ -29,10 +30,8 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 ;******************************************************************************
 ; Keymaps
 ;******************************************************************************
-PgUp::Home
-PgDn::End
-+PgUp::PgUp
-+PgDn::PgDn
++PgUp::Home
++PgDn::End
 !SPACE::Send("^{SPACE}")
 
 ; Show menu
@@ -96,15 +95,10 @@ PrintScreen::Send("#+{s}")
 #InputLevel 1
 !\::Send("\")
 +\::Send("|")
-; \::alternateTab()
-; *Capslock::alternateTab()
+\::alternateTab()
 !`::switchBetweenSameApps()
 #\::toggleCapsLosck()
 #Capslock::toggleCapsLosck()
-*\::ctrlAndAltTab()
-*\ up::ctrlAndAltTabStop()
-*Capslock::ctrlAndAltTab()
-*Capslock up::ctrlAndAltTabStop()
 
 ^#m::Send("#{m}")
 #m::toggleWinMinimize()
@@ -119,7 +113,9 @@ PrintScreen::Send("#+{s}")
 #HotIf
 !Enter::Send("{f11}")
 !Escape::winRestoreAndCenter()
-$Escape::superEscape()
+#HotIf IsSet(mouseGridActive) && mouseGridActive == 0
+  $Escape::superEscape()
+#HotIf
 #SPACE::toggleAlwaysOnTop()
 ; Vertual Desktop
 #h::navToDesktop("left")
