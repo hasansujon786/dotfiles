@@ -1,5 +1,5 @@
 # Doc
-https://github.com/jtroo/kanata/blob/main/cfg_samples/all_keys_in_defsrc.kbd
+https://github.com/jtroo/kanata/blob/main/docs/config.adoc
 
 # Configs
 https://github.com/ChuufMaster/kanata-kbd

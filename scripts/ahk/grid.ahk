@@ -6,9 +6,9 @@ BITMAP_BORDER_COLOR := 0x888888
 WINDOW_TRANSPARENT := 120
 SUB_GRID_TRANSPARENT := 80 ; Value from 0 (invisible) to 255 (opaque)
 FONT_COLOR := "cddffdd"
-FONT_FAMILY := "Arial"
-SUB_GRID_FONT_SIZE := 10
-FONT_SIZE := 13
+FONT_FAMILY := "Ubuntu Sans"
+SUB_GRID_FONT_SIZE := 9
+FONT_SIZE := 14
 CENTER_POINT_COLOR := "BackgroundYellow"
 CENTER_POINT_SIZE := 7
 
@@ -20,7 +20,9 @@ SUB_GRID_2D_DIRECTIN := [
   ["z", "x", "c", "v", "b", "n", "m", ",", ".", "/"]
 ]
 FINE_POINT_DIRECTIONAL_KEYS := ["h", "j", "k", "l" ]
+
 #y::render()
+Hotkey("alt", render)
 
 global isInit := 1
 global mouseGridActive := 0
@@ -28,7 +30,7 @@ global bufferInput := ""
 global cellMap := Map()
 global lastFocusedCell := 0
 global innerCellMap := Map()
-global centerPointLocation := { x: 0, y:0 }
+global pointLocation := { x: 0, y:0, box: { x: 0, y: 0, w: 0, h: 0 } }
 global finePointCellKey := 0
 
 setGridState() {
@@ -39,10 +41,9 @@ setGridState() {
 
   ; Global gui & hooks
   global GRID_IH := InputHook("")
-  global BORDER_SUB_GRID, TAG_SUB_GRID, CENTER_POINTER
-  global BORDER_GRID := Gui("+AlwaysOnTop -Caption +ToolWindow -SysMenu +E0x20", "Transparent Grid Backgrounnd")
-  global TAG_GRID := Gui("+AlwaysOnTop -Caption +ToolWindow -SysMenu +E0x20", "Transparent Grid") ; +E0x20 allows click-through
-  global colGui := Array()
+  global BORDER_GRID, TAG_GRID, BORDER_SUB_GRID, TAG_SUB_GRID
+  global FOCUS_COL_BOX := Array()
+  global POINTER_BOX, POINTER_BOX_BG
 
   ; Convert key arrays into maps
   global DIRECTION_X_MAPS := Map()
@@ -57,31 +58,27 @@ setGridState() {
 }
 setGridState()
 
-render() {
+render(*) {
   global BORDER_GRID, TAG_GRID, mouseGridActive, GRID_IH
   if (mouseGridActive) {
     escape(GRID_IH, "")
     return
   }
 
-  if(isInit) {
-    WinSetTransparent(WINDOW_TRANSPARENT, BORDER_GRID.Hwnd)  ; Value from 0 (invisible) to 255 (opaque)
-    BORDER_GRID.BackColor := BITMAP_BG_COLOR  ; Required for transparency to work
-    pic := BORDER_GRID.Add("Pic", "x0 y0 w" CANVAS_WIDTH " h" CANVAS_WIDTH)
-    hbm := CreateGridBitmap(CANVAS_WIDTH, CANVAS_WIDTH, CELL_WIDTH, CELL_HEIGHT, DIRECTION_Y.Length, DIRECTION_X.Length)
-    pic.Value := "HBITMAP:*" hbm
+  BORDER_GRID := Gui("+AlwaysOnTop -Caption +ToolWindow -SysMenu +E0x20", "Transparent Grid Backgrounnd")
+  WinSetTransparent(WINDOW_TRANSPARENT, BORDER_GRID.Hwnd)  ; Value from 0 (invisible) to 255 (opaque)
+  BORDER_GRID.BackColor := BITMAP_BG_COLOR  ; Required for transparency to work
+  pic := BORDER_GRID.Add("Pic", "x0 y0 w" CANVAS_WIDTH " h" CANVAS_WIDTH)
+  hbm := CreateGridBitmap(CANVAS_WIDTH, CANVAS_WIDTH, CELL_WIDTH, CELL_HEIGHT, DIRECTION_Y.Length, DIRECTION_X.Length)
+  pic.Value := "HBITMAP:*" hbm
 
-    TAG_GRID.BackColor := BITMAP_BG_COLOR  ; Required for transparency to work
-    TAG_GRID.SetFont("s" FONT_SIZE " Bold q2 " FONT_COLOR, FONT_FAMILY)
-    ; WinSetTransparent(50, TAG_GRID.Hwnd)  ; Value from 0 (invisible) to 255 (opaque)
-    WinSetTransColor(BITMAP_BG_COLOR, TAG_GRID.Hwnd)
-    renderCells()
+  TAG_GRID := Gui("+AlwaysOnTop -Caption +ToolWindow -SysMenu +E0x20", "Transparent Grid") ; +E0x20 allows click-through
+  TAG_GRID.BackColor := BITMAP_BG_COLOR  ; Required for transparency to work
+  TAG_GRID.SetFont("s" FONT_SIZE " Bold q2 " FONT_COLOR, FONT_FAMILY)
+  WinSetTransColor(BITMAP_BG_COLOR, TAG_GRID.Hwnd)
 
-    global CENTER_POINTER := BORDER_GRID.AddText("x0 y0 w" CENTER_POINT_SIZE " h" CENTER_POINT_SIZE " " CENTER_POINT_COLOR, "")
-    global isInit := 0
-  }
-
-  renderCenterPoint(CANVAS_WIDTH/2, CANVAS_HEIGHT/2)
+  renderGridCells()
+  renderPointer(CANVAS_WIDTH/2, CANVAS_HEIGHT/2)
 
   BORDER_GRID.Show("NoActivate x0 y0 w" CANVAS_WIDTH " h" CANVAS_HEIGHT)
   TAG_GRID.Show("NoActivate x0 y0 w" CANVAS_WIDTH " h" CANVAS_HEIGHT)
@@ -90,7 +87,7 @@ render() {
 }
 ; render()
 
-renderCells() {
+renderGridCells() {
   ; Build grid and map labels to controls
   for rowIndex, row in DIRECTION_Y {
     for colIndex, col in DIRECTION_X {
@@ -98,18 +95,35 @@ renderCells() {
       x := (colIndex - 1) * CELL_WIDTH
       y := (rowIndex - 1) * CELL_HEIGHT
 
-      ctrl := TAG_GRID.AddText("x" x " y" y " w" CELL_WIDTH " h" CELL_HEIGHT " Center BackgroundTrans +0x200", StrUpper(col " " row))
+      ctrl := TAG_GRID.AddText("x" x " y" y " w" CELL_WIDTH " h" CELL_HEIGHT " Center BackgroundTrans +0x200", StrUpper(col "   " row))
       cellMap[label] := {ctrl: ctrl, x: x, y: y}
     }
   }
 }
-renderCenterPoint(x, y) {
-  global centerPointLocation, CENTER_POINTER
-  size := CENTER_POINT_SIZE / 2
 
-  centerPointLocation := { x:x-size, y:y-size }
-  CENTER_POINTER.Move(centerPointLocation.x, centerPointLocation.y)
-  CENTER_POINTER.Visible := true
+renderPointer(x, y) {
+  global POINTER_BOX_BG := BORDER_GRID.AddText("x0 y0 w" CANVAS_WIDTH " h" CANVAS_HEIGHT " " "Backgrounda13131 Hidden", "")
+  global POINTER_BOX := BORDER_GRID.AddText("x0 y0 w" CENTER_POINT_SIZE " h" CENTER_POINT_SIZE " " CENTER_POINT_COLOR, "")
+  movePointer({ x: 0, y:0, w: CANVAS_WIDTH, h: CANVAS_HEIGHT })
+}
+movePointer(box := 0, renderBox := 0) {
+  global pointLocation, POINTER_BOX, POINTER_BOX_BG
+  halfSize := CENTER_POINT_SIZE / 2
+  pointLocation := {
+    x: box.x + (box.w / 2),
+    y: box.y + (box.h / 2),
+    box: box
+  }
+
+  POINTER_BOX.Visible := false
+  POINTER_BOX.Visible := true
+  POINTER_BOX.Move(pointLocation.x - halfSize,  pointLocation.y - halfSize)
+  if (renderBox) {
+    POINTER_BOX_BG.Visible := true
+    POINTER_BOX_BG.Move(box.x, box.y, box.w, box.h)
+  } else {
+    POINTER_BOX_BG.Visible := false
+  }
 }
 
 highlightCell(cellId) {
@@ -146,7 +160,7 @@ highlightCell(cellId) {
   TAG_SUB_GRID.Show("NoActivate x" cell.x " y" cell.y " w" gw " h" gh)
   WinSetTransColor(BITMAP_BG_COLOR, TAG_SUB_GRID)
 
-  renderCenterPoint(cell.x + gw/2, cell.y + gh/2)
+  movePointer({x: cell.x, y: cell.y, w: CELL_WIDTH, h: CELL_HEIGHT})
 
   for rowIndex, row in SUB_GRID_2D_DIRECTIN {
     for colIndex, label in row {
@@ -174,10 +188,10 @@ destroyCellGrid() {
   }
 }
 destroyFocusCol() {
-  global colGui
-  for index, colG in colGui {
+  global FOCUS_COL_BOX
+  for index, colG in FOCUS_COL_BOX {
     colG.Visible := false
-    colGui := Array()
+    FOCUS_COL_BOX := Array()
   }
 }
 restoreLastCellTag() {
@@ -190,10 +204,10 @@ restoreLastCellTag() {
 
 
 highlightCol(char) {
-  global colGui
+  global FOCUS_COL_BOX
 
   if(DIRECTION_X_MAPS.Has(char) == 0) {
-    return
+    return false
   }
 
   destroyFocusCol()
@@ -205,32 +219,38 @@ highlightCol(char) {
     colX := (focusColIndex - 1) * CELL_WIDTH
   }
 
-  renderCenterPoint(colX + CELL_WIDTH/2, CANVAS_HEIGHT/2)
+  movePointer({x : colX, y: 0, w: CELL_WIDTH, h: CANVAS_HEIGHT})
   col1 := BORDER_GRID.AddText("x" colX-1 " y0 w5 h" CANVAS_HEIGHT " Center Border BackgroundYellow", "")
   col2 := BORDER_GRID.AddText("x" colX+CELL_WIDTH-5 " y0 w5 h" CANVAS_HEIGHT " Center Border BackgroundYellow", "")
-  colGui.push(col1)
-  colGui.Push(col2)
+  FOCUS_COL_BOX := [ col1, col2 ]
   WinRedraw(BORDER_GRID.Hwnd)
+  return true
 }
 
 escape(ih, char) {
   global bufferInput, lastFocusedCell, finePointCellKey
 
-  restoreLastCellTag()
+  ; restoreLastCellTag()
   ih.Stop()
   lastFocusedCell := 0
   finePointCellKey := 0
   bufferInput := ""
-  TAG_GRID.Hide()
-  BORDER_GRID.Hide()
   destroyFocusCol()
   destroyCellGrid()
+  TAG_GRID.Destroy()
+  BORDER_GRID.Destroy()
   global mouseGridActive := 0
 }
 
 ; Define the OnEnd callback function
 onInputEnd(ih, char) {
-  global bufferInput, colGui, BORDER_SUB_GRID, TAG_SUB_GRID, lastFocusedCell, finePointCellKey, CENTER_POINTER
+  global bufferInput, FOCUS_COL_BOX, BORDER_SUB_GRID, TAG_SUB_GRID, lastFocusedCell, finePointCellKey, POINTER_BOX
+
+  if (StrLen(bufferInput) >= 2) {
+    bufferInput := SubStr(bufferInput, -1) . char ; set last char with new char
+  } else {
+    global bufferInput .= char
+  }
 
   EscChar := Chr(27)
   if (char = EscChar) {
@@ -243,7 +263,7 @@ onInputEnd(ih, char) {
     if (finePointCellKey && innerCellMap.Has(finePointCellKey)) {
       Send("{Click}")
     } else {
-      Send("{Click " centerPointLocation.x " " centerPointLocation.y "}")
+      Send("{Click " pointLocation.x " " pointLocation.y "}")
     }
 
     escape(ih, char)
@@ -287,7 +307,7 @@ onInputEnd(ih, char) {
 
       if(leftShift || rightShift) {
         finePointCellKey := lowerChar
-        CENTER_POINTER.Visible := false
+        POINTER_BOX.Visible := false
         MouseMove(targetX, targetY)
         return
       }
@@ -301,25 +321,64 @@ onInputEnd(ih, char) {
     }
   }
 
-  if (StrLen(bufferInput) >= 2) {
-    bufferInput := SubStr(bufferInput, -1) . char ; set last char with new char
-  } else {
-    global bufferInput .= char
-    highlightCol(bufferInput)
-  }
-
   focusCell := highlightCell(bufferInput)
   if (focusCell) {
     bufferInput := ""  ; Reset buffer after 2 characters
+    return
+  }
+
+  if (StrLen(bufferInput) == 1) {
+    hasVaidCol := highlightCol(bufferInput)
+    if(hasVaidCol == 0 && FIND_POINT_DIRECTION_MAPS.Has(char)) {
+      bufferInput := ""
+      box := pointLocation.box
+      Switch char {
+        Case "h":
+          movePointer({ x: box.x, y: box.y, w: box.w / 2, h: box.h }, 1)
+        Case "l" :
+          movePointer({ x: box.x + box.w / 2, y: box.y, w: box.w / 2, h: box.h }, 1)
+        Case "k" :
+          movePointer({ x: box.x, y: box.y, w: box.w, h: box.h / 2 }, 1)
+        Case "j" :
+          movePointer({ x: box.x, y: box.y + box.h / 2, w: box.w, h: box.h / 2}, 1)
+      }
+    }
+    return
   }
 }
 
+; ------------------------------------------------
+; -- Keymaps Listeners ---------------------------
+; ------------------------------------------------
 watchKeyPress() {
   global GRID_IH
   GRID_IH.KeyOpt("{All}", "N")  ; Allow all keys
   GRID_IH.OnChar := onInputEnd
   GRID_IH.Start()
 }
+
+; Class Keymap {
+;   static GRID_KEYMAP_HOOK := InputHook("B L1 T1", "{Esc}")
+
+;   static AltStart() {
+;    Keymap.GRID_KEYMAP_HOOK.Start()
+;     reason := Keymap.GRID_KEYMAP_HOOK.Wait()
+;     if (reason = "Stopped") {
+;       render()
+;     } else if (reason = "Max") {
+;       SendInput "{Blind}{LAlt down}"
+;       SendInput Keymap.GRID_KEYMAP_HOOK.Input
+;     }
+;   }
+
+;   static AltUp() {
+;     if (Keymap.GRID_KEYMAP_HOOK.InProgress) {
+;       Keymap.GRID_KEYMAP_HOOK.Stop()
+;     } else {
+;       Send "{LAlt up}"
+;     }
+;   }
+; }
 
 ; Draw a grid using GDI
 CreateGridBitmap(w, h, cw, ch, rows, cols, borderColor := BITMAP_BORDER_COLOR) {

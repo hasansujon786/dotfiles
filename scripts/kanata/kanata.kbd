@@ -20,7 +20,7 @@
   _     _     _     _     _      _      _     _     _     _     _      _       _     _
 @cap    _     _     _     _      _      _     _     _     _     _      _       _
   _     _     _     _     _      _      _     _     _     _     _      _
-  _     _   @lalt              @spc                 _     _     _
+  _     _     _                @spc                 _     _     _
 )
 
 (deflayer spc-layer
@@ -34,7 +34,7 @@ A-tab   C-q   _     end   _     C-S-tab C-y   pgup  A-i   pgdn  C-p    C-S-tab C
 (defalias
   spc (tap-hold-release 2000 400 spc (layer-toggle spc-layer))
   cap (tap-hold-release 2000 400 A-tab lctl)
-  lalt (tap-hold-release 2000 180 M-y lalt)
+  ;; lalt (tap-hold-press 100 180 M-y lalt)
   ;; a (tap-hold $tap-time $hold-time a lmet)
   ;; s (tap-hold $tap-time $hold-time s lalt)
   ;; d (tap-hold $tap-time $hold-time d lsft)

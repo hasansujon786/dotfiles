@@ -238,3 +238,18 @@ return
 ; DllCall("dwmapi\DwmSetWindowAttribute", "Ptr", SLine.Hwnd, "Int", 33, "Int*", 3, "Int", 4)
 
 ```
+
+# Archive keymaps
+```ahk
+#InputLevel 1
+!\::Send("\")
+\::alternateTab()
+*Capslock::alternateTab()
+*\::ctrlAndAltTab()
+*\ up::ctrlAndAltTabStop()
+*Capslock::ctrlAndAltTab()
+*Capslock up::ctrlAndAltTabStop()
+
+
+```
+

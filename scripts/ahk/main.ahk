@@ -34,9 +34,8 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 +PgDn::End
 !SPACE::Send("^{SPACE}")
 
-; Show menu
-!.::SendInput("{AppsKey}")
-!;::SendInput("{AppsKey}")
+; Show menu (use #; for emoji)
+#.::SendInput("{AppsKey}")
 ; Screenshot
 #`::takeScreenshot()
 ^#`::openNewestFile("C:\Users\" A_UserName "\Pictures\Screenshots\*.*")
@@ -55,15 +54,10 @@ PrintScreen::Send("#+{s}")
 #HotIf winIsMouseOver("ahk_class Shell_TrayWnd")
   ~LAlt & WheelUP::volup()
   ~LAlt & WheelDown::voldown()
-  ~LAlt & RButton::showVolMixer()
 #HotIf
-; emacs-standard
-!f::Send("^{Right}")
-!b::Send("^{Left}")
-!+f::Send("^+{Right}")
-!+b::Send("^+{Left}")
-!Backspace::Send("^{Backspace}")
-; Global arrow controls
+~LAlt & MButton::showVolMixer()
+
+; Global arrow with homerow
 #HotIf not WinActive("ahk_exe WindowsTerminal.exe")
   and not WinActive("ahk_exe alacritty.exe")
   and not WinActive("ahk_exe wezterm-gui.exe")
@@ -73,32 +67,25 @@ PrintScreen::Send("#+{s}")
   !h::SendInput("{LEFT}")
   !l::SendInput("{RIGHT}")
 #HotIf
+; emacs-standard
+!Backspace::SendInput("^{Backspace}")
+!f::Send("^{Right}")
+!b::Send("^{Left}")
++!f::Send("^+{Right}")
++!b::Send("^+{Left}")
 ; Other
 ^#b::showCalendar()
 #q::toggleBluetooth()
 #k::toggleKanata()
+#Capslock::toggleCapsLosck()
 
 ;******************************************************************************
 ; Window manazement
 ;******************************************************************************
-!1::Send("#1")
-!2::Send("#2")
-!3::Send("#3")
-!4::Send("#4")
-!5::Send("#5")
-!6::Send("#6")
-!7::Send("#7")
-!8::Send("#8")
-!9::Send("#9")
-!0::Send("#0")
-
 #InputLevel 1
 !\::Send("\")
-+\::Send("|")
 \::alternateTab()
 !`::switchBetweenSameApps()
-#\::toggleCapsLosck()
-#Capslock::toggleCapsLosck()
 
 ^#m::Send("#{m}")
 #m::toggleWinMinimize()
@@ -164,6 +151,8 @@ current_layout := 0
   or WinActive("Task Switching") ; ctrl+alt+tab
   or WinActive("Notification Center")
   or WinActive("ahk_class PotPlayer64")
+  or WinActive("ahk_class PotPlayer64")
+  or WinActive("ahk_exe zen.exe") and WinActive("Picture-in-Picture")
   ; or (winIsMouseOver("ahk_class ApplicationFrameWindow") or winIsMouseOver("ahk_class Shell_LightDismissOverlay")) and winIsMouseOver("ahk_exe explorer.exe") and winIsMouseOver("") ; clipboard & backdrop
   ; or WinActive("ahk_class MultitaskingViewFrame")  ; ctrl+alt+tab
   ; or WinActive("ahk_class Windows.UI.Core.CoreWindow") ; win+tab/StartScreen
