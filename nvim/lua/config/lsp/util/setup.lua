@@ -1,8 +1,10 @@
 local M = {}
 
+vim.lsp.enable({ 'autohotkey_lsp' })
+
 ---LspAttach event callback
 ---@param args table
-M.lsp_attach = function(args)
+function M.lsp_attach(args)
   local bufnr = args.buf
   local client = vim.lsp.get_client_by_id(args.data.client_id)
   if client == nil then

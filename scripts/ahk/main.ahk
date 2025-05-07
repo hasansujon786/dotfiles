@@ -145,14 +145,15 @@ current_layout := 0
 ; AltTabMenu & TaskView Vim Mode
 ;******************************************************************************
 #/::SendInput("^!{Tab}")
-#HotIf WinActive("Volume Control")
+#HotIf (WinActive("Volume Control")
   or WinActive("Quick settings")
   or WinActive("Task View") ; win+tab
   or WinActive("Task Switching") ; ctrl+alt+tab
   or WinActive("Notification Center")
   or WinActive("ahk_class PotPlayer64")
   or WinActive("ahk_class PotPlayer64")
-  or WinActive("ahk_exe zen.exe") and WinActive("Picture-in-Picture")
+  or WinActive("ahk_exe zen.exe") and WinActive("Picture-in-Picture"))
+  and IsSet(mouseGridActive) && mouseGridActive == 0
   ; or (winIsMouseOver("ahk_class ApplicationFrameWindow") or winIsMouseOver("ahk_class Shell_LightDismissOverlay")) and winIsMouseOver("ahk_exe explorer.exe") and winIsMouseOver("") ; clipboard & backdrop
   ; or WinActive("ahk_class MultitaskingViewFrame")  ; ctrl+alt+tab
   ; or WinActive("ahk_class Windows.UI.Core.CoreWindow") ; win+tab/StartScreen
