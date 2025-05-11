@@ -1,6 +1,8 @@
 setlocal nonumber norelativenumber
 setlocal readonly nomodifiable nolist
 
+let b:snacks_indent = v:false
+
 nnoremap <buffer>           <CR>    <C-]>
 " Next link
 nnoremap <nowait><buffer>    ]t      /\v\\|[^\|]+\\|<CR><cmd>nohl<CR>

@@ -380,7 +380,34 @@ local function set_custom_highlights()
     WezTab                      = { fg = c.orange, bg = context },
     WezTabBorder                = { fg = dark_border, bg = c.none },
 
-  }
+    -- /// navbyddy ///
+    NavbuddyFile                = { link = '@lsp.type.comment' },
+    NavbuddyModule              = { link = '@module' },
+    NavbuddyNamespace           = { link = '@lsp.type.Namespace' },
+    NavbuddyPackage             = { link = 'Keyword' },
+    NavbuddyClass               = { link = '@lsp.type.class' },
+    NavbuddyProperty            = { link = '@lsp.type.Property' },
+    NavbuddyField               = { link = '@lsp.type.Property' },
+    NavbuddyConstructor         = { link = '@type' },
+    NavbuddyEnum                = { link = '@lsp.type.Enum' },
+    NavbuddyInterface           = { link = '@lsp.type.Interface' },
+    NavbuddyFunction            = { link = '@lsp.type.Function' },
+    NavbuddyMethod              = { link = '@lsp.type.method' },
+    NavbuddyVariable            = { link = '@lsp.type.Variable' },
+    NavbuddyConstant            = { link = 'Constant' },
+    NavbuddyEnumMember          = { link = '@lsp.type.EnumMember' },
+    NavbuddyStruct              = { link = '@lsp.type.Struct' },
+    NavbuddyEvent               = { link = '@lsp.type.Event' },
+    NavbuddyOperator            = { link = '@lsp.type.Operator' },
+    NavbuddyTypeParameter       = { link = '@lsp.type.TypeParameter' },
+    NavbuddyString              = { link = '@lsp.type.String' },
+    NavbuddyNumber              = { link = '@lsp.type.Number' },
+    NavbuddyBoolean             = { link = '@boolean' },
+    NavbuddyArray               = { link = '@type' },
+    NavbuddyObject              = { link = '@constant.builtin' },
+    NavbuddyKey                 = { link = '@constant.builtin' },
+    NavbuddyNull                = { link = '@constant.builtin' },
+}
 
   for hlName, option in pairs(highlights) do
     hl(0, hlName, option)

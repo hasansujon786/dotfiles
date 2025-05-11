@@ -1,7 +1,5 @@
 local M = {}
 
-vim.lsp.enable({ 'autohotkey_lsp' })
-
 ---LspAttach event callback
 ---@param args table
 function M.lsp_attach(args)

@@ -171,3 +171,5 @@ o.breakindent = true --                          Every wrapped line will continu
 -- o.showbreak = '↪  ' --                           Make it so that long lines wrap smartly
 -- vim.wo.showbreak = '↪  ' --                           Make it so that long lines wrap smartly
 opt.cpoptions:append('n')
+
+vim.lsp.enable({ 'autohotkey_lsp' })

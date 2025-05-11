@@ -2,7 +2,7 @@
 ; Custom layout
 ;******************************************************************************
 
-Global TASKBAR_HEIGHT := 0 ;; 40
+Global TASKBAR_HEIGHT := 40 ;; 40
 
 ; "wt.exe", "ahk_exe WindowsTerminal.exe" ; "Code.exe", "ahk_exe Code.exe"
 Global EDITOR_EXE := ["wezterm-gui.exe", "ahk_exe wezterm-gui.exe"]
