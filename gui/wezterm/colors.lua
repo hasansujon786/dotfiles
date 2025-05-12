@@ -5,13 +5,7 @@ M.colors = {
   fg = '#abb2bf',
   fg1 = '#c0c0c0',
   muted = '#68707E',
-}
-
-M.window_frame = {
-  -- inactive_titlebar_bg = '#1E1C1C',
-  inactive_titlebar_bg = '#242A37',
-  active_titlebar_bg = '#242A37',
-  font_size = 12,
+  light_grey = '#8b95a7',
 }
 
 M.one_half = {
@@ -50,18 +44,24 @@ M.one_half = {
   quick_select_match_fg = { Color = '#ebc275' },
 
   tab_bar = {
+    background = '#242A37',
     active_tab = {
-      -- bg_color = '#1E1C1C',
-      bg_color = '#1a1b20',
-      fg_color = M.colors.fg1,
+      bg_color = '#32354b',
+      fg_color = M.colors.light_grey,
       intensity = 'Bold',
       underline = 'None',
     },
     inactive_tab = {
-      bg_color = M.window_frame.active_titlebar_bg,
+      bg_color = '#242A37',
       fg_color = M.colors.muted,
     },
   },
+}
+
+M.window_frame = {
+  inactive_titlebar_bg = '#242A37',
+  active_titlebar_bg = '#242A37',
+  font_size = 12,
 }
 
 return M

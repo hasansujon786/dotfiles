@@ -4,13 +4,6 @@ local function is_doc_file(path)
   return (path:match('/nvim/') ~= nil or path:match('/nvim%-data/') ~= nil) and path:match('/doc/')
 end
 
-local function set_titlestring()
-  -- vim.o.titlestring = '%= Neovim%<%='
-  vim.schedule(function()
-    vim.o.titlestring = '%= %{fnamemodify(getcwd(), ":t")}%<%=' -- what the title of the window will be set to
-  end)
-end
-
 augroup('MY_AUGROUP')(function(autocmd)
   autocmd('CmdwinEnter', 'nnoremap <buffer><CR> <CR>')
 
@@ -47,13 +40,10 @@ augroup('MY_AUGROUP')(function(autocmd)
 
   autocmd('LspAttach', function(args)
     require('config.lsp.util.setup').lsp_attach(args)
-
-    vim.defer_fn(set_titlestring, 10)
   end)
   autocmd({ 'BufWritePost' }, function()
     require('lint').try_lint()
   end, { pattern = { '*.sh' } })
-  -- autocmd('BufEnter', set_titlestring)
   autocmd('InsertEnter', function()
     vim.schedule(function()
       vim.cmd('nohlsearch')

@@ -8,68 +8,21 @@ return {
     { event = { Drag = { streak = 1, button = 'Left' } }, mods = 'CTRL|SHIFT', action = 'StartWindowDrag' },
   },
   keys = {
-    {
-      key = 'F2',
-      mods = 'ALT',
-      action = act.PromptInputLine({
-        description = wezterm.format({
-          { Attribute = { Intensity = 'Bold' } },
-          { Foreground = { AnsiColor = 'Fuchsia' } },
-          { Text = 'Enter name for tab' },
-        }),
-        action = wezterm.action_callback(function(window, _, line)
-          if line then
-            window:active_tab():set_title(line)
-          end
-        end),
-      }),
-    },
-    {
-      key = 'F2',
-      mods = 'ALT|CTRL',
-      action = act.PromptInputLine({
-        description = wezterm.format({
-          { Attribute = { Intensity = 'Bold' } },
-          { Foreground = { AnsiColor = 'Fuchsia' } },
-          { Text = 'Enter name for workspace' },
-        }),
-        action = wezterm.action_callback(function(_, _, line)
-          if line then
-            wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line)
-          end
-        end),
-      }),
-    },
     { key = 'F11', action = wezterm.action_callback(events.toggle_full_screen) },
     { key = 'l', mods = 'SHIFT|CTRL', action = wezterm.action_callback(events.toggle_quick_pane) },
-    -- { key = ',', mods = 'ALT', action = 'ShowTabNavigator' },
     { key = 'r', mods = 'CTRL|SHIFT', action = wezterm.action_callback(wezterm.reload_configuration) },
     { key = 't', mods = 'SHIFT|ALT', action = act({ EmitEvent = 'toggle-tab-bar' }) },
     { key = 'w', mods = 'SHIFT|CTRL', action = act({ CloseCurrentPane = { confirm = false } }) },
     { key = 'k', mods = 'SHIFT|CTRL', action = act.ScrollByLine(-1) },
     { key = 'j', mods = 'SHIFT|CTRL', action = act.ScrollByLine(1) },
-    { key = 'PageUp', mods = 'SHIFT', action = act.ScrollByPage(-1) },
-    { key = 'PageDown', mods = 'SHIFT', action = act.ScrollByPage(1) },
-    -- tabs
-    { key = '[', mods = 'ALT', action = act({ ActivateTabRelative = -1 }) },
-    { key = ']', mods = 'ALT', action = act({ ActivateTabRelative = 1 }) },
-    { key = '{', mods = 'SHIFT|ALT', action = act({ MoveTabRelative = -1 }) },
-    { key = '}', mods = 'SHIFT|ALT', action = act({ MoveTabRelative = 1 }) },
-    { key = '[', mods = 'CTRL', action = act({ SwitchWorkspaceRelative = -1 }) },
-    { key = ']', mods = 'CTRL', action = act({ SwitchWorkspaceRelative = 1 }) },
+    { key = 'PageUp', mods = 'ALT', action = act.ScrollByPage(-1) },
+    { key = 'PageDown', mods = 'ALT', action = act.ScrollByPage(1) },
+
     -- tmux style key bindings
     { key = 'c', mods = 'LEADER', action = act({ SpawnTab = 'CurrentPaneDomain' }) },
     { key = 'x', mods = 'LEADER', action = act({ CloseCurrentPane = { confirm = false } }) },
     { key = '-', mods = 'LEADER', action = act({ SplitVertical = { domain = 'CurrentPaneDomain' } }) },
     { key = '\\', mods = 'LEADER', action = act({ SplitHorizontal = { domain = 'CurrentPaneDomain' } }) },
-    { key = 'h', mods = 'LEADER', action = act({ ActivatePaneDirection = 'Left' }) },
-    { key = 'j', mods = 'LEADER', action = act({ ActivatePaneDirection = 'Down' }) },
-    { key = 'k', mods = 'LEADER', action = act({ ActivatePaneDirection = 'Up' }) },
-    { key = 'l', mods = 'LEADER', action = act({ ActivatePaneDirection = 'Right' }) },
-    { key = 'H', mods = 'LEADER|SHIFT', action = act({ AdjustPaneSize = { 'Left', 5 } }) },
-    { key = 'J', mods = 'LEADER|SHIFT', action = act({ AdjustPaneSize = { 'Down', 5 } }) },
-    { key = 'K', mods = 'LEADER|SHIFT', action = act({ AdjustPaneSize = { 'Up', 5 } }) },
-    { key = 'L', mods = 'LEADER|SHIFT', action = act({ AdjustPaneSize = { 'Right', 5 } }) },
     { key = '1', mods = 'LEADER', action = act({ ActivateTab = 0 }) },
     { key = '2', mods = 'LEADER', action = act({ ActivateTab = 1 }) },
     { key = '3', mods = 'LEADER', action = act({ ActivateTab = 2 }) },
@@ -93,6 +46,10 @@ return {
     { key = 'b', mods = 'LEADER', action = wezterm.action_callback(events.toggle_opacity) },
     { key = 'r', mods = 'LEADER', action = act.RotatePanes('Clockwise') },
     { key = 'R', mods = 'LEADER', action = act.RotatePanes('CounterClockwise') },
+    { key = 'h', mods = 'LEADER|ALT', action = act({ AdjustPaneSize = { 'Left', 5 } }) },
+    { key = 'j', mods = 'LEADER|ALT', action = act({ AdjustPaneSize = { 'Down', 5 } }) },
+    { key = 'k', mods = 'LEADER|ALT', action = act({ AdjustPaneSize = { 'Up', 5 } }) },
+    { key = 'l', mods = 'LEADER|ALT', action = act({ AdjustPaneSize = { 'Right', 5 } }) },
     {
       key = 'X',
       mods = 'LEADER',
@@ -113,12 +70,54 @@ return {
       end),
     },
 
+    -- tabs
+    { key = '[', mods = 'ALT', action = act({ ActivateTabRelative = -1 }) },
+    { key = ']', mods = 'ALT', action = act({ ActivateTabRelative = 1 }) },
+    { key = '{', mods = 'SHIFT|ALT', action = act({ MoveTabRelative = -1 }) },
+    { key = '}', mods = 'SHIFT|ALT', action = act({ MoveTabRelative = 1 }) },
+    { key = 'q', mods = 'LEADER|ALT', action = 'ShowTabNavigator' },
     -- Workspace
+    { key = '{', mods = 'CTRL|SHIFT', action = act({ SwitchWorkspaceRelative = -1 }) },
+    { key = '}', mods = 'CTRL|SHIFT', action = act({ SwitchWorkspaceRelative = 1 }) },
     { key = 's', mods = 'LEADER|CTRL', action = act({ EmitEvent = 'save-session' }) },
     { key = 'r', mods = 'LEADER|CTRL', action = act({ EmitEvent = 'restore-session' }) },
     { key = 'l', mods = 'LEADER|CTRL', action = act({ EmitEvent = 'load-session' }) },
-    { key = 'f', mods = 'LEADER|CTRL', action = act({ EmitEvent = 'sessionizer-find-repoes' }) },
-    { key = 'a', mods = 'LEADER|CTRL', action = act.ShowLauncherArgs({ flags = 'WORKSPACES' }) },
+    { key = 'f', mods = 'LEADER', action = act({ EmitEvent = 'sessionizer-find-repoes' }) },
+    { key = 'q', mods = 'LEADER', action = act.ShowLauncherArgs({ flags = 'WORKSPACES' })},
+    -- Rename tab
+    {
+      key = 'F2',
+      mods = 'ALT',
+      action = act.PromptInputLine({
+        description = wezterm.format({
+          { Attribute = { Intensity = 'Bold' } },
+          { Foreground = { AnsiColor = 'Fuchsia' } },
+          { Text = 'Enter name for tab' },
+        }),
+        action = wezterm.action_callback(function(window, _, line)
+          if line then
+            window:active_tab():set_title(line)
+          end
+        end),
+      }),
+    },
+    -- Rename workspace
+    {
+      key = 'F2',
+      mods = 'ALT|CTRL',
+      action = act.PromptInputLine({
+        description = wezterm.format({
+          { Attribute = { Intensity = 'Bold' } },
+          { Foreground = { AnsiColor = 'Fuchsia' } },
+          { Text = 'Enter name for workspace' },
+        }),
+        action = wezterm.action_callback(function(_, _, line)
+          if line then
+            wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line)
+          end
+        end),
+      }),
+    },
 
     -- Custom inputs
     { key = 'i', mods = 'CTRL', action = { SendString = '\x1b[105;5u' } },

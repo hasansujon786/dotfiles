@@ -1,5 +1,6 @@
 local wezterm = require('wezterm')
 local constants = require('constants')
+local utils = require('wez_utils')
 local scheme = require('colors')
 local act = wezterm.action
 
@@ -16,42 +17,113 @@ M.activate_win_stack = function(window, pane)
   window:perform_action({ ActivateKeyTable = { name = 'win_stack', one_shot = false } }, pane)
 end
 
-local text_fg = scheme.colors.fg1
-local tab_bar_bg = scheme.window_frame.active_titlebar_bg
-local right_colors = { '#32354b', '#3E425D', '#4c5272' }
-wezterm.on('update-right-status', function(window, _)
+local tab_bar = scheme.one_half.tab_bar
+local tab_length = 20
+wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
+  local title = string.format('%d:%s', tab.tab_index + 1, utils.tab_title(tab))
+  title = utils.fit_to_length(title, tab_length - 2)
+
+  local fg = tab_bar.inactive_tab.fg_color
+  local bg = tab_bar.inactive_tab.bg_color
+  if tab.is_active then
+    bg = tab_bar.active_tab.bg_color
+    fg = tab_bar.active_tab.fg_color
+  end
+
+  return {
+    { Background = { Color = tab_bar.background } },
+    { Foreground = { Color = bg } },
+    { Text = '' },
+    { Background = { Color = bg } },
+    { Foreground = { Color = fg } },
+    { Text = string.format('%s', title) },
+    { Background = { Color = tab_bar.background } },
+    { Foreground = { Color = bg } },
+    { Text = '' },
+  }
+end)
+
+wezterm.on('update-status', function(window, pane)
   local time = wezterm.strftime('  %I:%M %p')
-  local date = wezterm.strftime('  %a %b %-d    ')
+  local date = wezterm.strftime('󰸗  %b %-d, %a')
   local workspace = wezterm.mux.get_active_workspace()
-  local cells = { workspace, time, date }
 
-  local elements = {} -- The elements to be formatted
+  local layer = '#32354b'
+
+  local right_cells = {
+    { date, color = '#68707E' },
+    { time, color = '#8b95a7' },
+  }
+  local left_cells = {
+    { workspace, color = '#8b95a7' },
+    { date, color = '#68707E' },
+  }
+
+  local left_elements, right_elements = {}, {}
+
   -- Translate a cell into elements
-  local function simple(text, idx, _)
-    local c = right_colors[idx]
-    if idx == 1 then
-      table.insert(elements, { Background = { Color = tab_bar_bg } })
+  for index, value in ipairs(right_cells) do
+    if index == 1 then
+      table.insert(right_elements, { Foreground = { Color = layer } })
+      table.insert(right_elements, { Text = '' })
+      table.insert(right_elements, { Background = { Color = layer } })
+      table.insert(right_elements, { Text = ' ' })
+    else
+      table.insert(right_elements, { Foreground = { Color = '#1e232e' } })
+      table.insert(right_elements, { Text = '  ' })
     end
-    table.insert(elements, { Foreground = { Color = c } })
-    table.insert(elements, { Text = '  ' })
-    table.insert(elements, { Foreground = { Color = text_fg } })
-    table.insert(elements, { Background = { Color = c } })
-    table.insert(elements, { Text = '   ' })
-    table.insert(elements, { Text = text })
+    table.insert(right_elements, { Foreground = { Color = value.color } })
+    table.insert(right_elements, { Text = value[1] })
+  end
+  table.insert(right_elements, { Text = ' ' })
+
+  local left_elements_width = 0
+  table.insert(left_elements, { Background = { Color = layer } })
+  table.insert(left_elements, { Text = ' ' })
+  for index, value in ipairs(left_cells) do
+    table.insert(left_elements, { Foreground = { Color = value.color } })
+    if index == 1 and window:leader_is_active() then
+      table.insert(left_elements, { Foreground = { Color = '#f0d197' } })
+    end
+    table.insert(left_elements, { Text = value[1] })
+    left_elements_width = left_elements_width + #value[1] + 2
+
+    if index == #left_cells then
+      table.insert(left_elements, { Foreground = { Color = layer } })
+      table.insert(left_elements, { Text = ' ' })
+      table.insert(left_elements, { Background = { Color = tab_bar.background } })
+      table.insert(left_elements, { Text = '' })
+    else
+      table.insert(left_elements, { Foreground = { Color = '#1e232e' } })
+      table.insert(left_elements, { Text = '  ' })
+    end
   end
 
-  for i = 1, #cells, 1 do
-    simple(cells[i], i, #cells == 0)
-  end
+  -- if key_stack_mode then
+  --   table.insert(elements, 1, { Text = ' ] ' })
+  --   table.insert(elements, 1, { Text = key_stack_mode })
+  --   table.insert(elements, 1, { Text = '[ ' })
+  --   table.insert(elements, 1, { Foreground = { Color = '#97CA72' } })
+  --   table.insert(elements, 1, { Background = { Color = tab_bar.background } })
+  -- end
+  -- #wezterm.format(left_elements)
 
-  if key_stack_mode then
-    table.insert(elements, 1, { Text = ' ] ' })
-    table.insert(elements, 1, { Text = key_stack_mode })
-    table.insert(elements, 1, { Text = '[ ' })
-    table.insert(elements, 1, { Foreground = { Color = '#97CA72' } })
-    table.insert(elements, 1, { Background = { Color = tab_bar_bg } })
+  local left_status = wezterm.format(left_elements)
+
+  -- Center tabs
+  local tabs = window:mux_window():tabs()
+  local mid_width = 0
+  for _, _ in ipairs(tabs) do
+    -- local title = tab:get_title()
+    -- mid_width = mid_width + math.floor(math.log(idx, 10)) + 1
+    -- mid_width = mid_width + 2 + #title + 1
+    mid_width = mid_width + tab_length - 1
   end
-  window:set_right_status(wezterm.format(elements))
+  local tab_bar_width = window:active_tab():get_size().cols
+  local max_left = tab_bar_width / 2 - mid_width / 2
+
+  window:set_left_status(left_status .. wezterm.pad_left(' ', max_left - left_elements_width))
+  window:set_right_status(wezterm.format(right_elements))
 end)
 
 local is_tab_bar_forced_hidden = false
@@ -176,10 +248,7 @@ M.toggle_quick_pane = function(window, pane)
     act.SplitPane({
       direction = 'Down',
       size = { Cells = 15 },
-      command = {
-        cwd = '.',
-        -- args = { 'yazi' },
-      },
+      -- command = { cwd = '.' }, -- args = { 'yazi' },
     }),
     pane
   )

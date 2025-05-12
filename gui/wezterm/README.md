@@ -200,3 +200,58 @@ id = string.match(id, '([^/]+)$') -- match after '/'
 7   normal  white       #fafafa   #dcdfe4
             foreground  #383a42   #dcdfe4
             background  #fafafa   #282c34
+
+```lua
+local right_colors = { '#32354b', '#3E425D', '#4c5272' }
+wezterm.on('update-right-status', function(window, _)
+  local time = wezterm.strftime('  %I:%M %p')
+  local date = wezterm.strftime('  %a %b %-d    ')
+  local workspace = wezterm.mux.get_active_workspace()
+  local cells = { workspace, time, date }
+
+  local elements = {} -- The elements to be formatted
+  -- Translate a cell into elements
+  local function simple(text, idx, _)
+    local c = right_colors[idx]
+    if idx == 1 then
+      table.insert(elements, { Background = { Color = tab_bar.background } })
+    end
+    table.insert(elements, { Foreground = { Color = c } })
+    table.insert(elements, { Text = ' ' })
+    table.insert(elements, { Foreground = { Color = scheme.colors.fg1 } })
+    table.insert(elements, { Background = { Color = c } })
+    table.insert(elements, { Text = '  ' })
+    table.insert(elements, { Text = text })
+  end
+
+  for i = 1, #cells, 1 do
+    simple(cells[i], i, #cells == 0)
+  end
+
+  if key_stack_mode then
+    table.insert(elements, 1, { Text = ' ] ' })
+    table.insert(elements, 1, { Text = key_stack_mode })
+    table.insert(elements, 1, { Text = '[ ' })
+    table.insert(elements, 1, { Foreground = { Color = '#97CA72' } })
+    table.insert(elements, 1, { Background = { Color = tab_bar.background } })
+  end
+  window:set_right_status(wezterm.format(elements))
+
+  -- local color = '#4C5272'
+  -- if window:leader_is_active() then
+  --   color = "#b7bdf8"
+  -- end
+
+  -- -- if window:active_tab():tab_id() ~= 0 then
+  -- --   ARROW_FOREGROUND = { Foreground = { Color = '#1e2030' } }
+  -- -- end -- arrow color based on if tab is first pane
+
+  -- window:set_left_status(wezterm.format({
+  --   { Background = { Color = color } },
+  --   { Text = ' ' .. utf8.char(0x1f30a) },
+  --   { Background = { Color = tab_bar.background } },
+  --   { Foreground = { Color = color } },
+  --   { Text = '' },
+  -- }))
+end)
+```
