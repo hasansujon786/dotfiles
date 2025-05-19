@@ -60,4 +60,22 @@ function M.search_project_todos()
   })
 end
 
+-- function M.wezterm_zen(state, disable, opts)
+--   local stdout = vim.loop.new_tty(1, false)
+--   if disable then
+--     Stdout:write(
+--       -- Requires tmux setting or no effect: set-option -g allow-passthrough on
+--       ('\x1bPtmux;\x1b\x1b]1337;SetUserVar=%s=%s\b\x1b\\'):format(
+--         'ZEN_MODE',
+--         vim.fn.system({ 'base64' }, tostring(opts.font))
+--       )
+--     )
+--   else
+--     stdout:write(
+--       ('\x1bPtmux;\x1b\x1b]1337;SetUserVar=%s=%s\b\x1b\\'):format('ZEN_MODE', vim.fn.system({ 'base64' }, '-1'))
+--     )
+--   end
+--   vim.cmd([[redraw]])
+-- end
+
 return M

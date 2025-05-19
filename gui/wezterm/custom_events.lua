@@ -143,11 +143,6 @@ wezterm.on('user-var-changed', function(window, pane, name, value)
     local incremental = value:find('+')
     local number_value = tonumber(value)
 
-    local map_start = value:find('_minimap')
-    if map_start then
-      number_value = tonumber(value:sub(0, map_start - 1))
-    end
-
     if incremental ~= nil then
       while number_value > 0 do
         window:perform_action(wezterm.action.IncreaseFontSize, pane)
@@ -165,11 +160,9 @@ wezterm.on('user-var-changed', function(window, pane, name, value)
       show_tab_bar = false
     end
 
-    -- if not is_forced_fullscreen then
-    --   overrides.enable_tab_bar = show_tab_bar
-    --   if window:get_dimensions().is_full_screen or (not map_start and number_value == 0) then
-    --     window:perform_action('ToggleFullScreen', pane)
-    --   end
+    overrides.enable_tab_bar = show_tab_bar
+    -- if window:get_dimensions().is_full_screen or (number_value == 0) then
+    --   window:perform_action('ToggleFullScreen', pane)
     -- end
   end
 

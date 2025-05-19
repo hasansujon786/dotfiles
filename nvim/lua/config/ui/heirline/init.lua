@@ -108,6 +108,9 @@ return {
               'blink-cmp-menu',
               'blink-cmp-signature',
               'blink-cmp-documentation',
+              'superkanban_task',
+              'superkanban_list',
+              'superkanban_board',
             },
           }, args.buf)
         end,

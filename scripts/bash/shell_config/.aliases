@@ -283,7 +283,7 @@ remove() {
 # Calculator
 cl() { echo "scale=5;$*" | bc -l; }
 
-url-redrive() {
+redrive() {
   curl --silent -I -L "$@" | grep -i location
 }
 

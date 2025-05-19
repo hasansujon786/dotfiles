@@ -211,10 +211,18 @@ return {
       --     easing = 'outCirc',
       --   },
       -- },
+      -- zen = {
+      --   on_open = function(win)
+      --     wezterm_zen(nil, true, { font = 0 })
+      --   end,
+      --   on_close = function(win)
+      --     wezterm_zen(nil, false, nil)
+      --   end,
+      -- },
       bigfile = { enabled = true },
       quickfile = { enabled = true },
       words = { enabled = true },
-      explorer = { enabled = true },
+      explorer = { enabled = false },
       image = { enabled = false },
       input = {},
       indent = {
