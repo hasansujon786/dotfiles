@@ -1,13 +1,3 @@
-local dev_Mode = true
-local reload_on_call = true
-
-if dev_Mode == false then
-  reload_on_call = false
-end
-vim.api.nvim_create_user_command('NavbuddyDevMode', function()
-  reload_on_call = not reload_on_call
-end, { nargs = 0, desc = 'NavbuddyDevMode' })
-
 vim.g.navbuddy_taransparent = true
 
 local buildDoc = function()
@@ -95,6 +85,18 @@ local opts = {
   },
 }
 
+_G.reload_on_call = nil
+local function update_should_reload()
+  vim.defer_fn(function()
+    _G.reload_on_call = vim.uv.cwd():find('nvim%-navbuddy') and true or false
+  end, 300)
+end
+
+augroup('MY_BUDDY_AUGROUP')(function(autocmd)
+  autocmd('User', update_should_reload, { pattern = 'VeryLazy', once = true })
+  autocmd('User', update_should_reload, { pattern = 'PersistedPickerLoadPost' })
+end)
+
 local function getNavbuddy()
   if reload_on_call then
     vim.cmd([[wa]])
@@ -108,7 +110,7 @@ end
 
 return {
   'hasansujon786/nvim-navbuddy',
-  dev = dev_Mode,
+  dev = true,
   cmd = { 'Navbuddy' },
   keys = {
     {
@@ -119,7 +121,7 @@ return {
         if reload_on_call then
           vim.defer_fn(function()
             buddy.open()
-          end, 1000)
+          end, 300)
         else
           buddy.open()
         end
@@ -135,7 +137,7 @@ return {
         if reload_on_call then
           vim.defer_fn(function()
             buddy.open(open_opts)
-          end, 1000)
+          end, 300)
         else
           buddy.open(open_opts)
         end
@@ -144,6 +146,9 @@ return {
     },
   },
   opts = opts,
+  -- config = function(_, lopts)
+  --   require('nvim-navbuddy').setup(lopts)
+  -- end,
   dependencies = {
     { 'hasansujon786/nvim-navic', dev = true },
     'MunifTanjim/nui.nvim',

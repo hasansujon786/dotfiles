@@ -20,7 +20,7 @@ keymap({ 'i', 'n', 's' }, '<esc>', function()
 end, { expr = true, desc = 'Escape and Clear hlsearch' })
 
 -- Center window on insert
-require('hasan.center_cursor').attach_mappings()
+-- require('hasan.center_cursor').attach_mappings()
 require('hasan.pseudo-text-objects')
 
 for _, mode in ipairs(nx) do

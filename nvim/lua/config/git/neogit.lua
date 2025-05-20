@@ -4,6 +4,7 @@ return {
   lazy = true,
   cmd = 'Neogit',
   -- commit = '001f43f',
+  commit = 'a58ab1befb5608b8ff36a2286360df8263791c1c',
   keys = {
     { '<leader>gg', '<cmd>Neogit<CR>', desc = 'Open Neogit' },
   },

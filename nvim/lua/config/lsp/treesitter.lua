@@ -126,6 +126,8 @@ return {
       -- stylua: ignore end
       keymap('n', '[f', '<Plug>(ts-jump-prev-s-func)zz', { desc = 'Jump prev func' })
       keymap('n', ']f', '<Plug>(ts-jump-next-s-func)zz', { desc = 'Jump next func' })
+      keymap('n', '[[', '<Plug>(ts-jump-prev-s-func)zz', { desc = 'Jump prev func' })
+      keymap('n', ']]', '<Plug>(ts-jump-next-s-func)zz', { desc = 'Jump next func' })
       keymap('n', '[m', '<Plug>(ts-jump-prev-s-class)zz', { desc = 'Jump prev class' })
       keymap('n', ']m', '<Plug>(ts-jump-next-s-class)zz', { desc = 'Jump next class' })
     end,
@@ -177,13 +179,13 @@ return {
   },
   {
     'nvim-treesitter/nvim-treesitter-context',
-    commit = '2bcf700', -- 8fd989b
+    commit = '4976d8b', -- 2bcf700 -- 8fd989b
     enabled = true,
     lazy = true,
     event = 'CursorHold',
     keys = {
       {
-        'zT',
+        'z-',
         function()
           require('treesitter-context').go_to_context(vim.v.count1)
         end,

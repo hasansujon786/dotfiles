@@ -1,5 +1,6 @@
 return {
   'yetone/avante.nvim',
+  enabled = false,
   lazy = true,
   version = '*', -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
   ft = { 'Avante' },
@@ -47,6 +48,7 @@ return {
     {
       -- Make sure to set this up properly if you have lazy=true
       'MeanderingProgrammer/render-markdown.nvim',
+      enabled = false,
       opts = {
         file_types = { 'markdown', 'Avante' },
         completions = { blink = { enabled = true } },
