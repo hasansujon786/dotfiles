@@ -38,7 +38,6 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', '<leader>al', vim.diagnostic.open_float, desc('Lsp: Show line diagnostics'))
 
   keymap({ 'n', 'i' }, '<C-c><C-s>', vim.lsp.buf.signature_help, desc('Lsp: show signature help'))
-  keymap('n', '<leader>aq', require('config.lsp.util.extras').showLspRenameChanges, desc('Lsp: Show lsp rename'))
   -- keymap('n', '<leader>th', function()
   --   local is_enabled = vim.lsp.inlay_hint.is_enabled({})
   --   vim.lsp.inlay_hint.enable(not is_enabled)
