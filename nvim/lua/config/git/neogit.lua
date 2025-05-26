@@ -3,8 +3,7 @@ return {
   'NeogitOrg/neogit',
   lazy = true,
   cmd = 'Neogit',
-  -- commit = '001f43f',
-  commit = 'a58ab1befb5608b8ff36a2286360df8263791c1c',
+  commit = 'a58ab1befb5608b8ff36a2286360df8263791c1c', -- '001f43f'
   keys = {
     { '<leader>gg', '<cmd>Neogit<CR>', desc = 'Open Neogit' },
   },
@@ -42,5 +41,5 @@ return {
       },
     },
   },
-  dependencies = { 'sindrets/diffview.nvim', 'rebelot/heirline.nvim' },
+  dependencies = { 'sindrets/diffview.nvim', },
 }

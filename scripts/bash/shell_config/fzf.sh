@@ -169,7 +169,7 @@ __fzf_z_plus__() {
   local dir="${out[1]}"
 
   if [[ "$keybind" == "ctrl-o" ]]; then
-    printf 'nvim %q' "$dir"
+    printf 'cd -- %q && nvim' "$dir"
   elif [[ "$keybind" == "ctrl-y" ]]; then
     printf 'cd -- %q && yazi' "$dir"
   elif [[ "$keybind" == "ctrl-e" ]]; then

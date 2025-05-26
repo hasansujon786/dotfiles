@@ -2,6 +2,7 @@ return {
   'rebelot/heirline.nvim',
   lazy = true,
   enabled = true,
+  ft = { 'NeogitStatus', 'gitcommit' },
   event = { 'BufReadPost', 'BufNewFile' },
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()

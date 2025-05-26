@@ -15,3 +15,5 @@
   dt = "! args=$@; shift $#; nvim -c \"DiffviewOpen $args\""
 	ck = checkout
 	acm = !git add -A && git commit -m
+[core]
+	longpaths = true

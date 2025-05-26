@@ -8,5 +8,10 @@
     "prefix": "defer",
     "body": "vim.defer_fn(function()\n  ${0}\nend, ${1:1000})",
     "description": "Defers calling {fn} until {timeout} ms passes"
+  },
+  "clock": {
+    "prefix": "clock",
+    "body": "local start_time = os.clock()\n${0}\nlocal end_time = os.clock()\nprint('Loop took: ' .. (end_time - start_time) * 1000 .. ' milliseconds')",
+    "description": "Defers calling {fn} until {timeout} ms passes"
   }
 }

@@ -1,99 +1,94 @@
+local async = require('hasan.utils.async')
 local M = {}
 
---- Get date as YY/MM/DD HH:MM:SSxx
----@return string|osdate
+---Get date as YY/MM/DD HH:MM:SSxx
+---@return string
 local function get_formatted_time()
-  return os.date('%y/%m/%d %H:%M:%S')
+  return tostring(os.date('%y/%m/%d %H:%M:%S'))
 end
 
-local function try_git_push(cwd)
-  local git_push = require('plenary.job'):new({ command = 'git', args = { 'push' }, cwd = cwd })
-  git_push:after_failure(vim.schedule_wrap(function(_)
-    git_push = nil
-    vim.notify('Someting went wrong while git push', 'error', { title = 'Vault' })
-  end))
-  git_push:after_success(vim.schedule_wrap(function(_)
-    git_push = nil
-    vim.notify('Successfully pushed to repo', 'info', { title = 'Vault' })
-  end))
-
-  vim.notify('Git pushing...', 'info', { title = 'Vault' })
-  git_push:start()
+---@param on_exit fun(boolean)
+---@param opts {cwd:string}
+local function has_local_changes(on_exit, opts)
+  async.async_cmd('git', { 'status', '--porcelain' }, function(status_ok, status_msg)
+    on_exit(status_ok and #status_msg > 0)
+  end, opts)
 end
 
-local function has_local_commits_to_push(cwd)
-  local git_status =
-    require('plenary.job'):new({ command = 'git', args = { 'status', '--porcelain=2', '--branch' }, cwd = cwd })
-  local ok, output = pcall(function()
-    return git_status:sync()
-  end)
+---@param on_exit fun(boolean)
+---@param opts {cwd:string}
+local function has_local_commits_to_push(on_exit, opts)
+  async.async_cmd('git', { 'status', '--porcelain=2', '--branch' }, function(ok, output)
+    if not ok then
+      return on_exit(false)
+    end
 
-  if not ok then
-    return false
-  end
-
-  for _, line in ipairs(output) do
-    if line:match('^# branch%.ab') then
-      -- Extract ahead and behind counts (e.g., # branch.ab +2 -1)
-      local ahead = tonumber(line:match('+%d+')) or 0
-      if ahead > 0 then
-        return true -- Local commits exist that can be pushed
-      else
-        return false -- No local commits to push
+    for _, line in ipairs(output) do
+      if line:match('^# branch%.ab') then
+        -- Extract ahead and behind counts (e.g., # branch.ab +2 -1)
+        local ahead = tonumber(line:match('+%d+')) or 0
+        if ahead > 0 then
+          return on_exit(true)
+        end
       end
     end
-  end
 
-  return false
+    return on_exit(false)
+  end, opts)
 end
 
-local function try_git_commit(cwd)
-  local date = get_formatted_time()
-  local git_commit = require('plenary.job'):new({ command = 'git', args = { 'acm', date }, cwd = cwd })
-  git_commit:after_failure(vim.schedule_wrap(function(_)
-    git_commit = nil
-    vim.notify('Someting went wrong while git commit', 'error', { title = 'Vault' })
-  end))
-  git_commit:after_success(vim.schedule_wrap(function(_)
-    git_commit = nil
+---@param on_exit fun(boolean, any)
+---@param opts {cwd:string}
+local function git_commit(on_exit, opts)
+  async.async_cmd('git', { 'add', '--all' }, function()
+    async.async_cmd('git', { 'commit', '-m', get_formatted_time() }, on_exit, opts)
+  end, opts)
+end
 
-    if has_local_commits_to_push(cwd) then
-      try_git_push(cwd)
-      return
+---@param opts {cwd:string}
+local function git_push(opts)
+  vim.notify('Auto pushing...', 'info', { title = 'Auto Push' })
+  async.async_cmd('git', { 'push' }, function(push_ok)
+    if not push_ok then
+      return vim.notify('Someting went wrong while git push', 'error', { title = 'Auto Push' })
     end
-  end))
-  git_commit:start()
+
+    vim.notify('Auto pushed ' .. opts.cwd, 'info', { title = 'Auto Push' })
+  end, opts)
 end
 
+---@param cwd string
 function M.auto_commit(cwd)
   local exists = require('hasan.utils.file').dir_exists(cwd)
   if not exists then
-    vim.notify(string.format('Could not found given directory `%s`', cwd), 'error', { title = 'Vault' })
+    vim.notify(string.format('Could not found given directory `%s`', cwd), 'error', { title = 'Auto Push' })
     return
   end
 
-  local git_status = require('plenary.job'):new({ command = 'git', args = { 'status', '--porcelain' }, cwd = cwd })
-  git_status:after_failure(vim.schedule_wrap(function(_)
-    git_status = nil
-    vim.notify('Nothing to commit', 'error', { title = 'Vault' })
-  end))
-  git_status:after_success(vim.schedule_wrap(function(job)
-    git_status = nil
+  local opts = { cwd = cwd }
 
-    local status_output = job:result()
-    if status_output == false or #status_output == 0 then
-      if has_local_commits_to_push(cwd) then
-        try_git_push(cwd)
+  async.async_cmd('git', { 'pull', '--rebase' }, function()
+    has_local_changes(function(has_changes)
+      if not has_changes then
+        has_local_commits_to_push(function(has_local_commits)
+          if has_local_commits then
+            return git_push(opts)
+          end
+
+          vim.notify('Nothing to commit in ' .. cwd, 'info', { title = 'Auto Push' })
+        end, opts)
         return
       end
 
-      vim.notify('Nothing to commit', 'info', { title = 'Vault' })
-      return
-    end
+      git_commit(function(commit_ok)
+        if not commit_ok then
+          return vim.notify('Someting went wrong while git commit', 'error', { title = 'Auto Push' })
+        end
 
-    try_git_commit(cwd)
-  end))
-  git_status:start()
+        git_push(opts)
+      end, opts)
+    end, opts)
+  end, opts)
 end
 
 return M

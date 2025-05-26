@@ -8,26 +8,22 @@ return {
         function()
           vim.cmd([[wa]])
           local kanban = R('super-kanban')
-
-          kanban.open('test.md')
+          vim.defer_fn(function()
+            kanban.open('test.md')
+          end, 300)
         end,
       },
     },
-    config = function()
-      -- require('super-kanban').setup()
-      -- keymap('n', )
-    end,
+    opts = {},
+    -- config = function()
+    --   require('super-kanban').setup()
+    -- end,
   },
   {
     'arakkkkk/kanban.nvim',
-    commit = '90a3d235f87d708febe3215aeeeb6fc762f3adfa',
     lazy = true,
-    enabled = true,
-    opts = {
-      markdown = {
-        description_folder = '/tasks/', -- Path to save the file corresponding to the task.
-        list_head = '## ',
-      },
-    },
+    cmd = { 'KanbanOpen', 'KanbanCreate' },
+    enabled = false,
+    opts = {},
   },
 }
