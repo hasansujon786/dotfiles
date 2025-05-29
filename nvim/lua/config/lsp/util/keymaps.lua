@@ -21,12 +21,12 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', 'gR', '<cmd>Glance resume<CR>', desc('Lsp: Glance resume'))
   keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', desc('Lsp: Go to declaration'))
 
-  keymap('n', 'gpd', require('config.lsp.util.peek').PeekDefinition, desc('Lsp: Peek definition'))
-  keymap('n', 'gpI', require('config.lsp.util.peek').PeekImplementation, desc('Lsp: Peek implementation'))
-  keymap('n', 'gpy', require('config.lsp.util.peek').PeekTypeDefinition, desc('Lsp: Peek type definition'))
+  keymap('n', 'gpd', '<cmd>lua require("config.lsp.util.peek").PeekDefinition()<CR>', desc('Peek definition'))
+  keymap('n', 'gpI', '<cmd>lua require("config.lsp.util.peek").PeekImplementation()<CR>', desc('Peek implementation'))
+  keymap('n', 'gpy', '<cmd>lua require("config.lsp.util.peek").PeekTypeDefinition()<CR>', desc('Peek type definition'))
 
   -- Action, Prompt, Search
-  keymap('n', 'K', require('config.lsp.util.extras').hover, desc('Lsp: Hover under cursor'))
+  keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', desc('Lsp: Hover under cursor'))
   keymap('n', '<F2>', require('config.lsp.util.extras').lspRename, desc('Lsp: Rename under cursor'))
   for _, action_key in ipairs({ '<C-q>', '<C-space>', '<A-space>' }) do
     keymap({ 'n', 'x' }, action_key, vim.lsp.buf.code_action, desc('Lsp: Code action'))

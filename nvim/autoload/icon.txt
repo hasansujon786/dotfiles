@@ -42,7 +42,7 @@ bar icons:
 ▁▂▃▄▅▆▇█ ▀▔
 
 ▖▗ ▘▝ ▚ ▞ ░▒▓ ║‖
--▬■ﱢ ━▬─  
+-▬■ﱢ ━▬─    ⋮ …
 
 Powerline characters:
 Name                 Value

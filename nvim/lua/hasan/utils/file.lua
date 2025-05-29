@@ -212,13 +212,9 @@ function M.reload()
   end
 end
 
-local qlook = {
-  args = nil,
-  map_added = false,
-}
+local qlook = { args = nil }
 
-function M.quickLook(args)
-  local bg_job = nil
+function M.quicklook(args)
   qlook.args = args
 
   local quicklook_path = vim.fn.exepath('quicklook.exe')
@@ -227,28 +223,16 @@ function M.quickLook(args)
     return
   end
 
-  bg_job = require('plenary.job'):new({ command = quicklook_path, args = args })
-  bg_job:start()
-
-  bg_job:after_failure(vim.schedule_wrap(function(_)
-    bg_job = nil
-    vim.notify('There someting went wrong while opening QuickLook', vim.log.levels.WARN, { title = 'QuickLook' })
-  end))
-
-  bg_job:after_success(vim.schedule_wrap(function(_)
-    bg_job = nil
-  end))
-
-  if not qlook.map_added then
-    keymap('n', '<leader>vh', function()
-      M.quickLook_toggle()
-    end, { desc = 'Toggle quickLook' })
-    qlook.map_added = true
-  end
+  require('hasan.utils.async').async_cmd(quicklook_path, args, function(is_ok, _)
+    if not is_ok then
+      vim.notify('There someting went wrong while opening QuickLook', vim.log.levels.WARN, { title = 'QuickLook' })
+      return
+    end
+  end, {})
 end
 
-function M.quickLook_toggle()
-  M.quickLook(qlook.args)
+function M.quicklook_toggle()
+  M.quicklook(qlook.args)
 end
 
 M.system_open_cmd = vim.fn.has('win32') == 1 and 'explorer.exe' or vim.fn.has('mac') == 1 and 'open' or 'xdg-open'

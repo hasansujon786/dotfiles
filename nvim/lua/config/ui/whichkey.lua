@@ -119,6 +119,7 @@ return {
       { '<leader>vR', '<cmd>silent write | edit | TSBufEnable highlight<CR>', desc = 'Reload hightlight' },
       { '<leader>vL', '<cmd>call logevents#LogEvents_Toggle()<CR>', desc = 'Toggle LogEvents' },
       { '<leader>vl', '<cmd>lua require("hasan.utils.logger").view()<CR>', desc = 'Open log file' },
+      { '<leader>vh', '<cmd>lua require("hasan.utils.file").quicklook_toggle()<CR>', desc = 'Toggle quickLook' },
 
       -- WINDOW
       { '<leader>w', group = 'window' },

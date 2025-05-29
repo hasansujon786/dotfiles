@@ -96,7 +96,7 @@ return {
       end,
       ['i'] = function(state)
         local node = state.tree:get_node()
-        require('hasan.utils.file').quickLook({ node:get_id() })
+        require('hasan.utils.file').quicklook({ node:get_id() })
       end,
       ['R'] = function(state)
         local node = state.tree:get_node()

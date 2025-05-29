@@ -50,7 +50,7 @@ local local_action = transform_mod({
         return no_item_found()
       end
       local file_path = is_path_absolute and entry[1] or get_file_from_entry(entry)
-      require('hasan.utils.file').quickLook({ file_path })
+      require('hasan.utils.file').quicklook({ file_path })
     end
   end,
   system_open = function(prompt_bufnr)

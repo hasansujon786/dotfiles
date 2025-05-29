@@ -189,7 +189,7 @@ local function try_change_quicklook(p)
         return
       end
 
-      local ok = pcall(require('hasan.utils.file').quickLook, { cur_item._path })
+      local ok = pcall(require('hasan.utils.file').quicklook, { cur_item._path })
       if ok then
         vim.b.qlook = cur_item._path
       end
@@ -468,6 +468,7 @@ return {
 
           ---@type snacks.picker.file_browser.Config
           file_browser = {
+             layout = 'ivy_mini',
             -- prompt_prefix = false,
             -- title = 'asdfasdfsd',
           },
@@ -683,7 +684,7 @@ return {
             if not item or item._path == nil then
               return
             end
-            local ok = pcall(require('hasan.utils.file').quickLook, { item._path })
+            local ok = pcall(require('hasan.utils.file').quicklook, { item._path })
             if not ok then
               return
             end

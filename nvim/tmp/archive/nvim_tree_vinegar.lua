@@ -108,7 +108,7 @@ M.actions = {
   end,
   quickLook = function()
     local node = api.tree.get_node_under_cursor()
-    require('hasan.utils.file').quickLook({ node.absolute_path })
+    require('hasan.utils.file').quicklook({ node.absolute_path })
   end,
   vinegar_dir_up = function()
     local node = api.tree.get_node_under_cursor()

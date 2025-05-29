@@ -102,6 +102,7 @@ end, { desc = gx_desc })
 
 keymap('n', 'gG', '<cmd>lua require("hasan.utils").google_search()<CR>', { desc = 'Search on google' })
 keymap('x', 'gG', '<Esc><cmd>lua require("hasan.utils").google_search(true)<CR>', { desc = 'Search on google' })
+keymap('n', 'gpp', '<cmd>lua require("config.lsp.util.extras").hover()<cr>', { desc = 'Preview image under cursor' })
 
 keymap('n', 'cm', ':%s/<c-r>///g<Left><Left>', { desc = 'Change all matches with prompt', silent = false })
 keymap('n', 'dm', ':%s/<c-r>///g<CR>', { desc = 'Delete all matches' })

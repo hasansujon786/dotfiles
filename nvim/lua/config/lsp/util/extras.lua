@@ -100,11 +100,8 @@ function M.hover()
   end
 
   if img_src then
-    require('hasan.utils.file').quickLook({ img_src })
-    return
+    require('hasan.utils.file').quicklook({ img_src })
   end
-
-  vim.lsp.buf.hover()
 end
 
 return M
