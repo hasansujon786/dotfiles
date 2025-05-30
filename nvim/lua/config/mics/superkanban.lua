@@ -3,7 +3,6 @@ local reload_on_call = false
 local function update_should_reload()
 	vim.schedule(function()
 		reload_on_call = vim.uv.cwd():find("super%-kanban") and true or false
-		print(reload_on_call)
 	end)
 end
 local function get_kanban(reload)

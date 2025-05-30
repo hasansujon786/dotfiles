@@ -39,17 +39,21 @@ return {
     { key = 'z', mods = 'LEADER', action = 'TogglePaneZoomState' },
 
     -- Leader custom bindings
-    { key = '.', mods = 'LEADER', action = 'TogglePaneZoomState' },
-    { key = 'o', mods = 'LEADER', action = 'ActivateLastTab' },
+    { key = 'k', mods = 'LEADER', action = act.ActivatePaneDirection('Up') },
+    { key = 'j', mods = 'LEADER', action = act.ActivatePaneDirection('Down') },
+    { key = 'h', mods = 'LEADER', action = act.ActivatePaneDirection('Left') },
+    { key = 'l', mods = 'LEADER', action = act.ActivatePaneDirection('Right') },
+    { key = 'h', mods = 'LEADER|ALT', action = act.AdjustPaneSize({ 'Left', 5 }) },
+    { key = 'j', mods = 'LEADER|ALT', action = act.AdjustPaneSize({ 'Down', 5 }) },
+    { key = 'k', mods = 'LEADER|ALT', action = act.AdjustPaneSize({ 'Up', 5 }) },
+    { key = 'l', mods = 'LEADER|ALT', action = act.AdjustPaneSize({ 'Right', 5 }) },
     { key = 'v', mods = 'LEADER', action = act({ SplitHorizontal = {} }) },
     { key = 's', mods = 'LEADER', action = act({ SplitVertical = {} }) },
+    { key = '.', mods = 'LEADER', action = 'TogglePaneZoomState' },
+    { key = 'o', mods = 'LEADER', action = 'ActivateLastTab' },
     { key = 'b', mods = 'LEADER', action = wezterm.action_callback(events.toggle_opacity) },
     { key = 'r', mods = 'LEADER', action = act.RotatePanes('Clockwise') },
     { key = 'R', mods = 'LEADER', action = act.RotatePanes('CounterClockwise') },
-    { key = 'h', mods = 'LEADER|ALT', action = act({ AdjustPaneSize = { 'Left', 5 } }) },
-    { key = 'j', mods = 'LEADER|ALT', action = act({ AdjustPaneSize = { 'Down', 5 } }) },
-    { key = 'k', mods = 'LEADER|ALT', action = act({ AdjustPaneSize = { 'Up', 5 } }) },
-    { key = 'l', mods = 'LEADER|ALT', action = act({ AdjustPaneSize = { 'Right', 5 } }) },
     {
       key = 'X',
       mods = 'LEADER',
@@ -83,7 +87,7 @@ return {
     { key = 'r', mods = 'LEADER|CTRL', action = act({ EmitEvent = 'restore-session' }) },
     { key = 'l', mods = 'LEADER|CTRL', action = act({ EmitEvent = 'load-session' }) },
     { key = 'f', mods = 'LEADER', action = act({ EmitEvent = 'sessionizer-find-repoes' }) },
-    { key = 'q', mods = 'LEADER', action = act.ShowLauncherArgs({ flags = 'WORKSPACES' })},
+    { key = 'q', mods = 'LEADER', action = act.ShowLauncherArgs({ flags = 'WORKSPACES' }) },
     -- Rename tab
     {
       key = 'F2',

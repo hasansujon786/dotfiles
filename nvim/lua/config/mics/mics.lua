@@ -66,4 +66,17 @@ return {
   --     resizeMode = 'Fit', -- Fit / Strech / Crop
   --   },
   -- },
+  -- { 'mbbill/undotree' },
+  -- {
+  --   'wolfwfr/vimatrix.nvim',
+  --   cmd = { 'VimatrixOpen' },
+  --   opts = {
+  --     window = {
+  --       general = {
+  --         background = '#111111',
+  --         blend = 0,
+  --       },
+  --     },
+  --   },
+  -- },
 }
