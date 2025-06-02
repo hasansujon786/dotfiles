@@ -93,6 +93,10 @@ M.lsp = {
       formatter = { 'stylua' },
     },
     {
+      filetype = 'dart',
+      formatter = { lsp_format = 'fallback' },
+    },
+    {
       filetype = { 'bash', 'sh' },
       formatter = { 'shfmt' },
     },

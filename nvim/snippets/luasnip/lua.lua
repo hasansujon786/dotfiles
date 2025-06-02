@@ -22,48 +22,31 @@ local r = ls.restore_node
 local sn = ls.snippet_node
 
 ls.add_snippets('lua', {
-  -- s('req', fmt("local {} = require('{}')", { i(1, 'module'), rep(1) })),
-  s('pr', fmt('P({})', i(1, "'write something'"))),
-  s('notify', fmt('vim.notify({}, vim.log.levels.WARN)', { i(0) })),
-  s(
-    'rq',
-    fmt("local {} = require('{}')", {
-      f(function(import_name)
-        local parts = vim.split(import_name[1][1], '.', true)
-        return parts[#parts]
-      end, { 1 }),
-      i(1),
-    })
-  ),
-  s(
-    'defer',
-    fmt(
-      [[
-      vim.defer_fn(function()
-        {2}
-      end, {1})
-      ]],
-      {
-        i(1, '1000'),
-        i(0, '-- write something'),
-      }
-    )
-  ),
-  s(
-    'schedule-timer',
-    fmt(
-      [[
-      local timer = vim.loop.new_timer()
-      timer:start(0, 3000, vim.schedule_wrap(function()
-        -- timer:close()
-        {}
-      end))
-      ]],
-      {
-        i(0, '-- write something'),
-      }
-    )
-  ),
+  -- s(
+  --   'rq',
+  --   fmt("local {} = require('{}')", {
+  --     f(function(import_name)
+  --       local parts = vim.split(import_name[1][1], '.', true)
+  --       return parts[#parts]
+  --     end, { 1 }),
+  --     i(1),
+  --   })
+  -- ),
+  -- s(
+  --   'schedule-timer',
+  --   fmt(
+  --     [[
+  --     local timer = vim.loop.new_timer()
+  --     timer:start(0, 3000, vim.schedule_wrap(function()
+  --       -- timer:close()
+  --       {}
+  --     end))
+  --     ]],
+  --     {
+  --       i(0, '-- write something'),
+  --     }
+  --   )
+  -- ),
   s(
     'metaclass',
     fmta(
@@ -87,22 +70,8 @@ ls.add_snippets('lua', {
       ]],
       {
         name = i(1, 'Module'),
-        module_name = rep(1)
+        module_name = rep(1),
       }
     )
   ),
-  s(
-    'ei',
-    fmt(
-      [[
-      elseif {} then
-        {}
-      ]],
-      { i(1), i(0) }
-    )
-  ),
-  s('ee', {
-    t({ 'else', '\t' }),
-    i(0),
-  }),
 }, { key = 'my_lua_snips' })

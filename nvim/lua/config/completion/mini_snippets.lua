@@ -1,6 +1,7 @@
 return {
   'echasnovski/mini.snippets',
   lazy = true,
+  enabled = false,
   config = function()
     local gen_loader = require('mini.snippets').gen_loader
 
@@ -41,6 +42,7 @@ return {
       },
       dart = {
         '**/flutter.json',
+        '**/dart.json',
       },
     }
 

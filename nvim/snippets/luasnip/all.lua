@@ -42,8 +42,8 @@ ls.add_snippets('all', {
       i(0),
     })
   ),
-  s('<f', fmt('[[file:' .. org_root_path .. '/{}]]', { i(0) })),
-  s('<.', fmt(org_root_path .. '/{}', { i(0) })),
+  s('<f', fmt('[[file:' .. org_root_path .. '{}]]', { i(0) })),
+  s('<F', fmt(org_root_path .. '{}', { i(0) })),
   s(
     '<t',
     fmt(
@@ -58,28 +58,6 @@ ls.add_snippets('all', {
         i(0),
         f(common.comment_chars, {}),
       }
-    )
-  ),
-  s(
-    'ei',
-    fmt(
-      [[
-      else if ({}) {{
-        {}
-      }}
-      ]],
-      { i(1), i(0) }
-    )
-  ),
-  s(
-    'el',
-    fmt(
-      [[
-      else {{
-        {}
-      }}
-      ]],
-      { i(0) }
     )
   ),
 }, { key = 'my_global_snips' })

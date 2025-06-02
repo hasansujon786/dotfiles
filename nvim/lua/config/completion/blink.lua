@@ -47,25 +47,38 @@ return {
       ['<CR>'] = { 'accept', 'fallback' },
       ['<C-y>'] = { 'select_and_accept', 'fallback' },
 
+      ['<A-n>'] = { 'select_next', 'fallback' },
+      ['<A-p>'] = { 'select_prev', 'fallback' },
+      ['<A-u>'] = { 'scroll_documentation_up', 'fallback' },
+      ['<A-d>'] = { 'scroll_documentation_down', 'fallback' },
+
       ['<Tab>'] = {
         function(cmp)
-          if cmp.snippet_active() then
-            return cmp.accept()
+          if cmp.snippet_active({ direction = 1 }) then
+            return cmp.snippet_forward()
           elseif cmp.is_visible() then
             return cmp.select_and_accept()
-          elseif tab_out_available() then
-            feedkeys('<Right>', 'n')
-            return true
-          elseif has_words_before() and not cmp.is_visible() then
-            return cmp.show()
           end
         end,
-        'snippet_forward',
+        function(cmp)
+          if tab_out_available() then
+            feedkeys('<Right>', 'n')
+            return true
+            -- elseif has_words_before() and not cmp.is_visible() then
+            --   return cmp.show()
+          end
+        end,
         'fallback',
         -- 'fallback_to_mappings',
       },
-      ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
-
+      ['<S-Tab>'] = {
+        function(cmp)
+          if cmp.snippet_active({ direction = -1 }) then
+            return cmp.snippet_backward()
+          end
+        end,
+        'fallback',
+      },
       ['<C-l>'] = {
         function(cmp)
           if cmp.snippet_active() then
@@ -74,30 +87,27 @@ return {
           return cmp.show({ providers = { 'snippets' } })
         end,
       },
+      ['<C-k>'] = {
+        function(cmp)
+          if cmp.snippet_active({ direction = 1 }) then
+            return cmp.snippet_forward()
+          end
+        end,
+        'fallback',
+      },
       ['<C-j>'] = {
         function(cmp)
-          if cmp.snippet_active() then
+          if cmp.snippet_active({ direction = -1 }) then
             return cmp.snippet_backward()
           end
-
-          if cmp.is_visible() then
-            return cmp.hide({ callback = minisnippet_expand })
-          end
-
-          return minisnippet_expand()
         end,
+        'fallback',
       },
-
-      ['<A-n>'] = { 'select_next', 'fallback' },
-      ['<A-p>'] = { 'select_prev', 'fallback' },
-
-      ['<A-u>'] = { 'scroll_documentation_up', 'fallback' },
-      ['<A-d>'] = { 'scroll_documentation_down', 'fallback' },
     },
     fuzzy = { implementation = 'prefer_rust' },
     snippets = {
-      -- preset = 'luasnip',
-      preset = 'mini_snippets',
+      preset = 'luasnip',
+      -- preset = 'mini_snippets',
     },
     sources = {
       -- https://github.com/Saghen/blink.cmp/blob/main/docs/configuration/sources.md#community-sources
