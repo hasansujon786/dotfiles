@@ -5,25 +5,25 @@ local function tab_out_available()
   local tab_out_chars = '>)}\'"`,;]'
   return vim.fn.search('\\%#[]' .. tab_out_chars, 'n') ~= 0
 end
-local function has_words_before()
-  local skip_ft = vim.tbl_contains({ 'spectre_input', 'spectre_file_input' }, vim.bo.filetype)
-  if skip_ft then
-    return false
-  end
+-- local function has_words_before()
+--   local skip_ft = vim.tbl_contains({ 'spectre_input', 'spectre_file_input' }, vim.bo.filetype)
+--   if skip_ft then
+--     return false
+--   end
 
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  if col == 0 then
-    return false
-  end
-  local text = vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
-  return text:sub(col, col):match('%s') == nil
-end
-local minisnippet_expand = function()
-  feedkeys('<C-k><C-j>')
-  return true
-end
+--   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+--   if col == 0 then
+--     return false
+--   end
+--   local text = vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
+--   return text:sub(col, col):match('%s') == nil
+-- end
+-- local minisnippet_expand = function()
+--   feedkeys('<C-k><C-j>')
+--   return true
+-- end
 -- Hack to tab makes work
-keymap('i', '<tab>', '<space><space>')
+-- keymap('i', '<tab>', '<space><space>')
 keymap('i', '<s-tab>', '<BS>')
 
 return {
@@ -35,7 +35,7 @@ return {
     'rafamadriz/friendly-snippets',
     'windwp/nvim-autopairs',
     -- 'L3MON4D3/LuaSnip',
-    'echasnovski/mini.snippets',
+    -- 'echasnovski/mini.snippets',
     'mattn/emmet-vim',
   },
   ---@module 'blink.cmp'
@@ -54,10 +54,10 @@ return {
 
       ['<Tab>'] = {
         function(cmp)
-          if cmp.snippet_active({ direction = 1 }) then
-            return cmp.snippet_forward()
-          elseif cmp.is_visible() then
+          if cmp.is_visible() then
             return cmp.select_and_accept()
+          elseif cmp.snippet_active({ direction = 1 }) then
+            return cmp.snippet_forward()
           end
         end,
         function(cmp)
