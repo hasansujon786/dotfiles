@@ -12,16 +12,19 @@ return {
       -- You can jump back into it even if you move outside of the selection
       history = true,
       -- This one is cool cause if you have dynamic snippets, it updates as you type!
-      update_events = 'TextChanged,TextChangedI,InsertEnter,InsertLeave',
-      region_check_events = 'InsertEnter,CursorMoved,TextChangedI',
-      delete_check_events = 'InsertLeave,InsertEnter,TextChanged',
+      update_events = 'InsertEnter,InsertLeave,TextChanged,TextChangedI',
+      region_check_events = 'InsertEnter,TextChanged,TextChangedI,CursorMoved,CursorMovedI',
+      delete_check_events = 'InsertLeave,InsertEnter,TextChanged,TextChangedI',
       -- Autosnippets:
       enable_autosnippets = false,
       -- ext_opts = nil,
       ext_opts = {
         [types.choiceNode] = {
           passive = { virt_text = { { '◇', 'Comment' } } },
-          active = { virt_text = { { '◆', 'CmpItemKindClass' } } },
+          -- active = { virt_text = { { '◆', 'CmpItemKindClass' } } },
+          active = {
+            virt_text = { { '(snippet) choice node', 'LspInlayHint' } },
+          },
         },
         [types.insertNode] = {
           passive = { virt_text = { { icons.Other.circleBg, 'Comment' } } },
@@ -39,6 +42,17 @@ return {
       end
       return '<esc>'
     end, { expr = true, desc = 'Escape and Clear hlsearch' })
+
+    vim.keymap.set({ 'i', 's' }, '<C-t>', function()
+      if require('luasnip').choice_active() then
+        vim.schedule(function()
+          require('luasnip').change_choice(1)
+        end)
+        return ''
+      end
+
+      return '<tab>'
+    end, { expr = true, desc = 'Select next choice' })
 
     -- require('luasnip').filetype_extend('javascriptreact', { 'javascript' }) -- (to, {from})
     -- require('luasnip').filetype_extend('javascript', { 'javascriptreact' })

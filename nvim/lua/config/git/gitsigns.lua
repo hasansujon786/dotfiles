@@ -21,7 +21,7 @@ end
 return {
   'lewis6991/gitsigns.nvim',
   lazy = true,
-  commit = '140ac646db125904e456e42ab8b538d28f9607d7',
+  commit = '5f1b1e2',
   event = 'BufReadPost',
   opts = {
     signs_staged_enable = true,

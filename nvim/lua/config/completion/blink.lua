@@ -34,7 +34,7 @@ return {
   dependencies = {
     'rafamadriz/friendly-snippets',
     'windwp/nvim-autopairs',
-    -- 'L3MON4D3/LuaSnip',
+    'L3MON4D3/LuaSnip',
     -- 'echasnovski/mini.snippets',
     'mattn/emmet-vim',
   },
@@ -43,7 +43,19 @@ return {
   opts = {
     keymap = {
       preset = 'super-tab',
-      ['<C-q>'] = { 'show', 'show_documentation', 'hide_documentation' },
+      ['<C-space>'] = {
+        function(cmp)
+          if require('luasnip').choice_active() then
+            vim.schedule(function()
+              require('luasnip.extras.select_choice')()
+            end)
+            return true
+          end
+        end,
+        'show',
+        'show_documentation',
+        'hide_documentation',
+      },
       ['<CR>'] = { 'accept', 'fallback' },
       ['<C-y>'] = { 'select_and_accept', 'fallback' },
 
@@ -81,24 +93,21 @@ return {
       },
       ['<C-l>'] = {
         function(cmp)
-          if cmp.snippet_active() then
-            return cmp.snippet_forward()
-          end
           return cmp.show({ providers = { 'snippets' } })
         end,
       },
       ['<C-k>'] = {
         function(cmp)
-          if cmp.snippet_active({ direction = 1 }) then
-            return cmp.snippet_forward()
+          if cmp.snippet_active({ direction = -1 }) then
+            return cmp.snippet_backward()
           end
         end,
         'fallback',
       },
       ['<C-j>'] = {
         function(cmp)
-          if cmp.snippet_active({ direction = -1 }) then
-            return cmp.snippet_backward()
+          if cmp.snippet_active({ direction = 1 }) then
+            return cmp.snippet_forward()
           end
         end,
         'fallback',
