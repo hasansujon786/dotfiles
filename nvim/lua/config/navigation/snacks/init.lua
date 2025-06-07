@@ -743,7 +743,6 @@ return {
         win = {
           input = {
             keys = {
-              ['<Esc>'] = { 'close', mode = { 'n', 'i' } },
               ['<c-u>'] = false,
 
               ['<F3>'] = { 'toggle_preview', mode = { 'i', 'n' } },
