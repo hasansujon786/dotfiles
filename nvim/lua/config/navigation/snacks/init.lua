@@ -468,7 +468,7 @@ return {
 
           ---@type snacks.picker.file_browser.Config
           file_browser = {
-             layout = 'ivy_mini',
+            layout = 'ivy_mini',
             -- prompt_prefix = false,
             -- title = 'asdfasdfsd',
           },
@@ -695,13 +695,21 @@ return {
               vim.b.qlook = item._path
             end
           end,
-          system_open = function(picker, item)
+          system_reveal = function(picker, item)
             picker:close()
             if not item or item._path == nil then
               return
             end
 
             require('hasan.utils.file').system_open(item._path, { reveal = true })
+          end,
+          system_open = function(picker, item)
+            picker:close()
+            if not item or item._path == nil then
+              return
+            end
+
+            require('hasan.utils.file').system_open(item._path)
           end,
           focus_file_tree = function(picker, item)
             picker:close()
@@ -738,7 +746,7 @@ return {
               ['<Esc>'] = { 'close', mode = { 'n', 'i' } },
               ['<c-u>'] = false,
 
-              ['<a-q>'] = { 'toggle_preview', mode = { 'i', 'n' } },
+              ['<F3>'] = { 'toggle_preview', mode = { 'i', 'n' } },
               ['<a-u>'] = { 'preview_scroll_up', mode = { 'i', 'n' } },
               ['<a-d>'] = { 'preview_scroll_down', mode = { 'i', 'n' } },
               ['<a-n>'] = { 'list_down', mode = { 'i', 'n' } },
@@ -750,14 +758,19 @@ return {
               -- ['<a-h>'] = { 'toggle_hidden', mode = { 'i', 'n' } },
               -- ['<a-f>'] = { 'toggle_follow', mode = { 'i', 'n' } },
 
-              ['<a-r>'] = { 'insert_relative_path', mode = { 'i', 'n' } },
+              ['<C-r><C-r>'] = { 'insert_relative_path', mode = { 'i', 'n' } },
               ['<a-l>'] = { 'inspect', mode = { 'i', 'n' } },
 
+              ['<a-t>'] = { 'focus_file_tree', mode = { 'i', 'n' } },
               ['<a-s>'] = { 'flash', mode = { 'n', 'i' } },
               ['s'] = { 'flash' },
-              ['<a-t>'] = { 'focus_file_tree', mode = { 'i', 'n' } },
+
               ['<a-i>'] = { 'quicklook', mode = { 'i', 'n' } },
+              ['i'] = { 'quicklook', mode = { 'n' } },
+              ['<a-r>'] = { 'system_reveal', mode = { 'i', 'n' } },
+              ['R'] = { 'system_reveal', mode = { 'n' } },
               ['<a-o>'] = { 'system_open', mode = { 'i', 'n' } },
+              ['O'] = { 'system_open', mode = { 'n' } },
               -- ['<S-CR>'] = { 'fedit', mode = { 'i', 'n' } },
             },
           },

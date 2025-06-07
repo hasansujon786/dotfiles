@@ -97,6 +97,21 @@ return {
   width = 30,
   mapping_options = { noremap = true, nowait = true },
   mappings = {
+    ['i'] = function(state)
+      local node = state.tree:get_node()
+      require('hasan.utils.file').quicklook({ node:get_id() })
+    end,
+    ['R'] = function(state)
+      local node = state.tree:get_node()
+      local file = node:get_id()
+      require('hasan.utils.file').system_open(file, { reveal = true })
+    end,
+    ['O'] = function(state)
+      local node = state.tree:get_node()
+      local file = node:get_id()
+      require('hasan.utils.file').system_open(file, { reveal = false })
+    end,
+
     ['K'] = 'show_file_details',
     ['r'] = 'refresh',
     ['q'] = 'close_window',
@@ -111,7 +126,7 @@ return {
     ['v'] = 'open_vsplit',
     ['S'] = 'open_split',
     -- ['w'] = 'open_with_window_picker', 'split_with_window_picker', 'vsplit_with_window_picker',
-    ['P'] = { 'toggle_preview', config = { use_float = true } },
+    ['<F3>'] = { 'toggle_preview', config = { use_float = true } },
     ['h'] = 'close_node',
     ['H'] = 'close_all_nodes',
     ['W'] = 'close_all_nodes',

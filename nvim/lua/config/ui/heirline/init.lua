@@ -86,12 +86,20 @@ return {
         { wb.BarStart, wb.WinBarFileName, wb.BarEnd, wb.Rest },
       },
     }
+    _G.log_winbar_ft = false
 
     require('heirline').setup({
       statusline = StatusLine,
       winbar = WinBars,
       opts = {
         disable_winbar_cb = function(args)
+          if log_winbar_ft then
+            local ft = vim.api.nvim_get_option_value('filetype', { buf = args.buf })
+            if ft ~= 'snacks_notif' then
+              log(ft)
+            end
+          end
+
           if conditions.buffer_matches({ filetype = dapui_filetypes }, args.buf) then
             return false
           end

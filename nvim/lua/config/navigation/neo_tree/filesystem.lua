@@ -47,7 +47,7 @@ return {
   window = {
     mappings = {
       ['.'] = 'set_root',
-      ['I'] = 'toggle_hidden',
+      ['<A-h>'] = 'toggle_hidden',
       ['f'] = 'filter_on_submit',
       ['F'] = 'fuzzy_finder',
       ['/'] = 'none',
@@ -93,20 +93,6 @@ return {
           require('neo-tree.sources.filesystem').navigate(state, vim.g.cwd)
         end
         feedkeys('ggj')
-      end,
-      ['i'] = function(state)
-        local node = state.tree:get_node()
-        require('hasan.utils.file').quicklook({ node:get_id() })
-      end,
-      ['R'] = function(state)
-        local node = state.tree:get_node()
-        local file = node:get_id()
-        require('hasan.utils.file').system_open(file, { reveal = true })
-      end,
-      ['O'] = function(state)
-        local node = state.tree:get_node()
-        local file = node:get_id()
-        require('hasan.utils.file').system_open(file, { reveal = false })
       end,
 
       ['[c'] = 'prev_git_modified',
