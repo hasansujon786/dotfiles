@@ -13,11 +13,11 @@ end, { expr = true, desc = 'Record a macro' })
 keymap('v', '@', ':norm @', noSilent) -- run macro on selection
 keymap(nx, '<CR>', ':<up>', { silent = false, desc = 'Run last command easily' })
 keymap(nx, '<leader><cr>', 'q:', { silent = false, desc = 'Open command history' })
-keymap({ 'i', 'n', 's' }, '<esc>', function()
-  vim.cmd('noh')
-  vim.snippet.stop()
-  return '<esc>'
-end, { expr = true, desc = 'Escape and Clear hlsearch' })
+-- keymap({ 'i', 'n', 's' }, '<esc>', function()
+--   vim.cmd('noh')
+--   vim.snippet.stop()
+--   return '<esc>'
+-- end, { expr = true, desc = 'Escape and Clear hlsearch' })
 
 -- Center window on insert
 -- require('hasan.center_cursor').attach_mappings()

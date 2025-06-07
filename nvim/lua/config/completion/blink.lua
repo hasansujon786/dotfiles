@@ -58,24 +58,43 @@ return {
       },
       ['<CR>'] = { 'accept', 'fallback' },
       ['<C-y>'] = { 'select_and_accept', 'fallback' },
-
-      ['<A-n>'] = { 'select_next', 'fallback' },
-      ['<A-p>'] = { 'select_prev', 'fallback' },
       ['<A-u>'] = { 'scroll_documentation_up', 'fallback' },
       ['<A-d>'] = { 'scroll_documentation_down', 'fallback' },
+
+      ['<A-n>'] = {
+        function()
+          if require('luasnip').choice_active() then
+            vim.schedule(function()
+              require('luasnip').change_choice(1)
+            end)
+            return true
+          end
+        end,
+        'select_next',
+        'fallback',
+      },
+      ['<A-p>'] = {
+        function()
+          if require('luasnip').choice_active() then
+            vim.schedule(function()
+              require('luasnip').change_choice(-1)
+            end)
+            return true
+          end
+        end,
+        'select_prev',
+        'fallback',
+      },
 
       ['<Tab>'] = {
         function(cmp)
           if cmp.is_visible() then
             return cmp.select_and_accept()
-          elseif cmp.snippet_active({ direction = 1 }) then
-            return cmp.snippet_forward()
-          end
-        end,
-        function(cmp)
-          if tab_out_available() then
+          elseif tab_out_available() then
             feedkeys('<Right>', 'n')
             return true
+          elseif cmp.snippet_active({ direction = 1 }) then
+            return cmp.snippet_forward()
             -- elseif has_words_before() and not cmp.is_visible() then
             --   return cmp.show()
           end
@@ -91,12 +110,7 @@ return {
         end,
         'fallback',
       },
-      ['<C-l>'] = {
-        function(cmp)
-          return cmp.show({ providers = { 'snippets' } })
-        end,
-      },
-      ['<C-k>'] = {
+      ['<C-j>'] = {
         function(cmp)
           if cmp.snippet_active({ direction = -1 }) then
             return cmp.snippet_backward()
@@ -104,13 +118,16 @@ return {
         end,
         'fallback',
       },
-      ['<C-j>'] = {
+      ['<C-l>'] = {
         function(cmp)
-          if cmp.snippet_active({ direction = 1 }) then
+          if cmp.is_visible() then
+            return cmp.show({ providers = { 'snippets' } })
+          elseif cmp.snippet_active({ direction = 1 }) then
             return cmp.snippet_forward()
           end
+
+          return cmp.show({ providers = { 'snippets' } })
         end,
-        'fallback',
       },
     },
     fuzzy = { implementation = 'prefer_rust' },

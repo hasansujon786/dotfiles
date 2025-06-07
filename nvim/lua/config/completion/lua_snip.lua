@@ -33,7 +33,7 @@ return {
       },
     })
 
-    keymap({ 'n' }, '<esc>', function()
+    keymap({ 'i', 'n', 's' }, '<esc>', function()
       vim.cmd('noh')
 
       local is_active = ls.session.current_nodes[vim.api.nvim_get_current_buf()] and not ls.session.jump_active
@@ -42,17 +42,6 @@ return {
       end
       return '<esc>'
     end, { expr = true, desc = 'Escape and Clear hlsearch' })
-
-    vim.keymap.set({ 'i', 's' }, '<C-t>', function()
-      if require('luasnip').choice_active() then
-        vim.schedule(function()
-          require('luasnip').change_choice(1)
-        end)
-        return ''
-      end
-
-      return '<tab>'
-    end, { expr = true, desc = 'Select next choice' })
 
     -- require('luasnip').filetype_extend('javascriptreact', { 'javascript' }) -- (to, {from})
     -- require('luasnip').filetype_extend('javascript', { 'javascriptreact' })
