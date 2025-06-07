@@ -120,7 +120,23 @@ return {
     },
     sources = {
       -- https://github.com/Saghen/blink.cmp/blob/main/docs/configuration/sources.md#community-sources
-      default = { 'lsp', 'path', 'snippets', 'buffer' },
+      -- default = { 'lsp', 'path', 'snippets', 'buffer' },
+      -- Disable some sources in comments and strings.
+      default = function()
+        local sources = { 'lsp', 'buffer', 'path' }
+        local ok, node = pcall(vim.treesitter.get_node)
+
+        if ok and node then
+          -- if not vim.tbl_contains({ 'comment', 'line_comment', 'block_comment' }, node:type()) then
+          --   table.insert(sources, 'path')
+          -- end
+          if node:type() ~= 'string' then
+            table.insert(sources, 'snippets')
+          end
+        end
+
+        return sources
+      end,
       per_filetype = {
         spectre_input = { 'buffer' },
         spectre_file_input = { 'path' },
