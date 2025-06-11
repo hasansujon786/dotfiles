@@ -119,7 +119,7 @@ PrintScreen::Send("#+{s}")
   p::leader("p", () => toggleAlwaysOnTop())
   a::leader("a", () => send("#{a}"))
   s::leader("s", () => showVolMixer())
-  MButton::leader("🖱️", () => chooseAutoClikMode())
+  MButton::leader("🖱️", () => enterAutoClikMode())
   LWin::return
 #HotIf
 

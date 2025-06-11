@@ -1,71 +1,58 @@
 local M = {}
 
-local whichkey = require('which-key')
-
 -- lua require('osv').run_this()
 -- require("dap.ext.vscode").load_launchjs()
 
 function M.setup()
-  local keymap = {
-    d = {
-      name = 'Debug',
-      c = { "<cmd>lua require'dap'.continue()<cr>",                                'Continue' },
-      R = { "<cmd>lua require'dap'.run_to_cursor()<cr>",                           'Run to Cursor' },
-      t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>",                       'Toggle Breakpoint' },
-      b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>",                       'Toggle Breakpoint' },
-      B = { "<cmd>lua require'dap'.set_breakpoint(vim.fn.input'[Condition] > ')<cr>",'Conditional Breakpoint' },
+  keymap('n', '<leader>dc', '<cmd>lua require"dap".continue()<cr>', { desc = 'Continue' })
+  keymap('n', '<leader>dR', '<cmd>lua require"dap".run_to_cursor()<cr>', { desc = 'Run to Cursor' })
+  keymap('n', '<leader>dt', '<cmd>lua require"dap".toggle_breakpoint()<cr>', { desc = 'Toggle Breakpoint' })
+  keymap('n', '<leader>db', '<cmd>lua require"dap".toggle_breakpoint()<cr>', { desc = 'Toggle Breakpoint' })
+  keymap(
+    'n',
+    '<leader>dB',
+    '<cmd>lua require"dap".set_breakpoint(vim.fn.input"[Condition] > ")<cr>',
+    { desc = 'Conditional Breakpoint' }
+  )
 
-      i = { "<cmd>lua require'dap'.step_into()<cr>",                               'Step Into' },
-      I = { "<cmd>lua require'dap'.step_back()<cr>",                               'Step Back' },
-      o = { "<cmd>lua require'dap'.step_over()<cr>",                               'Step Over' },
-      O = { "<cmd>lua require'dap'.step_out()<cr>",                                'Step Out' },
+  keymap('n', '<leader>di', '<cmd>lua require"dap".step_into()<cr>', { desc = 'Step Into' })
+  keymap('n', '<leader>dI', '<cmd>lua require"dap".step_back()<cr>', { desc = 'Step Back' })
+  keymap('n', '<leader>do', '<cmd>lua require"dap".step_over()<cr>', { desc = 'Step Over' })
+  keymap('n', '<leader>dO', '<cmd>lua require"dap".step_out()<cr>', { desc = 'Step Out' })
 
-      h = { "<cmd>lua require'dap.ui.widgets'.hover()<cr>",                        'Hover Variables' },
-      r = { "<cmd>lua require'dap'.repl.toggle()<cr>",                             'Toggle Repl' },
-      u = { "<cmd>lua require'dapui'.toggle()<cr>",                                'Toggle UI' },
-      S = { "<cmd>lua require'dap.ui.widgets'.scopes()<cr>",                       'Scopes' },
-      p = { "<cmd>lua require'dap'.pause.toggle()<cr>",                            'Pause' },
+  keymap('n', '<leader>dh', '<cmd>lua require"dap.ui.widgets".hover()<cr>', { desc = 'Hover Variables' })
+  keymap('n', '<leader>dr', '<cmd>lua require"dap".repl.toggle()<cr>', { desc = 'Toggle Repl' })
+  keymap('n', '<leader>du', '<cmd>lua require"dapui".toggle()<cr>', { desc = 'Toggle UI' })
+  keymap('n', '<leader>dS', '<cmd>lua require"dap.ui.widgets".scopes()<cr>', { desc = 'Scopes' })
+  keymap('n', '<leader>dp', '<cmd>lua require"dap".pause.toggle()<cr>', { desc = 'Pause' })
 
-      q = { "<cmd>lua require'dap'.close()<cr>",                                   'Quit' },
-      D = { "<cmd>lua require'dap'.disconnect()<cr>",                              'Disconnect' },
-      X = { "<cmd>lua require'dap'.terminate()<cr>",                               'Terminate' },
-      g = { "<cmd>lua require'dap'.session()<cr>",                                 'Get Session' },
+  keymap('n', '<leader>dq', '<cmd>lua require"dap".close()<cr>', { desc = 'Quit' })
+  keymap('n', '<leader>dD', '<cmd>lua require"dap".disconnect()<cr>', { desc = 'Disconnect' })
+  keymap('n', '<leader>dX', '<cmd>lua require"dap".terminate()<cr>', { desc = 'Terminate' })
+  keymap('n', '<leader>dg', '<cmd>lua require"dap".session()<cr>', { desc = 'Get Session' })
 
-      e = { "<cmd>lua require'dapui'.eval()<cr>",                                  'Evaluate' },
-      E = { "<cmd>lua require'dapui'.eval(vim.fn.input '[Expression] > ')<cr>",    'Evaluate Input' },
+  keymap({ 'n', 'x' }, '<leader>de', '<cmd>lua require"dapui".eval()<cr>', { desc = 'Evaluate' })
+  keymap(
+    'n',
+    '<leader>dE',
+    '<cmd>lua require"dapui".eval(vim.fn.input "[Expression] > ")<cr>',
+    { desc = 'Evaluate Input' }
+  )
 
-      ['.'] = { "<cmd>lua require'dapui'.float_element('scopes',{enter=true})<CR>",'Show Scopes' },
-      ['/'] = { "<cmd>lua require'telescope'.extensions.dap.commands()<cr>",       'Find DAP Commands' },
-      l = {
-        c = { "<cmd>lua require'telescope'.extensions.dap.configurations()<cr>",   'Find DAP configurations'},
-        l = { "<cmd>lua require'telescope'.extensions.dap.list_breakpoints()<cr>", 'Find DAP list_breakpoints'},
-        v = { "<cmd>lua require'telescope'.extensions.dap.variables()<cr>",        'Find DAP variables'},
-        f = { "<cmd>lua require'telescope'.extensions.dap.frames()<cr>",           'Find DAP frames'},
-      }
-    },
-  }
+  keymap(
+    'n',
+    '<leader>d.',
+    '<cmd>lua require"dapui".float_element("scopes",{enter=true})<CR>',
+    { desc = 'Show Scopes' }
+  )
 
-  whichkey.register(keymap, {
-    mode = 'n',
-    prefix = '<leader>',
-    buffer = nil,
-    silent = true,
-    nowait = false,
-    noremap = true,
-  })
-
-  local keymap_v = {
-    name = 'Debug',
-    e = { "<cmd>lua require'dapui'.eval()<cr>", 'Evaluate' },
-  }
-  whichkey.register(keymap_v, {
-    mode = 'v',
-    prefix = '<leader>',
-    buffer = nil,
-    silent = true,
-    nowait = false,
-    noremap = true,
-  })
+  -- keymap('n', '['/']',  '<cmd>lua require"telescope".extensions.dap.commands()<cr>', { desc = 'Find DAP Commands' },
+  -- l = {
+  -- keymap('n', 'c',  '<cmd>lua require'telescope'.extensions.dap.configurations()<cr>', { desc = 'Find DAP configurations' },
+  -- keymap('n', 'l',  '<cmd>lua require'telescope'.extensions.dap.list_breakpoints()<cr>', { desc = 'Find DAP list_breakpoints' },
+  -- keymap('n', 'v',  '<cmd>lua require'telescope'.extensions.dap.variables()<cr>', { desc = 'Find DAP variables' },
+  -- keymap('n', 'f',  '<cmd>lua require'telescope'.extensions.dap.frames()<cr>', { desc = 'Find DAP frames' },
+  -- }
 end
 
 return M
