@@ -468,7 +468,7 @@ return {
 
           ---@type snacks.picker.file_browser.Config
           file_browser = {
-            layout = 'ivy_mini',
+            layout = 'ivy',
             -- prompt_prefix = false,
             -- title = 'asdfasdfsd',
           },
