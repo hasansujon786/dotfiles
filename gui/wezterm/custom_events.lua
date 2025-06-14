@@ -17,27 +17,31 @@ M.activate_win_stack = function(window, pane)
   window:perform_action({ ActivateKeyTable = { name = 'win_stack', one_shot = false } }, pane)
 end
 
-local tab_bar = scheme.one_half.tab_bar
-local tab_length = 20
+local tab_bar_scheme = scheme.one_half.tab_bar
+local all_tabs_width = 0
 wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
+  if tab.tab_index == 0 then
+    all_tabs_width = 0
+  end
   local title = string.format('%d:%s', tab.tab_index + 1, utils.tab_title(tab))
-  title = utils.fit_to_length(title, tab_length - 2)
+  all_tabs_width = all_tabs_width + #title + 2
+  -- title = utils.fit_to_length(title, tab_length - 2)
 
-  local fg = tab_bar.inactive_tab.fg_color
-  local bg = tab_bar.inactive_tab.bg_color
+  local fg = tab_bar_scheme.inactive_tab.fg_color
+  local bg = tab_bar_scheme.inactive_tab.bg_color
   if tab.is_active then
-    bg = tab_bar.active_tab.bg_color
-    fg = tab_bar.active_tab.fg_color
+    bg = tab_bar_scheme.active_tab.bg_color
+    fg = tab_bar_scheme.active_tab.fg_color
   end
 
   return {
-    { Background = { Color = tab_bar.background } },
+    { Background = { Color = tab_bar_scheme.background } },
     { Foreground = { Color = bg } },
     { Text = '' },
     { Background = { Color = bg } },
     { Foreground = { Color = fg } },
     { Text = string.format('%s', title) },
-    { Background = { Color = tab_bar.background } },
+    { Background = { Color = tab_bar_scheme.background } },
     { Foreground = { Color = bg } },
     { Text = '' },
   }
@@ -55,47 +59,47 @@ wezterm.on('update-status', function(window, pane)
     { time, color = '#8b95a7' },
   }
   local left_cells = {
-    { workspace, color = '#8b95a7' },
-    { date, color = '#68707E' },
+    { workspace, color = '#8b95a7', icon_space = 0 },
+    { date, color = '#68707E', icon_space = 3 },
   }
 
-  local left_elements, right_elements = {}, {}
+  local left_status_elements, right_status_elements = {}, {}
 
   -- Translate a cell into elements
   for index, value in ipairs(right_cells) do
     if index == 1 then
-      table.insert(right_elements, { Foreground = { Color = layer } })
-      table.insert(right_elements, { Text = '' })
-      table.insert(right_elements, { Background = { Color = layer } })
-      table.insert(right_elements, { Text = ' ' })
+      table.insert(right_status_elements, { Foreground = { Color = layer } })
+      table.insert(right_status_elements, { Text = '' })
+      table.insert(right_status_elements, { Background = { Color = layer } })
+      table.insert(right_status_elements, { Text = ' ' })
     else
-      table.insert(right_elements, { Foreground = { Color = '#1e232e' } })
-      table.insert(right_elements, { Text = '  ' })
+      table.insert(right_status_elements, { Foreground = { Color = '#1e232e' } })
+      table.insert(right_status_elements, { Text = '  ' })
     end
-    table.insert(right_elements, { Foreground = { Color = value.color } })
-    table.insert(right_elements, { Text = value[1] })
+    table.insert(right_status_elements, { Foreground = { Color = value.color } })
+    table.insert(right_status_elements, { Text = value[1] })
   end
-  table.insert(right_elements, { Text = ' ' })
+  table.insert(right_status_elements, { Text = ' ' })
 
-  local left_elements_width = 0
-  table.insert(left_elements, { Background = { Color = layer } })
-  table.insert(left_elements, { Text = ' ' })
-  for index, value in ipairs(left_cells) do
-    table.insert(left_elements, { Foreground = { Color = value.color } })
-    if index == 1 and window:leader_is_active() then
-      table.insert(left_elements, { Foreground = { Color = '#f0d197' } })
+  local left_elements_width = (#left_cells * 3)
+  table.insert(left_status_elements, { Background = { Color = layer } })
+  table.insert(left_status_elements, { Text = ' ' })
+  for cell_index, cell in ipairs(left_cells) do
+    table.insert(left_status_elements, { Foreground = { Color = cell.color } })
+    if cell_index == 1 and window:leader_is_active() then
+      table.insert(left_status_elements, { Foreground = { Color = '#f0d197' } })
     end
-    table.insert(left_elements, { Text = value[1] })
-    left_elements_width = left_elements_width + #value[1] + 2
+    table.insert(left_status_elements, { Text = cell[1] })
+    left_elements_width = left_elements_width + #cell[1] - cell.icon_space
 
-    if index == #left_cells then
-      table.insert(left_elements, { Foreground = { Color = layer } })
-      table.insert(left_elements, { Text = ' ' })
-      table.insert(left_elements, { Background = { Color = tab_bar.background } })
-      table.insert(left_elements, { Text = '' })
+    if cell_index == #left_cells then
+      table.insert(left_status_elements, { Foreground = { Color = layer } })
+      table.insert(left_status_elements, { Text = ' ' })
+      table.insert(left_status_elements, { Background = { Color = tab_bar_scheme.background } })
+      table.insert(left_status_elements, { Text = '' })
     else
-      table.insert(left_elements, { Foreground = { Color = '#1e232e' } })
-      table.insert(left_elements, { Text = '  ' })
+      table.insert(left_status_elements, { Foreground = { Color = '#1e232e' } })
+      table.insert(left_status_elements, { Text = '  ' })
     end
   end
 
@@ -108,22 +112,12 @@ wezterm.on('update-status', function(window, pane)
   -- end
   -- #wezterm.format(left_elements)
 
-  local left_status = wezterm.format(left_elements)
-
   -- Center tabs
-  local tabs = window:mux_window():tabs()
-  local mid_width = 0
-  for _, _ in ipairs(tabs) do
-    -- local title = tab:get_title()
-    -- mid_width = mid_width + math.floor(math.log(idx, 10)) + 1
-    -- mid_width = mid_width + 2 + #title + 1
-    mid_width = mid_width + tab_length - 1
-  end
-  local tab_bar_width = window:active_tab():get_size().cols
-  local max_left = tab_bar_width / 2 - mid_width / 2
+  local window_width = window:active_tab():get_size().cols
+  local max_left = (window_width / 2) - (all_tabs_width / 2) - left_elements_width
 
-  window:set_left_status(left_status .. wezterm.pad_left(' ', max_left - left_elements_width))
-  window:set_right_status(wezterm.format(right_elements))
+  window:set_left_status(wezterm.format(left_status_elements) .. wezterm.pad_left(' ', max_left))
+  window:set_right_status(wezterm.format(right_status_elements))
 end)
 
 local is_tab_bar_forced_hidden = false
