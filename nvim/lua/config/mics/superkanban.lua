@@ -57,6 +57,9 @@ return {
   {
     'hasansujon786/super-kanban.nvim',
     cmd = { 'SuperKanban' },
+    dependencies = {
+      'nvim-orgmode/orgmode',
+    },
     lazy = true,
     dev = true,
     keys = {

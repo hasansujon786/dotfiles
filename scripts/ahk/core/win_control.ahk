@@ -256,8 +256,7 @@ winPinToSide(side, checkFullscreen) {
     Send("#{Right}")
   }
 }
-winPinToSide_custom(side) {
-  tb_height := 24
+winPinToSide_custom(side , tb_height:= 24) {
   y_start := 0
   x_start := 0
   s_height := A_ScreenHeight - tb_height

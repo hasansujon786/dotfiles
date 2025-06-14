@@ -82,7 +82,8 @@ runLayoutAction(EXE_FULL, EXE, side) {
     ; centerCurrentWindow()
   } else {
     ; winPinToSide(side, false)
-    winPinToSide_custom(side)
+    tbHeight := TASKBAR_HEIGHT == 0 ? -8 : TASKBAR_HEIGHT
+    winPinToSide_custom(side, tbHeight)
   }
 }
 
