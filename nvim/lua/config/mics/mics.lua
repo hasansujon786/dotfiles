@@ -20,17 +20,18 @@ return {
   {
     'sphamba/smear-cursor.nvim',
     event = 'CursorMoved',
+    commit = '7d96674ee3466083ab3f9ef82281ee59fee5d991',
     enabled = true,
     opts = {
       smear_insert_mode = false,
       smear_to_cmd = true,
       normal_bg = '#242B38',
       smear_between_buffers = true,
-      --                                 Default  Range
-      stiffness = 0.8, --                0.6      [0, 1]
-      trailing_stiffness = 0.5, --       0.3      [0, 1]
-      distance_stop_animating = 0.1, --  0.1      > 0
-      hide_target_hack = true, --        true     boolean
+      -- --                                 Default  Range
+      -- stiffness = 0.8, --                0.6      [0, 1]
+      -- trailing_stiffness = 0.5, --       0.3      [0, 1]
+      -- distance_stop_animating = 0.1, --  0.1      > 0
+      -- hide_target_hack = true, --        true     boolean
     },
   },
   {

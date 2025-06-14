@@ -125,6 +125,10 @@ movePointer(box := 0, renderBox := 0) {
     POINTER_BOX_BG.Visible := false
   }
 }
+moveCursor(x:=0, y:=0) {
+  CoordMode("Mouse", "Screen")
+  MouseMove(x,y)
+}
 
 highlightCell(cellId) {
   global lastFocusedCell, BORDER_SUB_GRID, TAG_SUB_GRID
@@ -261,15 +265,18 @@ onInputEnd(ih, char) {
   spaceChar := Chr(32)
   if (char = spaceChar) {
     if (finePointCellKey && innerCellMap.Has(finePointCellKey)) {
+      ; Cursor should already on a finePointCellKey, so just send click
       Send("{Click}")
     } else {
-      Send("{Click " pointLocation.x " " pointLocation.y "}")
+      moveCursor(pointLocation.x,pointLocation.y)
+      Send("{Click}")
     }
 
     escape(ih, char)
     return
   }
 
+  ; finePointCellKey directional mappings
   if (finePointCellKey && innerCellMap.Has(finePointCellKey) && FIND_POINT_DIRECTION_MAPS.Has(char)) {
     innerCel := innerCellMap[finePointCellKey]
     targetX := lastFocusedCell.x + innerCel.x
@@ -289,7 +296,7 @@ onInputEnd(ih, char) {
       targetY := targetY + (innerCel.ch - 1)
     }
 
-    MouseMove(targetX, targetY)
+    moveCursor(targetX, targetY)
     ; finePointCellKey := 0
     return
   }
@@ -308,14 +315,14 @@ onInputEnd(ih, char) {
       if(leftShift || rightShift) {
         finePointCellKey := lowerChar
         POINTER_BOX.Visible := false
-        MouseMove(targetX, targetY)
+        moveCursor(targetX, targetY)
         return
       }
 
       targetY := lastFocusedCell.y + innerCel.y + (innerCel.ch / 2)
       targetX := lastFocusedCell.x + innerCel.x  + (innerCel.cw / 2)
-      ; MouseMove(targetX, targetY)
-      Send("{Click " targetX " " targetY "}")
+      moveCursor(targetX, targetY)
+      Send("{Click}")
       escape(ih, char)
       return
     }
