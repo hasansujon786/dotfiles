@@ -181,7 +181,7 @@ local preview_main_win = {
 
 ---try_change_quicklook
 ---@param p snacks.Picker
-local function try_change_quicklook(p)
+local function try_change_quicklook(p, action)
   if vim.b.qlook then
     vim.schedule(function()
       local cur_item = p.list:current()
@@ -192,8 +192,11 @@ local function try_change_quicklook(p)
       local ok = pcall(require('hasan.utils.file').quicklook, { cur_item._path })
       if ok then
         vim.b.qlook = cur_item._path
+        p:action(action)
       end
     end)
+  else
+    p:action(action)
   end
 end
 
@@ -507,14 +510,14 @@ return {
               frecency = true, -- use frecency boosting
               sort_empty = true, -- sort even when the filter is empty
             },
-            win = {
-              input = {
-                keys = {
-                  ['<c-n>'] = { 'next_result', mode = { 'i', 'n' } },
-                  ['<esc>'] = { 'close', mode = { 'i', 'n' } },
-                },
-              },
-            },
+            -- win = {
+            --   input = {
+            --     keys = {
+            --       -- ['<c-n>'] = { 'next_result', mode = { 'i', 'n' } },
+            --       ['<esc>'] = { 'close', mode = { 'i', 'n' } },
+            --     },
+            --   },
+            -- },
             actions = {
               close = function(p, _)
                 vim.cmd('noh')
@@ -673,12 +676,10 @@ return {
             require('hasan.float').fedit(item.file)
           end,
           my_list_up = function(p)
-            p:action('list_up')
-            try_change_quicklook(p)
+            try_change_quicklook(p, 'list_up')
           end,
           my_list_down = function(p)
-            p:action('list_down')
-            try_change_quicklook(p)
+            try_change_quicklook(p, 'list_down')
           end,
           quicklook = function(_, item)
             if not item or item._path == nil then
@@ -744,20 +745,34 @@ return {
           input = {
             keys = {
               ['<c-u>'] = false,
+              ['<Esc>'] = { 'close', mode = { 'i', 'n' } },
 
               ['<F3>'] = { 'toggle_preview', mode = { 'i', 'n' } },
               ['<a-u>'] = { 'preview_scroll_up', mode = { 'i', 'n' } },
               ['<a-d>'] = { 'preview_scroll_down', mode = { 'i', 'n' } },
-              ['<a-n>'] = { 'list_down', mode = { 'i', 'n' } },
-              ['<a-p>'] = { 'list_up', mode = { 'i', 'n' } },
-              ['<tab>'] = { 'my_list_down', mode = { 'i', 'n' } },
-              ['<s-tab>'] = { 'my_list_up', mode = { 'i', 'n' } },
+              ['<c-b>'] = { 'list_scroll_up', mode = { 'i', 'n' } },
+              ['<c-f>'] = { 'list_scroll_down', mode = { 'i', 'n' } },
 
+              ['<s-tab>'] = { 'my_list_up', mode = { 'i', 'n' } },
+              ['<tab>'] = { 'my_list_down', mode = { 'i', 'n' } },
+              ['<c-i>'] = { 'select_and_prev', mode = { 'i', 'n' } },
+              ['<c-y>'] = { 'select_and_next', mode = { 'i', 'n' } },
+              ['<A-y>'] = { 'select_and_next', mode = { 'i', 'n' } },
+
+              ['<a-p>'] = { 'list_up', mode = { 'i', 'n' } },
+              ['<a-n>'] = { 'list_down', mode = { 'i', 'n' } },
+              ['<a-k>'] = { 'list_up', mode = { 'i', 'n' } },
+              ['<a-j>'] = { 'list_down', mode = { 'i', 'n' } },
+
+              -- ['<c-a>'] = { 'select_all', mode = { 'n', 'i' } },
+              -- ['<a-f>'] = { 'toggle_follow', mode = { 'i', 'n' } },
+              -- ['<a-h>'] = { 'toggle_hidden', mode = { 'i', 'n' } },
+              -- ['<a-i>'] = { 'toggle_ignored', mode = { 'i', 'n' } },
               -- ['<a-i>'] = { 'toggle_ignored', mode = { 'i', 'n' } },
               -- ['<a-h>'] = { 'toggle_hidden', mode = { 'i', 'n' } },
               -- ['<a-f>'] = { 'toggle_follow', mode = { 'i', 'n' } },
 
-              ['<C-r><C-r>'] = { 'insert_relative_path', mode = { 'i', 'n' } },
+              ['<c-r><c-r>'] = { 'insert_relative_path', mode = { 'i', 'n' } },
               ['<a-l>'] = { 'inspect', mode = { 'i', 'n' } },
 
               ['<a-t>'] = { 'focus_file_tree', mode = { 'i', 'n' } },
@@ -765,7 +780,6 @@ return {
               ['s'] = { 'flash' },
 
               ['<a-i>'] = { 'quicklook', mode = { 'i', 'n' } },
-              ['i'] = { 'quicklook', mode = { 'n' } },
               ['<a-r>'] = { 'system_reveal', mode = { 'i', 'n' } },
               ['R'] = { 'system_reveal', mode = { 'n' } },
               ['<a-o>'] = { 'system_open', mode = { 'i', 'n' } },

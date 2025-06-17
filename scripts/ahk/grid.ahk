@@ -41,6 +41,7 @@ setGridState() {
 
   ; Global gui & hooks
   global GRID_IH := InputHook("")
+  global BLOCK_IH := InputHook("")
   global BORDER_GRID, TAG_GRID, BORDER_SUB_GRID, TAG_SUB_GRID
   global FOCUS_COL_BOX := Array()
   global POINTER_BOX, POINTER_BOX_BG
@@ -64,6 +65,7 @@ render(*) {
     escape(GRID_IH, "")
     return
   }
+  blockKeyPress()
 
   BORDER_GRID := Gui("+AlwaysOnTop -Caption +ToolWindow -SysMenu +E0x20", "Transparent Grid Backgrounnd")
   WinSetTransparent(WINDOW_TRANSPARENT, BORDER_GRID.Hwnd)  ; Value from 0 (invisible) to 255 (opaque)
@@ -358,10 +360,17 @@ onInputEnd(ih, char) {
 ; -- Keymaps Listeners ---------------------------
 ; ------------------------------------------------
 watchKeyPress() {
+  BLOCK_IH.Stop()
   global GRID_IH
   GRID_IH.KeyOpt("{All}", "N")  ; Allow all keys
   GRID_IH.OnChar := onInputEnd
   GRID_IH.Start()
+}
+
+blockKeyPress() {
+  global BLOCK_IH
+  BLOCK_IH.KeyOpt("{All}", "N")  ; Allow all keys
+  BLOCK_IH.Start()
 }
 
 ; Class Keymap {
