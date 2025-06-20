@@ -16,6 +16,7 @@ vim.api.nvim_win_call(win, function()
 end)
 
 jit.os:find('Windows')
+local username = os.getenv('USERNAME') or os.getenv('USER') or os.getenv('LOGNAME')
 
 local M = {}
 

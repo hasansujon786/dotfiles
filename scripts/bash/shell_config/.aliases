@@ -149,6 +149,7 @@ alias gcl='git clone --recurse-submodules'
 alias gb='git branch --sort=-committerdate | fzf --border-label="Checkout Recent Branch" --preview "git diff {1} --color=always" | xargs git checkout'
 alias gbn='git checkout -b' # create & switch branch
 alias gck='git checkout'    # switch brnch
+alias grm='git rm --cached'
 # Use --soft if you want to keep your changes
 # Use --hard if you don't care about keeping the changes you made
 alias gr='git reset'         # unstage files (Use --hard/--soft)

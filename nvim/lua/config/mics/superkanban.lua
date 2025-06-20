@@ -50,6 +50,12 @@ local opts = {
       end,
       desc = 'Flash',
     },
+    ['/'] = {
+      callback = function(...)
+        require('super-kanban.actions').search_card(...)
+      end,
+      nowait = true,
+    },
   },
 }
 

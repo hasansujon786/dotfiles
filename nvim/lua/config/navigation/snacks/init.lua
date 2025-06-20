@@ -503,8 +503,8 @@ return {
 
           project_files = { -- https://github.com/folke/snacks.nvim/issues/532#issuecomment-2609303872
             layout = { preset = 'dropdown' },
-            -- multi = { 'files', 'lsp_symbols' },
-            finder = 'files',
+            multi = { 'files', 'lsp_symbols' },
+            -- finder = 'files',
             matcher = {
               cwd_bonus = true, -- boost cwd matches
               frecency = true, -- use frecency boosting

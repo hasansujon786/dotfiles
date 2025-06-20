@@ -3,7 +3,7 @@ return {
   lazy = true,
   enabled = true,
   ft = { 'NeogitStatus', 'gitcommit' },
-  event = { 'VeryLazy' },
+  event = { 'BufReadPost', 'BufNewFile' },
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
     vim.o.laststatus = 3

@@ -82,8 +82,10 @@ wezterm.on('update-status', function(window, pane)
   table.insert(right_status_elements, { Text = ' ' })
 
   local left_elements_width = (#left_cells * 3)
-  table.insert(left_status_elements, { Background = { Color = layer } })
-  table.insert(left_status_elements, { Text = ' ' })
+  if #left_cells > 0 then
+    table.insert(left_status_elements, { Background = { Color = layer } })
+    table.insert(left_status_elements, { Text = ' ' })
+  end
   for cell_index, cell in ipairs(left_cells) do
     table.insert(left_status_elements, { Foreground = { Color = cell.color } })
     if cell_index == 1 and window:leader_is_active() then
