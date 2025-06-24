@@ -30,6 +30,7 @@ return {
     },
     prompt = { enabled = true, prefix = { { ' ⚡', 'FlashPromptIcon' } } },
   },
+  -- { label = { after = { 0, 2 }, style = 'overlay' }, }
   -- stylua: ignore
   keys = {
     { 's', mode = nx, function() require('flash').jump() end, desc = 'Flash' },

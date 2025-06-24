@@ -254,27 +254,31 @@ return {
           ---@type table<string, snacks.scope.TextObject|{desc?:string}>
           textobject = {
             ii = {
+              linewise = true,
               min_size = 2, -- minimum size of the scope
               edge = false, -- inner scope
-              cursor = true,
+              cursor = false,
               treesitter = { blocks = { enabled = false } },
               desc = 'inner scope',
             },
             ai = {
-              cursor = true,
+              linewise = true,
+              cursor = false,
               min_size = 2, -- minimum size of the scope
               treesitter = { blocks = { enabled = false } },
               desc = 'full scope',
             },
             iI = {
+              linewise = true,
               min_size = 2, -- minimum size of the scope
               edge = false, -- inner scope
-              cursor = false,
+              cursor = true,
               treesitter = { blocks = { enabled = false } },
               desc = 'inner scope',
             },
             aI = {
-              cursor = false,
+              linewise = true,
+              cursor = true,
               min_size = 2, -- minimum size of the scope
               treesitter = { blocks = { enabled = false } },
               desc = 'full scope',
