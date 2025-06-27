@@ -85,8 +85,6 @@ local function set_custom_highlights()
   -- stylua: ignore
   local highlights = {
     -- /// backgrounds ///
-    NormalFloat             = { fg = c.fg, bg = c.none },
-    FloatBorder             = { fg = c.cyan, bg = c.none },
     FloatBorderTitle        = { bg = c.cyan, fg = float_bg },
     NormalFloatFlat         = { fg = c.fg, bg = float_bg },
     FloatBorderFlat         = { fg = dark_border, bg = float_bg },

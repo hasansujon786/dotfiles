@@ -43,6 +43,17 @@ local function pick_window(callback)
 end
 
 local opts = {
+  icons = {
+    list_edge_left = '║',
+    list_edge_right = '║',
+    bubble_edge_left = '',
+    bubble_edge_right = '',
+
+    -- list_edge_left = '',
+    -- list_edge_right = '',
+    -- bubble_edge_left = '',
+    -- bubble_edge_right = '',
+  },
   mappings = {
     ['s'] = {
       callback = function()
@@ -56,6 +67,12 @@ local opts = {
       end,
       nowait = true,
     },
+    ['<leader>k'] = 'jump_up',
+    ['<leader>j'] = 'jump_down',
+    ['<leader>h'] = 'jump_left',
+    ['<leader>l'] = 'jump_right',
+    -- ['g<cr>'] = 'open_note',
+    -- ['<cr>'] = false,
   },
 }
 

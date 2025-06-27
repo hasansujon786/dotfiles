@@ -27,10 +27,11 @@ return {
         light_grey = '#7d899f',
         bg1        = '#2d3343',
       },
+      -- stylua: ignore
       highlights = {
         -- "/// Neovim Builin ///"
-        ['Cursor'] = { bg = '${blue}' },
-        ['Cursorline'] = { bg = '${bg1}' },
+        -- ['FloatBorder'] = { fg = '${cyan}' },
+        ['Cursor'] = { bg = '${blue}', fg = '${bg}' },
         ['CursorLineNr'] = { fg = '${fg}' },
         ['DiagnosticSignInfo'] = { fg = '${cyan}' },
         ['StatusLine'] = { fg = '${fg}', bg = '${bg1}' },
@@ -39,6 +40,16 @@ return {
         ['RedText'] = { fg = '#ff0000' },
         ['MutedText'] = { fg = '${light_grey}' },
         ['DapCursorLine'] = { bg = '#173F1E', underline = false },
+
+        SuperKanbanCardNormal        = { bg = '#21252B' },
+        SuperKanbanCardWinbarNC      = { fg = '${gray}' },
+        SuperKanbanListWinbar        = { fg = '${yellow}', bg = '${selection}' },
+        SuperKanbanListWinbarEdge    = { fg = '${bg}' },
+        SuperKanbanBubble            = { fg = '${bg}', bg = '${cyan}' },
+        SuperKanbanBubbleEdge        = { fg = '${cyan}', bg = '${float_bg}'  },
+        SuperKanbanBoardFileName     = { fg = '${bg}', bg = '${orange}' },
+        SuperKanbanBoardFileNameEdge = { fg = '${orange}', },
+        SuperKanbanTag               = { fg = '${orange}', bg = '#4C4944' },
 
         -- global treesitter
         ['@field.lua'] = { link = '@property' },

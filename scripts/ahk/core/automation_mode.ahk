@@ -1,5 +1,6 @@
 Global isClikModeActive := 0
-Global currentClikMode := 0
+Global currentClikMode := ""
+Global selectedIndex := 0
 Global optionsList := ["Youtube Playlist", "Youtube queue", "Firebase Remove User", "Chatgpt remove chat thread"]
 Global guiTitle := "autoclick_status_line"
 
@@ -27,7 +28,7 @@ _exitAutoClikMode() {
 _chooseAutoClikMode() {
   _exitAutoClikMode()
 
-  defaultItemIndex := currentClikMode = 0 ? 1 : currentClikMode
+  defaultItemIndex := selectedIndex = 0 ? 1 : selectedIndex
   optionWin := Gui(), optionWin.SetFont("s12 Bold", "Arial"), optionWin.Title := "Auto Click Mode"
 
   for index, opt in optionsList {
@@ -45,11 +46,12 @@ _chooseAutoClikMode() {
       return dd("not selected")
     }
 
-    Global currentClikMode := selected
+    Global selectedIndex := selected
+    Global currentClikMode := optionsList[selected]
     optionWin.Destroy()
 
     Global isClikModeActive := 1
-    _createStatusLine("Autoclick", optionsList[currentClikMode])
+    _createStatusLine("Autoclick", currentClikMode)
     beep()
   }
   cancel() {
@@ -78,11 +80,10 @@ _createStatusLine(title, submode) {
 
 
 _tryAutoClick() {
-  if (currentClikMode = 0) {
+  if (selectedIndex = 0) {
     _chooseAutoClikMode()
     return
   }
-  local option := optionsList[currentClikMode]
 
   Switch currentClikMode {
   Case "Youtube Playlist":
@@ -100,7 +101,8 @@ _tryAutoClick() {
 _ytRemovetFromWL() {
   Send("{LButton}")
   sleep(100)
-  if(currentClikMode = 1) {
+  ; TODO: fix this line
+  if(selectedIndex = 1) {
     Send("{tab}{tab}{tab}")
   } else {
     Send("{tab}{tab}")
@@ -135,3 +137,57 @@ _removeChatThreadFromChatGpt() {
   sleep(100)
   Send("{Enter}")
 }
+
+type(str := "", delay := 50) {
+  Loop StrLen(str)
+  {
+      char := SubStr(str, A_Index, 1)
+      sleep(delay)
+      SendInput(char)
+  }
+}
+
+_demoSuperKanban() {
+  sleep(300)
+  type(":SuperKanban demo.md")
+  sleep(300)
+  SendInput("{Enter}")
+  sleep(2000)
+  Send("^l")
+  sleep(500)
+  type("G")
+  sleep(600)
+
+  type("gn")
+  sleep(300)
+  type("Ask mom for rent money", 80)
+  sleep(200)
+  Send("^e")
+  sleep(500)
+  SendInput("{Enter}")
+  sleep(200)
+  SendInput("{#}")
+  type("important @", 80)
+  sleep(600)
+  SendInput("{Right}")
+  sleep(900)
+  SendInput("{Enter}")
+  sleep(600)
+
+  type("/", 80)
+  sleep(600)
+  type("Talking to", 80)
+  sleep(300)
+  SendInput("{Enter}")
+  sleep(600)
+  SendInput("g{Enter}")
+  sleep(600)
+  SendInput("o")
+  sleep(300)
+  type("Write notes here..")
+  sleep(3000)
+  ; Send("!l")
+  ; type("z0")
+}
+; #n::_demoSuperKanban()
+; _demoSuperKanban()
