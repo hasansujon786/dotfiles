@@ -308,12 +308,20 @@ return {
       notifier = {
         enabled = true,
         timeout = 3000, -- default timeout in ms
-        margin = { top = 1, right = 0, bottom = 0 },
+        margin = { top = 1, right = 1, bottom = 1 },
         padding = true, -- add 1 cell of left/right padding to the notification window
         -- sort = { 'level', 'added' }, -- sort by level and time
-        icons = { error = ' ', warn = ' ', info = ' ', debug = ' ', trace = '󰠠 ' },
+        icons = { error = '', warn = '', info = '', debug = '', trace = '󰠠' },
         ---@type snacks.notifier.style
-        style = 'compact', -- 'compact'|'fancy'|'minimal'
+        style = function(buf, notif, ctx)
+          local title = vim.trim((notif.title or ''))
+          if title ~= '' then
+            ctx.opts.title = { { title, ctx.hl.title } }
+            ctx.opts.title_pos = 'right'
+          end
+          vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(notif.msg, '\n'))
+        end,
+        -- 'compact'|'fancy'|'minimal'
         top_down = false, -- place notifications from top to bottom
       },
       lazygit = {
@@ -796,26 +804,6 @@ return {
         layouts = {
           dropdown = get_dropdown(false),
           dropdown_preview = get_dropdown(true),
-
-          vscode = {
-            preview = false,
-            layout = {
-              backdrop = false,
-              zindex = 100,
-              row = 0,
-              width = 0.4,
-              min_width = 80,
-              height = 0.45,
-              box = 'vertical',
-              border = { '🭽', '▔', '🭾', '▕', '🭿', '▁', '🭼', '▏' },
-              title = '{source} {live}',
-              title_pos = 'center',
-              { win = 'input', height = 1, border = 'bottom' },
-              { win = 'list', border = 'none' },
-              { win = 'preview', height = 0.4, border = { '', '▔', '', '', '', '', '', '' } },
-            },
-          },
-
           ivy = get_ivy(false),
           ivy_mini = get_ivy(true),
           select = {
@@ -838,7 +826,20 @@ return {
         },
       },
       styles = {
-        notification = { relative = 'editor', wo = { wrap = true, winblend = 0 } },
+        notification = {
+          border = {
+            ' ',
+            ' ', -- up
+            '▐',
+            '▐',
+            '▐',
+            ' ', -- bottom
+            ' ',
+            ' ',
+          },
+          relative = 'editor',
+          wo = { wrap = true, winblend = 0 },
+        },
         terminal = { relative = 'editor', border = 'rounded', wo = { winhighlight = '' } },
         notification_history = {
           relative = 'editor',
@@ -979,7 +980,7 @@ return {
     { '<leader>/c', function() Snacks.picker.command_history() end, desc = 'Command History' },
     { 'co', function() Snacks.picker.commands({ layout = 'dropdown' }) end, desc = 'Commands' },
     { 'cy', function() require('config.navigation.snacks.custom').keymaps() end, desc = 'Commands' },
-    { '<A-x>', function() Snacks.picker.commands({ layout = 'dropdown' }) end, desc = 'Commands' },
+    { '<A-x>', function() Snacks.picker.commands() end, desc = 'Commands' },
     { '//', auto_open_qflistt_or_loclist, ft = 'qf', desc = 'which_key_ignore' },
 
     -- PROJECT

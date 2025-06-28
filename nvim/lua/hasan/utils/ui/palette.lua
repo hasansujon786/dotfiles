@@ -411,6 +411,20 @@ local function set_custom_highlights()
     hl(0, hlName, option)
   end
 
+  for group, co in pairs({
+    Error = { fg = c.red , title = 'NvimLightRed' },
+    Warn = { fg = c.yellow , title = 'NvimLightYellow' },
+    Info = { fg = c.cyan , title = 'NvimLightCyan' },
+    Debug = { fg = c.blue , title = 'NvimLightBlue' },
+    Trace = { fg = c.grey , title = c.grey },
+  }) do
+    hl(0, 'SnacksNotifier' .. group, { bg = float_bg })
+    local border = 'SnacksNotifierBorder' .. group
+    hl(0, border, { bg = float_bg, fg = co.fg })
+    hl(0, 'SnacksNotifierTitle' .. group, { fg = c.muted, bg = float_bg, underline = true })
+    hl(0, 'SnacksNotifierFooter' .. group, { link = 'SnacksNotifierTitle' })
+  end
+
   local links = {
     -- https://github.com/folke/tokyonight.nvim/blob/main/lua/tokyonight/theme.lua#L255-L272
     -- ['@lsp.type.comment'] = '@comment',
