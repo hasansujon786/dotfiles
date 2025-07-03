@@ -2,6 +2,7 @@ return {
   'nvim-flutter/flutter-tools.nvim',
   lazy = true,
   ft = { 'dart' },
+  cmd = { 'FlutterRun' },
   keys = {
     {
       '<leader>fc',

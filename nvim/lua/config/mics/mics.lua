@@ -20,7 +20,7 @@ return {
   {
     'sphamba/smear-cursor.nvim',
     event = 'CursorMoved',
-    commit = 'ac5c4a8',
+    commit = '4a0f7ac', -- 'ac5c4a8',
     enabled = true,
     opts = {
       smear_insert_mode = false,

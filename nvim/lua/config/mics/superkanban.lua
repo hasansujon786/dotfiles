@@ -30,8 +30,8 @@ local function pick_window(callback)
       multi_window = true,
       exclude = {
         function(win)
-          local map_ft = { superkanban_list = 1, superkanban_card = 1 }
-          return map_ft[vim.bo[vim.api.nvim_win_get_buf(win)].filetype] ~= 1
+          local kanban_ft = { superkanban_list = true, superkanban_card = true }
+          return not kanban_ft[vim.bo[vim.api.nvim_win_get_buf(win)].filetype]
         end,
       },
     },
@@ -71,8 +71,8 @@ local opts = {
     ['<leader>j'] = 'jump_down',
     ['<leader>h'] = 'jump_left',
     ['<leader>l'] = 'jump_right',
-    -- ['g<cr>'] = 'open_note',
-    -- ['<cr>'] = false,
+    ['g<cr>'] = 'open_note',
+    ['<cr>'] = false,
   },
 }
 
