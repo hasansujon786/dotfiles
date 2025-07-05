@@ -72,6 +72,8 @@ local opts = {
     ['<leader>h'] = 'jump_left',
     ['<leader>l'] = 'jump_right',
     ['g<cr>'] = 'open_note',
+    ['?'] = 'help',
+    ['g?'] = false,
     ['<cr>'] = false,
   },
 }

@@ -191,6 +191,7 @@ bind -m emacs-standard '"\C-o": " \C-b\C-k \C-u`__fzf_z_plus__`\e\C-e\er\C-m\C-y
 bind -m vi-command '"\C-o": "\C-z\C-o\C-z"'
 bind -m vi-insert '"\C-o": "\C-z\C-o\C-z"'
 
+# Force kill selected tasks
 fk() {
   local pid
   pid=$(tasklist | sed 1d | fzf -m | awk '{print $1}')
@@ -200,8 +201,14 @@ fk() {
   fi
 }
 
+# Search fiels in cwd & open nvim, yazi, explorer & more.
+# default : Open each file with default app.
+# ctrl-o  : Open each file with default app.
+# ctrl-y  : Open yazi & focus on selected file.
+# ctrl-e  : Open explorer & focus on selected file.
+# alt-c   : Cd into directory of selected file.
 f() {
-  readarray -t out <<<"$(fzf --tac --query="$1" --expect=ctrl-o,ctrl-t,ctrl-y,ctrl-e)"
+  readarray -t out <<<"$(fzf --tac --query="$1" --expect=ctrl-o,alt-c,ctrl-y,ctrl-e)"
   keybind=${out[0]}
   files=("${out[@]:1}")
 
@@ -224,7 +231,7 @@ f() {
   fi
 
   # Cd into selected file directory
-  if [[ "$keybind" == "ctrl-t" ]]; then
+  if [[ "$keybind" == "alt-c" ]]; then
     dir=$(dirname "$first_file")
     cd "$dir" || exit && printf 'cd -- %q' "$dir"
   elif [[ "$keybind" == "ctrl-y" ]]; then
@@ -246,6 +253,7 @@ f() {
   fi
 }
 
+# Search string in cwd & open selected files in Neovim.
 fn() {
   local search=""
   if [[ $# -gt 0 ]]; then
@@ -253,37 +261,78 @@ fn() {
     shift
   fi
   local files
-  files=$(command rg --color=always --line-number --no-heading --smart-case "$@" "$search" |
-    command fzf -d':' --ansi --preview "bat -p --color=always {1} --highlight-line {2}" --preview-window "~8,+{2}-5")
+  files=$(rg --color=always --line-number --no-heading --smart-case "$@" "$search" |
+    fzf -d':' --ansi --multi \
+      --preview "bat -p --color=always {1} --highlight-line {2}" \
+      --preview-window "~8,+{2}-5")
 
-  if [ -n "$files" ]; then
-
-    open_vertical=true # or false if you don't want vertical split
-    local args=()
-
-    while IFS= read -r line; do
-      IFS=':' read -r filepath lineno _ <<<"${line//\\//}"
-      if [[ "${#args[@]}" -eq 0 ]]; then
-        # Open first file normally
-        args+=("$filepath" "-c" "$lineno")
-      else
-        if [[ $open_vertical == true ]]; then
-          args+=("-c" "vsplit $filepath" "-c" "$lineno")
-        else
-          args+=("-c" "e $filepath" "-c" "$lineno")
-        fi
-      fi
-    done <<<"$files"
-
-    # Optionally equalize window sizes and go to first split
-    if [[ $open_vertical == true ]]; then
-      args+=("-c" "wincmd =" "-c" "wincmd t")
-    fi
-
-    nvim "${args[@]}"
-  else
-    echo "No file selected"
+  if [[ -z "$files" ]]; then
+    echo "No file selected."
+    return 1
   fi
+
+  local vsplit_if_multiple=true # or false if you don't want vertical split
+  local args=()
+
+  while IFS= read -r line; do
+    IFS=':' read -r filepath lineno _ <<<"${line//\\//}"
+    if [[ "${#args[@]}" -eq 0 ]]; then
+      # Open first file normally
+      args+=("$filepath" "-c" "$lineno")
+    else
+      if [[ $vsplit_if_multiple == true ]]; then
+        args+=("-c" "vsplit $filepath" "-c" "$lineno")
+      else
+        args+=("-c" "e $filepath" "-c" "$lineno")
+      fi
+    fi
+  done <<<"$files"
+
+  # Optionally equalize window sizes and go to first split
+  if [[ $vsplit_if_multiple == true ]]; then
+    args+=("-c" "wincmd =" "-c" "wincmd t")
+  fi
+
+  nvim "${args[@]}"
+}
+
+# Search & select files inside ~/my_vault/ and open it in Neovim.
+fv() {
+  local files
+  files=$(rg --color=always --files "$HOME/my_vault/" |
+    fzf --ansi --multi \
+      --preview 'bat -p --color=always {}' \
+      --preview-window '~8,+{2}-5')
+
+  if [[ -z "$files" ]]; then
+    echo "No file selected."
+    return 1
+  fi
+
+  local vsplit_if_multiple=true # or false if you don't want vertical split
+  local args=()
+
+  while read -r filepath; do
+    if [[ "${#args[@]}" -eq 0 ]]; then
+      # Open first file normally
+      args+=("$filepath")
+    else
+      if [[ $vsplit_if_multiple == true ]]; then
+        args+=("-c" "vsplit $filepath")
+      else
+        args+=("-c" "e $filepath")
+      fi
+    fi
+  done <<<"$files"
+
+  # Optionally equalize window sizes and go to first split
+  if [[ $vsplit_if_multiple == true ]]; then
+    args+=("-c" "wincmd =" "-c" "wincmd t")
+  fi
+
+  args+=("-c" "normal! zv")
+
+  nvim "${args[@]}"
 }
 
 b() {
@@ -319,19 +368,23 @@ re() {
 }
 
 scoop-uninstall() {
-  local pkg
-  pkg="$(scoop list | tail -n +5 | fzf --border-label="Scoop Uninstall" | awk '{print $1}')"
+  local pkgs
+  pkgs="$(scoop list | tail -n +5 | fzf --multi --border-label="Scoop Uninstall" | awk '{print $1}')"
 
-  if [[ -z "$pkg" ]]; then
+  if [[ -z "$pkgs" ]]; then
     echo "No package selected. Aborting."
     return 1
   fi
 
-  read -r -p "Scoop: Uninstall \`${pkg}\` (y/n)? " yn
+  echo "Selected packages to uninstall:"
+  echo "$pkgs"
+  read -r -p "Scoop: Uninstall the selected packages (y/n)? " yn
   case $yn in
   [Yy]*)
-    echo "Uninstalling $pkg..."
-    scoop uninstall "$pkg"
+    for pkg in $pkgs; do
+      echo "Uninstalling $pkg..."
+      scoop uninstall "$pkg"
+    done
     ;;
   [Nn]*) echo "Canceled." ;;
   *) echo "Please answer yes or no." ;;

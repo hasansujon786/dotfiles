@@ -20,11 +20,12 @@ end
 return {
   'mawkler/demicolon.nvim',
   enabled = true,
+  event = 'VeryLazy',
   keys = {
     { ';', mode = nxo },
     { ',', mode = nxo },
-    { '[', mode = nxo },
-    { ']', mode = nxo },
+    -- { '[', mode = nxo },
+    -- { ']', mode = nxo },
     { 'f', eyeliner_jump('f'), desc = 'Jump to char', mode = nxo, expr = true },
     { 'F', eyeliner_jump('F'), desc = 'Jump to char', mode = nxo, expr = true },
     { 't', eyeliner_jump('t'), desc = 'Jump to char', mode = nxo, expr = true },
