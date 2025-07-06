@@ -299,8 +299,8 @@ fn() {
 # Search & select files inside ~/my_vault/ and open it in Neovim.
 fv() {
   local files
-  files=$(rg --color=always --files "$HOME/my_vault/" |
-    fzf --ansi --multi \
+  files=$(rg --files "$HOME/my_vault/" |
+    fzf --multi \
       --preview 'bat -p --color=always {}' \
       --preview-window '~8,+{2}-5')
 

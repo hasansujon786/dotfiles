@@ -32,6 +32,7 @@
 ---@class state.Lsp
 ---@field essential_servers {lsp_name: string[]}
 ---@field extra_tools string[]
+---@field use_builtin_lsp_formatter string[]
 ---@field default_opts table
 ---@field linters_by_ft state.Lsp.Linter
 ---@field formatters_by_ft state.Lsp.FormatterConfig[]

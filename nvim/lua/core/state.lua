@@ -58,7 +58,7 @@ M.lsp = {
     'prettierd',
     'dart-debug-adapter',
   },
-  -- use_builtin_lsp_formatter = { 'dartls', 'astro', 'null-ls' },
+  use_builtin_lsp_formatter = {},
   default_opts = {
     flags = { debounce_text_changes = 500 },
     -- capabilities = {},
@@ -94,6 +94,10 @@ M.lsp = {
     },
     {
       filetype = 'dart',
+      formatter = { lsp_format = 'fallback' },
+    },
+    {
+      filetype = 'astro',
       formatter = { lsp_format = 'fallback' },
     },
     {
