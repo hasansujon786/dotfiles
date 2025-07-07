@@ -92,6 +92,9 @@ local function set_custom_highlights()
     SidebarDark             = { fg = c.fg, bg = c.bg_d },
     Folded                  = { fg = c.fg, bg = 'none' },
     Visual                  = { bg = c.dim_blue },
+    FloatBorder             = { fg = c.cyan, bg = c.none },
+    NonText                 = { fg = c.layer, bg = c.none },
+    LineNr                  = { fg = '#495162', bg = c.none },
 
     DirectoryIcon           = { fg = '#8094B4' },
     CursorLineFocus         = { bg = c.bg3 },
@@ -105,11 +108,22 @@ local function set_custom_highlights()
     CurSearch               = { link =  'IncSearch' },
     Conceal                 = { link =  'String' },
     ['@keyword.function']   = { fg = c.purple, italic = true },
+    WezTab                  = { fg = c.orange, bg = context },
+    WezTabBorder            = { fg = dark_border, bg = c.none },
 
-    PmenuSel              = { bg = c.bg3 },
-    PmenuSbar             = { bg = c.bg1 },
-    PmenuThumb            = { bg = '#404959' },
-    Pmenu                 = { link = 'NormalFloatFlat' },
+    PmenuSel                = { bg = c.bg3 },
+    PmenuSbar               = { bg = c.bg1 },
+    PmenuThumb              = { bg = '#404959' },
+    Pmenu                   = { link = 'NormalFloatFlat' },
+
+    SuperKanbanCardNormal        = { bg = float_bg },
+    SuperKanbanListWinbar        = { fg = c.yellow, bg = '#343f51' },
+    SuperKanbanListWinbarEdge    = { fg = c.bg0, bg = c.none },
+    SuperKanbanBubble            = { fg = c.bg0, bg = c.cyan },
+    SuperKanbanBubbleEdge        = { fg = c.cyan },
+    SuperKanbanBoardFileName     = { fg = c.bg0, bg = c.orange },
+    SuperKanbanBoardFileNameEdge = { fg = c.orange },
+    SuperKanbanTag               = { fg = c.orange, bg = '#4C4944' },
 
     -- /// LSP ///
     LspReferenceText        = { bg = c.dim_green },
@@ -125,7 +139,6 @@ local function set_custom_highlights()
     DiagnosticUnderlineWarn = { link = 'DiagnosticUnderlineError' },
     DiagnosticUnderlineHint = { link = 'DiagnosticUnderlineError' },
     DiagnosticUnderlineError= { fg = 'none', underline = true, sp = c.red },
-    NullLsInfoBorder        = { link = 'FloatBorder' },
 
     -- /// notify ///
     NotifyTitle             = { fg = c.light_grey, bg = c.none },
@@ -139,6 +152,7 @@ local function set_custom_highlights()
     EdgyTitle               = { fg = c.light_grey, bg = c.bg0 },
     EdgyIcon                = { fg = c.grey, bg = c.bg0 },
     EdgyIconActive          = { fg = c.dark_cyan, bg = c.bg0 },
+
     -- /// snacks ///
     SnacksNormal            = { fg = c.fg, bg = float_bg },
     SnacksDashboardHeader   = { fg = c.blue },
@@ -152,6 +166,34 @@ local function set_custom_highlights()
     SnacksIndent            = { fg = c.bg3 },
     SnacksDim               = { fg = c.bg3 },
     SnacksNotifierHistoryTitle = { fg = c.orange, underline = true },
+
+    SnacksPicker            = { link = 'NormalFloatFlat' },
+    SnacksPickerBorder      = { link = 'FloatBorderFlat' },
+    SnacksPickerTitle       = { fg = c.dark_orange, bg = dark_border },
+    SnacksPickerPrompt      = { fg = c.green, bg = float_bg },
+    SnacksPickerTotals      = { fg = c.grey, bg = float_bg },
+    SnacksPickerMatch       = { fg = c.orange },
+    SnacksPickerDir         = { fg = c.grey, italic = true },
+    SnacksPickerListCursorLine  = { link = 'CursorLine' },
+
+    -- /// Folke collection ///
+    FlashMatch                  = { fg = c.fg, bg = c.bg3 },
+    FlashLabel                  = { fg = c.black, bg = c.green },
+    NoiceMini                   = { bg = '#000000' },
+    NoiceFormatConfirmDefault   = { link = 'LazyButton' },
+    NoiceVirtualText            = { link = 'DiagnosticLineNrWarn' },
+    NoiceVirtualTextAlt         = { fg = c.dim_yellow },
+    LazyNormal                  = { link = 'NormalFloatFlat' },
+    LazyButton                  = { bg = c.layer, fg = c.fg },
+    LazyButtonActive            = { link = 'WildMenu' },
+    WhichKeySeparator           = { fg = c.grey },
+    WhichKeyBorder              = { fg = normal_bg, bg = cursorling_bg },
+    WhichKeyNormal              = { fg = c.fg, bg = cursorling_bg },
+    WhichKeyFloat               = { fg = c.fg, bg = cursorling_bg },
+    WhichKeyTitle               = { fg = c.muted, bg = normal_bg },
+    TreesitterContext           = { bg = context },
+    TreesitterContextSeparator  = { bg = c.none, fg = c.grey },
+    TreesitterContextLineNumber = { bg = context, fg = c.grey },
 
     -- /// org ///
     CodeBlock                 = { bg = c.bg_d },
@@ -198,35 +240,6 @@ local function set_custom_highlights()
     NeogitDiffContextHighlight = { bg = cursorling_bg },
     NeogitWinSeparator         = { fg = c.bg3 },
 
-    -- /// Telescope ///
-    TelescopePromptPrefix   = { fg = c.green },
-    TelescopeSelectionCaret = { fg = c.orange, bg = cursorling_bg },
-    TelescopePromptTitle    = { fg = c.orange, bg = dark_border },
-    TelescopePreviewTitle   = { fg = c.bg3, bg = dark_border },
-    TelescopeResultsTitle   = { fg = c.bg3, bg = dark_border },
-    TelescopeMatching       = { fg = c.orange },
-    TelescopeMultiSelection = { fg = c.purple },
-    TelescopeTitle          = { link = 'Comment' },
-    TelescopeBorder         = { link = 'FloatBorderFlat' },
-    TelescopeNormal         = { link = 'NormalFloatFlat' },
-    TelescopeSelection      = { link = 'Cursorline' },
-    PersistedTelescopeDir   = { link = 'DirectoryIcon' },
-
-    SnacksPicker            = { link = 'NormalFloatFlat' },
-    SnacksPickerBorder      = { link = 'FloatBorderFlat' },
-    SnacksPickerTitle       = { fg = c.dark_orange, bg = dark_border },
-    SnacksPickerPrompt      = { fg = c.green },
-    SnacksPickerMatch       = { fg = c.orange },
-    SnacksPickerDir         = { fg = c.grey, italic = true },
-    SnacksPickerListCursorLine  = { link = 'CursorLine' },
-
-    -- /// FzfLua ///
-    FzfLuaBorder            = { fg = c.grey },
-    FzfLuaNormal            = { bg = c.none },
-    FzfLuaSearch            = { bg = c.red },
-    FzfLuaCursor            = { bg = c.blue },
-    FzfLuaFzfMatch          = { bg = 'red' },
-
     -- /// neo-tree.nvim ///
     NeoTreeFileIcon      = { fg = c.muted },
     NeoTreeFloatBorder   = { bg = float_bg, fg = c.cyan },
@@ -249,34 +262,6 @@ local function set_custom_highlights()
     qfSeparator          = { link = 'Comment' },
     QuickFixHeaderHard   = { link = 'qfSeparator' },
     QuickFixHeaderSoft   = { link = 'qfSeparator' },
-
-    -- /// nvim-cmp ///
-    CmpBorder             = { fg = dark_border, bg = float_bg },
-    CmpItemMenu           = { fg = c.grey },
-    CmpItemAbbrMatchFuzzy = { fg = c.orange, underline = true },
-    CmpItemAbbrMatch      = { fg = c.orange },
-    CmpItemAbbrDeprecated = { fg = c.muted, strikethrough = true },
-    CmpItemKindFunction   = { fg = c.purple },
-    CmpItemKindMethod     = { link = 'CmpItemKindFunction' },
-    CmpItemKindModule     = { link = 'CmpItemKindFunction' },
-    CmpItemKindKeyword    = { link = 'CmpItemKindFunction' },
-    CmpItemKindVariable   = { fg = c.blue },
-    CmpItemKindFile       = { link = 'CmpItemKindVariable' },
-    CmpItemKindField      = { link = 'CmpItemKindVariable' },
-    CmpItemKindInterface  = { link = 'CmpItemKindVariable' },
-    CmpItemKindClass      = { fg = c.yellow },
-    CmpItemKindEvent      = { link = 'CmpItemKindClass' },
-    CmpItemKindStruct     = { link = 'CmpItemKindClass' },
-    CmpItemKindEnum       = { link = 'CmpItemKindClass' },
-    CmpItemKindValue      = { link = 'CmpItemKindClass' },
-    CmpItemKindEnumMember = { link = 'CmpItemKindClass' },
-    CmpItemKindConstructor= { link = 'CmpItemKindClass' },
-    CmpItemKindProperty   = { fg = c.light_grey },
-    CmpItemKindConstant   = { link = 'CmpItemKindProperty' },
-    CmpItemKindTypeParamet= { link = 'CmpItemKindProperty' },
-    CmpItemKindUnit       = { link = 'CmpItemKindProperty' },
-    CmpItemKindText       = { fg = c.bg_blue },
-    CmpItemKindSnippet    = { fg = c.bg_blue },
 
     -- /// blink.cmp ///
     BlinkCmpGhostText         = { fg = c.muted },
@@ -311,12 +296,6 @@ local function set_custom_highlights()
     BlinkCmpKindOperator      = { link = 'BlinkCmpKindProperty' },
     BlinkCmpKindSnippet       = { link = 'BlinkCmpKindText' },
 
-    MiniSnippetsFinal         = { fg = c.dark_green, bg = c.none },
-    MiniSnippetsCurrentReplace= { fg = c.none, bg = c.dim_blue },
-    MiniSnippetsCurrent       = { fg = c.none, bg = c.none },
-    MiniSnippetsUnvisited     = { fg = c.none, bg = c.none, underline = true },
-    MiniSnippetsVisited       = { fg = c.none, bg = c.none, underline = false },
-
     -- /// nui.nvim ///
     NuiNormalFloat = { link = 'Normal' },
     NuiFloatBorder = { link = 'FloatBorder' },
@@ -339,44 +318,20 @@ local function set_custom_highlights()
     NuiComponentsTreeSpectreFileName       = { fg = c.purple },
     NuiComponentsTreeNodeFocused           = { link = 'CursorLine' },
 
-    -- /// Floaterm ///
-    FloatermBorder = { link = 'Comment' },
-    -- /// outline.nvim ///
-    OutlineGuides  = { link = 'SnacksIndent' },
-    OutlineCurrent = { fg = c.yellow, underline = true },
-    -- /// Folke collection ///
-    FlashMatch                  = { fg = c.fg, bg = c.bg3 },
-    FlashLabel                  = { fg = c.black, bg = c.green },
-    NoiceMini                   = { bg = '#000000' },
-    NoiceFormatConfirmDefault   = { link = 'LazyButton' },
-    NoiceVirtualText            = { link = 'DiagnosticLineNrWarn' },
-    NoiceVirtualTextAlt         = { fg = c.dim_yellow },
-    LazyNormal                  = { link = 'NormalFloatFlat' },
-    LazyButton                  = { bg = c.layer, fg = c.fg },
-    LazyButtonActive            = { link = 'WildMenu' },
-    WhichKeySeparator           = { fg = c.grey },
-    WhichKeyBorder              = { fg = normal_bg, bg = cursorling_bg },
-    WhichKeyNormal              = { fg = c.fg, bg = cursorling_bg },
-    WhichKeyFloat               = { fg = c.fg, bg = cursorling_bg },
-    WhichKeyTitle               = { fg = c.muted, bg = normal_bg },
-    TreesitterContext           = { bg = context },
-    TreesitterContextSeparator  = { bg = c.none, fg = c.grey },
-    TreesitterContextLineNumber = { bg = context, fg = c.grey },
     -- /// Mason ///
     MasonNormal                 = { link = 'NormalFloatFlat' },
     MasonMutedBlock             = { link = 'LazyButton' },
     MasonHighlightBlockBold     = { link = 'LazyButtonActive' },
+
     -- /// vim-visual-multi ///
     VM_Extend                   = { bg = '#363f7d', fg =  c.none  },
     VM_Cursor                   = { bg = '#5962a1', fg = c.none },
     VM_Insert                   = { bg = '#4c4e50', fg = c.none },
     VM_Mono                     = { bg = c.ligh_green, fg = c.white },
+
     -- /// eyeliner ///
     EyelinerPrimary             = { fg = 'tomato', underline = true },
     EyelinerSecondary           = { fg = '#d78787', underline = true },
-
-    WezTab                      = { fg = c.orange, bg = context },
-    WezTabBorder                = { fg = dark_border, bg = c.none },
 
     -- /// navbyddy ///
     NavbuddyFile                = { link = '@lsp.type.comment' },
@@ -412,11 +367,11 @@ local function set_custom_highlights()
   end
 
   for group, co in pairs({
-    Error = { fg = c.red , title = 'NvimLightRed' },
-    Warn = { fg = c.yellow , title = 'NvimLightYellow' },
-    Info = { fg = c.cyan , title = 'NvimLightCyan' },
-    Debug = { fg = c.blue , title = 'NvimLightBlue' },
-    Trace = { fg = c.grey , title = c.grey },
+    Error = { fg = c.red, title = 'NvimLightRed' },
+    Warn = { fg = c.yellow, title = 'NvimLightYellow' },
+    Info = { fg = c.cyan, title = 'NvimLightCyan' },
+    Debug = { fg = c.blue, title = 'NvimLightBlue' },
+    Trace = { fg = c.grey, title = c.grey },
   }) do
     hl(0, 'SnacksNotifier' .. group, { bg = float_bg })
     local border = 'SnacksNotifierBorder' .. group

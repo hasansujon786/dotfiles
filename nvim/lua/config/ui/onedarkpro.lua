@@ -41,16 +41,6 @@ return {
         ['MutedText'] = { fg = '${light_grey}' },
         ['DapCursorLine'] = { bg = '#173F1E', underline = false },
 
-        SuperKanbanCardNormal        = { bg = '#21252B' },
-        SuperKanbanCardWinbarNC      = { fg = '${gray}' },
-        SuperKanbanListWinbar        = { fg = '${yellow}', bg = '${selection}' },
-        SuperKanbanListWinbarEdge    = { fg = '${bg}' },
-        SuperKanbanBubble            = { fg = '${bg}', bg = '${cyan}' },
-        SuperKanbanBubbleEdge        = { fg = '${cyan}', bg = '${float_bg}'  },
-        SuperKanbanBoardFileName     = { fg = '${bg}', bg = '${orange}' },
-        SuperKanbanBoardFileNameEdge = { fg = '${orange}', },
-        SuperKanbanTag               = { fg = '${orange}', bg = '#4C4944' },
-
         -- global treesitter
         ['@field.lua'] = { link = '@property' },
         ['@constant'] = { fg = '${yellow}' },

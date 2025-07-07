@@ -245,6 +245,9 @@ M.get_notify_popup = function(opts, last_pop)
     border = { style = 'rounded' },
     anchor = anchor[3],
     relative = 'editor',
+    win_options = {
+      winhighlight = 'Normal:Normal',
+    },
     zindex = 2000,
     position = { row = row, col = '100%' },
     -- position = '80%',
