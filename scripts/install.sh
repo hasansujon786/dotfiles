@@ -313,14 +313,13 @@ install_various_cli_apps() {
   get eget
 
   # Git repository summary on terminal
-  get onefetch
-  get tokei
+  get onefetch tokei
 
-  # Display and control your Android device => https://github.com/Genymobile/scrcpy
+  # Cast and control your Android device => https://github.com/Genymobile/scrcpy
   # check QtScrcpy a gui for scrcpy
   get scrcpy
 
-  # Some necessary tools
+  # Some extra tools
   get tldr fastfetch
 }
 
@@ -373,7 +372,7 @@ install_various_gui_apps() {
     get sharpkeys
 
     # FIXME: riot
-    get obsidian potplayer quicklook instant-eyedropper localsend
+    get obsidian quicklook instant-eyedropper localsend
     get googlechrome brave abdownloadmanager qbittorrent
 
     # Potplayer
@@ -407,14 +406,14 @@ setup_python() {
   get python
 }
 
-# kanata tig lf alacritty windowsTerminal keypirinha
+# TODO: tig lf alacritty windowsTerminal keypirinha
 main() {
   init_setup
 
   # CLI & TUI Apps
   setup_git
   setup_bash
-  setup_node # install before cause some installation can be depend on node
+  setup_node # Install notde earlier, some installation can be depend on node
   install_various_cli_apps
   setup_nvim
   setup_autohotkey

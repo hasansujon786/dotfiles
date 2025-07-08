@@ -9,17 +9,24 @@ return {
     { 'gmA', desc = 'VM-Select-All)', mode = nx },
     { '<C-up>', mode = nx },
     { '<C-down>', mode = nx },
+    { 'gmc', 'vip<Plug>(VM-Visual-Cursors)', mode = 'n' },
+    { 'gmc', '<Plug>(VM-Visual-Cursors)', mode = 'x' },
+    { '<C-LeftMouse>', '<Plug>(VM-Mouse-Cursor)' },
+    { '<C-S-LeftMouse>', '<Plug>(VM-Mouse-Word)' },
+    { '<M-RightMouse>', '<Plug>(VM-Mouse-Column)' },
   },
   init = function()
+    local maps = vim.g.VM_maps or {}
+    maps['Find Under'] = 0
+    maps['Find Subword Under'] = 0
+    maps['gc'] = 'gC'
+    maps['I BS'] = '<C-h>'
+    maps['Reselect Last'] = 'gmG'
+
+    vim.g.VM_maps = maps
     vim.g.VM_leader = 'gm'
     vim.g.VM_theme = ''
-    vim.g.VM_maps = {
-      ['Find Under'] = 0,
-      ['Find Subword Under'] = 0,
-      ['gc'] = 'gC',
-      ['I BS'] = '<C-h>',
-      ['Reselect Last'] = 'gmG',
-    }
+    vim.g.VM_show_warnings = 1
   end,
   config = function()
     augroup('MY_VM')(function(autocmd)

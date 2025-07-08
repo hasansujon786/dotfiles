@@ -43,6 +43,8 @@ return {
   opts = {
     keymap = {
       preset = 'super-tab',
+      ['<C-b>'] = false,
+      ['<C-f>'] = false,
       ['<C-space>'] = {
         function(cmp)
           if require('luasnip').choice_active() then
