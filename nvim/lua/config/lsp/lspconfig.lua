@@ -23,6 +23,6 @@ return {
       end,
       build = ':MasonUpdate',
     },
-    { 'b0o/schemastore.nvim', lazy = true },
+    { 'b0o/schemastore.nvim', lazy = true, commit = '36fb914' },
   },
 }

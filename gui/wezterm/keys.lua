@@ -9,8 +9,9 @@ return {
   },
   keys = {
     { key = 'F11', action = wezterm.action_callback(events.toggle_full_screen) },
-    { key = 'l', mods = 'SHIFT|CTRL', action = wezterm.action_callback(events.toggle_quick_pane) },
-    { key = 'r', mods = 'CTRL|SHIFT', action = wezterm.action_callback(wezterm.reload_configuration) },
+    { key = 'e', mods = 'LEADER|ALT', action = wezterm.action_callback(events.toggle_quick_pane) },
+    { key = 'e', mods = 'LEADER', action = wezterm.action_callback(events.toggle_quick_pane) },
+    { key = 'r', mods = 'SHIFT|CTRL', action = wezterm.action_callback(wezterm.reload_configuration) },
     { key = 't', mods = 'SHIFT|ALT', action = act({ EmitEvent = 'toggle-tab-bar' }) },
     { key = 'w', mods = 'SHIFT|CTRL', action = act({ CloseCurrentPane = { confirm = false } }) },
     { key = 'k', mods = 'SHIFT|CTRL', action = act.ScrollByLine(-1) },
@@ -39,14 +40,6 @@ return {
     { key = 'z', mods = 'LEADER', action = 'TogglePaneZoomState' },
 
     -- Leader custom bindings
-    { key = 'k', mods = 'LEADER', action = act.ActivatePaneDirection('Up') },
-    { key = 'j', mods = 'LEADER', action = act.ActivatePaneDirection('Down') },
-    { key = 'h', mods = 'LEADER', action = act.ActivatePaneDirection('Left') },
-    { key = 'l', mods = 'LEADER', action = act.ActivatePaneDirection('Right') },
-    { key = 'h', mods = 'LEADER|ALT', action = act.AdjustPaneSize({ 'Left', 5 }) },
-    { key = 'j', mods = 'LEADER|ALT', action = act.AdjustPaneSize({ 'Down', 5 }) },
-    { key = 'k', mods = 'LEADER|ALT', action = act.AdjustPaneSize({ 'Up', 5 }) },
-    { key = 'l', mods = 'LEADER|ALT', action = act.AdjustPaneSize({ 'Right', 5 }) },
     { key = 'v', mods = 'LEADER', action = act({ SplitHorizontal = {} }) },
     { key = 's', mods = 'LEADER', action = act({ SplitVertical = {} }) },
     { key = '.', mods = 'LEADER', action = 'TogglePaneZoomState' },
@@ -74,20 +67,42 @@ return {
       end),
     },
 
+    -- Update pane size
+    { key = 'LeftArrow', mods = 'SHIFT|ALT', action = act.AdjustPaneSize({ 'Left', 5 }) },
+    { key = 'DownArrow', mods = 'SHIFT|ALT', action = act.AdjustPaneSize({ 'Down', 5 }) },
+    { key = 'UpArrow', mods = 'SHIFT|ALT', action = act.AdjustPaneSize({ 'Up', 5 }) },
+    { key = 'RightArrow', mods = 'SHIFT|ALT', action = act.AdjustPaneSize({ 'Right', 5 }) },
+    { key = 'h', mods = 'SHIFT|ALT', action = act.AdjustPaneSize({ 'Left', 5 }) },
+    { key = 'j', mods = 'SHIFT|ALT', action = act.AdjustPaneSize({ 'Down', 5 }) },
+    { key = 'k', mods = 'SHIFT|ALT', action = act.AdjustPaneSize({ 'Up', 5 }) },
+    { key = 'l', mods = 'SHIFT|ALT', action = act.AdjustPaneSize({ 'Right', 5 }) },
+
+    -- Jump through pane
+    { key = 'h', mods = 'LEADER', action = act.ActivatePaneDirection('Left') },
+    { key = 'j', mods = 'LEADER', action = act.ActivatePaneDirection('Down') },
+    { key = 'k', mods = 'LEADER', action = act.ActivatePaneDirection('Up') },
+    { key = 'l', mods = 'LEADER', action = act.ActivatePaneDirection('Right') },
+    { key = 'h', mods = 'SHIFT|CTRL', action = act.ActivatePaneDirection('Left') },
+    { key = 'j', mods = 'SHIFT|CTRL', action = act.ActivatePaneDirection('Down') },
+    { key = 'k', mods = 'SHIFT|CTRL', action = act.ActivatePaneDirection('Up') },
+    { key = 'l', mods = 'SHIFT|CTRL', action = act.ActivatePaneDirection('Right') },
+
     -- tabs
     { key = '[', mods = 'ALT', action = act({ ActivateTabRelative = -1 }) },
     { key = ']', mods = 'ALT', action = act({ ActivateTabRelative = 1 }) },
     { key = '{', mods = 'SHIFT|ALT', action = act({ MoveTabRelative = -1 }) },
     { key = '}', mods = 'SHIFT|ALT', action = act({ MoveTabRelative = 1 }) },
-    { key = 'q', mods = 'LEADER|ALT', action = 'ShowTabNavigator' },
+    -- { key = 'q', mods = 'LEADER|ALT', action = 'ShowTabNavigator' },
+
     -- Workspace
     { key = '{', mods = 'CTRL|SHIFT', action = act({ SwitchWorkspaceRelative = -1 }) },
     { key = '}', mods = 'CTRL|SHIFT', action = act({ SwitchWorkspaceRelative = 1 }) },
-    { key = 's', mods = 'LEADER|CTRL', action = act({ EmitEvent = 'save-session' }) },
-    { key = 'r', mods = 'LEADER|CTRL', action = act({ EmitEvent = 'restore-session' }) },
-    { key = 'l', mods = 'LEADER|CTRL', action = act({ EmitEvent = 'load-session' }) },
-    { key = 'f', mods = 'LEADER', action = act({ EmitEvent = 'sessionizer-find-repoes' }) },
-    { key = 'q', mods = 'LEADER', action = act.ShowLauncherArgs({ flags = 'WORKSPACES' }) },
+    { key = 's', mods = 'LEADER|ALT', action = act({ EmitEvent = 'save-session' }) },
+    { key = 'r', mods = 'LEADER|ALT', action = act({ EmitEvent = 'restore-session' }) },
+    { key = 'l', mods = 'LEADER|ALT', action = act({ EmitEvent = 'load-session' }) },
+    { key = 'f', mods = 'LEADER|ALT', action = act({ EmitEvent = 'sessionizer-find-repoes' }) },
+    { key = 'q', mods = 'LEADER|ALT', action = act.ShowLauncherArgs({ flags = 'WORKSPACES' }) },
+
     -- Rename tab
     {
       key = 'F2',

@@ -22,6 +22,8 @@ return {
     maps['gc'] = 'gC'
     maps['I BS'] = '<C-h>'
     maps['Reselect Last'] = 'gmG'
+    maps['Goto Prev'] = '{'
+    maps['Goto Next'] = '}'
 
     vim.g.VM_maps = maps
     vim.g.VM_leader = 'gm'
