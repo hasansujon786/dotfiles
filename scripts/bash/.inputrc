@@ -1,17 +1,41 @@
-set editing-mode vi
-# set keymap vi # ensure vi key bindings are fully applied
 set bell-style none
 
+# TURN ON VIM (E.G. FOR READLINE)
+set editing-mode vi
+
+# SHOW THE VIM MODE IN THE PROMPT (COMMAND OR INSERT)
+set show-mode-in-prompt on
+
+# SET THE MODE STRING AND CURSOR TO INDICATE THE VIM MODE
+#   FOR THE NUMBER AFTER `\e[`:
+#     0: blinking block
+#     1: blinking block (default)
+#     2: steady block
+#     3: blinking underline
+#     4: steady underline
+#     5: blinking bar (xterm)
+#     6: steady bar (xterm)
+set vi-ins-mode-string "\1\e[1;32m\e[5 q\e[0m\2>> "
+set vi-cmd-mode-string "\1\e[1;32m\e[1 q\e[0m\2:: "
+set colored-stats on
+
 $if mode=vi
+  set keymap vi-command
+  "k": history-substring-search-backward
+  "j": history-substring-search-forward
+
   set keymap vi-insert
   "jk": vi-movement-mode
   "\C-e": end-of-line
   "\C-a": beginning-of-line
   "\C-f": forward-char
   "\C-b": backward-char
+  "\M-f": forward-word
+  "\M-b": backward-word
   "\C-d": delete-char
-  "\C-k": kill-line
+  "\C-k": kill-whole-line
   "\C-l": clear-screen
   "\C-n": next-history
   "\C-p": previous-history
+  "\C-k": transpose-chars
 $endif

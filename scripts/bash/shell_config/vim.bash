@@ -1,5 +1,5 @@
 #!/bin/bash
-set -o vi # Enable Vi mode in Bash
+# set -o vi # Enable Vi mode in Bash
 
 ### Neovim Quick Edit & Execute
 ##################################################

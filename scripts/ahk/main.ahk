@@ -66,13 +66,15 @@ PrintScreen::Send("#+{s}")
   !k::SendInput("{UP}")
   !h::SendInput("{LEFT}")
   !l::SendInput("{RIGHT}")
+
+  ; emacs-standard
+  !f::Send("^{Right}")
+  !b::Send("^{Left}")
+  +!f::Send("^+{Right}")
+  +!b::Send("^+{Left}")
 #HotIf
-; emacs-standard
 !Backspace::SendInput("^{Backspace}")
-!f::Send("^{Right}")
-!b::Send("^{Left}")
-+!f::Send("^+{Right}")
-+!b::Send("^+{Left}")
+
 ; Other
 ^#b::showCalendar()
 #q::toggleBluetooth()
