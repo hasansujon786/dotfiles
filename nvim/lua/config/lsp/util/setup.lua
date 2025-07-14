@@ -20,12 +20,12 @@ function M.lsp_attach(args)
   end
 
   -- Disable defalut formatter ---------------
-  local should_disable_formatter = lsp_state.use_builtin_lsp_formatter ~= nil
-    and not vim.tbl_contains(lsp_state.use_builtin_lsp_formatter, client.name)
-  if should_disable_formatter then
-    client.server_capabilities.documentFormattingProvider = false
-    client.server_capabilities.documentRangeFormattingProvider = false
-  end
+  -- local should_disable_formatter = lsp_state.use_builtin_lsp_formatter ~= nil
+  --   and not vim.tbl_contains(lsp_state.use_builtin_lsp_formatter, client.name)
+  -- if should_disable_formatter then
+  --   client.server_capabilities.documentFormattingProvider = false
+  --   client.server_capabilities.documentRangeFormattingProvider = false
+  -- end
 end
 
 function M.update_capabilities(fname)

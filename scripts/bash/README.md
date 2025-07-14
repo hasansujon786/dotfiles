@@ -35,6 +35,19 @@ printf "\n"
 ```bash
 set -o vi
 bind '"jk":vi-movement-mode'
+
+# SET THE MODE STRING AND CURSOR TO INDICATE THE VIM MODE
+#   FOR THE NUMBER AFTER `\e[`:
+#     0: blinking block
+#     1: blinking block (default)
+#     2: steady block
+#     3: blinking underline
+#     4: steady underline
+#     5: blinking bar (xterm)
+#     6: steady bar (xterm)
+#     Ex: \e[5 q\ , \e[1 q\
+# set vi-ins-mode-string "\1\e[1;32me[0m\2>> "
+# set vi-cmd-mode-string "\1\e[1;32me[0m\2:: "
 ```
 
 # Keymap syntax
