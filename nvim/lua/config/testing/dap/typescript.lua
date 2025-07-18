@@ -1,84 +1,131 @@
--- Dap configs:
--- https://github.com/dreamsofcode-io/neovim-nodejs/blob/main/configs/dap.lua
--- https://github.com/perrin4869/dotfiles/blob/305f3abdebd49013368ca1b6c98db7abb9aa0849/home/.config/nvim/plugin/dap.lua
--- https://github.com/anasrar/.dotfiles/blob/671c32cbf44d828e5b5128ada4f4637b58a0b792/neovim/.config/nvim/lua/rin/DAP/languages/typescript.lua
--- https://github.com/harrisoncramer/nvim/tree/main/lua/plugins/dap
 local M = {}
 
-M.setup = function(dap)
-  -- local dap_utils = require('dap.utils')
-  require('dap-vscode-js').setup({
-    node_path = 'node',
-    debugger_path = dap_adapter_path .. '\\vscode-js-debug',
-    adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
-  })
+M.setup = function()
+  local dap = require('dap')
 
-  local exts = {
-    'javascript',
-    'typescript',
-    'javascriptreact',
-    'typescriptreact',
-    -- using pwa-chrome
-    'vue',
-    'svelte',
-  }
+  if not dap.adapters['pwa-node'] then
+    require('dap').adapters['pwa-node'] = {
+      type = 'server',
+      host = 'localhost',
+      port = '${port}',
+      executable = {
+        command = 'node',
+        args = {
+          mason_path .. '/js-debug-adapter/js-debug/src/dapDebugServer.js',
+          '${port}',
+        },
+      },
+    }
+  end
 
-  for _, ext in ipairs(exts) do
-    dap.configurations[ext] = {
-      -- Debug web applications (client side)
+  if not dap.adapters['node'] then
+    dap.adapters['node'] = function(cb, config)
+      if config.type == 'node' then
+        config.type = 'pwa-node'
+      end
+      local nativeAdapter = dap.adapters['pwa-node']
+      if type(nativeAdapter) == 'function' then
+        nativeAdapter(cb, config)
+      else
+        cb(nativeAdapter)
+      end
+    end
+  end
+
+  if not dap.adapters['pwa-chrome'] then
+    dap.adapters['pwa-chrome'] = {
+      type = 'server',
+      host = 'localhost',
+      port = '${port}',
+      executable = {
+        command = 'node',
+        args = {
+          mason_path .. '/js-debug-adapter/js-debug/src/dapDebugServer.js',
+          '${port}',
+        },
+      },
+    }
+  end
+
+  -- Filetypes for JavaScript/TypeScript
+  local js_filetypes = { 'typescript', 'javascript', 'typescriptreact', 'javascriptreact', 'astro' }
+
+  -- Update VSCode extensions for pwa-chrome
+  local vscode = require('dap.ext.vscode')
+  vscode.type_to_filetypes['node'] = js_filetypes
+  vscode.type_to_filetypes['pwa-node'] = js_filetypes
+  vscode.type_to_filetypes['pwa-chrome'] = js_filetypes
+
+  -- Add pwa-chrome configurations for Next.js
+  for _, language in ipairs(js_filetypes) do
+    if not dap.configurations[language] then
+      dap.configurations[language] = {}
+    end
+
+    local existing_configs = dap.configurations[language]
+    local new_configs = {
       {
         type = 'pwa-chrome',
         request = 'launch',
-        name = 'Launch & Debug Chrome',
-        -- port = 9222,
-        url = function()
-          local co = coroutine.running()
-          return coroutine.create(function()
-            vim.ui.input({
-              prompt = 'Enter URL',
-              default = 'http://localhost:3000',
-            }, function(url)
-              if url == nil or url == '' then
-                return
-              else
-                coroutine.resume(co, url)
-              end
-            end)
-          end)
-        end,
-        webRoot = '${workspaceFolder}', -- vim.fn.getcwd(),
-        protocol = 'inspector',
+        name = 'Launch Chrome (pwa-chrome)',
+        url = 'http://localhost:3000',
+        webRoot = '${workspaceFolder}',
         sourceMaps = true,
-        userDataDir = false,
+        trace = true,
+        runtimeExecutable = 'C:/Program Files/Google/Chrome/Application/chrome.exe', -- Adjust path if needed
+        runtimeArgs = {
+          '--remote-debugging-port=9222',
+          '--no-first-run',
+          '--no-default-browser-check',
+          -- '--user-data-dir=C:/Users/hasan/chrome-debug-profile', -- Separate profile
+        },
         skipFiles = { '<node_internals>/**', 'node_modules/**' },
-        -- runtimeArgs = { '--restore-last-session', '--remote-debugging-port=9222' },
-        -- userDataDir = false,
-        -- userDataDir = '${workspaceFolder}/.vscode/vscode-chrome-debug-userdatadir',
       },
-      -- Debug web applications (run chrome with --remote-debugging-port=9222)
       {
         type = 'pwa-chrome',
         request = 'attach',
-        name = 'Attach Chrome',
-        program = '${file}',
-        cwd = vim.fn.getcwd(),
+        name = 'Attach to Chrome (pwa-chrome | WIP)',
+        url = 'http://localhost:3000',
+        webRoot = '${workspaceFolder}',
         sourceMaps = true,
         port = 9222,
-        -- port = function() return vim.fn.input('Select port: ', 9222) end,
-        webRoot = '${workspaceFolder}',
+        timeout = 30000,
+        continueOnAttach = true,
         skipFiles = { '<node_internals>/**', 'node_modules/**' },
-      },
-      -- Debug express.js applications (run node with --inspect)
-      {
-        type = 'pwa-node',
-        request = 'attach',
-        name = 'Attach Node/Express',
-        cwd = vim.fn.getcwd(),
-        sourceMaps = true,
-        protocol = 'inspector',
-        skipFiles = { '<node_internals>/**', 'node_modules/**' },
+        -- Optional: Specify WebSocket URL if needed
+        -- webSocketUrl = 'ws://localhost:9222/devtools/page/...' -- Replace with actual URL from http://localhost:9222/json
       },
     }
+
+    if language == 'javascript' or language == 'typescript' then
+      --  NOTE: Debug single node.js file
+      table.insert(new_configs, {
+        type = 'pwa-node',
+        request = 'launch',
+        name = 'Launch file (pwa-node)',
+        program = '${file}',
+        cwd = '${workspaceFolder}',
+      })
+
+      -- NOTE: Debug node.js processes (make sure to add --inspect when you run the process)
+      table.insert(new_configs, {
+        type = 'pwa-node',
+        request = 'attach',
+        name = 'Attach (pwa-node)',
+        processId = require('dap.utils').pick_process,
+        cwd = '${workspaceFolder}',
+      })
+    end
+
+    -- Divider for the launch.json derived configs
+    table.insert(new_configs, {
+      name = '----- ↓ launch.json configs ↓ -----',
+      type = '',
+      request = 'launch',
+    })
+
+    -- Combine existing and new configurations
+    dap.configurations[language] = vim.tbl_extend('force', existing_configs, new_configs)
   end
 end
 

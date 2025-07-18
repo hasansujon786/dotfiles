@@ -4,9 +4,7 @@
 local Icons = require('hasan.utils.ui.icons').Other
 
 local function configure_debuggers()
-  local dap = require('dap')
-  require('config.testing.dap.typescript').setup(dap)
-  -- require('config.testing.dap.node').setup(dap)
+  require('config.testing.dap.typescript').setup()
   -- require('config.testing.dap.lua').setup()
 end
 
@@ -30,34 +28,11 @@ return {
       '<cmd>lua require"dap".toggle_breakpoint()<CR>',
       desc = 'Toggle Breakpoint',
     },
-    -- {
-    --   '<leader>d/',
-    --   '<cmd>lua require"telescope".extensions.dap.commands()<CR>',
-    --   desc = 'Start',
-    -- },
-
-    -- {
-    --   '<leader>da',
-    --   function()
-    --     if vim.fn.filereadable('.vscode/launch.json') then
-    --       local dap_vscode = require('dap.ext.vscode')
-    --       dap_vscode.load_launchjs(nil, {
-    --         ['pwa-node'] = js_based_languages,
-    --         ['chrome'] = js_based_languages,
-    --         ['pwa-chrome'] = js_based_languages,
-    --       })
-    --     end
-    --     require('dap').continue()
-    --   end,
-    --   desc = 'Run with Args',
-    -- },
   },
   dependencies = {
-    'nvim-telescope/telescope-dap.nvim',
-    'mxsdev/nvim-dap-vscode-js',
+    -- 'mxsdev/nvim-dap-vscode-js',
     'theHamsta/nvim-dap-virtual-text',
     'nvim-neotest/nvim-nio',
-    -- 'jbyuki/one-small-step-for-vimkind',
     {
       'rcarriga/nvim-dap-ui',
       opts = {

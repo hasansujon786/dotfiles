@@ -50,7 +50,7 @@ return {
       snippets = {
         -- gen_loader.from_lang(),
         gen_loader.from_lang({ lang_patterns = lang_patterns }),
-        gen_loader.from_file(config_path .. '/snippets/global.json'),
+        gen_loader.from_file(vim.fn.stdpath('config') .. '/snippets/global.json'),
       },
       mappings = {
         expand = '<C-k><C-j>',

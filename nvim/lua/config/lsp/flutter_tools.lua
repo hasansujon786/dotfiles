@@ -39,8 +39,7 @@ return {
           dap.adapters.dart = {
             type = 'executable',
             command = 'node',
-            args = { path_mason .. '/packages/dart-debug-adapter/extension/out/dist/debug.js', 'flutter' },
-            -- args = { dap_adapter_path .. '/Dart-Code/out/dist/debug.js', 'flutter' },
+            args = { mason_path .. '/dart-debug-adapter/extension/out/dist/debug.js', 'flutter' },
           }
           dap.configurations.dart = {
             {

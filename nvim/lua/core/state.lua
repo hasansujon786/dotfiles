@@ -58,6 +58,7 @@ M.lsp = {
     'stylua',
     'prettierd',
     'dart-debug-adapter',
+    'js-debug-adapter',
   },
   use_builtin_lsp_formatter = {},
   default_opts = {
