@@ -163,6 +163,7 @@ if not vim.g.vscode then
     { '<A-e>', '<C-e>' },
   }
   for _, k in pairs(scroll_maps) do
+    -- nvim_set_keymap('n', k[2], k[2] .. 'zz', { noremap = false })
     nvim_set_keymap('n', k[1], k[2], { noremap = false })
     nvim_set_keymap('x', k[1], k[2], { noremap = false })
   end

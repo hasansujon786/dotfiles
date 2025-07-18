@@ -224,7 +224,11 @@ return {
       -- },
       bigfile = { enabled = true },
       quickfile = { enabled = true },
-      words = { enabled = true },
+      words = {
+        enabled = true,
+        debounce = 450, -- time in ms to wait before updating
+        modes = { 'n' }, -- modes to show references
+      },
       explorer = { enabled = false },
       image = { enabled = false },
       input = {},

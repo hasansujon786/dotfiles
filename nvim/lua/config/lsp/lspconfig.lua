@@ -11,7 +11,7 @@ return {
       config = function(_, opts)
         require('mason').setup(opts)
         require('mason-lspconfig').setup({
-          ensure_installed = { 'lua_ls', 'ts_ls', 'vimls' },
+          ensure_installed = { 'lua_ls' },
           -- handlers = {
           --   function(server_name)
           --     require('lspconfig')[server_name].setup(require('config.lsp.util.setup').get_setup_opts(server_name))

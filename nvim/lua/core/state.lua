@@ -38,7 +38,8 @@ M.lsp = {
     -- Frontend
     html = { 'html-lsp' },
     cssls = { 'css-lsp' },
-    ts_ls = { 'typescript-language-server' },
+    vtsls = { 'vtsls' },
+    -- ts_ls = { 'typescript-language-server' },
     jsonls = { 'json-lsp' },
     eslint = { 'eslint-lsp' },
     -- Frameworks
