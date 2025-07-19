@@ -2,7 +2,7 @@
 # Yarn
 alias yup='yarn upgrade-interactive --latest'
 alias ycc='yarn cache clean'
-alias ya='yarn android'
+alias yan='yarn android'
 alias ys='yarn start'
 alias yd='yarn dev'
 alias zo='zi && sc'
@@ -116,10 +116,9 @@ alias lf='lfcd'
 # Copy the PWD to the Clipboard
 alias cpd="pwd | tr -d '\n' | clip && echo 'pwd copied to clipboard'"
 # alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard'"
-alias y='yazi_cd'
-alias yazi='yazi_cd'
 alias dbgya='YAZI_LOG=debug yazi'
 alias kan='~/dotfiles/scripts/restart-kanata.sh'
+alias ahk='pwsh -File ~/dotfiles/scripts/ahk/run.ps1'
 
 # git
 alias ggpusht='git push origin $(git_current_branch) --tags'
@@ -233,13 +232,11 @@ jump_to_git_root() {
   echo "Git repo root: $_root_dir"
   cd "$_root_dir" || exit
 }
-function yazi_cd() {
-  local tmp
-  tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-  \yazi "$@" --cwd-file="$tmp"
-  if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-    builtin cd -- "$cwd" || return
-  fi
+function y() {
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+  yazi "$@" --cwd-file="$tmp"
+  IFS= read -r -d '' cwd <"$tmp"
+  [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd" || exit
   rm -f -- "$tmp"
 }
 lfcd() {

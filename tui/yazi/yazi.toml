@@ -2,11 +2,12 @@
 # If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
 "$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
 
-[manager]
+[mgr]
 ratio        = [1, 3, 2]
 show_hidden  = true
 show_symlink = false
 linemode     = "size"
+title_format = ""
 
 [opener]
 edit = [
