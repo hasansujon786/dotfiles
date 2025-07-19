@@ -3,12 +3,12 @@ return {
   lazy = true,
   config = function()
     require('nvim-web-devicons').set_icon({
-      astro = {
-        icon = '',
-        color = '#e23f67',
-        cterm_color = '197',
-        name = 'Astro',
-      },
+      -- astro = {
+      --   icon = '',
+      --   color = '#e23f67',
+      --   cterm_color = '197',
+      --   name = 'Astro',
+      -- },
       dart = {
         icon = '',
         color = '#51a0cf',
@@ -121,90 +121,6 @@ return {
       },
 
       -- Config files
-      ['.prettierrc'] = {
-        icon = 'P', -- '',
-        color = '#4285F4',
-        cterm_color = '33',
-        name = 'PrettierConfig',
-      },
-      ['.prettierrc.cjs'] = {
-        icon = 'P',
-        color = '#4285F4',
-        cterm_color = '33',
-        name = 'PrettierConfig',
-      },
-      ['.prettierrc.js'] = {
-        icon = 'P',
-        color = '#4285F4',
-        cterm_color = '33',
-        name = 'PrettierConfig',
-      },
-      ['.prettierrc.json'] = {
-        icon = 'P',
-        color = '#4285F4',
-        cterm_color = '33',
-        name = 'PrettierConfig',
-      },
-      ['.prettierrc.json5'] = {
-        icon = 'P',
-        color = '#4285F4',
-        cterm_color = '33',
-        name = 'PrettierConfig',
-      },
-      ['.prettierrc.mjs'] = {
-        icon = 'P',
-        color = '#4285F4',
-        cterm_color = '33',
-        name = 'PrettierConfig',
-      },
-      ['.prettierrc.toml'] = {
-        icon = 'P',
-        color = '#4285F4',
-        cterm_color = '33',
-        name = 'PrettierConfig',
-      },
-      ['.prettierrc.yaml'] = {
-        icon = 'P',
-        color = '#4285F4',
-        cterm_color = '33',
-        name = 'PrettierConfig',
-      },
-      ['.prettierrc.yml'] = {
-        icon = 'P',
-        color = '#4285F4',
-        cterm_color = '33',
-        name = 'PrettierConfig',
-      },
-      ['.prettierignore'] = {
-        icon = 'P',
-        color = '#4285F4',
-        cterm_color = '33',
-        name = 'PrettierIgnore',
-      },
-      ['prettier.config.js'] = {
-        icon = 'P',
-        color = '#4285F4',
-        cterm_color = '33',
-        name = 'PrettierConfig',
-      },
-      ['prettier.config.cjs'] = {
-        icon = 'P',
-        color = '#4285F4',
-        cterm_color = '33',
-        name = 'PrettierConfig',
-      },
-      ['prettier.config.mjs'] = {
-        icon = 'P',
-        color = '#4285F4',
-        cterm_color = '33',
-        name = 'PrettierConfig',
-      },
-      ['prettier.config.ts'] = {
-        icon = 'P',
-        color = '#4285F4',
-        cterm_color = '33',
-        name = 'PrettierConfig',
-      },
       ['yarn-error.log'] = {
         icon = '',
         color = '#458ee6',
@@ -229,24 +145,24 @@ return {
         cterm_color = '208',
         name = 'Pnpmlock',
       },
-      ['package.json'] = {
-        icon = '',
-        color = '#019833',
-        cterm_color = '28',
-        name = 'Npm_packagejson',
-      },
-      ['package-lock.json'] = {
-        icon = '',
-        color = '#019833',
-        cterm_color = '28',
-        name = 'Npm_packagejson',
-      },
-      ['.nvmrc'] = {
-        icon = '',
-        color = '#019833',
-        cterm_color = '28',
-        name = 'Npm_packagejson',
-      },
+      -- ['package.json'] = {
+      --   icon = '',
+      --   color = '#019833',
+      --   cterm_color = '28',
+      --   name = 'Npm_packagejson',
+      -- },
+      -- ['package-lock.json'] = {
+      --   icon = '',
+      --   color = '#019833',
+      --   cterm_color = '28',
+      --   name = 'Npm_packagejson',
+      -- },
+      -- ['.nvmrc'] = {
+      --   icon = '',
+      --   color = '#019833',
+      --   cterm_color = '28',
+      --   name = 'Npm_packagejson',
+      -- },
       ['babel.config.js'] = {
         icon = '',
         color = '#cbcb41',
