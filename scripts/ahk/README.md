@@ -10,6 +10,7 @@ https://lexikos.github.io/v2/docs/Hotkeys.htm
 
 - [autohotkey-windows-mac-keyboard](https://github.com/stroebjo/autohotkey-windows-mac-keyboard/tree/master)
 - [buliasz/AHKv2-Gdip](https://github.com/buliasz/AHKv2-Gdip)
+- [evilC/TapHoldManager](https://github.com/evilC/TapHoldManager)
 
 ## Info
 

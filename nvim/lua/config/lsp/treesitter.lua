@@ -124,13 +124,6 @@ return {
       -- stylua: ignore start
       keymap('n', '<P', '<Plug>(ts-swap-parameter-prev)<cmd>call repeat#set("\\<Plug>(ts-swap-parameter-prev)")<CR>', { desc = 'Swap parameter prev' })
       keymap('n', '>P', '<Plug>(ts-swap-parameter-next)<cmd>call repeat#set("\\<Plug>(ts-swap-parameter-next)")<CR>', { desc = 'Swap parameter next' })
-      -- stylua: ignore end
-      keymap('n', '[f', '<Plug>(ts-jump-prev-s-func)zz', { desc = 'Jump prev func' })
-      keymap('n', ']f', '<Plug>(ts-jump-next-s-func)zz', { desc = 'Jump next func' })
-      keymap('n', '[[', '<Plug>(ts-jump-prev-s-func)zz', { desc = 'Jump prev func' })
-      keymap('n', ']]', '<Plug>(ts-jump-next-s-func)zz', { desc = 'Jump next func' })
-      keymap('n', '[m', '<Plug>(ts-jump-prev-s-class)zz', { desc = 'Jump prev class' })
-      keymap('n', ']m', '<Plug>(ts-jump-next-s-class)zz', { desc = 'Jump next class' })
     end,
     dependencies = {
       -- 'nvim-treesitter/nvim-treesitter-textobjects',

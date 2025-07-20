@@ -1,23 +1,3 @@
--- https://www.naseraleisa.com/posts/diff#file-1
-local function next_hunk()
-  if vim.wo.diff then
-    return ']c'
-  end
-  vim.schedule(function()
-    package.loaded.gitsigns.nav_hunk('next')
-  end)
-  return '<Ignore>'
-end
-local function prev_hunk()
-  if vim.wo.diff then
-    return '[c'
-  end
-  vim.schedule(function()
-    package.loaded.gitsigns.nav_hunk('prev')
-  end)
-  return '<Ignore>'
-end
-
 return {
   'lewis6991/gitsigns.nvim',
   lazy = true,
@@ -54,11 +34,6 @@ return {
         vim.keymap.set(mode, l, r, opts)
       end
 
-      -- Navigation
-      map('n', ']c', next_hunk, { expr = true, desc = 'Git: Jump to hunk' })
-      map('n', '[c', prev_hunk, { expr = true, desc = 'Git: Jump to hunk' })
-      map('n', ']x', '<cmd>Gitsigns nav_hunk next target=staged<cr>', { desc = 'Git: Jump to hunk' })
-      map('n', '[x', '<cmd>Gitsigns nav_hunk prev target=staged<cr>', { desc = 'Git: Jump to hunk' })
       -- Stage Actions
       map('n', '<leader>gp', gs.preview_hunk, { desc = 'Git: Preview hunk' })
       map('n', '<leader>gs', gs.stage_hunk, { desc = 'Git: Stage hunk' })

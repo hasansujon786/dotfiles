@@ -15,9 +15,6 @@ return {
     keymap('n', '<leader>iI', '<Plug>(yanklist-last-item-Put)', { desc = 'Paste from Yanklist' })
     keymap('x', '<leader>ii', '<Plug>(yanklist-last-item-put)gvy', { desc = 'Paste from Yanklist' })
     keymap('x', '<leader>iI', '<Plug>(yanklist-last-item-Put)gvy', { desc = 'Paste from Yanklist' })
-    -- Cycle through Yanklist items
-    keymap('n', '[r', '<Plug>(yanklist-cycle-forward)', { desc = 'Yanklist forward' })
-    keymap('n', ']r', '<Plug>(yanklist-cycle-backward)', { desc = 'Yanklist backward' })
     -- Show Yanklist
     keymap('n', '<leader>oy', '<cmd>lua require("yanklist").yanklist()<cr>', { desc = 'Show Yanklist' })
     keymap('x', '<leader>oy', '<Esc><cmd>lua require("yanklist").yanklist_visual()<cr>', { desc = 'Show Yanklist' })

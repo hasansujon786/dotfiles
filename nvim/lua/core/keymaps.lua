@@ -174,25 +174,6 @@ if not vim.g.vscode then
   keymap('n', '<C-i>', '<C-i>')
   keymap('n', '<C-j>', '<C-i>')
 
-  -- Diagnostic
-  local function diagnostic_jump(count, severity)
-    return function()
-      vim.diagnostic.jump({ count = count, severity = severity, float = true })
-    end
-  end
-  keymap(nxo, '[e', diagnostic_jump(-1, vim.diagnostic.severity.ERROR), { desc = 'Previous error' })
-  keymap(nxo, ']e', diagnostic_jump(1, vim.diagnostic.severity.ERROR), { desc = 'Next error' })
-  keymap(nxo, '[d', diagnostic_jump(-1), { desc = 'Previous diagnostic' })
-  keymap(nxo, ']d', diagnostic_jump(1), { desc = 'Next diagnostic' })
-
-  -- Quickfix list
-  -- keymap('n', ']l', ':lnext<CR>')
-  -- keymap('n', '[l', ':lprev<CR>')
-  -- keymap('n', ']q', ':cnext<CR>')
-  -- keymap('n', '[q', ':cprev<CR>')
-  -- keymap('n', ']Q', ':clast<CR>')
-  -- keymap('n', '[Q', ':cfirst<CR>')
-
   -- Insert mode ----------------------------------
   -- keymap(ic, 'jk', '<ESC>') -- Use jk to return to normal mode
   keymap('t', '<C-o>', '<C-\\><C-n>', { desc = 'Exit Term mode' })
