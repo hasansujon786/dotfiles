@@ -78,7 +78,7 @@
 --   scroll_timer:start(1, 1, vim.schedule_wrap(fooo))
 -- end
 -- local function scroll_to(to)
---   neoscroll.scroll(to, true, 80, ease) -- defalut scroll
+--   neoscroll.scroll(to, true, 80, ease) -- default scroll
 -- end
 
 -- -- function Foo()

@@ -518,7 +518,7 @@ return {
           },
 
           project_files = { -- https://github.com/folke/snacks.nvim/issues/532#issuecomment-2609303872
-            layout = { preset = 'dropdown' },
+            layout = { preset = 'vscode', preview = 'main' },
             multi = { 'files', 'lsp_symbols' },
             -- finder = 'files',
             matcher = {

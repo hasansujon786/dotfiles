@@ -59,6 +59,7 @@ M.lsp = {
     'prettierd',
     'dart-debug-adapter',
     'js-debug-adapter',
+    'harper-ls'
   },
   use_builtin_lsp_formatter = {},
   default_opts = {
@@ -140,7 +141,7 @@ M.ui = {
     open_flutter_log_on_right = true,
   },
   neotree = {
-    source_selector_style = 'minimal', -- defalut | minimal
+    source_selector_style = 'minimal', -- default | minimal
   },
 }
 

@@ -384,8 +384,8 @@ local codicons = {
     ChevronDown   = '',
   },
   diagnostics = {
-    Error = '',
-    Warn  = '',
+    Error = '󰅚', -- 
+    Warn  = '󰀪', -- 
     Info  = '',
     Ques  = '',
     Hint  = '',-- ,

@@ -1,3 +1,5 @@
+local Icons = require('hasan.utils.ui.icons').diagnostics
+
 return {
   'kevinhwang91/nvim-bqf',
   lazy = true,
@@ -5,6 +7,10 @@ return {
   ft = { 'qf' }, -- event = 'FileType qf',
   opts = {
     preview = { winblend = 0 },
+    func_map = {
+      prevhist = '[[',
+      nexthist = ']]',
+    },
   },
   keys = {
     {
@@ -32,11 +38,11 @@ return {
         soft_end = '┤',
       },
       type_icons = {
-        E = ' ',
-        W = ' ',
-        I = ' ',
-        N = '󰌵 ',
-        H = '󰌵 ',
+        E = Icons.Error,
+        W = Icons.Warn,
+        I = Icons.Info,
+        N = Icons.Hint,
+        H = Icons.Hint,
       },
       highlight = {
         treesitter = true,
@@ -45,18 +51,18 @@ return {
       },
       keys = {
         {
-          '>',
-          function()
-            require('quicker').expand({ before = 2, after = 2, add_to_existing = true })
-          end,
-          desc = 'Expand quickfix context',
-        },
-        {
-          '<',
+          '-',
           function()
             require('quicker').collapse()
           end,
           desc = 'Collapse quickfix context',
+        },
+        {
+          '=',
+          function()
+            require('quicker').expand({ before = 2, after = 2, add_to_existing = true })
+          end,
+          desc = 'Expand quickfix context',
         },
       },
     },

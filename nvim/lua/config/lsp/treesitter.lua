@@ -23,7 +23,8 @@ return {
         'javascript',
         'typescript',
         'tsx',
-        'powershell'
+        'powershell',
+        'astro',
       }
 
       require('nvim-treesitter.configs').setup({
@@ -189,7 +190,15 @@ return {
         function()
           require('treesitter-context').go_to_context(vim.v.count1)
         end,
-        mode = '',
+        mode = 'n',
+        desc = 'Move cursor to context',
+      },
+      {
+        '-',
+        function()
+          require('treesitter-context').go_to_context(vim.v.count1)
+        end,
+        mode = { 'x', 'o' },
         desc = 'Move cursor to context',
       },
     },
