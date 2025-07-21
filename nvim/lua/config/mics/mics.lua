@@ -1,13 +1,12 @@
 local nx, nxo = { 'n', 'x' }, { 'n', 'x', 'o' }
 
 return {
-  -- require("hasan.neo_glance")
   {
     'max397574/better-escape.nvim',
     lazy = true,
     event = { 'InsertEnter', 'CmdlineEnter' },
     opts = {
-      timeout = 350, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
+      timeout = 350, -- The time in which the keys must be hit in ms. Use option timeoutlen by default
       mappings = {
         i = { j = { k = '<Esc>', j = false } },
         c = { j = { k = '<Esc>', j = false } },
@@ -19,7 +18,7 @@ return {
   },
   {
     'sphamba/smear-cursor.nvim',
-    event = 'CursorMoved',
+    event = 'VeryLazy',
     commit = '4a0f7ac', -- 'ac5c4a8',
     enabled = true,
     opts = {
@@ -54,8 +53,7 @@ return {
   { 'MunifTanjim/nui.nvim', lazy = true, module = 'nui' },
   { 'nvim-lua/plenary.nvim', lazy = true, module = 'plenary' },
   { 'tpope/vim-repeat', lazy = true, event = 'BufReadPost', dependencies = 'tpope/vim-surround' },
-  { 'dhruvasagar/vim-table-mode', cmd = { 'TableModeToggle', 'TableModeEnable', 'TableModeRealign' } },
-  -- { 'tpope/vim-eunuch', lazy = true, cmd = { 'Delete', 'Move', 'Rename', 'Mkdir', 'Chmod' } },
+  { 'mbbill/undotree', keys = { { '<leader>ou', '<cmd>UndotreeToggle<cr>' } } },
   -- {
   --   'skardyy/neo-img',
   --   lazy = true,
@@ -70,7 +68,6 @@ return {
   --     resizeMode = 'Fit', -- Fit / Strech / Crop
   --   },
   -- },
-  -- { 'mbbill/undotree' },
   -- {
   --   'wolfwfr/vimatrix.nvim',
   --   cmd = { 'VimatrixOpen' },

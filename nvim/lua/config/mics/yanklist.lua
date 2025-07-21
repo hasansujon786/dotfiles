@@ -1,6 +1,6 @@
 return {
   'hasansujon786/yanklist.nvim',
-  event = { 'CursorHold' },
+  event = 'VeryLazy',
   init = function()
     vim.g.yanklist_finder = 'snacks'
   end,

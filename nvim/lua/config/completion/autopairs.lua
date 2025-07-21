@@ -33,7 +33,7 @@ return {
 
     require('nvim-autopairs').add_rules({
       rule('<', '>', 'lua'):with_pair(isNodeType({ 'string', 'string_content' })),
-      rule('<', '>', { 'vim', 'html', 'xml' }), -- keymaps & tags
+      -- rule('<', '>', { 'vim', 'html', 'xml' }), -- keymaps & tags
       rule('*', '*', 'markdown'), -- italics
       rule('![', ']()', 'markdown'):set_end_pair_length(1), -- images
 

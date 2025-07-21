@@ -59,7 +59,7 @@ M.lsp = {
     'prettierd',
     'dart-debug-adapter',
     'js-debug-adapter',
-    'harper-ls'
+    'harper-ls',
   },
   use_builtin_lsp_formatter = {},
   default_opts = {

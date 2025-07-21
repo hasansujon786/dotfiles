@@ -4,7 +4,7 @@ return {
   'kevinhwang91/nvim-bqf',
   lazy = true,
   module = 'bqf',
-  ft = { 'qf' }, -- event = 'FileType qf',
+  ft = { 'qf' },
   opts = {
     preview = { winblend = 0 },
     func_map = {
@@ -49,7 +49,7 @@ return {
         lsp = true, -- Use LSP semantic token highlighting
         load_buffers = false, -- Load the referenced buffers to apply more accurate highlights (may be slow)
       },
-      keys = {
+      keys = { -- qf buffer keymaps
         {
           '-',
           function()

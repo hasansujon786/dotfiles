@@ -26,9 +26,10 @@ local spec = {
   { import = 'config.lsp' },
   { import = 'config.mics' },
   { import = 'config.navigation' },
-  { import = 'config.testing' },
+  { import = 'config.writing' },
   { import = 'config.ui' },
-  { import = 'config' },
+  { import = 'config.testing' },
+  -- { import = 'config' },
 }
 
 if vim.g.vscode then

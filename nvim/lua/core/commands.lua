@@ -50,3 +50,12 @@ command('CheckWinConfig', function()
   local opts = vim.api.nvim_win_get_config(0)
   dd(opts)
 end, { desc = 'Check win config' })
+
+command('DocGenerate', function()
+  vim.cmd.wa()
+  local ok = pcall(R, 'scripts.minidoc')
+  if not ok then
+    return vim.notify("module 'scripts.minidoc' not found", 'error', { title = 'minidoc' })
+  end
+  vim.cmd.checktime()
+end, { nargs = 0, desc = 'DocGenerate' })

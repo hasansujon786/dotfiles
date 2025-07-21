@@ -8,6 +8,12 @@ return {
     { 'g<Plug>(dial-increment)', mode = nx },
     { 'g<Plug>(dial-decrement)', mode = nx },
   },
+  init = function()
+    keymap(nx, '<C-a>', '<Plug>(dial-increment)')
+    keymap(nx, '<C-x>', '<Plug>(dial-decrement)')
+    keymap(nx, 'g<C-a>', '<Plug>(dial-increment)')
+    keymap(nx, 'g<C-x>', '<Plug>(dial-decrement)')
+  end,
   config = function()
     local augend = require('dial.augend')
     local toggle = function(...)
@@ -15,10 +21,10 @@ return {
     end
 
     require('dial.config').augends:register_group({
-      -- default augends used when no group name is specified
+      -- Default augends used when no group name is specified
       default = {
-        augend.integer.alias.decimal, -- nonnegative decimal number (0, 1, 2, 3, ...)
-        augend.integer.alias.hex, -- nonnegative hex number  (0x01, 0x1a1f, etc.)
+        augend.integer.alias.decimal, -- non-negative decimal number (0, 1, 2, 3, ...)
+        augend.integer.alias.hex, -- non-negative hex number (0x01, 0x1a1f, etc.)
         augend.constant.alias.bool,
         augend.semver.alias.semver,
         augend.constant.alias.en_weekday_full,
