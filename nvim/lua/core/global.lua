@@ -70,6 +70,12 @@ function _G.command(name, callback, opts)
   vim.api.nvim_create_user_command(name, callback, opts or {})
 end
 
+---Fire user event
+---@param event string
+function _G.fire_user_cmds(event)
+  vim.api.nvim_exec_autocmds('User', { pattern = event })
+end
+
 function _G.augroup(group)
   vim.api.nvim_create_augroup(group, { clear = true })
 

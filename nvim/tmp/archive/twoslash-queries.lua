@@ -9,7 +9,7 @@ local function attach_on_current_buf()
     end
   end
 
-  local ts_client = vim.lsp.get_clients({ bufnr = bufnr, name = 'ts_ls' })[1]
+  local ts_client = vim.lsp.get_clients({ bufnr = bufnr, name = 'vtsls' })[1] -- ts_ls
   if ts_client == nil then
     return false
   end
@@ -37,7 +37,7 @@ return {
       function()
         local attached = attach_on_current_buf()
         if attached then
-          vim.cmd([[TwoslashQueriesInspect]])
+          vim.cmd.TwoslashQueriesInspect()
         end
       end,
       desc = 'Add Twoslash Queries',
@@ -45,10 +45,12 @@ return {
   },
   cmd = { 'TwoslashQueriesEnable', 'TwoslashQueriesInspect' },
   config = function()
-    require('twoslash-queries').setup({ multi_line = false, is_enabled = true })
+    require('nvim.tmp.archive.twoslash-queries').setup({ multi_line = false, is_enabled = true })
 
     vim.api.nvim_create_user_command('TwoslashQueriesMultiLineToggle', function()
-      require('twoslash-queries').setup({ multi_line = not require('twoslash-queries').config.multi_line })
+      require('nvim.tmp.archive.twoslash-queries').setup({
+        multi_line = not require('nvim.tmp.archive.twoslash-queries').config.multi_line,
+      })
       vim.cmd([[doautocmd User EnableTwoslashQueries]])
     end, { nargs = 0, desc = 'Toggle multi line for two slash queries' })
   end,

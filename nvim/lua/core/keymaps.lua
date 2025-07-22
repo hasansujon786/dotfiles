@@ -57,10 +57,17 @@ keymap('v', '<leader>y', '"+ygv<Esc>', { desc = 'Yank to system' })
 keymap(nx, '<leader>ip', '"+p', { desc = 'Paste from system' })
 keymap(nx, '<leader>iP', '"+P', { desc = 'Paste from system' })
 
--- Modify & rearange texts ----------------------
+-- Modify & rearrange texts ----------------------
 -- maps.vnoremap('ao', '<ESC>va{%V%') -- Select a block {} of code
 -- maps.nnoremap('yao', 'va{%V%y')
 -- maps.nnoremap('dao', 'va{%V%d')
+
+local uncomment_block = function()
+  require('vim._comment').textobject()
+  feedkeys('gc', 'm')
+end
+keymap({ 'n' }, 'gcu', uncomment_block, { desc = 'Uncomment block' })
+keymap({ 'x' }, 'Z', '<Plug>VSurround')
 
 keymap('x', '$', 'g_') -- A fix to select end of line
 keymap('v', '.', ':norm.<cr>') -- map . in visual mode

@@ -1,32 +1,5 @@
 vim.g.navbuddy_taransparent = true
 
-local buildDoc = function()
-  vim.cmd([[wa]])
-  local minidoc = require('mini.doc')
-
-  if _G.MiniDoc == nil then
-    minidoc.setup()
-  end
-
-  local hooks = vim.deepcopy(MiniDoc.default_hooks)
-
-  hooks.write_pre = function(lines)
-    -- Remove first two lines with `======` and `------` delimiters to comply
-    -- with `:h local-additions` template
-    table.remove(lines, 1)
-    table.remove(lines, 1)
-    return lines
-  end
-
-  MiniDoc.generate({
-    'lua/nvim-navbuddy/init.lua',
-    'lua/nvim-navbuddy/actions.lua',
-    'lua/nvim-navbuddy/ui.lua',
-  }, 'doc/navbuddy.txt', { hooks = hooks })
-end
-
-vim.api.nvim_create_user_command('NavbuddyGenDoc', buildDoc, { nargs = 0, desc = 'Navbuddy GenDoc' })
-
 ---@type Navbuddy.config
 local opts = {
   custom_hl_group = 'Visual',
@@ -146,13 +119,10 @@ return {
     },
   },
   opts = opts,
-  -- config = function(_, lopts)
-  --   require('nvim-navbuddy').setup(lopts)
-  -- end,
   dependencies = {
-    { 'hasansujon786/nvim-navic', dev = true },
+    'SmiteshP/nvim-navic',
     'MunifTanjim/nui.nvim',
-    'numToStr/Comment.nvim', -- Optional
+    -- 'numToStr/Comment.nvim', -- Optional
     -- 'nvim-telescope/telescope.nvim',
   },
 }

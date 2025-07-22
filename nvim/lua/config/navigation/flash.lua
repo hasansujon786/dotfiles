@@ -3,29 +3,15 @@ return {
   'folke/flash.nvim',
   opts = {
     labels = ';asdfghjklwertyuiopxcvbnm',
-    label = {
-      current = true,
-      rainbow = { enabled = false, shade = 5 },
-    },
-    modes = { char = { enabled = false } },
+    modes = { char = { enabled = false }, search = { enabled = true } },
     search = {
       exclude = {
         'notify',
-        'cmp_menu',
         'noice',
         'flash_prompt',
-        'cmp_docs',
-        function(win)
-          local conf, buf = vim.api.nvim_win_get_config(win), vim.api.nvim_win_get_buf(win)
-          local ft = vim.api.nvim_get_option_value('filetype', { buf = buf })
-
-          -- filter cmp wildmenu
-          if conf.height == 1 and ft == '' and conf.relative ~= '' then
-            return true
-          end
-
-          return not conf.focusable
-        end,
+        'blink-cmp-menu',
+        'blink-cmp-signature',
+        'blink-cmp-documentation',
       },
     },
     prompt = { enabled = true, prefix = { { ' ⚡', 'FlashPromptIcon' } } },
@@ -33,6 +19,8 @@ return {
   -- { label = { after = { 0, 2 }, style = 'overlay' }, }
   -- stylua: ignore
   keys = {
+    { '/', mode = nxo, desc = 'Search forward' },
+    { '?', mode = nxo, desc = 'Search backward' },
     { 's', mode = nx, function() require('flash').jump() end, desc = 'Flash' },
     { 'z', mode = 'o', function() require('flash').jump() end, desc = 'Flash' },
     { 'S', mode = nxo, function() require('flash').treesitter() end, desc = 'Flash Treesitter' },

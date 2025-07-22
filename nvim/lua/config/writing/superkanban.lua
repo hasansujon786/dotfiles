@@ -54,6 +54,9 @@ local opts = {
     -- bubble_edge_left = '',
     -- bubble_edge_right = '',
   },
+  card = {
+    height = 2,
+  },
   mappings = {
     ['s'] = {
       callback = function()
@@ -101,19 +104,5 @@ return {
       },
     },
     opts = opts,
-    -- config = function()
-    --   require('super-kanban').setup()
-    -- end,
-  },
-  {
-    'arakkkkk/kanban.nvim',
-    lazy = true,
-    cmd = { 'KanbanOpen', 'KanbanCreate' },
-    enabled = true,
-    opts = {
-      markdown = {
-        description_folder = 'tasks', -- Path to save the file corresponding to the task.
-      },
-    },
   },
 }
