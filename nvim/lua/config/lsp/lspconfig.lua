@@ -1,5 +1,6 @@
 return {
   'neovim/nvim-lspconfig',
+  commit = '4d3b3bb',
   lazy = true,
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {

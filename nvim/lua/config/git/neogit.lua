@@ -3,7 +3,7 @@ return {
   'NeogitOrg/neogit',
   lazy = true,
   cmd = 'Neogit',
-  commit = '5972552', -- 'a58ab1befb5608b8ff36a2286360df8263791c1c', -- '001f43f'
+  commit = '99b811a', -- 5972552 a58ab1befb5608b8ff36a2286360df8263791c1c 001f43f
   keys = {
     { '<leader>gg', '<cmd>Neogit<CR>', desc = 'Open Neogit' },
   },

@@ -233,8 +233,9 @@ local function set_custom_highlights()
     -- DiffviewCursorLine        = { link = 'CursorLineFocus' },
 
     -- /// Neogit ///
-    NeogitDiffContext          = { link = 'Normal' },
+    NeogitDiffContext          = { link = 'SidebarDark' },
     NeogitCursorLine           = { link = 'CursorLine' },
+    NeogitDiffContextCursor    = { bg = c.layer },
     NeogitHunkHeader           = { fg = c.black, bg = c.layer },
     NeogitHunkHeaderHighlight  = { fg = c.bg0, bg = '#c3a7e5' },
     NeogitDiffContextHighlight = { bg = cursorling_bg },
