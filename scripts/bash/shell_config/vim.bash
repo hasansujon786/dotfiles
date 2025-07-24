@@ -20,7 +20,7 @@ bind -m emacs -x '"\C-x\C-e":_edit_wo_executing'
 
 ### Neovim Config Swithcer
 ##################################################
-alias lz="NVIM_APPNAME=LazyVim nvim"
+alias lz="NVIM_APPNAME=lazyvim nvim"
 alias vi="NVIM_APPNAME=nvim nvim"
 alias miv="NVIM_APPNAME=mini_nvim nvim"
 # alias nvim-kick="NVIM_APPNAME=kickstart nvim"

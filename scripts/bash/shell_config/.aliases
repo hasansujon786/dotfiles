@@ -63,6 +63,7 @@ alias emd='~/AppData/Local/Android/Sdk/emulator/emulator -avd default_device -ne
 alias rndoc='npx @react-native-community/cli doctor'
 
 # Flutter
+alias ff='fvm flutter'
 alias flr='flutter run'
 alias flrp='flutter run -d "$MY_PHONE_IP"'
 alias fll='flutter clean'
@@ -118,7 +119,7 @@ alias cpd="pwd | tr -d '\n' | clip && echo 'pwd copied to clipboard'"
 # alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard'"
 alias dbgya='YAZI_LOG=debug yazi'
 alias kan='~/dotfiles/scripts/restart-kanata.sh'
-alias ahk='pwsh -File ~/dotfiles/scripts/ahk/run.ps1'
+alias ahk='powershell -File ~/dotfiles/scripts/ahk/run.ps1'
 
 # git
 alias ggpusht='git push origin $(git_current_branch) --tags'
@@ -197,8 +198,7 @@ alias mn='mv -vn'
 alias txf='tar -xf'
 alias uz='unzip'
 alias uzl='unzip -l'
-alias fN='find . -name "*'
-alias ff='find . -name "*.'
+alias fin='find . -name "*.'
 alias h='hash -rf'
 alias sz='source ~/.zshrc'
 alias sb='source ~/.bashrc'

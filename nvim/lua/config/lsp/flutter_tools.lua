@@ -17,6 +17,7 @@ return {
     require('flutter-tools').setup({
       ui = { border = require('core.state').ui.border.style },
       widget_guides = { enabled = true },
+      fvm = true,
       lsp = {
         color = { -- show the derived colours for dart variables
           enabled = true,
