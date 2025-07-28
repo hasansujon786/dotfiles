@@ -109,26 +109,28 @@ ensure_scoop_bucket() {
 
 trap 'error "Something went wrong. Exiting."' ERR
 
+declare -A system_name
+system_name[win]="Windows"
+system_name[lin]="Linux"
+system_name[mac]="MacOS"
+system_name[Unknown]="Unknown"
+
 detect_os() {
   case "$(uname -s)" in
   MINGW* | MSYS* | CYGWIN*)
     OS="win"
-    SYSTEM="Windows"
     PACKAGE_MANAGER="scoop"
     ;;
   # Linux*)
   #   OS="lin"
-  #   SYSTEM="Linux"
   #   PACKAGE_MANAGER="apt"
   #   ;;
   # Darwin*)
   #   OS="mac"
-  #   SYSTEM="macOS"
   #   PACKAGE_MANAGER="brew"
   #   ;;
   *)
     OS="Unknown"
-    SYSTEM="Unknown"
     PACKAGE_MANAGER="none"
     ;;
   esac
@@ -139,7 +141,7 @@ detect_os() {
   echo " | (_| | (_) | ||_____|  _| | |  __/\__ \\"
   echo "  \__,_|\___/ \__|    |_| |_|_|\___||___/"
   echo ""
-  echo -e "  \033[1;34mSystem:\033[0m ${SYSTEM} (${OS})"
+  echo -e "  \033[1;34mSystem:\033[0m ${system_name[${OS}]} (${OS})"
   echo -e "  \033[1;34mPackage manager:\033[0m ${PACKAGE_MANAGER}"
   echo ""
 }
@@ -159,24 +161,32 @@ WINDOWS_STARTUP_DIR="C:\\Users\\${USERNAME}\\AppData\\Roaming\\Microsoft\\Window
 NVIM_CONFIG_DIR="$HOME/AppData/Local/nvim"
 NVIM_PACKAGES_DIR="$HOME/AppData/Local/nvim-data/packages"
 
-# Install scoop with powershell => Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force; iwr -useb get.scoop.sh | iex
-# Check if Scoop is installed
 HAS_SCOOP=false
-if [[ "$PACKAGE_MANAGER" == 'scoop' ]] && command -v scoop &>/dev/null; then
+setup_scoop() {
+  if [[ "$PACKAGE_MANAGER" != 'scoop' ]]; then
+    return
+  fi
+
+  # Check if Scoop is installed
+  # Install scoop with powershell => Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force; iwr -useb get.scoop.sh | iex
+  if ! command -v scoop &>/dev/null; then
+    error "Scoop is not installed. Please install Scoop first."
+    exit 1
+  fi
+
   HAS_SCOOP=true
   ensure_scoop_bucket extras
-else
-  error "Scoop is not installed. Please install Scoop first."
-  exit 1
-fi
-
-# Check if dotfiles config exists
-if [ ! -d "$DOTFILES" ]; then
-  error "Config directory $DOTFILES does not exist."
-  exit 1
-fi
+}
 
 init_setup() {
+  setup_scoop
+
+  # Exit if no dotfiles dir exists
+  if [ ! -d "$DOTFILES" ]; then
+    error "Config directory $DOTFILES does not exist."
+    exit 1
+  fi
+
   if ! command -v figlet &>/dev/null; then
     get figlet
   fi
@@ -372,7 +382,7 @@ install_various_gui_apps() {
     get sharpkeys
 
     # FIXME: riot
-    get obsidian quicklook instant-eyedropper localsend
+    get obsidian quicklook instant-eyedropper localsend 7zip
     get googlechrome brave abdownloadmanager qbittorrent
 
     # Potplayer
