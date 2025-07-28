@@ -438,6 +438,7 @@ return {
           buffers = { layout = 'dropdown', current = false },
           files = { layout = 'ivy' },
           commands = { layout = 'vscode' },
+          keymaps = { layout = 'vscode' },
           git_files = { layout = 'dropdown' },
           recent = { layout = 'ivy' },
           treesitter = {
@@ -946,6 +947,7 @@ return {
     { '<leader>gl', function() Snacks.lazygit() end, desc = 'Open lazygit' },
 
     -- FIND FILES
+    { '<C-p>', function() Snacks.picker.project_files() end, desc = 'Find project files' },
     { '<leader><space>', function() Snacks.picker.project_files() end, desc = 'Find project files' },
     -- { '<leader><space>', function() Snacks.picker.smart() end, desc = 'Find project files' },
     -- { '<leader><space>', function() Snacks.picker.git_files() end, desc = 'Find Git Files' },
@@ -982,9 +984,8 @@ return {
     { '<leader>/l', function() Snacks.picker.loclist() end, desc = 'Location List' },
     { '<leader>/H', function() Snacks.picker.highlights() end, desc = 'Highlights' },
     { '<leader>/c', function() Snacks.picker.command_history() end, desc = 'Command History' },
-    { 'co', function() Snacks.picker.commands({ layout = 'dropdown' }) end, desc = 'Commands' },
     { 'cy', function() require('config.navigation.snacks.custom').keymaps() end, desc = 'Commands' },
-    { '<A-x>', function() Snacks.picker.commands() end, desc = 'Commands' },
+    { '<F1>', function() Snacks.picker.commands() end, desc = 'Commands' },
     { '//', auto_open_qflistt_or_loclist, ft = 'qf', desc = 'which_key_ignore' },
 
     -- PROJECT

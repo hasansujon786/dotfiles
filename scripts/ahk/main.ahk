@@ -91,7 +91,7 @@ PrintScreen::Send("#+{s}")
 
 ^#m::Send("#{m}")
 #m::toggleWinMinimize()
-; !x::toggleWinMaximize()
+!x::toggleWinMaximize()
 #HotIf not WinActive("ahk_exe wezterm-gui.exe")
   ; Nav through tabs
   ![::SendInput("^+{tab}")

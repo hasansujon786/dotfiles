@@ -18,8 +18,11 @@ local function keymap_format(item, picker)
   local lhs = Snacks.util.normkey(k.lhs)
   ret[#ret + 1] = { k.mode, 'SnacksPickerKeymapMode' }
   ret[#ret + 1] = { ' ' }
-  ret[#ret + 1] = { a(lhs, 15), 'SnacksPickerKeymapLhs' }
+  ret[#ret + 1] = { a(lhs, 12), 'SnacksPickerKeymapLhs' }
   ret[#ret + 1] = { ' ' }
+
+  ret[#ret + 1] = { ' ' }
+  ret[#ret + 1] = { a(k.desc or '', 45) }
 
   local icon_nowait = picker.opts.icons.keymaps.nowait
   if k.nowait == 1 then
@@ -35,18 +38,14 @@ local function keymap_format(item, picker)
     ret[#ret + 1] = { a('', 6) }
   end
 
-  ret[#ret + 1] = { ' ' }
-  ret[#ret + 1] = { a(k.desc or '', 20) }
-
   return ret
 end
 
 function M.keymaps()
-  Snacks.picker.keymaps({
-    layout = 'dropdown',
-    format = keymap_format,
-  })
+  Snacks.picker.keymaps({ format = keymap_format })
 end
+
+M.keymaps()
 
 function M.search_project_todos()
   Snacks.picker.grep({
