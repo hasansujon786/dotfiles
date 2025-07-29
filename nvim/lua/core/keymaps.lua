@@ -120,7 +120,7 @@ local search_viewport = '/\\%><C-r>=line("w0")-1<CR>l\\%<<C-r>=line("w$")+1<CR>l
 keymap('n', 'z/', search_viewport, { silent = false, desc = 'Search in viewport' })
 keymap('x', 'z/', '<ESC>/\\%V', { silent = false, desc = 'Search in visual selection' })
 
-keymap('n', '<leader>tt', '<cmd>lua require("hasan.utils.win").cycle_numbering()<CR>', { desc = 'Cycle number' })
+keymap('n', '<leader>r', '<cmd>lua require("hasan.utils.win").cycle_numbering()<CR>', { desc = 'Cycle number' })
 
 if not vim.g.vscode then
   nvim_set_keymap('n', '<C-_>', 'mz_gcc`z', {}) -- Comment or uncomment lines

@@ -1021,7 +1021,6 @@ return {
 
           -- Create some toggle mappings
           Snacks.toggle.line_number():map('<leader>tn')
-          Snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map('<leader>r')
           Snacks.toggle.option('cursorcolumn', { name = 'Cursorcolumn' }):map('<leader>tC')
           Snacks.toggle.option('cursorline', { name = 'Cursorline' }):map('<leader>tL')
           Snacks.toggle.option('spell', { name = 'Spelling' }):map('<leader>ts')
