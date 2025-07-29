@@ -1,3 +1,17 @@
+local should_save = function()
+  -- Do not save if the dashboard is the current filetype
+  if vim.bo.filetype == 'snacks_dashboard' then
+    return false
+  end
+  return true
+end
+
+command('SessionSaveQuit', function()
+  if should_save() then
+    require('persisted').save()
+  end
+end, { nargs = 0, desc = 'SessionSaveQuit' })
+
 return {
   {
     'ahmedkhalf/project.nvim',
@@ -19,7 +33,7 @@ return {
     keys = {
       { '<leader>ps', '<cmd>SessionSave<CR>', desc = 'Save session' },
       { '<leader>pl', '<cmd>SessionLoad<CR>', desc = 'Load session' },
-      { '<leader>pz', '<cmd>SessionSave<CR><cmd>wall | qall<CR>', desc = 'Save session and quit' },
+      { '<leader>pz', '<cmd>SessionSaveQuit<CR><cmd>wqall<CR>', desc = 'Save session and quit' },
       {
         "'<tab>",
         function()
@@ -78,8 +92,10 @@ return {
           },
         },
         -- use_git_branch = false,
-        -- allowed_dirs = {}, -- Table of dirs that the plugin will start and autoload from
-        ignored_dirs = { 'C:/Users/hasan' }, -- Table of dirs that are ignored for starting and autoloading
+        -- allowed_dirs = {},
+        ignored_dirs = { 'C:/Users/hasan' },
+        ---@type fun(): boolean
+        should_save = should_save,
       })
     end,
   },

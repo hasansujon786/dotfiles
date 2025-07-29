@@ -54,9 +54,6 @@ local opts = {
     -- bubble_edge_left = '',
     -- bubble_edge_right = '',
   },
-  card = {
-    height = 2,
-  },
   mappings = {
     ['s'] = {
       callback = function()

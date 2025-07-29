@@ -1,7 +1,7 @@
 return {
   'folke/noice.nvim',
   lazy = true,
-  event = { 'CursorHold', 'BufReadPre', 'BufNewFile' },
+  event = { 'BufReadPost', 'CmdlineEnter' },
   config = function()
     local hover = require('core.state').ui.hover
     local ok, noice = pcall(require, 'noice')

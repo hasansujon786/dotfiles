@@ -1,8 +1,7 @@
 return {
   'neovim/nvim-lspconfig',
-  commit = '4d3b3bb',
   lazy = true,
-  event = { 'BufReadPre', 'BufNewFile' },
+  event = { 'VeryLazy' },
   dependencies = {
     { 'mason-org/mason-lspconfig.nvim', lazy = true, module = 'mason-lspconfig' },
     {

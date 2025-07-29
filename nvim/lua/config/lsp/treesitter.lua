@@ -1,7 +1,7 @@
 return {
   'nvim-treesitter/nvim-treesitter',
   lazy = true,
-  event = { 'VeryLazy', 'BufReadPre', 'BufNewFile' },
+  event = { 'VeryLazy' },
   cmd = { 'TSUpdate', 'TSUpdateSync', 'TSInstall', 'TSInstallSync' },
   config = function()
     -- TSInstallSync javascript typescript tsx
