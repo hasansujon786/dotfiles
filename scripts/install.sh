@@ -1,11 +1,30 @@
 #!/usr/bin/env bash
 
-# Exit immediately if a command fails
-set -euo pipefail
+# ------------------------------------------------
+# -- Config paths --------------------------------
+# ------------------------------------------------
+DOTFILES="$HOME/dotfiles"
+WINDOWS_STARTUP_DIR="C:\\Users\\${USERNAME}\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"
+NVIM_CONFIG_DIR="$HOME/AppData/Local/nvim"
+NVIM_PACKAGES_DIR="$HOME/AppData/Local/nvim-data/packages"
+
+# ------------------------------------------------
+# -- Global Variabss --------------------------------
+# ------------------------------------------------
+declare -A system_name
+system_name[win]="Windows"
+system_name[lin]="Linux"
+system_name[mac]="MacOS"
+system_name[Unknown]="Unknown"
+
+HAS_SCOOP=false
+OS="Unknown"
+PACKAGE_MANAGER="none"
 
 # ------------------------------------------------
 # -- Utils fucntios ------------------------------
 # ------------------------------------------------
+set -euo pipefail # Exit immediately if a command fails
 # Colored output for readability
 info() { echo -e "\033[1;34m[INFO]\033[0m $*"; }
 success() { echo -e "\033[1;32m[SUCCESS]\033[0m $*"; }
@@ -107,14 +126,6 @@ ensure_scoop_bucket() {
   fi
 }
 
-trap 'error "Something went wrong. Exiting."' ERR
-
-declare -A system_name
-system_name[win]="Windows"
-system_name[lin]="Linux"
-system_name[mac]="MacOS"
-system_name[Unknown]="Unknown"
-
 detect_os() {
   case "$(uname -s)" in
   MINGW* | MSYS* | CYGWIN*)
@@ -145,23 +156,7 @@ detect_os() {
   echo -e "  \033[1;34mPackage manager:\033[0m ${PACKAGE_MANAGER}"
   echo ""
 }
-detect_os
 
-# Exit if it isn't one of the supported system
-if [[ "$OS" == 'Unknown' ]]; then
-  error "System $(uname -s) is not supported"
-  exit 1
-fi
-
-# ------------------------------------------------
-# -- Config paths --------------------------------
-# ------------------------------------------------
-DOTFILES="$HOME/dotfiles"
-WINDOWS_STARTUP_DIR="C:\\Users\\${USERNAME}\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"
-NVIM_CONFIG_DIR="$HOME/AppData/Local/nvim"
-NVIM_PACKAGES_DIR="$HOME/AppData/Local/nvim-data/packages"
-
-HAS_SCOOP=false
 setup_scoop() {
   if [[ "$PACKAGE_MANAGER" != 'scoop' ]]; then
     return
@@ -178,15 +173,23 @@ setup_scoop() {
   ensure_scoop_bucket extras
 }
 
+trap 'error "Something went wrong. Exiting."' ERR
+detect_os
+setup_scoop
+
+# Exit if it isn't one of the supported system
+if [[ "$OS" == 'Unknown' ]]; then
+  error "System $(uname -s) is not supported"
+  exit 1
+fi
+
+# Exit if no dotfiles dir exists
+if [ ! -d "$DOTFILES" ]; then
+  error "Config directory $DOTFILES does not exist."
+  exit 1
+fi
+
 init_setup() {
-  setup_scoop
-
-  # Exit if no dotfiles dir exists
-  if [ ! -d "$DOTFILES" ]; then
-    error "Config directory $DOTFILES does not exist."
-    exit 1
-  fi
-
   if ! command -v figlet &>/dev/null; then
     get figlet
   fi
@@ -293,16 +296,17 @@ setup_kanata() {
     conf_path[lin]="$HOME/.config/kanata-tray"
 
     heading kanata
-    get kanata
+    get kanata-cmd
 
     archive_config "${conf_path[$OS]}"
     create_symlink "${conf_path[$OS]}" "$HOME/dotfiles/scripts/kanata/kanata-tray"
 
     rm -rf "$WINDOWS_STARTUP_DIR\\kanata-tray.exe"
+    eget rszyma/kanata-tray --asset kanata-tray.exe --to "$WINDOWS_STARTUP_DIR"
 
-    local KANATA_TRAY_VER="0.6.0"
-    wget https://github.com/rszyma/kanata-tray/releases/download/v${KANATA_TRAY_VER}/kanata-tray.exe
-    mv kanata-tray.exe "$WINDOWS_STARTUP_DIR"
+    # local KANATA_TRAY_VER="0.6.0"
+    # wget https://github.com/rszyma/kanata-tray/releases/download/v${KANATA_TRAY_VER}/kanata-tray.exe
+    # mv kanata-tray.exe "$WINDOWS_STARTUP_DIR"
 
     sleep 0.5
     explorer "${WINDOWS_STARTUP_DIR}\\kanata-tray.exe"

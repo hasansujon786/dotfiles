@@ -1,39 +1,29 @@
+;; kanata-cmd.exe -c ~/dotfiles/scripts/kanata/kanata.kbd
+
 (defcfg
   process-unmapped-keys yes
+  concurrent-tap-hold yes
+  danger-enable-cmd yes
 )
 
+;; Variables
 (defvar
   tap-time 200
   hold-time 200
+  chord-time 800
 )
 
-(defsrc
-  grv   1     2     3     4      5      6     7     8     9     0      -       =     bspc
-  tab   q     w     e     r      t      y     u     i     o     p      [       ]     \
-  caps  a     s     d     f      g      h     j     k     l     ;      '       ret
-  lsft  z     x     c     v      b      n     m     ,     .     /      rsft
-  lctl  lmet  lalt              spc                 ralt  rmet  rctl
-)
-
-(deflayer base
-  _     _     _     _     _      _      _     _     _     _     _      _       _     _
-  _     _     _     _     _      _      _     _     _     _     _      _       _     _
-@cap    _     _     _     _      _      _     _     _     _     _      _       _
-  _     _     _     _     _      _      _     _     _     _     _      _
-  _     _     _                @spc                 _     _     _
-)
-
-(deflayer spc-layer
-A-grv   M-1   M-2   M-3   M-4    M-5    M-6   M-7   M-8   M-9   M-0    _       _     C-bspc
-A-tab   C-q   _     end   _     C-S-tab C-y   pgup  A-i   pgdn  C-p    C-S-tab C-tab _
-  XX    home  C-s   C-d   C-rght C-tab  left  down  up    rght  _      _       C-ret
-  _     _     A-x   _     _      C-left C-n   _     _    C-spc C-A-tab _
-  _     _     _                  _                  _     _     _
-)
-
+;; Aliases
 (defalias
-  spc (tap-hold-release 2000 400 spc (layer-toggle spc-layer))
-  cap (tap-hold-release 2000 400 A-tab lctl)
+  ;; foo (cmd start chrome.exe)
+
+  ;; easy tab controll
+  AltTab (tap-hold-press 60 $hold-time A-tab rsft)
+  CapCtrl (tap-hold-release 2000 400 A-tab lctl)
+
+  SpcLayer (tap-hold-release 2000 400 spc (layer-toggle spc-layer))
+  SftLayer (tap-hold-press $tap-time $hold-time lshift (layer-toggle sft-layer))
+
   ;; lalt (tap-hold-press 100 180 M-y lalt)
   ;; a (tap-hold $tap-time $hold-time a lmet)
   ;; s (tap-hold $tap-time $hold-time s lalt)
@@ -45,4 +35,46 @@ A-tab   C-q   _     end   _     C-S-tab C-y   pgup  A-i   pgdn  C-p    C-S-tab C
   ;; ; (tap-hold $tap-time $hold-time ; rmet)
 )
 
-;; _     _     @s    @d    @f     _      _     @j    @k    @l    _       _       _
+(defsrc
+  esc      f1       f2       f3       f4      f5      f6      f7      f8       f9       f10      f11     f12
+  grv      1        2        3        4       5       6       7       8        9        0        -       =       bspc
+  tab      q        w        e        r       t       y       u       i        o        p        [       ]       \
+  caps     a        s        d        f       g       h       j       k        l        ;        '       ret
+  lsft     z        x        c        v       b       n       m       ,        .        /        rsft    ▲
+  lctl     lmet     lalt                     spc                      ralt     rmet     rctl     ◀       ▼       ▶
+)
+
+(deflayer base-layer
+  _        _        _        _        _       _       _       _       _        _        _        _       _
+  _        _        _        _        _       _       _       _       _        _        _        _       _       _
+  _        _        _        _        _       _       _       _       _        _        _        _       _       _
+@CapCtrl   _        _        _        _       _       _       _       _        _        _        _       _
+  _        _        _        _        _       _       _       _       _        _        _        @AltTab _
+  _        _        _                     @SpcLayer                   _        _        _        _       _       _
+)
+
+(deflayer spc-layer
+  A-grv    _        _        _        _       _       _       _       _        _        _        _       _
+  A-grv    M-1      M-2      M-3      M-4     M-5     M-6     M-7     M-8      M-9      M-0      _       _       C-bspc
+  _        _        _        end      _       _       _       pgup    _        pgdn     C-p      C-S-tab C-tab   _
+  _        home     C-s      C-d      C-rght  _       left    down    up       rght     _        _       _
+  _        _        A-x      _        _       C-left  C-n     _       _        C-spc    C-A-tab  _       _
+  _        _        _                         _                       _        _        _        _       _       _
+)
+
+;; (deflayer sft-layer
+;;   S-esc    S-f1     S-f2     S-f3     S-f4    S-f5    S-f6    S-f7    S-f8     S-f9     S-f10    S-f11   S-f12
+;;   S-grv    S-1      S-2      S-3      S-4     S-5     S-6     S-7     S-8      S-9      S-0      S--     S-=     S-bspc
+;;   S-tab    S-q      S-w      S-e      S-r     S-t     S-y     S-u     S-i      S-o      S-p      S-[     S-]     S-\
+;;   S-caps   S-a      S-s      S-d      S-f     S-g     S-h     S-j     S-k      S-l      S-;      S-'     S-ret
+;;   _        S-z      S-x      S-c      S-v     S-b     S-n     S-m     S-,      S-.      S-/      _       S-▲
+;;   S-lctl   S-lmet   S-lalt                    S-spc                   S-ralt   S-rmet   S-rctl   S-◀     S-▼      S-▶
+;; )
+
+(defchordsv2
+  ;; (participating-keys1) action1 timeout1 release-behaviour1 (disabled-layers1)
+  ;; (a s d) (macro h e l l o) $chord-time first-release ()
+  ;; (spc 8) M-8 $chord-time first-release ()
+  ;; (spc 9) (macro A-q 20 [) $chord-time first-release ()
+)
+

@@ -13,7 +13,7 @@ defaults.tcp_port = 5829
 
 
 [presets.'Default Preset']
-kanata_executable = ""
+kanata_executable = "kanata-cmd.exe"
 kanata_config = "~/dotfiles/scripts/kanata/kanata.kbd"
 autorun = true
 

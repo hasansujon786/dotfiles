@@ -22,8 +22,6 @@ return {
   -- { label = { after = { 0, 2 }, style = 'overlay' }, }
   -- stylua: ignore
   keys = {
-    -- { '/', mode = nxo, desc = 'Search forward' },
-    -- { '?', mode = nxo, desc = 'Search backward' },
     { 's', mode = nx, function() require('flash').jump() end, desc = 'Flash' },
     { 'z', mode = 'o', function() require('flash').jump() end, desc = 'Flash' },
     { 'S', mode = nxo, function() require('flash').treesitter() end, desc = 'Flash Treesitter' },
