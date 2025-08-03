@@ -53,7 +53,6 @@ return {
   { 'MunifTanjim/nui.nvim', lazy = true, module = 'nui' },
   { 'nvim-lua/plenary.nvim', lazy = true, module = 'plenary' },
   { 'tpope/vim-repeat', lazy = true, event = 'BufReadPost', dependencies = 'tpope/vim-surround' },
-  { 'mbbill/undotree', keys = { { '<leader>ou', '<cmd>UndotreeToggle<cr>' } } },
   -- {
   --   'skardyy/neo-img',
   --   lazy = true,

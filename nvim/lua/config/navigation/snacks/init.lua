@@ -437,6 +437,7 @@ return {
         sources = {
           buffers = { layout = 'dropdown', current = false },
           files = { layout = 'ivy' },
+          undo = { layout = 'ivy' },
           commands = { layout = 'vscode' },
           keymaps = { layout = 'vscode' },
           git_files = { layout = 'dropdown' },
@@ -977,6 +978,7 @@ return {
     { '<A-/>', function() Snacks.picker.grep_word() end, desc = 'Visual selection or word', mode = { "n", "x" } },
 
     -- SEARCH
+    { '<leader>ou', function() Snacks.picker.undo() end, desc = 'Show undo history' },
     { '<leader>/.', function() Snacks.picker.resume() end, desc = 'Resume' },
     { '<leader>/f', function() Snacks.picker.files() end, desc = 'Find Files' },
     { '<leader>/k', function() Snacks.picker.keymaps() end, desc = 'Keymaps' },

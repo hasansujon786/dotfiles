@@ -109,8 +109,8 @@ autohotkey2() {
 }
 
 main() {
-  # autohotkey2
-  vscode-js-debug
+  autohotkey2
+  # vscode-js-debug
 }
 
 main
