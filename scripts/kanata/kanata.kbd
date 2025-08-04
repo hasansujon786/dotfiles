@@ -15,14 +15,20 @@
 
 ;; Aliases
 (defalias
-  ;; foo (cmd start chrome.exe)
+  ;; Layers
+  SpcLyr (tap-hold-release 2000 400 spc (layer-while-held spc-layer))
+  LSftLyr (tap-hold-press $tap-time $hold-time lshift (layer-while-held sft-layer))
 
-  ;; easy tab controll
-  AltTab (tap-hold-press 60 $hold-time A-tab rsft)
-  CapCtrl (tap-hold-release 2000 400 A-tab lctl)
+  ;; Easy tab controll
+  AltTab (tap-hold-press 100 $hold-time A-tab \)
+  CapCtrl (tap-hold-press 100 $hold-time A-tab lctl)
 
-  SpcLayer (tap-hold-release 2000 400 spc (layer-toggle spc-layer))
-  SftLayer (tap-hold-press $tap-time $hold-time lshift (layer-toggle sft-layer))
+  ms↑ (movemouse-up 4 4)
+  ms← (movemouse-left 4 4)
+  ms↓ (movemouse-down 4 4)
+  ms→ (movemouse-right 4 4)
+
+  chrome (cmd powershell.exe Start-Process chrome)
 
   ;; lalt (tap-hold-press 100 180 M-y lalt)
   ;; a (tap-hold $tap-time $hold-time a lmet)
@@ -47,10 +53,10 @@
 (deflayer base-layer
   _        _        _        _        _       _       _       _       _        _        _        _       _
   _        _        _        _        _       _       _       _       _        _        _        _       _       _
-  _        _        _        _        _       _       _       _       _        _        _        _       _       _
+  _        _        _        _        _       _       _       _       _        _        _        _       _       @AltTab
 @CapCtrl   _        _        _        _       _       _       _       _        _        _        _       _
-  _        _        _        _        _       _       _       _       _        _        _        @AltTab _
-  _        _        _                     @SpcLayer                   _        _        _        _       _       _
+@LSftLyr   _        _        _        _       _       _       _       _        _        _        _       _
+  _        _        _                      @SpcLyr                    _        _        _        _       _       _
 )
 
 (deflayer spc-layer
@@ -58,18 +64,18 @@
   A-grv    M-1      M-2      M-3      M-4     M-5     M-6     M-7     M-8      M-9      M-0      _       _       C-bspc
   _        _        _        end      _       _       _       pgup    _        pgdn     C-p      C-S-tab C-tab   _
   _        home     C-s      C-d      C-rght  _       left    down    up       rght     _        _       _
-  _        _        A-x      _        _       C-left  C-n     _       _        C-spc    C-A-tab  _       _
-  _        _        _                         _                       _        _        _        _       _       _
+  _        _        A-x      _        _       C-left  C-n     _       _        C-spc    C-A-tab  _       @ms↑
+  _        _        _                         _                       _        _        _        @ms←    @ms↓    @ms→
 )
 
-;; (deflayer sft-layer
-;;   S-esc    S-f1     S-f2     S-f3     S-f4    S-f5    S-f6    S-f7    S-f8     S-f9     S-f10    S-f11   S-f12
-;;   S-grv    S-1      S-2      S-3      S-4     S-5     S-6     S-7     S-8      S-9      S-0      S--     S-=     S-bspc
-;;   S-tab    S-q      S-w      S-e      S-r     S-t     S-y     S-u     S-i      S-o      S-p      S-[     S-]     S-\
-;;   S-caps   S-a      S-s      S-d      S-f     S-g     S-h     S-j     S-k      S-l      S-;      S-'     S-ret
-;;   _        S-z      S-x      S-c      S-v     S-b     S-n     S-m     S-,      S-.      S-/      _       S-▲
-;;   S-lctl   S-lmet   S-lalt                    S-spc                   S-ralt   S-rmet   S-rctl   S-◀     S-▼      S-▶
-;; )
+(deflayer sft-layer
+  S-esc    S-f1     S-f2     S-f3     S-f4    S-f5    S-f6    S-f7    S-f8     S-f9     S-f10    S-f11   S-f12
+  S-grv    S-1      S-2      S-3      S-4     S-5     S-6     S-7     S-8      S-9      S-0      S--     S-=     S-bspc
+  S-tab    S-q      S-w      S-e      S-r     S-t     S-y     S-u     S-i      S-o      S-p      S-[     S-]     S-\
+  _        S-a      S-s      S-d      S-f     S-g     S-h     S-j     S-k      S-l      S-;      S-'     S-ret
+  _        S-z      S-x      S-c      S-v     S-b     S-n     S-m     S-,      S-.      S-/      _       S-▲
+  _        _        _                        S-spc                    _        _        _        S-◀     S-▼      S-▶
+)
 
 (defchordsv2
   ;; (participating-keys1) action1 timeout1 release-behaviour1 (disabled-layers1)

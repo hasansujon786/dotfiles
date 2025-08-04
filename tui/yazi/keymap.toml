@@ -56,11 +56,11 @@ prepend_keymap = [
   { on = "<Space>", run = "plugin quicklook", desc = "Peek" },
   { on = "i", run = "plugin quicklook", desc = "Peek" },
   { on = "f", run = "plugin jump-to-char", desc = "Jump to char" },
-  { on = ".", run = "plugin git-root", desc = "Jump to git root" },
   { on = "I", run = "Hidden toggle", desc = "Toggle the visibility of hidden files" },
-  { on = "X", run = 'shell "C:/Users/hasan/dotfiles/tui/yazi/scripts/7z_yazi.cmd %0" --confirm --block', desc = "Extract with 7zip" },
+  { on = "X", run = 'shell "C:/Users/hasan/dotfiles/tui/yazi/scripts/7z_yazi.cmd \"%0\"" --confirm --block', desc = "Extract with 7zip" },
   { on = ["g", "?"], run = "help", desc = "Help" },
-  # { on = ["m", "x"], run = 'shell "bash ~/dotfiles/tui/yazi/scripts/share-code-file.bash %0" --confirm --block', desc = "Share file with https://0x0.st" },
+  { on = [".", "."], run = "plugin git-root", desc = "Jump to git root" },
+  { on = [".", "S"], run = 'shell "bash ~/dotfiles/tui/yazi/scripts/share-code-file.bash \"%0\"" --confirm --block', desc = "Share file with https://0x0.st" },
 
   # Tabs
   { on = ["T"], run = "tab_create --current", desc = "Create a new tab using the current path" },

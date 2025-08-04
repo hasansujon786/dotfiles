@@ -9,4 +9,4 @@ REM with the same name as the archive file
 REM
 
 7z x "%~f1" -o"%~n1"
-REM -y 1> %LOCALAPPDATA%\lf\extract.log 2>&1
+sleep 2
