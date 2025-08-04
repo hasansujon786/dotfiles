@@ -520,8 +520,16 @@ return {
           },
 
           project_files = { -- https://github.com/folke/snacks.nvim/issues/532#issuecomment-2609303872
+            title = '',
             layout = { preset = 'vscode', preview = 'main' },
-            multi = { 'files', 'lsp_symbols' },
+            multi = { 'files', 'lsp_symbols', 'buffers' },
+            win = {
+              preview = {
+                row = -1,
+                -- wo = { winbar = "%{%v:lua.require'heirline'.eval_winbar()%}" },
+                wo = { winbar = '%#SidebarDark#' },
+              },
+            },
             -- finder = 'files',
             matcher = {
               cwd_bonus = true, -- boost cwd matches
@@ -571,10 +579,11 @@ return {
               ---@param p snacks.picker
               ---@param filter snacks.picker.Filter
               transform = function(p, filter)
-                local symbol_pattern = filter.pattern:match('^.-@(.*)$')
+                local buffer_pattern = filter.pattern:match('^.-$(.*)$')
+                local symbol_pattern_before, symbol_pattern = filter.pattern:match('^(.-)@(.*)$')
                 local line_nr_pattern = filter.pattern:match('^.-:(%d*)$')
                 local search_pattern = filter.pattern:match('^.-#(.*)$')
-                local pattern = symbol_pattern or line_nr_pattern or search_pattern
+                local pattern = symbol_pattern or line_nr_pattern or search_pattern or buffer_pattern
 
                 if pattern then
                   local item = p:current()
@@ -590,8 +599,17 @@ return {
 
                 if symbol_pattern then
                   filter.pattern = symbol_pattern
-                  filter.current_buf = filter.meta.buf
+                  if not (symbol_pattern_before == nil or symbol_pattern_before == '') then
+                    filter.current_buf = filter.meta.buf
+                  end
                   filter.source_id = 2
+                  return
+                end
+
+                if buffer_pattern then
+                  filter.pattern = buffer_pattern
+                  filter.current_buf = filter.meta.buf
+                  filter.source_id = 3
                   return
                 end
 
@@ -944,7 +962,15 @@ return {
     -- Terminal
     { '<M-m>', function() Snacks.terminal(nil, { shell = 'bash', win = { position = 'float' } }) end, desc = 'Terminal'  },
     { '<leader>ot', function() Snacks.terminal(nil, { shell = 'bash', win = { wo = { winbar = termWinbar } } }) end, desc = 'Terminal'  },
-    { '<leader>of', function() Snacks.terminal('yazi', { shell = 'bash', win = { style = 'lazygit' } }) end, desc = 'Open File Manager' },
+    { '<leader>of', function()
+      local cmd = { 'yazi' }
+        if vim.bo.modifiable and not vim.bo.readonly then
+          local buf = vim.api.nvim_buf_get_name(0)
+          table.insert(cmd, '"' .. buf .. '"')
+        end
+      Snacks.terminal(table.concat(cmd, ' '), { shell = 'bash', win = { style = 'lazygit' } })
+    end, desc = 'Open File Manager' },
+
     { '<leader>gl', function() Snacks.lazygit() end, desc = 'Open lazygit' },
 
     -- FIND FILES
