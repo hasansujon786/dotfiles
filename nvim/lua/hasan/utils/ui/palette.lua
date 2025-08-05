@@ -110,6 +110,7 @@ local function set_custom_highlights()
     ['@keyword.function']   = { fg = c.purple, italic = true },
     WezTab                  = { fg = c.orange, bg = context },
     WezTabBorder            = { fg = dark_border, bg = c.none },
+    ZenBorder               = { fg = c.bg_d2 },
 
     PmenuSel                = { bg = c.bg3 },
     PmenuSbar               = { bg = c.bg1 },

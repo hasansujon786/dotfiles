@@ -2,6 +2,8 @@ vim.o.conceallevel = 2
 vim.o.softtabstop = 2
 vim.o.shiftwidth = 2
 vim.o.tabstop = 2
+vim.b['snacks_scope'] = false
+vim.b['snacks_indent'] = false
 
 local action = '<cmd>lua require("orgmode").action("org_mappings.toggle_checkbox")<CR>'
 for _, action_key in ipairs({ 'cic', '<C-q>', '<C-space>', '<A-space>' }) do

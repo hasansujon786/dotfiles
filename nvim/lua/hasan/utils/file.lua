@@ -235,22 +235,34 @@ function M.quicklook_toggle()
   M.quicklook(qlook.args)
 end
 
-M.system_open_cmd = vim.fn.has('win32') == 1 and 'explorer.exe' or vim.fn.has('mac') == 1 and 'open' or 'xdg-open'
+local is_windows = vim.fn.has('win32') == 1
 
+---Open files/folder in system explorer
+---@param file string
+---@param opts? {reveal?:boolean, args?:string[], wait?:number}
 function M.system_open(file, opts)
   opts = opts or {}
   local args = opts.args or {}
 
-  if M.system_open_cmd == 'explorer.exe' then
+  if is_windows then
     file = file:gsub('/', '\\')
-  end
 
-  if opts.reveal == true then
-    table.insert(args, '/select,')
-  end
+    local explorer_args = opts.reveal and ('/select,' .. file) or file
 
-  table.insert(args, file)
-  require('plenary.job'):new({ command = M.system_open_cmd, args = args }):start()
+    vim.fn.jobstart({
+      'powershell',
+      '-NoProfile',
+      '-WindowStyle',
+      'Hidden',
+      '-Command',
+      'Start-Process',
+      string.format("explorer.exe '%s'", explorer_args),
+    })
+  else
+    -- For macOS or Linux fallback
+    table.insert(args, file)
+    vim.fn.jobstart({ M.system_open_cmd, unpack(args) })
+  end
 end
 
 ---Check if path is file or directory

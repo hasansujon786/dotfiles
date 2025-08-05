@@ -59,6 +59,14 @@ function M.search_project_todos()
   })
 end
 
+-- zen = {
+--   on_open = function(win)
+--     wezterm_zen(nil, true, { font = 0 })
+--   end,
+--   on_close = function(win)
+--     wezterm_zen(nil, false, nil)
+--   end,
+-- },
 -- function M.wezterm_zen(state, disable, opts)
 --   local stdout = vim.loop.new_tty(1, false)
 --   if disable then

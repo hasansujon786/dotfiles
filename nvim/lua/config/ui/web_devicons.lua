@@ -3,12 +3,12 @@ return {
   lazy = true,
   config = function()
     require('nvim-web-devicons').set_icon({
-      -- astro = {
-      --   icon = '',
-      --   color = '#e23f67',
-      --   cterm_color = '197',
-      --   name = 'Astro',
-      -- },
+      ahk = {
+        icon = '',
+        color = '#4CAF50',
+        cterm_color = '197',
+        name = 'AutoHotkey',
+      },
       dart = {
         icon = '',
         color = '#51a0cf',

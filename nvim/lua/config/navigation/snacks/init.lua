@@ -184,6 +184,8 @@ local preview_main_win = {
 local function try_change_quicklook(p, action)
   if vim.b.qlook then
     vim.schedule(function()
+      p:action(action)
+
       local cur_item = p.list:current()
       if not cur_item or cur_item._path == nil then
         return
@@ -192,7 +194,6 @@ local function try_change_quicklook(p, action)
       local ok = pcall(require('hasan.utils.file').quicklook, { cur_item._path })
       if ok then
         vim.b.qlook = cur_item._path
-        p:action(action)
       end
     end)
   else
@@ -206,72 +207,25 @@ return {
     priority = 1000,
     enabled = true,
     lazy = false,
-    -- dependencies = { },
     ---@type snacks.Config
     opts = {
-      -- scroll = {
-      --   animate = {
-      --     easing = 'outCirc',
-      --   },
-      -- },
-      -- zen = {
-      --   on_open = function(win)
-      --     wezterm_zen(nil, true, { font = 0 })
-      --   end,
-      --   on_close = function(win)
-      --     wezterm_zen(nil, false, nil)
-      --   end,
-      -- },
       bigfile = { enabled = true },
       quickfile = { enabled = true },
-      words = {
-        enabled = true,
-        debounce = 450, -- time in ms to wait before updating
-        modes = { 'n' }, -- modes to show references
-      },
-      explorer = { enabled = false },
+      words = { enabled = true, debounce = 450, modes = { 'n' } },
+      explorer = { enabled = true },
       image = { enabled = false },
-      input = {},
       indent = {
-        ---@class snacks.indent.animate: snacks.animate.Config
         animate = { enabled = false },
-        indent = { char = '│' }, -- blank = '·'
-        ---@class snacks.indent.Scope.Config: snacks.scope.Config
-        scope = {
-          enabled = true,
-          char = '│',
-          underline = false, -- underline the start of the scope
-          only_current = true, -- only show scope in the current window
-        },
-        -- filter for buffers to enable indent guides
-        filter = function(buf)
-          return vim.g.snacks_indent ~= false and vim.b[buf].snacks_indent ~= false and vim.bo[buf].buftype == ''
-        end,
-        priority = 200,
+        scope = { only_current = true },
       },
+      input = {},
       scope = {
         treesitter = { enabled = false },
-        filter = function(buf)
-          return vim.b[buf].snacks_indent_scope ~= false and vim.bo[buf].buftype == ''
-        end,
         keys = {
           ---@type table<string, snacks.scope.TextObject|{desc?:string}>
           textobject = {
-            ii = {
-              linewise = true,
-              min_size = 2, -- minimum size of the scope
-              edge = false, -- inner scope
-              cursor = false,
-              treesitter = { blocks = { enabled = false } },
-              desc = 'inner scope',
-            },
-            ai = {
-              linewise = true,
-              cursor = false,
-              min_size = 2, -- minimum size of the scope
-              treesitter = { blocks = { enabled = false } },
-              desc = 'full scope',
-            },
+            ii = { linewise = true },
+            ai = { linewise = true },
             iI = {
               linewise = true,
               min_size = 2, -- minimum size of the scope
@@ -293,7 +247,7 @@ return {
             ['[t'] = {
               min_size = 1, -- allow single line scopes
               bottom = false,
-              cursor = false,
+              cursor = true,
               edge = true,
               treesitter = { blocks = { enabled = false } },
               desc = 'jump to top edge of scope',
@@ -301,7 +255,7 @@ return {
             [']t'] = {
               min_size = 1, -- allow single line scopes
               bottom = true,
-              cursor = false,
+              cursor = true,
               edge = true,
               treesitter = { blocks = { enabled = false } },
               desc = 'jump to bottom edge of scope',
@@ -311,10 +265,7 @@ return {
       },
       notifier = {
         enabled = true,
-        timeout = 3000, -- default timeout in ms
         margin = { top = 1, right = 1, bottom = 1 },
-        padding = true, -- add 1 cell of left/right padding to the notification window
-        -- sort = { 'level', 'added' }, -- sort by level and time
         icons = { error = '', warn = '', info = '', debug = '', trace = '󰠠' },
         ---@type snacks.notifier.style
         style = function(buf, notif, ctx)
@@ -325,7 +276,6 @@ return {
           end
           vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(notif.msg, '\n'))
         end,
-        -- 'compact'|'fancy'|'minimal'
         top_down = false, -- place notifications from top to bottom
       },
       lazygit = {
@@ -334,42 +284,16 @@ return {
         },
       },
       statuscolumn = {
-        enabled = true,
-        left = { 'sign', 'mark' }, -- priority of signs on the right (high to low)
-        right = { 'fold', 'git' }, -- priority of signs on the left (high to low)
-        folds = { open = false, git_hl = false },
-        git = { patterns = { 'GitSign', 'MiniDiffSign' } },
-        refresh = 50, -- refresh at most every 50ms
+        left = { 'sign', 'mark' }, -- (high to low)
+        right = { 'fold', 'git' },
       },
-      scratch = {
-        ---@type table<string, snacks.win.Config>
-        win_by_ft = {
-          lua = {
-            relative = 'editor',
-            keys = {
-              ['source'] = {
-                '<cr>',
-                function(self)
-                  local name = 'scratch.' .. vim.fn.fnamemodify(vim.api.nvim_buf_get_name(self.buf), ':e')
-                  Snacks.debug.run({ buf = self.buf, name = name })
-                end,
-                desc = 'Source buffer',
-                mode = { 'n', 'x' },
-              },
-            },
-          },
-        },
-      },
+      -- scratch = { },
       dashboard = {
         enabled = not require('core.state').ui.session_autoload,
         -- These settings are used by some built-in sections
         preset = {
-          -- Defaults to a picker that supports `fzf-lua`, `telescope.nvim` and `mini.pick`
-          ---@type fun(cmd:string, opts:table)|nil
-          pick = nil,
-        -- Used by the `keys` section to show keymaps
-        ---@type snacks.dashboard.Item[]
         -- stylua: ignore
+        ---@type snacks.dashboard.Item[]
         keys = {
           button('r', 'R', ' ', 'Recent file', '<cmd>lua Snacks.dashboard.pick("recent")<CR>'),
           button('l', 'L', ' ', 'Load session', '<cmd>lua require("persisted").load()<CR>'),
@@ -377,9 +301,8 @@ return {
           button('s', 'S', ' ', 'Open settings', '<cmd>lua Snacks.dashboard.pick("files", {cwd = vim.fn.stdpath("config")})<CR>'),
           button('p', 'P', ' ', 'Lazy dashboard', '<cmd>Lazy<CR>'),
           button('a', 'A', ' ', 'Open org agenda', '<cmd>lua require("orgmode").action("agenda.prompt")<CR>'),
-          -- { icon = ' ', label = ' n ', key = 'n', desc = 'New File', action = ':ene | startinsert' },
-          -- button('t', ' T ', '  Open terminal', ':FloatermNew --wintype=normal --height=10'),
-          -- { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
+          -- button('q', 'Q', ' ', 'Quit Neovim', '<cmd>qa<CR>'),
+          -- button('n', 'N', ' ', 'New File', '<cmd>ene | startinsert<CR>'),
         },
           -- Used by the `header` section
           header = [[
@@ -403,7 +326,6 @@ return {
         sections = {
           { section = 'header' },
           { section = 'keys', gap = 1, padding = 2 },
-          -- { section = 'startup' },
           {
             function()
               local v = vim.version()
@@ -422,13 +344,8 @@ return {
               }
             end,
           },
-          -- { pane = 2, section = 'recent_files', padding = { 2, 10 }, title = 'Recent files' },
+          -- { pane = 2, section = 'recent_files', title = 'Recent files' },
           -- { pane = 2, section = 'projects', title = 'Projects' },
-          -- projects = <function 8>,
-          -- recent_files = <function 9>,
-          -- session = <function 10>,
-          -- startup = <function 11>,
-          -- terminal = <function 12>
         },
       },
       picker = {
@@ -488,11 +405,7 @@ return {
           loclist = { layout = 'dropdown_preview' },
 
           ---@type snacks.picker.file_browser.Config
-          file_browser = {
-            layout = 'ivy',
-            -- prompt_prefix = false,
-            -- title = 'asdfasdfsd',
-          },
+          file_browser = { layout = 'ivy' },
 
           explorer = {
             tree = true,
@@ -530,7 +443,6 @@ return {
                 wo = { winbar = '%#SidebarDark#' },
               },
             },
-            -- finder = 'files',
             matcher = {
               cwd_bonus = true, -- boost cwd matches
               frecency = true, -- use frecency boosting
@@ -695,9 +607,7 @@ return {
         },
 
         formatters = {
-          file = {
-            filename_first = true, -- display filename before the file path
-          },
+          file = { filename_first = true }, -- Display filename before the file path
         },
 
         actions = {
@@ -707,8 +617,7 @@ return {
             if not item or item.file == nil then
               return
             end
-
-            -- FIXME: do not kill buffer if it is opend before
+            -- FIXME: do not kill buffer if it is opened before
             require('hasan.float').fedit(item.file)
           end,
           my_list_up = function(p)
@@ -757,8 +666,8 @@ return {
             require('neo-tree.command').execute({
               action = 'focus', -- OPTIONAL, this is the default value
               source = 'filesystem', -- OPTIONAL, this is the default value
-              reveal_file = item._path, -- path to file or folder to reveal
-              reveal_force_cwd = true, -- change cwd without asking if needed
+              reveal_file = item._path, -- Path to file or folder to reveal
+              reveal_force_cwd = true, -- Change cwd without asking if needed
             })
           end,
           insert_relative_path = function(p, item, action)
@@ -830,103 +739,25 @@ return {
           dropdown_preview = get_dropdown(true),
           ivy = get_ivy(false),
           ivy_mini = get_ivy(true),
-          select = {
-            preview = false,
-            layout = {
-              backdrop = false,
-              width = 0.5,
-              min_width = 80,
-              height = 0.4,
-              min_height = 3,
-              box = 'vertical',
-              border = { '🭽', '▔', '🭾', '▕', '🭿', '▁', '🭼', '▏' },
-              title = '{title}',
-              title_pos = 'center',
-              { win = 'input', height = 1, border = 'bottom' },
-              { win = 'list', border = 'none' },
-              { win = 'preview', title = '{preview}', height = 0.4, border = { '', '▔', '', '', '', '', '', '' } },
-            },
-          },
+          select = { layout = { border = { '🭽', '▔', '🭾', '▕', '🭿', '▁', '🭼', '▏' } } },
         },
       },
       styles = {
         notification = {
-          border = {
-            ' ',
-            ' ', -- up
-            '▐',
-            '▐',
-            '▐',
-            ' ', -- bottom
-            ' ',
-            ' ',
-          },
-          relative = 'editor',
+          --               up ---------------- bot
+          border = { ' ', ' ', '▐', '▐', '▐', ' ', ' ', ' ' },
           wo = { wrap = true, winblend = 0 },
         },
-        terminal = { relative = 'editor', border = 'rounded', wo = { winhighlight = '' } },
-        notification_history = {
-          relative = 'editor',
-          keys = { q = 'close' },
-          zindex = 100,
-          wo = {
-            number = false,
-            relativenumber = false,
-            signcolumn = 'no',
-            winhighlight = 'Normal:SnacksNotifierHistory',
-          },
-        },
-        dashboard = {
-          relative = 'editor',
-          zindex = 10,
-          height = 0,
-          width = 0,
-          -- wo = { winhighlight = 'Normal:SidebarDark,NormalFloat:SidebarDark' },
-        },
-        lazygit = {
-          relative = 'editor',
-          height = 0,
-          width = 0,
-          border = 'none',
-        },
-        input = {
-          backdrop = false,
-          position = 'float',
-          border = 'rounded',
-          title_pos = 'center',
-          height = 1,
-          width = 60,
-          relative = 'editor',
-          row = 2,
-          wo = {
-            winhighlight = 'Normal:SidebarDark,NormalFloat:SnacksInputNormal,FloatBorder:SnacksInputBorder,FloatTitle:SnacksInputTitle',
-          },
-          -- keys = { },
-        },
+        terminal = { border = 'rounded', wo = { winhighlight = '' } },
+        notification_history = { wo = { number = false, relativenumber = false, signcolumn = 'no' } },
+        lazygit = { height = 0, width = 0, border = 'none' },
         input_cursor = { relative = 'cursor', row = 1, col = 0, width = 30 },
-        scratch = {
-          relative = 'editor',
-          width = 100,
-          height = 30,
-          bo = { buftype = '', buflisted = false, bufhidden = 'hide', swapfile = false },
-          minimal = false,
-          noautocmd = false,
-          zindex = 20,
-          wo = { winhighlight = 'NormalFloat:Normal', winbar = '' },
-          border = 'rounded',
-          title_pos = 'center',
-          footer_pos = 'center',
-        },
+        scratch = { wo = { winbar = '' } },
         zen = {
-          relative = 'editor',
-          enter = true,
-          fixbuf = false,
-          minimal = false,
-          width = 120,
-          height = 0,
-          backdrop = { transparent = false, blend = 96 },
+          border = { '', '', '', '│', '', '', '', '│' },
           keys = { q = false },
-          wo = { winhighlight = 'NormalFloat:Normal', winbar = '' },
+          backdrop = { transparent = false, blend = 98 },
+          wo = { winbar = '', winhighlight = 'NormalFloat:Normal,FloatBorder:ZenBorder' },
         },
       },
     },
@@ -1022,12 +853,12 @@ return {
     { '<leader>pp', function() require('hasan.picker.persisted').persisted() end, desc = 'Switch project' },
     { '<leader>/t', function() require('config.navigation.snacks.custom').search_project_todos() end, desc = 'Search project todos' },
 
-    -- VIM Builtins
+    -- VIM Builtin
     { '<leader>v/', function() Snacks.picker.help() end, desc = 'Help Pages' },
     { '<leader>vm', function() Snacks.picker.marks() end, desc = 'Marks' },
     { '<leader>vc', function() Snacks.picker.colorschemes() end, desc = 'Colorschemes' },
 
-    -- ORGMODE
+    -- ORG MODE
     { '<leader>ng', function() Snacks.picker.grep({cwd=org_root_path}) end, desc = 'Grep org text' },
     { '<leader>w/', function() Snacks.picker.files({cwd=org_root_path}) end, desc = 'Find org files' },
   },
@@ -1035,71 +866,8 @@ return {
       vim.api.nvim_create_autocmd('User', {
         pattern = 'VeryLazy',
         callback = function()
-          -- Setup some globals for debugging (lazy-loaded)
-          _G.dd = function(...)
-            Snacks.debug.inspect(...)
-          end
-          _G.bt = function()
-            Snacks.debug.backtrace()
-          end
-          _G.log = function(...)
-            Snacks.debug.log(...)
-          end
-          vim.print = _G.dd -- Override print to use snacks for `:=` command
-
-          -- Create some toggle mappings
-          Snacks.toggle.line_number():map('<leader>tn')
-          Snacks.toggle.option('cursorcolumn', { name = 'Cursorcolumn' }):map('<leader>tC')
-          Snacks.toggle.option('cursorline', { name = 'Cursorline' }):map('<leader>tL')
-          Snacks.toggle.option('spell', { name = 'Spelling' }):map('<leader>ts')
-          Snacks.toggle.option('wrap', { name = 'Wrap' }):map('<leader>tw')
-          Snacks.toggle
-            .option('conceallevel', { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
-            :map('<leader>to')
-          Snacks.toggle.inlay_hints():map('<leader>th')
-          Snacks.toggle.treesitter({ name = 'Treesitter' }):map('<leader>tT')
-          Snacks.toggle.indent():map('<leader>ti')
-          Snacks.toggle.dim():map('<leader>tm')
-          Snacks.toggle.option('background', { off = 'light', on = 'dark', name = 'Dark Background' }):map('<leader>tB')
-          Snacks.toggle.diagnostics():map('<leader>td')
-          Snacks.toggle({
-            name = 'Diagnostic Lines',
-            get = function()
-              return vim.diagnostic.config().virtual_text
-            end,
-            set = function(st)
-              return vim.diagnostic.config({ virtual_text = st })
-            end,
-          }):map('<leader>tl')
-
-          Snacks.toggle({
-            name = 'Transparency',
-            get = function()
-              return require('core.state').theme.transparency
-            end,
-            set = function(_)
-              require('hasan.utils.color').toggle_transparency(false)
-            end,
-          }):map('<leader>tb')
-
-          Snacks.toggle({
-            name = 'Highlight same words',
-            get = function()
-              return type(vim.w.auto_highlight_id) == 'number'
-            end,
-            set = function(state)
-              vim.fn['autohl#_AutoHighlightToggle']()
-            end,
-          }):map('<leader>tW')
-
-          vim.api.nvim_create_autocmd('FileType', {
-            pattern = { 'org' },
-            callback = function(info)
-              -- vim.b[info.buf]['snacks_indent'] = false
-              vim.b[info.buf]['snacks_indent_scope'] = false
-            end,
-          })
-        end, -- VeryLazy Callback
+          require('config.navigation.snacks.toggles')
+        end,
       })
     end,
   },

@@ -6,7 +6,7 @@ end
 
 local M = {
   entry = function(_, _)
-    local result, err = Command('git'):args({ 'rev-parse', '--show-toplevel' }):stdout(Command.PIPED):output()
+    local result, err = Command('git'):arg({ 'rev-parse', '--show-toplevel' }):stdout(Command.PIPED):output()
     local output = result.stdout
     if output == '' or output == nil or err then
       return fail('`git` command failed', err)

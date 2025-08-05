@@ -1,7 +1,7 @@
 setlocal nonumber norelativenumber
 setlocal readonly nomodifiable nolist
 
-let b:snacks_indent = v:false
+let b:snacks_scope = v:false
 
 nnoremap <buffer>           <CR>    <C-]>
 " Next link
