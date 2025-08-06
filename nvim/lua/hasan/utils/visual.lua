@@ -1,5 +1,43 @@
 local M = {}
 
+function M.is_visual_mode()
+  local mode = vim.api.nvim_get_mode().mode
+  return mode == 'v' or mode == 'V' or mode == '', mode
+end
+
+function M.get_visual_selection()
+  local start_pos = vim.api.nvim_buf_get_mark(0, '<')
+  local end_pos = vim.api.nvim_buf_get_mark(0, '>')
+  local lines = vim.fn.getline(start_pos[1], end_pos[1])
+  -- Add when only select in 1 line
+  local plusEnd = 0
+  local plusStart = 1
+  if #lines == 0 then
+    return ''
+  elseif #lines == 1 then
+    plusEnd = 1
+    plusStart = 1
+  end
+  lines[#lines] = string.sub(lines[#lines], 0, end_pos[2] + plusEnd)
+  lines[1] = string.sub(lines[1], start_pos[2] + plusStart, string.len(lines[1]))
+
+  if type(lines) == 'string' then
+    return lines
+  end
+  return table.concat(lines, '')
+end
+
+---Get range or visual text to use it with nvim_create_user_command
+---@param range number
+function M.get_range_or_visual_text(range)
+  if range == 2 then
+    return require('hasan.utils.visual').get_visual_selection()
+  elseif require('hasan.utils.visual').is_visual_mode() then
+    local r = require('hasan.utils.visual').get_visual_region(0, true)
+    return require('hasan.utils.visual').nvim_buf_get_text(0, r.start_row, r.start_col, r.end_row, r.end_col)[1]
+  end
+end
+
 -- Visual selection
 local constants = {
   visual_mode = {
@@ -9,7 +47,7 @@ local constants = {
     BLOCK = 'BLOCK',
   },
 }
-function Get_visual_mode(forced_mode)
+local function get_visual_mode(forced_mode)
   local mode = forced_mode or vim.api.nvim_get_mode().mode
 
   if mode == 'v' then
@@ -39,9 +77,9 @@ function M.get_visual_region(buffer, updated, forced_mode, detected_mode)
 
     visual_mode = detected_mode
       or M.is_same_position(spos, epos) and constants.visual_mode.NONE
-      or Get_visual_mode(forced_mode)
+      or get_visual_mode(forced_mode)
   else
-    visual_mode = detected_mode or Get_visual_mode(forced_mode)
+    visual_mode = detected_mode or get_visual_mode(forced_mode)
 
     if visual_mode == constants.visual_mode.INLINE then
       sln = vim.api.nvim_buf_get_mark(buffer or 0, '<')

@@ -112,4 +112,43 @@ function M.parse_img_str_at_cursor()
   end
 end
 
+function M.create_link(template, cursor_pos, relative_from_head)
+  if not template then
+    return
+  end
+
+  local link = vim.fn.expand('<cWORD>')
+  vim.cmd('normal! "_diW')
+
+  vim.schedule(function()
+    local line = template:gsub('${link}', link)
+    vim.api.nvim_put({ line }, 'v', true, true)
+
+    if cursor_pos then
+      local pos = vim.api.nvim_win_get_cursor(0)
+      if relative_from_head then
+        cursor_pos = (#line * -1) + cursor_pos
+      end
+      pos[2] = pos[2] + cursor_pos
+      vim.api.nvim_win_set_cursor(0, pos)
+      vim.cmd('startinsert')
+    end
+  end)
+end
+
+function M.create_link_visual(template)
+  if not template then
+    return
+  end
+
+  local title = require('hasan.utils.visual').get_visual_selection()
+  local full_link = vim.fn.expand('<cWORD>')
+  vim.cmd('normal! "_diW')
+
+  vim.schedule(function()
+    local line = template:gsub('${link}', full_link):gsub('${title}', title)
+    vim.api.nvim_put({ line }, 'v', true, true)
+  end)
+end
+
 return M

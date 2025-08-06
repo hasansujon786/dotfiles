@@ -14,7 +14,7 @@ local M = {}
 
 M.open_visual = function(opts)
   opts = opts or {}
-  opts.search_text = require('hasan.utils').get_visual_selection()
+  opts.search_text = require('hasan.utils.visual').get_visual_selection()
   M.open(opts)
 end
 

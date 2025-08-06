@@ -20,7 +20,7 @@ function M.rename_current_file()
 end
 
 local _show_substitute_input = function(isVisual)
-  local curWord = isVisual and require('hasan.utils').get_visual_selection() or vim.fn.expand('<cword>')
+  local curWord = isVisual and require('hasan.utils.visual').get_visual_selection() or vim.fn.expand('<cword>')
 
   vim.ui.input({
     prompt = 'Substitute Word',
@@ -40,7 +40,7 @@ local _show_substitute_input = function(isVisual)
 end
 
 function M.substitute_word()
-  local isVisual = require('hasan.utils').is_visual_mode()
+  local isVisual = require('hasan.utils.visual').is_visual_mode()
   if isVisual then
     feedkeys('<Esc>', '')
     vim.defer_fn(function()

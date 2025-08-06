@@ -149,26 +149,6 @@ M.open_git_remote = function(open_with_file)
   end
 end
 
-local function _google_search(query)
-  if not query or query == '' then
-    return
-  end
-
-  local search_query = query:gsub(' ', '+')
-  local url = 'https://www.google.com/search?q=' .. search_query
-  vim.ui.open(url)
-end
-M.google_search = function(is_visual)
-  if is_visual then
-    local query = require('hasan.utils').get_visual_selection()
-    return _google_search(query)
-  end
-
-  vim.ui.input({ prompt = 'Search on Google', icon = ' ' }, function(text)
-    _google_search(text)
-  end)
-end
-
 -- opts = utils.merge({
 --   timeout = 2000,
 -- }, opts or {})
@@ -200,32 +180,5 @@ M.flatten = (function()
     end
   end
 end)()
-
-function M.is_visual_mode()
-  local mode = vim.api.nvim_get_mode().mode
-  return mode == 'v' or mode == 'V' or mode == '', mode
-end
-
-function M.get_visual_selection()
-  local start_pos = vim.api.nvim_buf_get_mark(0, '<')
-  local end_pos = vim.api.nvim_buf_get_mark(0, '>')
-  local lines = vim.fn.getline(start_pos[1], end_pos[1])
-  -- add when only select in 1 line
-  local plusEnd = 0
-  local plusStart = 1
-  if #lines == 0 then
-    return ''
-  elseif #lines == 1 then
-    plusEnd = 1
-    plusStart = 1
-  end
-  lines[#lines] = string.sub(lines[#lines], 0, end_pos[2] + plusEnd)
-  lines[1] = string.sub(lines[1], start_pos[2] + plusStart, string.len(lines[1]))
-
-  if type(lines) == 'string' then
-    return lines
-  end
-  return table.concat(lines, '')
-end
 
 return M

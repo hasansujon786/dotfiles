@@ -1,6 +1,9 @@
 vim.wo.conceallevel = 2
 vim.wo.concealcursor = 'nc'
 
+vim.keymap.set('n', 'g-', '<cmd>lua require("hasan.utils.buffer").create_link("[](${link})", 2, true)<CR>', { desc = 'Create Link', buffer = true })
+vim.keymap.set('x', 'g-', '<Esc><cmd>lua require("hasan.utils.buffer").create_link_visual("[${title}](${link})")<CR>', { desc = 'Create Link', buffer = true })
+
 -- local function follow_link(default_key)
 --   return function()
 --     if require('obsidian').util.cursor_on_markdown_link() then

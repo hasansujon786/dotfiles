@@ -26,17 +26,16 @@ command('ClearShada', function()
 end, { desc = 'Clears all the .tmp shada files' })
 
 command('ParseTiemISO', function(ctx)
-  local str = nil
-  if ctx.range == 2 then
-    str = require('hasan.utils').get_visual_selection()
-  elseif require('hasan.utils').is_visual_mode() then
-    local r = require('hasan.utils.visual').get_visual_region(0, true)
-    str = require('hasan.utils.visual').nvim_buf_get_text(0, r.start_row, r.start_col, r.end_row, r.end_col)[1]
-  else
-    str = vim.fn.expand('<cWORD>')
-  end
-  require('hasan.utils.time').parse_time(str)
+  local text = require('hasan.utils.visual').get_range_or_visual_text(ctx.range) or vim.fn.expand('<cWORD>')
+  require('hasan.utils.time').parse_time(text)
 end, { desc = 'Parse ISO time', range = true })
+
+command('Translate', function(ctx)
+  require('hasan.utils.search').translate(ctx)
+end, { desc = 'Translate selected text or current word using Google Translate', range = true })
+command('Google', function(ctx)
+  require('hasan.utils.search').search_with_google(ctx)
+end, { desc = 'Search on google', range = true })
 
 command('Dashboard', function()
   Snacks.dashboard.open()

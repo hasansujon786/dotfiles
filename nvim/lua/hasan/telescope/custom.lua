@@ -123,7 +123,7 @@ M.references = function()
 end
 
 function M.curbuf(is_visual)
-  local word = is_visual and require('hasan.utils').get_visual_selection() or nil
+  local word = is_visual and require('hasan.utils.visual').get_visual_selection() or nil
 
   builtin.current_buffer_fuzzy_find(my_theme.get_dropdown({
     previewer = false,
@@ -217,7 +217,7 @@ M.commands = function()
 end
 
 function M.grep_string(is_visual)
-  local word = is_visual and require('hasan.utils').get_visual_selection() or vim.fn.input('Grep String: ')
+  local word = is_visual and require('hasan.utils.visual').get_visual_selection() or vim.fn.input('Grep String: ')
   -- word = string.gsub(word, '%s+', '') -- remove spaces
   if word == '' then
     return

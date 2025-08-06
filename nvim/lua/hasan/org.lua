@@ -272,33 +272,4 @@ function M.org_on_WinLeave()
   end)
 end
 
--- ------------------------------------------------
--- => create org note
--- ------------------------------------------------
-function M.create_link()
-  local link = vim.fn.expand('<cWORD>')
-  vim.cmd('normal! "_diW')
-
-  vim.schedule(function()
-    local line = string.format('[[%s][]]', link)
-    api.nvim_put({ line }, 'v', true, true)
-
-    local pos = api.nvim_win_get_cursor(0)
-    pos[2] = pos[2] - 1
-    api.nvim_win_set_cursor(0, pos)
-    vim.cmd('startinsert')
-  end)
-end
-
-function M.create_link_visual()
-  local partial_link = require('hasan.utils').get_visual_selection()
-  local full_link = vim.fn.expand('<cWORD>')
-  vim.cmd('normal! "_diW')
-
-  vim.schedule(function()
-    local line = string.format('[[%s][%s]]', full_link, partial_link)
-    api.nvim_put({ line }, 'v', true, true)
-  end)
-end
-
 return M

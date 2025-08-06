@@ -770,7 +770,7 @@ return {
     { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Kill this buffer' },
     { '<leader>bo', function() Snacks.bufdelete.other() end, desc = 'Kill this buffer' },
     { '<leader>go', function() Snacks.gitbrowse() end, desc = 'Open git repo' , mode = { 'n', 'v' } },
-    { '<leader>gO', function() Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end, notify = false }) end,  desc = "Git Browse (copy)", mode = {"n", "x" } },
+    { '<leader>gO', function() Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end, notify = false }) end,  desc = "Git Browse (copy url)", mode = {"n", "x" } },
     { '<leader>fr', function() Snacks.rename.rename_file() end, desc = 'Lsp: Rename file' },
     { '<leader>pd', function () Snacks.dashboard.open() end, desc = 'Open dashboard' },
     { '<leader>z',  function() Snacks.zen() end, desc = 'Toggle Zen Mode' },
