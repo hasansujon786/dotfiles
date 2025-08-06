@@ -151,4 +151,38 @@ function M.create_link_visual(template)
   end)
 end
 
+---@param buf number
+---@param ns integer
+---@param lines HighlightLine
+---@param start_line? number 0-index
+function M.render_lines(buf, ns, lines, start_line)
+  start_line = start_line or 0
+  local current_line = start_line
+
+  for _, segments in ipairs(lines) do
+    local line = ''
+    local col = 0
+
+    -- First pass to build full line
+    for _, seg in ipairs(segments) do
+      line = line .. seg[1]
+    end
+
+    -- Set line in buffer
+    vim.api.nvim_buf_set_lines(buf, current_line, current_line + 1, false, { line })
+
+    -- Second pass for highlights
+    for _, seg in ipairs(segments) do
+      local text, hl_group = seg[1], seg[2]
+      vim.api.nvim_buf_set_extmark(buf, ns, current_line, col, {
+        end_col = col + #text,
+        hl_group = hl_group,
+      })
+      col = col + #text
+    end
+
+    current_line = current_line + 1
+  end
+end
+
 return M

@@ -10,6 +10,16 @@ local window = constants.hls.window
 local info_text_window = constants.hls.info_text_window
 local popup_options = constants.popup_options
 
+local placeholders = {
+  Search = 'foo   foo([a-z0-9]*)   fun\\(',
+  Replacement = 'bar   ${1}_foo   $$MY_ENV_VAR ',
+  ['Filter Files'] = '*.lua   *.{css,js}   **/docs/*.md   (specify one per line)',
+  Paths = '/foo/bar   ../   ./hello\\ world/   ./src/foo.lua   ~/.config',
+  -- Flags = '--help --ignore-case (-i) --replace= (empty replace) --multiline (-U)',
+
+  search_info = 'Search (Help:?)',
+}
+
 local M = {}
 
 M.open_visual = function(opts)
@@ -65,7 +75,7 @@ function M.open(opts)
     is_replace_field_visible = false,
     is_filter_field_visible = #opts.search_paths > 0,
     is_match_case_insensitive_checked = false,
-    search_info = '',
+    search_info = placeholders.search_info,
     search_results = {},
   })
 
@@ -81,7 +91,7 @@ function M.open(opts)
       if #curr.search_query > 2 then
         engine.search(curr, signal)
       else
-        signal.search_info = ''
+        signal.search_info = placeholders.search_info
         signal.search_results = {}
       end
     end
@@ -95,6 +105,7 @@ function M.open(opts)
     vim.cmd('startinsert!')
   end
 
+  local keymaps = {}
   local actions = {
     insert_search_input = function()
       renderer:get_component_by_id('search_query'):focus()
@@ -170,20 +181,29 @@ function M.open(opts)
     toggle_case = function()
       signal.is_match_case_insensitive_checked = not signal.is_match_case_insensitive_checked:get_value()
     end,
+    show_help = function()
+      require('hasan.widgets.spectre.components.help').show(
+        placeholders,
+        keymaps,
+        { width = ui_info.width, row = ui_info.max_height }
+      )
+    end,
   }
 
-  renderer:add_mappings({
-    { key = 'q', handler = actions.close, mode = { 'n' } },
-    { key = '<leader>q', handler = actions.close, mode = { 'n' } },
-    { key = 'R', handler = actions.replace_all, mode = { 'n' } },
-    { key = '|', handler = actions.toggle_zoom, mode = { 'n' } },
-    { key = '<A-c>', handler = actions.toggle_case, mode = { 'n', 'i' } },
-    { key = '<C-f>', handler = actions.toggle_filter_input, mode = { 'n', 'i' } },
-    { key = '<C-t>', handler = actions.toggle_replace_input, mode = { 'n', 'i' } },
-  })
+  keymaps = {
+    { key = '?', handler = actions.show_help, mode = { 'n' }, desc = 'Show help' },
+    { key = 'q', handler = actions.close, mode = { 'n' }, desc = 'Close window' },
+    { key = '<leader>q', handler = actions.close, mode = { 'n' }, desc = 'Close window' },
+    { key = 'R', handler = actions.replace_all, mode = { 'n' }, desc = 'Replace all' },
+    { key = '|', handler = actions.toggle_zoom, mode = { 'n' }, desc = 'Toggle maximize window' },
+    { key = '<A-c>', handler = actions.toggle_case, mode = { 'n', 'i' }, desc = 'Togle match case' },
+    { key = '<C-f>', handler = actions.toggle_filter_input, mode = { 'n', 'i' }, desc = 'Togle filter inputs' },
+    { key = '<C-t>', handler = actions.toggle_replace_input, mode = { 'n', 'i' }, desc = 'Togle replace input' },
+  }
 
+  renderer:add_mappings(keymaps)
   renderer:on_mount(function()
-    -- Initialise search only if char length is greater than 2
+    -- Initialize search only if char length is greater than 2
     if opts.search_text == '' or #opts.search_text <= 2 then
       return
     end
@@ -194,6 +214,7 @@ function M.open(opts)
   renderer:on_unmount(function()
     vim.api.nvim_set_current_win(renderer:get_origin_winid())
     subscription:unsubscribe()
+    require('hasan.widgets.spectre.components.help').close()
     M.renderer = nil
   end)
 
@@ -278,7 +299,7 @@ function M.open(opts)
       n.text_input({
         id = 'filter_path',
         filetype = 'spectre_file_input',
-        border_label = 'Pattern to filter',
+        border_label = 'Filter Files',
         -- placeholder = 'lua/**/*.lua',
         window = window,
         flex = 1,
@@ -291,7 +312,7 @@ function M.open(opts)
       }, popup_options),
       n.text_input({
         filetype = 'spectre_file_input',
-        border_label = 'Files to include',
+        border_label = 'Paths',
         -- placeholder = 'lua/, plugin/',
         window = window,
         size = 1,
@@ -311,9 +332,9 @@ function M.open(opts)
     n.columns(
       {
         size = 2,
-        hidden = signal.search_info:map(function(value)
-          return value == ''
-        end),
+        -- hidden = signal.search_info:map(function(value)
+        --   return value == ''
+        -- end),
       },
       n.paragraph({
         is_focusable = false,

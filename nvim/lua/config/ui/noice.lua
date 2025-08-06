@@ -1,7 +1,7 @@
 return {
   'folke/noice.nvim',
   lazy = true,
-  event = { 'BufReadPost', 'CmdlineEnter' },
+  event = { 'VeryLazy', 'CmdlineEnter' },
   config = function()
     local hover = require('core.state').ui.hover
     local ok, noice = pcall(require, 'noice')
@@ -11,11 +11,11 @@ return {
 
     noice.setup({
       presets = {
-        command_palette = true, -- position the cmdline and popupmenu together
-        lsp_doc_border = true, -- add a border to hover docs and signature help
-        bottom_search = false, -- use a classic bottom cmdline for search
-        -- long_message_to_split = true, -- long messages will be sent to a split
-        -- inc_rename = false, -- enables an input dialog for inc-rename.nvim
+        command_palette = true, -- Position the cmdline and popupmenu together
+        lsp_doc_border = true, -- Add a border to hover docs and signature help
+        bottom_search = false, -- Use a classic bottom cmdline for search
+        -- long_message_to_split = true, long messages will be sent to a split
+        -- inc_rename = false, enables an input dialog for inc-rename.nvim
       },
       lsp = {
         progress = { enabled = false },
@@ -24,7 +24,7 @@ return {
           ['vim.lsp.util.stylize_markdown'] = true,
           ['cmp.entry.get_documentation'] = true,
         },
-        -- defaults for hover and signature help
+        -- Defaults for hover and signature help
         documentation = {
           view = 'hover',
           opts = {
@@ -74,12 +74,12 @@ return {
         },
       },
       messages = {
-        enabled = true, -- enables the Noice messages UI
-        view = 'notify', -- default view for messages
-        view_error = 'notify', -- view for errors
-        view_warn = 'notify', -- view for warnings
-        view_history = 'messages', -- view for :messages
-        view_search = 'virtualtext', -- view for search count messages. Set to `false` to disable
+        enabled = true, -- Enables the Noice messages UI
+        view = 'notify', -- Default view for messages
+        view_error = 'notify', -- View for errors
+        view_warn = 'notify', -- View for warnings
+        view_history = 'messages', -- View for :messages
+        view_search = 'virtualtext', -- View for search count messages. Set to `false` to disable
       },
       views = {
         ---@type nui_popup_options
@@ -100,7 +100,7 @@ return {
       end, 10)
     end, { desc = 'Redirect Cmdline' })
 
-    -- hover & signature widow scrooll
+    -- hover & signature widow scroll
     keymap({ 'i', 's' }, '<A-d>', function()
       if not require('noice.lsp').scroll(4) then
         return '<A-d>'
