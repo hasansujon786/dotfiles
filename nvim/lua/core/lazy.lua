@@ -43,14 +43,14 @@ require('lazy').setup({
   concurrency = 3,
   rocks = { enabled = false },
   git = {
-    timeout = 120, -- kill processes that take more than 2 minutes
+    timeout = 120, -- Kill processes that take more than 2 minutes
   },
   install = { colorscheme = { 'onedark', 'habamax' } },
   change_detection = {
     enabled = true,
-    notify = true, -- get a notification when changes are found
+    notify = true, -- Get a notification when changes are found
   },
-  dev = { path = 'D:/repoes/lua' },
+  dev = { path = repoes_path .. '/lua' },
   performance = {
     cache = {
       enabled = true,

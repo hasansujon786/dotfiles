@@ -362,8 +362,7 @@ eml() {
 }
 
 re() {
-  # TODO: use repo variable
-  dir=$(fd --max-depth 2 --search-path /d/repoes | fzf)
+  dir=$(fd --max-depth 2 --search-path "$REPOES" | fzf)
   cd "$dir" || exit
 }
 

@@ -11,6 +11,7 @@ _G.has_pvim = os.getenv('PVIM') and true or false
 _G.plugin_path = data_path .. '/lazy'
 _G.mason_path = data_path .. '/mason/packages'
 _G.org_root_path = vim.fs.normalize(vim.fn.expand('~/my_vault/orgfiles'))
+_G.repoes_path = os.getenv('REPOES') or vim.fn.expand('~/')
 
 P = function(...)
   local hasNvim9 = vim.fn.has('nvim-0.9') == 1

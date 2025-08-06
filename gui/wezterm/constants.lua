@@ -2,8 +2,10 @@ local M = {}
 
 M.bash_path = 'C:\\Program Files\\Git\\bin\\bash.exe'
 
+local repoes = os.getenv('REPOES') or os.getenv('HOME')
+
 M.project_dirs = {
-  'D:/repoes',
+  repoes,
   -- srcPath .. '/work',
   -- srcPath .. '/other',
 }

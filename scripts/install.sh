@@ -200,6 +200,7 @@ init_setup() {
 
     update_path_var "C:\Users\\$USERNAME\dotfiles\.bin"
     create_user_var ANDROID_HOME "$LOCALAPPDATA\Android\Sdk"
+    create_user_var REPOES "D:/repoes"
   fi
 }
 
