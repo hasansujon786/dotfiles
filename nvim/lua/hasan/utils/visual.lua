@@ -5,6 +5,10 @@ function M.is_visual_mode()
   return mode == 'v' or mode == 'V' or mode == '', mode
 end
 
+function M.exit_visual_mode()
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', false)
+end
+
 function M.get_visual_selection()
   local start_pos = vim.api.nvim_buf_get_mark(0, '<')
   local end_pos = vim.api.nvim_buf_get_mark(0, '>')
@@ -28,7 +32,7 @@ function M.get_visual_selection()
 end
 
 ---Get range or visual text to use it with nvim_create_user_command
----@param range number
+---@param range? number
 function M.get_range_or_visual_text(range)
   if range == 2 then
     return require('hasan.utils.visual').get_visual_selection()

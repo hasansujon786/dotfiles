@@ -22,27 +22,26 @@ local placeholders = {
 
 local M = {}
 
-M.open_visual = function(opts)
-  opts = opts or {}
-  opts.search_text = require('hasan.utils.visual').get_visual_selection()
-  M.open(opts)
-end
-
 function M.open(opts)
   if M.renderer then
     return M.renderer:focus()
   end
 
+  local initial_search_text = ''
+  if require('hasan.utils.visual').is_visual_mode() then
+    initial_search_text = require('hasan.utils.visual').get_range_or_visual_text()
+    require('hasan.utils.visual').exit_visual_mode()
+  elseif opts and opts.select_word then
+    initial_search_text = vim.fn.expand('<cword>')
+  end
+
   opts = vim.tbl_extend('force', {
     cwd = nil,
-    search_text = '',
+    search_text = initial_search_text,
     replace_text = '',
     search_paths = {},
   }, opts or {})
 
-  if opts.select_word then
-    opts.search_text = vim.fn.expand('<cword>')
-  end
   if opts.current_file then
     local file_path = vim.fn.fnameescape(vim.fn.expand('%:p:.'))
     if vim.loop.os_uname().sysname == 'Windows_NT' then

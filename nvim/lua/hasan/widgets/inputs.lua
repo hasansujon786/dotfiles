@@ -19,36 +19,31 @@ function M.rename_current_file()
   end)
 end
 
-local _show_substitute_input = function(isVisual)
-  local curWord = isVisual and require('hasan.utils.visual').get_visual_selection() or vim.fn.expand('<cword>')
+function M.substitute_word()
+  local cur_word = nil
+  local is_visual = require('hasan.utils.visual').is_visual_mode()
+
+  if is_visual then
+    cur_word = require('hasan.utils.visual').get_range_or_visual_text()
+  else
+    cur_word = vim.fn.expand('<cword>')
+  end
 
   vim.ui.input({
     prompt = 'Substitute Word',
-    default = curWord,
-    win = { style = 'input_cursor', width = math.max(#curWord + 6, 30), },
+    default = cur_word,
+    win = { style = 'input_cursor', width = math.max(#cur_word + 6, 30) },
   }, function(newWord)
     if not newWord then
       return
     end
 
-    local cmd = isVisual and '%s/' .. curWord .. '/' .. newWord .. '/gc'
-      or '%s/\\<' .. curWord .. '\\>/' .. newWord .. '/gc'
+    local cmd = is_visual and '%s/' .. cur_word .. '/' .. newWord .. '/gc'
+      or '%s/\\<' .. cur_word .. '\\>/' .. newWord .. '/gc'
 
     feedkeys('<Cmd>' .. cmd .. '<CR>', 'n')
     vim.fn.setreg('z', cmd)
   end)
-end
-
-function M.substitute_word()
-  local isVisual = require('hasan.utils.visual').is_visual_mode()
-  if isVisual then
-    feedkeys('<Esc>', '')
-    vim.defer_fn(function()
-      _show_substitute_input(isVisual)
-    end, 100)
-  else
-    _show_substitute_input(isVisual)
-  end
 end
 
 return M

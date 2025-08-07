@@ -77,8 +77,7 @@ end
 function M.showLspReferencesInLocList()
   local words, idx = Snacks.words.get()
   if #words <= 1 then
-    vim.notify('No reference found', vim.log.levels.WARN, { title = 'Words' })
-    return
+    return vim.notify('No reference found', vim.log.levels.WARN, { title = 'Words' })
   end
 
   local quickfix_list = create_quickfix_list(words, vim.api.nvim_buf_get_name(0))
@@ -87,11 +86,9 @@ function M.showLspReferencesInLocList()
   end
 
   vim.fn.setloclist(0, quickfix_list, 'r') -- Replace the current quickfix list
-  vim.cmd(string.format('ll %d', idx)) -- Jump to the location list entry at `idx`
+  vim.cmd(string.format('ll %d', idx or 1)) -- Jump to the location list entry at `idx`
   vim.cmd('lopen')
 end
-
--- require("hasan.utils.ui.qf").showLspReferencesInLocList()
 
 ---@param exclude_paths string[]
 ---@return string

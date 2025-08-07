@@ -671,13 +671,19 @@ return {
             })
           end,
           insert_relative_path = function(p, item, action)
-            local buf_name = vim.api.nvim_buf_get_name(p.finder.filter['current_buf'])
-            buf_name = vim.fs.normalize(buf_name)
-            local text = require('hasan.utils.file').get_relative_path(buf_name, item._path)
+            local cur_buf_name = vim.api.nvim_buf_get_name(p.finder.filter['current_buf'])
+            cur_buf_name = vim.fs.normalize(cur_buf_name)
+            local text = require('hasan.utils.file').get_relative_path(cur_buf_name, item._path)
 
             p:close()
             if text then
               vim.api.nvim_put({ text }, 'c', true, true)
+            end
+          end,
+          insert_absolute_path = function(p, item, action)
+            p:close()
+            if item and item.file then
+              vim.api.nvim_put({ item.file }, 'c', true, true)
             end
           end,
         },
@@ -718,6 +724,7 @@ return {
               -- ['<a-f>'] = { 'toggle_follow', mode = { 'i', 'n' } },
 
               ['<c-r><c-r>'] = { 'insert_relative_path', mode = { 'i', 'n' } },
+              ['<c-r><c-a>'] = { 'insert_absolute_path', mode = { 'i', 'n' } },
               ['<a-l>'] = { 'inspect', mode = { 'i', 'n' } },
 
               ['<a-t>'] = { 'focus_file_tree', mode = { 'i', 'n' } },
