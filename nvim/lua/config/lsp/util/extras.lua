@@ -70,22 +70,27 @@ end
 --     vim.notify(msg, vim.log.levels.INFO, { title = ('Rename: %s -> %s'):format(currName, new) })
 --   end
 
-function M.lspRename()
+function M.lsp_rename()
   -- https://www.youtube.com/watch?v=tAVxxdFFYMU
-  -- local tshl = require('nvim-treesitter-playground.hl-info').get_treesitter_hl()
-  -- if tshl and #tshl > 0 then
-  --   local ind = tshl[#tshl]:match('^.*()%*%*.*%*%*')
-  --   tshl = tshl[#tshl]:sub(ind + 2, -3)
-  -- end
-  local currName = vim.fn.expand('<cword>')
+  local cur_name = vim.fn.expand('<cword>')
+  if not cur_name or cur_name == '' then
+    return
+  end
+
+  local hl_group = require('hasan.utils.hl').get_active_hl_at_cursor()
+  local win_hl = ('NormalFloat:%s'):format(hl_group)
 
   vim.ui.input({
     prompt = 'Rename',
-    default = currName,
-    win = { style = 'input_cursor', width = math.max(#currName + 6, 30) },
-  }, function(newName)
-    if newName and newName ~= currName then
-      vim.lsp.buf.rename(newName)
+    default = cur_name,
+    win = {
+      style = 'input_cursor',
+      width = math.max(#cur_name + 6, 30),
+      wo = { winhighlight = win_hl },
+    },
+  }, function(new_name)
+    if new_name and new_name ~= cur_name then
+      vim.lsp.buf.rename(new_name)
     end
   end)
 end

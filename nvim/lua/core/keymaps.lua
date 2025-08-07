@@ -31,7 +31,13 @@ for _, mode in ipairs(nx) do
 end
 
 if vim.fn.has('nvim-0.11') == 1 then
-  local keys_to_del = { 'grn', 'grr', 'gri', 'gra' }
+  local keys_to_del = {
+    { 'gra', mode = { 'n', 'x' } },
+    'grn',
+    'grr',
+    'gri',
+    'grt',
+  }
   for _, key in ipairs(keys_to_del) do
     if type(key) == 'string' then
       pcall(vim.keymap.del, 'n', key)

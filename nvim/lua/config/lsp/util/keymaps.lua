@@ -27,24 +27,24 @@ function M.lsp_buffer_keymaps(client, bufnr)
 
   -- Action, Prompt, Search
   keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', desc('Lsp: Hover under cursor'))
-  keymap('n', '<F2>', require('config.lsp.util.extras').lspRename, desc('Lsp: Rename under cursor'))
+  keymap('n', '<F2>', '<cmd>lua require("config.lsp.util.extras").lsp_rename()<CR>', desc('Lsp: Rename under cursor'))
   for _, action_key in ipairs({ '<C-q>', '<C-space>', '<A-space>' }) do
-    keymap({ 'n', 'x' }, action_key, vim.lsp.buf.code_action, desc('Lsp: Code action'))
+    keymap({ 'n', 'x' }, action_key, '<cmd>lua vim.lsp.buf.code_action()<CR>', desc('Lsp: Code action'))
   end
 
   -- Diagnostics
-  keymap('n', '<leader>ad', vim.diagnostic.setloclist, desc('Lsp: Show local diagnostics'))
-  keymap('n', '<leader>aD', vim.diagnostic.setqflist, desc('Lsp: Show global diagnostics'))
-  keymap('n', '<leader>al', vim.diagnostic.open_float, desc('Lsp: Show line diagnostics'))
+  keymap('n', '<leader>ad', '<cmd>lua vim.diagnostic.setloclist()<CR>', desc('Lsp: Show local diagnostics'))
+  keymap('n', '<leader>aD', '<cmd>lua vim.diagnostic.setqflist()<CR>', desc('Lsp: Show global diagnostics'))
+  keymap('n', '<leader>al', '<cmd>lua vim.diagnostic.open_float()<CR>', desc('Lsp: Show line diagnostics'))
 
-  keymap({ 'n', 'i' }, '<C-c><C-s>', vim.lsp.buf.signature_help, desc('Lsp: show signature help'))
+  keymap({ 'n', 'i' }, '<C-c><C-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', desc('Lsp: show signature help'))
   -- keymap('n', '<leader>th', function()
   --   local is_enabled = vim.lsp.inlay_hint.is_enabled({})
   --   vim.lsp.inlay_hint.enable(not is_enabled)
   -- end, desc('Lsp: toggle inlay_hint'))
 
-  keymap('n', '<leader>a+', vim.lsp.buf.add_workspace_folder, desc('Lsp: Add workspace folder'))
-  keymap('n', '<leader>a-', vim.lsp.buf.remove_workspace_folder, desc('Lsp: Remove workspace folder'))
+  keymap('n', '<leader>a+', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', desc('Lsp: Add workspace folder'))
+  keymap('n', '<leader>a-', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', desc('Lsp: Remove workspace folder'))
   keymap('n', '<leader>aw', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, desc('Lsp: list workspace folders'))
