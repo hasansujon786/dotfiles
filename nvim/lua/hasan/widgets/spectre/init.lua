@@ -2,6 +2,7 @@ local fn = require('utils.fn')
 local n = require('nui-components')
 local Icons = require('hasan.utils.ui.icons')
 local engine = require('hasan.widgets.spectre.engine')
+local utils = require('hasan.widgets.spectre.utils')
 local search_tree = require('hasan.widgets.spectre.components.search_tree')
 local gap = require('hasan.widgets.spectre.components.gap')
 local constants = require('hasan.widgets.spectre.constants')
@@ -187,15 +188,24 @@ function M.open(opts)
         { width = ui_info.width, row = ui_info.max_height }
       )
     end,
+    focus_tree = function()
+      local next_input = renderer:get_component_by_id('search_tree')
+      next_input:focus()
+    end,
+    quickfix = function()
+      utils.open_quickfix()
+    end,
   }
 
   keymaps = {
     { key = '?', handler = actions.show_help, mode = { 'n' }, desc = 'Show help' },
     { key = 'q', handler = actions.close, mode = { 'n' }, desc = 'Close window' },
     { key = '<leader>q', handler = actions.close, mode = { 'n' }, desc = 'Close window' },
+    { key = 'r', handler = actions.focus_tree, mode = { 'n' }, desc = 'Replace under cursor' },
     { key = 'R', handler = actions.replace_all, mode = { 'n' }, desc = 'Replace all' },
     { key = '|', handler = actions.toggle_zoom, mode = { 'n' }, desc = 'Toggle maximize window' },
-    { key = '<A-c>', handler = actions.toggle_case, mode = { 'n', 'i' }, desc = 'Togle match case' },
+    { key = '<C-q>', handler = actions.quickfix, mode = { 'n', 'i' }, desc = 'Open results in quickfix' },
+    { key = '<A-c>', handler = actions.toggle_case, mode = { 'n', 'i' }, desc = 'Togle case' },
     { key = '<C-f>', handler = actions.toggle_filter_input, mode = { 'n', 'i' }, desc = 'Togle filter inputs' },
     { key = '<C-t>', handler = actions.toggle_replace_input, mode = { 'n', 'i' }, desc = 'Togle replace input' },
   }

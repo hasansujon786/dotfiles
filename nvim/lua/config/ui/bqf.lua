@@ -16,7 +16,7 @@ return {
     {
       'gw',
       function()
-        require('hasan.utils.ui.qf').showLspReferencesInLocList()
+        require('hasan.utils.ui.qf').show_lsp_words_in_loclist()
       end,
       desc = 'Show LSP references in loclist',
     },

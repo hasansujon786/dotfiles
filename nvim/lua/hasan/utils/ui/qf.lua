@@ -48,13 +48,15 @@ M.valid_qf_fname = function(bufnr)
   return fname
 end
 
--- Show LSP references in loclist
-local function create_quickfix_list(positions, filename)
+--- Create loclist from word list from Snacks
+---@param positions LspWord[]
+---@return table
+local function create_quickfix_list(positions)
   local qf_list = {}
   local unique_key_store = {}
 
   local buf = vim.api.nvim_get_current_buf()
-  filename = filename or vim.api.nvim_buf_get_name(buf)
+  local filename = vim.api.nvim_buf_get_name(buf)
 
   for _, pos in ipairs(positions) do
     local lnum, col = pos.from[1], pos.from[2] + 1
@@ -74,13 +76,13 @@ local function create_quickfix_list(positions, filename)
   return qf_list
 end
 
-function M.showLspReferencesInLocList()
+function M.show_lsp_words_in_loclist()
   local words, idx = Snacks.words.get()
   if #words <= 1 then
-    return vim.notify('No reference found', vim.log.levels.WARN, { title = 'Words' })
+    return vim.notify('No reference found', vim.log.levels.WARN, { title = 'Lsp Words' })
   end
 
-  local quickfix_list = create_quickfix_list(words, vim.api.nvim_buf_get_name(0))
+  local quickfix_list = create_quickfix_list(words)
   if #quickfix_list <= 1 then
     return
   end

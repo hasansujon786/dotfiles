@@ -85,8 +85,6 @@ function M.open_editor(default_char)
   end)
 end
 
--- vim.fn.setreg('r', "jci'hasan mahmud")
-
 function M.start_recording()
   if vim.fn.reg_recording() ~= '' then
     return 'q'
