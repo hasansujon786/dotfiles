@@ -318,7 +318,9 @@ local function set_custom_highlights()
     NuiComponentsTreeSpectreReplaceSuccess = { link = 'String' },
     NuiComponentsTreeSpectreCodeLine       = { fg = c.none },
     NuiComponentsTreeSpectreFileName       = { fg = c.purple },
+    NuiComponentsTreeSpectreDirName        = { fg = c.muted },
     NuiComponentsTreeNodeFocused           = { link = 'CursorLine' },
+    NuiComponentsTreeSpectreChildCount     = { fg = c.fg, bg = c.none },
 
     -- /// Mason ///
     MasonNormal                 = { link = 'NormalFloatFlat' },

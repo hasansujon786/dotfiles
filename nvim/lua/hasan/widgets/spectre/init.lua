@@ -2,7 +2,7 @@ local fn = require('utils.fn')
 local n = require('nui-components')
 local Icons = require('hasan.utils.ui.icons')
 local engine = require('hasan.widgets.spectre.engine')
-local utils = require('hasan.widgets.spectre.utils')
+local utils = require('hasan.widgets.spectre.mics')
 local search_tree = require('hasan.widgets.spectre.components.search_tree')
 local gap = require('hasan.widgets.spectre.components.gap')
 local constants = require('hasan.widgets.spectre.constants')
@@ -97,7 +97,7 @@ function M.open(opts)
     end
 
     if not (prev.replace_query == curr.replace_query) and #curr.search_query > 2 then
-      signal.search_results = engine.process(curr)
+      signal.search_results = engine.process_and_get_tree_nodes(curr)
     end
   end)
 

@@ -2,13 +2,14 @@ local spectre_search = require('spectre.search')
 local spectre_state = require('spectre.state')
 local spectre_state_utils = require('spectre.state_utils')
 local spectre_utils = require('spectre.utils')
+local _, devicons = pcall(require, 'nvim-web-devicons')
 
 local Tree = require('nui.tree')
 local fn = require('utils.fn')
 
 local M = {}
 
-function M.process(options)
+function M.process_and_get_tree_nodes(options)
   options = options or {}
 
   return fn.kmap(spectre_state.groups, function(group, filename)
@@ -26,7 +27,24 @@ function M.process(options)
     end)
 
     local id = tostring(math.random())
-    local node = Tree.Node({ text = filename:gsub('^./', ''), _id = id }, children)
+
+    local base = vim.fs.basename(filename)
+    local dir = vim.fs.dirname(filename)
+    if dir == '.' or dir == '/' or dir == '' then
+      dir = nil
+    end
+    local icon, icon_highlight = devicons.get_icon(filename, string.match(filename, '%a+$'), { default = true })
+
+    local node_data = {
+      text = filename,
+      icon = icon,
+      icon_highlight = icon_highlight,
+      count = #children,
+      dir = dir,
+      base = base,
+      _id = id,
+    }
+    local node = Tree.Node(node_data, children)
 
     node:expand()
 
@@ -50,11 +68,12 @@ local function search_handler(options, signal)
         return
       end
 
+      item.filename = vim.fs.normalize(item.filename)
       if not spectre_state.groups[item.filename] then
         spectre_state.groups[item.filename] = {}
       end
 
-      table.insert(spectre_state.groups[item.filename], item)
+      spectre_state.groups[item.filename][#spectre_state.groups[item.filename] + 1] = item
       total = total + 1
     end,
     on_error = function(_) end,
@@ -65,7 +84,7 @@ local function search_handler(options, signal)
 
       local end_time = (vim.loop.hrtime() - start_time) / 1E9
 
-      signal.search_results = M.process(options)
+      signal.search_results = M.process_and_get_tree_nodes(options)
       signal.search_info = string.format('Total: %s match, time: %ss', total, end_time)
 
       spectre_state.finder_instance = nil

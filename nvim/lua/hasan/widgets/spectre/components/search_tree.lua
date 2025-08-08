@@ -53,19 +53,25 @@ local function mappings(search_query, replace_query, insert_search_input)
 end
 
 local function prepare_node(node, line, component)
-  local _, devicons = pcall(require, 'nvim-web-devicons')
   local has_children = node:has_children()
 
-  line:append(string.rep('  ', node:get_depth() - 1))
+  if not has_children then
+    line:append(string.rep('  ', node:get_depth()))
+  end
 
   if has_children then
-    local icon, icon_highlight = devicons.get_icon(node.text, string.match(node.text, '%a+$'), { default = true })
-
+    local icon, icon_highlight = node.icon, node.icon_highlight
     local chevron = node:is_expanded() and Icons.Other.ChevronSlimDown or Icons.Other.ChevronSlimRight
+
     line:append(chevron, component:hl_group('SpectreIcon'))
     line:append(' ' .. icon .. ' ', icon_highlight)
-    line:append(node.text, component:hl_group('SpectreFileName'))
 
+    line:append(node.base, component:hl_group('SpectreFileName'))
+    if node.dir then
+      line:append(' ' .. node.dir, component:hl_group('SpectreDirName'))
+    end
+
+    line:append(string.format(' (%d)', node.count), component:hl_group('SpectreChildCount'))
     return line
   end
 
