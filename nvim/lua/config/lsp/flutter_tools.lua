@@ -59,12 +59,12 @@ return {
       },
     })
 
-    command('FlutterLogToggleLayout', function(_)
+    vim.api.nvim_create_user_command('FlutterLogToggleLayout', function(_)
       local updated_layout = not require('core.state').ui.edgy.open_flutter_log_on_right
       require('core.state').ui.edgy.open_flutter_log_on_right = updated_layout
       require('config.edgy').config()
-    end)
-    command('FlutterLogOpen', function(_)
+    end, { desc = 'Toggle flutter log layout' })
+    vim.api.nvim_create_user_command('FlutterLogOpen', function(_)
       require('hasan.nebulous').mark_as_alternate_win()
       local winFound = require('hasan.utils.win').focusWinIfExists('log')
       if winFound then
@@ -80,7 +80,7 @@ return {
         end
       end
       vim.notify('No window found', vim.log.levels.WARN)
-    end)
+    end, { desc = 'Open Flutter log' })
 
     -- require('config.lsp.servers.dartls.pub').setup()
     augroup('MY_FLUTTER_AUGROUP')(function(autocmd)

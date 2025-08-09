@@ -269,7 +269,7 @@ return {
         ['<CR>'] = cmp.mapping(function(fallback)
           if cmp.visible() and cmp.get_selected_entry() then
             cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-            feedkeys('<CR>', '')
+            feedkeys('<CR>')
           else
             fallback()
           end
@@ -277,7 +277,7 @@ return {
         ['<C-y>'] = cmp.mapping(function(_)
           cmp.close()
           vim.defer_fn(function()
-            feedkeys('<CR>', '')
+            feedkeys('<CR>')
           end, 10)
         end),
       }),

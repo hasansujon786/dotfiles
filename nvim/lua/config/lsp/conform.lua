@@ -61,10 +61,10 @@ return {
     opts.formatters_by_ft = get_formatter_list(require('core.state').lsp.formatters_by_ft)
     require('conform').setup(opts)
 
-    command('Format', function(args)
+    vim.api.nvim_create_user_command('Format', function(args)
       require('conform').format({ async = true, range = get_visual_range(args) }, save_cb)
     end, { range = true })
-    command('FormatSync', function(args)
+    vim.api.nvim_create_user_command('FormatSync', function(args)
       require('conform').format({ async = false, range = get_visual_range(args) }, save_cb)
     end, { range = true })
     -- Format with gq key

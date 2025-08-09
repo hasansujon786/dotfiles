@@ -96,7 +96,7 @@ return {
     keymap('c', '<S-CR>', function()
       require('noice').redirect(vim.fn.getcmdline())
       vim.defer_fn(function()
-        feedkeys('<C-c>')
+        feedkeys('<C-c>', 'n')
       end, 10)
     end, { desc = 'Redirect Cmdline' })
 

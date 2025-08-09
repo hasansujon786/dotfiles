@@ -174,7 +174,7 @@ return {
       },
       keys = {
         ['<BS>'] = function(_)
-          feedkeys('<C-w>p')
+          feedkeys('<C-w>p', 'n')
         end,
         ['q'] = function(win)
           win:close()

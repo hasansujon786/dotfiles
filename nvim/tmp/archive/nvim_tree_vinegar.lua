@@ -100,7 +100,7 @@ M.actions = {
   end,
   jump_to_root = function()
     lib.open({ path = vim.loop.cwd() })
-    feedkeys('gg', '')
+    feedkeys('gg')
   end,
   system_reveal = function()
     local node = api.tree.get_node_under_cursor()
@@ -174,7 +174,7 @@ local function tab_win_closed(winnr)
         vim.schedule(function()
           if #vim.api.nvim_list_wins() == 1 then -- if its the last buffer in vim
             -- vim.cmd "quit"                                        -- then close all of vim
-            P('last win')
+            -- P('last win')
           else -- else there are more tabs open
             vim.api.nvim_win_close(tab_wins[1], true) -- then close only the tab
           end

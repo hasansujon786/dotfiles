@@ -14,7 +14,6 @@ local M = {}
 local pub_job = nil
 local function on_pub_get(result, err)
   local timeout = err and 10000 or nil
-  P(result)
   flutter_ui.notify(result, { timeout = timeout })
 end
 
@@ -88,7 +87,7 @@ M.pub_install = function()
 end
 
 M.setup = function()
-  command('PubInstall', M.pub_install)
+  vim.api.nvim_create_user_command('PubInstall', M.pub_install, {})
 end
 
 return M

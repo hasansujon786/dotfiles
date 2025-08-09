@@ -6,7 +6,7 @@ local should_save = function()
   return true
 end
 
-command('SessionSaveQuit', function()
+vim.api.nvim_create_user_command('SessionSaveQuit', function()
   if should_save() then
     require('persisted').save()
   end

@@ -12,7 +12,7 @@ return {
     {
       '<C-c>w',
       function()
-        feedkeys('V%<C-c>w', '')
+        feedkeys('V%<C-c>w')
       end,
       desc = 'Emmet: Wrap tag',
       silent = true,
@@ -21,7 +21,7 @@ return {
     {
       '<C-c>x',
       function()
-        feedkeys('dst', '')
+        feedkeys('dst')
       end,
       desc = 'Emmet: Remove current tag',
       silent = true,

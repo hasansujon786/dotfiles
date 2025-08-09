@@ -208,7 +208,7 @@ function M.reload()
         -- P(name)
       end
     end
-    P('Neovim reloaded')
+    print('Neovim reloaded')
   end
 end
 

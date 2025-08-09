@@ -14,14 +14,14 @@ end
 local M = {
   norm_move_down = function()
     if not vim.o.modifiable then
-      return feedkeys('j', 'v')
+      return feedkeys('j')
     end
     vim.cmd.move('+1')
     feedkeys('==', 'n')
   end,
   norm_move_up = function()
     if not vim.o.modifiable then
-      return feedkeys('k', 'v')
+      return feedkeys('k')
     end
     vim.cmd.move('-2')
     feedkeys('==', 'n')
@@ -29,7 +29,7 @@ local M = {
   move_down = function(lastline)
     if not vim.o.modifiable then
       feedkeys('gv', 'n')
-      return feedkeys('j', 'v')
+      return feedkeys('j')
     end
     local count = vim.v.count == 0 and 1 or vim.v.count
     local max = vim.fn.line('$') - lastline
@@ -42,7 +42,7 @@ local M = {
   move_up = function(firstline)
     if not vim.o.modifiable then
       feedkeys('gv', 'n')
-      return feedkeys('k', 'v')
+      return feedkeys('k')
     end
     local count = vim.v.count == 0 and -1 or -vim.v.count
     local max = (firstline - 1) * -1

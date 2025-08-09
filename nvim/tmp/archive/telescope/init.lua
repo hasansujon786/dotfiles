@@ -248,9 +248,9 @@ return {
     my_theme.setup()
 
     -- keymaps
-    command('EmojiPicker', function()
+    vim.api.nvim_create_user_command('EmojiPicker', function()
       require('hasan.telescope.custom').emojis()
-    end)
+    end, {})
   end,
   init = function()
     vim.ui.select = function(...)

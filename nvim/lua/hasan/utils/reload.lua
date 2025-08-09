@@ -28,7 +28,7 @@ local reload_lua_modules = function()
     end)
 
     if not ok then
-      P(dir)
+      print(dir)
     end
   end
 end

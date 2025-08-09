@@ -173,5 +173,5 @@ _G.explorer_collasp_all = function()
   require('hasan.utils.vinegar').actions.jump_to_root()
 end
 _G.explorer_menu = function(val)
-  P('explorer_menu', val)
+  print('explorer_menu', val)
 end

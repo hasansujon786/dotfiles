@@ -13,45 +13,36 @@ _G.mason_path = data_path .. '/mason/packages'
 _G.org_root_path = vim.fs.normalize(vim.fn.expand('~/my_vault/orgfiles'))
 _G.repoes_path = os.getenv('REPOES') or vim.fn.expand('~/')
 
-P = function(...)
-  local hasNvim9 = vim.fn.has('nvim-0.9') == 1
-  if hasNvim9 then
-    vim.print(...)
-  else
-    vim.pretty_print(...)
-  end
-  return ...
-end
-
-R = function(moduleName, message)
+---Reload lua module
+---@param module_name string
+---@param msg? string
+---@return table | function | Void module
+R = function(module_name, msg)
   if pcall(require, 'plenary') then
     local plenary_reload = require('plenary.reload').reload_module
 
-    plenary_reload(moduleName)
-    if message then
-      vim.notify(string.format('[%s] - %s', moduleName, message), vim.log.levels.INFO)
+    plenary_reload(module_name)
+    if msg then
+      vim.notify(string.format('[%s] - %s', module_name, msg), vim.log.levels.INFO)
     end
-    return require(moduleName)
+    return require(module_name)
   end
 end
 
+---@param str string
 _G.insert = function(str)
   vim.api.nvim_put({ str }, 'v', true, true)
 end
 
----Show custom message popup
----@param msg string Content of the notification to show to the user.
----@param level integer|nil One of the values from |vim.log.levels|.
----@param opts table|nil Optional parameters. Unused by default.
-function _G.notify(msg, level, opts)
-  require('hasan.widgets.notify').notify(msg, level, opts)
-end
-
+---@param str string
 function _G.t(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
+
+---@param key string
+---@param mode? 'm'|'n'
 function _G.feedkeys(key, mode)
-  mode = mode == nil and 'm' or mode
+  mode = mode or 'm'
   vim.api.nvim_feedkeys(t(key), mode, false)
 end
 
@@ -65,10 +56,6 @@ function _G.handle_win_cmd(wincmd, lazySave)
     require('hasan.nebulous').mark_as_alternate_win()
     vim.cmd(wincmd)
   end
-end
-
-function _G.command(name, callback, opts)
-  vim.api.nvim_create_user_command(name, callback, opts or {})
 end
 
 ---Fire user event
@@ -93,8 +80,6 @@ function _G.augroup(group)
     end)
   end
 end
-
--- prequire {{{
 
 ---Protected `require` function
 ---@param module_name string
@@ -124,4 +109,3 @@ function _G.prequire(module_name)
     return void, false
   end
 end
--- }}}

@@ -4,7 +4,7 @@ local selection = table.concat(vim.iter(_lines):map(vim.trim):totable())
 
 local c = require('onedark.colors')
 local util = require('onedark.util')
-P(util.darken('#ca72e4', 0.2, c.bg0))
+-- P(util.darken('#ca72e4', 0.2, c.bg0))
 
 local ts_utils = require('nvim-treesitter.ts_utils')
 ts_utils.get_node_text = vim.treesitter.query.get_node_text

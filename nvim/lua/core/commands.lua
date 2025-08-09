@@ -3,6 +3,8 @@ keymap('n', '<Plug>(inspect-pos)', function()
   vim.fn['repeat#set'](t('<Plug>(inspect-pos)'))
 end, { desc = 'Inspect Pos' })
 
+local command = vim.api.nvim_create_user_command
+
 command('ClearShada', function()
   local shada_path = vim.fn.expand(vim.fn.stdpath('data') .. '/shada')
   local files = vim.fn.glob(shada_path .. '/*', false, true)

@@ -66,14 +66,12 @@ keymap(nx, '<leader>iP', '"+P', { desc = 'Paste from system' })
 -- Modify & rearrange texts ----------------------
 local uncomment_block = function()
   require('vim._comment').textobject()
-  feedkeys('gc', 'm')
-end
-local textobject_rhs = function()
-  require('vim._comment').textobject()
+  feedkeys('gc')
 end
 keymap({ 'n' }, 'gcu', uncomment_block, { desc = 'Uncomment block' })
 keymap({ 'n' }, 'gc/', uncomment_block, { desc = 'Uncomment block' })
-keymap({ 'o' }, 'a/', textobject_rhs, { desc = 'Comment textobject' })
+keymap({ 'o' }, 'a/', '<cmd>lua require("vim._comment").textobject()<CR>', { desc = 'Comment textobject' })
+keymap({ 'x' }, 'a/', '<Esc><cmd>lua require("vim._comment").textobject()<CR>', { desc = 'Comment textobject' })
 
 keymap({ 'x' }, 'Z', '<Plug>VSurround')
 
@@ -148,6 +146,7 @@ if not vim.g.vscode then
   nvim_set_keymap('n', 'zuu', '0vai:foldclose!<CR>zazt', { silent = true, desc = 'Fold current context' })
   nvim_set_keymap('x', 'zu', ':foldclose!<CR>zazt', { silent = true, desc = 'Fold current context' })
   keymap('n', 'z.', '<cmd>%foldclose<CR>zb', { desc = 'Fold all buf' })
+  keymap('n', 'z;', '<cmd>setl foldlevel=1<CR>zb', { desc = 'Fold all buf' })
   keymap('n', '<tab>', 'za')
   keymap('n', '<s-tab>', 'zA')
 

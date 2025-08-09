@@ -92,7 +92,7 @@ return {
         if state.path ~= vim.g.cwd then
           require('neo-tree.sources.filesystem').navigate(state, vim.g.cwd)
         end
-        feedkeys('ggj')
+        feedkeys('ggj', 'n')
       end,
 
       ['[c'] = 'prev_git_modified',

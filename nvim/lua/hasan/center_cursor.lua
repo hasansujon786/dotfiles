@@ -46,6 +46,6 @@ M.toggle = function()
   end
 end
 
-command('CenterCursorToggle', M.toggle, { desc = 'Toggle center cursor on insert' })
+vim.api.nvim_create_user_command('CenterCursorToggle', M.toggle, { desc = 'Toggle center cursor on insert' })
 
 return M

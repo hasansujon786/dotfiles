@@ -133,7 +133,7 @@ end
 _G.bar = function()
   local msg = 'Hello World Lorem animi\nsadf d asdf sadf asdf sdfsdfsdf asdffsdsf sdf'
 
-  notify(msg, vim.log.levels.TRACE, { title = 'harpoon' })
+  -- notify(msg, vim.log.levels.TRACE, { title = 'msg' })
 end
 
 return M
