@@ -64,19 +64,21 @@ keymap(nx, '<leader>ip', '"+p', { desc = 'Paste from system' })
 keymap(nx, '<leader>iP', '"+P', { desc = 'Paste from system' })
 
 -- Modify & rearrange texts ----------------------
--- maps.vnoremap('ao', '<ESC>va{%V%') -- Select a block {} of code
--- maps.nnoremap('yao', 'va{%V%y')
--- maps.nnoremap('dao', 'va{%V%d')
-
 local uncomment_block = function()
   require('vim._comment').textobject()
   feedkeys('gc', 'm')
 end
+local textobject_rhs = function()
+  require('vim._comment').textobject()
+end
 keymap({ 'n' }, 'gcu', uncomment_block, { desc = 'Uncomment block' })
+keymap({ 'n' }, 'gc/', uncomment_block, { desc = 'Uncomment block' })
+keymap({ 'o' }, 'a/', textobject_rhs, { desc = 'Comment textobject' })
+
 keymap({ 'x' }, 'Z', '<Plug>VSurround')
 
 keymap('x', '$', 'g_') -- A fix to select end of line
-keymap('v', '.', ':norm.<cr>') -- map . in visual mode
+keymap('v', '.', ':norm.<cr>') -- Map (.) in visual mode
 keymap('v', '>', '>gv') -- Keep selection when indenting/outdenting.
 keymap('v', '<', '<gv')
 nvim_set_keymap('v', '<C-g>', '*<C-O>:%s///gn<CR>', noSilent) -- Print the number of occurrences of the current word under the cursor

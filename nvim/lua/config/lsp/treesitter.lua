@@ -64,8 +64,8 @@ return {
             ['ak'] = { query = '@pair.outer', desc = 'pair' }, -- object's { key: value }
             ['io'] = { query = '@block.inner', desc = 'inner block' },
             ['ao'] = { query = '@block.outer', desc = 'block' },
-            ['i/'] = { query = '@comment.inner', desc = 'inner comment' },
-            ['a/'] = { query = '@comment.outer', desc = 'comment' },
+            -- ['i/'] = { query = '@comment.inner', desc = 'inner comment' },
+            -- ['a/'] = { query = '@comment.outer', desc = 'comment' },
             ['iC'] = { query = '@conditional.inner', desc = 'inner conditional' },
             ['aC'] = { query = '@conditional.outer', desc = 'conditional' },
             ['iP'] = { query = '@parameter.inner', desc = 'inner parameter' },

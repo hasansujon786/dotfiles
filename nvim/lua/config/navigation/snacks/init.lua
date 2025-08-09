@@ -354,7 +354,7 @@ return {
         sources = {
           buffers = { layout = 'dropdown', current = false },
           files = { layout = 'ivy' },
-          undo = { layout = 'ivy' },
+          undo = { focus = 'list' },
           commands = { layout = 'vscode' },
           keymaps = { layout = 'vscode' },
           git_files = { layout = 'dropdown' },
@@ -611,6 +611,13 @@ return {
         },
 
         actions = {
+          focus_preview = function(p, _)
+            if vim.api.nvim_get_current_win() == p.preview.win.win then
+              p:focus('list', { show = true })
+            else
+              p:focus('preview', { show = true })
+            end
+          end,
           flash = flash_on_picker,
           fedit = function(picker, item)
             picker:close()
@@ -686,6 +693,16 @@ return {
               vim.api.nvim_put({ item.file }, 'c', true, true)
             end
           end,
+          spectree = function(picker, item)
+            picker:close()
+
+            local path = item.file
+            if item.cwd then
+              path = vim.fs.dirname(item.file)
+            end
+
+            require('hasan.widgets.spectre').open({ search_paths = path })
+          end,
         },
 
         icons = {
@@ -693,6 +710,22 @@ return {
         },
 
         win = {
+          list = {
+            keys = {
+              ['p'] = { 'focus_preview', mode = { 'n' } },
+              ['<A-k>'] = { 'select_and_prev', mode = { 'i', 'n' } },
+              ['<A-j>'] = { 'select_and_next', mode = { 'i', 'n' } },
+              ['<s-tab>'] = { 'my_list_up', mode = { 'i', 'n' } },
+              ['<tab>'] = { 'my_list_down', mode = { 'i', 'n' } },
+            },
+          },
+          preview = {
+            keys = {
+              ['p'] = { 'focus_preview', mode = { 'n' } },
+              ['<s-tab>'] = { 'my_list_up', mode = { 'i', 'n' } },
+              ['<tab>'] = { 'my_list_down', mode = { 'i', 'n' } },
+            },
+          },
           input = {
             keys = {
               ['<c-u>'] = false,
@@ -706,9 +739,8 @@ return {
 
               ['<s-tab>'] = { 'my_list_up', mode = { 'i', 'n' } },
               ['<tab>'] = { 'my_list_down', mode = { 'i', 'n' } },
-              ['<c-i>'] = { 'select_and_prev', mode = { 'i', 'n' } },
-              ['<c-y>'] = { 'select_and_next', mode = { 'i', 'n' } },
-              ['<A-y>'] = { 'select_and_next', mode = { 'i', 'n' } },
+              ['<A-k>'] = { 'select_and_prev', mode = { 'i', 'n' } },
+              ['<A-j>'] = { 'select_and_next', mode = { 'i', 'n' } },
 
               ['<a-p>'] = { 'list_up', mode = { 'i', 'n' } },
               ['<a-n>'] = { 'list_down', mode = { 'i', 'n' } },
@@ -727,8 +759,9 @@ return {
               ['<c-r><c-a>'] = { 'insert_absolute_path', mode = { 'i', 'n' } },
               ['<a-l>'] = { 'inspect', mode = { 'i', 'n' } },
 
-              ['<a-t>'] = { 'focus_file_tree', mode = { 'i', 'n' } },
-              ['<a-s>'] = { 'flash', mode = { 'n', 'i' } },
+              ['<A-/>'] = { 'spectree', mode = { 'i', 'n' } },
+              ['<c-_>'] = { 'spectree', mode = { 'i', 'n' } },
+              -- ['<a-s>'] = { 'flash', mode = { 'n', 'i' } },
               ['s'] = { 'flash' },
 
               ['<a-i>'] = { 'quicklook', mode = { 'i', 'n' } },

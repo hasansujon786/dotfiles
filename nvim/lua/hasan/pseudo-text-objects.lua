@@ -9,13 +9,14 @@ keymap('o', 'al', '<cmd>normal val<CR>', { desc = 'line' })
 -- number pseudo-text object (integer and float)
 -- ---------------------------------------------
 -- in
-function VisualNumber()
+local function visual_number()
+  vim.cmd([[normal v]])
   vim.fn.search([[\d\([^0-9\.]\|$\)]], 'cW')
   vim.cmd([[normal v]])
   vim.fn.search([[\(^\|[^0-9\.]\d\)]], 'becW')
 end
-keymap('x', 'in', ':lua VisualNumber()<CR>', { desc = 'inner number' })
-keymap('o', 'in', ':<C-u>normal vin<CR>', { desc = 'inner number' })
+keymap('x', 'in', visual_number, { desc = 'inner number' })
+keymap('o', 'in', '<cmd>normal vin<CR>', { desc = 'inner number' })
 
 -- buffer pseudo-text objects
 -- --------------------------
@@ -53,11 +54,23 @@ keymap('o', 'a?', '<cmd>normal va?V<CR>', { desc = 'block comment' })
 -- -----------------------------
 -- i_ i. i: i, i; i| i/ i\ i* i+ i- i#
 -- a_ a. a: a, a; a| a/ a\ a* a+ a- a#
-for _, char in ipairs({ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '-', '#' }) do
-  keymap('x', 'i' .. char, string.format(':<C-u>normal! T%svt%s<CR>', char, char), { desc = 'which_key_ignore' })
-  keymap('o', 'i' .. char, string.format(':normal vi%s<CR>', char), { desc = 'which_key_ignore' })
-  keymap('x', 'a' .. char, string.format(':<C-u>normal! F%svf%s<CR>', char, char), { desc = 'which_key_ignore' })
-  keymap('o', 'a' .. char, string.format(':normal va%s<CR>', char), { desc = 'which_key_ignore' })
+local simple_objects = {
+  inner = function(char)
+    return function()
+      vim.cmd(string.format('normal! T%sot%s', char, char))
+    end
+  end,
+  outer = function(char)
+    return function()
+      vim.cmd(string.format('normal! F%sof%s', char, char))
+    end
+  end,
+}
+for _, char in ipairs({ '_', '.', ':', ',', '<bar>', '/', '<bslash>', '*', '-', '#' }) do
+  keymap('x', 'i' .. char, simple_objects.inner(char), { desc = 'which_key_ignore' })
+  keymap('o', 'i' .. char, string.format('<cmd>normal vi%s<CR>', char), { desc = 'which_key_ignore' })
+  keymap('x', 'a' .. char, simple_objects.outer(char), { desc = 'which_key_ignore' })
+  keymap('o', 'a' .. char, string.format('<cmd>normal va%s<CR>', char), { desc = 'which_key_ignore' })
 end
 
 -- hasan/mahmud/sujon
