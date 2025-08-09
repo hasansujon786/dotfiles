@@ -713,10 +713,11 @@ return {
           list = {
             keys = {
               ['p'] = { 'focus_preview', mode = { 'n' } },
-              ['<A-k>'] = { 'select_and_prev', mode = { 'i', 'n' } },
-              ['<A-j>'] = { 'select_and_next', mode = { 'i', 'n' } },
               ['<s-tab>'] = { 'my_list_up', mode = { 'i', 'n' } },
               ['<tab>'] = { 'my_list_down', mode = { 'i', 'n' } },
+              ['<A-i>'] = { 'select_and_prev', mode = { 'i', 'n' } },
+              ['<A-y>'] = { 'select_and_next', mode = { 'i', 'n' } },
+              ['<C-y>'] = { 'select_and_next', mode = { 'i', 'n' } },
             },
           },
           preview = {
@@ -734,13 +735,15 @@ return {
               ['<F3>'] = { 'toggle_preview', mode = { 'i', 'n' } },
               ['<a-u>'] = { 'preview_scroll_up', mode = { 'i', 'n' } },
               ['<a-d>'] = { 'preview_scroll_down', mode = { 'i', 'n' } },
+              ['<a-o>'] = { 'preview_scroll_down', mode = { 'i', 'n' } },
               ['<c-b>'] = { 'list_scroll_up', mode = { 'i', 'n' } },
               ['<c-f>'] = { 'list_scroll_down', mode = { 'i', 'n' } },
 
               ['<s-tab>'] = { 'my_list_up', mode = { 'i', 'n' } },
               ['<tab>'] = { 'my_list_down', mode = { 'i', 'n' } },
-              ['<A-k>'] = { 'select_and_prev', mode = { 'i', 'n' } },
-              ['<A-j>'] = { 'select_and_next', mode = { 'i', 'n' } },
+              ['<A-i>'] = { 'select_and_prev', mode = { 'i', 'n' } },
+              ['<A-y>'] = { 'select_and_next', mode = { 'i', 'n' } },
+              ['<C-y>'] = { 'select_and_next', mode = { 'i', 'n' } },
 
               ['<a-p>'] = { 'list_up', mode = { 'i', 'n' } },
               ['<a-n>'] = { 'list_down', mode = { 'i', 'n' } },
@@ -761,13 +764,13 @@ return {
 
               ['<A-/>'] = { 'spectree', mode = { 'i', 'n' } },
               ['<c-_>'] = { 'spectree', mode = { 'i', 'n' } },
-              -- ['<a-s>'] = { 'flash', mode = { 'n', 'i' } },
+              ['<a-s>'] = { 'flash', mode = { 'n', 'i' } },
               ['s'] = { 'flash' },
 
-              ['<a-i>'] = { 'quicklook', mode = { 'i', 'n' } },
+              ['<C-i>'] = { 'quicklook', mode = { 'i', 'n' } },
               ['<a-r>'] = { 'system_reveal', mode = { 'i', 'n' } },
               ['R'] = { 'system_reveal', mode = { 'n' } },
-              ['<a-o>'] = { 'system_open', mode = { 'i', 'n' } },
+              ['<C-o>'] = { 'system_open', mode = { 'i', 'n' } },
               ['O'] = { 'system_open', mode = { 'n' } },
               -- ['<S-CR>'] = { 'fedit', mode = { 'i', 'n' } },
             },
@@ -878,12 +881,11 @@ return {
     { '<leader>ou', function() Snacks.picker.undo() end, desc = 'Show undo history' },
     { '<leader>/.', function() Snacks.picker.resume() end, desc = 'Resume' },
     { '<leader>/f', function() Snacks.picker.files() end, desc = 'Find Files' },
-    { '<leader>/k', function() Snacks.picker.keymaps() end, desc = 'Keymaps' },
+    { '<leader>/k', function() require('config.navigation.snacks.custom').keymaps() end, desc = 'Commands' },
     { '<leader>/q', function() Snacks.picker.qflist() end, desc = 'Quickfix List' },
     { '<leader>/l', function() Snacks.picker.loclist() end, desc = 'Location List' },
     { '<leader>/H', function() Snacks.picker.highlights() end, desc = 'Highlights' },
     { '<leader>/c', function() Snacks.picker.command_history() end, desc = 'Command History' },
-    { 'cy', function() require('config.navigation.snacks.custom').keymaps() end, desc = 'Commands' },
     { '<F1>', function() Snacks.picker.commands() end, desc = 'Commands' },
     { '//', auto_open_qflistt_or_loclist, ft = 'qf', desc = 'which_key_ignore' },
 

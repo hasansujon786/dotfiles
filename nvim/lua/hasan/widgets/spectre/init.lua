@@ -59,11 +59,14 @@ function M.open(opts)
     max_height = vim.o.lines,
     width = math.floor(vim.o.columns / 2),
   }
+
+  local default_keymap = { focus_next = '<C-g><Tab>', focus_prev = '<C-g><S-Tab>' }
   local renderer = n.create_renderer({
     width = ui_info.width,
     height = ui_info.max_height - 1,
     relative = 'editor',
     position = { row = 0, col = '100%' },
+    keymap = default_keymap,
   })
 
   local is_replace_processing = false
@@ -192,6 +195,12 @@ function M.open(opts)
       local next_input = renderer:get_component_by_id('search_tree')
       next_input:focus()
     end,
+    focus_next = function()
+      feedkeys(default_keymap.focus_next)
+    end,
+    focus_prev = function()
+      feedkeys(default_keymap.focus_prev)
+    end,
     quickfix = function()
       utils.open_quickfix()
     end,
@@ -208,6 +217,8 @@ function M.open(opts)
     { key = '<A-c>', handler = actions.toggle_case, mode = { 'n', 'i' }, desc = 'Togle case' },
     { key = '<C-f>', handler = actions.toggle_filter_input, mode = { 'n', 'i' }, desc = 'Togle filter inputs' },
     { key = '<C-t>', handler = actions.toggle_replace_input, mode = { 'n', 'i' }, desc = 'Togle replace input' },
+    { key = '<Tab>', handler = actions.focus_next, mode = { 'n', 'i' }, desc = 'Open results in quickfix' },
+    { key = '<S-Tab>', handler = actions.focus_prev, mode = { 'n', 'i' }, desc = 'Open results in quickfix' },
   }
 
   renderer:add_mappings(keymaps)
