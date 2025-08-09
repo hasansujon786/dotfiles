@@ -7,12 +7,60 @@ local constants = require('hasan.widgets.spectre.constants')
 local popup_options = constants.popup_options
 local window = constants.hls.window
 
-local function mappings(search_query, replace_query, insert_search_input)
+local function open_file_origin(winid, entry, post_action)
+  local escaped_filename = vim.fn.fnameescape(entry.filename)
+  vim.api.nvim_set_current_win(winid)
+  vim.api.nvim_command([[execute "normal! m` "]])
+  vim.cmd.edit(escaped_filename)
+  vim.api.nvim_win_set_cursor(0, { entry.lnum, entry.col - 1 })
+  feedkeys('zz', 'n')
+
+  if type(post_action) == 'function' then
+    vim.schedule(post_action)
+  end
+end
+
+local function on_select(origin_winid, post_action)
+  return function(node, component)
+    local tree = component:get_tree()
+
+    if node:has_children() then
+      if node:is_expanded() then
+        node:collapse()
+      else
+        node:expand()
+      end
+
+      return tree:render()
+    end
+
+    local entry = node.entry
+    if not vim.api.nvim_win_is_valid(origin_winid) then
+      return
+    end
+
+    open_file_origin(origin_winid, entry, post_action)
+  end
+end
+
+local function mappings(origin_winid, search_query, replace_query, insert_search_input, close)
   local is_replace_processing = false
 
   return function(component)
     return {
       { key = 'i', handler = insert_search_input, mode = { 'n' } },
+      {
+        key = 'o',
+        handler = function()
+          local node = component:get_focused_node()
+          if not vim.api.nvim_win_is_valid(origin_winid) or node == nil or not node.entry then
+            return
+          end
+
+          open_file_origin(origin_winid, node.entry, close)
+        end,
+        mode = { 'n' },
+      },
       {
         mode = { 'n' },
         key = 'r',
@@ -118,36 +166,6 @@ local function prepare_node(node, line, component)
   return line
 end
 
-local function on_select(origin_winid, exit_zoom)
-  return function(node, component)
-    local tree = component:get_tree()
-
-    if node:has_children() then
-      if node:is_expanded() then
-        node:collapse()
-      else
-        node:expand()
-      end
-
-      return tree:render()
-    end
-
-    local entry = node.entry
-
-    if vim.api.nvim_win_is_valid(origin_winid) then
-      local escaped_filename = vim.fn.fnameescape(entry.filename)
-      vim.api.nvim_set_current_win(origin_winid)
-      vim.api.nvim_command([[execute "normal! m` "]])
-      vim.cmd.edit(escaped_filename)
-      vim.api.nvim_win_set_cursor(0, { entry.lnum, entry.col - 1 })
-
-      if type(exit_zoom) == 'function' then
-        vim.schedule(exit_zoom)
-      end
-    end
-  end
-end
-
 local function search_tree(props)
   local tree = n.tree({
     id = 'search_tree',
@@ -156,7 +174,13 @@ local function search_tree(props)
     padding = { left = 1, right = 1 },
     hidden = props.hidden,
     data = props.data,
-    mappings = mappings(props.search_query, props.replace_query, props.insert_search_input),
+    mappings = mappings(
+      props.origin_winid,
+      props.search_query,
+      props.replace_query,
+      props.insert_search_input,
+      props.close
+    ),
     prepare_node = prepare_node,
     on_select = on_select(props.origin_winid, props.exit_zoom),
     window = window,

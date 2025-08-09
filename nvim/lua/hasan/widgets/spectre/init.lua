@@ -380,6 +380,7 @@ function M.open(opts)
         return #value == 0
       end),
       exit_zoom = actions.exit_zoom,
+      close = actions.close,
       insert_search_input = actions.insert_search_input,
     })
     -- gap(1),
