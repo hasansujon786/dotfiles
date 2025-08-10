@@ -50,33 +50,35 @@ return {
           lookahead = true, -- Automatically jump forward to text-objects, similar to targets.vim
           keymaps = {
             -- You can use the capture groups defined in textobjects.scm
-            ['iv'] = { query = '@assignment.lhs', desc = 'assignment lhs' },
-            ['i='] = { query = '@assignment.rhs', desc = 'assignment rhs' },
-            ['a='] = { query = '@assignment.outer', desc = 'assignment' },
-            ['av'] = { query = '@assignment.outer', desc = 'assignment' },
-            ['if'] = { query = '@function.inner', desc = 'inner function' },
-            ['af'] = { query = '@function.outer', desc = 'function' },
+            ['ia'] = { query = '@parameter.inner', desc = 'inner parameter' },
+            ['aa'] = { query = '@parameter.outer', desc = 'parameter' },
             ['ic'] = { query = '@call.inner', desc = 'inner function call' },
             ['ac'] = { query = '@call.outer', desc = 'function call' },
+            ['if'] = { query = '@function.inner', desc = 'inner function' },
+            ['af'] = { query = '@function.outer', desc = 'function' },
+
             ['im'] = { query = '@class.inner', desc = 'inner class' },
             ['am'] = { query = '@class.outer', desc = 'class' },
+
+            ['id'] = { query = '@conditional.inner', desc = 'inner conditional' },
+            ['ad'] = { query = '@conditional.outer', desc = 'conditional' },
+            ['io'] = { query = '@loop.inner', desc = 'inner loop' },
+            ['ao'] = { query = '@loop.outer', desc = 'loop' },
+            ['iC'] = { query = '@block.inner', desc = 'inner block' },
+            ['aC'] = { query = '@block.outer', desc = 'block' },
+
             ['ik'] = { query = '@pair.inner', desc = 'inner pair' },
             ['ak'] = { query = '@pair.outer', desc = 'pair' }, -- object's { key: value }
-            ['io'] = { query = '@block.inner', desc = 'inner block' },
-            ['ao'] = { query = '@block.outer', desc = 'block' },
-            -- ['i/'] = { query = '@comment.inner', desc = 'inner comment' },
-            -- ['a/'] = { query = '@comment.outer', desc = 'comment' },
-            ['iC'] = { query = '@conditional.inner', desc = 'inner conditional' },
-            ['aC'] = { query = '@conditional.outer', desc = 'conditional' },
-            ['iP'] = { query = '@parameter.inner', desc = 'inner parameter' },
-            ['aP'] = { query = '@parameter.outer', desc = 'parameter' },
             ['iR'] = { query = '@return.inner', desc = 'inner return' },
             ['aR'] = { query = '@return.outer', desc = 'return' },
-            -- ['ii'] = { query = '@indent.begin', query_group = 'indents', desc = 'inner indent begin' },
-            -- ['ai'] = { query = '@fold', query_group = 'folds', desc = 'fold' },
-            -- ['ii'] = { query = '@local.scope', desc = 'Select language scope' },
-            -- @loop.inner
-            -- @loop.outer
+
+            ['iv'] = { query = '@assignment.lhs', desc = 'assignment lhs' },
+            ['av'] = { query = '@assignment.outer', desc = 'assignment' },
+            ['i='] = { query = '@assignment.rhs', desc = 'assignment rhs' },
+            ['a='] = { query = '@assignment.outer', desc = 'assignment' },
+
+            ['i/'] = { query = '@comment.inner', desc = 'inner comment' },
+            -- ['a/'] = { query = '@comment.outer', desc = 'comment' },
           },
         },
         swap = {
@@ -108,20 +110,12 @@ return {
             ['[M'] = '@class.outer',
           },
         },
-        -- lsp_interop = {
-        --   enable = true,
-        --   border = 'double',
-        --   peek_definition_code = {
-        --     ["df"] = "@function.outer",
-        --     ["dF"] = "@class.outer",
-        --   },
-        -- }
       },
     })
 
-      -- stylua: ignore start
-      keymap('n', '<P', '<Plug>(ts-swap-parameter-prev)<cmd>call repeat#set("\\<Plug>(ts-swap-parameter-prev)")<CR>', { desc = 'Swap parameter prev' })
-      keymap('n', '>P', '<Plug>(ts-swap-parameter-next)<cmd>call repeat#set("\\<Plug>(ts-swap-parameter-next)")<CR>', { desc = 'Swap parameter next' })
+    -- stylua: ignore start
+    keymap('n', '<P', '<Plug>(ts-swap-parameter-prev)<cmd>call repeat#set("\\<Plug>(ts-swap-parameter-prev)")<CR>', { desc = 'Swap parameter prev' })
+    keymap('n', '>P', '<Plug>(ts-swap-parameter-next)<cmd>call repeat#set("\\<Plug>(ts-swap-parameter-next)")<CR>', { desc = 'Swap parameter next' })
   end,
   dependencies = {
     -- 'nvim-treesitter/nvim-treesitter-textobjects',

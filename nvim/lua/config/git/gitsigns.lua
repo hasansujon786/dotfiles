@@ -55,8 +55,8 @@ return {
       -- map('n', '<leader>gD', function() gs.diffthis('~') end)
 
       -- Text object
-      map({ 'o', 'x' }, 'ih', '<cmd>Gitsigns select_hunk<CR>')
-      map({ 'o', 'x' }, 'ah', '<cmd>Gitsigns select_hunk<CR>')
+      map({ 'o', 'x' }, 'ig', '<cmd>Gitsigns select_hunk<CR>')
+      map({ 'o', 'x' }, 'ag', '<cmd>Gitsigns select_hunk<CR>')
     end,
   },
   config_path = function (_, opts)

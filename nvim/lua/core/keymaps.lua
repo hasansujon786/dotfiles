@@ -147,8 +147,8 @@ if not vim.g.vscode then
   nvim_set_keymap('x', 'zu', ':foldclose!<CR>zazt', { silent = true, desc = 'Fold current context' })
   keymap('n', 'z.', '<cmd>%foldclose<CR>zb', { desc = 'Fold all buf' })
   keymap('n', 'z;', '<cmd>setl foldlevel=1<CR>zb', { desc = 'Fold all buf' })
-  keymap('n', '<tab>', 'za')
-  keymap('n', '<s-tab>', 'zA')
+  keymap('n', '<tab>', 'za', { desc = 'Toggle fold' })
+  keymap('n', '<s-tab>', 'zA', { desc = 'Toggle fold recursively' })
 
   -- Navigation -----------------------------------
   keymap('n', 'j', function()

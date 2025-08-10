@@ -20,11 +20,11 @@ keymap('o', 'in', '<cmd>normal vin<CR>', { desc = 'inner number' })
 
 -- buffer pseudo-text objects
 -- --------------------------
--- ia aa
-keymap('x', 'ia', [[0:<C-u>let z = @/|1;/^./kz<CR>G??<CR>:let @/ = z|nohlsearch<CR>V'z]], { desc = 'inner buffer' })
-keymap('o', 'ia', '<cmd>normal via<CR>', { desc = 'inner buffer' })
-keymap('x', 'aa', 'G$ogg0', { desc = 'buffer' })
-keymap('o', 'aa', '<cmd>normal vaa<CR>', { desc = 'buffer' })
+-- ie ae
+keymap('x', 'ie', [[0:<C-u>let z = @/|1;/^./kz<CR>G??<CR>:let @/ = z|nohlsearch<CR>V'z]], { desc = 'inner buffer' })
+keymap('o', 'ie', '<cmd>normal vie<CR>', { desc = 'inner buffer' })
+keymap('x', 'ae', 'G$ogg0', { desc = 'buffer' })
+keymap('o', 'ae', '<cmd>normal vae<CR>', { desc = 'buffer' })
 
 -- square brackets pseudo-text objects
 -- -----------------------------------
@@ -37,10 +37,10 @@ keymap('o', 'ar', '<cmd>normal va[<CR>', { desc = 'square brackets' })
 -- last change pseudo-text objects
 -- -------------------------------
 -- ie ae
-keymap('x', 'ie', '`]o`[', { desc = 'inner last change' })
-keymap('o', 'ie', '<cmd>normal vie<CR>', { desc = 'inner last change' })
-keymap('x', 'ae', '`]o`[V', { desc = 'last change' })
-keymap('o', 'ae', '<cmd>normal vae<CR>', { desc = 'last change' })
+-- keymap('x', 'ie', '`]o`[', { desc = 'inner last change' })
+-- keymap('o', 'ie', '<cmd>normal vie<CR>', { desc = 'inner last change' })
+-- keymap('x', 'ae', '`]o`[V', { desc = 'last change' })
+-- keymap('o', 'ae', '<cmd>normal vae<CR>', { desc = 'last change' })
 
 -- block comment pseudo-text objects
 -- ---------------------------------
