@@ -34,6 +34,14 @@ return {
       { '<leader>oc', '<cmd>lua require("orgmode").action("capture.prompt")<CR>', desc = 'Org capture' },
     },
     opts = {
+      mappings = {
+        text_objects = {
+          -- inner_heading = '',
+          -- around_heading = '',
+          inner_subtree = 'iS',
+          around_subtree = 'aS',
+        },
+      },
       org_agenda_files = { '~/my_vault/orgfiles/**/*' },
       org_default_notes_file = org_root_path .. '/refile.org',
       org_hide_leading_stars = true,

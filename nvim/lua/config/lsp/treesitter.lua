@@ -50,35 +50,41 @@ return {
           lookahead = true, -- Automatically jump forward to text-objects, similar to targets.vim
           keymaps = {
             -- You can use the capture groups defined in textobjects.scm
-            ['ia'] = { query = '@parameter.inner', desc = 'inner parameter' },
-            ['aa'] = { query = '@parameter.outer', desc = 'parameter' },
-            ['ic'] = { query = '@call.inner', desc = 'inner function call' },
-            ['ac'] = { query = '@call.outer', desc = 'function call' },
             ['if'] = { query = '@function.inner', desc = 'inner function' },
             ['af'] = { query = '@function.outer', desc = 'function' },
+            ['ic'] = { query = '@call.inner', desc = 'inner function call' },
+            ['ac'] = { query = '@call.outer', desc = 'function call' },
+            ['ia'] = { query = '@parameter.inner', desc = 'inner parameter' },
+            ['aa'] = { query = '@parameter.outer', desc = 'parameter' },
 
             ['im'] = { query = '@class.inner', desc = 'inner class' },
             ['am'] = { query = '@class.outer', desc = 'class' },
 
+            ['io'] = { query = '@block.inner', desc = 'inner block' },
+            ['ao'] = { query = '@block.outer', desc = 'block' },
             ['id'] = { query = '@conditional.inner', desc = 'inner conditional' },
             ['ad'] = { query = '@conditional.outer', desc = 'conditional' },
-            ['io'] = { query = '@loop.inner', desc = 'inner loop' },
-            ['ao'] = { query = '@loop.outer', desc = 'loop' },
-            ['iC'] = { query = '@block.inner', desc = 'inner block' },
-            ['aC'] = { query = '@block.outer', desc = 'block' },
+            ['iP'] = { query = '@loop.inner', desc = 'inner loop' },
+            ['aP'] = { query = '@loop.outer', desc = 'loop' },
 
-            ['ik'] = { query = '@pair.inner', desc = 'inner pair' },
-            ['ak'] = { query = '@pair.outer', desc = 'pair' }, -- object's { key: value }
             ['iR'] = { query = '@return.inner', desc = 'inner return' },
             ['aR'] = { query = '@return.outer', desc = 'return' },
 
+            ['i='] = { query = '@attribute.inner', desc = 'inner return' },
+            ['a='] = { query = '@attribute.outer', desc = 'return' },
+
             ['iv'] = { query = '@assignment.lhs', desc = 'assignment lhs' },
             ['av'] = { query = '@assignment.outer', desc = 'assignment' },
-            ['i='] = { query = '@assignment.rhs', desc = 'assignment rhs' },
-            ['a='] = { query = '@assignment.outer', desc = 'assignment' },
+            ['ig'] = { query = '@assignment.rhs', desc = 'assignment rhs' },
+            ['ag'] = { query = '@assignment.outer', desc = 'assignment' },
 
             ['i/'] = { query = '@comment.inner', desc = 'inner comment' },
             -- ['a/'] = { query = '@comment.outer', desc = 'comment' },
+
+            ['ik'] = { query = '@_pair.inner', desc = 'inner pair' },
+            ['ak'] = { query = '@_pair.outer', desc = 'outer pair' }, -- object's { key: value }
+            ['iS'] = { query = '@_subtree.inner', desc = 'inner subtree' },
+            ['aS'] = { query = '@_subtree.outer', desc = 'outer subtree' },
           },
         },
         swap = {
@@ -114,8 +120,8 @@ return {
     })
 
     -- stylua: ignore start
-    keymap('n', '<P', '<Plug>(ts-swap-parameter-prev)<cmd>call repeat#set("\\<Plug>(ts-swap-parameter-prev)")<CR>', { desc = 'Swap parameter prev' })
-    keymap('n', '>P', '<Plug>(ts-swap-parameter-next)<cmd>call repeat#set("\\<Plug>(ts-swap-parameter-next)")<CR>', { desc = 'Swap parameter next' })
+    keymap('n', '[a', '<Plug>(ts-swap-parameter-prev)<cmd>call repeat#set("\\<Plug>(ts-swap-parameter-prev)")<CR>', { desc = 'Swap parameter prev' })
+    keymap('n', ']a', '<Plug>(ts-swap-parameter-next)<cmd>call repeat#set("\\<Plug>(ts-swap-parameter-next)")<CR>', { desc = 'Swap parameter next' })
   end,
   dependencies = {
     -- 'nvim-treesitter/nvim-treesitter-textobjects',

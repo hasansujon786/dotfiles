@@ -203,10 +203,9 @@ function M.buffers_with_symbols()
     title = 'Buffers',
     multi = { 'buffers', 'lsp_symbols' },
     layout = { preset = 'dropdown', preview = 'main' },
-    win = preview_main.show_winbar,
+    win = { preview = preview_main.show_winbar },
     -- on_show = function(picker)
     --   vim.cmd.stopinsert()
-
     --   -- you can auto enable it if you want
     --   vim.schedule(function()
     --     flash_on_picker(picker)
