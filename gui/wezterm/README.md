@@ -1,9 +1,11 @@
 ## dotfiles
+
 https://github.com/yutkat/dotfiles/blob/main/.config/wezterm/wezterm.lua
 https://gist.github.com/gsuuon/5511f0aa10c10c6cbd762e0b3e596b71
 https://dev.to/lovelindhoni/make-wezterm-mimic-tmux-5893
 
 ## plugins
+
 - https://github.com/sei40kr/wez-status-generator
 - https://github.com/sei40kr/wez-per-project-workspace
 - https://github.com/MLFlexer/resurrect.wezterm
@@ -11,37 +13,42 @@ https://dev.to/lovelindhoni/make-wezterm-mimic-tmux-5893
 - https://github.com/MLFlexer/smart_workspace_switcher.wezterm
 
 ## Theme
+
 https://github.com/neapsix/wezterm
 hi Normal guibg=#FAF4EC
 hi Normal guibg=#F2E9E0
 
 ## cli
+
 wezterm ls-fonts --text "✘"
 wezterm cli spawn nvim
 wezterm cli spawn --window-id=0 --cwd=E:/repoes/lua/peep.nvim nvim
 
 ## Log Files
+
 You can find log files in $XDG_RUNTIME_DIR/wezterm on unix systems,
 or $HOME/.local/share/wezterm on macOS and Windows systems.
 
 ## Custom keymap
+
 - https://www.reddit.com/r/neovim/comments/12hyi9t/make_scr_cscr_stab_ctab_work_in_neovim_kitty/
 - using: https://stackoverflow.com/questions/16359878/how-to-map-shift-enter
-map shift+enter              send_text all \x1b[13;2u      # <s-cr>
-map ctrl+enter               send_text all \x1b[13;5u      # <c-cr>
-map ctrl+shift+enter         send_text all \x1b[13;6u      # <c-s-cr>
-map shift+tab                send_text all \x1b[9;2u       # <s-tab>
-map ctrl+tab                 send_text all \x1b[9;5u       # <c-tab>
-map ctrl+shift+tab           send_text all \x1b[9;6u       # <c-s-tab>
+  map shift+enter send_text all \x1b[13;2u # <s-cr>
+  map ctrl+enter send_text all \x1b[13;5u # <c-cr>
+  map ctrl+shift+enter send_text all \x1b[13;6u # <c-s-cr>
+  map shift+tab send_text all \x1b[9;2u # <s-tab>
+  map ctrl+tab send_text all \x1b[9;5u # <c-tab>
+  map ctrl+shift+tab send_text all \x1b[9;6u # <c-s-tab>
 
 - using: https://www.reddit.com/r/neovim/comments/mbj8m5/how_to_setup_ctrlshiftkey_mappings_in_neovim_and/
-map ctrl+shift+j             send_text all \x1b[74;5u      # <c-s-j> (not <c-J>, like <m-J> which works differently from <m-j>)
-map ctrl+shift+k             send_text all \x1b[75;5u      # <c-s-k>
-map ctrl+shift+h             send_text all \x1b[72;5u      # <c-s-h>
-map ctrl+shift+l             send_text all \x1b[76;5u      # <c-s-l>
-act.SendKey({ key = '\x1b' }), -- escape
+  map ctrl+shift+j send_text all \x1b[74;5u # <c-s-j> (not <c-J>, like <m-J> which works differently from <m-j>)
+  map ctrl+shift+k send_text all \x1b[75;5u # <c-s-k>
+  map ctrl+shift+h send_text all \x1b[72;5u # <c-s-h>
+  map ctrl+shift+l send_text all \x1b[76;5u # <c-s-l>
+  act.SendKey({ key = '\x1b' }), -- escape
 
 ## lua code
+
 ```lua
 wezterm.on('gui-startup', function(cmd)
   local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
@@ -138,6 +145,7 @@ end)
 ```
 
 ## Debug
+
 ```lua
 -- debug_key_events = true,
 wezterm.on('update-status', function(window, pane)
@@ -147,6 +155,7 @@ end)
 ```
 
 ## Tab Compnents
+
 ```lua
 local cell_num = 1 -- How many cells have been formatted
 local function stacked(text, _)
@@ -173,6 +182,7 @@ end
 ```
 
 ## Text format
+
 ```lua
 wezterm.format({
   -- turn on underlines
@@ -188,18 +198,21 @@ local type = string.match(id, '^([^/]+)') -- match before '/'
 id = string.match(id, '(.+)%..+$') -- remove file extention
 id = string.match(id, '([^/]+)$') -- match after '/'
 ```
+
 ## theme onedarkhalf
+
                         light     dark
-0   normal  black       #383a42   #282c34
-1   normal  red         #e45649   #e06c75
-2   normal  green       #50a14f   #98c379
-3   normal  yellow      #c18401   #e5c07b
-4   normal  blue        #0184bc   #61afef
-5   normal  magenta     #a626a4   #c678dd
-6   normal  cyan        #0997b3   #56b6c2
-7   normal  white       #fafafa   #dcdfe4
-            foreground  #383a42   #dcdfe4
-            background  #fafafa   #282c34
+
+0 normal black #383a42 #282c34
+1 normal red #e45649 #e06c75
+2 normal green #50a14f #98c379
+3 normal yellow #c18401 #e5c07b
+4 normal blue #0184bc #61afef
+5 normal magenta #a626a4 #c678dd
+6 normal cyan #0997b3 #56b6c2
+7 normal white #fafafa #dcdfe4
+foreground #383a42 #dcdfe4
+background #fafafa #282c34
 
 ```lua
 local right_colors = { '#32354b', '#3E425D', '#4c5272' }
@@ -254,4 +267,38 @@ wezterm.on('update-right-status', function(window, _)
   --   { Text = '' },
   -- }))
 end)
+
+```
+
+## Snacks zen
+
+```lua
+
+zen = {
+  on_open = function(win)
+    wezterm_zen(nil, true, { font = 0 })
+  end,
+  on_close = function(win)
+    wezterm_zen(nil, false, nil)
+  end,
+},
+
+function M.wezterm_zen(state, disable, opts)
+  local stdout = vim.loop.new_tty(1, false)
+  if disable then
+    Stdout:write(
+      -- Requires tmux setting or no effect: set-option -g allow-passthrough on
+      ('\x1bPtmux;\x1b\x1b]1337;SetUserVar=%s=%s\b\x1b\\'):format(
+        'ZEN_MODE',
+        vim.fn.system({ 'base64' }, tostring(opts.font))
+      )
+    )
+  else
+    stdout:write(
+      ('\x1bPtmux;\x1b\x1b]1337;SetUserVar=%s=%s\b\x1b\\'):format('ZEN_MODE', vim.fn.system({ 'base64' }, '-1'))
+    )
+  end
+  vim.cmd([[redraw]])
+end
+
 ```
