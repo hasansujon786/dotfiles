@@ -8,20 +8,22 @@ return {
     local wk = require('which-key')
     wk.setup({
       icons = {
-        breadcrumb = '»', -- symbol used in the command line area that shows your active key combo
-        separator = '➜', -- symbol used between a key and it's label
-        group = '+', -- symbol prepended to a group
+        breadcrumb = '»',
+        separator = '➜',
+        group = '+',
         ellipsis = '…',
         --- See `lua/which-key/icons.lua` for more details
         --- Set to `false` to disable keymap icons
         ---@type wk.IconRule[]|false
         rules = false,
-        -- use the highlights from mini.icons
-        -- When `false`, it will use `WhichKeyIcon` instead
-        colors = true,
+        colors = true, -- When `false`, it will use `WhichKeyIcon` instead
+      },
+      plugins = {
+        marks = false,
+        harpoon = { enabled = true },
       },
       show_help = false,
-      show_keys = false, -- show the currently pressed key and its label as a message in the command line
+      show_keys = false, -- Show the currently pressed key and its label as a message in the command line
       win = {
         -- width = 1,
         -- height = { min = 4, max = 25 },
