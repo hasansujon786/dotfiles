@@ -110,7 +110,7 @@ return {
           concealcursor = true,
           indent = true,
           symbols = {
-            headlines = { '◎', '◯', '', '', '✸', '', '♥', '✿' },
+            headlines = { '◎', '◯', '▣', '□', '◆', '◇', '♥', '⏾' },
             checkboxes = {
               half = { '-', '@org.checkbox.halfchecked' },
               done = { '✓', '@org.keyword.done' },
