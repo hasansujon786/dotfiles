@@ -72,6 +72,17 @@ keymap({ 'n' }, 'gcu', uncomment_block, { desc = 'Uncomment block' })
 keymap({ 'n' }, 'gc/', uncomment_block, { desc = 'Uncomment block' })
 keymap({ 'o' }, 'a/', '<cmd>lua require("vim._comment").textobject()<CR>', { desc = 'Comment textobject' })
 keymap({ 'x' }, 'a/', '<Esc><cmd>lua require("vim._comment").textobject()<CR>', { desc = 'Comment textobject' })
+-- Comment below/above/at the end of current line
+local function comment(move)
+  return function()
+    local lhs, rhs = require('hasan.utils.buffer').current_commentstring():match('^(.-)%%s(.*)$')
+    local shiftstr = string.rep(vim.keycode('<Left>'), #rhs)
+    vim.fn.feedkeys(move .. lhs .. rhs .. shiftstr)
+  end
+end
+keymap('n', 'gcO', comment('O'), { desc = 'Add comment above' })
+keymap('n', 'gco', comment('o'), { desc = 'Add comment below' })
+keymap('n', 'gcA', comment('A '), { desc = 'Add comment end of line' })
 
 keymap({ 'x' }, 'Z', '<Plug>VSurround')
 

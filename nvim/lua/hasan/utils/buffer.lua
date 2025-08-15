@@ -185,4 +185,44 @@ function M.render_lines(buf, ns, lines, start_line)
   end
 end
 
+function M.current_commentstring()
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local ts_parser = vim.treesitter.get_parser(nil, nil, { error = false })
+  if not ts_parser then
+    return vim.bo.commentstring
+  end
+  local row, col = cursor[1] - 1, cursor[2]
+
+  local captures = vim.treesitter.get_captures_at_pos(0, row, col)
+  for _, capture in ipairs(captures) do
+    local id, metadata = capture.id, capture.metadata
+    local metadata_commenstring = metadata['bo.commentstring'] or metadata[id] and metadata[id]['bo.commentstring']
+    if metadata_commenstring then
+      return metadata_commenstring
+    end
+  end
+
+  local ts_commentstring, res_level = nil, 0
+  ---@param lang_tree vim.treesitter.LanguageTree
+  ---@param level integer
+  local function traverse(lang_tree, level)
+    if not lang_tree:contains({ row, col, row, col + 1 }) then
+      return
+    end
+    local lang = lang_tree:lang()
+    local filetypes = vim.treesitter.language.get_filetypes(lang)
+    for _, ft in ipairs(filetypes) do
+      local ft_commentstring = vim.filetype.get_option(ft, 'commentstring')
+      if ft_commentstring ~= '' and level > res_level then
+        ts_commentstring = ft_commentstring
+      end
+    end
+    for _, child_lang_tree in pairs(lang_tree:children()) do
+      traverse(child_lang_tree, level + 1)
+    end
+  end
+  traverse(ts_parser, 1)
+  return ts_commentstring or vim.bo.commentstring
+end
+
 return M
