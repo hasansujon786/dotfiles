@@ -85,14 +85,15 @@ local function set_custom_highlights()
   -- stylua: ignore
   local highlights = {
     -- /// backgrounds ///
+    FloatBorder             = { fg = c.cyan, bg = c.none },
     FloatBorderTitle        = { bg = c.cyan, fg = float_bg },
     NormalFloatFlat         = { fg = c.fg, bg = float_bg },
     FloatBorderFlat         = { fg = dark_border, bg = float_bg },
     FloatBorderFlatHidden   = { fg = float_bg, bg = float_bg },
     SidebarDark             = { fg = c.fg, bg = c.bg_d },
+
     Folded                  = { fg = c.fg, bg = 'none' },
     Visual                  = { bg = c.dim_blue },
-    FloatBorder             = { fg = c.cyan, bg = c.none },
     NonText                 = { fg = c.layer, bg = c.none },
     LineNr                  = { fg = '#495162', bg = c.none },
 
@@ -232,7 +233,6 @@ local function set_custom_highlights()
     DiffviewFilePanelRootPath = { link = 'NeoTreeRootName' },
     DiffviewStatusUntracked   = { link = 'DiffviewFilePanelDeletions' },
     DiffviewStatusModified    = { link = 'NeoTreeGitModified' },
-    -- DiffviewCursorLine        = { link = 'CursorLineFocus' },
 
     -- /// Neogit ///
     NeogitDiffContext          = { link = 'SidebarDark' },
@@ -245,9 +245,6 @@ local function set_custom_highlights()
 
     -- /// neo-tree.nvim ///
     NeoTreeFileIcon      = { fg = c.muted },
-    NeoTreeFloatBorder   = { bg = float_bg, fg = c.cyan },
-    NeoTreeFloatTitle    = { link = 'FloatBorderTitle' },
-    NeoTreeTitleBar      = { link = 'FloatBorderTitle' },
     NeoTreeModified      = { link = 'String' },
     NeoTreeMessage       = { link = 'Comment' },
     NeoTreeDimText       = { link = 'Comment' },
@@ -257,9 +254,10 @@ local function set_custom_highlights()
     NeoTreeNormalNC      = { link = 'SidebarDark' },
     NeoTreeVertSplit     = { link = 'EdgyWinSeparator' },
     NeoTreeWinSeparator  = { link = 'EdgyWinSeparator' },
-    NeoTreeFloatNormal   = { link = 'TelescopeNormal' },
-    -- NeoTreeCursorLine    = { link = 'CursorLineFocus' },
-    -- hi! NeoTreeGitUntracked       gui=NONE
+    NeoTreeTitleBar      = { link = 'FloatBorderTitle' },
+    NeoTreeFloatNormal   = { link = 'Normal' },
+    NeoTreeFloatBorder   = { link = 'FloatBorder' },
+    NeoTreeFloatTitle    = { link = 'FloatBorderTitle' },
 
     qfLineNr             = { fg = c.light_grey },
     qfSeparator          = { link = 'Comment' },

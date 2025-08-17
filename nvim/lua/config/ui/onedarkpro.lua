@@ -148,17 +148,15 @@ return {
       },
     })
 
+    local function set_highlights()
+      require('hasan.utils.ui.palette').set_custom_highlights()
+    end
     augroup('THEME_AUGROUP')(function(autocmd)
-      autocmd('ColorScheme', function()
-        require('hasan.utils.ui.palette').set_custom_highlights()
-        -- vim.defer_fn(require('hasan.nebulous').my_nebulous_setup, 300)
-      end)
+      autocmd('ColorScheme', set_highlights)
 
       autocmd('BufWritePost', function()
-        vim.defer_fn(function()
-          R('hasan.utils.ui.palette', nil)
-          require('hasan.utils.ui.palette').set_custom_highlights()
-        end, 300)
+        R('hasan.utils.ui.palette', 'reloaded custom highlights')
+        set_highlights()
       end, { pattern = { 'palette.lua' } })
     end)
 

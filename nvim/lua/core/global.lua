@@ -23,7 +23,7 @@ R = function(module_name, msg)
 
     plenary_reload(module_name)
     if msg then
-      vim.notify(string.format('[%s] - %s', module_name, msg), vim.log.levels.INFO)
+      vim.notify(string.format('[%s] - %s', module_name, msg), vim.log.levels.INFO, { title = 'Theme' })
     end
     return require(module_name)
   end

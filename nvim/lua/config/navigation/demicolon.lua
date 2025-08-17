@@ -74,8 +74,8 @@ return {
     { 'g[', word_jump({ forward = false }), desc = 'Prev Reference', mode = nxo },
     { 'g]', word_jump({ forward = true }), desc = 'Next Reference', mode = nxo },
     -- DAP
-    { '[g', '<cmd>lua require"dap".step_out()<cr>', desc = 'Step Out', mode = nxo },
-    { ']g', '<cmd>lua require"dap".step_into()<cr>', desc = 'Step Into', mode = nxo },
+    { '[v', '<cmd>lua require("dap").step_out()<cr>', desc = 'Debug: Step Out', mode = nxo },
+    { ']v', '<cmd>lua require("dap").step_into()<cr>', desc = 'Debug: Step Into', mode = nxo },
 
     -- Diagnostic
     { '[e', diagnostic_jump(-1, vim.diagnostic.severity.ERROR), desc = 'Previous error', mode = nxo },
