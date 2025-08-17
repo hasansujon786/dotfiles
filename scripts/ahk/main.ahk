@@ -30,20 +30,27 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 ;******************************************************************************
 ; Keymaps
 ;******************************************************************************
+!1::Send("#1")
+!2::Send("#2")
+!3::Send("#3")
+!4::Send("#4")
+!5::Send("#5")
+!6::Send("#6")
+!7::Send("#7")
+!8::Send("#8")
+!9::Send("#9")
 +PgUp::Home
 +PgDn::End
 !SPACE::Send("^{SPACE}")
 
 ; Show menu (use #; for emoji)
-#.::SendInput("{AppsKey}")
+!;::SendInput("{AppsKey}")
+
 ; Screenshot
 #`::takeScreenshot()
 ^#`::openNewestFile("C:\Users\" A_UserName "\Pictures\Screenshots\*.*")
 PrintScreen::Send("#+{s}")
-; Window Transparency
-^#/::toggleTransparency()
-^#.::increaseTransparency()
-^#,::decreaseTransparency()
+
 ; Volume Control
 #Del::Volume_Mute
 #Esc::Volume_Mute
@@ -56,24 +63,6 @@ PrintScreen::Send("#+{s}")
   ~LAlt & WheelDown::voldown()
 #HotIf
 ~LAlt & MButton::showVolMixer()
-
-; Global arrow with homerow
-#HotIf not WinActive("ahk_exe WindowsTerminal.exe")
-  and not WinActive("ahk_exe alacritty.exe")
-  and not WinActive("ahk_exe wezterm-gui.exe")
-  and not WinActive("ahk_exe Code.exe")
-  !j::SendInput("{DOWN}")
-  !k::SendInput("{UP}")
-  !h::SendInput("{LEFT}")
-  !l::SendInput("{RIGHT}")
-
-  ; emacs-standard
-  !f::Send("^{Right}")
-  !b::Send("^{Left}")
-  +!f::Send("^+{Right}")
-  +!b::Send("^+{Left}")
-#HotIf
-!Backspace::SendInput("^{Backspace}")
 
 ; Other
 ^#b::showCalendar()
@@ -88,6 +77,11 @@ PrintScreen::Send("#+{s}")
 ; !\::Send("\")
 ; \::alternateTab()
 !`::switchBetweenSameApps()
+
+; Window Transparency
+^#/::toggleTransparency()
+^#.::increaseTransparency()
+^#,::decreaseTransparency()
 
 ^#m::Send("#{m}")
 #m::toggleWinMinimize()
@@ -105,10 +99,8 @@ PrintScreen::Send("#+{s}")
 #HotIf IsSet(mouseGridActive) && mouseGridActive == 0
   $Escape::superEscape()
 #HotIf
-#SPACE::toggleAlwaysOnTop()
+; ^#SPACE::toggleAlwaysOnTop()
 ; Vertual Desktop
-#h::navToDesktop("left")
-#l::navToDesktop("right")
 #[::navToDesktop("left")
 #]::navToDesktop("right")
 
@@ -135,16 +127,14 @@ current_layout := 0
 #'::toggleLayout()
 
 #HotIf layout_loading
-  LWin::{
-    return
-  }
+  LWin::return
 #HotIf
 
 ; #[::winPinToSide("left", true)
 ; #]::winPinToSide("right", true)
 
 ;******************************************************************************
-; AltTabMenu & TaskView Vim Mode
+; Vim Mode (AltTabMenu, TaskView)
 ;******************************************************************************
 #/::SendInput("^!{Tab}")
 #HotIf (WinActive("Volume Control")
@@ -152,7 +142,6 @@ current_layout := 0
   or WinActive("Task View") ; win+tab
   or WinActive("Task Switching") ; ctrl+alt+tab
   or WinActive("Notification Center")
-  or WinActive("ahk_class PotPlayer64")
   or WinActive("ahk_class PotPlayer64")
   or WinActive("ahk_exe zen.exe") and WinActive("Picture-in-Picture"))
   and IsSet(mouseGridActive) && mouseGridActive == 0
@@ -180,3 +169,28 @@ current_layout := 0
   ]::navToDesktop("right")
 #HotIf
 
+; Global arrow with homerow
+#HotIf not WinActive("ahk_exe WindowsTerminal.exe")
+  and not WinActive("ahk_exe alacritty.exe")
+  and not WinActive("ahk_exe wezterm-gui.exe")
+  and not WinActive("ahk_exe Code.exe")
+  !j::SendInput("{DOWN}")
+  !k::SendInput("{UP}")
+  !h::SendInput("{LEFT}")
+  !l::SendInput("{RIGHT}")
+  !p::Send("{Up}")
+  !n::Send("{Down}")
+
+  ; emacs-standard
+  !f::Send("^{Right}")
+  !b::Send("^{Left}")
+  +!f::Send("^+{Right}")
+  +!b::Send("^+{Left}")
+#HotIf
+!Backspace::SendInput("^{Backspace}")
+
+; ; ahk_exe Microsoft.CmdPal.UI.exe
+; #HotIf WinActive("Command Palette")
+;   !p::Send("{Up}")
+;   !n::Send("{Down}")
+; #HotIf

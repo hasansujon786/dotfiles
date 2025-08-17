@@ -30,8 +30,7 @@ return {
     },
   },
   dependencies = {
-    -- 'mxsdev/nvim-dap-vscode-js',
-    'theHamsta/nvim-dap-virtual-text',
+    { 'theHamsta/nvim-dap-virtual-text', opts = { virt_text_pos = 'eol' } },
     'nvim-neotest/nvim-nio',
     {
       'rcarriga/nvim-dap-ui',
@@ -86,9 +85,9 @@ return {
         dap.listeners.after.event_initialized['dapui_config'] = function()
           vim.notify('Debugger ui connected', vim.log.levels.INFO)
         end
-        -- dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-        dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-        dap.listeners.before.event_exited['dapui_config'] = dapui.close
+        dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+        -- dap.listeners.before.event_terminated['dapui_config'] = dapui.close
+        -- dap.listeners.before.event_exited['dapui_config'] = dapui.close
       end,
     },
   },

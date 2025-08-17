@@ -46,6 +46,15 @@ function M.setup()
     { desc = 'Show Scopes' }
   )
 
+  keymap('n', '<F5>', function()
+    local dap = require('dap')
+    if dap.session() then
+      dap.terminate() -- stop previous run (if exists)
+    end
+    vim.cmd('write')
+    dap.run(dap.configurations.javascript[5]) -- pick 5th config
+  end)
+
   -- keymap('n', '['/']',  '<cmd>lua require"telescope".extensions.dap.commands()<cr>', { desc = 'Find DAP Commands' },
   -- l = {
   -- keymap('n', 'c',  '<cmd>lua require'telescope'.extensions.dap.configurations()<cr>', { desc = 'Find DAP configurations' },

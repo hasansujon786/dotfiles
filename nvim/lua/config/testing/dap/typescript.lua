@@ -115,6 +115,17 @@ M.setup = function()
         processId = require('dap.utils').pick_process,
         cwd = '${workspaceFolder}',
       })
+
+      table.insert(new_configs, {
+        name = 'Launch single file',
+        type = 'pwa-node',
+        request = 'launch',
+        program = '${file}',
+        cwd = '${workspaceFolder}',
+        sourceMaps = true,
+        protocol = 'inspector',
+        console = 'integratedTerminal',
+      })
     end
 
     -- Divider for the launch.json derived configs

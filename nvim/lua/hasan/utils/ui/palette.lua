@@ -140,6 +140,7 @@ local function set_custom_highlights()
     DiagnosticUnderlineWarn = { link = 'DiagnosticUnderlineError' },
     DiagnosticUnderlineHint = { link = 'DiagnosticUnderlineError' },
     DiagnosticUnderlineError= { fg = 'none', underline = true, sp = c.red },
+    NvimDapVirtualText      = { fg = c.purple, bg = c.dim_purple },
 
     -- /// notify ///
     NotifyTitle             = { fg = c.light_grey, bg = c.none },
