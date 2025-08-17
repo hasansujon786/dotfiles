@@ -620,7 +620,6 @@ return {
     -- PROJECT
     { '<leader>pr', function() Snacks.picker.recent({cwd = vim.uv.cwd()}) end, desc = 'Find recent files' },
     { '<leader>pe', function() Snacks.picker.zoxide() end, desc = 'Find zoxide list' },
-    { '<leader>pp', function() require('hasan.picker.persisted').persisted() end, desc = 'Switch project' },
     { '<leader>/t', function() require('config.navigation.snacks.custom').search_project_todos() end, desc = 'Search project todos' },
 
     -- VIM Builtin

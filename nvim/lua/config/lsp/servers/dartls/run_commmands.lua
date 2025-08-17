@@ -2,6 +2,7 @@ local lazy = require('flutter-tools.lazy')
 local commands = lazy.require('flutter-tools.commands') ---@module "flutter-tools.commands"
 local ui = lazy.require('flutter-tools.ui') ---@module "flutter-tools.ui"
 
+-- TODO: Replace telescope
 ---@alias TelescopeEntry {hint: string, text: string, command: fun(), id: integer}
 ---@alias CustomOptions {title: string, callback: fun(bufnr: integer)}
 

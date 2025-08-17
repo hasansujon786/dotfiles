@@ -93,9 +93,6 @@ return {
       [']<tab>'] = function()
         harpoon:list():next()
       end,
-      ['<leader>/e'] = function()
-        require('hasan.telescope.custom').find_harpoon_file(harpoon:list())
-      end,
     }
 
     for _, item in ipairs(keys) do

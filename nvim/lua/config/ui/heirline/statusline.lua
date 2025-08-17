@@ -60,9 +60,9 @@ return {
     },
     on_click = {
       callback = function()
-        vim.defer_fn(function()
+        vim.schedule(function()
           vim.cmd('LspInfo')
-        end, 100)
+        end)
       end,
       name = 'heirline_LSP',
     },
@@ -132,12 +132,6 @@ return {
       provider = function(self)
         return self.filetype
       end,
-    },
-    on_click = {
-      callback = function()
-        vim.cmd('Telescope filetypes')
-      end,
-      name = 'heirline_Filetype',
     },
   },
   FileFormat = {
@@ -325,9 +319,7 @@ return {
     hl = layerBlock,
     on_click = {
       callback = function()
-        vim.defer_fn(function()
-          vim.cmd('Telescope git_branches')
-        end, 100)
+        Snacks.picker.git_branches()
       end,
       name = 'heirline_git_branches',
     },

@@ -34,13 +34,8 @@ return {
       { '<leader>ps', '<cmd>SessionSave<CR>', desc = 'Save session' },
       { '<leader>pl', '<cmd>SessionLoad<CR>', desc = 'Load session' },
       { '<leader>pz', '<cmd>SessionSaveQuit<CR><cmd>wqall<CR>', desc = 'Save session and quit' },
-      {
-        "'<tab>",
-        function()
-          require('hasan.picker.persisted').persisted()
-        end,
-        desc = 'Switch project',
-      },
+      { '<leader>pp', function() require('config.navigation.snacks.persisted').persisted() end, desc = 'Switch project' },
+      { "'<tab>", function() require('config.navigation.snacks.persisted').persisted() end, desc = 'Switch project' },
     },
     config = function()
       local group = vim.api.nvim_create_augroup('PersistedHooks', { clear = true })

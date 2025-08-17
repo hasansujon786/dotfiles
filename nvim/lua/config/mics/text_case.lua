@@ -9,6 +9,7 @@ return {
   config = function()
     require('which-key').add({
       { 'ga', group = 'TextCase' },
+      -- TODO: use snacks
       { 'ga.', '<cmd>TextCaseOpenTelescopeQuickChange<CR>', mode = nx, desc = 'Telescope Quick Change' },
       { 'ga,', '<cmd>TextCaseOpenTelescopeLSPChange<CR>', mode = nx, desc = 'Telescope LSP Change' },
 
