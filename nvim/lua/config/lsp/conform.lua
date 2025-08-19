@@ -40,7 +40,7 @@ return {
   module = 'conform',
   event = 'BufWritePre',
   keys = {
-    { '<leader>fs', '<cmd>Format<CR>', mode = '', desc = 'Lsp: format and save' },
+    { '<leader>fs', '<cmd>Format<CR>', mode = { 'n', 'x' }, desc = 'Lsp: format and save' },
   },
   opts = {
     default_format_opts = {
@@ -62,10 +62,10 @@ return {
     require('conform').setup(opts)
 
     vim.api.nvim_create_user_command('Format', function(args)
-      require('conform').format({ async = true, range = get_visual_range(args) }, save_cb)
+      require('conform').format({ async = true, range = get_visual_range(args), lsp_format = 'fallback' }, save_cb)
     end, { range = true })
     vim.api.nvim_create_user_command('FormatSync', function(args)
-      require('conform').format({ async = false, range = get_visual_range(args) }, save_cb)
+      require('conform').format({ async = false, range = get_visual_range(args), lsp_format = 'fallback' }, save_cb)
     end, { range = true })
     -- Format with gq key
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"

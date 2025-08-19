@@ -96,21 +96,13 @@ M.lsp = {
       formatter = { 'stylua' },
     },
     {
-      filetype = 'dart',
-      formatter = { lsp_format = 'fallback' },
-    },
-    {
-      filetype = 'astro',
-      formatter = { lsp_format = 'fallback' },
-    },
-    {
       filetype = { 'bash', 'sh' },
       formatter = { 'shfmt' },
     },
-    {
-      filetype = '_', -- "_" filetypes that don't have other formatters configured.
-      formatter = { 'trim_whitespace' },
-    },
+    -- {
+    --   filetype = '_', -- "_" filetypes that don't have other formatters configured.
+    --   formatter = { 'trim_whitespace' },
+    -- },
   },
   diagnosgic = {
     sign = {

@@ -28,8 +28,8 @@ return {
     'olimorris/persisted.nvim',
     lazy = not require('core.state').ui.session_autoload,
     enabled = not vim.g.vscode,
-    module = 'persisted',
     cmd = { 'SessionLoad', 'SessionLoadLast', 'SessionSave' },
+    -- stylua: ignore
     keys = {
       { '<leader>ps', '<cmd>SessionSave<CR>', desc = 'Save session' },
       { '<leader>pl', '<cmd>SessionLoad<CR>', desc = 'Load session' },
@@ -37,61 +37,55 @@ return {
       { '<leader>pp', function() require('config.navigation.snacks.persisted').persisted() end, desc = 'Switch project' },
       { "'<tab>", function() require('config.navigation.snacks.persisted').persisted() end, desc = 'Switch project' },
     },
-    config = function()
-      local group = vim.api.nvim_create_augroup('PersistedHooks', { clear = true })
-      local psessions_path = vim.fn.expand(vim.fn.stdpath('data') .. '/sessions/')
+    opts = {
+      autostart = true, -- Start recording
+      autoload = require('core.state').ui.session_autoload, -- Automatically load the session for the cwd on Neovim startup?
+      -- use_git_branch = false,
+      -- allowed_dirs = {},
+      ignored_dirs = { 'C:/Users/hasan' },
+      ---@type fun(): boolean
+      should_save = should_save,
+      telescope = {
+        mappings = {
+          copy_session = '<C-c>',
+          change_branch = '<C-b>',
+          delete_session = '<C-x>',
+        },
+        icons = {
+          selected = '➤ ',
+          dir = '󰝰  ',
+          branch = ' ',
+        },
+      },
+    },
+    config = function(_, opts)
+      require('persisted').setup(opts)
 
-      vim.api.nvim_create_autocmd({ 'User' }, {
-        pattern = 'PersistedSavePre',
-        group = group,
-        callback = function()
-          -- Close edgy windows
-          local ok, edgy = pcall(require, 'edgy.commands')
-          if ok then
-            edgy.close()
-          end
+      augroup('MY_PERSISTED_HOOKS_AUGROUP')(function(autocmd)
+        autocmd({ 'User' }, function()
+          vim.cmd([[Neotree filesystem show]])
+        end, { pattern = 'PersistedLoadPost' })
 
-          -- for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-          --   if vim.bo[buf].filetype == 'codecompanion' then
-          --     vim.api.nvim_buf_delete(buf, { force = true })
-          --   end
-          -- end
-        end,
-      })
-
-      -- Save current layout before manually switching with Telescope
-      vim.api.nvim_create_autocmd({ 'User' }, {
-        pattern = { 'PersistedTelescopeLoadPre', 'PersistedPickerLoadPre' },
-        group = group,
-        callback = function()
-          -- Save the currently loaded session
+        -- Save current layout before manually switching with picker
+        autocmd({ 'User' }, function()
           require('persisted').save({ session = vim.g.persisted_loaded_session })
           vim.api.nvim_input('<ESC><cmd>%bd!<CR>')
-        end,
-      })
+        end, { pattern = { 'PersistedTelescopeLoadPre', 'PersistedPickerLoadPre' } })
 
-      require('persisted').setup({
-        autostart = true, -- Start recording
-        autoload = require('core.state').ui.session_autoload, -- Automatically load the session for the cwd on Neovim startup?
-        save_dir = psessions_path,
-        telescope = {
-          mappings = {
-            copy_session = '<C-c>',
-            change_branch = '<C-b>',
-            delete_session = '<C-x>',
-          },
-          icons = {
-            selected = '➤ ',
-            dir = '󰝰  ',
-            branch = ' ',
-          },
-        },
-        -- use_git_branch = false,
-        -- allowed_dirs = {},
-        ignored_dirs = { 'C:/Users/hasan' },
-        ---@type fun(): boolean
-        should_save = should_save,
-      })
+        -- autocmd({ 'User' }, function()
+        --   -- Close edgy windows
+        --   local ok, edgy = pcall(require, 'edgy.commands')
+        --   if ok then
+        --     edgy.close()
+        --   end
+        --
+        --   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        --     if vim.bo[buf].filetype == 'codecompanion' then
+        --       vim.api.nvim_buf_delete(buf, { force = true })
+        --     end
+        --   end
+        -- end, { pattern = 'PersistedSavePre' })
+      end)
     end,
   },
 }

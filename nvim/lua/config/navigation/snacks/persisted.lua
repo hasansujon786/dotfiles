@@ -89,8 +89,8 @@ function M.persisted()
       fire_user_cmds('PersistedPickerLoadPre')
       vim.schedule(function()
         persisted.load({ session = item.text })
+        fire_user_cmds('PersistedPickerLoadPost')
       end)
-      fire_user_cmds('PersistedPickerLoadPost')
     end,
     actions = {
       delete_session = function(p, _)

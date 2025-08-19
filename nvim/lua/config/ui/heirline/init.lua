@@ -27,7 +27,7 @@ return {
           S = 'purple',
           ['\19'] = 'purple',
           R = 'red',
-          -- r = 'orange',
+          r = 'orange',
           ['!'] = 'orange',
           t = 'green',
         },
