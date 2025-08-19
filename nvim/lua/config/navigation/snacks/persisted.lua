@@ -45,11 +45,16 @@ local function list_sessions()
     end
 
     sessions[index] = {
-      branch = branch,
+      label = ' ',
       text = session,
       dir = dir_path,
       file = dir_path,
+      comment = branch,
     }
+
+    if session == vim.g.persisted_loaded_session then
+      sessions[index].label = '➤'
+    end
   end
 
   -- {
@@ -80,7 +85,7 @@ function M.persisted()
           ['<c-g>'] = { { 'tcd', 'picker_grep' }, mode = { 'n', 'i' } },
           ['<c-r>'] = { { 'tcd', 'recent' }, mode = { 'n', 'i' } },
           ['<c-w>'] = { { 'tcd' }, mode = { 'n', 'i' } },
-          ['<c-t>'] = { 'open_new_tab', mode = { 'n', 'i' } },
+          ['<c-t>'] = { 'wezrun', mode = { 'n', 'i' } },
         },
       },
     },
@@ -120,6 +125,17 @@ function M.persisted()
         Snacks.notify('New tab opened')
         p:close()
         Snacks.picker.pick('files', { cwd = item.file })
+      end,
+      wezrun = function(p, item)
+        local args = { '~/dotfiles/scripts/wezrun.sh', item.file or item._path }
+        require('hasan.utils.async').async_cmd('bash', args, function(ok, output)
+          if ok then
+            return vim.notify(output[1], 'info', { title = 'Wezrun' })
+          end
+
+          vim.notify('Failed to run Wezrun', 'error', { title = 'Wezrun' })
+        end, {})
+        p:close()
       end,
     },
   })

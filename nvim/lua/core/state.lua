@@ -99,6 +99,10 @@ M.lsp = {
       filetype = { 'bash', 'sh' },
       formatter = { 'shfmt' },
     },
+    {
+      filetype = { 'org', 'text' },
+      formatter = { 'trim_whitespace' },
+    },
     -- {
     --   filetype = '_', -- "_" filetypes that don't have other formatters configured.
     --   formatter = { 'trim_whitespace' },
