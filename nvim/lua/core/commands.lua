@@ -44,7 +44,7 @@ command('Dashboard', function()
 end, { desc = 'Open dashboard' })
 
 command('WezSession', function()
-  require('hasan.wez-session').select_file()
+  require('hasan.wezterm.edit-session').select_file()
 end, { desc = 'Edit wez-sessions' })
 
 command('CheckWinConfig', function()

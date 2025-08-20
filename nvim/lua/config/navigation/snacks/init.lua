@@ -164,17 +164,16 @@ return {
       notifier = {
         enabled = true,
         margin = { top = 1, right = 1, bottom = 1 },
-        icons = { error = '', warn = '', info = '', debug = '', trace = '󰠠' },
         ---@type snacks.notifier.style
         style = function(buf, notif, ctx)
           local title = vim.trim((notif.title or ''))
           if title ~= '' then
-            ctx.opts.title = { { title, ctx.hl.title } }
+            ctx.opts.title = { { notif.icon }, { title, ctx.hl.title } }
             ctx.opts.title_pos = 'right'
           end
           vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(notif.msg, '\n'))
         end,
-        top_down = false, -- place notifications from top to bottom
+        top_down = false, -- Place notifications from top to bottom
       },
       lazygit = {
         theme = {

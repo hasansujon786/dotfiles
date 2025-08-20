@@ -378,9 +378,8 @@ local function set_custom_highlights()
     Trace = { fg = c.grey, title = c.grey },
   }) do
     hl(0, 'SnacksNotifier' .. group, { bg = float_bg })
-    local border = 'SnacksNotifierBorder' .. group
-    hl(0, border, { bg = float_bg, fg = co.fg })
-    hl(0, 'SnacksNotifierTitle' .. group, { fg = c.muted, bg = float_bg, underline = true })
+    hl(0, 'SnacksNotifierBorder' .. group, { bg = float_bg, fg = co.fg })
+    hl(0, 'SnacksNotifierTitle' .. group, { fg = co.fg, bg = float_bg, underline = false })
     hl(0, 'SnacksNotifierFooter' .. group, { link = 'SnacksNotifierTitle' })
   end
 

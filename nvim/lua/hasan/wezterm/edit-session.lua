@@ -11,6 +11,32 @@ local M = {
   render_positons = {},
 }
 
+---@param val boolean
+local function toggle_modifiable(val)
+  if not M.float then
+    return
+  end
+
+  vim.api.nvim_set_option_value('modifiable', val, { buf = M.float.bufnr })
+end
+
+---@return number
+local function get_current_tab_index()
+  local cursor_line = vim.api.nvim_win_get_cursor(M.float.winid)[1]
+  if M.render_positons == nil then
+    return 0
+  end
+
+  local current_tab_idx = 1
+  for tab_idx, tab in ipairs(M.render_positons) do
+    if cursor_line >= tab.line_nr then
+      current_tab_idx = tab_idx
+    end
+  end
+
+  return current_tab_idx
+end
+
 ---@param texts NuiText[]
 ---@param bufnr number
 ---@param ns_id number
@@ -88,33 +114,67 @@ local utils = {
   is_cursor_on_tab = function(line)
     return line:match('Tab:') == 'Tab:'
   end,
-  ---@return number
-  get_current_tab_index = function()
-    local cursor_line = vim.api.nvim_win_get_cursor(M.float.winid)[1]
-    if M.render_positons == nil then
-      return 0
+  toggle_tab_active = function(line, curline_nr)
+    local tab_active = line:find('%(Active:')
+    if tab_active then
+      return
     end
 
-    local current_tab_idx = 1
-    for tab_idx, tab in ipairs(M.render_positons) do
-      if cursor_line >= tab.line_nr then
-        current_tab_idx = tab_idx
+    toggle_modifiable(true)
+    local new_status = line:gsub('%(:', '(Active:')
+    render_line({ NuiText(new_status, 'WezTab') }, 0, -1, curline_nr)
+
+    for _, tab in ipairs(M.render_positons) do
+      local l = vim.fn.getline(tab.line_nr)
+      if l:match('%(Active:') and tab.line_nr ~= curline_nr then
+        local tab_text = l:gsub('%(Active:', '(:')
+        render_line({ NuiText(tab_text, 'WezTab') }, 0, -1, tab.line_nr)
       end
     end
 
-    return current_tab_idx
+    vim.schedule(function()
+      toggle_modifiable(false)
+    end)
   end,
-  toggle_tab_active = function(text, line_nr)
-    local is_active = text:find('%(Active:')
-    local new_status = is_active and text:gsub('%(Active:', '(:') or text:gsub('%(:', '(Active:')
+  toggle_pane_active = function(line, curline_nr)
+    local active = line:match('%[%d+%]%*') ~= nil
+    if active then
+      return
+    end
 
-    render_line({ NuiText(new_status, 'WezTab') }, 0, -1, line_nr)
-  end,
-  toggle_pane_active = function(line, line_nr)
-    local is_active = line:match('%[%d+%]%*') ~= nil
-    local updated_line = is_active and line:gsub('%]%*', ']') or line:gsub('%]', ']*')
+    toggle_modifiable(true)
+    local status = line:gsub('%]', ']')
+    render_line({ NuiText(status), NuiText('*', 'Constant') }, 0, -1, curline_nr)
 
-    render_line({ NuiText(updated_line) }, 0, -1, line_nr)
+    local tabs_ln, current_tab_idx = M.render_positons, nil
+    if not tabs_ln then
+      vim.schedule(function()
+        toggle_modifiable(false)
+      end)
+      return
+    end
+
+    current_tab_idx = get_current_tab_index()
+
+    if not current_tab_idx or current_tab_idx == 0 then
+      vim.schedule(function()
+        toggle_modifiable(false)
+      end)
+      return
+    end
+
+    for _, pane in ipairs(tabs_ln[current_tab_idx].panes) do
+      local l = vim.fn.getline(pane.line_nr)
+      local is_active = l:match('%[%d+%]%*')
+      if is_active and pane.line_nr ~= curline_nr then
+        local updated_line = l:gsub('%]%*', ']')
+        render_line({ NuiText(updated_line) }, 0, -1, pane.line_nr)
+      end
+    end
+
+    vim.schedule(function()
+      toggle_modifiable(false)
+    end)
   end,
   list_files = function(directory)
     local files = {}
@@ -151,12 +211,10 @@ local utils = {
         updated_tab.is_active = tab_parsed.is_active
 
         for pane_index, pane_parsed in ipairs(tab_parsed.panes) do
-          if vim.trim(pane_parsed.action) ~= '' then
-            -- update pane action,cwd
-            updated_tab.panes[pane_index].action = pane_parsed.action
-            updated_tab.panes[pane_index].cwd = pane_parsed.cwd
-            updated_tab.panes[pane_index].is_active = pane_parsed.is_active
-          end
+          local action = vim.trim(pane_parsed.action or '')
+          updated_tab.panes[pane_index].action = action
+          updated_tab.panes[pane_index].cwd = pane_parsed.cwd
+          updated_tab.panes[pane_index].is_active = pane_parsed.is_active
         end
         new_state.tabs[tab_index] = updated_tab
       end
@@ -180,13 +238,25 @@ local actions = {
     M.float:unmount()
     M.render_positons = {}
   end,
+  edit = function(insert)
+    return function()
+      local line = vim.api.nvim_get_current_line()
+      local can_edit = line:match('Dir:') or line:match('Action:')
+      if not can_edit then
+        return
+      end
+
+      toggle_modifiable(true)
+      return insert
+    end
+  end,
   jump_next_tab = function()
     local positions = M.render_positons
     if positions == nil then
       return
     end
 
-    local current_tab_idx = utils.get_current_tab_index()
+    local current_tab_idx = get_current_tab_index()
 
     local next_tab = positions[current_tab_idx + 1] and positions[current_tab_idx + 1] or positions[1]
     vim.api.nvim_win_set_cursor(M.float.winid, { next_tab.line_nr, 0 })
@@ -198,14 +268,14 @@ local actions = {
       return
     end
 
-    local current_tab_idx = utils.get_current_tab_index()
+    local current_tab_idx = get_current_tab_index()
 
     local next_tab = positions[current_tab_idx - 1] and positions[current_tab_idx - 1] or positions[#positions]
     vim.api.nvim_win_set_cursor(M.float.winid, { next_tab.line_nr, 0 })
     feedkeys('zt', 'n')
   end,
   jump_to_pane = function(pane_idx)
-    local current_tab_idx = utils.get_current_tab_index()
+    local current_tab_idx = get_current_tab_index()
     local pane = M.render_positons[current_tab_idx].panes[pane_idx]
     if pane and type(pane.line_nr) == 'number' then
       vim.api.nvim_win_set_cursor(M.float.winid, { pane.line_nr, 0 })
@@ -217,7 +287,8 @@ local actions = {
 
     local cursor_on_tab = utils.is_cursor_on_tab(line)
     if cursor_on_tab then
-      return utils.toggle_tab_active(line, cursor[1])
+      utils.toggle_tab_active(line, cursor[1])
+      return
     end
 
     local cursor_on_pane = line:match('%[%d+%]') ~= nil
@@ -234,7 +305,14 @@ local function create_floating_win(state_file)
   local float = Popup({
     enter = true,
     focusable = true,
-    border = { padding = { 0, 2 } },
+    border = {
+      text = {
+        top = wezterm_state.name or 'Wezterm Sessions',
+        bottom = NuiText('<CR>: Save • t: Toggle active • <tab>/<s-tab>: Jump tabs • 1-4: Jump panes', 'Comment'),
+      },
+      style = 'solid',
+      padding = { 0, 1 },
+    },
     win_options = { winhighlight = 'Normal:LazyNormal' },
     position = '50%',
     size = { width = 0.6, height = 0.6 },
@@ -272,17 +350,30 @@ local function create_floating_win(state_file)
     M.render_positons[tab_index] = record_position
   end
 
-  float:show()
+  float:mount()
+  local event = require('nui.utils.autocmd').event
   vim.api.nvim_win_set_cursor(float.winid, { 2, 0 })
+
+  float:on(event.InsertLeave, function()
+    toggle_modifiable(false)
+  end)
+  vim.schedule(function()
+    toggle_modifiable(false)
+  end)
 
   local kopt = { noremap = true, silent = true, buffer = bufnr }
   keymap('n', 'q', actions.close_win, kopt)
   keymap('n', 't', actions.toggle_action_status, kopt)
   keymap('n', '<tab>', actions.jump_next_tab, kopt)
   keymap('n', '<s-tab>', actions.jump_prev_tab, kopt)
-  keymap('n', '<leader>s', function()
+  keymap('n', '<CR>', function()
     actions.write_state(state_file, utils.update_state(wezterm_state))
   end, kopt)
+
+  -- Insert keymaps
+  keymap('n', 'i', actions.edit('A'), { buffer = bufnr, expr = true })
+  keymap('n', 'a', actions.edit('a'), { buffer = bufnr, expr = true })
+  keymap('n', 'A', actions.edit('A'), { buffer = bufnr, expr = true })
 
   for key_num = 1, 4, 1 do
     keymap('n', tostring(key_num), function()
@@ -302,14 +393,13 @@ function M.select_file()
 
   vim.ui.select(files, { prompt = 'Select a file:' }, function(choice)
     if choice then
-      -- dd(state_path .. '/' .. choice)
       create_floating_win(state_path .. '/' .. choice)
     end
   end)
 end
 
 -- M.select_file()
--- create_floating_win('C:/Users/hasan/dotfiles/gui/wezterm/wezterm-session-manager/state/klark-app.json')
+-- create_floating_win('C:/Users/hasan/dotfiles/gui/wezterm/wezterm-session-manager/state/klark-app-rn.json')
 
 ---@class Size
 ---@field cols number

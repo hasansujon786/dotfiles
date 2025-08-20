@@ -95,8 +95,8 @@ return {
     -- { key = 'q', mods = 'LEADER|ALT', action = 'ShowTabNavigator' },
 
     -- Workspace
-    { key = '{', mods = 'CTRL|SHIFT', action = act({ SwitchWorkspaceRelative = -1 }) },
-    { key = '}', mods = 'CTRL|SHIFT', action = act({ SwitchWorkspaceRelative = 1 }) },
+    { key = '[', mods = 'CTRL', action = act({ SwitchWorkspaceRelative = -1 }) },
+    { key = ']', mods = 'CTRL', action = act({ SwitchWorkspaceRelative = 1 }) },
     { key = 's', mods = 'LEADER|ALT', action = act({ EmitEvent = 'save-session' }) },
     { key = 'r', mods = 'LEADER|ALT', action = act({ EmitEvent = 'restore-session' }) },
     { key = 'l', mods = 'LEADER|ALT', action = act({ EmitEvent = 'load-session' }) },
