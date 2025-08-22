@@ -74,8 +74,8 @@ PrintScreen::Send("#+{s}")
 ; Window manazement
 ;******************************************************************************
 #InputLevel 1
-; !\::Send("\")
-; \::alternateTab()
+!\::Send("\")
+\::alternateTab()
 !`::switchBetweenSameApps()
 
 ; Window Transparency

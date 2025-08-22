@@ -20,7 +20,8 @@
   LSftLyr (tap-hold-press $tap-time $hold-time lshift (layer-while-held sft-layer))
 
   ;; Easy tab controll
-  AltTab (tap-hold-press 100 $hold-time A-tab \)
+  ;; AltTab (tap-hold-press 100 $hold-time A-tab \)
+  ;; AltTab (tap-hold-except-keys 100 $hold-time \ A-tab ())
   CapCtrl (tap-hold-press 100 $hold-time A-tab lctl)
 
   ms↑ (movemouse-up 4 4)
@@ -53,9 +54,9 @@
 (deflayer base-layer
   _        _        _        _        _       _       _       _       _        _        _        _       _
   _        _        _        _        _       _       _       _       _        _        _        _       _       _
-  _        _        _        _        _       _       _       _       _        _        _        _       _       @AltTab
+  _        _        _        _        _       _       _       _       _        _        _        _       _       _
 @CapCtrl   _        _        _        _       _       _       _       _        _        _        _       _
-@LSftLyr   _        _        _        _       _       _       _       _        _        _        _       _
+  _        _        _        _        _       _       _       _       _        _        _        _       _
   _        _        _                      @SpcLyr                    _        _        _        _       _       _
 )
 
@@ -66,15 +67,6 @@
   _        home     C-s      C-d      C-rght  _       left    down    up       rght     _        _       _
   _        _        A-x      _        _       C-left  C-n     _       _        C-spc    C-A-tab  _       @ms↑
   _        _        _                         _                       _        _        _        @ms←    @ms↓    @ms→
-)
-
-(deflayer sft-layer
-  S-esc    S-f1     S-f2     S-f3     S-f4    S-f5    S-f6    S-f7    S-f8     S-f9     S-f10    S-f11   S-f12
-  S-grv    S-1      S-2      S-3      S-4     S-5     S-6     S-7     S-8      S-9      S-0      S--     S-=     S-bspc
-  S-tab    S-q      S-w      S-e      S-r     S-t     S-y     S-u     S-i      S-o      S-p      S-[     S-]     S-\
-  _        S-a      S-s      S-d      S-f     S-g     S-h     S-j     S-k      S-l      S-;      S-'     S-ret
-  _        S-z      S-x      S-c      S-v     S-b     S-n     S-m     S-,      S-.      S-/      _       S-▲
-  _        _        _                        S-spc                    _        _        _        S-◀     S-▼      S-▶
 )
 
 (defchordsv2
