@@ -305,6 +305,7 @@ local function create_floating_win(state_file)
   local float = Popup({
     enter = true,
     focusable = true,
+    relative = 'editor',
     border = {
       text = {
         top = wezterm_state.name or 'Wezterm Sessions',

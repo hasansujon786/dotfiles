@@ -196,7 +196,7 @@ fk() {
   local pid
   pid=$(tasklist | sed 1d | fzf -m | awk '{print $1}')
 
-  if [ "x$pid" != "x" ]; then
+  if [ "$pid" != "" ]; then
     echo "$pid" | xargs taskkill //F //IM
   fi
 }
@@ -297,10 +297,12 @@ fn() {
 }
 
 # Search & select files inside ~/my_vault/ and open it in Neovim.
-fv() {
+va() {
+  cd "$HOME/my_vault" || exit
+
   local files
-  files=$(rg --files "$HOME/my_vault/" |
-    fzf --multi \
+  files=$(fd -t f --color=never |
+    fzf --multi --ansi \
       --preview 'bat -p --color=always {}' \
       --preview-window '~8,+{2}-5')
 

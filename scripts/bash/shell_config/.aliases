@@ -73,7 +73,9 @@ alias fob='cd build/app/outputs/flutter-apk && explorer .'
 alias dp='dart pub'
 alias dpum='dart pub upgrade --major-versions'
 alias drbb='dart run build_runner build --delete-conflicting-outputs'
-alias drbw='dart run build_runner watch --delete-conflicting-outputs'
+
+# Golang
+alias gmi='go mod init github.com/hasansujon786/'
 
 #adb
 alias adk='adb kill-server'

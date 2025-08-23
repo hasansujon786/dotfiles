@@ -70,13 +70,6 @@ return {
   -- {
   --   'wolfwfr/vimatrix.nvim',
   --   cmd = { 'VimatrixOpen' },
-  --   opts = {
-  --     window = {
-  --       general = {
-  --         background = '#111111',
-  --         blend = 0,
-  --       },
-  --     },
-  --   },
+  --   opts = { window = { general = { background = 'none', blend = 0 } } },
   -- },
 }

@@ -17,7 +17,7 @@
 (defalias
   ;; Layers
   SpcLyr (tap-hold-release 2000 400 spc (layer-while-held spc-layer))
-  LSftLyr (tap-hold-press $tap-time $hold-time lshift (layer-while-held sft-layer))
+  ;; LSftLyr (tap-hold-press $tap-time $hold-time lshift (layer-while-held sft-layer))
 
   ;; Easy tab controll
   ;; AltTab (tap-hold-press 100 $hold-time A-tab \)

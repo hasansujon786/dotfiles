@@ -3,6 +3,8 @@
 https://github.com/yutkat/dotfiles/blob/main/.config/wezterm/wezterm.lua
 https://gist.github.com/gsuuon/5511f0aa10c10c6cbd762e0b3e596b71
 https://dev.to/lovelindhoni/make-wezterm-mimic-tmux-5893
+TODO: check wezterm config
+Reddit post https://www.reddit.com/r/wezterm/comments/1ml2qzo/my_macos_wezterm_custom_config_complete_user_guide/
 
 ## plugins
 
