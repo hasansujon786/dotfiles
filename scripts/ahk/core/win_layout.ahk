@@ -71,27 +71,27 @@ runLayoutAction(EXE_FULL, EXE, side) {
 		return
 	}
 
-	if (EXE_FULL == BROWSER_EXE[2]) {
-		activateNonPrivateBrowserWindow(EXE_FULL)
-	} else {
-		WinActivate(EXE_FULL)
-	}
-
-	if (side == "center") {
-		winRestoreAndCenter()
-	} else if (side == "maximized") {
-		try {
-			WinMaximize(EXE_FULL)
+	try {
+		if (EXE_FULL == BROWSER_EXE[2]) {
+			activateNonPrivateBrowserWindow(EXE_FULL)
+		} else {
+			WinActivate(EXE_FULL)
 		}
-	} else if (side == "maximized_custom") {
-		;           ↓ here 0 hides the video behind the window
-		WinMove(-8, 1, A_ScreenWidth + 16, A_ScreenHeight + 8 - TASKBAR_HEIGHT, "A")
-		; WinMove(, , A_ScreenWidth + 8, A_ScreenHeight - 36, "A")
-		; centerCurrentWindow()
-	} else {
-		; winPinToSide(side, false)
-		tbHeight := TASKBAR_HEIGHT == 0 ? -8 : TASKBAR_HEIGHT
-		winPinToSide_custom(side, tbHeight)
+
+		if (side == "center") {
+			winRestoreAndCenter()
+		} else if (side == "maximized") {
+			WinMaximize(EXE_FULL)
+		} else if (side == "maximized_custom") {
+			;           ↓ here 0 hides the video behind the window
+			WinMove(-8, 1, A_ScreenWidth + 16, A_ScreenHeight + 8 - TASKBAR_HEIGHT, "A")
+			; WinMove(, , A_ScreenWidth + 8, A_ScreenHeight - 36, "A")
+			; centerCurrentWindow()
+		} else {
+			; winPinToSide(side, false)
+			tbHeight := TASKBAR_HEIGHT == 0 ? -8 : TASKBAR_HEIGHT
+			winPinToSide_custom(side, tbHeight)
+		}
 	}
 }
 
