@@ -1,7 +1,7 @@
 local nx = { 'n', 'x' }
 
 return {
-  'echasnovski/mini.move',
+  'nvim-mini/mini.move',
   keys = {
     { '<M-k>', mode = nx, desc = 'Move up' },
     { '<M-j>', mode = nx, desc = 'Move down' },

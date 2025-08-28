@@ -139,12 +139,6 @@ return {
         cterm_color = '68',
         name = 'Yarnconfig',
       },
-      ['pnpm-lock.yaml'] = {
-        icon = '󰀻',
-        color = '#FFB300',
-        cterm_color = '208',
-        name = 'Pnpmlock',
-      },
       -- ['package.json'] = {
       --   icon = '',
       --   color = '#019833',
@@ -168,18 +162,6 @@ return {
         color = '#cbcb41',
         cterm_color = '185',
         name = 'Babelrc',
-      },
-      ['vite.config.js'] = {
-        icon = '', -- '',
-        color = '#FD971F',
-        cterm_color = '208',
-        name = 'ViteConfigFile',
-      },
-      ['vite.config.ts'] = {
-        icon = '',
-        color = '#FD971F',
-        cterm_color = '208',
-        name = 'ViteConfigFile',
       },
       ['.gitattributes'] = {
         icon = '',

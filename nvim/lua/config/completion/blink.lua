@@ -35,7 +35,7 @@ return {
     'rafamadriz/friendly-snippets',
     'windwp/nvim-autopairs',
     'L3MON4D3/LuaSnip',
-    -- 'echasnovski/mini.snippets',
+    -- 'nvim-mini/mini.snippets',
     'mattn/emmet-vim',
   },
   ---@module 'blink.cmp'

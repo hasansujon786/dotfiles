@@ -1,7 +1,7 @@
 return {
   'folke/edgy.nvim',
   event = 'WinNew', -- 'VeryLazy'
-  enabled = true,
+  enabled = false,
   lazy = true, -- make sure we load this during startup if it is your main colorscheme
   config = function()
     local Icons = require('hasan.utils.ui.icons').Other
@@ -64,11 +64,11 @@ return {
         ft = 'scratchpad',
         wo = { winbar = false, winhighlight = '', fillchars = bottom_chars },
       },
-      {
-        ft = 'terminal',
-        wo = { winbar = false, winhighlight = '', fillchars = bottom_chars },
-        filter = is_split_win,
-      },
+      -- {
+      --   ft = 'terminal',
+      --   wo = { winbar = false, winhighlight = '', fillchars = bottom_chars },
+      --   filter = is_split_win,
+      -- },
       {
         ft = 'snacks_terminal',
         wo = { winbar = false, winhighlight = '', fillchars = bottom_chars },

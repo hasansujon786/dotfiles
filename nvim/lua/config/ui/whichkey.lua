@@ -102,8 +102,8 @@ return {
 
       -- OPEN
       { '<leader>o', group = 'open' },
-      { '<leader>ol', '<cmd>call hasan#window#toggle_quickfix(0)<CR>', desc = 'Open Local list' },
-      { '<leader>oq', '<cmd>call hasan#window#toggle_quickfix(1)<CR>', desc = 'Open Quickfix list' },
+      { '<leader>ol', '<cmd>lwindow<CR>', desc = 'Open Local list' },
+      { '<leader>oq', '<cmd>botright cwindow<CR>', desc = 'Open Quickfix list' },
 
       -- PROJECT
       { '<leader>p', group = 'project' },

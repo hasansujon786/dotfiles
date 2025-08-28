@@ -37,7 +37,7 @@ p:: leader("p", () => toggleAlwaysOnTop())
 a:: leader("a", () => send("#{a}"))
 s:: leader("s", () => showVolMixer())
 m:: leader("m", () => showMicPanel())
-+k:: leader("k", () => toggleKanata())
+^k:: leader("^k", () => toggleKanata())
 MButton:: leader("🖱️", () => enterAutoClikMode())
 LWin:: return
 #HotIf
@@ -58,7 +58,6 @@ LWin:: return
 +PgDn::End
 !SPACE:: Send("^{SPACE}")
 
-
 ; Screenshot
 #`:: takeScreenshot()
 ^#`:: openNewestFile("C:\Users\" A_UserName "\Pictures\Screenshots\*.*")
@@ -66,7 +65,7 @@ PrintScreen:: Send("#+{s}")
 ~LWin & MButton:: Send("#+{s}")
 
 ; Audio Control
-#k:: Send("^#v")
+#s:: Send("^#v")
 !Esc::Volume_Mute
 !PgUp:: volup()
 !PgDn:: voldown()
