@@ -2,6 +2,13 @@ vim.g.navbuddy_taransparent = true
 
 ---@type Navbuddy.config
 local opts = {
+  node_markers = {
+    icons = {
+      leaf = '  ',
+      leaf_selected = '  ',
+      branch = ' »',
+    },
+  },
   custom_hl_group = 'Visual',
   lsp = { auto_attach = true },
   -- source_buffer = {
@@ -12,7 +19,7 @@ local opts = {
   -- },
   window = {
     winblend = 20,
-    -- border = 'single',
+    border = 'rounded',
     size = '60%',
     position = '50%',
     scrolloff = nil,

@@ -1,17 +1,53 @@
-local keys = {
-  { '<leader>M', desc = 'Harpoon: Add file' },
-  { '<leader><tab>', desc = 'Harpoon: Toggle menu' },
-  { '[<tab>', desc = 'Harpoon: Prev item' },
-  { ']<tab>', desc = 'Harpoon: Next item' },
-  { '<leader>/e', desc = 'Find harpoon files' },
-}
-
 return {
   'ThePrimeagen/harpoon',
   branch = 'harpoon2',
   lazy = true,
   module = 'harpoon',
-  keys = keys,
+  keys = {
+    {
+      '<leader>M',
+      function()
+        local list = require('harpoon'):list():add()
+
+        local displayed = list:display()
+        local name = require('hasan.utils.file').get_buf_name_relative(0)
+        local index = require('hasan.utils').index_of(displayed, name)
+
+        vim.notify('File added at index ' .. index, vim.log.levels.INFO, { title = 'harpoon' })
+        fire_user_cmds('HarpoonAdded')
+      end,
+      desc = 'Harpoon: Add file',
+    },
+    {
+      '<leader><tab>',
+      function()
+        local harpoon = require('harpoon')
+        harpoon.ui:toggle_quick_menu(harpoon:list(), {
+          title = ' Harpoon ',
+          border = 'rounded',
+          title_pos = 'center',
+          height_in_lines = 12,
+          ui_max_width = 90,
+        })
+      end,
+      desc = 'Harpoon: Toggle menu',
+    },
+    {
+      '[<tab>',
+      function()
+        require('harpoon'):list():prev()
+      end,
+      desc = 'Harpoon: Prev item',
+    },
+    {
+      ']<tab>',
+      function()
+        require('harpoon'):list():next()
+      end,
+      desc = 'Harpoon: Next item',
+    },
+    -- { '<leader>/e', desc = 'Find harpoon files' },
+  },
   init = function()
     local harpoon_ls, win_ls, win_rs = '<leader>%s', '<leader>w%s', '%s<C-w>w'
     local opts = { desc = 'which_key_ignore' }
@@ -25,12 +61,11 @@ return {
     end
   end,
   config = function()
-    local harpoon = require('harpoon')
     local Extensions = require('harpoon.extensions')
     local Logger = require('harpoon.logger')
 
     -- REQUIRED
-    harpoon.setup({
+    require('harpoon').setup({
       settings = {
         save_on_toggle = true,
         sync_on_ui_close = true,
@@ -67,38 +102,6 @@ return {
         end,
       },
     })
-
-    local maps = {
-      ['<leader>M'] = function()
-        local list = harpoon:list():add()
-
-        local displayed = list:display()
-        local name = require('hasan.utils.file').get_buf_name_relative(0)
-        local index = require('hasan.utils').index_of(displayed, name)
-
-        vim.notify('File added at index ' .. index, vim.log.levels.INFO, { title = 'harpoon' })
-      end,
-      ['<leader><tab>'] = function()
-        harpoon.ui:toggle_quick_menu(harpoon:list(), {
-          title = ' Harpoon ',
-          border = 'rounded',
-          title_pos = 'center',
-          height_in_lines = 12,
-          ui_max_width = 90,
-        })
-      end,
-      ['[<tab>'] = function()
-        harpoon:list():prev()
-      end,
-      [']<tab>'] = function()
-        harpoon:list():next()
-      end,
-    }
-
-    for _, item in ipairs(keys) do
-      local key = item[1]
-      keymap('n', key, maps[key], { desc = item.desc })
-    end
 
     vim.g.harpoon_loaded = true
   end,

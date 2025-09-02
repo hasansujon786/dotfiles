@@ -200,7 +200,7 @@ return {
     { provider = '█', hl = layerBlockAlt },
   },
   Harpoon = {
-    update = { 'WinEnter', 'WinLeave', 'BufReadPost', 'BufEnter', 'BufWinEnter' },
+    update = { 'WinEnter', 'WinLeave', 'BufReadPost', 'BufEnter', 'BufWinEnter', 'User', pattern = 'HarpoonAdded' },
     condition = function()
       return vim.g.harpoon_loaded
     end,

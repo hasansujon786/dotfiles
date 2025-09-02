@@ -24,6 +24,8 @@ return {
       'tsx',
       'powershell',
       'astro',
+      'go',
+      'gomod',
     }
 
     require('nvim-treesitter.configs').setup({
