@@ -1,5 +1,43 @@
 local M = {}
 
+---@param cmds string[]
+---@param after function
+local code_action = function(cmds, after)
+  local win = vim.api.nvim_get_current_win()
+  local offset_encoding = 'utf-16'
+  local params = vim.lsp.util.make_range_params(win, offset_encoding)
+  params.context = { only = cmds }
+
+  ---@param err? lsp.ResponseError
+  ---@param res? (lsp.Command|lsp.CodeAction)[]
+  ---@param ctx lsp.HandlerContext
+  local on_result = function(err, res, ctx)
+    if err then
+      return
+    end
+    if not res then
+      return
+    end
+
+    for _, r in pairs(res) do
+      if r.edit then
+        local enc = (vim.lsp.get_client_by_id(ctx.client_id) or {}).offset_encoding
+        vim.lsp.util.apply_workspace_edit(r.edit, enc)
+        -- else
+        -- fallback: if it's a command, execute it
+        -- if r.command then
+        --   client:exec_cmd(r.command, ctx)
+        -- end
+      end
+    end
+
+    if after then
+      after()
+    end
+  end
+  vim.lsp.buf_request(0, 'textDocument/codeAction', params, on_result)
+end
+
 ---@type lsp.AttachCb
 function M.lsp_buffer_keymaps(client, bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
@@ -20,6 +58,11 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', 'gy', '<cmd>Glance type_definitions<CR>', desc('Lsp: Type definition'))
   keymap('n', 'gR', '<cmd>Glance resume<CR>', desc('Lsp: Glance resume'))
   keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', desc('Lsp: Go to declaration'))
+
+  keymap('n', '<leader>a.', run_code_action({ 'source.fixAll' }), desc('Lsp: Fix all'))
+  keymap('n', '<leader>ai', function()
+    code_action({ 'source.organizeImports' }, vim.cmd.write)
+  end, desc('Lsp: Organize imports'))
 
   keymap('n', 'gpd', '<cmd>lua require("config.lsp.util.peek").PeekDefinition()<CR>', desc('Peek definition'))
   keymap('n', 'gpI', '<cmd>lua require("config.lsp.util.peek").PeekImplementation()<CR>', desc('Peek implementation'))

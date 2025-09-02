@@ -9,6 +9,7 @@
     "C:/Users/hasan/AppData/Local/nvim-data/lazy/blink.cmp",
     "C:/Users/hasan/AppData/Local/nvim-data/lazy/LuaSnip",
     "C:/tools/neovim/nvim-win64/share/nvim/runtime/lua",
+    "C:/Users/hasan/scoop/apps/neovim/current/share/nvim/runtime/lua",
     "C:/Users/hasan/dotfiles/nvim/lua",
     "${3rd}/luv/library",
     "${3rd}/luassert/library"

@@ -81,6 +81,15 @@ function _G.augroup(group)
   end
 end
 
+function _G.run_code_action(cmds)
+  return function()
+    vim.lsp.buf.code_action({
+      apply = true,
+      context = { only = cmds, diagnostics = {} },
+    })
+  end
+end
+
 ---Protected `require` function
 ---@param module_name string
 ---@return table | function | Void module

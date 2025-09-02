@@ -13,14 +13,6 @@
 -- "dart.refactor.move_top_level_to_file"
 -- },
 
-local run_code_action = function(cmds)
-  return function()
-    vim.lsp.buf.code_action({
-      apply = true,
-      context = { only = cmds, diagnostics = {} },
-    })
-  end
-end
 keymap('n', '<Plug>FlutterPkgToRelative', function()
   run_code_action({
     'refactor.convert.packageToRelativeImport',
@@ -38,8 +30,6 @@ local M = {
     -- lua require('project_run.utils').open_tab(vim.fn.getcwd(), 'adb connect 192.168.31.252 && flutter run')
 
     -- Custom code actions
-    keymap('n', '<leader>a.', run_code_action({ 'source.fixAll' }), desc('Lsp: Fix all'))
-    keymap('n', '<leader>ai', run_code_action({ 'source.organizeImports' }), desc('Lsp: Organize imports'))
     keymap('n', '<leader>am', '<Plug>FlutterPkgToRelative', desc('Lsp: Convert to a relative import'))
   end,
   opts = {
