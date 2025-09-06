@@ -52,9 +52,7 @@ require('lazy').setup({
   },
   dev = { path = repoes_path .. '/lua' },
   performance = {
-    cache = {
-      enabled = true,
-    },
+    cache = { enabled = true },
     rtp = {
       disabled_plugins = {
         'gzip',

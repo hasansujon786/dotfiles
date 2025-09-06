@@ -1,15 +1,3 @@
--- Setup some globals for debugging (lazy-loaded)
-_G.dd = function(...)
-  Snacks.debug.inspect(...)
-end
-_G.bt = function()
-  Snacks.debug.backtrace()
-end
-_G.log = function(...)
-  Snacks.debug.log(...)
-end
-vim.print = _G.dd -- Override print to use snacks for `:=` command
-
 -- Create some toggle mappings
 Snacks.toggle.line_number():map('<leader>tn')
 Snacks.toggle.option('cursorcolumn', { name = 'Cursorcolumn' }):map('<leader>tC')
@@ -54,3 +42,17 @@ Snacks.toggle({
     vim.fn['autohl#_AutoHighlightToggle']()
   end,
 }):map('<leader>tW')
+
+Snacks.toggle({
+  name = 'TSContext',
+  get = function()
+    return require('treesitter-context').enabled
+  end,
+  set = function(state)
+    if state then
+      require('treesitter-context').enable()
+    else
+      require('treesitter-context').disable()
+    end
+  end,
+}):map('<leader>t-')

@@ -176,20 +176,6 @@ return {
         },
       },
       opts = function()
-        local tsc = require('treesitter-context')
-
-        Snacks.toggle({
-          name = 'TSContext',
-          get = tsc.enabled,
-          set = function(state)
-            if state then
-              tsc.enable()
-            else
-              tsc.disable()
-            end
-          end,
-        }):map('<leader>t-')
-
         return {
           enable = require('core.state').treesitter.enabled_context, -- Enable this plugin (Can be enabled/disabled later via commands)
           max_lines = 5, -- How many lines the window should span. Values <= 0 mean no limit.
