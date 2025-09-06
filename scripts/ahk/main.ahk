@@ -54,25 +54,26 @@ LWin:: return
 !7:: Send("#7")
 !8:: Send("#8")
 !9:: Send("#9")
-+PgUp::Home
-+PgDn::End
+!PgUp::Home
+!PgDn::End
 !SPACE:: Send("^{SPACE}")
 
 ; Screenshot
 #`:: takeScreenshot()
-^#`:: openNewestFile("C:\Users\" A_UserName "\Pictures\Screenshots\*.*")
+!#`:: openNewestFile("C:\Users\" A_UserName "\Pictures\Screenshots\*.*")
+^#`:: openNewestFile("C:\Users\" A_UserName "\Downloads\*.*")
 PrintScreen:: Send("#+{s}")
 ~LWin & MButton:: Send("#+{s}")
 
 ; Audio Control
 #s:: Send("^#v")
-!Esc::Volume_Mute
-!PgUp:: volup()
-!PgDn:: voldown()
+#Del:: Send("{Volume_Mute}")
+#PgUp:: volup()
+#PgDn:: voldown()
+#HotIf winIsMouseOver("ahk_class Shell_TrayWnd")
 ~LAlt & WheelUP:: volup()
 ~LAlt & WheelDown:: voldown()
-; #HotIf winIsMouseOver("ahk_class Shell_TrayWnd")
-; #HotIf
+#HotIf
 
 ; Other
 ^#b:: showCalendar()
@@ -96,8 +97,8 @@ PrintScreen:: Send("#+{s}")
 ; +#m:: Restore only minimized windows
 ^#m:: toggleWinMinimize()
 #Enter:: Send("{f11}")
-#Escape:: toggleWinMaximize()
-#,:: winRestoreAndCenter()
+#Esc:: winRestoreAndCenter()
+#,:: toggleWinMaximize()
 #HotIf not WinActive("ahk_exe wezterm-gui.exe")
 ; Nav through tabs
 ![:: SendInput("^+{tab}")

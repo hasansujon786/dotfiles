@@ -8,16 +8,29 @@ return {
     { event = { Drag = { streak = 1, button = 'Left' } }, mods = 'CTRL|SHIFT', action = 'StartWindowDrag' },
   },
   keys = {
-    { key = 'F11', action = wezterm.action_callback(events.toggle_full_screen) },
+    -- Useful keymaps
     { key = 'e', mods = 'LEADER|ALT', action = wezterm.action_callback(events.toggle_quick_pane) },
     { key = 'e', mods = 'LEADER', action = wezterm.action_callback(events.toggle_quick_pane) },
+    {
+      key = 'q',
+      mods = 'SHIFT|CTRL',
+      action = wezterm.action.Multiple({
+        wezterm.action.SendKey({ key = 'q', mods = '' }),
+        wezterm.action.SendKey({ key = 'UpArrow', mods = '' }),
+        wezterm.action.SendKey({ key = 'Enter', mods = '' }),
+      }),
+    },
+
+    -- Control wezterm
+    { key = 'F11', action = wezterm.action_callback(events.toggle_full_screen) },
     { key = 'r', mods = 'SHIFT|CTRL', action = wezterm.action_callback(wezterm.reload_configuration) },
-    { key = 't', mods = 'SHIFT|ALT', action = act({ EmitEvent = 'toggle-tab-bar' }) },
     { key = 'w', mods = 'SHIFT|CTRL', action = act({ CloseCurrentPane = { confirm = false } }) },
-    { key = 'k', mods = 'SHIFT|CTRL', action = act.ScrollByLine(-1) },
-    { key = 'j', mods = 'SHIFT|CTRL', action = act.ScrollByLine(1) },
-    { key = 'PageUp', mods = 'ALT', action = act.ScrollByPage(-1) },
-    { key = 'PageDown', mods = 'ALT', action = act.ScrollByPage(1) },
+    { key = 't', mods = 'SHIFT|ALT', action = act({ EmitEvent = 'toggle-tab-bar' }) },
+    -- Scroll lines
+    { key = 'UpArrow', mods = 'SHIFT|CTRL', action = act.ScrollByLine(-1) },
+    { key = 'DownArrow', mods = 'SHIFT|CTRL', action = act.ScrollByLine(1) },
+    { key = 'PageUp', mods = 'SHIFT|CTRL', action = act.ScrollByPage(-1) },
+    { key = 'PageDown', mods = 'SHIFT|CTRL', action = act.ScrollByPage(1) },
 
     -- tmux style key bindings
     { key = 'c', mods = 'LEADER', action = act({ SpawnTab = 'CurrentPaneDomain' }) },

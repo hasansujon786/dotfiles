@@ -167,7 +167,8 @@ alias lg='lazygit'
 alias gdsafe='pwd | xargs git config --global --add safe.directory'
 
 # kill port
-alias fp='tasklist | findstr' # search string
+alias fit='tasklist | findstr' # search string
+alias fip='netstat -ano | findstr' # search string
 alias tk='taskkill //F //IM'
 alias tkp='taskkill //PID'
 alias tkv='taskkill //F //IM "java.exe"'
@@ -289,6 +290,21 @@ redrive() {
 
 qrcode() {
   echo "$@" | curl -F-=\<- qrenco.de
+}
+logv() {
+  if [ -z "$1" ]; then
+    echo "Usage: logv <filename>"
+    return 1
+  fi
+
+  local file="$1"
+
+  if [ ! -f "$file" ]; then
+    echo "File '$file' does not exist."
+    return 1
+  fi
+
+  tail -f "$file" | bat --paging=never --language log
 }
 
 declare -A EXCLUDE_EXPAND_ALIASES=(
