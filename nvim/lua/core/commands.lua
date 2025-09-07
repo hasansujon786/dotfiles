@@ -60,3 +60,10 @@ command('DocGenerate', function()
   end
   vim.cmd.checktime()
 end, { nargs = 0, desc = 'DocGenerate' })
+
+command('GoErrDeclToggle', function()
+  require('config.lsp.servers.gopls.go_err').toggle_inline_err()
+end, { nargs = 0, desc = 'GoErrDeclToggle' })
+keymap('n', '<Plug>(GoErrDeclToggle)', function()
+  require('config.lsp.servers.gopls.go_err').toggle_inline_err()
+end, { desc = 'GoErrDeclToggle' })
