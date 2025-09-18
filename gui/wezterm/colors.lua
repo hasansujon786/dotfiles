@@ -17,7 +17,7 @@ M.one_half = {
     '#61afef',
     '#c678dd',
     '#56b6c2',
-    '#dcdfe4',
+     M.colors.fg,
   },
   brights = {
     '#546178', -- '#282c34',

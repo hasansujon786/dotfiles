@@ -77,8 +77,9 @@ PrintScreen:: Send("#+{s}")
 
 ; Other
 ^#b:: showCalendar()
-#Capslock:: toggleCapsLosck()
 !;:: SendInput("{AppsKey}") ; Show menu
+#Capslock:: toggleCapsLosck()
+SetCapsLockState(0)
 
 ;******************************************************************************
 ; Window manazement

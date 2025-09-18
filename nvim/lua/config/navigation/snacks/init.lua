@@ -38,7 +38,9 @@ return {
       },
 
       -- Terminal
-      { '<M-m>', function() Snacks.terminal(nil, { shell = 'bash', win = { position = 'float' } }) end, desc = 'Terminal'  },
+      { '<M-m>', function() require('config.navigation.snacks.terminal').toggle() end, desc = 'Terminal'  },
+      { '[t', function() require('config.navigation.snacks.terminal').prev() end, desc = 'Next Terminal'  },
+      { ']t', function() require('config.navigation.snacks.terminal').next() end, desc = 'Prev Terminal'  },
       { '<leader>ot', function() Snacks.terminal(nil, { shell = 'bash', win = { wo = { winbar = '' } } }) end, desc = 'Terminal'  },
       { '<leader>of', function()
         local cmd = { 'yazi' }

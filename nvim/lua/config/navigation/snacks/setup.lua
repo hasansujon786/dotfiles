@@ -104,7 +104,7 @@ require('snacks').setup({
   bigfile = { enabled = true },
   quickfile = { enabled = true },
   words = { enabled = true, debounce = 450, modes = { 'n' } },
-  explorer = { enabled = true },
+  explorer = { enabled = false },
   image = { enabled = false },
   indent = {
     animate = { enabled = false },
@@ -136,7 +136,7 @@ require('snacks').setup({
       },
       ---@type table<string, snacks.scope.Jump|{desc?:string}>
       jump = {
-        ['[t'] = {
+        ['[u'] = {
           min_size = 1, -- allow single line scopes
           bottom = false,
           cursor = true,
@@ -144,7 +144,7 @@ require('snacks').setup({
           treesitter = { blocks = { enabled = false } },
           desc = 'jump to top edge of scope',
         },
-        [']t'] = {
+        [']u'] = {
           min_size = 1, -- allow single line scopes
           bottom = true,
           cursor = true,
