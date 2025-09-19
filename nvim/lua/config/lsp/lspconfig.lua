@@ -7,7 +7,10 @@ return {
     {
       'mason-org/mason.nvim',
       cmd = { 'Mason', 'MasonInstall', 'MasonUpdate' },
-      opts = { max_concurrent_installers = 3, ui = { border = 'none', height = 0.8 } },
+      opts = {
+        max_concurrent_installers = 3,
+        ui = { border = 'none', height = 0.7, width = 0.6 },
+      },
       config = function(_, opts)
         require('mason').setup(opts)
         require('mason-lspconfig').setup({

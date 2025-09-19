@@ -97,9 +97,9 @@ SetCapsLockState(0)
 ; #m:: Minimize all windows
 ; +#m:: Restore only minimized windows
 ^#m:: toggleWinMinimize()
-#Enter:: Send("{f11}")
+#Enter:: toggleWinMaximize()
 #Esc:: winRestoreAndCenter()
-#,:: toggleWinMaximize()
+#,:: Send("{f11}")
 #HotIf not WinActive("ahk_exe wezterm-gui.exe")
 ; Nav through tabs
 ![:: SendInput("^+{tab}")

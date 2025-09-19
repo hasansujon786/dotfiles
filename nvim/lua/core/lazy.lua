@@ -41,6 +41,10 @@ end
 require('lazy').setup({
   spec = spec,
   concurrency = 3,
+  ui = {
+    size = { width = 0.6, height = 0.7 },
+    border = 'none',
+  },
   rocks = { enabled = false },
   git = {
     timeout = 120, -- Kill processes that take more than 2 minutes

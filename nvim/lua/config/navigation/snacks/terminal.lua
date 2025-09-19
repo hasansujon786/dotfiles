@@ -74,9 +74,14 @@ function M.prev()
 end
 
 function M.toggle()
+  if vim.v.count > 0 then
+    return Snacks.terminal(nil, { shell = 'bash', win = { position = 'float' } })
+  end
+
   local ft = vim.o.ft
   if ft == 'snacks_terminal' or ft == 'terminal' then
-    return vim.cmd([[close]])
+    vim.cmd([[close]])
+    return false
   end
 
   -- Open last opened term
@@ -84,7 +89,7 @@ function M.toggle()
 
   -- Or create a new term
   if not opened then
-    Snacks.terminal(nil, { shell = 'bash', win = { position = 'float' } })
+    return Snacks.terminal(nil, { shell = 'bash', win = { position = 'float' } })
   end
 end
 
