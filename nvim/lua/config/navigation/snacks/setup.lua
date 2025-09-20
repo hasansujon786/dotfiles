@@ -244,7 +244,7 @@ require('snacks').setup({
     exclude = state.picker.exclude,
     sources = {
       buffers = { layout = 'dropdown', current = false },
-      files = { layout = 'ivy' },
+      files = { layout = 'ivy', matcher = { cwd_bonus = true, frecency = true, sort_empty = true } },
       undo = { focus = 'list' },
       commands = { layout = 'vscode' },
       keymaps = { layout = 'vscode' },
@@ -503,6 +503,7 @@ require('snacks').setup({
       ivy = get_ivy(false),
       ivy_mini = get_ivy(true),
       select = { layout = { border = { '🭽', '▔', '🭾', '▕', '🭿', '▁', '🭼', '▏' } } },
+      vscode = { layout = { row = 0 } },
     },
   },
   styles = {

@@ -67,17 +67,24 @@ function M.search_project_todos()
   })
 end
 
+-- Default - files
+-- @ - lsp_symbols
+-- $ - buffers
+-- : - line number
+-- # - search pattern
 function M.project_files()
   Snacks.picker({ -- https://github.com/folke/snacks.nvim/issues/532#issuecomment-2609303872
     title = '',
     layout = { preset = 'vscode', preview = 'main' },
     multi = { 'files', 'lsp_symbols', 'buffers' },
-    win = { preview = preview_main.hidden_winbar },
-    matcher = {
-      cwd_bonus = true, -- boost cwd matches
-      frecency = true, -- use frecency boosting
-      sort_empty = true, -- sort even when the filter is empty
-    },
+    -- win = { preview = preview_main.hidden_winbar },
+    matcher = { cwd_bonus = true, frecency = true, sort_empty = true },
+    sort = function(a, b)
+      local sort = require('snacks.picker.sort').default()
+      sort = type(sort) == 'table' and require('snacks.picker.sort').default(sort) or sort
+      ---@cast sort snacks.picker.sort
+      return sort(a, b)
+    end,
     -- win = {
     --   input = {
     --     keys = {
@@ -203,7 +210,7 @@ function M.buffers_with_symbols()
     title = 'Buffers',
     multi = { 'buffers', 'lsp_symbols' },
     layout = { preset = 'dropdown', preview = 'main' },
-    win = { preview = preview_main.show_winbar },
+    -- win = { preview = preview_main.show_winbar },
     -- on_show = function(picker)
     --   vim.cmd.stopinsert()
     --   -- you can auto enable it if you want
