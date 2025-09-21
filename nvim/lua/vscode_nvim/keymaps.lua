@@ -5,22 +5,22 @@ local noSilent = { silent = false }
 -- G command
 keymap('n', 'go', '<cmd>lua require("vscode").action("editor.action.openLink")<CR>')
 
--- Folding
-keymap('n', '<tab>', '<cmd>lua require("vscode").action("editor.toggleFold")<CR>') -- Toggle folds
-keymap('n', 'za', '<cmd>lua require("vscode").action("editor.toggleFold")<CR>')
-keymap('n', 'zc', '<cmd>lua require("vscode").action("editor.foldRecursively")<CR>')
-keymap('n', 'zo', '<cmd>lua require("vscode").action("editor.unfoldRecursively")<CR>')
-keymap('n', 'zC', '<cmd>lua require("vscode").action("editor.foldAll")<CR>')
-keymap('n', 'zO', '<cmd>lua require("vscode").action("editor.unfoldAll")<CR>')
-keymap('n', 'zR', '<cmd>lua require("vscode").action("editor.unfoldAll")<CR>')
-keymap('n', 'zp', '<cmd>lua require("vscode").action("editor.gotoParentFold")<CR>')
+-- -- Folding
+-- keymap('n', '<tab>', '<cmd>lua require("vscode").action("editor.toggleFold")<CR>') -- Toggle folds
+-- keymap('n', 'za', '<cmd>lua require("vscode").action("editor.toggleFold")<CR>')
+-- keymap('n', 'zc', '<cmd>lua require("vscode").action("editor.foldRecursively")<CR>')
+-- keymap('n', 'zo', '<cmd>lua require("vscode").action("editor.unfoldRecursively")<CR>')
+-- keymap('n', 'zC', '<cmd>lua require("vscode").action("editor.foldAll")<CR>')
+-- keymap('n', 'zO', '<cmd>lua require("vscode").action("editor.unfoldAll")<CR>')
+-- keymap('n', 'zR', '<cmd>lua require("vscode").action("editor.unfoldAll")<CR>')
+-- keymap('n', 'zp', '<cmd>lua require("vscode").action("editor.gotoParentFold")<CR>')
 
 -- => Navigation ------------------------------------
 keymap({ 'n', 'x' }, ']d', '<cmd>lua require("vscode").action("editor.action.marker.next")<CR>')
 keymap({ 'n', 'x' }, '[d', '<cmd>lua require("vscode").action("editor.action.marker.prev")<CR>')
 keymap({ 'n', 'x' }, '[c', '<cmd>lua require("vscode").action("workbench.action.editor.previousChange")<CR>')
 keymap({ 'n', 'x' }, ']c', '<cmd>lua require("vscode").action("workbench.action.editor.nextChange")<CR>')
-keymap({ 'n', 'x' }, '<C-j>', '<cmd>lua require("vscode").action("workbench.action.navigateForward")<CR>')
+-- keymap({ 'n', 'x' }, '<C-j>', '<cmd>lua require("vscode").action("workbench.action.navigateForward")<CR>')
 keymap(
   'n',
   '<backspace>',

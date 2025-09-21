@@ -1,104 +1,143 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-local noSilent = { silent = false }
-local nvim_set_keymap = vim.api.nvim_set_keymap
-local nx, ic, nxo = { 'n', 'x' }, { 'i', 'c' }, { 'n', 'x', 'o' }
+local n, nx, ic, nxo = { 'n' }, { 'n', 'x' }, { 'i', 'c' }, { 'n', 'x', 'o' }
 
-keymap({ 'n', 'x', 'i' }, '<C-c>', '<nop>')
-keymap(nx, 'q', '<esc><cmd>noh<CR><C-l>')
-keymap(nx, 'Q', function()
-  return require('hasan.widgets.register_editor').start_recording()
-end, { expr = true, desc = 'Record a macro' })
-keymap('v', '@', ':norm @', noSilent) -- run macro on selection
-keymap(nx, '<CR>', ':<up>', { silent = false, desc = 'Run last command easily' })
-keymap(nx, '<leader><cr>', 'q:', { silent = false, desc = 'Open command history' })
--- keymap({ 'i', 'n', 's' }, '<esc>', function()
---   vim.cmd('noh')
---   vim.snippet.stop()
---   return '<esc>'
--- end, { expr = true, desc = 'Escape and Clear hlsearch' })
+---@class MyKeySpecs: LazyKeysSpec
+---@field silent? boolean
 
--- Center window on insert
--- require('hasan.center_cursor').attach_mappings()
-require('hasan.pseudo-text-objects')
+---@class MyKeymaps
+---@field all MyKeySpecs[]
+---@field vscode MyKeySpecs[]
+---@field nvim MyKeySpecs[]
+local M = { all = {}, vscode = {}, nvim = {} }
 
-for _, mode in ipairs(nx) do
-  nvim_set_keymap(mode, 'n', 'nzz', noSilent)
-  nvim_set_keymap(mode, 'N', 'Nzz', noSilent)
-
-  nvim_set_keymap(mode, "'", '`', noSilent)
+---Set keymap for nvim & vscode
+---@param k MyKeySpecs
+local function amap(k)
+  table.insert(M.all, k)
 end
 
-if vim.fn.has('nvim-0.11') == 1 then
-  local keys_to_del = {
-    { 'gra', mode = { 'n', 'x' } },
-    'grn',
-    'grr',
-    'gri',
-    'grt',
-  }
-  for _, key in ipairs(keys_to_del) do
-    if type(key) == 'string' then
-      pcall(vim.keymap.del, 'n', key)
-    else
-      pcall(vim.keymap.del, key.mode or 'n', key[1])
-    end
+---Set keymap only for nvim
+---@param k MyKeySpecs
+local function nmap(k)
+  table.insert(M.nvim, k)
+end
+
+---Set keymap for vscode
+---@param k MyKeySpecs
+local function vmap(k)
+  table.insert(M.vscode, k)
+end
+
+---Setup keymaps
+---@param key_specs MyKeySpecs[]
+local function set_keymaps(key_specs)
+  for _, k in ipairs(key_specs) do
+    keymap(k.mode or n, k[1], k[2], {
+      desc = k.desc,
+      silent = k.silent,
+      remap = k.remap,
+      expr = k.expr,
+      nowait = k.nowait,
+      noremap = k.noremap,
+    })
   end
 end
 
--- Copy Paste -----------------------------------
-keymap('v', 'p', 'pgvy') -- Prevent selecting and pasting from overwriting what you originally copied.
-keymap('v', 'y', 'ygv<Esc>') -- Keep cursor at the bottom of the visual selection after you yank it.
-keymap('n', 'Y', 'y$') -- Ensure Y works similar to D,C.
-keymap('n', 'gV', '`[v`]', { desc = 'Select the last yanked text' })
-keymap(nx, 'x', '"_x') -- Prevent x from overriding the clipboard.
-keymap(nx, 'X', '"_X')
-keymap(ic, '<C-v>', '<C-R>+', noSilent) -- Paste from + register (system clipboard)
-keymap(ic, '<C-g><C-v>', '<C-v>', noSilent) -- Paste from + register (system clipboard)
-keymap(ic, '<A-p>', '<C-R>"', noSilent) -- Paste the last item from register TODO: vscode-neovim.send
--- Easier system clipboard usage
-keymap('n', '<leader>y', '"+y', { desc = 'Yank to system' })
-keymap('v', '<leader>y', '"+ygv<Esc>', { desc = 'Yank to system' })
-keymap(nx, '<leader>ip', '"+p', { desc = 'Paste from system' })
-keymap(nx, '<leader>iP', '"+P', { desc = 'Paste from system' })
+amap({ 'q', '<esc><cmd>noh<CR><C-l>', mode = nx })
+amap({ '<CR>', ':<up>', silent = false, desc = 'Run last command easily', mode = nx })
+amap({ 'n', 'nzz', mode = nx, remap = true })
+amap({ 'N', 'Nzz', mode = nx, remap = true })
+amap({ "'", '`', mode = nx, remap = true })
 
--- Modify & rearrange texts ----------------------
+-- Custom record keymaps
+local function record_macro()
+  return require('hasan.widgets.register_editor').start_recording()
+end
+nmap({ 'Q', record_macro, mode = nx, expr = true, desc = 'Record a macro' })
+vmap({ 'Q', 'q', { desc = 'Record a macro' } })
+amap({ '@', ':norm @', mode = 'v', silent = false, desc = 'Run macro on visual selection' })
+
+-- Center window on insert
+-- require('hasan.center_cursor').attach_mappings()
+
+require('hasan.pseudo-text-objects')
+
+-- Copy Paste -----------------------------------
+amap({ 'p', 'pgvy', mode = 'v' }) -- Prevent selecting and pasting from overwriting what you originally copied.
+amap({ 'y', 'ygv<Esc>', desc = 'Keep cursor at place', mode = 'v' })
+amap({ 'gV', '`[v`]', desc = 'Select the last yanked text' })
+amap({ 'x', '"_x', desc = 'Prevent x from overriding the clipboard.', mode = nx })
+amap({ 'X', '"_X', desc = 'Prevent X from overriding the clipboard.', mode = nx })
+
+-- TODO: vscode-neovim.send
+nmap({ '<C-v>', '<C-R>+', mode = ic, silent = false, desc = 'Paste from system clipboard' })
+nmap({ '<C-g><C-v>', '<C-v>', mode = ic, silent = false, desc = 'Paste from system clipboard' })
+nmap({ '<A-p>', '<C-R>"', mode = ic, silent = false, desc = 'Paste the last item from register' })
+
+-- Easier system clipboard usage
+amap({ '<leader>y', '"+y', desc = 'Yank to system', mode = 'n' })
+amap({ '<leader>y', '"+ygv<Esc>', desc = 'Yank to system', mode = 'v' })
+amap({ '<leader>ip', '"+p', desc = 'Paste from system', mode = nx })
+amap({ '<leader>iP', '"+P', desc = 'Paste from system', mode = nx })
+
+-- Search & Modify texts ------------------------
+amap({ '$', 'g_', desc = 'A fix to select end of line', mode = { 'x' } })
+amap({ '>', '>gv', mode = 'v', desc = 'Keep selection when indenting/outdenting' })
+amap({ '<', '<gv', mode = 'v', desc = 'Keep selection when indenting/outdenting' })
+for _, keys in ipairs({ { '<A-k>', '<A-j>' } }) do
+  nmap({ keys[1], '<esc><cmd>m .-2<cr>==gi', desc = 'Move Up', mode = 'i' })
+  nmap({ keys[2], '<esc><cmd>m .+1<cr>==gi', desc = 'Move Down', mode = 'i' })
+end
+
 local uncomment_block = function()
   require('vim._comment').textobject()
   feedkeys('gc')
 end
-keymap({ 'n' }, 'gcu', uncomment_block, { desc = 'Uncomment block' })
-keymap({ 'n' }, 'gc/', uncomment_block, { desc = 'Uncomment block' })
-keymap({ 'o' }, 'a/', '<cmd>lua require("vim._comment").textobject()<CR>', { desc = 'Comment textobject' })
-keymap({ 'x' }, 'a/', '<Esc><cmd>lua require("vim._comment").textobject()<CR>', { desc = 'Comment textobject' })
+amap({ 'gcu', uncomment_block, desc = 'Uncomment block', mode = 'n' })
+amap({ 'gc/', uncomment_block, desc = 'Uncomment block', mode = 'n' })
+amap({ 'a/', '<cmd>lua require("vim._comment").textobject()<CR>', desc = 'Comment textobject', mode = 'o' })
+amap({ 'a/', '<Esc><cmd>lua require("vim._comment").textobject()<CR>', desc = 'Comment textobject', mode = 'x' })
+
+-- Toggle comment lines & persist cursor position
+nmap({ '<C-_>', 'mz_gcc`z', desc = 'Toggle comment line', mode = 'n', remap = true })
+nmap({ '<C-_>', '<ESC>_gccgi', desc = 'Toggle comment line', mode = 'i', remap = true })
+nmap({ '<C-_>', 'mz_gcgv`z', desc = 'Toggle comment line', mode = 'v', remap = true })
+
 -- Comment below/above/at the end of current line
-local function comment(move)
+local function comment_at(move)
   return function()
     local lhs, rhs = require('hasan.utils.buffer').current_commentstring():match('^(.-)%%s(.*)$')
     local shiftstr = string.rep(vim.keycode('<Left>'), #rhs)
     vim.fn.feedkeys(move .. lhs .. rhs .. shiftstr)
   end
 end
-keymap('n', 'gcO', comment('O'), { desc = 'Add comment above' })
-keymap('n', 'gco', comment('o'), { desc = 'Add comment below' })
-keymap('n', 'gcA', comment('A '), { desc = 'Add comment end of line' })
+amap({ 'gcO', comment_at('O'), desc = 'Add comment above' })
+amap({ 'gco', comment_at('o'), desc = 'Add comment below' })
+amap({ 'gcA', comment_at('I '), desc = 'Add comment end of line' })
 
-keymap({ 'x' }, 'Z', '<Plug>VSurround')
+-- nvim_set_keymap('v', '<C-g>', '*<C-O>:%s///gn<CR>', noSilent) -- Print the number of occurrences of the current word under the cursor
 
-keymap('x', '$', 'g_') -- A fix to select end of line
-keymap('v', '.', ':norm.<cr>') -- Map (.) in visual mode
-keymap('v', '>', '>gv') -- Keep selection when indenting/outdenting.
-keymap('v', '<', '<gv')
-nvim_set_keymap('v', '<C-g>', '*<C-O>:%s///gn<CR>', noSilent) -- Print the number of occurrences of the current word under the cursor
+amap({ 'c*', "<cmd>let @/='\\<'.expand('<cword>').'\\>'<CR>cgn", mode = 'n', desc = 'Change word & repeat with "."' })
+amap({ 'c*', '"cy<cmd>let @/=@c<CR>cgn', mode = 'x', desc = 'Change selection & repeat with "."' })
+amap({ 'gx', '<Plug>(exchange-operator)', desc = 'Exchange word', mode = nx })
 
--- Search ---------------------------------------
--- Type a replacement term and press . to repeat the replacement again. Useful
--- for replacing a few instances of the term (alternative to multiple cursors).
-keymap('n', 'c*', "<cmd>let @/='\\<'.expand('<cword>').'\\>'<CR>cgn")
-keymap('x', 'C', '"cy<cmd>let @/=@c<CR>cgn')
-keymap(nx, 'gx', '<Plug>(exchange-operator)', { desc = 'Exchange word' })
+amap({ 'cm', ':%s/<c-r>///g<Left><Left>', desc = 'Change all matches with prompt', silent = false })
+amap({ 'dm', ':%s/<c-r>///g<CR>', desc = 'Delete all matches' })
+amap({ 'dM', ':%g/<c-r>//d<CR>', desc = 'Delete all lines with matches' })
+amap({
+  '<leader>cw',
+  '<cmd>lua require("hasan.widgets.inputs").substitute_word()<CR>',
+  desc = 'Substitute word',
+  mode = nx,
+})
 
+local search_viewport = '/\\%><C-r>=line("w0")-1<CR>l\\%<<C-r>=line("w$")+1<CR>l'
+amap({ 'z/', search_viewport, silent = false, desc = 'Search in viewport' })
+amap({ 'z/', '<ESC>/\\%V', silent = false, desc = 'Search in visual selection', mode = 'x' })
+
+-- Open ----------------------------------------
 local function do_open(uri)
   local cmd, err = vim.ui.open(uri)
   local rv = cmd and cmd:wait(1000) or nil
@@ -114,167 +153,158 @@ local function do_open(uri)
     vim.notify(err, vim.log.levels.ERROR)
   end
 end
-local gx_desc = 'Opens filepath or URI under cursor'
-keymap('n', 'gB', function()
+local function _open()
   do_open(vim.fn.expand('<cfile>'))
-end, { desc = gx_desc })
-keymap('x', 'gB', function()
-  local lines = vim.fn.getregion(vim.fn.getpos('.'), vim.fn.getpos('v'), { type = vim.fn.mode() })
-  -- Trim whitespace on each line and concatenate.
-  do_open(table.concat(vim.iter(lines):map(vim.trim):totable()))
-end, { desc = gx_desc })
-
-keymap({ 'n', 'x' }, 'gW', '<cmd>Translate<CR>')
-keymap({ 'n', 'x' }, 'gG', '<cmd>Google<CR>', { desc = 'Search on google' })
-keymap('n', 'gpp', '<cmd>lua require("config.lsp.util.extras").hover()<cr>', { desc = 'Preview image under cursor' })
-
-keymap('n', 'cm', ':%s/<c-r>///g<Left><Left>', { desc = 'Change all matches with prompt', silent = false })
-keymap('n', 'dm', ':%s/<c-r>///g<CR>', { desc = 'Delete all matches' })
-keymap('n', 'dM', ':%g/<c-r>//d<CR>', { desc = 'Delete all lines with matches' })
-keymap(nx, '<leader>cw', '<cmd>lua require("hasan.widgets.inputs").substitute_word()<CR>', { desc = 'Substitute word' })
-
-local search_viewport = '/\\%><C-r>=line("w0")-1<CR>l\\%<<C-r>=line("w$")+1<CR>l'
-keymap('n', 'z/', search_viewport, { silent = false, desc = 'Search in viewport' })
-keymap('x', 'z/', '<ESC>/\\%V', { silent = false, desc = 'Search in visual selection' })
-
-keymap('n', '<leader>r', '<cmd>lua require("hasan.utils.win").cycle_numbering()<CR>', { desc = 'Cycle number' })
-
-if not vim.g.vscode then
-  nvim_set_keymap('n', '<C-_>', 'mz_gcc`z', {}) -- Comment or uncomment lines
-  nvim_set_keymap('i', '<C-_>', '<ESC>_gccgi', {})
-  nvim_set_keymap('v', '<C-_>', 'mz_gcgv`z', {})
-
-  for _, keys in ipairs({ { '<A-k>', '<A-j>' } }) do
-    keymap('i', keys[1], '<esc><cmd>m .-2<cr>==gi', { desc = 'Move Up' })
-    keymap('i', keys[2], '<esc><cmd>m .+1<cr>==gi', { desc = 'Move Down' })
-    -- keymap('n', keys[1], '<cmd>lua require("hasan.utils.buffer").norm_move_up()<cr>')
-    -- keymap('n', keys[2], '<cmd>lua require("hasan.utils.buffer").norm_move_down()<cr>')
-    -- keymap('x', keys[1], ':MoveUp<CR>')
-    -- keymap('x', keys[2], ':MoveDown<CR>')
-  end
-
-  -- Fold
-  nvim_set_keymap('n', 'zuu', '0vai:foldclose!<CR>zazt', { silent = true, desc = 'Fold current context' })
-  nvim_set_keymap('x', 'zu', ':foldclose!<CR>zazt', { silent = true, desc = 'Fold current context' })
-  keymap('n', 'z.', '<cmd>%foldclose<CR>zb', { desc = 'Fold all buf' })
-  keymap('n', 'z;', '<cmd>setl foldlevel=1<CR>zb', { desc = 'Fold all buf' })
-  keymap('n', '<tab>', 'za', { desc = 'Toggle fold' })
-  keymap('n', '<s-tab>', 'zA', { desc = 'Toggle fold recursively' })
-
-  -- Navigation -----------------------------------
-  keymap('n', 'j', function()
-    vim.fn['reljump#jump']('j')
-  end)
-  keymap('n', 'k', function()
-    vim.fn['reljump#jump']('k')
-  end)
-
-  keymap('n', 'H', 'H<cmd>exec "norm! ".&scrolloff."k"<cr>') -- jump in file
-  keymap('n', 'L', 'L<cmd>exec "norm! ".&scrolloff."j"<cr>')
-
-  keymap(nx, '<BS>', '<c-^>')
-  keymap(nx, 'g<BS>', '<c-w><c-p>')
-
-  -- Vertical scrolling
-  local scroll_maps = {
-    { '<A-u>', '<C-u>' },
-    { '<A-d>', '<C-d>' },
-    { '<A-o>', '<C-d>' },
-    { '<PageUp>', '<C-u>' },
-    { '<PageDown>', '<C-d>' },
-    { '<A-f>', '<C-f>' },
-    { '<A-b>', '<C-b>' },
-    { '<A-y>', '<C-y>' },
-    { '<A-e>', '<C-e>' },
-  }
-  for _, k in pairs(scroll_maps) do
-    -- nvim_set_keymap('n', k[2], k[2] .. 'zz', { noremap = false })
-    nvim_set_keymap('n', k[1], k[2], { noremap = false })
-    nvim_set_keymap('x', k[1], k[2], { noremap = false })
-  end
-  -- Horizontal scroll
-  keymap(nx, '<A-l>', '20zl')
-  keymap(nx, '<A-h>', '20zh')
-  -- Jumplist
-  keymap('n', '<C-i>', '<C-i>')
-  keymap('n', '<C-j>', '<C-i>')
-
-  -- Insert mode ----------------------------------
-  -- keymap(ic, 'jk', '<ESC>') -- Use jk to return to normal mode
-  keymap('t', '<C-o>', '<C-\\><C-n>', { desc = 'Exit Term mode' })
-  keymap('t', '<M-m>', '<cmd>close<cr>', { desc = 'Hide Terminal' })
-  -- Add undo break-points
-  keymap('i', ',', ',<c-g>u')
-  keymap('i', '.', '.<c-g>u')
-  keymap('i', ';', ';<c-g>u')
-
-  -- commenting
-  keymap('n', 'gco', 'o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>', { desc = 'Add Comment Below' })
-  keymap('n', 'gcO', 'O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>', { desc = 'Add Comment Above' })
-
-  keymap(ic, '<A-h>', '<left>', noSilent) -- Move cursor by character
-  keymap(ic, '<A-l>', '<right>', noSilent)
-  keymap(ic, '<C-n>', '<down>', noSilent)
-  keymap(ic, '<C-p>', '<up>', noSilent)
-  -- keymap(ic, '<A-j>', '<down>', noSilent)
-  -- keymap(ic, '<A-k>', '<up>', noSilent)
-
-  keymap(ic, '<A-f>', '<S-right>', noSilent) -- Move cursor by words
-  keymap(ic, '<A-b>', '<S-left>', noSilent)
-
-  keymap('i', '<C-a>', '<C-o>^<C-g>u') -- Jump cursor to start & end of a line
-  keymap('c', '<C-a>', '<Home>', noSilent)
-  keymap(ic, '<C-e>', '<End>')
-  keymap(ic, '<C-d>', '<Delete>', noSilent)
-
-  keymap(ic, '<A-BS>', '<C-W>', noSilent) -- Delete by characters & words
-  keymap('i', '<A-d>', '<C-O>dw')
-  keymap('c', '<A-d>', '<S-Right><C-W><Delete>', noSilent)
-  keymap('i', '<C-CR>', '<C-o>o') -- Make & move to a new line under the cursor
-  keymap('i', '<A-CR>', '<C-o>o') -- Make & move to a new line under the cursor
-  keymap('i', '<A-o>', '<CR><C-o>O') -- Open HTML tags
-
-  keymap('i', '<C-u>', '<C-G>u<C-U>') -- CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo, so that you can undo CTRL-U after inserting a line break.
-
-  keymap('i', '<C-g><C-e>', '<c-g>u<Esc>bgUiwgi', { desc = 'Uppercase current word' })
-  keymap('i', '<C-g><C-g>', '<c-g>u<Esc>[s1z=`]a<c-g>u', { desc = 'Fix previous misspelled world' })
-
-  -- Leader keys ----------------------------------
-  keymap(nx, '<leader>s', '<cmd>w<cr>', { desc = 'Save File' })
-  keymap({ 'i', 'x', 'n' }, '<C-s>', '<cmd>w<cr>', { desc = 'Save File' })
-
-  -- Window Management ----------------------------
-  keymap('n', 'ZZ', '<cmd>Quit!<CR>') -- Prompt before quitting
-  keymap('n', '<Bar>', '<cmd>wincmd =<cr>') -- Event all windows
-  keymap(nx, '<leader>q', '<cmd>Quit<CR>', { desc = 'Close window' })
-  keymap(nx, '<leader>h', '<cmd>lua handle_win_cmd("wincmd h")<CR>', { desc = 'which_key_ignore' })
-  keymap(nx, '<leader>j', '<cmd>lua handle_win_cmd("wincmd j")<CR>', { desc = 'which_key_ignore' })
-  keymap(nx, '<leader>k', '<cmd>lua handle_win_cmd("wincmd k")<CR>', { desc = 'which_key_ignore' })
-  keymap(nx, '<leader>l', '<cmd>lua handle_win_cmd("wincmd l")<CR>', { desc = 'which_key_ignore' })
-  -- Resize splits
-  keymap('n', '<A-=>', '<cmd>resize +3<CR>')
-  keymap('n', '<A-->', '<cmd>resize -3<CR>')
-  keymap('n', '<A-.>', '<cmd>vertical resize +5<CR>')
-  keymap('n', '<A-,>', '<cmd>vertical resize -5<CR>')
-  -- Jump between tabs
-  keymap(nx, 'gl', 'gt')
-  keymap(nx, 'gh', 'gT')
-  keymap('n', 'gL', '<cmd>tabmove+<CR>') -- Move tabs
-  keymap('n', 'gH', '<cmd>tabmove-<CR>')
-  -- keymap(nx, 'gl',<cmd>'<cmd>!wezterm cli activate-tab --tab-relative 1<CR>')
-  -- keymap(nx, 'gh',<cmd>'<cmd>!wezterm cli activate-tab --tab-relative -1<CR>')
-
-  -- File commands
-  keymap('n', '<leader>fC', ':w <C-R>=expand("%")<CR>', { silent = false, desc = 'Copy this file' })
-  keymap('n', '<leader>fe', ":edit <C-R>=expand('%:p:h') . '\\'<CR>", { silent = false, desc = 'Edit in current dir' })
-  keymap('n', '<leader>fM', ':Move <C-R>=expand("%")<CR>', { silent = false, desc = 'Move/rename file' })
-  for _, key in pairs({ '<leader>fi', '<c-g>' }) do
-    keymap('n', key, '<cmd>lua require("hasan.widgets.file_info").show_file_info()<CR>', { desc = 'Show file info' })
-  end
-
-  keymap('n', '<leader>vi', '<Plug>(inspect-pos)', { desc = 'Inspect TS highlight' })
-  keymap('n', '<leader>vI', function()
-    vim.treesitter.inspect_tree()
-    vim.api.nvim_input('I')
-  end, { desc = 'Inspect Tree' })
 end
+local function _open_v()
+  local lines = vim.fn.getregion(vim.fn.getpos('.'), vim.fn.getpos('v'), { type = vim.fn.mode() })
+  do_open(table.concat(vim.iter(lines):map(vim.trim):totable())) -- Trim whitespace on each line and concatenate.
+end
+
+amap({ 'gB', _open, desc = 'Opens filepath or URI under cursor' })
+amap({ 'gB', _open_v, desc = 'Opens filepath or URI under cursor', mode = 'x' })
+amap({ 'gW', '<cmd>Translate<CR>', desc = 'Search on Translate', mode = nx })
+amap({ 'gG', '<cmd>Google<CR>', desc = 'Search on google', mode = nx })
+
+-- TODO: fix or remove image preview or make it a command
+-- keymap('n', 'gpp', '<cmd>lua require("config.lsp.util.extras").hover()<cr>', { desc = 'Preview image under cursor' })
+
+-- Fold
+nmap({ 'zuu', '0vai:foldclose!<CR>zazt', desc = 'Fold current context', remap = true, mode = nx })
+nmap({ 'zu', ':foldclose!<CR>zazt', desc = 'Fold current context', remap = true, mode = nx })
+nmap({ 'z.', '<cmd>%foldclose<CR>zb', desc = 'Fold all buf', mode = nx })
+nmap({ 'z;', '<cmd>setl foldlevel=1<CR>zb', desc = 'Fold all buf', mode = nx })
+nmap({ '<tab>', 'za', desc = 'Toggle fold', mode = nx })
+nmap({ '<s-tab>', 'zA', desc = 'Toggle fold recursively', mode = nx })
+
+vmap({ '<tab>', '<cmd>lua require("vscode").action("editor.toggleFold")<CR>', desc = 'Toggle fold' })
+vmap({ 'za', '<cmd>lua require("vscode").action("editor.toggleFold")<CR>', desc = 'Toggle fold' })
+vmap({ 'zc', '<cmd>lua require("vscode").action("editor.foldRecursively")<CR>', desc = 'Fold recursively' })
+vmap({ 'zC', '<cmd>lua require("vscode").action("editor.foldAll")<CR>', desc = 'Fold all' })
+vmap({ 'zM', '<cmd>lua require("vscode").action("editor.foldRecursively")<CR>', desc = 'Fold recursively' })
+vmap({ 'zM', '<cmd>lua require("vscode").action("editor.foldAll")<CR>', desc = 'Fold all' })
+vmap({ 'zo', '<cmd>lua require("vscode").action("editor.unfoldRecursively")<CR>', desc = 'Unfold recursively' })
+vmap({ 'zO', '<cmd>lua require("vscode").action("editor.unfoldAll")<CR>', desc = 'Unfold all' })
+vmap({ 'zr', '<cmd>lua require("vscode").action("editor.unfoldRecursively")<CR>', desc = 'Unfold recursively' })
+vmap({ 'zR', '<cmd>lua require("vscode").action("editor.unfoldAll")<CR>', desc = 'Unfold all' })
+vmap({ 'zp', '<cmd>lua require("vscode").action("editor.gotoParentFold")<CR>', desc = 'Go to parent fold' })
+
+-- Navigation -----------------------------------
+amap({ '<BS>', '<c-^>', mode = nx })
+amap({ 'g<BS>', '<c-w><c-p>', mode = nx })
+nmap({ '<C-j>', '<c-i>', mode = nx, remap = false })
+vmap({ '<C-j>', '<cmd>lua require("vscode").action("workbench.action.navigateForward")<CR>', mode = nx })
+
+amap({ 'k', '<cmd>call reljump#jump("k")<cr>', desc = 'Move cursor up' })
+amap({ 'j', '<cmd>call reljump#jump("j")<cr>', desc = 'Move cursor down' })
+
+amap({ 'H', 'H<cmd>exec "norm! ".&scrolloff."k"<cr>', desc = 'Jump to first line on the window' })
+amap({ 'L', 'L<cmd>exec "norm! ".&scrolloff."j"<cr>', desc = 'Jump to last line on the window' })
+
+-- Vertical scrolling
+local scroll_maps = {
+  { '<A-u>', '<C-u>' },
+  { '<A-d>', '<C-d>' },
+  { '<A-o>', '<C-d>' },
+  { '<PageUp>', '<C-u>' },
+  { '<PageDown>', '<C-d>' },
+  { '<A-f>', '<C-f>' },
+  { '<A-b>', '<C-b>' },
+  { '<A-y>', '<C-y>' },
+  { '<A-e>', '<C-e>' },
+}
+for _, k in pairs(scroll_maps) do
+  nmap({ k[1], k[2], desc = 'Scroll window', mode = nx, remap = true })
+end
+-- Horizontal scroll
+nmap({ '<A-l>', '20zl', mode = nx })
+nmap({ '<A-h>', '20zh', mode = nx })
+
+-- Insert & Term mode -------------------------
+nmap({ '<C-o>', '<C-\\><C-n>', desc = 'Exit Term mode', mode = 't' })
+nmap({ '<M-m>', '<cmd>close<cr>', desc = 'Hide Terminal', mode = 't' })
+
+-- Add undo break-points
+nmap({ ',', ',<c-g>u', mode = 'i' })
+nmap({ '.', '.<c-g>u', mode = 'i' })
+nmap({ ';', ';<c-g>u', mode = 'i' })
+
+-- Move cursor by character
+nmap({ '<A-h>', '<left>', mode = ic })
+nmap({ '<A-l>', '<right>', mode = ic })
+nmap({ '<C-n>', '<down>', mode = ic })
+nmap({ '<C-p>', '<up>', mode = ic })
+-- Move cursor by words
+nmap({ '<A-f>', '<S-right>', mode = ic })
+nmap({ '<A-b>', '<S-left>', mode = ic })
+-- Jump cursor to start & end of a line
+nmap({ '<C-a>', '<C-o>^<C-g>u', mode = 'i' })
+nmap({ '<C-a>', '<Home>', mode = 'c' })
+nmap({ '<C-e>', '<End>', mode = ic })
+nmap({ '<C-d>', '<Delete>', mode = ic })
+-- Delete by characters & words
+nmap({ '<A-d>', '<C-O>dw', mode = 'i' })
+nmap({ '<A-d>', '<S-Right><C-W><Delete>', mode = 'c' })
+
+-- CTRL-U in insert mode deletes a lot. Use CTRL-G u to first break undo, so
+-- that you can undo CTRL-U after inserting a line break.
+nmap({ '<C-u>', '<C-G>u<C-U>', mode = 'i' })
+
+nmap({ '<C-CR>', '<C-o>o', desc = 'Move & insert a newline under cursor', mode = 'i' })
+nmap({ '<A-CR>', '<C-o>o', desc = 'Move & insert a newline under cursor', mode = 'i' })
+nmap({ '<A-o>', '<CR><C-o>O', desc = 'Open HTML tags', mode = 'i' })
+
+nmap({ '<C-g><C-e>', '<c-g>u<Esc>bgUiwgi', desc = 'Uppercase current word', mode = 'i' })
+nmap({ '<C-g><C-g>', '<c-g>u<Esc>[s1z=`]a<c-g>u', desc = 'Fix previous misspelled world', mode = 'i' })
+
+-- Leader keys ----------------------------------
+nmap({ '<leader>s', '<cmd>w<cr>', desc = 'Save File', mode = nx })
+nmap({ '<C-s>', '<cmd>w<cr>', desc = 'Save File', mode = { 'i', 'x', 'n' } })
+amap({ '<leader>r', '<cmd>lua require("hasan.utils.win").cycle_numbering()<CR>', desc = 'Cycle number', mode = 'n' })
+
+-- Window Management ----------------------------
+nmap({ '<Bar>', '<cmd>wincmd =<cr>', desc = 'Equalize all windows', mode = nx })
+nmap({ 'ZZ', '<cmd>Quit!<CR>', desc = 'close the current window', mode = nx })
+nmap({ '<leader>q', '<cmd>Quit<CR>', desc = 'close the current window', mode = nx })
+nmap({ '<leader>h', '<cmd>lua handle_win_cmd("wincmd h")<CR>', desc = 'which_key_ignore', mode = nx })
+nmap({ '<leader>j', '<cmd>lua handle_win_cmd("wincmd j")<CR>', desc = 'which_key_ignore', mode = nx })
+nmap({ '<leader>k', '<cmd>lua handle_win_cmd("wincmd k")<CR>', desc = 'which_key_ignore', mode = nx })
+nmap({ '<leader>l', '<cmd>lua handle_win_cmd("wincmd l")<CR>', desc = 'which_key_ignore', mode = nx })
+-- Resize splits
+nmap({ '<A-=>', '<cmd>resize +3<CR>', mode = nx })
+nmap({ '<A-->', '<cmd>resize -3<CR>', mode = nx })
+nmap({ '<A-.>', '<cmd>vertical resize +5<CR>', mode = nx })
+nmap({ '<A-,>', '<cmd>vertical resize -5<CR>', mode = nx })
+
+nmap({ 'gh', 'gT', mode = nx, desc = 'Jump to left tab' })
+nmap({ 'gl', 'gt', mode = nx, desc = 'Jump to right tab' })
+nmap({ 'gH', '<cmd>tabmove-<CR>', desc = 'Move tab to left' })
+nmap({ 'gL', '<cmd>tabmove+<CR>', desc = 'Move tab to right' })
+
+-- File commands
+nmap({ '<leader>fC', ':w <C-R>=expand("%")<CR>', desc = 'Copy this file', silent = false })
+nmap({ '<leader>fe', ":edit <C-R>=expand('%:p:h') . '\\'<CR>", desc = 'Edit in current dir', silent = false })
+nmap({ '<leader>fM', ':Move <C-R>=expand("%")<CR>', desc = 'Move/rename file', silent = false })
+for _, key in pairs({ '<leader>fi', '<c-g>' }) do
+  nmap({ key, '<cmd>lua require("hasan.widgets.file_info").show_file_info()<CR>', desc = 'Show file info' })
+end
+
+if vim.fn.has('nvim-0.11') == 1 then
+  local keys_to_del = {
+    { 'gra', mode = nx },
+    'grn',
+    'grr',
+    'gri',
+    'grt',
+  }
+  for _, key in ipairs(keys_to_del) do
+    if type(key) == 'string' then
+      pcall(vim.keymap.del, 'n', key)
+    else
+      pcall(vim.keymap.del, key.mode or 'n', key[1])
+    end
+  end
+end
+
+set_keymaps(M.all)
+set_keymaps(vim.g.vscode and M.vscode or M.nvim)

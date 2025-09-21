@@ -26,6 +26,9 @@ wezterm ls-fonts --text "✘"
 wezterm cli spawn nvim
 wezterm cli spawn --window-id=0 --cwd=E:/repoes/lua/peep.nvim nvim
 
+keymap(nx, 'gl',<cmd>'<cmd>!wezterm cli activate-tab --tab-relative 1<CR>')
+keymap(nx, 'gh',<cmd>'<cmd>!wezterm cli activate-tab --tab-relative -1<CR>')
+
 ## Log Files
 
 You can find log files in $XDG_RUNTIME_DIR/wezterm on unix systems,

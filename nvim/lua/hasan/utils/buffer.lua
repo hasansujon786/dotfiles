@@ -11,6 +11,10 @@ local move = function(address, should_move)
   vim.api.nvim_feedkeys('gv', 'n', true)
 end
 
+-- keymap('n', keys[1], '<cmd>lua require("hasan.utils.buffer").norm_move_up()<cr>')
+-- keymap('n', keys[2], '<cmd>lua require("hasan.utils.buffer").norm_move_down()<cr>')
+-- keymap('x', keys[1], ':MoveUp<CR>')
+-- keymap('x', keys[2], ':MoveDown<CR>')
 local M = {
   norm_move_down = function()
     if not vim.o.modifiable then

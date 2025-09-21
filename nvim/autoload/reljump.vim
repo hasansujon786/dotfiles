@@ -4,7 +4,7 @@
 " let g:loaded_rel_jump = 1
 
 if !exists('g:rel_jump_min_distance')
-  let g:rel_jump_min_distance = 2
+  let g:rel_jump_min_distance = 3
 endif
 
 if !exists('g:rel_jump_first_char')

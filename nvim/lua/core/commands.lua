@@ -1,8 +1,3 @@
-keymap('n', '<Plug>(inspect-pos)', function()
-  require('noice').redirect(vim.show_pos)
-  vim.fn['repeat#set'](t('<Plug>(inspect-pos)'))
-end, { desc = 'Inspect Pos' })
-
 local command = vim.api.nvim_create_user_command
 
 command('ClearShada', function()

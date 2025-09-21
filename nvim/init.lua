@@ -10,9 +10,9 @@ require('core.global')
 require('core.options')
 require('core.keymaps')
 require('core.commands')
-if vim.g.vscode then
-  require('vscode_nvim')
-else
+if not vim.g.vscode then
   require('core.autocmds')
+  require('core.lazy')
+else
+  -- require('vscode.keymaps')
 end
-require('core.lazy')

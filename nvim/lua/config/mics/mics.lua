@@ -52,7 +52,16 @@ return {
   },
   { 'MunifTanjim/nui.nvim', lazy = true, module = 'nui' },
   { 'nvim-lua/plenary.nvim', lazy = true, module = 'plenary' },
-  { 'tpope/vim-repeat', lazy = true, event = 'BufReadPost', dependencies = 'tpope/vim-surround' },
+  {
+    keys = {
+      { 'Z', '<Plug>VSurround', mode = { 'x' } },
+      { '.', ':norm.<cr>', desc = 'Repeat in visual selection', mode = { 'x' } },
+    },
+    'tpope/vim-repeat',
+    lazy = true,
+    event = 'BufReadPost',
+    dependencies = 'tpope/vim-surround',
+  },
   -- {
   --   'skardyy/neo-img',
   --   lazy = true,
