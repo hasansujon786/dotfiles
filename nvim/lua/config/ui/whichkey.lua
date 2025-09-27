@@ -125,22 +125,8 @@ return {
 
       -- WINDOW
       { '<leader>w', group = 'window' },
-      { '<leader>wh', '<cmd>wincmd h<CR>', desc = 'Window left' },
-      { '<leader>wj', '<cmd>wincmd j<CR>', desc = 'Window down' },
-      { '<leader>wk', '<cmd>wincmd k<CR>', desc = 'Window up' },
-      { '<leader>wl', '<cmd>wincmd l<CR>', desc = 'Window right' },
-      { '<leader>ww', '<cmd>wincmd w<CR>', desc = 'Window next' },
-      { '<leader>wW', '<cmd>wincmd W<CR>', desc = 'Window previous' },
-      { '<leader>wp', '<cmd>wincmd p<CR>', desc = 'Window previous' },
 
       { '<leader>wt', '<cmd>-tab split<CR>', desc = 'Edit to new tab' },
-      { '<leader>ws', '<cmd>wincmd s<CR>', desc = 'Window split' },
-      { '<leader>wv', '<cmd>wincmd v<CR>', desc = 'Windwo vsplit' },
-
-      { '<leader>wc', '<cmd>wincmd c<CR>', desc = 'Close windows' },
-      { '<leader>wq', '<cmd>tabclose<CR>', desc = 'Close tab' },
-      { '<leader>wo', '<cmd>wincmd o<CR>', desc = 'Keep only windwo' },
-      { '<leader>wO', '<cmd>tabonly<CR><C-l>',  desc = 'Keep only tab' },
 
       { '<leader>wH', '<cmd>wincmd H<CR>', desc = 'Move window far left' },
       { '<leader>wJ', '<cmd>wincmd J<CR>', desc = 'Move window far bottom' },

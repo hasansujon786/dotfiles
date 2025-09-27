@@ -48,14 +48,8 @@ end
 
 _G.keymap = vim.keymap.set
 
-function _G.handle_win_cmd(wincmd, lazySave)
-  if lazySave then
-    vim.cmd(wincmd)
-    require('hasan.nebulous').mark_as_alternate_win()
-  else
-    require('hasan.nebulous').mark_as_alternate_win()
-    vim.cmd(wincmd)
-  end
+function _G.run_cmd(wincmd)
+  require('hasan.utils.run_cmd').run_cmd(wincmd)
 end
 
 ---Fire user event

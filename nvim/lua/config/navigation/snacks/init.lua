@@ -13,7 +13,7 @@ return {
       -- { 'g[',         function() Snacks.words.jump(-vim.v.count1) end, desc = 'Prev Reference', mode = { 'n', 't' } },
       { '<leader>vo', function() Snacks.notifier.hide() end, desc = 'Dismiss All Notifications' },
       { '<leader>vn', function() Snacks.notifier.show_history() end, desc = 'Notification History' },
-      { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Kill this buffer' },
+      -- { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Kill this buffer' },
       { '<leader>bo', function() Snacks.bufdelete.other() end, desc = 'Kill this buffer' },
       { '<leader>go', function() Snacks.gitbrowse() end, desc = 'Open git repo' , mode = { 'n', 'v' } },
       { '<leader>gO', function() Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end, notify = false }) end,  desc = "Git Browse (copy url)", mode = {"n", "x" } },

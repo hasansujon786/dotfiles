@@ -1,5 +1,9 @@
 local command = vim.api.nvim_create_user_command
 
+command('Bufdelete', function()
+  Snacks.bufdelete()
+end, { desc = 'bufdelete' })
+
 command('ClearShada', function()
   local shada_path = vim.fn.expand(vim.fn.stdpath('data') .. '/shada')
   local files = vim.fn.glob(shada_path .. '/*', false, true)

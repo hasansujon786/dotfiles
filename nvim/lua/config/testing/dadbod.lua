@@ -6,7 +6,7 @@ return {
     -- { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true }, -- Optional
   },
   keys = {
-    { '<leader>od', '<cmd>lua handle_win_cmd("DBUI")<CR>', desc = 'Open dadbod' },
+    { '<leader>od', '<cmd>DBUI<CR>', desc = 'Open dadbod' },
   },
   cmd = {
     'DBUI',

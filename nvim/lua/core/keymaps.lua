@@ -1,7 +1,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-local n, nx, ic, nxo = { 'n' }, { 'n', 'x' }, { 'i', 'c' }, { 'n', 'x', 'o' }
+local n, nx, ic, nxo, nxi = { 'n' }, { 'n', 'x' }, { 'i', 'c' }, { 'n', 'x', 'o' }, { 'n', 'x', 'i' }
 
 ---@class MyKeySpecs: LazyKeysSpec
 ---@field silent? boolean
@@ -45,11 +45,11 @@ local function set_keymaps(key_specs)
   end
 end
 
-amap({ 'q', '<esc><cmd>noh<CR><C-l>', mode = nx })
+amap({ 'q', '<esc><cmd>noh<CR>', mode = nx })
 amap({ '<CR>', ':<up>', silent = false, desc = 'Run last command easily', mode = nx })
-amap({ 'n', 'nzz', mode = nx, remap = true })
-amap({ 'N', 'Nzz', mode = nx, remap = true })
-amap({ "'", '`', mode = nx, remap = true })
+amap({ 'n', 'nzz', desc = 'Repeat the latest "/" or "?"', remap = true, mode = nx })
+amap({ 'N', 'Nzz', desc = 'Repeat the latest "/" or "?"', remap = true, mode = nx })
+amap({ "'", '`', desc = 'Jump to the mark', remap = true, mode = nx })
 
 -- Custom record keymaps
 local function record_macro()
@@ -115,13 +115,20 @@ local function comment_at(move)
 end
 amap({ 'gcO', comment_at('O'), desc = 'Add comment above' })
 amap({ 'gco', comment_at('o'), desc = 'Add comment below' })
-amap({ 'gcA', comment_at('I '), desc = 'Add comment end of line' })
+amap({ 'gcI', comment_at('I'), desc = 'Add comment start of line' })
+amap({ 'gcA', comment_at('A '), desc = 'Add comment end of line' })
 
 -- nvim_set_keymap('v', '<C-g>', '*<C-O>:%s///gn<CR>', noSilent) -- Print the number of occurrences of the current word under the cursor
 
-amap({ 'c*', "<cmd>let @/='\\<'.expand('<cword>').'\\>'<CR>cgn", mode = 'n', desc = 'Change word & repeat with "."' })
-amap({ 'c*', '"cy<cmd>let @/=@c<CR>cgn', mode = 'x', desc = 'Change selection & repeat with "."' })
-amap({ 'gx', '<Plug>(exchange-operator)', desc = 'Exchange word', mode = nx })
+local function multi_cursor(cmd)
+  return function()
+    require('vscode').with_insert(function()
+      require('vscode').action(cmd)
+    end)
+  end
+end
+vmap({ '<C-l>', multi_cursor('editor.action.addSelectionToNextFindMatch'), mode = nxi })
+vmap({ '<C-S-l>', multi_cursor('editor.action.selectHighlights'), mode = nxi })
 
 amap({ 'cm', ':%s/<c-r>///g<Left><Left>', desc = 'Change all matches with prompt', silent = false })
 amap({ 'dm', ':%s/<c-r>///g<CR>', desc = 'Delete all matches' })
@@ -136,6 +143,19 @@ amap({
 local search_viewport = '/\\%><C-r>=line("w0")-1<CR>l\\%<<C-r>=line("w$")+1<CR>l'
 amap({ 'z/', search_viewport, silent = false, desc = 'Search in viewport' })
 amap({ 'z/', '<ESC>/\\%V', silent = false, desc = 'Search in visual selection', mode = 'x' })
+
+-- Search visual selection or word
+vmap({
+  '<A-/>',
+  '<cmd>lua require("vscode").action("workbench.action.findInFiles",{args={query=vim.fn.expand("<cword>")}})<CR>',
+})
+vmap({ '<A-/>', '<cmd>lua require("vscode").action("workbench.action.findInFiles")<CR>', mode = 'x' })
+vmap({ '<leader>//', '<cmd>lua require("vscode").action("workbench.action.findInFiles")<CR>', mode = nx })
+
+-- Picker keymaps
+vmap({ '<leader><leader>', '<cmd>Tabfind<CR>', mode = nx })
+vmap({ '<leader>pp', '<cmd>lua require("vscode").action("workbench.action.openRecent")<CR>', mode = nx })
+vmap({ 'g.', '<cmd>lua require("vscode").action("workbench.action.showAllEditors")<CR>', mode = nx })
 
 -- Open ----------------------------------------
 local function do_open(uri)
@@ -172,12 +192,22 @@ amap({ 'gG', '<cmd>Google<CR>', desc = 'Search on google', mode = nx })
 -- Fold
 nmap({ 'zuu', '0vai:foldclose!<CR>zazt', desc = 'Fold current context', remap = true, mode = nx })
 nmap({ 'zu', ':foldclose!<CR>zazt', desc = 'Fold current context', remap = true, mode = nx })
-nmap({ 'z.', '<cmd>%foldclose<CR>zb', desc = 'Fold all buf', mode = nx })
-nmap({ 'z;', '<cmd>setl foldlevel=1<CR>zb', desc = 'Fold all buf', mode = nx })
+
 nmap({ '<tab>', 'za', desc = 'Toggle fold', mode = nx })
 nmap({ '<s-tab>', 'zA', desc = 'Toggle fold recursively', mode = nx })
-
 vmap({ '<tab>', '<cmd>lua require("vscode").action("editor.toggleFold")<CR>', desc = 'Toggle fold' })
+vmap({ '<s-tab>', '<cmd>lua require("vscode").action("editor.toggleFoldRecursively")<CR>', desc = 'Fold recursively' })
+
+local function foldWithLevel(level)
+  return function()
+    require('vscode').action('runCommands', { args = { commands = { 'editor.unfoldAll', level } } })
+  end
+end
+nmap({ 'z.', '<cmd>%foldclose<CR>zb', desc = 'Fold all buf', mode = nx })
+nmap({ 'z;', '<cmd>setl foldlevel=1<CR>zb', desc = 'Fold all buf', mode = nx })
+vmap({ 'z.', foldWithLevel('editor.foldLevel1'), desc = 'Fold all buf', mode = nx })
+vmap({ 'z;', foldWithLevel('editor.foldLevel2'), desc = 'Fold all buf', mode = nx })
+
 vmap({ 'za', '<cmd>lua require("vscode").action("editor.toggleFold")<CR>', desc = 'Toggle fold' })
 vmap({ 'zc', '<cmd>lua require("vscode").action("editor.foldRecursively")<CR>', desc = 'Fold recursively' })
 vmap({ 'zC', '<cmd>lua require("vscode").action("editor.foldAll")<CR>', desc = 'Fold all' })
@@ -190,10 +220,21 @@ vmap({ 'zR', '<cmd>lua require("vscode").action("editor.unfoldAll")<CR>', desc =
 vmap({ 'zp', '<cmd>lua require("vscode").action("editor.gotoParentFold")<CR>', desc = 'Go to parent fold' })
 
 -- Navigation -----------------------------------
-amap({ '<BS>', '<c-^>', mode = nx })
+local function edit_alternate_file()
+  require('vscode').action('runCommands', {
+    args = { commands = { 'workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup', 'list.select' } },
+  })
+end
+nmap({ '<BS>', '<c-^>', desc = 'Edit alternate file', mode = nx })
+vmap({ '<BS>', edit_alternate_file, desc = 'Edit alternate file', mode = nx })
 amap({ 'g<BS>', '<c-w><c-p>', mode = nx })
 nmap({ '<C-j>', '<c-i>', mode = nx, remap = false })
 vmap({ '<C-j>', '<cmd>lua require("vscode").action("workbench.action.navigateForward")<CR>', mode = nx })
+
+vmap({ ']d', '<cmd>lua require("vscode").action("editor.action.marker.nextInFiles")<CR>', mode = nx })
+vmap({ '[d', '<cmd>lua require("vscode").action("editor.action.marker.prevInFiles")<CR>', mode = nx })
+vmap({ '[c', '<cmd>lua require("vscode").action("workbench.action.editor.previousChange")<CR>', mode = nx })
+vmap({ ']c', '<cmd>lua require("vscode").action("workbench.action.editor.nextChange")<CR>', mode = nx })
 
 amap({ 'k', '<cmd>call reljump#jump("k")<cr>', desc = 'Move cursor up' })
 amap({ 'j', '<cmd>call reljump#jump("j")<cr>', desc = 'Move cursor down' })
@@ -217,8 +258,8 @@ for _, k in pairs(scroll_maps) do
   nmap({ k[1], k[2], desc = 'Scroll window', mode = nx, remap = true })
 end
 -- Horizontal scroll
-nmap({ '<A-l>', '20zl', mode = nx })
 nmap({ '<A-h>', '20zh', mode = nx })
+nmap({ '<A-l>', '20zl', mode = nx })
 
 -- Insert & Term mode -------------------------
 nmap({ '<C-o>', '<C-\\><C-n>', desc = 'Exit Term mode', mode = 't' })
@@ -258,28 +299,85 @@ nmap({ '<C-g><C-e>', '<c-g>u<Esc>bgUiwgi', desc = 'Uppercase current word', mode
 nmap({ '<C-g><C-g>', '<c-g>u<Esc>[s1z=`]a<c-g>u', desc = 'Fix previous misspelled world', mode = 'i' })
 
 -- Leader keys ----------------------------------
-nmap({ '<leader>s', '<cmd>w<cr>', desc = 'Save File', mode = nx })
+-- Save file
 nmap({ '<C-s>', '<cmd>w<cr>', desc = 'Save File', mode = { 'i', 'x', 'n' } })
+nmap({ '<leader>s', '<cmd>w<cr>', desc = 'Save File', mode = nx })
+vmap({ '<leader>s', '<cmd>lua require("vscode").action("workbench.action.files.save")<CR>', mode = nx })
+vmap({ '<leader>fs', '<cmd>lua require("vscode").action("editor.action.formatDocument")<CR>', mode = 'n' })
+vmap({ '<leader>fs', '<cmd>lua require("vscode").action("editor.action.formatSelection")<CR>', mode = 'x' })
+vmap({ '<leader>fxx', '<cmd>lua require("vscode").action("editor.action.trimTrailingWhitespace")<cr>' })
+
 amap({ '<leader>r', '<cmd>lua require("hasan.utils.win").cycle_numbering()<CR>', desc = 'Cycle number', mode = 'n' })
+vmap({ '<leader>u', '<cmd>lua require("vscode").action("workbench.action.toggleZenMode")<CR>', mode = nx })
+
+-- Git
+vmap({ '<leader>gg', '<cmd>lua require("vscode").action("workbench.view.scm")<CR>' })
+vmap({ '<leader>g.', '<cmd>lua require("vscode").action("git.stage")<CR>' })
+vmap({ '<leader>gp', '<cmd>lua require("vscode").action("editor.action.dirtydiff.next")<CR>', mode = nx })
+vmap({ '<leader>gr', '<cmd>lua require("vscode").action("git.revertSelectedRanges")<CR>', mode = nx })
+vmap({ '<leader>gs', '<cmd>lua require("vscode").action("git.stageSelectedRanges")<CR>', mode = nx })
+vmap({ '<leader>gd', '<cmd>lua require("vscode").action("git.viewChanges")<CR>', mode = nx })
+-- keymap({ 'n', 'x' }, '<leader>gu', '<cmd>lua require("vscode").action("git.unstageSelectedRanges")<CR>')
+
+-- Debugger
+vmap({ '<leader>dc', '<cmd>lua require("vscode").action("workbench.action.debug.continue")<CR>' })
+vmap({ '<leader>ds', '<cmd>lua require("vscode").action("workbench.action.debug.continue")<CR>' })
+vmap({ '<leader>da', '<cmd>lua require("vscode").action("workbench.action.debug.selectandstart")<CR>' })
+vmap({ '<leader>dq', '<cmd>lua require("vscode").action("workbench.action.debug.stop")<CR>' })
+vmap({ '<leader>db', '<cmd>lua require("vscode").action("editor.debug.action.toggleBreakpoint")<CR>' })
+vmap({ '<leader>di', '<cmd>lua require("vscode").action("workbench.action.debug.stepInto")<CR>' })
+vmap({ '<leader>do', '<cmd>lua require("vscode").action("workbench.action.debug.stepOver")<CR>' })
+vmap({ '<leader>dh', '<cmd>lua require("vscode").action("editor.debug.action.showDebugHover")<CR>' })
+
+-- Editor
+vmap({ '<leader>vo', '<cmd>lua require("vscode").action("notifications.clearAll")<CR>', mode = nx })
+
+-- Explorer
+vmap({ '<leader>op', '<cmd>lua require("vscode").action("workbench.view.explorer")<CR>' })
+vmap({ '-', '<cmd>lua require("vscode").action("workbench.files.action.showActiveFileInExplorer")<CR>' })
 
 -- Window Management ----------------------------
-nmap({ '<Bar>', '<cmd>wincmd =<cr>', desc = 'Equalize all windows', mode = nx })
 nmap({ 'ZZ', '<cmd>Quit!<CR>', desc = 'close the current window', mode = nx })
-nmap({ '<leader>q', '<cmd>Quit<CR>', desc = 'close the current window', mode = nx })
-nmap({ '<leader>h', '<cmd>lua handle_win_cmd("wincmd h")<CR>', desc = 'which_key_ignore', mode = nx })
-nmap({ '<leader>j', '<cmd>lua handle_win_cmd("wincmd j")<CR>', desc = 'which_key_ignore', mode = nx })
-nmap({ '<leader>k', '<cmd>lua handle_win_cmd("wincmd k")<CR>', desc = 'which_key_ignore', mode = nx })
-nmap({ '<leader>l', '<cmd>lua handle_win_cmd("wincmd l")<CR>', desc = 'which_key_ignore', mode = nx })
+amap({ '<leader>q', '<cmd>lua run_cmd("Quit")<CR>', desc = 'Close current window', mode = nx })
+amap({ '<leader>wc', '<cmd>lua run_cmd("Quit")<CR>', desc = 'Close current window', mode = nx })
+amap({ '<leader>bd', '<cmd>lua run_cmd("Bufdelete")<CR>', mode = nx })
+
+amap({ '<leader>h', '<cmd>lua run_cmd("wincmd h")<CR>', desc = 'which_key_ignore', mode = nx })
+amap({ '<leader>j', '<cmd>lua run_cmd("wincmd j")<CR>', desc = 'which_key_ignore', mode = nx })
+amap({ '<leader>k', '<cmd>lua run_cmd("wincmd k")<CR>', desc = 'which_key_ignore', mode = nx })
+amap({ '<leader>l', '<cmd>lua run_cmd("wincmd l")<CR>', desc = 'which_key_ignore', mode = nx })
+
+amap({ '<leader>wh', '<cmd>lua run_cmd("wincmd h")<CR>', desc = 'Window left', mode = nx })
+amap({ '<leader>wj', '<cmd>lua run_cmd("wincmd j")<CR>', desc = 'Window down', mode = nx })
+amap({ '<leader>wk', '<cmd>lua run_cmd("wincmd k")<CR>', desc = 'Window up', mode = nx })
+amap({ '<leader>wl', '<cmd>lua run_cmd("wincmd l")<CR>', desc = 'Window right', mode = nx })
+
+amap({ '<leader>ws', '<cmd>lua run_cmd("wincmd s")<CR>', desc = 'Window split', mode = nx })
+amap({ '<leader>wv', '<cmd>lua run_cmd("wincmd v")<CR>', desc = 'Windwo vsplit', mode = nx })
+
+amap({ '<leader>wo', '<cmd>lua run_cmd("only")<CR>', desc = 'Keep only window', mode = nx })
+amap({ '<leader>wO', '<cmd>lua run_cmd("tabonly")<CR>', desc = 'Keep only tab', mode = nx })
+amap({ '<Bar>', '<cmd>lua run_cmd("wincmd =")<CR>', desc = 'Equalize all windows', mode = nx })
+
+amap({ '<leader>wp', '<cmd>lua run_cmd("wincmd p")<CR>', desc = 'Window previous', mdoe = nx })
+amap({ '<leader>ww', '<cmd>lua run_cmd("wincmd w")<CR>', desc = 'Window next', mode = nx })
+amap({ '<leader>wW', '<cmd>lua run_cmd("wincmd W")<CR>', desc = 'Window previous', mode = nx })
+
 -- Resize splits
 nmap({ '<A-=>', '<cmd>resize +3<CR>', mode = nx })
 nmap({ '<A-->', '<cmd>resize -3<CR>', mode = nx })
 nmap({ '<A-.>', '<cmd>vertical resize +5<CR>', mode = nx })
 nmap({ '<A-,>', '<cmd>vertical resize -5<CR>', mode = nx })
 
-nmap({ 'gh', 'gT', mode = nx, desc = 'Jump to left tab' })
-nmap({ 'gl', 'gt', mode = nx, desc = 'Jump to right tab' })
+-- Jump between tabs
+nmap({ 'gh', 'gT', desc = 'Jump to left tab', mode = nx })
+nmap({ 'gl', 'gt', desc = 'Jump to right tab', mode = nx })
 nmap({ 'gH', '<cmd>tabmove-<CR>', desc = 'Move tab to left' })
 nmap({ 'gL', '<cmd>tabmove+<CR>', desc = 'Move tab to right' })
+vmap({ 'gh', '<cmd>lua require("vscode").action("workbench.action.previousEditorInGroup")<CR>', mode = nx })
+vmap({ 'gl', '<cmd>lua require("vscode").action("workbench.action.nextEditorInGroup")<CR>', mode = nx })
+vmap({ 'gH', '<cmd>lua require("vscode").action("workbench.action.firstEditorInGroup")<CR>', mode = nx })
+vmap({ 'gL', '<cmd>lua require("vscode").action("workbench.action.lastEditorInGroup")<CR>', mode = nx })
 
 -- File commands
 nmap({ '<leader>fC', ':w <C-R>=expand("%")<CR>', desc = 'Copy this file', silent = false })
@@ -288,6 +386,15 @@ nmap({ '<leader>fM', ':Move <C-R>=expand("%")<CR>', desc = 'Move/rename file', s
 for _, key in pairs({ '<leader>fi', '<c-g>' }) do
   nmap({ key, '<cmd>lua require("hasan.widgets.file_info").show_file_info()<CR>', desc = 'Show file info' })
 end
+
+-- Lsp
+vmap({ 'gd', '<cmd>lua require("vscode").action("editor.action.revealDefinition")<CR>' })
+vmap({ 'gr', '<cmd>lua vim.lsp.buf.references()<CR>' })
+vmap({ 'gR', '<cmd>lua require("vscode").action("references-view.findReferences")<CR>' })
+vmap({ 'gI', '<cmd>lua vim.lsp.buf.implementation()<CR>' })
+vmap({ 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>' })
+vmap({ 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>' })
+vmap({ 'go', '<cmd>lua vim.lsp.buf.document_symbol()<CR>' })
 
 if vim.fn.has('nvim-0.11') == 1 then
   local keys_to_del = {

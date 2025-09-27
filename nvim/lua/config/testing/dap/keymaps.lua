@@ -6,7 +6,6 @@ local M = {}
 function M.setup()
   keymap('n', '<leader>dc', '<cmd>lua require"dap".continue()<cr>', { desc = 'Continue' })
   keymap('n', '<leader>dR', '<cmd>lua require"dap".run_to_cursor()<cr>', { desc = 'Run to Cursor' })
-  keymap('n', '<leader>dt', '<cmd>lua require"dap".toggle_breakpoint()<cr>', { desc = 'Toggle Breakpoint' })
   keymap('n', '<leader>db', '<cmd>lua require"dap".toggle_breakpoint()<cr>', { desc = 'Toggle Breakpoint' })
   keymap(
     'n',
@@ -16,8 +15,8 @@ function M.setup()
   )
 
   keymap('n', '<leader>di', '<cmd>lua require"dap".step_into()<cr>', { desc = 'Step Into' })
-  keymap('n', '<leader>dI', '<cmd>lua require"dap".step_back()<cr>', { desc = 'Step Back' })
   keymap('n', '<leader>do', '<cmd>lua require"dap".step_over()<cr>', { desc = 'Step Over' })
+  keymap('n', '<leader>dI', '<cmd>lua require"dap".step_back()<cr>', { desc = 'Step Back' })
   keymap('n', '<leader>dO', '<cmd>lua require"dap".step_out()<cr>', { desc = 'Step Out' })
 
   keymap('n', '<leader>dh', '<cmd>lua require"dap.ui.widgets".hover()<cr>', { desc = 'Hover Variables' })
@@ -46,6 +45,7 @@ function M.setup()
     { desc = 'Show Scopes' }
   )
 
+  -- Launch single file
   keymap('n', '<F5>', function()
     local dap = require('dap')
     if dap.session() then
@@ -54,7 +54,6 @@ function M.setup()
     vim.cmd('write')
     dap.run(dap.configurations.javascript[5]) -- pick 5th config
   end)
-
   -- keymap('n', '['/']',  '<cmd>lua require"telescope".extensions.dap.commands()<cr>', { desc = 'Find DAP Commands' },
   -- l = {
   -- keymap('n', 'c',  '<cmd>lua require'telescope'.extensions.dap.configurations()<cr>', { desc = 'Find DAP configurations' },

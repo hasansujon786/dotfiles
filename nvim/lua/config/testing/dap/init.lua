@@ -18,16 +18,8 @@ return {
     configure_debuggers()
   end,
   keys = {
-    {
-      '<leader>ds',
-      '<cmd>lua require"dap".continue()<cr>',
-      desc = 'Continue',
-    },
-    {
-      '<leader>db',
-      '<cmd>lua require"dap".toggle_breakpoint()<CR>',
-      desc = 'Toggle Breakpoint',
-    },
+    { '<leader>ds', '<cmd>lua require"dap".continue()<cr>', desc = 'Continue' },
+    { '<leader>db', '<cmd>lua require"dap".toggle_breakpoint()<CR>', desc = 'Toggle Breakpoint' },
   },
   dependencies = {
     { 'theHamsta/nvim-dap-virtual-text', opts = { virt_text_pos = 'eol' } },
