@@ -263,12 +263,11 @@ local function setup()
   vmap({ '[d', '<cmd>lua require("vscode").action("editor.action.marker.prevInFiles")<CR>', mode = nx })
   vmap({ '[c', '<cmd>lua require("vscode").action("workbench.action.editor.previousChange")<CR>', mode = nx })
   vmap({ ']c', '<cmd>lua require("vscode").action("workbench.action.editor.nextChange")<CR>', mode = nx })
+  vmap({ 'g[', '<cmd>lua require("vscode").action("editor.action.wordHighlight.prev")<CR>', mode = nx })
+  vmap({ 'g]', '<cmd>lua require("vscode").action("editor.action.wordHighlight.next")<CR>', mode = nx })
 
-  amap({ 'k', '<cmd>call reljump#jump("k")<cr>', desc = 'Move cursor up' })
-  amap({ 'j', '<cmd>call reljump#jump("j")<cr>', desc = 'Move cursor down' })
-
-  amap({ 'H', 'H<cmd>exec "norm! ".&scrolloff."k"<cr>', desc = 'Jump to first line on the window' })
-  amap({ 'L', 'L<cmd>exec "norm! ".&scrolloff."j"<cr>', desc = 'Jump to last line on the window' })
+  amap({ 'k', 'v:count == 0 ? "gk" : "k"', desc = 'Move cursor up', expr = true, remap = true })
+  amap({ 'j', 'v:count == 0 ? "gj" : "j"', desc = 'Move cursor down', expr = true, remap = true })
 
   -- Vertical scrolling
   local scroll_maps = {

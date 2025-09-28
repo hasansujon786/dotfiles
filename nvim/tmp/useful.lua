@@ -98,6 +98,8 @@ end
 
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+-- amap({ 'H', 'H<cmd>exec "norm! ".&scrolloff."k"<cr>', desc = 'Jump to first line on the window' })
+-- amap({ 'L', 'L<cmd>exec "norm! ".&scrolloff."j"<cr>', desc = 'Jump to last line on the window' })
 
 -- set_lines({lines}, {A}, {B}, {new_lines})           *vim.lsp.util.set_lines()*
 -- vim.lsp.util.open_floating_preview()
@@ -472,7 +474,6 @@ local relative_col = cursor_col + 1 -- Neovim's column is zero-based, so add 1 t
 print('Cursor position relative to viewable area:')
 print('Row:', relative_row, 'Column:', relative_col)
 print('Window height:', window_height)
-
 
 -- ------------------------------------------------
 -- -- highlight_word ------------------------------

@@ -13,3 +13,9 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force; iwr -useb get.scoop.
 ```bash
 git clone --depth 1 https://github.com/hasansujon786/dotfiles ~/dotfiles && cd ~/dotfiles && ./scripts/install.sh
 ```
+
+# vscode
+
+```PowerShell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/hasansujon786/dotfiles/refs/heads/main/nvim/lua/core/keymaps/code.lua" -OutFile "$HOME\AppData\Local\nvim\init.lua"
+```
