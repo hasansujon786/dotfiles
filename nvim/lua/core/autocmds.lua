@@ -5,43 +5,8 @@ local function is_doc_file(path)
 end
 
 augroup('MY_AUGROUP')(function(autocmd)
-  autocmd('CmdwinEnter', 'nnoremap <buffer><CR> <CR>')
-
-  autocmd('FileType', 'setl foldlevel=0', { pattern = 'vim' })
-  autocmd('FileType', 'setl foldmethod=marker', { pattern = { 'vim', 'css', 'scss', 'json' } })
-  autocmd('FileType', 'setl foldmarker={,}', { pattern = { 'css', 'scss', 'json' } })
-  autocmd('FileType', 'setl foldmarker={,}', { pattern = { 'css', 'scss', 'json' } })
-  autocmd({ 'BufNewFile', 'BufRead' }, 'setl filetype=jsonc', { pattern = { '*.json', 'tsconfig.json' } })
-  autocmd({ 'BufNewFile', 'BufRead' }, 'setl filetype=kanata', { pattern = { '*.kbd' } })
-  autocmd('BufWritePost', function()
-    require('hasan.utils.file').reload_ahk()
-  end, { pattern = '*.ahk' })
-  -- HELP_FILE
-  autocmd({ 'BufNewFile', 'BufRead' }, function(info)
-    if is_doc_file(info.match) then
-      vim.bo.filetype = 'help'
-    end
-  end, { pattern = { '*.txt' } })
-  autocmd('BufLeave', function(info)
-    if is_doc_file(info.match) then
-      vim.cmd([[normal! mK]])
-    end
-  end, { pattern = '*.txt' })
-
   autocmd('TextYankPost', function()
     vim.hl.on_yank({ on_visual = true, higroup = 'Search', timeout = 200 })
-  end)
-  autocmd('TermOpen', 'setfiletype terminal | set bufhidden=hide')
-  -- autocmd('BufWritePost', function() require('lint').try_lint() end, { pattern = { '*.sh' } })
-  -- autocmd('BufWritePre', vim.fn['hasan#autocmd#trimWhitespace'], { pattern = { '*.vim', '*.lua', '*.org', '*.ahk' } })
-  autocmd({ 'FocusGained', 'BufEnter', 'TermClose', 'TermLeave' }, ':silent! checktime')
-  autocmd('BufWritePost', function()
-    R('core.state')
-    require('hasan.utils.reload').reload_app_state()
-  end, { pattern = 'state.lua' })
-
-  autocmd('LspAttach', function(args)
-    require('config.lsp.util.setup').lsp_attach(args)
   end)
   autocmd('InsertEnter', function()
     vim.schedule(function()
@@ -49,27 +14,64 @@ augroup('MY_AUGROUP')(function(autocmd)
     end)
   end)
 
-  autocmd('BufReadPost', function(...)
-    require('hasan.utils.win').restore_cussor_pos(...)
-  end)
-  -- Persist fold
-  if require('core.state').ui.fold.persists then
-    autocmd({ 'BufWinLeave', 'BufWritePost', 'WinLeave' }, function(args)
-      if vim.b[args.buf].view_activated then
-        vim.cmd.mkview({ mods = { emsg_silent = true } })
+  if not vim.g.vscode then
+    autocmd('CmdwinEnter', 'nnoremap <buffer><CR> <CR>')
+    autocmd('FileType', 'setl foldlevel=0', { pattern = 'vim' })
+    autocmd('FileType', 'setl foldmethod=marker', { pattern = { 'vim', 'css', 'scss', 'json' } })
+    autocmd('FileType', 'setl foldmarker={,}', { pattern = { 'css', 'scss', 'json' } })
+    autocmd('FileType', 'setl foldmarker={,}', { pattern = { 'css', 'scss', 'json' } })
+    autocmd({ 'BufNewFile', 'BufRead' }, 'setl filetype=jsonc', { pattern = { '*.json', 'tsconfig.json' } })
+    autocmd({ 'BufNewFile', 'BufRead' }, 'setl filetype=kanata', { pattern = { '*.kbd' } })
+    autocmd('BufWritePost', function()
+      require('hasan.utils.file').reload_ahk()
+    end, { pattern = '*.ahk' })
+    -- HELP_FILE
+    autocmd({ 'BufNewFile', 'BufRead' }, function(info)
+      if is_doc_file(info.match) then
+        vim.bo.filetype = 'help'
       end
-    end, { desc = 'Save view with mkview for real files' })
-    autocmd('BufWinEnter', function(args)
-      if not vim.b[args.buf].view_activated then
-        local filetype = vim.api.nvim_get_option_value('filetype', { buf = args.buf })
-        local buftype = vim.api.nvim_get_option_value('buftype', { buf = args.buf })
-        local ignore_filetypes = { 'gitcommit', 'gitrebase', 'svg', 'hgcommit' }
-        if buftype == '' and filetype and filetype ~= '' and not vim.tbl_contains(ignore_filetypes, filetype) then
-          vim.b[args.buf].view_activated = true
-          vim.cmd.loadview({ mods = { emsg_silent = true } })
+    end, { pattern = { '*.txt' } })
+    autocmd('BufLeave', function(info)
+      if is_doc_file(info.match) then
+        vim.cmd([[normal! mK]])
+      end
+    end, { pattern = '*.txt' })
+
+    autocmd('TermOpen', 'setfiletype terminal | set bufhidden=hide')
+    -- autocmd('BufWritePost', function() require('lint').try_lint() end, { pattern = { '*.sh' } })
+    -- autocmd('BufWritePre', vim.fn['hasan#autocmd#trimWhitespace'], { pattern = { '*.vim', '*.lua', '*.org', '*.ahk' } })
+    autocmd({ 'FocusGained', 'BufEnter', 'TermClose', 'TermLeave' }, ':silent! checktime')
+    autocmd('BufWritePost', function()
+      R('core.state')
+      require('hasan.utils.reload').reload_app_state()
+    end, { pattern = 'state.lua' })
+
+    autocmd('LspAttach', function(args)
+      require('config.lsp.util.setup').lsp_attach(args)
+    end)
+
+    autocmd('BufReadPost', function(...)
+      require('hasan.utils.win').restore_cussor_pos(...)
+    end)
+    -- Persist fold
+    if require('core.state').ui.fold.persists then
+      autocmd({ 'BufWinLeave', 'BufWritePost', 'WinLeave' }, function(args)
+        if vim.b[args.buf].view_activated then
+          vim.cmd.mkview({ mods = { emsg_silent = true } })
         end
-      end
-    end, { desc = 'Try to load file view if available and enable view saving for real files' })
+      end, { desc = 'Save view with mkview for real files' })
+      autocmd('BufWinEnter', function(args)
+        if not vim.b[args.buf].view_activated then
+          local filetype = vim.api.nvim_get_option_value('filetype', { buf = args.buf })
+          local buftype = vim.api.nvim_get_option_value('buftype', { buf = args.buf })
+          local ignore_filetypes = { 'gitcommit', 'gitrebase', 'svg', 'hgcommit' }
+          if buftype == '' and filetype and filetype ~= '' and not vim.tbl_contains(ignore_filetypes, filetype) then
+            vim.b[args.buf].view_activated = true
+            vim.cmd.loadview({ mods = { emsg_silent = true } })
+          end
+        end
+      end, { desc = 'Try to load file view if available and enable view saving for real files' })
+    end
   end
 
   -- local function reloadConfig(plugin)

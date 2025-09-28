@@ -9,7 +9,6 @@ return {
       '<leader>gd',
       function()
         if next(require('diffview.lib').views) == nil then
-          require('nebulous.init').pause(2000)
           vim.cmd('DiffviewOpen')
         else
           vim.cmd('DiffviewClose')

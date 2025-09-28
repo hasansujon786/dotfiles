@@ -98,7 +98,6 @@ end
 
 function M.toggle_neotree()
   vim.g.cwd = vim.loop.cwd()
-  require('hasan.nebulous').mark_as_alternate_win()
   local filereadable = vim.fn.filereadable(vim.fn.expand('%'))
 
   if vim.o.filetype == 'neo-tree' then

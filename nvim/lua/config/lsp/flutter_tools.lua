@@ -65,7 +65,6 @@ return {
       require('config.edgy').config()
     end, { desc = 'Toggle flutter log layout' })
     vim.api.nvim_create_user_command('FlutterLogOpen', function(_)
-      require('hasan.nebulous').mark_as_alternate_win()
       local winFound = require('hasan.utils.win').focusWinIfExists('log')
       if winFound then
         return

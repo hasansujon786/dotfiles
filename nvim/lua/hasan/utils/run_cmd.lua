@@ -18,13 +18,7 @@ local wincmds = {
 
   only = {
     'runCommands',
-    args = {
-      commands = {
-        'workbench.action.closeEditorsInOtherGroups',
-        'workbench.action.closeOtherEditors',
-        'workbench.action.focusActiveEditorGroup',
-      },
-    },
+    opts = [[{args = { commands = { 'workbench.action.closeEditorsInOtherGroups', 'workbench.action.closeOtherEditors', 'workbench.action.focusActiveEditorGroup' }}}]],
   },
   ['tabonly'] = 'workbench.action.closeOtherEditors',
   ['wincmd ='] = 'workbench.action.evenEditorWidths',
@@ -32,20 +26,22 @@ local wincmds = {
 
 function M.run_cmd(wincmd)
   if vim.g.vscode then
-    local cmd, args = wincmds[wincmd], nil
+    local cmd = wincmds[wincmd]
     if not cmd then
-      return
+      return '<Cmd>' .. 'echo "hello"' .. '<CR>'
     end
 
     if type(cmd) == 'table' then
-      args = cmd.args
+      local opts = cmd.opts
       cmd = cmd[1]
+      local x = '<Cmd>lua require("vscode").action("' .. cmd .. '", ' .. opts .. ')<CR>'
+      return x
     end
 
-    return require('vscode').action(cmd, { args = args })
+    return '<Cmd>lua require("vscode").action("' .. cmd .. '")<CR>'
   end
 
-  vim.cmd(wincmd)
+  return '<Cmd>' .. wincmd .. '<CR>'
 end
 
 return M

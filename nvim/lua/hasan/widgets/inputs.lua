@@ -6,7 +6,6 @@ function M.rename_current_file()
     return
   end
 
-  require('nebulous.configs').pause(100)
   local currNameFileName = vim.fn.expand('%:t')
 
   local opt = { default = currNameFileName }
