@@ -1,6 +1,6 @@
 local M = {}
 
-M.bash_path = 'C:\\Program Files\\Git\\bin\\bash.exe'
+M.bash_path = 'bash' --  'C:\\Program Files\\Git\\bin\\bash.exe'
 
 local repoes = os.getenv('REPOES') or os.getenv('HOME')
 

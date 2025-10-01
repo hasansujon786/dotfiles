@@ -7,8 +7,8 @@ M.isEmpty = function(s)
 end
 M.isNeoTreeWindow = function(name)
   return string.match(name, 'neo%-tree filesystem') ~= nil
-    or string.match(name, 'neo%-tree buffers') ~= nil
-    or string.match(name, 'neo%-tree git_status') ~= nil
+      or string.match(name, 'neo%-tree buffers') ~= nil
+      or string.match(name, 'neo%-tree git_status') ~= nil
 end
 M.save_altfile = function()
   vim.g.cwd = vim.loop.cwd()
@@ -51,13 +51,28 @@ end
 
 function M.open_vinegar()
   M.save_altfile()
-  local filereadable = vim.fn.filereadable(vim.fn.expand('%'))
-
-  if not vim.o.readonly and vim.o.modifiable and filereadable == 1 then
-    vim.cmd([[Neotree filesystem position=current dir=%:h reveal_file=%]])
+  local reveal_file = vim.fn.expand('%:p')
+  if (reveal_file == '') then
+    reveal_file = vim.fn.getcwd()
   else
-    vim.cmd([[Neotree filesystem position=current]])
+    local f = io.open(reveal_file, "r")
+    if (f) then
+      f.close(f)
+    else
+      reveal_file = vim.fn.getcwd()
+    end
   end
+
+  local parent_dir = vim.fs.dirname(reveal_file)
+
+  require('neo-tree.command').execute({
+    action = "focus",
+    source = "filesystem",
+    position = "current",
+    reveal_file = reveal_file, -- path to file or folder to reveal
+    reveal_force_cwd = true,   -- change cwd without asking if needed
+    dir = parent_dir
+  })
 end
 
 function M.edit_alternate_file()
@@ -94,19 +109,6 @@ function M.edit_alternate_file()
   end
 
   feedkeys('<c-^>')
-end
-
-function M.toggle_neotree()
-  vim.g.cwd = vim.loop.cwd()
-  local filereadable = vim.fn.filereadable(vim.fn.expand('%'))
-
-  if vim.o.filetype == 'neo-tree' then
-    vim.cmd([[Neotree close]])
-  elseif not vim.o.readonly and vim.o.modifiable and filereadable == 1 then
-    vim.cmd([[Neotree filesystem left reveal_file=%:p]])
-  else
-    vim.cmd([[Neotree filesystem left]])
-  end
 end
 
 return M
