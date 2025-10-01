@@ -75,7 +75,7 @@ end
 function M.project_files()
   Snacks.picker({ -- https://github.com/folke/snacks.nvim/issues/532#issuecomment-2609303872
     title = '',
-    layout = { preset = 'vscode' },
+    layout = { preset = 'vscode', preview = 'main' },
     multi = { 'files', 'lsp_symbols', 'buffers' },
     -- win = { preview = preview_main.hidden_winbar },
     matcher = { cwd_bonus = true, frecency = true, sort_empty = true },
