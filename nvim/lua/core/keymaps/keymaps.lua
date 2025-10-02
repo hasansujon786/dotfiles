@@ -84,6 +84,7 @@ local function setup()
   function M.record_macro()
     return require('hasan.widgets.register_editor').start_recording()
   end
+
   nmap({ 'Q', { __code = 'M.record_macro' }, mode = nx, expr = true, desc = 'Record a macro' })
   vmap({ 'Q', 'q', { desc = 'Record a macro' } })
   amap({ '@', ':norm @', mode = 'v', silent = false, desc = 'Run macro on visual selection' })
@@ -122,6 +123,7 @@ local function setup()
     require('vim._comment').textobject()
     feedkeys('gc')
   end
+
   amap({ 'gcu', { __code = 'M.uncomment_block' }, desc = 'Uncomment block', mode = 'n' })
   amap({ 'gc/', { __code = 'M.uncomment_block' }, desc = 'Uncomment block', mode = 'n' })
   amap({ 'a/', '<cmd>lua require("vim._comment").textobject()<CR>', desc = 'Comment textobject', mode = 'o' })
@@ -155,6 +157,7 @@ local function setup()
       end)
     end
   end
+
   vmap({ '<C-l>', { __code = "M.multi_cursor('editor.action.addSelectionToNextFindMatch')" }, mode = nxi })
   vmap({ '<C-S-l>', { __code = "M.multi_cursor('editor.action.selectHighlights')" }, mode = nxi })
 
@@ -201,9 +204,11 @@ local function setup()
       vim.notify(err, vim.log.levels.ERROR)
     end
   end
+
   function M._open()
     M.do_open(vim.fn.expand('<cfile>'))
   end
+
   function M._open_v()
     local lines = vim.fn.getregion(vim.fn.getpos('.'), vim.fn.getpos('v'), { type = vim.fn.mode() })
     M.do_open(table.concat(vim.iter(lines):map(vim.trim):totable())) -- Trim whitespace on each line and concatenate.
@@ -231,6 +236,7 @@ local function setup()
       require('vscode').action('runCommands', { args = { commands = { 'editor.unfoldAll', level } } })
     end
   end
+
   nmap({ 'z.', '<cmd>%foldclose<CR>zb', desc = 'Fold all buf', mode = nx })
   nmap({ 'z;', '<cmd>setl foldlevel=1<CR>zb', desc = 'Fold all buf', mode = nx })
   vmap({ 'z.', { __code = "M.foldWithLevel('editor.foldLevel1')" }, desc = 'Fold all buf', mode = nx })
@@ -253,6 +259,7 @@ local function setup()
       args = { commands = { 'workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup', 'list.select' } },
     })
   end
+
   nmap({ '<BS>', '<c-^>', desc = 'Edit alternate file', mode = nx })
   vmap({ '<BS>', { __code = 'M.edit_alternate_file' }, desc = 'Edit alternate file', mode = nx })
   amap({ 'g<BS>', '<c-w><c-p>', mode = nx })
@@ -266,20 +273,22 @@ local function setup()
   vmap({ 'g[', '<cmd>lua require("vscode").action("editor.action.wordHighlight.prev")<CR>', mode = nx })
   vmap({ 'g]', '<cmd>lua require("vscode").action("editor.action.wordHighlight.next")<CR>', mode = nx })
 
-  amap({ 'k', 'v:count == 0 ? "gk" : "k"', desc = 'Move cursor up', expr = true, remap = true })
-  amap({ 'j', 'v:count == 0 ? "gj" : "j"', desc = 'Move cursor down', expr = true, remap = true })
+  nmap({ 'k', 'v:count == 0 ? "gk" : "k"', desc = 'Move cursor up', expr = true, remap = false })
+  nmap({ 'j', 'v:count == 0 ? "gj" : "j"', desc = 'Move cursor down', expr = true, remap = false })
+  vmap({ 'k', 'v:count == 0 ? "gk" : "k"', desc = 'Move cursor up', expr = true, remap = true })
+  vmap({ 'j', 'v:count == 0 ? "gj" : "j"', desc = 'Move cursor down', expr = true, remap = true })
 
   -- Vertical scrolling
   local scroll_maps = {
-    { '<A-u>', '<C-u>' },
-    { '<A-d>', '<C-d>' },
-    { '<A-o>', '<C-d>' },
-    { '<PageUp>', '<C-u>' },
+    { '<A-u>',      '<C-u>' },
+    { '<A-d>',      '<C-d>' },
+    { '<A-o>',      '<C-d>' },
+    { '<PageUp>',   '<C-u>' },
     { '<PageDown>', '<C-d>' },
-    { '<A-f>', '<C-f>' },
-    { '<A-b>', '<C-b>' },
-    { '<A-y>', '<C-y>' },
-    { '<A-e>', '<C-e>' },
+    { '<A-f>',      '<C-f>' },
+    { '<A-b>',      '<C-b>' },
+    { '<A-y>',      '<C-y>' },
+    { '<A-e>',      '<C-e>' },
   }
   for _, k in pairs(scroll_maps) do
     nmap({ k[1], k[2], desc = 'Scroll window', mode = nx, remap = true })
@@ -441,12 +450,22 @@ M.set_keymaps(maps)
 
 local genereate = require('hasan.utils.genereate_keys')
 
-vim.g.vscode = true
-setup()
-genereate.run(M.all, M.vscode, 'nvim/lua/core/keymaps/code.lua', { footer = footer, header = header })
-genereate.copyContent('nvim/lua/hasan/pseudo-text-objects.lua', 'nvim/lua/core/keymaps/code.lua')
-genereate.copyContent('nvim/lua/core/keymaps/code_autocmds.lua', 'nvim/lua/core/keymaps/code.lua')
+local function run(vscode)
+  vim.g.vscode = vscode
+  M.all = {}
+  M.nvim = {}
+  M.vscode = {}
 
-vim.g.vscode = false
-setup()
-genereate.run(M.all, M.nvim, 'nvim/lua/core/keymaps/nvim.lua', { footer = footer, header = header })
+  if vscode then
+    setup()
+    genereate.run(M.all, M.vscode, 'nvim/lua/core/keymaps/code.lua', { footer = footer, header = header })
+    genereate.copyContent('nvim/lua/hasan/pseudo-text-objects.lua', 'nvim/lua/core/keymaps/code.lua')
+    genereate.copyContent('nvim/lua/core/keymaps/code_autocmds.lua', 'nvim/lua/core/keymaps/code.lua')
+  else
+    setup()
+    genereate.run(M.all, M.nvim, 'nvim/lua/core/keymaps/nvim.lua', { footer = footer, header = header })
+  end
+end
+
+run(true)
+run(false)
