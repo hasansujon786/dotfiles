@@ -287,7 +287,7 @@ setup_autohotkey() {
 
     rm -rf "$WINDOWS_STARTUP_DIR\\main.ahk"
     create_symlink "'$WINDOWS_STARTUP_DIR\\main.ahk'" "$HOME/dotfiles/scripts/ahk/main.ahk"
-    explorer "$WINDOWS_STARTUP_DIR\\main.ahk"
+    # explorer "$WINDOWS_STARTUP_DIR\\main.ahk"
   fi
 }
 setup_kanata() {
@@ -309,8 +309,8 @@ setup_kanata() {
     # wget https://github.com/rszyma/kanata-tray/releases/download/v${KANATA_TRAY_VER}/kanata-tray.exe
     # mv kanata-tray.exe "$WINDOWS_STARTUP_DIR"
 
-    sleep 0.5
-    explorer "${WINDOWS_STARTUP_DIR}\\kanata-tray.exe"
+    # sleep 0.5
+    # explorer "${WINDOWS_STARTUP_DIR}\\kanata-tray.exe"
   fi
 }
 install_various_cli_apps() {
@@ -392,6 +392,7 @@ install_various_gui_apps() {
 
     # Potplayer
     get potplayer
+    # fix:
     reg.exe import "C:\\Users\\$USERNAME\\dotfiles\\scripts\\PotPlayerMini64.reg"
   fi
 }
@@ -405,6 +406,7 @@ setup_node() {
   # fnm a Cross-platform Node.js version switcher
   get fnm
   fnm install lts-latest
+  eval "$(fnm env)"
   fnm use lts-latest
 
   info "Installing useful global npm packages..."

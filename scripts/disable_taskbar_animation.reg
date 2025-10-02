@@ -1,0 +1,13 @@
+Windows Registry Editor Version 5.00
+
+; Disable Taskbar Animations
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"TaskbarAnimations"=dword:00000000
+
+; Speed up menu opening (optional)
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"MenuShowDelay"="0"
+
+; Optional: Disable other animations (for faster UI)
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"UserPreferencesMask"=hex:90,12,03,80,10,00,00,00
