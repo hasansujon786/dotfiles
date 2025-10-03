@@ -110,7 +110,7 @@ return {
           concealcursor = true,
           indent = true,
           symbols = {
-            headlines = { '◎', '◯', '▣', '□', '◆', '◇', '♥', '⏾' },
+            headlines = require('core.state').ui.icons.org.headlines,
             checkboxes = {
               half = { '-', '@org.checkbox.halfchecked' },
               done = { '✓', '@org.keyword.done' },

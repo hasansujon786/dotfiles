@@ -1,4 +1,3 @@
-local headlines = { '◎', '◯', '▣', '□', '◆', '◇', '♥', '⏾' }
 local highlights = {
   '@org.headline.level1.org',
   '@org.headline.level2.org',
@@ -134,7 +133,7 @@ function M.pick_heading()
 
       ret[#ret + 1] = { item.prefix, 'SnacksPickerTree' }
 
-      ret[#ret + 1] = { headlines[level], hl }
+      ret[#ret + 1] = { require('core.state').ui.icons.org.headlines[level], hl }
       ret[#ret + 1] = { ' ' }
       ret[#ret + 1] = { item.text, hl }
 

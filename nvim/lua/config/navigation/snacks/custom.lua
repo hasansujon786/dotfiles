@@ -77,7 +77,7 @@ function M.project_files()
     title = '',
     layout = { preset = 'vscode', preview = 'main' },
     multi = { 'files', 'lsp_symbols', 'buffers' },
-    -- win = { preview = preview_main.hidden_winbar },
+    win = { preview = preview_main.hidden_winbar },
     matcher = { cwd_bonus = true, frecency = true, sort_empty = true },
     sort = function(a, b)
       local sort = require('snacks.picker.sort').default()

@@ -401,6 +401,7 @@ local function set_custom_highlights()
     -- ['@lsp.type.method'] = '@method',
     -- ['@lsp.type.macro'] = '@macro',
     -- ['@lsp.type.decorator'] = '@function',
+    ['@keyword.function.lua'] = '@keyword.function',
     ['@keyword.conditional'] = '@keyword.function',
     ['@keyword.return'] = '@keyword.function',
     ['@keyword.return.javascript'] = '@keyword.function',

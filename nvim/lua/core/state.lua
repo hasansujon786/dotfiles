@@ -116,6 +116,11 @@ M.lsp = {
 }
 
 M.ui = {
+  icons = {
+    org = {
+      headlines = { '◎', '◯', '■', '□', '◆', '◇', '♥', '⏾' },
+    },
+  },
   border = {
     style = 'rounded',
     highlight = 'DiagnosticHint',

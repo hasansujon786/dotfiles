@@ -503,7 +503,7 @@ require('snacks').setup({
       ivy = get_ivy(false),
       ivy_mini = get_ivy(true),
       select = { layout = { border = { '🭽', '▔', '🭾', '▕', '🭿', '▁', '🭼', '▏' } } },
-      vscode = { layout = { row = 0 } },
+      vscode = { layout = { row = 0, width = 0.4, min_width = 70, height = 0.5 } },
     },
   },
   styles = {
