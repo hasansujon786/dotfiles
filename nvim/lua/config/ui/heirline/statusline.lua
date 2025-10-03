@@ -5,7 +5,7 @@ local mutedText = { fg = 'muted', bg = 'bg1' }
 local layerBlock = { fg = 'light_grey', bg = 'layer' }
 local layerBlockAlt = { fg = 'layer', bg = 'bg1' }
 local modeBlock = function(self)
-  return { bg = self.color, fg = 'bg1' }
+  return { bg = self.color, fg = 'bg1', bold = true }
 end
 local modeBlockAlt = function(self)
   return { bg = 'bg1', fg = self.color }

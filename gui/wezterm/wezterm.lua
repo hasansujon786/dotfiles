@@ -28,27 +28,15 @@ config.set_environment_variables = {
 }
 config.status_update_interval = 1000
 config.freetype_load_flags = 'NO_HINTING'
-config.font_size = 13.4
+config.font_size = 14
+-- config.line_height = 0.88
 config.font = wezterm.font_with_fallback({
-  -- { family = 'OperatorMonoLig Nerd Font', weight = 700 }, -- Medium|Bold
-  { family = 'Operator Mono Lig', weight = 700 }, -- Medium|Bold
+  { family = 'JetBrains Mono', weight = 'Medium' },
   'Cascadia Code',
-  -- 'CaskaydiaMono NF',
   'Consolas',
   'Flog Symbols',
 })
-config.font_rules = {
-  { -- Bold font
-    intensity = 'Bold',
-    italic = false,
-    font = wezterm.font_with_fallback({ family = 'Operator Mono Lig', weight = 700 }), -- Medium|Bold
-  },
-  {
-    intensity = 'Bold',
-    italic = true,
-    font = wezterm.font_with_fallback({ { family = 'Monaspace Radon', weight = 700 } }) -- Bold Italic font
-  },
-}
+config.harfbuzz_features = { 'zero' }
 config.underline_thickness = '2pt'
 config.underline_position = '-2pt'
 config.adjust_window_size_when_changing_font_size = false
@@ -69,10 +57,10 @@ config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
 config.pane_focus_follows_mouse = false
 config.inactive_pane_hsb = { brightness = 0.8 }
 config.launch_menu = {
-  { label = 'Git Bash',        args = { constants.bash_path } },
+  { label = 'Git Bash', args = { constants.bash_path } },
   { label = 'PowerShell Core', args = { 'pwsh' } },
-  { label = 'Command Prompt',  args = { 'cmd' } },
-  { label = 'PowerShell',      args = { 'powershell.exe', '-NoLogo' } },
+  { label = 'Command Prompt', args = { 'cmd' } },
+  { label = 'PowerShell', args = { 'powershell.exe', '-NoLogo' } },
 }
 config.command_palette_bg_color = '#222222'
 config.command_palette_fg_color = '#abb2bf'
