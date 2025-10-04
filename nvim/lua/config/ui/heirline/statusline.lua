@@ -1,19 +1,19 @@
 local conditions = require('heirline.conditions')
 local Icons = require('hasan.utils.ui.icons')
 
-local mutedText = { fg = 'muted', bg = 'bg1' }
-local layerBlock = { fg = 'light_grey', bg = 'layer' }
-local layerBlockAlt = { fg = 'layer', bg = 'bg1' }
+local mutedText = 'Heirline_C'
+local layerBlock = 'HeirlineLayer'
+local layerBlockAlt = 'HeirlineLayerEdge'
 local modeBlock = function(self)
-  return { bg = self.color, fg = 'bg1', bold = true }
+  return { bg = self.color, fg = 'bg', bold = true }
 end
-local modeBlockAlt = function(self)
-  return { bg = 'bg1', fg = self.color }
+local modeBlockOutSide = function(self)
+  return { bg = 'bg', fg = self.color }
 end
-local modeBlockLayerAlt = function(self)
+local modeBlockInside = function(self)
   return { bg = 'layer', fg = self.color }
 end
-local divider_right = { provider = '▕', hl = { fg = 'bg_d', bg = 'layer' } }
+local divider_right = { provider = '▕', hl = 'HeirlineLayerDivider' }
 local tabIcon = { active = Icons.Other.circleBg, inactive = Icons.Other.circleOutline }
 local function withHl(text, hl)
   return string.format('%%#%s#%s', hl, text)
@@ -28,7 +28,7 @@ end
 --   end,
 -- })
 
-return {
+local c = {
   Fill = { provider = '%=' },
   Space = { provider = ' ' },
   LSPActive = {
@@ -164,20 +164,20 @@ return {
       local i = math.floor((curr_line - 1) / lines * #self.sbar) + 1
       return string.rep(self.sbar[i], 2)
     end,
-    hl = { fg = 'bg2', bg = 'blue' },
+    hl = layerBlock,
   },
   ScrollPercentageBall = {
-    hl = function()
-      local position = math.floor(vim.api.nvim_win_get_cursor(0)[1] / vim.api.nvim_buf_line_count(0) * 100)
-      local fg = 'purple'
-
-      if position <= 5 then
-        fg = 'bg_blue'
-      elseif position >= 95 then
-        fg = 'red'
-      end
-      return { fg = fg, bg = 'layer' }
-    end,
+    -- hl = function()
+    --   local position = math.floor(vim.api.nvim_win_get_cursor(0)[1] / vim.api.nvim_buf_line_count(0) * 100)
+    --   local fg = 'purple'
+    --
+    --   if position <= 5 then
+    --     fg = 'bg_blue'
+    --   elseif position >= 95 then
+    --     fg = 'red'
+    --   end
+    --   return { fg = fg, bg = 'layer' }
+    -- end,
     { provider = ' █', hl = layerBlockAlt },
     {
       provider = function()
@@ -196,6 +196,7 @@ return {
           return string.format('%s%2d%%%%', icon, math.ceil(line_ratio * 99))
         end
       end,
+      hl = layerBlock,
     },
     { provider = '█', hl = layerBlockAlt },
   },
@@ -241,9 +242,9 @@ return {
     init = function(self)
       self.color = self:mode_color()
     end,
-    { provider = '', hl = modeBlockLayerAlt },
+    { provider = '', hl = modeBlockInside },
     { provider = '%4l:%-2v' },
-    { provider = '', hl = modeBlockAlt },
+    { provider = '', hl = modeBlockOutSide },
     hl = modeBlock,
   },
   ViMode = {
@@ -289,13 +290,13 @@ return {
         ['!'] = '!',
       },
     },
-    { provider = '', hl = modeBlockAlt },
+    { provider = '', hl = modeBlockOutSide },
     {
       provider = function(self)
         return '%2(' .. self.mode_names[self.mode] .. '%)'
       end,
     },
-    { provider = '', hl = modeBlockLayerAlt },
+    { provider = '', hl = modeBlockInside },
     hl = modeBlock,
     update = {
       'ModeChanged',
@@ -333,21 +334,6 @@ return {
     hl = layerBlock,
   },
   layerEndleft = { provider = '█ ', hl = layerBlockAlt },
-  DAPMessages = {
-    condition = function()
-      local ok, dap = pcall(require, 'dap')
-      if not ok then
-        return false
-      end
-
-      local session = dap.session()
-      return session ~= nil
-    end,
-    provider = function()
-      return ' ' .. require('dap').status()
-    end,
-    hl = 'red',
-  },
   Diagnostics = {
     condition = function()
       -- if vim.v.hlsearch ~= 0 then
@@ -373,25 +359,25 @@ return {
       provider = function(self)
         return self.errors > 0 and (self.Error .. ' ' .. self.errors .. ' ')
       end,
-      hl = { fg = 'red', bg = 'bg1' },
+      hl = 'DiagnosticError',
     },
     {
       provider = function(self)
         return self.warnings > 0 and (self.Warn .. ' ' .. self.warnings .. ' ')
       end,
-      hl = { fg = 'yellow', bg = 'bg1' },
+      hl = 'DiagnosticWarn',
     },
     {
       provider = function(self)
         return self.info > 0 and (self.Info .. ' ' .. self.info .. ' ')
       end,
-      hl = { fg = 'cyan', bg = 'bg1' },
+      hl = 'DiagnosticInfo',
     },
     {
       provider = function(self)
         return self.hints > 0 and (self.Hint .. ' ' .. self.hints)
       end,
-      hl = { fg = 'cyan', bg = 'bg1' },
+      hl = 'DiagnosticInfo',
     },
   },
   SearchCount = {
@@ -413,17 +399,63 @@ return {
     condition = function()
       return vim.fn.reg_recording() ~= '' and vim.o.cmdheight == 0
     end,
-    hl = { fg = 'red', bg = 'bg1' },
-    { provider = '' },
-    { provider = ' REC', hl = { fg = 'white', bg = 'red' } },
-    { provider = ' ', hl = { bg = 'layer' } },
+    { provider = '', hl = 'HeirlineRECLeft' },
+    { provider = Icons.Other.circleBg .. ' REC', hl = 'HeirlineREC' },
+    { provider = ' ', hl = 'HeirlineRECRight' },
     {
       provider = function()
         return vim.fn.reg_recording()
       end,
-      hl = { fg = 'red', bg = 'layer' },
+      hl = layerBlock,
     },
-    { provider = ' ', hl = { fg = 'layer', bg = 'bg1' } },
+    { provider = ' ', hl = layerBlockAlt },
     update = { 'RecordingEnter', 'RecordingLeave' },
+  },
+}
+
+return {
+  static = {
+    mode_colors_map = {
+      n = 'blue',
+      i = 'green',
+      v = 'purple',
+      V = 'purple',
+      ['\22'] = 'cyan',
+      c = 'orange',
+      s = 'purple',
+      S = 'purple',
+      ['\19'] = 'purple',
+      R = 'red',
+      r = 'orange',
+      ['!'] = 'orange',
+      t = 'green',
+    },
+    mode_color = function(self)
+      local mode = vim.fn.mode() or 'n'
+      return self.mode_colors_map[mode]
+    end,
+  },
+  {
+    c.ViMode,
+    c.Tabs,
+    c.GitBranch,
+    c.GitBranchAlt,
+    c.layerEndleft,
+    c.MacroRec,
+    c.Diagnostics,
+    c.Fill,
+    -- {
+    --   sl.Fill,
+    --   -- sl.SearchCount,
+    --   sl.Fill,
+    -- },
+    c.ShowCmd,
+    c.Harpoon,
+    c.LSPActive,
+    c.SpaceInfo,
+    c.FileFormat,
+    c.FileType,
+    c.ScrollPercentageBall,
+    c.Location,
   },
 }

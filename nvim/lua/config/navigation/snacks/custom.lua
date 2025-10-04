@@ -6,7 +6,7 @@ local preview_main = {
   },
   hidden_winbar = {
     row = -1,
-    wo = { winbar = '%#SidebarDark#' },
+    -- wo = { winbar = '%#SidebarDark#' },
   },
 }
 

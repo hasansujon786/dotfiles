@@ -34,7 +34,7 @@ return {
         ['Cursor'] = { bg = '${blue}', fg = '${bg}' },
         ['CursorLineNr'] = { fg = '${fg}' },
         ['DiagnosticSignInfo'] = { fg = '${cyan}' },
-        ['StatusLine'] = { fg = '${fg}', bg = '${bg1}' },
+        -- ['StatusLine'] = { fg = '${fg}', bg = '${bg1}' },
         ['IncSearch'] = { fg = '${bg}', bg = '${red}' },
         ['Search'] = { fg = '${bg}', bg = '${highlight}' },
         ['RedText'] = { fg = '#ff0000' },

@@ -90,9 +90,9 @@ SetCapsLockState(0)
 !`:: switchBetweenSameApps()
 
 ; Window Transparency
-^#/:: toggleTransparency()
-^#.:: increaseTransparency()
-^#,:: decreaseTransparency()
+^#.:: toggleTransparency()
+^#>:: increaseTransparency()
+^#<:: decreaseTransparency()
 
 ; #m:: Minimize all windows
 ; +#m:: Restore only minimized windows

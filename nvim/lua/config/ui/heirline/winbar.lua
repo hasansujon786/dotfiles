@@ -33,14 +33,24 @@ local FnameProvider = {
   },
 }
 
-local FileNameModifer = {
-  hl = function()
-    if vim.bo.modified then
-      -- use `force` because we need to override the child's hl foreground
-      return { fg = 'cyan', force = true }
-    end
-  end,
-}
+local function FnameIconProvider(left_pad)
+  return {
+    init = function(self)
+      local filename = self.filename
+      local extension = vim.fn.fnamemodify(filename, ':e')
+      self.icon, self.icon_color = require('nvim-web-devicons').get_icon_color(filename, extension, { default = true })
+    end,
+    provider = function(self)
+      if left_pad and self.left_pad > 0 then
+        return self.icon and (string.rep(' ', self.left_pad) .. self.icon .. ' ')
+      end
+      return self.icon and (self.icon .. ' ')
+    end,
+    hl = function(self)
+      return { fg = self.icon_color }
+    end,
+  }
+end
 
 local FileName = {
   provider = function(self)
@@ -53,64 +63,110 @@ local FileName = {
     end
     return filename
   end,
-  hl = { fg = 'white' },
+  hl = 'WinbarTabContent',
 }
 
 local FileNameBlock = function(left_pad)
   return utils.insert(
     FnameProvider,
-    {
-      init = function(self)
-        local filename = self.filename
-        local extension = vim.fn.fnamemodify(filename, ':e')
-        self.icon, self.icon_color =
-          require('nvim-web-devicons').get_icon_color(filename, extension, { default = true })
-      end,
-      provider = function(self)
-        if left_pad and self.left_pad > 0 then
-          return self.icon and (string.rep(' ', self.left_pad) .. self.icon .. ' ')
-        end
-        return self.icon and (self.icon .. ' ')
-      end,
-      hl = function(self)
-        return { fg = self.icon_color }
-      end,
-    },
-    utils.insert(FileNameModifer, FileName), -- a new table where FileName is a child of FileNameModifier
-    { provider = '%<' } -- this means that the statusline is cut here when there's not enough space
+    FnameIconProvider(left_pad),
+    FileName,
+    { provider = '%<' } -- This means that the statusline is cut here when there's not enough space
   )
 end
 
 local CloseButton = {
   on_click = {
+    name = 'heirline_winbar_close_button',
     minwid = function()
       return vim.api.nvim_get_current_win()
     end,
     callback = function(_, minwid)
       vim.api.nvim_win_close(minwid, true)
     end,
-    name = 'heirline_winbar_close_button',
   },
   {
     condition = function()
       return vim.bo.modified
     end,
-    provider = ' ' .. Icon.Other.circleBg,
-    hl = { fg = 'green' },
+    provider = ' ',
   },
   {
     condition = function()
       return not vim.bo.modified
     end,
     provider = ' ' .. Icon.ui.Close,
-    hl = { fg = 'gray' },
   },
+  hl = 'WinbarTabContent',
 }
 
-return {
+local c = {
+  Space = { provider = ' ' },
   FileNameBlock = FileNameBlock,
   WinBarFileName = { FileNameBlock(true), CloseButton },
-  BarStart = { provider = '▎', hl = { fg = 'bg_blue' } },
-  BarEnd = { provider = '▕', hl = { fg = 'black' } },
-  Rest = { hl = { bg = 'bg_d', fg = 'light_grey' }, provider = '%=' },
+  BarStart = { provider = '▎', hl = 'WinbarTabEdgeLeft' },
+  BarEnd = { provider = '▕', hl = 'WinbarTabEdgeRight' },
+  Rest = { hl = 'WinbarTabEmpty', provider = '%=' },
+}
+
+local conditions = require('heirline.conditions')
+local dapui_filetypes = { 'dapui_scopes', 'dapui_breakpoints', 'dapui_stacks', 'dapui_watches' }
+
+local function get_winbar(active)
+  local hl = not active and { fg = 'muted', force = true }
+
+  return {
+    active and c.BarStart or c.Space,
+    { c.WinBarFileName, hl = hl },
+    c.BarEnd,
+    c.Rest,
+  }
+end
+
+return {
+  Winbar = {
+    fallthrough = false,
+    { -- DapUI sidebar
+      fallthrough = false,
+      condition = function()
+        return conditions.buffer_matches({ filetype = dapui_filetypes })
+      end,
+      { c.Space, c.FileNameBlock(), c.Rest },
+    },
+    {
+      fallthrough = false,
+      { -- Default inactive winbar for regular files
+        condition = function()
+          return conditions.is_not_active()
+        end,
+        get_winbar(false),
+      },
+      -- Default active winbar for regular files
+      get_winbar(true),
+    },
+  },
+  disable_winbar_cb = function(args)
+    if conditions.buffer_matches({ filetype = dapui_filetypes }, args.buf) then
+      return false
+    end
+    return conditions.buffer_matches({
+      buftype = { 'nofile', 'prompt', 'help', 'quickfix' },
+      filetype = {
+        '^git.*',
+        'fzf',
+        'fugitive',
+        'Trouble',
+        'dashboard',
+        'harpoon',
+        'floaterm',
+        'terminal',
+        'blink-cmp-menu',
+        'blink-cmp-signature',
+        'blink-cmp-documentation',
+        'superkanban_task',
+        'superkanban_list',
+        'superkanban_board',
+      },
+    }, args.buf)
+  end,
 }
