@@ -108,7 +108,7 @@ SetCapsLockState(0)
 +![:: SendInput("^+{PgUp}")
 +!]:: SendInput("^+{PgDn}")
 #HotIf
-#HotIf IsSet(mouseGridActive) && mouseGridActive == 0
+#HotIf isMouseGridInactive()
 $Escape:: superEscape()
 #HotIf
 ; ^#SPACE::toggleAlwaysOnTop()
@@ -135,6 +135,10 @@ LWin:: return
 ;******************************************************************************
 ; Vim Mode (AltTabMenu, TaskView)
 ;******************************************************************************
+isMouseGridInactive() {
+	return !IsSet(mouseGridActive) || mouseGridActive = 0
+}
+
 #/:: SendInput("^!{Tab}")
 #HotIf (WinActive("Volume Control")
 	or WinActive("Sound")
@@ -144,7 +148,7 @@ LWin:: return
 	or WinActive("Notification Center")
 	or WinActive("ahk_class PotPlayer64")
 	or WinActive("Picture-in-Picture") and WinActive("ahk_exe zen.exe"))
-and IsSet(mouseGridActive) && mouseGridActive == 0
+and isMouseGridInactive()
 ; or (winIsMouseOver("ahk_class ApplicationFrameWindow") or winIsMouseOver("ahk_class Shell_LightDismissOverlay")) and winIsMouseOver("ahk_exe explorer.exe") and winIsMouseOver("") ; clipboard & backdrop
 ; or WinActive("ahk_class MultitaskingViewFrame")  ; ctrl+alt+tab
 ; or WinActive("ahk_class Windows.UI.Core.CoreWindow") ; win+tab/StartScreen
@@ -162,6 +166,11 @@ o:: Send("{Enter}")
 x:: Send("{Delete}")
 d:: Send("{PgDn}")
 u:: Send("{PgUp}")
+#HotIf
+
+#HotIf (WinActive("Task View") ; win+tab
+	or WinActive("Task Switching")) ; ctrl+alt+tab
+and isMouseGridInactive()
 ; manage workspace
 +n:: Send("^#d")
 +x:: Send("^#{F4}")
@@ -171,9 +180,9 @@ u:: Send("{PgUp}")
 
 ; Global arrow with homerow
 #HotIf not WinActive("ahk_exe WindowsTerminal.exe")
-	and not WinActive("ahk_exe alacritty.exe")
-	and not WinActive("ahk_exe wezterm-gui.exe")
-	and not WinActive("ahk_exe Code.exe")
+  and not WinActive("ahk_exe alacritty.exe")
+  and not WinActive("ahk_exe wezterm-gui.exe")
+  and not WinActive("ahk_exe Code.exe")
 !j:: SendInput("{DOWN}")
 !k:: SendInput("{UP}")
 !h:: SendInput("{LEFT}")
@@ -188,6 +197,24 @@ u:: Send("{PgUp}")
 +!b:: Send("^+{Left}")
 #HotIf
 !Backspace:: SendInput("^{Backspace}")
+
+#HotIf WinActive("ahk_class PotPlayer64") and isMouseGridInactive()
+-:: Send("{F6}")
+f:: Send("{Enter}")
+; next/previous video
++p:: Send("{PgUp}")
++n:: Send("{PgDn}")
+; Playback speed
+<:: Send("{x}")
+>:: Send("{c}")
+; next/previous frame
+,:: Send("{d}")
+.:: Send("{f}")
+; Subtitle
+c:: Send("!{h}")
+_:: Send("!{PgDn}")
++:: Send("!{PgUp}")
+#HotIf
 
 ; ; ahk_exe Microsoft.CmdPal.UI.exe
 ; #HotIf WinActive("Command Palette")
