@@ -270,6 +270,8 @@ local function setup()
   vmap({ '[d', '<cmd>lua require("vscode").action("editor.action.marker.prevInFiles")<CR>', mode = nx })
   vmap({ '[c', '<cmd>lua require("vscode").action("workbench.action.editor.previousChange")<CR>', mode = nx })
   vmap({ ']c', '<cmd>lua require("vscode").action("workbench.action.editor.nextChange")<CR>', mode = nx })
+  vmap({ '[x', '<cmd>lua require("vscode").action("editor.action.dirtydiff.prev")<CR>', mode = nx })
+  vmap({ ']x', '<cmd>lua require("vscode").action("editor.action.dirtydiff.next")<CR>', mode = nx })
   vmap({ 'g[', '<cmd>lua require("vscode").action("editor.action.wordHighlight.prev")<CR>', mode = nx })
   vmap({ 'g]', '<cmd>lua require("vscode").action("editor.action.wordHighlight.next")<CR>', mode = nx })
 

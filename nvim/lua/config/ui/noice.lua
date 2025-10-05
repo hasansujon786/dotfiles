@@ -11,7 +11,13 @@ return {
 
     noice.setup({
       presets = {
-        command_palette = true, -- Position the cmdline and popupmenu together
+        command_palette = {
+          views = {
+            cmdline_popup = { position = { row = 2 } },
+            cmdline_popupmenu = { position = { row = 5 } },
+          },
+        },
+        -- command_palette = true, -- Position the cmdline and popupmenu together
         lsp_doc_border = true, -- Add a border to hover docs and signature help
         bottom_search = false, -- Use a classic bottom cmdline for search
         -- long_message_to_split = true, long messages will be sent to a split
