@@ -249,6 +249,10 @@ end
 ---@param range lsp_range_t 0-based range
 ---@return boolean
 local function cursor_in_range(cursor, range)
+  if range == nil then
+    return false
+  end
+
   local cursor0 = { cursor[1] - 1, cursor[2] }
   -- stylua: ignore start
   return (

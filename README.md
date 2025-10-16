@@ -5,7 +5,10 @@
 1. Install Scoop & Git Bash with PowerShell
 
 ```ps1
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force; iwr -useb get.scoop.sh | iex; scoop install git
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force;
+iwr -useb get.scoop.sh | iex;
+scoop install git;
+Start-Process "$env:USERPROFILE\scoop\apps\git\current\git-bash.exe" -Verb RunAs
 ```
 
 2. Install & setup dotfiles with Bash

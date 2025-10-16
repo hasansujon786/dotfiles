@@ -105,6 +105,37 @@ get() {
     fi
   done
 }
+hasExecutable() {
+  is_installed() {
+    app="$1"
+    powershell.exe -Command "
+    \$found = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*,
+                              HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* |
+              Where-Object { \$_.DisplayName -match '$app' }
+    if (\$found) { exit 0 } else { exit 1 }
+  " >/dev/null 2>&1
+  }
+
+  if command -v "$1" >/dev/null 2>&1; then
+    return 0 # true — executable found
+  fi
+
+  if is_installed "$1"; then
+    return 0 # true — executable found
+  fi
+
+  return 1 # false — not found
+}
+ensure_installed() {
+  local pkg="$1"
+  local exe="${2:-$1}"
+
+  if hasExecutable "$exe"; then
+    info "Found $exe. Skipping install."
+  else
+    get "$pkg"
+  fi
+}
 ensure_scoop_bucket() {
   local bucket_name="${1:-}"
 
@@ -169,6 +200,14 @@ setup_scoop() {
     exit 1
   fi
 
+  if ! command -v figlet &>/dev/null; then
+    get figlet
+  fi
+
+  if ! command -v gum &>/dev/null; then
+    get charm-gum
+  fi
+
   HAS_SCOOP=true
   ensure_scoop_bucket extras
 }
@@ -189,11 +228,7 @@ if [ ! -d "$DOTFILES" ]; then
   exit 1
 fi
 
-init_setup() {
-  if ! command -v figlet &>/dev/null; then
-    get figlet
-  fi
-
+setup_variables() {
   if [[ "$OS" == "win" ]]; then
     start ms-settings:developers
     mkdir -p ~/.config
@@ -214,8 +249,16 @@ setup_git() {
 
   heading git
 
-  archive_config "${conf_path[$OS]}"
-  create_symlink "${conf_path[$OS]}" "$DOTFILES/scripts/bash/.gitconfig"
+  info "Enter git credentials"
+  git_email=$(gum input --placeholder "Enter your email" --prompt "Email: ")
+  git_name=$(gum input --placeholder "Enter your name" --prompt "Name: ")
+
+  git config --global user.email "$git_email"
+  git config --global user.name "$git_name"
+  git config --global credential.helper manager
+
+  # archive_config "${conf_path[$OS]}"
+  # create_symlink "${conf_path[$OS]}" "$DOTFILES/scripts/bash/.gitconfig"
 }
 setup_bash() {
   declare -A conf_path
@@ -320,8 +363,8 @@ install_various_cli_apps() {
   if [[ "$OS" == "win" ]]; then
     get mingw make
 
-    # htop-like system-monitor
-    get ntop btop
+    # htop-like system-monitor # btop
+    get ntop
   fi
 
   # Easily install prebuilt binaries from GitHub. Ex: eget junegunn/fzf
@@ -383,17 +426,11 @@ install_various_gui_apps() {
   heading "Usefull GUI Apps"
 
   if [[ "$OS" == "win" ]]; then
-    # A utility that manages a Registry key that allows Windows to remap one key to any other key.
-    get sharpkeys
+    get quicklook instant-eyedropper 7zip
 
-    # FIXME: riot
-    get obsidian quicklook instant-eyedropper localsend 7zip
-    get googlechrome brave abdownloadmanager qbittorrent
-
-    # Potplayer
-    get potplayer
-    # fix:
-    reg.exe import "C:\\Users\\$USERNAME\\dotfiles\\scripts\\PotPlayerMini64.reg"
+    # Install browser
+    # ensure_installed extras/googlechrome chrome
+    ensure_installed extras/zen-browser zen
   fi
 }
 
@@ -425,7 +462,7 @@ setup_python() {
 
 # TODO: tig lf alacritty windowsTerminal keypirinha
 main() {
-  init_setup
+  setup_variables
 
   # CLI & TUI Apps
   setup_git

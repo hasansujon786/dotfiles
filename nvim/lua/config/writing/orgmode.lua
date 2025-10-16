@@ -34,6 +34,9 @@ return {
       { '<leader>oc', '<cmd>lua require("orgmode").action("capture.prompt")<CR>', desc = 'Org capture' },
     },
     opts = {
+      -- hyperlinks = {
+      --   sources = { },
+      -- },
       mappings = {
         text_objects = {
           -- inner_heading = '',

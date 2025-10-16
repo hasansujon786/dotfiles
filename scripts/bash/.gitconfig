@@ -2,7 +2,7 @@
 	email = 38243998+hasansujon786@users.noreply.github.com
 	name = Hasan Mahmud
 [credential]
-	helper = store
+	helper = manager
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process

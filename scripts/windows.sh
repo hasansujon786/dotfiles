@@ -13,6 +13,19 @@
 
 # choco install qbittorrent -y
 # winget install eza-community.eza
-choco install -y microsoft-openjdk17
-winget install aristocratos.btop4win
-winget install GNU.Emacs
+# choco install -y microsoft-openjdk17
+# winget install aristocratos.btop4win
+# winget install GNU.Emacs
+# scoop install abdownloadmanager obsidian
+
+# FIXME: riot
+winget install -e PDFgear
+scoop install brave qbittorrent localsend
+
+# A utility that manages a Registry key that allows Windows to remap one key to any other key.
+scoop install sharpkeys
+
+# Potplayer
+scoop install potplayer
+# fix:
+# reg.exe import "C:\\Users\\$USERNAME\\dotfiles\\scripts\\PotPlayerMini64.reg"
