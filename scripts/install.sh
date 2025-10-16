@@ -17,6 +17,8 @@ system_name[lin]="Linux"
 system_name[mac]="MacOS"
 system_name[Unknown]="Unknown"
 
+GIT_EMAIL=""
+GIT_NAME=""
 HAS_SCOOP=false
 OS="Unknown"
 PACKAGE_MANAGER="none"
@@ -208,6 +210,14 @@ setup_scoop() {
     get charm-gum
   fi
 
+  if ! git config --global user.email >/dev/null 2>&1; then
+    GIT_EMAIL=$(gum input --placeholder "Enter your email" --prompt "Email: ")
+  fi
+
+  if ! git config --global user.name >/dev/null 2>&1; then
+    GIT_NAME=$(gum input --placeholder "Enter your name" --prompt "Name: ")
+  fi
+
   HAS_SCOOP=true
   ensure_scoop_bucket extras
 }
@@ -249,12 +259,14 @@ setup_git() {
 
   heading git
 
-  info "Enter git credentials"
-  git_email=$(gum input --placeholder "Enter your email" --prompt "Email: ")
-  git_name=$(gum input --placeholder "Enter your name" --prompt "Name: ")
+  if [ ! -z "$GIT_EMAIL" ]; then
+    git config --global user.email "$GIT_EMAIL"
+  fi
 
-  git config --global user.email "$git_email"
-  git config --global user.name "$git_name"
+  if [ ! -z "$GIT_NAME" ]; then
+    git config --global user.name "$GIT_NAME"
+  fi
+
   git config --global credential.helper manager
 
   # archive_config "${conf_path[$OS]}"
@@ -478,7 +490,7 @@ main() {
 
   # GUI Apps
   setup_wezterm
-  setup_sublime
+  # setup_sublime
   install_various_gui_apps
 
   # Language
