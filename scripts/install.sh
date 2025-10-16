@@ -107,13 +107,13 @@ get() {
     fi
   done
 }
-hasExecutable() {
+has_executable() {
   is_installed() {
-    app="$1"
+    exe="$1"
     powershell.exe -Command "
     \$found = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*,
                               HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* |
-              Where-Object { \$_.DisplayName -match '$app' }
+              Where-Object { \$_.DisplayName -match '$exe' }
     if (\$found) { exit 0 } else { exit 1 }
   " >/dev/null 2>&1
   }
@@ -132,7 +132,7 @@ ensure_installed() {
   local pkg="$1"
   local exe="${2:-$1}"
 
-  if hasExecutable "$exe"; then
+  if has_executable "$exe"; then
     info "Found $exe. Skipping install."
   else
     get "$pkg"
@@ -338,7 +338,7 @@ setup_yazi() {
 setup_autohotkey() {
   if [[ "$OS" == "win" ]]; then
     heading autohotkey
-    get autohotkey
+    get extras/autohotkey
 
     rm -rf "$WINDOWS_STARTUP_DIR\\main.ahk"
     create_symlink "'$WINDOWS_STARTUP_DIR\\main.ahk'" "$HOME/dotfiles/scripts/ahk/main.ahk"
@@ -352,7 +352,7 @@ setup_kanata() {
     conf_path[lin]="$HOME/.config/kanata-tray"
 
     heading kanata
-    get kanata-cmd
+    get extras/kanata-cmd
 
     archive_config "${conf_path[$OS]}"
     create_symlink "${conf_path[$OS]}" "$HOME/dotfiles/scripts/kanata/kanata-tray"
@@ -402,7 +402,7 @@ setup_wezterm() {
   conf_path[lin]="$HOME/.config/wezterm"
 
   heading wezterm
-  get wezterm
+  get extras/wezterm
 
   archive_config "${conf_path[$OS]}"
   create_symlink "${conf_path[$OS]}" "$HOME/dotfiles/gui/wezterm"
@@ -414,7 +414,7 @@ setup_sublime() {
   # C:/Users/hasan/scoop/persist/sublime-text/Data/Packages
 
   heading sublime
-  get sublime-text
+  get extras/sublime-text
 
   if [[ "$HAS_SCOOP" == "true" && "$OS" == "win" ]]; then
     mkdir -p "${conf_path[win_scoop]}"
@@ -438,7 +438,7 @@ install_various_gui_apps() {
   heading "Usefull GUI Apps"
 
   if [[ "$OS" == "win" ]]; then
-    get quicklook instant-eyedropper 7zip
+    get extras/quicklook extras/instant-eyedropper
 
     # Install browser
     # ensure_installed extras/googlechrome chrome
