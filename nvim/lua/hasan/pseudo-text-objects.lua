@@ -11,30 +11,30 @@ map('o', 'al', '<cmd>normal val<CR>', { desc = 'line' })
 -- number pseudo-text object (integer and float)
 -- ---------------------------------------------
 -- in
-local function visual_number()
-  vim.cmd([[normal v]])
-  vim.fn.search([[\d\([^0-9\.]\|$\)]], 'cW')
-  vim.cmd([[normal v]])
-  vim.fn.search([[\(^\|[^0-9\.]\d\)]], 'becW')
-end
-map('x', 'in', visual_number, { desc = 'inner number' })
-map('o', 'in', '<cmd>normal vin<CR>', { desc = 'inner number' })
+-- local function visual_number()
+--   vim.cmd([[normal v]])
+--   vim.fn.search([[\d\([^0-9\.]\|$\)]], 'cW')
+--   vim.cmd([[normal v]])
+--   vim.fn.search([[\(^\|[^0-9\.]\d\)]], 'becW')
+-- end
+-- map('x', 'in', visual_number, { desc = 'inner number' })
+-- map('o', 'in', '<cmd>normal vin<CR>', { desc = 'inner number' })
 
 -- buffer pseudo-text objects
 -- --------------------------
 -- ie ae
-map('x', 'ie', [[0:<C-u>let z = @/|1;/^./kz<CR>G??<CR>:let @/ = z|nohlsearch<CR>V'z]], { desc = 'inner buffer' })
-map('o', 'ie', '<cmd>normal vie<CR>', { desc = 'inner buffer' })
-map('x', 'ae', 'G$ogg0', { desc = 'buffer' })
-map('o', 'ae', '<cmd>normal vae<CR>', { desc = 'buffer' })
+-- map('x', 'ie', [[0:<C-u>let z = @/|1;/^./kz<CR>G??<CR>:let @/ = z|nohlsearch<CR>V'z]], { desc = 'inner buffer' })
+-- map('o', 'ie', '<cmd>normal vie<CR>', { desc = 'inner buffer' })
+-- map('x', 'ae', 'G$ogg0', { desc = 'buffer' })
+-- map('o', 'ae', '<cmd>normal vae<CR>', { desc = 'buffer' })
 
 -- square brackets pseudo-text objects
 -- -----------------------------------
--- ir ar
-map('x', 'ir', 'i[', { desc = 'inner square brackets' })
-map('o', 'ir', '<cmd>normal vi[<CR>', { desc = 'inner square brackets' })
-map('x', 'ar', 'a[', { desc = 'square brackets' })
-map('o', 'ar', '<cmd>normal va[<CR>', { desc = 'square brackets' })
+-- -- ir ar
+-- map('x', 'ir', 'i[', { desc = 'inner square brackets' })
+-- map('o', 'ir', '<cmd>normal vi[<CR>', { desc = 'inner square brackets' })
+-- map('x', 'ar', 'a[', { desc = 'square brackets' })
+-- map('o', 'ar', '<cmd>normal va[<CR>', { desc = 'square brackets' })
 
 -- last change pseudo-text objects
 -- -------------------------------
@@ -47,10 +47,10 @@ map('o', 'ar', '<cmd>normal va[<CR>', { desc = 'square brackets' })
 -- block comment pseudo-text objects
 -- ---------------------------------
 -- i? a?
-map('x', 'i?', '[*jo]*k', { desc = 'inner block comment' })
-map('o', 'i?', '<cmd>normal vi?V<CR>', { desc = 'inner block comment' })
-map('x', 'a?', '[*o]*', { desc = 'block comment' })
-map('o', 'a?', '<cmd>normal va?V<CR>', { desc = 'block comment' })
+-- map('x', 'i?', '[*jo]*k', { desc = 'inner block comment' })
+-- map('o', 'i?', '<cmd>normal vi?V<CR>', { desc = 'inner block comment' })
+-- map('x', 'a?', '[*o]*', { desc = 'block comment' })
+-- map('o', 'a?', '<cmd>normal va?V<CR>', { desc = 'block comment' })
 
 -- 24 simple pseudo-text objects
 -- -----------------------------
