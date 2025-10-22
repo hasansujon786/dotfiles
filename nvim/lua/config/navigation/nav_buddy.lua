@@ -90,7 +90,7 @@ end
 
 return {
   'hasansujon786/nvim-navbuddy',
-  dev = true,
+  dev = require('core.state').dev.enabled,
   cmd = { 'Navbuddy' },
   keys = {
     {

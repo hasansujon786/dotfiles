@@ -54,7 +54,7 @@ require('lazy').setup({
     enabled = true,
     notify = true, -- Get a notification when changes are found
   },
-  dev = { path = repoes_path .. '/lua' },
+  dev = { path = require('core.state').dev.path },
   performance = {
     cache = { enabled = true },
     rtp = {

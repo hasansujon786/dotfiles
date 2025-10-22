@@ -86,7 +86,7 @@ return {
       'nvim-orgmode/orgmode',
     },
     lazy = true,
-    dev = true,
+    dev = require('core.state').dev.enabled,
     keys = {
       {
         '<space>m',

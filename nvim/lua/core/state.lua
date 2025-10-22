@@ -147,12 +147,18 @@ M.ui = {
 }
 
 M.project = {
+  repoes_path = os.getenv('REPOES') or vim.fn.expand('~/'),
   todo = {
     keyfaces = { 'TODO', 'DONE', 'INFO', 'FIXME', 'BUG', 'FIXIT', 'ISSUE', 'OPTIM', 'OPTIMIZE' },
     exclude = {
       'nvim/lua/config/lsp/servers/dartls/bloc.lua',
     },
   },
+}
+
+M.dev = {
+  enabled = false,
+  path = M.project.repoes_path .. '/lua',
 }
 
 return M
