@@ -67,8 +67,8 @@ return {
 
             -- ['io'] = { query = '@block.inner', desc = 'inner block' },
             -- ['ao'] = { query = '@block.outer', desc = 'block' },
-            ['iC'] = { query = '@conditional.inner', desc = 'inner conditional' },
-            ['aC'] = { query = '@conditional.outer', desc = 'conditional' },
+            -- ['iC'] = { query = '@conditional.inner', desc = 'inner conditional' },
+            -- ['aC'] = { query = '@conditional.outer', desc = 'conditional' },
             ['iL'] = { query = '@loop.inner', desc = 'inner loop' },
             ['aL'] = { query = '@loop.outer', desc = 'loop' },
 
@@ -78,16 +78,16 @@ return {
             -- ['iG'] = { query = '@attribute.inner', desc = 'inner return' },
             -- ['aG'] = { query = '@attribute.outer', desc = 'return' },
 
-            -- ['iv'] = { query = '@assignment.lhs', desc = 'assignment lhs' },
-            -- ['av'] = { query = '@assignment.outer', desc = 'assignment' },
-            -- ['i='] = { query = '@assignment.rhs', desc = 'assignment rhs' },
-            -- ['a='] = { query = '@assignment.outer', desc = 'assignment' },
+            ['iv'] = { query = '@assignment.lhs', desc = 'assignment lhs' },
+            ['av'] = { query = '@assignment.outer', desc = 'assignment' },
+            ['iV'] = { query = '@assignment.rhs', desc = 'assignment rhs' },
+            ['aV'] = { query = '@assignment.outer', desc = 'assignment' },
 
             ['i/'] = { query = '@comment.inner', desc = 'inner comment' },
             -- ['a/'] = { query = '@comment.outer', desc = 'comment' },
 
-            ['ij'] = { query = '@_pair.inner', desc = 'inner pair' },
-            ['aj'] = { query = '@_pair.outer', desc = 'outer pair' }, -- object's { key: value }
+            -- ['ik'] = { query = '@_pair.inner', desc = 'inner pair' },
+            -- ['ak'] = { query = '@_pair.outer', desc = 'outer pair' }, -- object's { key: value }
             ['iS'] = { query = '@_subtree.inner', desc = 'inner subtree' },
             ['aS'] = { query = '@_subtree.outer', desc = 'outer subtree' },
           },

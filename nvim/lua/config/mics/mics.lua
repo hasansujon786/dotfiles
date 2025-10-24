@@ -108,22 +108,20 @@ return {
             a = { '@block.outer', '@conditional.outer', '@loop.outer' },
             i = { '@block.inner', '@conditional.inner', '@loop.inner' },
           }),
-          f = gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }), -- function
-          c = gen_spec.function_call(), -- u for "Usage"
+          f = gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }),
+          c = gen_spec.function_call(),
           C = gen_spec.function_call({ name_pattern = '[%w_]' }), -- Without dot in function name
           m = gen_spec.treesitter({ a = '@class.outer', i = '@class.inner' }),
-          T = gen_spec.treesitter({ a = '@attribute.outer', i = '@attribute.inner' }),
-          r = { { '%b[]' }, '^.().*().$' },
-          k = { { '^().*()$' }, { '^%s*().-()%s*$', '^().*()$' } },
+          ['='] = gen_spec.treesitter({ a = '@attribute.outer', i = '@attribute.inner' }),
+          P = gen_spec.treesitter({ a = '@_pair.outer', i = '@_pair.inner' }),
 
           -- ['*'] = gen_spec.pair('*', '*', { type = 'greedy' }),
           -- ['_'] = gen_spec.pair('_', '_', { type = 'greedy' }),
 
-          v = gen_spec.treesitter({ a = '@assignment.outer', i = '@assignment.lhs' }),
-          ['='] = gen_spec.treesitter({ a = '@assignment.outer', i = '@assignment.rhs' }),
-          -- c = gen_spec.treesitter({ a = '@class.outer', i = '@class.inner' }), -- class
-          -- t = { '<([%p%w]-)%f[^<%w][^<>]->.-</%1>', '^<.->().*()</[^/]->$' }, -- tags
           t = false,
+          -- t = { '<([%p%w]-)%f[^<%w][^<>]->.-</%1>', '^<.->().*()</[^/]->$' }, -- tags
+          r = { { '%b[]' }, '^.().*().$' },
+          k = { { '^().*()$' }, { '^%s*().-()%s*$', '^().*()$' } },
           d = { '%f[%d]%d+' }, -- digits
           e = { -- Word with case
             { '%u[%l%d]+%f[^%l%d]', '%f[%S][%l%d]+%f[^%l%d]', '%f[%P][%l%d]+%f[^%l%d]', '^[%l%d]+%f[^%l%d]' },
