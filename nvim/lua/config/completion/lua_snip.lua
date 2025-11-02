@@ -11,7 +11,7 @@ return {
       -- This tells LuaSnip to remember to keep around the last snippet.
       -- You can jump back into it even if you move outside of the selection
       history = true,
-      cut_selection_keys = 'c',
+      -- cut_selection_keys = 'c',
       -- This one is cool cause if you have dynamic snippets, it updates as you type!
       update_events = 'InsertEnter,InsertLeave,TextChanged,TextChangedI',
       region_check_events = 'InsertEnter,TextChanged,TextChangedI,CursorMoved,CursorMovedI',
@@ -22,14 +22,12 @@ return {
       ext_opts = {
         [types.choiceNode] = {
           passive = { virt_text = { { '◇', 'Comment' } } },
+          active = { virt_text = { { '(snippet) choice node', 'LspInlayHint' } } },
           -- active = { virt_text = { { '◆', 'CmpItemKindClass' } } },
-          active = {
-            virt_text = { { '(snippet) choice node', 'LspInlayHint' } },
-          },
         },
         [types.insertNode] = {
-          passive = { virt_text = { { icons.Other.circleBg, 'Comment' } } },
-          active = { virt_text = { { icons.Other.circleOutline2, 'String' } } },
+          passive = { virt_text = { { '◆', 'Comment' } } },
+          active = { virt_text = { { '◆', 'String' } } },
         },
       },
     })

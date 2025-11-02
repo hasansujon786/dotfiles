@@ -92,13 +92,13 @@ return {
         function(cmp)
           if cmp.is_visible() then
             return cmp.select_and_accept()
+          elseif tab_out_available() then
+            feedkeys('<Right>', 'n')
+            return true
           elseif cmp.snippet_active({ direction = 1 }) then
             return cmp.snippet_forward()
             -- elseif has_words_before() and not cmp.is_visible() then
             --   return cmp.show()
-          elseif tab_out_available() then
-            feedkeys('<Right>', 'n')
-            return true
           end
         end,
         'fallback',
@@ -130,6 +130,7 @@ return {
 
           return cmp.show({ providers = { 'snippets' } })
         end,
+        'fallback',
       },
     },
     fuzzy = { implementation = 'prefer_rust' },

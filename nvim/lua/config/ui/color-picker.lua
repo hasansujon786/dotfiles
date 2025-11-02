@@ -15,16 +15,19 @@ return {
       point_char = '⏽',
       bar_len = 40,
       default_color = '#7321de',
+      alpha_show = 'hide',
+      preserve = true,
       save_on_quit = true,
       inputs = {
         ccc.input.hsl,
         ccc.input.rgb,
+        ccc.input.oklch,
       },
       outputs = {
         ccc.output.hex,
-        ccc.output.hex_short,
-        ccc.output.css_rgb,
         ccc.output.css_hsl,
+        ccc.output.css_rgb,
+        ccc.output.css_oklch,
       },
       convert = {
         { ccc.picker.hex, ccc.output.css_rgb },

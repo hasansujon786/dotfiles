@@ -145,6 +145,7 @@ return {
           RRGGBB = true, -- #RRGGBB hex codes
           rgb_fn = true, -- CSS rgb() and rgba() functions
           hsl_fn = true, -- CSS hsl() and hsla() functions
+          oklch_fn = true, -- CSS oklch() function
           names = false, -- "Name" codes like Blue or blue
           RRGGBBAA = false, -- #RRGGBBAA hex codes
           AARRGGBB = false, -- 0xAARRGGBB hex codes
