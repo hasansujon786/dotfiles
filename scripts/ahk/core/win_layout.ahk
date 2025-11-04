@@ -2,17 +2,12 @@
 ; Custom layout
 ;******************************************************************************
 
-Global TASKBAR_HEIGHT := 0 ;; 40
+Global TASKBAR_HEIGHT := 50 ;; 40
 
 ; "wt.exe", "ahk_exe WindowsTerminal.exe" ; "Code.exe", "ahk_exe Code.exe"
-Global EDITOR_EXE := [
-	"wezterm-gui.exe",
-	"ahk_exe wezterm-gui.exe"
-]
-Global BROWSER_EXE := [
-	"zen.exe",
-	"ahk_class MozillaWindowClass"
-] ; chrome.exe brave.exe
+Global EDITOR_EXE := [ "wezterm-gui.exe", "ahk_exe wezterm-gui.exe" ]
+Global BROWSER_EXE := [ "zen.exe", "ahk_class MozillaWindowClass" ]
+; Global BROWSER_EXE := [ "chrome.exe", "ahk_class Chrome_WidgetWin_1" ]
 
 changeLayoutTo(layoutName) {
 	Global layout_loading := 1

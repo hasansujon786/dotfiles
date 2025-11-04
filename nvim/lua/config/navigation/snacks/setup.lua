@@ -465,6 +465,8 @@ require('snacks').setup({
           ['<A-y>'] = { 'select_and_next', mode = { 'i', 'n' } },
           ['<C-y>'] = { 'select_and_next', mode = { 'i', 'n' } },
 
+          ['<c-n>'] = { 'list_up', mode = { 'i', 'n' } },
+          ['<c-p>'] = { 'list_down', mode = { 'i', 'n' } },
           ['<a-p>'] = { 'list_up', mode = { 'i', 'n' } },
           ['<a-n>'] = { 'list_down', mode = { 'i', 'n' } },
           ['<a-k>'] = { 'list_up', mode = { 'i', 'n' } },
