@@ -1,5 +1,5 @@
 [user]
-	email = 38243998+hasansujon786@users.noreply.github.com
+	email = hasanmahmud7152@gmail.com
 	name = Hasan Mahmud
 [credential]
 	helper = manager
@@ -17,3 +17,5 @@
 	acm = !git add -A && git commit -m
 [core]
 	longpaths = true
+[credential "helperselector"]
+	selected = manager
