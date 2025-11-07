@@ -56,7 +56,7 @@ keymap({ 'n', 'x' }, 'gpm', '<cmd>lua require("vscode").action("editor.action.pe
 keymap({ 'n', 'x' }, 'gpy', '<cmd>lua require("vscode").action("editor.action.peekTypeDefinition")<CR>')
 keymap({ 'n', 'x' }, 'gpD', '<cmd>lua require("vscode").action("editor.action.peekDeclaration")<CR>')
 
-keymap({ 'n', 'x' }, 'g.', '<cmd>lua require("vscode").action("workbench.action.gotoSymbol")<CR>')
+keymap({ 'n', 'x' }, 'g,', '<cmd>lua require("vscode").action("workbench.action.gotoSymbol")<CR>')
 
 keymap('n', '<C-space>', '<cmd>lua require("vscode").action("editor.action.quickFix")<CR>')
 keymap('i', '<C-space>', '<cmd>lua require("vscode").action("editor.action.triggerSuggest")<CR>')

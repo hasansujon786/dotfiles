@@ -186,7 +186,7 @@ local function setup()
   -- Picker keymaps
   vmap({ '<leader><leader>', '<cmd>Tabfind<CR>', mode = nx })
   vmap({ '<leader>pp', '<cmd>lua require("vscode").action("workbench.action.openRecent")<CR>', mode = nx })
-  vmap({ 'g.', '<cmd>lua require("vscode").action("workbench.action.showAllEditors")<CR>', mode = nx })
+  vmap({ 'g,', '<cmd>lua require("vscode").action("workbench.action.showAllEditors")<CR>', mode = nx })
 
   -- Open ----------------------------------------
   function M.do_open(uri)
@@ -428,6 +428,7 @@ local function setup()
   end
 
   -- Lsp
+  vmap({ 'g.', '<cmd>lua vim.lsp.buf.code_action()<CR>' })
   vmap({ 'gd', '<cmd>lua require("vscode").action("editor.action.revealDefinition")<CR>' })
   vmap({ 'gr', '<cmd>lua vim.lsp.buf.references()<CR>' })
   vmap({ 'gR', '<cmd>lua require("vscode").action("references-view.findReferences")<CR>' })

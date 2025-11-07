@@ -100,10 +100,10 @@ function M.edit_alternate_file()
 local maps_common = {
   { "q", "<esc><cmd>noh<CR>", mode = { "n", "x" } },
   { "<CR>", ":<up>", silent = false, mode = { "n", "x" }, desc = "Run last command easily" },
-  { "n", "nzz", mode = { "n", "x" }, desc = "Repeat the latest \"/\" or \"?\"", remap = true },
-  { "N", "Nzz", mode = { "n", "x" }, desc = "Repeat the latest \"/\" or \"?\"", remap = true },
-  { "'", "`", mode = { "n", "x" }, desc = "Jump to the mark", remap = true },
-  { "@", ":norm @", silent = false, desc = "Run macro on visual selection", mode = "v" },
+  { "n", "nzz", remap = true, mode = { "n", "x" }, desc = "Repeat the latest \"/\" or \"?\"" },
+  { "N", "Nzz", remap = true, mode = { "n", "x" }, desc = "Repeat the latest \"/\" or \"?\"" },
+  { "'", "`", remap = true, mode = { "n", "x" }, desc = "Jump to the mark" },
+  { "@", ":norm @", silent = false, mode = "v", desc = "Run macro on visual selection" },
   { "p", "pgvy", mode = "v" },
   { "y", "ygv<Esc>", mode = "v", desc = "Keep cursor at place" },
   { "gV", "`[v`]", desc = "Select the last yanked text" },
@@ -114,8 +114,8 @@ local maps_common = {
   { "<leader>ip", "\"+p", mode = { "n", "x" }, desc = "Paste from system" },
   { "<leader>iP", "\"+P", mode = { "n", "x" }, desc = "Paste from system" },
   { "$", "g_", mode = { "x" }, desc = "A fix to select end of line" },
-  { ">", ">gv", desc = "Keep selection when indenting/outdenting", mode = "v" },
-  { "<", "<gv", desc = "Keep selection when indenting/outdenting", mode = "v" },
+  { ">", ">gv", mode = "v", desc = "Keep selection when indenting/outdenting" },
+  { "<", "<gv", mode = "v", desc = "Keep selection when indenting/outdenting" },
   { "gcu", M.uncomment_block, mode = "n", desc = "Uncomment block" },
   { "gc/", M.uncomment_block, mode = "n", desc = "Uncomment block" },
   { "a/", "<cmd>lua require(\"vim._comment\").textobject()<CR>", mode = "o", desc = "Comment textobject" },
@@ -128,7 +128,7 @@ local maps_common = {
   { "dm", ":%s/<c-r>///g<CR>", desc = "Delete all matches" },
   { "dM", ":%g/<c-r>//d<CR>", desc = "Delete all lines with matches" },
   { "<leader>cw", "<cmd>lua require(\"hasan.widgets.inputs\").substitute_word()<CR>", mode = { "n", "x" }, desc = "Substitute word" },
-  { "z/", "/\\%><C-r>=line(\"w0\")-1<CR>l\\%<<C-r>=line(\"w$\")+1<CR>l", desc = "Search in viewport", silent = false },
+  { "z/", "/\\%><C-r>=line(\"w0\")-1<CR>l\\%<<C-r>=line(\"w$\")+1<CR>l", silent = false, desc = "Search in viewport" },
   { "z/", "<ESC>/\\%V", silent = false, mode = "x", desc = "Search in visual selection" },
   { "gB", M._open, desc = "Opens filepath or URI under cursor" },
   { "gB", M._open_v, mode = "x", desc = "Opens filepath or URI under cursor" },
@@ -165,7 +165,7 @@ local maps = {
   { "<leader>//", "<cmd>lua require(\"vscode\").action(\"workbench.action.findInFiles\")<CR>", mode = { "n", "x" } },
   { "<leader><leader>", "<cmd>Tabfind<CR>", mode = { "n", "x" } },
   { "<leader>pp", "<cmd>lua require(\"vscode\").action(\"workbench.action.openRecent\")<CR>", mode = { "n", "x" } },
-  { "g.", "<cmd>lua require(\"vscode\").action(\"workbench.action.showAllEditors\")<CR>", mode = { "n", "x" } },
+  { "g,", "<cmd>lua require(\"vscode\").action(\"workbench.action.showAllEditors\")<CR>", mode = { "n", "x" } },
   { "<tab>", "<cmd>lua require(\"vscode\").action(\"editor.toggleFold\")<CR>", desc = "Toggle fold" },
   { "<s-tab>", "<cmd>lua require(\"vscode\").action(\"editor.toggleFoldRecursively\")<CR>", desc = "Fold recursively" },
   { "z.", M.foldWithLevel('editor.foldLevel1'), mode = { "n", "x" }, desc = "Fold all buf" },
@@ -218,6 +218,7 @@ local maps = {
   { "gl", "<cmd>lua require(\"vscode\").action(\"workbench.action.nextEditorInGroup\")<CR>", mode = { "n", "x" } },
   { "gH", "<cmd>lua require(\"vscode\").action(\"workbench.action.firstEditorInGroup\")<CR>", mode = { "n", "x" } },
   { "gL", "<cmd>lua require(\"vscode\").action(\"workbench.action.lastEditorInGroup\")<CR>", mode = { "n", "x" } },
+  { "g.", "<cmd>lua vim.lsp.buf.code_action()<CR>" },
   { "gd", "<cmd>lua require(\"vscode\").action(\"editor.action.revealDefinition\")<CR>" },
   { "gr", "<cmd>lua vim.lsp.buf.references()<CR>" },
   { "gR", "<cmd>lua require(\"vscode\").action(\"references-view.findReferences\")<CR>" },
@@ -248,30 +249,30 @@ map('o', 'al', '<cmd>normal val<CR>', { desc = 'line' })
 -- number pseudo-text object (integer and float)
 -- ---------------------------------------------
 -- in
-local function visual_number()
-  vim.cmd([[normal v]])
-  vim.fn.search([[\d\([^0-9\.]\|$\)]], 'cW')
-  vim.cmd([[normal v]])
-  vim.fn.search([[\(^\|[^0-9\.]\d\)]], 'becW')
-end
-map('x', 'in', visual_number, { desc = 'inner number' })
-map('o', 'in', '<cmd>normal vin<CR>', { desc = 'inner number' })
+-- local function visual_number()
+--   vim.cmd([[normal v]])
+--   vim.fn.search([[\d\([^0-9\.]\|$\)]], 'cW')
+--   vim.cmd([[normal v]])
+--   vim.fn.search([[\(^\|[^0-9\.]\d\)]], 'becW')
+-- end
+-- map('x', 'in', visual_number, { desc = 'inner number' })
+-- map('o', 'in', '<cmd>normal vin<CR>', { desc = 'inner number' })
 
 -- buffer pseudo-text objects
 -- --------------------------
 -- ie ae
-map('x', 'ie', [[0:<C-u>let z = @/|1;/^./kz<CR>G??<CR>:let @/ = z|nohlsearch<CR>V'z]], { desc = 'inner buffer' })
-map('o', 'ie', '<cmd>normal vie<CR>', { desc = 'inner buffer' })
-map('x', 'ae', 'G$ogg0', { desc = 'buffer' })
-map('o', 'ae', '<cmd>normal vae<CR>', { desc = 'buffer' })
+-- map('x', 'ie', [[0:<C-u>let z = @/|1;/^./kz<CR>G??<CR>:let @/ = z|nohlsearch<CR>V'z]], { desc = 'inner buffer' })
+-- map('o', 'ie', '<cmd>normal vie<CR>', { desc = 'inner buffer' })
+-- map('x', 'ae', 'G$ogg0', { desc = 'buffer' })
+-- map('o', 'ae', '<cmd>normal vae<CR>', { desc = 'buffer' })
 
 -- square brackets pseudo-text objects
 -- -----------------------------------
--- ir ar
-map('x', 'ir', 'i[', { desc = 'inner square brackets' })
-map('o', 'ir', '<cmd>normal vi[<CR>', { desc = 'inner square brackets' })
-map('x', 'ar', 'a[', { desc = 'square brackets' })
-map('o', 'ar', '<cmd>normal va[<CR>', { desc = 'square brackets' })
+-- -- ir ar
+-- map('x', 'ir', 'i[', { desc = 'inner square brackets' })
+-- map('o', 'ir', '<cmd>normal vi[<CR>', { desc = 'inner square brackets' })
+-- map('x', 'ar', 'a[', { desc = 'square brackets' })
+-- map('o', 'ar', '<cmd>normal va[<CR>', { desc = 'square brackets' })
 
 -- last change pseudo-text objects
 -- -------------------------------
@@ -284,10 +285,10 @@ map('o', 'ar', '<cmd>normal va[<CR>', { desc = 'square brackets' })
 -- block comment pseudo-text objects
 -- ---------------------------------
 -- i? a?
-map('x', 'i?', '[*jo]*k', { desc = 'inner block comment' })
-map('o', 'i?', '<cmd>normal vi?V<CR>', { desc = 'inner block comment' })
-map('x', 'a?', '[*o]*', { desc = 'block comment' })
-map('o', 'a?', '<cmd>normal va?V<CR>', { desc = 'block comment' })
+-- map('x', 'i?', '[*jo]*k', { desc = 'inner block comment' })
+-- map('o', 'i?', '<cmd>normal vi?V<CR>', { desc = 'inner block comment' })
+-- map('x', 'a?', '[*o]*', { desc = 'block comment' })
+-- map('o', 'a?', '<cmd>normal va?V<CR>', { desc = 'block comment' })
 
 -- 24 simple pseudo-text objects
 -- -----------------------------

@@ -183,18 +183,18 @@ require('snacks').setup({
     enabled = not require('core.state').ui.session_autoload,
     -- These settings are used by some built-in sections
     preset = {
-        -- stylua: ignore
-        ---@type snacks.dashboard.Item[]
-        keys = {
-          button('r', 'R', ' ', 'Recent file', '<cmd>lua Snacks.dashboard.pick("recent")<CR>'),
-          button('l', 'L', ' ', 'Load session', '<cmd>lua require("persisted").load()<CR>'),
-          button('f', 'F', ' ', 'Search files', '<cmd>lua Snacks.dashboard.pick("files")<CR>'),
-          button('s', 'S', ' ', 'Open settings', '<cmd>lua Snacks.dashboard.pick("files", {cwd = vim.fn.stdpath("config")})<CR>'),
-          button('p', 'P', ' ', 'Lazy dashboard', '<cmd>Lazy<CR>'),
-          button('a', 'A', ' ', 'Open org agenda', '<cmd>lua require("orgmode").action("agenda.prompt")<CR>'),
-          -- button('q', 'Q', ' ', 'Quit Neovim', '<cmd>qa<CR>'),
-          -- button('n', 'N', ' ', 'New File', '<cmd>ene | startinsert<CR>'),
-        },
+      -- stylua: ignore
+      ---@type snacks.dashboard.Item[]
+      keys = {
+        button('r', 'R', ' ', 'Recent file', '<cmd>lua Snacks.dashboard.pick("recent")<CR>'),
+        button('l', 'L', ' ', 'Load session', '<cmd>lua require("persisted").load()<CR>'),
+        button('f', 'F', ' ', 'Search files', '<cmd>lua Snacks.dashboard.pick("files")<CR>'),
+        button('s', 'S', ' ', 'Open settings', '<cmd>lua Snacks.dashboard.pick("files", {cwd = vim.fn.stdpath("config")})<CR>'),
+        button('p', 'P', ' ', 'Lazy dashboard', '<cmd>Lazy<CR>'),
+        button('a', 'A', ' ', 'Open org agenda', '<cmd>lua require("orgmode").action("agenda.prompt")<CR>'),
+        -- button('q', 'Q', ' ', 'Quit Neovim', '<cmd>qa<CR>'),
+        -- button('n', 'N', ' ', 'New File', '<cmd>ene | startinsert<CR>'),
+      },
       -- Used by the `header` section
       header = [[
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣤⡼⠀⢀⡀⣀⢱⡄⡀⠀⠀⠀⢲⣤⣤⣤⣤⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀

@@ -19,6 +19,7 @@ HISTFILESIZE=2000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+[ -f "$HOME/.env.local" ] && set -a && source "$HOME/.env.local" && set +a
 shopt -s nullglob dotglob
 for f in ~/dotfiles/scripts/bash/shell_config/*; do
   source "$f"
