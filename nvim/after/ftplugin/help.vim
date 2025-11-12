@@ -3,7 +3,7 @@ setlocal readonly nomodifiable nolist
 
 let b:snacks_scope = v:false
 
-nnoremap <buffer>           <CR>    <C-]>
+nnoremap <buffer> gd <C-]>
 " Next link
 nnoremap <nowait><buffer>    ]t      /\v\\|[^\|]+\\|<CR><cmd>nohl<CR>
 nnoremap <nowait><buffer>    [t      ?\v\\|[^\|]+\\|<CR><cmd>nohl<CR>
