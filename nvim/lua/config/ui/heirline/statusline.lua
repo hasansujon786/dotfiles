@@ -50,19 +50,12 @@ local c = {
         --   return progress_message
         -- end
 
-        -- lsp name
-        local names = {}
-        for _, server in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
-          table.insert(names, server.name)
-        end
-        return table.concat(names, ',')
+        return #vim.lsp.get_clients({ bufnr = 0 }) or 0
       end,
     },
     on_click = {
       callback = function()
-        vim.schedule(function()
-          vim.cmd('LspInfo')
-        end)
+        require('hasan.widgets.lsp_clients').show()
       end,
       name = 'heirline_LSP',
     },

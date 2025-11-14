@@ -38,14 +38,18 @@ M.lsp = {
     -- Frontend
     html = { 'html-lsp' },
     cssls = { 'css-lsp' },
-    vtsls = { 'vtsls' },
-    -- ts_ls = { 'typescript-language-server' },
+    css_variables = { 'css-variables-language-server' },
     jsonls = { 'json-lsp' },
     eslint = { 'eslint-lsp' },
+    vtsls = { 'vtsls' },
+    -- ts_ls = { 'typescript-language-server' },
+
     -- Frameworks
     astro = { 'astro-language-server' },
     volar = { 'vue-language-server' }, -- vuels = { 'vetur-vls' },
     tailwindcss = { 'tailwindcss-language-server' },
+    cssmodules_ls = { 'cssmodules-language-server' },
+
     -- Lsps
     bashls = { 'bash-language-server' },
     lua_ls = { 'lua-language-server' },

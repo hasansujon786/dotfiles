@@ -52,4 +52,13 @@ function M.get_active_hl_at_cursor()
   return highlight
 end
 
+function M.winhighlight(highlights)
+  return table.concat(
+    vim.tbl_map(function(key)
+      return key .. ':' .. highlights[key]
+    end, vim.tbl_keys(highlights)),
+    ','
+  )
+end
+
 return M

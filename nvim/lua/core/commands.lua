@@ -4,6 +4,10 @@ command('Bufdelete', function()
   Snacks.bufdelete()
 end, { desc = 'bufdelete' })
 
+command('LspClients', function()
+  require('hasan.widgets.lsp_clients').show()
+end, { desc = 'Show Active Clients' })
+
 command('ClearShada', function()
   local shada_path = vim.fn.expand(vim.fn.stdpath('data') .. '/shada')
   local files = vim.fn.glob(shada_path .. '/*', false, true)
