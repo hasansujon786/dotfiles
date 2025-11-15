@@ -267,6 +267,7 @@ setup_git() {
     git config --global user.name "$GIT_NAME"
   fi
 
+  git config --global init.defaultBranch main
   git config --global credential.helper manager
 
   # archive_config "${conf_path[$OS]}"
