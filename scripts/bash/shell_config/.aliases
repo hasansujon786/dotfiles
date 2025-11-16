@@ -51,6 +51,7 @@ alias wtt='wt -w 0 nt -d .'
 alias dx='pwsh -Command dxdiag'
 alias su='subl'
 alias sub='subl'
+alias bin='start shell:RecycleBinFolder'
 
 # Android
 alias gdc='./gradlew clean'

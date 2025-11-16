@@ -1,4 +1,5 @@
 # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#defaulthttps://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#default
+
 reporting: 'on'
 startuppopupversion: 1
 gui:
@@ -54,6 +55,6 @@ customCommands:
 os:
   editPreset: 'nvim' # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#configuring-file-editing
 git:
-  paging:
-    colorArg: always
-    pager: delta --side-by-side --paging=never
+  pagers:
+    - colorArg: always
+      pager: delta --side-by-side --paging=never

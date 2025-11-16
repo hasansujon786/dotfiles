@@ -12,6 +12,7 @@ return {
       'dart',
       'html',
       'json',
+      'jsonc',
       'lua',
       'markdown',
       'markdown_inline',
