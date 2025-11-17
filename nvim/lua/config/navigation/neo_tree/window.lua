@@ -113,7 +113,7 @@ return {
     end,
 
     ['K'] = 'show_file_details',
-    ['r'] = 'refresh',
+    ['u'] = 'refresh',
     ['q'] = 'close_window',
     ['?'] = 'show_help',
     ['<esc>'] = 'cancel', -- close preview or floating neo-tree window
@@ -143,6 +143,7 @@ return {
     ['a'] = { 'add', config = { show_path = 'none' } }, -- "none", "relative", "absolute"
     ['A'] = 'add_directory', -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
     ['<f2>'] = 'rename',
+    ['r'] = 'rename',
     ['<C-x>'] = 'cut_to_clipboard',
     ['<C-c>'] = 'copy_to_clipboard',
     ['<C-v>'] = 'paste_from_clipboard',

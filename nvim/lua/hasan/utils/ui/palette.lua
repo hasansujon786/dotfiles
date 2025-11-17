@@ -183,11 +183,11 @@ local function set_custom_highlights()
     SnacksIndentScope       = { fg = c.grey },
     SnacksIndent            = { fg = c.bg3 },
     SnacksDim               = { fg = c.bg3 },
-    SnacksPickerLabel       = { fg = c.orange },
     SnacksNotifierHistoryTitle = { fg = c.orange, underline = true },
 
     SnacksPicker            = { link = 'NormalFloatFlat' },
     SnacksPickerBorder      = { link = 'FloatBorderFlat' },
+    SnacksPickerLabel       = { fg = c.orange },
     SnacksPickerTitle       = { fg = c.dark_orange, bg = dark_border },
     SnacksPickerPrompt      = { fg = c.green, bg = float_bg },
     SnacksPickerTotals      = { fg = c.grey, bg = float_bg },

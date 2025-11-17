@@ -450,6 +450,7 @@ require('snacks').setup({
       input = {
         keys = {
           ['<c-u>'] = false,
+          ['<c-d>'] = false,
           ['<Esc>'] = { 'close', mode = { 'i', 'n' } },
 
           ['<F3>'] = { 'toggle_preview', mode = { 'i', 'n' } },
@@ -461,12 +462,9 @@ require('snacks').setup({
 
           ['<s-tab>'] = { 'my_list_up', mode = { 'i', 'n' } },
           ['<tab>'] = { 'my_list_down', mode = { 'i', 'n' } },
-          ['<A-i>'] = { 'select_and_prev', mode = { 'i', 'n' } },
-          ['<A-y>'] = { 'select_and_next', mode = { 'i', 'n' } },
+          ['<C-l>'] = { 'select_and_prev', mode = { 'i', 'n' } },
           ['<C-y>'] = { 'select_and_next', mode = { 'i', 'n' } },
 
-          ['<c-n>'] = { 'list_up', mode = { 'i', 'n' } },
-          ['<c-p>'] = { 'list_down', mode = { 'i', 'n' } },
           ['<a-p>'] = { 'list_up', mode = { 'i', 'n' } },
           ['<a-n>'] = { 'list_down', mode = { 'i', 'n' } },
           ['<a-k>'] = { 'list_up', mode = { 'i', 'n' } },
@@ -482,7 +480,7 @@ require('snacks').setup({
 
           ['<c-r><c-r>'] = { 'insert_relative_path', mode = { 'i', 'n' } },
           ['<c-r><c-a>'] = { 'insert_absolute_path', mode = { 'i', 'n' } },
-          ['<a-l>'] = { 'inspect', mode = { 'i', 'n' } },
+          ['<c-r><c-g>'] = { 'inspect', mode = { 'i', 'n' } },
 
           ['<A-/>'] = { 'spectree', mode = { 'i', 'n' } },
           ['<c-_>'] = { 'spectree', mode = { 'i', 'n' } },

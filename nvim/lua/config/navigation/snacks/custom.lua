@@ -79,6 +79,7 @@ function M.project_files()
     multi = { 'files', 'lsp_symbols', 'buffers' },
     win = { preview = preview_main.hidden_winbar },
     matcher = { cwd_bonus = true, frecency = true, sort_empty = true },
+    -- correctly sort lsp_symbols
     sort = function(a, b)
       local sort = require('snacks.picker.sort').default()
       sort = type(sort) == 'table' and require('snacks.picker.sort').default(sort) or sort
