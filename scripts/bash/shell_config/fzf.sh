@@ -391,3 +391,47 @@ scoop-uninstall() {
   *) echo "Please answer yes or no." ;;
   esac
 }
+
+pastebin() {
+  local file result
+
+  file="$(fzf --border-label='Share file with https://0x0.st')"
+
+  if [[ -z "$file" ]]; then
+    echo "No file selected."
+    return 1
+  fi
+
+  # Show selected file
+  echo -e "Selected file: \e[1;32m${file}\e[0m"
+
+  # Upload
+  result=$(
+    curl -A "UploaderScript/1.0" \
+      -F "file=@${file}" \
+      -F "expires=72" \
+      https://0x0.st
+  )
+
+  echo "URL: $result"
+
+  # Clipboard based on OS
+  case "$OSTYPE" in
+  linux*)
+    if command -v xclip >/dev/null 2>&1; then
+      echo -n "$result" | xclip -selection clipboard
+    else
+      echo "xclip not found — cannot copy to clipboard."
+    fi
+    ;;
+  darwin*)
+    echo -n "$result" | pbcopy
+    ;;
+  msys* | cygwin* | win32*)
+    echo -n "$result" | clip
+    ;;
+  *)
+    echo "Unknown OS — cannot copy automatically."
+    ;;
+  esac
+}
