@@ -11,24 +11,50 @@
     ],
     "description": "twMerge"
   },
+  "cva": {
+    "prefix": "cva",
+    "body": [
+      "import { cva, type VariantProps } from \"class-variance-authority\";",
+      "export const button = cva(",
+      "  \"px-4 py-2 font-medium rounded\",",
+      "  {",
+      "    variants: {",
+      "      variant: {",
+      "        primary: \"bg-blue-500 text-white\",",
+      "        secondary: \"bg-gray-200 text-black\",",
+      "      },",
+      "      size: {",
+      "        sm: \"text-sm\",",
+      "        lg: \"text-lg\",",
+      "      },",
+      "    },",
+      "    defaultVariants: {",
+      "      variant: \"primary\",",
+      "      size: \"sm\",",
+      "    },",
+      "  }",
+      ");"
+    ],
+    "description": "simple cva usage example"
+  },
   "value as union type": {
     "prefix": "typeUnionValue",
     "body": "type ${2:TypeName} = (typeof ${1:object})[keyof typeof ${1:object}]",
-    "description": "get object values as union type"
+    "description": "Create a union type from all values of an object"
   },
   "key as union type": {
     "prefix": "typeUnionKey",
     "body": "type ${2:TypeName} = keyof typeof ${1:object}",
-    "description": "get object values as union type"
+    "description": "Create a union type from all keys of an object"
   },
-  "list key as union type": {
-    "prefix": "typeUnionlistKey",
-    "body": "type ${2:TypeName} = (typeof ${1:object})[number][$0];",
-    "description": "get object values as union type"
+  "Array Values to Union Type": {
+    "prefix": "typeUnionArrayValues",
+    "body": "type ${2:TypeName} = (typeof ${1:array})[number];",
+    "description": "Create a union type from the values of a readonly array or tuple in TypeScript"
   },
   "typePrettify": {
     "prefix": "typePrettify",
     "body": ["type Prettify<T> = {", "  [K in keyof T]: T[K]", "} & {}"],
-    "description": "Prettify any nested type"
+    "description": "Flatten and normalize TypeScript types for better editor display"
   }
 }
