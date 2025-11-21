@@ -189,6 +189,7 @@ local function set_custom_highlights()
     SnacksPickerBorder      = { link = 'FloatBorderFlat' },
     SnacksPickerLabel       = { fg = c.orange },
     SnacksPickerTitle       = { fg = c.dark_orange, bg = dark_border },
+    -- Title                   = { link = 'SnacksPickerTitle' },
     SnacksPickerPrompt      = { fg = c.green, bg = float_bg },
     SnacksPickerTotals      = { fg = c.grey, bg = float_bg },
     SnacksPickerMatch       = { fg = c.orange },

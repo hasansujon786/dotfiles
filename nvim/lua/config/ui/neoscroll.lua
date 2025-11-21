@@ -20,7 +20,7 @@ return {
     local neoscroll = require('neoscroll')
     neoscroll.setup({
       mappings = {},
-      hide_cursor = true,
+      hide_cursor = false,
       stop_eof = true, -- Stop at <EOF> when scrolling downwards
       respect_scrolloff = false,
       cursor_scrolls_alone = true,
