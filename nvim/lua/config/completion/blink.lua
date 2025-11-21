@@ -5,23 +5,7 @@ local function tab_out_available()
   local tab_out_chars = '>)}\'"`,;]'
   return vim.fn.search('\\%#[]' .. tab_out_chars, 'n') ~= 0
 end
--- local function has_words_before()
---   local skip_ft = vim.tbl_contains({ 'spectre_input', 'spectre_file_input' }, vim.bo.filetype)
---   if skip_ft then
---     return false
---   end
 
---   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
---   if col == 0 then
---     return false
---   end
---   local text = vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]
---   return text:sub(col, col):match('%s') == nil
--- end
--- local minisnippet_expand = function()
---   feedkeys('<C-k><C-j>')
---   return true
--- end
 -- Hack to tab makes work
 -- keymap('i', '<tab>', '<space><space>')
 keymap('i', '<s-tab>', '<BS>')
