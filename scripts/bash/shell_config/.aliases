@@ -105,13 +105,13 @@ alias mk='mkdir -p'
 mm() { mkdir -p "$@" && cd "$@" || exit; }
 alias x='exit'
 alias e='z'
-alias c='clear && pwd && ls'
+alias cl='clear && pwd && ls'
 # alias c='clear'
 alias live='live-server'
 alias h='history'
 alias wh='which'
-alias o='explorer'
-alias open='explorer'
+alias o='open'
+alias ex='explorer'
 alias dus='du -h --max-depth=1 --exclude=node_modules* | sort -rh'
 alias dua='du -s * --exclude=node_modules* | sort -rn | cut -f2- | xargs -d "\n" du -sh'
 alias dul='du -h -x --exclude=node_modules* -s -- *  | sort -r -h | head -20'
@@ -168,7 +168,7 @@ alias lg='lazygit'
 alias gdsafe='pwd | xargs git config --global --add safe.directory'
 
 # kill port
-alias fit='tasklist | findstr' # search string
+alias fit='tasklist | findstr'     # search string
 alias fip='netstat -ano | findstr' # search string
 alias tk='taskkill //F //IM'
 alias tkp='taskkill //PID'
@@ -283,7 +283,7 @@ remove() {
 }
 
 # Calculator
-cl() { echo "scale=5;$*" | bc -l; }
+c() { echo "scale=5;$*" | bc -l; }
 
 redrive() {
   curl --silent -I -L "$@" | grep -i location
@@ -307,64 +307,21 @@ logv() {
 
   tail -f "$file" | bat --paging=never --language log
 }
+open() {
+  if [ $# -eq 0 ]; then
+    explorer
+    return 0
+  fi
 
-declare -A EXCLUDE_EXPAND_ALIASES=(
-  ["ls"]=1
-  ["cd"]=1
-  ["git"]=1
-  ["e"]=1
-  ["z"]=1
-  ["--"]=1
-)
-insert_space() {
-  # Simulate pressing Space by inserting a space at the current cursor position
-  READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT} ${READLINE_LINE:$READLINE_POINT}"
-  ((READLINE_POINT++))
+  for item in "$@"; do
+    # if [ ! -e "$item" ]; then
+    #   echo "❌ '$item' not found"
+    #   continue
+    # fi
+    start "$item"
+  done
 }
-expand_aliases() {
-  # Exit if cursor is not at the end
-  if [ "$READLINE_POINT" -ne "${#READLINE_LINE}" ]; then
-    insert_space
-    return
-  fi
 
-  local input="$READLINE_LINE"
-  local -a words=($input) # Split into words (using whitespace as delimiter)
-  local word_count=${#words[@]}
-
-  # Exit if input is empty or has space at the end or word_count isn't 1
-  if [[ -z $input || $input =~ [[:space:]]$ || $word_count -eq 0 || $word_count -gt 1 ]]; then
-    insert_space
-    return
-  fi
-
-  # Get the last word (or empty if none)
-  local last_word="${words[-1]:-}"
-  # Exit if last_word is empty or matched with exclude values
-  if [[ -z $last_word || -n "${EXCLUDE_EXPAND_ALIASES[$last_word]}" ]]; then
-    insert_space
-    return
-  fi
-
-  if [[ $last_word =~ ^[[:space:]]*([a-zA-Z0-9_-]+)(.*)$ ]]; then
-    local cmd=${BASH_REMATCH[1]}
-
-    # Look up the alias definition
-    if builtin alias $cmd >/dev/null 2>&1; then
-      local found_alias=$(builtin alias $cmd 2>/dev/null)
-
-      if [[ -n $found_alias && $found_alias =~ =\'(.*)\' ]]; then
-        cmd="${BASH_REMATCH[1]}"
-        # replace the alias with its definition
-        READLINE_LINE="$cmd "
-        READLINE_POINT=${#READLINE_LINE}
-        return
-      fi
-    fi
-  fi
-
-  insert_space
-}
 find_alias() {
   local selected
   selected=$(alias | sed -E "s/^alias ([^=]+)='(.*)'$/\1  =  \2/" | fzf --border-label="Run alias")
@@ -383,15 +340,6 @@ find_alias() {
 
 ### Keybinds
 ##################################################
-# auto-expand
-bind -m emacs-standard -x '" ":expand_aliases'
-bind -m vi-command -x '" ":expand_aliases'
-bind -m vi-insert -x '" ":expand_aliases'
-bind '"\C-@":magic-space'
-# bind '"\e\ ":magic-space'
-# bind '"\eq":alias-expand-line'
-# bind '" ":"\eq\C-v "'
-
 bind -m emacs-standard -x '"\es":find_alias'
 bind -m vi-command -x '"\es":find_alias'
 bind -m vi-insert -x '"\es":find_alias'
