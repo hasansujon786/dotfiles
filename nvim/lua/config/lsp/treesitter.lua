@@ -164,7 +164,7 @@ return {
       -- commit = -- 4976d8b 2bcf700 8fd989b
       keys = {
         {
-          'z-',
+          'g<CR>',
           function()
             require('treesitter-context').go_to_context(vim.v.count1)
           end,
@@ -172,7 +172,7 @@ return {
           desc = 'Move cursor to context',
         },
         {
-          '-',
+          '<CR>',
           function()
             require('treesitter-context').go_to_context(vim.v.count1)
           end,

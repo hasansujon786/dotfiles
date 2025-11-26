@@ -93,7 +93,11 @@ M.lsp = {
         'graphql',
         'handlebars',
       },
-      formatter = { 'prettierd', 'prettier', stop_after_first = true },
+      formatter = {
+        'prettierd',
+        'prettier',
+        stop_after_first = true,
+      },
     },
     {
       filetype = 'lua',
