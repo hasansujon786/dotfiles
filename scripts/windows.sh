@@ -7,6 +7,10 @@
 # https://dl.google.com/android/repository/commandlinetools-win-8092744_latest.zip
 # sdkmanager.bat "platforms;android-29" "platform-tools" "build-tools;28.0.3"
 
+# A utility that manages a Registry key that allows Windows to remap one key to any other key.
+# scoop install sharpkeys
+
+# FIXME: riot
 # choco install gimp -y
 # choco install vlc -y
 # choco install emacs -y
@@ -18,12 +22,15 @@
 # winget install GNU.Emacs
 # scoop install abdownloadmanager obsidian
 
-# FIXME: riot
 winget install -e PDFgear
 scoop install brave qbittorrent localsend
 
-# A utility that manages a Registry key that allows Windows to remap one key to any other key.
-scoop install sharpkeys
+scoop install extras/insomnia
+scoop bucket add charm https://github.com/charmbracelet/scoop-bucket.git
+scoop install crush
+
+scoop bucket add github-gh https://github.com/cli/scoop-gh.git
+scoop install gh
 
 # Potplayer
 scoop install potplayer

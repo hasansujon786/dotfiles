@@ -338,6 +338,40 @@ find_alias() {
   READLINE_POINT=$((READLINE_POINT + ${#command}))
 }
 
+alias gnh='gh auth switch -u hasanmahmud7152'
+alias gns='gh auth switch -u hasansujon786'
+alias gnn='gh auth switch -u hasansujon786'
+GREEN="\e[32m"
+RESET="\e[0m"
+# Function to get the active GitHub account
+function gh_active_user() {
+  local user
+  user=$(gh auth status 2>/dev/null |
+    awk '/Logged in to github.com account/ {user=$7} /Active account: true/ {print user; exit}')
+
+  if [[ -n "$user" ]]; then
+    # \e[32m = green, \e[0m = reset
+    echo -e "✔ Active acount: ${GREEN}$user${RESET}"
+  fi
+}
+gn() {
+  case "$1" in
+  hasan | h)
+    gh auth switch -u hasanmahmud7152
+    ;;
+  sujon | s | n)
+    gh auth switch -u hasansujon786
+    ;;
+  *)
+    gh_active_user
+    echo ""
+    echo "Switch Account:"
+    echo "  gn hasan   → switch to hasanmahmud7152"
+    echo "  gn sujon   → switch to hasansujon786"
+    ;;
+  esac
+}
+
 ### Keybinds
 ##################################################
 bind -m emacs-standard -x '"\es":find_alias'
