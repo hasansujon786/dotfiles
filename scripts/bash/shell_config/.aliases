@@ -143,7 +143,7 @@ alias -- --=jump_to_git_root # map --
 alias g='git'
 alias gcm='git commit -m'
 alias gcam='git commit -am'
-alias gs='git show'
+# alias gs='git show'
 alias gd='git diff'
 alias gt='git tag'
 alias gst='git status'
@@ -338,9 +338,8 @@ find_alias() {
   READLINE_POINT=$((READLINE_POINT + ${#command}))
 }
 
-alias gnh='gh auth switch -u hasanmahmud7152'
-alias gns='gh auth switch -u hasansujon786'
-alias gnn='gh auth switch -u hasansujon786'
+alias gsh='gh auth switch -u hasanmahmud7152'
+alias gsn='gh auth switch -u hasansujon786'
 GREEN="\e[32m"
 RESET="\e[0m"
 # Function to get the active GitHub account
@@ -354,7 +353,7 @@ function gh_active_user() {
     echo -e "✔ Active acount: ${GREEN}$user${RESET}"
   fi
 }
-gn() {
+gs() {
   case "$1" in
   hasan | h)
     gh auth switch -u hasanmahmud7152
@@ -366,8 +365,8 @@ gn() {
     gh_active_user
     echo ""
     echo "Switch Account:"
-    echo "  gn hasan   → switch to hasanmahmud7152"
-    echo "  gn sujon   → switch to hasansujon786"
+    echo "  gs hasan   → switch to hasanmahmud7152"
+    echo "  gs sujon   → switch to hasansujon786"
     ;;
   esac
 }

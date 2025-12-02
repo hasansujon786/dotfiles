@@ -69,7 +69,7 @@ return {
     'tpope/vim-repeat',
     lazy = true,
     event = 'BufReadPost',
-    dependencies = 'tpope/vim-surround',
+    dependencies = { 'tpope/vim-sleuth', 'tpope/vim-surround' },
   },
   {
     'nvim-mini/mini.ai',

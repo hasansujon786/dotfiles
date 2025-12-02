@@ -1,0 +1,14 @@
+Windows Registry Editor Version 5.00
+
+; Enable Taskbar Animations
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"TaskbarAnimations"=dword:00000001
+
+; Restore default menu opening delay (default is 400 ms)
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"MenuShowDelay"="400"
+
+; Restore animation settings (UserPreferencesMask)
+; Default mask: 9e,3e,07,80,10,00,00,00  (Windows 10/11 default)
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"UserPreferencesMask"=hex:9e,3e,07,80,10,00,00,00
