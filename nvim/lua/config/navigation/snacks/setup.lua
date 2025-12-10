@@ -413,7 +413,7 @@ require('snacks').setup({
           vim.api.nvim_put({ item.file }, 'c', true, true)
         end
       end,
-      spectree = function(picker, item)
+      open_spectre = function(picker, item)
         picker:close()
 
         local path = item.file
@@ -482,8 +482,8 @@ require('snacks').setup({
           ['<c-r><c-a>'] = { 'insert_absolute_path', mode = { 'i', 'n' } },
           ['<c-r><c-g>'] = { 'inspect', mode = { 'i', 'n' } },
 
-          ['<A-/>'] = { 'spectree', mode = { 'i', 'n' } },
-          ['<c-_>'] = { 'spectree', mode = { 'i', 'n' } },
+          ['<A-/>'] = { 'open_spectre', mode = { 'i', 'n' } },
+          ['<A-t>'] = { 'focus_file_tree', mode = { 'i', 'n' } },
           ['<a-s>'] = { 'flash', mode = { 'n', 'i' } },
           ['s'] = { 'flash' },
 

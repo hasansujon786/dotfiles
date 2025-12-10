@@ -15,6 +15,7 @@ tui/lf/files
 tui/lf/tmp_vimv
 tui/lf/extract.log
 tui/lf/marks
+PowerShell/Modules
 
 # dependencies
 /node_modules

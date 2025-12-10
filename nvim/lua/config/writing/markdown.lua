@@ -9,6 +9,7 @@ return {
       vim.fn['mkdp#util#install']()
     end,
     init = function()
+      -- vim.g.mkdp_theme = 'light'
       vim.g.mkdp_auto_close = 0
       vim.g.mkdp_refresh_slow = 0
     end,
