@@ -158,6 +158,7 @@ return {
     { key = 'Enter', mods = 'CTRL', action = { SendString = '\x1b[13;5u' } },
     { key = 'Space', mods = 'CTRL', action = { SendKey = { key = 'Space', mods = 'CTRL' } } },
     { key = 'Backspace', mods = 'CTRL', action = { SendKey = { key = 'w', mods = 'CTRL' } } },
+    { key = '.', mods = 'CTRL', action = { SendKey = { key = '.', mods = 'CTRL' } } },
     { key = 'p', mods = 'SHIFT|CTRL', action = { SendKey = { key = 'F1' } } },
 
     -- stacks

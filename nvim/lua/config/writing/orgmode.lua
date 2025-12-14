@@ -22,6 +22,9 @@ return {
   },
   {
     'nvim-orgmode/orgmode',
+    build = function()
+      require('lazy').load({ plugins = { 'orgmode' } })
+    end,
     lazy = true,
     ft = { 'org' },
     module = 'orgmode',

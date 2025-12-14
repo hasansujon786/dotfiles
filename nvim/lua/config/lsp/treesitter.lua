@@ -3,6 +3,7 @@ return {
   lazy = true,
   event = { 'VeryLazy' },
   cmd = { 'TSUpdate', 'TSUpdateSync', 'TSInstall', 'TSInstallSync' },
+  branch = 'master',
   config = function()
     -- TSInstallSync javascript typescript tsx
     local parsers = {
@@ -130,8 +131,8 @@ return {
     keymap('n', ']a', '<Plug>(ts-swap-parameter-next)<cmd>call repeat#set("\\<Plug>(ts-swap-parameter-next)")<CR>', { desc = 'Swap parameter next' })
   end,
   dependencies = {
-    -- 'nvim-treesitter/nvim-treesitter-textobjects',
-    { 'hasansujon786/nvim-treesitter-textobjects', dev = false },
+    -- { 'hasansujon786/nvim-treesitter-textobjects', dev = false },
+    { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'master' },
     { 'windwp/nvim-ts-autotag', opts = {} },
     {
       'catgoose/nvim-colorizer.lua',

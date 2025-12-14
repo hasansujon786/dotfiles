@@ -27,6 +27,7 @@ o.ttimeoutlen = 200
 o.timeoutlen = 500 --                            Quickly time out on keycodes, but never time out on mappings
 o.autowrite = true --                            Automatically :write before running commands
 o.autoread = true --                             Set to auto read when a file is changed from the outside
+o.shellslash = true
 
 -- Autocompletion
 o.completeopt = 'menuone,noselect'
