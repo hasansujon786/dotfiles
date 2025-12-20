@@ -1,3 +1,7 @@
+-- main branch config
+-- https://github.com/den-is/nvim/blob/master/lua/plugins/treesitter.lua
+-- https://www.reddit.com/r/neovim/comments/1ppa4ag/comment/nungaa0/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+
 return {
   'nvim-treesitter/nvim-treesitter',
   lazy = true,
