@@ -12,7 +12,7 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 #Include %A_ScriptDir%\core\vim_explorer.ahk
 #Include %A_ScriptDir%\core\automation_mode.ahk
 #Include %A_ScriptDir%\leader.ahk
-; #Include %A_ScriptDir%\grid.ahk
+#Include %A_ScriptDir%\grid.ahk
 
 ;Reload/Execute this script.ahk file
 ::rscript::

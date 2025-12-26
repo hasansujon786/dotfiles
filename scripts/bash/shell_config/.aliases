@@ -290,7 +290,8 @@ redrive() {
 }
 
 qrcode() {
-  echo "$@" | curl -F-=\<- qrenco.de
+  qrencode -t ANSI256 "$*"
+  # echo "$@" | curl -F-=\<- qrenco.de
 }
 logv() {
   if [ -z "$1" ]; then

@@ -371,7 +371,7 @@ setup_kanata() {
 }
 install_various_cli_apps() {
   heading "Usefull CLI Apps"
-  get wget curl fd ripgrep zoxide fzf delta jq eza bat bc
+  get wget curl fd ripgrep zoxide fzf delta jq eza bat bc qrencode
 
   if [[ "$OS" == "win" ]]; then
     get mingw make
