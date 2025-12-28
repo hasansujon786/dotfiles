@@ -339,8 +339,10 @@ find_alias() {
   READLINE_POINT=$((READLINE_POINT + ${#command}))
 }
 
+alias ghnpush="gh repo create --public --source=. --remote=origin --push"
 alias gsh='gh auth switch -u hasanmahmud7152'
 alias gsn='gh auth switch -u hasansujon786'
+
 GREEN="\e[32m"
 RESET="\e[0m"
 # Function to get the active GitHub account

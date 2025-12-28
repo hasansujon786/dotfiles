@@ -338,6 +338,25 @@ va() {
 }
 
 b() {
+  local file="$HOME/dotfiles/links.json"
+  [[ ! -f "$file" ]] && {
+    echo "File $file not found!"
+    return 1
+  }
+
+  # Prepare fzf list: show title, keep URL
+  local selected
+  selected=$(jq -r '.[] | [.title, .url] | @tsv' "$file" |
+    fzf --multi --ansi --prompt="Select links: " --delimiter='\t' | cut -f2)
+
+  [[ -z "$selected" ]] && return
+
+  while IFS= read -r url; do
+    start "" "$url"
+  done <<<"$selected"
+}
+
+bv() {
   # bookmarks_path="c/AppData\Local\BraveSoftware\Brave-Browser\User Data\Default\Bookmarks"
   bookmarks_path="$HOME/AppData/Local/BraveSoftware/Brave-Browser/User Data/Default/Bookmarks"
 
