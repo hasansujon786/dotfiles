@@ -1,3 +1,5 @@
+local platform = require('platform')
+
 local M = {}
 
 function M.get_cwd_tail(tab_info)
@@ -51,6 +53,12 @@ function M.fit_to_length(text, max_length)
     local right_pad = padding - left_pad
     return string.rep(' ', left_pad) .. text .. string.rep(' ', right_pad)
   end
+end
+
+--- Converts Windows backslash to forward slash
+---@param path string
+function M.normalize_path(path)
+  return platform.is_win and path:gsub('\\', '/') or path
 end
 
 return M

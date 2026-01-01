@@ -126,3 +126,45 @@ wezterm.on('format-tab-title', function(tab, _, _, _, hover, max_width)
     { Text = TAB_EDGE_RIGHT },
   }
 end)
+
+-- sessionizer.lua --------------------------------------------------
+--- If name nil or false print err_message
+---@param name string|boolean|nil
+---@param err_message string
+local function err_if_not(name, err_message)
+  if not name then
+    w.log_error(err_message)
+  end
+end
+--
+--- path if file or directory exists nil otherwise
+---@param path string
+local function file_exists(path)
+  if path == nil then
+    return nil
+  end
+  local f = io.open(path, 'r')
+  -- io.open won't work to check if directories exist,
+  -- but works for symlinks and regular files
+  if f ~= nil then
+    w.log_info(path .. ' file or symlink found')
+    io.close(f)
+    return path
+  end
+  return nil
+end
+
+-------------------------------------------------------
+-- PATHS
+--
+local fd = (
+  file_exists('/ProgramData/chocolatey/bin/fd.exe')
+  or file_exists(home .. '/bin/fd')
+  or file_exists('usr/bin/fd')
+  or file_exists(home .. '/bin/fd.exe')
+)
+err_if_not(fd, 'fd not found')
+
+local git = (file_exists('/Program Files/Git/cmd/git.exe') or file_exists('/usr/bin/git'))
+err_if_not(git, 'git not found')
+-------------------------------------------------------

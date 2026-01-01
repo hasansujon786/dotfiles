@@ -1,5 +1,5 @@
 local w = require('wezterm')
-local platform = require('platform')
+local w_utils = require('wez_utils')
 local act = w.action
 
 local M = {}
@@ -15,12 +15,6 @@ local function workspace_exists(target_name)
     end
   end
   return false
-end
-
---- Converts Windows backslash to forwardslash
----@param path string
-local function normalize_path(path)
-  return platform.is_win and path:gsub('\\', '/') or path
 end
 
 local function get_file_name(file, sep)
@@ -45,59 +39,15 @@ local function get_path_name(str)
   return get_file_name(parent, sep)
 end
 
-local home = normalize_path(w.home_dir)
-
---- If name nil or false print err_message
----@param name string|boolean|nil
----@param err_message string
-local function err_if_not(name, err_message)
-  if not name then
-    w.log_error(err_message)
-  end
-end
---
---- path if file or directory exists nil otherwise
----@param path string
-local function file_exists(path)
-  if path == nil then
-    return nil
-  end
-  local f = io.open(path, 'r')
-  -- io.open won't work to check if directories exist,
-  -- but works for symlinks and regular files
-  if f ~= nil then
-    w.log_info(path .. ' file or symlink found')
-    io.close(f)
-    return path
-  end
-  return nil
-end
-
--------------------------------------------------------
--- PATHS
---
-local fd = (
-  file_exists('/ProgramData/chocolatey/bin/fd.exe')
-  or file_exists(home .. '/bin/fd')
-  or file_exists('usr/bin/fd')
-  or file_exists(home .. '/bin/fd.exe')
-)
-err_if_not(fd, 'fd not found')
-
-local git = (file_exists('/Program Files/Git/cmd/git.exe') or file_exists('/usr/bin/git'))
-err_if_not(git, 'git not found')
--------------------------------------------------------
-
 --- Merge numeric tables
 ---@param t1 table
 ---@param t2 table
 ---@return table
 local function merge_tables(t1, t2)
-  local result = t1
-  for index, value in ipairs(t2) do
-    result[#result + index] = value
+  for _, value in ipairs(t2) do
+    t1[#t1 + 1] = value
   end
-  return result
+  return t1
 end
 
 M.find_repoes = function(project_dirs, window, pane)
@@ -110,6 +60,7 @@ M.find_repoes = function(project_dirs, window, pane)
     return
   end
 
+  -- local srcPath = normalize_path(w.home_dir)
   -- local project_dirs = {
   --   srcPath,
   --   -- srcPath .. '/work',
@@ -127,7 +78,7 @@ M.find_repoes = function(project_dirs, window, pane)
   --  └──other                 # 3rd party project
   --     └──103 unlisted
 
-  local cmd = merge_tables({ fd, '-HI', '-td', '--max-depth=2', '.' }, project_dirs)
+  local cmd = merge_tables({ 'fd', '-HI', '-td', '--max-depth=2', '.' }, project_dirs)
   w.log_info('fd cmd: ' .. table.concat(cmd, ' '))
 
   local success, stdout, stderr = w.run_child_process(cmd)
@@ -138,7 +89,7 @@ M.find_repoes = function(project_dirs, window, pane)
   end
 
   for line in stdout:gmatch('([^\n]*)\n?') do
-    local path = normalize_path(line)
+    local path = w_utils.normalize_path(line)
     local label = path
     local id = path
     table.insert(projects, { label = tostring(label), id = tostring(id) })
