@@ -3,7 +3,7 @@ last_arg=${*:$#}
 main_cmd=${1}
 scan_count=9
 
-known_ips='s/50-8f-4c-49-ca-f9/Redmi Note 4x    /;s/d6-de-4b-ad-de-e3/Redmi Note 12    /'
+known_ips='s/50-8f-4c-49-ca-f9/Redmi Note 4x    /;s/aa-d1-20-f7-6e-33/CMF Phone 2 Pro  /'
 
 # 1. Connect device with USB.
 # 2. Run "arr"
