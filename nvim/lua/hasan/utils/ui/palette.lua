@@ -173,7 +173,7 @@ local function set_custom_highlights()
 
     -- /// snacks ///
     SnacksNormal            = { fg = c.fg, bg = float_bg },
-    SnacksDashboardHeader   = { fg = c.blue },
+    SnacksDashboardHeader   = { fg = c.grey },
     SnacksDashboardDesc     = { fg = c.light_grey, italic = true },
     SnacksDashboardKey      = { bg = c.bg3, fg = c.light_grey, italic = false },
     SnacksDashboardKeyAlt   = { fg = c.bg3 },

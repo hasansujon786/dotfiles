@@ -66,7 +66,7 @@ return {
       { '<leader>fe', function() Snacks.explorer() end, desc = 'File Explorer' },
 
       -- FIND BUFFERS
-      { 'g,', function() require('config.navigation.snacks.custom').buffers_with_symbols() end, desc = 'which_key_ignore' },
+      { "<leader><tab>", function() require('config.navigation.snacks.custom').buffers_with_symbols() end, desc = 'which_key_ignore' },
       { '<leader>bb', function() require('config.navigation.snacks.custom').buffers_with_symbols() end, desc = 'Buffers' },
 
       -- LSP
