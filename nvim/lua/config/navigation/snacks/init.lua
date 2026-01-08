@@ -66,7 +66,7 @@ return {
       { '<leader>fe', function() Snacks.explorer() end, desc = 'File Explorer' },
 
       -- FIND BUFFERS
-      { "<leader><tab>", function() require('config.navigation.snacks.custom').buffers_with_symbols() end, desc = 'which_key_ignore' },
+      { "<leader>.", function() require('config.navigation.snacks.custom').buffers_with_symbols() end, desc = 'which_key_ignore' },
       { '<leader>bb', function() require('config.navigation.snacks.custom').buffers_with_symbols() end, desc = 'Buffers' },
 
       -- LSP
@@ -137,7 +137,7 @@ return {
     dev = require('core.state').dev.enabled,
     -- stylua: ignore start
     keys = {
-      { '<leader>.', function() require('snacks-file-browser').browse({ cwd = vim.fn.expand('%:h') }) end, desc = 'Browse cur directory' },
+      { '<leader>,', function() require('snacks-file-browser').browse({ cwd = vim.fn.expand('%:h') }) end, desc = 'Browse cur directory' },
       { '<leader>f.', function() require('snacks-file-browser').browse() end, desc = 'Browser Project' },
       { '<leader>fb', function() require('snacks-file-browser').select_dir() end, desc = 'Browser Project' },
     },
