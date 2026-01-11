@@ -1,16 +1,16 @@
 local state = require('core.state')
 
-local btn_width = 32
+local btn_width = 34
 local function button(key, label, icon, desc, cmd)
-  local pad = btn_width - #label
+  local pad = btn_width - #label + 4
 
   return {
     text = {
       { icon, hl = 'SnacksDashboardDesc', width = 3 },
       { desc, hl = 'SnacksDashboardDesc', width = pad },
-      { '', hl = 'SnacksDashboardKeyAlt' },
-      { label, hl = 'SnacksDashboardKey' },
-      { '', hl = 'SnacksDashboardKeyAlt' },
+      -- { '', hl = 'SnacksDashboardKeyAlt' },
+      { label, hl = 'SnacksDashboardDesc' },
+      -- { '', hl = 'SnacksDashboardKeyAlt' },
       -- { label, hl = 'SnacksDashboardKey' },
     },
     action = cmd,
@@ -180,21 +180,10 @@ require('snacks').setup({
   },
   -- scratch = { },
   dashboard = {
+    width = btn_width,
     enabled = not require('core.state').ui.session_autoload,
     -- These settings are used by some built-in sections
     preset = {
-      -- stylua: ignore
-      ---@type snacks.dashboard.Item[]
-      keys = {
-        button('r', 'R', ' ', 'Recent file', '<cmd>lua Snacks.dashboard.pick("recent")<CR>'),
-        button('l', 'L', ' ', 'Load session', '<cmd>lua require("persisted").load()<CR>'),
-        button('f', 'F', ' ', 'Search files', '<cmd>lua Snacks.dashboard.pick("files")<CR>'),
-        button('s', 'S', ' ', 'Open settings', '<cmd>lua Snacks.dashboard.pick("files", {cwd = vim.fn.stdpath("config")})<CR>'),
-        button('p', 'P', ' ', 'Lazy dashboard', '<cmd>Lazy<CR>'),
-        button('a', 'A', ' ', 'Open org agenda', '<cmd>lua require("orgmode").action("agenda.prompt")<CR>'),
-        -- button('q', 'Q', ' ', 'Quit Neovim', '<cmd>qa<CR>'),
-        -- button('n', 'N', ' ', 'New File', '<cmd>ene | startinsert<CR>'),
-      },
       -- Used by the `header` section
       header = [[
     ███  ███       ██████           
@@ -206,7 +195,32 @@ require('snacks').setup({
     },
     sections = {
       { section = 'header' },
-      { section = 'keys', gap = 1, padding = 2 },
+      -- { section = 'keys', gap = 1, padding = 2 },
+      {
+        -- stylua: ignore
+        {
+          gap = 0,
+          padding = 1,
+          { text = {{ 'Get Started', hl = 'String' }, {' ……………………………………………………………………………', hl = 'SnacksDim'}}},
+          button('n', 'n', ' ', 'New File', '<cmd>ene | startinsert<CR>'),
+          button('f', '<spc>ff', ' ', 'Search Files', '<cmd>lua Snacks.dashboard.pick("files")<CR>'),
+          button('p', '<spc>pp', ' ', 'Open Project', '<cmd>lua require("config.navigation.snacks.persisted").persisted()<CR>'),
+          button('l', '<spc>pl', '󰑓 ', 'Load Last Session', '<cmd>lua require("persisted").load()<CR>'),
+          -- button('r', 'R', ' ', 'Recent file', '<cmd>lua Snacks.dashboard.pick("recent")<CR>'),
+          -- button('t', '<spc>ot', ' ', 'Open Terminal', '<cmd>lua Snacks.terminal(nil,{shell="bash",win={wo={winbar=""}}})<CR>'),
+          -- button('a', '<spc>oa', ' ', 'Open org agenda', '<cmd>lua require("orgmode").action("agenda.prompt")<CR>'),
+        },
+        -- stylua: ignore
+        {
+          gap = 0,
+          padding = 1,
+          { text = {{ 'Configure', hl = 'String' }, { ' …………………………………………………………………………………', hl = 'SnacksDim' }}},
+          button('S', 'S', ' ', 'Open Settings', '<cmd>lua Snacks.dashboard.pick("files",{cwd=vim.fn.stdpath("config")})<CR>'),
+          button('<leader>vp', '<spc>vp', ' ', 'Lazy Dashboard', '<cmd>Lazy<CR>'),
+          { text = { { '……………………………………………………………………………………………………………', hl = 'SnacksDim' } },
+          },
+        },
+      },
       {
         function()
           local v = vim.version()
