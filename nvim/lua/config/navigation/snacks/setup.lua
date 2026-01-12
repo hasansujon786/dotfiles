@@ -116,9 +116,9 @@ require('snacks').setup({
     keys = {
       ---@type table<string, snacks.scope.TextObject|{desc?:string}>
       textobject = {
-        ii = { linewise = true },
-        ai = { linewise = true },
-        iI = {
+        iI = { linewise = true },
+        aI = { linewise = true },
+        ii = {
           linewise = true,
           min_size = 2, -- minimum size of the scope
           edge = false, -- inner scope
@@ -126,7 +126,7 @@ require('snacks').setup({
           treesitter = { blocks = { enabled = false } },
           desc = 'inner scope',
         },
-        aI = {
+        ai = {
           linewise = true,
           cursor = true,
           min_size = 2, -- minimum size of the scope
