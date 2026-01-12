@@ -193,11 +193,13 @@ bind -m vi-insert '"\C-o": "\C-z\C-o\C-z"'
 
 # Force kill selected tasks
 fk() {
-  local pid
-  pid=$(tasklist | sed 1d | fzf -m | awk '{print $1}')
+  local selected
+  selected=$(tasklist | sed '1,3d' |
+    fzf -m --header="Image Name                     PID Session Name        Session#    Mem Usage" --border-label="taskkill" |
+    awk '{print $1}')
 
-  if [ "$pid" != "" ]; then
-    echo "$pid" | xargs taskkill //F //IM
+  if [ "$selected" != "" ]; then
+    echo "$selected" | xargs taskkill //F //IM
   fi
 }
 
