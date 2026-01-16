@@ -178,7 +178,14 @@ require('snacks').setup({
     left = { 'sign', 'mark' }, -- (high to low)
     right = { 'fold', 'git' },
   },
-  -- scratch = { },
+  scratch = {
+    ft = function()
+      -- if vim.bo.buftype == '' and vim.bo.filetype ~= '' then
+      --   return vim.bo.filetype
+      -- end
+      return 'markdown'
+    end,
+  },
   dashboard = {
     width = btn_width,
     enabled = not require('core.state').ui.session_autoload,

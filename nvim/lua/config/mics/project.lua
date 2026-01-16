@@ -28,7 +28,7 @@ return {
     'olimorris/persisted.nvim',
     lazy = not require('core.state').ui.session_autoload,
     enabled = not vim.g.vscode,
-    cmd = { 'SessionLoad', 'SessionLoadLast', 'SessionSave' },
+    cmd = 'Persisted',
     -- stylua: ignore
     keys = {
       { '<leader>ps', '<cmd>SessionSave<CR>', desc = 'Save session' },
