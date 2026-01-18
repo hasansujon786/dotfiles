@@ -304,7 +304,7 @@ function M.flash_on_picker(picker)
     pattern = '^',
     label = {
       after = { 0, 0 },
-      current = false,
+      current = true,
     },
     highlight = {
       -- show a backdrop with hl FlashBackdrop

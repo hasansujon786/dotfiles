@@ -73,38 +73,78 @@ local function get_ivy(mini)
   }
 end
 
+local function winhighlight_from(tbl)
+  return table.concat(tbl, ',')
+end
+
+local function get_sidebar()
+  return {
+    preview = 'main',
+    layout = {
+      backdrop = false,
+      width = 32,
+      min_width = 32,
+      height = 0,
+      position = 'left',
+      border = { '', '', '', ' ', '', '', '', '' },
+      wo = { winhighlight = 'FloatBorder:EdgyWinSeparator' },
+      box = 'vertical',
+      {
+        win = 'input',
+        height = 1,
+        border = true,
+        title = '{live} {flags}',
+        -- title = '{title} {live} {flags}',
+        title_pos = 'center',
+        wo = {
+          winhighlight = winhighlight_from({
+            'Normal:SidebarDark',
+            'NormalNC:SidebarDark',
+            'FloatBorder:SidebarDarkBorder',
+            'FloatTitle:SidebarDarkTitlte',
+          }),
+        },
+      },
+      {
+        win = 'list',
+        border = 'none',
+        wo = {
+          winhighlight = winhighlight_from({
+            'Normal:SidebarDark',
+            'NormalNC:SidebarDark',
+          }),
+        },
+      },
+      {
+        win = 'preview',
+        title = '{preview}',
+        height = 0.4,
+        border = 'top',
+        wo = {
+          winhighlight = winhighlight_from({
+            'Normal:SidebarDark',
+            'NormalNC:SidebarDark',
+            'FloatBorder:SidebarDarkBorder',
+            'FloatTitle:SnacksPickerTitle',
+          }),
+        },
+      },
+    },
+  }
+end
+
 local preview_main_win = {
   preview = { row = -1 },
 }
 
----try_change_quicklook
----@param p snacks.Picker
-local function try_change_quicklook(p, action)
-  if vim.b.qlook then
-    vim.schedule(function()
-      p:action(action)
-
-      local cur_item = p.list:current()
-      if not cur_item or cur_item._path == nil then
-        return
-      end
-
-      local ok = pcall(require('hasan.utils.file').quicklook, { cur_item._path })
-      if ok then
-        vim.b.qlook = cur_item._path
-      end
-    end)
-  else
-    p:action(action)
-  end
-end
+local Icons = require('hasan.utils.ui.icons')
 
 ----@type snacks.Config
 require('snacks').setup({
   bigfile = { enabled = true },
   quickfile = { enabled = true },
   words = { enabled = true, debounce = 450, modes = { 'n' } },
-  explorer = { enabled = false },
+  explorer = { enabled = true },
   image = { enabled = false },
   indent = {
     animate = { enabled = false },
@@ -222,7 +262,7 @@ require('snacks').setup({
           gap = 0,
           padding = 1,
           { text = {{ 'Configure', hl = 'String' }, { ' …………………………………………………………………………………', hl = 'SnacksDim' }}},
-          button('S', 'S', ' ', 'Open Settings', '<cmd>lua Snacks.dashboard.pick("files",{cwd=vim.fn.stdpath("config")})<CR>'),
+          button('s', 's', ' ', 'Open Settings', '<cmd>lua Snacks.dashboard.pick("files",{cwd=vim.fn.stdpath("config")})<CR>'),
           button('<leader>vp', '<spc>vp', ' ', 'Lazy Dashboard', '<cmd>Lazy<CR>'),
           { text = { { '……………………………………………………………………………………………………………', hl = 'SnacksDim' } },
           },
@@ -308,31 +348,7 @@ require('snacks').setup({
 
       ---@type snacks.picker.file_browser.Config
       file_browser = { layout = 'ivy' },
-
-      explorer = {
-        tree = true,
-        watch = false,
-        diagnostics = false,
-        diagnostics_open = false,
-        follow_file = true,
-        focus = 'list',
-        auto_close = false,
-        win = {
-          input = {
-            keys = {
-              ['<tab>'] = { 'toggle_focus', mode = { 'i', 'n' } },
-            },
-          },
-          list = {
-            keys = {
-              ['<tab>'] = { 'toggle_focus', mode = { 'i', 'n' } },
-              ['o'] = 'confirm',
-              ['O'] = 'explorer_open', -- open with system application
-              ['x'] = 'explorer_close', -- close directory
-            },
-          },
-        },
-      },
+      explorer = require('config.navigation.snacks.explorer').source,
     },
 
     formatters = {
@@ -350,19 +366,15 @@ require('snacks').setup({
       flash = function(...)
         require('config.navigation.snacks.custom').flash_on_picker(...)
       end,
-      fedit = function(picker, item)
-        picker:close()
-        if not item or item.file == nil then
-          return
-        end
-        -- FIXME: do not kill buffer if it is opened before
-        require('hasan.float').fedit(item.file)
-      end,
       my_list_up = function(p)
-        try_change_quicklook(p, 'list_up')
+        require('config.navigation.snacks.explorer').utils.try_change_quicklook(p, 'list_up')
       end,
       my_list_down = function(p)
-        try_change_quicklook(p, 'list_down')
+        local cur_item = p.list:current()
+        local action = not vim.b.qlook and 'toggle_focus'
+          or cur_item and cur_item._path == vim.b.qlook and 'list_down'
+          or nil
+        require('config.navigation.snacks.explorer').utils.try_change_quicklook(p, action)
       end,
       quicklook = function(_, item)
         if not item or item._path == nil then
@@ -437,7 +449,20 @@ require('snacks').setup({
     },
 
     icons = {
-      kinds = require('hasan.utils.ui.icons').kind,
+      kinds = Icons.kind,
+      git = {
+        enabled = true, -- show git icons
+        commit = '󰜘 ', -- used by git log
+        -- staged = Icons.Other.smallcaps.s, -- staged changes. Always overrides the type icons
+        staged = '',
+        added = Icons.Other.smallcaps.a,
+        deleted = Icons.Other.smallcaps.d,
+        ignored = ' ',
+        modified = Icons.Other.smallcaps.m,
+        renamed = Icons.Other.smallcaps.r,
+        unmerged = ' ',
+        untracked = Icons.Other.smallcaps.u,
+      },
     },
 
     win = {
@@ -494,7 +519,8 @@ require('snacks').setup({
           ['<c-r><c-g>'] = { 'inspect', mode = { 'i', 'n' } },
 
           ['<A-/>'] = { 'open_spectre', mode = { 'i', 'n' } },
-          ['<A-t>'] = { 'focus_file_tree', mode = { 'i', 'n' } },
+          ['<A-t>'] = { { 'tcd', 'picker_explorer' }, mode = { 'n', 'i' } },
+          -- ['<A-t>'] = { 'focus_file_tree', mode = { 'i', 'n' } },
           ['<a-s>'] = { 'flash', mode = { 'n', 'i' } },
           ['s'] = { 'flash' },
 
@@ -503,7 +529,6 @@ require('snacks').setup({
           ['R'] = { 'system_reveal', mode = { 'n' } },
           ['<C-o>'] = { 'system_open', mode = { 'i', 'n' } },
           ['O'] = { 'system_open', mode = { 'n' } },
-          -- ['<S-CR>'] = { 'fedit', mode = { 'i', 'n' } },
         },
       },
     },
@@ -513,6 +538,7 @@ require('snacks').setup({
       dropdown_preview = get_dropdown(true),
       ivy = get_ivy(false),
       ivy_mini = get_ivy(true),
+      sidebar = get_sidebar(),
       select = { layout = { border = { '🭽', '▔', '🭾', '▕', '🭿', '▁', '🭼', '▏' } } },
       vscode = { layout = { row = 0, width = 0.4, min_width = 70 } },
     },

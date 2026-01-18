@@ -29,13 +29,13 @@ return {
       never_draw_over_target = true,
       hide_target_hack = true,
       --
-      particles_enabled = true,
+      particles_enabled = false,
       particle_max_num = 200,
       -- particles_per_length = 2.0,
       stiffness = 0.8,
       trailing_stiffness = 0.4,
       trailing_exponent = 5,
-      damping = 0.6,
+      damping = 0.8,
       gradient_exponent = 0,
       --
       -- stiffness = 0.8,

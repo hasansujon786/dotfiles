@@ -2,7 +2,7 @@ return {
   {
     'folke/snacks.nvim',
     enabled = true,
-    lazy = true,
+    lazy = false,
     event = 'UIEnter',
     config = function()
       require('config.navigation.snacks.setup')
@@ -64,6 +64,7 @@ return {
       { '<leader>fr', function() Snacks.picker.recent() end, desc = 'Recent' },
       { '<leader>fc', function() Snacks.picker.files({cwd=vim.fn.stdpath('config')}) end, desc = 'Find Config File' },
       { '<leader>fe', function() Snacks.explorer() end, desc = 'File Explorer' },
+      { '<leader>op', function() Snacks.explorer() end, desc = 'File Explorer' },
 
       -- FIND BUFFERS
       { "<leader>.", function() require('config.navigation.snacks.custom').buffers_with_symbols() end, desc = 'which_key_ignore' },
@@ -80,7 +81,7 @@ return {
 
       -- GREP
       { '<leader>//', function() Snacks.picker.grep() end, desc = 'Grep' },
-      { '<leader>/b', function() Snacks.picker.grep_buffers() end, desc = 'Grep Open Buffers' },
+      { '<leader>b/', function() Snacks.picker.grep_buffers() end, desc = 'Grep Open Buffers' },
       { '//', function() Snacks.picker.lines() end, desc = 'which_key_ignore' },
       { '<A-/>', function() Snacks.picker.grep_word() end, desc = 'Visual selection or word', mode = { "n", "x" } },
 
