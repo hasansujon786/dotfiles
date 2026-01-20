@@ -31,6 +31,12 @@ end
 return {
   utils = {
     try_change_quicklook = try_change_quicklook,
+    show_explorer = function()
+      Snacks.explorer()
+      vim.defer_fn(function()
+        vim.cmd([[wincmd p]])
+      end, 300)
+    end,
   },
   source = {
     tree = true,
@@ -80,6 +86,13 @@ return {
           or cur_item and cur_item._path == vim.b.qlook and 'list_down'
           or nil
         try_change_quicklook(p, action)
+      end,
+      my_list_down = function(p)
+        local cur_item = p.list:current()
+        local action = not vim.b.qlook and 'toggle_focus'
+          or cur_item and cur_item._path == vim.b.qlook and 'list_down'
+          or nil
+        require('config.navigation.snacks.explorer').utils.try_change_quicklook(p, action)
       end,
     },
     win = {

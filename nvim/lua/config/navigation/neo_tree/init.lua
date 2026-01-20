@@ -2,7 +2,6 @@ local util = require('config.navigation.neo_tree.util')
 
 return {
   'nvim-neo-tree/neo-tree.nvim',
-  enabled = false,
   lazy = true,
   -- event = 'CursorHold',
   cmd = { 'Neotree' },

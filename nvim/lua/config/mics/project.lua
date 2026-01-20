@@ -63,11 +63,7 @@ return {
 
       augroup('MY_PERSISTED_HOOKS_AUGROUP')(function(autocmd)
         autocmd({ 'User' }, function()
-          -- vim.cmd([[Neotree filesystem show]])
-          Snacks.explorer()
-          vim.defer_fn(function()
-            vim.cmd([[wincmd p]])
-          end, 300)
+          vim.cmd([[Neotree filesystem show]])
         end, { pattern = 'PersistedLoadPost' })
 
         -- Save current layout before manually switching with picker

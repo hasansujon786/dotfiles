@@ -144,7 +144,7 @@ require('snacks').setup({
   bigfile = { enabled = true },
   quickfile = { enabled = true },
   words = { enabled = true, debounce = 450, modes = { 'n' } },
-  explorer = { enabled = true },
+  explorer = { enabled = false },
   image = { enabled = false },
   indent = {
     animate = { enabled = false },
@@ -348,7 +348,7 @@ require('snacks').setup({
 
       ---@type snacks.picker.file_browser.Config
       file_browser = { layout = 'ivy' },
-      explorer = require('config.navigation.snacks.explorer').source,
+      -- explorer = require('config.navigation.snacks.explorer').source,
     },
 
     formatters = {
@@ -370,11 +370,7 @@ require('snacks').setup({
         require('config.navigation.snacks.explorer').utils.try_change_quicklook(p, 'list_up')
       end,
       my_list_down = function(p)
-        local cur_item = p.list:current()
-        local action = not vim.b.qlook and 'toggle_focus'
-          or cur_item and cur_item._path == vim.b.qlook and 'list_down'
-          or nil
-        require('config.navigation.snacks.explorer').utils.try_change_quicklook(p, action)
+        require('config.navigation.snacks.explorer').utils.try_change_quicklook(p, 'list_down')
       end,
       quicklook = function(_, item)
         if not item or item._path == nil then
@@ -519,8 +515,8 @@ require('snacks').setup({
           ['<c-r><c-g>'] = { 'inspect', mode = { 'i', 'n' } },
 
           ['<A-/>'] = { 'open_spectre', mode = { 'i', 'n' } },
-          ['<A-t>'] = { { 'tcd', 'picker_explorer' }, mode = { 'n', 'i' } },
-          -- ['<A-t>'] = { 'focus_file_tree', mode = { 'i', 'n' } },
+          -- ['<A-t>'] = { { 'tcd', 'picker_explorer' }, mode = { 'n', 'i' } },
+          ['<A-t>'] = { 'focus_file_tree', mode = { 'i', 'n' } },
           ['<a-s>'] = { 'flash', mode = { 'n', 'i' } },
           ['s'] = { 'flash' },
 
