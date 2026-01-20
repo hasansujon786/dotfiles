@@ -18,25 +18,20 @@ append_keymap = [
   { on = ["<C-o>"], run = "back", desc = "Go back to the previous directory" },
   { on = ["<C-j>"], run = "forward", desc = "Go forward to the next directory" },
 
-  # { on = [ ",", "m" ], run = "sort modified --reverse=no",     desc = "Sort by modified time" },
-  # { on = [ ",", "M" ], run = "sort modified --reverse",        desc = "Sort by modified time (reverse)" },
-  # { on = [ ",", "c" ], run = "sort created --reverse=no",      desc = "Sort by created time" },
-  # { on = [ ",", "C" ], run = "sort created  --reverse",        desc = "Sort by created time (reverse)" },
-  # { on = [ ",", "e" ], run = "sort extension --reverse=no",    desc = "Sort by extension" },
-  # { on = [ ",", "E" ], run = "sort extension --reverse",       desc = "Sort by extension (reverse)" },
-  # { on = [ ",", "a" ], run = "sort alphabetical --reverse=no", desc = "Sort alphabetically" },
-  # { on = [ ",", "A" ], run = "sort alphabetical --reverse",    desc = "Sort alphabetically (reverse)" },
-  # { on = [ ",", "n" ], run = "sort natural --reverse=no",      desc = "Sort naturally" },
-  # { on = [ ",", "N" ], run = "sort natural --reverse",         desc = "Sort naturally (reverse)" },
-  # { on = [ ",", "s" ], run = "sort size --reverse=no",         desc = "Sort by size" },
-  # { on = [ ",", "S" ], run = "sort size --reverse",            desc = "Sort by size (reverse)" },
+  { on = [ ",", "t" ], run = "sort mtime --reverse",        desc = "Sort by modified time (reverse)" },
+  { on = [ ",", "T" ], run = "sort mtime --reverse=no",     desc = "Sort by modified time" },
 ]
+
+# TODO: update copy actions similar to neotree
+# TODO: update tab colors
+# TODO: add fzf directory jump
+# TODO: fix zoxide
 
 prepend_keymap = [
   # Goto
   # { on = [".", "."], run = "cd ~/Desktop", desc = "Desktop" },
-  { on = ["g", "d"], run = "cd ~/Downloads", desc = "Downloads" },
-  { on = ["g", "D"], run = "cd ~/Documents", desc = "Documents" },
+  { on = ["g", "d"], run = ["cd ~/Downloads", "sort mtime --reverse"], desc = "Downloads" },
+  { on = ["g", "D"], run = ["cd ~/Documents", "sort mtime --reverse"], desc = "Documents" },
   { on = ["g", "p"], run = "cd ~/Pictures", desc = "Pictures" },
   { on = ["g", "v"], run = "cd ~/Videos", desc = "Videos" },
   { on = ["g", "M"], run = "cd ~/Music", desc = "Music" },

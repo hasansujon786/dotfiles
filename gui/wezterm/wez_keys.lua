@@ -9,8 +9,7 @@ return {
   },
   keys = {
     -- Useful keymaps
-    { key = 'e', mods = 'LEADER|ALT', action = wezterm.action_callback(events.toggle_quick_pane) },
-    { key = 'e', mods = 'LEADER', action = wezterm.action_callback(events.toggle_quick_pane) },
+    { key = 'e', mods = 'SHIFT|CTRL', action = wezterm.action_callback(events.toggle_quick_pane) },
     {
       key = 'q',
       mods = 'SHIFT|CTRL',

@@ -237,7 +237,7 @@ M.toggle_quick_pane = function(window, pane)
     act.SplitPane({
       direction = 'Down',
       size = { Cells = 15 },
-      -- command = { cwd = '.' }, -- args = { 'yazi' },
+      command = { cwd = '.', args = { 'yazi' } },
     }),
     pane
   )
