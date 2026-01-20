@@ -96,9 +96,6 @@ return {
               kind = 'get_char',
               min_width = 40,
               win_config = { win_options = { number = false } },
-              format_item = function(item)
-                return string.format('   %s - %s', item.key, item.label)
-              end,
             })
           end,
         },

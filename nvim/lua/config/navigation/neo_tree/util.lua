@@ -7,8 +7,8 @@ M.isEmpty = function(s)
 end
 M.isNeoTreeWindow = function(name)
   return string.match(name, 'neo%-tree filesystem') ~= nil
-      or string.match(name, 'neo%-tree buffers') ~= nil
-      or string.match(name, 'neo%-tree git_status') ~= nil
+    or string.match(name, 'neo%-tree buffers') ~= nil
+    or string.match(name, 'neo%-tree git_status') ~= nil
 end
 M.save_altfile = function()
   vim.g.cwd = vim.loop.cwd()
@@ -52,11 +52,11 @@ end
 function M.open_vinegar()
   M.save_altfile()
   local reveal_file = vim.fn.expand('%:p')
-  if (reveal_file == '') then
+  if reveal_file == '' then
     reveal_file = vim.fn.getcwd()
   else
-    local f = io.open(reveal_file, "r")
-    if (f) then
+    local f = io.open(reveal_file, 'r')
+    if f then
       f.close(f)
     else
       reveal_file = vim.fn.getcwd()
@@ -66,12 +66,12 @@ function M.open_vinegar()
   local parent_dir = vim.fs.dirname(reveal_file)
 
   require('neo-tree.command').execute({
-    action = "focus",
-    source = "filesystem",
-    position = "current",
+    action = 'focus',
+    source = 'filesystem',
+    position = 'current',
     reveal_file = reveal_file, -- path to file or folder to reveal
-    reveal_force_cwd = true,   -- change cwd without asking if needed
-    dir = parent_dir
+    reveal_force_cwd = true, -- change cwd without asking if needed
+    dir = parent_dir,
   })
 end
 
@@ -109,6 +109,44 @@ function M.edit_alternate_file()
   end
 
   feedkeys('<c-^>')
+end
+
+function M.toggle_quicklook(state)
+  if type(vim.b.qlook_id) == 'number' then
+    if vim.b.qlook_file then
+      pcall(require('hasan.utils.file').quicklook, { vim.b.qlook_file })
+    end
+
+    vim.api.nvim_del_autocmd(vim.b.qlook_id)
+    vim.b.qlook_id = false
+    return
+  end
+
+  vim.b.qlook_id = vim.api.nvim_create_autocmd('CursorHold', {
+    buffer = vim.api.nvim_get_current_buf(),
+    callback = function()
+      vim.schedule(function()
+        local node = state.tree:get_node()
+        if not node then
+          return
+        end
+
+        local file = node:get_id()
+        local ok = pcall(require('hasan.utils.file').quicklook, { file })
+        if ok then
+          vim.b.qlook_file = file
+        end
+      end)
+    end,
+  })
+end
+
+function M.terminal(path_or_file)
+  Snacks.terminal(nil, {
+    shell = 'bash',
+    win = { wo = { winbar = '' } },
+    cwd = Snacks.picker.util.dir(path_or_file),
+  })
 end
 
 return M

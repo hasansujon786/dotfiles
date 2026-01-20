@@ -1,18 +1,32 @@
 local function show_copy_options(state)
   local tree_util = require('config.navigation.neo_tree.util')
-  local options = {
+  local items = {
     {
       key = 'c',
+      label = 'Copy filename',
+      action = function()
+        tree_util.copy_path(state, ':t:r')
+      end,
+    },
+    {
+      key = 'f',
+      label = 'Copy filename with extension',
+      action = function()
+        tree_util.copy_path(state, ':t')
+      end,
+    },
+    {
+      key = 'p',
       label = 'Copy file path',
       action = function()
         tree_util.copy_path(state)
       end,
     },
     {
-      key = 'f',
-      label = 'Copy filename',
+      key = 'P',
+      label = 'Copy path to dirname',
       action = function()
-        tree_util.copy_path(state, ':t')
+        tree_util.copy_path(state, ':p:h')
       end,
     },
     {
@@ -22,14 +36,27 @@ local function show_copy_options(state)
         tree_util.copy_path(state, ':.')
       end,
     },
+    {
+      key = 'R',
+      label = 'Copy relative path to dirname',
+      action = function()
+        tree_util.copy_path(state, ':.:h')
+      end,
+    },
   }
 
-  require('hasan.widgets').get_select(options, function(item)
+  require('hasan.widgets').get_select(items, function(item)
     if item.action then
       item.action()
     end
   end, {
     prompt = ' Neotree menu ',
+    win_config = {
+      border = {
+        -- left = opts.number and 0 or 2, right = opts.number and 3 or 2,
+        -- padding = { top = 2, bottom = 2, left = 2, right = 0 },
+      },
+    },
     relative = 'cursor',
     kind = 'get_char',
     min_width = 30,
@@ -40,7 +67,7 @@ local function show_more_options(state)
   local bloc = require('config.lsp.servers.dartls.bloc')
   local fs = require('neo-tree.sources.filesystem')
 
-  local options = {
+  local items = {
     {
       key = 'b',
       label = 'New Block',
@@ -80,12 +107,13 @@ local function show_more_options(state)
     },
   }
 
-  require('hasan.widgets').get_select(options, function(item)
+  require('hasan.widgets').get_select(items, function(item)
     if item.action then
       item.action()
     end
   end, {
     prompt = ' Neotree menu ',
+    format_item = format_item,
     relative = 'cursor',
     kind = 'get_char',
     min_width = 30,
@@ -97,10 +125,7 @@ return {
   width = 30,
   mapping_options = { noremap = true, nowait = true },
   mappings = {
-    ['i'] = function(state)
-      local node = state.tree:get_node()
-      require('hasan.utils.file').quicklook({ node:get_id() })
-    end,
+    ['i'] = require('config.navigation.neo_tree.util').toggle_quicklook,
     ['R'] = function(state)
       local node = state.tree:get_node()
       local file = node:get_id()
@@ -157,6 +182,13 @@ return {
     -- ['m'] = 'move', -- takes text input for destination, also accepts the optional config.show_path option like "add".
     ['c'] = { show_copy_options, desc = 'Copy filepath to clipboard' },
     ['m'] = { show_more_options, desc = 'Show more options' },
+    ['<c-t>'] = {
+      function(state)
+        local node = state.tree:get_node()
+        require('config.navigation.neo_tree.util').terminal(node:get_id())
+      end,
+      desc = 'Open terminal in cwd',
+    },
     ['Y'] = {
       function(state)
         require('config.navigation.neo_tree.util').copy_path(state, ':t')

@@ -132,14 +132,13 @@ M.get_select = function(items, on_choice, opts)
   opts = opts and opts or {}
   opts.relative = utils.get_default(opts.relative, 'editor')
 
-  local right_pad = 6
   local min_width = opts.min_width or 20
   local max_width = opts.max_width or 60
 
   local format_item = opts.format_item
     or function(item)
       if opts.kind == 'get_char' and item.key ~= nil and type(item.label) == 'string' then
-        return string.format('   %s - %s', tostring(item.key), item.label)
+        return string.format('  %s - %s  ', tostring(item.key), item.label)
       end
       if type(item.label) == 'string' then
         return item.label
@@ -190,7 +189,7 @@ M.get_select = function(items, on_choice, opts)
 
   opts = utils.merge({
     max_width = max_width,
-    min_width = math.min(min_width, max_width) + right_pad,
+    min_width = math.min(min_width, max_width),
     max_height = 8,
     keymap = {
       focus_next = { 'j', '<Down>', '<Tab>' },

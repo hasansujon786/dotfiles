@@ -74,8 +74,8 @@ return {
       -- FILE
       { '<leader>f', group = 'file' },
       { '<leader>fw', '<Plug>(fix-current-world)', desc = 'Fix current world' },
-      { '<leader>fy', "<cmd>lua require('config.navigation.neo_tree.util').copy_path(vim.fn.expand('%:t'))<CR>", desc = 'Copy current node' },
-      { '<leader>fY', "<cmd>lua require('config.navigation.neo_tree.util').copy_path(vim.fn.expand('%:p'))<CR>", desc = 'Copy absolute node' },
+      { '<leader>fy', "<cmd>lua require('config.navigation.neo_tree.util').copy_path(vim.fn.expand('%:t'))<CR>", desc = 'Copy current filename' },
+      { '<leader>fY', "<cmd>lua require('config.navigation.neo_tree.util').copy_path(vim.fn.expand('%:r'))<CR>", desc = 'Copy relative path' },
 
       { '<leader>fx', group = 'remove' },
       { '<leader>fx/', '<cmd>lua require("hasan.utils.file").delete_lines_with("comment")<CR>', desc = 'Delete all comments' },
