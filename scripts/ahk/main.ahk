@@ -216,8 +216,10 @@ _:: Send("!{PgDn}")
 +:: Send("!{PgUp}")
 #HotIf
 
-; ; ahk_exe Microsoft.CmdPal.UI.exe
-; #HotIf WinActive("Command Palette")
-;   !p::Send("{Up}")
-;   !n::Send("{Down}")
-; #HotIf
+#HotIf WinActive("Command Palette") and isMouseGridInactive()
+Tab:: Send("{Down}")
++Tab:: Send("{Up}")
+!p::Send("{Up}")
+!n::Send("{Down}")
+#HotIf
+
