@@ -22,7 +22,6 @@ append_keymap = [
   { on = [ ",", "T" ], run = "sort mtime --reverse=no",     desc = "Sort by modified time" },
 ]
 
-# TODO: update copy actions similar to neotree
 # TODO: update tab colors
 # TODO: add fzf directory jump
 # TODO: fix zoxide

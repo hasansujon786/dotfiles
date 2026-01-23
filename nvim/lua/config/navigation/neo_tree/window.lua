@@ -3,9 +3,16 @@ local function show_copy_options(state)
   local items = {
     {
       key = 'c',
-      label = 'Copy filename',
+      label = 'Copy path',
       action = function()
-        tree_util.copy_path(state, ':t:r')
+        tree_util.copy_path(state)
+      end,
+    },
+    {
+      key = 'd',
+      label = 'Copy dirname',
+      action = function()
+        tree_util.copy_path(state, ':p:h')
       end,
     },
     {
@@ -16,17 +23,10 @@ local function show_copy_options(state)
       end,
     },
     {
-      key = 'p',
-      label = 'Copy file path',
+      key = 'n',
+      label = 'Copy filename',
       action = function()
-        tree_util.copy_path(state)
-      end,
-    },
-    {
-      key = 'P',
-      label = 'Copy path to dirname',
-      action = function()
-        tree_util.copy_path(state, ':p:h')
+        tree_util.copy_path(state, ':t:r')
       end,
     },
     {

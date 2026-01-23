@@ -48,7 +48,7 @@ local sort_bookmarks = function(bookmarks, key1, key2, reverse)
 end
 
 local save_to_file = function(mb_path, bookmarks)
-  local file = io.open(mb_path, "w")
+  local file = io.open(mb_path, 'w')
   if file == nil then
     return
   end
@@ -56,25 +56,25 @@ local save_to_file = function(mb_path, bookmarks)
   for _, item in pairs(bookmarks) do
     table.insert(array, item)
   end
-  sort_bookmarks(array, "tag", "key", true)
+  sort_bookmarks(array, 'tag', 'key', true)
   for _, item in ipairs(array) do
-    file:write(string.format("%s\t%s\t%s\n", item.tag, item.path, item.key))
+    file:write(string.format('%s\t%s\t%s\n', item.tag, item.path, item.key))
   end
   file:close()
 end
 
 local fzf_find = function(cli, mb_path)
   local permit = ya.hide()
-  local cmd = string.format("%s < \"%s\"", cli, mb_path)
-  local handle = io.popen(cmd, "r")
-  local result = ""
+  local cmd = string.format('%s < "%s"', cli, mb_path)
+  local handle = io.popen(cmd, 'r')
+  local result = ''
   if handle then
     -- strip
-    result = string.gsub(handle:read("*all") or "", "^%s*(.-)%s*$", "%1")
+    result = string.gsub(handle:read('*all') or '', '^%s*(.-)%s*$', '%1')
     handle:close()
   end
   permit:drop()
-  local tag, path, key = string.match(result or "", "(.-)\t(.-)\t(.*)")
+  local tag, path, key = string.match(result or '', '(.-)\t(.-)\t(.*)')
   return path
 end
 
@@ -85,17 +85,17 @@ local which_find = function(bookmarks)
       table.insert(cands, { desc = item.tag, on = item.key, path = item.path })
     end
   end
-  sort_bookmarks(cands, "on", "desc", false)
+  sort_bookmarks(cands, 'on', 'desc', false)
   if #cands == 0 then
-    ya.notify {
-      title = "Bookmarks",
-      content = "Empty bookmarks",
+    ya.notify({
+      title = 'Bookmarks',
+      content = 'Empty bookmarks',
       timeout = 2,
-      level = "info",
-    }
+      level = 'info',
+    })
     return nil
   end
-  local idx = ya.which { cands = cands }
+  local idx = ya.which({ cands = cands })
   if idx == nil then
     return nil
   end
@@ -110,21 +110,21 @@ local action_jump = function(bookmarks, path, jump_notify)
   -- if string.sub(path, -1) == path_sep then
   --   ya.manager_emit("cd", { path })
   -- else
-    ya.manager_emit("reveal", { path })
+  ya.emit('reveal', { path })
   -- end
   if jump_notify then
-    ya.notify {
-      title = "Bookmarks",
+    ya.notify({
+      title = 'Bookmarks',
       content = 'Jump to "' .. tag .. '"',
       timeout = 2,
-      level = "info",
-    }
+      level = 'info',
+    })
   end
 end
 
 local generate_key = function(bookmarks)
-  local keys = get_state_attr("keys")
-  local key2rank = get_state_attr("key2rank")
+  local keys = get_state_attr('keys')
+  local key2rank = get_state_attr('key2rank')
   local mb = {}
   for _, item in pairs(bookmarks) do
     if #item.key == 1 then
@@ -154,24 +154,24 @@ local action_save = function(mb_path, bookmarks, path, ask_for_filename)
 
   local path_obj = bookmarks[path]
   -- check tag
-  local tag = path_obj and path_obj.tag or path:match(".*[\\/]([^\\/]+)[\\/]?$")
+  local tag = path_obj and path_obj.tag or path:match('.*[\\/]([^\\/]+)[\\/]?$')
   while true and ask_for_filename do
     local value, event = ya.input({
-      title = "Tag (alias name)",
+      title = 'Tag (alias name)',
       value = tag,
-      position = { "top-center", y = 3, w = 40 },
+      pos = { 'bottom-center', y = 3, w = 40 },
     })
     if event ~= 1 then
       return
     end
     tag = value or ''
     if #tag == 0 then
-      ya.notify {
-        title = "Bookmarks",
-        content = "Empty tag",
+      ya.notify({
+        title = 'Bookmarks',
+        content = 'Empty tag',
         timeout = 2,
-        level = "info",
-      }
+        level = 'info',
+      })
     else
       -- check the tag
       local tag_obj = nil
@@ -184,28 +184,28 @@ local action_save = function(mb_path, bookmarks, path, ask_for_filename)
       if tag_obj == nil or tag_obj.path == path then
         break
       end
-      ya.notify {
-        title = "Bookmarks",
-        content = "Duplicated tag",
+      ya.notify({
+        title = 'Bookmarks',
+        content = 'Duplicated tag',
         timeout = 2,
-        level = "info",
-      }
+        level = 'info',
+      })
     end
   end
   -- check key
   local key = path_obj and path_obj.key or generate_key(bookmarks)
   while true do
     local value, event = ya.input({
-      title = "Key (1 character, optional)",
-      value = ask_for_filename and key or "",
-      position = { "top-center", y = 3, w = 40 },
+      title = 'Key (1 character, optional)',
+      value = ask_for_filename and key or '',
+      pos = { 'bottom-center', y = 3, w = 40 },
     })
     if event ~= 1 then
       return
     end
-    key = value or ""
-    if key == "" then
-      key = ""
+    key = value or ''
+    if key == '' then
+      key = ''
       break
     elseif #key == 1 then
       -- check the key
@@ -219,32 +219,32 @@ local action_save = function(mb_path, bookmarks, path, ask_for_filename)
       if key_obj == nil or key_obj.path == path then
         break
       else
-        ya.notify {
-          title = "Bookmarks",
-          content = "Duplicated key",
+        ya.notify({
+          title = 'Bookmarks',
+          content = 'Duplicated key',
           timeout = 2,
-          level = "info",
-        }
+          level = 'info',
+        })
       end
     else
-      ya.notify {
-        title = "Bookmarks",
-        content = "The length of key shoule be 1",
+      ya.notify({
+        title = 'Bookmarks',
+        content = 'The length of key shoule be 1',
         timeout = 2,
-        level = "info",
-      }
+        level = 'info',
+      })
     end
   end
   -- save
   set_bookmarks(path, { tag = tag, path = path, key = key })
-  bookmarks = get_state_attr("bookmarks")
+  bookmarks = get_state_attr('bookmarks')
   save_to_file(mb_path, bookmarks)
-  ya.notify {
-    title = "Bookmarks",
+  ya.notify({
+    title = 'Bookmarks',
     content = '"' .. tag .. '" saved"',
     timeout = 2,
-    level = "info",
-  }
+    level = 'info',
+  })
 end
 
 local action_delete = function(mb_path, bookmarks, path)
@@ -253,52 +253,52 @@ local action_delete = function(mb_path, bookmarks, path)
   end
   local tag = bookmarks[path].tag
   set_bookmarks(path, nil)
-  bookmarks = get_state_attr("bookmarks")
+  bookmarks = get_state_attr('bookmarks')
   save_to_file(mb_path, bookmarks)
-  ya.notify {
-    title = "Bookmarks",
+  ya.notify({
+    title = 'Bookmarks',
     content = '"' .. tag .. '" deleted',
     timeout = 2,
-    level = "info",
-  }
+    level = 'info',
+  })
 end
 
 local action_delete_all = function(mb_path)
   local value, event = ya.input({
-    title = "Delete all bookmarks? (y/n)",
-    position = { "top-center", y = 3, w = 40 },
+    title = 'Delete all bookmarks? (y/n)',
+    pos = { 'bottom-center', y = 3, w = 40 },
   })
   if event ~= 1 then
     return
   end
-  if string.lower(value) == "y" then
-    set_state_attr("bookmarks", {})
+  if string.lower(value) == 'y' then
+    set_state_attr('bookmarks', {})
     save_to_file(mb_path, {})
-    ya.notify {
-      title = "Bookmarks",
-      content = "All bookmarks deleted",
+    ya.notify({
+      title = 'Bookmarks',
+      content = 'All bookmarks deleted',
       timeout = 2,
-      level = "info",
-    }
+      level = 'info',
+    })
   else
-    ya.notify {
-      title = "Bookmarks",
-      content = "Cancel delete",
+    ya.notify({
+      title = 'Bookmarks',
+      content = 'Cancel delete',
       timeout = 2,
-      level = "info",
-    }
+      level = 'info',
+    })
   end
 end
 
 return {
   setup = function(state, options)
-    state.path = options.path or
-        (ya.target_family() == "windows" and os.getenv("APPDATA") .. "\\yazi\\config\\bookmark") or
-        (os.getenv("HOME") .. "/.config/yazi/bookmark")
-    state.cli = options.cli or "fzf"
+    state.path = options.path
+      or (ya.target_family() == 'windows' and os.getenv('APPDATA') .. '\\yazi\\config\\bookmark')
+      or (os.getenv('HOME') .. '/.config/yazi/bookmark')
+    state.cli = options.cli or 'fzf'
     state.jump_notify = options.jump_notify and true
     -- init the keys
-    local keys = options.keys or "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    local keys = options.keys or '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
     state.keys = {}
     state.key2rank = {}
     for i = 1, #keys do
@@ -313,12 +313,12 @@ return {
       bookmarks[item.path] = { tag = item.tag, path = item.path, key = item.key }
     end
     -- load the config
-    local file = io.open(state.path, "r")
+    local file = io.open(state.path, 'r')
     if file ~= nil then
       for line in file:lines() do
-        local tag, path, key = string.match(line, "(.-)\t(.-)\t(.*)")
+        local tag, path, key = string.match(line, '(.-)\t(.-)\t(.*)')
         if tag and path then
-          key = key or ""
+          key = key or ''
           bookmarks[path] = { tag = tag, path = path, key = key }
         end
       end
@@ -333,24 +333,25 @@ return {
     if not action then
       return
     end
-    local mb_path, cli, bookmarks, jump_notify = get_state_attr("path"), get_state_attr("cli"), get_state_attr("bookmarks"), get_state_attr("jump_notify")
-    if action == "save" then
+    local mb_path, cli, bookmarks, jump_notify =
+      get_state_attr('path'), get_state_attr('cli'), get_state_attr('bookmarks'), get_state_attr('jump_notify')
+    if action == 'save' then
       action_save(mb_path, bookmarks, get_hovered_path(), true)
-    elseif action == "save_by_key" then
+    elseif action == 'save_by_key' then
       action_save(mb_path, bookmarks, get_hovered_path(), false)
-    elseif action == "delete_by_key" then
+    elseif action == 'delete_by_key' then
       action_delete(mb_path, bookmarks, which_find(bookmarks))
-    elseif action == "delete_by_fzf" then
+    elseif action == 'delete_by_fzf' then
       action_delete(mb_path, bookmarks, fzf_find(cli, mb_path))
-    elseif action == "delete_all" then
+    elseif action == 'delete_all' then
       action_delete_all(mb_path)
-    elseif action == "jump_by_key" then
+    elseif action == 'jump_by_key' then
       action_jump(bookmarks, which_find(bookmarks), jump_notify)
-    elseif action == "jump_by_fzf" then
+    elseif action == 'jump_by_fzf' then
       action_jump(bookmarks, fzf_find(cli, mb_path), jump_notify)
-    elseif action == "rename_by_key" then
+    elseif action == 'rename_by_key' then
       action_save(mb_path, bookmarks, which_find(bookmarks))
-    elseif action == "rename_by_fzf" then
+    elseif action == 'rename_by_fzf' then
       action_save(mb_path, bookmarks, fzf_find(cli, mb_path))
     end
   end,

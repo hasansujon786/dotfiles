@@ -8,7 +8,7 @@ return {
       return
     end
 
-    local path = false or falback_paths[env_var] or os.getenv('HOME')
-    ya.manager_emit('cd', { path })
+    local path = os.getenv(env_var) or falback_paths[env_var] or os.getenv('HOME')
+    ya.emit('cd', { path })
   end,
 }

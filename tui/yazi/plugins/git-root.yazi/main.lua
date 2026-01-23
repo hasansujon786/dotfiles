@@ -16,7 +16,7 @@ local M = {
     if target == '' or target == nil then
       return fail('`git` could not find cwd')
     end
-    ya.mgr_emit('cd', { target })
+    ya.emit('cd', { target })
   end,
 }
 
