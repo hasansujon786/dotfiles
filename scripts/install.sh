@@ -243,6 +243,9 @@ setup_variables() {
     start ms-settings:developers
     mkdir -p ~/.config
 
+    # setx ANDROID_HOME "C:\Users\hasan\android"
+    # setx PATH "$PATH;$ANDROID_HOME\cmdline-tools\latest\bin;$ANDROID_HOME\platform-tools"
+
     update_path_var "C:\Users\\$USERNAME\dotfiles\.bin"
     create_user_var ANDROID_HOME "$LOCALAPPDATA\Android\Sdk"
     create_user_var REPOES "D:/repoes"
