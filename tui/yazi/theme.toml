@@ -150,3 +150,16 @@ icon_error = ""
 
 # : }}}
 
+[tabs]
+active   = { bg = "#8b95a7", fg = "#282c34", bold = true }
+inactive = { fg = "#8b95a7", bg = "#2D3343" }
+
+# Separator
+sep_inner = { open = "", close = "" }
+sep_outer = { open = "", close = "" }
+
+[icon]
+globs = []
+dirs  = [
+	{ name = "repoes", text = "", fg = "#00bcd4" },
+]

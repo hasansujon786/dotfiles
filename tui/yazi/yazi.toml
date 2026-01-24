@@ -11,7 +11,8 @@ title_format = ""
 
 [opener]
 edit = [
-  { run = 'nvim %*', block = true, desc = "nvim (block)", for = "windows" },
+  { run = 'nvim %s',          desc = "nvim", for = "windows", block = true, },
+  { run = "code %s",          desc = "code", for = "windows", orphan = true },
 ]
 reveal = [
   { run = 'C:/Users/hasan/dotfiles/tui/yazi/scripts/reveal.cmd "%0"', orphan = true, desc = "Reveal", for = "windows" },
