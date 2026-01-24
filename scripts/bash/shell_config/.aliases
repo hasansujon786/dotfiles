@@ -138,6 +138,7 @@ alias gpr='hub pull-request'
 alias gci='hub issue create'
 alias gm2m='git branch -m master main'
 alias gpup='git push --set-upstream origin main'
+alias gbp='~/dotfiles/scripts/backup-project.sh'
 
 alias -- --=jump_to_git_root # map --
 alias g='git'

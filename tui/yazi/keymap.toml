@@ -17,7 +17,10 @@ append_keymap = [
   { on = ["<Backspace>"], run = "back", desc = "Go back to the previous directory" },
   { on = ["<C-o>"], run = "back", desc = "Go back to the previous directory" },
   { on = ["<C-j>"], run = "forward", desc = "Go forward to the next directory" },
+  { on = "<A-Left>", run = "back",    desc = "Back to previous directory" },
+  { on = "<A-Right>", run = "forward", desc = "Forward to next directory" },
 
+  # Sort
   { on = [ ",", "t" ], run = "sort mtime --reverse",        desc = "Sort by modified time (reverse)" },
   { on = [ ",", "T" ], run = "sort mtime --reverse=no",     desc = "Sort by modified time" },
 ]
@@ -51,10 +54,15 @@ prepend_keymap = [
   { on = "i", run = "plugin quicklook", desc = "Peek" },
   { on = "f", run = "plugin jump-to-char", desc = "Jump to char" },
   { on = "I", run = "Hidden toggle", desc = "Toggle the visibility of hidden files" },
-  { on = "X", run = 'shell "C:/Users/hasan/dotfiles/tui/yazi/scripts/7z_yazi.cmd \"%0\"" --confirm --block', desc = "Extract with 7zip" },
   { on = ["g", "?"], run = "help", desc = "Help" },
-  { on = ["g", "<Enter>"], run = "plugin git-root", desc = "Jump to git root" },
-  { on = [".", "S"], run = 'shell "bash ~/dotfiles/tui/yazi/scripts/share-code-file.bash \"%0\"" --confirm --block', desc = "Share file with https://0x0.st" },
+  { on = ["g", "-"], run = "plugin git-root", desc = "Jump to git root" },
+
+  # Menu
+  { on = ["m", "s"], run = 'shell "bash ~/dotfiles/tui/yazi/scripts/share-code-file.bash \"%0\"" --confirm --block', desc = "Share file with https://0x0.st" },
+  { on = ["m", "u"], run = 'shell "C:/Users/hasan/dotfiles/tui/yazi/scripts/7z_unzip.cmd \"\"%0\"\"" --confirm --block', desc = "Extract with 7zip" },
+  { on = ["m", "z"], run = 'shell "C:/Users/hasan/dotfiles/tui/yazi/scripts/7z_zip.cmd \"\"%0\"\"" --confirm --block', desc = "Create zip archive" },
+  # { on = "<Tab>", run = "spot", desc = "Spot hovered file" },
+  # { on = "r",         run = "rename --cursor=before_ext",  desc = "Rename selected file(s)" },
 
   # Tabs
   { on = ["T"], run = "tab_create --current", desc = "Create a new tab using the current path" },
@@ -65,7 +73,7 @@ prepend_keymap = [
   { on = ["U"], run = "visual_mode --unset", desc = "Enter visual mode (unset mode)" },
   # { on = ["<C-v>"], run = "select_all --state=none", desc = "Inverse selection of all files" },
 
-  { on = [ "m" ], run = "plugin yamb save_by_key", desc = "Add bookmark" },
+  { on = [ "M" ], run = "plugin yamb save_by_key", desc = "Add bookmark" },
   { on = [ "'" ], run = "plugin yamb jump_by_key", desc = "Jump bookmark by key" },
   { on = [ "g", "'" ], run = "plugin yamb jump_by_fzf", desc = "Jump bookmark by fzf" },
   { on = [ "g", "m" ], run = "plugin yamb delete_by_fzf", desc = "Delete bookmark by fzf" },

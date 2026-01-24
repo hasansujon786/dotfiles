@@ -35,6 +35,7 @@ PowerShell/Modules
 .env.development.local
 .env.test.local
 .env.production.local
+.crush
 
 npm-debug.log*
 yarn-debug.log*
