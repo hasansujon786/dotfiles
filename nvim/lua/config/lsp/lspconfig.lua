@@ -27,5 +27,6 @@ return {
       build = ':MasonUpdate',
     },
     { 'b0o/schemastore.nvim', lazy = true, commit = '976b31e' },
+    { 'yioneko/nvim-vtsls', cmd = { 'VtsExec' }, lazy = true },
   },
 }

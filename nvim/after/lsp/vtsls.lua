@@ -50,7 +50,7 @@ return {
       client.server_capabilities.semanticTokensProvider.full = true
     end
 
-    keymap('n', '<leader>ai', utils.ts_organize_imports_sync, { buffer = bufnr, desc = 'Lsp: organize imports' })
+    -- keymap('n', '<leader>ai', utils.ts_organize_imports_sync, { buffer = bufnr, desc = 'Lsp: organize imports' })
   end,
   settings = {
     complete_function_calls = true,

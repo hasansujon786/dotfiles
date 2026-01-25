@@ -2,7 +2,7 @@ local M = {}
 
 ---@param cmds string[]
 ---@param after function
-local code_action = function(cmds, after)
+function M.code_action(cmds, after)
   local win = vim.api.nvim_get_current_win()
   local offset_encoding = 'utf-16'
   local params = vim.lsp.util.make_range_params(win, offset_encoding)
@@ -56,13 +56,19 @@ function M.lsp_buffer_keymaps(client, bufnr)
   keymap('n', 'gr', '<cmd>Glance references<CR>', desc('Lsp: Go to references'))
   keymap('n', 'gI', '<cmd>Glance implementations<CR>', desc('Lsp: Type implementation'))
   keymap('n', 'gy', '<cmd>Glance type_definitions<CR>', desc('Lsp: Type definition'))
-  keymap('n', 'gR', '<cmd>Glance resume<CR>', desc('Lsp: Glance resume'))
+  keymap('n', '<leader>ar', '<cmd>Glance resume<CR>', desc('Lsp: Glance resume'))
   keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', desc('Lsp: Go to declaration'))
 
   keymap('n', '<leader>a.', run_code_action({ 'source.fixAll' }), desc('Lsp: Fix all'))
-  keymap('n', '<leader>ai', function()
-    code_action({ 'source.organizeImports' }, vim.cmd.write)
-  end, desc('Lsp: Organize imports'))
+  if client.name == 'vtsls' then
+    keymap('n', 'gR', '<cmd>VtsExec file_references<CR>', desc('Lsp: Type definition'))
+    keymap('n', '<leader>ai', '<cmd>VtsExec organize_imports<CR>', desc('Lsp: Organize imports'))
+    keymap('n', '<leader>am', '<cmd>VtsExec add_missing_imports<CR>', desc('Lsp: Add Missing Imports'))
+  else
+    keymap('n', '<leader>ai', function()
+      M.code_action({ 'source.organizeImports' }, vim.cmd.write)
+    end, desc('Lsp: Organize imports'))
+  end
 
   keymap('n', 'gpd', '<cmd>lua require("config.lsp.util.peek").PeekDefinition()<CR>', desc('Peek definition'))
   keymap('n', 'gpI', '<cmd>lua require("config.lsp.util.peek").PeekImplementation()<CR>', desc('Peek implementation'))
