@@ -29,13 +29,31 @@ local inlayHints = {
   functionLikeReturnTypes = { enabled = true },
   enumMemberValues = { enabled = true },
 }
+
+local vue_language_server_path = mason_path .. '/vue-language-server/node_modules/@vue/language-server'
+local vueGlobalPlugin = {
+  name = '@vue/typescript-plugin',
+  location = vue_language_server_path,
+  languages = { 'vue' },
+  configNamespace = 'typescript',
+  enableForWorkspaceTypeScriptVersions = true,
+}
+
 return {
+  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
   on_attach = function(client, bufnr)
+    if vim.bo.filetype == 'vue' then
+      client.server_capabilities.semanticTokensProvider.full = false
+    else
+      client.server_capabilities.semanticTokensProvider.full = true
+    end
+
     keymap('n', '<leader>ai', utils.ts_organize_imports_sync, { buffer = bufnr, desc = 'Lsp: organize imports' })
   end,
   settings = {
     complete_function_calls = true,
     vtsls = {
+      tsserver = { globalPlugins = { vueGlobalPlugin } },
       enableMoveToFileCodeAction = true,
       autoUseWorkspaceTsdk = true,
       experimental = {
@@ -51,5 +69,6 @@ return {
       suggest = { completeFunctionCalls = true },
     },
     javascript = { inlayHints = inlayHints },
+    vue = { inlayHints = inlayHints },
   },
 }

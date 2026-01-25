@@ -73,6 +73,8 @@ return {
     -- LSP
     { 'g[', word_jump({ forward = false }), desc = 'Prev Reference', mode = nxo },
     { 'g]', word_jump({ forward = true }), desc = 'Next Reference', mode = nxo },
+    { '[[', word_jump({ forward = false }), desc = 'Prev Reference', mode = nxo },
+    { ']]', word_jump({ forward = true }), desc = 'Next Reference', mode = nxo },
     -- DAP
     { '[v', '<cmd>lua require("dap").step_out()<cr>', desc = 'Debug: Step Out', mode = nxo },
     { ']v', '<cmd>lua require("dap").step_into()<cr>', desc = 'Debug: Step Into', mode = nxo },
@@ -84,10 +86,10 @@ return {
     { ']d', diagnostic_jump(1), desc = 'Next diagnostic', mode = nxo },
 
     -- Text-objects
+    -- { '[[', '<Plug>(ts-jump-prev-s-func)zz', desc = 'Jump prev func', mode = nx },
+    -- { ']]', '<Plug>(ts-jump-next-s-func)zz', desc = 'Jump next func', mode = nx },
     { '[f', '<Plug>(ts-jump-prev-s-func)zz', desc = 'Jump prev func', mode = nx },
     { ']f', '<Plug>(ts-jump-next-s-func)zz', desc = 'Jump next func', mode = nx },
-    { '[[', '<Plug>(ts-jump-prev-s-func)zz', desc = 'Jump prev func', mode = nx },
-    { ']]', '<Plug>(ts-jump-next-s-func)zz', desc = 'Jump next func', mode = nx },
     { '[m', '<Plug>(ts-jump-prev-s-class)zz', desc = 'Jump prev class', mode = nx },
     { ']m', '<Plug>(ts-jump-next-s-class)zz', desc = 'Jump next class', mode = nx },
 

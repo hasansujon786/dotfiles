@@ -14,5 +14,9 @@
   {
     "url": "https://download-directory.github.io",
     "title": "download directory from github"
+  },
+  {
+    "url": "https://github.com/hasansujon786/my_vault/blob/main/orgfiles/3_resources/tailwindcss.org#setup-with-vite",
+    "title": "Tailwind setup with vite"
   }
 ]
