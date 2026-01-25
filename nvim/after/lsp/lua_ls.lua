@@ -1,6 +1,8 @@
 -- https://luals.github.io/wiki/settings/
 -- Wiki https://github.com/neovim/nvim-lspconfig/wiki/User-contributed-tips#range-formatting-with-a-motion
 
+---@module "vim.lsp.client"
+---@class vim.lsp.ClientConfig
 return {
   -- on_init = function()
   -- end,

@@ -23,7 +23,7 @@ end
 -- https://github.com/yioneko/nvim-vtsls
 local inlayHints = {
   parameterNames = { enabled = 'literals' },
-  parameterTypes = { enabled = true },
+  parameterTypes = { enabled = true, suppressWhenArgumentMatchesName = true },
   variableTypes = { enabled = true },
   propertyDeclarationTypes = { enabled = true },
   functionLikeReturnTypes = { enabled = true },
@@ -39,6 +39,8 @@ local vueGlobalPlugin = {
   enableForWorkspaceTypeScriptVersions = true,
 }
 
+---@module "vim.lsp.client"
+---@class vim.lsp.ClientConfig
 return {
   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
   on_attach = function(client, bufnr)

@@ -439,6 +439,7 @@ local function set_custom_highlights()
     ['@lsp.typemod.variable.injected'] = '@variable',
     ['@lsp.typemod.function.declaration'] = '@function',
     ['@lsp.typemod.function.readonly'] = '@function',
+    ['@punctuation.special.vue'] = '@type',
   }
   for newgroup, oldgroup in pairs(links) do
     hl(0, newgroup, { link = oldgroup, default = false })
