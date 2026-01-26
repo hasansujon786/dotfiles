@@ -59,7 +59,8 @@ prepend_keymap = [
 
   # Menu
   { on = ["m", "s"], run = 'shell "bash ~/dotfiles/tui/yazi/scripts/share-code-file.bash \"%0\"" --confirm --block', desc = "Share file with https://0x0.st" },
-  { on = ["m", "u"], run = 'shell "C:/Users/hasan/dotfiles/tui/yazi/scripts/7z_unzip.cmd \"\"%0\"\"" --confirm --block', desc = "Extract with 7zip" },
+  { on = ["m", "u"], run = 'shell "C:/Users/hasan/dotfiles/tui/yazi/scripts/7z_unzip_cwd.cmd \"\"%0\"\"" --confirm --block', desc = "Extract in CWD with 7zip" },
+  { on = ["m", "U"], run = 'shell "C:/Users/hasan/dotfiles/tui/yazi/scripts/7z_unzip.cmd \"\"%0\"\"" --confirm --block', desc = "Extract with 7zip" },
   { on = ["m", "z"], run = 'shell "C:/Users/hasan/dotfiles/tui/yazi/scripts/7z_zip.cmd \"\"%0\"\"" --confirm --block', desc = "Create zip archive" },
   # { on = "<Tab>", run = "spot", desc = "Spot hovered file" },
   # { on = "r",         run = "rename --cursor=before_ext",  desc = "Rename selected file(s)" },

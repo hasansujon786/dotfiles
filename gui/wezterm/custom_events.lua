@@ -211,13 +211,7 @@ M.toggle_quick_pane = function(window, pane)
 
   if is_quick_pane(pane) then
     wezterm.log_info('quick_pane#hide_pane')
-    window:perform_action(
-      act.Multiple({
-        act.ActivatePaneDirection('Up'),
-        act.SetPaneZoomState(true),
-      }),
-      pane
-    )
+    window:perform_action(act.Multiple({ act.ActivatePaneDirection('Up'), act.SetPaneZoomState(true) }), pane)
     return
   end
 
@@ -233,14 +227,10 @@ M.toggle_quick_pane = function(window, pane)
   end
 
   wezterm.log_info('quick_pane#crate_new_pane')
-  window:perform_action(
-    act.SplitPane({
-      direction = 'Down',
-      size = { Cells = 15 },
-      command = { cwd = '.', args = { 'yazi' } },
-    }),
-    pane
-  )
+  window:perform_action(act.SplitPane({ direction = 'Down', size = { Cells = 15 } }), pane) -- command = { cwd = '.', args = { 'yazi' } },
+
+  local new_pane = window:active_pane()
+  window:perform_action(wezterm.action({ Multiple = { { SendString = 'yazi\r' } } }), new_pane)
 end
 
 return M

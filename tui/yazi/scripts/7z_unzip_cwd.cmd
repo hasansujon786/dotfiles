@@ -5,7 +5,6 @@ REM
 REM Use 7zip for extractor
 REM
 REM Extract archive contents into destination folder
-REM with the same name as the archive file
 
-7z x "%~1" -o"%~n1"
+7z x "%~1"
 timeout /t 2 /nobreak >nul
