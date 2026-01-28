@@ -14,9 +14,9 @@ edit = [
   { run = 'nvim %s',          desc = "nvim", for = "windows", block = true, },
   { run = "code %s",          desc = "code", for = "windows", orphan = true },
 ]
-reveal = [
-  { run = 'C:/Users/hasan/dotfiles/tui/yazi/scripts/reveal.cmd "%0"', orphan = true, desc = "Reveal", for = "windows" },
-]
+# reveal = [
+#   { run = 'C:/Users/hasan/dotfiles/tui/yazi/scripts/reveal.cmd "%0"', orphan = true, desc = "Reveal", for = "windows" },
+# ]
 # extract = [
 #   { run = 'unar "$1"', desc = "Extract here", for = "unix" },
 #   { run = '7z_yazi.cmd "%1"', block = false, desc = "Extract here", for = "windows" },
