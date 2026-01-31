@@ -5,7 +5,7 @@
 [mgr]
 append_keymap = [
   { on = ["<C-w>"], run = "close", desc = "Close the current tab or quit if it is last tab" },
-  { on = ["R"], run = 'shell "C:/Users/hasan/dotfiles/tui/yazi/scripts/reveal.cmd \"\"%0\"\"" --confirm --orphan', desc = "Reveal" },
+  { on = ["R"], run = 'shell "bash ~/dotfiles/tui/yazi/scripts/reveal.sh \"%0\"" --confirm --orphan', desc = "Reveal" },
 
   # Navigation
   { on = ["<A-u>"], run = "arrow -50%", desc = "Move cursor up half page" },
