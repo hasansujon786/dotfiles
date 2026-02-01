@@ -1,5 +1,6 @@
 return {
-  'DNLHC/glance.nvim',
+  -- 'DNLHC/glance.nvim',
+  'hasansujon786/glance.nvim',
   cmd = 'Glance',
   config = function()
     local Icons = require('hasan.utils.ui.icons').Other
