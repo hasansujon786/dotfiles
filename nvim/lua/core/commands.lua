@@ -70,3 +70,26 @@ end, { nargs = 0, desc = 'GoErrDeclToggle' })
 keymap('n', '<Plug>(GoErrDeclToggle)', function()
   require('config.lsp.servers.gopls.go_err').toggle_inline_err()
 end, { desc = 'GoErrDeclToggle' })
+
+keymap('n', '<Plug>OpenQuicklookAtCursor', function()
+  local img_src = nil
+  Snacks.image.doc.at_cursor(function(src, _)
+    img_src = src
+  end)
+  if img_src then
+    require('hasan.utils.file').quicklook({ img_src })
+  end
+  vim.fn['repeat#set'](t('<Plug>OpenQuicklookAtCursor'))
+end)
+
+keymap('v', '<Plug>OpenQuicklookAtCursor', function()
+  local selection = table.concat(vim.fn.getregion(vim.fn.getpos('v'), vim.fn.getpos('.')), '\n')
+  if not selection or selection == '' or string.len(selection) == 1 then
+    return
+  end
+  local img_src = Snacks.image.doc.resolve(vim.api.nvim_get_current_buf(), selection)
+  if img_src then
+    require('hasan.utils.file').quicklook({ img_src })
+  end
+  vim.fn['repeat#set'](t('<Plug>OpenQuicklookAtCursor'))
+end)

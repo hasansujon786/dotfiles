@@ -1,3 +1,5 @@
+local n, nx = { 'n' }, { 'n', 'x' }
+
 return {
   {
     'folke/snacks.nvim',
@@ -11,7 +13,9 @@ return {
     keys = {
       -- { 'g]',         function() Snacks.words.jump(vim.v.count1) end, desc = 'Next Reference', mode = { 'n', 't' } },
       -- { 'g[',         function() Snacks.words.jump(-vim.v.count1) end, desc = 'Prev Reference', mode = { 'n', 't' } },
-      { '<leader>vo', function() Snacks.notifier.hide() end, desc = 'Dismiss All Notifications' },
+      { 'gpp', '<Plug>OpenQuicklookAtCursor', desc = 'Preview image under cursor', mode = nx },
+      { '<leader>vh', function() Snacks.notifier.hide() end, desc = 'Dismiss All Notifications', mode = nx },
+      { '<leader>vo', '<cmd>lua require("hasan.utils.file").quicklook_toggle()<CR>', desc = 'Toggle quickLook', mode = nx },
       { '<leader>vn', function() Snacks.notifier.show_history() end, desc = 'Notification History' },
       -- { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Kill this buffer' },
       { '<leader>bo', function() Snacks.bufdelete.other() end, desc = 'Kill this buffer' },

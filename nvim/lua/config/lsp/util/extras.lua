@@ -95,18 +95,4 @@ function M.lsp_rename()
   end)
 end
 
-function M.hover()
-  local img_src = nil
-  Snacks.image.doc.at_cursor(function(src, _)
-    img_src = src
-  end)
-  if not img_src then
-    img_src = require('hasan.utils.buffer').parse_img_str_at_cursor()
-  end
-
-  if img_src then
-    require('hasan.utils.file').quicklook({ img_src })
-  end
-end
-
 return M
