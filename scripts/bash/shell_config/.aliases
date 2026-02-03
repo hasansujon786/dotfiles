@@ -122,6 +122,7 @@ alias cpd="pwd | tr -d '\n' | clip && echo 'pwd copied to clipboard'"
 # alias cpwd="pwd | tr -d '\n' | pbcopy && echo 'pwd copied to clipboard'"
 alias dbgya='YAZI_LOG=debug yazi'
 alias kan='~/dotfiles/scripts/restart-kanata.sh'
+alias kanc='kanata-cmd.exe --cfg ~/dotfiles/scripts/kanata/kanata.kbd'
 alias ahk='powershell -File ~/dotfiles/scripts/ahk/run.ps1'
 
 # git
