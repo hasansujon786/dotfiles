@@ -9,6 +9,7 @@ bind '"\C-@":magic-space'
 
 declare -A EXCLUDE_EXPAND_ALIASES=(
   ["ls"]=1
+  ["cat"]=1
   ["cd"]=1
   ["git"]=1
   ["e"]=1

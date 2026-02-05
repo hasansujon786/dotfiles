@@ -272,6 +272,8 @@ setup_git() {
 
   git config --global init.defaultBranch main
   git config --global credential.helper manager
+  git config --global alias.undo 'reset --soft HEAD^'
+  git config --global alias.remove 'reset HEAD --'
 
   # archive_config "${conf_path[$OS]}"
   # create_symlink "${conf_path[$OS]}" "$DOTFILES/scripts/bash/.gitconfig"
