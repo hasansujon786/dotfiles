@@ -37,8 +37,8 @@ p:: leader("p", () => toggleAlwaysOnTop())
 a:: leader("a", () => send("#{a}"))
 s:: leader("s", () => showVolMixer())
 m:: leader("m", () => showMicPanel())
-^k:: leader("^k", () => toggleKanata())
-MButton:: leader("🖱️", () => enterAutoClikMode())
+#k:: leader("#k", () => toggleKanata())
+MButton:: leader("MB", () => enterAutoClikMode())
 LWin:: return
 #HotIf
 
@@ -57,6 +57,20 @@ LWin:: return
 !PgUp::Home
 !PgDn::End
 !SPACE:: Send("^{SPACE}")
+
+; Example hotkeys for different apps
+; #e:: ToggleApp("explorer.exe")
+#e:: ToggleExplorer()
+#c:: ToggleApp("chrome.exe")
+!t:: ToggleApp("telegram.exe", "telegram")
+
+#b:: ToggleApp("zen.exe")
+!w:: ToggleApp("zen.exe")
+#i:: ToggleApp("Insomnia-12.3.1.exe", "C:/Users/hasan/scoop/apps/insomnia/current/Insomnia.exe")
+!r:: ToggleApp("Insomnia-12.3.1.exe", "C:/Users/hasan/scoop/apps/insomnia/current/Insomnia.exe")
+#j:: ToggleApp("wezterm-gui.exe")
+!e:: ToggleApp("wezterm-gui.exe")
+
 
 ; Screenshot
 #`:: takeScreenshot()
@@ -180,9 +194,9 @@ and isMouseGridInactive()
 
 ; Global arrow with homerow
 #HotIf not WinActive("ahk_exe WindowsTerminal.exe")
-  and not WinActive("ahk_exe alacritty.exe")
-  and not WinActive("ahk_exe wezterm-gui.exe")
-  and not WinActive("ahk_exe Code.exe")
+	and not WinActive("ahk_exe alacritty.exe")
+	and not WinActive("ahk_exe wezterm-gui.exe")
+	and not WinActive("ahk_exe Code.exe")
 !j:: SendInput("{DOWN}")
 !k:: SendInput("{UP}")
 !h:: SendInput("{LEFT}")
@@ -219,7 +233,6 @@ _:: Send("!{PgDn}")
 #HotIf WinActive("Command Palette") and isMouseGridInactive()
 Tab:: Send("{Down}")
 +Tab:: Send("{Up}")
-!p::Send("{Up}")
-!n::Send("{Down}")
+!p:: Send("{Up}")
+!n:: Send("{Down}")
 #HotIf
-

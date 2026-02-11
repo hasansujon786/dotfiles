@@ -449,6 +449,7 @@ install_various_gui_apps() {
     # Install browser
     # ensure_installed extras/googlechrome chrome
     ensure_installed extras/zen-browser zen
+    # ensure_installed extras/insomnia insomnia
   fi
 }
 
@@ -500,8 +501,8 @@ main() {
   install_various_gui_apps
 
   # Language
-  setup_rust
-  setup_python
+  # setup_rust
+  # setup_python
 }
 
 main

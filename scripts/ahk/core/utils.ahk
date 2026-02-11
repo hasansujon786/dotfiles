@@ -79,18 +79,9 @@ beep() {
 ; Different Actions
 ;******************************************************************************
 toggleKanata() {
-	kanataPID := ProcessExist("kanata.exe")
-	trayPID := ProcessExist("kanata-tray.exe")
-	if (trayPID) {
-		ProcessClose(trayPID)
-		ProcessClose(kanataPID)
-		Global kanata_enable := 0
-		TrayTip("Kanata", "Kanata Disabled", 2)
-	} else {
-		Run("C:\Users\" A_UserName "\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\kanata-tray.exe")
-		TrayTip("Kanata", "Kanata Enabled", 2)
-		Global kanata_enable := 1
-	}
+	beep()
+	onOff := RunPowerShellScript("C:/Users/hasan/dotfiles/scripts/ahk/kanata-toggle.ps1")
+	boardUpdateMsgLabel(onOff, 16)
 }
 ; Long press (> 0.5 sec) on Esc closes window - but if you change your mind you can keep it pressed for 3 more seconds
 superEscape() {
