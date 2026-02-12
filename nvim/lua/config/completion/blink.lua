@@ -13,6 +13,7 @@ keymap('i', '<s-tab>', '<BS>')
 return {
   'saghen/blink.cmp',
   version = '*',
+  commit = 'b19413d',
   enabled = require('core.state').completion.module == 'blink',
   event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
