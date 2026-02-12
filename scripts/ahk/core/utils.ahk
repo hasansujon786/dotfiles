@@ -83,6 +83,14 @@ toggleKanata() {
 	onOff := RunPowerShellScript("C:/Users/hasan/dotfiles/scripts/ahk/kanata-toggle.ps1")
 	boardUpdateMsgLabel(onOff, 16)
 }
+suspendAHK() {
+	Suspend()
+	if A_IsSuspended
+		ToolTip("Hotkeys Suspended")
+	else
+		ToolTip("Hotkeys Active")
+	SetTimer(() => ToolTip(), -2000)
+}
 ; Long press (> 0.5 sec) on Esc closes window - but if you change your mind you can keep it pressed for 3 more seconds
 superEscape() {
 	ErrorLevel := !KeyWait("Escape", "T0.5") ; Wait no more than 0.5 sec for key release (also suppress auto-repeat)
