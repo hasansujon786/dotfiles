@@ -174,7 +174,7 @@ switchBetweenSameApps() {
 		WinActivate("ahk_id " awindowsListWithSameProcessAndClass[awindowsListWithSameProcessAndClass.Length])
 	}
 }
-ToggleApp(exeName, startProgram := "") {
+ToggleApp(exeName, startProgram := "", excludeClass := "") {
 	if !ProcessExist(exeName) {
 		previousWindow := WinExist("A")
 		programToRun := startProgram ? startProgram : exeName
@@ -194,13 +194,37 @@ ToggleApp(exeName, startProgram := "") {
 			return
 		}
 	}
-
-	if WinActive("ahk_exe " exeName) {
-		switchBetweenSameApps()
-		; Send "!{Tab}" ; If app is in focus, simulate Alt+Tab to go back
-		; alternateTab()
-	} else {
-		WinActivate("ahk_exe " exeName)
+	try {
+		; Check if the active window is the target exe but not the excluded class
+		isActiveTarget := WinActive("ahk_exe " exeName)
+		if excludeClass
+			isActiveTarget := isActiveTarget && !WinActive("ahk_class " excludeClass)
+		
+		if isActiveTarget {
+			switchBetweenSameApps()
+			; Send "!{Tab}" ; If app is in focus, simulate Alt+Tab to go back
+		} else {
+			; Build window criteria - exclude specific class if provided
+			winCriteria := "ahk_exe " exeName
+			if excludeClass
+				winCriteria .= " ahk_class " excludeClass
+			
+			if excludeClass {
+				; Get all windows matching exe, find first non-excluded one
+				windows := WinGetList("ahk_exe " exeName)
+				for hwnd in windows {
+					if WinGetClass(hwnd) != excludeClass {
+						WinActivate(hwnd)
+						return
+					}
+				}
+			} else {
+				WinActivate("ahk_exe " exeName)
+			}
+		}
+	} catch {
+		MsgBox("Could not find " exeName, "", "T1")
+		return
 	}
 }
 ToggleExplorer() {

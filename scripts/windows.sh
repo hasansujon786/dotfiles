@@ -25,7 +25,7 @@
 winget install -e PDFgear
 scoop install brave qbittorrent localsend
 
-scoop install extras/insomnia
+scoop install extras/insomnia extras/telegram
 scoop bucket add charm https://github.com/charmbracelet/scoop-bucket.git
 scoop install crush
 

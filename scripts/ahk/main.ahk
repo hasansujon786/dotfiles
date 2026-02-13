@@ -25,7 +25,7 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 	spGui.Destroy
 	Run("C:\Users\" A_UserName "\dotfiles\scripts\ahk\main.ahk")
 }
-^!#ESC::suspendAHK()
+^!#ESC:: suspendAHK()
 
 ;******************************************************************************
 ; Leader
@@ -62,19 +62,19 @@ LWin:: return
 ; #e:: ToggleApp("explorer.exe")
 #e:: ToggleExplorer()
 #c:: ToggleApp("chrome.exe")
+#t:: ToggleApp("telegram.exe", "telegram")
 #i:: ToggleApp("Insomnia-12.3.1.exe", "C:/Users/hasan/scoop/apps/insomnia/current/Insomnia.exe")
 #j:: ToggleApp("wezterm-gui.exe")
-#b:: ToggleApp("zen.exe")
-!w:: ToggleApp("zen.exe")
-!e:: ToggleApp("wezterm-gui.exe")
+#b:: ToggleApp("zen.exe", "", "MozillaDialogClass")
+!e:: ToggleApp("zen.exe")
+!w:: ToggleApp("wezterm-gui.exe")
 !r:: ToggleApp("Insomnia-12.3.1.exe", "C:/Users/hasan/scoop/apps/insomnia/current/Insomnia.exe")
 !t:: ToggleApp("telegram.exe", "telegram")
 
-
 ; Screenshot
 #`:: takeScreenshot()
-!#`:: openNewestFile("C:\Users\" A_UserName "\Pictures\Screenshots\*.*")
-^#`:: openNewestFile("C:\Users\" A_UserName "\Downloads\*.*")
+^#`:: openNewestFile("C:\Users\" A_UserName "\Pictures\Screenshots\*.*")
+!#`:: openNewestFile("C:\Users\" A_UserName "\Downloads\*.*")
 PrintScreen:: Send("#+{s}")
 ~LWin & MButton:: Send("#+{s}")
 
@@ -101,7 +101,8 @@ SetCapsLockState(0)
 !\:: Send("\")
 \:: alternateTab()
 !`:: switchBetweenSameApps()
-Capslock::alternateTab()
+*Capslock:: ctrlAndAltTab()
+*Capslock up:: ctrlAndAltTabStop()
 
 ; Window Transparency
 ^#.:: toggleTransparency()
