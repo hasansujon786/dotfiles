@@ -101,6 +101,7 @@ SetCapsLockState(0)
 !\:: Send("\")
 \:: alternateTab()
 !`:: switchBetweenSameApps()
+Capslock::alternateTab()
 
 ; Window Transparency
 ^#.:: toggleTransparency()
