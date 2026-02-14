@@ -42,6 +42,25 @@ MButton:: leader("MB", () => enterAutoClikMode())
 LWin:: return
 #HotIf
 
+#InputLevel 1
+!\:: Send("\")
+\::ActiveLQuickeaderMode()
+#HotIf qleaderPressed
+; \:: quickleader("\", () => alternateTab())
+w:: quickleader("w", () => ToggleApp("wezterm-gui.exe"))
+e:: quickleader("e", () => ToggleApp("wezterm-gui.exe"))
+f:: quickleader("f", () => ToggleExplorer())
+r:: quickleader("r", () => ToggleApp("zen.exe", "", "MozillaDialogClass"))
+\:: quickleader("\", () => ToggleApp("zen.exe", "", "MozillaDialogClass"))
+b:: quickleader("b", () => ToggleApp("zen.exe", "", "MozillaDialogClass"))
+j:: quickleader("j", () => ToggleApp("zen.exe", "", "MozillaDialogClass"))
+g:: quickleader("g", () => ToggleApp("zen.exe", "", "MozillaDialogClass"))
+d:: quickleader("d", () => ToggleApp("zen.exe", "", "MozillaDialogClass"))
+c:: quickleader("c", () => ToggleApp("chrome.exe"))
+i:: quickleader("i", () => ToggleApp("Insomnia-12.3.1.exe", "C:/Users/hasan/scoop/apps/insomnia/current/Insomnia.exe"))
+t:: quickleader("t", () => ToggleApp("telegram.exe", "telegram"))
+#HotIf
+
 ;******************************************************************************
 ; Keymaps
 ;******************************************************************************
@@ -97,9 +116,9 @@ SetCapsLockState(0)
 ;******************************************************************************
 ; Window manazement
 ;******************************************************************************
-#InputLevel 1
-!\:: Send("\")
-\:: alternateTab()
+; #InputLevel 1
+; !\:: Send("\")
+; \:: alternateTab()
 !`:: switchBetweenSameApps()
 *Capslock:: ctrlAndAltTab()
 *Capslock up:: ctrlAndAltTabStop()

@@ -120,3 +120,29 @@ guiExitToBottom(hGui, width, height, startFromYPos) {
 		hGui := ""
 	}
 }
+
+; **************************************************************************
+quickleader(key, cmd) {
+	ResetQuickLeader(1)
+	cmd()
+}
+
+global qleaderPressed := 0
+ActiveLQuickeaderMode() {
+	global qleaderPressed
+	if (qleaderPressed) {
+		return
+	}
+
+	global qleaderPressed := 1
+	SetTimer(ResetQuickLeader, -1000)  ; Reset after 1 seconds
+}
+
+ResetQuickLeader(actionKePressed := 0) {
+	global qleaderPressed
+	if (qleaderPressed == 0) {
+		return
+	}
+	qleaderPressed := 0
+}
+

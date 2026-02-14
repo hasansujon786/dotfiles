@@ -79,7 +79,7 @@ NavRun(Path) {
     ; }
   }
 #HotIf
-#HotIf (WinActive("ahk_class CabinetWClass") or WinActive("Save As")) && !isExplInsertMode
+#HotIf (WinActive("ahk_class CabinetWClass") or WinActive("Save As")) && !isExplInsertMode && !leaderPressed && !qleaderPressed
   i::explorerToggleInsert()
 
   ; Navigation
