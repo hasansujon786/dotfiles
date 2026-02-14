@@ -125,22 +125,29 @@ alternateTab() {
 	Send("{tab}")
 	Send("{alt up}")
 }
-ih := InputHook("B L1 T1", "{Esc}")
+capsLockTime := 0
+capsLockIsDown := false
 ctrlAndAltTab() {
-	ih.Start()
-	reason := ih.Wait()
-	if (reason = "Stopped") {
-		; Send "{Esc}"
-		alternateTab()
-	} else if (reason = "Max") {
-		Send "{Blind}{Ctrl down}" ih.Input
+	global capsLockIsDown
+	global capsLockTime
+	Send "{Blind}{LControl down}"
+	if (!capsLockIsDown) {
+		capsLockTime := A_TickCount
+		capsLockIsDown := true
 	}
 }
 ctrlAndAltTabStop() {
-	if (ih.InProgress) {
-		ih.Stop()
-	} else {
-		Send "{Ctrl up}"
+	global capsLockIsDown
+	if (capsLockIsDown) {
+		Send "{Blind}{LControl Up}"
+		global capsLockTime
+		if (A_TickCount - capsLockTime < 200) { ; modify time here
+			Suspend "1"
+			alternateTab()
+			; Send "{Esc}"
+			Suspend "0"
+		}
+		capsLockIsDown := false
 	}
 }
 ; Extracts the application title from the window's full title
@@ -199,7 +206,7 @@ ToggleApp(exeName, startProgram := "", excludeClass := "") {
 		isActiveTarget := WinActive("ahk_exe " exeName)
 		if excludeClass
 			isActiveTarget := isActiveTarget && !WinActive("ahk_class " excludeClass)
-		
+
 		if isActiveTarget {
 			switchBetweenSameApps()
 			; Send "!{Tab}" ; If app is in focus, simulate Alt+Tab to go back
@@ -208,7 +215,7 @@ ToggleApp(exeName, startProgram := "", excludeClass := "") {
 			winCriteria := "ahk_exe " exeName
 			if excludeClass
 				winCriteria .= " ahk_class " excludeClass
-			
+
 			if excludeClass {
 				; Get all windows matching exe, find first non-excluded one
 				windows := WinGetList("ahk_exe " exeName)
