@@ -142,10 +142,10 @@ ctrlAndAltTabStop() {
 		Send "{Blind}{LControl Up}"
 		global capsLockTime
 		if (A_TickCount - capsLockTime < 200) { ; modify time here
-			Suspend "1"
+			; Suspend "1"
 			alternateTab()
 			; Send "{Esc}"
-			Suspend "0"
+			; Suspend "0"
 		}
 		capsLockIsDown := false
 	}
@@ -250,10 +250,24 @@ ToggleExplorer() {
 FocusZenPiP() {
 	if WinExist("Picture-in-Picture ahk_exe zen.exe") {
 		WinActivate("Picture-in-Picture ahk_exe zen.exe")
-		return true
 	} else {
-		MsgBox("Picture-in-Picture window not found!")
-		return false
+		if WinActive("ahk_exe zen.exe") {
+			Send("^+]")
+			return
+		}
+		
+		previousWindow := WinExist("A")
+		ToggleApp("zen.exe", "", "MozillaDialogClass")
+		if WinActive("ahk_exe zen.exe") {
+			Send("^+]")
+			Sleep(300) ; Small delay for app to fully activate
+			try {
+				WinActivate(previousWindow)
+			} catch {
+				return
+			}
+		}
+
 	}
 }
 

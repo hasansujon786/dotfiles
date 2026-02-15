@@ -46,12 +46,12 @@ LWin:: return
 !\:: Send("\")
 \::ActiveLQuickeaderMode()
 #HotIf qleaderPressed
-; \:: quickleader("\", () => alternateTab())
+\:: quickleader("\", () => alternateTab())
 w:: quickleader("w", () => ToggleApp("wezterm-gui.exe"))
 e:: quickleader("e", () => ToggleApp("wezterm-gui.exe"))
 f:: quickleader("f", () => ToggleExplorer())
 r:: quickleader("r", () => ToggleApp("zen.exe", "", "MozillaDialogClass"))
-\:: quickleader("\", () => ToggleApp("zen.exe", "", "MozillaDialogClass"))
+; \:: quickleader("\", () => ToggleApp("zen.exe", "", "MozillaDialogClass"))
 b:: quickleader("b", () => ToggleApp("zen.exe", "", "MozillaDialogClass"))
 j:: quickleader("j", () => ToggleApp("zen.exe", "", "MozillaDialogClass"))
 g:: quickleader("g", () => ToggleApp("zen.exe", "", "MozillaDialogClass"))
@@ -112,7 +112,7 @@ PrintScreen:: Send("#+{s}")
 ^#b:: showCalendar()
 !;:: SendInput("{AppsKey}") ; Show menu
 #Capslock:: toggleCapsLosck()
-SetCapsLockState(0)
+SetCapsLockState("AlwaysOff")
 
 ;******************************************************************************
 ; Window manazement
@@ -121,8 +121,8 @@ SetCapsLockState(0)
 ; !\:: Send("\")
 ; \:: alternateTab()
 !`:: switchBetweenSameApps()
-*Capslock:: ctrlAndAltTab()
-*Capslock up:: ctrlAndAltTabStop()
+~Capslock:: ctrlAndAltTab()
+~Capslock up:: ctrlAndAltTabStop()
 
 ; Window Transparency
 ^#.:: toggleTransparency()
