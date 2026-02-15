@@ -59,6 +59,7 @@ d:: quickleader("d", () => ToggleApp("zen.exe", "", "MozillaDialogClass"))
 c:: quickleader("c", () => ToggleApp("chrome.exe"))
 i:: quickleader("i", () => ToggleApp("Insomnia-12.3.1.exe", "C:/Users/hasan/scoop/apps/insomnia/current/Insomnia.exe"))
 t:: quickleader("t", () => ToggleApp("telegram.exe", "telegram"))
+z:: quickleader("z", () => FocusZenPiP())
 #HotIf
 
 ;******************************************************************************

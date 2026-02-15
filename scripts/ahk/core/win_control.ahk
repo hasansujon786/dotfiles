@@ -182,10 +182,10 @@ switchBetweenSameApps() {
 	}
 }
 ToggleApp(exeName, startProgram := "", excludeClass := "") {
-	if !ProcessExist(exeName) {
-		previousWindow := WinExist("A")
-		programToRun := startProgram ? startProgram : exeName
-		try {
+	try {
+		if !WinExist("ahk_exe " exeName) {
+			previousWindow := WinExist("A")
+			programToRun := startProgram ? startProgram : exeName
 			Run(programToRun)
 			WinWait("ahk_exe " exeName, , 5)
 			WinActivate("ahk_exe " exeName)
@@ -197,11 +197,9 @@ ToggleApp(exeName, startProgram := "", excludeClass := "") {
 				Sleep(50)
 				WinActivate("ahk_exe " exeName)
 			}
-		} catch {
 			return
 		}
-	}
-	try {
+
 		; Check if the active window is the target exe but not the excluded class
 		isActiveTarget := WinActive("ahk_exe " exeName)
 		if excludeClass
@@ -214,7 +212,7 @@ ToggleApp(exeName, startProgram := "", excludeClass := "") {
 			; Build window criteria - exclude specific class if provided
 			winCriteria := "ahk_exe " exeName
 			if excludeClass
-				winCriteria .= " ahk_class " excludeClass
+				winCriteria := " ahk_class " excludeClass
 
 			if excludeClass {
 				; Get all windows matching exe, find first non-excluded one
@@ -247,6 +245,15 @@ ToggleExplorer() {
 		Run("explorer.exe")
 		WinWait("ahk_class CabinetWClass", , 2)
 		WinActivate("ahk_class CabinetWClass")
+	}
+}
+FocusZenPiP() {
+	if WinExist("Picture-in-Picture ahk_exe zen.exe") {
+		WinActivate("Picture-in-Picture ahk_exe zen.exe")
+		return true
+	} else {
+		MsgBox("Picture-in-Picture window not found!")
+		return false
 	}
 }
 
