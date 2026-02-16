@@ -97,6 +97,7 @@ return {
       { '<leader>il', group = 'link' },
       { '<leader>ill', '<cmd>lua insert("https://picsum.photos/seed/picsum/300/200")<CR>', desc = 'Image link' },
       { '<leader>ild', '<cmd>lua insert("http://dummyimage.com/300x200/000000/555555")<CR>', desc = 'dummy image' },
+      { '<leader>ila', '<cmd>lua insert("https://i.pravatar.cc/150?img=5")<CR>', desc = 'User avatar image' },
 
       { '<leader>n', group = 'org-roam' },
 
