@@ -8,6 +8,7 @@ return {
     { '<leader>gg', '<cmd>Neogit<CR>', desc = 'Open Neogit' },
   },
   opts = {
+    diff_viewer = 'codediff', -- 'diffview'
     graph_style = 'kitty', -- kitty|unicode|ascii -- https://github.com/rbong/flog-symbols
     disable_insert_on_commit = 'auto',
     disable_signs = false,
@@ -41,5 +42,5 @@ return {
       },
     },
   },
-  dependencies = { 'sindrets/diffview.nvim', },
+  dependencies = { 'sindrets/diffview.nvim' },
 }

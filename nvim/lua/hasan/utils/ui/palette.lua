@@ -134,6 +134,7 @@ local function set_custom_highlights()
     PmenuSbar               = { bg = c.bg1 },
     PmenuThumb              = { bg = '#404959' },
     Pmenu                   = { link = 'NormalFloatFlat' },
+    PmenuExtra              = { fg = c.grey },
 
     SuperKanbanCardNormal        = { bg = float_bg },
     SuperKanbanListWinbar        = { fg = c.yellow, bg = '#343f51' },
@@ -292,6 +293,7 @@ local function set_custom_highlights()
     BlinkCmpLabelMatch        = { fg = c.orange },
     BlinkCmpLabelDeprecated   = { fg = c.muted, strikethrough = true },
     BlinkCmpSource            = { fg = c.grey },
+    -- BlinkCmpLabelDescription  = { link = 'BlinkCmpSource' },
     BlinkCmpMenuBorder        = { link = 'FloatBorderFlat' },
     BlinkCmpDoc               = { link = 'BlinkCmpMenu' },
     BlinkCmpDocBorder         = { link = 'BlinkCmpMenuBorder' },

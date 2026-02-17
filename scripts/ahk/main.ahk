@@ -121,8 +121,8 @@ SetCapsLockState("AlwaysOff")
 ; !\:: Send("\")
 ; \:: alternateTab()
 !`:: switchBetweenSameApps()
-~Capslock:: ctrlAndAltTab()
-~Capslock up:: ctrlAndAltTabStop()
+*Capslock:: ctrlAndAltTab()
+*Capslock up:: ctrlAndAltTabStop()
 
 ; Window Transparency
 ^#.:: toggleTransparency()
