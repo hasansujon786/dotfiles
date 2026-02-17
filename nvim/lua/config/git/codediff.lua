@@ -2,10 +2,16 @@
 return {
   'esmuellert/codediff.nvim',
   dependencies = { 'MunifTanjim/nui.nvim' },
+  keys = {
+    { '<leader>gd', '<cmd>CodeDiff<cr>', desc = 'Open Diffview' },
+    { '<leader>gD', '<cmd>CodeDiff history<cr>', desc = 'Open Repo History' },
+    { '<leader>gf', '<cmd>CodeDiff history %<cr>', desc = 'Open File history' },
+    { '<leader>gf', "<Esc><Cmd>'<,'>CodeDiff history<CR>", desc = 'Range history', mode = 'x' },
+  },
   opts = {
     keymaps = {
       view = {
-        quit = 'q', -- Close diff tab
+        quit = '<leader>gd', -- Close diff tab
         toggle_explorer = '<leader>b', -- Toggle explorer visibility (explorer mode only)
         diff_get = 'do', -- Get change from other buffer (like vimdiff)
         diff_put = 'dp', -- Put change to other buffer (like vimdiff)
@@ -17,7 +23,6 @@ return {
         show_help = 'g?', -- Show floating window with available keymaps
       },
       explorer = {
-        select = '<CR>', -- Open diff for selected file
         hover = 'K', -- Show file diff preview
         refresh = 'u', -- Refresh git status
         toggle_view_mode = 'T', -- Toggle between 'list' and 'tree' views

@@ -3,6 +3,7 @@ local Icons = require('hasan.utils.ui.icons')
 return {
   'sindrets/diffview.nvim',
   lazy = true,
+  enabled = false,
   cmd = { 'DiffviewOpen' },
   keys = {
     {
