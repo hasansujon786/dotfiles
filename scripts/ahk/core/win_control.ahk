@@ -128,8 +128,8 @@ alternateTab() {
 capsLockTime := 0
 capsLockIsDown := false
 ctrlAndAltTab() {
-	global capsLockIsDown
-	global capsLockTime
+	global capsLockIsDown, capsLockTime
+	SetCapsLockState "AlwaysOff"   ; <-- prevent toggle on rapid press
 	Send "{Blind}{LControl down}"
 	if (!capsLockIsDown) {
 		capsLockTime := A_TickCount
@@ -137,19 +137,19 @@ ctrlAndAltTab() {
 	}
 }
 ctrlAndAltTabStop() {
-	global capsLockIsDown
+	global capsLockIsDown, capsLockTime
 	if (capsLockIsDown) {
 		Send "{Blind}{LControl Up}"
-		global capsLockTime
-		if (A_TickCount - capsLockTime < 200) { ; modify time here
-			; Suspend "1"
+		if (A_TickCount - capsLockTime < 200) {
+			Suspend "1"
 			alternateTab()
-			; Send "{Esc}"
-			; Suspend "0"
+			Suspend "0"
 		}
 		capsLockIsDown := false
+		SetCapsLockState "AlwaysOff"   ; <-- ensure it's still off after release
 	}
 }
+
 ; Extracts the application title from the window's full title
 ExtractAppTitle(FullTitle) {
 	return SubStr(FullTitle, (InStr(FullTitle, " ", false, -2) + 1) < 1 ? (InStr(FullTitle, " ", false, -2) + 1) - 1 : (InStr(FullTitle, " ", false, -2) + 1))
@@ -255,7 +255,7 @@ FocusZenPiP() {
 			Send("^+]")
 			return
 		}
-		
+
 		previousWindow := WinExist("A")
 		ToggleApp("zen.exe", "", "MozillaDialogClass")
 		if WinActive("ahk_exe zen.exe") {
