@@ -79,17 +79,12 @@ z:: quickleader("z", () => FocusZenPiP())
 !SPACE:: Send("^{SPACE}")
 
 ; Example hotkeys for different apps
-; #e:: ToggleApp("explorer.exe")
 #e:: ToggleExplorer()
 #c:: ToggleApp("chrome.exe")
 #t:: ToggleApp("telegram.exe", "telegram")
 #i:: ToggleApp("Insomnia-12.3.1.exe", "C:/Users/hasan/scoop/apps/insomnia/current/Insomnia.exe")
 #j:: ToggleApp("wezterm-gui.exe")
 #b:: ToggleApp("zen.exe", "", "MozillaDialogClass")
-!e:: ToggleApp("zen.exe")
-!w:: ToggleApp("wezterm-gui.exe")
-!r:: ToggleApp("Insomnia-12.3.1.exe", "C:/Users/hasan/scoop/apps/insomnia/current/Insomnia.exe")
-!t:: ToggleApp("telegram.exe", "telegram")
 
 ; Screenshot
 #`:: takeScreenshot()
