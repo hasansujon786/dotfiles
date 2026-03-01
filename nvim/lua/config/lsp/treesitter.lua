@@ -141,27 +141,28 @@ return {
     {
       'catgoose/nvim-colorizer.lua',
       opts = {
-        filetypes = {
-          '*', -- Highlight all files, but customize some others.
-          dart = { AARRGGBB = true, names = false },
-          css = { css = true },
-        },
-        user_default_options = {
-          RGB = true, -- #RGB hex codes
-          RRGGBB = true, -- #RRGGBB hex codes
-          rgb_fn = true, -- CSS rgb() and rgba() functions
-          hsl_fn = true, -- CSS hsl() and hsla() functions
-          oklch_fn = true, -- CSS oklch() function
-          names = false, -- "Name" codes like Blue or blue
-          RRGGBBAA = false, -- #RRGGBBAA hex codes
-          AARRGGBB = false, -- 0xAARRGGBB hex codes
-          css = false, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-          css_fn = false, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-          mode = 'background', -- Set the display mode. 'foreground', 'background', 'virtualtext'
-          virtualtext = '■',
-          tailwind = 'lsp', -- Available methods are false / true / "normal" / "lsp" / "both" | True is same as normal
+        options = {
+          parsers = {
+            css = true, -- preset: enables names, hex, rgb, hsl, oklch
+            tailwind = { enable = true, lsp = true },
+            hex = {
+              enable = true,
+              rgb = true, --       #RGB (3-digit)
+              rgba = false, --     #RGBA (4-digit)
+              rrggbb = true, --    #RRGGBB (6-digit)
+              rrggbbaa = true, --  #RRGGBBAA (8-digit)
+              aarrggbb = true, --  0xAARRGGBB
+            },
+            names = false,
+          },
+          display = { mode = 'background' },
         },
         buftypes = { '!prompt', '!popup' },
+        -- filetypes = {
+        --   '*', -- Highlight all files, but customize some others.
+        --   dart = { AARRGGBB = true, names = false },
+        --   css = { css = true },
+        -- },
       },
     },
     {

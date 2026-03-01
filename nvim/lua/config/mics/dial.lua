@@ -1,6 +1,6 @@
 local nx = { 'n', 'x' }
 return {
-  'ruicsh/tailwindcss-dial.nvim',
+  'hasansujon786/tailwindcss-dial.nvim',
   lazy = true,
   keys = {
     { '<Plug>(dial-increment)', mode = nx },
@@ -113,6 +113,6 @@ return {
   },
   opts = {
     -- group = "default", -- optional, defaults to "default"
-    -- ft = { 'typescript', 'typescriptreact', 'tsx', 'vue' }, -- optional
+    ft = { 'typescript', 'typescriptreact', 'tsx', 'vue' }, -- optional
   },
 }
