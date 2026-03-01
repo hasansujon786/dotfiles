@@ -198,6 +198,10 @@ require('snacks').setup({
   statuscolumn = {
     left = { 'sign', 'mark' }, -- (high to low)
     right = { 'fold', 'git' },
+    folds = {
+      open = true, -- show open fold icons
+      git_hl = false, -- use Git Signs hl for fold icons
+    },
   },
   scratch = {
     ft = function()

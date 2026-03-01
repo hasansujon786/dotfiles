@@ -61,7 +61,7 @@
   "sidekick.nvim": { "branch": "main", "commit": "c2bdf8cfcd87a6be5f8b84322c1b5052e78e302e" },
   "smear-cursor.nvim": { "branch": "main", "commit": "c85bdbb25db096fbcf616bc4e1357bd61fe2c199" },
   "snacks-file-browser.nvim": { "branch": "main", "commit": "98bb1fd41f5c681878a3fb78a6a90adf9d3e2daf" },
-  "snacks.nvim": { "branch": "main", "commit": "fe7cfe9800a182274d0f868a74b7263b8c0c020b" },
+  "snacks.nvim": { "branch": "main", "commit": "9912042fc8bca2209105526ac7534e9a0c2071b2" },
   "super-kanban.nvim": { "branch": "main", "commit": "fbddd3f48bf672dab1fc6ca26424f3a158623be9" },
   "tailwindcss-dial.nvim": { "branch": "main", "commit": "7f5f926031a45294fc33fa9f0a979cf4fc80c3c0" },
   "text-case.nvim": { "branch": "main", "commit": "e898cfd46fa6cde0e83abb624a16e67d2ffc6457" },

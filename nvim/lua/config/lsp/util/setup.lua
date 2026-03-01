@@ -19,6 +19,11 @@ function M.lsp_attach(args)
     local_conf.lsp_attach(client, bufnr)
   end
 
+  if client:supports_method('textDocument/foldingRange') then
+    local win = vim.api.nvim_get_current_win()
+    vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+  end
+
   -- Disable default formatter ---------------
   -- local should_disable_formatter = lsp_state.use_builtin_lsp_formatter ~= nil
   --   and not vim.tbl_contains(lsp_state.use_builtin_lsp_formatter, client.name)
