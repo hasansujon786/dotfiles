@@ -74,11 +74,15 @@ M.setup = function()
         sourceMaps = true,
         trace = true,
         runtimeExecutable = chromePath, -- Adjust path if needed
+        -- explorer "C:\\Users\\hasan\\AppData\\Local\\Google\\Chrome"
+        -- copy User Data & rename to chrome-debug-profile
         runtimeArgs = {
           '--remote-debugging-port=9222',
+          '--restore-last-session',
           '--no-first-run',
           '--no-default-browser-check',
-          -- '--user-data-dir=C:/Users/hasan/chrome-debug-profile', -- Separate profile
+          '--user-data-dir=C:/Users/hasan/chrome-debug-profile',
+          '--profile-directory=Default',
         },
         skipFiles = { '<node_internals>/**', 'node_modules/**' },
       },
