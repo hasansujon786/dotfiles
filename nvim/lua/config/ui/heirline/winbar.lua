@@ -131,7 +131,7 @@ return {
       condition = function()
         return conditions.buffer_matches({ filetype = dapui_filetypes })
       end,
-      { c.Space, c.FileNameBlock(), c.Rest },
+      { c.Space, c.FileNameBlock() },
     },
     {
       fallthrough = false,

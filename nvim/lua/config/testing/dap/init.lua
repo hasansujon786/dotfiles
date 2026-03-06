@@ -22,7 +22,30 @@ return {
     { '<leader>db', '<cmd>lua require"dap".toggle_breakpoint()<CR>', desc = 'Toggle Breakpoint' },
   },
   dependencies = {
-    { 'theHamsta/nvim-dap-virtual-text', opts = { virt_text_pos = 'eol' } },
+    {
+      'theHamsta/nvim-dap-virtual-text',
+      opts = {
+        virt_text_pos = 'eol',
+        --- @param variable Variable https://microsoft.github.io/debug-adapter-protocol/specification#Types_Variable
+        --- @param buf number
+        --- @param stackframe dap.StackFrame https://microsoft.github.io/debug-adapter-protocol/specification#Types_StackFrame
+        --- @param node userdata tree-sitter node identified as variable definition of reference (see `:h tsnode`)
+        --- @param options nvim_dap_virtual_text_options Current options for nvim-dap-virtual-text
+        --- @return string|nil A text how the virtual text should be displayed or nil, if this variable shouldn't be displayed
+        display_callback = function(variable, buf, stackframe, node, options)
+          if variable.type == 'Function' then
+            return nil
+          end
+
+          -- by default, strip out new line characters
+          if options.virt_text_pos == 'inline' then
+            return ' = ' .. variable.value:gsub('%s+', ' ')
+          else
+            return variable.name .. ' = ' .. variable.value:gsub('%s+', ' ')
+          end
+        end,
+      },
+    },
     'nvim-neotest/nvim-nio',
     {
       'rcarriga/nvim-dap-ui',
@@ -38,8 +61,8 @@ return {
         },
         layouts = {
           {
-            position = 'left',
-            size = 40,
+            position = 'right',
+            size = 36,
             elements = {
               { id = 'scopes', size = 0.40 },
               { id = 'watches', size = 0.20 },

@@ -19,7 +19,8 @@ function M.setup()
   keymap('n', '<leader>dI', '<cmd>lua require"dap".step_back()<cr>', { desc = 'Step Back' })
   keymap('n', '<leader>dO', '<cmd>lua require"dap".step_out()<cr>', { desc = 'Step Out' })
 
-  keymap('n', '<leader>dh', '<cmd>lua require"dap.ui.widgets".hover()<cr>', { desc = 'Hover Variables' })
+  keymap({ 'n', 'x' }, '<leader>dh', '<cmd>lua require"dapui".eval()<cr>', { desc = 'Evaluate' })
+  keymap('n', '<leader>de', '<cmd>lua require"dap.ui.widgets".hover()<cr>', { desc = 'Hover Variables' })
   keymap('n', '<leader>dr', '<cmd>lua require"dap".repl.toggle()<cr>', { desc = 'Toggle Repl' })
   keymap('n', '<leader>du', '<cmd>lua require"dapui".toggle()<cr>', { desc = 'Toggle UI' })
   keymap('n', '<leader>dS', '<cmd>lua require"dap.ui.widgets".scopes()<cr>', { desc = 'Scopes' })
@@ -30,7 +31,6 @@ function M.setup()
   keymap('n', '<leader>dX', '<cmd>lua require"dap".terminate()<cr>', { desc = 'Terminate' })
   keymap('n', '<leader>dg', '<cmd>lua require"dap".session()<cr>', { desc = 'Get Session' })
 
-  keymap({ 'n', 'x' }, '<leader>de', '<cmd>lua require"dapui".eval()<cr>', { desc = 'Evaluate' })
   keymap(
     'n',
     '<leader>dE',
@@ -41,7 +41,7 @@ function M.setup()
   keymap(
     'n',
     '<leader>d.',
-    '<cmd>lua require"dapui".float_element("scopes",{enter=true})<CR>',
+    '<cmd>lua require"dapui".float_element("scopes",{enter=true,width=30,height=10})<CR>',
     { desc = 'Show Scopes' }
   )
 

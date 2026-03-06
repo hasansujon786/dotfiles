@@ -2,6 +2,7 @@ local M = {}
 
 M.setup = function()
   local dap = require('dap')
+  local chromePath = vim.fn.exepath('chrome')
 
   if not dap.adapters['pwa-node'] then
     require('dap').adapters['pwa-node'] = {
@@ -72,7 +73,7 @@ M.setup = function()
         webRoot = '${workspaceFolder}',
         sourceMaps = true,
         trace = true,
-        runtimeExecutable = 'C:/Program Files/Google/Chrome/Application/chrome.exe', -- Adjust path if needed
+        runtimeExecutable = chromePath, -- Adjust path if needed
         runtimeArgs = {
           '--remote-debugging-port=9222',
           '--no-first-run',

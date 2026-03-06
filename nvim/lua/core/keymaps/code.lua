@@ -99,10 +99,10 @@ function M.edit_alternate_file()
 
 local maps_common = {
   { "q", "<esc><cmd>noh<CR>", mode = { "n", "x" } },
-  { "<CR>", ":<up>", silent = false, mode = { "n", "x" }, desc = "Run last command easily" },
-  { "n", "nzz", remap = true, mode = { "n", "x" }, desc = "Repeat the latest \"/\" or \"?\"" },
-  { "N", "Nzz", remap = true, mode = { "n", "x" }, desc = "Repeat the latest \"/\" or \"?\"" },
-  { "'", "`", remap = true, mode = { "n", "x" }, desc = "Jump to the mark" },
+  { "<CR>", ":<up>", mode = { "n", "x" }, silent = false, desc = "Run last command easily" },
+  { "n", "nzz", mode = { "n", "x" }, remap = true, desc = "Repeat the latest \"/\" or \"?\"" },
+  { "N", "Nzz", mode = { "n", "x" }, remap = true, desc = "Repeat the latest \"/\" or \"?\"" },
+  { "'", "`", mode = { "n", "x" }, remap = true, desc = "Jump to the mark" },
   { "@", ":norm @", silent = false, mode = "v", desc = "Run macro on visual selection" },
   { "p", "pgvy", mode = "v" },
   { "y", "ygv<Esc>", mode = "v", desc = "Keep cursor at place" },
@@ -129,7 +129,7 @@ local maps_common = {
   { "dM", ":%g/<c-r>//d<CR>", desc = "Delete all lines with matches" },
   { "<leader>cw", "<cmd>lua require(\"hasan.widgets.inputs\").substitute_word()<CR>", mode = { "n", "x" }, desc = "Substitute word" },
   { "z/", "/\\%><C-r>=line(\"w0\")-1<CR>l\\%<<C-r>=line(\"w$\")+1<CR>l", silent = false, desc = "Search in viewport" },
-  { "z/", "<ESC>/\\%V", silent = false, mode = "x", desc = "Search in visual selection" },
+  { "z/", "<ESC>/\\%V", mode = "x", silent = false, desc = "Search in visual selection" },
   { "gB", M._open, desc = "Opens filepath or URI under cursor" },
   { "gB", M._open_v, mode = "x", desc = "Opens filepath or URI under cursor" },
   { "gW", "<cmd>Translate<CR>", mode = { "n", "x" }, desc = "Search on Translate" },
