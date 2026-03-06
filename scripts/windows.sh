@@ -23,6 +23,8 @@
 # scoop install abdownloadmanager obsidian
 
 winget install -e PDFgear
+winget install --id Telegram.TelegramDesktop
+
 scoop install brave qbittorrent localsend
 
 scoop install extras/insomnia extras/telegram
