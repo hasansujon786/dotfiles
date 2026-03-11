@@ -24,6 +24,9 @@ nmap <silent> <Plug>(fix-current-world) :call hasan#repeat#fix_word()<CR>
 " exchange-operator
 nnoremap <silent><Plug>(exchange-operator)  :set opfunc=exchange_operator#_opfunc<CR>g@
 vnoremap <silent><Plug>(exchange-operator)  :<C-U>call exchange_operator#_opfunc(visualmode())<CR>
+vmap gx <Plug>(exchange-operator)
+nmap gx <Plug>(exchange-operator)
+
 " dial
 nmap  <C-a>  <Plug>(dial-increment)
 nmap  <C-x>  <Plug>(dial-decrement)

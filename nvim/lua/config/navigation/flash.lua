@@ -1,6 +1,7 @@
 local nx, nxo = { 'n', 'x' }, { 'n', 'x', 'o' }
 return {
   'folke/flash.nvim',
+  -- enabled = not vim.g.vscode,
   opts = {
     labels = ';asdfghjklwertyuiopxcvbnm',
     modes = {

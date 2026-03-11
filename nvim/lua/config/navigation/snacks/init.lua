@@ -3,7 +3,7 @@ local n, nx = { 'n' }, { 'n', 'x' }
 return {
   {
     'folke/snacks.nvim',
-    enabled = true,
+    enabled = not vim.g.vscode,
     lazy = false,
     event = 'UIEnter',
     config = function()

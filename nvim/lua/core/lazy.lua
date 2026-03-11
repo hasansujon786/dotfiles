@@ -34,6 +34,7 @@ local spec = {
 
 if vim.g.vscode then
   spec = {
+    { import = 'config.navigation' },
     { import = 'config.mics' },
   }
 end

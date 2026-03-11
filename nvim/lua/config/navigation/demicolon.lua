@@ -45,7 +45,7 @@ end
 
 return {
   'mawkler/demicolon.nvim',
-  enabled = true,
+  enabled = not vim.g.vscode,
   keys = {
     { ';', mode = nxo },
     { ',', mode = nxo },

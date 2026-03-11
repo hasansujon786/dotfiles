@@ -2,6 +2,7 @@ return {
   'ThePrimeagen/harpoon',
   branch = 'harpoon2',
   lazy = true,
+  enabled = not vim.g.vscode,
   module = 'harpoon',
   keys = {
     {

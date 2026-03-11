@@ -3,6 +3,7 @@ local util = require('config.navigation.neo_tree.util')
 return {
   'nvim-neo-tree/neo-tree.nvim',
   lazy = true,
+  enabled = not vim.g.vscode,
   -- event = 'CursorHold',
   cmd = { 'Neotree' },
   branch = 'v3.x',
