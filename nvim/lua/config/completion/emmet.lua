@@ -1,4 +1,5 @@
 local ni = { 'n', 'i' }
+local ft = { 'jsx', 'tsx', 'vue', 'html' }
 return {
   'mattn/emmet-vim',
   lazy = true,
@@ -6,9 +7,28 @@ return {
     vim.g.user_emmet_leader_key = '<C-c>'
   end,
   keys = {
-    { '<C-c><C-c>', '<plug>(emmet-expand-abbr)', desc = 'Emmet: Expand abbreviation', mode = ni, silent = true },
-    { '<C-c>e', '<plug>(emmet-update-tag)', desc = 'Emmet: Update tag', silent = true },
-    { '<C-c>u', '<plug>(emmet-update-tag)', desc = 'Emmet: Update tag', silent = true },
+    {
+      '<C-c><C-c>',
+      '<plug>(emmet-expand-abbr)',
+      desc = 'Emmet: Expand abbreviation',
+      mode = ni,
+      silent = true,
+      ft = ft,
+    },
+    {
+      '<C-c>e',
+      '<plug>(emmet-update-tag)',
+      desc = 'Emmet: Update tag',
+      silent = true,
+      ft = ft,
+    },
+    {
+      '<C-c>u',
+      '<plug>(emmet-update-tag)',
+      desc = 'Emmet: Update tag',
+      silent = true,
+      ft = ft,
+    },
     {
       '<C-c>w',
       function()
@@ -16,8 +36,16 @@ return {
       end,
       desc = 'Emmet: Wrap tag',
       silent = true,
+      ft = ft,
     },
-    { '<C-c>w', '<plug>(emmet-expand-abbr)', desc = 'Emmet: Wrap tag', mode = 'v', silent = true },
+    {
+      '<C-c>w',
+      '<plug>(emmet-expand-abbr)',
+      desc = 'Emmet: Wrap tag',
+      mode = 'v',
+      silent = true,
+      ft = ft,
+    },
     {
       '<C-c>x',
       function()
@@ -25,6 +53,7 @@ return {
       end,
       desc = 'Emmet: Remove current tag',
       silent = true,
+      ft = ft,
     },
   },
 }
