@@ -1,5 +1,5 @@
 local ni = { 'n', 'i' }
-local ft = { 'jsx', 'tsx', 'vue', 'html' }
+local ft = { 'jsx', 'tsx', 'vue', 'html', 'typescriptreact', 'javascriptreact' }
 return {
   'mattn/emmet-vim',
   lazy = true,
