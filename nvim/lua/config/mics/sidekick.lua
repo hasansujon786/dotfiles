@@ -25,7 +25,7 @@ return {
       '<c-.>',
       function()
         -- require('sidekick.cli').toggle()
-        require('sidekick.cli').focus()
+        require('sidekick.cli').focus({ filter = { installed = true } })
       end,
       desc = 'Sidekick: Focus CLI',
       mode = { 'n', 't', 'i', 'x' },
@@ -78,6 +78,14 @@ return {
     },
     {
       '<leader>ap',
+      function()
+        require('sidekick.cli').prompt()
+      end,
+      mode = { 'n', 'x' },
+      desc = 'Sidekick: Select Prompt',
+    },
+    {
+      '<C-i>',
       function()
         require('sidekick.cli').prompt()
       end,
