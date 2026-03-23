@@ -341,6 +341,22 @@ setup_yazi() {
   archive_config "${conf_path[$OS]}/config"
   create_symlink "${conf_path[$OS]}/config" "$HOME/dotfiles/tui/yazi"
 }
+setup_opencode() {
+  declare -A conf_path
+  conf_path[win]="$HOME/.config/opencode"
+  conf_path[lin]="$HOME/.config/opencode"
+
+  heading opencode
+  get opencode
+
+  mkdir -p "${conf_path[$OS]}/themes"
+
+  archive_config "${conf_path[$OS]}/themes"
+  archive_config "${conf_path[$OS]}/tui.json"
+
+  create_symlink "${conf_path[$OS]}/themes" "$HOME/dotfiles/tui/opencode/themes"
+  create_symlink "${conf_path[$OS]}/tui.json" "$HOME/dotfiles/tui/opencode/tui.json"
+}
 setup_autohotkey() {
   if [[ "$OS" == "win" ]]; then
     heading autohotkey
@@ -490,10 +506,11 @@ main() {
   install_various_cli_apps
   setup_nvim
   setup_autohotkey
+  # setup_kanata
   setup_yazi
   setup_lazygit
   setup_pwsh
-  setup_kanata
+  setup_opencode
 
   # GUI Apps
   setup_wezterm

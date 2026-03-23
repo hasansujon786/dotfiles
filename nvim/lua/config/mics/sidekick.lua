@@ -9,45 +9,45 @@ return {
     --     enabled = true,
     --   },
     -- },
+    cli = {
+      prompts = {
+        component = 'Please refactor {this} to a component',
+        refactor = 'Please refactor {this} to be more maintainable',
+        -- security = 'Review {file} for security vulnerabilities',
+        -- custom = function(ctx)
+        --   return 'Current file: ' .. ctx.buf .. ' at line ' .. ctx.row
+        -- end,
+      },
+    },
   },
   keys = {
-    -- {
-    --   '<tab>',
-    --   function()
-    --     -- if there is a next edit, jump to it, otherwise apply it if any
-    --     if not require('sidekick').nes_jump_or_apply() then
-    --       return '<Tab>' -- fallback to normal tab
-    --     end
-    --   end,
-    --   expr = true,
-    --   desc = 'Goto/Apply Next Edit Suggestion',
-    -- },
     {
       '<c-.>',
       function()
-        require('sidekick.cli').toggle()
+        -- require('sidekick.cli').toggle()
+        require('sidekick.cli').focus()
       end,
-      desc = 'Sidekick: Toggle CLI',
+      desc = 'Sidekick: Focus CLI',
       mode = { 'n', 't', 'i', 'x' },
     },
     {
       '<leader>aa',
       function()
-        require('sidekick.cli').toggle()
+        require('sidekick.cli').toggle({ filter = { installed = true } })
       end,
       desc = 'Sidekick: Toggle CLI',
     },
     {
       '<leader>as',
       function()
-        require('sidekick.cli').select()
+        require('sidekick.cli').select({ filter = { installed = true } })
       end,
       -- Or to select only installed tools:
       -- require("sidekick.cli").select({ filter = { installed = true } })
       desc = 'Sidekick: Select CLI',
     },
     {
-      '<leader>aC',
+      '<leader>ac',
       function()
         require('sidekick.cli').close()
       end,
