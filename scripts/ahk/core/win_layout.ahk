@@ -2,11 +2,18 @@
 ; Custom layout
 ;******************************************************************************
 
-Global TASKBAR_HEIGHT := 40 ;; 40
+Global TASKBAR_HEIGHT := 40 ;; 40  -6
+Global POWERTOYS_DOC := false
 
 ; "wt.exe", "ahk_exe WindowsTerminal.exe" ; "Code.exe", "ahk_exe Code.exe"
-Global EDITOR_EXE := [ "wezterm-gui.exe", "ahk_exe wezterm-gui.exe" ]
-Global BROWSER_EXE := [ "zen.exe", "ahk_class MozillaWindowClass" ]
+Global EDITOR_EXE := [
+	"wezterm-gui.exe",
+	"ahk_exe wezterm-gui.exe"
+]
+Global BROWSER_EXE := [
+	"zen.exe",
+	"ahk_class MozillaWindowClass"
+]
 ; Global BROWSER_EXE := [ "chrome.exe", "ahk_class Chrome_WidgetWin_1" ]
 
 changeLayoutTo(layoutName) {
@@ -80,7 +87,11 @@ runLayoutAction(EXE_FULL, EXE, side) {
 		} else if (side == "maximized_custom") {
 			;           ↓ here 0 hides the video behind the window
 			; WinMove(-8, 1, A_ScreenWidth + 16, A_ScreenHeight + 8 - TASKBAR_HEIGHT, "A")
-			WinMove(-8, 1, A_ScreenWidth + 16, A_ScreenHeight - TASKBAR_HEIGHT, "A")
+			if (POWERTOYS_DOC) {
+				WinMove(-8, TASKBAR_HEIGHT - 1, A_ScreenWidth + 16, A_ScreenHeight - (TASKBAR_HEIGHT - 10), "A")
+			} else {
+				WinMove(-8, 1, A_ScreenWidth + 16, A_ScreenHeight - TASKBAR_HEIGHT, "A")
+			}
 			; WinMove(, , A_ScreenWidth + 8, A_ScreenHeight - 36, "A")
 			; centerCurrentWindow()
 		} else {
