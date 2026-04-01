@@ -48,7 +48,7 @@
   },
   "med-mobile-first": {
     "prefix": "med-mobile-first",
-    "body": ["@media screen and (min-width: ${1:600px}) {", "  ${0}", "}"],
+    "body": ["@media screen and (min-width: ${1:768px}) {", "  ${0}", "}"],
     "description": "Create a full-bleed container"
   }
 }
