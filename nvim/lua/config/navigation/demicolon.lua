@@ -71,8 +71,8 @@ return {
     { 'T', eyeliner_jump('T'), desc = 'Jump to char', mode = nxo, expr = true },
 
     -- LSP
-    { 'g[', word_jump({ forward = false }), desc = 'Prev Reference', mode = nxo },
-    { 'g]', word_jump({ forward = true }), desc = 'Next Reference', mode = nxo },
+    -- { 'g[', word_jump({ forward = false }), desc = 'Prev Reference', mode = nxo },
+    -- { 'g]', word_jump({ forward = true }), desc = 'Next Reference', mode = nxo },
     { '[[', word_jump({ forward = false }), desc = 'Prev Reference', mode = nxo },
     { ']]', word_jump({ forward = true }), desc = 'Next Reference', mode = nxo },
     -- DAP

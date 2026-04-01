@@ -8,7 +8,7 @@ return {
   event = { 'VeryLazy' },
   cmd = { 'TSUpdate', 'TSUpdateSync', 'TSInstall', 'TSInstallSync' },
   branch = 'master',
-  config = function()
+  konfig = function()
     -- TSInstallSync javascript typescript tsx
     local parsers = {
       'bash',
@@ -84,10 +84,10 @@ return {
             -- ['iG'] = { query = '@attribute.inner', desc = 'inner return' },
             -- ['aG'] = { query = '@attribute.outer', desc = 'return' },
 
-            ['iv'] = { query = '@assignment.lhs', desc = 'assignment lhs' },
-            ['av'] = { query = '@assignment.outer', desc = 'assignment' },
-            ['iV'] = { query = '@assignment.rhs', desc = 'assignment rhs' },
-            ['aV'] = { query = '@assignment.outer', desc = 'assignment' },
+            -- ['iV'] = { query = '@assignment.lhs', desc = 'assignment lhs' },
+            -- ['aV'] = { query = '@assignment.outer', desc = 'assignment' },
+            -- ['iv'] = { query = '@assignment.rhs', desc = 'assignment rhs' },
+            -- ['av'] = { query = '@assignment.outer', desc = 'assignment' },
 
             ['i/'] = { query = '@comment.inner', desc = 'inner comment' },
             -- ['a/'] = { query = '@comment.outer', desc = 'comment' },

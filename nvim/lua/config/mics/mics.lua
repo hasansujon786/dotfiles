@@ -123,6 +123,8 @@ return {
           m = gen_spec.treesitter({ a = '@class.outer', i = '@class.inner' }),
           ['='] = gen_spec.treesitter({ a = '@attribute.outer', i = '@attribute.inner' }),
           P = gen_spec.treesitter({ a = '@_pair.outer', i = '@_pair.inner' }),
+          v = gen_spec.treesitter({ a = '@assignment.outer', i = '@assignment.rhs' }),
+          V = gen_spec.treesitter({ a = '@assignment.outer', i = '@assignment.lhs' }),
 
           -- ['*'] = gen_spec.pair('*', '*', { type = 'greedy' }),
           -- ['_'] = gen_spec.pair('_', '_', { type = 'greedy' }),
