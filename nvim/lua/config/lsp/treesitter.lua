@@ -8,7 +8,7 @@ return {
   event = { 'VeryLazy' },
   cmd = { 'TSUpdate', 'TSUpdateSync', 'TSInstall', 'TSInstallSync' },
   branch = 'master',
-  konfig = function()
+  config = function()
     -- TSInstallSync javascript typescript tsx
     local parsers = {
       'bash',
