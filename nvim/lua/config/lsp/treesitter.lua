@@ -25,19 +25,14 @@ return {
         vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
       end,
     })
-
-    -- keymap('n', '[a', '<Plug>(ts-swap-parameter-prev)<cmd>call repeat#set("\\<Plug>(ts-swap-parameter-prev)")<CR>', { desc = 'Swap parameter prev' })
-    -- keymap('n', ']a', '<Plug>(ts-swap-parameter-next)<cmd>call repeat#set("\\<Plug>(ts-swap-parameter-next)")<CR>', { desc = 'Swap parameter next' })
   end,
   opts = {},
-  -- config = function()
-  --   require("nvim-treesitter").setup({
-  --     install_dir = vim.fn.stdpath('data') .. '/site'
-  --   })
-  -- end,
   dependencies = {
-    -- { 'hasansujon786/nvim-treesitter-textobjects', dev = false },
-    { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main' },
+    {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      branch = 'main',
+      opts = {},
+    },
     { 'windwp/nvim-ts-autotag', opts = {} },
     {
       'catgoose/nvim-colorizer.lua',
@@ -87,7 +82,7 @@ return {
           desc = 'Move cursor to context',
         },
       },
-      opts = function(a, b, c)
+      opts = function()
         return {
           enable = require('core.state').treesitter.enabled_context, -- Enable this plugin (Can be enabled/disabled later via commands)
           max_lines = 5, -- How many lines the window should span. Values <= 0 mean no limit.

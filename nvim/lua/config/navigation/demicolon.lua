@@ -96,6 +96,11 @@ return {
     -- Cycle through Yanklist items
     { '[r', '<Plug>(yanklist-cycle-forward)', desc = 'Yanklist forward' },
     { ']r', '<Plug>(yanklist-cycle-backward)', desc = 'Yanklist backward' },
+
+    -- stylua: ignore start
+    { '[a', '<cmd>lua require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner")<CR>', desc = 'Swap parameter prev' },
+    { ']a', '<cmd>lua require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner")<CR>', desc = 'Swap parameter next' },
+    -- stylua: ignore end
   },
   opts = {
     -- Create default keymaps
