@@ -12,6 +12,33 @@ M.theme = {
 M.treesitter = {
   auto_conceal_html_class = true,
   enabled_context = true,
+
+  parsers_by_ft = {
+    markdown = { 'markdown' },
+
+    html = { 'html' },
+    css = { 'css' },
+    json = { 'json' },
+
+    vue = { 'vue' },
+    astro = { 'astro' },
+    javascript = { 'javascript' },
+    typescript = { 'typescript' },
+    tsx = { 'typescriptreact' },
+
+    dart = { 'dart' },
+
+    go = { 'go' },
+    gomod = { 'gomod' },
+
+    gitcommit = { 'gitcommit' },
+    bash = { 'sh', 'bash', 'zsh' },
+    powershell = { 'ps1', 'psm1', 'psd1' },
+
+    lua = { 'lua' },
+    vim = { 'vim' },
+    vimdoc = { 'help' },
+  }
 }
 
 M.completion = {

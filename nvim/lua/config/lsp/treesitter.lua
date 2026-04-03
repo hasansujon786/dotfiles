@@ -1,142 +1,43 @@
 -- main branch config
 -- https://github.com/den-is/nvim/blob/master/lua/plugins/treesitter.lua
 -- https://www.reddit.com/r/neovim/comments/1ppa4ag/comment/nungaa0/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
-
 return {
   'nvim-treesitter/nvim-treesitter',
-  lazy = true,
+  lazy = false,
+  build = ':TSUpdate',
   event = { 'VeryLazy' },
   cmd = { 'TSUpdate', 'TSUpdateSync', 'TSInstall', 'TSInstallSync' },
-  branch = 'master',
-  config = function()
-    -- TSInstallSync javascript typescript tsx
-    local parsers = {
-      'bash',
-      'gitcommit',
-      'css',
-      'dart',
-      'html',
-      'json',
-      'jsonc',
-      'lua',
-      'markdown',
-      'markdown_inline',
-      'regex',
-      'vim',
-      'vimdoc',
-      'vue',
-      'javascript',
-      'typescript',
-      'tsx',
-      'powershell',
-      'astro',
-      'go',
-      'gomod',
-    }
+  branch = 'main',
+  init = function()
+    vim.env.CC = 'gcc'
+    vim.g.no_plugin_maps = true
 
-    require('nvim-treesitter.configs').setup({
-      ensure_installed = parsers,
-      highlight = {
-        enable = true, -- false will disable the whole extension
-        use_languagetree = false,
-        disable = { 'vim' },
-        additional_vim_regex_highlighting = { 'vim', 'markdown' }, -- Required since TS highlighter doesn't support all syntax features (conceal)
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = 'g<tab>', -- maps in normal mode to init the node/scope selection
-          scope_incremental = 'O', -- increment to the upper scope (as defined in locals.scm)
-          node_incremental = '<tab>', -- increment to the upper named parent
-          node_decremental = '<s-tab>', -- decrement to the previous node
-        },
-      },
-      indent = { enable = true, disable = { 'dart' } },
-      textobjects = {
-        select = {
-          enable = true,
-          lookahead = true, -- Automatically jump forward to text-objects, similar to targets.vim
-          keymaps = {
-            -- You can use the capture groups defined in textobjects.scm
-            -- ['if'] = { query = '@function.inner', desc = 'inner function' },
-            -- ['af'] = { query = '@function.outer', desc = 'function' },
-            -- ['ic'] = { query = '@call.inner', desc = 'inner function call' },
-            -- ['ac'] = { query = '@call.outer', desc = 'function call' },
-            -- ['ia'] = { query = '@parameter.inner', desc = 'inner parameter' },
-            -- ['aa'] = { query = '@parameter.outer', desc = 'parameter' },
+    local state = require('core.state')
+    local filetypes = vim.iter(vim.tbl_values(state.treesitter.parsers_by_ft)):flatten():totable()
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = filetypes,
+      callback = function()
+        pcall(vim.treesitter.start)
 
-            -- ['im'] = { query = '@class.inner', desc = 'inner class' },
-            -- ['am'] = { query = '@class.outer', desc = 'class' },
+        vim.wo.foldmethod = 'expr'
+        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
-            -- ['ik'] = { query = '@jsx.inner', desc = 'inner block' },
-            -- ['ak'] = { query = '@jsx.outer', desc = 'block' },
-
-            -- ['io'] = { query = '@block.inner', desc = 'inner block' },
-            -- ['ao'] = { query = '@block.outer', desc = 'block' },
-            -- ['iC'] = { query = '@conditional.inner', desc = 'inner conditional' },
-            -- ['aC'] = { query = '@conditional.outer', desc = 'conditional' },
-            ['iL'] = { query = '@loop.inner', desc = 'inner loop' },
-            ['aL'] = { query = '@loop.outer', desc = 'loop' },
-
-            ['iR'] = { query = '@return.inner', desc = 'inner return' },
-            ['aR'] = { query = '@return.outer', desc = 'return' },
-
-            -- ['iG'] = { query = '@attribute.inner', desc = 'inner return' },
-            -- ['aG'] = { query = '@attribute.outer', desc = 'return' },
-
-            -- ['iV'] = { query = '@assignment.lhs', desc = 'assignment lhs' },
-            -- ['aV'] = { query = '@assignment.outer', desc = 'assignment' },
-            -- ['iv'] = { query = '@assignment.rhs', desc = 'assignment rhs' },
-            -- ['av'] = { query = '@assignment.outer', desc = 'assignment' },
-
-            ['i/'] = { query = '@comment.inner', desc = 'inner comment' },
-            -- ['a/'] = { query = '@comment.outer', desc = 'comment' },
-
-            -- ['ik'] = { query = '@_pair.inner', desc = 'inner pair' },
-            -- ['ak'] = { query = '@_pair.outer', desc = 'outer pair' }, -- object's { key: value }
-            ['iS'] = { query = '@_subtree.inner', desc = 'inner subtree' },
-            ['aS'] = { query = '@_subtree.outer', desc = 'outer subtree' },
-          },
-        },
-        swap = {
-          enable = true,
-          swap_next = {
-            ['<Plug>(ts-swap-parameter-next)'] = '@parameter.inner',
-          },
-          swap_previous = {
-            ['<Plug>(ts-swap-parameter-prev)'] = '@parameter.inner',
-          },
-        },
-        move = {
-          enable = true,
-          set_jumps = false, -- whether to set jumps in the jumplist
-          goto_next_start = {
-            ['<Plug>(ts-jump-next-s-func)'] = '@function.outer',
-            ['<Plug>(ts-jump-next-s-class)'] = '@class.outer',
-          },
-          goto_previous_start = {
-            ['<Plug>(ts-jump-prev-s-func)'] = '@function.outer',
-            ['<Plug>(ts-jump-prev-s-class)'] = '@class.outer',
-          },
-          goto_next_end = {
-            [']F'] = '@function.outer',
-            [']M'] = '@class.outer',
-          },
-          goto_previous_end = {
-            ['[F'] = '@function.outer',
-            ['[M'] = '@class.outer',
-          },
-        },
-      },
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end,
     })
 
-    -- stylua: ignore start
-    keymap('n', '[a', '<Plug>(ts-swap-parameter-prev)<cmd>call repeat#set("\\<Plug>(ts-swap-parameter-prev)")<CR>', { desc = 'Swap parameter prev' })
-    keymap('n', ']a', '<Plug>(ts-swap-parameter-next)<cmd>call repeat#set("\\<Plug>(ts-swap-parameter-next)")<CR>', { desc = 'Swap parameter next' })
+    -- keymap('n', '[a', '<Plug>(ts-swap-parameter-prev)<cmd>call repeat#set("\\<Plug>(ts-swap-parameter-prev)")<CR>', { desc = 'Swap parameter prev' })
+    -- keymap('n', ']a', '<Plug>(ts-swap-parameter-next)<cmd>call repeat#set("\\<Plug>(ts-swap-parameter-next)")<CR>', { desc = 'Swap parameter next' })
   end,
+  opts = {},
+  -- config = function()
+  --   require("nvim-treesitter").setup({
+  --     install_dir = vim.fn.stdpath('data') .. '/site'
+  --   })
+  -- end,
   dependencies = {
     -- { 'hasansujon786/nvim-treesitter-textobjects', dev = false },
-    { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'master' },
+    { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main' },
     { 'windwp/nvim-ts-autotag', opts = {} },
     {
       'catgoose/nvim-colorizer.lua',
@@ -186,7 +87,7 @@ return {
           desc = 'Move cursor to context',
         },
       },
-      opts = function()
+      opts = function(a, b, c)
         return {
           enable = require('core.state').treesitter.enabled_context, -- Enable this plugin (Can be enabled/disabled later via commands)
           max_lines = 5, -- How many lines the window should span. Values <= 0 mean no limit.

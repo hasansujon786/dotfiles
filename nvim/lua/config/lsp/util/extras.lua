@@ -32,6 +32,9 @@ function M.execute(action, bufnr, on_complete)
 end
 
 function M.install_essential_servers()
+  local state = require('core.state')
+  require('nvim-treesitter').install(vim.tbl_keys(state.treesitter.parsers_by_ft))
+
   local ok, registry = pcall(require, 'mason-registry')
   if not ok then
     print('[Mason] Please install mason and try again')

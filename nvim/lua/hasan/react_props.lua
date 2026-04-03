@@ -1,7 +1,5 @@
 local M = {}
 
-local ts_utils = require('nvim-treesitter.ts_utils')
-
 -- Walk up from cursor to find the enclosing React component node
 local function find_component(node)
   local cur = node
@@ -40,7 +38,7 @@ end
 -- Get the top-level declaration row (the line we insert the interface above)
 local function get_decl_start_row(comp_node, kind, outer)
   if kind == 'function_declaration' and outer and outer:type() == 'export_statement' then
-    local row = outer:range() -- returns sr, sc, er, ec
+    local row = outer:range()
     return row
   end
   local row = comp_node:range()
@@ -53,7 +51,7 @@ function M.generate_props_interface()
   end
 
   local bufnr = vim.api.nvim_get_current_buf()
-  local node = ts_utils.get_node_at_cursor()
+  local node = vim.treesitter.get_node()
 
   if not node then
     vim.notify('No treesitter node at cursor', vim.log.levels.WARN)

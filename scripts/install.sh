@@ -395,7 +395,7 @@ install_various_cli_apps() {
   get wget curl fd ripgrep zoxide fzf delta jq eza bat bc qrencode
 
   if [[ "$OS" == "win" ]]; then
-    get mingw make
+    get mingw make tree-sitter
 
     # htop-like system-monitor # btop
     get ntop
