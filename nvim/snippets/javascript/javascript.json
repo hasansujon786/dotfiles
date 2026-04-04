@@ -51,13 +51,41 @@
     "description": "await a promise for given time"
   },
   "basic function": {
-    "prefix": "fn",
+    "prefix": "cf",
     "body": ["const ${1:fn_name} = () => {\n  ${0}\n}"],
     "description": "Prettify any nested type"
   },
   "async function": {
-    "prefix": "fna",
+    "prefix": "cfa",
     "body": ["const ${1:fn_name} = async () => {\n  ${0}\n}"],
     "description": "Prettify any nested type"
+  },
+  "Function": {
+    "prefix": "fn",
+    "body": [
+      "function ${1:name}(${2:params}) {",
+      "  $0",
+      "}"
+    ],
+    "description": "Create a function"
+  },
+  "Async Function": {
+    "prefix": "fna",
+    "body": [
+      "async function ${1:name}(${2:params}) {",
+      "  $0",
+      "}"
+    ],
+    "description": "Create an async function"
+  },
+  "Pretty JSON stringify": {
+    "prefix": "jsonpp",
+    "body": ["JSON.stringify(${1:data}, null, 2)$0"],
+    "description": "Pretty print JSON with 2-space indentation"
+  },
+  "Console table": {
+    "prefix": "clt",
+    "body": ["console.table(${1:data})$0"],
+    "description": "Log data as table"
   }
 }

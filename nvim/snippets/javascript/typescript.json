@@ -56,5 +56,29 @@
     "prefix": "typePrettify",
     "body": ["type Prettify<T> = {", "  [K in keyof T]: T[K]", "} & {}"],
     "description": "Flatten and normalize TypeScript types for better editor display"
+  },
+  "Const array to union type": {
+    "prefix": "constarr-union",
+    "body": [
+      "export const ${1:NAME} = [",
+      "  ${2:'VALUE_1'},",
+      "  ${3:'VALUE_2'},",
+      "] as const",
+      "",
+      "export type ${4:${1/(.*)/${1:/pascalcase}/}} = (typeof ${1})[number]$0"
+    ],
+    "description": "Create const array and infer union type"
+  },
+  "Const object values to union type": {
+    "prefix": "constobj-union",
+    "body": [
+      "export const ${1:NAME} = {",
+      "  ${2:key1}: ${3:'value1'},",
+      "  ${4:key2}: ${5:'value2'},",
+      "} as const",
+      "",
+      "export type ${6:${1/(.*)/${1:/pascalcase}/}} = (typeof ${1})[keyof typeof ${1}]$0"
+    ],
+    "description": "Create const object and infer union of values"
   }
 }
