@@ -95,9 +95,13 @@ PrintScreen:: Send("#+{s}")
 
 ; Audio Control
 #s:: Send("^#v")
-#Del:: Send("{Volume_Mute}")
-#PgUp:: volup()
-#PgDn:: voldown()
+; Del:: Send("{Volume_Mute}")
+Pause:: Send("{Media_Play_Pause}")
+#Del:: Send("{Media_Play_Pause}") ; Play/Pause
+#PgUp:: Send("{Media_Prev}")      ; Next track
+#PgDn:: Send("{Media_Next}")      ; Previous track
+; #PgUp:: volup()
+; #PgDn:: voldown()
 #HotIf winIsMouseOver("ahk_class Shell_TrayWnd")
 ~LAlt & WheelUP:: volup()
 ~LAlt & WheelDown:: voldown()

@@ -22,3 +22,7 @@ git clone --depth 1 https://github.com/hasansujon786/dotfiles ~/dotfiles && cd ~
 ```PowerShell
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/hasansujon786/dotfiles/refs/heads/main/nvim/lua/core/keymaps/code.lua" -OutFile "$HOME\AppData\Local\nvim\init.lua"
 ```
+
+
+% keymaps is not working
+a= textobject
