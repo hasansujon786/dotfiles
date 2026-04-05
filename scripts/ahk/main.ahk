@@ -50,15 +50,10 @@ LWin:: return
 w:: quickleader("w", () => ToggleApp("wezterm-gui.exe"))
 e:: quickleader("e", () => ToggleApp("wezterm-gui.exe"))
 f:: quickleader("f", () => ToggleExplorer())
-r:: quickleader("r", () => ToggleApp("zen.exe", "", "MozillaDialogClass"))
-; \:: quickleader("\", () => ToggleApp("zen.exe", "", "MozillaDialogClass"))
-b:: quickleader("b", () => ToggleApp("zen.exe", "", "MozillaDialogClass"))
-j:: quickleader("j", () => ToggleApp("zen.exe", "", "MozillaDialogClass"))
-g:: quickleader("g", () => ToggleApp("zen.exe", "", "MozillaDialogClass"))
 d:: quickleader("d", () => ToggleApp("zen.exe", "", "MozillaDialogClass"))
 c:: quickleader("c", () => ToggleApp("chrome.exe"))
-i:: quickleader("i", () => ToggleApp("Insomnia-12.3.1.exe", "C:/Users/hasan/scoop/apps/insomnia/current/Insomnia.exe"))
-t:: quickleader("t", () => ToggleApp("telegram.exe", "C:/Users/hasan/AppData/Roaming/Telegram Desktop/Telegram.exe"))
+i:: quickleader("i", () => ToggleApp("Insomnia-12.3.1.exe", "C:/Users/" A_UserName "/scoop/apps/insomnia/current/Insomnia.exe"))
+t:: quickleader("t", () => ToggleApp("telegram.exe", "C:/Users/" A_UserName "/AppData/Roaming/Telegram Desktop/Telegram.exe"))
 z:: quickleader("z", () => FocusZenPiP())
 #HotIf
 
@@ -77,14 +72,6 @@ z:: quickleader("z", () => FocusZenPiP())
 !PgUp::Home
 !PgDn::End
 !SPACE:: Send("^{SPACE}")
-
-; Example hotkeys for different apps
-#e:: ToggleExplorer()
-#c:: ToggleApp("chrome.exe")
-#t:: ToggleApp("telegram.exe", "telegram")
-#i:: ToggleApp("Insomnia-12.3.1.exe", "C:/Users/hasan/scoop/apps/insomnia/current/Insomnia.exe")
-#j:: ToggleApp("wezterm-gui.exe")
-#b:: ToggleApp("zen.exe", "", "MozillaDialogClass")
 
 ; Screenshot
 #`:: takeScreenshot()
