@@ -3,14 +3,14 @@
 -- https://www.reddit.com/r/neovim/comments/1ppa4ag/comment/nungaa0/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 return {
   'nvim-treesitter/nvim-treesitter',
-  lazy = false,
+  lazy = true,
   build = ':TSUpdate',
   event = { 'VeryLazy' },
   cmd = { 'TSUpdate', 'TSUpdateSync', 'TSInstall', 'TSInstallSync' },
   branch = 'main',
   init = function()
     vim.env.CC = 'gcc'
-    vim.g.no_plugin_maps = true
+    -- vim.g.no_plugin_maps = true
 
     local state = require('core.state')
     local filetypes = vim.iter(vim.tbl_values(state.treesitter.parsers_by_ft)):flatten():totable()
