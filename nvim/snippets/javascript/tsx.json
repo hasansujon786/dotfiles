@@ -1,13 +1,33 @@
 {
+  "import Next.js Link": {
+    "prefix": "iml",
+    "body": "import Link from 'next/link';",
+    "description": "Next.js Link import"
+  },
+  "import Next.js Image": {
+    "prefix": "imi",
+    "body": "import Image from 'next/image';",
+    "description": "Next.js Image import"
+  },
   "ComponentPropsWithoutRef": {
     "prefix": "propsComponentPropsWithoutRef",
     "body": "React.ComponentPropsWithoutRef<'button'>",
     "description": "Props with html element"
   },
   "ComponentProps": {
-    "prefix": "propsComponent",
-    "body": "React.ComponentProps<typeof MyComponent>",
+    "prefix": "rcp",
+    "body": "React.ComponentProps<${0:typeof MyComponent}>",
     "description": "Props from a component"
+  },
+  "createReactHook": {
+    "prefix": "crh",
+    "body": ["export function use$1 () {", "\t$0", "}"],
+    "description": "Create React Hook using File name"
+  },
+  "createReactHookWithName": {
+    "prefix": "crhn",
+    "body": ["export function ${1:${TM_FILENAME_BASE}} () {", "\t$0", "}"],
+    "description": "Create React Hook using File name"
   },
   "listComponent": {
     "prefix": "listComponent",

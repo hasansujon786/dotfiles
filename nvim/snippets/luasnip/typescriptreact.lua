@@ -23,6 +23,19 @@ local sn = ls.snippet_node
 
 ls.add_snippets('typescriptreact', {
   s(
+    'us',
+    fmt(
+      [[
+      const [{1}, set{2}] = useState({})
+      ]],
+      {
+        i(1, 'state'),
+        f(common.get_insert_node_and_upper_first_char, { 1 }),
+        i(0, 'initValue'),
+      }
+    )
+  ),
+  s(
     'useCounterContext',
     fmt(
       [[

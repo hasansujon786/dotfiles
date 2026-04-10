@@ -17,7 +17,7 @@ return {
   enabled = require('core.state').completion.module == 'blink',
   event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
-    'rafamadriz/friendly-snippets',
+    { 'hasansujon786/friendly-snippets', dev = false },
     'windwp/nvim-autopairs',
     'L3MON4D3/LuaSnip',
     -- 'nvim-mini/mini.snippets',

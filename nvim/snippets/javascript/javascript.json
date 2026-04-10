@@ -1,18 +1,18 @@
 {
   "array from & map": {
-    "prefix": "fromMap",
+    "prefix": "arrfm",
     "body": [
       "Array.from({ length: ${1:5} }, (_, i) => i + 1).map((item, idx) => ${0:// map item here})"
     ],
     "description": "create an array programmatically and map over"
   },
   "array from": {
-    "prefix": "from",
+    "prefix": "arrf",
     "body": ["Array.from({ length: ${1:5} }, (_, i) => ${2:i + 1})"],
     "description": "create an array programmatically"
   },
   "array from keys": {
-    "prefix": "fromCount",
+    "prefix": "arrfc",
     "body": ["Array.from(Array(5).keys());"],
     "description": "create an array programmatically"
   },
@@ -21,10 +21,25 @@
     "body": "console.log($0)",
     "description": "get console log"
   },
+  "log variable with name": {
+    "prefix": "clv",
+    "body": "console.log('${0}:', ${0})",
+    "description": "get console log"
+  },
   "log with JSON.stringify": {
     "prefix": "clj",
     "body": "console.log(JSON.stringify($0, null, 2));",
     "description": "get console log with JSON.stringify"
+  },
+  "Pretty JSON stringify": {
+    "prefix": "jsonpp",
+    "body": ["JSON.stringify(${1:data}, null, 2)$0"],
+    "description": "Pretty print JSON with 2-space indentation"
+  },
+  "Console table": {
+    "prefix": "clt",
+    "body": ["console.table(${1:data})$0"],
+    "description": "Log data as table"
   },
   "export all": {
     "prefix": "exFrom",
@@ -42,9 +57,9 @@
     "description": "get number from a range"
   },
   "wait promise": {
-    "prefix": "waitpromise",
+    "prefix": "sleepPromise",
     "body": [
-      "async function wait(time: number) {",
+      "async function sleep(time: number) {",
       "  return await new Promise((resolve) => setTimeout(resolve, time));",
       "}"
     ],
@@ -62,30 +77,82 @@
   },
   "Function": {
     "prefix": "fn",
-    "body": [
-      "function ${1:name}(${2:params}) {",
-      "  $0",
-      "}"
-    ],
+    "body": ["function ${1:name}(${2:params}) {", "  $0", "}"],
     "description": "Create a function"
   },
   "Async Function": {
     "prefix": "fna",
-    "body": [
-      "async function ${1:name}(${2:params}) {",
-      "  $0",
-      "}"
-    ],
+    "body": ["async function ${1:name}(${2:params}) {", "  $0", "}"],
     "description": "Create an async function"
   },
-  "Pretty JSON stringify": {
-    "prefix": "jsonpp",
-    "body": ["JSON.stringify(${1:data}, null, 2)$0"],
-    "description": "Pretty print JSON with 2-space indentation"
+  "const await variable": {
+    "prefix": "ca",
+    "body": ["const ${1:name} = await ${0:value}"],
+    "description": "create const await variable"
   },
-  "Console table": {
-    "prefix": "clt",
-    "body": ["console.table(${1:data})$0"],
-    "description": "Log data as table"
+  "RTK API Slice (from filename)": {
+    "prefix": "rtk-api",
+    "body": [
+      "import { baseApi } from '@/api/baseApi'",
+      "import type { WithApiStatus } from '@/types'",
+      "",
+      "const ${1:${TM_FILENAME_BASE}} = baseApi.injectEndpoints({",
+      "  endpoints: (builder) => ({",
+      "    $0",
+      "  }),",
+      "  overrideExisting: false,",
+      "})",
+      "",
+      "export const { } = ${1}",
+      "export default ${1}"
+    ],
+    "description": "RTK Query API slice using filename as base name"
+  },
+  "RTK Query Try Catch with Toast": {
+    "prefix": "rtktry",
+    "body": [
+      "try {",
+      "  const res = await ${1:apiCall}({",
+      "    ${2:param1},",
+      "  }).unwrap()",
+      "",
+      "  toast.success(res.message || '${3:Success message}')",
+      "} catch (err) {",
+      "  toast.error('${4:Error title}', {",
+      "    description: getErrorMessage(err),",
+      "  })",
+      "}"
+    ],
+    "description": "RTK Query try/catch pattern with unwrap and toast"
+  },
+  "RTK Query (list with params)": {
+    "prefix": "rtk-query",
+    "body": [
+      "${1:getItems}: builder.query<",
+      "  WithApiStatus<void>,",
+      "  void",
+      ">({",
+      "  query: (args) => ({",
+      "    url: `${2:/url}`,",
+      "    params: args ?? undefined,",
+      "  }),",
+      "  providesTags: ['${0:Tag}']",
+      "}),"
+    ],
+    "description": "RTK Query list endpoint with params and providesTags"
+  },
+  "RTK Mutation (simple)": {
+    "prefix": "rtk-mutation",
+    "body": [
+      "${1:mutationName}: builder.mutation<WithApiStatus<void>, void>({",
+      "  query: (data) => ({",
+      "    url: `${2:/url}`,",
+      "    method: '${3|POST,PATCH,DELETE,PUT,GET|}',",
+      "    body: data,",
+      "  }),",
+      "  invalidatesTags: ['${0:Tag}'],",
+      "}),"
+    ],
+    "description": "Simple RTK Query mutation"
   }
 }
