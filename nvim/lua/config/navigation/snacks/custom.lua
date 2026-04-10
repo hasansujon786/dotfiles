@@ -210,8 +210,8 @@ function M.buffers_with_symbols()
   Snacks.picker({
     title = 'Buffers',
     multi = { 'buffers', 'lsp_symbols' },
-    layout = { preset = 'dropdown', preview = 'main' },
-    -- win = { preview = preview_main.show_winbar },
+    layout = { preset = 'select_main' },
+    win = { preview = preview_main.show_winbar },
     -- on_show = function(picker)
     --   vim.cmd.stopinsert()
     --   -- you can auto enable it if you want

@@ -71,7 +71,7 @@ end
 
 function M.persisted()
   Snacks.picker.pick({
-    layout = 'dropdown',
+    layout = 'ivy',
     source = 'Persisted Sessions',
     format = 'file',
     finder = list_sessions,

@@ -1,4 +1,5 @@
 local state = require('core.state')
+local hover = require('core.state').ui.hover
 
 local function get_dropdown(preview)
   return {
@@ -19,7 +20,7 @@ local function get_dropdown(preview)
       },
       {
         box = 'vertical',
-        border = { '🭽', '▔', '🭾', '▕', '🭿', '▁', '🭼', '▏' },
+        border = hover.border,
         title = '{source} {live}',
         title_pos = 'center',
         { win = 'input', height = 1, border = 'bottom' },
@@ -49,6 +50,49 @@ local function get_ivy(mini)
         box = 'horizontal',
         { win = 'list', border = 'none' },
         { win = 'preview', width = 0.6, border = 'left' },
+      },
+    },
+  }
+end
+
+local function get_default()
+  return {
+    layout = {
+      box = 'horizontal',
+      width = 0.8,
+      min_width = 120,
+      height = 0.8,
+      {
+        box = 'vertical',
+        border = hover.border,
+        title = '{title} {live} {flags}',
+        { win = 'input', height = 1, border = 'bottom' },
+        { win = 'list', border = 'none' },
+      },
+      { win = 'preview', title = '{preview}', border = hover.border, width = 0.5 },
+    },
+  }
+end
+
+local function get_cursor()
+  return {
+    preview = false,
+    layout = {
+      relative = 'cursor',
+      row = 1,
+      height = 10,
+      backdrop = true,
+      width = 0.4,
+      min_width = 80,
+      border = 'none',
+      box = 'vertical',
+      {
+        box = 'vertical',
+        border = hover.border,
+        title = '{source} {live}',
+        title_pos = 'center',
+        { win = 'input', height = 1, border = 'bottom' },
+        { win = 'list', border = 'none' },
       },
     },
   }
@@ -205,6 +249,7 @@ require('snacks').setup({
   },
   scratch = {
     ft = function()
+      local asdfsdf = 'asdf'
       -- if vim.bo.buftype == '' and vim.bo.filetype ~= '' then
       --   return vim.bo.filetype
       -- end
@@ -213,23 +258,28 @@ require('snacks').setup({
   },
   dashboard = require('config.navigation.snacks.dashboard'),
   picker = {
+    kinds = {
+      codeaction = {
+        layout = 'cursor',
+      },
+    },
     prompt = '   ',
     exclude = state.picker.exclude,
     sources = {
-      buffers = { layout = 'dropdown', current = false },
+      -- 'dropdown'
+      buffers = { layout = 'select_main', current = false },
       files = { layout = 'ivy', matcher = { cwd_bonus = true, frecency = true, sort_empty = true } },
       undo = { focus = 'list' },
       commands = { layout = 'vscode' },
       keymaps = { layout = 'vscode' },
-      git_files = { layout = 'dropdown' },
+      git_files = { layout = 'vscode' },
       recent = { layout = 'ivy' },
-      smart = { layout = 'dropdown' },
-      grep = { layout = 'dropdown_preview' },
-      grep_word = { layout = 'dropdown_preview' },
-      grep_buffers = { layout = 'dropdown_preview' },
-      lsp_symbols = { layout = 'dropdown' },
+      grep = { layout = 'dropdown' },
+      grep_word = { layout = 'dropdown' },
+      grep_buffers = { layout = 'dropdown' },
+      lsp_symbols = { layout = 'ivy_mini_main' },
       treesitter = {
-        layout = { preset = 'dropdown', preview = 'main' },
+        layout = 'right',
         win = preview_main_win,
         filter = {
           default = {
@@ -242,8 +292,8 @@ require('snacks').setup({
             'Namespace',
             'Struct',
             'Trait',
-            'identifier',
 
+            'identifier',
             'Variable',
             'Field',
             'TypeParameter',
@@ -260,13 +310,13 @@ require('snacks').setup({
         win = preview_main_win,
       },
 
-      zoxide = { layout = 'dropdown' },
-      marks = { layout = 'dropdown_preview' },
-      colorschemes = { layout = 'dropdown_preview' },
-      highlights = { layout = 'dropdown_preview' },
+      zoxide = { layout = 'ivy' },
+      marks = { layout = 'dropdown' },
+      colorschemes = { layout = 'dropdown' },
+      highlights = { layout = 'dropdown' },
 
-      qflist = { layout = 'dropdown_preview' },
-      loclist = { layout = 'dropdown_preview' },
+      qflist = { layout = 'dropdown' },
+      loclist = { layout = 'dropdown' },
 
       ---@type snacks.picker.file_browser.Config
       file_browser = { layout = 'ivy' },
@@ -452,13 +502,17 @@ require('snacks').setup({
     },
 
     layouts = {
-      dropdown = get_dropdown(false),
-      dropdown_preview = get_dropdown(true),
+      default = get_default(),
+      cursor = get_cursor(),
+      dropdown = get_dropdown(true),
       ivy = get_ivy(false),
       ivy_mini = get_ivy(true),
+      ivy_main = { preset = 'ivy', preview = 'main' },
+      ivy_mini_main = { preset = 'ivy_mini', preview = 'main' },
       sidebar = get_sidebar(),
-      select = { layout = { border = { '🭽', '▔', '🭾', '▕', '🭿', '▁', '🭼', '▏' } } },
       vscode = { layout = { row = 0, width = 0.4, min_width = 70 } },
+      select = { layout = { border = hover.border } },
+      select_main = { preset = 'select', preview = 'main', hidden = {} },
     },
   },
   styles = {

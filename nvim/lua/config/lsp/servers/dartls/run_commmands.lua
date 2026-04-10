@@ -54,7 +54,7 @@ function M.get_config(items, user_opts, opts)
   return vim.tbl_deep_extend('keep', opts or {}, {
     items = items,
     format = format_cmd(get_max_length(items)),
-    layout = { preview = false, preset = 'dropdown' },
+    layout = { preview = false, preset = 'select' },
     confirm = callback,
   })
 end

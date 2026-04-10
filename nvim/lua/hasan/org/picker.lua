@@ -119,7 +119,7 @@ function M.pick_heading()
 
   Snacks.picker({
     title = 'Org Headings',
-    layout = 'dropdown',
+    layout = 'select',
     items = items,
     confirm = function(p, item)
       vim.api.nvim_win_set_cursor(p.finder.filter.current_win, item.pos)
