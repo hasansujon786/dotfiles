@@ -84,14 +84,6 @@ return {
       mode = { 'n', 'x' },
       desc = 'Sidekick: Select Prompt',
     },
-    {
-      '<C-i>',
-      function()
-        require('sidekick.cli').prompt()
-      end,
-      mode = { 'n', 'x' },
-      desc = 'Sidekick: Select Prompt',
-    },
     -- Example of a keybinding to open Claude directly
     -- {
     --   '<leader>ac',
