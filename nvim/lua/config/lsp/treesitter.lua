@@ -2,7 +2,7 @@
 -- https://github.com/den-is/nvim/blob/master/lua/plugins/treesitter.lua
 -- https://www.reddit.com/r/neovim/comments/1ppa4ag/comment/nungaa0/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 return {
-  'nvim-treesitter/nvim-treesitter',
+  'neovim-treesitter/nvim-treesitter',
   lazy = true,
   build = ':TSUpdate',
   event = { 'VeryLazy' },
@@ -12,8 +12,7 @@ return {
     vim.env.CC = 'gcc'
     -- vim.g.no_plugin_maps = true
 
-    local state = require('core.state')
-    local filetypes = vim.iter(vim.tbl_values(state.treesitter.parsers_by_ft)):flatten():totable()
+    local filetypes = vim.iter(vim.tbl_values(require('core.state').treesitter.parsers_by_ft)):flatten():totable()
     vim.api.nvim_create_autocmd('FileType', {
       pattern = filetypes,
       callback = function()
@@ -29,8 +28,9 @@ return {
   opts = {},
   dependencies = {
     {
-      'nvim-treesitter/nvim-treesitter-textobjects',
+      'hasansujon786/nvim-treesitter-textobjects',
       branch = 'main',
+      dev = false,
       opts = {},
     },
     { 'windwp/nvim-ts-autotag', opts = {} },

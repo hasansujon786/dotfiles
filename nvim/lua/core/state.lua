@@ -25,6 +25,7 @@ M.treesitter = {
     javascript = { 'javascript' },
     typescript = { 'typescript' },
     tsx = { 'typescriptreact' },
+    jsx = { 'javascriptreact' },
 
     dart = { 'dart' },
 

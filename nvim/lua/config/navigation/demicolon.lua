@@ -88,10 +88,10 @@ return {
     -- Text-objects
     -- { '[[', '<Plug>(ts-jump-prev-s-func)zz', desc = 'Jump prev func', mode = nx },
     -- { ']]', '<Plug>(ts-jump-next-s-func)zz', desc = 'Jump next func', mode = nx },
-    { '[f', '<Plug>(ts-jump-prev-s-func)zz', desc = 'Jump prev func', mode = nx },
-    { ']f', '<Plug>(ts-jump-next-s-func)zz', desc = 'Jump next func', mode = nx },
-    { '[m', '<Plug>(ts-jump-prev-s-class)zz', desc = 'Jump prev class', mode = nx },
-    { ']m', '<Plug>(ts-jump-next-s-class)zz', desc = 'Jump next class', mode = nx },
+    { '[f', '<cmd>lua require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")<CR>', desc = 'Jump next func', mode = nx },
+    { ']f', '<cmd>lua require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")<CR>', desc = 'Jump prev func', mode = nx },
+    { '[m', '<cmd>lua require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer", "textobjects")<CR>', desc = 'Jump next func', mode = nx },
+    { ']m', '<cmd>lua require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer", "textobjects")<CR>', desc = 'Jump prev func', mode = nx },
 
     -- Cycle through Yanklist items
     { '[r', '<Plug>(yanklist-cycle-forward)', desc = 'Yanklist forward' },
