@@ -118,6 +118,6 @@ return {
         default_keymaps = false,
       },
     },
-    'nvim-treesitter/nvim-treesitter',
+    'neovim-treesitter/nvim-treesitter',
   },
 }
