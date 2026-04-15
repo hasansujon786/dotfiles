@@ -15,11 +15,14 @@ M.treesitter = {
 
   parsers_by_ft = {
     markdown = { 'markdown' },
+    markdown_inline = {},
 
     html = { 'html' },
     css = { 'css' },
     json = { 'json' },
+    html_tags = {},
 
+    ecma = {},
     vue = { 'vue' },
     astro = { 'astro' },
     javascript = { 'javascript' },
@@ -39,7 +42,8 @@ M.treesitter = {
     lua = { 'lua' },
     vim = { 'vim' },
     vimdoc = { 'help' },
-  }
+    regex = {}
+  },
 }
 
 M.completion = {

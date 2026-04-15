@@ -4,6 +4,7 @@ return {
   {
     'folke/snacks.nvim',
     enabled = not vim.g.vscode,
+    priority = 1000,
     lazy = false,
     event = 'UIEnter',
     config = function()

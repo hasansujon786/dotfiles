@@ -27,6 +27,7 @@ return {
   end,
   opts = {},
   dependencies = {
+    { 'neovim-treesitter/treesitter-parser-registry' },
     {
       'hasansujon786/nvim-treesitter-textobjects',
       branch = 'main',
