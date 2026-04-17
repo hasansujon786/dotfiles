@@ -67,7 +67,7 @@ return {
       { '<leader>ff', function() Snacks.picker.files() end, desc = 'Find Files' },
       { '<leader>fg', function() Snacks.picker.git_files() end, desc = 'Find Git Files' },
       { '<leader>fr', function() Snacks.picker.recent() end, desc = 'Recent' },
-      { '<leader>fc', function() Snacks.picker.files({cwd=vim.fn.stdpath('config')}) end, desc = 'Find Config File' },
+      -- { '<leader>fc', function() Snacks.picker.files({cwd=vim.fn.stdpath('config')}) end, desc = 'Find Config File' },
       { '<leader>fe', function() Snacks.explorer() end, desc = 'File Explorer' },
       -- { '<leader>op', function() Snacks.explorer() end, desc = 'File Explorer' },
 
