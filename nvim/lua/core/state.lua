@@ -42,7 +42,7 @@ M.treesitter = {
     lua = { 'lua' },
     vim = { 'vim' },
     vimdoc = { 'help' },
-    regex = {}
+    regex = {},
   },
 }
 
