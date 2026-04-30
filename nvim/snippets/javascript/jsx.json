@@ -83,5 +83,34 @@
       "}"
     ],
     "description": "useRenders hook"
+  },
+  "React Portal": {
+    "prefix": "portalcomp",
+    "body": [
+      "'use client'",
+      "",
+      "import { createPortal } from 'react-dom'",
+      "",
+      "interface ${1:PortalProps} extends React.PropsWithChildren {",
+      "  targetId: string",
+      "}",
+      "",
+      "export function ${2:Portal}({ children, targetId }: ${1:PortalProps}) {",
+      "  if (typeof window === 'undefined') return null",
+      "",
+      "  const container = document.getElementById(targetId)",
+      "",
+      "  if (!container) {",
+      "    if (process.env.NODE_ENV === 'development') {",
+      "      console.warn(`Portal target '#\\${targetId}' not found`)",
+      "    }",
+      "",
+      "    return null",
+      "  }",
+      "",
+      "  return createPortal(children, container)",
+      "}"
+    ],
+    "description": "Next.js React Portal component with missing target warning"
   }
 }
