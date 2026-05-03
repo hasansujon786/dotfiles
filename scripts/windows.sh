@@ -38,3 +38,5 @@ scoop install gh
 scoop install potplayer
 # fix:
 # reg.exe import "C:\\Users\\$USERNAME\\dotfiles\\scripts\\PotPlayerMini64.reg"
+
+# go install github.com/vyrx-dev/toofan@latest
