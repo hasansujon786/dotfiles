@@ -36,18 +36,15 @@ return {
         toggle({ elements = { '!=', '==' }, word = false }),
         augend.hexcolor.new({ case = 'lower' }),
         toggle({
-          elements = {
-            'number',
-            'string',
-            'boolean',
-            'unknown',
-            'any',
-            'void',
-            'null',
-            'undefined',
-            'never',
-            'bigint',
-          },
+          elements = { 'number', 'string', 'boolean', 'unknown', 'any', 'void', 'null', 'undefined', 'never', 'bigint' },
+          word = false,
+        }),
+        toggle({
+          elements = { 'GET', 'POST', 'PUT', 'PATCH', 'DELETE' },
+          word = false,
+        }),
+        toggle({
+          elements = { 'TODO:', 'DONE:', 'INFO:', 'FIXME:', 'BUG:', 'FIXIT:', 'ISSUE:', 'OPTIM:', 'OPTIMIZE:' },
           word = false,
         }),
         augend.date.new({
