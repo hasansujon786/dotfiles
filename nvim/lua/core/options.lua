@@ -90,10 +90,12 @@ opt.foldtext = '' -- 'hasan#utils#foldtext()'
 vim.opt.fillchars = {
   eob = ' ',
   diff = '╱',
-  fold = ' ', -- ┄
-  foldsep = '',
-  foldclose = '˃',
+
   foldopen = '',
+  foldclose = '',
+  fold = ' ', -- ┄
+  foldsep = ' ',
+
   vert = '▏',
   horiz = '▁',
   horizup = '🭼',

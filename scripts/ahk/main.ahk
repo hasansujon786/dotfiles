@@ -167,7 +167,6 @@ isMouseGridInactive() {
 	or WinActive("Task View") ; win+tab
 	or WinActive("Task Switching") ; ctrl+alt+tab
 	or WinActive("Notification Center")
-	or WinActive("ahk_class PotPlayer64")
 	or WinActive("Picture-in-Picture") and WinActive("ahk_exe zen.exe"))
 and isMouseGridInactive()
 ; or (winIsMouseOver("ahk_class ApplicationFrameWindow") or winIsMouseOver("ahk_class Shell_LightDismissOverlay")) and winIsMouseOver("ahk_exe explorer.exe") and winIsMouseOver("") ; clipboard & backdrop
@@ -220,6 +219,14 @@ and isMouseGridInactive()
 !Backspace:: SendInput("^{Backspace}")
 
 #HotIf WinActive("ahk_class PotPlayer64") and isMouseGridInactive()
+l:: Send("{Right}")
+h:: Send("{Left}")
+j:: Send("{Down}")
+k:: Send("{Up}")
+
+q:: Send("{Esc}")
+0:: Send("{Backspace}")
+
 -:: Send("{F6}")
 f:: Send("{Enter}")
 ; next/previous video
