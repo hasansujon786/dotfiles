@@ -21,6 +21,8 @@ M.treesitter = {
     css = { 'css' },
     json = { 'json' },
     html_tags = {},
+    c = { 'c' },
+    cpp = { 'cpp' },
 
     ecma = {},
     vue = { 'vue' },
@@ -87,6 +89,7 @@ M.lsp = {
     lua_ls = { 'lua-language-server' },
     vimls = { 'vim-language-server' },
     gopls = { 'gopls' },
+    clangd = { 'clangd' },
   },
   extra_tools = {
     'shfmt',
