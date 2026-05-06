@@ -249,7 +249,6 @@ require('snacks').setup({
   },
   scratch = {
     ft = function()
-      local asdfsdf = 'asdf'
       -- if vim.bo.buftype == '' and vim.bo.filetype ~= '' then
       --   return vim.bo.filetype
       -- end

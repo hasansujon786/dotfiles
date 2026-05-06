@@ -8,8 +8,8 @@ o.swapfile = false --                            Turn backup off, since most stu
 o.writebackup = false
 o.undofile = true
 o.undolevels = 1500 --                           persistent undo between file reloads
-o.sessionoptions = 'buffers,curdir,folds,globals,tabpages,winpos,winsize'
-opt.viewoptions:remove({ 'folds', 'curdir' }) -- see: https://vi.stackexchange.com/questions/11903/working-directory-different-than-current-file-directory
+opt.sessionoptions = { 'buffers', 'curdir', 'tabpages', 'winsize', 'help', 'globals', 'skiprtp', 'folds' }
+opt.viewoptions:remove({ 'curdir' }) -- see: https://vi.stackexchange.com/questions/11903/working-directory-different-than-current-file-directory
 -- Spell
 opt.complete:append({ 'kspell' })
 o.spellfile = '~/dotfiles/nvim/spell/en.utf-8.add'
@@ -81,14 +81,12 @@ o.joinspaces = false --                          Two spaces and grade school, we
 opt.iskeyword:append('-') --                     Treat dash separated words as a word text object
 -- opt.matchpairs:append({'<:>','«:»','｢:｣'}) --    Match angle brackets...)
 opt.whichwrap:append('<,>,[,],h,l') --           Allow left/right & h/l key to move to the previous/next line
--- code folding settings
-o.foldtext = '' -- 'hasan#utils#foldtext()'
-vim.wo.foldmethod = 'expr'
-vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-o.foldnestmax = 2 --                             Maximum nesting of folds
-o.foldlevelstart = 99 --                         Sets 'foldlevel' when starting to edit a buffer
-o.foldenable = true --                           Don't fold by default
-o.foldcolumn = '0'
+
+-- Code folding settings
+opt.foldlevel = 99
+opt.foldmethod = 'indent'
+opt.foldtext = '' -- 'hasan#utils#foldtext()'
+
 vim.opt.fillchars = {
   eob = ' ',
   diff = '╱',

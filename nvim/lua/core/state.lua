@@ -167,7 +167,7 @@ M.ui = {
   },
   session_autoload = false,
   fold = {
-    persists = false,
+    persists = true,
   },
   neominimap = {
     width = 90,
