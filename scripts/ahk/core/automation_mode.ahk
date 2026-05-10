@@ -1,7 +1,13 @@
 Global isClikModeActive := 0
 Global currentClikMode := ""
 Global selectedIndex := 0
-Global optionsList := ["Youtube Playlist", "Youtube queue", "Firebase Remove User", "Chatgpt remove chat thread"]
+Global optionsList := [
+  "Youtube Playlist",
+  "Youtube queue",
+  "Firebase Remove User",
+  "Chatgpt remove chat thread",
+  "Remove Property"
+]
 Global guiTitle := "autoclick_status_line"
 
 
@@ -94,6 +100,8 @@ _tryAutoClick() {
     _firebaseRemoveAuthUser()
   Case "Chatgpt remove chat thread":
     _removeChatThreadFromChatGpt()
+  Case "Remove Property":
+    _removeProperty()
   ; Default:
   }
 }
@@ -107,6 +115,24 @@ _ytRemovetFromWL() {
   } else {
     Send("{tab}{tab}")
   }
+  Send("{Enter}")
+}
+
+_removeProperty() {
+  Send("{LButton}")
+  sleep(300)
+  Send("{Down}")
+  sleep(100)
+  Send("{Down}")
+  sleep(100)
+  Send("{Down}")
+  sleep(100)
+  Send("{Down}")
+  sleep(100)
+  Send("{Enter}")
+  sleep(400)
+  Send("{Tab}")
+  sleep(50)
   Send("{Enter}")
 }
 
