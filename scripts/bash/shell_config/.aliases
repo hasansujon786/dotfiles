@@ -124,6 +124,8 @@ alias dbgya='YAZI_LOG=debug yazi'
 alias kan='~/dotfiles/scripts/restart-kanata.sh'
 alias kanc='kanata-cmd.exe --cfg ~/dotfiles/scripts/kanata/kanata.kbd'
 alias ahk='powershell -File ~/dotfiles/scripts/ahk/run.ps1'
+alias ths='thide show'
+alias thh='thide hide'
 
 # git
 alias ggpusht='git push origin $(git_current_branch) --tags'

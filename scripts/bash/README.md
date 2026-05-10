@@ -1,7 +1,9 @@
 # Usefull links
+
 https://phoenixnap.com/kb/change-bash-prompt-linux
 
 # Coor Codes
+
 ```bash
 blk='\[\033[01;30m\]'   # Black
 red='\[\033[01;31m\]'   # Red
@@ -15,6 +17,7 @@ clr='\[\033[00m\]'      # Reset
 ```
 
 # Poor man fetch
+
 ```bash
 printf "\n"
 printf "   %s\n" "IP ADDR: $(curl ifconfig.me)"
@@ -30,8 +33,8 @@ printf "   %s\n" "MEMORY: $(free -m -h | awk '/Mem/{print $3"/"$2}')"
 printf "\n"
 ```
 
-
 # vim mode in bash
+
 ```bash
 set -o vi
 bind '"jk":vi-movement-mode'
@@ -51,6 +54,7 @@ bind '"jk":vi-movement-mode'
 ```
 
 # Keymap syntax
+
 ```bash
 bind '\C-o:clear-screen'
 bind '"\eh":"foobar"'
@@ -59,6 +63,7 @@ bind '"\ed":kill-word'
 ```
 
 # Usefull functions
+
 ```bash
 
 echo "$SECONDS"
@@ -113,7 +118,11 @@ sourceIfExists() {
 }
 sourceIfExists ~/dotfiles/bash/.aliases
 
+```
 
+# Usefull commannds
 
-
-# ```
+```bash
+setx POWERTOYS_DOC "1"                      # user level
+setx POWERTOYS_DOC "1" /M                   # system level (admin required)
+```

@@ -3,7 +3,7 @@
 ;******************************************************************************
 
 Global TASKBAR_HEIGHT := 40 ;; 40  -6
-Global POWERTOYS_DOC := false
+Global POWERTOYS_DOC := EnvGet("POWERTOYS_DOC") ? EnvGet("POWERTOYS_DOC") : 0
 
 ; "wt.exe", "ahk_exe WindowsTerminal.exe" ; "Code.exe", "ahk_exe Code.exe"
 Global EDITOR_EXE := [
@@ -85,11 +85,11 @@ runLayoutAction(EXE_FULL, EXE, side) {
 		} else if (side == "maximized") {
 			WinMaximize(EXE_FULL)
 		} else if (side == "maximized_custom") {
+			if (POWERTOYS_DOC) {
+				WinMove(-8, 25, A_ScreenWidth + 16, A_ScreenHeight - 16, "A")
+			} else {
 			;           ↓ here 0 hides the video behind the window
 			; WinMove(-8, 1, A_ScreenWidth + 16, A_ScreenHeight + 8 - TASKBAR_HEIGHT, "A")
-			if (POWERTOYS_DOC) {
-				WinMove(-8, TASKBAR_HEIGHT - 1, A_ScreenWidth + 16, A_ScreenHeight - (TASKBAR_HEIGHT - 10), "A")
-			} else {
 				WinMove(-8, 1, A_ScreenWidth + 16, A_ScreenHeight - TASKBAR_HEIGHT, "A")
 			}
 			; WinMove(, , A_ScreenWidth + 8, A_ScreenHeight - 36, "A")
