@@ -186,7 +186,7 @@ local function setup()
   -- Picker keymaps
   vmap({ '<leader><leader>', '<cmd>Tabfind<CR>', mode = nx })
   vmap({ '<leader>pp', '<cmd>lua require("vscode").action("workbench.action.openRecent")<CR>', mode = nx })
-  vmap({ 'g,', '<cmd>lua require("vscode").action("workbench.action.showAllEditors")<CR>', mode = nx })
+  vmap({ '<leader>.', '<cmd>lua require("vscode").action("workbench.action.showAllEditors")<CR>', mode = nx })
 
   -- Open ----------------------------------------
   function M.do_open(uri)
