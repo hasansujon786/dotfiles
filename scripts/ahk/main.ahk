@@ -96,6 +96,16 @@ Pause:: Send("{Media_Play_Pause}")
 ~LAlt & WheelDown:: voldown()
 #HotIf
 
+#HotIf winIsMouseOver("ahk_class Shell_TrayWnd") && MouseInRightCorner()
+WheelUp::Send("^#{Left}")
+WheelDown::Send("^#{Right}")
+#HotIf
+MouseInRightCorner() {
+  MouseGetPos(&mx, &my)
+  screenW := SysGet(78)   ; SM_CXVIRTUALSCREEN  — full screen width
+  return mx > screenW - 200   ; true if cursor is within 200px of the right edge
+}
+
 ; Other
 ^#b:: showCalendar()
 !;:: SendInput("{AppsKey}") ; Show menu
