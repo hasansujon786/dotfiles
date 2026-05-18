@@ -226,7 +226,7 @@ M.toggle_quick_pane = function(window, pane)
     end
   end
 
-  wezterm.log_info('quick_pane#crate_new_pane')
+  wezterm.log_info('quick_pane#create_new_pane')
   window:perform_action(act.SplitPane({ direction = 'Down', size = { Cells = 15 } }), pane) -- command = { cwd = '.', args = { 'yazi' } },
 
   local new_pane = window:active_pane()
