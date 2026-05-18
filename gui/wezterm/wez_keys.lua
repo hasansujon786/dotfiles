@@ -162,6 +162,34 @@ return {
 
     -- stacks
     { key = 'w', mods = 'LEADER', action = wezterm.action_callback(events.activate_win_stack) },
+
+    -- Opacity
+    {
+      key = '+',
+      mods = 'SHIFT|CTRL',
+      action = wezterm.action_callback(function(window, _)
+        local current = window:effective_config().window_background_opacity
+        local opacity = math.min(1.0, current + 0.02)
+        window:set_config_overrides({ window_background_opacity = opacity })
+      end),
+    },
+    {
+      key = '_',
+      mods = 'SHIFT|CTRL',
+      action = wezterm.action_callback(function(window, _)
+        local current = window:effective_config().window_background_opacity
+        local opacity = math.max(0.0, current - 0.02)
+        window:set_config_overrides({ window_background_opacity = opacity })
+      end),
+    },
+    {
+      key = '0',
+      mods = 'LEADER',
+      action = wezterm.action_callback(function(window, _)
+        local opacity = 0.96
+        window:set_config_overrides({ window_background_opacity = opacity })
+      end),
+    },
   },
   key_tables = {
     win_stack = {
