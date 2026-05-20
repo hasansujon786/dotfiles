@@ -8,35 +8,39 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 #Include %A_ScriptDir%\core\utils.ahk
 #Include %A_ScriptDir%\core\win_layout.ahk
 #Include %A_ScriptDir%\core\win_control.ahk
+#Include %A_ScriptDir%\core\sound.ahk
 ; #Include %A_ScriptDir%\core\vert_desktop.ahk
 #Include %A_ScriptDir%\core\vim_explorer.ahk
 #Include %A_ScriptDir%\core\automation_mode.ahk
 #Include %A_ScriptDir%\leader.ahk
 #Include %A_ScriptDir%\grid.ahk
 
-;Reload/Execute this script.ahk file
+; Reload / Execute script
 ::rscript::
 !f5:: {
-	spGui := Gui("+ToolWindow +AlwaysOnTop -Sysmenu Disabled", "")
-	spGui.SetFont("s10", "Segoe UI")
-	spGui.Add("Text", "Center", "    AHK Reloaded...    `n`n")
-	spGui.Show("NoActivate AutoSize")
-	Sleep(300)
-	spGui.Destroy
-	Run("C:\Users\" A_UserName "\dotfiles\scripts\ahk\main.ahk")
+  spGui := Gui("+ToolWindow +AlwaysOnTop -Sysmenu Disabled", "")
+  spGui.SetFont("s10", "Segoe UI")
+  spGui.Add("Text", "Center", "    AHK Reloaded...    `n`n")
+  spGui.Show("NoActivate AutoSize")
+  Sleep(300)
+  spGui.Destroy
+  Run("C:\Users\" A_UserName "\dotfiles\scripts\ahk\main.ahk")
 }
+
 ^!#ESC:: suspendAHK()
 
 ;******************************************************************************
 ; Leader
 ;******************************************************************************
 #a:: ActiveLeaderMode()
+
 #HotIf leaderPressed
 q:: leader("q", () => toggleBluetooth())
 p:: leader("p", () => toggleAlwaysOnTop())
 a:: leader("a", () => send("#{a}"))
+m:: leader("m", () => selectMic())
++m:: leader("M", () => showMicPanel())
 s:: leader("s", () => showVolMixer())
-m:: leader("m", () => showMicPanel())
 #k:: leader("#k", () => toggleKanata())
 MButton:: leader("MB", () => enterAutoClikMode())
 LWin:: return
@@ -44,7 +48,8 @@ LWin:: return
 
 #InputLevel 1
 !\:: Send("\")
-\::ActiveLQuickeaderMode()
+\:: ActiveLQuickeaderMode()
+
 #HotIf qleaderPressed
 \:: quickleader("\", () => alternateTab())
 w:: quickleader("w", () => ToggleApp("wezterm-gui.exe"))
@@ -71,8 +76,9 @@ z:: quickleader("z", () => FocusZenPiP())
 !7:: Send("#7")
 !8:: Send("#8")
 !9:: Send("#9")
-!PgUp::Home
-!PgDn::End
+
+!PgUp:: Home
+!PgDn:: End
 !SPACE:: Send("^{SPACE}")
 
 ; Screenshot
@@ -91,15 +97,17 @@ Pause:: Send("{Media_Play_Pause}")
 #PgDn:: Send("{Media_Next}")      ; Previous track
 ; #PgUp:: volup()
 ; #PgDn:: voldown()
+
 #HotIf winIsMouseOver("ahk_class Shell_TrayWnd")
-~LAlt & WheelUP:: volup()
+~LAlt & WheelUp:: volup()
 ~LAlt & WheelDown:: voldown()
 #HotIf
 
 #HotIf winIsMouseOver("ahk_class Shell_TrayWnd") && MouseInRightCorner()
-WheelUp::Send("^#{Left}")
-WheelDown::Send("^#{Right}")
+WheelUp:: Send("^#{Left}")
+WheelDown:: Send("^#{Right}")
 #HotIf
+
 MouseInRightCorner() {
   MouseGetPos(&mx, &my)
   screenW := SysGet(78)   ; SM_CXVIRTUALSCREEN  — full screen width
@@ -113,7 +121,7 @@ MouseInRightCorner() {
 SetCapsLockState("AlwaysOff")
 
 ;******************************************************************************
-; Window manazement
+; Window management
 ;******************************************************************************
 ; #InputLevel 1
 ; !\:: Send("\")
@@ -133,6 +141,7 @@ SetCapsLockState("AlwaysOff")
 #Enter:: toggleWinMaximize()
 #Esc:: winRestoreAndCenter()
 #,:: Send("{f11}")
+
 #HotIf not WinActive("ahk_exe wezterm-gui.exe")
 ; Nav through tabs
 ![:: SendInput("^+{tab}")
@@ -141,9 +150,11 @@ SetCapsLockState("AlwaysOff")
 +![:: SendInput("^+{PgUp}")
 +!]:: SendInput("^+{PgDn}")
 #HotIf
+
 #HotIf isMouseGridInactive()
 $Escape:: superEscape()
 #HotIf
+
 ; ^#SPACE::toggleAlwaysOnTop()
 ; Vertual Desktop
 #[:: navToDesktop("left")
@@ -154,6 +165,7 @@ $Escape:: superEscape()
 ;******************************************************************************
 layout_loading := 0
 current_layout := 0
+
 #p:: changeLayoutTo("code")
 #o:: changeLayoutTo("focus_custom")
 #':: toggleLayout()
@@ -166,29 +178,26 @@ LWin:: return
 ; #]::winPinToSide("right", true)
 
 ;******************************************************************************
-; Vim Mode (AltTabMenu, TaskView)
+; Vim Mode
 ;******************************************************************************
 isMouseGridInactive() {
-	return !IsSet(mouseGridActive) || mouseGridActive = 0
+  return !IsSet(mouseGridActive) || mouseGridActive = 0
 }
 
 #/:: SendInput("^!{Tab}")
+
 #HotIf (WinActive("Volume Control")
-	or WinActive("Sound")
-	or WinActive("Quick settings")
-	or WinActive("Task View") ; win+tab
-	or WinActive("Task Switching") ; ctrl+alt+tab
-	or WinActive("Notification Center")
-	or WinActive("Picture-in-Picture") and WinActive("ahk_exe zen.exe"))
-and isMouseGridInactive()
-; or (winIsMouseOver("ahk_class ApplicationFrameWindow") or winIsMouseOver("ahk_class Shell_LightDismissOverlay")) and winIsMouseOver("ahk_exe explorer.exe") and winIsMouseOver("") ; clipboard & backdrop
-; or WinActive("ahk_class MultitaskingViewFrame")  ; ctrl+alt+tab
-; or WinActive("ahk_class Windows.UI.Core.CoreWindow") ; win+tab/StartScreen
-; or WinActive("ahk_exe ShellExperienceHost.exe")
-; ahk_exe ApplicationFrameHost.exe
+  or WinActive("Sound")
+  or WinActive("Quick settings")
+  or WinActive("Task View")
+  or WinActive("Task Switching")
+  or WinActive("Notification Center")
+  or WinActive("Picture-in-Picture") and WinActive("ahk_exe zen.exe")
+) and isMouseGridInactive()
 
 ; *WheelDown::Send {Blind}{Tab}
 ; *WheelUp::Send {Blind}+{Tab}
+
 q:: Send("{Esc}")
 l:: Send("{Right}")
 h:: Send("{Left}")
@@ -200,9 +209,10 @@ d:: Send("{PgDn}")
 u:: Send("{PgUp}")
 #HotIf
 
-#HotIf (WinActive("Task View") ; win+tab
-	or WinActive("Task Switching")) ; ctrl+alt+tab
+#HotIf (WinActive("Task View")
+  or WinActive("Task Switching"))
 and isMouseGridInactive()
+
 ; manage workspace
 +n:: Send("^#d")
 +x:: Send("^#{F4}")
@@ -210,15 +220,16 @@ and isMouseGridInactive()
 ]:: navToDesktop("right")
 #HotIf
 
-; Global arrow with homerow
+; Global arrow (home row)
 #HotIf not WinActive("ahk_exe WindowsTerminal.exe")
-	and not WinActive("ahk_exe alacritty.exe")
-	and not WinActive("ahk_exe wezterm-gui.exe")
-	and not WinActive("ahk_exe Code.exe")
-!j:: SendInput("{DOWN}")
-!k:: SendInput("{UP}")
-!h:: SendInput("{LEFT}")
-!l:: SendInput("{RIGHT}")
+  and not WinActive("ahk_exe alacritty.exe")
+  and not WinActive("ahk_exe wezterm-gui.exe")
+  and not WinActive("ahk_exe Code.exe")
+
+!j:: SendInput("{Down}")
+!k:: SendInput("{Up}")
+!h:: SendInput("{Left}")
+!l:: SendInput("{Right}")
 !p:: Send("{Up}")
 !n:: Send("{Down}")
 
@@ -228,9 +239,12 @@ and isMouseGridInactive()
 +!f:: Send("^+{Right}")
 +!b:: Send("^+{Left}")
 #HotIf
+
 !Backspace:: SendInput("^{Backspace}")
 
+; PotPlayer
 #HotIf WinActive("ahk_class PotPlayer64") and isMouseGridInactive()
+
 l:: Send("{Right}")
 h:: Send("{Left}")
 j:: Send("{Down}")
@@ -241,15 +255,19 @@ q:: Send("{Esc}")
 
 -:: Send("{F6}")
 f:: Send("{Enter}")
+
 ; next/previous video
 +p:: Send("{PgUp}")
 +n:: Send("{PgDn}")
+
 ; Playback speed
 <:: Send("{x}")
 >:: Send("{c}")
+
 ; next/previous frame
 ,:: Send("{d}")
 .:: Send("{f}")
+
 ; Subtitle
 c:: Send("!{h}")
 _:: Send("!{PgDn}")
@@ -257,6 +275,7 @@ _:: Send("!{PgDn}")
 #HotIf
 
 #HotIf WinActive("Command Palette") and isMouseGridInactive()
+
 Tab:: Send("{Down}")
 +Tab:: Send("{Up}")
 !p:: Send("{Up}")
