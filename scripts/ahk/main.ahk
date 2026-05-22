@@ -18,22 +18,20 @@ SetWorkingDir(A_ScriptDir) ; Ensures a consistent starting directory.
 ; Reload / Execute script
 ::rscript::
 !f5:: {
-  spGui := Gui("+ToolWindow +AlwaysOnTop -Sysmenu Disabled", "")
-  spGui.SetFont("s10", "Segoe UI")
-  spGui.Add("Text", "Center", "    AHK Reloaded...    `n`n")
-  spGui.Show("NoActivate AutoSize")
-  Sleep(300)
-  spGui.Destroy
-  Run("C:\Users\" A_UserName "\dotfiles\scripts\ahk\main.ahk")
+	spGui := Gui("+ToolWindow +AlwaysOnTop -Sysmenu Disabled", "")
+	spGui.SetFont("s10", "Segoe UI")
+	spGui.Add("Text", "Center", "    AHK Reloaded...    `n`n")
+	spGui.Show("NoActivate AutoSize")
+	Sleep(300)
+	spGui.Destroy
+	Run("C:\Users\" A_UserName "\dotfiles\scripts\ahk\main.ahk")
 }
-
 ^!#ESC:: suspendAHK()
 
 ;******************************************************************************
 ; Leader
 ;******************************************************************************
 #a:: ActiveLeaderMode()
-
 #HotIf leaderPressed
 q:: leader("q", () => toggleBluetooth())
 p:: leader("p", () => toggleAlwaysOnTop())
@@ -49,7 +47,6 @@ LWin:: return
 #InputLevel 1
 !\:: Send("\")
 \:: ActiveLQuickeaderMode()
-
 #HotIf qleaderPressed
 \:: quickleader("\", () => alternateTab())
 w:: quickleader("w", () => ToggleApp("wezterm-gui.exe"))
@@ -67,19 +64,13 @@ z:: quickleader("z", () => FocusZenPiP())
 ;******************************************************************************
 ; Keymaps
 ;******************************************************************************
-!1:: Send("#1")
-!2:: Send("#2")
-!3:: Send("#3")
-!4:: Send("#4")
-!5:: Send("#5")
-!6:: Send("#6")
-!7:: Send("#7")
-!8:: Send("#8")
-!9:: Send("#9")
-
-!PgUp:: Home
-!PgDn:: End
+!PgUp::Home
+!PgDn::End
 !SPACE:: Send("^{SPACE}")
+!;:: SendInput("{AppsKey}") ; Show menu
+^#b:: showCalendar()
+#Capslock:: toggleCapsLosck()
+SetCapsLockState("AlwaysOff")
 
 ; Screenshot
 #`:: takeScreenshot()
@@ -95,34 +86,26 @@ Pause:: Send("{Media_Play_Pause}")
 #Del:: Send("{Media_Play_Pause}") ; Play/Pause
 #PgUp:: Send("{Media_Prev}")      ; Next track
 #PgDn:: Send("{Media_Next}")      ; Previous track
+!#k:: togleSelectedMic()
 ; #PgUp:: volup()
 ; #PgDn:: voldown()
-
 #HotIf winIsMouseOver("ahk_class Shell_TrayWnd")
 ~LAlt & WheelUp:: volup()
 ~LAlt & WheelDown:: voldown()
 #HotIf
 
-#HotIf winIsMouseOver("ahk_class Shell_TrayWnd") && MouseInRightCorner()
-WheelUp:: Send("^#{Left}")
-WheelDown:: Send("^#{Right}")
-#HotIf
-
-MouseInRightCorner() {
-  MouseGetPos(&mx, &my)
-  screenW := SysGet(78)   ; SM_CXVIRTUALSCREEN  — full screen width
-  return mx > screenW - 200   ; true if cursor is within 200px of the right edge
-}
-
-; Other
-^#b:: showCalendar()
-!;:: SendInput("{AppsKey}") ; Show menu
-#Capslock:: toggleCapsLosck()
-SetCapsLockState("AlwaysOff")
-
 ;******************************************************************************
 ; Window management
 ;******************************************************************************
+!1:: Send("#1")
+!2:: Send("#2")
+!3:: Send("#3")
+!4:: Send("#4")
+!5:: Send("#5")
+!6:: Send("#6")
+!7:: Send("#7")
+!8:: Send("#8")
+!9:: Send("#9")
 ; #InputLevel 1
 ; !\:: Send("\")
 ; \:: alternateTab()
@@ -155,16 +138,26 @@ SetCapsLockState("AlwaysOff")
 $Escape:: superEscape()
 #HotIf
 
-; ^#SPACE::toggleAlwaysOnTop()
 ; Vertual Desktop
 #[:: navToDesktop("left")
 #]:: navToDesktop("right")
+#HotIf winIsMouseOver("ahk_class Shell_TrayWnd") && MouseInRightCorner()
+; Switch Vertual Desktops
+WheelUp:: Send("^#{Left}")
+WheelDown:: Send("^#{Right}")
+#HotIf
+
+MouseInRightCorner() {
+	MouseGetPos(&mx, &my)
+	screenW := SysGet(78)   ; SM_CXVIRTUALSCREEN  — full screen width
+	return mx > screenW - 200   ; true if cursor is within 200px of the right edge
+}
 
 ;******************************************************************************
 ; Layout
 ;******************************************************************************
-layout_loading := 0
-current_layout := 0
+global layout_loading := 0
+global current_layout := 0
 
 #p:: changeLayoutTo("code")
 #o:: changeLayoutTo("focus_custom")
@@ -181,18 +174,18 @@ LWin:: return
 ; Vim Mode
 ;******************************************************************************
 isMouseGridInactive() {
-  return !IsSet(mouseGridActive) || mouseGridActive = 0
+	return !IsSet(mouseGridActive) || mouseGridActive = 0
 }
 
 #/:: SendInput("^!{Tab}")
 
 #HotIf (WinActive("Volume Control")
-  or WinActive("Sound")
-  or WinActive("Quick settings")
-  or WinActive("Task View")
-  or WinActive("Task Switching")
-  or WinActive("Notification Center")
-  or WinActive("Picture-in-Picture") and WinActive("ahk_exe zen.exe")
+	or WinActive("Sound")
+	or WinActive("Quick settings")
+	or WinActive("Task View")
+	or WinActive("Task Switching")
+	or WinActive("Notification Center")
+	or WinActive("Picture-in-Picture") and WinActive("ahk_exe zen.exe")
 ) and isMouseGridInactive()
 
 ; *WheelDown::Send {Blind}{Tab}
@@ -209,10 +202,7 @@ d:: Send("{PgDn}")
 u:: Send("{PgUp}")
 #HotIf
 
-#HotIf (WinActive("Task View")
-  or WinActive("Task Switching"))
-and isMouseGridInactive()
-
+#HotIf (WinActive("Task View") or WinActive("Task Switching")) and isMouseGridInactive()
 ; manage workspace
 +n:: Send("^#d")
 +x:: Send("^#{F4}")
@@ -222,9 +212,9 @@ and isMouseGridInactive()
 
 ; Global arrow (home row)
 #HotIf not WinActive("ahk_exe WindowsTerminal.exe")
-  and not WinActive("ahk_exe alacritty.exe")
-  and not WinActive("ahk_exe wezterm-gui.exe")
-  and not WinActive("ahk_exe Code.exe")
+	and not WinActive("ahk_exe alacritty.exe")
+	and not WinActive("ahk_exe wezterm-gui.exe")
+	and not WinActive("ahk_exe Code.exe")
 
 !j:: SendInput("{Down}")
 !k:: SendInput("{Up}")
@@ -244,7 +234,6 @@ and isMouseGridInactive()
 
 ; PotPlayer
 #HotIf WinActive("ahk_class PotPlayer64") and isMouseGridInactive()
-
 l:: Send("{Right}")
 h:: Send("{Left}")
 j:: Send("{Down}")
@@ -275,7 +264,6 @@ _:: Send("!{PgDn}")
 #HotIf
 
 #HotIf WinActive("Command Palette") and isMouseGridInactive()
-
 Tab:: Send("{Down}")
 +Tab:: Send("{Up}")
 !p:: Send("{Up}")
