@@ -11,6 +11,7 @@ command! CodeOpenCwd lua require('hasan.utils.file').openInCode(false)
 command! -bang -nargs=1 -complete=file Fedit lua require("hasan.float").fedit(<f-args>)
 command! LuaSnipEdit lua require("luasnip.loaders").edit_snippet_files()
 command! Log edit $NVIM_LOG_FILE
+command! RemoveComments execute 'g/^\s*' . escape(trim(split(&commentstring, '%s')[0]), '/*^$.~[]\') . '/d'
 " Lsp
 command! LspInstallEssentials lua require('config.lsp.util.extras').install_essential_servers()
 command! SkipAutoFormatSave silent noa write

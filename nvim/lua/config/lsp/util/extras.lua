@@ -98,4 +98,30 @@ function M.lsp_rename()
   end)
 end
 
+---@param client vim.lsp.Client
+---@param attempts? number
+function M.enable_document_color(client, attempts)
+  attempts = attempts or 0
+
+  if client:supports_method('textDocument/documentColor') then
+    vim.defer_fn(function()
+      vim.lsp.document_color.enable(true, { client_id = client.id }, { style = 'background' })
+    end, 50)
+    return
+  end
+
+  -- Retry only for specific LSPs
+  local delayed_clients = {
+    dartls = true,
+    tailwindcss = true,
+    cssls = true,
+  }
+
+  if delayed_clients[client.name] and attempts < 10 then
+    vim.defer_fn(function()
+      M.enable_document_color(client, attempts + 1)
+    end, 200)
+  end
+end
+
 return M

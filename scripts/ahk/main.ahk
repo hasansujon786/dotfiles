@@ -49,7 +49,6 @@ LWin:: return
 \:: ActiveLQuickeaderMode()
 #HotIf qleaderPressed
 \:: quickleader("\", () => alternateTab())
-w:: quickleader("w", () => ToggleApp("wezterm-gui.exe"))
 e:: quickleader("e", () => ToggleApp("wezterm-gui.exe"))
 f:: quickleader("f", () => ToggleExplorer())
 d:: quickleader("d", () => ToggleApp("zen.exe", "", "MozillaDialogClass"))
@@ -58,6 +57,7 @@ v:: quickleader("x", () => ToggleApp("PotPlayerMini64.exe"))
 c:: quickleader("c", () => ToggleApp("chrome.exe"))
 i:: quickleader("i", () => ToggleApp("Insomnia-12.3.1.exe", "C:/Users/" A_UserName "/scoop/apps/insomnia/current/Insomnia.exe"))
 t:: quickleader("t", () => ToggleApp("telegram.exe", "C:/Users/" A_UserName "/AppData/Roaming/Telegram Desktop/Telegram.exe"))
+w:: quickleader("w", () => ToggleApp("WhatsApp.Root.exe"))
 z:: quickleader("z", () => FocusZenPiP())
 #HotIf
 

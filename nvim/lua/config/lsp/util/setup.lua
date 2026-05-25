@@ -24,6 +24,8 @@ function M.lsp_attach(args)
     vim.wo.foldexpr = 'v:lua.vim.lsp.foldexpr()'
   end
 
+  require('config.lsp.util.extras').enable_document_color(client)
+
   -- Disable default formatter ---------------
   -- local should_disable_formatter = lsp_state.use_builtin_lsp_formatter ~= nil
   --   and not vim.tbl_contains(lsp_state.use_builtin_lsp_formatter, client.name)

@@ -3,6 +3,7 @@ return {
   lazy = true,
   ft = { 'dart' },
   cmd = { 'FlutterRun' },
+  event = { 'BufReadPre pubspec.yaml' },
   keys = {
     {
       '<leader>fc',
@@ -19,17 +20,17 @@ return {
       widget_guides = { enabled = true },
       fvm = true,
       lsp = {
-        color = { -- show the derived colours for dart variables
-          enabled = true,
-          background = false,
-          foreground = false,
-          virtual_text = true,
-          virtual_text_str = '■',
-        },
         capabilities = require('config.lsp.util.setup').update_capabilities('flutter_tools'),
         -- see the link below for details on each option:
         -- https://github.com/dart-lang/sdk/blob/master/pkg/analysis_server/tool/lsp_spec/README.md#client-workspace-configuration
         settings = require('config.lsp.servers.dartls').opts.settings.dart,
+      },
+      dev_log = {
+        enabled = true,
+        notify_errors = true,
+        -- open_cmd = 'botright 10split',
+        open_cmd = '10split',
+        focus_on_open = true,
       },
       debugger = {
         enabled = false,
