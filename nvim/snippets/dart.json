@@ -105,7 +105,18 @@
     "prefix": "dd",
     "description": "Quick Container",
     "body": [
-      "Container(child: const Text('foobar'), color: Colors.blue.shade300),"
+      "Container(",
+      "  foregroundDecoration: BoxDecoration(border: Border.all(color: Colors.red, width: 2)),",
+      "  child: const Text('foobar'),",
+      "),"
+    ]
+  },
+
+  "container outline": {
+    "prefix": "fd",
+    "description": "Quick Container",
+    "body": [
+      "foregroundDecoration: BoxDecoration(border: Border.all(color: Colors.red, width: 2))"
     ]
   },
   "iffe": {

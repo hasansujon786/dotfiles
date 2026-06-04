@@ -27,7 +27,7 @@ return {
       },
       dev_log = {
         enabled = true,
-        notify_errors = true,
+        notify_errors = false,
         -- open_cmd = 'botright 10split',
         open_cmd = '10split',
         focus_on_open = true,

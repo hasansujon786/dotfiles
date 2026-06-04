@@ -53,6 +53,13 @@ return {
         v = gen_spec.treesitter({ a = '@assignment.outer', i = '@assignment.rhs' }),
         V = gen_spec.treesitter({ a = '@assignment.outer', i = '@assignment.lhs' }),
 
+        -- e,j,k,l,s,u,x,y,z
+
+        -- Makes `aB` equivalent to built-in `al`
+        -- B = MiniExtra.gen_ai_spec.buffer(),
+        -- -- Makes `iL` equivalent to built-in `il`
+        -- L = MiniExtra.gen_ai_spec.line(),
+
         -- ['*'] = gen_spec.pair('*', '*', { type = 'greedy' }),
         -- ['_'] = gen_spec.pair('_', '_', { type = 'greedy' }),
 
