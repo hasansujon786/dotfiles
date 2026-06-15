@@ -174,6 +174,12 @@ function M.commands(opts)
       command = commands.generate,
     },
     {
+      id = 'flutter-tools-log-toggle',
+      text = 'Log Toggle',
+      hint = 'Toggle Log Window',
+      command = lazy.require('flutter-tools.log').toggle,
+    },
+    {
       id = 'flutter-tools-clear-dev-log',
       text = 'Clear Dev Log',
       hint = 'Clear previous logs in the output buffer',
