@@ -319,7 +319,7 @@ require('snacks').setup({
 
       ---@type snacks.picker.file_browser.Config
       file_browser = { layout = 'ivy' },
-      -- explorer = require('config.navigation.snacks.explorer').source,
+      explorer = require('config.navigation.snacks.explorer').source,
     },
 
     formatters = {
@@ -439,8 +439,8 @@ require('snacks').setup({
           ['<s-tab>'] = { 'my_list_up', mode = { 'i', 'n' } },
           ['<tab>'] = { 'my_list_down', mode = { 'i', 'n' } },
           ['<A-i>'] = { 'select_and_prev', mode = { 'i', 'n' } },
-          ['<A-y>'] = { 'select_and_next', mode = { 'i', 'n' } },
-          ['<C-y>'] = { 'select_and_next', mode = { 'i', 'n' } },
+          ['<A-y>'] = { 'select_and_next', mode = { 'i', 'n', 'x' } },
+          ['<C-y>'] = { 'select_and_next', mode = { 'i', 'n', 'x' } },
         },
       },
       preview = {

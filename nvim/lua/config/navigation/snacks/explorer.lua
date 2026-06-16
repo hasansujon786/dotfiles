@@ -114,12 +114,13 @@ return {
           ['g/'] = 'picker_grep',
           ['x'] = 'explorer_close', -- close directory
           ['W'] = 'explorer_collasp_all_root',
-          ['<tab>'] = { 'toggle_focus_or_quicklook', mode = { 'i', 'n' } },
 
           ['s'] = 'flash',
           ['<c-t>'] = 'terminal',
-          ['i'] = { 'quicklook', mode = { 'i', 'n' } },
+
           ['<C-i>'] = { 'quicklook', mode = { 'i', 'n' } },
+          -- ['i'] = { 'quicklook', mode = { 'i', 'n' } },
+          -- ['<tab>'] = { 'toggle_focus_or_quicklook', mode = { 'i', 'n' } },
 
           -- ['k'] = { 'my_list_up', mode = { 'i', 'n' } },
           -- ['j'] = { 'my_list_down', mode = { 'i', 'n' } },
