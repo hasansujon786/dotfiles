@@ -24,7 +24,6 @@ return {
     {
       '<c-.>',
       function()
-        -- require('sidekick.cli').toggle()
         require('sidekick.cli').focus({ filter = { installed = true } })
       end,
       desc = 'Sidekick: Focus CLI',
@@ -33,7 +32,7 @@ return {
     {
       '<leader>aa',
       function()
-        require('sidekick.cli').toggle({ filter = { installed = true } })
+        require('sidekick.cli').toggle()
       end,
       desc = 'Sidekick: Toggle CLI',
     },
@@ -42,8 +41,6 @@ return {
       function()
         require('sidekick.cli').select({ filter = { installed = true } })
       end,
-      -- Or to select only installed tools:
-      -- require("sidekick.cli").select({ filter = { installed = true } })
       desc = 'Sidekick: Select CLI',
     },
     {
@@ -84,13 +81,5 @@ return {
       mode = { 'n', 'x' },
       desc = 'Sidekick: Select Prompt',
     },
-    -- Example of a keybinding to open Claude directly
-    -- {
-    --   '<leader>ac',
-    --   function()
-    --     require('sidekick.cli').toggle({ name = 'claude', focus = true })
-    --   end,
-    --   desc = 'Sidekick: Toggle Claude',
-    -- },
   },
 }
