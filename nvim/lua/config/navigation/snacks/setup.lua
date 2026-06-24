@@ -102,6 +102,26 @@ local function winhighlight_from(tbl)
   return table.concat(tbl, ',')
 end
 
+local sidebar_hl = {
+  root = 'FloatBorder:EdgyWinSeparator',
+  input = winhighlight_from({
+    'Normal:SidebarDark',
+    'NormalNC:SidebarDark',
+    'FloatBorder:SidebarDarkBorder',
+    'FloatTitle:SidebarDarkTitlte',
+  }),
+  list = winhighlight_from({
+    'Normal:SidebarDark',
+    'NormalNC:SidebarDark',
+  }),
+  preview = winhighlight_from({
+    'Normal:SidebarDark',
+    'NormalNC:SidebarDark',
+    'FloatBorder:SidebarDarkBorder',
+    'FloatTitle:SnacksPickerTitle',
+  }),
+}
+
 local function get_sidebar()
   return {
     preview = 'main',
@@ -112,47 +132,65 @@ local function get_sidebar()
       height = 0,
       position = 'left',
       border = { '', '', '', ' ', '', '', '', '' },
-      wo = { winhighlight = 'FloatBorder:EdgyWinSeparator' },
+      wo = { winhighlight = sidebar_hl.root },
       box = 'vertical',
       {
         win = 'input',
         height = 1,
         border = true,
-        title = '{live} {flags}',
-        -- title = '{title} {live} {flags}',
+        -- title = '{live} {flags}',
+        title = '{title} {live} {flags}',
         title_pos = 'center',
-        wo = {
-          winhighlight = winhighlight_from({
-            'Normal:SidebarDark',
-            'NormalNC:SidebarDark',
-            'FloatBorder:SidebarDarkBorder',
-            'FloatTitle:SidebarDarkTitlte',
-          }),
-        },
+        wo = { winhighlight = sidebar_hl.input },
       },
       {
         win = 'list',
         border = 'none',
-        wo = {
-          winhighlight = winhighlight_from({
-            'Normal:SidebarDark',
-            'NormalNC:SidebarDark',
-          }),
-        },
+        wo = { winhighlight = sidebar_hl.list },
       },
       {
         win = 'preview',
         title = '{preview}',
         height = 0.4,
         border = 'top',
-        wo = {
-          winhighlight = winhighlight_from({
-            'Normal:SidebarDark',
-            'NormalNC:SidebarDark',
-            'FloatBorder:SidebarDarkBorder',
-            'FloatTitle:SnacksPickerTitle',
-          }),
-        },
+        wo = { winhighlight = sidebar_hl.preview },
+      },
+    },
+  }
+end
+
+local function get_right_float()
+  return {
+    preview = 'main',
+    layout = {
+      box = 'vertical',
+      backdrop = false,
+      row = 0,
+      col = 0.99,
+      width = 32,
+      height = 0,
+      border = 'none',
+      -- border = { '█', '█', '█', '', '', '', '', '▕' },
+      title_pos = 'center',
+      wo = { winhighlight = sidebar_hl.root },
+      {
+        win = 'input',
+        title = '{title} {live} {flags}',
+        height = 1,
+        border = 'rounded',
+        wo = { winhighlight = sidebar_hl.input },
+      },
+      {
+        win = 'list',
+        border = 'none',
+        wo = { winhighlight = sidebar_hl.list },
+      },
+      {
+        win = 'preview',
+        title = '{preview}',
+        width = 0.6,
+        border = 'none',
+        wo = { winhighlight = sidebar_hl.preview },
       },
     },
   }
@@ -276,9 +314,12 @@ require('snacks').setup({
       grep = { layout = 'dropdown' },
       grep_word = { layout = 'dropdown' },
       grep_buffers = { layout = 'dropdown' },
-      lsp_symbols = { layout = 'ivy_mini_main' },
+      lsp_symbols = {
+        layout = 'right_float',
+        win = preview_main_win,
+      },
       treesitter = {
-        layout = 'right',
+        layout = 'right_float',
         win = preview_main_win,
         filter = {
           default = {
@@ -506,9 +547,8 @@ require('snacks').setup({
       dropdown = get_dropdown(true),
       ivy = get_ivy(false),
       ivy_mini = get_ivy(true),
-      ivy_main = { preset = 'ivy', preview = 'main' },
-      ivy_mini_main = { preset = 'ivy_mini', preview = 'main' },
       sidebar = get_sidebar(),
+      right_float = get_right_float(),
       vscode = { layout = { row = 0, width = 0.4, min_width = 70 } },
       select = { layout = { border = hover.border } },
       select_main = { preset = 'select', preview = 'main', hidden = {} },
