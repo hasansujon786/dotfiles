@@ -18,7 +18,7 @@ return {
       '<leader>op',
       '<cmd>Neotree close<CR>',
       desc = 'NeoTree: Toggle sidebar',
-      ft = 'neo-tree'
+      ft = 'neo-tree',
     },
     {
       '-',
@@ -26,12 +26,17 @@ return {
       desc = 'NeoTree: Open vinegar',
     },
   },
-  config = function()
-    keymap('n', '<bs>', '<cmd>lua require("config.navigation.neo_tree.util").edit_alternate_file()<CR>', { desc = 'Edit alternate file' })
+  opts = function(_, opts)
+    keymap(
+      'n',
+      '<bs>',
+      '<cmd>lua require("config.navigation.neo_tree.util").edit_alternate_file()<CR>',
+      { desc = 'Edit alternate file' }
+    )
 
     ---@module "neo-tree"
     ---@type neotree.Config
-    local opts = {
+    local myOpts = {
       -- see `:h neo-tree-custom-commands-global`
       -- A list of functions, each representing a global custom command
       -- that will be available in all sources (if not overridden in `opts[source_name].commands`)
@@ -44,8 +49,8 @@ return {
       enable_git_status = true,
       enable_diagnostics = false,
       open_files_do_not_replace_types = { 'terminal', 'trouble', 'qf' }, -- when opening files, do not use windows containing these filetypes or buftypes
-      sort_case_insensitive = false,                                     -- used when sorting files and directories in the tree
-      sort_function = nil,                                               -- use a custom function for sorting files and directories in the tree
+      sort_case_insensitive = false, -- used when sorting files and directories in the tree
+      sort_function = nil, -- use a custom function for sorting files and directories in the tree
       default_component_configs = require('config.navigation.neo_tree.default_component_configs'),
       window = require('config.navigation.neo_tree.window'),
       filesystem = require('config.navigation.neo_tree.filesystem'),
@@ -53,7 +58,7 @@ return {
       git_status = require('config.navigation.neo_tree.git_status'),
     }
 
-    require('neo-tree').setup(opts)
+    return vim.tbl_deep_extend('force', opts or {}, myOpts)
   end,
   dependencies = {
     'nvim-lua/plenary.nvim',
