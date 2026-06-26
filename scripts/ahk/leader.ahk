@@ -1,14 +1,16 @@
 #SingleInstance Force
 
-leader(key, cmd) {
+leader(key, cmd, cb := 0) {
 	boardUpdateMsg(key)
 	ResetLeader(1)
 	cmd()
+	if cb
+		cb()
 }
 
 global leaderPressed := 0
 global leaderBoardExists := 0
-global MyLeaderGui, MyLeaderText
+global MyLeaderGui, MyLeaderText, MyLeaderSmallText
 
 global SCREEN_WIDTH := A_ScreenWidth
 global SCREEN_HEIGHT := A_ScreenHeight
@@ -43,7 +45,7 @@ ResetLeader(actionKePressed := 0) {
 }
 
 boardShow() {
-	global MyLeaderGui, MyLeaderText, leaderBoardExists
+	global MyLeaderGui, MyLeaderText, MyLeaderSmallText, leaderBoardExists
 	global BOARD_WIDTH, BOARD_HEIGHT, SCREEN_HEIGHT, POS_Y
 	if (leaderBoardExists) {
 		return
@@ -51,7 +53,9 @@ boardShow() {
 
 	MyLeaderGui := Gui("+ToolWindow +AlwaysOnTop -Sysmenu Disabled", "")
 	MyLeaderGui.SetFont("Bold s28", "Arial")
-	MyLeaderText := MyLeaderGui.Add("Text", "w" BOARD_WIDTH " h80 x0 y12 Center", ":)")  ; Add text
+	MyLeaderText := MyLeaderGui.Add("Text", "w" BOARD_WIDTH " h65 x0 y12 Center", ":)")  ; Add text
+	MyLeaderGui.SetFont("Bold s8", "Arial")
+	MyLeaderSmallText := MyLeaderGui.Add("Text", "w" BOARD_WIDTH " x0 y" (BOARD_HEIGHT - 22) " Center", "")
 
 	guiEnterFromBottom(MyLeaderGui, BOARD_WIDTH, BOARD_HEIGHT, POS_X, SCREEN_HEIGHT, POS_X, POS_Y)
 }
@@ -64,12 +68,10 @@ boardHide() {
 	}
 }
 
-boardUpdateMsgLabel(key := "", fontSize := 28) {
-	global MyLeaderGui, MyLeaderText, leaderBoardExists
-	if MyLeaderText && leaderBoardExists {
-		MyLeaderGui.SetFont("Bold s" fontSize, "Arial")
-		MyLeaderText.SetFont()
-		MyLeaderText.Text := key
+boardUpdateMsgLabel(label := "") {
+	global MyLeaderSmallText, leaderBoardExists
+	if MyLeaderSmallText && leaderBoardExists {
+		MyLeaderSmallText.Text := label
 	}
 }
 
@@ -146,3 +148,7 @@ ResetQuickLeader(actionKePressed := 0) {
 	qleaderPressed := 0
 }
 
+; **************************************************************************
+GridToggleCallback() {
+	boardUpdateMsgLabel(isGridEnabled ? "ACTIVE" : "DEACTIVE")
+}

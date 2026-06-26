@@ -89,7 +89,7 @@ beepOff() {
 toggleKanata() {
 	beep()
 	onOff := RunPowerShellScript("C:/Users/hasan/dotfiles/scripts/ahk/kanata-toggle.ps1")
-	boardUpdateMsgLabel(onOff, 16)
+	boardUpdateMsgLabel(onOff)
 }
 suspendAHK() {
 	Suspend()

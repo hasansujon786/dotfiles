@@ -39,6 +39,7 @@ a:: leader("a", () => send("#{a}"))
 m:: leader("m", () => selectMic())
 +m:: leader("M", () => showMicPanel())
 s:: leader("s", () => showVolMixer())
+g:: leader("g", () => ToggleGrid(), GridToggleCallback)
 #k:: leader("#k", () => toggleKanata())
 MButton:: leader("MB", () => enterAutoClikMode())
 LWin:: return
@@ -64,6 +65,7 @@ z:: quickleader("z", () => FocusZenPiP())
 ;******************************************************************************
 ; Keymaps
 ;******************************************************************************
+; #q::Send("!{f4}")
 !PgUp::Home
 !PgDn::End
 !SPACE:: Send("^{SPACE}")
@@ -134,9 +136,9 @@ Pause:: Send("{Media_Play_Pause}")
 +!]:: SendInput("^+{PgDn}")
 #HotIf
 
-#HotIf isMouseGridInactive()
-$Escape:: superEscape()
-#HotIf
+; #HotIf isMouseGridInactive()
+; $Escape:: superEscape()
+; #HotIf
 
 ; Vertual Desktop
 #[:: navToDesktop("left")

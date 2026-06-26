@@ -116,7 +116,7 @@
     "prefix": "fd",
     "description": "Quick Container",
     "body": [
-      "foregroundDecoration: BoxDecoration(border: Border.all(color: Colors.red, width: 2))"
+      "foregroundDecoration: BoxDecoration(border: Border.all(color: Colors.red, width: 2)),"
     ]
   },
   "iffe": {

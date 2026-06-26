@@ -21,10 +21,7 @@ SUB_GRID_2D_DIRECTIN := [
 ]
 FINE_POINT_DIRECTIONAL_KEYS := ["h", "j", "k", "l" ]
 
-#y::render()
-Hotkey("alt", render)
-
-global isInit := 1
+global isGridEnabled := false
 global mouseGridActive := 0
 global bufferInput := ""
 global cellMap := Map()
@@ -32,6 +29,12 @@ global lastFocusedCell := 0
 global innerCellMap := Map()
 global pointLocation := { x: 0, y:0, box: { x: 0, y: 0, w: 0, h: 0 } }
 global finePointCellKey := 0
+
+Hotkey("alt", render)
+ToggleGrid() {
+  global isGridEnabled := !isGridEnabled
+}
+
 
 setGridState() {
   global CANVAS_WIDTH := A_ScreenWidth
@@ -60,6 +63,9 @@ setGridState() {
 setGridState()
 
 render(*) {
+  if(!isGridEnabled) {
+    return
+  }
   global BORDER_GRID, TAG_GRID, mouseGridActive, GRID_IH
   if (mouseGridActive) {
     escape(GRID_IH, "")
