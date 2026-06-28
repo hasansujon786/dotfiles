@@ -120,9 +120,11 @@ local function show_more_options(state)
   })
 end
 
+local sidebar = require('core.state').ui.sidebar
+
 return {
-  position = 'left',
-  width = 30,
+  position = sidebar.positions.explorer,
+  width = sidebar.width,
   mapping_options = { noremap = true, nowait = true },
   mappings = {
     ['i'] = require('config.navigation.neo_tree.util').toggle_quicklook,

@@ -122,13 +122,15 @@ local sidebar_hl = {
   }),
 }
 
+local sidebar = require('core.state').ui.sidebar
+
 local function get_sidebar()
   return {
     preview = 'main',
     layout = {
       backdrop = false,
-      width = 32,
-      min_width = 32,
+      width = sidebar.width,
+      min_width = sidebar.width,
       height = 0,
       position = 'left',
       border = { '', '', '', ' ', '', '', '', '' },

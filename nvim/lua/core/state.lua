@@ -159,6 +159,13 @@ M.lsp = {
 }
 
 M.ui = {
+  sidebar = {
+    explorer_plugin = 'snacks',
+    width = 32,
+    positions = {
+      explorer = 'left',
+    },
+  },
   icons = {
     org = {
       headlines = { '◎', '◯', '■', '□', '◆', '◇', '♥', '⏾' },

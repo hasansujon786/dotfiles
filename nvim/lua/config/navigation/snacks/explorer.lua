@@ -28,6 +28,8 @@ local function try_change_quicklook(p, action)
   end
 end
 
+local sidebar = require('core.state').ui.sidebar
+
 return {
   utils = {
     try_change_quicklook = try_change_quicklook,
@@ -39,10 +41,13 @@ return {
     end,
   },
   source = {
+    layout = {
+      preset = sidebar.positions.explorer, -- sidebar == left
+    },
     tree = true,
     watch = true,
-    diagnostics = false,
-    diagnostics_open = false,
+    -- diagnostics = false,
+    -- diagnostics_open = false,
     follow_file = true,
     focus = 'list',
     auto_close = false,
