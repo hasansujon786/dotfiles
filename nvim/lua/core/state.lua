@@ -161,7 +161,7 @@ M.lsp = {
 M.ui = {
   sidebar = {
     explorer_plugin = 'snacks',
-    width = 32,
+    width = 30,
     positions = {
       explorer = 'left',
     },

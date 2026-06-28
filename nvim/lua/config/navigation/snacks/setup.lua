@@ -459,6 +459,11 @@ require('snacks').setup({
     },
 
     icons = {
+      tree = {
+        vertical = "│",
+        middle   = "├",
+        last     = "└",
+      },
       kinds = Icons.kind,
       git = {
         enabled = true, -- show git icons
