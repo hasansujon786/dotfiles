@@ -468,8 +468,8 @@ require('snacks').setup({
       git = {
         enabled = true, -- show git icons
         commit = '󰜘 ', -- used by git log
-        -- staged = Icons.Other.smallcaps.s, -- staged changes. Always overrides the type icons
-        staged = '',
+        -- staged = '',
+        staged = Icons.Other.smallcaps.s, -- staged changes. Always overrides the type icons
         added = Icons.Other.smallcaps.a,
         deleted = Icons.Other.smallcaps.d,
         ignored = ' ',
