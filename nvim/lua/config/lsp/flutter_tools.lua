@@ -28,30 +28,29 @@ return {
       dev_log = {
         enabled = true,
         notify_errors = false,
-        -- open_cmd = 'botright 10split',
-        open_cmd = '10split',
+        open_cmd = 'botright 5split',
+        -- open_cmd = '10split',
         focus_on_open = true,
       },
       debugger = {
-        enabled = false,
+        enabled = true,
         run_via_dap = true, -- use dap instead of a plenary job to run flutter apps
         register_configurations = function(paths)
-          local dap = require('dap')
-
-          dap.adapters.dart = {
+          require('dap').adapters.dart = {
             type = 'executable',
-            command = 'node',
-            args = { mason_path .. '/dart-debug-adapter/extension/out/dist/debug.js', 'flutter' },
+            command = 'flutter', -- or full path to your flutter binary
+            args = { 'debug-adapter' },
           }
-          dap.configurations.dart = {
+
+          require('dap').configurations.dart = {
             {
               type = 'dart',
               request = 'launch',
-              name = 'Launch flutter',
-              dartSdkPath = paths.dart_sdk,
-              flutterSdkPath = paths.flutter_sdk,
+              name = 'Launch Flutter',
               program = '${workspaceFolder}/lib/main.dart',
               cwd = '${workspaceFolder}',
+              -- dartSdkPath = paths.dart_sdk,
+              -- flutterSdkPath = paths.flutter_sdk,
               -- toolArgs = { '-d', 'Edge' },
               --skipFiles = ["**/node_modules/**", "!**/node_modules/my-module/**"]
             },
@@ -60,29 +59,6 @@ return {
       },
     })
 
-    -- vim.api.nvim_create_user_command('FlutterLogToggleLayout', function(_)
-    --   local updated_layout = not require('core.state').ui.edgy.open_flutter_log_on_right
-    --   require('core.state').ui.edgy.open_flutter_log_on_right = updated_layout
-    --   require('config.edgy').config()
-    -- end, { desc = 'Toggle flutter log layout' })
-    -- vim.api.nvim_create_user_command('FlutterLogOpen', function(_)
-    --   local winFound = require('hasan.utils.win').focusWinIfExists('log')
-    --   if winFound then
-    --     return
-    --   end
-    --   local splitCmd = require('core.state').ui.edgy.open_flutter_log_on_right and '26vsplit' or '26split'
-    --
-    --   for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-    --     local bufname = vim.api.nvim_buf_get_name(bufnr)
-    --     if string.match(bufname, '__FLUTTER_DEV_LOG__') ~= nil then
-    --       vim.cmd(splitCmd .. ' | b __FLUTTER_DEV_LOG__')
-    --       return
-    --     end
-    --   end
-    --   vim.notify('No window found', vim.log.levels.WARN)
-    -- end, { desc = 'Open Flutter log' })
-
-    -- require('config.lsp.servers.dartls.pub').setup()
     augroup('MY_FLUTTER_AUGROUP')(function(autocmd)
       autocmd({ 'FileType' }, 'setlocal nonumber norelativenumber signcolumn=no', { pattern = 'log' })
       autocmd({ 'BufWinEnter', 'WinEnter' }, 'normal Gzt', { pattern = '__FLUTTER_DEV_LOG__' })
