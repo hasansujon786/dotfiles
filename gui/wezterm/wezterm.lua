@@ -12,7 +12,7 @@ config.key_tables = keysmaps.key_tables
 config.initial_rows = 35
 config.initial_cols = 138
 config.hide_tab_bar_if_only_one_tab = false
-config.window_decorations = 'RESIZE' -- NONE, INTEGRATED_BUTTONS
+-- config.window_decorations = 'RESIZE' -- NONE, INTEGRATED_BUTTONS
 config.check_for_updates = true
 config.use_dead_keys = false
 config.warn_about_missing_glyphs = false
@@ -28,8 +28,7 @@ config.set_environment_variables = {
 }
 config.status_update_interval = 1000
 config.freetype_load_flags = 'NO_HINTING'
-config.font_size = 14
--- config.line_height = 0.88
+config.font_size = 20
 config.font = wezterm.font_with_fallback({
   { family = 'JetBrains Mono', weight = 'Medium' },
   'Cascadia Code',
@@ -38,10 +37,11 @@ config.font = wezterm.font_with_fallback({
 })
 config.harfbuzz_features = { 'zero' }
 config.underline_thickness = '2pt'
-config.underline_position = '-2pt'
+config.underline_position = '-4pt'
+-- config.line_height = 0.88
 config.adjust_window_size_when_changing_font_size = false
 -- harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }, -- Disable ligatures
-config.default_prog = { constants.bash_path }
+-- config.default_prog = { constants.bash_path }
 -- default_gui_startup_args = {'start'}
 config.window_background_opacity = 0.96
 -- window_background_image = 'C:\\Users\\hasan\\Pictures\\do-more-y3.jpg'

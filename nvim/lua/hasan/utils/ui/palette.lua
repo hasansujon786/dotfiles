@@ -186,7 +186,7 @@ local function set_custom_highlights()
     SnacksDashboardNormal   = { fg = c.fg, bg = c.none },
     SnacksDashboardFooter   = { fg = c.dark_blue, bg = c.bg_d },
     SnacksDashboardFooterAlt= { fg = c.bg_d, bg = c.none },
-    SnacksIndentScope       = { fg = c.grey },
+    SnacksIndentScope       = { fg = c.dark_blue },
     SnacksIndent            = { fg = c.bg3 },
     SnacksDim               = { fg = c.bg3 },
     SnacksNotifierHistoryTitle = { fg = c.orange, underline = true },

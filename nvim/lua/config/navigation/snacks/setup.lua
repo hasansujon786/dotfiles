@@ -213,11 +213,32 @@ require('snacks').setup({
   image = { enabled = false },
   indent = {
     animate = { enabled = false },
-    scope = { only_current = true },
+    scope = {
+      enabled = true,
+      priority = 1000,
+      only_current = true,
+      underline = true,
+      char = '▏',
+    },
+    chunk = {
+      -- When enabled, scopes will be rendered as chunks, except for the
+      -- top-level scope which will be rendered as a scope.
+      enabled = true,
+      priority = 3000,
+      char = {
+        corner_top = '┌',
+        corner_bottom = '└',
+        -- corner_top = "╭",
+        -- corner_bottom = "╰",
+        horizontal = '─',
+        vertical = '│',
+        arrow = '▶',
+      },
+    },
   },
   input = {},
   scope = {
-    treesitter = { enabled = false },
+    treesitter = { enabled = true },
     keys = {
       ---@type table<string, snacks.scope.TextObject|{desc?:string}>
       textobject = {
@@ -460,9 +481,9 @@ require('snacks').setup({
 
     icons = {
       tree = {
-        vertical = "│",
-        middle   = "├",
-        last     = "└",
+        vertical = '│',
+        middle = '├',
+        last = '└',
       },
       kinds = Icons.kind,
       git = {
