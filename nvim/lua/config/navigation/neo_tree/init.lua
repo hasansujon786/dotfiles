@@ -10,12 +10,12 @@ return {
   vinegar_helper = util,
   keys = {
     {
-      '<leader>fe',
+      '<leader>op',
       '<cmd>Neotree filesystem<CR>',
       desc = 'NeoTree: Toggle sidebar',
     },
     {
-      '<leader>fe',
+      '<leader>op',
       '<cmd>Neotree close<CR>',
       desc = 'NeoTree: Toggle sidebar',
       ft = 'neo-tree',

@@ -134,6 +134,7 @@ local function get_sidebar()
       height = 0,
       position = 'left',
       border = { '', '', '', ' ', '', '', '', '' },
+      -- border = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' },
       wo = { winhighlight = sidebar_hl.root },
       box = 'vertical',
       {

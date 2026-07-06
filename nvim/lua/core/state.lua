@@ -160,7 +160,7 @@ M.lsp = {
 
 M.ui = {
   sidebar = {
-    explorer_plugin = 'snacks',
+    explorer_plugin = 'neotree', -- 'snacks',
     width = 30,
     positions = {
       explorer = 'left',

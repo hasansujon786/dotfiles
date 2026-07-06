@@ -68,8 +68,7 @@ return {
       { '<leader>fg', function() Snacks.picker.git_files() end, desc = 'Find Git Files' },
       { '<leader>fr', function() Snacks.picker.recent() end, desc = 'Recent' },
       -- { '<leader>fc', function() Snacks.picker.files({cwd=vim.fn.stdpath('config')}) end, desc = 'Find Config File' },
-      { '<leader>op', function() Snacks.explorer() end, desc = 'File Explorer' },
-      -- { '<leader>op', function() Snacks.explorer() end, desc = 'File Explorer' },
+      { '<leader>fe', function() Snacks.explorer() end, desc = 'File Explorer' },
 
       -- FIND BUFFERS
       { "<leader>.", function() require('config.navigation.snacks.custom').buffers_with_symbols() end, desc = 'which_key_ignore' },

@@ -28,8 +28,8 @@ return {
       dev_log = {
         enabled = true,
         notify_errors = false,
-        open_cmd = 'botright 5split',
-        -- open_cmd = '10split',
+        -- open_cmd = 'botright 5split',
+        open_cmd = '5split',
         focus_on_open = true,
       },
       debugger = {
