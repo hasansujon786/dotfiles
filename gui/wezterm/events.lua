@@ -6,17 +6,6 @@ local act = wezterm.action
 
 local M = {}
 
-local key_stack_mode = nil
-M.exit_key_stack = function(window, pane)
-  key_stack_mode = nil
-  window:perform_action('PopKeyTable', pane)
-end
-
-M.activate_win_stack = function(window, pane)
-  key_stack_mode = 'Win Stack'
-  window:perform_action({ ActivateKeyTable = { name = 'win_stack', one_shot = false } }, pane)
-end
-
 local tab_bar_scheme = scheme.one_half.tab_bar
 local all_tabs_width = 0
 wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
@@ -131,7 +120,6 @@ wezterm.on('toggle-tab-bar', function(window, _)
   window:set_config_overrides(overrides)
 end)
 
-local is_forced_fullscreen = false
 wezterm.on('user-var-changed', function(window, pane, name, value)
   local overrides = window:get_config_overrides() or {}
   if name == 'ZEN_MODE' then
@@ -166,71 +154,16 @@ wezterm.on('user-var-changed', function(window, pane, name, value)
 end)
 
 wezterm.on('save-session', function(...)
-  require('wezterm-session-manager/session-manager').save_state(...)
+  require('plugin/wezterm-session-manager/session-manager').save_state(...)
 end)
 wezterm.on('load-session', function(...)
-  require('wezterm-session-manager/session-manager').load_state(...)
+  require('plugin/wezterm-session-manager/session-manager').load_state(...)
 end)
 wezterm.on('restore-session', function(...)
-  require('wezterm-session-manager/session-manager').restore_state(...)
+  require('plugin/wezterm-session-manager/session-manager').restore_state(...)
 end)
 wezterm.on('sessionizer-find-repoes', function(...)
-  require('sessionizer').find_repoes(constants.project_dirs, ...)
+  require('plugin/sessionizer').find_repoes(constants.project_dirs, ...)
 end)
-
-local bg_opacity = 0.96
-M.toggle_opacity = function(win, _)
-  local overrides = win:get_config_overrides() or {}
-
-  bg_opacity = bg_opacity > 0.9 and 0.9 or 0.96
-  overrides.window_background_opacity = bg_opacity
-  win:set_config_overrides(overrides)
-end
-
-M.toggle_full_screen = function(window, pane)
-  window:perform_action('ToggleFullScreen', pane)
-  is_forced_fullscreen = window:get_dimensions().is_full_screen
-
-  if not is_tab_bar_forced_hidden then
-    local overrides = window:get_config_overrides() or {}
-
-    overrides.enable_tab_bar = not window:get_dimensions().is_full_screen
-
-    window:set_config_overrides(overrides)
-  end
-end
-
-local function is_quick_pane(pane)
-  -- pane:get_foreground_process_name() and pane:get_foreground_process_name():find('yazi')
-  local d = pane:get_dimensions()
-  return d['viewport_rows'] == 15
-end
-
-M.toggle_quick_pane = function(window, pane)
-  local panes = window:active_tab():panes()
-
-  if is_quick_pane(pane) then
-    wezterm.log_info('quick_pane#hide_pane')
-    window:perform_action(act.Multiple({ act.ActivatePaneDirection('Up'), act.SetPaneZoomState(true) }), pane)
-    return
-  end
-
-  for _, p in ipairs(panes) do
-    -- Check if the quick pane already exists
-    if is_quick_pane(p) then
-      wezterm.log_info('quick_pane#show_pane')
-      p:activate()
-      window:perform_action(wezterm.action.SetPaneZoomState(false), pane)
-      -- window:perform_action(wezterm.action.ActivatePaneByIndex(index - 1), pane)
-      return
-    end
-  end
-
-  wezterm.log_info('quick_pane#create_new_pane')
-  window:perform_action(act.SplitPane({ direction = 'Down', size = { Cells = 15 } }), pane) -- command = { cwd = '.', args = { 'yazi' } },
-
-  local new_pane = window:active_pane()
-  window:perform_action(wezterm.action({ Multiple = { { SendString = 'yazi\r' } } }), new_pane)
-end
 
 return M

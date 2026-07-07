@@ -42,8 +42,8 @@ end
 -- PATHS
 --
 local home_dir = normalize_path(wezterm.home_dir)
-local state_path = home_dir .. '/.config/wezterm/wezterm-session-manager/state/'
-local truncate_str = home_dir .. '/.config/wezterm/wezterm%-session%-manager/state/'
+local state_path = home_dir .. '/.config/wezterm/plugin/wezterm-session-manager/state/'
+local truncate_str = home_dir .. '/.config/wezterm/plugin/wezterm%-session%-manager/state/'
 
 local fd = (
   file_exists('/ProgramData/chocolatey/bin/fd.exe')
