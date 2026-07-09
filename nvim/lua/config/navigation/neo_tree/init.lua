@@ -20,11 +20,11 @@ return {
       desc = 'NeoTree: Toggle sidebar',
       ft = 'neo-tree',
     },
-    {
-      '-',
-      '<cmd>lua require("config.navigation.neo_tree.util").open_vinegar()<CR>',
-      desc = 'NeoTree: Open vinegar',
-    },
+    -- {
+    --   '-',
+    --   '<cmd>lua require("config.navigation.neo_tree.util").open_vinegar()<CR>',
+    --   desc = 'NeoTree: Open vinegar',
+    -- },
   },
   opts = function(_, opts)
     keymap(

@@ -2,14 +2,12 @@ return {
   'folke/sidekick.nvim',
   enabled = true,
   opts = {
-    -- add any options here
-    -- cli = {
-    --   mux = {
-    --     backend = 'zellij',
-    --     enabled = true,
-    --   },
-    -- },
     cli = {
+      -- add any options here
+      --   mux = {
+      --     backend = 'zellij',
+      --     enabled = true,
+      --   },
       prompts = {
         component = 'Please refactor {this} to a component',
         refactor = 'Please refactor {this} to be more maintainable',
@@ -17,6 +15,19 @@ return {
         -- custom = function(ctx)
         --   return 'Current file: ' .. ctx.buf .. ' at line ' .. ctx.row
         -- end,
+      },
+      tools = {
+        -- Defining the custom Antigravity entry
+        agy = {
+          cmd = { 'agy' }, -- Launches the core antigravity-cli tool
+          -- Optional: Pass custom flags or default models if needed
+          -- cmd = { "agy", "--model", "ultra" },
+          -- If you need to make sure your terminal passes specific options
+          env = {
+            -- Example: Tells agy to automatically use safe sandbox mode inside Neovim
+            -- AGY_SANDBOX_MODE = "true",
+          },
+        },
       },
     },
   },

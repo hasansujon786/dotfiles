@@ -3,6 +3,7 @@ local colors = require('colors')
 local constants = require('constants')
 local keymaps = require('keymaps')
 local events = require('events')
+local platform = require('platform')
 
 local config = wezterm.config_builder()
 
@@ -27,6 +28,7 @@ config.window_background_opacity = 0.96
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
 config.hide_mouse_cursor_when_typing = true
 config.enable_scroll_bar = false
+config.window_decorations = 'RESIZE' -- NONE, INTEGRATED_BUTTONS
 
 -- Tab Bar ============================================
 config.hide_tab_bar_if_only_one_tab = false
@@ -72,22 +74,9 @@ config.tab_and_split_indices_are_zero_based = false
 -- cursor_blink_ease_out = 'Constant',
 -- cursor_blink_rate = 0,
 
-if wezterm.target_triple == 'x86_64-unknown-linux-gnu' then
-  -- Linux settings =========================================
-elseif wezterm.target_triple == 'x86_64-apple-darwin' then
-  -- macOS settings =========================================
-  config.font_size = 20
-  config.default_prog = { 'zsh' }
-  config.window_decorations = 'INTEGRATED_BUTTONS' -- NONE, INTEGRATED_BUTTONS
-  config.launch_menu = {
-    { label = 'Zsh', args = { 'zsh' } },
-    { label = 'Bash', args = { 'bash' } },
-  }
-else -- wezterm.target_triple == 'x86_64-pc-windows-msvc'
-  -- Windows & Default settings =======================================
+if platform.is_win then
   config.font_size = 14
   config.default_prog = { 'bash' }
-  config.window_decorations = 'RESIZE' -- NONE, INTEGRATED_BUTTONS
   config.launch_menu = {
     { label = 'Bash', args = { 'bash' } },
     { label = 'Zsh', args = { 'zsh' } },
@@ -95,6 +84,15 @@ else -- wezterm.target_triple == 'x86_64-pc-windows-msvc'
     { label = 'Command Prompt', args = { 'cmd' } },
     { label = 'PowerShell', args = { 'powershell.exe', '-NoLogo' } },
   }
+elseif platform.is_mac then
+  config.font_size = 20
+  config.initial_cols = 125
+
+  config.launch_menu = {
+    { label = 'Zsh', args = { 'zsh' } },
+    { label = 'Bash', args = { 'bash' } },
+  }
+  -- elseif platform.is_linux then
 end
 
 return config
