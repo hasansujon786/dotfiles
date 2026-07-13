@@ -191,11 +191,23 @@ return {
       end,
       desc = 'Open terminal in cwd',
     },
-    ['Y'] = {
+    ['gy'] = {
       function(state)
         require('config.navigation.neo_tree.util').copy_path(state, ':t')
       end,
       desc = 'Copy filename',
+    },
+    ['gY'] = {
+      function(state)
+        require('config.navigation.neo_tree.util').copy_path(state, ':.')
+      end,
+      desc = 'Copy relative path',
+    },
+    ['gr'] = {
+      function(state)
+        require('config.navigation.neo_tree.util').copy_path(state, ':~')
+      end,
+      desc = 'Copy relative path',
     },
 
     ['[['] = 'prev_source',
