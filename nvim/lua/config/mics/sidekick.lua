@@ -28,6 +28,7 @@ return {
             -- AGY_SANDBOX_MODE = "true",
           },
         },
+        mimo = { cmd = { 'mimo' } },
       },
     },
   },
@@ -50,7 +51,7 @@ return {
     {
       '<leader>as',
       function()
-        require('sidekick.cli').select({ filter = { installed = true } })
+        require('sidekick.cli').select({ filter = { installed = false } })
       end,
       desc = 'Sidekick: Select CLI',
     },
@@ -74,6 +75,14 @@ return {
       function()
         require('sidekick.cli').send({ msg = '{file}' })
       end,
+      desc = 'Sidekick: Send File',
+    },
+    {
+      '<leader>af',
+      function()
+        require('sidekick.cli').send({ msg = '{selection}' })
+      end,
+      mode = { 'x' },
       desc = 'Sidekick: Send File',
     },
     {

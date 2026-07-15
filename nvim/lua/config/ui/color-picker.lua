@@ -8,6 +8,8 @@ return {
   },
   config = function()
     local ccc = require('ccc')
+    local ccc_argb = require('nvim.lua.hasan.ccc.hex_argb')
+    local ccc_argb_picker = require('nvim.lua.hasan.ccc.hex_argb_picker')
     local mapping = ccc.mapping
 
     ccc.setup({
@@ -19,7 +21,6 @@ return {
       preserve = true,
       save_on_quit = true,
       inputs = {
-        ccc.input.hsl,
         ccc.input.rgb,
         ccc.input.oklch,
       },
@@ -28,11 +29,29 @@ return {
         ccc.output.css_hsl,
         ccc.output.css_rgb,
         ccc.output.css_oklch,
+        ccc_argb,
+      },
+      pickers = {
+        ccc.picker.hex,
+        ccc.picker.css_rgb,
+        ccc.picker.css_hsl,
+        ccc.picker.css_hwb,
+        ccc.picker.css_lab,
+        ccc.picker.css_lch,
+        ccc.picker.css_oklab,
+        ccc.picker.css_oklch,
+        ccc_argb_picker,
       },
       convert = {
         { ccc.picker.hex, ccc.output.css_rgb },
         { ccc.picker.css_rgb, ccc.output.css_hsl },
         { ccc.picker.css_hsl, ccc.output.hex },
+        { ccc_argb_picker, ccc_argb },
+      },
+      recognize = {
+        pattern = {
+          [ccc_argb_picker] = { ccc.input.rgb, ccc_argb },
+        },
       },
       mappings = {
         ['r'] = mapping.cycle_input_mode,

@@ -130,12 +130,23 @@
     "body": ["print(${1});"]
   },
   "addpostframecallback": {
-    "prefix": ["wpfc"],
+    "prefix": ["postFrameCallBack"],
     "description": "Add post framecallback",
     "body": [
       "WidgetsBinding.instance.addPostFrameCallback((timestamp) {",
       "  ${1:// Content goes here}",
       "});"
     ]
+  },
+  "fixed Length List.generate": {
+    "prefix": "listgen",
+    "body": [
+      "final ${1:listName} = List.generate(",
+      "  ${2:length},",
+      "  (index) => ${3:value},",
+      "  growable: false,",
+      ");"
+    ],
+    "description": "Create a fixed-length list using List.generate"
   }
 }
