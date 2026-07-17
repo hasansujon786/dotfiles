@@ -22,21 +22,26 @@ M.save_altfile = function()
   end
 end
 
-M.copy_path = function(path_or_state, modifire)
+M.get_cursor_path = function(path_or_state)
   local path_name
   if type(path_or_state) == 'string' then
     path_name = path_or_state
   else
     local node = path_or_state.tree:get_node()
     path_name = node.path
+    log(node)
   end
-  if modifire ~= nil then
-    path_name = vim.fn.fnamemodify(path_name, modifire)
-  end
-  path_name = vim.fs.normalize(path_name)
 
-  vim.fn.setreg('+', path_name)
-  vim.notify('Coppied ' .. path_name .. ' to clipboard', vim.log.levels.INFO, { title = 'Neotree' })
+  return path_name
+end
+
+M.get_cursor_dir = function(state)
+  local node = state.tree:get_node()
+  if node.type == 'directory' then
+    return node.path
+  end
+
+  return node._parent_id
 end
 
 function M.vinegar_dir_up(state)

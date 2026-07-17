@@ -1,4 +1,5 @@
 local vinegar = require('config.navigation.neo_tree.util')
+local fa = require('hasan.utils.file_action')
 
 local function focus_first_child(state, node)
   if node:has_children() then
@@ -46,6 +47,16 @@ return {
   -- instead of relying on nvim autocmd events.
   window = {
     mappings = {
+      ['gZ'] = function(state)
+        fa.zip_and_yank_to_clipboard(require('config.navigation.neo_tree.util').get_cursor_path(state))
+      end,
+      ['<C-c>'] = function(state)
+        fa.copy_content_to_clipboard(require('config.navigation.neo_tree.util').get_cursor_path(state))
+      end,
+      ['<C-v>'] = function(state)
+        fa.paste_content_from_clipboard(require('config.navigation.neo_tree.util').get_cursor_dir(state))
+        require('neo-tree.sources.manager').refresh('filesystem')
+      end,
       ['.'] = 'set_root',
       ['<A-h>'] = 'toggle_hidden',
       ['f'] = 'filter_on_submit',

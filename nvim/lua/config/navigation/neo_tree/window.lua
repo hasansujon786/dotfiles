@@ -1,67 +1,67 @@
-local function show_copy_options(state)
-  local tree_util = require('config.navigation.neo_tree.util')
-  local items = {
-    {
-      key = 'c',
-      label = 'Copy path',
-      action = function()
-        tree_util.copy_path(state)
-      end,
-    },
-    {
-      key = 'd',
-      label = 'Copy dirname',
-      action = function()
-        tree_util.copy_path(state, ':p:h')
-      end,
-    },
-    {
-      key = 'f',
-      label = 'Copy filename with extension',
-      action = function()
-        tree_util.copy_path(state, ':t')
-      end,
-    },
-    {
-      key = 'n',
-      label = 'Copy filename',
-      action = function()
-        tree_util.copy_path(state, ':t:r')
-      end,
-    },
-    {
-      key = 'r',
-      label = 'Copy relative path',
-      action = function()
-        tree_util.copy_path(state, ':.')
-      end,
-    },
-    {
-      key = 'R',
-      label = 'Copy relative path to dirname',
-      action = function()
-        tree_util.copy_path(state, ':.:h')
-      end,
-    },
-  }
-
-  require('hasan.widgets').get_select(items, function(item)
-    if item.action then
-      item.action()
-    end
-  end, {
-    prompt = ' Neotree menu ',
-    win_config = {
-      border = {
-        -- left = opts.number and 0 or 2, right = opts.number and 3 or 2,
-        -- padding = { top = 2, bottom = 2, left = 2, right = 0 },
-      },
-    },
-    relative = 'cursor',
-    kind = 'get_char',
-    min_width = 30,
-  })
-end
+-- local function show_copy_options(state)
+--   local tree_util = require('config.navigation.neo_tree.util')
+--   local items = {
+--     {
+--       key = 'c',
+--       label = 'Copy path',
+--       action = function()
+--         tree_util.get_cursor_path(state)
+--       end,
+--     },
+--     {
+--       key = 'd',
+--       label = 'Copy dirname',
+--       action = function()
+--         tree_util.get_cursor_path(state, ':p:h')
+--       end,
+--     },
+--     {
+--       key = 'f',
+--       label = 'Copy filename with extension',
+--       action = function()
+--         tree_util.get_cursor_path(state, ':t')
+--       end,
+--     },
+--     {
+--       key = 'n',
+--       label = 'Copy filename',
+--       action = function()
+--         tree_util.get_cursor_path(state, ':t:r')
+--       end,
+--     },
+--     {
+--       key = 'r',
+--       label = 'Copy relative path',
+--       action = function()
+--         tree_util.get_cursor_path(state, ':.')
+--       end,
+--     },
+--     {
+--       key = 'R',
+--       label = 'Copy relative path to dirname',
+--       action = function()
+--         tree_util.get_cursor_path(state, ':.:h')
+--       end,
+--     },
+--   }
+--
+--   require('hasan.widgets').get_select(items, function(item)
+--     if item.action then
+--       item.action()
+--     end
+--   end, {
+--     prompt = ' Neotree menu ',
+--     win_config = {
+--       border = {
+--         -- left = opts.number and 0 or 2, right = opts.number and 3 or 2,
+--         -- padding = { top = 2, bottom = 2, left = 2, right = 0 },
+--       },
+--     },
+--     relative = 'cursor',
+--     kind = 'get_char',
+--     min_width = 30,
+--   })
+-- end
 
 local function show_more_options(state)
   local bloc = require('config.lsp.servers.dartls.bloc')
@@ -121,6 +121,7 @@ local function show_more_options(state)
 end
 
 local sidebar = require('core.state').ui.sidebar
+local fa = require('hasan.utils.file_action')
 
 return {
   position = sidebar.positions.explorer,
@@ -171,9 +172,9 @@ return {
     ['A'] = 'add_directory', -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
     ['<f2>'] = 'rename',
     ['r'] = 'rename',
-    ['<C-x>'] = 'cut_to_clipboard',
-    ['<C-c>'] = 'copy_to_clipboard',
-    ['<C-v>'] = 'paste_from_clipboard',
+    -- ['<C-x>'] = 'cut_to_clipboard',
+    -- ['<C-c>'] = 'copy_to_clipboard',
+    -- ['<C-v>'] = 'paste_from_clipboard',
     ['x'] = 'cut_to_clipboard',
     ['y'] = 'copy_to_clipboard',
     ['p'] = 'paste_from_clipboard',
@@ -182,7 +183,7 @@ return {
     ['<delete>'] = 'delete',
     -- ['c'] = { 'copy', config = { show_path = 'none' } }, -- "none", "relative", "absolute"
     -- ['m'] = 'move', -- takes text input for destination, also accepts the optional config.show_path option like "add".
-    ['c'] = { show_copy_options, desc = 'Copy filepath to clipboard' },
+    -- ['c'] = { show_copy_options, desc = 'Copy filepath to clipboard' },
     ['m'] = { show_more_options, desc = 'Show more options' },
     ['<c-t>'] = {
       function(state)
@@ -191,21 +192,21 @@ return {
       end,
       desc = 'Open terminal in cwd',
     },
-    ['gy'] = {
+    ['Y'] = {
       function(state)
-        require('config.navigation.neo_tree.util').copy_path(state, ':t')
+        fa.yank_path(require('config.navigation.neo_tree.util').get_cursor_path(state), ':t', 'Neotree')
       end,
       desc = 'Copy filename',
     },
-    ['gY'] = {
+    ['g.'] = {
       function(state)
-        require('config.navigation.neo_tree.util').copy_path(state, ':.')
+        fa.yank_path(require('config.navigation.neo_tree.util').get_cursor_path(state), ':.', 'Neotree')
       end,
       desc = 'Copy relative path',
     },
     ['gr'] = {
       function(state)
-        require('config.navigation.neo_tree.util').copy_path(state, ':~')
+        fa.yank_path(require('config.navigation.neo_tree.util').get_cursor_path(state), ':~', 'Neotree')
       end,
       desc = 'Copy relative path',
     },
