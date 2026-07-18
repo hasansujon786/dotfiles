@@ -59,12 +59,11 @@ return {
       end,
       ['.'] = 'set_root',
       ['<A-h>'] = 'toggle_hidden',
-      ['f'] = 'filter_on_submit',
-      ['F'] = 'fuzzy_finder',
-      ['/'] = 'none',
-      ['<Esc>'] = 'clear_filter',
-      -- ['#'] = 'fuzzy_sorter', -- fuzzy sorting using the fzy algorithm
-      -- ['D'] = 'fuzzy_sorter_directory',
+      ['/'] = 'filter_on_submit',
+      ['<esc>'] = 'clear_filter',
+      ['f'] = 'none',
+      ['F'] = 'none',
+      ['#'] = 'none',
 
       ['-'] = function(state)
         vinegar.vinegar_dir_up(state)

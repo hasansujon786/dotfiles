@@ -59,9 +59,9 @@ M.picker = {
     'nvim/tmp/archive',
     '4_archive/',
     -- projects
-    'android/',
-    'ios/',
-    'vendor/',
+    -- 'android/',
+    -- 'ios/',
+    -- 'vendor/',
     'pubspec.lock',
   },
 }

@@ -6,12 +6,14 @@
 ---@field groups CommandGroup[]
 ---@field select_command fun(self: CommandPalette, commands: Command[], on_back?: fun())
 ---@field show fun(self: CommandPalette)
+---@field _all_commands Command[]
 local CommandPalette = {
   snacks_opts = {
     layout = { preset = 'vscode' },
     focus = 'list',
   },
   groups = {},
+  _all_commands = {},
 }
 
 function CommandPalette:select_command(commands, on_back)
@@ -101,8 +103,6 @@ function CommandPalette:build_all_commands()
 end
 
 function CommandPalette:show_all()
-  self._all_commands = self._all_commands or self:build_all_commands()
-
   Snacks.picker.pick({
     items = self._all_commands,
     title = '',
@@ -139,8 +139,17 @@ function CommandPalette:show_all()
   })
 end
 
-function CommandPalette:Group(name, commands)
+function CommandPalette:group(name, commands)
   table.insert(self.groups, { name = name, commands = commands })
+
+  for _, cmd in ipairs(commands) do
+    table.insert(self._all_commands, {
+      label = cmd[1],
+      text = cmd[1],
+      cmd = cmd[2],
+      group = name,
+    })
+  end
 end
 
 return CommandPalette

@@ -1,20 +1,20 @@
 local CommandPalette = require('command_pallete.command_pallete')
 
-CommandPalette:Group('LSP', {
+CommandPalette:group('LSP', {
   { 'Restart tsserver', ':VtsExec restart_tsserver' },
   { 'Restart eslint_d', ':! eslint_d restart' },
   { 'Restart prettierd', ':!prettierd restart' },
   { 'Restart lua-ls', ':LspRestart lua-ls' },
 })
 
-CommandPalette:Group('File', {
+CommandPalette:group('File', {
   { 'Inspect types', ':InspectTwoslashQueries' },
   { 'Toggle inline folds', ':InlineFoldToggle' },
   { 'Search and Replace', ':SearchAndReplace' },
   { 'Toggle env variables', 'CloakToggle' },
 })
 
-CommandPalette:Group('Database dialect', {
+CommandPalette:group('Database dialect', {
   {
     'PostgreSQL',
     function()
@@ -41,7 +41,7 @@ CommandPalette:Group('Database dialect', {
   },
 })
 
-CommandPalette:Group('Git', {
+CommandPalette:group('Git', {
   {
     'View on GitHub',
     function()
@@ -66,7 +66,7 @@ CommandPalette:Group('Git', {
   },
 })
 
-CommandPalette:Group('Vim', {
+CommandPalette:group('Vim', {
   {
     'Open Lazy',
     function()
@@ -95,4 +95,4 @@ CommandPalette:Group('Vim', {
   },
 })
 
--- CommandPalette:show_all()
+CommandPalette:show_all()
