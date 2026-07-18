@@ -10,48 +10,89 @@ local preview_main = {
   },
 }
 
+function M.format_space_between(picker, left, right)
+  local width = picker.list.win.opts.width
+  local total_cols = width - 2
+
+  local ret = {} ---@type snacks.picker.Highlight[]
+  local left_width = 0
+  for index, value in ipairs(left) do
+    ret[#ret + 1] = value
+    left_width = left_width + #(value[1] or '')
+  end
+
+  local middle_index = #ret + 1
+  ret[middle_index] = { ' ' }
+
+  local right_width = 0
+  for index, value in ipairs(right) do
+    ret[#ret + 1] = value
+    right_width = right_width + #(value[1] or '')
+  end
+
+  local available_space = math.max(0, total_cols - left_width - right_width)
+  ret[middle_index] = { string.rep(' ', available_space) }
+
+  return ret
+end
+
 function M.keymaps()
   Snacks.picker.keymaps({
     format = function(item, picker)
-      local ret = {} ---@type snacks.picker.Highlight[]
       ---@type vim.api.keyset.get_keymap
       local k = item.item
       local a = Snacks.picker.util.align
 
-      if package.loaded['which-key'] then
-        local Icons = require('which-key.icons')
-        local icon, hl = Icons.get({ keymap = k, desc = k.desc })
-        if icon then
-          ret[#ret + 1] = { a(icon, 3), hl }
-        else
-          ret[#ret + 1] = { '   ' }
-        end
-      end
       local lhs = Snacks.util.normkey(k.lhs)
-      ret[#ret + 1] = { k.mode, 'SnacksPickerKeymapMode' }
-      ret[#ret + 1] = { ' ' }
-      ret[#ret + 1] = { a(lhs, 12), 'SnacksPickerKeymapLhs' }
-      ret[#ret + 1] = { ' ' }
+      local left = {
+        { k.desc, 'SnacksPickerFile' },
+      }
+      local right = {
+        { lhs, 'SnacksPickerKeymapLhs' },
+      }
 
-      ret[#ret + 1] = { ' ' }
-      ret[#ret + 1] = { a(k.desc or '', 45) }
-
-      local icon_nowait = picker.opts.icons.keymaps.nowait
-      if k.nowait == 1 then
-        ret[#ret + 1] = { icon_nowait, 'SnacksPickerKeymapNowait' }
-      else
-        ret[#ret + 1] = { (' '):rep(vim.api.nvim_strwidth(icon_nowait)) }
-      end
-      ret[#ret + 1] = { ' ' }
-
-      if k.buffer and k.buffer > 0 then
-        ret[#ret + 1] = { a('buf:' .. k.buffer, 6), 'SnacksPickerBufNr' }
-      else
-        ret[#ret + 1] = { a('', 6) }
-      end
-
-      return ret
+      return M.format_space_between(picker, left, right)
     end,
+    -- format = function(item, picker)
+    --   local ret = {} ---@type snacks.picker.Highlight[]
+    --   ---@type vim.api.keyset.get_keymap
+    --   local k = item.item
+    --   local a = Snacks.picker.util.align
+    --
+    --   if package.loaded['which-key'] then
+    --     local Icons = require('which-key.icons')
+    --     local icon, hl = Icons.get({ keymap = k, desc = k.desc })
+    --     if icon then
+    --       ret[#ret + 1] = { a(icon, 3), hl }
+    --     else
+    --       ret[#ret + 1] = { '   ' }
+    --     end
+    --   end
+    --   local lhs = Snacks.util.normkey(k.lhs)
+    --   ret[#ret + 1] = { k.mode, 'SnacksPickerKeymapMode' }
+    --   ret[#ret + 1] = { ' ' }
+    --   ret[#ret + 1] = { a(lhs, 12), 'SnacksPickerKeymapLhs' }
+    --   ret[#ret + 1] = { ' ' }
+    --
+    --   ret[#ret + 1] = { ' ' }
+    --   ret[#ret + 1] = { a(k.desc or '', 45) }
+    --
+    --   local icon_nowait = picker.opts.icons.keymaps.nowait
+    --   if k.nowait == 1 then
+    --     ret[#ret + 1] = { icon_nowait, 'SnacksPickerKeymapNowait' }
+    --   else
+    --     ret[#ret + 1] = { (' '):rep(vim.api.nvim_strwidth(icon_nowait)) }
+    --   end
+    --   ret[#ret + 1] = { ' ' }
+    --
+    --   if k.buffer and k.buffer > 0 then
+    --     ret[#ret + 1] = { a('buf:' .. k.buffer, 6), 'SnacksPickerBufNr' }
+    --   else
+    --     ret[#ret + 1] = { a('', 6) }
+    --   end
+    --
+    --   return ret
+    -- end,
   })
 end
 
