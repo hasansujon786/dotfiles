@@ -1,3 +1,5 @@
+# shellcheck disable=SC1091
+
 # If not running interactively, don't do anything
 case $- in
 *i*) ;;
@@ -20,8 +22,12 @@ HISTFILESIZE=2000
 shopt -s checkwinsize
 
 [ -f "$HOME/.env.local" ] && set -a && source "$HOME/.env.local" && set +a
-shopt -s nullglob dotglob
-for f in ~/dotfiles/scripts/bash/shell_config/*; do
-  source "$f"
-done
-shopt -u nullglob dotglob
+
+source "$HOME/dotfiles/scripts/bash/shell_config/.env"
+source "$HOME/dotfiles/scripts/bash/shell_config/.aliases"
+source "$HOME/dotfiles/scripts/bash/shell_config/glob-alias.sh"
+source "$HOME/dotfiles/scripts/bash/shell_config/fzf.sh"
+source "$HOME/dotfiles/scripts/bash/shell_config/functions.bash"
+source "$HOME/dotfiles/scripts/bash/shell_config/simple_prompt.bash"
+source "$HOME/dotfiles/scripts/bash/shell_config/vim.bash"
+source "$HOME/dotfiles/scripts/bash/shell_config/zoxide.bash"
