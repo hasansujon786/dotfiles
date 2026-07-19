@@ -25,7 +25,7 @@
   "mini.files": { "branch": "main", "commit": "d08e8da87be8bf07d09245294821706afcca31cd" },
   "mini.move": { "branch": "main", "commit": "48fcaac289a19b8eff2fd5fe203267d478a8abdc" },
   "neo-tree.nvim": { "branch": "v3.x", "commit": "ebd66767191714e008ce73b769518a763ff31bdc" },
-  "neogit": { "branch": "master", "commit": "a0847c4bea5a5f92a36e3f3bf7da99d7d685d3ac" },
+  "neogit": { "branch": "master", "commit": "f8674ec894315c02449b61c9de9a116c5aafeb90" },
   "neoscroll.nvim": { "branch": "master", "commit": "c8d29979cb0cb3a2437a8e0ae683fd82f340d3b8" },
   "noice.nvim": { "branch": "main", "commit": "7bfd942445fb63089b59f97ca487d605e715f155" },
   "nui-components.nvim": { "branch": "main", "commit": "1654dd709f13874089eefc80d82e0eb667f7fdfb" },

@@ -1,43 +1,5 @@
 local M = {}
 
----@param cmds string[]
----@param after function
-function M.code_action(cmds, after)
-  local win = vim.api.nvim_get_current_win()
-  local offset_encoding = 'utf-16'
-  local params = vim.lsp.util.make_range_params(win, offset_encoding)
-  params.context = { only = cmds }
-
-  ---@param err? lsp.ResponseError
-  ---@param res? (lsp.Command|lsp.CodeAction)[]
-  ---@param ctx lsp.HandlerContext
-  local on_result = function(err, res, ctx)
-    if err then
-      return
-    end
-    if not res then
-      return
-    end
-
-    for _, r in pairs(res) do
-      if r.edit then
-        local enc = (vim.lsp.get_client_by_id(ctx.client_id) or {}).offset_encoding
-        vim.lsp.util.apply_workspace_edit(r.edit, enc)
-        -- else
-        -- fallback: if it's a command, execute it
-        -- if r.command then
-        --   client:exec_cmd(r.command, ctx)
-        -- end
-      end
-    end
-
-    if after then
-      after()
-    end
-  end
-  vim.lsp.buf_request(0, 'textDocument/codeAction', params, on_result)
-end
-
 ---@type lsp.AttachCb
 function M.lsp_buffer_keymaps(client, bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
@@ -65,9 +27,7 @@ function M.lsp_buffer_keymaps(client, bufnr)
     keymap('n', '<leader>ai', '<cmd>VtsExec organize_imports<CR>', desc('Lsp: Organize imports'))
     keymap('n', '<leader>am', '<cmd>VtsExec add_missing_imports<CR>', desc('Lsp: Add Missing Imports'))
   else
-    keymap('n', '<leader>ai', function()
-      M.code_action({ 'source.organizeImports' }, vim.cmd.write)
-    end, desc('Lsp: Organize imports'))
+    keymap('n', '<leader>ai', run_code_action({ 'source.organizeImports' }), desc('Lsp: Organize imports'))
   end
 
   keymap('n', 'gpd', '<cmd>lua require("config.lsp.util.peek").PeekDefinition()<CR>', desc('Peek definition'))

@@ -217,18 +217,23 @@ local qlook = { args = nil }
 function M.quicklook(args)
   qlook.args = args
 
-  local quicklook_path = vim.fn.exepath('quicklook.exe')
-  if quicklook_path == '' then
-    vim.notify('QuickLook is not found in the system', 'error', { title = 'QuickLook' })
-    return
-  end
-
-  require('hasan.utils.async').async_cmd(quicklook_path, args, function(is_ok, _)
-    if not is_ok then
-      vim.notify('There someting went wrong while opening QuickLook', vim.log.levels.WARN, { title = 'QuickLook' })
+  if require('hasan.utils').is_windows() then
+    local quicklook_path = vim.fn.exepath('quicklook.exe')
+    if quicklook_path == '' then
+      vim.notify('QuickLook is not found in the system', 'error', { title = 'QuickLook' })
       return
     end
-  end, {})
+
+    require('hasan.utils.async').async_cmd(quicklook_path, args, function(is_ok, _)
+      if not is_ok then
+        vim.notify('There someting went wrong while opening QuickLook', vim.log.levels.WARN, { title = 'QuickLook' })
+        return
+      end
+    end, {})
+  elseif require('hasan.utils').is_mac() then
+    -- vim.fn.jobstart({ 'open', '-a', 'Preview', unpack(args or {}) })
+    vim.fn.jobstart({ 'qlmanage', '-p', unpack(args or {}) })
+  end
 end
 
 function M.quicklook_toggle()

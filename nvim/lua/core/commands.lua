@@ -76,6 +76,21 @@ keymap('n', '<Plug>OpenQuicklookAtCursor', function()
   Snacks.image.doc.at_cursor(function(src, _)
     img_src = src
   end)
+
+  local buf = vim.api.nvim_get_current_buf()
+  if img_src == nil then
+    local text = require('hasan.utils.buffer').parse_cursor_text(buf)
+
+    if text then
+      text = text:gsub("^'(.*)'$", '%1')
+      local path = Snacks.image.doc.resolve(buf, text)
+      local is_file = vim.fn.filereadable(path) == 1
+      if is_file then
+        img_src = path
+      end
+    end
+  end
+
   if img_src then
     require('hasan.utils.file').quicklook({ img_src })
   end

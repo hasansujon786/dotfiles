@@ -79,16 +79,29 @@ function M.parse_cursor_text(bufnr)
     return
   end
 
+  local function strip_quotes(t)
+    if type(t) ~= 'string' then
+      return nil
+    end
+
+    return t:gsub('^([\'"])(.*)%1$', '%2')
+  end
+
   local root_type = root:type()
-  if root_type == 'string_fragment' or root_type == 'string' or root_type == 'string_content' then
-    return vim.treesitter.get_node_text(root, bufnr)
+  if
+    root_type == 'string_fragment'
+    or root_type == 'string'
+    or root_type == 'string_content'
+    or root_type == 'string_literal'
+  then
+    return strip_quotes(vim.treesitter.get_node_text(root, bufnr))
   end
 
   local function find_node(node)
     for child in node:iter_children() do
       local type = child:type()
       if type == 'string_fragment' or type == 'string' or type == 'string_content' then
-        return vim.treesitter.get_node_text(child, bufnr)
+        return strip_quotes(vim.treesitter.get_node_text(child, bufnr))
       end
       local found = find_node(child)
       if found then

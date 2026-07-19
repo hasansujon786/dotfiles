@@ -1,4 +1,6 @@
 -- https://github.com/neovim/neovim/blob/master/runtime/lua/vim/lsp/buf.lua#L809
+
+-- https://dartcode.org/docs/refactorings-and-code-fixes/
 -- client.commands = {
 -- "edit.sortMembers",
 -- "edit.organizeImports",
@@ -27,7 +29,6 @@ local M = {
     local function desc(d)
       return { desc = d, buffer = buffer }
     end
-    -- lua require('project_run.utils').open_tab(vim.fn.getcwd(), 'adb connect 192.168.31.252 && flutter run')
 
     -- Custom code actions
     keymap('n', '<leader>am', '<Plug>FlutterPkgToRelative', desc('Lsp: Convert to a relative import'))

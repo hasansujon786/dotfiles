@@ -80,8 +80,15 @@ Target OS names:
 end
 
 M.is_windows = function()
-  local has = vim.fn.has('win32') or vim.fn.has('wsl')
-  return has == 1
+  return vim.fn.has('win32') == 1 or vim.fn.has('wsl') == 1
+end
+
+M.is_mac = function()
+  return vim.fn.has('mac') == 1 or vim.fn.has('macunix') == 1
+end
+
+M.is_linux = function()
+  return vim.fn.has('linux') == 1
 end
 
 -- Search if a table have the value we are looking for,

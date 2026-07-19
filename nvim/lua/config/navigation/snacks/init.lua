@@ -93,12 +93,12 @@ return {
       { '<leader>ou', function() Snacks.picker.undo() end, desc = 'Show undo history' },
       { '<leader>/.', function() Snacks.picker.resume() end, desc = 'Resume' },
       { '<leader>/f', function() Snacks.picker.files() end, desc = 'Find Files' },
-      { '<leader>/k', function() require('config.navigation.snacks.custom').keymaps() end, desc = 'Commands', mode = { "n", "x" } },
       { '<leader>/q', function() Snacks.picker.qflist() end, desc = 'Quickfix List' },
       { '<leader>/l', function() Snacks.picker.loclist() end, desc = 'Location List' },
       { '<leader>/H', function() Snacks.picker.highlights() end, desc = 'Highlights' },
-      { '<leader>/c', function() Snacks.picker.command_history() end, desc = 'Command History' },
-      { '<F1>', function() Snacks.picker.commands() end, desc = 'Commands' },
+      { '<leader>/c', function() Snacks.picker.commands() end, desc = 'Command History' },
+      { '<leader>/h', function() Snacks.picker.command_history() end, desc = 'Commands', mode = { "n", "x" } },
+      { '<F1>', function() require('config.navigation.snacks.custom').keymaps() end, desc = 'Commands' },
       { '//', function() require('config.navigation.snacks.custom').open_qflist_or_loclist() end, ft = 'qf', desc = 'which_key_ignore' },
 
       -- PROJECT
