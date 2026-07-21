@@ -47,14 +47,8 @@ return {
       { '[t', function() require('config.navigation.snacks.terminal').prev() end, desc = 'Next Terminal'  },
       { ']t', function() require('config.navigation.snacks.terminal').next() end, desc = 'Prev Terminal'  },
       { '<leader>ot', function() Snacks.terminal(nil, { shell = 'bash', win = { wo = { winbar = '' } } }) end, desc = 'Terminal'  },
-      { '<leader>of', function()
-        local cmd = { 'yazi' }
-          if vim.bo.modifiable and not vim.bo.readonly then
-            local buf = vim.api.nvim_buf_get_name(0)
-            table.insert(cmd, '"' .. buf .. '"')
-          end
-        Snacks.terminal(table.concat(cmd, ' '), { shell = 'bash', win = { style = 'lazygit' } })
-      end, desc = 'Open File Manager' },
+      { '<leader>of', function() require('config.navigation.snacks.terminal').toggle_yazi() end, desc = 'Open File Manager' },
+      { '<leader>od', function() require('config.navigation.snacks.terminal').toggle_ordna()() end, desc = 'Open kanban' },
 
       { '<leader>gl', function() Snacks.lazygit() end, desc = 'Open lazygit' },
 

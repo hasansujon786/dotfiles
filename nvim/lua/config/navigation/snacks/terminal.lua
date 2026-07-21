@@ -93,4 +93,18 @@ function M.toggle()
   end
 end
 
+function M.toggle_yazi()
+  local cmd = { 'yazi' }
+  if vim.bo.modifiable and not vim.bo.readonly then
+    local bufname = vim.api.nvim_buf_get_name(0)
+    table.insert(cmd, '"' .. bufname .. '"')
+  end
+  Snacks.terminal(table.concat(cmd, ' '), { shell = 'bash', win = { style = 'lazygit' } })
+end
+
+function M.toggle_ordna()
+  local cmd = { 'ordna' }
+  Snacks.terminal(table.concat(cmd, ' '), { shell = 'bash', win = { style = 'lazygit' } })
+end
+
 return M
