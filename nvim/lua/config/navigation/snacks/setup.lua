@@ -377,6 +377,7 @@ require('snacks').setup({
     terminal = { border = 'rounded', wo = { winhighlight = '' } },
     notification_history = { wo = { number = false, relativenumber = false, signcolumn = 'no' } },
     lazygit = { height = 0, width = 0, border = 'none' },
+    center = { height = 0.7, width = 0.6, border = 'rounded' },
     input_cursor = { relative = 'cursor', row = 1, col = 0, width = 30 },
     scratch = { wo = { winbar = '' } },
     zen = {

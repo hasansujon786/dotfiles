@@ -107,4 +107,9 @@ function M.toggle_ordna()
   Snacks.terminal(table.concat(cmd, ' '), { shell = 'bash', win = { style = 'lazygit' } })
 end
 
+function M.toggle_music()
+  local cmd = { 'rs-pug' }
+  Snacks.terminal(table.concat(cmd, ' '), { shell = 'bash', win = { style = 'center' } })
+end
+
 return M

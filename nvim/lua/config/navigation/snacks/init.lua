@@ -48,7 +48,8 @@ return {
       { ']t', function() require('config.navigation.snacks.terminal').next() end, desc = 'Prev Terminal'  },
       { '<leader>ot', function() Snacks.terminal(nil, { shell = 'bash', win = { wo = { winbar = '' } } }) end, desc = 'Terminal'  },
       { '<leader>of', function() require('config.navigation.snacks.terminal').toggle_yazi() end, desc = 'Open File Manager' },
-      { '<leader>od', function() require('config.navigation.snacks.terminal').toggle_ordna()() end, desc = 'Open kanban' },
+      { '<leader>od', function() require('config.navigation.snacks.terminal').toggle_ordna() end, desc = 'Open kanban' },
+      { '<leader>om', function() require('config.navigation.snacks.terminal').toggle_music() end, desc = 'Open kanban' },
 
       { '<leader>gl', function() Snacks.lazygit() end, desc = 'Open lazygit' },
 
