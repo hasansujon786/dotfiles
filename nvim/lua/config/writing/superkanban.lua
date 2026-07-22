@@ -88,17 +88,17 @@ return {
     lazy = true,
     dev = require('core.state').dev.enabled,
     keys = {
-      {
-        '<space>m',
-        function()
-          vim.cmd([[wa]])
-          local kanban = get_kanban(reload_on_call)
-          if reload_on_call then
-            kanban.setup(opts)
-          end
-          kanban.open('test.md')
-        end,
-      },
+      -- {
+      --   '<space>m',
+      --   function()
+      --     vim.cmd([[wa]])
+      --     local kanban = get_kanban(reload_on_call)
+      --     if reload_on_call then
+      --       kanban.setup(opts)
+      --     end
+      --     kanban.open('test.md')
+      --   end,
+      -- },
     },
     opts = opts,
   },

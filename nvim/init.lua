@@ -11,6 +11,7 @@ if not vim.g.vscode then
   require('core.options')
   require('core.commands')
   require('core.keymaps.nvim')
+  require('core.keymaps.more')
   require('core.autocmds')
 else
   require('core.keymaps.code')
