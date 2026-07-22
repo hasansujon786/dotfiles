@@ -67,7 +67,7 @@ actions.toggle_quick_pane = function(window, pane)
   window:perform_action(act.SplitPane({ direction = 'Down', size = { Cells = 15 } }), pane) -- command = { cwd = '.', args = { 'yazi' } },
 
   local new_pane = window:active_pane()
-  window:perform_action(wezterm.action({ Multiple = { { SendString = 'rs-pug\r' } } }), new_pane)
+  window:perform_action(wezterm.action({ Multiple = { { SendString = 'ytm\r' } } }), new_pane)
 end
 
 return {
