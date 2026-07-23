@@ -24,11 +24,25 @@ config.set_environment_variables = {
 -- Window =============================================
 config.initial_rows = 35
 config.initial_cols = 138
-config.window_background_opacity = 0.96
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
 config.hide_mouse_cursor_when_typing = true
 config.enable_scroll_bar = false
 config.window_decorations = 'RESIZE' -- NONE, INTEGRATED_BUTTONS
+
+config.window_background_opacity = 0.96
+-- 1. Set window opacity to allow for transparency (values from 0.0 to 1.0)
+-- config.window_background_opacity = 0.65
+
+-- 2. Apply the blur effect based on your Operating System:
+
+-- For macOS: set the blur radius (e.g., 20 is a good starting point)
+-- config.macos_window_background_blur = 20
+
+-- For Windows: choose between "Acrylic", "Mica", or "Tabbed"
+-- config.win32_system_backdrop = 'Acrylic'
+
+-- For Linux (Wayland): enable the KDE blur protocol (requires nightly build)
+-- config.kde_window_background_blur = true
 
 -- Tab Bar ============================================
 config.hide_tab_bar_if_only_one_tab = false
