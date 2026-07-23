@@ -392,7 +392,7 @@ setup_kanata() {
 }
 install_various_cli_apps() {
   heading "Usefull CLI Apps"
-  get wget curl fd ripgrep zoxide fzf delta jq eza bat bc qrencode
+  get wget curl fd ripgrep zoxide fzf delta jq eza bat bc qrencode gh
 
   if [[ "$OS" == "win" ]]; then
     get mingw make tree-sitter
