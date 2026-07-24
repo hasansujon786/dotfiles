@@ -41,7 +41,7 @@ actions.toggle_quick_pane = function(window, pane)
   local function is_quick_pane(pane)
     -- pane:get_foreground_process_name() and pane:get_foreground_process_name():find('yazi')
     local d = pane:get_dimensions()
-    return d['viewport_rows'] == 15
+    return d['viewport_rows'] == 20
   end
 
   local panes = window:active_tab():panes()
@@ -64,7 +64,7 @@ actions.toggle_quick_pane = function(window, pane)
   end
 
   wezterm.log_info('quick_pane#create_new_pane')
-  window:perform_action(act.SplitPane({ direction = 'Down', size = { Cells = 15 } }), pane) -- command = { cwd = '.', args = { 'yazi' } },
+  window:perform_action(act.SplitPane({ direction = 'Down', size = { Cells = 20 } }), pane) -- command = { cwd = '.', args = { 'yazi' } },
 
   local new_pane = window:active_pane()
   window:perform_action(wezterm.action({ Multiple = { { SendString = 'ytm\r' } } }), new_pane)

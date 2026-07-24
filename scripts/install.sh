@@ -357,6 +357,19 @@ setup_opencode() {
   create_symlink "${conf_path[$OS]}/themes" "$HOME/dotfiles/tui/opencode/themes"
   create_symlink "${conf_path[$OS]}/tui.json" "$HOME/dotfiles/tui/opencode/tui.json"
 }
+setup_ytm() {
+  declare -A conf_path
+  conf_path[win]="$HOME/AppData/Roaming/ytm-player"
+
+  heading ytm
+
+  archive_config "${conf_path[$OS]}/keymap.toml"
+  archive_config "${conf_path[$OS]}/config.toml"
+
+  mkdir -p "${conf_path[$OS]}"
+  create_symlink "${conf_path[$OS]}/keymap.toml" "$HOME/dotfiles/tui/ytm-player/keymap.toml"
+  create_symlink "${conf_path[$OS]}/config.toml" "$HOME/dotfiles/tui/ytm-player/config.toml"
+}
 setup_autohotkey() {
   if [[ "$OS" == "win" ]]; then
     heading autohotkey
@@ -511,6 +524,7 @@ main() {
   setup_lazygit
   setup_pwsh
   setup_opencode
+  setup_ytm
 
   # GUI Apps
   setup_wezterm
