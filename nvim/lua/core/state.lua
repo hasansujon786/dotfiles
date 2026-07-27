@@ -202,6 +202,13 @@ M.project = {
     keyfaces = { 'TODO', 'DONE', 'INFO', 'FIXME', 'BUG', 'FIXIT', 'ISSUE', 'OPTIM', 'OPTIMIZE' },
     exclude = {
       'nvim/lua/config/lsp/servers/dartls/bloc.lua',
+      'android/',
+      'ios/',
+      'vendor/',
+      'linux/',
+      'macos/',
+      'web/',
+      'windows/',
     },
   },
 }

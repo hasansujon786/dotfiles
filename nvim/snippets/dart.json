@@ -148,5 +148,92 @@
       ");"
     ],
     "description": "Create a fixed-length list using List.generate"
+  },
+  "Riverpod AsyncNotifier": {
+    "prefix": "rpasync",
+    "body": [
+      "final ${1:name}Provider =",
+      "    AsyncNotifierProvider<",
+      "      ${2:${1/(.*)/${1:/pascalcase}Notifier/}},",
+      "      ${3:StateType}",
+      "    >(${2}.new);",
+      "",
+      "class ${2} extends AsyncNotifier<${3}> {",
+      "  late final _apiService = ${4:ApiService}(apiClient: ApiClient());",
+      "",
+      "  @override",
+      "  Future<${3}> build() async {",
+      "    final res = await _apiService.${5:getData}();",
+      "    return ${6:res.data};",
+      "  }",
+      "}"
+    ],
+    "description": "Riverpod AsyncNotifierProvider boilerplate"
+  },
+  "Riverpod AsyncNotifier Family": {
+    "prefix": "rpasyncfamily",
+    "body": [
+      "final ${1:name}Provider =",
+      "    AsyncNotifierProvider.family<",
+      "      ${2:${1/(.*)/${1:/pascalcase}Notifier/}},",
+      "      ${3:StateType},",
+      "      ${4:ArgType}",
+      "    >((id) => ${2}(id));",
+      "",
+      "class ${2} extends AsyncNotifier<${3}> {",
+      "  ${2}(this.id);",
+      "",
+      "  final ${4} id;",
+      "  late final _apiService = ${5:ApiService}(apiClient: ApiClient());",
+      "",
+      "  @override",
+      "  Future<${3}> build() async {",
+      "    final res = await _apiService.${6:getData}(id);",
+      "    return ${7:res.data};",
+      "  }",
+      "}"
+    ],
+    "description": "Riverpod AsyncNotifierProvider.family boilerplate"
+  },
+  "Riverpod Notifier": {
+    "prefix": "rpnotifier",
+    "body": [
+      "final ${1:name}Provider =",
+      "    NotifierProvider<",
+      "      ${2:${1/(.*)/${1:/pascalcase}Notifier/}},",
+      "      ${3:StateType}",
+      "    >(${2}.new);",
+      "",
+      "class ${2} extends Notifier<${3}> {",
+      "  @override",
+      "  ${3} build() {",
+      "    return ${4:initialState};",
+      "  }",
+      "",
+      "  void ${5:updateState}(${6:${3} value}) {",
+      "    state = value;",
+      "  }",
+      "}"
+    ],
+    "description": "Riverpod Notifier boilerplate"
+  },
+  "Riverpod MutationNotifier": {
+    "prefix": "rpmutation",
+    "body": [
+      "final ${1:name}Provider = mutationProvider<${2:${1/(.*)/${1:/pascalcase}Notifier/}}, ${3:ResponseType}>(",
+      "  ${2}.new,",
+      ");",
+      "",
+      "class ${2} extends MutationNotifier<${3}> {",
+      "  late final _api = ${4:ApiService}(apiClient: ApiClient());",
+      "",
+      "  Future<${3}> ${5:action}(${6:String id}) {",
+      "    return mutate(() async {",
+      "      return _api.${7:apiMethod}(id);",
+      "    })",
+      "  }",
+      "}"
+    ],
+    "description": "Riverpod MutationNotifier boilerplate"
   }
 }
