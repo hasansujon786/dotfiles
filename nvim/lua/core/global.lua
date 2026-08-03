@@ -38,6 +38,31 @@ function _G.t(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
+---@class Hasan.Keymap
+---@field [1] string LHS
+---@field [2] string|function RHS
+---@field mode? string|string[]
+---@field desc? string
+---@field expr? boolean
+---@field remap? boolean
+---@field silent? boolean
+---@field buffer? integer|boolean
+---@field nowait? boolean
+
+---@param maps Hasan.Keymap[]
+function _G.maps(maps)
+  for _, map in ipairs(maps) do
+    vim.keymap.set(map.mode or 'n', map[1], map[2], {
+      desc = map.desc,
+      expr = map.expr,
+      remap = map.remap,
+      silent = map.silent ~= false,
+      buffer = map.buffer,
+      nowait = map.nowait,
+    })
+  end
+end
+
 ---@param key string
 ---@param mode? 'm'|'n'
 function _G.feedkeys(key, mode)
