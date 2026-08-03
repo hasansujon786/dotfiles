@@ -20,10 +20,6 @@ function M.disable_keys()
   end
 end
 
-function M.record_macro()
-  return require('hasan.widgets.register_editor').start_recording()
-end
-
 function M.uncomment_block()
   require('vim._comment').textobject()
   feedkeys('gc')
@@ -66,8 +62,8 @@ maps({
   -----------------------------------------------------------------------------
   -- Basic Editing
   -----------------------------------------------------------------------------
-  { 'q', 'noh', mode = { 'n', 'x' } },
-  { '<CR>', ':', mode = { 'n', 'x' }, desc = 'Run last command easily', silent = false },
+  { 'q', '<esc><cmd>noh<CR>', mode = { 'n', 'x' } },
+  { '<CR>', ':<up>', mode = { 'n', 'x' }, desc = 'Run last command easily', silent = false },
   { 'n', 'nzz', mode = { 'n', 'x' }, remap = true, desc = 'Repeat search forward' },
   { 'N', 'Nzz', mode = { 'n', 'x' }, remap = true, desc = 'Repeat search backward' },
   { "'", '`', mode = { 'n', 'x' }, remap = true, desc = 'Jump to mark' },
@@ -79,10 +75,6 @@ maps({
   { '$', 'g_', mode = 'x', desc = 'Select to end of line' },
   { '>', '>gv', mode = 'v', desc = 'Keep selection after indent' },
   { '<', '<gv', mode = 'v', desc = 'Keep selection after outdent' },
-  { 'j', 'v:count == 0 ? "gj" : "j"', expr = true, remap = false, desc = 'Move down' },
-  { 'k', 'v:count == 0 ? "gk" : "k"', expr = true, remap = false, desc = 'Move up' },
-  { '<BS>', '<C-^>', mode = { 'n', 'x' }, desc = 'Alternate file' },
-  { '<C-j>', '<C-i>', mode = { 'n', 'x' }, remap = false },
 
   -----------------------------------------------------------------------------
   -- Clipboard & Registers
@@ -101,13 +93,15 @@ maps({
   -----------------------------------------------------------------------------
   { 'gcu', M.uncomment_block, desc = 'Uncomment block' },
   { 'gc/', M.uncomment_block, desc = 'Uncomment block' },
-  { 'a/', '<cmd>lua require("vim._comment").textobject()<CR>', mode = 'o', desc = 'Comment textobject' },
-  { 'a/', '<Esc><cmd>lua require("vim._comment").textobject()<CR>', mode = 'x', desc = 'Comment textobject' },
   { 'gcO', M.comment_at('O'), desc = 'Comment above' },
   { 'gco', M.comment_at('o'), desc = 'Comment below' },
   { 'gcI', M.comment_at('I'), desc = 'Comment at line start' },
   { 'gcA', M.comment_at('A '), desc = 'Comment at line end' },
 
+  { 'a/', '<cmd>lua require("vim._comment").textobject()<CR>', mode = 'o', desc = 'Comment textobject' },
+  { 'a/', '<Esc><cmd>lua require("vim._comment").textobject()<CR>', mode = 'x', desc = 'Comment textobject' },
+
+  -- TODO: not working
   { '<C-_>', 'mz_gcc`z', mode = 'n', remap = true, desc = 'Toggle comment' },
   { '<C-_>', '<Esc>_gccgi', mode = 'i', remap = true, desc = 'Toggle comment' },
   { '<C-_>', 'mz_gcgv`z', mode = 'v', remap = true, desc = 'Toggle comment' },
@@ -146,10 +140,15 @@ maps({
   -----------------------------------------------------------------------------
   -- Navigation & Scrolling
   -----------------------------------------------------------------------------
+  { 'j', 'v:count == 0 ? "gj" : "j"', expr = true, remap = false, desc = 'Move down' },
+  { 'k', 'v:count == 0 ? "gk" : "k"', expr = true, remap = false, desc = 'Move up' },
+  { '<BS>', '<C-^>', mode = { 'n', 'x' }, desc = 'Alternate file' },
+  { '<C-j>', '<C-i>', mode = { 'n', 'x' }, remap = false },
   { 'g<BS>', '<C-w><C-p>', mode = { 'n', 'x' } },
 
   { '<A-u>', '<C-u>', mode = { 'n', 'x' }, remap = true, desc = 'Scroll up' },
   { '<A-d>', '<C-d>', mode = { 'n', 'x' }, remap = true, desc = 'Scroll down' },
+  { '<A-o>', '<C-d>', remap = true, desc = 'Scroll window', mode = { 'n', 'x' } },
   { '<PageUp>', '<C-u>', mode = { 'n', 'x' }, remap = true },
   { '<PageDown>', '<C-d>', mode = { 'n', 'x' }, remap = true },
   { '<A-f>', '<C-f>', mode = { 'n', 'x' }, remap = true },
@@ -170,6 +169,7 @@ maps({
   { '<leader>k', '<Cmd>wincmd k<CR>', mode = { 'n', 'x' }, desc = 'which_key_ignore' },
   { '<leader>l', '<Cmd>wincmd l<CR>', mode = { 'n', 'x' }, desc = 'which_key_ignore' },
 
+  { '<Bar>', '<Cmd>wincmd =<CR>', mode = { 'n', 'x' }, desc = 'Equalize windows' },
   { '<leader>wh', '<Cmd>wincmd h<CR>', mode = { 'n', 'x' }, desc = 'Window left' },
   { '<leader>wj', '<Cmd>wincmd j<CR>', mode = { 'n', 'x' }, desc = 'Window down' },
   { '<leader>wk', '<Cmd>wincmd k<CR>', mode = { 'n', 'x' }, desc = 'Window up' },
@@ -178,7 +178,13 @@ maps({
   { '<leader>wv', '<Cmd>wincmd v<CR>', mode = { 'n', 'x' }, desc = 'Vertical split' },
   { '<leader>wo', '<Cmd>only<CR>', mode = { 'n', 'x' }, desc = 'Only window' },
   { '<leader>wO', '<Cmd>tabonly<CR>', mode = { 'n', 'x' }, desc = 'Only tab' },
-  { '<Bar>', '<Cmd>wincmd =<CR>', mode = { 'n', 'x' }, desc = 'Equalize windows' },
+  { '<leader>wt', '<cmd>-tab split<CR>', mode = { 'n', 'x' }, desc = 'Edit to new tab' },
+  { '<leader>wH', '<cmd>wincmd H<CR>', mode = { 'n', 'x' }, desc = 'Move window far left' },
+  { '<leader>wJ', '<cmd>wincmd J<CR>', mode = { 'n', 'x' }, desc = 'Move window far bottom' },
+  { '<leader>wK', '<cmd>wincmd K<CR>', mode = { 'n', 'x' }, desc = 'Move window far top' },
+  { '<leader>wL', '<cmd>wincmd L<CR>', mode = { 'n', 'x' }, desc = 'Move window far right' },
+  { '<leader>wr', '<cmd>wincmd r<CR>', mode = { 'n', 'x' }, desc = 'Rotate window cw' },
+  { '<leader>wR', '<cmd>wincmd R<CR>', mode = { 'n', 'x' }, desc = 'Rotate window ccw' },
   { '<leader>wp', '<cmd>lua run_cmd("wincmd p")<CR>', mode = { 'n', 'x' }, desc = 'Previous window' },
   { '<leader>ww', '<cmd>lua run_cmd("wincmd w")<CR>', mode = { 'n', 'x' }, desc = 'Next window' },
   { '<leader>wW', '<cmd>lua run_cmd("wincmd W")<CR>', mode = { 'n', 'x' }, desc = 'Previous window' },
@@ -186,7 +192,7 @@ maps({
   -----------------------------------------------------------------------------
   -- Buffers & Tabs
   -----------------------------------------------------------------------------
-  { '<leader>bd', '<Cmd>Bufdelete<CR>' },
+  { '<leader>bK', '<cmd>call hasan#utils#buffer#_clear_all()<CR>', desc = 'Kill all buffers' },
 
   { 'gh', 'gT', mode = { 'n', 'x' }, desc = 'Previous tab' },
   { 'gl', 'gt', mode = { 'n', 'x' }, desc = 'Next tab' },
@@ -217,7 +223,15 @@ maps({
   -----------------------------------------------------------------------------
   -- Macros
   -----------------------------------------------------------------------------
-  { 'Q', M.record_macro, mode = { 'n', 'x' }, expr = true, desc = 'Record macro' },
+  {
+    'Q',
+    function()
+      return require('hasan.widgets.register_editor').start_recording()
+    end,
+    mode = { 'n', 'x' },
+    expr = true,
+    desc = 'Record macro',
+  },
   { '@', ':norm @', mode = 'v', desc = 'Run macro', silent = false },
 
   -----------------------------------------------------------------------------
@@ -237,13 +251,12 @@ maps({
   { '.', '.<C-g>u', mode = 'i' },
   { ';', ';<C-g>u', mode = 'i' },
 
+  { '<C-n>', '<Down>', mode = { 'i', 'c' } },
+  { '<C-p>', '<Up>', mode = { 'i', 'c' } },
   { '<A-h>', '<Left>', mode = { 'i', 'c' } },
   { '<A-l>', '<Right>', mode = { 'i', 'c' } },
   { '<A-f>', '<S-Right>', mode = { 'i', 'c' } },
   { '<A-b>', '<S-Left>', mode = { 'i', 'c' } },
-
-  { '<C-n>', '<Down>', mode = { 'i', 'c' } },
-  { '<C-p>', '<Up>', mode = { 'i', 'c' } },
 
   { '<C-a>', '<C-o>^<C-g>u', mode = 'i' },
   { '<C-a>', '<Home>', mode = 'c' },

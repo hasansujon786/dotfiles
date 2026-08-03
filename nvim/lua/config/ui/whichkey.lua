@@ -59,10 +59,6 @@ return {
 
       -- BUFFER
       { '<leader>b', group = 'buffer' },
-      { '<leader>bk', '<cmd>:bd<cr>', desc = 'Delete Buffer and Window' },
-      { '<leader>bK', '<cmd>call hasan#utils#buffer#_clear_all()<CR>', desc = 'Kill all buffers' },
-      { '<leader>bw', '<cmd>wa<CR>', desc = 'Write all buffer' },
-      { '<leader>X', '<cmd>call hasan#utils#buffer#_open_scratch_buffer()<CR>', desc = 'Open scratch buffer' },
 
       -- CHANGE
       { '<leader>c', group = 'change' },
@@ -126,14 +122,7 @@ return {
       -- WINDOW
       { '<leader>w', group = 'window' },
 
-      { '<leader>wt', '<cmd>-tab split<CR>', desc = 'Edit to new tab' },
 
-      { '<leader>wH', '<cmd>wincmd H<CR>', desc = 'Move window far left' },
-      { '<leader>wJ', '<cmd>wincmd J<CR>', desc = 'Move window far bottom' },
-      { '<leader>wK', '<cmd>wincmd K<CR>', desc = 'Move window far top' },
-      { '<leader>wL', '<cmd>wincmd L<CR>', desc = 'Move window far right' },
-      { '<leader>wr', '<cmd>wincmd r<CR>', desc = 'Rotate window cw' },
-      { '<leader>wR', '<cmd>wincmd R<CR>', desc = 'Rotate window ccw' },
     })
   end,
 }
