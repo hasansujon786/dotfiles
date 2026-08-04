@@ -60,8 +60,7 @@ return {
     })
 
     augroup('MY_FLUTTER_AUGROUP')(function(autocmd)
-      autocmd({ 'FileType' }, 'setlocal nonumber norelativenumber signcolumn=no', { pattern = 'log' })
-      autocmd({ 'BufWinEnter', 'WinEnter' }, 'normal Gzt', { pattern = '__FLUTTER_DEV_LOG__' })
+      -- autocmd({ 'BufWinEnter', 'WinEnter' }, 'normal Gzt', { pattern = '__FLUTTER_DEV_LOG__' })
       autocmd('User', function()
         vim.lsp.semantic_tokens.force_refresh()
       end, { pattern = 'LspProgressUpdate', once = true })
