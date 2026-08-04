@@ -378,10 +378,73 @@ emo() {
 }
 
 eml() {
-  # ~/AppData/Local/Android/Sdk/emulator/emulator
-  emulator -list-avds |
-    fzf --height=10 |
-    xargs emulator -netdelay none -netspeed full -avd
+  local emulator_bin avd
+
+  case "$OSTYPE" in
+  darwin*)
+    emulator_bin="$HOME/Library/Android/sdk/emulator/emulator"
+    ;;
+  linux*)
+    emulator_bin="$HOME/Android/Sdk/emulator/emulator"
+    ;;
+  msys* | cygwin* | win32*)
+    emulator_bin="$LOCALAPPDATA/Android/Sdk/emulator/emulator.exe"
+    ;;
+  *)
+    echo "Unsupported OS: $OSTYPE"
+    return 1
+    ;;
+  esac
+
+  [[ -x "$emulator_bin" ]] || {
+    echo "Android emulator not found:"
+    echo "  $emulator_bin"
+    return 1
+  }
+
+  avd=$(
+    "$emulator_bin" -list-avds |
+      fzf \
+        --prompt='AVD > ' \
+        --height=40% \
+        --layout=reverse \
+        --border
+  ) || return
+
+  nohup "$emulator_bin" \
+    -avd "$avd" \
+    -netdelay none \
+    -netspeed full \
+    >/dev/null 2>&1 &
+}
+
+fem() {
+  local emulator
+  local emulators
+
+  emulators=$(
+    flutter emulators |
+      awk -F'•' '
+        /^Id[[:space:]]/ { next }
+        /^[[:space:]]*$/ { next }
+        /To run an emulator/ { exit }
+        /•/ {
+          gsub(/^[[:space:]]+|[[:space:]]+$/, "", $1)
+          print $1
+        }
+      '
+  ) || return
+
+  emulator=$(
+    printf '%s\n' "$emulators" |
+      fzf \
+        --prompt='Emulator > ' \
+        --height=40% \
+        --layout=reverse \
+        --border
+  ) || return
+
+  flutter emulators --launch "$emulator"
 }
 
 re() {
@@ -455,4 +518,62 @@ pastebin() {
     echo "Unknown OS — cannot copy automatically."
     ;;
   esac
+}
+
+litterbox() {
+  local file result
+
+  file=$(
+    fd \
+      --type f \
+      --hidden \
+      --follow \
+      --exclude .git |
+      fzf \
+        --prompt='File > ' \
+        --border-label=' Upload to Litterbox ' \
+        --height=40% \
+        --layout=reverse \
+        --border
+  ) || return
+
+  echo -e "Selected file: \e[1;32m${file}\e[0m"
+
+  result=$(
+    curl --silent \
+      -F "reqtype=fileupload" \
+      -F "time=72h" \
+      -F "fileToUpload=@${file}" \
+      https://litterbox.catbox.moe/resources/internals/api.php
+  )
+
+  # Remove trailing '%' if present
+  result="${result%\%}"
+
+  echo "URL: ${result}"
+
+  case "$OSTYPE" in
+  linux*)
+    if command -v wl-copy >/dev/null 2>&1; then
+      printf "%s" "$result" | wl-copy
+    elif command -v xclip >/dev/null 2>&1; then
+      printf "%s" "$result" | xclip -selection clipboard
+    elif command -v xsel >/dev/null 2>&1; then
+      printf "%s" "$result" | xsel --clipboard --input
+    else
+      echo "No clipboard utility found."
+    fi
+    ;;
+  darwin*)
+    printf "%s" "$result" | pbcopy
+    ;;
+  msys* | cygwin* | win32*)
+    printf "%s" "$result" | clip
+    ;;
+  *)
+    echo "Unknown OS — cannot copy automatically."
+    ;;
+  esac
+
+  echo "Copied to clipboard."
 }
