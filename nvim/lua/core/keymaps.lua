@@ -135,7 +135,7 @@ maps({
   { '<Tab>', 'za', mode = { 'n', 'x' }, desc = 'Toggle fold' },
   { '<S-Tab>', 'zA', mode = { 'n', 'x' }, desc = 'Toggle recursive fold' },
   { 'z.', '<cmd>%foldclose<CR>zb', mode = { 'n', 'x' }, desc = 'Fold all' },
-  { 'z;', '<cmd>setlocal foldlevel=1<CR>zb', mode = { 'n', 'x' }, desc = 'Fold level 1' },
+  { 'z;', '<cmd>lua require("hasan.utils.fold").close_level(2)<CR>zb', mode = { 'n', 'x' }, desc = 'Fold level 1' },
 
   -----------------------------------------------------------------------------
   -- Navigation & Scrolling
