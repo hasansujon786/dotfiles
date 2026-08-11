@@ -13,6 +13,14 @@ return {
       ft = { 'yaml', 'dart', 'log' },
       desc = 'Flutter: Show commands',
     },
+    {
+      '<leader>dd',
+      function()
+        require('flutter-tools.log').toggle()
+      end,
+      -- ft = { 'yaml', 'dart', 'log' },
+      desc = 'Flutter: Toggle Log Window',
+    },
   },
   config = function()
     require('flutter-tools').setup({
