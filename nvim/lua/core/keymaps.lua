@@ -64,6 +64,7 @@ function M._open_v()
   M.do_open(table.concat(vim.iter(lines):map(vim.trim):totable())) -- Trim whitespace on each line and concatenate.
 end
 
+-- stylua: ignore
 maps({
   -----------------------------------------------------------------------------
   -- Basic Editing
@@ -118,12 +119,7 @@ maps({
   { 'cm', ':%s/<C-r>///g<Left><Left>', desc = 'Substitute with prompt', silent = false },
   { 'dm', ':%s/<C-r>///g<CR>', desc = 'Delete matches' },
   { 'dM', ':%g/<C-r>//d<CR>', desc = 'Delete matching lines' },
-  {
-    '<leader>cw',
-    '<cmd>lua require("hasan.widgets.inputs").substitute_word()<CR>',
-    mode = { 'n', 'x' },
-    desc = 'Substitute word',
-  },
+  { '<leader>cw', '<cmd>lua require("hasan.widgets.inputs").substitute_word()<CR>', mode = { 'n', 'x' }, desc = 'Substitute word' },
 
   { 'z/', '/\\%><C-r>=line("w0")-1<CR>l\\%<<C-r>=line("w$")+1<CR>l', desc = 'Search in viewport', silent = false },
   { 'z/', '<Esc>/\\%V', mode = 'x', desc = 'Search in selection', silent = false },
@@ -211,33 +207,13 @@ maps({
   { '<leader>fC', ':w <C-R>=expand("%")<CR>', desc = 'Copy file', silent = false },
   { '<leader>fe', ":edit <C-R>=expand('%:p:h') . '\\'<CR>", desc = 'Edit current directory', silent = false },
   { '<leader>fM', ':Move <C-R>=expand("%")<CR>', desc = 'Move file', silent = false },
-  {
-    '<leader>fi',
-    function()
-      require('hasan.widgets.file_info').show_file_info()
-    end,
-    desc = 'File info',
-  },
-  {
-    '<C-g>',
-    function()
-      require('hasan.widgets.file_info').show_file_info()
-    end,
-    desc = 'File info',
-  },
+  { '<leader>fi', '<Cmd>lua require("hasan.widgets.file_info").open()<CR>', desc = 'File info' },
+  { '<C-g>', '<Cmd>lua require("hasan.widgets.file_info").open()<CR>', desc = 'File info' },
 
   -----------------------------------------------------------------------------
   -- Macros
   -----------------------------------------------------------------------------
-  {
-    'Q',
-    function()
-      return require('hasan.widgets.register_editor').start_recording()
-    end,
-    mode = { 'n', 'x' },
-    expr = true,
-    desc = 'Record macro',
-  },
+  { 'Q', function() return require('hasan.widgets.register_editor').start_recording() end, mode = { 'n', 'x' }, expr = true, desc = 'Record macro' },
   { '@', ':norm @', mode = 'v', desc = 'Run macro', silent = false },
 
   -----------------------------------------------------------------------------
@@ -301,4 +277,52 @@ maps({
   { '<leader>m', '<cmd>lua require("music.actions").ytm_toggle()<CR>', desc = 'Toggle YouTube Music' },
 })
 
+---@type lsp.AttachCb
+function M.lsp_buffer_keymaps(client, bufnr)
+  local b = { buffer = bufnr }
+
+  -- stylua: ignore
+  local maps_list = {
+    { 'gd', '<cmd>Glance definitions<CR>', desc = 'Lsp: Go to definition', unpack(b) },
+    { 'gr', '<cmd>Glance references<CR>', desc = 'Lsp: Go to references', nowait = true, unpack(b) },
+    { 'gI', '<cmd>Glance implementations<CR>', desc = 'Lsp: Type implementation', unpack(b) },
+    { 'gy', '<cmd>Glance type_definitions<CR>', desc = 'Lsp: Type definition', unpack(b) },
+    { 'gR', '<cmd>Glance resume<CR>', desc = 'Lsp: Glance resume', unpack(b) },
+    { 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', desc = 'Lsp: Go to declaration', unpack(b) },
+    { '<leader>a.', run_code_action({ 'source.fixAll' }), desc = 'Lsp: Fix all', unpack(b) },
+    -- Peek
+    { 'gpd', '<cmd>lua require("config.lsp.util.peek").PeekDefinition()<CR>', desc = 'Peek definition', unpack(b) },
+    { 'gpI', '<cmd>lua require("config.lsp.util.peek").PeekImplementation()<CR>', desc = 'Peek implementation', unpack(b) },
+    { 'gpy', '<cmd>lua require("config.lsp.util.peek").PeekTypeDefinition()<CR>', desc = 'Peek type definition', unpack(b) },
+    -- Action, Prompt, Search
+    { 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', desc = 'Lsp: Hover under cursor', unpack(b) },
+    { '<F2>', '<cmd>lua require("config.lsp.util.extras").lsp_rename()<CR>', desc = 'Lsp: Rename under cursor', unpack(b) },
+    { '<C-q>', '<cmd>lua vim.lsp.buf.code_action()<CR>', mode = { 'n', 'x' }, desc = 'Lsp: Code action', unpack(b) },
+    { '<C-space>', '<cmd>lua vim.lsp.buf.code_action()<CR>', mode = { 'n', 'x' }, desc = 'Lsp: Code action', unpack(b) },
+    { '<A-space>', '<cmd>lua vim.lsp.buf.code_action()<CR>', mode = { 'n', 'x' }, desc = 'Lsp: Code action', unpack(b) },
+    { 'g.', '<cmd>lua vim.lsp.buf.code_action()<CR>', mode = { 'n', 'x' }, desc = 'Lsp: Code action', unpack(b) },
+    -- Diagnostics
+    { '<leader>ad', '<cmd>lua vim.diagnostic.setloclist()<CR>', desc = 'Lsp: Show local diagnostics', unpack(b) },
+    { '<leader>aD', '<cmd>lua vim.diagnostic.setqflist()<CR>', desc = 'Lsp: Show global diagnostics', unpack(b) },
+    { '<leader>al', '<cmd>lua vim.diagnostic.open_float()<CR>', desc = 'Lsp: Show line diagnostics', unpack(b) },
+    { '<C-c><C-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', mode = { 'n', 'i' }, desc = 'Lsp: show signature help', unpack(b) },
+    { '<leader>a+', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', desc = 'Lsp: Add workspace folder', unpack(b) },
+    { '<leader>a-', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', desc = 'Lsp: Remove workspace folder', unpack(b) },
+    { '<leader>aw', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, desc = 'Lsp: list workspace folders', unpack(b) },
+  }
+
+  -- stylua: ignore
+  if client.name == 'vtsls' then
+    table.insert(maps_list, { 'gR', '<cmd>VtsExec file_references<CR>', desc = 'Lsp: File references', unpack(b) })
+    table.insert(maps_list, { '<leader>ai', '<cmd>VtsExec organize_imports<CR>', desc = 'Lsp: Organize imports', unpack(b) })
+    table.insert(maps_list, { '<leader>am', '<cmd>VtsExec add_missing_imports<CR>', desc = 'Lsp: Add Missing Imports', unpack(b) })
+  else
+    table.insert(maps_list, { '<leader>ai', run_code_action({ 'source.organizeImports' }), desc = 'Lsp: Organize imports', unpack(b) })
+  end
+
+  maps(maps_list)
+end
+
 M.disable_keys()
+
+return M

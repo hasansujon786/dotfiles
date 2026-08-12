@@ -12,7 +12,7 @@ function M.lsp_attach(args)
   local lsp_state = require('core.state').lsp
   local local_conf = require('config.lsp.util.extras').import_lspconfig_by_name(client.name)
 
-  require('config.lsp.util.keymaps').lsp_buffer_keymaps(client, bufnr)
+  require('core.keymaps').lsp_buffer_keymaps(client, bufnr)
 
   -- Initialize local lsp_attach ------------------
   if local_conf and local_conf.lsp_attach then

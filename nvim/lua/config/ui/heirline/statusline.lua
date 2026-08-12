@@ -55,7 +55,7 @@ local c = {
     },
     on_click = {
       callback = function()
-        require('hasan.widgets.lsp_clients').show()
+        require('hasan.widgets.file_info').open()
       end,
       name = 'heirline_LSP',
     },
