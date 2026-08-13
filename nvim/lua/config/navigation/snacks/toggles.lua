@@ -13,13 +13,35 @@ Snacks.toggle.indent():map('<leader>ti')
 Snacks.toggle.dim():map('<leader>tm')
 Snacks.toggle.option('background', { off = 'light', on = 'dark', name = 'Dark Background' }):map('<leader>tB')
 Snacks.toggle.diagnostics():map('<leader>td')
+-- Snacks.toggle({
+--   name = 'Diagnostic Lines',
+--   get = function()
+--     return vim.diagnostic.config().virtual_text
+--   end,
+--   set = function(st)
+--     return vim.diagnostic.config({ virtual_text = st })
+--   end,
+-- }):map('<leader>tl')
+
 Snacks.toggle({
   name = 'Diagnostic Lines',
   get = function()
-    return vim.diagnostic.config().virtual_text
+    local config = vim.diagnostic.config()
+    -- Returns true if virtual_lines config is active/truthy
+    return not not (config and config.virtual_lines)
   end,
-  set = function(st)
-    return vim.diagnostic.config({ virtual_text = st })
+  set = function(state)
+    if state then
+      -- Enable multiline layout for the current line
+      vim.diagnostic.config({
+        virtual_lines = { current_line = false },
+      })
+    else
+      -- Disable multiline layout completely
+      vim.diagnostic.config({
+        virtual_lines = false,
+      })
+    end
   end,
 }):map('<leader>tl')
 

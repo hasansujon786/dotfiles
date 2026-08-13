@@ -8,7 +8,9 @@ local function winhighlight_from(tbl)
 end
 
 local sidebar_hl = {
-  root = 'FloatBorder:EdgyWinSeparator',
+  root = winhighlight_from({
+    'FloatBorder:EdgyWinSeparator',
+  }),
   input = winhighlight_from({
     'Normal:SidebarDark',
     'NormalNC:SidebarDark',
@@ -133,8 +135,9 @@ function M.get_sidebar()
       min_width = sidebar.width,
       height = 0,
       position = 'left',
-      border = { '', '', '', 'P', '', '', '', '' },
+      border = { '', '', '', '█', '', '', '', '' },
       -- border = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' },
+      -- border = 'none',
       wo = { winhighlight = sidebar_hl.root },
       box = 'vertical',
       {
