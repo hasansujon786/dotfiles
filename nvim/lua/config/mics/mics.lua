@@ -2,6 +2,34 @@ local nx, nxo = { 'n', 'x' }, { 'n', 'x', 'o' }
 
 return {
   {
+    'rachartier/tiny-inline-diagnostic.nvim',
+    event = 'VeryLazy',
+    priority = 1000,
+    config = function()
+      require('tiny-inline-diagnostic').setup({
+        -- Available: "modern", "classic", "minimal", "powerline", "ghost", "simple", "nonerdfont", "amongus"
+        preset = 'powerline',
+        options = {
+          -- Only show diagnostics when the cursor is directly over them, no fallback to line diagnostics
+          show_diags_only_under_cursor = true,
+          add_messages = {
+            display_count = true,
+          },
+          multilines = {
+            enabled = true,
+            always_show = true,
+            -- severity = {
+            --   vim.diagnostic.severity.ERROR,
+            --   vim.diagnostic.severity.WARN,
+            --   -- vim.diagnostic.severity.INFO,
+            --   -- vim.diagnostic.severity.HINT,
+            -- },
+          },
+        },
+      })
+    end,
+  },
+  {
     'max397574/better-escape.nvim',
     lazy = true,
     event = { 'InsertEnter', 'CmdlineEnter' },

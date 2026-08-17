@@ -47,16 +47,31 @@ return {
 
         tailwind.tailwind_bg_text_colors,
 
-        flutter.flutter_main_axis_alignment,
-        flutter.flutter_main_axis_alignment_sh,
+        flutter.font_weight,
+        flutter.TextAlign.full,
+        flutter.TextAlign.shorthand,
+        flutter.MainAxisAlignment.full,
+        flutter.MainAxisAlignment.shorthand,
+        flutter.CrossAxisAlignment.full,
+        flutter.CrossAxisAlignment.shorthand,
+        flutter.MainAxisSize.full,
+        flutter.MainAxisSize.shorthand,
 
-        flutter.flutter_cross_axis_alignment,
-        flutter.flutter_cross_axis_alignment_sh,
+        flutter.TextOverflow.full,
+        flutter.TextOverflow.shorthand,
+        flutter.BoxFit.full,
+        flutter.BoxFit.shorthand,
+        flutter.WrapAlignment.full,
+        flutter.WrapAlignment.shorthand,
+        flutter.WrapCrossAlignment.full,
+        flutter.WrapCrossAlignment.shorthand,
 
-        flutter.flutter_text_align,
-        flutter.flutter_text_align_sh,
+        flutter.Clip.full,
+        flutter.Clip.shorthand,
+        flutter.BorderStyle.full,
+        flutter.BorderStyle.shorthand,
 
-        flutter.flutter_font_weight,
+        flutter.nullable_type,
       },
     })
     require('dial.config').augends:on_filetype({

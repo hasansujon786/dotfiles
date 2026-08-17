@@ -1,7 +1,7 @@
-function custom_augend()
+local function custom_augend()
   local augend = require('dial.augend')
   local toggle = function(...)
-    return require('dial.augend').constant.new(...)
+    return augend.constant.new(...)
   end
 
   local M = {}

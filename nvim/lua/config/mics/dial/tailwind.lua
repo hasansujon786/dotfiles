@@ -1,4 +1,4 @@
-function custom_augend()
+local function custom_augend()
   local augend = require('dial.augend')
 
   local M = {}

@@ -19,7 +19,7 @@ end
 
 local function diagnostic_jump(count, severity)
   return function()
-    vim.diagnostic.jump({ count = count, severity = severity, float = true })
+    vim.diagnostic.jump({ count = count, severity = severity, float = false })
   end
 end
 
