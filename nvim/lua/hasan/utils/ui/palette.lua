@@ -150,15 +150,17 @@ local function set_custom_highlights()
     LspReferenceRead        = { bg = c.dim_green },
     LspReferenceWrite       = { bg = c.dim_red },
     LspInfoBorder           = { link = 'FloatBorder' },
-    DiagnosticLineNrWarn    = { fg = c.yellow, bg = use_dim_bg and c.dim_yellow or c.none },
-    DiagnosticLineNrError   = { fg = c.red, bg = use_dim_bg and c.dim_red or c.none },
-    DiagnosticLineNrInfo    = { fg = c.cyan, bg = use_dim_bg and c.dim_cyan or c.none },
-    DiagnosticLineNrHint    = { fg = c.purple, bg = use_dim_bg and c.dim_purple or c.none },
+
+    DiagnosticLineNrError   = { link = 'DiagnosticError' },
+    DiagnosticLineNrWarn    = { link = 'DiagnosticWarn' },
+    DiagnosticLineNrInfo    = { link = 'DiagnosticInfo' },
+    DiagnosticLineNrHint    = { link = 'DiagnosticHint' },
+
     DiagnosticUnnecessary   = { link = 'DiagnosticUnderlineError' },
     DiagnosticUnderlineInfo = { link = 'DiagnosticUnderlineError' },
     DiagnosticUnderlineWarn = { link = 'DiagnosticUnderlineError' },
     DiagnosticUnderlineHint = { link = 'DiagnosticUnderlineError' },
-    DiagnosticUnderlineError= { fg = 'none', underline = true, sp = c.red },
+    -- DiagnosticUnderlineError= { fg = 'none', underline = true, sp = c.red },
     NvimDapVirtualText      = { fg = c.purple, bg = c.dim_purple },
 
     -- /// notify ///

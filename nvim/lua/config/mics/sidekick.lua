@@ -1,37 +1,6 @@
 return {
   'folke/sidekick.nvim',
   enabled = true,
-  opts = {
-    cli = {
-      -- add any options here
-      --   mux = {
-      --     backend = 'zellij',
-      --     enabled = true,
-      --   },
-      prompts = {
-        component = 'Please refactor {this} to a component',
-        refactor = 'Please refactor {this} to be more maintainable',
-        -- security = 'Review {file} for security vulnerabilities',
-        -- custom = function(ctx)
-        --   return 'Current file: ' .. ctx.buf .. ' at line ' .. ctx.row
-        -- end,
-      },
-      tools = {
-        -- Defining the custom Antigravity entry
-        agy = {
-          cmd = { 'agy' }, -- Launches the core antigravity-cli tool
-          -- Optional: Pass custom flags or default models if needed
-          -- cmd = { "agy", "--model", "ultra" },
-          -- If you need to make sure your terminal passes specific options
-          env = {
-            -- Example: Tells agy to automatically use safe sandbox mode inside Neovim
-            -- AGY_SANDBOX_MODE = "true",
-          },
-        },
-        mimo = { cmd = { 'mimo' } },
-      },
-    },
-  },
   keys = {
     {
       '<c-.>',
@@ -100,6 +69,48 @@ return {
       end,
       mode = { 'n', 'x' },
       desc = 'Sidekick: Select Prompt',
+    },
+  },
+  opts = {
+    nes = { enabled = true },
+    cli = {
+      win = {
+        layout = 'float',
+        float = {
+          col = 1,
+          row = 0,
+          width = 0.5,
+          height = 1,
+          border = { '', '', '', '', '', '', '', { '│', 'WinSeparator' } },
+        },
+      },
+      -- add any options here
+      --   mux = {
+      --     backend = 'zellij',
+      --     enabled = true,
+      --   },
+      prompts = {
+        component = 'Please refactor {this} to a component',
+        refactor = 'Please refactor {this} to be more maintainable',
+        -- security = 'Review {file} for security vulnerabilities',
+        -- custom = function(ctx)
+        --   return 'Current file: ' .. ctx.buf .. ' at line ' .. ctx.row
+        -- end,
+      },
+      tools = {
+        -- Defining the custom Antigravity entry
+        agy = {
+          cmd = { 'agy' }, -- Launches the core antigravity-cli tool
+          -- Optional: Pass custom flags or default models if needed
+          -- cmd = { "agy", "--model", "ultra" },
+          -- If you need to make sure your terminal passes specific options
+          env = {
+            -- Example: Tells agy to automatically use safe sandbox mode inside Neovim
+            -- AGY_SANDBOX_MODE = "true",
+          },
+        },
+        mimo = { cmd = { 'mimo' } },
+      },
     },
   },
 }

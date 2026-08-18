@@ -9,21 +9,30 @@ return {
       require('tiny-inline-diagnostic').setup({
         -- Available: "modern", "classic", "minimal", "powerline", "ghost", "simple", "nonerdfont", "amongus"
         preset = 'powerline',
+        hi = {
+          error = 'DiagnosticError', -- Highlight for error diagnostics
+          warn = 'DiagnosticWarn', -- Highlight for warning diagnostics
+          info = 'DiagnosticInfo', -- Highlight for info diagnostics
+          hint = 'DiagnosticHint', -- Highlight for hint diagnostics
+          arrow = 'NonText', -- Highlight for the arrow pointing to diagnostic
+          background = 'CursorLine', -- Background highlight for diagnostics
+          mixing_color = 'Normal', -- Color to blend background with (or "None")
+        },
         options = {
           -- Only show diagnostics when the cursor is directly over them, no fallback to line diagnostics
-          show_diags_only_under_cursor = true,
+          -- show_diags_only_under_cursor = true,
           add_messages = {
             display_count = true,
           },
           multilines = {
             enabled = true,
             always_show = true,
-            -- severity = {
-            --   vim.diagnostic.severity.ERROR,
-            --   vim.diagnostic.severity.WARN,
-            --   -- vim.diagnostic.severity.INFO,
-            --   -- vim.diagnostic.severity.HINT,
-            -- },
+            severity = {
+              vim.diagnostic.severity.ERROR,
+              vim.diagnostic.severity.WARN,
+              -- vim.diagnostic.severity.INFO,
+              -- vim.diagnostic.severity.HINT,
+            },
           },
         },
       })
