@@ -58,7 +58,7 @@ return {
         require('neo-tree.sources.manager').refresh('filesystem')
       end,
       ['.'] = 'set_root',
-      ['<A-h>'] = 'toggle_hidden',
+      ['H'] = 'toggle_hidden',
       ['/'] = 'filter_on_submit',
       ['<esc>'] = 'clear_filter',
       ['f'] = 'none',

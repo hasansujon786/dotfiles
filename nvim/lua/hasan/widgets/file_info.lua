@@ -64,6 +64,7 @@ M.open = function()
   })
 
   local win = Snacks.win({
+    backdrop = false,
     width = width,
     max_width = vim.o.columns,
     height = #lines,
