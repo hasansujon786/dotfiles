@@ -197,9 +197,6 @@ end
 
 return M
 
--- s Save a screenshot to flutter.png.
---
---
 -- h Repeat this help message.
 -- a Toggle timeline events for all widget build methods.                    (debugProfileWidgetBuilds)
 -- b Toggle platform brightness (dark and light mode).                        (debugBrightnessOverride)

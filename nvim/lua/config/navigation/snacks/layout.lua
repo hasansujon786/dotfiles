@@ -212,6 +212,7 @@ M.picker_layouts = {
   right_float = M.get_right_float(),
   vscode = { layout = { row = 0, width = 0.4, min_width = 70 } },
   select = { layout = { border = hover.border } },
+  mini_select = { preset = 'select', layout = { width = 40, min_width = 50 } },
   select_main = { preset = 'select', preview = 'main', hidden = {} },
 }
 
