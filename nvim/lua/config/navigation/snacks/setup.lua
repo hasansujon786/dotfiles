@@ -116,7 +116,7 @@ require('snacks').setup({
       -- if vim.bo.buftype == '' and vim.bo.filetype ~= '' then
       --   return vim.bo.filetype
       -- end
-      return 'markdown'
+      return 'org'
     end,
   },
   dashboard = require('config.navigation.snacks.dashboard'),

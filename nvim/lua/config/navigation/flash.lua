@@ -6,7 +6,7 @@ return {
     labels = ';asdfghjklwertyuiopxcvbnm',
     modes = {
       char = { enabled = false },
-      search = { enabled = false },
+      search = { enabled = true },
     },
     search = {
       exclude = {
@@ -23,6 +23,7 @@ return {
   -- { label = { after = { 0, 2 }, style = 'overlay' }, }
   -- stylua: ignore
   keys = {
+    {'/', mode = nx },
     { 's', mode = nx, function() require('flash').jump() end, desc = 'Flash' },
     { 'z', mode = 'o', function() require('flash').jump() end, desc = 'Flash' },
     { 'S', mode = nxo, function() require('flash').treesitter() end, desc = 'Flash Treesitter' },

@@ -8,7 +8,7 @@ return {
     {
       '<leader>fc',
       function()
-        require('config.lsp.servers.dartls.run_commmands').commands()
+        require('config.lsp.servers.dartls.run_commands').commands()
       end,
       ft = { 'yaml', 'dart', 'log' },
       desc = 'Flutter: Show commands',

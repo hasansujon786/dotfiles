@@ -192,21 +192,21 @@ return {
       end,
       desc = 'Open terminal in cwd',
     },
-    ['Y'] = {
+    ['gy'] = {
       function(state)
         fa.yank_path(require('config.navigation.neo_tree.util').get_cursor_path(state), ':t', 'Neotree')
       end,
       desc = 'Copy filename',
     },
-    ['g.'] = {
-      function(state)
-        fa.yank_path(require('config.navigation.neo_tree.util').get_cursor_path(state), ':.', 'Neotree')
-      end,
-      desc = 'Copy relative path',
-    },
-    ['gr'] = {
+    ['gY'] = {
       function(state)
         fa.yank_path(require('config.navigation.neo_tree.util').get_cursor_path(state), ':~', 'Neotree')
+      end,
+      desc = 'Copy absolute path',
+    },
+    ['Y'] = {
+      function(state)
+        fa.yank_path(require('config.navigation.neo_tree.util').get_cursor_path(state), ':.', 'Neotree')
       end,
       desc = 'Copy relative path',
     },
