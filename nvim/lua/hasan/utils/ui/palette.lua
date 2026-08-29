@@ -178,6 +178,8 @@ local function set_custom_highlights()
 
     -- /// snacks ///
     SnacksNormal            = { fg = c.fg, bg = float_bg },
+    SnacksScratchTitle      = { fg = c.cyan, bg = c.none },
+    SnacksFooter            = { fg = c.cyan, bg = c.none },
     SnacksDashboardHeader   = { fg = c.grey },
     SnacksDashboardDesc     = { fg = c.light_grey, italic = true },
     SnacksDashboardDir      = { link = 'SnacksDim' },
