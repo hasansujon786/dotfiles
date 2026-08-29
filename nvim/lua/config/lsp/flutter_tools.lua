@@ -44,12 +44,14 @@ return {
         enabled = true,
         run_via_dap = true, -- use dap instead of a plenary job to run flutter apps
         register_configurations = function(paths)
-          require('dap').adapters.dart = {
-            type = 'executable',
-            command = 'flutter', -- or full path to your flutter binary
-            args = { 'debug-adapter' },
-          }
-
+          -- require('dap').adapters.dart = {
+          --   type = 'executable',
+          --   command = 'flutter', -- or full path to your flutter binary
+          --   args = { 'debug-adapter' },
+          -- }
+          -- NOTE: `dap.adapters.dart` must NOT be overridden here.
+          -- flutter-tools registers it itself with the resolved `paths.flutter_bin`
+          -- (full absolute path + `options.detached = false` on Windows).
           require('dap').configurations.dart = {
             {
               type = 'dart',
@@ -57,8 +59,8 @@ return {
               name = 'Launch Flutter',
               program = '${workspaceFolder}/lib/main.dart',
               cwd = '${workspaceFolder}',
-              -- dartSdkPath = paths.dart_sdk,
-              -- flutterSdkPath = paths.flutter_sdk,
+              dartSdkPath = paths.dart_sdk,
+              flutterSdkPath = paths.flutter_sdk,
               -- toolArgs = { '-d', 'Edge' },
               --skipFiles = ["**/node_modules/**", "!**/node_modules/my-module/**"]
             },
