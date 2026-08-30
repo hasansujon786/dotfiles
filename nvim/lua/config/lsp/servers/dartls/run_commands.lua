@@ -1,9 +1,8 @@
 local lazy = require('flutter-tools.lazy')
 local ui = lazy.require('flutter-tools.ui') ---@module "flutter-tools.ui"
 
--- TODO: Replace telescope
----@alias TelescopeEntry {hint: string, text: string, command: fun(), id: integer}
----@alias CustomOptions {title: string, callback: fun(bufnr: integer)}
+---@alias PickerEntry {id: integer, hint: string, text: string, command: fun()}
+---@alias PickerOptions {title: string, callback: fun(bufnr: integer)}
 
 local ft_commands = lazy.require('flutter-tools.commands') ---@module "flutter-tools.commands"
 local devices = lazy.require('flutter-tools.devices') ---@module "flutter-tools.devices"
@@ -110,9 +109,9 @@ local function get_max_length(cmds)
 end
 
 ---The options use to create the custom telescope picker menu's for flutter-tools
----@param items TelescopeEntry[]
+---@param items PickerEntry[]
 ---@param user_opts table?
----@param opts CustomOptions?
+---@param opts PickerOptions?
 function M.get_config(items, user_opts, opts)
   local callback = (opts and opts.callback) or execute_command
 
@@ -142,9 +141,9 @@ function M.commands(opts)
     end)
     :map(function(entry)
       return {
-        text = entry.text,
         id = entry.id,
         hint = entry.hint,
+        text = entry.text,
         key = entry.key,
         command = resolve_command(entry.cmd),
       }
