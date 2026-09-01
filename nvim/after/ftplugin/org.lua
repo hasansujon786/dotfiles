@@ -14,3 +14,7 @@ vim.keymap.set('n', '<leader>v.', '<cmd>lua require("hasan.org.src_block").execu
 
 vim.keymap.set('n', 'g-', '<cmd>lua require("hasan.utils.buffer").create_link("[[${link}][]]", -1)<CR>', { desc = 'Create Link', buffer = true })
 vim.keymap.set('x', 'g-', '<Esc><cmd>lua require("hasan.utils.buffer").create_link_visual("[[${link}][${title}]]")<CR>', { desc = 'Create Link', buffer = true })
+
+vim.schedule(function()
+  vim.opt.winhighlight:append({ Folded = 'OrgFolded' })
+end)

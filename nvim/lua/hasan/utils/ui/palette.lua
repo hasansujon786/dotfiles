@@ -95,6 +95,7 @@ local function set_custom_highlights()
     SidebarDarkBorder       = { fg = dark_border, bg = c.bg_d },
 
     Folded                  = { fg = c.fg, bg = '#2F343E' },
+    OrgFolded               = { fg = c.none, bg = c.none },
     Visual                  = { bg = c.dim_blue },
     NonText                 = { fg = c.layer, bg = c.none },
     LineNr                  = { fg = '#495162', bg = c.none },
