@@ -79,8 +79,12 @@ Target OS names:
   return jit.os
 end
 
+M.is_wsl = function()
+  return vim.fn.has('wsl') == 1
+end
+
 M.is_windows = function()
-  return vim.fn.has('win32') == 1 or vim.fn.has('wsl') == 1
+  return vim.fn.has('win32') == 1 or M.is_wsl()
 end
 
 M.is_mac = function()

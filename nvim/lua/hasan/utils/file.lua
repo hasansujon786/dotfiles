@@ -240,7 +240,8 @@ function M.quicklook_toggle()
   M.quicklook(qlook.args)
 end
 
-local is_windows = vim.fn.has('win32') == 1
+local is_windows = require('hasan.utils').is_windows()
+local is_mac = require('hasan.utils').is_linux()
 
 ---Open files/folder in system explorer
 ---@param file string
@@ -251,9 +252,7 @@ function M.system_open(file, opts)
 
   if is_windows then
     file = file:gsub('/', '\\')
-
     local explorer_args = opts.reveal and ('/select,' .. file) or file
-
     vim.fn.jobstart({
       'powershell',
       '-NoProfile',
@@ -263,10 +262,45 @@ function M.system_open(file, opts)
       'Start-Process',
       string.format("explorer.exe '%s'", explorer_args),
     })
-  else
-    -- For macOS or Linux fallback
+  elseif is_mac then
+    if opts.reveal then
+      -- `open -R` reveals the file in Finder, selecting it
+      table.insert(args, '-R')
+    end
     table.insert(args, file)
-    vim.fn.jobstart({ M.system_open_cmd, unpack(args) })
+    vim.fn.jobstart({ 'open', unpack(args) })
+  else
+    -- Linux: no universal "reveal and select" command like Finder/Explorer.
+    -- Try common file managers that support selecting a file first,
+    -- falling back to xdg-open on the containing directory (or file).
+    local target = file
+    local cmd = nil
+
+    if opts.reveal then
+      -- Try Nautilus (GNOME Files) - supports selecting the file
+      if vim.fn.executable('nautilus') == 1 then
+        cmd = { 'nautilus', '--select', file }
+      -- Try Nemo (Cinnamon) - also supports --select? Not reliably; fall back
+      elseif vim.fn.executable('nemo') == 1 then
+        cmd = { 'nemo', file }
+      -- Try dolphin (KDE) - supports --select
+      elseif vim.fn.executable('dolphin') == 1 then
+        cmd = { 'dolphin', '--select', file }
+      -- Try thunar (XFCE) - no select support, open parent dir
+      elseif vim.fn.executable('thunar') == 1 then
+        cmd = { 'thunar', vim.fn.fnamemodify(file, ':h') }
+      end
+    end
+
+    if not cmd then
+      -- Fallback: xdg-open the containing directory if revealing,
+      -- otherwise xdg-open the file/target itself.
+      target = opts.reveal and vim.fn.fnamemodify(file, ':h') or file
+      table.insert(args, target)
+      cmd = { 'xdg-open', unpack(args) }
+    end
+
+    vim.fn.jobstart(cmd)
   end
 end
 

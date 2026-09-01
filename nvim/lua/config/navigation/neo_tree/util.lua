@@ -116,7 +116,25 @@ function M.edit_alternate_file()
   feedkeys('<c-^>')
 end
 
+local is_windows = require('hasan.utils').is_windows()
 function M.toggle_quicklook(state)
+  function look_file()
+    local node = state.tree:get_node()
+    if not node then
+      return
+    end
+
+    local file = node:get_id()
+    local ok = pcall(require('hasan.utils.file').quicklook, { file })
+    if ok and is_windows then
+      vim.b.qlook_file = file
+    end
+  end
+
+  if not is_windows then
+    look_file()
+  end
+
   if type(vim.b.qlook_id) == 'number' then
     if vim.b.qlook_file then
       pcall(require('hasan.utils.file').quicklook, { vim.b.qlook_file })
@@ -130,18 +148,7 @@ function M.toggle_quicklook(state)
   vim.b.qlook_id = vim.api.nvim_create_autocmd('CursorHold', {
     buffer = vim.api.nvim_get_current_buf(),
     callback = function()
-      vim.schedule(function()
-        local node = state.tree:get_node()
-        if not node then
-          return
-        end
-
-        local file = node:get_id()
-        local ok = pcall(require('hasan.utils.file').quicklook, { file })
-        if ok then
-          vim.b.qlook_file = file
-        end
-      end)
+      vim.schedule(look_file)
     end,
   })
 end
