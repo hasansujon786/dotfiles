@@ -56,6 +56,7 @@ return {
       filesystem = require('config.navigation.neo_tree.filesystem'),
       buffers = require('config.navigation.neo_tree.buffers'),
       git_status = require('config.navigation.neo_tree.git_status'),
+      -- clipboard = { sync = 'universal' },
     }
 
     return vim.tbl_deep_extend('force', opts or {}, myOpts)
@@ -64,5 +65,6 @@ return {
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons',
     'MunifTanjim/nui.nvim',
+    { 'antosha417/nvim-lsp-file-operations', opts = {} },
   },
 }

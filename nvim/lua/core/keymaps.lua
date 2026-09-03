@@ -93,7 +93,8 @@ maps({
 
   { '<C-v>', '<C-R>+', mode = { 'i', 'c' }, desc = 'Paste from system clipboard', silent = false },
   { '<C-g><C-v>', '<C-v>', mode = { 'i', 'c' }, desc = 'Literal paste', silent = false },
-  { '<A-p>', '<C-R>"', mode = { 'i', 'c' }, desc = 'Paste from register' },
+  { '<A-p>', '<C-R>"', mode = { 'i' }, desc = 'last deleted, changed or yanked content' },
+  { '<c-r><c-r>', '<C-R>"', mode = { 'i', 'c' }, desc = 'last deleted, changed or yanked content' },
 
   -----------------------------------------------------------------------------
   -- Comments

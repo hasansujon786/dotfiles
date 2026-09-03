@@ -13,7 +13,7 @@ keymap('i', '<s-tab>', '<BS>')
 return {
   'saghen/blink.cmp',
   version = '*',
-  commit = 'b19413d',
+  -- commit = 'b19413d',
   enabled = require('core.state').completion.module == 'blink',
   event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
@@ -248,6 +248,11 @@ return {
     },
 
     cmdline = {
+      -- sources = function()
+      --   local type = vim.fn.getcmdtype()
+      --   if type == '/' or type == '?' then return {} end
+      --   return { 'cmdline', 'buffer' }
+      -- end,
       keymap = {
         ['<C-y>'] = { 'select_and_accept', 'fallback' },
         ['<C-e>'] = { 'cancel', 'fallback' },
@@ -267,7 +272,7 @@ return {
         ['<C-n>'] = { 'select_next', 'fallback' },
         ['<C-p>'] = { 'select_prev', 'fallback' },
         ['<A-n>'] = { 'select_next', 'fallback' },
-        -- ['<A-p>'] = { 'select_prev', 'fallback' },
+        ['<A-p>'] = { 'select_prev', 'fallback' },
       },
       completion = {
         menu = {
