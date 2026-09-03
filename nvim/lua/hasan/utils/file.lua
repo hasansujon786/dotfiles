@@ -1,9 +1,8 @@
 local Path = require('plenary.path')
 
--- local on_windows = vim.loop.os_uname().version:match('Windows')
-local sysname = vim.uv.os_uname().sysname:lower()
-local iswin = not not (sysname:find('windows') or sysname:find('mingw'))
-local os_sep = iswin and '\\' or '/'
+local is_windows = require('hasan.utils').is_windows()
+local is_mac = require('hasan.utils').is_mac()
+local os_sep = is_windows and '\\' or '/'
 
 local M = {}
 
@@ -239,9 +238,6 @@ end
 function M.quicklook_toggle()
   M.quicklook(qlook.args)
 end
-
-local is_windows = require('hasan.utils').is_windows()
-local is_mac = require('hasan.utils').is_linux()
 
 ---Open files/folder in system explorer
 ---@param file string
