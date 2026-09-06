@@ -1,8 +1,8 @@
 return {
-  "obsidian-nvim/obsidian.nvim",
+  'obsidian-nvim/obsidian.nvim',
   lazy = true,
   cmd = { 'Obsidian' },
-  version = "*", -- recommended, use latest release instead of latest commit
+  version = '*', -- recommended, use latest release instead of latest commit
   -- lazy = true,
   -- ft = "markdown",
   -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
@@ -15,17 +15,15 @@ return {
   -- },
   dependencies = {
     -- Required.
-    "nvim-lua/plenary.nvim",
-
-    -- see above for full list of optional dependencies ☝️
+    'nvim-lua/plenary.nvim',
   },
   ---@module 'obsidian'
-  ---@type obsidian.config
   opts = {
+    legacy_commands = false, -- this will be removed in 4.0.0
     workspaces = {
       {
-        name = "personal",
-        path = "~/my_vault/",
+        name = 'personal',
+        path = '~/my_vault/',
       },
       -- {
       --   name = "work",
