@@ -60,6 +60,10 @@ command('DocGenerate', function()
   vim.cmd.checktime()
 end, { nargs = 0, desc = 'DocGenerate' })
 
+command('SyncFilenameWithClass', function()
+  require('config.lsp.servers.dartls.sync_filename_with_class').sync_filename_with_class()
+end, { nargs = 0, desc = 'SyncFilenameWithClass' })
+
 command('GoErrDeclToggle', function()
   require('config.lsp.servers.gopls.go_err').toggle_inline_err()
 end, { nargs = 0, desc = 'GoErrDeclToggle' })
