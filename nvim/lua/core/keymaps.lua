@@ -275,7 +275,7 @@ maps({
   -- Utilities
   -----------------------------------------------------------------------------
   { '<leader>r', '<cmd>lua require("hasan.utils.win").cycle_numbering()<CR>', desc = 'Cycle numbers' },
-  { '<leader>m', '<cmd>lua require("music.actions").ytm_toggle()<CR>', desc = 'Toggle YouTube Music' },
+  { 'g<space>', '<cmd>lua require("music.actions").ytm_toggle()<CR>', desc = 'Toggle YouTube Music' },
 })
 
 ---@type lsp.AttachCb

@@ -13,7 +13,6 @@ if not vim.g.vscode then
   require('core.keymaps')
   require('core.autocmds')
 else
-  require('core.keymaps.code')
   require('hasan.utils.ui.palette').set_custom_highlights()
   -- require('vscode.keymaps')
 end

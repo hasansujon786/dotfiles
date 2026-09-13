@@ -181,7 +181,7 @@ require('snacks').setup({
       loclist = { layout = 'dropdown' },
 
       ---@type snacks.picker.file_browser.Config
-      file_browser = { layout = 'ivy' },
+      file_browser = { layout = 'ivy_mini' },
       explorer = require('config.navigation.snacks.explorer').source,
     },
 

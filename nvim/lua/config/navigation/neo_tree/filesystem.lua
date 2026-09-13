@@ -21,7 +21,7 @@ return {
     hide_by_name = {
       --"node_modules"
     },
-    hide_by_pattern = { -- uses glob style patterns
+    hide_by_pattern = { -- uces glob style patterns
       --"*.meta",
       --"*/src/*/tsconfig.json",
     },
@@ -59,9 +59,8 @@ return {
       end,
       ['.'] = 'set_root',
       ['H'] = 'toggle_hidden',
-      ['/'] = 'filter_on_submit',
+      ['f'] = 'filter_on_submit',
       ['<esc>'] = 'clear_filter',
-      ['f'] = 'none',
       ['F'] = 'none',
       ['#'] = 'none',
 
