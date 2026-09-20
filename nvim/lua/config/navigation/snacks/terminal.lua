@@ -1,5 +1,8 @@
 local index = nil
 
+local is_windows = require('hasan.utils').is_windows()
+local shell = is_windows and 'bash' or nil
+
 local function open_term(is_previous, opts)
   opts = opts or {}
   local list = Snacks.terminal.list()
@@ -75,7 +78,7 @@ end
 
 function M.toggle()
   if vim.v.count > 0 then
-    return Snacks.terminal(nil, { shell = 'bash', win = { position = 'float' } })
+    return Snacks.terminal(nil, { shell = shell, win = { position = 'float' } })
   end
 
   local ft = vim.o.ft
@@ -89,7 +92,7 @@ function M.toggle()
 
   -- Or create a new term
   if not opened then
-    return Snacks.terminal(nil, { shell = 'bash', win = { position = 'float' } })
+    return Snacks.terminal(nil, { shell = shell, win = { position = 'float' } })
   end
 end
 
@@ -99,17 +102,17 @@ function M.toggle_yazi()
     local bufname = vim.api.nvim_buf_get_name(0)
     table.insert(cmd, '"' .. bufname .. '"')
   end
-  Snacks.terminal(table.concat(cmd, ' '), { shell = 'bash', win = { style = 'lazygit' } })
+  Snacks.terminal(table.concat(cmd, ' '), { shell = shell, win = { style = 'lazygit' } })
 end
 
 function M.toggle_ordna()
   local cmd = { 'ordna' }
-  Snacks.terminal(table.concat(cmd, ' '), { shell = 'bash', win = { style = 'lazygit' } })
+  Snacks.terminal(table.concat(cmd, ' '), { shell = shell, win = { style = 'lazygit' } })
 end
 
 function M.toggle_music()
   local cmd = { 'rs-pug' }
-  Snacks.terminal(table.concat(cmd, ' '), { shell = 'bash', win = { style = 'center' } })
+  Snacks.terminal(table.concat(cmd, ' '), { shell = shell, win = { style = 'center' } })
 end
 
 return M
