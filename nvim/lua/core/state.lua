@@ -17,6 +17,8 @@ M.treesitter = {
     markdown = { 'markdown' },
     markdown_inline = {},
 
+    swift = { 'swift' },
+
     html = { 'html' },
     css = { 'css' },
     json = { 'json' },

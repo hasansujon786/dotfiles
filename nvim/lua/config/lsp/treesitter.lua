@@ -3,11 +3,12 @@
 -- https://www.reddit.com/r/neovim/comments/1ppa4ag/comment/nungaa0/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 return {
   'nvim-treesitter/nvim-treesitter',
-  lazy = true,
-  build = ':TSUpdate',
-  event = { 'VeryLazy' },
-  cmd = { 'TSUpdate', 'TSUpdateSync', 'TSInstall', 'TSInstallSync' },
   branch = 'main',
+  build = ':TSUpdate',
+  lazy = true,
+  event = { 'VeryLazy' },
+  commit = 'df7489e',
+  cmd = { 'TSUpdate', 'TSUpdateSync', 'TSInstall', 'TSInstallSync' },
   init = function()
     vim.env.CC = 'gcc'
     -- vim.g.no_plugin_maps = true
