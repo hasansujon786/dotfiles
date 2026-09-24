@@ -109,7 +109,7 @@ return {
             -- AGY_SANDBOX_MODE = "true",
           },
         },
-        mimo = { cmd = { 'mimo' } },
+        -- mimo = { cmd = { 'mimo' } },
       },
     },
   },
