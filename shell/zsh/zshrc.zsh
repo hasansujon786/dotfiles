@@ -32,8 +32,7 @@ export PATH="$PATH":"$HOME/.pub-cache/bin"
 [ -d "$HOME/.cargo" ] && export PATH="$HOME/.cargo/bin:$PATH"
 
 export ANDROID_HOME="$HOME/Library/Android/sdk"
-[ -d "$ANDROID_HOME/platform-tools" ] && export PATH="$PATH:$ANDROID_HOME/platform-tools"
-
+export PATH=$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
 
 # =========================================================
 # CORE SHELL OPTIONS
