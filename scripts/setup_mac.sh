@@ -22,3 +22,5 @@ backup_and_link() {
 
 backup_and_link ~/dotfiles/nvim ~/.config/nvim
 backup_and_link ~/dotfiles/gui/wezterm ~/.config/wezterm
+
+defaults write -g ApplePressAndHoldEnabled -bool false

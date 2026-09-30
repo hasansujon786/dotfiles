@@ -34,8 +34,6 @@ return {
       { '<leader>ps', '<cmd>SessionSave<CR>', desc = 'Save session' },
       { '<leader>pl', '<cmd>SessionLoad<CR>', desc = 'Load session' },
       { '<leader>pz', '<cmd>SessionSaveQuit<CR><cmd>wqall<CR>', desc = 'Save session and quit' },
-      { '<leader>pp', function() require('config.navigation.snacks.persisted').persisted() end, desc = 'Switch project' },
-      -- { "'<tab>", function() require('config.navigation.snacks.persisted').persisted() end, desc = 'Switch project' },
     },
     opts = {
       autostart = true, -- Start recording

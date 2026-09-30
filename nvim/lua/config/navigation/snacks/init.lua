@@ -15,7 +15,6 @@ return {
       -- { 'g]',         function() Snacks.words.jump(vim.v.count1) end, desc = 'Next Reference', mode = { 'n', 't' } },
       -- { 'g[',         function() Snacks.words.jump(-vim.v.count1) end, desc = 'Prev Reference', mode = { 'n', 't' } },
       { 'gpp', '<Plug>OpenQuicklookAtCursor', desc = 'Preview image under cursor', mode = nx },
-      { '<leader>vh', function() Snacks.notifier.hide() end, desc = 'Dismiss All Notifications', mode = nx },
       { '<leader>vo', '<cmd>lua require("hasan.utils.file").quicklook_toggle()<CR>', desc = 'Toggle quickLook', mode = nx },
       { '<leader>vn', function() Snacks.notifier.show_history() end, desc = 'Notification History' },
       { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Kill this buffer' },
@@ -55,7 +54,6 @@ return {
 
       -- FIND FILES
       { '<C-p>', function() require('config.navigation.snacks.custom').project_files() end, desc = 'Find project files' },
-      { '<leader><space>', function() require('config.navigation.snacks.custom').project_files() end, desc = 'Find project files' },
       -- { '<leader><space>', function() Snacks.picker.smart() end, desc = 'Find project files' },
       -- { '<leader><space>', function() Snacks.picker.git_files() end, desc = 'Find Git Files' },
       -- { '<leader>.', function() Snacks.picker.files({layout='ivy', cwd=vim.fn.expand('%:h')}) end, desc = 'Browse cur directory' },
@@ -66,11 +64,9 @@ return {
       { '<leader>fe', function() Snacks.explorer() end, desc = 'File Explorer' },
 
       -- FIND BUFFERS
-      { "<leader>m", function() require('config.navigation.snacks.custom').buffers_with_symbols() end, desc = 'which_key_ignore' },
       { '<leader>bb', function() require('config.navigation.snacks.custom').buffers_with_symbols() end, desc = 'Buffers' },
 
       -- LSP
-      { 'go', function () require('config.navigation.snacks.custom').lsp_symbols() end, desc = 'LSP Symbols' },
       { 'go', function () require('hasan.org.picker').pick_heading() end, desc = 'LSP Symbols', ft = 'org' },
       { 'g/', function() Snacks.picker.treesitter() end, desc = 'Treesitter Symbols' },
 

@@ -3,8 +3,13 @@ local nx, nxo = { 'n', 'x' }, { 'n', 'x', 'o' }
 ---@param option { forward:boolean }
 local function word_jump(option)
   return function()
-    require('demicolon.jump').repeatably_do(function(kcount)
-      Snacks.words.jump(kcount.forward and vim.v.count1 or -vim.v.count1, true)
+    require('demicolon.jump').repeatably_do(function(opts)
+      if vim.g.vscode then
+        local action = opts.forward and 'editor.action.wordHighlight.next' or 'editor.action.wordHighlight.prev'
+        require('vscode').action(action)
+      else
+        Snacks.words.jump(opts.forward and vim.v.count1 or -vim.v.count1, true)
+      end
     end, option)
   end
 end
@@ -19,33 +24,54 @@ end
 
 local function diagnostic_jump(count, severity)
   return function()
+    if vim.g.vscode then
+      require('demicolon.jump').repeatably_do(function(opts)
+        local action = opts.forward and 'editor.action.marker.next' or 'editor.action.marker.prev'
+        require('vscode').action(action)
+      end, { forward = count > 0 })
+      return
+    end
     vim.diagnostic.jump({ count = count, severity = severity, float = false })
   end
 end
 
 -- https://www.naseraleisa.com/posts/diff#file-1
-local function next_hunk()
-  if vim.wo.diff then
-    return ']c'
+local function hunk_jump(forward)
+  return function()
+    if vim.g.vscode then
+      require('demicolon.jump').repeatably_do(function(opts)
+        local action = opts.forward and 'workbench.action.editor.nextChange' or 'workbench.action.editor.previousChange'
+        require('vscode').action(action)
+      end, { forward = forward })
+      return '<Ignore>'
+    end
+    if vim.wo.diff then
+      return forward and ']c' or '[c'
+    end
+    vim.schedule(function()
+      package.loaded.gitsigns.nav_hunk(forward and 'next' or 'prev')
+    end)
+    return '<Ignore>'
   end
-  vim.schedule(function()
-    package.loaded.gitsigns.nav_hunk('next')
-  end)
-  return '<Ignore>'
 end
-local function prev_hunk()
-  if vim.wo.diff then
-    return '[c'
+
+local function staged_hunk_jump(forward)
+  return function()
+    if vim.g.vscode then
+      require('demicolon.jump').repeatably_do(function(opts)
+        local action = opts.forward and 'editor.action.dirtydiff.next' or 'editor.action.dirtydiff.prev'
+        require('vscode').action(action)
+      end, { forward = forward })
+      return
+    end
+    require('demicolon.jump').repeatably_do(function(opts)
+      vim.cmd('Gitsigns nav_hunk ' .. (opts.forward and 'next' or 'prev') .. ' target=staged')
+    end, { forward = forward })
   end
-  vim.schedule(function()
-    package.loaded.gitsigns.nav_hunk('prev')
-  end)
-  return '<Ignore>'
 end
 
 return {
   'mawkler/demicolon.nvim',
-  enabled = not vim.g.vscode,
   keys = {
     { ';', mode = nxo },
     { ',', mode = nxo },
@@ -59,10 +85,10 @@ return {
     { ']Q', '<cmd>clast<CR>', mode = nxo },
 
     -- Git
-    { ']c', next_hunk, expr = true, desc = 'Git: Jump to hunk' },
-    { '[c', prev_hunk, expr = true, desc = 'Git: Jump to hunk' },
-    { ']x', '<cmd>Gitsigns nav_hunk next target=staged<cr>', desc = 'Git: Jump to hunk' },
-    { '[x', '<cmd>Gitsigns nav_hunk prev target=staged<cr>', desc = 'Git: Jump to hunk' },
+    { ']c', hunk_jump(true), expr = true, desc = 'Git: Jump to hunk', mode = nxo },
+    { '[c', hunk_jump(false), expr = true, desc = 'Git: Jump to hunk', mode = nxo },
+    { ']x', staged_hunk_jump(true), desc = 'Git: Jump to staged hunk', mode = nxo },
+    { '[x', staged_hunk_jump(false), desc = 'Git: Jump to staged hunk', mode = nxo },
 
     -- Jump
     { 'f', eyeliner_jump('f'), desc = 'Jump to char', mode = nxo, expr = true },

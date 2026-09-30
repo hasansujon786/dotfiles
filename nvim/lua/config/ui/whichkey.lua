@@ -75,7 +75,6 @@ return {
 
       { '<leader>fx', group = 'remove' },
       { '<leader>fx/', '<cmd>lua require("hasan.utils.file").delete_lines_with("comment")<CR>', desc = 'Delete all comments' },
-      { '<leader>fxx', '<cmd>call hasan#autocmd#trimWhitespace()<CR>', desc = 'Remove white space' },
 
       -- GIT
       { '<leader>g', group = 'git' },

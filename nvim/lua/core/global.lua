@@ -41,6 +41,7 @@ end
 ---@class Hasan.Keymap
 ---@field [1] string LHS
 ---@field [2] string|function RHS
+---@field code? string|function|boolean RHS for Vscode
 ---@field mode? string|string[]
 ---@field desc? string
 ---@field expr? boolean
@@ -49,17 +50,26 @@ end
 ---@field buffer? integer|boolean
 ---@field nowait? boolean
 
+local is_vscode = vim.g.vscode ~= nil
+
 ---@param maps Hasan.Keymap[]
 function _G.maps(maps)
   for _, map in ipairs(maps) do
-    vim.keymap.set(map.mode or 'n', map[1], map[2], {
-      desc = map.desc,
-      expr = map.expr,
-      remap = map.remap,
-      silent = map.silent ~= false,
-      buffer = map.buffer,
-      nowait = map.nowait,
-    })
+    local skip = (map.code == false and is_vscode) or (map.code == true and not is_vscode)
+
+    if not skip then
+      -- Resolver action: use map.code when in VS Code and provided, otherwise map[2]
+      local cmd = (is_vscode and map.code ~= nil and map.code ~= true) and map.code or map[2]
+
+      vim.keymap.set(map.mode or 'n', map[1], cmd, {
+        desc = map.desc,
+        expr = map.expr,
+        remap = map.remap,
+        silent = map.silent ~= false,
+        buffer = map.buffer,
+        nowait = map.nowait,
+      })
+    end
   end
 end
 
