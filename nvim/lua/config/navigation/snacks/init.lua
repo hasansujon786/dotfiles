@@ -131,6 +131,7 @@ return {
     'hasansujon786/snacks-file-browser.nvim',
     lazy = true,
     dev = require('core.state').dev.enabled,
+    enabled = vim.g.vscode,
     -- stylua: ignore start
     keys = {
       { '<leader>.', function() require('snacks-file-browser').browse({ cwd = vim.fn.expand('%:h') }) end, desc = 'Browse cur directory' },

@@ -3,6 +3,7 @@ local nx, nxo = { 'n', 'x' }, { 'n', 'x', 'o' }
 return {
   {
     'rachartier/tiny-inline-diagnostic.nvim',
+    enabled = vim.g.vscode,
     event = 'VeryLazy',
     priority = 1000,
     config = function()
@@ -56,8 +57,8 @@ return {
   {
     'sphamba/smear-cursor.nvim',
     event = 'VeryLazy',
+    enabled = not vim.g.vscode,
     -- commit = '1a3df9a', --  4a0f7ac, ac5c4a8
-    enabled = true,
     opts = {
       smear_insert_mode = false,
       smear_to_cmd = true,

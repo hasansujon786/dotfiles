@@ -35,10 +35,10 @@ return {
       dev = false,
       opts = {},
     },
-    { 'windwp/nvim-ts-autotag', opts = {}, enable = not vim.g.vscode },
+    { 'windwp/nvim-ts-autotag', opts = {}, enabled = not vim.g.vscode },
     {
       'catgoose/nvim-colorizer.lua',
-      enable = not vim.g.vscode,
+      enabled = not vim.g.vscode,
       opts = {
         options = {
           parsers = {
@@ -66,7 +66,7 @@ return {
     },
     {
       'nvim-treesitter/nvim-treesitter-context',
-      enable = not vim.g.vscode,
+      enabled = not vim.g.vscode,
       -- commit = -- 4976d8b 2bcf700 8fd989b
       keys = {
         {
