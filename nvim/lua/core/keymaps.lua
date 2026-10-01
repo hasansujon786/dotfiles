@@ -13,7 +13,7 @@ local M = {}
 function M.disable_keys()
   if vim.fn.has('nvim-0.11') == 1 then
     local keys_to_del = {
-      -- { 'gra', mode = { 'n', 'x' } },
+      -- { 'gra', mode = nx },
       -- 'grn',
       -- 'grr',
       -- 'gri',
@@ -92,16 +92,16 @@ maps({
   -----------------------------------------------------------------------------
   -- Basic Editing
   -----------------------------------------------------------------------------
-  { 'q', '<esc><cmd>noh<CR>', mode = { 'n', 'x' } },
-  { '<CR>', ':<up>', mode = { 'n', 'x' }, desc = 'Run last command easily', silent = false },
-  { 'n', 'nzz', mode = { 'n', 'x' }, remap = true, desc = 'Repeat search forward' }, -- n
-  { 'N', 'Nzz', mode = { 'n', 'x' }, remap = true, desc = 'Repeat search backward' }, -- n
-  { "'", '`', mode = { 'n', 'x' }, remap = true, desc = 'Jump to mark' },
+  { 'q', '<esc><cmd>noh<CR>', mode = nx },
+  { '<CR>', ':<up>', mode = nx, desc = 'Run last command easily', silent = false },
+  { 'n', 'nzz', mode = nx, remap = true, desc = 'Repeat search forward' }, -- n
+  { 'N', 'Nzz', mode = nx, remap = true, desc = 'Repeat search backward' }, -- n
+  { "'", '`', mode = nx, remap = true, desc = 'Jump to mark' },
   { 'p', 'pgvy', mode = 'v' },
   { 'y', 'ygv<Esc>', mode = 'v', desc = 'Keep cursor position' },
   { 'gV', '`[v`]', desc = 'Select last yanked text' },
-  { 'x', '"_x', mode = { 'n', 'x' }, desc = 'Delete without yanking' },
-  { 'X', '"_X', mode = { 'n', 'x' }, desc = 'Delete without yanking' },
+  { 'x', '"_x', mode = nx, desc = 'Delete without yanking' },
+  { 'X', '"_X', mode = nx, desc = 'Delete without yanking' },
   { '$', 'g_', mode = 'x', desc = 'Select to end of line' },
   { '>', '>gv', mode = 'v', desc = 'Keep selection after indent' },
   { '<', '<gv', mode = 'v', desc = 'Keep selection after outdent' },
@@ -111,8 +111,8 @@ maps({
   -----------------------------------------------------------------------------
   { '<leader>y', '"+y', mode = 'n', desc = 'Yank to system clipboard' },
   { '<leader>y', '"+ygv<Esc>', mode = 'v', desc = 'Yank to system clipboard' },
-  { '<leader>ip', '"+p', mode = { 'n', 'x' }, desc = 'Paste from system clipboard' },
-  { '<leader>iP', '"+P', mode = { 'n', 'x' }, desc = 'Paste from system clipboard' },
+  { '<leader>ip', '"+p', mode = nx, desc = 'Paste from system clipboard' },
+  { '<leader>iP', '"+P', mode = nx, desc = 'Paste from system clipboard' },
 
   -- n
   { '<C-v>', '<C-R>+', mode = { 'i', 'c' }, desc = 'Paste from system clipboard', silent = false },
@@ -144,25 +144,25 @@ maps({
   { 'cm', ':%s/<C-r>///g<Left><Left>', desc = 'Substitute with prompt', silent = false },
   { 'dm', ':%s/<C-r>///g<CR>', desc = 'Delete matches' },
   { 'dM', ':%g/<C-r>//d<CR>', desc = 'Delete matching lines' },
-  { '<leader>cw', '<cmd>lua require("hasan.widgets.inputs").substitute_word()<CR>', mode = { 'n', 'x' }, desc = 'Substitute word' },
+  { '<leader>cw', '<cmd>lua require("hasan.widgets.inputs").substitute_word()<CR>', mode = nx, desc = 'Substitute word' },
 
   { 'z/', '/\\%><C-r>=line("w0")-1<CR>l\\%<<C-r>=line("w$")+1<CR>l', desc = 'Search in viewport', silent = false },
   { 'z/', '<Esc>/\\%V', mode = 'x', desc = 'Search in selection', silent = false },
 
   { 'gB', M._open, desc = 'Open URI under cursor' },
   { 'gB', M._open_v, mode = 'x', desc = 'Open URI under selection' },
-  { 'gG', '<cmd>Google<CR>', mode = { 'n', 'x' }, desc = 'Search Google' }, -- n
-  { 'gW', '<cmd>Translate<CR>', mode = { 'n', 'x' }, desc = 'Translate' }, -- n
+  { 'gG', '<cmd>Google<CR>', mode = nx, desc = 'Search Google' }, -- n
+  { 'gW', '<cmd>Translate<CR>', mode = nx, desc = 'Translate' }, -- n
 
   -----------------------------------------------------------------------------
   -- Folding
   -----------------------------------------------------------------------------
-  { 'zuu', '0vai:foldclose!<CR>zazt', mode = { 'n', 'x' }, remap = true, desc = 'Fold context' },
-  { 'zu', ':foldclose!<CR>zazt', mode = { 'n', 'x' }, remap = true, desc = 'Fold context' },
-  { '<Tab>', 'za', mode = { 'n', 'x' }, desc = 'Toggle fold', code = '<cmd>lua require("vscode").action("editor.toggleFold")<CR>' },
-  { '<S-Tab>', 'zA', mode = { 'n', 'x' }, desc = 'Toggle recursive fold', code = '<cmd>lua require("vscode").action("editor.toggleFoldRecursively")<CR>' },
-  { 'z.', '<cmd>%foldclose<CR>zb', mode = { 'n', 'x' }, desc = 'Fold all', code = M.foldWithLevel('editor.foldLevel1') },
-  { 'z;', '<cmd>lua require("hasan.utils.fold").close_level(2)<CR>zb', mode = { 'n', 'x' }, desc = 'Fold level 1', code = M.foldWithLevel('editor.foldLevel2') },
+  { 'zuu', '0vai:foldclose!<CR>zazt', mode = nx, remap = true, desc = 'Fold context' },
+  { 'zu', ':foldclose!<CR>zazt', mode = nx, remap = true, desc = 'Fold context' },
+  { '<Tab>', 'za', mode = nx, desc = 'Toggle fold', code = '<cmd>lua require("vscode").action("editor.toggleFold")<CR>' },
+  { '<S-Tab>', 'zA', mode = nx, desc = 'Toggle recursive fold', code = '<cmd>lua require("vscode").action("editor.toggleFoldRecursively")<CR>' },
+  { 'z.', '<cmd>%foldclose<CR>zb', mode = nx, desc = 'Fold all', code = M.foldWithLevel('editor.foldLevel1') },
+  { 'z;', '<cmd>lua require("hasan.utils.fold").close_level(2)<CR>zb', mode = nx, desc = 'Fold level 1', code = M.foldWithLevel('editor.foldLevel2') },
 
   { 'za', '<cmd>lua require("vscode").action("editor.toggleFold")<CR>', desc = 'Toggle fold', code = true },
   { 'zc', '<cmd>lua require("vscode").action("editor.foldRecursively")<CR>', desc = 'Fold recursively', code = true },
@@ -181,21 +181,20 @@ maps({
   { 'j', 'v:count == 0 ? "gj" : "j"', expr = true, remap = false, desc = 'Move cursor down' },
   { 'k', 'v:count == 0 ? "gk" : "k"', expr = true, remap = false, desc = 'Move cursor up' },
   { '<BS>', '<C-^>', desc = 'Edit alternate file', mode = nx, code = M.edit_alternate_file, },
-  { '<C-j>', '<C-i>', mode = { 'n', 'x' }, remap = false },
-  -- { '<C-j>', '<cmd>lua require("vscode").action("workbench.action.navigateForward")<CR>', mode = { 'n', 'x' } },
-  { 'g<BS>', '<C-w><C-p>', mode = { 'n', 'x' } },
+  { '<C-j>', '<C-i>', mode = nx, remap = false, code = '<cmd>lua require("vscode").action("workbench.action.navigateForward")<CR>' },
+  { 'g<BS>', '<C-w><C-p>', mode = nx },
 
-  { '<A-u>', '<C-u>', mode = { 'n', 'x' }, remap = true, desc = 'Scroll up' }, -- n
-  { '<A-d>', '<C-d>', mode = { 'n', 'x' }, remap = true, desc = 'Scroll down' },
-  { '<A-o>', '<C-d>', remap = true, desc = 'Scroll window', mode = { 'n', 'x' } },
-  { '<PageUp>', '<C-u>', mode = { 'n', 'x' }, remap = true },
-  { '<PageDown>', '<C-d>', mode = { 'n', 'x' }, remap = true },
-  { '<A-f>', '<C-f>', mode = { 'n', 'x' }, remap = true },
-  { '<A-b>', '<C-b>', mode = { 'n', 'x' }, remap = true },
-  { '<A-y>', '<C-y>', mode = { 'n', 'x' }, remap = true },
-  { '<A-e>', '<C-e>', mode = { 'n', 'x' }, remap = true },
-  { '<A-h>', '20zh', mode = { 'n', 'x' } },
-  { '<A-l>', '20zl', mode = { 'n', 'x' } },
+  { '<A-u>', '<C-u>', mode = nx, remap = true, desc = 'Scroll up' }, -- n
+  { '<A-d>', '<C-d>', mode = nx, remap = true, desc = 'Scroll down' },
+  { '<A-o>', '<C-d>', remap = true, desc = 'Scroll window', mode = nx },
+  { '<PageUp>', '<C-u>', mode = nx, remap = true },
+  { '<PageDown>', '<C-d>', mode = nx, remap = true },
+  { '<A-f>', '<C-f>', mode = nx, remap = true },
+  { '<A-b>', '<C-b>', mode = nx, remap = true },
+  { '<A-y>', '<C-y>', mode = nx, remap = true },
+  { '<A-e>', '<C-e>', mode = nx, remap = true },
+  { '<A-h>', '20zh', mode = nx },
+  { '<A-l>', '20zl', mode = nx },
 
   -----------------------------------------------------------------------------
   -- Explorer
@@ -216,43 +215,48 @@ maps({
   -----------------------------------------------------------------------------
   -- Windows
   -----------------------------------------------------------------------------
-  { '<leader>q', '<Cmd>Quit<CR>', mode = { 'n', 'x' }, desc = 'Close window' },
-  { '<leader>wc', '<Cmd>Quit<CR>', mode = { 'n', 'x' }, desc = 'Close window' },
+  { '<leader>q', '<Cmd>Quit<CR>', mode = nx, desc = 'Close window', code = '<cmd>lua require("vscode").action("workbench.action.closeActiveEditor")<CR>' },
+  { '<leader>wc', '<Cmd>Quit<CR>', mode = nx, desc = 'Close window', code = '<cmd>lua require("vscode").action("workbench.action.closeActiveEditor")<CR>' },
 
-  { '<leader>h', '<Cmd>wincmd h<CR>', mode = { 'n', 'x' }, desc = 'which_key_ignore' },
-  { '<leader>j', '<Cmd>wincmd j<CR>', mode = { 'n', 'x' }, desc = 'which_key_ignore' },
-  { '<leader>k', '<Cmd>wincmd k<CR>', mode = { 'n', 'x' }, desc = 'which_key_ignore' },
-  { '<leader>l', '<Cmd>wincmd l<CR>', mode = { 'n', 'x' }, desc = 'which_key_ignore' },
 
-  { '<Bar>', '<Cmd>wincmd =<CR>', mode = { 'n', 'x' }, desc = 'Equalize windows' },
-  { '<leader>wh', '<Cmd>wincmd h<CR>', mode = { 'n', 'x' }, desc = 'Window left' },
-  { '<leader>wj', '<Cmd>wincmd j<CR>', mode = { 'n', 'x' }, desc = 'Window down' },
-  { '<leader>wk', '<Cmd>wincmd k<CR>', mode = { 'n', 'x' }, desc = 'Window up' },
-  { '<leader>wl', '<Cmd>wincmd l<CR>', mode = { 'n', 'x' }, desc = 'Window right' },
-  { '<leader>ws', '<Cmd>wincmd s<CR>', mode = { 'n', 'x' }, desc = 'Horizontal split' },
-  { '<leader>wv', '<Cmd>wincmd v<CR>', mode = { 'n', 'x' }, desc = 'Vertical split' },
-  { '<leader>wo', '<Cmd>only<CR>', mode = { 'n', 'x' }, desc = 'Only window' },
-  { '<leader>wO', '<Cmd>tabonly<CR>', mode = { 'n', 'x' }, desc = 'Only tab' },
-  { '<leader>wt', '<cmd>-tab split<CR>', mode = { 'n', 'x' }, desc = 'Edit to new tab' },
-  { '<leader>wH', '<cmd>wincmd H<CR>', mode = { 'n', 'x' }, desc = 'Move window far left' },
-  { '<leader>wJ', '<cmd>wincmd J<CR>', mode = { 'n', 'x' }, desc = 'Move window far bottom' },
-  { '<leader>wK', '<cmd>wincmd K<CR>', mode = { 'n', 'x' }, desc = 'Move window far top' },
-  { '<leader>wL', '<cmd>wincmd L<CR>', mode = { 'n', 'x' }, desc = 'Move window far right' },
-  { '<leader>wr', '<cmd>wincmd r<CR>', mode = { 'n', 'x' }, desc = 'Rotate window cw' },
-  { '<leader>wR', '<cmd>wincmd R<CR>', mode = { 'n', 'x' }, desc = 'Rotate window ccw' },
-  { '<leader>wp', '<cmd>lua run_cmd("wincmd p")<CR>', mode = { 'n', 'x' }, desc = 'Previous window' },
-  { '<leader>ww', '<cmd>lua run_cmd("wincmd w")<CR>', mode = { 'n', 'x' }, desc = 'Next window' },
-  { '<leader>wW', '<cmd>lua run_cmd("wincmd W")<CR>', mode = { 'n', 'x' }, desc = 'Previous window' },
+  { '<leader>h', '<Cmd>wincmd h<CR>', mode = nx, desc = 'which_key_ignore', code = '<cmd>lua require("vscode").action("workbench.action.focusLeftGroup")<CR>' },
+  { '<leader>j', '<Cmd>wincmd j<CR>', mode = nx, desc = 'which_key_ignore', code = '<cmd>lua require("vscode").action("workbench.action.focusBelowGroup")<CR>' },
+  { '<leader>k', '<Cmd>wincmd k<CR>', mode = nx, desc = 'which_key_ignore', code = '<cmd>lua require("vscode").action("workbench.action.focusAboveGroup")<CR>' },
+  { '<leader>l', '<Cmd>wincmd l<CR>', mode = nx, desc = 'which_key_ignore', code = '<cmd>lua require("vscode").action("workbench.action.focusRightGroup")<CR>' },
+  { '<leader>wh', '<Cmd>wincmd h<CR>', mode = nx, desc = 'Window left', code = '<cmd>lua require("vscode").action("workbench.action.focusLeftGroup")<CR>' },
+  { '<leader>wj', '<Cmd>wincmd j<CR>', mode = nx, desc = 'Window down', code = '<cmd>lua require("vscode").action("workbench.action.focusBelowGroup")<CR>' },
+  { '<leader>wk', '<Cmd>wincmd k<CR>', mode = nx, desc = 'Window up', code = '<cmd>lua require("vscode").action("workbench.action.focusAboveGroup")<CR>' },
+  { '<leader>wl', '<Cmd>wincmd l<CR>', mode = nx, desc = 'Window right', code = '<cmd>lua require("vscode").action("workbench.action.focusRightGroup")<CR>' },
+
+
+  { '<leader>ws', '<Cmd>wincmd s<CR>', mode = nx, desc = 'Horizontal split', code = '<cmd>lua require("vscode").action("workbench.action.splitEditorDown")<CR>' },
+  { '<leader>wv', '<Cmd>wincmd v<CR>', mode = nx, desc = 'Vertical split', code = '<cmd>lua require("vscode").action("workbench.action.splitEditorRight")<CR>' },
+  { '<leader>ww', '<cmd>wincmd w<CR>', mode = nx, desc = 'Next window', code = '<cmd>lua require("vscode").action("workbench.action.focusNextGroup")<CR>' },
+  { '<leader>wW', '<cmd>"wincmd W"<CR>', mode = nx, desc = 'Previous window', code = '<cmd>lua require("vscode").action("workbench.action.focusPreviousGroup")<CR>' },
+
+  { '<leader>wo', '<Cmd>only<CR>', mode = nx, desc = 'Only window', code = '<cmd>lua require("vscode").action("workbench.action.joinAllGroups")<CR>' },
+  { '<leader>wO', '<Cmd>tabonly<CR>', mode = nx, desc = 'Only tab', code = '<cmd>lua require("vscode").action("workbench.action.closeOtherEditors")<CR>' },
+  { '<leader>wt', '<cmd>-tab split<CR>', mode = nx, desc = 'Edit to new tab', code = '<cmd>lua require("vscode").action("workbench.action.moveEditorToNewWindow")<CR>' },
+  { '<leader>wH', '<cmd>wincmd H<CR>', mode = nx, desc = 'Move window far left', code = '<cmd>lua require("vscode").action("workbench.action.moveActiveEditorGroupLeft")<CR>' },
+  { '<leader>wJ', '<cmd>wincmd J<CR>', mode = nx, desc = 'Move window far bottom', code = '<cmd>lua require("vscode").action("workbench.action.moveActiveEditorGroupDown")<CR>' },
+  { '<leader>wK', '<cmd>wincmd K<CR>', mode = nx, desc = 'Move window far top', code = '<cmd>lua require("vscode").action("workbench.action.moveActiveEditorGroupUp")<CR>' },
+  { '<leader>wL', '<cmd>wincmd L<CR>', mode = nx, desc = 'Move window far right', code = '<cmd>lua require("vscode").action("workbench.action.moveActiveEditorGroupRight")<CR>' },
+  { '<leader>wr', '<cmd>wincmd r<CR>', mode = nx, desc = 'Rotate window cw', code = '<cmd>lua require("vscode").action("workbench.action.moveEditorToNextGroup")<CR>' },
+  { '<leader>wR', '<cmd>wincmd R<CR>', mode = nx, desc = 'Rotate window ccw', code = '<cmd>lua require("vscode").action("workbench.action.moveEditorToPreviousGroup")<CR>' },
+  { '<leader>wp', '<cmd>wincmd p<CR>', mode = nx, desc = 'Previous window' },
+
+  { '<Bar>', '<Cmd>wincmd =<CR>', mode = nx, desc = 'Equalize windows', code = '<cmd>lua require("vscode").action("workbench.action.evenEditorWidths")<CR>' },
   { '<leader>u', '<cmd>lua require("vscode").action("workbench.action.toggleZenMode")<CR>', mode = nx, code = true },
-  { '<leader>z', '<cmd>lua require("vscode").action("workbench.action.toggleZenMode")<CR>', mode = nx, code = true},
+  { '<leader>z', '<cmd>lua require("vscode").action("workbench.action.toggleZenMode")<CR>', mode = nx, code = true },
+-- keymap('n', '\\', '<cmd>lua require("vscode").action("workbench.action.toggleEditorWidths")<CR>') -- zoom a vim pane
 
   -----------------------------------------------------------------------------
   -- Buffers & Tabs
   -----------------------------------------------------------------------------
   { '<leader>bK', '<cmd>call hasan#utils#buffer#_clear_all()<CR>', desc = 'Kill all buffers' },
 
-  { 'gh', 'gT', mode = { 'n', 'x' }, desc = 'Previous tab', code = '<cmd>lua require("vscode").action("workbench.action.previousEditorInGroup")<CR>' },
-  { 'gl', 'gt', mode = { 'n', 'x' }, desc = 'Next tab', code = '<cmd>lua require("vscode").action("workbench.action.nextEditorInGroup")<CR>' },
+  { 'gh', 'gT', mode = nx, desc = 'Previous tab', code = '<cmd>lua require("vscode").action("workbench.action.previousEditorInGroup")<CR>' },
+  { 'gl', 'gt', mode = nx, desc = 'Next tab', code = '<cmd>lua require("vscode").action("workbench.action.nextEditorInGroup")<CR>' },
   { 'gH', '<Cmd>tabmove -1<CR>', desc = 'Move tab left', code = '<cmd>lua require("vscode").action("workbench.action.firstEditorInGroup")<CR>' },
   { 'gL', '<Cmd>tabmove +1<CR>', desc = 'Move tab right', code = '<cmd>lua require("vscode").action("workbench.action.lastEditorInGroup")<CR>' },
 
@@ -268,7 +272,7 @@ maps({
   -----------------------------------------------------------------------------
   -- Macros
   -----------------------------------------------------------------------------
-  { 'Q', function() return require('hasan.widgets.register_editor').start_recording() end, mode = { 'n', 'x' }, expr = true, desc = 'Record macro' },
+  { 'Q', function() return require('hasan.widgets.register_editor').start_recording() end, mode = nx, expr = true, desc = 'Record macro' },
   { '@', ':norm @', mode = 'v', desc = 'Run macro', silent = false },
 
   -----------------------------------------------------------------------------
@@ -314,8 +318,8 @@ maps({
   -- Saving
   -----------------------------------------------------------------------------
   { '<C-s>', '<Cmd>w<CR>', mode = { 'n', 'i', 'x' }, desc = 'Save file' },
-  { '<leader>s', '<Cmd>w<CR>', mode = { 'n', 'x' }, desc = 'Save file' },
-  { 'ZZ', '<Cmd>Quit!<CR>', mode = { 'n', 'x' }, desc = 'Quit window' },
+  { '<leader>s', '<Cmd>w<CR>', mode = nx, desc = 'Save file' },
+  { 'ZZ', '<Cmd>Quit!<CR>', mode = nx, desc = 'Quit window' },
   { '<leader>fs', '<cmd>lua require("vscode").action("editor.action.formatDocument")<CR>', mode = 'n', code = true },
   { '<leader>fs', '<cmd>lua require("vscode").action("editor.action.formatSelection")<CR>', mode = 'x', code = true },
   { '<leader>fxx', '<cmd>call hasan#autocmd#trimWhitespace()<CR>', desc = 'Remove white space', code = '<cmd>lua require("vscode").action("editor.action.trimTrailingWhitespace")<cr>' },
@@ -323,10 +327,10 @@ maps({
   -----------------------------------------------------------------------------
   -- Window Resizing
   -----------------------------------------------------------------------------
-  { '<A-=>', '<Cmd>resize +3<CR>', mode = { 'n', 'x' } },
-  { '<A-->', '<Cmd>resize -3<CR>', mode = { 'n', 'x' } },
-  { '<A-.>', '<Cmd>vertical resize +5<CR>', mode = { 'n', 'x' } },
-  { '<A-,>', '<Cmd>vertical resize -5<CR>', mode = { 'n', 'x' } },
+  { '<A-=>', '<Cmd>resize +3<CR>', mode = nx },
+  { '<A-->', '<Cmd>resize -3<CR>', mode = nx },
+  { '<A-.>', '<Cmd>vertical resize +5<CR>', mode = nx },
+  { '<A-,>', '<Cmd>vertical resize -5<CR>', mode = nx },
 
   -----------------------------------------------------------------------------
   -- Utilities
@@ -346,7 +350,7 @@ maps({
     '<cmd>lua require("vscode").action("workbench.action.findInFiles",{args={query=vim.fn.expand("<cword>")}})<CR>',
   },
   { '<A-/>', '<cmd>lua require("vscode").action("workbench.action.findInFiles")<CR>', mode = 'x' },
-  { '<leader>//', '<cmd>lua require("vscode").action("workbench.action.findInFiles")<CR>', mode = { 'n', 'x' } },
+  { '<leader>//', '<cmd>lua require("vscode").action("workbench.action.findInFiles")<CR>', mode = nx },
 })
 
 ---@type lsp.AttachCb
@@ -378,10 +382,10 @@ function M.lsp_buffer_keymaps(client, bufnr)
     -- Action, Prompt, Search
     { 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', desc = 'Lsp: Hover under cursor', unpack(b) },
     { '<F2>', '<cmd>lua require("config.lsp.util.extras").lsp_rename()<CR>', desc = 'Lsp: Rename under cursor', unpack(b) },
-    { '<C-q>', '<cmd>lua vim.lsp.buf.code_action()<CR>', mode = { 'n', 'x' }, desc = 'Lsp: Code action', unpack(b) },
-    { '<C-space>', '<cmd>lua vim.lsp.buf.code_action()<CR>', mode = { 'n', 'x' }, desc = 'Lsp: Code action', unpack(b) },
-    { '<A-space>', '<cmd>lua vim.lsp.buf.code_action()<CR>', mode = { 'n', 'x' }, desc = 'Lsp: Code action', unpack(b) },
-    { 'g.', '<cmd>lua vim.lsp.buf.code_action()<CR>', mode = { 'n', 'x' }, desc = 'Lsp: Code action', unpack(b) },
+    { '<C-q>', '<cmd>lua vim.lsp.buf.code_action()<CR>', mode = nx, desc = 'Lsp: Code action', unpack(b) },
+    { '<C-space>', '<cmd>lua vim.lsp.buf.code_action()<CR>', mode = nx, desc = 'Lsp: Code action', unpack(b) },
+    { '<A-space>', '<cmd>lua vim.lsp.buf.code_action()<CR>', mode = nx, desc = 'Lsp: Code action', unpack(b) },
+    { 'g.', '<cmd>lua vim.lsp.buf.code_action()<CR>', mode = nx, desc = 'Lsp: Code action', unpack(b) },
 
     -- Diagnostics
     { '<leader>ad', '<cmd>lua vim.diagnostic.setloclist()<CR>', desc = 'Lsp: Show local diagnostics', unpack(b), code = '<cmd>lua require("vscode").action("workbench.panel.markers.view.focus")<CR>' },
