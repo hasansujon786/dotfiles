@@ -3,16 +3,9 @@ local act = wezterm.action
 
 local actions = {}
 
-local key_stack_mode = nil
-actions.exit_key_stack = function(window, pane)
-  key_stack_mode = nil
-  window:perform_action('PopKeyTable', pane)
-end
+actions.exit_key_stack = act.PopKeyTable
 
-actions.activate_win_stack = function(window, pane)
-  key_stack_mode = 'Win Stack'
-  window:perform_action({ ActivateKeyTable = { name = 'win_stack', one_shot = false } }, pane)
-end
+actions.activate_win_stack = act.ActivateKeyTable({ name = 'win_stack', one_shot = false })
 
 local bg_opacity = 0.96
 actions.toggle_opacity = function(win, _)
@@ -127,7 +120,6 @@ return {
     { key = 's', mods = 'LEADER', action = act({ SplitVertical = {} }) },
     { key = '.', mods = 'LEADER', action = 'TogglePaneZoomState' },
     { key = 'o', mods = 'LEADER', action = 'ActivateLastTab' },
-    { key = 'b', mods = 'LEADER', action = wezterm.action_callback(actions.toggle_opacity) },
     { key = 'r', mods = 'LEADER', action = act.RotatePanes('Clockwise') },
     { key = 'R', mods = 'LEADER', action = act.RotatePanes('CounterClockwise') },
     {
@@ -251,8 +243,8 @@ return {
       end),
     },
     {
-      key = '0',
-      mods = 'LEADER',
+      key = ')', -- ctrl+shift+0
+      mods = 'SHIFT|CTRL',
       action = wezterm.action_callback(function(window, _)
         local opacity = 0.96
         window:set_config_overrides({ window_background_opacity = opacity })
@@ -260,16 +252,26 @@ return {
     },
 
     -- Win stack ===========================================
-    { key = 'w', mods = 'LEADER', action = wezterm.action_callback(actions.activate_win_stack) },
+    { key = 'w', mods = 'LEADER', action = actions.activate_win_stack },
   },
   key_tables = {
     win_stack = {
-      { key = 'h', action = act.AdjustPaneSize({ 'Left', 1 }) },
-      { key = 'l', action = act.AdjustPaneSize({ 'Right', 1 }) },
-      { key = 'k', action = act.AdjustPaneSize({ 'Up', 1 }) },
-      { key = 'j', action = act.AdjustPaneSize({ 'Down', 1 }) },
+      { key = 'h', action = act.ActivatePaneDirection('Left') },
+      { key = 'j', action = act.ActivatePaneDirection('Down') },
+      { key = 'k', action = act.ActivatePaneDirection('Up') },
+      { key = 'l', action = act.ActivatePaneDirection('Right') },
+
+      { key = '<', mods = 'SHIFT', action = act.AdjustPaneSize({ 'Left', 1 }) },
+      { key = '>', mods = 'SHIFT', action = act.AdjustPaneSize({ 'Right', 1 }) },
+      { key = '+', mods = 'SHIFT', action = act.AdjustPaneSize({ 'Up', 1 }) },
+      { key = '_', mods = 'SHIFT', action = act.AdjustPaneSize({ 'Down', 1 }) },
+
+      { key = 'v', action = act({ SplitHorizontal = {} }) },
+      { key = 's', action = act({ SplitVertical = {} }) },
+
       -- Cancel the mode by pressing escape
-      { key = 'Escape', action = wezterm.action_callback(actions.exit_key_stack) },
+      { key = 'Escape', action = actions.exit_key_stack },
+      { key = 'q', action = actions.exit_key_stack },
     },
   },
 }

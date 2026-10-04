@@ -47,10 +47,17 @@ wezterm.on('update-status', function(window, pane)
     { date, color = '#68707E' },
     { time, color = '#8b95a7' },
   }
+
   local left_cells = {
     { workspace, color = '#8b95a7', icon_space = 0 },
     { date, color = '#68707E', icon_space = 3 },
   }
+
+  local key_table = window:active_key_table()
+  if key_table then
+    local label = key_table == 'win_stack' and 'Win Stack' or key_table
+    table.insert(left_cells, { label, color = '#97CA72', icon_space = 0 })
+  end
 
   local left_status_elements, right_status_elements = {}, {}
 
