@@ -4,6 +4,7 @@ command! -bang Quit call hasan#utils#confirmQuit(<q-bang>)
 command! ClearRegister call hasan#utils#clear_register()
 command! ProjectCommands lua require("telescope._extensions").manager.project_commands.commands()
 command! Messages NoiceHistory
+command! LspLog lua vim.cmd('edit '..vim.lsp.get_log_path())
 " File
 command! ReloadConfig lua require('hasan.utils.file').reload()
 command! CodeOpenFile lua require('hasan.utils.file').openInCode(true)

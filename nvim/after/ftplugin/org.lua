@@ -5,16 +5,16 @@ vim.o.tabstop = 2
 vim.b['snacks_scope'] = false
 vim.b['snacks_indent'] = false
 
-local action = '<cmd>lua require("orgmode").action("org_mappings.toggle_checkbox")<CR>'
-for _, action_key in ipairs({ 'cic', '<C-q>', '<C-space>', '<A-space>' }) do
-  vim.keymap.set({ 'n', 'x' }, action_key, action, { desc = 'org toggle checkbox', buffer = true })
-end
-
-vim.keymap.set('n', '<leader>v.', '<cmd>lua require("hasan.org.src_block").execute()<CR>', { desc = 'Execute SRC_BLOCK', buffer = true })
-
-vim.keymap.set('n', 'g-', '<cmd>lua require("hasan.utils.buffer").create_link("[[${link}][]]", -1)<CR>', { desc = 'Create Link', buffer = true })
-vim.keymap.set('x', 'g-', '<Esc><cmd>lua require("hasan.utils.buffer").create_link_visual("[[${link}][${title}]]")<CR>', { desc = 'Create Link', buffer = true })
-
-vim.schedule(function()
-  vim.opt.winhighlight:append({ Folded = 'OrgFolded' })
-end)
+-- local action = '<cmd>lua require("orgmode").action("org_mappings.toggle_checkbox")<CR>'
+-- for _, action_key in ipairs({ 'cic', '<C-q>', '<C-space>', '<A-space>' }) do
+--   vim.keymap.set({ 'n', 'x' }, action_key, action, { desc = 'org toggle checkbox', buffer = true })
+-- end
+--
+-- vim.keymap.set('n', '<leader>v.', '<cmd>lua require("hasan.org.src_block").execute()<CR>', { desc = 'Execute SRC_BLOCK', buffer = true })
+--
+-- vim.keymap.set('n', 'g-', '<cmd>lua require("hasan.utils.buffer").create_link("[[${link}][]]", -1)<CR>', { desc = 'Create Link', buffer = true })
+-- vim.keymap.set('x', 'g-', '<Esc><cmd>lua require("hasan.utils.buffer").create_link_visual("[[${link}][${title}]]")<CR>', { desc = 'Create Link', buffer = true })
+--
+-- vim.schedule(function()
+--   vim.opt.winhighlight:append({ Folded = 'OrgFolded' })
+-- end)

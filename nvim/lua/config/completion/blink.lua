@@ -143,6 +143,7 @@ return {
         return sources
       end,
       per_filetype = {
+        per_filetype = { org = { inherit_defaults = true, 'org' } },
         spectre_input = { 'buffer' },
         spectre_file_input = { 'path' },
       },
@@ -167,6 +168,7 @@ return {
           -- score_offset = 70,
           min_keyword_length = 2,
         },
+        org = { name = 'Org', module = 'org.completion.blink' },
         cmdline = {
           name = ' ',
           min_keyword_length = function(ctx)
