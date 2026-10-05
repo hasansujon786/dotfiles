@@ -67,7 +67,6 @@ return {
       { '<leader>bb', function() require('config.navigation.snacks.custom').buffers_with_symbols() end, desc = 'Buffers' },
 
       -- LSP
-      { 'go', function () require('hasan.org.picker').pick_heading() end, desc = 'LSP Symbols', ft = 'org' },
       { 'g/', function() Snacks.picker.treesitter() end, desc = 'Treesitter Symbols' },
 
       -- GIT

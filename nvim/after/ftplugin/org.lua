@@ -12,9 +12,12 @@ vim.b['snacks_indent'] = false
 --
 -- vim.keymap.set('n', '<leader>v.', '<cmd>lua require("hasan.org.src_block").execute()<CR>', { desc = 'Execute SRC_BLOCK', buffer = true })
 --
--- vim.keymap.set('n', 'g-', '<cmd>lua require("hasan.utils.buffer").create_link("[[${link}][]]", -1)<CR>', { desc = 'Create Link', buffer = true })
--- vim.keymap.set('x', 'g-', '<Esc><cmd>lua require("hasan.utils.buffer").create_link_visual("[[${link}][${title}]]")<CR>', { desc = 'Create Link', buffer = true })
+vim.keymap.set('n', 'g-', '<cmd>lua require("hasan.utils.buffer").create_link("[[${link}][]]", -1)<CR>', { desc = 'Create Link', buffer = true })
+vim.keymap.set('x', 'g-', '<Esc><cmd>lua require("hasan.utils.buffer").create_link_visual("[[${link}][${title}]]")<CR>', { desc = 'Create Link', buffer = true })
 --
--- vim.schedule(function()
---   vim.opt.winhighlight:append({ Folded = 'OrgFolded' })
--- end)
+vim.schedule(function()
+  vim.opt.winhighlight:append({ Folded = 'OrgFolded' })
+end)
+
+vim.keymap.set('n', 'go', '<cmd>Org pick_headline<cr>', { desc = 'Org pick_headline', buffer = true })
+vim.keymap.set('n', '<leader>a/', '<cmd>Org pick_headline_all<cr>', { desc = 'Org pick_headline_all', buffer = true })

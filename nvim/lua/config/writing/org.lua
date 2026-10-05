@@ -49,9 +49,9 @@ return {
   lazy = false, -- startup cost is small: heavy modules load on first use
   opts = {
     picker = 'snacks',
-    org_directory = '~/org',
-    agenda_files = { '~/org/**/*.org' },
-    default_notes_file = '~/org/refile.org',
+    org_directory = '~/my_vault/',
+    agenda_files = { '~/my_vault/**/*.org' },
+    default_notes_file = '~/my_vault/refile.org',
     ui = {
       bullets = { '◉', '○', '✸', '✿' }, -- or false
       checkboxes = { ' ', '◐', '✓' }, -- or false
@@ -62,7 +62,7 @@ return {
     extensions = {
       quickadd = true,
       present = true, -- enable with the defaults
-      roam = { directory = '~/org' }, -- options are merged over its defaults
+      roam = { directory = '~/my_vault' }, -- options are merged over its defaults
     },
 
     capture = capture,

@@ -85,6 +85,8 @@ return {
 
     -- Control wezterm =====================================
     { key = 'F11', action = wezterm.action_callback(actions.toggle_full_screen) },
+    -- Disable default ALT+Enter fullscreen toggle
+    { key = 'Enter', mods = 'ALT', action = wezterm.action.DisableDefaultAssignment },
     { key = 'r', mods = 'SHIFT|CTRL', action = wezterm.action_callback(wezterm.reload_configuration) },
     { key = 'w', mods = 'SHIFT|CTRL', action = act({ CloseCurrentPane = { confirm = false } }) },
     { key = 't', mods = 'SHIFT|ALT', action = act({ EmitEvent = 'toggle-tab-bar' }) },
@@ -218,6 +220,7 @@ return {
     { key = 'm', mods = 'CTRL', action = { SendString = '\x1b[109;5u' } },
     { key = 'Enter', mods = 'SHIFT', action = { SendString = '\x1b[13;2u' } },
     { key = 'Enter', mods = 'CTRL', action = { SendString = '\x1b[13;5u' } },
+    { key = 'Enter', mods = 'ALT|SHIFT', action = { SendString = '\x1b[13;4u' } },
     { key = 'Space', mods = 'CTRL', action = { SendKey = { key = 'Space', mods = 'CTRL' } } },
     { key = 'Backspace', mods = 'CTRL', action = { SendKey = { key = 'w', mods = 'CTRL' } } },
     { key = '.', mods = 'CTRL', action = { SendKey = { key = '.', mods = 'CTRL' } } },
