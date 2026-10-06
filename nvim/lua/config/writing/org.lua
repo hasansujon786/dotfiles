@@ -58,6 +58,7 @@ return {
       hide_emphasis_markers = true,
       indent_mode = true, -- org-indent-mode
       todo_keyword_faces = { WAITING = ':foreground #e0af68 :weight bold' },
+      -- pretty_entities
     },
     extensions = {
       quickadd = true,

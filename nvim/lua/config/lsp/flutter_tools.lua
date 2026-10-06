@@ -1,6 +1,7 @@
 return {
   'nvim-flutter/flutter-tools.nvim',
   lazy = true,
+  -- commit = '0867b346e9a60753080168188c8f1ee6be40b767',
   ft = { 'dart' },
   cmd = { 'FlutterRun' },
   event = { 'BufReadPre pubspec.yaml' },
@@ -26,7 +27,7 @@ return {
     require('flutter-tools').setup({
       ui = { border = require('core.state').ui.border.style },
       widget_guides = { enabled = true },
-      fvm = true,
+      fvm = false,
       lsp = {
         capabilities = require('config.lsp.util.setup').update_capabilities('flutter_tools'),
         -- see the link below for details on each option:
