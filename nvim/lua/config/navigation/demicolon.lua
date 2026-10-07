@@ -167,6 +167,6 @@ return {
         default_keymaps = false,
       },
     },
-    'neovim-treesitter/nvim-treesitter',
+    'nvim-treesitter/nvim-treesitter',
   },
 }

@@ -1,14 +1,14 @@
--- main branch config
+-- main branch configuration
 -- https://github.com/den-is/nvim/blob/master/lua/plugins/treesitter.lua
 -- https://www.reddit.com/r/neovim/comments/1ppa4ag/comment/nungaa0/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 return {
   'nvim-treesitter/nvim-treesitter',
   branch = 'main',
-  build = ':TSUpdate',
-  lazy = true,
-  event = { 'VeryLazy' },
-  commit = 'df7489e',
   cmd = { 'TSUpdate', 'TSUpdateSync', 'TSInstall', 'TSInstallSync' },
+  lazy = false,
+  build = ':TSUpdate',
+  -- event = { 'VeryLazy' },
+  -- commit = 'df7489e',
   init = function()
     vim.env.CC = 'gcc'
     -- vim.g.no_plugin_maps = true
@@ -28,7 +28,6 @@ return {
   end,
   opts = {},
   dependencies = {
-    { 'neovim-treesitter/treesitter-parser-registry' },
     {
       'hasansujon786/nvim-treesitter-textobjects',
       branch = 'main',
@@ -70,7 +69,7 @@ return {
       -- commit = -- 4976d8b 2bcf700 8fd989b
       keys = {
         {
-          'g<CR>',
+          'g{',
           function()
             require('treesitter-context').go_to_context(vim.v.count1)
           end,
@@ -78,7 +77,7 @@ return {
           desc = 'Move cursor to context',
         },
         {
-          '<CR>',
+          'g{',
           function()
             require('treesitter-context').go_to_context(vim.v.count1)
           end,

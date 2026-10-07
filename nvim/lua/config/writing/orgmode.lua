@@ -84,7 +84,7 @@ return {
   --   require('orgmode').setup(opts)
   -- end,
   dependencies = {
-    'neovim-treesitter/nvim-treesitter',
+    'nvim-treesitter/nvim-treesitter',
     {
       'akinsho/org-bullets.nvim',
       opts = {
