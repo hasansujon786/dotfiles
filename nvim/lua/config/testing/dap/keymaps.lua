@@ -4,46 +4,26 @@ local M = {}
 -- require("dap.ext.vscode").load_launchjs()
 
 function M.setup()
-  keymap('n', '<leader>dc', '<cmd>lua require"dap".continue()<cr>', { desc = 'Continue' })
-  keymap('n', '<leader>dR', '<cmd>lua require"dap".run_to_cursor()<cr>', { desc = 'Run to Cursor' })
-  keymap('n', '<leader>db', '<cmd>lua require"dap".toggle_breakpoint()<cr>', { desc = 'Toggle Breakpoint' })
-  keymap(
-    'n',
-    '<leader>dB',
-    '<cmd>lua require"dap".set_breakpoint(vim.fn.input"[Condition] > ")<cr>',
-    { desc = 'Conditional Breakpoint' }
-  )
+  maps({
+    { '<leader>dc', '<cmd>lua require"dap".continue()<cr>', desc = 'Continue' },
+    { '<leader>dR', '<cmd>lua require"dap".run_to_cursor()<cr>', desc = 'Run to Cursor' },
+    { '<leader>db', '<cmd>lua require"dap".toggle_breakpoint()<cr>', desc = 'Toggle Breakpoint' },
+    { '<leader>dB', '<cmd>lua require"dap".set_breakpoint(vim.fn.input"[Condition] > ")<cr>', desc = 'Conditional Breakpoint' },
 
-  keymap('n', '<leader>di', '<cmd>lua require"dap".step_into()<cr>', { desc = 'Step Into' })
-  keymap('n', '<leader>do', '<cmd>lua require"dap".step_over()<cr>', { desc = 'Step Over' })
-  keymap('n', '<leader>dI', '<cmd>lua require"dap".step_back()<cr>', { desc = 'Step Back' })
-  keymap('n', '<leader>dO', '<cmd>lua require"dap".step_out()<cr>', { desc = 'Step Out' })
+    { '<leader>di', '<cmd>lua require"dap".step_into()<cr>', desc = 'Step Into' },
+    { '<leader>do', '<cmd>lua require"dap".step_over()<cr>', desc = 'Step Over' },
+    { '<leader>dI', '<cmd>lua require"dap".step_back()<cr>', desc = 'Step Back' },
+    { '<leader>dO', '<cmd>lua require"dap".step_out()<cr>', desc = 'Step Out' },
 
-  keymap({ 'n', 'x' }, '<leader>dh', '<cmd>lua require"dapui".eval()<cr>', { desc = 'Evaluate' })
-  keymap('n', '<leader>de', '<cmd>lua require"dap.ui.widgets".hover()<cr>', { desc = 'Hover Variables' })
-  keymap('n', '<leader>dr', '<cmd>lua require"dap".repl.toggle()<cr>', { desc = 'Toggle Repl' })
-  keymap('n', '<leader>du', '<cmd>lua require"dapui".toggle()<cr>', { desc = 'Toggle UI' })
-  keymap('n', '<leader>dS', '<cmd>lua require"dap.ui.widgets".scopes()<cr>', { desc = 'Scopes' })
-  keymap('n', '<leader>dp', '<cmd>lua require"dap".pause.toggle()<cr>', { desc = 'Pause' })
+    { '<leader>dr', '<cmd>lua require"dap".repl.toggle()<cr>', desc = 'Toggle Repl' },
+    { '<leader>dS', '<cmd>lua require"dap.ui.widgets".scopes()<cr>', desc = 'Scopes' },
+    { '<leader>dp', '<cmd>lua require"dap".pause.toggle()<cr>', desc = 'Pause' },
 
-  keymap('n', '<leader>dq', '<cmd>lua require"dap".close()<cr>', { desc = 'Quit' })
-  keymap('n', '<leader>dD', '<cmd>lua require"dap".disconnect()<cr>', { desc = 'Disconnect' })
-  keymap('n', '<leader>dX', '<cmd>lua require"dap".terminate()<cr>', { desc = 'Terminate' })
-  keymap('n', '<leader>dg', '<cmd>lua require"dap".session()<cr>', { desc = 'Get Session' })
-
-  keymap(
-    'n',
-    '<leader>dE',
-    '<cmd>lua require"dapui".eval(vim.fn.input "[Expression] > ")<cr>',
-    { desc = 'Evaluate Input' }
-  )
-
-  keymap(
-    'n',
-    '<leader>d.',
-    '<cmd>lua require"dapui".float_element("scopes",{enter=true,width=30,height=10})<CR>',
-    { desc = 'Show Scopes' }
-  )
+    { '<leader>dq', '<cmd>lua require"dap".close()<cr>', desc = 'Quit' },
+    { '<leader>dD', '<cmd>lua require"dap".disconnect()<cr>', desc = 'Disconnect' },
+    { '<leader>dX', '<cmd>lua require"dap".terminate()<cr>', desc = 'Terminate' },
+    { '<leader>dg', '<cmd>lua require"dap".session()<cr>', desc = 'Get Session' },
+  })
 
   -- Launch single file
   keymap('n', '<F5>', function()
@@ -65,7 +45,6 @@ end
 
 return M
 
--- map({ "n", "<F4>", ":lua require('dapui').toggle()<CR>" })
 -- map({ "n", "<F5>", ":lua require('dap').toggle_breakpoint()<CR>" })
 -- map({ "n", "<F9>", ":lua require('dap').continue()<CR>" })
 
@@ -92,7 +71,6 @@ return M
 -- map({ "n", "<Leader>dbt", ":lua require('dap').toggle_breakpoint()<CR>" })
 
 -- map({ "n", "<Leader>dc", ":lua require('dap.ui.variables').scopes()<CR>" })
--- map({ "n", "<Leader>di", ":lua require('dapui').toggle()<CR>" })
 
 -- local status_ok, dap = pcall(require, "dap")
 -- if not status_ok then

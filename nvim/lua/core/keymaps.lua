@@ -1,7 +1,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-local n, nx = { 'n' }, { 'n', 'x' }
+local n, nx, nxi = { 'n' }, { 'n', 'x' }, { 'n', 'x', 'i' }
 local is_vscode = vim.g.vscode ~= nil
 
 if not is_vscode then
@@ -251,6 +251,14 @@ maps({
 -- keymap('n', '\\', '<cmd>lua require("vscode").action("workbench.action.toggleEditorWidths")<CR>') -- zoom a vim pane
 
   -----------------------------------------------------------------------------
+  -- Window Resizing
+  -----------------------------------------------------------------------------
+  { '<A-=>', '<Cmd>resize +3<CR>', mode = nx, code = false },
+  { '<A-->', '<Cmd>resize -3<CR>', mode = nx, code = false },
+  { '<A-.>', '<Cmd>vertical resize +5<CR>', mode = nx, code = false },
+  { '<A-,>', '<Cmd>vertical resize -5<CR>', mode = nx, code = false },
+
+  -----------------------------------------------------------------------------
   -- Buffers & Tabs
   -----------------------------------------------------------------------------
   { '<leader>bK', '<cmd>call hasan#utils#buffer#_clear_all()<CR>', desc = 'Kill all buffers' },
@@ -292,27 +300,43 @@ maps({
   { '.', '.<C-g>u', mode = 'i' },
   { ';', ';<C-g>u', mode = 'i' },
 
-  { '<C-n>', '<Down>', mode = { 'i', 'c' } },
-  { '<C-p>', '<Up>', mode = { 'i', 'c' } },
   { '<A-h>', '<Left>', mode = { 'i', 'c' } },
   { '<A-l>', '<Right>', mode = { 'i', 'c' } },
-  { '<A-f>', '<S-Right>', mode = { 'i', 'c' } },
-  { '<A-b>', '<S-Left>', mode = { 'i', 'c' } },
-
-  { '<C-a>', '<C-o>^<C-g>u', mode = 'i' },
-  { '<C-a>', '<Home>', mode = 'c' },
-  { '<C-e>', '<End>', mode = { 'i', 'c' } },
-  { '<C-d>', '<Delete>', mode = { 'i', 'c' } },
-  { '<A-d>', '<C-o>dw', mode = 'i' },
-  { '<A-d>', '<S-Right><C-W><Delete>', mode = 'c' },
-  { '<C-u>', '<C-g>u<C-u>', mode = 'i' },
-
   { '<C-CR>', '<C-o>o', mode = 'i', desc = 'New line below' },
   { '<A-CR>', '<C-o>o', mode = 'i', desc = 'New line below' },
   { '<A-o>', '<CR><C-o>O', mode = 'i', desc = 'Open HTML tag' },
 
   { '<C-g><C-e>', '<C-g>u<Esc>bgUiwgi', mode = 'i', desc = 'Uppercase word' },
   { '<C-g><C-g>', '<C-g>u<Esc>[s1z=`]a<C-g>u', mode = 'i', desc = 'Fix spelling' },
+
+  -- Emacs (readline-style editing for insert & command-line)
+  -- Movement: line
+  { '<C-n>', '<Down>', mode = { 'i', 'c' }, desc = 'Next line' },
+  { '<C-p>', '<Up>', mode = { 'i', 'c' }, desc = 'Previous line' },
+  -- Movement: char
+  { '<C-b>', '<Left>', mode = { 'i', 'c' }, desc = 'Backward char' },
+  { '<C-f>', '<Right>', mode = { 'i', 'c' }, desc = 'Forward char' },
+  -- Movement: word
+  { '<A-b>', '<S-Left>', mode = { 'i', 'c' }, desc = 'Backward word' },
+  { '<A-f>', '<S-Right>', mode = { 'i', 'c' }, desc = 'Forward word' },
+  -- Movement: beginning / end of line
+  { '<C-a>', '<C-o>^<C-g>u', mode = 'i', desc = 'Beginning of line' },
+  { '<C-a>', '<Home>', mode = 'c', desc = 'Beginning of line' },
+  { '<C-e>', '<End>', mode = { 'i', 'c' }, desc = 'End of line' },
+
+  -- Deletion: char / word backward
+  { '<C-d>', '<Delete>', mode = { 'i', 'c' }, desc = 'Delete char forward' },
+  { '<A-BS>', '<C-g>u<C-w>', mode = 'i', desc = 'Kill word backward' },
+  { '<A-BS>', '<C-w>', mode = 'c', desc = 'Kill word backward' },
+  -- Deletion: kill to start / end of line
+  { '<C-u>', '<C-g>u<C-u>', mode = 'i', desc = 'Kill to beginning of line' },
+  { '<C-k>', '<C-g>u<C-o>D', mode = 'i', desc = 'Kill to end of line' },
+  { '<C-k>', '<C-\\>e strpart(getcmdline(), 0, getcmdpos() - 1)<CR>', mode = 'c', desc = 'Kill to end of line' },
+  -- Deletion: kill word forward
+  { '<A-d>', '<C-o>dw', mode = 'i', desc = 'Kill word forward' },
+  { '<A-d>', '<S-Right><C-W><Delete>', mode = 'c', desc = 'Kill word forward' },
+  -- Yank (paste last killed / yanked text)
+  { '<C-y>', '<C-r>"', mode = { 'i', 'c' }, desc = 'Yank (paste)' },
 
   -----------------------------------------------------------------------------
   -- Saving
@@ -324,15 +348,7 @@ maps({
   { '<leader>fs', '<cmd>lua require("vscode").action("editor.action.formatSelection")<CR>', mode = 'x', code = true },
   { '<leader>fxx', '<cmd>call hasan#autocmd#trimWhitespace()<CR>', desc = 'Remove white space', code = '<cmd>lua require("vscode").action("editor.action.trimTrailingWhitespace")<cr>' },
 
-  -----------------------------------------------------------------------------
-  -- Window Resizing
-  -----------------------------------------------------------------------------
-  { '<A-=>', '<Cmd>resize +3<CR>', mode = nx },
-  { '<A-->', '<Cmd>resize -3<CR>', mode = nx },
-  { '<A-.>', '<Cmd>vertical resize +5<CR>', mode = nx },
-  { '<A-,>', '<Cmd>vertical resize -5<CR>', mode = nx },
-
-  -----------------------------------------------------------------------------
+  ----------------------------------------------------------------------------
   -- Utilities
   -----------------------------------------------------------------------------
   { '<leader>r', '<cmd>lua require("hasan.utils.win").cycle_numbering()<CR>', desc = 'Cycle numbers' },
