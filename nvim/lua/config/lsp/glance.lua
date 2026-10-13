@@ -8,8 +8,8 @@ return {
     local actions = glance.actions
 
     local function filterReactDTS(value)
-      return string.match(value.targetUri, 'index.d.ts') == nil
-      -- return string.match(value.uri, '%.d.ts') == nil
+      local uri = value.targetUri or value.uri or ''
+      return uri:find('index.d.ts', 1, true) == nil
     end
 
     glance.setup({
@@ -57,7 +57,7 @@ return {
             if #filtered_result == 1 then
               return jump(filtered_result[1])
             end
-            open(filtered_result)
+            open(#filtered_result > 0 and filtered_result or results)
           else
             open(results) -- argument is optional
           end

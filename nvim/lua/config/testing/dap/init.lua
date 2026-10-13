@@ -64,7 +64,17 @@ return {
       -- https://github.com/igorlfs/nvim-dap-view
       'igorlfs/nvim-dap-view',
       opts = {
+        -- Auto open when a session is started and auto close when all sessions finish
+        -- Alternatively, can be a string:
+        -- - "keep_terminal": as above, but keeps the terminal when the session finishes
+        -- - "open_term": open the terminal when starting a new session, nothing else
+        -- - "open": self explanatory
         auto_toggle = false,
+        -- Reopen dapview when switching to a different tab
+        -- Can also be a function to dynamically choose when to follow, by returning a boolean
+        -- If a function, receives the name of the adapter for the current session as an argument
+        follow_tab = false,
+
         help = {
           border = 'rounded',
         },
@@ -90,9 +100,22 @@ return {
       },
       config = function(_, opts)
         require('dap-view').setup(opts)
+        -- Belt and suspenders: dap-view only auto-opens via `auto_toggle`
+        -- (attach/launch) and `follow_tab` (TabEnter) — both are false above.
+        -- It has no BufEnter logic, but strip its auto-open listeners anyway
+        -- so a future default bump can't re-enable it.
+        local dap_ok, dap = pcall(require, 'dap')
+        if dap_ok then
+          for _, event in ipairs({ 'attach', 'launch' }) do
+            if dap.listeners.before[event] then
+              dap.listeners.before[event]['dap-view'] = nil
+            end
+          end
+        end
       end,
       keys = {
-        { '<leader>du', '<cmd>DapViewToggle<cr>', desc = 'Toggle DAP View' },
+        { '<leader>du', '<cmd>DapViewToggle!<cr>', desc = 'Toggle DAP View' },
+        { '<leader>dU', '<cmd>DapViewClose!<cr>', desc = 'Toggle DAP View' },
         { '<leader>dh', '<cmd>DapViewHover!<cr>', desc = 'Toggle DAP View' },
         { '<leader>dW', '<cmd>lua require("dap-view").add_expr()<cr>', desc = 'A to Watch' },
         {
