@@ -2,7 +2,7 @@ local M = {}
 
 function M.run_template(template_name)
   local overseer = require('overseer')
-  overseer.run_template({ name = template_name }, function(task)
+  overseer.run_task({ name = template_name }, function(task)
     if task then
       task:add_component({ 'restart_on_save', paths = { vim.uv.cwd() } })
       task:add_component({ 'custom.on_file_change_fix_term_layout' })
