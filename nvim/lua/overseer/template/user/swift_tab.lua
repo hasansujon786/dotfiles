@@ -1,9 +1,10 @@
--- Overseer template for Swift SPM projects: manual `swift run` in a new tab.
--- Usage: :OverseerRun -> "Swift run (SPM, tab)".
--- No restart_on_save: runs only when you trigger it. Output opens in a tab
--- (reused on re-run, no tab spam) with focus so you land in the TUI.
+-- Overseer template for Swift SPM projects: manual `swift run` in Snacks.terminal.
+-- Usage: :OverseerRun -> "Swift run (SPM, snacks)" (or :SwiftRunTab).
+-- No restart_on_save: runs only when you trigger it. The real process runs in
+-- a Snacks terminal (bottom split, no winbar), same style as M.terminal() in
+-- nvim/lua/config/navigation/neo_tree/util.lua.
 return {
-  name = 'Swift run (SPM, tab)',
+  name = 'Swift run (SPM, snacks)',
   builder = function(params)
     params = params or {}
     local file = vim.fn.expand('%:p')
@@ -31,18 +32,31 @@ return {
       cmd = { 'swift', file }
     end
 
-    return {
-      name = 'swift run (tab)',
+    -- Run it in Snacks.terminal, same style as M.terminal() in
+    -- nvim/lua/config/navigation/neo_tree/util.lua (no winbar).
+    -- NOTE: `position = 'bottom'` is explicit because Snacks defaults to
+    -- 'float' when a cmd is given (M.terminal passes nil, which defaults to
+    -- 'bottom'). Snacks toggles by cmd: re-running focuses/hides this same
+    -- terminal instead of spawning a duplicate.
+    local cmd_str = table.concat(vim.tbl_map(vim.fn.shellescape, cmd), ' ')
+    Snacks.terminal(cmd_str, {
       cwd = root,
-      cmd = cmd,
+      win = { position = 'float', wo = { winbar = '' } },
+    })
+
+    -- Placeholder task: completes instantly. The real process lives in the
+    -- Snacks terminal above, so do NOT put the swift cmd here or the app
+    -- would run twice. A builder must still return a task definition
+    -- (returning nil errors inside Overseer).
+    return {
+      name = 'swift run (snacks)',
+      cmd = { 'true' },
+      cwd = root,
       components = {
-        -- No `on_output_quickfix` on purpose (breaks TUI rendering/input).
-        -- custom.open_output_once reuses the tab on re-run instead of
-        -- opening a new tab each time like builtin open_output would.
-        { 'custom.open_output_once', direction = 'tab', focus = true, close_on_exit = true },
-        { 'on_exit_set_status' },
-        { 'on_complete_notify' },
+        -- No output component on purpose: nothing to show, job is in Snacks.
+        -- No `on_complete_notify` either: it would spam success for `true`.
         { 'unique', soft = false },
+        { 'on_exit_set_status' },
       },
     }
   end,
