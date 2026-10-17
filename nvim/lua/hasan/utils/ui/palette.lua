@@ -95,10 +95,14 @@ local function set_custom_highlights()
     SidebarDarkBorder       = { fg = dark_border, bg = c.bg_d },
 
     Folded                  = { fg = c.fg, bg = '#2F343E' },
-    OrgFolded               = { fg = c.none, bg = c.none },
     Visual                  = { bg = c.dim_blue },
     NonText                 = { fg = c.layer, bg = c.none },
     LineNr                  = { fg = '#495162', bg = c.none },
+
+    OrgFolded               = { fg = c.none, bg = c.none },
+    OrgTodo                 = { fg = c.red, bg = c.dim_red, bold = true },
+    OrgDone                 = { fg = c.green, bg = c.dim_green, bold = true },
+    orgTodoKw_WAITING       = { fg = c.yellow, bg = c.dim_yellow, bold = true },
 
     StatusLine              = { fg = c.muted, bg = c.none },
     HeirlineLayer           = { fg = c.light_grey, bg = c.layer },
