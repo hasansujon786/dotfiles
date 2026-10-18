@@ -82,7 +82,6 @@ PrintScreen:: Send("#+{s}")
 ~LWin & MButton:: Send("#+{s}")
 
 ; Audio Control
-#s:: Send("^#v")
 ; Del:: Send("{Volume_Mute}")
 Pause:: Send("{Media_Play_Pause}")
 #Del:: Send("{Media_Play_Pause}") ; Play/Pause
@@ -271,3 +270,53 @@ Tab:: Send("{Down}")
 !p:: Send("{Up}")
 !n:: Send("{Down}")
 #HotIf
+
+
+;******************************************************************************
+; Mac-style mappings (Win key as Cmd)
+;******************************************************************************
+; Tabs
+; Win+Tab = Alt+Tab switcher: hold Win, tap Tab to cycle, release Win to switch
+#Tab:: {
+	if !GetKeyState("Alt")
+		Send("{Blind}{Alt down}")
+	Send("{Blind}{Tab}")
+}
+#+Tab:: {
+	if !GetKeyState("Alt")
+		Send("{Blind}{Alt down}")
+	Send("{Blind}+{Tab}")
+}
+~LWin up::
+~RWin up:: {
+	if GetKeyState("Alt")
+		Send("{Blind}{Alt up}")
+}
+#t:: Send("^{t}")          ; New tab
+#+t:: Send("^+{t}")        ; Reopen closed tab
+#w:: Send("^{w}")          ; Close tab/window
+
+; Clipboard
+#c:: Send("^c")            ; Copy
+#x:: Send("^x")            ; Cut
+#v:: Send("^v")            ; Paste
+#z:: Send("^z")            ; Undo
+#+z:: Send("^+{z}")        ; Redo
+
+; Text
+#f:: Send("^f")            ; Find
+#g:: Send("^g")            ; Find next
+#b:: Send("^b")            ; Bold
+#i:: Send("^i")            ; Italic
+#u:: Send("^u")            ; Underline
+
+; App
+#n:: Send("^n")            ; New
+#r:: Send("{F5}")          ; Reload/refresh
+#q:: Send("!{f4}")         ; Quit app
+#s:: Send("^s")          ; Save (conflicts with voice #s)
+
+; Conflicts with existing bindings - kept commented
+; #a:: Send("^a")          ; Select all (conflicts with leader #a)
+; #p:: Send("^p")          ; Print (conflicts with layout #p)
+; #o:: Send("^o")          ; Open (conflicts with layout #o)

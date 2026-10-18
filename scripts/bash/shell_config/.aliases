@@ -74,6 +74,7 @@ alias fob='cd build/app/outputs/flutter-apk && explorer .'
 alias dp='dart pub'
 alias dpum='dart pub upgrade --major-versions'
 alias drbb='dart run build_runner build --delete-conflicting-outputs'
+alias fgg='dart run flutter_gen:flutter_gen_command'
 
 # Golang
 alias gmi='go mod init github.com/hasansujon786/'
