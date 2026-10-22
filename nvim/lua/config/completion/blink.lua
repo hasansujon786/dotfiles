@@ -10,6 +10,22 @@ end
 -- keymap('i', '<tab>', '<space><space>')
 keymap('i', '<s-tab>', '<BS>')
 
+local function menu_trigger()
+  return {
+    function(cmp)
+      if require('luasnip').choice_active() then
+        vim.schedule(function()
+          require('luasnip.extras.select_choice')()
+        end)
+        return true
+      end
+    end,
+    'show',
+    'show_documentation',
+    'hide_documentation',
+  }
+end
+
 return {
   'saghen/blink.cmp',
   version = '*',
@@ -30,19 +46,8 @@ return {
       preset = 'super-tab',
       ['<C-b>'] = false,
       ['<C-f>'] = false,
-      ['<C-space>'] = {
-        function(cmp)
-          if require('luasnip').choice_active() then
-            vim.schedule(function()
-              require('luasnip.extras.select_choice')()
-            end)
-            return true
-          end
-        end,
-        'show',
-        'show_documentation',
-        'hide_documentation',
-      },
+      ['<C-space>'] = menu_trigger(),
+      ['<A-space>'] = menu_trigger(),
       ['<CR>'] = { 'accept', 'fallback' },
       ['<C-y>'] = { 'select_and_accept', 'fallback' },
       ['<A-u>'] = { 'scroll_documentation_up', 'fallback' },
