@@ -31,3 +31,6 @@ source "$HOME/dotfiles/scripts/bash/shell_config/functions.bash"
 source "$HOME/dotfiles/scripts/bash/shell_config/simple_prompt.bash"
 source "$HOME/dotfiles/scripts/bash/shell_config/vim.bash"
 source "$HOME/dotfiles/scripts/bash/shell_config/zoxide.bash"
+
+# opencode
+export PATH=/c/Users/hasan/.opencode/bin:$PATH

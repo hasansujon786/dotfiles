@@ -1,14 +1,37 @@
 #!/bin/bash
 
-adb kill-server
+set -e
+
 adb start-server
+
+# Requires a connected and authorized device
+if ! adb get-state >/dev/null 2>&1; then
+  echo "No authorized ADB device found."
+  echo "Connect your phone via USB or use Wireless debugging."
+  exit 1
+fi
+
 adb tcpip 5555
 sleep 3
-# adb shell ip addr show wlan0
-output=$(adb shell ip addr show wlan0)
+
+output=$(adb shell ip -4 addr show wlan0)
 echo "$output"
 echo "___________________________________________________________"
-echo "$output" | grep -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])' | head -n 1 | xargs adb connect
+
+ip=$(echo "$output" | awk '/inet / {
+    split($2, addr, "/")
+    if (addr[1] !~ /^127\./) {
+        print addr[1]
+        exit
+    }
+}')
+
+if [ -z "$ip" ]; then
+  echo "Could not find the phone's Wi-Fi IPv4 address."
+  exit 1
+fi
+
+echo "Connecting to $ip:5555"
+adb connect "$ip:5555"
+
 adb devices
-# adb -s f8a8aa489804 tcpip 5555
-# adb -s f8a8aa489804 connect 192.168.0.100

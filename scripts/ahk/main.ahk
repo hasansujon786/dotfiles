@@ -50,7 +50,7 @@ LWin:: return
 \:: ActiveLQuickeaderMode()
 #HotIf qleaderPressed
 \:: quickleader("\", () => alternateTab())
-e:: quickleader("e", () => ToggleApp("wezterm-gui.exe"))
+e:: quickleader("e", () => ToggleApp("noctty.exe"))
 f:: quickleader("f", () => ToggleExplorer())
 d:: quickleader("d", () => ToggleApp("zen.exe", "", "MozillaDialogClass"))
 x:: quickleader("x", () => ToggleApp("msedge.exe"))
@@ -161,7 +161,7 @@ global layout_loading := 0
 global current_layout := 0
 
 #p:: changeLayoutTo("code")
-#o:: changeLayoutTo("focus_custom")
+#o:: changeLayoutTo("focus")
 #':: toggleLayout()
 
 #HotIf layout_loading
@@ -215,6 +215,7 @@ u:: Send("{PgUp}")
 #HotIf not WinActive("ahk_exe WindowsTerminal.exe")
 	and not WinActive("ahk_exe alacritty.exe")
 	and not WinActive("ahk_exe wezterm-gui.exe")
+	and not WinActive("ahk_exe noctty.exe")
 	and not WinActive("ahk_exe Code.exe")
 
 !j:: SendInput("{Down}")
