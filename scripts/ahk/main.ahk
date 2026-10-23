@@ -315,7 +315,8 @@ Tab:: Send("{Down}")
 #n:: Send("^n")            ; New
 #r:: Send("{F5}")          ; Reload/refresh
 #q:: Send("!{f4}")         ; Quit app
-#s:: Send("^s")          ; Save (conflicts with voice #s)
+#s:: Send("^s")            ; Save (conflicts with voice #s)
+; #Esc:: Send("#x")          ; Cut
 
 ; Conflicts with existing bindings - kept commented
 ; #a:: Send("^a")          ; Select all (conflicts with leader #a)

@@ -3,7 +3,17 @@ last_arg=${*:$#}
 main_cmd=${1}
 scan_count=9
 
-known_ips='s/50-8f-4c-49-ca-f9/Redmi Note 4x    /;s/aa-d1-20-f7-6e-33/CMF Phone 2 Pro  /'
+known_ips=(
+	'50-8f-4c-49-ca-f9|Redmi Note 4x'
+	'92-A3-45-24-08-57|CMF Phone 2 Pro'
+)
+
+known_sed=''
+for entry in "${known_ips[@]}"; do
+	mac=${entry%%|*}
+	name=$(printf '%-17.17s' "${entry#*|}")
+	known_sed+="s/${mac}/${name}/I;"
+done
 
 # 1. Connect device with USB.
 # 2. Run "arr"
@@ -15,9 +25,9 @@ known_ips='s/50-8f-4c-49-ca-f9/Redmi Note 4x    /;s/aa-d1-20-f7-6e-33/CMF Phone 
 
 if [[ "$last_arg" == "-s" ]]; then
 	for ((j = 0; j <= scan_count; j++)); do
-		ping 192.168.0.10${j} -n 1 -w 100
+		ping 192.168.1.10${j} -n 1 -w 100
 	done
 	echo "___________________________________________________________"
 fi
 
-arp -a | tail -n +3 | sed "$known_ips" | fzf | awk '{print $1}' | xargs $main_cmd
+arp -a | tail -n +3 | sed "$known_sed" | fzf | awk '{print $1}' | xargs $main_cmd
