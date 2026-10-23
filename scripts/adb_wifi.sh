@@ -5,16 +5,41 @@ set -e
 adb start-server
 
 # Requires a connected and authorized device
-if ! adb get-state >/dev/null 2>&1; then
+devices=$(adb devices | awk 'NR > 1 && $2 == "device" { print $1 }')
+count=$(printf '%s\n' "$devices" | grep -c . || true)
+
+if [ "$count" -eq 0 ]; then
   echo "No authorized ADB device found."
   echo "Connect your phone via USB or use Wireless debugging."
   exit 1
 fi
 
-adb tcpip 5555
+if [ -n "$ANDROID_SERIAL" ]; then
+  serial="$ANDROID_SERIAL"
+elif [ "$count" -eq 1 ]; then
+  serial="$devices"
+else
+  echo "More than one device connected:"
+  i=1
+  while IFS= read -r d; do
+    echo "  $i) $d"
+    i=$((i + 1))
+  done <<<"$devices"
+  printf 'Select device [1-%s]: ' "$count"
+  read -r choice
+
+  if ! [[ "$choice" =~ ^[0-9]+$ ]] || [ "$choice" -lt 1 ] || [ "$choice" -gt "$count" ]; then
+    echo "Invalid selection."
+    exit 1
+  fi
+
+  serial=$(printf '%s\n' "$devices" | sed -n "${choice}p")
+fi
+
+adb -s "$serial" tcpip 5555
 sleep 3
 
-output=$(adb shell ip -4 addr show wlan0)
+output=$(adb -s "$serial" shell ip -4 addr show wlan0)
 echo "$output"
 echo "___________________________________________________________"
 
