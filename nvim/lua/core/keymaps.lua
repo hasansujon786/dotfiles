@@ -471,7 +471,7 @@ function M.lsp_buffer_keymaps(client, bufnr)
   maps(maps_list)
 end
 
-if vim.g.vscode then
+if is_vscode then
   maps({
     -- { '<C-l>', M.multi_cursor('editor.action.addSelectionToNextFindMatch'), mode = { 'n', 'x', 'i' } },
     -- { '<C-S-l>', M.multi_cursor('editor.action.selectHighlights'), mode = { 'n', 'x', 'i' } },

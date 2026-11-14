@@ -51,8 +51,6 @@ end
 ---@field buffer? integer|boolean
 ---@field nowait? boolean
 
-local is_vscode = vim.g.vscode ~= nil
-
 ---@param maps Hasan.Keymap[]
 function _G.maps(maps)
   for _, map in ipairs(maps) do
@@ -82,10 +80,6 @@ function _G.feedkeys(key, mode)
 end
 
 _G.keymap = vim.keymap.set
-
-function _G.run_cmd(wincmd)
-  require('hasan.utils.run_cmd').run_cmd(wincmd)
-end
 
 ---Fire user event
 ---@param event string

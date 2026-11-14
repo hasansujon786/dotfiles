@@ -25,7 +25,7 @@ local wincmds = {
 }
 
 function M.run_cmd(wincmd)
-  if vim.g.vscode then
+  if is_vscode then
     local cmd = wincmds[wincmd]
     if not cmd then
       return '<Cmd>' .. 'echo "hello"' .. '<CR>'

@@ -91,7 +91,7 @@ end
 return {
   'hasansujon786/nvim-navbuddy',
   dev = require('core.state').dev.enabled,
-  enabled = not vim.g.vscode,
+  enabled = not is_vscode,
   cmd = { 'Navbuddy' },
   keys = {
     {

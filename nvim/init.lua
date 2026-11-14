@@ -7,7 +7,7 @@
 
 require('core.state')
 require('core.global')
-if not vim.g.vscode then
+if not is_vscode then
   require('core.options')
   require('core.commands')
 else

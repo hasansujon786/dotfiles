@@ -32,7 +32,7 @@ local spec = {
   -- { import = 'config' },
 }
 
-if vim.g.vscode then
+if is_vscode then
   spec = {
     { import = 'config.navigation' },
     { import = 'config.mics' },

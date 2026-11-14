@@ -17,7 +17,7 @@ return {
     'ahmedkhalf/project.nvim',
     event = 'VeryLazy',
     main = 'project_nvim',
-    enabled = not vim.g.vscode,
+    enabled = not is_vscode,
     opts = {
       detection_methods = { 'pattern' },
       exclude_dirs = { 'c:' },
@@ -28,7 +28,7 @@ return {
   {
     'olimorris/persisted.nvim',
     lazy = not require('core.state').ui.session_autoload,
-    enabled = not vim.g.vscode,
+    enabled = not is_vscode,
     cmd = 'Persisted',
     -- stylua: ignore
     keys = {

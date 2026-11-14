@@ -3,7 +3,7 @@ local n, nx = { 'n' }, { 'n', 'x' }
 return {
   {
     'folke/snacks.nvim',
-    enabled = not vim.g.vscode,
+    enabled = not is_vscode,
     priority = 1000,
     lazy = false,
     event = 'UIEnter',
@@ -128,7 +128,7 @@ return {
     'hasansujon786/snacks-file-browser.nvim',
     lazy = true,
     dev = require('core.state').dev.enabled,
-    enabled = vim.g.vscode,
+    enabled = not is_vscode,
     -- stylua: ignore start
     keys = {
       { '<leader>.', function() require('snacks-file-browser').browse({ cwd = vim.fn.expand('%:h') }) end, desc = 'Browse cur directory' },

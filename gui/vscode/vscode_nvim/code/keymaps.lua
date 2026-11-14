@@ -68,7 +68,7 @@ function M.set_opts()
   vim.g.mapleader = ' '
   vim.g.maplocalleader = ' '
 
-  if not vim.g.vscode then
+  if not is_vscode then
     require('hasan.pseudo-text-objects')
   end
 end
@@ -282,15 +282,15 @@ local function setup()
 
   -- Vertical scrolling
   local scroll_maps = {
-    { '<A-u>',      '<C-u>' },
-    { '<A-d>',      '<C-d>' },
-    { '<A-o>',      '<C-d>' },
-    { '<PageUp>',   '<C-u>' },
+    { '<A-u>', '<C-u>' },
+    { '<A-d>', '<C-d>' },
+    { '<A-o>', '<C-d>' },
+    { '<PageUp>', '<C-u>' },
     { '<PageDown>', '<C-d>' },
-    { '<A-f>',      '<C-f>' },
-    { '<A-b>',      '<C-b>' },
-    { '<A-y>',      '<C-y>' },
-    { '<A-e>',      '<C-e>' },
+    { '<A-f>', '<C-f>' },
+    { '<A-b>', '<C-b>' },
+    { '<A-y>', '<C-y>' },
+    { '<A-e>', '<C-e>' },
   }
   for _, k in pairs(scroll_maps) do
     nmap({ k[1], k[2], desc = 'Scroll window', mode = nx, remap = true })

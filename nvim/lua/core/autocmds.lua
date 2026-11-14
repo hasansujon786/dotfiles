@@ -51,7 +51,7 @@ augroup('MY_AUGROUP')(function(autocmd)
     set_relativenumber(true)
   end)
 
-  if not vim.g.vscode then
+  if not is_vscode then
     autocmd('CmdwinEnter', 'nnoremap <buffer><CR> <CR>')
     autocmd('FileType', 'setl foldlevel=0', { pattern = 'vim' })
     autocmd('FileType', 'setl foldmethod=marker', { pattern = { 'vim', 'css', 'scss', 'json' } })
