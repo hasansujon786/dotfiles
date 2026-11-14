@@ -4,7 +4,7 @@ local nx, nxo = { 'n', 'x' }, { 'n', 'x', 'o' }
 local function word_jump(option)
   return function()
     require('demicolon.jump').repeatably_do(function(opts)
-      if vim.g.vscode then
+      if is_vscode then
         local action = opts.forward and 'editor.action.wordHighlight.next' or 'editor.action.wordHighlight.prev'
         require('vscode').action(action)
       else
@@ -24,7 +24,7 @@ end
 
 local function diagnostic_jump(count, severity)
   return function()
-    if vim.g.vscode then
+    if is_vscode then
       require('demicolon.jump').repeatably_do(function(opts)
         local action = opts.forward and 'editor.action.marker.next' or 'editor.action.marker.prev'
         require('vscode').action(action)
@@ -38,7 +38,7 @@ end
 -- https://www.naseraleisa.com/posts/diff#file-1
 local function hunk_jump(forward)
   return function()
-    if vim.g.vscode then
+    if is_vscode then
       require('demicolon.jump').repeatably_do(function(opts)
         local action = opts.forward and 'workbench.action.editor.nextChange' or 'workbench.action.editor.previousChange'
         require('vscode').action(action)
@@ -57,7 +57,7 @@ end
 
 local function staged_hunk_jump(forward)
   return function()
-    if vim.g.vscode then
+    if is_vscode then
       require('demicolon.jump').repeatably_do(function(opts)
         local action = opts.forward and 'editor.action.dirtydiff.next' or 'editor.action.dirtydiff.prev'
         require('vscode').action(action)
@@ -97,8 +97,6 @@ return {
     { 'T', eyeliner_jump('T'), desc = 'Jump to char', mode = nxo, expr = true },
 
     -- LSP
-    { 'g[', word_jump({ forward = false }), desc = 'Prev Reference', mode = nxo },
-    { 'g]', word_jump({ forward = true }), desc = 'Next Reference', mode = nxo },
     { '[g', word_jump({ forward = false }), desc = 'Prev Reference', mode = nxo },
     { ']g', word_jump({ forward = true }), desc = 'Next Reference', mode = nxo },
     { '[[', word_jump({ forward = false }), desc = 'Prev Reference', mode = nxo },

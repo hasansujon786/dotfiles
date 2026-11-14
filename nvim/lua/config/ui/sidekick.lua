@@ -1,6 +1,7 @@
 return {
   'folke/sidekick.nvim',
   enabled = true,
+  cmd = 'Sidekick',
   keys = {
     {
       '<c-.>',
@@ -33,34 +34,20 @@ return {
     },
     {
       '<leader>at',
-      function()
-        require('sidekick.cli').send({ msg = '{this}' })
-      end,
+      '<cmd>Sidekick cli send msg="{this}"<cr>',
       mode = { 'x', 'n' },
       desc = 'Sidekick: Send This',
     },
     {
       '<leader>af',
-      function()
-        require('sidekick.cli').send({ msg = '{file}' })
-      end,
+      '<cmd>Sidekick cli send msg="{file}"<cr>',
       desc = 'Sidekick: Send File',
     },
     {
       '<leader>af',
-      function()
-        require('sidekick.cli').send({ msg = '{selection}' })
-      end,
+      '<cmd>Sidekick cli send msg="{selection}"<cr>',
       mode = { 'x' },
       desc = 'Sidekick: Send File',
-    },
-    {
-      '<leader>av',
-      function()
-        require('sidekick.cli').send({ msg = '{selection}' })
-      end,
-      mode = { 'x' },
-      desc = 'Sidekick: Send Visual Selection',
     },
     {
       '<leader>ap',

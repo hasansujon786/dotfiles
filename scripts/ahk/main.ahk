@@ -217,6 +217,7 @@ u:: Send("{PgUp}")
 	and not WinActive("ahk_exe wezterm-gui.exe")
 	and not WinActive("ahk_exe noctty.exe")
 	and not WinActive("ahk_exe Code.exe")
+	and not WinActive("ahk_exe Antigravity IDE.exe")
 
 !j:: SendInput("{Down}")
 !k:: SendInput("{Up}")
@@ -271,7 +272,6 @@ Tab:: Send("{Down}")
 !p:: Send("{Up}")
 !n:: Send("{Down}")
 #HotIf
-
 
 ;******************************************************************************
 ; Mac-style mappings (Win key as Cmd)

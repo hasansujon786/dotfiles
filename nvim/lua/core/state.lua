@@ -17,6 +17,7 @@ M.treesitter = {
     markdown = { 'markdown' },
     markdown_inline = {},
 
+    blade = { 'blade' },
     swift = { 'swift' },
 
     html = { 'html' },
@@ -90,8 +91,12 @@ M.lsp = {
     bashls = { 'bash-language-server' },
     lua_ls = { 'lua-language-server' },
     vimls = { 'vim-language-server' },
-    gopls = { 'gopls' },
     clangd = { 'clangd' },
+
+    -- Backend
+    laravel_lsp = { 'laravel_lsp' },
+    intelephense = { 'intelephense' },
+    gopls = { 'gopls' },
   },
   extra_tools = {
     'shfmt',
@@ -147,6 +152,10 @@ M.lsp = {
     {
       filetype = { 'org', 'text' },
       formatter = { 'trim_whitespace' },
+    },
+    {
+      filetype = { 'blade' },
+      formatter = { 'blade-formatter' },
     },
     -- {
     --   filetype = '_', -- "_" filetypes that don't have other formatters configured.

@@ -1,8 +1,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-local n, nx, nxi = { 'n' }, { 'n', 'x' }, { 'n', 'x', 'i' }
-local is_vscode = vim.g.vscode ~= nil
+local n, x, nx, nxi = { 'n' }, { 'x' }, { 'n', 'x' }, { 'n', 'x', 'i' }
 
 if not is_vscode then
   require('hasan.pseudo-text-objects')
@@ -38,6 +37,18 @@ end
 function M.uncomment_block()
   require('vim._comment').textobject()
   feedkeys('gc')
+end
+
+function M.code_action()
+  vim.lsp.buf.code_action()
+end
+
+function M.quick_fix()
+  if is_vscode then
+    require('vscode').action('editor.action.quickFix')
+  else
+    vim.lsp.buf.code_action()
+  end
 end
 
 function M.comment_at(move)
@@ -253,10 +264,10 @@ maps({
   -----------------------------------------------------------------------------
   -- Window Resizing
   -----------------------------------------------------------------------------
-  { '<A-=>', '<Cmd>resize +3<CR>', mode = nx, code = false },
-  { '<A-->', '<Cmd>resize -3<CR>', mode = nx, code = false },
-  { '<A-.>', '<Cmd>vertical resize +5<CR>', mode = nx, code = false },
-  { '<A-,>', '<Cmd>vertical resize -5<CR>', mode = nx, code = false },
+  { '<A-=>', '<Cmd>resize +3<CR>', mode = nx, code = '<cmd>lua require("vscode").action("workbench.action.increaseViewHeight")<CR>' },
+  { '<A-->', '<Cmd>resize -3<CR>', mode = nx, code = '<cmd>lua require("vscode").action("workbench.action.decreaseViewHeight")<CR>' },
+  { '<A-.>', '<Cmd>vertical resize +5<CR>', mode = nx, code = '<cmd>lua require("vscode").action("workbench.action.increaseViewWidth")<CR>' },
+  { '<A-,>', '<Cmd>vertical resize -5<CR>', mode = nx, code = '<cmd>lua require("vscode").action("workbench.action.decreaseViewWidth")<CR>' },
 
   -----------------------------------------------------------------------------
   -- Buffers & Tabs
@@ -293,8 +304,8 @@ maps({
   -- Insert & Command-line
   -----------------------------------------------------------------------------
   -- Movement
-  { '<A-k>', '<Esc><Cmd>m .-2<CR>==gi', mode = 'i', desc = 'Move line up' },
-  { '<A-j>', '<Esc><Cmd>m .+1<CR>==gi', mode = 'i', desc = 'Move line down' },
+  { '<A-k>', '<Esc><Cmd>m .-2<CR>==gi', mode = 'i', desc = 'Move line up', code = false },
+  { '<A-j>', '<Esc><Cmd>m .+1<CR>==gi', mode = 'i', desc = 'Move line down', code = false },
 
   { ',', ',<C-g>u', mode = 'i' },
   { '.', '.<C-g>u', mode = 'i' },
@@ -343,9 +354,9 @@ maps({
   -----------------------------------------------------------------------------
   { '<C-s>', '<Cmd>w<CR>', mode = { 'n', 'i', 'x' }, desc = 'Save file' },
   { '<leader>s', '<Cmd>w<CR>', mode = nx, desc = 'Save file' },
-  { 'ZZ', '<Cmd>Quit!<CR>', mode = nx, desc = 'Quit window' },
-  { '<leader>fs', '<cmd>lua require("vscode").action("editor.action.formatDocument")<CR>', mode = 'n', code = true },
-  { '<leader>fs', '<cmd>lua require("vscode").action("editor.action.formatSelection")<CR>', mode = 'x', code = true },
+  { 'ZZ', '<Cmd>Quit!<CR>', mode = nx, desc = 'Quit window', code = false },
+  { '<leader>fs', '<cmd>Format<CR>', mode = 'n', code = '<cmd>lua require("vscode").call("editor.action.formatDocument"); require("vscode").call("workbench.action.files.save")<CR>', desc = 'Lsp: format and save' },
+  { '<leader>fs', '<cmd>Format<CR>', mode = 'x', code = '<cmd>lua require("vscode").call("editor.action.formatSelection"); require("vscode").call("workbench.action.files.save")<CR>', desc = 'Lsp: format and save' },
   { '<leader>fxx', '<cmd>call hasan#autocmd#trimWhitespace()<CR>', desc = 'Remove white space', code = '<cmd>lua require("vscode").action("editor.action.trimTrailingWhitespace")<cr>' },
 
   ----------------------------------------------------------------------------
@@ -358,15 +369,50 @@ maps({
   -----------------------------------------------------------------------------
   -- Pickers
   -----------------------------------------------------------------------------
-  { '<leader><space>', function() require('config.navigation.snacks.custom').project_files() end, desc = 'Find project files', code = '<cmd>Tabfind<CR>', mode = nx },
-  { '<leader>m', function() require('config.navigation.snacks.custom').buffers_with_symbols() end, code = '<cmd>lua require("vscode").action("workbench.action.showAllEditors")<CR>' },
-  { '<leader>pp', function() require('config.navigation.snacks.persisted').persisted() end, desc = 'Switch project', mode = nx, code = '<cmd>lua require("vscode").action("workbench.action.openRecent")<CR>' },
+  { '<leader><space>', '<cmd>lua require("config.navigation.snacks.custom").project_files()<cr>', desc = 'Find project files', code = '<cmd>Tabfind<CR>', mode = nx },
+  { '<leader>pp', '<cmd>lua require("config.navigation.snacks.persisted").persisted()<cr>', desc = 'Switch project', mode = nx, code = '<cmd>lua require("vscode").action("workbench.action.openRecent")<CR>' },
+  { '<leader>m', '<cmd>lua require("config.navigation.snacks.custom").buffers_with_symbols()<cr>', code = '<cmd>lua require("vscode").action("workbench.action.showAllEditors")<CR>' },
+
+  { '<A-/>', '<cmd>lua Snacks.picker.grep_word()<cr>', desc = 'Search word', mode = n, code = '<cmd>lua require("vscode").action("workbench.action.findInFiles",{args={query=vim.fn.expand("<cword>")}})<CR>' },
+  { '<A-/>', '<cmd>lua Snacks.picker.grep_word()<cr>', desc = 'Search selection', mode = x, code = '<cmd>lua require("vscode").action("workbench.action.findInFiles")<CR>' },
+  { '<leader>//', '<cmd>lua Snacks.picker.grep()<cr>', code = '<cmd>lua require("vscode").action("workbench.action.findInFiles")<CR>', mode = n, desc = 'Grep' },
+  { '<leader>//', '<cmd>lua Snacks.picker.grep_word()<cr>', code = '<cmd>lua require("vscode").action("workbench.action.findInFiles")<CR>', mode = x, desc = 'Grep' },
+
+  -----------------------------------------------------------------------------
+  -- Debugger
+  -----------------------------------------------------------------------------
+  { '<leader>ds', '<cmd>lua require"dap".continue()<cr>', desc = 'Continue', code = '<cmd>lua require("vscode").action("workbench.action.debug.start")<CR>' },
+  { '<leader>dc', '<cmd>lua require"dap".continue()<cr>', desc = 'Continue', code = '<cmd>lua require("vscode").action("workbench.action.debug.continue")<CR>' },
+  { '<leader>db', '<cmd>lua require"dap".toggle_breakpoint()<cr>', desc = 'Toggle Breakpoint', code = '<cmd>lua require("vscode").action("editor.debug.action.toggleBreakpoint")<CR>' },
+
+  { '<leader>dR', '<cmd>lua require"dap".run_to_cursor()<cr>', desc = 'Run to Cursor', code = '<cmd>lua require("vscode").action("editor.debug.action.runToCursor")<CR>' },
+  -- { '<leader>dB', '<cmd>lua require"dap".set_breakpoint(vim.fn.input"[Condition] > ")<cr>', desc = 'Conditional Breakpoint', code = '<cmd>lua require("vscode").action("editor.debug.action.conditionalBreakpoint")<CR>' },
+
+  { '<leader>di', '<cmd>lua require"dap".step_into()<cr>', desc = 'Step Into', code = '<cmd>lua require("vscode").action("workbench.action.debug.stepInto")<CR>' },
+  { '<leader>du', '<cmd>lua require"dap".step_out()<cr>', desc = 'Step Out', code = '<cmd>lua require("vscode").action("workbench.action.debug.stepOut")<CR>' },
+  { '<leader>do', '<cmd>lua require"dap".step_over()<cr>', desc = 'Step Over', code = '<cmd>lua require("vscode").action("workbench.action.debug.stepOver")<CR>' },
+  { '<leader>dB', '<cmd>lua require"dap".step_back()<cr>', desc = 'Step Back', code = '<cmd>lua require("vscode").action("workbench.action.debug.stepBack")<CR>' },
+
+  { '<leader>dr', '<cmd>lua require"dap".repl.toggle()<cr>', desc = 'Toggle Repl', code = '<cmd>lua require("vscode").action("workbench.debug.action.toggleRepl")<CR>' },
+  { '<leader>dS', '<cmd>lua require"dap.ui.widgets".scopes()<cr>', desc = 'Scopes', code = '<cmd>lua require("vscode").action("workbench.debug.action.focusVariablesView")<CR>' },
+  { '<leader>dp', '<cmd>lua require"dap".pause.toggle()<cr>', desc = 'Pause', code = '<cmd>lua require("vscode").action("workbench.action.debug.pause")<CR>' },
+
+  { '<leader>dq', '<cmd>lua require"dap".close()<cr>', desc = 'Quit', code = '<cmd>lua require("vscode").action("workbench.action.debug.stop")<CR>' },
+  { '<leader>dD', '<cmd>lua require"dap".disconnect()<cr>', desc = 'Disconnect', code = '<cmd>lua require("vscode").action("workbench.action.debug.disconnect")<CR>' },
+  { '<leader>dX', '<cmd>lua require"dap".terminate()<cr>', desc = 'Terminate', code = '<cmd>lua require("vscode").action("workbench.action.debug.stop")<CR>' },
+  { '<leader>dg', '<cmd>lua require"dap".session()<cr>', desc = 'Get Session', code = '<cmd>lua require("vscode").action("workbench.action.debug.selectandstart")<CR>' },
+
+  -- dapview
+  { '<leader>dl', '<cmd>DapViewToggle!<cr>', desc = 'Toggle DAP View', code = '<cmd>lua require("vscode").action("workbench.view.debug")<CR>' },
+  { '<leader>dh', '<cmd>DapViewHover!<cr>', desc = 'Toggle DAP View', code = '<cmd>lua require("vscode").action("editor.debug.action.showDebugHover")<CR>' },
+  { '<leader>dW', '<cmd>lua require("dap-view").add_expr()<cr>', desc = 'Add to Watch', code = '<cmd>lua require("vscode").action("editor.debug.action.selectionToWatch")<CR>' },
   {
-    '<A-/>',
-    '<cmd>lua require("vscode").action("workbench.action.findInFiles",{args={query=vim.fn.expand("<cword>")}})<CR>',
+    '<leader>dE',
+    '<cmd>lua require("dap-view").hover(vim.fn.input("[Expression] > "))<cr>',
+    desc = 'Evaluate Input',
+    code = '<cmd>lua require("vscode").action("editor.debug.action.selectionToRepl")<CR>',
   },
-  { '<A-/>', '<cmd>lua require("vscode").action("workbench.action.findInFiles")<CR>', mode = 'x' },
-  { '<leader>//', '<cmd>lua require("vscode").action("workbench.action.findInFiles")<CR>', mode = nx },
+  { '<leader>d.', '<cmd>DapViewJump scopes<cr>', desc = 'Show Scopes', code = '<cmd>lua require("vscode").action("workbench.debug.action.focusVariablesView")<CR>' },
 })
 
 ---@type lsp.AttachCb
@@ -387,7 +433,6 @@ function M.lsp_buffer_keymaps(client, bufnr)
     { 'gR', '<cmd>Glance resume<CR>', desc = 'Lsp: Glance resume', unpack(b) },
     { 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', desc = 'Lsp: Go to declaration', unpack(b) },
     { 'go', function () require('config.navigation.snacks.custom').lsp_symbols() end, desc = 'LSP Symbols', code = '<cmd>lua vim.lsp.buf.document_symbol()<CR>' },
-    { '<leader>a.', run_code_action({ 'source.fixAll' }), desc = 'Lsp: Fix all', unpack(b) },
       -- { 'gR', '<cmd>lua require("vscode").action("references-view.findReferences")<CR>' },
 
     -- Peek
@@ -398,19 +443,20 @@ function M.lsp_buffer_keymaps(client, bufnr)
     -- Action, Prompt, Search
     { 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', desc = 'Lsp: Hover under cursor', unpack(b) },
     { '<F2>', '<cmd>lua require("config.lsp.util.extras").lsp_rename()<CR>', desc = 'Lsp: Rename under cursor', unpack(b) },
-    { '<C-q>', '<cmd>lua vim.lsp.buf.code_action()<CR>', mode = nx, desc = 'Lsp: Code action', unpack(b) },
-    { '<C-space>', '<cmd>lua vim.lsp.buf.code_action()<CR>', mode = nx, desc = 'Lsp: Code action', unpack(b) },
-    { '<A-space>', '<cmd>lua vim.lsp.buf.code_action()<CR>', mode = nx, desc = 'Lsp: Code action', unpack(b) },
-    { 'g.', '<cmd>lua vim.lsp.buf.code_action()<CR>', mode = nx, desc = 'Lsp: Code action', unpack(b) },
+    { 'g.', M.quick_fix, mode = nx, desc = 'Lsp: Quick action', unpack(b) },
+    { '<C-q>', M.code_action, mode = nx, desc = 'Lsp: Code action', unpack(b) },
+    { '<C-space>', M.code_action, mode = nx, desc = 'Lsp: Code action', unpack(b) },
+    { '<A-space>', M.code_action, mode = nx, desc = 'Lsp: Code action', unpack(b) },
 
     -- Diagnostics
-    { '<leader>ad', '<cmd>lua vim.diagnostic.setloclist()<CR>', desc = 'Lsp: Show local diagnostics', unpack(b), code = '<cmd>lua require("vscode").action("workbench.panel.markers.view.focus")<CR>' },
-    { '<leader>aD', '<cmd>lua vim.diagnostic.setqflist()<CR>', desc = 'Lsp: Show global diagnostics', unpack(b), code = '<cmd>lua require("vscode").action("workbench.panel.markers.view.focus")<CR>' },
-    { '<leader>al', '<cmd>lua vim.diagnostic.open_float()<CR>', desc = 'Lsp: Show line diagnostics', unpack(b) },
-    { '<C-c><C-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', mode = { 'n', 'i' }, desc = 'Lsp: show signature help', unpack(b) },
-    { '<leader>a+', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', desc = 'Lsp: Add workspace folder', unpack(b) },
-    { '<leader>a-', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', desc = 'Lsp: Remove workspace folder', unpack(b) },
-    { '<leader>aw', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, desc = 'Lsp: list workspace folders', unpack(b) },
+    -- { '<leader>ad', '<cmd>lua vim.diagnostic.setloclist()<CR>', desc = 'Lsp: Show local diagnostics', unpack(b), code = '<cmd>lua require("vscode").action("workbench.panel.markers.view.focus")<CR>' },
+    -- { '<leader>aD', '<cmd>lua vim.diagnostic.setqflist()<CR>', desc = 'Lsp: Show global diagnostics', unpack(b), code = '<cmd>lua require("vscode").action("workbench.panel.markers.view.focus")<CR>' },
+    -- { '<leader>al', '<cmd>lua vim.diagnostic.open_float()<CR>', desc = 'Lsp: Show line diagnostics', unpack(b) },
+    -- { '<C-c><C-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', mode = { 'n', 'i' }, desc = 'Lsp: show signature help', unpack(b) },
+    -- { '<leader>a+', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', desc = 'Lsp: Add workspace folder', unpack(b) },
+    -- { '<leader>a-', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', desc = 'Lsp: Remove workspace folder', unpack(b) },
+    -- { '<leader>aw', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, desc = 'Lsp: list workspace folders', unpack(b) },
+    -- { '<leader>a.', run_code_action({ 'source.fixAll' }), desc = 'Lsp: Fix all', unpack(b) },
   }
 
   -- stylua: ignore
@@ -429,14 +475,21 @@ if vim.g.vscode then
   maps({
     -- { '<C-l>', M.multi_cursor('editor.action.addSelectionToNextFindMatch'), mode = { 'n', 'x', 'i' } },
     -- { '<C-S-l>', M.multi_cursor('editor.action.selectHighlights'), mode = { 'n', 'x', 'i' } },
-    -- { '<leader>dc', '<cmd>lua require("vscode").action("workbench.action.debug.continue")<CR>' },
-    -- { '<leader>ds', '<cmd>lua require("vscode").action("workbench.action.debug.continue")<CR>' },
-    -- { '<leader>da', '<cmd>lua require("vscode").action("workbench.action.debug.selectandstart")<CR>' },
-    -- { '<leader>dq', '<cmd>lua require("vscode").action("workbench.action.debug.stop")<CR>' },
-    -- { '<leader>db', '<cmd>lua require("vscode").action("editor.debug.action.toggleBreakpoint")<CR>' },
-    -- { '<leader>di', '<cmd>lua require("vscode").action("workbench.action.debug.stepInto")<CR>' },
-    -- { '<leader>do', '<cmd>lua require("vscode").action("workbench.action.debug.stepOver")<CR>' },
-    -- { '<leader>dh', '<cmd>lua require("vscode").action("editor.debug.action.showDebugHover")<CR>' },
+
+    {
+      '<leader>at',
+      '<cmd>lua require("vscode").action("antigravity.insertSnippet")<CR>',
+      code = true,
+      mode = nx,
+      desc = 'Sidekick: Send File',
+    },
+    {
+      '<leader>af',
+      '<cmd>lua require("vscode").action("antigravity.insertSnippet")<CR>',
+      code = true,
+      mode = nx,
+      desc = 'Sidekick: Send File',
+    },
   })
 end
 

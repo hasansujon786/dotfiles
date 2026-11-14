@@ -4,6 +4,30 @@ local function is_doc_file(path)
   return (path:match('/nvim/') ~= nil or path:match('/nvim%-data/') ~= nil) and path:match('/doc/')
 end
 
+local relativenumber_flag = 'relativenumber_disabled'
+---@param value boolean
+local function set_relativenumber(value)
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    local is_locked = vim.bo[buf].readonly and not vim.bo[buf].modifiable
+
+    if not is_locked then
+      if value == false then
+        local relativenumber = vim.wo[win].relativenumber
+        local number = vim.wo[win].number
+
+        if not vim.w[win].number_cycled and relativenumber and number then
+          vim.wo[win].relativenumber = false
+          vim.w[win][relativenumber_flag] = true
+        end
+      elseif vim.w[win][relativenumber_flag] then
+        vim.wo[win].relativenumber = true
+        vim.w[win][relativenumber_flag] = nil
+      end
+    end
+  end
+end
+
 augroup('MY_AUGROUP')(function(autocmd)
   autocmd('TextYankPost', function()
     vim.hl.on_yank({ on_visual = true, higroup = 'Search', timeout = 200 })
@@ -12,6 +36,19 @@ augroup('MY_AUGROUP')(function(autocmd)
     vim.schedule(function()
       vim.cmd('nohlsearch')
     end)
+  end)
+
+  autocmd('InsertEnter', function()
+    if is_vscode then
+      return require('vscode').update_config('editor.lineNumbers', 'on', 'global')
+    end
+    set_relativenumber(false)
+  end)
+  autocmd('InsertLeave', function()
+    if is_vscode then
+      return require('vscode').update_config('editor.lineNumbers', 'relative', 'global')
+    end
+    set_relativenumber(true)
   end)
 
   if not vim.g.vscode then

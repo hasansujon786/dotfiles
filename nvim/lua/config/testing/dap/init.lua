@@ -1,11 +1,21 @@
 -- Dap configs:
 -- https://github.com/dreamsofcode-io/neovim-nodejs/blob/main/configs/dap.lua
 
--- local Icons = require('hasan.utils.ui.icons').Other -- only used by nvim-dap-ui (currently disabled)
-
 local function configure_debuggers()
   require('config.testing.dap.typescript').setup()
   -- require('config.testing.dap.lua').setup()
+end
+local function configure_dapui()
+  local dap_sign = {
+    stopped = { text = '', texthl = 'Number', numhl = 'Number', linehl = 'DapCursorLine' },
+    breakpoint = { text = '●', texthl = 'RedText', numhl = '', linehl = '' },
+    bcondition = { text = '◉', texthl = 'RedText', numhl = '', linehl = '' },
+    rejected = { text = '○', texthl = 'MutedText', numhl = '', linehl = '' },
+  }
+  vim.fn.sign_define('DapStopped', dap_sign.stopped)
+  vim.fn.sign_define('DapBreakpoint', dap_sign.breakpoint)
+  vim.fn.sign_define('DapBreakpointRejected', dap_sign.rejected)
+  vim.fn.sign_define('DapBreakpointCondition', dap_sign.bcondition)
 end
 
 return {
@@ -13,27 +23,10 @@ return {
   lazy = true,
   module = 'dap',
   config = function()
-    require('config.testing.dap.keymaps').setup()
     require('dap').set_log_level('TRACE') --TRACE DEBUG INFO WARN ERROR
-
-    -- Dap sign icons
-    local dap_sign = {
-      stopped = { text = '', texthl = 'Number', numhl = 'Number', linehl = 'DapCursorLine' },
-      breakpoint = { text = '●', texthl = 'RedText', numhl = '', linehl = '' },
-      bcondition = { text = '◉', texthl = 'RedText', numhl = '', linehl = '' },
-      rejected = { text = '○', texthl = 'MutedText', numhl = '', linehl = '' },
-    }
-    vim.fn.sign_define('DapStopped', dap_sign.stopped)
-    vim.fn.sign_define('DapBreakpoint', dap_sign.breakpoint)
-    vim.fn.sign_define('DapBreakpointRejected', dap_sign.rejected)
-    vim.fn.sign_define('DapBreakpointCondition', dap_sign.bcondition)
-
+    configure_dapui()
     configure_debuggers()
   end,
-  keys = {
-    { '<leader>ds', '<cmd>lua require"dap".continue()<cr>', desc = 'Continue' },
-    { '<leader>db', '<cmd>lua require"dap".toggle_breakpoint()<CR>', desc = 'Toggle Breakpoint' },
-  },
   dependencies = {
     {
       'theHamsta/nvim-dap-virtual-text',
@@ -69,7 +62,7 @@ return {
         -- - "open_term": open the terminal when starting a new session, nothing else
         -- - "keep_terminal": as above, but keeps the terminal when the session finishes
         -- - "open": self explanatory
-        auto_toggle = "open_term",
+        auto_toggle = 'open_term',
         -- Reopen dapview when switching to a different tab
         -- Can also be a function to dynamically choose when to follow, by returning a boolean
         -- If a function, receives the name of the adapter for the current session as an argument
@@ -113,76 +106,6 @@ return {
           end
         end
       end,
-      keys = {
-        { '<leader>du', '<cmd>DapViewToggle!<cr>', desc = 'Toggle DAP View' },
-        { '<leader>dU', '<cmd>DapViewClose!<cr>', desc = 'Toggle DAP View' },
-        { '<leader>dh', '<cmd>DapViewHover!<cr>', desc = 'Toggle DAP View' },
-        { '<leader>dW', '<cmd>lua require("dap-view").add_expr()<cr>', desc = 'A to Watch' },
-        {
-          '<leader>dE',
-          '<cmd>lua require("dap-view").hover(vim.fn.input("[Expression] > "))',
-          desc = 'Evaluate Input',
-        },
-        { '<leader>d.', '<cmd>DapViewJump scopes<cr>', desc = 'Show Scopes' },
-      },
     },
-    -- {
-    --   'rcarriga/nvim-dap-ui',
-    --   opts = {
-    --     icons = { expanded = Icons.ChevronSlimDown, collapsed = Icons.ChevronSlimRight, current_frame = '' },
-    --     floating = {
-    --       max_height = 0.9, -- These can be integers or a float between 0 and 1.
-    --       max_width = 0.8, -- Floats will be treated as percentage of your screen.
-    --       border = 'rounded', -- Border style. Can be "single", "double" or "rounded"
-    --       mappings = {
-    --         close = { 'q', '<Esc>' },
-    --       },
-    --     },
-    --     layouts = {
-    --       {
-    --         position = 'right',
-    --         size = 36,
-    --         elements = {
-    --           { id = 'scopes', size = 0.40 },
-    --           { id = 'watches', size = 0.20 },
-    --           { id = 'stacks', size = 0.20 },
-    --           { id = 'breakpoints', size = 0.20 },
-    --         },
-    --       },
-    --       {
-    --         position = 'bottom',
-    --         size = 10,
-    --         elements = {
-    --           { id = 'repl', size = 1 },
-    --           -- { id = 'console', size = 0.5 },
-    --         },
-    --       },
-    --     },
-    --   },
-    --   config = function(_, opts)
-    --     local dap, dapui = require('dap'), require('dapui')
-    --
-    --     -- Dap sign icons
-    --     local dap_sign = {
-    --       stopped = { text = '', texthl = 'Number', numhl = 'Number', linehl = 'DapCursorLine' },
-    --       breakpoint = { text = '●', texthl = 'RedText', numhl = '', linehl = '' },
-    --       bcondition = { text = '◉', texthl = 'RedText', numhl = '', linehl = '' },
-    --       rejected = { text = '○', texthl = 'MutedText', numhl = '', linehl = '' },
-    --     }
-    --     vim.fn.sign_define('DapStopped', dap_sign.stopped)
-    --     vim.fn.sign_define('DapBreakpoint', dap_sign.breakpoint)
-    --     vim.fn.sign_define('DapBreakpointRejected', dap_sign.rejected)
-    --     vim.fn.sign_define('DapBreakpointCondition', dap_sign.bcondition)
-    --
-    --     -- Dapui
-    --     dapui.setup(opts)
-    --     dap.listeners.after.event_initialized['dapui_config'] = function()
-    --       vim.notify('Debugger ui connected', vim.log.levels.INFO)
-    --     end
-    --     -- dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-    --     -- dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-    --     -- dap.listeners.before.event_exited['dapui_config'] = dapui.close
-    --   end,
-    -- },
   },
 }

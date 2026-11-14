@@ -46,7 +46,11 @@ function M.cycle_numbering()
 
   -- Leave a mark so that other functions can check to see if the user has
   -- overridden the settings for this window.
-  vim.w[number_flag] = true
+  if relativenumber and number then
+    vim.w[number_flag] = false
+  else
+    vim.w[number_flag] = true
+  end
 end
 
 return M

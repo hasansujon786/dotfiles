@@ -39,9 +39,6 @@ return {
   cmd = { 'ConformInfo', 'Format', 'FormatSync' },
   module = 'conform',
   event = 'BufWritePre',
-  keys = {
-    { '<leader>fs', '<cmd>Format<CR>', mode = { 'n', 'x' }, desc = 'Lsp: format and save' },
-  },
   opts = {
     default_format_opts = {
       lsp_format = 'fallback',

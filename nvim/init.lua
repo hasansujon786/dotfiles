@@ -10,9 +10,9 @@ require('core.global')
 if not vim.g.vscode then
   require('core.options')
   require('core.commands')
-  require('core.autocmds')
 else
   require('hasan.utils.ui.palette').set_custom_highlights()
 end
+require('core.autocmds')
 require('core.keymaps')
 require('core.lazy')

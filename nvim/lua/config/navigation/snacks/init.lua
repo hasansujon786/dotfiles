@@ -74,10 +74,8 @@ return {
       { '<leader>gc', function() Snacks.picker.git_log() end, desc = 'Git Log' },
 
       -- GREP
-      { '<leader>//', function() Snacks.picker.grep() end, desc = 'Grep' },
       { '<leader>b/', function() Snacks.picker.grep_buffers() end, desc = 'Grep Open Buffers' },
       { '//', function() Snacks.picker.lines() end, desc = 'which_key_ignore' },
-      { '<A-/>', function() Snacks.picker.grep_word() end, desc = 'Visual selection or word', mode = { "n", "x" } },
 
       -- SEARCH
       { '<leader>ou', function() Snacks.picker.undo() end, desc = 'Show undo history' },
