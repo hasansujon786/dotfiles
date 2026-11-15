@@ -1,0 +1,316 @@
+// Place your key bindings in this file to override the defaults
+[
+  // -----------------------------------------------------------------------------
+  // -- NeoVim Insert mode bindings
+  //-----------------------------------------------------------------------------
+  // Move cursor by character
+  {
+    "key": "ctrl+p",
+    "command": "cursorUp",
+    "when": "!suggestWidgetVisible && neovim.mode == insert"
+  },
+  {
+    "key": "ctrl+n",
+    "command": "cursorDown",
+    "when": "!suggestWidgetVisible && neovim.mode == insert"
+  },
+  {
+    "key": "alt+h",
+    "command": "cursorLeft",
+    "when": "neovim.mode == insert"
+  },
+  {
+    "key": "alt+l",
+    "command": "cursorRight",
+    "when": "neovim.mode == insert"
+  },
+  // Move cursor by words
+  {
+    "key": "alt+f",
+    "command": "cursorWordEndRight",
+    "when": "textInputFocus && neovim.mode == insert"
+  },
+  {
+    "key": "alt+b",
+    "command": "cursorWordStartLeft",
+    "when": "textInputFocus && neovim.mode == insert"
+  },
+  // Jump cursor to start & end of a line
+  {
+    "key": "ctrl+a",
+    "command": "cursorHome",
+    "when": "textInputFocus && neovim.mode == insert"
+  },
+  {
+    "key": "ctrl+e",
+    "command": "cursorEnd",
+    "when": "textInputFocus && neovim.mode == insert"
+  },
+  // Delete by characters & words
+  {
+    "key": "ctrl+d",
+    "command": "deleteRight",
+    "when": "textInputFocus && neovim.mode == insert"
+  },
+  {
+    "key": "alt+d",
+    "command": "deleteWordRight",
+    "when": "textInputFocus && neovim.mode == insert"
+  },
+  {
+    "key": "alt+backspace",
+    "command": "deleteWordLeft",
+    "when": "textInputFocus && !editorReadonly"
+  },
+  // -----------------------------------------------------------------------------
+  // -- asdfsdf
+  //-----------------------------------------------------------------------------
+  {
+    "key": "ctrl+tab",
+    "command": "workbench.action.nextEditor"
+  },
+  {
+    "key": "ctrl+shift+tab",
+    "command": "workbench.action.previousEditor"
+  },
+  {
+    "key": "alt+]",
+    "command": "workbench.action.nextEditor"
+  },
+  {
+    "key": "alt+[",
+    "command": "workbench.action.previousEditor"
+  },
+  // {
+  //     "key": "alt+backspace",
+  //     "command": "workbench.action.terminal.sendSequence",
+  //     "args": {
+  //         "text": "\u0017"
+  //     },
+  //     "when": "terminalFocus"
+  // },
+  {
+    "key": "tab",
+    "command": "quickInput.next",
+    "when": "inQuickOpen"
+  },
+  {
+    "key": "shift+tab",
+    "command": "quickInput.previous",
+    "when": "inQuickOpen"
+  },
+  {
+    "key": "alt+n",
+    "command": "quickInput.next",
+    "when": "inQuickOpen"
+  },
+  {
+    "key": "alt+p",
+    "command": "quickInput.previous",
+    "when": "inQuickOpen"
+  },
+  {
+    "key": "alt+u",
+    "command": "cursorMove",
+    "args": {
+      "to": "up",
+      "by": "line",
+      "value": 7,
+      "revealCursor": true
+    },
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "alt+d",
+    "command": "cursorMove",
+    "args": {
+      "to": "down",
+      "by": "line",
+      "value": 7,
+      "revealCursor": true
+    },
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "alt+o",
+    "command": "cursorMove",
+    "args": {
+      "to": "down",
+      "by": "line",
+      "value": 7,
+      "revealCursor": true
+    },
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+alt+[",
+    "command": "list.collapseAll",
+    "when": "reference-list.isActive"
+  },
+  {
+    "key": "f6",
+    "command": "peekWidget.focusTree",
+    "when": "inReferenceSearchEditor"
+  },
+  {
+    "key": "f6",
+    "command": "peekWidget.focusEditor",
+    "when": "reference-list.isActive"
+  },
+  {
+    "key": "d",
+    "command": "moveFileToTrash",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "key": "backspace",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "q",
+    "command": "workbench.action.toggleSidebarVisibility",
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "shift+w",
+    "command": "workbench.files.action.collapseExplorerFolders",
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "[ c",
+    "command": "workbench.action.editor.nextChange",
+    "when": "explexplorer.openToSideorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "] c",
+    "command": "workbench.files.action.collapseExplorerFolders",
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "shift+r",
+    "command": "revealFileInOS",
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "u",
+    "command": "workbench.files.action.refreshFilesExplorer",
+    "when": "filesExplorerFocus && !explorerFindProviderActive && !inputFocus"
+  },
+  {
+    "key": "alt+u",
+    "command": "list.focusPageUp",
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "alt+d",
+    "command": "list.focusPageDown",
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "alt+o",
+    "command": "list.focusPageDown",
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "s",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "explorer.openToSide",
+        "workbench.action.moveEditorToBelowGroup"
+      ]
+    },
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  {
+    "command": "vscode-neovim.send",
+    "key": "ctrl+space",
+    "when": "editorTextFocus && neovim.mode != insert",
+    "args": "<C-space>"
+  },
+  {
+    "key": "ctrl+.",
+    "command": "antigravity.toggleChatFocus",
+    "when": "!antigravity.chatFocused && !terminalFocus"
+  },
+  // {
+  //     "key": "ctrl+.",
+  //     "command": "antigravity.insertSnippet",
+  //     "when": "!antigravity.chatFocused && !terminalFocus && editorHasSelection"
+  // },
+  {
+    "key": "ctrl+.",
+    "command": "workbench.action.focusActiveEditorGroup",
+    // "command": "antigravity.openAgent",
+    "when": "antigravity.chatFocused"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "workbench.action.quickOpen",
+    "when": "listFocus && !inputFocus"
+  },
+  {
+    "key": "space space",
+    "command": "workbench.action.quickOpen",
+    "when": "listFocus && !inputFocus"
+  },
+  {
+    "key": "alt+k",
+    "command": "editor.action.moveLinesUpAction",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+j",
+    "command": "editor.action.moveLinesDownAction",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "command": "vscode-neovim.send",
+    "key": "alt+.",
+    "when": "editorTextFocus && neovim.init",
+    "args": "<A-.>"
+  },
+  {
+    "command": "vscode-neovim.send",
+    "key": "alt+,",
+    "when": "editorTextFocus && neovim.init",
+    "args": "<A-,>"
+  },
+  {
+    "command": "vscode-neovim.send",
+    "key": "alt+=",
+    "when": "editorTextFocus && neovim.init",
+    "args": "<A-=>"
+  },
+  {
+    "command": "vscode-neovim.send",
+    "key": "alt+-",
+    "when": "editorTextFocus && neovim.init",
+    "args": "<A-->"
+  },
+  {
+    "key": "alt+/",
+    "command": "vscode-neovim.send",
+    "when": "editorTextFocus && neovim.init",
+    "args": "<A-/>"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "vscode-neovim.send",
+    "when": "editorTextFocus && neovim.init && neovim.mode == insert && neovim.ctrlKeysInsert.u && editorLangId not in neovim.editorLangIdExclusions",
+    "args": "<C-k>"
+  },
+  {
+    "key": "ctrl+y",
+    "command": "vscode-neovim.send",
+    "when": "editorTextFocus && neovim.init && neovim.mode == insert && neovim.ctrlKeysInsert.u && editorLangId not in neovim.editorLangIdExclusions",
+    "args": "<C-y>"
+  },
+  // -----------------------------------------------------------------------------
+  {
+    "key": "ctrl+shift+,",
+    "command": "workbench.action.openSettingsJson"
+  }
+  // asdf foo
+]

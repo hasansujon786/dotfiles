@@ -1,5 +1,52 @@
 #!/bin/bash
 
+# Colored output for readability
+info() { echo -e "\033[1;34m[INFO]\033[0m $*"; }
+success() { echo -e "\033[1;32m[SUCCESS]\033[0m $*"; }
+error() { echo -e "\033[1;31m[ERROR]\033[0m $*" >&2; }
+
+set_path() {
+  # Safely check if argument is provided using ${1:-}
+  if [ -z "${1:-}" ]; then
+    error "Missing argument. Usage: update_path_var <path-to-add>"
+    return 1
+  fi
+
+  local NEW_PATH="$(cygpath -w "$1")"
+  local SCRIPT="$(cygpath -w "$HOME/dotfiles/scripts/set_path.ps1")"
+
+  info "Updating PATH with: $NEW_PATH"
+
+  powershell.exe -File "$SCRIPT" -newPath "$NEW_PATH"
+  local status=$?
+
+  if [ $status -ne 0 ]; then
+    error "Failed to update PATH. PowerShell exited with status $status."
+    return $status
+  fi
+}
+set_var() {
+  # Safely check if both arguments are provided
+  if [ -z "${1:-}" ] || [ -z "${2:-}" ]; then
+    error "Missing arguments. Usage: create_user_var <variable-name> <variable-value>"
+    return 1
+  fi
+
+  local VAR_NAME="$1"
+  local VAR_VALUE="$(cygpath -w "$2")"
+  local SCRIPT="$(cygpath -w "$HOME/dotfiles/scripts/set_var.ps1")"
+
+  info "Creating user environment variable: $VAR_NAME=$VAR_VALUE"
+
+  powershell.exe -File "$SCRIPT" -varName "$VAR_NAME" -varValue "$VAR_VALUE"
+  local status=$?
+
+  if [ $status -ne 0 ]; then
+    error "Failed to create environment variable. PowerShell exited with status $status."
+    return $status
+  fi
+}
+
 jump_to_git_root() {
   local _root_dir _pwd
 

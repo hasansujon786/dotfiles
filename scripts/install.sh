@@ -49,20 +49,23 @@ create_symlink() {
   # $1 = symlink path (to)
   # $2 = actual path (from)
   if [[ "$OS" == "win" ]]; then
-    powershell New-Item -ItemType SymbolicLink -Path "$1" -Target "$2"
+    local link target
+    link="$(cygpath -w "$1")"
+    target="$(cygpath -w "$2")"
+    powershell New-Item -ItemType SymbolicLink -Path "'$link'" -Target "'$target'"
   else
     ln -s "$1" "$2"
   fi
 }
-update_path_var() {
+set_path() {
   # Safely check if argument is provided using ${1:-}
   if [ -z "${1:-}" ]; then
     error "Missing argument. Usage: update_path_var <path-to-add>"
     return 1
   fi
 
-  local NEW_PATH="$1"
-  local SCRIPT="C:\\Users\\$USERNAME\\dotfiles\\scripts\\variable_update_path.ps1"
+  local NEW_PATH="$(cygpath -w "$1")"
+  local SCRIPT="$(cygpath -w "$HOME/dotfiles/scripts/set_path.ps1")"
 
   info "Updating PATH with: $NEW_PATH"
 
@@ -74,7 +77,7 @@ update_path_var() {
     return $status
   fi
 }
-create_user_var() {
+set_var() {
   # Safely check if both arguments are provided
   if [ -z "${1:-}" ] || [ -z "${2:-}" ]; then
     error "Missing arguments. Usage: create_user_var <variable-name> <variable-value>"
@@ -82,8 +85,8 @@ create_user_var() {
   fi
 
   local VAR_NAME="$1"
-  local VAR_VALUE="$2"
-  local SCRIPT="C:\\Users\\$USERNAME\\dotfiles\\scripts\\variable_create.ps1"
+  local VAR_VALUE="$(cygpath -w "$2")"
+  local SCRIPT="$(cygpath -w "$HOME/dotfiles/scripts/set_var.ps1")"
 
   info "Creating user environment variable: $VAR_NAME=$VAR_VALUE"
 
@@ -246,9 +249,9 @@ setup_variables() {
     # setx ANDROID_HOME "C:\Users\hasan\android"
     # setx PATH "$PATH;$ANDROID_HOME\cmdline-tools\latest\bin;$ANDROID_HOME\platform-tools"
 
-    update_path_var "C:\Users\\$USERNAME\dotfiles\.bin"
-    create_user_var ANDROID_HOME "$LOCALAPPDATA\Android\Sdk"
-    create_user_var REPOES "D:/repoes"
+    set_path "$HOME/dotfiles/.bin"
+    set_var ANDROID_HOME "$LOCALAPPDATA\Android\Sdk"
+    set_var REPOES "D:/repoes"
   fi
 }
 
@@ -469,6 +472,21 @@ setup_sublime() {
 
   info "Tip: Press ctrl+shift+p => And install package controll"
 }
+setup_antigravity() {
+  declare -A conf_path
+  conf_path[win]="$HOME/AppData/Roaming/Antigravity IDE/User"
+
+  heading antigravity
+  get extras/antigravity-ide
+
+  mkdir -p "${conf_path[$OS]}"
+
+  # archive_config "${conf_path[$OS]}/keybindings.json"
+  # archive_config "${conf_path[$OS]}/settings.json"
+  #
+  # create_symlink "${conf_path[$OS]}/keybindings.json" "$HOME/dotfiles/gui/antigravity/IDE/keybindings.json"
+  # create_symlink "${conf_path[$OS]}/settings.json" "$HOME/dotfiles/gui/antigravity/IDE/settings.json"
+}
 install_various_gui_apps() {
   heading "Usefull GUI Apps"
 
@@ -477,7 +495,7 @@ install_various_gui_apps() {
 
     # Install browser
     # ensure_installed extras/googlechrome chrome
-    ensure_installed extras/zen-browser zen
+    # ensure_installed extras/zen-browser zen
     # ensure_installed extras/insomnia insomnia
   fi
 }
@@ -528,6 +546,7 @@ main() {
 
   # GUI Apps
   setup_wezterm
+  setup_antigravity
   # setup_sublime
   install_various_gui_apps
 
@@ -536,4 +555,7 @@ main() {
   # setup_python
 }
 
-main
+# main
+
+set_var moo "D:/repoes"
+set_path "$HOME/dotfiles/.foo"

@@ -449,14 +449,14 @@ function M.lsp_buffer_keymaps(client, bufnr)
     { '<A-space>', M.code_action, mode = nx, desc = 'Lsp: Code action', unpack(b) },
 
     -- Diagnostics
-    -- { '<leader>ad', '<cmd>lua vim.diagnostic.setloclist()<CR>', desc = 'Lsp: Show local diagnostics', unpack(b), code = '<cmd>lua require("vscode").action("workbench.panel.markers.view.focus")<CR>' },
-    -- { '<leader>aD', '<cmd>lua vim.diagnostic.setqflist()<CR>', desc = 'Lsp: Show global diagnostics', unpack(b), code = '<cmd>lua require("vscode").action("workbench.panel.markers.view.focus")<CR>' },
-    -- { '<leader>al', '<cmd>lua vim.diagnostic.open_float()<CR>', desc = 'Lsp: Show line diagnostics', unpack(b) },
-    -- { '<C-c><C-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', mode = { 'n', 'i' }, desc = 'Lsp: show signature help', unpack(b) },
-    -- { '<leader>a+', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', desc = 'Lsp: Add workspace folder', unpack(b) },
-    -- { '<leader>a-', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', desc = 'Lsp: Remove workspace folder', unpack(b) },
-    -- { '<leader>aw', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, desc = 'Lsp: list workspace folders', unpack(b) },
-    -- { '<leader>a.', run_code_action({ 'source.fixAll' }), desc = 'Lsp: Fix all', unpack(b) },
+    { '<leader>ad', '<cmd>lua vim.diagnostic.setloclist()<CR>', desc = 'Lsp: Show local diagnostics', unpack(b), code = '<cmd>lua require("vscode").action("workbench.panel.markers.view.focus")<CR>' },
+    { '<leader>aD', '<cmd>lua vim.diagnostic.setqflist()<CR>', desc = 'Lsp: Show global diagnostics', unpack(b), code = '<cmd>lua require("vscode").action("workbench.panel.markers.view.focus")<CR>' },
+    { '<leader>al', '<cmd>lua vim.diagnostic.open_float()<CR>', desc = 'Lsp: Show line diagnostics', unpack(b) },
+    { '<C-c><C-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', mode = { 'n', 'i' }, desc = 'Lsp: show signature help', unpack(b) },
+    { '<leader>a+', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', desc = 'Lsp: Add workspace folder', unpack(b) },
+    { '<leader>a-', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', desc = 'Lsp: Remove workspace folder', unpack(b) },
+    { '<leader>aw', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, desc = 'Lsp: list workspace folders', unpack(b) },
+    { '<leader>a.', run_code_action({ 'source.fixAll' }), desc = 'Lsp: Fix all', unpack(b) },
   }
 
   -- stylua: ignore
