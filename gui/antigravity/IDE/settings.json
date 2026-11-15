@@ -51,4 +51,13 @@
     "editor.cursorSurroundingLines": 10,
     "terminal.external.windowsExec": "bash",
     "editor.lineNumbers": "relative",
+    // "window.customTitleBarVisibility": "windowed",
+    // "window.titleBarStyle": "custom",
+    "terminal.integrated.commandsToSkipShell": [
+        "workbench.action.nextPanelView",
+        "workbench.action.previousPanelView",
+        "workbench.action.terminal.focusNext",
+        "workbench.action.terminal.focusPrevious",
+        "workbench.action.closePanel"
+    ]
 }

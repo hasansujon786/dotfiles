@@ -18,6 +18,9 @@ local tabIcon = { active = Icons.Other.circleBg, inactive = Icons.Other.circleOu
 local function withHl(text, hl)
   return string.format('%%#%s#%s', hl, text)
 end
+local function is_term(ft)
+  return ft == 'snacks_terminal' or ft == 'terminal'
+end
 
 -- vim.api.nvim_create_autocmd('LspProgress', {
 --   callback = function(args)
@@ -320,7 +323,7 @@ local c = {
   },
   GitBranchAlt = {
     condition = function()
-      return not conditions.is_git_repo()
+      return not conditions.is_git_repo() and not is_term(vim.bo.filetype)
     end,
     update = { 'BufReadPost', 'BufEnter', 'BufWinEnter', 'BufWinLeave' },
     provider = '  Branch',
@@ -404,6 +407,22 @@ local c = {
     { provider = ' ', hl = layerBlockAlt },
     update = { 'RecordingEnter', 'RecordingLeave' },
   },
+  Terminal = {
+    init = function(self)
+      self.snacks_terminal = vim.b['snacks_terminal'] or {}
+    end,
+    condition = function()
+      return is_term(vim.bo.filetype)
+    end,
+    update = { 'BufReadPost', 'BufEnter', 'BufWinEnter', 'BufWinLeave', 'BufLeave' },
+    hl = layerBlock,
+    {
+      provider = function(self)
+        local id = self.snacks_terminal['id'] or ''
+        return '   ' .. id
+      end,
+    },
+  },
 }
 
 return {
@@ -433,6 +452,7 @@ return {
     c.Tabs,
     c.GitBranch,
     c.GitBranchAlt,
+    c.Terminal,
     c.layerEndleft,
     c.MacroRec,
     c.Diagnostics,

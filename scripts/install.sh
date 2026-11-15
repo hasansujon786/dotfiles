@@ -4,7 +4,7 @@
 # -- Config paths --------------------------------
 # ------------------------------------------------
 DOTFILES="$HOME/dotfiles"
-WINDOWS_STARTUP_DIR="C:\\Users\\${USERNAME}\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"
+WINDOWS_STARTUP_DIR="$HOME/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup"
 NVIM_CONFIG_DIR="$HOME/AppData/Local/nvim"
 NVIM_PACKAGES_DIR="$HOME/AppData/Local/nvim-data/packages"
 
@@ -246,9 +246,6 @@ setup_variables() {
     start ms-settings:developers
     mkdir -p ~/.config
 
-    # setx ANDROID_HOME "C:\Users\hasan\android"
-    # setx PATH "$PATH;$ANDROID_HOME\cmdline-tools\latest\bin;$ANDROID_HOME\platform-tools"
-
     set_path "$HOME/dotfiles/.bin"
     set_var ANDROID_HOME "$LOCALAPPDATA\Android\Sdk"
     set_var REPOES "D:/repoes"
@@ -447,8 +444,8 @@ setup_wezterm() {
 }
 setup_sublime() {
   declare -A conf_path
-  conf_path[win]="C:\\Users\\$USERNAME\\AppData\\Roaming\\Sublime Text\\Packages"
-  conf_path[win_scoop]="C:\\Users\\$USERNAME\\scoop\\persist\\sublime-text\\Data\\Packages"
+  conf_path[win]="$HOME/AppData/Roaming/Sublime Text/Packages"
+  conf_path[win_scoop]="$HOME/scoop/persist/sublime-text/Data/Packages"
   # C:/Users/hasan/scoop/persist/sublime-text/Data/Packages
 
   heading sublime
@@ -459,8 +456,8 @@ setup_sublime() {
     rm -rf "${conf_path[win_scoop]}/User"
     rm -rf "${conf_path[win_scoop]}/Theme - One Dark"
 
-    create_symlink "${conf_path[win_scoop]}\\User" "$HOME/dotfiles/gui/sublime_text/User"
-    create_symlink "'${conf_path[win_scoop]}\\Theme - One Dark'" "$HOME/dotfiles/gui/sublime_text/theme"
+    create_symlink "${conf_path[win_scoop]}/User" "$HOME/dotfiles/gui/sublime_text/User"
+    create_symlink "'${conf_path[win_scoop]}/Theme - One Dark'" "$HOME/dotfiles/gui/sublime_text/theme"
   # elif [[ "$OS" == "win" ]]; then
   #   mkdir -p "${conf_path[$OS]}"
   #   rm -rf "${conf_path[$OS]}/User"
@@ -555,7 +552,4 @@ main() {
   # setup_python
 }
 
-# main
-
-set_var moo "D:/repoes"
-set_path "$HOME/dotfiles/.foo"
+main

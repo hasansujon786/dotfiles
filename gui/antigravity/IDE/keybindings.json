@@ -307,10 +307,29 @@
     "when": "editorTextFocus && neovim.init && neovim.mode == insert && neovim.ctrlKeysInsert.u && editorLangId not in neovim.editorLangIdExclusions",
     "args": "<C-y>"
   },
+  {
+    "key": "ctrl+shift+]",
+    "command": "workbench.action.nextPanelView",
+    "when": "panelFocus"
+  },
+  {
+    "key": "ctrl+shift+[",
+    "command": "workbench.action.previousPanelView",
+    "when": "panelFocus"
+  },
+  {
+    "key": "alt+m",
+    "command": "workbench.action.focusPanel",
+    "when": "!panelFocus"
+  },
+  {
+    "key": "alt+m",
+    "command": "workbench.action.closePanel",
+    "when": "panelFocus"
+  },
   // -----------------------------------------------------------------------------
   {
     "key": "ctrl+shift+,",
     "command": "workbench.action.openSettingsJson"
   }
-  // asdf foo
 ]

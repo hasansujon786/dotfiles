@@ -3,7 +3,7 @@ local n, nx = { 'n' }, { 'n', 'x' }
 return {
   {
     'folke/snacks.nvim',
-    enabled = not is_vscode,
+    -- enabled = not is_vscode,
     priority = 1000,
     lazy = false,
     event = 'UIEnter',
@@ -12,20 +12,13 @@ return {
     end,
     -- stylua: ignore
     keys = {
-      -- { 'g]',         function() Snacks.words.jump(vim.v.count1) end, desc = 'Next Reference', mode = { 'n', 't' } },
-      -- { 'g[',         function() Snacks.words.jump(-vim.v.count1) end, desc = 'Prev Reference', mode = { 'n', 't' } },
       { 'gpp', '<Plug>OpenQuicklookAtCursor', desc = 'Preview image under cursor', mode = nx },
       { '<leader>vo', '<cmd>lua require("hasan.utils.file").quicklook_toggle()<CR>', desc = 'Toggle quickLook', mode = nx },
       { '<leader>vn', function() Snacks.notifier.show_history() end, desc = 'Notification History' },
-      { '<leader>bd', function() Snacks.bufdelete() end, desc = 'Kill this buffer' },
-      { '<leader>bo', function() Snacks.bufdelete.other() end, desc = 'Kill other buffers' },
       { '<leader>go', function() Snacks.gitbrowse() end, desc = 'Open git repo' , mode = { 'n', 'v' } },
       { '<leader>gO', function() Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end, notify = false }) end,  desc = "Git Browse (copy url)", mode = {"n", "x" } },
       { '<leader>fr', function() Snacks.rename.rename_file() end, desc = 'Lsp: Rename file' },
       { '<leader>pd', function () Snacks.dashboard.open() end, desc = 'Open dashboard' },
-      { '<leader>z',  function() Snacks.zen() end, desc = 'Toggle Zen Mode' },
-      { '<leader>u',  function() Snacks.zen() end, desc = 'Toggle Zen Mode' },
-      { '<leader>w.',  function() Snacks.zen.zoom() end, desc = 'Toggle Zoom' },
       { '<leader>x', function() Snacks.scratch() end, desc = 'Toggle Scratch Buffer' },
       { '<leader>/x', function() Snacks.scratch.select() end, desc = 'Select Scratch Buffer' },
       {
@@ -40,15 +33,6 @@ return {
           })
         end,
       },
-
-      -- Terminal
-      { '<M-m>', function() require('config.navigation.snacks.terminal').toggle() end, desc = 'Terminal'  },
-      { '[t', function() require('config.navigation.snacks.terminal').prev() end, desc = 'Next Terminal'  },
-      { ']t', function() require('config.navigation.snacks.terminal').next() end, desc = 'Prev Terminal'  },
-      { '<leader>ot', function() Snacks.terminal(nil, { shell = 'bash', win = { wo = { winbar = '' } } }) end, desc = 'Terminal'  },
-      { '<leader>of', function() require('config.navigation.snacks.terminal').toggle_yazi() end, desc = 'Open File Manager' },
-      { '<leader>od', function() require('config.navigation.snacks.terminal').toggle_ordna() end, desc = 'Open kanban' },
-      { '<leader>om', function() require('config.navigation.snacks.terminal').toggle_music() end, desc = 'Open kanban' },
 
       { '<leader>gl', function() Snacks.lazygit() end, desc = 'Open lazygit' },
 
