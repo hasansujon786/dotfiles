@@ -40,10 +40,6 @@ return {
     require('mini.ai').setup({
       n_lines = 500,
       custom_textobjects = {
-        o = gen_spec.treesitter({ -- code block
-          a = { '@block.outer', '@conditional.outer', '@loop.outer' },
-          i = { '@block.inner', '@conditional.inner', '@loop.inner' },
-        }),
         f = gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }),
         c = gen_spec.function_call(),
         C = gen_spec.function_call({ name_pattern = '[%w_]' }), -- Without dot in function name
@@ -52,6 +48,13 @@ return {
         P = gen_spec.treesitter({ a = '@_pair.outer', i = '@_pair.inner' }),
         v = gen_spec.treesitter({ a = '@assignment.outer', i = '@assignment.rhs' }),
         V = gen_spec.treesitter({ a = '@assignment.outer', i = '@assignment.lhs' }),
+
+        F = gen_spec.treesitter({ a = '@conditional.outer', i = '@conditional.inner' }),
+        L = gen_spec.treesitter({ a = '@loop.outer', i = '@loop.inner' }),
+        o = gen_spec.treesitter({ -- code block
+          a = { '@block.outer', '@conditional.outer', '@loop.outer' },
+          i = { '@block.inner', '@conditional.inner', '@loop.inner' },
+        }),
 
         -- e,j,k,l,s,u,x,y,z
 
@@ -66,8 +69,8 @@ return {
         t = false,
         -- t = { '<([%p%w]-)%f[^<%w][^<>]->.-</%1>', '^<.->().*()</[^/]->$' }, -- tags
         r = { { '%b[]' }, '^.().*().$' },
-        k = { { '^().*()$' }, { '^%s*().-()%s*$', '^().*()$' } },
-        d = { '%f[%d]%d+' }, -- digits
+        d = { { '^().*()$' }, { '^%s*().-()%s*$', '^().*()$' } },
+        N = { '%f[%d]%d+' }, -- digits
         e = { -- Word with case
           { '%u[%l%d]+%f[^%l%d]', '%f[%S][%l%d]+%f[^%l%d]', '%f[%P][%l%d]+%f[^%l%d]', '^[%l%d]+%f[^%l%d]' },
           '^().*()$',

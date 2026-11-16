@@ -33,6 +33,18 @@ return {
       branch = 'main',
       dev = false,
       opts = {},
+      keys = {
+        -- stylua: ignore start
+        { '<a', '<cmd>lua require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner")<CR>', desc = 'Swap parameter prev' },
+        { '>a', '<cmd>lua require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner")<CR>', desc = 'Swap parameter next' },
+        { '<f', '<cmd>lua require("nvim-treesitter-textobjects.swap").swap_previous("@function.outer")<CR>', desc = 'Swap function prev' },
+        { '>f', '<cmd>lua require("nvim-treesitter-textobjects.swap").swap_next("@function.outer")<CR>', desc = 'Swap function next' },
+        { '<m', '<cmd>lua require("nvim-treesitter-textobjects.swap").swap_previous("@class.outer")<CR>', desc = 'Swap class prev' },
+        { '>m', '<cmd>lua require("nvim-treesitter-textobjects.swap").swap_next("@class.outer")<CR>', desc = 'Swap class next' },
+        { '<=', '<cmd>lua require("nvim-treesitter-textobjects.swap").swap_previous("@attribute.outer")<CR>', desc = 'Swap attribute prev' },
+        { '>=', '<cmd>lua require("nvim-treesitter-textobjects.swap").swap_next("@attribute.outer")<CR>', desc = 'Swap attribute next' },
+        -- stylua: ignore end
+      },
     },
     { 'windwp/nvim-ts-autotag', opts = {}, enabled = not is_vscode },
     {

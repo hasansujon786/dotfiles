@@ -3,7 +3,7 @@ local nx, nxo = { 'n', 'x' }, { 'n', 'x', 'o' }
 return {
   {
     'rachartier/tiny-inline-diagnostic.nvim',
-    enabled = is_vscode,
+    enabled = not is_vscode,
     event = 'VeryLazy',
     priority = 1000,
     config = function()
