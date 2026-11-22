@@ -7,10 +7,10 @@ Global POWERTOYS_DOC := EnvGet("POWERTOYS_DOC") ? EnvGet("POWERTOYS_DOC") : 0
 
 ; "wt.exe", "ahk_exe WindowsTerminal.exe" ; "Code.exe", "ahk_exe Code.exe"
 Global EDITOR_EXE := [
-	; "wezterm-gui.exe",
-	; "ahk_exe wezterm-gui.exe"
-	"noctty.exe",
-	"ahk_class noctty.win32.host"
+	"wezterm-gui.exe",
+	"ahk_exe wezterm-gui.exe"
+	; "noctty.exe",
+	; "ahk_class noctty.win32.host"
 ]
 
 Global BROWSER_EXE := [

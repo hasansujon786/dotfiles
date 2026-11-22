@@ -161,7 +161,7 @@ global layout_loading := 0
 global current_layout := 0
 
 #p:: changeLayoutTo("code")
-#o:: changeLayoutTo("focus")
+#o:: changeLayoutTo("focus_custom")
 #':: toggleLayout()
 
 #HotIf layout_loading
