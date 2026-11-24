@@ -90,10 +90,10 @@ Pause:: Send("{Media_Play_Pause}")
 !#k:: togleSelectedMic()
 ; #PgUp:: volup()
 ; #PgDn:: voldown()
-#HotIf winIsMouseOver("ahk_class Shell_TrayWnd")
-~LAlt & WheelUp:: volup()
-~LAlt & WheelDown:: voldown()
-#HotIf
+; #HotIf winIsMouseOver("ahk_class Shell_TrayWnd")
+; ~LAlt & WheelUp:: volup()
+; ~LAlt & WheelDown:: voldown()
+; #HotIf
 
 ;******************************************************************************
 ; Window management

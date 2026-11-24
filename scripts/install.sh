@@ -375,9 +375,9 @@ setup_autohotkey() {
     heading autohotkey
     get extras/autohotkey
 
-    rm -rf "$WINDOWS_STARTUP_DIR\\main.ahk"
-    create_symlink "'$WINDOWS_STARTUP_DIR\\main.ahk'" "$HOME/dotfiles/scripts/ahk/main.ahk"
-    # explorer "$WINDOWS_STARTUP_DIR\\main.ahk"
+    rm -rf "$WINDOWS_STARTUP_DIR/main.ahk"
+    create_symlink "$WINDOWS_STARTUP_DIR/main.ahk" "$HOME/dotfiles/scripts/ahk/main.ahk"
+    explorer "$WINDOWS_STARTUP_DIR/main.ahk"
   fi
 }
 setup_kanata() {
@@ -392,7 +392,7 @@ setup_kanata() {
     archive_config "${conf_path[$OS]}"
     create_symlink "${conf_path[$OS]}" "$HOME/dotfiles/scripts/kanata/kanata-tray"
 
-    rm -rf "$WINDOWS_STARTUP_DIR\\kanata-tray.exe"
+    rm -rf "$WINDOWS_STARTUP_DIR/kanata-tray.exe"
     eget rszyma/kanata-tray --asset kanata-tray.exe --to "$WINDOWS_STARTUP_DIR"
 
     # local KANATA_TRAY_VER="0.6.0"
@@ -471,18 +471,19 @@ setup_sublime() {
 }
 setup_antigravity() {
   declare -A conf_path
-  conf_path[win]="$HOME/AppData/Roaming/Antigravity IDE/User"
+  # conf_path[win]="$HOME/AppData/Roaming/Antigravity IDE/User"
+  conf_path[win]="$HOME/scoop/apps/antigravity-ide/current/data/user-data/User"
 
   heading antigravity
   get extras/antigravity-ide
 
   mkdir -p "${conf_path[$OS]}"
 
-  # archive_config "${conf_path[$OS]}/keybindings.json"
-  # archive_config "${conf_path[$OS]}/settings.json"
-  #
-  # create_symlink "${conf_path[$OS]}/keybindings.json" "$HOME/dotfiles/gui/antigravity/IDE/keybindings.json"
-  # create_symlink "${conf_path[$OS]}/settings.json" "$HOME/dotfiles/gui/antigravity/IDE/settings.json"
+  archive_config "${conf_path[$OS]}/keybindings.json"
+  archive_config "${conf_path[$OS]}/settings.json"
+
+  create_symlink "${conf_path[$OS]}/keybindings.json" "$HOME/dotfiles/gui/antigravity/IDE/keybindings.json"
+  create_symlink "${conf_path[$OS]}/settings.json" "$HOME/dotfiles/gui/antigravity/IDE/settings.json"
 }
 install_various_gui_apps() {
   heading "Usefull GUI Apps"
