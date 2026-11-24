@@ -17,6 +17,7 @@ M.treesitter = {
     markdown = { 'markdown' },
     markdown_inline = {},
 
+    php = { 'php' },
     blade = { 'blade' },
     swift = { 'swift' },
 
@@ -96,6 +97,7 @@ M.lsp = {
     -- Backend
     laravel_lsp = { 'laravel_lsp' },
     intelephense = { 'intelephense' },
+    -- phpactor = { 'phpactor' },
     gopls = { 'gopls' },
   },
   extra_tools = {

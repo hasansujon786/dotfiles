@@ -59,5 +59,8 @@
         "workbench.action.terminal.focusNext",
         "workbench.action.terminal.focusPrevious",
         "workbench.action.closePanel"
-    ]
+    ],
+    "[php]": {
+        "editor.defaultFormatter": "laravel.vscode-laravel"
+    }
 }

@@ -1,0 +1,137 @@
+# General =============================================
+env = EDITOR=nvim
+command = bash
+working-directory = C:\Users\hasan
+copy-on-select = clipboard
+confirm-close-surface = false
+mouse-hide-while-typing = true
+
+cursor-style = bar
+adjust-cursor-thickness = 2
+
+# Window ==============================================
+window-width = 138
+window-height = 35
+window-padding-x = 0
+window-padding-y = 0
+# window-decoration = none
+background-opacity = 0.96
+
+# Tab Bar =============================================
+window-show-tab-bar = always
+
+# Font ================================================
+font-family = "JetBrains Mono"
+font-family = "Consolas"
+font-family = "Flog Symbols"
+font-size = 14
+font-feature = zero
+adjust-underline-position = 2
+# adjust-underline-thickness = 2
+freetype-load-flags = no-hinting
+
+# Cursor & Shell ======================================
+cursor-style = block
+shell-integration = bash
+shell-integration-features = no-cursor
+
+# Colors ==============================================
+background = #242B38
+foreground = #abb2bf
+cursor-color = #5ab0f6
+cursor-text = #242B38
+selection-background = #3F4653
+selection-foreground = cell-foreground
+
+palette = 0=#546178
+palette = 1=#e06c75
+palette = 2=#98c379
+palette = 3=#e5c07b
+palette = 4=#61afef
+palette = 5=#c678dd
+palette = 6=#56b6c2
+palette = 7=#abb2bf
+palette = 8=#546178
+palette = 9=#e06c75
+palette = 10=#98c379
+palette = 11=#e5c07b
+palette = 12=#61afef
+palette = 13=#c678dd
+palette = 14=#56b6c2
+palette = 15=#dcdfe4
+
+split-divider-color = #3E425D
+unfocused-split-opacity = 0.85
+
+# Keybinds: panes =====================================
+keybind = ctrl+shift+h=goto_split:left
+keybind = ctrl+shift+j=goto_split:down
+keybind = ctrl+shift+k=goto_split:up
+keybind = ctrl+shift+l=goto_split:right
+keybind = ctrl+shift+w=close_surface
+keybind = ctrl+shift+z=toggle_split_zoom
+
+# Keybinds: resize panes ==============================
+keybind = alt+shift+h=resize_split:left,40
+keybind = alt+shift+j=resize_split:down,40
+keybind = alt+shift+k=resize_split:up,40
+keybind = alt+shift+l=resize_split:right,40
+keybind = alt+shift+left=resize_split:left,40
+keybind = alt+shift+down=resize_split:down,40
+keybind = alt+shift+up=resize_split:up,40
+keybind = alt+shift+right=resize_split:right,40
+
+# Keybinds: tabs ======================================
+keybind = alt+[=previous_tab
+keybind = alt+]=next_tab
+keybind = alt+shift+BracketLeft=move_tab:-1
+keybind = alt+shift+BracketRight=move_tab:1
+
+# Keybinds: window ====================================
+keybind = f11=toggle_fullscreen
+keybind = alt+enter=unbind
+keybind = ctrl+shift+r=reload_config
+keybind = alt+f2=prompt_tab_title
+
+# Keybinds: scroll ====================================
+keybind = ctrl+shift+up=scroll_page_lines:-1
+keybind = ctrl+shift+down=scroll_page_lines:1
+keybind = ctrl+shift+page_up=scroll_page_up
+keybind = ctrl+shift+page_down=scroll_page_down
+
+# Keybinds: custom input (kitty keyboard protocol) ====
+keybind = ctrl+i=csi:105;5u
+keybind = ctrl+m=csi:109;5u
+keybind = shift+enter=csi:13;2u
+keybind = ctrl+enter=csi:13;5u
+keybind = alt+shift+enter=csi:13;4u
+keybind = ctrl+backspace=text:\x17
+# keybind = ctrl+shift+p=esc:OP
+
+# Keybinds: leader (alt+q) sequences ==================
+keybind = alt+q>c=new_tab
+keybind = alt+q>x=close_surface
+keybind = alt+q>-=new_split:down
+keybind = alt+q>\=new_split:right
+keybind = alt+q>v=new_split:right
+keybind = alt+q>s=new_split:down
+keybind = alt+q>z=toggle_split_zoom
+keybind = alt+q>.=toggle_split_zoom
+keybind = alt+q>o=last_tab
+keybind = alt+q>[=toggle_copy_mode
+keybind = alt+q>n=next_tab
+keybind = alt+q>p=previous_tab
+keybind = alt+q>h=goto_split:left
+keybind = alt+q>j=goto_split:down
+keybind = alt+q>k=goto_split:up
+keybind = alt+q>l=goto_split:right
+keybind = alt+q>1=goto_tab:1
+keybind = alt+q>2=goto_tab:2
+keybind = alt+q>3=goto_tab:3
+keybind = alt+q>4=goto_tab:4
+keybind = alt+q>5=goto_tab:5
+keybind = alt+q>6=goto_tab:6
+keybind = alt+q>7=goto_tab:7
+keybind = alt+q>8=goto_tab:8
+keybind = alt+q>9=goto_tab:9
+keybind = alt+q>t=toggle_background_opacity

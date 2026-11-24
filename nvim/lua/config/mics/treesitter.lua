@@ -16,8 +16,8 @@ return {
     local filetypes = vim.iter(vim.tbl_values(require('core.state').treesitter.parsers_by_ft)):flatten():totable()
     vim.api.nvim_create_autocmd('FileType', {
       pattern = filetypes,
-      callback = function()
-        pcall(vim.treesitter.start)
+      callback = function(ev)
+        pcall(vim.treesitter.start, ev.buf)
 
         vim.wo.foldmethod = 'expr'
         vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
