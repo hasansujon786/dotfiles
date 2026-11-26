@@ -39,6 +39,22 @@ return {
     local gen_spec = require('mini.ai').gen_spec
     require('mini.ai').setup({
       n_lines = 500,
+      -- Module mappings. Use `''` (empty string) to disable one.
+      mappings = {
+        -- Main textobject prefixes
+        around = 'a',
+        inside = 'i',
+
+        -- Next/last textobjects
+        around_last = 'ak',
+        inside_last = 'ik',
+        around_next = 'an',
+        inside_next = 'in',
+
+        -- Move cursor to corresponding edge of `a` textobject
+        goto_left = 'g[',
+        goto_right = 'g]',
+      },
       custom_textobjects = {
         f = gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }),
         c = gen_spec.function_call(),
@@ -69,8 +85,8 @@ return {
         t = false,
         -- t = { '<([%p%w]-)%f[^<%w][^<>]->.-</%1>', '^<.->().*()</[^/]->$' }, -- tags
         r = { { '%b[]' }, '^.().*().$' },
-        d = { { '^().*()$' }, { '^%s*().-()%s*$', '^().*()$' } },
-        N = { '%f[%d]%d+' }, -- digits
+        l = { { '^().*()$' }, { '^%s*().-()%s*$', '^().*()$' } },
+        d = { '%f[%d]%d+' }, -- digits
         e = { -- Word with case
           { '%u[%l%d]+%f[^%l%d]', '%f[%S][%l%d]+%f[^%l%d]', '%f[%P][%l%d]+%f[^%l%d]', '^[%l%d]+%f[^%l%d]' },
           '^().*()$',

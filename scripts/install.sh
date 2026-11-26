@@ -298,14 +298,28 @@ setup_bash() {
 
 }
 setup_pwsh() {
-  declare -A conf_path
-  conf_path[win]="$HOME/Documents/PowerShell"
+  if [[ "$OS" == "win" ]]; then
+    heading pwsh
+    get pwsh
 
-  heading pwsh
-  get pwsh
+    # PowerShell resolves $PROFILE via the known Documents folder, which may be
+    # redirected to OneDrive. $HOME/Documents is not reliable on Windows.
+    local docs_dir
+    docs_dir="$(powershell.exe -NoProfile -Command '[Environment]::GetFolderPath("MyDocuments")' | tr -d '\r')"
 
-  archive_config "${conf_path[$OS]}"
-  create_symlink "${conf_path[$OS]}" "$HOME/dotfiles/PowerShell"
+    local winps_dir_6_and_later="$docs_dir/PowerShell"
+    archive_config "$winps_dir_6_and_later"
+    create_symlink "$winps_dir_6_and_later" "$HOME/dotfiles/PowerShell"
+
+    # Windows PowerShell 5.1 (powershell.exe) uses a different profile directory
+    # than pwsh, so link the same profile there as well.
+    local winps_dir_5="$docs_dir/WindowsPowerShell"
+    local profile="Microsoft.PowerShell_profile.ps1"
+    mkdir -p "$(cygpath -u "$winps_dir_5")"
+    archive_config "$winps_dir_5/$profile"
+    create_symlink "$winps_dir_5/$profile" "$HOME/dotfiles/PowerShell/$profile"
+  fi
+
 }
 setup_nvim() {
   declare -A conf_path
@@ -503,17 +517,20 @@ install_various_gui_apps() {
 # ------------------------------------------------
 setup_node() {
   heading nodejs
+  scoop install nodejs-lts
 
-  # fnm a Cross-platform Node.js version switcher
-  get fnm
-  fnm install lts-latest
-  eval "$(fnm env)"
-  fnm use lts-latest
-
-  info "Installing useful global npm packages..."
-  npm install -g yarn trash-cli live-server
-  # To auto channge node env use "fnm env --use-on-cd | Out-String | Invoke-Expression" to your powershell profile.
-  # For example, if a project has .nvmrc or .node-version, fnm will detect and activate that version.
+  # # nodejs-lts relies on Scoop's env_add_path instead of shims, so npm is not
+  # # on PATH until a new shell starts. Add its directories to this shell too.
+  # local node_dir="$HOME/scoop/apps/nodejs-lts/current"
+  # export PATH="$node_dir:$node_dir/bin:$PATH"
+  #
+  # if ! command -v npm &>/dev/null; then
+  #   error "npm is not available after installing nodejs-lts."
+  #   return 1
+  # fi
+  #
+  # info "Installing useful global npm packages..."
+  # npm install -g yarn trash-cli live-server
 }
 setup_rust() {
   heading rust
@@ -553,4 +570,5 @@ main() {
   # setup_python
 }
 
-main
+# main
+setup_node

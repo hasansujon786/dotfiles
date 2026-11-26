@@ -108,6 +108,7 @@ M.lsp = {
     'dart-debug-adapter',
     'js-debug-adapter',
     'harper-ls',
+    'blade-formatter',
   },
   use_builtin_lsp_formatter = {},
   default_opts = {

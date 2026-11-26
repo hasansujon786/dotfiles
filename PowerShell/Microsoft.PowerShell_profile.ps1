@@ -118,3 +118,6 @@ Set-Alias -Name z -Value __zoxide_z -Option AllScope -Scope Global -Force
 Set-Alias -Name zi -Value __zoxide_zi -Option AllScope -Scope Global -Force
 
 Invoke-Expression (& { (zoxide init powershell | Out-String) })
+
+# fnm (Node version manager)
+# fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression

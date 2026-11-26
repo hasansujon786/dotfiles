@@ -106,6 +106,7 @@ alias mk='mkdir -p'
 mm() { mkdir -p "$@" && cd "$@" || exit; }
 alias x='exit'
 alias e='z'
+alias ag='antigravity-ide'
 # alias cl='clear && pwd && ls'
 # alias c='clear'
 alias live='live-server'
