@@ -389,8 +389,9 @@ maps({
   -- Pickers
   -----------------------------------------------------------------------------
   { '<leader><space>', '<cmd>lua require("config.navigation.snacks.custom").project_files()<cr>', desc = 'Find project files', code = '<cmd>Tabfind<CR>', mode = nx },
-  { '<leader>pp', '<cmd>lua require("config.navigation.snacks.persisted").persisted()<cr>', desc = 'Switch project', mode = nx, code = '<cmd>lua require("vscode").action("workbench.action.openRecent")<CR>' },
-  { '<leader>m', '<cmd>lua require("config.navigation.snacks.custom").buffers_with_symbols()<cr>', code = '<cmd>lua require("vscode").action("workbench.action.showAllEditors")<CR>' },
+  { '<leader>pp', '<cmd>lua require("config.navigation.snacks.persisted").persisted()<cr>', desc = 'Switch project', mode = nx, code = '<cmd>lua require("vscode").action("workbench.action.openRecent")<CR>', mode = nx },
+  { '<leader>m', '<cmd>lua require("config.navigation.snacks.custom").buffers_with_symbols()<cr>', desc = 'Buffers', code = '<cmd>lua require("vscode").action("workbench.action.showAllEditors")<CR>', mode = nx },
+  { '<leader>bb', '<cmd>lua require("config.navigation.snacks.custom").buffers_with_symbols()<cr>', desc = 'Buffers', code = '<cmd>lua require("vscode").action("workbench.action.showAllEditors")<CR>', mode = nx },
 
   { '<A-/>', '<cmd>lua Snacks.picker.grep_word()<cr>', desc = 'Search selection', mode = x, code = '<cmd>lua require("vscode").action("workbench.action.findInFiles")<CR>' },
   { '<A-/>', '<cmd>lua Snacks.picker.grep_word()<cr>', desc = 'Search word', mode = n, code = '<cmd>lua require("vscode").action("workbench.action.findInFiles",{args={query=vim.fn.expand("<cword>")}})<CR>' },

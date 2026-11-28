@@ -47,9 +47,6 @@ return {
       -- { '<leader>fc', function() Snacks.picker.files({cwd=vim.fn.stdpath('config')}) end, desc = 'Find Config File' },
       { '<leader>fe', function() Snacks.explorer() end, desc = 'File Explorer' },
 
-      -- FIND BUFFERS
-      { '<leader>bb', function() require('config.navigation.snacks.custom').buffers_with_symbols() end, desc = 'Buffers' },
-
       -- LSP
       { 'g/', function() Snacks.picker.treesitter() end, desc = 'Treesitter Symbols' },
 

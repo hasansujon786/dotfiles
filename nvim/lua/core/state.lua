@@ -160,6 +160,10 @@ M.lsp = {
       filetype = { 'blade' },
       formatter = { 'blade-formatter' },
     },
+    {
+      filetype = { 'php' },
+      formatter = { 'pretty-php' },
+    },
     -- {
     --   filetype = '_', -- "_" filetypes that don't have other formatters configured.
     --   formatter = { 'trim_whitespace' },

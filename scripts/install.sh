@@ -110,8 +110,28 @@ get() {
     fi
   done
 }
+is_installed() {
+  # Returns 0 if the command is already on PATH, or 1 if missing.
+  local cmd="$1"
+  local label="${2:-$1}"
+
+  if command -v "$cmd" &>/dev/null; then
+    local version_info=""
+    version_info=$("$cmd" --version 2>/dev/null || "$cmd" -v 2>/dev/null || true)
+    version_info="${version_info%%$'\n'*}"
+
+    if [[ -n "$version_info" ]]; then
+      info "$label is already installed ($version_info)."
+    else
+      info "$label is already installed."
+    fi
+    return 0
+  fi
+
+  return 1
+}
 has_executable() {
-  is_installed() {
+  is_exe_installed() {
     exe="$1"
     powershell.exe -Command "
     \$found = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*,
@@ -121,11 +141,11 @@ has_executable() {
   " >/dev/null 2>&1
   }
 
-  if command -v "$1" >/dev/null 2>&1; then
+  if is_installed "$1"; then
     return 0 # true — executable found
   fi
 
-  if is_installed "$1"; then
+  if is_exe_installed "$1"; then
     return 0 # true — executable found
   fi
 
@@ -517,20 +537,24 @@ install_various_gui_apps() {
 # ------------------------------------------------
 setup_node() {
   heading nodejs
-  scoop install nodejs-lts
 
-  # # nodejs-lts relies on Scoop's env_add_path instead of shims, so npm is not
-  # # on PATH until a new shell starts. Add its directories to this shell too.
-  # local node_dir="$HOME/scoop/apps/nodejs-lts/current"
-  # export PATH="$node_dir:$node_dir/bin:$PATH"
-  #
-  # if ! command -v npm &>/dev/null; then
-  #   error "npm is not available after installing nodejs-lts."
-  #   return 1
-  # fi
-  #
-  # info "Installing useful global npm packages..."
-  # npm install -g yarn trash-cli live-server
+  if is_installed "node" "Node.js"; then
+    return 0
+  fi
+
+  get nodejs-lts
+  # nodejs-lts relies on Scoop's env_add_path instead of shims, so npm is not
+  # on PATH until a new shell starts. Add its directories to this shell too.
+  local node_dir="$HOME/scoop/apps/nodejs-lts/current"
+  export PATH="$node_dir:$node_dir/bin:$PATH"
+
+  if is_installed "npm"; then
+    error "npm is not available after installing nodejs-lts."
+    return 1
+  fi
+
+  info "Installing useful global npm packages..."
+  npm install -g yarn trash-cli live-server
 }
 setup_rust() {
   heading rust
@@ -570,5 +594,4 @@ main() {
   # setup_python
 }
 
-# main
-setup_node
+main

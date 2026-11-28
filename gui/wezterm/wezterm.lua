@@ -90,7 +90,7 @@ config.tab_and_split_indices_are_zero_based = false
 
 if platform.is_win then
   config.font_size = 14
-  config.default_prog = { 'bash' }
+  config.default_prog = { wezterm.home_dir .. '/scoop/apps/git/current/bin/bash.exe' }
   config.launch_menu = {
     { label = 'Bash', args = { 'bash' } },
     { label = 'Zsh', args = { 'zsh' } },
