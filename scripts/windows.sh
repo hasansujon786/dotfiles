@@ -22,20 +22,20 @@
 # winget install GNU.Emacs
 # scoop install abdownloadmanager obsidian
 
-winget install -e PDFgear
-winget install --id Telegram.TelegramDesktop
+# winget install -e PDFgear
+# winget install --id Telegram.TelegramDesktop
 
-scoop install brave qbittorrent localsend
+scoop install qbittorrent localsend
+scoop install potplayer
 
-scoop install extras/insomnia extras/telegram
-scoop bucket add charm https://github.com/charmbracelet/scoop-bucket.git
-scoop install crush
+# scoop install extras/insomnia extras/telegram
+# scoop bucket add charm https://github.com/charmbracelet/scoop-bucket.git
+# scoop install crush
 
-scoop bucket add github-gh https://github.com/cli/scoop-gh.git
-scoop install gh
+# scoop bucket add github-gh https://github.com/cli/scoop-gh.git
+# scoop install gh
 
 # Potplayer
-scoop install potplayer
 # fix:
 # reg.exe import "C:\\Users\\$USERNAME\\dotfiles\\scripts\\PotPlayerMini64.reg"
 

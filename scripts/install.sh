@@ -409,9 +409,15 @@ setup_autohotkey() {
     heading autohotkey
     get extras/autohotkey
 
-    rm -rf "$WINDOWS_STARTUP_DIR/main.ahk"
-    create_symlink "$WINDOWS_STARTUP_DIR/main.ahk" "$HOME/dotfiles/scripts/ahk/main.ahk"
-    explorer "$WINDOWS_STARTUP_DIR/main.ahk"
+    local symlink_path="$WINDOWS_STARTUP_DIR/main.ahk"
+    rm -rf "$symlink_path"
+    create_symlink "$symlink_path" "$HOME/dotfiles/scripts/ahk/main.ahk"
+
+    if [[ -e "$symlink_path" ]]; then
+      explorer.exe "$(cygpath -w "$symlink_path")" || true
+    else
+      info "Skipping Explorer: $symlink_path does not exist"
+    fi
   fi
 }
 setup_kanata() {
@@ -545,16 +551,15 @@ setup_node() {
   get nodejs-lts
   # nodejs-lts relies on Scoop's env_add_path instead of shims, so npm is not
   # on PATH until a new shell starts. Add its directories to this shell too.
-  local node_dir="$HOME/scoop/apps/nodejs-lts/current"
-  export PATH="$node_dir:$node_dir/bin:$PATH"
-
-  if is_installed "npm"; then
-    error "npm is not available after installing nodejs-lts."
-    return 1
-  fi
-
-  info "Installing useful global npm packages..."
-  npm install -g yarn trash-cli live-server
+  # local node_dir="$HOME/scoop/apps/nodejs-lts/current"
+  # export PATH="$node_dir:$node_dir/bin:$PATH"
+  #
+  # if is_installed "npm"; then
+  #   error "npm is not available after installing nodejs-lts." return 1
+  # fi
+  #
+  # info "Installing useful global npm packages..."
+  # npm install -g yarn trash-cli live-server
 }
 setup_rust() {
   heading rust
@@ -594,4 +599,6 @@ main() {
   # setup_python
 }
 
+# scoop bucket add extras
+# scoop install extras/vcredist2022
 main
